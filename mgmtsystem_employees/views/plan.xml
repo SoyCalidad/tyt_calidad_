@@ -1,0 +1,158 @@
+<odoo>
+    <data>
+        <menuitem id="menu_training_root"
+                  name="Capacitaciones"
+                  web_icon="mgmtsystem_employees,static/description/icon.png"
+                  groups="group_employees_onlyread,group_employees_onlyread_printreport,group_employees_write_printreport,group_employees_all"
+                  sequence="7" />
+
+        <!--menuitem id="menu_hr_training" name="Capacitaciones" parent="menu_training_root" groups="hr.group_hr_manager,hr.group_hr_user"/-->
+
+
+        <record id="view_mgmtsystem_plan_search" model="ir.ui.view">
+            <field name="name">mgmtsystem.plan.search</field>
+            <field name="model">mgmtsystem.plan</field>
+            <field name="arch" type="xml">
+                <search>
+                    <field name="code" />
+                    <field name="name" />
+                    <filter string="Vigentes" name="vigentis" domain="[('state', '!=', 'cancel')]" />
+                </search>
+            </field>
+        </record>
+
+        <record id="view_mgmtsystem_plan_tree" model="ir.ui.view">
+            <field name="name">mgmtsystem.plan.tree</field>
+            <field name="model">mgmtsystem.plan</field>
+            <field name="arch" type="xml">
+                <tree string="Plan" banner_route="/training/training_onboarding">
+                    <field name="code" />
+                    <field name="name" />
+                    <field name="training_ids" />
+                    <field name="state" />
+                </tree>
+            </field>
+        </record>
+
+        <record id="view_mgmtsystem_plan_form" model="ir.ui.view">
+            <field name="name">mgmtsystem.plan.form</field>
+            <field name="model">mgmtsystem.plan</field>
+            <field name="arch" type="xml">
+                <form string="Plan">
+                    <header>
+                        <field name="state" widget="statusbar" statusbar_visible="elaborate,review,validate,validate_ok" />
+                        <button string="Enviar a Elaborar"
+                                name="send_elaborate"
+                                type="object"
+                                class="btn-primary"
+                                attrs="{'invisible':[('state','in', ('elaborate','validate','validate_ok','cancel'))]}" />
+                        <button string="Enviar a Revisar"
+                                name="send_review"
+                                type="object"
+                                class="btn-primary"
+                                attrs="{'invisible':[('state','in', ('review','validate_ok','cancel'))]}" />
+                        <button string="Enviar a Validar"
+                                name="send_validate"
+                                type="object"
+                                class="btn-primary"
+                                attrs="{'invisible':[('state','in', ('elaborate','validate','validate_ok','cancel'))]}" />
+                        <button string="Validar"
+                                name="send_validate_ok"
+                                type="object"
+                                class="btn-primary"
+                                attrs="{'invisible':[('state','not in', ('validate'))]}" />
+                        <button name="button_new_version"
+                                type="object"
+                                string="Nueva versión"
+                                attrs="{'invisible':[('state', '!=', 'validate_ok')]}"
+                                class="oe_highlight" />
+                        <button string="Volver Obsoleto"
+                                confirm="Esto volverá obsoleto el presente registro. ¿Está seguro(a)?"
+                                name="send_cancel"
+                                type="object"
+                                class="btn-second"
+                                attrs="{'invisible': [('state','in',('cancel'))] }" />
+                    </header>
+                    <sheet>
+                        <div name="button_box" class="oe_button_box">
+                            <button name="action_trainings_views" type="object" class="oe_stat_button" icon="fa-clipboard">
+                                <field name="trainings_count" widget="statinfo" string="Planes de capacitación" />
+                            </button>
+                        </div>
+                        <div class="oe_title">
+                            <h2>
+                                <field name="code" readonly="1" />
+                            </h2>
+                        </div>
+                        <group>
+                            <label for="name" />
+                            <h2>
+                                <field name="name" nolabel="1" attrs="{'readonly': [('state','in',('validate_ok','cancel'))]}" />
+                            </h2>
+                        </group>
+                        <notebook>
+                            <page string="Capacitaciones">
+                                <field name="training_ids" context="{'default_plan_id': id}">
+                                    <tree editable="bottom">
+                                        <field name="name" />
+                                        <field name="exponent_id" />
+                                        <field name="month_training" />
+                                        <field name="date_training" />
+                                        <field name="duration" widget="float_time" />
+                                        <field name="type" />
+                                        <field name="aproval" attrs="{'column_invisible': [('parent.state', 'not in', ['review', 'validate'])]}" />
+                                        <field name="observations" attrs="{'column_invisible': [('parent.state', 'not in', ['validate'])]}" />
+                                        <field name="state" attrs="{'column_invisible': [('parent.state', 'not in', ['validate_ok'])]}" />
+                                    </tree>
+                                </field>
+                            </page>
+
+                            <page string="Validación">
+                                <group>
+                                    <group>
+                                        <field name="version" />
+                                    </group>
+                                    <group colspan="4">
+                                        <separator string="Elaboración" />
+                                        <field name="elaboration_step" colspan="2" nolabel="1" attrs="{'readonly': [('state','not in',('plan', 'elaborate'))]}" />
+                                        <separator string="Revisión" />
+                                        <field name="review_step" colspan="2" nolabel="1" attrs="{'readonly': [('state','not in',('elaborate', 'review'))]}" />
+                                        <separator string="Validación" />
+                                        <field name="validation_step" colspan="2" nolabel="1" attrs="{'readonly': [('state','not in',('elaborate', 'review', 'validate'))]}" />
+                                    </group>
+                                    <group>
+                                        <field name="date_elaborate" attrs="{'required': [('state','in',('elaborate'))], 'readonly': True}" />
+                                        <field name="date_review" attrs="{'required': [('state','in',('review'))], 'readonly': True, 'invisible': [('state','in',('elaborate'))] }" />
+                                        <field name="date_validate" groups="base.group_no_one,base.user_admin" attrs="{'invisible': [('state','in',('elaborate','review'))] }" />
+                                    </group>
+                                </group>
+                            </page>
+
+                        </notebook>
+                    </sheet>
+                    <div class="oe_chatter">
+                        <field name="message_follower_ids" widget="mail_followers" />
+                        <field name="activity_ids" widget="mail_activity" />
+                        <field name="message_ids" widget="mail_thread" />
+                    </div>
+                </form>
+            </field>
+        </record>
+
+        <record id="hr_item_plan_action" model="ir.actions.act_window">
+            <field name="name">Programa anual de capacitaciones</field>
+            <field name="type">ir.actions.act_window</field>
+            <field name="res_model">mgmtsystem.plan</field>
+            <field name="view_mode">tree,form</field>
+            <field name="context">{"search_default_vigentis":1}</field>
+        </record>
+
+        <menuitem id="hr_item_annual_plan"
+                  name="Programa anual de capacitaciones"
+                  parent="menu_training_root"
+                  groups="mgmtsystem_employees.group_employees_onlyread_printreport,mgmtsystem_employees.group_employees_write_printreport,mgmtsystem_employees.group_employees_all"
+                  sequence="1"
+                  action="hr_item_plan_action" />
+
+    </data>
+</odoo>

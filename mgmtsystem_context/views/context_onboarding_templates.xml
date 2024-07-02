@@ -1,0 +1,252 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <!-- ONBOARDING STEPS -->
+
+    <template id="onboarding_context_internal_issue_step">
+        <t t-call="base.onboarding_step">
+            <t t-set="title">Contexto interno</t>
+            <t t-set="description">Cree una contexto interno.</t>
+            <t t-set="done_icon" t-value="'fa-star'" />
+            <t t-set="btn_text">Crear</t>
+            <t t-set="done_text">Se ve bien!</t>
+            <t t-set="method" t-value="'action_open_context_internal_issue'" />
+            <t t-set="model" t-value="'res.company'" />
+            <t t-set="state" t-value="state.get('context_internal_issue_onboarding_state')" />
+        </t>
+    </template>
+
+    <template id="onboarding_context_external_issue_step">
+        <t t-call="base.onboarding_step">
+            <t t-set="title">Análisis de Porter</t>
+            <t t-set="description">Cree un análisis de Porter.</t>
+            <t t-set="done_icon" t-value="'fa-star'" />
+            <t t-set="btn_text">Crear</t>
+            <t t-set="done_text">Se ve bien!</t>
+            <t t-set="method" t-value="'action_open_context_external_issue'" />
+            <t t-set="model" t-value="'res.company'" />
+            <t t-set="state" t-value="state.get('context_external_issue_onboarding_state')" />
+        </t>
+    </template>
+
+    <template id="onboarding_context_swot_step">
+        <t t-call="base.onboarding_step">
+            <t t-set="title">Análisis FODA</t>
+            <t t-set="description">Cree un nuevo análisis FODA.</t>
+            <t t-set="done_icon" t-value="'fa-star'" />
+            <t t-set="btn_text">Crear</t>
+            <t t-set="done_text">Se ve bien!</t>
+            <t t-set="method" t-value="'action_open_context_swot'" />
+            <t t-set="model" t-value="'res.company'" />
+            <t t-set="state" t-value="state.get('context_swot_onboarding_state')" />
+        </t>
+    </template>
+
+    <template id="onboarding_context_pest_step">
+        <t t-call="base.onboarding_step">
+            <t t-set="title">Análisis PESTEL/AMOFHIT</t>
+            <t t-set="description">Cree un nuevo análisis PESTEL/AMOFHIT.</t>
+            <t t-set="done_icon" t-value="'fa-star'" />
+            <t t-set="btn_text">Crear</t>
+            <t t-set="done_text">Se ve bien!</t>
+            <t t-set="method" t-value="'action_open_context_pest'" />
+            <t t-set="model" t-value="'res.company'" />
+            <t t-set="state" t-value="state.get('context_pest_onboarding_state')" />
+        </t>
+    </template>
+
+    <template id="onboarding_context_stakeholders_step">
+        <t t-call="base.onboarding_step">
+            <t t-set="title">Matriz de partes interesadas</t>
+            <t t-set="description">Cree una nueva matriz de partes interesadas.</t>
+            <t t-set="done_icon" t-value="'fa-star'" />
+            <t t-set="btn_text">Crear</t>
+            <t t-set="done_text">Se ve bien!</t>
+            <t t-set="method" t-value="'action_open_context_stakeholders'" />
+            <t t-set="model" t-value="'res.company'" />
+            <t t-set="state" t-value="state.get('context_stakeholders_onboarding_state')" />
+        </t>
+    </template>
+
+    <template id="onboarding_context_policy_step">
+        <t t-call="base.onboarding_step">
+            <t t-set="title">Política de calidad</t>
+            <t t-set="description">Cree una nueva política de calidad.</t>
+            <t t-set="done_icon" t-value="'fa-star'" />
+            <t t-set="btn_text">Crear</t>
+            <t t-set="done_text">Se ve bien!</t>
+            <t t-set="method" t-value="'action_open_context_policy'" />
+            <t t-set="model" t-value="'res.company'" />
+            <t t-set="state" t-value="state.get('context_policy_onboarding_state')" />
+        </t>
+    </template>
+
+    <!-- ONBOARDING PANELS -->
+    <template id="context_onboarding_panel" name="context.onboarding.panel">
+        <t t-call="base.onboarding_container">
+            <t t-set="classes" t-value="'o_onboarding_blue'"/>
+            <t t-set="bg_image" t-value="'/account/static/src/img/account_invoice_onboarding_bg.jpg'"/>
+            <t t-set="close_method" t-value="'action_close_context_onboarding'"/>
+            <t t-set="close_model" t-value="'res.company'"/>
+            <t t-set="text_completed">Felicitaciones! Ha completado todo.</t>
+            <t t-call="mgmtsystem_context.onboarding_context_internal_issue_step" name="context_internal_issue_step" />
+            <t t-call="mgmtsystem_context.onboarding_context_external_issue_step" name="context_external_issue_step" />
+            <t t-call="mgmtsystem_context.onboarding_context_swot_step" name="context_swot_step" />
+            <t t-call="mgmtsystem_context.onboarding_context_pest_step" name="context_pest_step" />
+            <t t-call="mgmtsystem_context.onboarding_context_stakeholders_step" name="context_stakeholders_step" />
+            <t t-call="mgmtsystem_context.onboarding_context_policy_step" name="context_policy_step" />
+        </t>
+    </template>
+
+    <!-- Views -->
+
+    <record id="onboarding_context_internal_issue_form" model="ir.ui.view">
+        <field name="name">mgmtsystem.context.internal_issue.inherit.view.form</field>
+        <field name="model">mgmtsystem.context.internal_issue</field>
+        <field name="inherit_id" ref="mgmtsystem_context.context_internal_issue_view_form"/>
+        <field name="priority">1000</field>
+<field name="mode">primary</field>
+<field name="arch" type="xml">
+            <form position="inside">
+                <footer position="replace">
+                    <button name="action_save_onboarding_context_internal_issue_step" class="btn btn-primary" type="object" string="Crear" />
+                    <button special="cancel" string="Cancelar" />
+                </footer>
+            </form>
+        </field>
+    </record>
+
+    <record id="onboarding_context_external_issue_form" model="ir.ui.view">
+        <field name="name">mgmtsystem.context.external_issue.inherit.view.form</field>
+        <field name="model">mgmtsystem.context.external_issue</field>
+        <field name="inherit_id" ref="mgmtsystem_context.context_external_issue_view_form"/>
+        <field name="priority">1000</field>
+<field name="mode">primary</field>
+<field name="arch" type="xml">
+            <form position="inside">
+                <footer position="replace">
+                    <button name="action_save_onboarding_context_external_issue_step" class="btn btn-primary" type="object" string="Crear" />
+                    <button special="cancel" string="Cancelar" />
+                </footer>
+            </form>
+        </field>
+    </record>
+
+    <record id="onboarding_context_swot_form" model="ir.ui.view">
+        <field name="name">mgmtsystem.context.swot.inherit.view.form</field>
+        <field name="model">mgmtsystem.context.swot</field>
+        <field name="inherit_id" ref="mgmtsystem_context.context_swot_view_form"/>
+        <field name="priority">1000</field>
+<field name="mode">primary</field>
+<field name="arch" type="xml">
+            <form position="inside">
+                <footer position="replace">
+                    <button name="action_save_onboarding_context_swot_step" class="btn btn-primary" type="object" string="Crear" />
+                    <button special="cancel" string="Cancelar" />
+                </footer>
+            </form>
+        </field>
+    </record>
+
+    <record id="onboarding_context_pest_form" model="ir.ui.view">
+        <field name="name">mgmtsystem.context.pest.inherit.view.form</field>
+        <field name="model">mgmtsystem.context.pest</field>
+        <field name="inherit_id" ref="mgmtsystem_context.pest_analysis_view_form"/>
+        <field name="priority">1000</field>
+<field name="mode">primary</field>
+<field name="arch" type="xml">
+            <form position="inside">
+                <footer position="replace">
+                    <button name="action_save_onboarding_context_pest_step" class="btn btn-primary" type="object" string="Crear" />
+                    <button special="cancel" string="Cancelar" />
+                </footer>
+            </form>
+        </field>
+    </record>
+
+    <record id="onboarding_context_stakeholders_form" model="ir.ui.view">
+        <field name="name">mgmtsystem.stakeholders.inherit.view.form</field>
+        <field name="model">mgmtsystem.stakeholders</field>
+        <field name="inherit_id" ref="mgmtsystem_context.stakeholders_view_form"/>
+        <field name="priority">1000</field>
+<field name="mode">primary</field>
+<field name="arch" type="xml">
+            <form position="inside">
+                <footer position="replace">
+                    <button name="action_save_onboarding_context_stakeholders_step" class="btn btn-primary" type="object" string="Crear" />
+                    <button special="cancel" string="Cancelar" />
+                </footer>
+            </form>
+        </field>
+    </record>
+
+    <record id="onboarding_context_policy_form" model="ir.ui.view">
+        <field name="name">mgmtsystem.context.policy.inherit.view.form</field>
+        <field name="model">mgmtsystem.context.policy</field>
+        <field name="inherit_id" ref="mgmtsystem_context.context_policy_view_form"/>
+        <field name="priority">1000</field>
+<field name="mode">primary</field>
+<field name="arch" type="xml">
+            <form position="inside">
+                <footer position="replace">
+                    <button name="action_save_onboarding_context_policy_step" class="btn btn-primary" type="object" string="Crear" />
+                    <button special="cancel" string="Cancelar" />
+                </footer>
+            </form>
+        </field>
+    </record>
+
+    <record id="action_context_internal_issue_configurator" model="ir.actions.act_window">
+        <field name="type">ir.actions.act_window</field>
+        <field name="name">Cree un contexto interno de la organización</field>
+        <field name="view_mode">form</field>
+        <field name="target">new</field>
+        <field name="res_model">mgmtsystem.context.internal_issue</field>
+        <field name="view_id" ref="mgmtsystem_context.onboarding_context_internal_issue_form"/>
+    </record>
+
+    <record id="action_context_external_issue_configurator" model="ir.actions.act_window">
+        <field name="type">ir.actions.act_window</field>
+        <field name="name">Cree un contexto externo de la organización</field>
+        <field name="view_mode">form</field>
+        <field name="target">new</field>
+        <field name="res_model">mgmtsystem.context.external_issue</field>
+        <field name="view_id" ref="mgmtsystem_context.onboarding_context_external_issue_form"/>
+    </record>
+
+    <record id="action_context_swot_configurator" model="ir.actions.act_window">
+        <field name="type">ir.actions.act_window</field>
+        <field name="name">Cree un análisis FODA</field>
+        <field name="view_mode">form</field>
+        <field name="target">new</field>
+        <field name="res_model">mgmtsystem.context.swot</field>
+        <field name="view_id" ref="mgmtsystem_context.onboarding_context_swot_form"/>
+    </record>
+
+    <record id="action_context_pest_configurator" model="ir.actions.act_window">
+        <field name="type">ir.actions.act_window</field>
+        <field name="name">Cree un análisis PESTEL/AMOFHIT</field>
+        <field name="view_mode">form</field>
+        <field name="target">new</field>
+        <field name="res_model">mgmtsystem.context.pest</field>
+        <field name="view_id" ref="mgmtsystem_context.onboarding_context_pest_form"/>
+    </record>
+
+    <record id="action_context_stakeholders_configurator" model="ir.actions.act_window">
+        <field name="type">ir.actions.act_window</field>
+        <field name="name">Cree una matriz de partes interesadas</field>
+        <field name="view_mode">form</field>
+        <field name="target">new</field>
+        <field name="res_model">mgmtsystem.stakeholders</field>
+        <field name="view_id" ref="mgmtsystem_context.onboarding_context_stakeholders_form"/>
+    </record>
+
+    <record id="action_context_policy_configurator" model="ir.actions.act_window">
+        <field name="type">ir.actions.act_window</field>
+        <field name="name">Cree una política de calidad</field>
+        <field name="view_mode">form</field>
+        <field name="target">new</field>
+        <field name="res_model">mgmtsystem.context.policy</field>
+        <field name="view_id" ref="mgmtsystem_context.onboarding_context_policy_form"/>
+    </record>
+
+</odoo>

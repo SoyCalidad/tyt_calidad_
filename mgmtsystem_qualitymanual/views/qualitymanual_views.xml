@@ -1,0 +1,568 @@
+<odoo>
+    <record id="view_process_description_form" model="ir.ui.view">
+        <field name="name">mgmtsystem.process.description.form.view</field>
+        <field name="model">mgmtsystem.process.description</field>
+        <field name="arch" type="xml">
+            <tree>
+                <field name="name" />
+                <field name="description" />
+            </tree>
+        </field>
+    </record>
+
+    <record id="view_qualitymanual_form" model="ir.ui.view">
+        <field name="name">mgmtsystem.qualitymanual.form.view</field>
+        <field name="model">mgmtsystem.qualitymanual</field>
+        <field name="arch" type="xml">
+            <tree>
+                <field name="name" />
+                <field name="state" />
+            </tree>
+        </field>
+    </record>
+
+    <record id="view_mgmtsystem_qualitymanual_form" model="ir.ui.view">
+        <field name="name">mgmtsystem.qualitymanual.form.view</field>
+        <field name="model">mgmtsystem.qualitymanual</field>
+        <field name="arch" type="xml">
+            <form>
+                <header>
+                    <field name="state" widget="statusbar" statusbar_visible="elaborate,review,validate,validate_ok" />
+                    <button string="Enviar a Elaborar" name="send_elaborate" type="object" class="btn-primary" attrs="{'invisible':[('state','in', ('elaborate','cancel','validate_ok'))]}" />
+                    <button string="Enviar a Revisar" name="send_review" type="object" class="btn-primary" attrs="{'invisible':[('state','!=', 'elaborate')]}" />
+                    <button string="Enviar a Validar" name="send_validate" type="object" class="btn-primary" attrs="{'invisible':[('state','in', ('elaborate','validate','cancel','validate_ok'))]}" />
+                    <button string="Validar" name="send_validate_ok" type="object" class="btn-primary" attrs="{'invisible':[('state','not in', ('validate'))]}" />
+                    <button string="Volver Obsoleto" confirm="Esto volverá obsoleto el presente registro. ¿Está seguro(a)?" name="send_cancel" type="object" class="btn-second" attrs="{'invisible': [('state','in',('cancel'))] }" />
+                    <button name="button_new_version" type="object" string="Nueva versión" attrs="{'invisible':[('state', '!=', 'validate_ok')]}" class="oe_highlight" />
+                </header>
+                <sheet>
+                    <label for="name" />
+                    <div class="oe_title">
+                        <h4>
+                            <field name="name" />
+                        </h4>
+                    </div>
+                    <group>
+                        <field name="is_template" />
+                    </group>
+                    <p class="oe_grey">
+                        Para linkear los procedimientos utilizar el formato
+                        <b>//</b>
+                        Código del proceso
+                        <b>//</b>
+                        , no olvidar colocar dicho procedimiento en la tabla y pestaña "Procedimiento"; ej.
+                        <code>//E-PE-1//</code>
+                    </p>
+                    <br />
+                    <notebook>
+                        <page name="validation" string="Validación">
+                            <group col="4">
+                                <group colspan="4">
+                                    <field name="version" attrs="{'readonly': [('state','in',('validate_ok','cancel'))]}" />
+                                </group>
+                                <group colspan="4">
+                                    <separator string="Elaboración" />
+                                    <field name="elaboration_step" colspan="2" nolabel="1" attrs="{'readonly': [('state','not in',('elaborate'))]}" />
+                                    <separator string="Revisión" />
+                                    <field name="review_step" colspan="2" nolabel="1" attrs="{'readonly': [('state','not in',('elaborate', 'review'))]}" />
+                                    <separator string="Validación" />
+                                    <field name="validation_step" colspan="2" nolabel="1" attrs="{'readonly': [('state','not in',('elaborate', 'review', 'validate'))]}" />
+                                </group>
+                                <group colspan="2">
+                                    <field name="date_elaborate" attrs="{'required': [('state','in',('elaborate'))], 'readonly': True}" />
+                                    <field name="date_review" attrs="{'required': [('state','in',('review'))], 'readonly': True, 'invisible': [('state','in',('elaborate'))] }" />
+                                    <field name="date_validate" groups="base.group_no_one,base.user_admin" attrs="{'invisible': [('state','in',('elaborate','review'))] }" />
+                                </group>
+                            </group>
+                        </page>
+                        <page string="0. Introducción" name="introduction">
+                            <br />
+                            <h1 class="o_horizontal_separator">0. Introducción</h1>
+                            <field name="introduction" widget="html" attrs="{'readonly': [('state','in',('validate_ok','cancel'))]}" />
+                            <br />
+                            <h1 class="o_horizontal_separator">1. Objetivo y campo de aplicación</h1>
+                            <h4>1.1. Objetivo del manual</h4>
+                            <field name="objective" widget="html" attrs="{'readonly': [('state','in',('validate_ok','cancel'))]}" />
+                            <br />
+                            <h4>1.2. Alcance del sistema de gestión de calidad</h4>
+                            <field name="scope" widget="html" attrs="{'readonly': [('state','in',('validate_ok','cancel'))]}" />
+                            <br />
+                            <group>
+                                <field name="internal_issue_id" attrs="{'readonly': [('state','in',('validate_ok','cancel'))]}" />
+                            </group>
+                            <h1 class="o_horizontal_separator">2. Referencias normativas</h1>
+                            <field name="references" widget="html" attrs="{'readonly': [('state','in',('validate_ok','cancel'))]}" />
+                            <br />
+                            <h1 class="o_horizontal_separator">3. Términos y definiciones</h1>
+                            <field name="abbreviation_ids" attrs="{'readonly': [('state','in',('validate_ok','cancel'))]}">
+                                <tree>
+                                    <field name="name" />
+                                    <field name="description" />
+                                </tree>
+                            </field>
+                        </page>
+                        <page string="4. Contexto de la organización" name="context">
+                            <h1 class="o_horizontal_separator">4. Contexto de la organización</h1>
+                            <field name="context" widget="html" />
+                            <group>
+                                <field name="mission" widget="html" attrs="{'readonly': [('state','in',('validate_ok','cancel'))]}" />
+                                <field name="vision" widget="html" attrs="{'readonly': [('state','in',('validate_ok','cancel'))]}" />
+                                <field name="process_id" attrs="{'readonly': [('state','in',('validate_ok','cancel'))]}" />
+                            </group>
+                            <h4>4.1. Comprensión de la organización y de su contexto</h4>
+                            <field name="context_objective" widget="html" attrs="{'readonly': [('state','in',('validate_ok','cancel'))]}" />
+                            <br />
+                            <group>
+                                <field name="context_context_process_ids" attrs="{'readonly': [('state','in',('validate_ok','cancel'))]}" />
+                                <field name="porter_id" attrs="{'readonly': [('state','in',('validate_ok','cancel'))]}" />
+                                <field name="foda_id" attrs="{'readonly': [('state','in',('validate_ok','cancel'))]}" />
+                                <field name="pest_id" attrs="{'readonly': [('state','in',('validate_ok','cancel'))]}" />
+                            </group>
+                            <br />
+                            <br />
+                            <h4>4.2. Comprensión de las necesidades y expectativas de las partes interesadas</h4>
+                            <field name="context_needs" widget="html" attrs="{'readonly': [('state','in',('validate_ok','cancel'))]}" />
+                            <group>
+                                <field name="context_needs_process_ids" attrs="{'readonly': [('state','in',('validate_ok','cancel'))]}" />
+                                <field name="stakeholders_id" attrs="{'readonly': [('state','in',('validate_ok','cancel'))]}" />
+                            </group>
+                            <br />
+                            <br />
+                            <h4>4.3. Determinación del Alcance del Sistema de Gestión de calidad</h4>
+                            <field name="context_scope" widget="html" attrs="{'readonly': [('state','in',('validate_ok','cancel'))]}" />
+                            <br />
+                            <h4>4.4. Sistema de Gestión de Calidad y sus procesos</h4>
+                            <field name="quality_process" widget="html" />
+                            <p style="font-size:14px;font-weight:bold;">4.4.1. Mapa de procesos</p>
+                            <field name="process_preview" />
+                            <br />
+                            <br />
+                            <p style="font-size:14px;font-weight:bold;">4.4.2. Tipo de procesos</p>
+                            <field name="context_processdescription_ids" attrs="{'readonly': [('state','in',('validate_ok','cancel'))]}" />
+                            <p style="font-size:14px;font-weight:bold;">4.4.3. Procedimientos</p>
+                            <field name="process_ids" attrs="{'readonly': [('state','in',('validate_ok','cancel'))]}">
+                                <tree edit="false">
+                                    <field name="code" />
+                                    <field name="name" />
+                                    <field name="categ_id" />
+                                    <field name="responsible_id" />
+                                </tree>
+                            </field>
+                        </page>
+                        <page string="5. Liderazgo" name="leader">
+                            <h1 class="o_horizontal_separator">5. Liderazgo</h1>
+                            <h4>5.1. Liderazgo y Compromiso</h4>
+                            <p style="font-size:14px;font-weight:bold;">5.1.1. Generalidades</p>
+                            <field name="leader_generalities" widget="html" attrs="{'readonly': [('state','in',('validate_ok','cancel'))]}" />
+                            <br />
+                            <p style="font-size:14px;font-weight:bold;">5.1.2. Enfoque al cliente</p>
+                            <field name="leader_clientfocus" widget="html" attrs="{'readonly': [('state','in',('validate_ok','cancel'))]}" />
+                            <p style="font-size:13px;font-weight:bold;">a. Requisitos del cliente y los legales y reglamentarios aplicables.</p>
+                            <br />
+                            <group>
+                                <field name="legal_process_id" attrs="{'readonly': [('state','in',('validate_ok','cancel'))]}" />
+                                <field name="legal_ids" attrs="{'readonly': [('state','in',('validate_ok','cancel'))]}" />
+                            </group>
+                            <p style="font-size:13px;font-weight:bold;">b. Riesgos y oportunidades relacionados la satisfacción del cliente.</p>
+                            <br />
+                            <group>
+                                <field name="opp_process_id" attrs="{'readonly': [('state','in',('validate_ok','cancel'))]}" />
+                                <field name="risk_ids" attrs="{'readonly': [('state','in',('validate_ok','cancel'))]}" />
+                                <field name="opp_ids" attrs="{'readonly': [('state','in',('validate_ok','cancel'))]}" />
+                            </group>
+                            <p style="font-size:13px;font-weight:bold;">c. Se mantiene el enfoque en el aumento de la satisfacción del cliente.</p>
+                            <br />
+                            <group>
+                                <field name="survey_process_id" attrs="{'readonly': [('state','in',('validate_ok','cancel'))]}" />
+                                <field name="survey_ids" attrs="{'readonly': [('state','in',('validate_ok','cancel'))]}" />
+                            </group>
+                            <br />
+                            <h4>5.2. Políticas</h4>
+                            <p style="font-size:13px;font-weight:bold;">5.2.1 Establecimiento de la política de calidad</p>
+                            <field name="leader_politic" widget="html" attrs="{'readonly': [('state','in',('validate_ok','cancel'))]}" />
+                            <group>
+                                <field name="politic_process_id" attrs="{'readonly': [('state','in',('validate_ok','cancel'))]}" />
+                                <field name="politic_ids" attrs="{'readonly': [('state','in',('validate_ok','cancel'))]}" />
+                            </group>
+                            <br />
+                            <p style="font-size:13px;font-weight:bold;">5.2.2 Comunicación de la política de calidad</p>
+                            <field name="leader_comunication" widget="html" attrs="{'readonly': [('state','in',('validate_ok','cancel'))]}" />
+                            <group>
+                                <field name="comunication_process_id" attrs="{'readonly': [('state','in',('validate_ok','cancel'))]}" />
+                                <field name="comunication_plan_id" attrs="{'readonly': [('state','in',('validate_ok','cancel'))]}" />
+                            </group>
+                            <br />
+                            <h4>5.3. Roles, responsabilidades y Autoridades en la organización</h4>
+                            <field name="leader_rol" widget="html" attrs="{'readonly': [('state','in',('validate_ok','cancel'))]}" />
+                            <group>
+                                <field name="rol_process_id" attrs="{'readonly': [('state','in',('validate_ok','cancel'))]}" />
+                                <field name="job_ids" attrs="{'readonly': [('state','in',('validate_ok','cancel'))]}" />
+                            </group>
+                        </page>
+                        <page string="6. Planificación" name="plan">
+                            <h1 class="o_horizontal_separator">6. Planificación</h1>
+                            <field name="plan_body" widget="html" attrs="{'readonly': [('state','in',('validate_ok','cancel'))]}" />
+                            <br />
+                            <h4>6.1. Acciones para abordar riesgos y oportunidades</h4>
+                            <field name="plan_riskopp" widget="html" attrs="{'readonly': [('state','in',('validate_ok','cancel'))]}" />
+                            <group>
+                                <field name="matrix_process_id" attrs="{'readonly': [('state','in',('validate_ok','cancel'))]}" />
+                                <field name="risk_matrix_ids" attrs="{'readonly': [('state','in',('validate_ok','cancel'))]}" />
+                                <field name="opp_matrix_ids" attrs="{'readonly': [('state','in',('validate_ok','cancel'))]}" />
+                            </group>
+                            <br />
+                            <h4>6.2. Objetivos de la calidad y planificación para lograrlos</h4>
+                            <field name="plan_scope" widget="html" attrs="{'readonly': [('state','in',('validate_ok','cancel'))]}" />
+                            <group>
+                                <field name="target_process_id" attrs="{'readonly': [('state','in',('validate_ok','cancel'))]}" />
+                                <field name="target_ids" attrs="{'readonly': [('state','in',('validate_ok','cancel'))]}" />
+                            </group>
+                            <br />
+                            <h4>6.3. Planificación y control de Cambios</h4>
+                            <field name="plan_changes" widget="html" attrs="{'readonly': [('state','in',('validate_ok','cancel'))]}" />
+                            <group>
+                                <field name="plan_process_id" attrs="{'readonly': [('state','in',('validate_ok','cancel'))]}" />
+                            </group>
+                        </page>
+                        <page string="7. Apoyo" name="support">
+                            <h1 class="o_horizontal_separator">7. Apoyo</h1>
+                            <br />
+                            <h4>7.1. Recursos</h4>
+                            <p style="font-size:13px;font-weight:bold;">7.1.1. Generalidades</p>
+                            <field name="support_regeneralities" widget="html" attrs="{'readonly': [('state','in',('validate_ok','cancel'))]}" />
+                            <br />
+                            <p style="font-size:13px;font-weight:bold;">7.1.2. Personas</p>
+                            <field name="support_people" widget="html" attrs="{'readonly': [('state','in',('validate_ok','cancel'))]}" />
+                            <group>
+                                <field name="people_process_id" />
+                                <field name="employee_ids" />
+                                <field name="applicant_ids" />
+                            </group>
+                            <br />
+                            <p style="font-size:13px;font-weight:bold;">7.1.3. Infraestructura</p>
+                            <field name="support_infrastructure" widget="html" attrs="{'readonly': [('state','in',('validate_ok','cancel'))]}" />
+                            <group>
+                                <field name="infra_process_id" />
+                                <field name="infrastructure_ids" />
+                                <field name="maintenance_plan_ids" />
+                            </group>
+                            <br />
+                            <p style="font-size:13px;font-weight:bold;">7.1.4. Ambiente para la operación de los procesos</p>
+                            <field name="support_environment" widget="html" attrs="{'readonly': [('state','in',('validate_ok','cancel'))]}" />
+                            <group>
+                                <field name="environment_process_id" />
+                                <field name="internal_survey_ids" />
+                            </group>
+                            <br />
+                            <p style="font-size:13px;font-weight:bold;">7.1.5. Recursos de seguimiento y medición</p>
+                            <p style="font-size:11px;font-weight:bold;">7.1.5.1. Generalidades</p>
+                            <field name="support_measure_general" widget="html" attrs="{'readonly': [('state','in',('validate_ok','cancel'))]}" />
+                            <p style="font-size:11px;font-weight:bold;">7.1.5.2. Trazabilidad de las mediciones</p>
+                            <field name="support_measure_traz" widget="html" attrs="{'readonly': [('state','in',('validate_ok','cancel'))]}" />
+                            <group>
+                                <field name="measure_process_id" />
+                                <field name="calibration_plan_ids" />
+                            </group>
+                            <br />
+                            <p style="font-size:13px;font-weight:bold;">7.1.6. Conocimiento de la organización</p>
+                            <field name="support_knowledge" widget="html" attrs="{'readonly': [('state','in',('validate_ok','cancel'))]}" />
+                            <group>
+                                <field name="knowledge_process_id" />
+                                <field name="training_plan_ids" />
+                            </group>
+                            <br />
+                            <h4>7.2. Competencia</h4>
+                            <field name="support_competitions" widget="html" attrs="{'readonly': [('state','in',('validate_ok','cancel'))]}" />
+                            <group>
+                                <field name="competitions_process_id" />
+                                <field name="training_knw_ids" />
+                                <field name="training_survey_ids" />
+                            </group>
+                            <br />
+                            <h4>7.3. Toma de conciencia</h4>
+                            <field name="support_awareness" widget="html" attrs="{'readonly': [('state','in',('validate_ok','cancel'))]}" />
+                            <group>
+                                <field name="awareness_process_id" />
+                                <field name="training_aw_ids" />
+                                <field name="training_survey2_ids" />
+                            </group>
+                            <br />
+                            <h4>7.4. Comunicación</h4>
+                            <field name="support_comunication" widget="html" attrs="{'readonly': [('state','in',('validate_ok','cancel'))]}" />
+                            <group>
+                                <field name="comunication_process_id" />
+                                <field name="training_com_ids" />
+                            </group>
+                            <br />
+                            <h4>7.5. Información documentada</h4>
+                            <p style="font-size:13px;font-weight:bold;">7.5.1. Generalidades</p>
+                            <field name="support_generalities" widget="html" attrs="{'readonly': [('state','in',('validate_ok','cancel'))]}" />
+                            <br />
+                            <p style="font-size:13px;font-weight:bold;">7.5.2. Creación y actualización</p>
+                            <field name="support_creation" widget="html" attrs="{'readonly': [('state','in',('validate_ok','cancel'))]}" />
+                            <group>
+                                <field name="creation_process_id" />
+                                <field name="attachment_ids" />
+                            </group>
+                            <br />
+                            <p style="font-size:13px;font-weight:bold;">7.5.3. Control de la información documentada</p>
+                            <field name="support_control" widget="html" attrs="{'readonly': [('state','in',('validate_ok','cancel'))]}" />
+                            <group>
+                                <field name="control_process_id" />
+                                <field name="document_ids" />
+                            </group>
+                        </page>
+                        <page string="8. Operación" name="operation">
+                            <h1 class="o_horizontal_separator">8. Operación</h1>
+                            <br />
+                            <h4>8.1. Planificación y control operacional</h4>
+                            <field name="ope_plan" widget="html" />
+                            <group>
+                                <field name="ope_process_id" />
+                            </group>
+                            <br />
+                            <h4>8.2. Requisitos para los productos y los servicios</h4>
+                            <br />
+                            <p style="font-size:13px;font-weight:bold;">8.2.1. Comunicación con el cliente</p>
+                            <field name="ope_comunication" widget="html" attrs="{'readonly': [('state','in',('validate_ok','cancel'))]}" />
+                            <group>
+                                <field name="complaint_process_id" />
+                                <field name="complaints_ids" />
+                            </group>
+                            <br />
+                            <p style="font-size:13px;font-weight:bold;">8.2.2. Determinación de los requisitos para los servicios</p>
+                            <field name="ope_determination" widget="html" attrs="{'readonly': [('state','in',('validate_ok','cancel'))]}" />
+                            <group>
+                                <field name="determination_process_id" />
+                            </group>
+                            <br />
+                            <p style="font-size:13px;font-weight:bold;">8.2.3. Revisión de los requisitos para los productos y servicios</p>
+                            <field name="ope_review" widget="html" attrs="{'readonly': [('state','in',('validate_ok','cancel'))]}" />
+                            <group>
+                                <field name="review_process_id" />
+                            </group>
+                            <br />
+                            <p style="font-size:13px;font-weight:bold;">8.2.4. Cambios en los requisitos para los servicios</p>
+                            <field name="ope_changes" widget="html" attrs="{'readonly': [('state','in',('validate_ok','cancel'))]}" />
+                            <group>
+                                <field name="changes_process_id" />
+                            </group>
+                            <h4>8.3. Diseño y desarrollo de los productos y servicios</h4>
+                            <br />
+                            <p style="font-size:13px;font-weight:bold;">8.3.1. Generalidades</p>
+                            <field name="ope_cgeneral" widget="html" attrs="{'readonly': [('state','in',('validate_ok','cancel'))]}" />
+                            <group>
+                                <field name="cgneral_process_id" />
+                            </group>
+                            <br />
+                            <p style="font-size:13px;font-weight:bold;">8.3.2. Planificación del diseño y desarrollo</p>
+                            <field name="ope_design" widget="html" attrs="{'readonly': [('state','in',('validate_ok','cancel'))]}" />
+                            <group>
+                                <field name="design_process_id" />
+                            </group>
+                            <br />
+                            <p style="font-size:13px;font-weight:bold;">8.3.3. Entradas para el diseño y desarrollo</p>
+                            <field name="ope_entries" widget="html" attrs="{'readonly': [('state','in',('validate_ok','cancel'))]}" />
+                            <group>
+                                <field name="entries_process_id" />
+                            </group>
+                            <br />
+                            <p style="font-size:13px;font-weight:bold;">8.3.4. Controles del diseño y desarrollo</p>
+                            <field name="ope_ddcontrols" widget="html" attrs="{'readonly': [('state','in',('validate_ok','cancel'))]}" />
+                            <group>
+                                <field name="ddcontrols_process_id" />
+                            </group>
+                            <br />
+                            <p style="font-size:13px;font-weight:bold;">8.3.5. Salidas del diseño y desarrollo</p>
+                            <field name="ope_ddoutputs" widget="html" attrs="{'readonly': [('state','in',('validate_ok','cancel'))]}" />
+                            <group>
+                                <field name="ddoutputs_process_id" />
+                            </group>
+                            <br />
+                            <p style="font-size:13px;font-weight:bold;">8.3.6. Cambios del diseño y desarrollo</p>
+                            <field name="ope_ddchanges" widget="html" attrs="{'readonly': [('state','in',('validate_ok','cancel'))]}" />
+                            <group>
+                                <field name="ddchanges_process_id" />
+                            </group>
+                            <br />
+                            <h4>8.4. Control de los procesos y servicios suministrados externamente.</h4>
+                            <p style="font-size:13px;font-weight:bold;">8.4.1. Generalidades</p>
+                            <field name="ope_dchanges" widget="html" attrs="{'readonly': [('state','in',('validate_ok','cancel'))]}" />
+                            <group>
+                                <field name="dchanges_process_id" />
+                                <field name="stock_inspection_ids" />
+                            </group>
+                            <br />
+                            <p style="font-size:13px;font-weight:bold;">8.4.2. Tipo y alcance del control</p>
+                            <field name="ope_type" widget="html" attrs="{'readonly': [('state','in',('validate_ok','cancel'))]}" />
+                            <group>
+                                <field name="ope_type_process_id" />
+                                <field name="partner_evaluation_ids" />
+                            </group>
+                            <br />
+                            <p style="font-size:13px;font-weight:bold;">8.4.3. Información para los proveedores externos</p>
+                            <field name="ope_information" widget="html" attrs="{'readonly': [('state','in',('validate_ok','cancel'))]}" />
+                            <group>
+                                <field name="information_process_id" />
+                                <field name="supplier_ids" />
+                            </group>
+                            <br />
+                            <h4>8.5. Producción y provisión del servicio</h4>
+                            <p style="font-size:13px;font-weight:bold;">8.5.1. Control de la producción y de la provisión del servicio</p>
+                            <field name="ope_procontrol" widget="html" attrs="{'readonly': [('state','in',('validate_ok','cancel'))]}" />
+                            <group>
+                                <field name="procontrol_process_id" />
+                            </group>
+                            <br />
+                            <p style="font-size:13px;font-weight:bold;">8.5.2. Identificación y trazabilidad</p>
+                            <field name="ope_proide" widget="html" attrs="{'readonly': [('state','in',('validate_ok','cancel'))]}" />
+                            <group>
+                                <field name="proide_process_id" />
+                            </group>
+                            <br />
+                            <p style="font-size:13px;font-weight:bold;">8.5.3. Propiedad perteneciente a clientes o proveedores externos</p>
+                            <field name="ope_property" widget="html" attrs="{'readonly': [('state','in',('validate_ok','cancel'))]}" />
+                            <group>
+                                <field name="property_process_id" />
+                            </group>
+                            <br />
+                            <p style="font-size:13px;font-weight:bold;">8.5.4. Preservación</p>
+                            <field name="ope_preservation" widget="html" attrs="{'readonly': [('state','in',('validate_ok','cancel'))]}" />
+                            <group>
+                                <field name="preservation_process_id" />
+                            </group>
+                            <br />
+                            <p style="font-size:13px;font-weight:bold;">8.5.5. Actividades posteriores a la entrega</p>
+                            <field name="ope_postdelivery" widget="html" attrs="{'readonly': [('state','in',('validate_ok','cancel'))]}" />
+                            <group>
+                                <field name="postdelivery_process_id" />
+                            </group>
+                            <br />
+                            <p style="font-size:13px;font-weight:bold;">8.5.6. Control de Cambios</p>
+                            <field name="ope_realese" widget="html" attrs="{'readonly': [('state','in',('validate_ok','cancel'))]}" />
+                            <group>
+                                <field name="changecontrol_process_id" />
+                            </group>
+                            <br />
+                            <h4>8.6. Liberación de los servicios</h4>
+                            <field name="ope_control" widget="html" attrs="{'readonly': [('state','in',('validate_ok','cancel'))]}" />
+                            <group>
+                                <field name="release_process_id" />
+                            </group>
+                            <br />
+                            <h4>8.7. Control de servicio no conforme</h4>
+                            <field name="ope_control" widget="html" attrs="{'readonly': [('state','in',('validate_ok','cancel'))]}" />
+                            <group>
+                                <field name="opecontrol_process_id" />
+                            </group>
+                        </page>
+                        <page string="9. Evaluación de desempeño" name="evaluation">
+                            <h1 class="o_horizontal_separator">9. Evaluación de desempeño</h1>
+                            <br />
+                            <h4>9.1. Seguimiento, medición, análisis y evaluación</h4>
+                            <p style="font-size:13px;font-weight:bold;">9.1.1. Generalidades</p>
+                            <field name="eva_tgeneral" widget="html" attrs="{'readonly': [('state','in',('validate_ok','cancel'))]}" />
+                            <group>
+                                <field name="tgeneral_process_id" />
+                                <field name="indicator_ids" />
+                            </group>
+                            <br />
+                            <p style="font-size:13px;font-weight:bold;">9.1.2. Satisfacción del cliente</p>
+                            <field name="eva_tcustomer" widget="html" attrs="{'readonly': [('state','in',('validate_ok','cancel'))]}" />
+                            <group>
+                                <field name="tcustomer_process_id" />
+                                <field name="complaint_int_ids" />
+                                <field name="complaint_ext_ids" />
+                                <field name="eva_survey_ids" />
+                            </group>
+                            <br />
+                            <p style="font-size:13px;font-weight:bold;">9.1.3. Análisis y evaluación</p>
+                            <field name="eva_tana" widget="html" attrs="{'readonly': [('state','in',('validate_ok','cancel'))]}" />
+                            <group>
+                                <field name="tana_process_id" />
+                            </group>
+                            <br />
+                            <h4>9.2. Auditoría Interna</h4>
+                            <field name="eva_taudit" widget="html" attrs="{'readonly': [('state','in',('validate_ok','cancel'))]}" />
+                            <group>
+                                <field name="taudit_process_id" />
+                                <field name="audit_plan_ids" />
+                            </group>
+                            <br />
+                            <h4>9.3. Revisión por la dirección</h4>
+                            <h5>9.3.1. Generalidades</h5>
+                            <field name="eva_rgeneral" widget="html" attrs="{'readonly': [('state','in',('validate_ok','cancel'))]}" />
+                            <group>
+                                <field name="rgeneral_process_id" />
+                                <field name="mgmt_review_ids" />
+                                <field name="mgmt_reviewplan_ids" />
+                            </group>
+                            <h5>9.3.2. Entradas de la revisión por la dirección</h5>
+                            <field name="eva_rreview" widget="html" attrs="{'readonly': [('state','in',('validate_ok','cancel'))]}" />
+                            <h5>9.3.3. Salidas de la revisión por la dirección</h5>
+                            <field name="eva_rexist" widget="html" attrs="{'readonly': [('state','in',('validate_ok','cancel'))]}" />
+                        </page>
+                        <page string="10. Mejora" name="improvement">
+                            <h1 class="o_horizontal_separator">10. Mejora</h1>
+                            <br />
+                            <h4>10.1. Generalidades</h4>
+                            <field name="imp_general" widget="html" attrs="{'readonly': [('state','in',('validate_ok','cancel'))]}" />
+                            <br />
+                            <h4>10.2. No conformidad y acción Correctiva</h4>
+                            <field name="imp_nonconfor" widget="html" attrs="{'readonly': [('state','in',('validate_ok','cancel'))]}" />
+                            <group>
+                                <field name="nonconfor_process_id" />
+                                <field name="action_ids" />
+                                <field name="nc_ids" />
+                            </group>
+                            <br />
+                            <h4>10.3. Mejora continua</h4>
+                            <field name="imp_improvement" widget="html" attrs="{'readonly': [('state','in',('validate_ok','cancel'))]}" />
+                            <group>
+                                <field name="impro_process_id" />
+                                <field name="action2_ids" />
+                            </group>
+                        </page>
+                        <!-- <page string="11. Procedimientos">
+                            
+                        </page> -->
+                    </notebook>
+                </sheet>
+
+                <div class="oe_chatter">
+                    <field name="message_follower_ids" widget="mail_followers" />
+                    <field name="activity_ids" widget="mail_activity" />
+                    <field name="message_ids" widget="mail_thread" />
+                </div>
+
+            </form>
+        </field>
+    </record>
+
+    <record model="ir.actions.act_window" id="action_mgmtsystem_qualitymanual">
+        <field name="name">Manual de calidad</field>
+        <field name="res_model">mgmtsystem.qualitymanual</field>
+
+        <field name="view_mode">tree,form</field>
+        <field name="domain">[('is_template','=',False)]</field>
+        <field name="context">{'default_is_template':False}</field>
+    </record>
+
+    <record model="ir.actions.act_window" id="action_mgmtsystem_qualitymanual_template">
+        <field name="name">Plantilla de manual de calidad</field>
+        <field name="res_model">mgmtsystem.qualitymanual</field>
+
+        <field name="view_mode">tree,form</field>
+        <field name="domain">[('is_template','=',True)]</field>
+        <field name="context">{'default_is_template':True}</field>
+    </record>
+
+    <report id="reporte_process" string="Mapa de procesos" report_type="qweb-pdf" model="mgmt.categ" name="mgmtsystem_process.reporte_process_hola_calidad_template" file="Mapa de Procesos" paperformat="mgmtsystem_process.paperformat_lowmargin" />
+
+    <menuitem id="mgmt_process_manual_quality" name="Manual de calidad" parent="mgmtsystem_process.menu_process_root" sequence="40" groups="base.group_no_one,mgmtsystem_process.group_process_readonly,mgmtsystem_process.group_process_readonly_printreport,mgmtsystem_process.group_process_owner,mgmtsystem_process.group_process_all" />
+
+    <menuitem id="menu_mgmtsystem_qualitymanual" name="Manual de calidad" action="action_mgmtsystem_qualitymanual" sequence="10" parent="mgmt_process_manual_quality" />
+
+    <menuitem id="menu_mgmtsystem_qualitymanual_template" name="Plantillas de manual de calidad" action="action_mgmtsystem_qualitymanual_template" sequence="20" parent="mgmt_process_manual_quality" />
+
+</odoo>

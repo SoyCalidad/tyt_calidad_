@@ -1,0 +1,5 @@
+id,name,model_id:id,group_id:id,perm_read,perm_write,perm_create,perm_unlink
+
+access_mgmtsystem_validation_step,Acceso general,model_mgmtsystem_validation_step,,1,1,1,1
+access_mgmtsystem_validation_all,Todos los permisos,model_mgmtsystem_validation,,1,1,1,1
+access_mgmtsystem_validation_mail_all,Todos los permisos,model_mgmtsystem_validation_mail,,1,1,1,1

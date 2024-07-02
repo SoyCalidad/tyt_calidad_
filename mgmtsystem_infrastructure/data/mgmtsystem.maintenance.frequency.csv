@@ -1,0 +1,9 @@
+id,name,number,type
+freq1,Diaria,1,day
+freq2,Semanal,1,week
+freq3,Quincenal,2,week
+freq4,Mensual,4,week
+freq5,Bimestral,8,week
+freq6,Trimestral,12,week
+freq7,Semestral,24,week
+freq8,Anual,365,day

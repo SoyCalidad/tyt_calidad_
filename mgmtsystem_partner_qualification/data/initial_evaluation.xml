@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+
+    <record id="initial_evaluation_1" model="evaluation.initial_evaluation">
+        <field name="name">Evaluación inicial</field>
+        <field name="final_criteria">* Para que un proveedor sea seleccionado es obligatorio que tenga N° de Ruc y tratandose de un proveedor de materia prima o insumos el item 1, 2 y 4. En el caso particular de un servicio crítico el item 1 y 3. Ademas tiene que tener como mínimo tres criterios aceptables.</field>
+    </record>
+
+    <record id="initial_evaluation_1_item_1" model="evaluation.initial_evaluation.item">
+        <field name="name">RUC ACTIVO Y HABIDO</field>
+        <field name="initial_evaluation_id" ref="mgmtsystem_partner_qualification.initial_evaluation_1"/>
+    </record>
+
+    <record id="initial_evaluation_1_item_2" model="evaluation.initial_evaluation.item">
+        <field name="name">TIEMPO EN EL MERCADO (Mínimo 1 año)</field>
+        <field name="initial_evaluation_id" ref="mgmtsystem_partner_qualification.initial_evaluation_1"/>
+    </record>
+
+    <record id="initial_evaluation_1_item_3" model="evaluation.initial_evaluation.item">
+        <field name="name">REFERENCIAS</field>
+        <field name="initial_evaluation_id" ref="mgmtsystem_partner_qualification.initial_evaluation_1"/>
+    </record>
+
+    <record id="initial_evaluation_1_item_4" model="evaluation.initial_evaluation.item">
+        <field name="name">CONDICIONES DE ALMACENAMIENTO Y TRANSPORTE</field>
+        <field name="initial_evaluation_id" ref="mgmtsystem_partner_qualification.initial_evaluation_1"/>
+    </record>
+
+    <record id="initial_evaluation_1_item_5" model="evaluation.initial_evaluation.item">
+        <field name="name">EMITE CERTIFICADOS DE CALIDAD DE PRODUCTOS</field>
+        <field name="initial_evaluation_id" ref="mgmtsystem_partner_qualification.initial_evaluation_1"/>
+    </record>
+
+    <record id="initial_evaluation_1_item_6" model="evaluation.initial_evaluation.item">
+        <field name="name">CONDICIONES DE PAGO</field>
+        <field name="initial_evaluation_id" ref="mgmtsystem_partner_qualification.initial_evaluation_1"/>
+    </record>
+
+    
+</odoo>

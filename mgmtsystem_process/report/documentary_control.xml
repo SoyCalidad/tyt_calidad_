@@ -1,0 +1,30 @@
+<odoo>
+    <data>
+
+        <report
+            id="documentary_control_report_xls"
+            model="documentary.control"
+            string="Lista maestra"
+            report_type="xlsx"
+            name="mgmtsystem_process.documentary_control_xls"
+            file="Lista Maestra"
+            groups="base.group_no_one,mgmtsystem_process.group_process_readonly_printreport,mgmtsystem_process.group_process_owner,mgmtsystem_process.group_process_all"/>
+
+        <menuitem
+            id="process_report_root_menu"
+            name="Reportes"
+            parent="menu_process_root"
+            sequence="100"
+            groups="base.group_no_one,mgmtsystem_process.group_process_readonly_printreport,mgmtsystem_process.group_process_owner,mgmtsystem_process.group_process_all"/>
+
+        <menuitem
+            id="documentary_control_report_menu"
+            name="Lista Maestra"
+            action="documentary_control_report_xls"
+            parent="process_report_root_menu"
+            sequence="10"
+            groups="base.group_no_one,mgmtsystem_process.group_process_readonly,mgmtsystem_process.group_process_readonly_printreport,mgmtsystem_process.group_process_owner,mgmtsystem_process.group_process_all"/>
+
+
+    </data>
+</odoo>

@@ -1,0 +1,255 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data noupdate="1">
+
+
+        <!-- Folders -->
+
+        <record id="documents_communications_folder" model="documents.folder" forcecreate="0">
+            <field name="name">Comunicaciones</field>
+            <field name="description" type="html">
+                <center>
+                    <p>Descripción del directorio y sus funciones.</p>
+                    <p>funciones del directorio <span class="o_folder_description_alias"> 2da linea del parrafo 2</span> fin del 2do parrafo.</p>
+                </center>
+            </field>
+            <field name="sequence">25</field>
+        </record>
+
+        <record id="documents_training_folder" model="documents.folder" forcecreate="0">
+            <field name="name">Capacitaciones</field>
+            <field name="description" type="html">
+                <center>
+                    <p>funciones del directorio <span class="o_folder_description_alias"><strong>Las palabras dentro de está etiqueta debería de estar en negrita</strong> continuación y final del parrafo</span>.</p>
+                </center>
+            </field>
+            <field name="sequence">26</field>
+        </record>
+
+        <record id="documents_process_folder" model="documents.folder" forcecreate="0">
+            <field name="name">Procesos</field>
+            <field name="description" type="html">
+                <center>
+                    <p>funciones del directorio <span class="o_folder_description_alias"><strong>Las palabras dentro de está etiqueta debería de estar en negrita</strong> continuación y final del parrafo</span>.</p>
+                </center>
+            </field>
+            <field name="sequence">27</field>
+        </record>
+
+        <record id="documents_context_folder" model="documents.folder" forcecreate="0">
+            <field name="name">Contexto</field>
+            <field name="description" type="html">
+                <center>
+                    <p>funciones del directorio <span class="o_folder_description_alias"><strong>Las palabras dentro de está etiqueta debería de estar en negrita</strong> continuación y final del parrafo</span>.</p>
+                </center>
+            </field>
+            <field name="sequence">28</field>
+        </record>
+
+        <record id="documents_risk_op_folder" model="documents.folder" forcecreate="0">
+            <field name="name">Riesgos y Oportunidades</field>
+            <field name="description" type="html">
+                <center>
+                    <p>funciones del directorio <span class="o_folder_description_alias"><strong>Las palabras dentro de está etiqueta debería de estar en negrita</strong> continuación y final del parrafo</span>.</p>
+                </center>
+            </field>
+            <field name="sequence">29</field>
+        </record>
+
+        <record id="documents_legal_requirements_folder" model="documents.folder" forcecreate="0">
+            <field name="name">Requisitos legales</field>
+            <field name="description" type="html">
+                <center>
+                    <p>funciones del directorio <span class="o_folder_description_alias"><strong>Las palabras dentro de está etiqueta debería de estar en negrita</strong> continuación y final del parrafo</span>.</p>
+                </center>
+            </field>
+            <field name="sequence">30</field>
+        </record>
+
+        <record id="documents_requirements_folder" model="documents.folder" forcecreate="0">
+            <field name="name">Requisitos</field>
+            <field name="description" type="html">
+                <center>
+                    <p>funciones del directorio <span class="o_folder_description_alias"><strong>Las palabras dentro de está etiqueta debería de estar en negrita</strong> continuación y final del parrafo</span>.</p>
+                </center>
+            </field>
+            <field name="sequence">31</field>
+        </record>
+
+        <record id="documents_surveys_folder" model="documents.folder" forcecreate="0">
+            <field name="name">Encuestas</field>
+            <field name="description" type="html">
+                <center>
+                    <p>funciones del directorio <span class="o_folder_description_alias"><strong>Las palabras dentro de está etiqueta debería de estar en negrita</strong> continuación y final del parrafo</span>.</p>
+                </center>
+            </field>
+            <field name="sequence">32</field>
+        </record>
+
+        <record id="documents_target_folder" model="documents.folder" forcecreate="0">
+            <field name="name">Objetivos y Medición</field>
+            <field name="description" type="html">
+                <center>
+                    <p>funciones del directorio <span class="o_folder_description_alias"><strong>Las palabras dentro de está etiqueta debería de estar en negrita</strong> continuación y final del parrafo</span>.</p>
+                </center>
+            </field>
+            <field name="sequence">33</field>
+        </record>
+
+        <record id="documents_indicators_folder" model="documents.folder" forcecreate="0">
+            <field name="name">Indicadores</field>
+            <field name="description" type="html">
+                <center>
+                    <p>funciones del directorio <span class="o_folder_description_alias"><strong>Las palabras dentro de está etiqueta debería de estar en negrita</strong> continuación y final del parrafo</span>.</p>
+                </center>
+            </field>
+            <field name="sequence">34</field>
+        </record>
+
+        <record id="documents_maintenance_folder" model="documents.folder" forcecreate="0">
+            <field name="name">Mantenimiento y Calibración</field>
+            <field name="description" type="html">
+                <center>
+                    <p>funciones del directorio <span class="o_folder_description_alias"><strong>Las palabras dentro de está etiqueta debería de estar en negrita</strong> continuación y final del parrafo</span>.</p>
+                </center>
+            </field>
+            <field name="sequence">35</field>
+        </record>
+
+        <record id="documents_management_review_folder" model="documents.folder" forcecreate="0">
+            <field name="name">Revisión por la dirección</field>
+            <field name="description" type="html">
+                <center>
+                    <p>funciones del directorio <span class="o_folder_description_alias"><strong>Las palabras dentro de está etiqueta debería de estar en negrita</strong> continuación y final del parrafo</span>.</p>
+                </center>
+            </field>
+            <field name="sequence">36</field>
+        </record>
+
+        <record id="documents_nonconformities_folder" model="documents.folder" forcecreate="0">
+            <field name="name">No conformidades</field>
+            <field name="description" type="html">
+                <center>
+                    <p>funciones del directorio <span class="o_folder_description_alias"><strong>Las palabras dentro de está etiqueta debería de estar en negrita</strong> continuación y final del parrafo</span>.</p>
+                </center>
+            </field>
+            <field name="sequence">37</field>
+        </record>
+
+        <record id="documents_actions_folder" model="documents.folder" forcecreate="0">
+            <field name="name">Acciones</field>
+            <field name="description" type="html">
+                <center>
+                    <p>funciones del directorio <span class="o_folder_description_alias"><strong>Las palabras dentro de está etiqueta debería de estar en negrita</strong> continuación y final del parrafo</span>.</p>
+                </center>
+            </field>
+            <field name="sequence">38</field>
+        </record>
+
+        <record id="documents_audits_folder" model="documents.folder" forcecreate="0">
+            <field name="name">Auditorías</field>
+            <field name="description" type="html">
+                <center>
+                    <p>funciones del directorio <span class="o_folder_description_alias"><strong>Las palabras dentro de está etiqueta debería de estar en negrita</strong> continuación y final del parrafo</span>.</p>
+                </center>
+            </field>
+            <field name="sequence">39</field>
+        </record>
+
+    <!-- FACETS-->
+
+        <record id="documents_communications_status" model="documents.facet" forcecreate="0">
+            <field name="name">Estado</field>
+            <field name="sequence">11</field>
+            <field name="folder_id" ref="documents_communications_folder"/>
+        </record>
+
+    <!-- TAGS -->
+        <record id="documents_communications_status_inbox" model="documents.tag" forcecreate="0">
+            <field name="name">En Elaboración</field>
+            <field name="facet_id" ref="documents_communications_status"/>
+            <field name="sequence">11</field>
+        </record>
+
+        <record id="documents_communications_status_inbox" model="documents.tag" forcecreate="0">
+            <field name="name">En Revisión</field>
+            <field name="facet_id" ref="documents_communications_status"/>
+            <field name="sequence">12</field>
+        </record>
+
+        <record id="documents_communications_status_tc" model="documents.tag" forcecreate="0">
+            <field name="name">Validado</field>
+            <field name="facet_id" ref="documents_communications_status"/>
+            <field name="sequence">13</field>
+        </record>
+
+        <record id="documents_communications_status_validated" model="documents.tag" forcecreate="0">
+            <field name="name">Obsoleto</field>
+            <field name="facet_id" ref="documents_communications_status"/>
+            <field name="sequence">15</field>
+        </record>    
+
+
+        <!-- company default setting -->
+
+        <record id="base.main_company" model="res.company">
+            <field name="documents_communications_folder" ref="documents_communications_folder"/>
+        </record>
+
+        <record id="base.main_company" model="res.company">
+            <field name="documents_training_folder" ref="documents_training_folder"/>
+        </record>
+
+        <record id="base.main_company" model="res.company">
+            <field name="documents_process_folder" ref="documents_process_folder"/>
+        </record>
+
+        <record id="base.main_company" model="res.company">
+            <field name="documents_context_folder" ref="documents_context_folder"/>
+        </record>
+
+        <record id="base.main_company" model="res.company">
+            <field name="documents_risk_op_folder" ref="documents_risk_op_folder"/>
+        </record>
+
+        <record id="base.main_company" model="res.company">
+            <field name="documents_legal_requirements_folder" ref="documents_legal_requirements_folder"/>
+        </record>
+
+        <record id="base.main_company" model="res.company">
+            <field name="documents_requirements_folder" ref="documents_requirements_folder"/>
+        </record>
+
+        <record id="base.main_company" model="res.company">
+            <field name="documents_surveys_folder" ref="documents_surveys_folder"/>
+        </record>
+
+        <record id="base.main_company" model="res.company">
+            <field name="documents_target_folder" ref="documents_target_folder"/>
+        </record>
+
+        <record id="base.main_company" model="res.company">
+            <field name="documents_indicators_folder" ref="documents_indicators_folder"/>
+        </record>
+
+        <record id="base.main_company" model="res.company">
+            <field name="documents_maintenance_folder" ref="documents_maintenance_folder"/>
+        </record>
+
+        <record id="base.main_company" model="res.company">
+            <field name="documents_management_review_folder" ref="documents_management_review_folder"/>
+        </record>
+
+        <record id="base.main_company" model="res.company">
+            <field name="documents_nonconformities_folder" ref="documents_nonconformities_folder"/>
+        </record>
+
+        <record id="base.main_company" model="res.company">
+            <field name="documents_actions_folder" ref="documents_actions_folder"/>
+        </record>
+
+        <record id="base.main_company" model="res.company">
+            <field name="documents_audits_folder" ref="documents_audits_folder"/>
+        </record>
+    </data>
+</odoo>

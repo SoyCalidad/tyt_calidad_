@@ -1,0 +1,182 @@
+<odoo>
+    <data>
+
+        <report id="action_report_applicant" model="hr.applicant" string="Solicitud de empleo" report_type="qweb-pdf" name="mgmtsystem_employees.report_applicant" file="mgmtsystem_employees.report_applicant" paperformat="hola_calidad.portrait" />
+
+        <template id="report_applicant">
+            <t t-call="web.html_container">
+                <t t-foreach="docs" t-as="doc">
+                    <t t-if="doc and 'company_id' in doc">
+                        <t t-set="company" t-value="doc.company_id" />
+                    </t>
+                    <t t-if="not doc or not 'company_id' in doc">
+                        <t t-set="company" t-value="res_company" />
+                    </t>
+                    <div class="header">
+                        <TABLE width="100%" style="border-collapse:collapse;border: 1px solid black;vertical-align:top;">
+                            <tr>
+                                <td style="border: 1px solid black;" width="20%" rowspan="3" align="center" valign="middle">
+                                    <center>
+                                        <img t-if="company.logo" t-att-src="'data:image/png;base64,%s' % to_text(company.logo)" style="max-width:100px;vertical-align:absmiddle;" />
+                                    </center>
+                                </td>
+                                <td style="border: 1px solid black; text-align:middle" width="60%" rowspan="3" align="center" valign="middle">
+                                    <center>
+                                        <h2>
+                                            <b>SOLICITUD DE EMPLEO</b>
+                                        </h2>
+                                        <h3>
+                                            <span t-field="doc.name" />
+                                        </h3>
+                                    </center>
+                                </td>
+                            </tr>
+                        </TABLE>
+                    </div>
+                    <t t-call="web.external_layout">
+                        <div class="page">
+                            <style type="text/css">
+                                .tg  {border-collapse:collapse;border-spacing:0;}
+                                .tg td{font-family: Palatino, Palatino Linotype, Palatino LT STD, Book Antiqua, Georgia, serif;font-size:14px;padding:10px 5px;border-style:solid;border-width:1px;overflow:hidden;word-break:normal;border-color:black;}
+                                .tg th{font-family: Palatino, Palatino Linotype, Palatino LT STD, Book Antiqua, Georgia, serif;font-size:14px;font-weight:normal;padding:10px 5px;border-style:solid;border-width:1px;overflow:hidden;word-break:normal;border-color:black;}
+                                .tg .tg-gfek{font-weight:bold;font-family:Georgia, serif !important;;background-color:#efefef;border-color:#c0c0c0;text-align:center;vertical-align:middle}
+                                .tg .tg-onpo{font-weight:bold;font-size:16px;font-family:Georgia, serif !important;;background-color:#efefef;border-color:#c0c0c0;text-align:center;vertical-align:middle}
+                                .tg .tg-bc9a{font-weight:bold;font-size:14px;font-family:Georgia, serif !important;;background-color:#efefef;border-color:#c0c0c0;text-align:center;vertical-align:middle}
+                                .tg .tg-y0ty{font-weight:bold;font-size:18px;font-family:Georgia, serif !important;;background-color:#efefef;border-color:#c0c0c0;text-align:center;vertical-align:middle}
+                                .tg .tg-4el8{font-weight:bold;font-family:Georgia, serif !important;;background-color:#efefef;border-color:#c0c0c0;text-align:center;vertical-align:top}
+                                .tg .tg-eg7s{font-family:Georgia, serif !important;;border-color:#c0c0c0;text-align:center;vertical-align:middle}
+                                .tg .tg-dz2g{font-family:Georgia, serif !important;;border-color:#c0c0c0;text-align:center;vertical-align:top}
+                                .tg .tg-c4ij{font-weight:bold;font-family:Georgia, serif !important;;background-color:#efefef;border-color:#c0c0c0;text-align:center;vertical-align:top}
+                                .tg .tg-0pky{border-color:inherit;text-align:center;vertical-align:top}
+                                .tg .tg-yg19{font-weight:bold;font-size:15px;font-family:Georgia, serif !important;;background-color:#efefef;border-color:#c0c0c0;text-align:center;vertical-align:top}
+                            </style>
+                            <table class="tg">
+                                <tr>
+                                    <th class="tg-y0ty" colspan="7">SOLICITUD DE EMPLEO</th>
+                                </tr>
+                                <tr>
+                                    <td class="tg-bc9a" colspan="3">Puesto solicitado</td>
+                                    <td class="tg-4el8">Departamento</td>
+                                    <td class="tg-gfek">Fecha</td>
+                                    <td class="tg-eg7s" colspan="2" rowspan="2">
+                                        <center>
+                                            <img t-if="doc.partner_id.image_1920" t-att-src="'data:image/png;base64,%s' % to_text(doc.partner_id.image_1920)" style="max-width:100%;" />
+                                        </center>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td class="tg-eg7s" colspan="3">
+                                        <span t-field="doc.job_id.name"/>
+                                    </td>
+                                    <td class="tg-eg7s">
+                                        <span t-field="doc.department_id.name"/>
+                                    </td>
+                                    <td class="tg-eg7s">
+                                        <span t-field="doc.date_open"/>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td class="tg-gfek">Salario esperado</td>
+                                    <td class="tg-gfek">Salario propuesto</td>
+                                    <td class="tg-gfek">Disponibilidad</td>
+                                    <td class="tg-gfek" colspan="2">Apreciación</td>
+                                    <td class="tg-gfek">Turno</td>
+                                    <td class="tg-gfek">Jornada</td>
+                                </tr>
+                                <tr>
+                                    <td class="tg-eg7s">
+                                        <span t-field="doc.salary_expected"/>
+                                    </td>
+                                    <td class="tg-eg7s">
+                                        <span t-field="doc.salary_proposed"/>
+                                    </td>
+                                    <td class="tg-eg7s">
+                                        <span t-field="doc.availability"/>
+                                    </td>
+                                    <td class="tg-eg7s" colspan="2">
+                                        <span t-field="doc.priority"/>
+                                    </td>
+                                    <td class="tg-eg7s">
+                                        <span t-field="doc.turn_id.name"/>
+                                    </td>
+                                    <td class="tg-eg7s">
+                                        <span t-field="doc.journal"/>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td class="tg-4el8" colspan="4">Solicitado por</td>
+                                    <td class="tg-4el8" colspan="4">Aprobado por</td>
+                                </tr>
+                                <tr>
+                                    <td class="tg-dz2g" colspan="4">
+                                        <span t-field="doc.user_id.name"/>
+                                    </td>
+                                    <td class="tg-dz2g" colspan="4">
+                                        <span t-field="doc.approved_by.name"/>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td class="tg-onpo" colspan="7">DATOS PERSONALES</td>
+                                </tr>
+                                <tr>
+                                    <td class="tg-4el8" colspan="3" width="70%">Apellidos y Nombres</td>
+                                    <td class="tg-4el8" colspan="2" width="10%">Edad</td>
+                                    <td class="tg-4el8" colspan="2" width="20%">Sexo</td>
+                                </tr>
+                                <tr>
+                                    <td class="tg-dz2g" colspan="3">
+                                        <span t-field="doc.partner_name"/>
+                                    </td>
+                                    <td class="tg-dz2g" colspan="2">
+                                        <span t-field="doc.age"/>
+                                    </td>
+                                    <td class="tg-dz2g" colspan="2">
+                                        <span t-field="doc.genre"/>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td class="tg-4el8" colspan="2">Teléfono</td>
+                                    <td class="tg-4el8" colspan="2">Móvil</td>
+                                    <td class="tg-4el8" colspan="3">Correo electrónico</td>
+                                </tr>
+                                <tr>
+                                    <td class="tg-dz2g" colspan="2">
+                                        <span t-field="doc.partner_phone"/>
+                                    </td>
+                                    <td class="tg-dz2g" colspan="2">
+                                        <span t-field="doc.partner_mobile"/>
+                                    </td>
+                                    <td class="tg-dz2g" colspan="3">
+                                        <span t-field="doc.email_from"/>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td class="tg-4el8" colspan="7">Resumen de la solicitud</td>
+                                </tr>
+                                <tr>
+                                    <td class="tg-dz2g" colspan="7">
+                                        <span t-field="doc.description"/>
+                                    </td>
+                                </tr>
+                            </table>
+                        </div>
+                        <div class="footer" style="border-top: 1px solid black;font-size: 8px;">
+                            <div class="text-center" style="border-top: 1px solid black;font-size: 10px;text-align:center;">
+                                ©
+                                <span t-field="company.name"/>
+                                . All Rights Reserved.
+                                <br/>
+                                PROHIBIDA SU REPRODUCCIÓN SIN AUTORIZACIÓN EXPRESA DE LA DIRECCIÓN.
+                                <br/>
+                                CUALQUIER COPIA IMPRESA NO CONTROLADA. DEBE SER ROTULADA COMO "COPIA NO CONTROLADA".
+                                <br/>
+                                CONSULTE VERSIÓN ELECTRÓNICA
+                            </div>
+                        </div>
+                    </t>
+                </t>
+            </t>
+        </template>
+
+    </data>
+</odoo>

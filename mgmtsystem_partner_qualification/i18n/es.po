@@ -1,0 +1,1140 @@
+# Translation of Odoo Server.
+# This file contains the translation of the following modules:
+# 	* mgmtsystem_partner_qualification
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: Odoo Server 13.0-20201123\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2022-05-09 14:50+0000\n"
+"PO-Revision-Date: 2022-05-09 14:50+0000\n"
+"Last-Translator: \n"
+"Language-Team: \n"
+"Language: es\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: \n"
+"Plural-Forms: \n"
+
+#. module: mgmtsystem_partner_qualification
+#: model:mail.template,subject:mgmtsystem_partner_qualification.email_template_partner_evaluation_history
+msgid ""
+"${object.company_id.name} Evaluación de seguimiento (Ref ${object.name or "
+"'n/a'})"
+msgstr ""
+
+#. module: mgmtsystem_partner_qualification
+#: model:ir.actions.report,print_report_name:mgmtsystem_partner_qualification.action_report_initial_evaluation
+msgid ""
+"'Evaluación inicial %s' % object.partner_id.name if object.partner_id else "
+"'-'"
+msgstr ""
+
+#. module: mgmtsystem_partner_qualification
+#: model:ir.model.fields.selection,name:mgmtsystem_partner_qualification.selection__res_partner_evaluation_history_item_line__scala__1
+msgid "1 - Pésimo"
+msgstr ""
+
+#. module: mgmtsystem_partner_qualification
+#: model:ir.model.fields.selection,name:mgmtsystem_partner_qualification.selection__res_partner_evaluation_history_item_line__scala__2
+msgid "2 - Deficiente"
+msgstr ""
+
+#. module: mgmtsystem_partner_qualification
+#: model:ir.model.fields.selection,name:mgmtsystem_partner_qualification.selection__res_partner_evaluation_history_item_line__scala__3
+msgid "3 - Regular"
+msgstr ""
+
+#. module: mgmtsystem_partner_qualification
+#: model:ir.model.fields.selection,name:mgmtsystem_partner_qualification.selection__res_partner_evaluation_history_item_line__scala__4
+msgid "4 - Bueno"
+msgstr ""
+
+#. module: mgmtsystem_partner_qualification
+#: model:ir.model.fields.selection,name:mgmtsystem_partner_qualification.selection__res_partner_evaluation_history_item_line__scala__5
+msgid "5 - Muy bueno"
+msgstr ""
+
+#. module: mgmtsystem_partner_qualification
+#: model:mail.template,body_html:mgmtsystem_partner_qualification.email_template_partner_evaluation_history
+msgid ""
+"<div style=\"margin: 0px; padding: 0px;\">\n"
+"                    <p style=\"margin: 0px; padding: 0px; font-size: 13px;\">\n"
+"        Estimado/a\n"
+"        % if object.partner_id.parent_id:\n"
+"            ${object.partner_id.name} (${object.partner_id.parent_id.name}),\n"
+"        % else:\n"
+"            ${object.partner_id.name},\n"
+"        % endif\n"
+"                        <br/>\n"
+"                        <br/>\n"
+"        Aquí se le envía la evaluación de seguimiento.\n"
+"                    </p>\n"
+"                </div>\n"
+"            "
+msgstr ""
+
+#. module: mgmtsystem_partner_qualification
+#: model_terms:ir.ui.view,arch_db:mgmtsystem_partner_qualification.partner_initial_evaluation_view_form
+msgid "<strong>Aprobado</strong>"
+msgstr ""
+
+#. module: mgmtsystem_partner_qualification
+#: model:ir.module.category,description:mgmtsystem_partner_qualification.module_evaluation_management
+msgid "Accesos para módulo de Evaluación de contactos"
+msgstr ""
+
+#. module: mgmtsystem_partner_qualification
+#: model:ir.model.fields,field_description:mgmtsystem_partner_qualification.field_evaluation_initial_evaluation__message_needaction
+#: model:ir.model.fields,field_description:mgmtsystem_partner_qualification.field_res_partner_evaluation__message_needaction
+msgid "Action Needed"
+msgstr ""
+
+#. module: mgmtsystem_partner_qualification
+#: model:ir.model.fields,field_description:mgmtsystem_partner_qualification.field_res_partner_evaluation__active
+msgid "Active"
+msgstr ""
+
+#. module: mgmtsystem_partner_qualification
+#: model:ir.model.fields,field_description:mgmtsystem_partner_qualification.field_evaluation_initial_evaluation__activity_ids
+#: model:ir.model.fields,field_description:mgmtsystem_partner_qualification.field_res_partner_evaluation__activity_ids
+#: model:ir.model.fields,field_description:mgmtsystem_partner_qualification.field_res_partner_evaluation_history__activity_ids
+msgid "Activities"
+msgstr ""
+
+#. module: mgmtsystem_partner_qualification
+#: model:ir.model.fields,field_description:mgmtsystem_partner_qualification.field_evaluation_initial_evaluation__activity_exception_decoration
+#: model:ir.model.fields,field_description:mgmtsystem_partner_qualification.field_res_partner_evaluation__activity_exception_decoration
+#: model:ir.model.fields,field_description:mgmtsystem_partner_qualification.field_res_partner_evaluation_history__activity_exception_decoration
+msgid "Activity Exception Decoration"
+msgstr ""
+
+#. module: mgmtsystem_partner_qualification
+#: model:ir.model.fields,field_description:mgmtsystem_partner_qualification.field_evaluation_initial_evaluation__activity_state
+#: model:ir.model.fields,field_description:mgmtsystem_partner_qualification.field_res_partner_evaluation__activity_state
+#: model:ir.model.fields,field_description:mgmtsystem_partner_qualification.field_res_partner_evaluation_history__activity_state
+msgid "Activity State"
+msgstr ""
+
+#. module: mgmtsystem_partner_qualification
+#: model:ir.model.fields.selection,name:mgmtsystem_partner_qualification.selection__res_partner__frequency__yearly
+msgid "Anual"
+msgstr ""
+
+#. module: mgmtsystem_partner_qualification
+#: model:ir.model.fields,field_description:mgmtsystem_partner_qualification.field_evaluation_initial_evaluation__elaboration_users_check
+#: model:ir.model.fields,field_description:mgmtsystem_partner_qualification.field_res_partner_evaluation__elaboration_users_check
+msgid "Aprobada elaboración"
+msgstr ""
+
+#. module: mgmtsystem_partner_qualification
+#: model:ir.model.fields,field_description:mgmtsystem_partner_qualification.field_evaluation_initial_evaluation__review_users_check
+#: model:ir.model.fields,field_description:mgmtsystem_partner_qualification.field_res_partner_evaluation__review_users_check
+msgid "Aprobada revisión"
+msgstr ""
+
+#. module: mgmtsystem_partner_qualification
+#: model:ir.model.fields,field_description:mgmtsystem_partner_qualification.field_evaluation_initial_evaluation__validation_users_check
+#: model:ir.model.fields,field_description:mgmtsystem_partner_qualification.field_res_partner_evaluation__validation_users_check
+msgid "Aprobada validación"
+msgstr ""
+
+#. module: mgmtsystem_partner_qualification
+#: model_terms:ir.ui.view,arch_db:mgmtsystem_partner_qualification.res_partner_evaluation_form
+msgid "Archived"
+msgstr ""
+
+#. module: mgmtsystem_partner_qualification
+#: model:ir.model.fields,field_description:mgmtsystem_partner_qualification.field_res_partner_evaluation_history_item__item_id
+#: model:ir.model.fields,field_description:mgmtsystem_partner_qualification.field_res_partner_evaluation_history_item_line__history_item_id
+#: model:ir.model.fields,field_description:mgmtsystem_partner_qualification.field_res_partner_evaluation_item_line__item_id
+msgid "Aspecto"
+msgstr ""
+
+#. module: mgmtsystem_partner_qualification
+#: model:ir.model,name:mgmtsystem_partner_qualification.model_res_partner_evaluation_history_item
+msgid "Aspecto de historial de evaluación"
+msgstr ""
+
+#. module: mgmtsystem_partner_qualification
+#: model:ir.model.fields,field_description:mgmtsystem_partner_qualification.field_res_partner_evaluation__item_ids
+#: model:ir.model.fields,field_description:mgmtsystem_partner_qualification.field_res_partner_evaluation_history__history_item_ids
+#: model_terms:ir.ui.view,arch_db:mgmtsystem_partner_qualification.res_partner_evaluation_form
+msgid "Aspectos"
+msgstr ""
+
+#. module: mgmtsystem_partner_qualification
+#: model:ir.model.fields,field_description:mgmtsystem_partner_qualification.field_evaluation_initial_evaluation__message_attachment_count
+#: model:ir.model.fields,field_description:mgmtsystem_partner_qualification.field_res_partner_evaluation__message_attachment_count
+msgid "Attachment Count"
+msgstr ""
+
+#. module: mgmtsystem_partner_qualification
+#: model:ir.model.fields,field_description:mgmtsystem_partner_qualification.field_res_partner_evaluation_history_item__history_line_ids
+#: model_terms:ir.ui.view,arch_db:mgmtsystem_partner_qualification.res_partner_evaluation_history_item_form
+msgid "Calificaciones"
+msgstr ""
+
+#. module: mgmtsystem_partner_qualification
+#: model:ir.model.fields,field_description:mgmtsystem_partner_qualification.field_res_partner_evaluation_history_item__qualification_item
+#: model:ir.model.fields,field_description:mgmtsystem_partner_qualification.field_res_partner_evaluation_item__evaluation_id
+#: model:ir.ui.menu,name:mgmtsystem_partner_qualification.menu_partner_qualification
+msgid "Calificación"
+msgstr ""
+
+#. module: mgmtsystem_partner_qualification
+#: model:ir.model,name:mgmtsystem_partner_qualification.model_res_partner_evaluation_history_item_line
+msgid "Calificación de criterio"
+msgstr ""
+
+#. module: mgmtsystem_partner_qualification
+#: model:ir.model.fields,field_description:mgmtsystem_partner_qualification.field_res_partner_evaluation_history_item__weight_total
+msgid "Calificación objetivo"
+msgstr ""
+
+#. module: mgmtsystem_partner_qualification
+#: model:ir.model.fields,field_description:mgmtsystem_partner_qualification.field_res_partner__customer
+#: model:ir.model.fields,field_description:mgmtsystem_partner_qualification.field_res_users__customer
+msgid "Cliente"
+msgstr ""
+
+#. module: mgmtsystem_partner_qualification
+#: model:ir.model.fields,field_description:mgmtsystem_partner_qualification.field_res_partner__vip_customer
+#: model:ir.model.fields,field_description:mgmtsystem_partner_qualification.field_res_users__vip_customer
+msgid "Cliente crítico"
+msgstr ""
+
+#. module: mgmtsystem_partner_qualification
+#: model:ir.model.fields,field_description:mgmtsystem_partner_qualification.field_res_partner_evaluation_history__company_id
+msgid "Compañia"
+msgstr ""
+
+#. module: mgmtsystem_partner_qualification
+#: model:ir.model,name:mgmtsystem_partner_qualification.model_res_partner
+msgid "Contact"
+msgstr ""
+
+#. module: mgmtsystem_partner_qualification
+#: model:ir.model.fields,field_description:mgmtsystem_partner_qualification.field_evaluation_initial_evaluation__create_uid
+#: model:ir.model.fields,field_description:mgmtsystem_partner_qualification.field_evaluation_initial_evaluation_item__create_uid
+#: model:ir.model.fields,field_description:mgmtsystem_partner_qualification.field_partner_qualification_wizard__create_uid
+#: model:ir.model.fields,field_description:mgmtsystem_partner_qualification.field_res_partner_evaluation__create_uid
+#: model:ir.model.fields,field_description:mgmtsystem_partner_qualification.field_res_partner_evaluation_history__create_uid
+#: model:ir.model.fields,field_description:mgmtsystem_partner_qualification.field_res_partner_evaluation_history_item__create_uid
+#: model:ir.model.fields,field_description:mgmtsystem_partner_qualification.field_res_partner_evaluation_history_item_line__create_uid
+#: model:ir.model.fields,field_description:mgmtsystem_partner_qualification.field_res_partner_evaluation_item__create_uid
+#: model:ir.model.fields,field_description:mgmtsystem_partner_qualification.field_res_partner_evaluation_item_line__create_uid
+#: model:ir.model.fields,field_description:mgmtsystem_partner_qualification.field_res_partner_initial_evaluation__create_uid
+#: model:ir.model.fields,field_description:mgmtsystem_partner_qualification.field_res_partner_initial_evaluation_item__create_uid
+msgid "Created by"
+msgstr ""
+
+#. module: mgmtsystem_partner_qualification
+#: model:ir.model.fields,field_description:mgmtsystem_partner_qualification.field_evaluation_initial_evaluation__create_date
+#: model:ir.model.fields,field_description:mgmtsystem_partner_qualification.field_evaluation_initial_evaluation_item__create_date
+#: model:ir.model.fields,field_description:mgmtsystem_partner_qualification.field_partner_qualification_wizard__create_date
+#: model:ir.model.fields,field_description:mgmtsystem_partner_qualification.field_res_partner_evaluation__create_date
+#: model:ir.model.fields,field_description:mgmtsystem_partner_qualification.field_res_partner_evaluation_history__create_date
+#: model:ir.model.fields,field_description:mgmtsystem_partner_qualification.field_res_partner_evaluation_history_item__create_date
+#: model:ir.model.fields,field_description:mgmtsystem_partner_qualification.field_res_partner_evaluation_history_item_line__create_date
+#: model:ir.model.fields,field_description:mgmtsystem_partner_qualification.field_res_partner_evaluation_item__create_date
+#: model:ir.model.fields,field_description:mgmtsystem_partner_qualification.field_res_partner_evaluation_item_line__create_date
+#: model:ir.model.fields,field_description:mgmtsystem_partner_qualification.field_res_partner_initial_evaluation__create_date
+#: model:ir.model.fields,field_description:mgmtsystem_partner_qualification.field_res_partner_initial_evaluation_item__create_date
+msgid "Created on"
+msgstr ""
+
+#. module: mgmtsystem_partner_qualification
+#: model:ir.model.fields,field_description:mgmtsystem_partner_qualification.field_res_partner_evaluation_history_item_line__line_id
+msgid "Criterio"
+msgstr ""
+
+#. module: mgmtsystem_partner_qualification
+#: model:ir.model,name:mgmtsystem_partner_qualification.model_res_partner_evaluation_item_line
+msgid "Criterio de aspecto"
+msgstr ""
+
+#. module: mgmtsystem_partner_qualification
+#: model:ir.actions.act_window,name:mgmtsystem_partner_qualification.initial_evaluation_item_action
+#: model_terms:ir.ui.view,arch_db:mgmtsystem_partner_qualification.initial_evaluation_item_view_form
+#: model_terms:ir.ui.view,arch_db:mgmtsystem_partner_qualification.initial_evaluation_item_view_tree
+msgid "Criterio de evaluación"
+msgstr ""
+
+#. module: mgmtsystem_partner_qualification
+#: model:ir.model,name:mgmtsystem_partner_qualification.model_res_partner_initial_evaluation_item
+msgid "Criterio de evaluación incial de proveedor"
+msgstr ""
+
+#. module: mgmtsystem_partner_qualification
+#: model:ir.model,name:mgmtsystem_partner_qualification.model_evaluation_initial_evaluation_item
+msgid "Criterio de evaluación inicial"
+msgstr ""
+
+#. module: mgmtsystem_partner_qualification
+#: model:ir.model.fields,field_description:mgmtsystem_partner_qualification.field_evaluation_initial_evaluation__item_ids
+#: model:ir.model.fields,field_description:mgmtsystem_partner_qualification.field_res_partner_evaluation_item__line_ids
+#: model:ir.model.fields,field_description:mgmtsystem_partner_qualification.field_res_partner_initial_evaluation__item_ids
+#: model_terms:ir.ui.view,arch_db:mgmtsystem_partner_qualification.initial_evaluation_view_form
+msgid "Criterios"
+msgstr ""
+
+#. module: mgmtsystem_partner_qualification
+#: model:ir.model.fields,field_description:mgmtsystem_partner_qualification.field_evaluation_initial_evaluation__final_criteria
+#: model:ir.model.fields,field_description:mgmtsystem_partner_qualification.field_res_partner_initial_evaluation__final_criteria
+msgid "Criterios de evaluación"
+msgstr ""
+
+#. module: mgmtsystem_partner_qualification
+#: model_terms:ir.ui.view,arch_db:mgmtsystem_partner_qualification.res_partner_view_search_inherit
+msgid "Critical Customers"
+msgstr "Clientes críticos"
+
+#. module: mgmtsystem_partner_qualification
+#: model_terms:ir.ui.view,arch_db:mgmtsystem_partner_qualification.res_partner_view_search_inherit
+msgid "Critical Vendors"
+msgstr "Proveedores críticos"
+
+#. module: mgmtsystem_partner_qualification
+#: model_terms:ir.ui.view,arch_db:mgmtsystem_partner_qualification.res_partner_view_search_inherit
+msgid "Customers"
+msgstr "Clientes"
+
+#. module: mgmtsystem_partner_qualification
+#: model:ir.model.fields,field_description:mgmtsystem_partner_qualification.field_evaluation_initial_evaluation__code
+#: model:ir.model.fields,field_description:mgmtsystem_partner_qualification.field_res_partner_evaluation__code
+#: model:ir.model.fields,field_description:mgmtsystem_partner_qualification.field_res_partner_evaluation_history__code
+#: model:ir.model.fields,field_description:mgmtsystem_partner_qualification.field_res_partner_initial_evaluation__code
+msgid "Código"
+msgstr ""
+
+#. module: mgmtsystem_partner_qualification
+#: model:ir.model.fields,field_description:mgmtsystem_partner_qualification.field_res_partner_evaluation_history__old_code
+#: model:ir.model.fields,field_description:mgmtsystem_partner_qualification.field_res_partner_initial_evaluation__old_code
+msgid "Código antiguo"
+msgstr ""
+
+#. module: mgmtsystem_partner_qualification
+#: model_terms:ir.ui.view,arch_db:mgmtsystem_partner_qualification.qualification_wizard_view_form
+msgid "Descargar"
+msgstr ""
+
+#. module: mgmtsystem_partner_qualification
+#: model_terms:ir.ui.view,arch_db:mgmtsystem_partner_qualification.partner_initial_evaluation_view_tree
+msgid "Descargar evaluación"
+msgstr ""
+
+#. module: mgmtsystem_partner_qualification
+#: model_terms:ir.ui.view,arch_db:mgmtsystem_partner_qualification.res_partner_form_inherit
+msgid "Descargar evaluación de seguimiento"
+msgstr ""
+
+#. module: mgmtsystem_partner_qualification
+#: model_terms:ir.ui.view,arch_db:mgmtsystem_partner_qualification.res_partner_evaluation_history_tree
+msgid "Descargar reporte"
+msgstr ""
+
+#. module: mgmtsystem_partner_qualification
+#: model:ir.model.fields,field_description:mgmtsystem_partner_qualification.field_partner_qualification_wizard__start_date
+msgid "Desde"
+msgstr ""
+
+#. module: mgmtsystem_partner_qualification
+#: model:ir.model.fields,field_description:mgmtsystem_partner_qualification.field_evaluation_initial_evaluation__display_name
+#: model:ir.model.fields,field_description:mgmtsystem_partner_qualification.field_evaluation_initial_evaluation_item__display_name
+#: model:ir.model.fields,field_description:mgmtsystem_partner_qualification.field_partner_qualification_wizard__display_name
+#: model:ir.model.fields,field_description:mgmtsystem_partner_qualification.field_report_mgmtsystem_partner_qualification_partner_evaluation__display_name
+#: model:ir.model.fields,field_description:mgmtsystem_partner_qualification.field_report_mgmtsystem_partner_qualification_r_initial_evaluation__display_name
+#: model:ir.model.fields,field_description:mgmtsystem_partner_qualification.field_res_partner_evaluation__display_name
+#: model:ir.model.fields,field_description:mgmtsystem_partner_qualification.field_res_partner_evaluation_history__display_name
+#: model:ir.model.fields,field_description:mgmtsystem_partner_qualification.field_res_partner_evaluation_history_item__display_name
+#: model:ir.model.fields,field_description:mgmtsystem_partner_qualification.field_res_partner_evaluation_history_item_line__display_name
+#: model:ir.model.fields,field_description:mgmtsystem_partner_qualification.field_res_partner_evaluation_item__display_name
+#: model:ir.model.fields,field_description:mgmtsystem_partner_qualification.field_res_partner_evaluation_item_line__display_name
+#: model:ir.model.fields,field_description:mgmtsystem_partner_qualification.field_res_partner_initial_evaluation__display_name
+#: model:ir.model.fields,field_description:mgmtsystem_partner_qualification.field_res_partner_initial_evaluation_item__display_name
+msgid "Display Name"
+msgstr ""
+
+#. module: mgmtsystem_partner_qualification
+#: model:ir.model.fields,field_description:mgmtsystem_partner_qualification.field_res_partner__stockist
+#: model:ir.model.fields,field_description:mgmtsystem_partner_qualification.field_res_users__stockist
+msgid "Distribuidor"
+msgstr ""
+
+#. module: mgmtsystem_partner_qualification
+#: model:ir.model.fields,field_description:mgmtsystem_partner_qualification.field_evaluation_initial_evaluation__elaboration_step
+#: model:ir.model.fields,field_description:mgmtsystem_partner_qualification.field_res_partner_evaluation__elaboration_step
+#: model_terms:ir.ui.view,arch_db:mgmtsystem_partner_qualification.initial_evaluation_view_form
+#: model_terms:ir.ui.view,arch_db:mgmtsystem_partner_qualification.res_partner_evaluation_form
+msgid "Elaboración"
+msgstr ""
+
+#. module: mgmtsystem_partner_qualification
+#: model:ir.model.fields.selection,name:mgmtsystem_partner_qualification.selection__res_partner_evaluation__state__elaborate
+msgid "En elaboración"
+msgstr ""
+
+#. module: mgmtsystem_partner_qualification
+#: model:ir.model.fields.selection,name:mgmtsystem_partner_qualification.selection__res_partner_evaluation__state__review
+msgid "En revisión"
+msgstr ""
+
+#. module: mgmtsystem_partner_qualification
+#: model:ir.model.fields.selection,name:mgmtsystem_partner_qualification.selection__res_partner_evaluation__state__validate
+msgid "En validación"
+msgstr ""
+
+#. module: mgmtsystem_partner_qualification
+#: model_terms:ir.ui.view,arch_db:mgmtsystem_partner_qualification.initial_evaluation_view_form
+#: model_terms:ir.ui.view,arch_db:mgmtsystem_partner_qualification.res_partner_evaluation_form
+msgid "Enviar a Elaborar"
+msgstr ""
+
+#. module: mgmtsystem_partner_qualification
+#: model_terms:ir.ui.view,arch_db:mgmtsystem_partner_qualification.initial_evaluation_view_form
+#: model_terms:ir.ui.view,arch_db:mgmtsystem_partner_qualification.res_partner_evaluation_form
+msgid "Enviar a Revisar"
+msgstr ""
+
+#. module: mgmtsystem_partner_qualification
+#: model_terms:ir.ui.view,arch_db:mgmtsystem_partner_qualification.initial_evaluation_view_form
+#: model_terms:ir.ui.view,arch_db:mgmtsystem_partner_qualification.res_partner_evaluation_form
+msgid "Enviar a Validar"
+msgstr ""
+
+#. module: mgmtsystem_partner_qualification
+#: model_terms:ir.ui.view,arch_db:mgmtsystem_partner_qualification.res_partner_evaluation_history_tree
+msgid "Enviar por email"
+msgstr ""
+
+#. module: mgmtsystem_partner_qualification
+#: model:ir.model.fields,field_description:mgmtsystem_partner_qualification.field_res_partner_evaluation_history_item_line__scala
+msgid "Escala"
+msgstr ""
+
+#. module: mgmtsystem_partner_qualification
+#: model:ir.model.fields,field_description:mgmtsystem_partner_qualification.field_evaluation_initial_evaluation__state
+#: model:ir.model.fields,field_description:mgmtsystem_partner_qualification.field_res_partner_evaluation__state
+msgid "Estado"
+msgstr ""
+
+#. module: mgmtsystem_partner_qualification
+#: model_terms:ir.ui.view,arch_db:mgmtsystem_partner_qualification.initial_evaluation_view_form
+#: model_terms:ir.ui.view,arch_db:mgmtsystem_partner_qualification.res_partner_evaluation_form
+msgid "Esto volverá obsoleto el presente registro. ¿Está seguro(a)?"
+msgstr ""
+
+#. module: mgmtsystem_partner_qualification
+#: model:ir.model,name:mgmtsystem_partner_qualification.model_mgmtsystem_validation_step
+msgid "Etapas de validación"
+msgstr ""
+
+#. module: mgmtsystem_partner_qualification
+#: model:ir.model.fields,field_description:mgmtsystem_partner_qualification.field_res_partner__initial_evaluation_ids
+#: model:ir.model.fields,field_description:mgmtsystem_partner_qualification.field_res_users__initial_evaluation_ids
+msgid "Evaluaciones"
+msgstr ""
+
+#. module: mgmtsystem_partner_qualification
+#: model:ir.actions.act_window,name:mgmtsystem_partner_qualification.action_res_partner_evaluation
+#: model:ir.ui.menu,name:mgmtsystem_partner_qualification.menu_res_partner_evaluation
+#: model_terms:ir.ui.view,arch_db:mgmtsystem_partner_qualification.res_partner_form_inherit
+msgid "Evaluaciones de seguimiento"
+msgstr ""
+
+#. module: mgmtsystem_partner_qualification
+#: model_terms:ir.actions.act_window,help:mgmtsystem_partner_qualification.action_res_partner_evaluation
+msgid "Evaluaciones para proveedor"
+msgstr ""
+
+#. module: mgmtsystem_partner_qualification
+#: model:ir.actions.act_window,name:mgmtsystem_partner_qualification.partner_initial_evaluation_item_action
+#: model:ir.model.fields,field_description:mgmtsystem_partner_qualification.field_evaluation_initial_evaluation_item__initial_evaluation_id
+#: model:ir.model.fields,field_description:mgmtsystem_partner_qualification.field_res_partner__current_initial_evaluation_id
+#: model:ir.model.fields,field_description:mgmtsystem_partner_qualification.field_res_partner_evaluation_history__evaluation_id
+#: model:ir.model.fields,field_description:mgmtsystem_partner_qualification.field_res_partner_initial_evaluation__initial_evaluation_id
+#: model:ir.model.fields,field_description:mgmtsystem_partner_qualification.field_res_partner_initial_evaluation_item__initial_evaluation_id
+#: model:ir.model.fields,field_description:mgmtsystem_partner_qualification.field_res_users__current_initial_evaluation_id
+#: model_terms:ir.ui.view,arch_db:mgmtsystem_partner_qualification.initial_evaluation_view_form
+#: model_terms:ir.ui.view,arch_db:mgmtsystem_partner_qualification.initial_evaluation_view_tree
+#: model_terms:ir.ui.view,arch_db:mgmtsystem_partner_qualification.partner_initial_evaluation_item_view_form
+#: model_terms:ir.ui.view,arch_db:mgmtsystem_partner_qualification.partner_initial_evaluation_item_view_tree
+msgid "Evaluación"
+msgstr ""
+
+#. module: mgmtsystem_partner_qualification
+#: model:ir.module.category,name:mgmtsystem_partner_qualification.module_evaluation_management
+msgid "Evaluación de contactos"
+msgstr ""
+
+#. module: mgmtsystem_partner_qualification
+#: model:ir.actions.act_window,name:mgmtsystem_partner_qualification.qualification_wizard_action
+#: model_terms:ir.ui.view,arch_db:mgmtsystem_partner_qualification.qualification_wizard_view_form
+msgid "Evaluación de proveedor"
+msgstr ""
+
+#. module: mgmtsystem_partner_qualification
+#: model:ir.actions.report,name:mgmtsystem_partner_qualification.action_report_res_partner_evaluation
+msgid "Evaluación de seguimiento"
+msgstr ""
+
+#. module: mgmtsystem_partner_qualification
+#: model:mail.template,report_name:mgmtsystem_partner_qualification.email_template_partner_evaluation_history
+msgid "Evaluación de seguimiento_${(object.name or '').replace('/','_')}"
+msgstr ""
+
+#. module: mgmtsystem_partner_qualification
+#: model:ir.model,name:mgmtsystem_partner_qualification.model_res_partner_evaluation
+msgid "Evaluación de socio"
+msgstr ""
+
+#. module: mgmtsystem_partner_qualification
+#: model:ir.actions.act_window,name:mgmtsystem_partner_qualification.initial_evaluation_action
+#: model:ir.model,name:mgmtsystem_partner_qualification.model_evaluation_initial_evaluation
+#: model:ir.ui.menu,name:mgmtsystem_partner_qualification.initial_evaluation_menu
+#: model_terms:ir.ui.view,arch_db:mgmtsystem_partner_qualification.res_partner_form_inherit
+msgid "Evaluación inicial"
+msgstr ""
+
+#. module: mgmtsystem_partner_qualification
+#: model:ir.model.fields,field_description:mgmtsystem_partner_qualification.field_mgmtsystem_validation_step__initial_evaluation_elaboration_id
+msgid "Evaluación inicial (Elaboración)"
+msgstr ""
+
+#. module: mgmtsystem_partner_qualification
+#: model:ir.model.fields,field_description:mgmtsystem_partner_qualification.field_mgmtsystem_validation_step__initial_evaluation_review_id
+msgid "Evaluación inicial (Revisión)"
+msgstr ""
+
+#. module: mgmtsystem_partner_qualification
+#: model:ir.model.fields,field_description:mgmtsystem_partner_qualification.field_mgmtsystem_validation_step__initial_evaluation_validation_id
+msgid "Evaluación inicial (Validación)"
+msgstr ""
+
+#. module: mgmtsystem_partner_qualification
+#: model:ir.actions.report,name:mgmtsystem_partner_qualification.action_report_initial_evaluation
+#: model:ir.model,name:mgmtsystem_partner_qualification.model_res_partner_initial_evaluation
+msgid "Evaluación inicial de proveedor"
+msgstr ""
+
+#. module: mgmtsystem_partner_qualification
+#: model:ir.model.fields,field_description:mgmtsystem_partner_qualification.field_res_partner_initial_evaluation__employee_id
+msgid "Evaluador"
+msgstr ""
+
+#. module: mgmtsystem_partner_qualification
+#: model:ir.model.fields.selection,name:mgmtsystem_partner_qualification.selection__partner_qualification_wizard__filter_by__date
+#: model_terms:ir.ui.view,arch_db:mgmtsystem_partner_qualification.qualification_wizard_view_form
+msgid "Fecha"
+msgstr ""
+
+#. module: mgmtsystem_partner_qualification
+#: model:ir.model.fields,field_description:mgmtsystem_partner_qualification.field_evaluation_initial_evaluation__date_elaborate
+#: model:ir.model.fields,field_description:mgmtsystem_partner_qualification.field_res_partner_evaluation__date_elaborate
+msgid "Fecha de elaboración"
+msgstr ""
+
+#. module: mgmtsystem_partner_qualification
+#: model:ir.model.fields,field_description:mgmtsystem_partner_qualification.field_res_partner_evaluation_history__date_history
+msgid "Fecha de evaluación"
+msgstr ""
+
+#. module: mgmtsystem_partner_qualification
+#: model:ir.model.fields,field_description:mgmtsystem_partner_qualification.field_evaluation_initial_evaluation__deactivate_date
+#: model:ir.model.fields,field_description:mgmtsystem_partner_qualification.field_res_partner_evaluation__deactivate_date
+msgid "Fecha de expiración"
+msgstr ""
+
+#. module: mgmtsystem_partner_qualification
+#: model:ir.model.fields,field_description:mgmtsystem_partner_qualification.field_res_partner__evaluation_date
+#: model:ir.model.fields,field_description:mgmtsystem_partner_qualification.field_res_users__evaluation_date
+msgid "Fecha de primera evaluación"
+msgstr ""
+
+#. module: mgmtsystem_partner_qualification
+#: model:ir.model.fields,field_description:mgmtsystem_partner_qualification.field_evaluation_initial_evaluation__date_review
+#: model:ir.model.fields,field_description:mgmtsystem_partner_qualification.field_res_partner_evaluation__date_review
+msgid "Fecha de revisión"
+msgstr ""
+
+#. module: mgmtsystem_partner_qualification
+#: model:ir.model.fields,field_description:mgmtsystem_partner_qualification.field_evaluation_initial_evaluation__date_validate
+#: model:ir.model.fields,field_description:mgmtsystem_partner_qualification.field_res_partner_evaluation__date_validate
+msgid "Fecha de validación"
+msgstr ""
+
+#. module: mgmtsystem_partner_qualification
+#: model:ir.model.fields,field_description:mgmtsystem_partner_qualification.field_res_partner_initial_evaluation__initial_evaluation_date
+msgid "Fecha y hora de selección"
+msgstr ""
+
+#. module: mgmtsystem_partner_qualification
+#: model:ir.model.fields,field_description:mgmtsystem_partner_qualification.field_partner_qualification_wizard__filter_by
+#: model_terms:ir.ui.view,arch_db:mgmtsystem_partner_qualification.qualification_wizard_view_form
+msgid "Filtrar por"
+msgstr ""
+
+#. module: mgmtsystem_partner_qualification
+#: model:ir.model.fields,field_description:mgmtsystem_partner_qualification.field_evaluation_initial_evaluation__message_follower_ids
+#: model:ir.model.fields,field_description:mgmtsystem_partner_qualification.field_res_partner_evaluation__message_follower_ids
+msgid "Followers"
+msgstr ""
+
+#. module: mgmtsystem_partner_qualification
+#: model:ir.model.fields,field_description:mgmtsystem_partner_qualification.field_evaluation_initial_evaluation__message_channel_ids
+#: model:ir.model.fields,field_description:mgmtsystem_partner_qualification.field_res_partner_evaluation__message_channel_ids
+msgid "Followers (Channels)"
+msgstr ""
+
+#. module: mgmtsystem_partner_qualification
+#: model:ir.model.fields,field_description:mgmtsystem_partner_qualification.field_evaluation_initial_evaluation__message_partner_ids
+#: model:ir.model.fields,field_description:mgmtsystem_partner_qualification.field_res_partner_evaluation__message_partner_ids
+msgid "Followers (Partners)"
+msgstr ""
+
+#. module: mgmtsystem_partner_qualification
+#: model:ir.model.fields,field_description:mgmtsystem_partner_qualification.field_res_partner__frequency_id
+#: model:ir.model.fields,field_description:mgmtsystem_partner_qualification.field_res_users__frequency_id
+msgid "Frecuencia"
+msgstr ""
+
+#. module: mgmtsystem_partner_qualification
+#: model:ir.model.fields,field_description:mgmtsystem_partner_qualification.field_res_partner__frequency
+#: model:ir.model.fields,field_description:mgmtsystem_partner_qualification.field_res_users__frequency
+msgid "Frecuencia de evaluación"
+msgstr ""
+
+#. module: mgmtsystem_partner_qualification
+#: model:ir.model.fields,field_description:mgmtsystem_partner_qualification.field_partner_qualification_wizard__end_date
+msgid "Hasta"
+msgstr ""
+
+#. module: mgmtsystem_partner_qualification
+#: model:ir.model.fields,field_description:mgmtsystem_partner_qualification.field_res_partner__history_ids
+#: model:ir.model.fields,field_description:mgmtsystem_partner_qualification.field_res_partner_evaluation_history_item__history_id
+#: model:ir.model.fields,field_description:mgmtsystem_partner_qualification.field_res_users__history_ids
+#: model_terms:ir.ui.view,arch_db:mgmtsystem_partner_qualification.res_partner_form_inherit
+msgid "Historial"
+msgstr ""
+
+#. module: mgmtsystem_partner_qualification
+#: model_terms:ir.actions.act_window,help:mgmtsystem_partner_qualification.action_res_partner_evaluation_history
+msgid "Historial de evaluaciones para socio"
+msgstr ""
+
+#. module: mgmtsystem_partner_qualification
+#: model:ir.model,name:mgmtsystem_partner_qualification.model_res_partner_evaluation_history
+msgid "Historial de evaluación de proveedor"
+msgstr ""
+
+#. module: mgmtsystem_partner_qualification
+#: model:ir.model.fields,field_description:mgmtsystem_partner_qualification.field_res_partner_evaluation_history__history_items_total
+msgid "History Items Total"
+msgstr ""
+
+#. module: mgmtsystem_partner_qualification
+#: model:ir.model.fields,field_description:mgmtsystem_partner_qualification.field_evaluation_initial_evaluation__id
+#: model:ir.model.fields,field_description:mgmtsystem_partner_qualification.field_evaluation_initial_evaluation_item__id
+#: model:ir.model.fields,field_description:mgmtsystem_partner_qualification.field_partner_qualification_wizard__id
+#: model:ir.model.fields,field_description:mgmtsystem_partner_qualification.field_report_mgmtsystem_partner_qualification_partner_evaluation__id
+#: model:ir.model.fields,field_description:mgmtsystem_partner_qualification.field_report_mgmtsystem_partner_qualification_r_initial_evaluation__id
+#: model:ir.model.fields,field_description:mgmtsystem_partner_qualification.field_res_partner_evaluation__id
+#: model:ir.model.fields,field_description:mgmtsystem_partner_qualification.field_res_partner_evaluation_history__id
+#: model:ir.model.fields,field_description:mgmtsystem_partner_qualification.field_res_partner_evaluation_history_item__id
+#: model:ir.model.fields,field_description:mgmtsystem_partner_qualification.field_res_partner_evaluation_history_item_line__id
+#: model:ir.model.fields,field_description:mgmtsystem_partner_qualification.field_res_partner_evaluation_item__id
+#: model:ir.model.fields,field_description:mgmtsystem_partner_qualification.field_res_partner_evaluation_item_line__id
+#: model:ir.model.fields,field_description:mgmtsystem_partner_qualification.field_res_partner_initial_evaluation__id
+#: model:ir.model.fields,field_description:mgmtsystem_partner_qualification.field_res_partner_initial_evaluation_item__id
+msgid "ID"
+msgstr ""
+
+#. module: mgmtsystem_partner_qualification
+#: model:ir.model.fields,field_description:mgmtsystem_partner_qualification.field_evaluation_initial_evaluation__activity_exception_icon
+#: model:ir.model.fields,field_description:mgmtsystem_partner_qualification.field_res_partner_evaluation__activity_exception_icon
+#: model:ir.model.fields,field_description:mgmtsystem_partner_qualification.field_res_partner_evaluation_history__activity_exception_icon
+msgid "Icon"
+msgstr ""
+
+#. module: mgmtsystem_partner_qualification
+#: model:ir.model.fields,help:mgmtsystem_partner_qualification.field_evaluation_initial_evaluation__activity_exception_icon
+#: model:ir.model.fields,help:mgmtsystem_partner_qualification.field_res_partner_evaluation__activity_exception_icon
+#: model:ir.model.fields,help:mgmtsystem_partner_qualification.field_res_partner_evaluation_history__activity_exception_icon
+msgid "Icon to indicate an exception activity."
+msgstr ""
+
+#. module: mgmtsystem_partner_qualification
+#: model:ir.model.fields,help:mgmtsystem_partner_qualification.field_evaluation_initial_evaluation__message_needaction
+#: model:ir.model.fields,help:mgmtsystem_partner_qualification.field_evaluation_initial_evaluation__message_unread
+#: model:ir.model.fields,help:mgmtsystem_partner_qualification.field_res_partner_evaluation__message_needaction
+#: model:ir.model.fields,help:mgmtsystem_partner_qualification.field_res_partner_evaluation__message_unread
+msgid "If checked, new messages require your attention."
+msgstr ""
+
+#. module: mgmtsystem_partner_qualification
+#: model:ir.model.fields,help:mgmtsystem_partner_qualification.field_evaluation_initial_evaluation__message_has_error
+#: model:ir.model.fields,help:mgmtsystem_partner_qualification.field_evaluation_initial_evaluation__message_has_sms_error
+#: model:ir.model.fields,help:mgmtsystem_partner_qualification.field_res_partner_evaluation__message_has_error
+#: model:ir.model.fields,help:mgmtsystem_partner_qualification.field_res_partner_evaluation__message_has_sms_error
+msgid "If checked, some messages have a delivery error."
+msgstr ""
+
+#. module: mgmtsystem_partner_qualification
+#: model:ir.model.fields,field_description:mgmtsystem_partner_qualification.field_res_partner_evaluation_history__qualification
+msgid "Interpretación"
+msgstr ""
+
+#. module: mgmtsystem_partner_qualification
+#: model:ir.model.fields,field_description:mgmtsystem_partner_qualification.field_evaluation_initial_evaluation__message_is_follower
+#: model:ir.model.fields,field_description:mgmtsystem_partner_qualification.field_res_partner_evaluation__message_is_follower
+msgid "Is Follower"
+msgstr ""
+
+#. module: mgmtsystem_partner_qualification
+#: model:ir.model.fields,field_description:mgmtsystem_partner_qualification.field_evaluation_initial_evaluation____last_update
+#: model:ir.model.fields,field_description:mgmtsystem_partner_qualification.field_evaluation_initial_evaluation_item____last_update
+#: model:ir.model.fields,field_description:mgmtsystem_partner_qualification.field_partner_qualification_wizard____last_update
+#: model:ir.model.fields,field_description:mgmtsystem_partner_qualification.field_report_mgmtsystem_partner_qualification_partner_evaluation____last_update
+#: model:ir.model.fields,field_description:mgmtsystem_partner_qualification.field_report_mgmtsystem_partner_qualification_r_initial_evaluation____last_update
+#: model:ir.model.fields,field_description:mgmtsystem_partner_qualification.field_res_partner_evaluation____last_update
+#: model:ir.model.fields,field_description:mgmtsystem_partner_qualification.field_res_partner_evaluation_history____last_update
+#: model:ir.model.fields,field_description:mgmtsystem_partner_qualification.field_res_partner_evaluation_history_item____last_update
+#: model:ir.model.fields,field_description:mgmtsystem_partner_qualification.field_res_partner_evaluation_history_item_line____last_update
+#: model:ir.model.fields,field_description:mgmtsystem_partner_qualification.field_res_partner_evaluation_item____last_update
+#: model:ir.model.fields,field_description:mgmtsystem_partner_qualification.field_res_partner_evaluation_item_line____last_update
+#: model:ir.model.fields,field_description:mgmtsystem_partner_qualification.field_res_partner_initial_evaluation____last_update
+#: model:ir.model.fields,field_description:mgmtsystem_partner_qualification.field_res_partner_initial_evaluation_item____last_update
+msgid "Last Modified on"
+msgstr ""
+
+#. module: mgmtsystem_partner_qualification
+#: model:ir.model.fields,field_description:mgmtsystem_partner_qualification.field_evaluation_initial_evaluation__write_uid
+#: model:ir.model.fields,field_description:mgmtsystem_partner_qualification.field_evaluation_initial_evaluation_item__write_uid
+#: model:ir.model.fields,field_description:mgmtsystem_partner_qualification.field_partner_qualification_wizard__write_uid
+#: model:ir.model.fields,field_description:mgmtsystem_partner_qualification.field_res_partner_evaluation__write_uid
+#: model:ir.model.fields,field_description:mgmtsystem_partner_qualification.field_res_partner_evaluation_history__write_uid
+#: model:ir.model.fields,field_description:mgmtsystem_partner_qualification.field_res_partner_evaluation_history_item__write_uid
+#: model:ir.model.fields,field_description:mgmtsystem_partner_qualification.field_res_partner_evaluation_history_item_line__write_uid
+#: model:ir.model.fields,field_description:mgmtsystem_partner_qualification.field_res_partner_evaluation_item__write_uid
+#: model:ir.model.fields,field_description:mgmtsystem_partner_qualification.field_res_partner_evaluation_item_line__write_uid
+#: model:ir.model.fields,field_description:mgmtsystem_partner_qualification.field_res_partner_initial_evaluation__write_uid
+#: model:ir.model.fields,field_description:mgmtsystem_partner_qualification.field_res_partner_initial_evaluation_item__write_uid
+msgid "Last Updated by"
+msgstr ""
+
+#. module: mgmtsystem_partner_qualification
+#: model:ir.model.fields,field_description:mgmtsystem_partner_qualification.field_evaluation_initial_evaluation__write_date
+#: model:ir.model.fields,field_description:mgmtsystem_partner_qualification.field_evaluation_initial_evaluation_item__write_date
+#: model:ir.model.fields,field_description:mgmtsystem_partner_qualification.field_partner_qualification_wizard__write_date
+#: model:ir.model.fields,field_description:mgmtsystem_partner_qualification.field_res_partner_evaluation__write_date
+#: model:ir.model.fields,field_description:mgmtsystem_partner_qualification.field_res_partner_evaluation_history__write_date
+#: model:ir.model.fields,field_description:mgmtsystem_partner_qualification.field_res_partner_evaluation_history_item__write_date
+#: model:ir.model.fields,field_description:mgmtsystem_partner_qualification.field_res_partner_evaluation_history_item_line__write_date
+#: model:ir.model.fields,field_description:mgmtsystem_partner_qualification.field_res_partner_evaluation_item__write_date
+#: model:ir.model.fields,field_description:mgmtsystem_partner_qualification.field_res_partner_evaluation_item_line__write_date
+#: model:ir.model.fields,field_description:mgmtsystem_partner_qualification.field_res_partner_initial_evaluation__write_date
+#: model:ir.model.fields,field_description:mgmtsystem_partner_qualification.field_res_partner_initial_evaluation_item__write_date
+msgid "Last Updated on"
+msgstr ""
+
+#. module: mgmtsystem_partner_qualification
+#: model:ir.model,name:mgmtsystem_partner_qualification.model_res_partner_evaluation_item
+msgid "Linea de evaluación/Aspecto"
+msgstr ""
+
+#. module: mgmtsystem_partner_qualification
+#: model:ir.actions.act_window,name:mgmtsystem_partner_qualification.action_res_partner_evaluation_history
+#: model:ir.ui.menu,name:mgmtsystem_partner_qualification.menu_res_partner_evaluation_history
+msgid "Listado de evaluaciones de seguimiento"
+msgstr ""
+
+#. module: mgmtsystem_partner_qualification
+#: model:ir.actions.act_window,name:mgmtsystem_partner_qualification.partner_initial_evaluation_action
+#: model:ir.ui.menu,name:mgmtsystem_partner_qualification.partner_initial_evaluation_menu
+msgid "Listado de evaluaciones iniciales"
+msgstr ""
+
+#. module: mgmtsystem_partner_qualification
+#: model:ir.model.fields,field_description:mgmtsystem_partner_qualification.field_evaluation_initial_evaluation__message_main_attachment_id
+#: model:ir.model.fields,field_description:mgmtsystem_partner_qualification.field_res_partner_evaluation__message_main_attachment_id
+msgid "Main Attachment"
+msgstr ""
+
+#. module: mgmtsystem_partner_qualification
+#: model:ir.model.fields.selection,name:mgmtsystem_partner_qualification.selection__res_partner__frequency__monthly
+msgid "Mensual"
+msgstr ""
+
+#. module: mgmtsystem_partner_qualification
+#: model:ir.model.fields,field_description:mgmtsystem_partner_qualification.field_evaluation_initial_evaluation__message_has_error
+#: model:ir.model.fields,field_description:mgmtsystem_partner_qualification.field_res_partner_evaluation__message_has_error
+msgid "Message Delivery error"
+msgstr ""
+
+#. module: mgmtsystem_partner_qualification
+#: model:ir.model.fields,field_description:mgmtsystem_partner_qualification.field_evaluation_initial_evaluation__message_ids
+#: model:ir.model.fields,field_description:mgmtsystem_partner_qualification.field_res_partner_evaluation__message_ids
+msgid "Messages"
+msgstr ""
+
+#. module: mgmtsystem_partner_qualification
+#: model:ir.model.fields,field_description:mgmtsystem_partner_qualification.field_evaluation_initial_evaluation__activity_date_deadline
+#: model:ir.model.fields,field_description:mgmtsystem_partner_qualification.field_res_partner_evaluation__activity_date_deadline
+#: model:ir.model.fields,field_description:mgmtsystem_partner_qualification.field_res_partner_evaluation_history__activity_date_deadline
+msgid "Next Activity Deadline"
+msgstr ""
+
+#. module: mgmtsystem_partner_qualification
+#: model:ir.model.fields,field_description:mgmtsystem_partner_qualification.field_evaluation_initial_evaluation__activity_summary
+#: model:ir.model.fields,field_description:mgmtsystem_partner_qualification.field_res_partner_evaluation__activity_summary
+#: model:ir.model.fields,field_description:mgmtsystem_partner_qualification.field_res_partner_evaluation_history__activity_summary
+msgid "Next Activity Summary"
+msgstr ""
+
+#. module: mgmtsystem_partner_qualification
+#: model:ir.model.fields,field_description:mgmtsystem_partner_qualification.field_evaluation_initial_evaluation__activity_type_id
+#: model:ir.model.fields,field_description:mgmtsystem_partner_qualification.field_res_partner_evaluation__activity_type_id
+#: model:ir.model.fields,field_description:mgmtsystem_partner_qualification.field_res_partner_evaluation_history__activity_type_id
+msgid "Next Activity Type"
+msgstr ""
+
+#. module: mgmtsystem_partner_qualification
+#: model:ir.model.fields,field_description:mgmtsystem_partner_qualification.field_res_partner_initial_evaluation__select_no
+#: model:ir.model.fields,field_description:mgmtsystem_partner_qualification.field_res_partner_initial_evaluation_item__no
+msgid "No"
+msgstr ""
+
+#. module: mgmtsystem_partner_qualification
+#: model:ir.model.fields,field_description:mgmtsystem_partner_qualification.field_evaluation_initial_evaluation__name
+#: model:ir.model.fields,field_description:mgmtsystem_partner_qualification.field_evaluation_initial_evaluation_item__name
+#: model:ir.model.fields,field_description:mgmtsystem_partner_qualification.field_res_partner_evaluation__name
+#: model:ir.model.fields,field_description:mgmtsystem_partner_qualification.field_res_partner_evaluation_history__name
+#: model:ir.model.fields,field_description:mgmtsystem_partner_qualification.field_res_partner_evaluation_history_item__name
+#: model:ir.model.fields,field_description:mgmtsystem_partner_qualification.field_res_partner_evaluation_history_item_line__name
+#: model:ir.model.fields,field_description:mgmtsystem_partner_qualification.field_res_partner_evaluation_item__name
+#: model:ir.model.fields,field_description:mgmtsystem_partner_qualification.field_res_partner_evaluation_item_line__name
+#: model:ir.model.fields,field_description:mgmtsystem_partner_qualification.field_res_partner_initial_evaluation_item__name
+msgid "Nombre"
+msgstr ""
+
+#. module: mgmtsystem_partner_qualification
+#: model:ir.model.fields,field_description:mgmtsystem_partner_qualification.field_evaluation_initial_evaluation__unrevisioned_name
+#: model:ir.model.fields,field_description:mgmtsystem_partner_qualification.field_res_partner_evaluation__unrevisioned_name
+msgid "Nombre de la edición"
+msgstr ""
+
+#. module: mgmtsystem_partner_qualification
+#: model_terms:ir.ui.view,arch_db:mgmtsystem_partner_qualification.initial_evaluation_view_form
+#: model_terms:ir.ui.view,arch_db:mgmtsystem_partner_qualification.res_partner_evaluation_form
+msgid "Nueva versión"
+msgstr ""
+
+#. module: mgmtsystem_partner_qualification
+#: model:ir.model.fields,field_description:mgmtsystem_partner_qualification.field_evaluation_initial_evaluation__message_needaction_counter
+#: model:ir.model.fields,field_description:mgmtsystem_partner_qualification.field_res_partner_evaluation__message_needaction_counter
+msgid "Number of Actions"
+msgstr ""
+
+#. module: mgmtsystem_partner_qualification
+#: model:ir.model.fields,field_description:mgmtsystem_partner_qualification.field_evaluation_initial_evaluation__message_has_error_counter
+#: model:ir.model.fields,field_description:mgmtsystem_partner_qualification.field_res_partner_evaluation__message_has_error_counter
+msgid "Number of errors"
+msgstr ""
+
+#. module: mgmtsystem_partner_qualification
+#: model:ir.model.fields,help:mgmtsystem_partner_qualification.field_evaluation_initial_evaluation__message_needaction_counter
+#: model:ir.model.fields,help:mgmtsystem_partner_qualification.field_res_partner_evaluation__message_needaction_counter
+msgid "Number of messages which requires an action"
+msgstr ""
+
+#. module: mgmtsystem_partner_qualification
+#: model:ir.model.fields,help:mgmtsystem_partner_qualification.field_evaluation_initial_evaluation__message_has_error_counter
+#: model:ir.model.fields,help:mgmtsystem_partner_qualification.field_res_partner_evaluation__message_has_error_counter
+msgid "Number of messages with delivery error"
+msgstr ""
+
+#. module: mgmtsystem_partner_qualification
+#: model:ir.model.fields,help:mgmtsystem_partner_qualification.field_evaluation_initial_evaluation__message_unread_counter
+#: model:ir.model.fields,help:mgmtsystem_partner_qualification.field_res_partner_evaluation__message_unread_counter
+msgid "Number of unread messages"
+msgstr ""
+
+#. module: mgmtsystem_partner_qualification
+#: model:ir.model.fields,field_description:mgmtsystem_partner_qualification.field_evaluation_initial_evaluation__version
+#: model:ir.model.fields,field_description:mgmtsystem_partner_qualification.field_res_partner_evaluation__version
+msgid "Número de versión"
+msgstr ""
+
+#. module: mgmtsystem_partner_qualification
+#: model:ir.model.fields,field_description:mgmtsystem_partner_qualification.field_res_partner_initial_evaluation__observations
+msgid "Observaciones"
+msgstr ""
+
+#. module: mgmtsystem_partner_qualification
+#: model:ir.model.fields.selection,name:mgmtsystem_partner_qualification.selection__res_partner_evaluation__state__cancel
+msgid "Obsoleto"
+msgstr ""
+
+#. module: mgmtsystem_partner_qualification
+#: model:ir.model.fields,field_description:mgmtsystem_partner_qualification.field_evaluation_initial_evaluation__parent_edition
+#: model:ir.model.fields,field_description:mgmtsystem_partner_qualification.field_mgmtsystem_validation_step__evaluation_elaboration_id
+#: model:ir.model.fields,field_description:mgmtsystem_partner_qualification.field_mgmtsystem_validation_step__evaluation_review_id
+#: model:ir.model.fields,field_description:mgmtsystem_partner_qualification.field_mgmtsystem_validation_step__evaluation_validation_id
+#: model:ir.model.fields,field_description:mgmtsystem_partner_qualification.field_res_partner_evaluation__parent_edition
+msgid "Padre"
+msgstr ""
+
+#. module: mgmtsystem_partner_qualification
+#: model:ir.model.fields,field_description:mgmtsystem_partner_qualification.field_res_partner_evaluation__process_id
+msgid "Procedimiento"
+msgstr ""
+
+#. module: mgmtsystem_partner_qualification
+#: model:ir.model.fields,field_description:mgmtsystem_partner_qualification.field_res_partner__product_ids
+#: model:ir.model.fields,field_description:mgmtsystem_partner_qualification.field_res_users__product_ids
+#: model_terms:ir.ui.view,arch_db:mgmtsystem_partner_qualification.res_partner_form_inherit
+msgid "Productos y servicios"
+msgstr ""
+
+#. module: mgmtsystem_partner_qualification
+#: model:ir.model.fields,field_description:mgmtsystem_partner_qualification.field_res_partner__supplier
+#: model:ir.model.fields,field_description:mgmtsystem_partner_qualification.field_res_partner_evaluation_history__partner_id
+#: model:ir.model.fields,field_description:mgmtsystem_partner_qualification.field_res_partner_initial_evaluation__partner_id
+#: model:ir.model.fields,field_description:mgmtsystem_partner_qualification.field_res_users__supplier
+#: model:ir.model.fields.selection,name:mgmtsystem_partner_qualification.selection__partner_qualification_wizard__filter_by__supplier
+#: model_terms:ir.ui.view,arch_db:mgmtsystem_partner_qualification.qualification_wizard_view_form
+msgid "Proveedor"
+msgstr ""
+
+#. module: mgmtsystem_partner_qualification
+#: model:ir.model.fields,field_description:mgmtsystem_partner_qualification.field_res_partner__vip_supplier
+#: model:ir.model.fields,field_description:mgmtsystem_partner_qualification.field_res_users__vip_supplier
+msgid "Proveedor crítico"
+msgstr ""
+
+#. module: mgmtsystem_partner_qualification
+#: model:ir.model.fields,field_description:mgmtsystem_partner_qualification.field_partner_qualification_wizard__supplier_ids
+#: model_terms:ir.ui.view,arch_db:mgmtsystem_partner_qualification.res_partner_evaluation_form
+msgid "Proveedores"
+msgstr ""
+
+#. module: mgmtsystem_partner_qualification
+#: model:ir.model.fields,field_description:mgmtsystem_partner_qualification.field_res_partner__next_evaluation_date
+#: model:ir.model.fields,field_description:mgmtsystem_partner_qualification.field_res_users__next_evaluation_date
+msgid "Próxima fecha de evaluación"
+msgstr ""
+
+#. module: mgmtsystem_partner_qualification
+#: model:ir.model.fields,field_description:mgmtsystem_partner_qualification.field_res_partner_evaluation_history_item_line__qualification_line
+#: model:ir.model.fields,field_description:mgmtsystem_partner_qualification.field_res_partner_evaluation_item_line__weight
+msgid "Puntos"
+msgstr ""
+
+#. module: mgmtsystem_partner_qualification
+#: model:ir.model.fields,field_description:mgmtsystem_partner_qualification.field_res_partner_evaluation__weight_do_total
+msgid "Puntos hechos"
+msgstr ""
+
+#. module: mgmtsystem_partner_qualification
+#: model:ir.model.fields,field_description:mgmtsystem_partner_qualification.field_res_partner_evaluation__weight_limit_total
+msgid "Puntos limites"
+msgstr ""
+
+#. module: mgmtsystem_partner_qualification
+#: model:ir.model.fields,field_description:mgmtsystem_partner_qualification.field_res_partner_evaluation_item__weight_total
+msgid "Puntos sobre límite"
+msgstr ""
+
+#. module: mgmtsystem_partner_qualification
+#: model:ir.actions.server,name:mgmtsystem_partner_qualification.res_partner_cron_ir_actions_server
+#: model:ir.cron,cron_name:mgmtsystem_partner_qualification.res_partner_cron
+#: model:ir.cron,name:mgmtsystem_partner_qualification.res_partner_cron
+msgid "Reevaluación de proveedor"
+msgstr ""
+
+#. module: mgmtsystem_partner_qualification
+#: model:ir.ui.menu,name:mgmtsystem_partner_qualification.qualification_wizard_report_menu
+msgid "Reporte de evaluación"
+msgstr ""
+
+#. module: mgmtsystem_partner_qualification
+#: model:ir.ui.menu,name:mgmtsystem_partner_qualification.reports_contact_menu
+msgid "Reportes"
+msgstr ""
+
+#. module: mgmtsystem_partner_qualification
+#: model:ir.model.fields,field_description:mgmtsystem_partner_qualification.field_res_partner__responsible_id
+#: model:ir.model.fields,field_description:mgmtsystem_partner_qualification.field_res_users__responsible_id
+msgid "Responsable de evaluación"
+msgstr ""
+
+#. module: mgmtsystem_partner_qualification
+#: model:res.groups,name:mgmtsystem_partner_qualification.group_partner_evaluation_all
+msgid "Responsable: Lectura y edición"
+msgstr ""
+
+#. module: mgmtsystem_partner_qualification
+#: model:ir.model.fields,field_description:mgmtsystem_partner_qualification.field_evaluation_initial_evaluation__activity_user_id
+#: model:ir.model.fields,field_description:mgmtsystem_partner_qualification.field_res_partner_evaluation__activity_user_id
+#: model:ir.model.fields,field_description:mgmtsystem_partner_qualification.field_res_partner_evaluation_history__activity_user_id
+msgid "Responsible User"
+msgstr ""
+
+#. module: mgmtsystem_partner_qualification
+#: model:ir.model.fields,field_description:mgmtsystem_partner_qualification.field_evaluation_initial_evaluation__review_step
+#: model:ir.model.fields,field_description:mgmtsystem_partner_qualification.field_res_partner_evaluation__review_step
+#: model_terms:ir.ui.view,arch_db:mgmtsystem_partner_qualification.initial_evaluation_view_form
+#: model_terms:ir.ui.view,arch_db:mgmtsystem_partner_qualification.res_partner_evaluation_form
+msgid "Revisión"
+msgstr ""
+
+#. module: mgmtsystem_partner_qualification
+#: model:ir.model.fields,field_description:mgmtsystem_partner_qualification.field_evaluation_initial_evaluation__message_has_sms_error
+#: model:ir.model.fields,field_description:mgmtsystem_partner_qualification.field_res_partner_evaluation__message_has_sms_error
+msgid "SMS Delivery error"
+msgstr ""
+
+#. module: mgmtsystem_partner_qualification
+#: model:ir.model.fields.selection,name:mgmtsystem_partner_qualification.selection__res_partner__frequency__weekly
+msgid "Semanal"
+msgstr ""
+
+#. module: mgmtsystem_partner_qualification
+#: model:ir.model.fields,field_description:mgmtsystem_partner_qualification.field_res_partner_evaluation__partner_ids
+msgid "Socios"
+msgstr ""
+
+#. module: mgmtsystem_partner_qualification
+#: model:ir.model.fields,help:mgmtsystem_partner_qualification.field_evaluation_initial_evaluation__activity_state
+#: model:ir.model.fields,help:mgmtsystem_partner_qualification.field_res_partner_evaluation__activity_state
+#: model:ir.model.fields,help:mgmtsystem_partner_qualification.field_res_partner_evaluation_history__activity_state
+msgid ""
+"Status based on activities\n"
+"Overdue: Due date is already passed\n"
+"Today: Activity date is today\n"
+"Planned: Future activities."
+msgstr ""
+
+#. module: mgmtsystem_partner_qualification
+#: model:ir.model.fields,field_description:mgmtsystem_partner_qualification.field_res_partner_initial_evaluation__select_yes
+#: model:ir.model.fields,field_description:mgmtsystem_partner_qualification.field_res_partner_initial_evaluation_item__yes
+msgid "Sí"
+msgstr ""
+
+#. module: mgmtsystem_partner_qualification
+#: model:ir.model.fields,field_description:mgmtsystem_partner_qualification.field_res_partner__evaluation_id
+#: model:ir.model.fields,field_description:mgmtsystem_partner_qualification.field_res_users__evaluation_id
+msgid "Tipo de evaluación"
+msgstr ""
+
+#. module: mgmtsystem_partner_qualification
+#: model:ir.model.fields,help:mgmtsystem_partner_qualification.field_evaluation_initial_evaluation__activity_exception_decoration
+#: model:ir.model.fields,help:mgmtsystem_partner_qualification.field_res_partner_evaluation__activity_exception_decoration
+#: model:ir.model.fields,help:mgmtsystem_partner_qualification.field_res_partner_evaluation_history__activity_exception_decoration
+msgid "Type of the exception activity on record."
+msgstr ""
+
+#. module: mgmtsystem_partner_qualification
+#: model:ir.model.fields,field_description:mgmtsystem_partner_qualification.field_evaluation_initial_evaluation__message_unread
+#: model:ir.model.fields,field_description:mgmtsystem_partner_qualification.field_res_partner_evaluation__message_unread
+msgid "Unread Messages"
+msgstr ""
+
+#. module: mgmtsystem_partner_qualification
+#: model:ir.model.fields,field_description:mgmtsystem_partner_qualification.field_evaluation_initial_evaluation__message_unread_counter
+#: model:ir.model.fields,field_description:mgmtsystem_partner_qualification.field_res_partner_evaluation__message_unread_counter
+msgid "Unread Messages Counter"
+msgstr ""
+
+#. module: mgmtsystem_partner_qualification
+#: model:res.groups,name:mgmtsystem_partner_qualification.group_partner_evaluation_onlyread_printreport
+msgid "Usuario interno: Lectura e impresión"
+msgstr ""
+
+#. module: mgmtsystem_partner_qualification
+#: model:res.groups,name:mgmtsystem_partner_qualification.group_partner_evaluation_write_printreport
+msgid "Usuario secundario: Lectura Edición de documentos propios"
+msgstr ""
+
+#. module: mgmtsystem_partner_qualification
+#: model:res.groups,name:mgmtsystem_partner_qualification.group_partner_evaluation_onlyread
+msgid "Usuario: Solo lectura"
+msgstr ""
+
+#. module: mgmtsystem_partner_qualification
+#: model:ir.model.fields,field_description:mgmtsystem_partner_qualification.field_evaluation_initial_evaluation__validation_step
+#: model:ir.model.fields,field_description:mgmtsystem_partner_qualification.field_res_partner_evaluation__validation_step
+#: model_terms:ir.ui.view,arch_db:mgmtsystem_partner_qualification.initial_evaluation_view_form
+#: model_terms:ir.ui.view,arch_db:mgmtsystem_partner_qualification.res_partner_evaluation_form
+msgid "Validación"
+msgstr ""
+
+#. module: mgmtsystem_partner_qualification
+#: model_terms:ir.ui.view,arch_db:mgmtsystem_partner_qualification.initial_evaluation_view_form
+#: model_terms:ir.ui.view,arch_db:mgmtsystem_partner_qualification.res_partner_evaluation_form
+msgid "Validación y Versión"
+msgstr ""
+
+#. module: mgmtsystem_partner_qualification
+#: model:ir.model.fields.selection,name:mgmtsystem_partner_qualification.selection__res_partner_evaluation__state__validate_ok
+msgid "Validado"
+msgstr ""
+
+#. module: mgmtsystem_partner_qualification
+#: model_terms:ir.ui.view,arch_db:mgmtsystem_partner_qualification.initial_evaluation_view_form
+#: model_terms:ir.ui.view,arch_db:mgmtsystem_partner_qualification.res_partner_evaluation_form
+msgid "Validar"
+msgstr ""
+
+#. module: mgmtsystem_partner_qualification
+#: model_terms:ir.ui.view,arch_db:mgmtsystem_partner_qualification.res_partner_view_search_inherit
+msgid "Vendors"
+msgstr "Proveedores"
+
+#. module: mgmtsystem_partner_qualification
+#: model:ir.model.fields,field_description:mgmtsystem_partner_qualification.field_evaluation_initial_evaluation__old_versions
+#: model:ir.model.fields,field_description:mgmtsystem_partner_qualification.field_res_partner_evaluation__old_versions
+#: model_terms:ir.ui.view,arch_db:mgmtsystem_partner_qualification.initial_evaluation_view_form
+#: model_terms:ir.ui.view,arch_db:mgmtsystem_partner_qualification.res_partner_evaluation_form
+msgid "Versiones antiguas"
+msgstr ""
+
+#. module: mgmtsystem_partner_qualification
+#: model_terms:ir.ui.view,arch_db:mgmtsystem_partner_qualification.initial_evaluation_view_form
+#: model_terms:ir.ui.view,arch_db:mgmtsystem_partner_qualification.res_partner_evaluation_form
+msgid "Volver Obsoleto"
+msgstr ""
+
+#. module: mgmtsystem_partner_qualification
+#: model:ir.model.fields,field_description:mgmtsystem_partner_qualification.field_evaluation_initial_evaluation__website_message_ids
+#: model:ir.model.fields,field_description:mgmtsystem_partner_qualification.field_res_partner_evaluation__website_message_ids
+msgid "Website Messages"
+msgstr ""
+
+#. module: mgmtsystem_partner_qualification
+#: model:ir.model.fields,help:mgmtsystem_partner_qualification.field_evaluation_initial_evaluation__website_message_ids
+#: model:ir.model.fields,help:mgmtsystem_partner_qualification.field_res_partner_evaluation__website_message_ids
+msgid "Website communication history"
+msgstr ""
+
+#. module: mgmtsystem_partner_qualification
+#: model:ir.model,name:mgmtsystem_partner_qualification.model_partner_qualification_wizard
+msgid "partner.qualification.wizard"
+msgstr ""
+
+#. module: mgmtsystem_partner_qualification
+#: model:ir.model,name:mgmtsystem_partner_qualification.model_report_mgmtsystem_partner_qualification_partner_evaluation
+msgid "report.mgmtsystem_partner_qualification.partner_evaluation"
+msgstr ""
+
+#. module: mgmtsystem_partner_qualification
+#: model:ir.model,name:mgmtsystem_partner_qualification.model_report_mgmtsystem_partner_qualification_r_initial_evaluation
+msgid "report.mgmtsystem_partner_qualification.r_initial_evaluation"
+msgstr ""
+
+#. module: mgmtsystem_partner_qualification
+#: model:ir.model.fields,field_description:mgmtsystem_partner_qualification.field_evaluation_initial_evaluation__last_validate_date
+#: model:ir.model.fields,field_description:mgmtsystem_partner_qualification.field_res_partner_evaluation__last_validate_date
+msgid "Última fecha de validación"
+msgstr ""

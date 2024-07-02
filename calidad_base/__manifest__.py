@@ -1,0 +1,46 @@
+{
+    'name': 'Soy Calidad - Base',
+    'version': '1.0',
+    'description': 'Módulo base de Soy Calidad',
+    'summary': 'Permite instalar los módulos mas importantes de Soy Calidad',
+    'author': 'Soy Calidad',
+    'website': 'www.soycalidad.com',
+    'license': 'LGPL-3',
+    'category': 'quality_system',
+    'depends': [
+        'hola_calidad',
+        'maintenance_plan',
+        'mgmtsystem_action',
+        'mgmtsystem_context',
+        'mgmtsystem_complaints',
+        'mgmtsystem_target',
+        'mgmtsystem_legal',
+        'mgmtsystem_process',
+        'mgmtsystem_process_integration',
+        'mgmtsystem_opportunity',
+        'purchase',
+        'mgmtsystem_infrastructure',
+        'hr_recruitment',
+        'mgmtsystem_employees',
+        'survey',
+        'mgmtsystem_qualitymanual',
+        'mgmtsystem_management_review',
+        'contacts',
+        'knowledge',
+        'mgmtsystem_validation',
+        
+        # post menus_hola_calidad
+        'soycalidad_risk',
+        'hr_job_functions',
+        'partner_from_employee',
+        'report_requirements',
+        'mgmtsystem_context_integration',
+
+    ],
+    'data': [
+    ],
+    'demo': [
+    ],
+    'auto_install': False,
+    'application': True,
+}

@@ -1,0 +1,144 @@
+<?xml version="1.0"?>
+<odoo>
+    <data>
+
+        <record id="policy_template_view_form" model="ir.ui.view">
+            <field name="name">mgmtsystem.context.policy.template.view.form</field>
+            <field name="model">mgmtsystem.context.policy</field>
+            <field name="inherit_id" ref="mgmtsystem_context.policy_template_view_form"/>
+            <field name="arch" type="xml">
+                <field name="customer_satisfaction" position="attributes">
+                    <attribute name="string">Compromiso con el cliente</attribute>
+                </field>
+                <field name="communication" position="after">
+                    <field name="social_resp"/>
+                    <field name="ethic_behavior"/>
+                </field>
+            </field>
+        </record>
+
+        <record id="context_policy_view_form" model="ir.ui.view">
+            <field name="name">mgmtsystem.context.policy.view.form</field>
+            <field name="model">mgmtsystem.context.policy</field>
+            <field name="inherit_id" ref="mgmtsystem_context.context_policy_view_form"/>
+            <field name="arch" type="xml">
+                <notebook position="before">
+                    <group colspan="1">
+                        <field name="current_level"/>
+                    </group>
+                </notebook>
+                <field name="customer_satisfaction" position="attributes">
+                    <attribute name="string">Compromiso con el cliente</attribute>
+                    <attribute name="required">1</attribute>
+                </field>
+                <field name="continous_improvement" position="attributes">
+                    <attribute name="required">1</attribute>
+                </field>
+                <field name="organization_context" position="attributes">
+                    <attribute name="required">1</attribute>
+                </field>
+                <field name="communication" position="after">
+                    <field name="social_resp" attrs="{'required': [('current_level','in',['na'])]}"/>
+                    <field name="ethic_behavior"/>
+                </field>
+                <page name="document" position="after">
+                    <page name="checklist_page" string="Checklist">
+                        <group>
+                            <field name="items_level_1" attrs="{'invisible': [('current_level','in',['na'])]}">
+                                <tree editable="bottom">
+                                    <field name="sequence" widget="handle"/>
+                                    <field name="checked" style="width:9%"/>
+                                    <field name="name"/>
+                                    <field name="action_id"/>
+                                    <field name="action_date_open"/>
+                                    <field name="action_date_deadline"/>
+                                    <field name="action_state"/>
+                                </tree>
+                            </field>
+                            <field name="items_level_2" attrs="{'invisible': [('current_level','in',['na', '1'])]}">
+                                <tree editable="bottom">
+                                    <field name="sequence" widget="handle"/>
+                                    <field name="checked" style="width:9%"/>
+                                    <field name="name"/>
+                                    <field name="action_id"/>
+                                    <field name="action_date_open"/>
+                                    <field name="action_date_deadline"/>
+                                    <field name="action_state"/>
+                                </tree>
+                            </field>
+                            <field name="items_level_3" attrs="{'invisible': [('current_level','in',['na', '1', '2'])]}">
+                                <tree editable="bottom">
+                                    <field name="sequence" widget="handle"/>
+                                    <field name="checked" style="width:9%"/>
+                                    <field name="name"/>
+                                    <field name="action_id"/>
+                                    <field name="action_date_open"/>
+                                    <field name="action_date_deadline"/>
+                                    <field name="action_state"/>
+                                </tree>
+                            </field>
+                        </group>
+                    </page>
+                </page>
+            </field>
+        </record>
+
+
+        <record id="context_internal_issue_view_form" model="ir.ui.view">
+            <field name="name">mgmtsystem.context.internal_issue.view.form</field>
+            <field name="model">mgmtsystem.context.internal_issue</field>
+            <field name="inherit_id" ref="mgmtsystem_context.context_internal_issue_view_form"/>
+            <field name="arch" type="xml">
+                <notebook position="before">
+                    <group colspan="1">
+                        <field name="current_level"/>
+                    </group>
+                </notebook>
+                <field name="morals" position="attributes">
+                    <attribute name="required">1</attribute>
+                </field>
+                <xpath expr="//page[@name='general_info']" position="after">
+                    <page string="Checklist" name="checklist_page">
+                        <group>
+                            <field name="items_level_1" attrs="{'invisible': [('current_level','in',['na'])]}">
+                                <tree editable="bottom">
+                                    <field name="sequence" widget="handle"/>
+                                    <field name="checked" style="width:9%"/>
+                                    <field name="name"/>
+                                    <field name="action_id"/>
+                                    <field name="action_date_open"/>
+                                    <field name="action_date_deadline"/>
+                                    <field name="action_state"/>
+                                </tree>
+                            </field>
+                            <field name="items_level_2" attrs="{'invisible': [('current_level','in',['na', '1'])]}">
+                                <tree editable="bottom">
+                                    <field name="sequence" widget="handle"/>
+                                    <field name="checked" style="width:9%"/>
+                                    <field name="name"/>
+                                    <field name="action_id"/>
+                                    <field name="action_date_open"/>
+                                    <field name="action_date_deadline"/>
+                                    <field name="action_state"/>
+                                </tree>
+                            </field>
+                            <field name="items_level_3" attrs="{'invisible': [('current_level','in',['na', '1', '2'])]}">
+                                <tree editable="bottom">
+                                    <field name="sequence" widget="handle"/>
+                                    <field name="checked" style="width:9%"/>
+                                    <field name="name"/>
+                                    <field name="action_id"/>
+                                    <field name="action_date_open"/>
+                                    <field name="action_date_deadline"/>
+                                    <field name="action_state"/>
+                                </tree>
+                            </field>
+                        </group>
+                    </page>
+                </xpath>
+            </field>
+        </record>
+
+
+    </data>
+</odoo>

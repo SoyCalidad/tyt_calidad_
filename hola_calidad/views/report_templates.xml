@@ -1,0 +1,311 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+
+    <template id="mgmt_system_novalidation_layout">
+        <t t-if="not o" t-set="o" t-value="doc" />
+
+        <t t-if="not company">
+            <!-- Multicompany -->
+            <t t-if="company_id">
+                <t t-set="company" t-value="company_id" />
+            </t>
+            <t t-elif="o and 'company_id' in o">
+                <t t-set="company" t-value="o.company_id.sudo()" />
+            </t>
+            <t t-else="else">
+                <t t-set="company" t-value="res_company" />
+            </t>
+        </t>
+
+        <div class="header">
+            <style type="text/css">
+                            .tg  {border-collapse:collapse;border-spacing:0;margin:0px auto;width:100%;}
+                            .tg td{border-color:black;border-style:solid;border-width:1px;font-family: Palatino, Palatino Linotype, Palatino LT STD, Book Antiqua, Georgia, serif;font-size:14px;
+                            overflow:hidden;padding:10px 5px;word-break:normal;text-align:middle;align:center;}
+                            .tg th{border-color:black;border-style:solid;border-width:1px;font-family: Palatino, Palatino Linotype, Palatino LT STD, Book Antiqua, Georgia, serif;font-size:14px;
+                            font-weight:normal;overflow:hidden;padding:10px 5px;word-break:normal;}
+                            .tg .tg-9wq8{border-color:inherit;text-align:center;vertical-align:middle}
+                            .tg .tg-1wig{border-color:inherit;text-align:center;vertical-align:middle;font-size:16px;font-weight:bold;}
+                            .tg .tg-0lax{border-color:inherit;text-align:center;vertical-align:middle;font-size:12px;}
+            </style>
+            <table class="tg">
+                <tbody>
+                    <tr>
+                        <td class="tg-1wig" rowspan="3" width="20%" style="width:15%">
+                            <t t-if="company.logo">
+                                <img t-att-src="image_data_uri(company.logo)" style="max-width:100px;max-height:100px;vertical-align:middle;" alt="Logo"/>
+                            </t>
+                        </td>
+                        <td class="tg-1wig" rowspan="2" width="80%" style="width:65%;">
+                            <span t-field="o.name" style="font-size:15px;font-weight:bold;" />
+                        </td>
+                        <td class="tg-0lax" width="20%" style="width:20%">
+                                        Código:
+                        </td>
+                    </tr>
+                    <tr>
+                        <td class="tg-0lax">
+                            <span>Fecha de impresión:</span>
+                            <span t-esc="context_timestamp(datetime.datetime.now()).strftime('%d/%m/%Y %H:%M')" />
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+        <div class="article" t-att-data-oe-model="o and o._name" t-att-data-oe-id="o and o.id" t-att-data-oe-lang="o and o.env.context.get('lang')">
+            <t t-raw="0" />
+        </div>
+    </template>
+
+    <template id="mgmt_system_validation_layout">
+        <t t-if="not o" t-set="o" t-value="doc" />
+        <t t-if="not company">
+            <!-- Multicompany -->
+            <t t-if="company_id">
+                <t t-set="company" t-value="company_id" />
+            </t>
+            <t t-elif="o and 'company_id' in o">
+                <t t-set="company" t-value="o.company_id.sudo()" />
+            </t>
+            <t t-else="else">
+                <t t-set="company" t-value="res_company" />
+            </t>
+        </t>
+
+        <div class="header">
+            <style type="text/css">
+                            .tg  {border-collapse:collapse;border-spacing:0;margin:0px auto;width:100%;}
+                            .tg td{border-color:black;border-style:solid;border-width:1px;font-family: Palatino, Palatino Linotype, Palatino LT STD, Book Antiqua, Georgia, serif;font-size:14px;
+                            overflow:hidden;padding:10px 5px;word-break:normal;text-align:middle;align:center;}
+                            .tg th{border-color:black;border-style:solid;border-width:1px;font-family: Palatino, Palatino Linotype, Palatino LT STD, Book Antiqua, Georgia, serif;font-size:14px;
+                            font-weight:normal;overflow:hidden;padding:10px 5px;word-break:normal;}
+                            .tg .tg-9wq8{border-color:inherit;text-align:center;vertical-align:middle}
+                            .tg .tg-1wig{border-color:inherit;text-align:center;vertical-align:middle;font-size:16px;font-weight:bold;}
+                            .tg .tg-0lax{border-color:inherit;text-align:center;vertical-align:middle;font-size:12px;}
+            </style>
+            <table class="tg">
+                <tbody>
+                    <tr>
+                        <td class="tg-1wig" rowspan="3" width="20%" style="width:15%">
+                            <t t-if="company.logo">
+                                <img t-att-src="image_data_uri(company.logo)" style="max-width:100px;max-height:100px;vertical-align:middle;" alt="Logo"/>
+                            </t>
+                        </td>
+                        <td class="tg-1wig" rowspan="3" width="80%" style="width:65%;">
+                            <span style="font-size:18px;font-weight:bold;">ANÁLISIS PESTEL/AMOFHIT</span>
+                            <br />
+                            <span t-field="o.name" style="font-size:15px;font-weight:bold;" />
+                        </td>
+                        <td class="tg-0lax" width="20%" style="width:20%">
+                                        Código:
+                        </td>
+                    </tr>
+                    <tr>
+                        <td class="tg-0lax">
+                            <span>Edición:</span>
+                            <span t-field="o.version" />
+                        </td>
+                    </tr>
+                    <tr>
+                        <td class="tg-0lax">
+                            <span>Fecha de aprobación:</span>
+                            <span t-field="o.date_validate" />
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+        <div class="article" t-att-data-oe-model="o and o._name" t-att-data-oe-id="o and o.id" t-att-data-oe-lang="o and o.env.context.get('lang')">
+            <t t-raw="0" />
+        </div>
+    </template>
+
+    <template id="iso_cover" name="Cover">
+        <t t-if="not o" t-set="o" t-value="doc" />
+        <div class="cover" style="page-break-after: always;">
+            <center>
+                <table class="cover-table" width="85%">
+                    <tr>
+                        <td class="cover-table-nrix" colspan="3"/>
+                    </tr>
+                    <tr>
+                        <td class="cover-table-nrix" colspan="3">
+                            <span t-field="company.name"/>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td class="cover-table-nrix" colspan="3"/>
+                    </tr>
+                    <tr>
+                        <td class="cover-table-7g6k">NOMBRE</td>
+                        <td class="cover-table-3xi5" colspan="2">
+                            <span t-field="o.name"/>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td class="cover-table-7g6k">PROCEDIMIENTO</td>
+                        <td class="cover-table-3xi5" colspan="2">
+                            <span t-field="o.process_id"/>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td class="cover-table-7g6k">FECHA DE ELABORACIÓN</td>
+                        <td class="cover-table-3xi5" colspan="2">
+                            <span t-field="o.date_elaborate"/>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td class="cover-table-7g6k">ELABORADO POR</td>
+                        <td class="cover-table-3xi5" colspan="2">
+                            <t t-foreach="o.elaboration_step" t-as="user">
+                                <span t-field="user.user_id.partner_id.name"/>
+                                <br/>
+                            </t>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td class="cover-table-7g6j">
+                            Actualizado por:
+                            <br/>
+                            <t t-foreach="o.elaboration_step" t-as="user">
+                                <span t-field="user.user_id.partner_id.name"/>
+                                <br/>
+                            </t>
+                        </td>
+                        <td class="cover-table-7g6j">
+                            Revisado por:
+                            <br/>
+                            <t t-foreach="o.review_step" t-as="user">
+                                <span t-field="user.user_id.partner_id.name"/>
+                                <br/>
+                            </t>
+                        </td>
+                        <td class="cover-table-7g6j">
+                            Aprobado por:
+                            <br/>
+                            <t t-foreach="o.validation_step" t-as="user">
+                                <span t-field="user.user_id.partner_id.name"/>
+                                <br/>
+                            </t>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td class="cover-table-zv36">
+                            Firma:
+                            <br/>
+                            <t t-foreach="o.elaboration_step" t-as="user">
+                                <span t-if="o.state=='validate_ok'" t-raw="user.user_id.signature" />
+                                <br/>
+                            </t>
+                        </td>
+                        <td class="cover-table-zv36">
+                            Firma:
+                            <br/>
+                            <t t-foreach="o.review_step" t-as="user">
+                                <span t-if="o.state=='validate_ok'" t-raw="user.user_id.signature" />
+                                <br/>
+                            </t>
+                        </td>
+                        <td class="cover-table-zv36">
+                            Firma:
+                            <br/>
+                            <t t-foreach="o.validation_step" t-as="user">
+                                <span t-if="o.state=='validate_ok'" t-raw="user.user_id.signature" />
+                                <br/>
+                            </t>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td class="cover-table-3xi5">
+                            <t t-foreach="o.elaboration_step" t-as="user">
+                                <t t-foreach="user.user_id.employee_ids" t-as="emp">
+                                    <p t-field="emp.job_id.name"/>
+                                </t>
+                            </t>
+                        </td>
+                        <td class="cover-table-3xi5">
+                            <t t-foreach="o.review_step" t-as="user">
+                                <t t-foreach="user.user_id.employee_ids" t-as="emp">
+                                    <p t-field="emp.job_id.name"/>
+                                </t>
+                            </t>
+                        </td>
+                        <td class="cover-table-3xi5">
+                            <t t-foreach="o.validation_step" t-as="user">
+                                <t t-foreach="user.user_id.employee_ids" t-as="emp">
+                                    <p t-field="emp.job_id.name"/>
+                                </t>
+                            </t>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td class="cover-table-zv36">
+                            Fecha:
+                            <span t-field="o.date_elaborate"/>
+                        </td>
+                        <td class="cover-table-zv36">
+                            Fecha:
+                            <span t-field="o.date_review"/>
+                        </td>
+                        <td class="cover-table-zv36">
+                            Fecha:
+                            <span t-field="o.date_validate"/>
+                        </td>
+                    </tr>
+                </table>
+            </center>
+        </div>
+    </template>
+    
+    <template id="iso_header" name="Header">
+        <t t-if="not o" t-set="o" t-value="doc" />
+        <div class="header" align="center">
+            <table class="header_table">
+                <tbody>
+                    <tr>
+                        <td class="tg-1wig" rowspan="3" width="20%" style="width:15%">
+                            <t t-if="company.logo">
+                                <img t-att-src="image_data_uri(company.logo)" style="max-width:100px;max-height:100px;vertical-align:middle;" alt="Logo"/>
+                            </t>
+                        </td>
+                        <td class="header_table-1wig" rowspan="3" width="80%" style="width:65%;">
+                            <span t-field="o.name" style="font-size:15px;font-weight:bold;" />
+                        </td>
+                        <td class="header_table-0lax" width="20%" style="width:20%">
+                            <span t-field="o.code" />
+                        </td>
+                    </tr>
+                    <tr>
+                        <td class="header_table-0lax">
+                            <span>Edición:</span>
+                            <span t-field="o.version" />
+                        </td>
+                    </tr>
+                    <tr>
+                        <td class="header_table-0lax">
+                            <span>Fecha de aprobación:</span>
+                            <span t-field="o.date_validate" />
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+    </template>
+
+    <template id="iso_footer" name="Footer">
+        <div class="footer" style="border-top: 1px solid black;font-size: 8px;">
+            <div class="text-center" style="border-top: 1px solid black;font-size: 10px;text-align:center;">
+                ©
+                <span t-field="company.name" />
+                . All Rights Reserved.
+                <br />
+                PROHIBIDA SU REPRODUCCIÓN SIN AUTORIZACIÓN EXPRESA DE LA DIRECCIÓN.
+                <br />
+                CUALQUIER COPIA IMPRESA NO CONTROLADA. DEBE SER ROTULADA COMO "COPIA NO CONTROLADA".
+                <br />
+                CONSULTE VERSIÓN ELECTRÓNICA
+            </div>
+        </div>
+    </template>
+
+</odoo>

@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+
+    <record id="target_view_form" model="ir.ui.view">
+        <field name="name">mgmtsystem.target.view.form</field>
+        <field name="model">mgmtsystem.target</field>
+        <field name="inherit_id" ref="mgmtsystem_target.target_view_form" />
+        <field name="arch" type="xml">
+            <div class="oe_button_box" position="inside">
+                <button name="action_open_documents"
+                    class="oe_stat_button"
+                    groups="documents.group_documents_user"
+                    icon="fa-file-text"
+                    type="object">
+                    <field name="document_count" widget="statinfo" string="Documents"/>
+                </button>
+            </div>
+        </field>
+    </record>
+
+    <record id="indicator_view_form_inherit" model="ir.ui.view">
+        <field name="name">mgmtsystem.indicator.view.form.inherit</field>
+        <field name="model">mgmtsystem.indicator</field>
+        <field name="inherit_id" ref="mgmtsystem_target.indicator_view_form" />
+        <field name="arch" type="xml">
+            <div class="oe_button_box" position="inside">
+                <button name="action_open_documents"
+                    class="oe_stat_button"
+                    groups="documents.group_documents_user"
+                    icon="fa-file-text"
+                    type="object">
+                    <field name="document_count" widget="statinfo" string="Documents"/>
+                </button>
+            </div>
+        </field>
+    </record>
+
+</odoo>

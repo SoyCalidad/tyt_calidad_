@@ -1,0 +1,130 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+
+    <record id="soycalidad_change_request_view_form" model="ir.ui.view">
+        <field name="name">soycalidad.change_request.view.form</field>
+        <field name="model">soycalidad.change_request</field>
+        <field name="arch" type="xml">
+            <form string="Planificación de cambio">
+                <header>
+                    <field name="state" widget="statusbar" />
+                    <button string="Enviar para aprobación"
+                            name="to_send"
+                            type="object"
+                            class="btn-primary"
+                            attrs="{'invisible':[('state','not in', ('draft'))]}" />
+                    <button string="Aprobar"
+                            name="to_done"
+                            type="object"
+                            class="btn-primary"
+                            attrs="{'invisible':['|', ('state','not in', ('send')), ('current_user_can_validate','=', False)]}" />
+                </header>
+                <sheet>
+                    <div class="oe_button_box" name="button_box">
+                        <!--MOVE TO "soycalidad_dms"
+                        <button name="action_document_ids" type="object" class="oe_stat_button" icon="fa-file-text-o">
+                            <field string="Documentos" name="documents_count" widget="statinfo" />
+                        </button>
+                        -->
+                        <button name="action_maintenanceplan_views"
+                                type="object"
+                                context="{'type_action':'action'}"
+                                class="oe_stat_button"
+                                icon="fa-book">
+                            <field string="Acciones" name="actions_count" widget="statinfo" />
+                        </button>
+                        <button name="action_maintenanceplan_views"
+                                type="object"
+                                context="{'type_action':'target'}"
+                                class="oe_stat_button"
+                                icon="fa-check-square-o">
+                            <field string="Objetivos" name="targets_count" widget="statinfo" />
+                        </button>
+                    </div>
+                    <div class="oe-title">
+                        <label for="name" />
+                        <h1>
+                            <field name="name" />
+                        </h1>
+                    </div>
+                    <group name="main_body" col="2">
+                        <field name="request_date" attrs="{'readonly':[('state','not in', ('draft'))]}" />
+                        <field name="employee_id" attrs="{'readonly':[('state','not in', ('draft'))]}" />
+                        <field name="background" attrs="{'readonly':[('state','not in', ('draft'))]}" />
+                        <field name="change_request_area_id" attrs="{'readonly':[('state','not in', ('draft'))]}" />
+                        <field name="description" attrs="{'readonly':[('state','not in', ('draft'))]}" />
+                        <!-- <field name="benefit" attrs="{'readonly':[('state','not in', ('draft'))]}"/> -->
+                        <field name="consequence" attrs="{'readonly':[('state','not in', ('draft'))]}" />
+                        <field name="resource_ids" widget="many2many_tags" options="{'no_open': True}" attrs="{'readonly':[('state','not in', ('draft'))]}" />
+                        <field name="needing" attrs="{'readonly':[('state','not in', ('draft'))]}" />
+                        <field name="current_user_can_validate" invisible="1" />
+                    </group>
+                    <notebook>
+                        <page name="validation" string="Validación">
+                            <group>
+                                <field name="responsible_id" attrs="{'readonly':[('state','not in', ('draft'))]}" />
+                                <field name="approval" readonly="1" />
+                                <field name="response_date" attrs="{'readonly':[('current_user_can_validate','=', False)]}" />
+                            </group>
+                        </page>
+                        <!--MOVE TO "soycalidad_dms"
+                        <page name="document_ids" string="Documentos anexos">
+                            <separator string="Documentos Anexos" />
+                            <field name="dms_document_ids" mode="kanban"></field>
+                        </page>
+                        -->
+                        <page name="action_ids" string="Acciones">
+                            <separator string="Acciones" />
+                            <field name="action_ids" attrs="{'readonly':[('current_user_can_validate','=', False)]}" />
+                        </page>
+                        <page name="target_ids" string="Objetivos">
+                            <separator string="Objetivos" />
+                            <field name="target_ids" attrs="{'readonly':[('current_user_can_validate','=', False)]}" />
+                        </page>
+                        <page name="origin_ids" string="Origenes">
+                            <field name="origin_model_id" invisible="1" />
+                            <field name="origin_int_id" invisible="1" />
+                            <field name="origin_ids">
+                                <tree>
+                                    <field name="origin_model_id" />
+                                    <button string="Abrir origen" name="open_origin_record" type="object" class="oe_highlight" />
+                                </tree>
+                            </field>
+                        </page>
+                    </notebook>
+                </sheet>
+                <div class="oe_chatter">
+                    <field name="message_follower_ids" widget="mail_followers" />
+                    <field name="activity_ids" widget="mail_activity" />
+                    <field name="message_ids" widget="mail_thread" />
+                </div>
+            </form>
+        </field>
+    </record>
+
+    <record id="soycalidad_change_request_view_tree" model="ir.ui.view">
+        <field name="name">soycalidad.change_request.view.tree</field>
+        <field name="model">soycalidad.change_request</field>
+        <field name="arch" type="xml">
+            <tree string="Planificación de cambio" banner_route="/improve/improve_onboarding">
+                <field name="description" />
+                <field name="state" />
+                <field name="request_date" />
+                <field name="employee_id" />
+                <field name="responsible_id" />
+            </tree>
+        </field>
+    </record>
+
+    <record id="soycalidad_change_request_action" model="ir.actions.act_window">
+        <field name="name">Planificación de cambio</field>
+        <field name="res_model">soycalidad.change_request</field>
+        <field name="view_mode">tree,form</field>
+        <field name="domain">[]</field>
+        <field name="context">{}</field>
+        <field name="help" type="html">
+            <p>Planificación de cambio</p>
+        </field>
+    </record>
+
+</odoo>

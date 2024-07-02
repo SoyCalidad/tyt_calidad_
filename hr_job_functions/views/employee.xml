@@ -1,0 +1,72 @@
+<odoo>
+    <data>
+
+        <record id="view_employee_form" model="ir.ui.view">
+            <field name="name">hr.employee.form</field>
+            <field name="model">hr.employee</field>
+            <field name="inherit_id" ref="hr.view_employee_form"/>
+            <field name="arch" type="xml">
+                <xpath expr="//label" position="before">
+                    <h1>
+                        <field name="code" readonly="1"/>
+                    </h1>
+                </xpath>
+                <field name="work_phone" position="after">
+                    <field name="workplace"/>
+                </field>
+                <xpath expr="//div[@name='button_box']" position="inside">
+                    <button name="action_get_attachment_tree_view" class="oe_stat_button" icon="fa-book" type="object">
+                        <field name="attachment_number" widget="statinfo" string="Documents"/>
+                    </button>
+                </xpath>
+            </field>
+        </record>
+
+         <record id="view_applicant_form" model="ir.ui.view">
+            <field name="name">hr.applicant.form</field>
+            <field name="model">hr.applicant</field>
+            <field name="inherit_id" ref="mgmtsystem_employees.hr_applicant_view_form"/>
+            <field name="arch" type="xml">
+                <field name="journal" position="after">
+                    <field name="workplace"/>
+                </field>
+            </field>
+        </record>
+
+        <record id="view_applicant_tree" model="ir.ui.view">
+            <field name="name">hr.applicant.tree</field>
+            <field name="model">hr.applicant</field>
+            <field name="inherit_id" ref="hr_recruitment.crm_case_tree_view_job"/>
+            <field name="arch" type="xml">
+                <field name="medium_id" position="replace">
+                </field>
+                <field name="source_id" position="attributes">
+                    <attribute name="invisible">1</attribute>
+                </field>
+            </field>
+        </record>
+
+        <record id="ir_attachment_view_search_inherit_hr_employee" model="ir.ui.view">
+            <field name="name">ir.attachment.search.inherit.recruitment</field>
+            <field name="model">ir.attachment</field>
+            <field name="mode">primary</field>
+            <field name="inherit_id" ref="base.view_attachment_search"/>
+            <field name="arch" type="xml">
+                <xpath expr="//field[@name='create_date']" position="after">
+                    <field name="index_content" string="Content"/>
+                </xpath>
+                <xpath expr="//filter[@name='my_documents_filter']" position="attributes">
+                    <attribute name='invisible'>1</attribute>
+                </xpath>
+                <xpath expr="//filter[@name='url_filter']" position="attributes">
+                    <attribute name='invisible'>1</attribute>
+                </xpath>
+                <xpath expr="//filter[@name='binary_filter']" position="attributes">
+                    <attribute name='invisible'>1</attribute>
+                </xpath>
+            </field>
+        </record>
+
+
+    </data>
+</odoo>

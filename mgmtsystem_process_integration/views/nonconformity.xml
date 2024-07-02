@@ -1,0 +1,90 @@
+<odoo>
+    <data>
+
+        <record model="ir.ui.view" id="view_matrix_block_line_search">
+            <field name="name">matrix.block.line.search</field>
+            <field name="model">matrix.block.line</field>
+            <field name="arch" type="xml">
+                <search>
+                    <field name="name"/>
+                    <field name="state"/>
+                    <field name="complaint_ids"/>
+                    <field name="nonconformity_ids"/>
+                    <field name="action_ids"/>
+                </search>
+            </field>
+        </record>
+
+        <record id="target_nonconformity_filter" model="ir.ui.view">
+            <field name="name">mgmtsystem.target.filter</field>
+            <field name="model">mgmtsystem.target</field>
+            <field name="inherit_id" ref="mgmtsystem_target.view_target_search"/>
+            <field name="arch" type="xml">
+                <field name="action_ids" position="after">
+                    <field name="nonconformity_ids"/>
+                </field>
+            </field>
+        </record>
+
+        <record model="ir.actions.act_window" id="show_target_nonconformity_action">
+            <field name="name">Objetivos</field>
+            <field name="res_model">mgmtsystem.target</field>
+            <field name="view_mode">kanban,form,tree</field>
+            <field name="context">{"search_default_nonconformity_ids": active_id}</field>
+            <field name="search_view_id" ref="target_nonconformity_filter"/>
+        </record>
+
+        <record model="ir.actions.act_window" id="show_risk_nonconformity_action">
+            <field name="name">Riesgos</field>
+            <field name="res_model">matrix.block.line</field>
+            <field name="view_mode">kanban,form,tree</field>
+            <field name="context">{"search_default_nonconformity_ids": active_id}</field>
+            <field name="search_view_id" ref="view_matrix_block_line_search"/>
+        </record>
+
+        <record id="nonconformity_view_form" model="ir.ui.view">
+            <field name="name">mgmtsystem.nonconformity.view.form</field>
+            <field name="model">mgmtsystem.nonconformity</field>
+            <field name="inherit_id" ref="mgmtsystem_nonconformity.view_mgmtsystem_nonconformity_form"/>
+            <field name="arch" type="xml">
+                <xpath expr="//div[@name='button_box']" position="inside">
+                    <button type="action" name="%(show_target_nonconformity_action)d" class="oe_stat_button" icon="fa-bar-chart-o">
+                        <field name="targets_count" widget="statinfo" string="Objetivos"/>
+                    </button>
+                    <button type="action" name="%(show_risk_nonconformity_action)d" class="oe_stat_button" icon="fa-frown-o">
+                        <field name="opps_count" widget="statinfo" string="Oportunidades"/>
+                    </button>
+                    <button type="action" name="%(show_risk_nonconformity_action)d" class="oe_stat_button" icon="fa-edit">
+                        <field name="risks_count" widget="statinfo" string="Riesgos"/>
+                    </button>
+                </xpath>
+                <field name="date_limit" position="after">
+                    <field name="count_origin_ids" string="Reincidencias"/>
+                </field>
+                <xpath expr="//notebook" position="inside">
+                    <page string="Origenes">
+                        <field name="origin_model_id" invisible="1"/>
+                        <field name="origin_int_id" invisible="1"/>
+                        <field name="origin_ids">
+                        <tree>
+                            <field name="origin_model_id"/>
+                            <button string="Abrir origen" name="open_origin_record" type="object" class="oe_highlight"/>    
+                        </tree>
+                        </field>
+                    </page>
+                    <page name="target_ids" string="Objetivos">
+                        <field name="model_id" invisible="1"/>
+                        <field name="target_ids" context="{'default_origin_model_id': model_id, 'default_origin_int_id': id}"/>
+                    </page>
+                    <page name="risk_opp" string="Riesgos y oportunidades">
+                        <separator string="Riesgos"/>
+                        <field name="risk_ids" context="{'default_origin_model_id': model_id, 'default_origin_int_id': id, 'default_type': 'risk'}"/>
+                        <separator string="Oportunidades"/>
+                        <field name="opp_ids" context="{'default_origin_model_id': model_id, 'default_origin_int_id': id, 'default_type': 'opportunity'}"/>
+                    </page>
+                </xpath>
+            </field>
+        </record>
+
+    </data>
+</odoo>

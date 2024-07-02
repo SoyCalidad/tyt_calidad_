@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <record id="legal_plan_docs_view_form" model="ir.ui.view">
+        <field name="name">legal.plan.view.form</field>
+        <field name="model">legal.plan</field>
+        <field name="inherit_id" ref="mgmtsystem_legal.view_legal_plan_form"/>
+        <field name="arch" type="xml">
+            <xpath expr="//button[@name='open_change_request_view']" position="before">
+                <button name="action_open_documents"
+                    class="oe_stat_button"
+                    groups="documents.group_documents_user"
+                    icon="fa-file-text"
+                    type="object">
+                    <field name="document_count" widget="statinfo" string="Documents"/>
+                </button>
+            </xpath>
+        </field>
+    </record>
+
+    <record id="legal_legal_docs_view_form" model="ir.ui.view">
+        <field name="name">legal.legal.view.form</field>
+        <field name="model">legal.legal</field>
+        <field name="inherit_id" ref="mgmtsystem_legal.view_legal_legal_form"/>
+        <field name="arch" type="xml">
+            <xpath expr="//button[@name='open_change_request_view']" position="before">
+                <button name="action_open_documents"
+                    class="oe_stat_button"
+                    groups="documents.group_documents_user"
+                    icon="fa-file-text"
+                    type="object">
+                    <field name="document_count" widget="statinfo" string="Documents"/>
+                </button>
+            </xpath>
+        </field>
+    </record>
+</odoo>

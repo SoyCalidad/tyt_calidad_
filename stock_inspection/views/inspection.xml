@@ -1,0 +1,250 @@
+<odoo>
+    <data>
+        <record id="stock_inspection_item_view_form" model="ir.ui.view">
+            <field name="name">stock.inspection.item.view.form</field>
+            <field name="model">stock.inspection.item</field>
+            <field name="arch" type="xml">
+                <form string="Criterio de evaluación">
+                    <sheet>
+                        <group>
+                            <field name="name" />
+                        </group>
+                    </sheet>
+                </form>
+            </field>
+        </record>
+        <record id="stock_inspection_item_view_tree" model="ir.ui.view">
+            <field name="name">stock.inspection.item.view.tree</field>
+            <field name="model">stock.inspection.item</field>
+            <field name="arch" type="xml">
+                <tree string="Criterio de evaluación">
+                    <field name="name" />
+                </tree>
+            </field>
+        </record>
+        <record id="stock_inspection_item_action" model="ir.actions.act_window">
+            <field name="name">Criterio de evaluación</field>
+            <field name="res_model">stock.inspection.item</field>
+            <field name="view_mode">tree,form</field>
+            <field name="domain">[]</field>
+            <field name="context">{}</field>
+        </record>
+        <record id="stock_inspection_view_form" model="ir.ui.view">
+            <field name="name">stock.inspection.view.form</field>
+            <field name="model">stock.inspection</field>
+            <field name="arch" type="xml">
+                <form string="Evaluación">
+                    <header>
+                        <field name="state" widget="statusbar" statusbar_visible="elaborate,review,validate,validate_ok,on_track,closed" />
+                        <button string="Enviar a Elaborar"
+                                name="send_elaborate"
+                                type="object"
+                                class="btn-primary"
+                                attrs="{'invisible':[('state','not in', ('review'))]}" />
+                        <button string="Enviar a Revisar"
+                                name="send_review"
+                                type="object"
+                                class="btn-primary"
+                                attrs="{'invisible':[('state','not in', ('elaborate'))]}" />
+                        <button string="Enviar a Validar"
+                                name="send_validate"
+                                type="object"
+                                class="btn-primary"
+                                attrs="{'invisible':[('state','not in', ('review'))]}" />
+                        <button string="Validar"
+                                name="send_validate_ok"
+                                type="object"
+                                class="btn-primary"
+                                attrs="{'invisible':[('state','not in', ('validate'))]}" />
+                        <button string="Volver Obsoleto"
+                                confirm="Esto volverá obsoleto el presente registro. ¿Está seguro(a)?"
+                                name="send_cancel"
+                                type="object"
+                                class="btn-second"
+                                attrs="{'invisible': [('state','in',('cancel'))] }" />
+                        <button name="button_new_version"
+                                type="object"
+                                string="Nueva versión"
+                                attrs="{'invisible':[('state', '!=', 'validate_ok')]}"
+                                class="oe_highlight" />
+                    </header>
+                    <sheet>
+                        <div class="oe_button_box" name="button_box">
+                            <button type="object"
+                                    name="action_open_older_versions"
+                                    class="oe_stat_button"
+                                    icon="fa-archive"
+                                    style="white-space: nowrap;"
+                                    string="Versiones antiguas" />
+                        </div>
+                        <div class="oe_title">
+                            <label for="name" />
+                            <h2>
+                                <field name="name" attrs="{'readonly': [('state','in',('validate_ok'))] }" />
+                            </h2>
+                        </div>
+                        <notebook>
+                            <page name="criteria" string="Criterios">
+                                <group>
+                                    <separator string="Criterios" colspan="2" />
+                                    <field name="item_ids" nolabel="1" attrs="{'readonly': [('state','in',('validate_ok'))] }" />
+                                </group>
+                            </page>
+                            <page name="validation" string="Validación y Versión">
+                                <group>
+                                    <group colspan="4">
+                                        <field name="version" />
+                                    </group>
+                                    <group colspan="4">
+                                        <separator string="Elaboración" />
+                                        <field name="elaboration_step" colspan="2" nolabel="1" attrs="{'readonly': [('state','not in',('elaborate'))]}" />
+                                        <separator string="Revisión" />
+                                        <field name="review_step" colspan="2" nolabel="1" attrs="{'readonly': [('state','not in',('elaborate', 'review'))]}" />
+                                        <separator string="Validación" />
+                                        <field name="validation_step" colspan="2" nolabel="1" attrs="{'readonly': [('state','not in',('elaborate', 'review', 'validate'))]}" />
+                                    </group>
+                                    <group colspan="4">
+                                        <field name="date_elaborate" attrs="{'required': [('state','in',('elaborate'))], 'readonly': True}" />
+                                        <field name="date_review" attrs="{'required': [('state','in',('review'))], 'readonly': True, 'invisible': [('state','in',('elaborate'))] }" />
+                                        <field name="date_validate" groups="base.group_no_one,base.user_admin" attrs="{'invisible': [('state','in',('elaborate','review'))] }" />
+                                    </group>
+                                </group>
+                            </page>
+                        </notebook>
+                    </sheet>
+                    <div class="oe_chatter">
+                        <field name="message_follower_ids" widget="mail_followers" />
+                        <field name="activity_ids" widget="mail_activity" />
+                        <field name="message_ids" widget="mail_thread" />
+                    </div>
+                </form>
+            </field>
+        </record>
+        <record id="stock_inspection_view_tree" model="ir.ui.view">
+            <field name="name">stock.inspection.view.tree</field>
+            <field name="model">stock.inspection</field>
+            <field name="arch" type="xml">
+                <tree string="Evaluación">
+                    <field name="name" />
+                    <field name="item_ids" />
+                </tree>
+            </field>
+        </record>
+        <record id="stock_inspection_action" model="ir.actions.act_window">
+            <field name="name">Evaluación</field>
+            <field name="res_model">stock.inspection</field>
+            <field name="view_mode">tree,form</field>
+            <field name="domain">[]</field>
+            <field name="context">{}</field>
+        </record>
+        <record id="stock_picking_inspection_item_view_form" model="ir.ui.view">
+            <field name="name">stock.picking.inspection.item.view.form</field>
+            <field name="model">stock.picking.inspection.item</field>
+            <field name="arch" type="xml">
+                <form string="Evaluación">
+                    <sheet>
+                        <group>
+                            <field name="name" />
+                            <field name="yes" />
+                            <field name="no" />
+                            <field name="no_apply" />
+                        </group>
+                    </sheet>
+                </form>
+            </field>
+        </record>
+        <record id="stock_picking_inspection_item_view_tree" model="ir.ui.view">
+            <field name="name">stock.picking.inspection.item.view.tree</field>
+            <field name="model">stock.picking.inspection.item</field>
+            <field name="arch" type="xml">
+                <tree string="Evaluación">
+                    <field name="name" />
+                    <field name="yes" />
+                    <field name="no" />
+                    <field name="no_apply" />
+                </tree>
+            </field>
+        </record>
+        <record id="stock_picking_inspection_item_action" model="ir.actions.act_window">
+            <field name="name">Evaluación</field>
+            <field name="res_model">stock.picking.inspection.item</field>
+            <field name="view_mode">tree,form</field>
+            <field name="domain">[]</field>
+            <field name="context">{}</field>
+        </record>
+        <record id="stock_picking_inspection_view_form" model="ir.ui.view">
+            <field name="name">stock.picking.inspection.view.form</field>
+            <field name="model">stock.picking.inspection</field>
+            <field name="arch" type="xml">
+                <form string="">
+                    <sheet>
+                        <group>
+                            <field name="inspection_id" />
+                            <field name="inspection_date" />
+                            <field name="employee_id" />
+                        </group>
+                        <group>
+                            <field name="item_ids">
+                                <tree editable="bottom">
+                                    <field name="name" />
+                                    <field name="yes" />
+                                    <field name="no" />
+                                    <field name="no_apply" />
+                                </tree>
+                            </field>
+                        </group>
+                        <group>
+                            <field name="observations" />
+                        </group>
+                    </sheet>
+                </form>
+            </field>
+        </record>
+        <record id="stock_picking_inspection_view_tree" model="ir.ui.view">
+            <field name="name">stock.picking.inspection.view.tree</field>
+            <field name="model">stock.picking.inspection</field>
+            <field name="arch" type="xml">
+                <tree string="">
+                    <field name="inspection_id" />
+                    <field name="inspection_date" />
+                    <field name="employee_id" />
+                    <button string="Imprimir evaluación" type="object" class="btn-primary" name="print_evaluation" />
+                </tree>
+            </field>
+        </record>
+        <record id="stock_picking_inspection_action" model="ir.actions.act_window">
+            <field name="name">Evaluación</field>
+            <field name="res_model">stock.picking.inspection</field>
+            <field name="view_mode">tree,form</field>
+            <field name="domain">[]</field>
+            <field name="context">{}</field>
+        </record>
+        <record id="view_picking_form_inherit_stock" model="ir.ui.view">
+            <field name="name">stock.picking.view.form.inherit</field>
+            <field name="model">stock.picking</field>
+            <field name="inherit_id" ref="stock.view_picking_form" />
+            <field name="arch" type="xml">
+                <notebook position="inside">
+                    <page name="Evaluaciones" string="Evaluaciones">
+                        <field name="inspection_ids" />
+                    </page>
+                </notebook>
+                <field name="owner_id" position="after">
+                    <field name="return_date" groups="stock.group_tracking_owner" attrs="{'invisible': ['|', ('picking_type_code', '!=', 'incoming'), ('owner_id', '=', None)]}" />
+                </field>
+            </field>
+        </record>
+        <menuitem id="stock_inspection_root_menu" name="Evaluaciones" parent="stock.menu_stock_root" sequence="25" />
+        <menuitem id="stock_inspection_menu"
+                  name="Evaluaciones"
+                  sequence="0"
+                  parent="stock_inspection_root_menu"
+                  action="stock_inspection_action" />
+        <menuitem id="stock_picking_inspection_menu"
+                  name="Historial de fichas"
+                  sequence="1"
+                  parent="stock_inspection_root_menu"
+                  action="stock_picking_inspection_action" />
+
+    </data>
+</odoo>

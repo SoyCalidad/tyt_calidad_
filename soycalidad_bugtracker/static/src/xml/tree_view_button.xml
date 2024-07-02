@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="utf-8"?>
+<template id="template" xml:space="preserve">
+    <t t-extend="CrashManager.error">
+        <t t-jquery="div.ml8" t-operation="append">
+            <a href="https://forms.gle/EjwLyPoFtcM5WojY8" target="_blank">
+                <button class="btn btn-primary">
+                    <i class="fa fa-clipboard mr8" />Notificar el error
+                </button>
+            </a>
+        </t>
+    </t>
+    <t t-extend="ListView.buttons">
+        <t t-jquery="button.o_list_export_xlsx" t-operation="after">
+            <button type="button" class="btn btn-secondary fa fa-bug o_list_bug_report" title="Envíar reporte de error" />
+        </t>
+    </t>
+</template>

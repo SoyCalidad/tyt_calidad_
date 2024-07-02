@@ -1,0 +1,470 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+
+    <record id="view_audit_audit_form_inherit_audit" model="ir.ui.view">
+        <field name="name">audit.audit.view.form.inherit</field>
+        <field name="model">audit.audit</field>
+        <field name="inherit_id" ref="mgmtsystem_audit.view_audit_audit_form"/>
+        <field name="arch" type="xml">
+            <button name="send_validate_ok" position="after">
+                <button string="Validación rápida"
+                    name="fast_validation"
+                    type="object"
+                    class="oe_highlight"
+                    attrs="{'invisible':[('state','!=', 'elaborate')]}"/>
+            </button>
+        </field>
+    </record>
+
+    <record id="view_audit_plan_form_inherit_val" model="ir.ui.view">
+        <field name="name">audit.plan.view.form.inherit</field>
+        <field name="model">audit.plan</field>
+        <field name="inherit_id" ref="mgmtsystem_audit.view_audit_plan_form"/>
+        <field name="arch" type="xml">
+            <button name="send_validate_ok" position="after">
+                <button string="Validación rápida"
+                    name="fast_validation"
+                    type="object"
+                    class="oe_highlight"
+                    attrs="{'invisible':[('state','!=', 'elaborate')]}"/>
+            </button>
+        </field>
+    </record>
+
+    <record id="view_plan_line_form_inherit_val" model="ir.ui.view">
+        <field name="name">comunication.plan.line.view.form.inherit</field>
+        <field name="model">comunication.plan.line</field>
+        <field name="inherit_id" ref="mgmtsystem_comunication.view_plan_line_form"/>
+        <field name="arch" type="xml">
+            <button name="send_validate_ok" position="after">
+                <button string="Validación rápida"
+                    name="fast_validation"
+                    type="object"
+                    class="oe_highlight"
+                    attrs="{'invisible':[('state','!=', 'elaborate')]}"/>
+            </button>
+        </field>
+    </record>
+
+    <record id="view_comunication_plan_form_inherit_val" model="ir.ui.view">
+        <field name="name">comunication.plan.view.form.inherit</field>
+        <field name="model">comunication.plan</field>
+        <field name="inherit_id" ref="mgmtsystem_comunication.view_comunication_plan_form"/>
+        <field name="arch" type="xml">
+            <button name="send_validate_ok" position="after">
+                <button string="Validación rápida"
+                    name="fast_validation"
+                    type="object"
+                    class="oe_highlight"
+                    attrs="{'invisible':[('state','!=', 'elaborate')]}"/>
+            </button>
+        </field>
+    </record>
+
+    <record id="context_internal_issue_view_form_inherit_val" model="ir.ui.view">
+        <field name="name">mgmtsystem.context.internal_issue.view.form.inherit</field>
+        <field name="model">mgmtsystem.context.internal_issue</field>
+        <field name="inherit_id" ref="mgmtsystem_context.context_internal_issue_view_form"/>
+        <field name="arch" type="xml">
+            <button name="send_validate_ok" position="after">
+                <button string="Validación rápida"
+                    name="fast_validation"
+                    type="object"
+                    class="oe_highlight"
+                    attrs="{'invisible':[('state','!=', 'elaborate')]}"/>
+            </button>
+        </field>
+    </record>
+
+    <record id="context_policy_view_form_inherit_val" model="ir.ui.view">
+        <field name="name">mgmtsystem.context.policy.view.form.inherit</field>
+        <field name="model">mgmtsystem.context.policy</field>
+        <field name="inherit_id" ref="mgmtsystem_context.context_policy_view_form"/>
+        <field name="arch" type="xml">
+            <button name="send_validate_ok" position="after">
+                <button string="Validación rápida"
+                    name="fast_validation"
+                    type="object"
+                    class="oe_highlight"
+                    attrs="{'invisible':[('state','!=', 'elaborate')]}"/>
+            </button>
+        </field>
+    </record>
+
+    <record id="context_external_issue_view_form_inherit_val" model="ir.ui.view">
+        <field name="name">mgmtsystem.context.external_issue.view.form.inherit</field>
+        <field name="model">mgmtsystem.context.external_issue</field>
+        <field name="inherit_id" ref="mgmtsystem_context.context_external_issue_view_form"/>
+        <field name="arch" type="xml">
+            <button name="send_validate_ok" position="after">
+                <button string="Validación rápida"
+                    name="fast_validation"
+                    type="object"
+                    class="oe_highlight"
+                    attrs="{'invisible':[('state','!=', 'elaborate')]}"/>
+            </button>
+        </field>
+    </record>
+
+    <record id="stakeholders_view_form_inherit_val" model="ir.ui.view">
+        <field name="name">mgmtsystem.stakeholders.view.form.inherit</field>
+        <field name="model">mgmtsystem.stakeholders</field>
+        <field name="inherit_id" ref="mgmtsystem_context.stakeholders_view_form"/>
+        <field name="arch" type="xml">
+            <button name="send_validate_ok" position="after">
+                <button string="Validación rápida"
+                    name="fast_validation"
+                    type="object"
+                    class="oe_highlight"
+                    attrs="{'invisible':[('state','!=', 'elaborate')]}"/>
+            </button>
+        </field>
+    </record>
+
+    <record id="organization_chart_view_form_inherit_val" model="ir.ui.view">
+        <field name="name">mgmtsystem.context.organization_chart.view.form.inherit</field>
+        <field name="model">mgmtsystem.context.organization_chart</field>
+        <field name="inherit_id" ref="mgmtsystem_context.organization_chart_view_form"/>
+        <field name="arch" type="xml">
+            <button name="send_validate_ok" position="after">
+                <button string="Validación rápida"
+                    name="fast_validation"
+                    type="object"
+                    class="oe_highlight"
+                    attrs="{'invisible':[('state','!=', 'elaborate')]}"/>
+            </button>
+        </field>
+    </record>
+
+    <record id="pest_analysis_view_form_inherit_module_name" model="ir.ui.view">
+        <field name="name">mgmtsystem.context.pest.view.form.inherit</field>
+        <field name="model">mgmtsystem.context.pest</field>
+        <field name="inherit_id" ref="mgmtsystem_context.pest_analysis_view_form"/>
+        <field name="arch" type="xml">
+            <button name="send_validate_ok" position="after">
+                <button string="Validación rápida"
+                    name="fast_validation"
+                    type="object"
+                    class="oe_highlight"
+                    attrs="{'invisible':[('state','!=', 'elaborate')]}"/>
+            </button>
+        </field>
+    </record>
+
+    <record id="context_swot_view_form_inherit_val" model="ir.ui.view">
+        <field name="name">mgmtsystem.context.swot.view.form.inherit</field>
+        <field name="model">mgmtsystem.context.swot</field>
+        <field name="inherit_id" ref="mgmtsystem_context.context_swot_view_form"/>
+        <field name="arch" type="xml">
+            <button name="send_validate_ok" position="after">
+                <button string="Validación rápida"
+                    name="fast_validation"
+                    type="object"
+                    class="oe_highlight"
+                    attrs="{'invisible':[('state','!=', 'elaborate')]}"/>
+            </button>
+        </field>
+    </record>
+
+    <record id="cross_swot_view_form_inherit_val" model="ir.ui.view">
+        <field name="name">mgmtsystem.context.cross.swot.view.form.inherit</field>
+        <field name="model">mgmtsystem.context.cross.swot</field>
+        <field name="inherit_id" ref="mgmtsystem_context.cross_swot_view_form"/>
+        <field name="arch" type="xml">
+            <button name="send_validate_ok" position="after">
+                <button string="Validación rápida"
+                    name="fast_validation"
+                    type="object"
+                    class="oe_highlight"
+                    attrs="{'invisible':[('state','!=', 'elaborate')]}"/>
+            </button>
+        </field>
+    </record>
+
+    <record id="view_mgmtsystem_plan_form_inherit_val" model="ir.ui.view">
+        <field name="name">mgmtsystem.plan.view.form.inherit</field>
+        <field name="model">mgmtsystem.plan</field>
+        <field name="inherit_id" ref="mgmtsystem_employees.view_mgmtsystem_plan_form"/>
+        <field name="arch" type="xml">
+            <button name="send_validate_ok" position="after">
+                <button string="Validación rápida"
+                    name="fast_validation"
+                    type="object"
+                    class="oe_highlight"
+                    attrs="{'invisible':[('state','!=', 'elaborate')]}"/>
+            </button>
+        </field>
+    </record>
+
+    <record id="view_mgmtsystem_plan_training_form_inherit_val" model="ir.ui.view">
+        <field name="name">mgmtsystem.plan.training.view.form.inherit</field>
+        <field name="model">mgmtsystem.plan.training</field>
+        <field name="inherit_id" ref="mgmtsystem_employees.view_mgmtsystem_plan_training_form"/>
+        <field name="arch" type="xml">
+            <button name="send_validate_ok" position="after">
+                <button string="Validación rápida"
+                    name="fast_validation"
+                    type="object"
+                    class="oe_highlight"
+                    attrs="{'invisible':[('state','!=', 'elaborate')]}"/>
+            </button>
+        </field>
+    </record>
+
+    <record id="view_mgmtsystem_calibration_form_inherit_val" model="ir.ui.view">
+        <field name="name">mgmtsystem.calibration.view.form.inherit</field>
+        <field name="model">mgmtsystem.calibration</field>
+        <field name="inherit_id" ref="mgmtsystem_infrastructure.view_mgmtsystem_calibration_form"/>
+        <field name="arch" type="xml">
+            <button name="send_validate_ok" position="after">
+                <button string="Validación rápida"
+                    name="fast_validation"
+                    type="object"
+                    class="oe_highlight"
+                    attrs="{'invisible':[('state','!=', 'elaborate')]}"/>
+            </button>
+        </field>
+    </record>
+
+    <record id="view_mgmtsystem_calibration_plan_form_inherit_val" model="ir.ui.view">
+        <field name="name">mgmtsystem.calibration.plan.view.form.inherit</field>
+        <field name="model">mgmtsystem.calibration.plan</field>
+        <field name="inherit_id" ref="mgmtsystem_infrastructure.view_mgmtsystem_calibration_plan_form"/>
+        <field name="arch" type="xml">
+            <button name="send_validate_ok" position="after">
+                <button string="Validación rápida"
+                    name="fast_validation"
+                    type="object"
+                    class="oe_highlight"
+                    attrs="{'invisible':[('state','!=', 'elaborate')]}"/>
+            </button>
+        </field>
+    </record>
+
+    <record id="view_mgmtsystem_infrastructure_form_inherit_module_name" model="ir.ui.view">
+        <field name="name">mgmtsystem.infrastructure.view.form.inherit</field>
+        <field name="model">mgmtsystem.infrastructure</field>
+        <field name="inherit_id" ref="mgmtsystem_infrastructure.view_mgmtsystem_infrastructure_form"/>
+        <field name="arch" type="xml">
+            <button name="send_validate_ok" position="after">
+                <button string="Validación rápida"
+                    name="fast_validation"
+                    type="object"
+                    class="oe_highlight"
+                    attrs="{'invisible':[('state','!=', 'elaborate')]}"/>
+            </button>
+        </field>
+    </record>
+
+    <record id="view_mgmtsystem_maintenance_form_inherit_val" model="ir.ui.view">
+        <field name="name">mgmtsystem.maintenance.view.form.inherit</field>
+        <field name="model">mgmtsystem.maintenance</field>
+        <field name="inherit_id" ref="mgmtsystem_infrastructure.view_mgmtsystem_maintenance_form"/>
+        <field name="arch" type="xml">
+            <button name="send_validate_ok" position="after">
+                <button string="Validación rápida"
+                    name="fast_validation"
+                    type="object"
+                    class="oe_highlight"
+                    attrs="{'invisible':[('state','!=', 'elaborate')]}"/>
+            </button>
+        </field>
+    </record>
+
+    <record id="view_mgmtsystem_maintenance_plan_form_inherit_val" model="ir.ui.view">
+        <field name="name">mgmtsystem.maintenance.plan.view.form.inherit</field>
+        <field name="model">mgmtsystem.maintenance.plan</field>
+        <field name="inherit_id" ref="mgmtsystem_infrastructure.view_mgmtsystem_maintenance_plan_form"/>
+        <field name="arch" type="xml">
+            <button name="send_validate_ok" position="after">
+                <button string="Validación rápida"
+                    name="fast_validation"
+                    type="object"
+                    class="oe_highlight"
+                    attrs="{'invisible':[('state','!=', 'elaborate')]}"/>
+            </button>
+        </field>
+    </record>
+
+    <record id="system_process_edition_form_view_inherit_inherit_val" model="ir.ui.view">
+        <field name="name">process.edition.view.form.inherit</field>
+        <field name="model">process.edition</field>
+        <field name="inherit_id" ref="mgmtsystem_process.system_process_edition_form_view_inherit"/>
+        <field name="arch" type="xml">
+            <button name="send_validate_ok" position="after">
+                <button string="Validación rápida"
+                    name="fast_validation"
+                    type="object"
+                    class="oe_highlight"
+                    attrs="{'invisible':[('state','!=', 'elaborate')]}"/>
+            </button>
+        </field>
+    </record>
+
+    <record id="view_legal_plan_form_inherit_val" model="ir.ui.view">
+        <field name="name">legal.plan.view.form.inherit</field>
+        <field name="model">legal.plan</field>
+        <field name="inherit_id" ref="mgmtsystem_legal.view_legal_plan_form"/>
+        <field name="arch" type="xml">
+            <button name="send_validate_ok" position="after">
+                <button string="Validación rápida"
+                    name="fast_validation"
+                    type="object"
+                    class="oe_highlight"
+                    attrs="{'invisible':[('state','!=', 'elaborate')]}"/>
+            </button>
+        </field>
+    </record>
+
+    <record id="management_review_plan_form_view_inherit_val" model="ir.ui.view">
+        <field name="name">management.review.plan.view.form.inherit</field>
+        <field name="model">management.review.plan</field>
+        <field name="inherit_id" ref="mgmtsystem_management_review.management_review_plan_form_view"/>
+        <field name="arch" type="xml">
+            <button name="send_validate_ok" position="after">
+                <button string="Validación rápida"
+                    name="fast_validation"
+                    type="object"
+                    class="oe_highlight"
+                    attrs="{'invisible':[('state','!=', 'elaborate')]}"/>
+            </button>
+        </field>
+    </record>
+
+    <record id="management_review_form_view_inherit_val" model="ir.ui.view">
+        <field name="name">management.review.view.form.inherit</field>
+        <field name="model">management.review</field>
+        <field name="inherit_id" ref="mgmtsystem_management_review.management_review_form_view"/>
+        <field name="arch" type="xml">
+            <button name="send_validate_ok" position="after">
+                <button string="Validación rápida"
+                    name="fast_validation"
+                    type="object"
+                    class="oe_highlight"
+                    attrs="{'invisible':[('state','!=', 'elaborate')]}"/>
+            </button>
+        </field>
+    </record>
+
+    <record id="management_review_form_view_inherit_val" model="ir.ui.view">
+        <field name="name">management.review.view.form.inherit</field>
+        <field name="model">management.review</field>
+        <field name="inherit_id" ref="mgmtsystem_management_review.management_review_form_view"/>
+        <field name="arch" type="xml">
+            <button name="send_validate_ok" position="after">
+                <button string="Validación rápida"
+                    name="fast_validation"
+                    type="object"
+                    class="oe_highlight"
+                    attrs="{'invisible':[('state','!=', 'elaborate')]}"/>
+            </button>
+        </field>
+    </record>
+
+    <record id="res_partner_evaluation_form_inherit_val" model="ir.ui.view">
+        <field name="name">res.partner.evaluation.view.form.inherit</field>
+        <field name="model">res.partner.evaluation</field>
+        <field name="inherit_id" ref="mgmtsystem_partner_qualification.res_partner_evaluation_form"/>
+        <field name="arch" type="xml">
+            <button name="send_validate_ok" position="after">
+                <button string="Validación rápida"
+                    name="fast_validation"
+                    type="object"
+                    class="oe_highlight"
+                    attrs="{'invisible':[('state','!=', 'elaborate')]}"/>
+            </button>
+        </field>
+    </record>
+
+    <record id="initial_evaluation_view_form_inherit_val" model="ir.ui.view">
+        <field name="name">evaluation.initial_evaluation.view.form.inherit</field>
+        <field name="model">evaluation.initial_evaluation</field>
+        <field name="inherit_id" ref="mgmtsystem_partner_qualification.initial_evaluation_view_form"/>
+        <field name="arch" type="xml">
+            <button name="send_validate_ok" position="after">
+                <button string="Validación rápida"
+                    name="fast_validation"
+                    type="object"
+                    class="oe_highlight"
+                    attrs="{'invisible':[('state','!=', 'elaborate')]}"/>
+            </button>
+        </field>
+    </record>
+
+    <record id="nc_comunication_filter_inherit_val" model="ir.ui.view">
+        <field name="name">document.page.view.form.inherit</field>
+        <field name="model">document.page</field>
+        <field name="inherit_id" ref="mgmtsystem_process.nc_comunication_filter"/>
+        <field name="arch" type="xml">
+            <button name="send_validate_ok" position="after">
+                <button string="Validación rápida"
+                    name="fast_validation"
+                    type="object"
+                    class="oe_highlight"
+                    attrs="{'invisible':[('state','!=', 'elaborate')]}"/>
+            </button>
+        </field>
+    </record>
+
+    <record id="view_mgmtsystem_qualitymanual_form_inherit_val" model="ir.ui.view">
+        <field name="name">mgmtsystem.qualitymanual.view.form.inherit</field>
+        <field name="model">mgmtsystem.qualitymanual</field>
+        <field name="inherit_id" ref="mgmtsystem_qualitymanual.view_mgmtsystem_qualitymanual_form"/>
+        <field name="arch" type="xml">
+            <button name="send_validate_ok" position="after">
+                <button string="Validación rápida"
+                    name="fast_validation"
+                    type="object"
+                    class="oe_highlight"
+                    attrs="{'invisible':[('state','!=', 'elaborate')]}"/>
+            </button>
+        </field>
+    </record>
+
+    <record id="view_survey_survey_inherit_form_inherit_val" model="ir.ui.view">
+        <field name="name">survey.survey.view.form.inherit</field>
+        <field name="model">survey.survey</field>
+        <field name="inherit_id" ref="mgmtsystem_survey.view_survey_survey_inherit_form"/>
+        <field name="arch" type="xml">
+            <button name="send_validate_ok" position="after">
+                <button string="Validación rápida"
+                    name="fast_validation"
+                    type="object"
+                    class="oe_highlight"
+                    attrs="{'invisible':[('state','!=', 'elaborate')]}"/>
+            </button>
+        </field>
+    </record>
+
+    <record id="target_view_form_inherit_val" model="ir.ui.view">
+        <field name="name">mgmtsystem.target.view.form.inherit</field>
+        <field name="model">mgmtsystem.target</field>
+        <field name="inherit_id" ref="mgmtsystem_target.target_view_form"/>
+        <field name="arch" type="xml">
+            <button name="send_validate_ok" position="after">
+                <button string="Validación rápida"
+                    name="fast_validation"
+                    type="object"
+                    class="oe_highlight"
+                    attrs="{'invisible':[('state','!=', 'elaborate')]}"/>
+            </button>
+        </field>
+    </record>
+
+    <record id="stock_inspection_view_form_inherit_val" model="ir.ui.view">
+        <field name="name">stock.inspection.view.form.inherit</field>
+        <field name="model">stock.inspection</field>
+        <field name="inherit_id" ref="stock_inspection.stock_inspection_view_form"/>
+        <field name="arch" type="xml">
+            <button name="send_validate_ok" position="after">
+                <button string="Validación rápida"
+                    name="fast_validation"
+                    type="object"
+                    class="oe_highlight"
+                    attrs="{'invisible':[('state','!=', 'elaborate')]}"/>
+            </button>
+        </field>
+    </record>
+
+
+</odoo>

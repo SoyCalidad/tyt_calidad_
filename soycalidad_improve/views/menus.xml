@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+
+    <menuitem id="improve_menu" name="Mejora" web_icon="soycalidad_improve,static/description/icon.png" sequence="39" />
+
+    <menuitem id="change_request_menu"
+              name="Planificación de cambios"
+              action="soycalidad_change_request_action"
+              parent="improve_menu"
+              sequence="9" />
+
+    <menuitem id="improve_plan_matrix_menu"
+              name="Matriz de Planificación de cambios"
+              action="improve_plan_matrix_action"
+              parent="improve_menu"
+              sequence="11" />
+
+    <record model="ir.ui.menu" id="mgmtsystem_action.menu_action_root">
+        <field name="parent_id" ref="soycalidad_improve.improve_menu" />
+        <field name="sequence" eval="13" />
+    </record>
+
+    <record model="ir.ui.menu" id="mgmtsystem_nonconformity.menu_nonconformity_root">
+        <field name="parent_id" ref="soycalidad_improve.improve_menu" />
+        <field name="sequence" eval="12" />
+    </record>
+
+</odoo>

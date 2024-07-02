@@ -1,0 +1,166 @@
+<odoo>
+
+    <!--Views: matrix.matrix-->
+    <record model="ir.ui.view" id="view_matrix_matrix_tree">
+        <field name="name">matrix.matrix.tree</field>
+        <field name="model">matrix.matrix</field>
+        <field name="arch" type="xml">
+            <tree class="o_matrix_matrix" banner_route="/opportunity/opportunity_onboarding">
+                <field name="name" />
+                <field name="filter" />
+                <field name="version" />
+                <field name="state" />
+            </tree>
+        </field>
+    </record>
+
+
+    <record model="ir.ui.view" id="view_matrix_matrix_form">
+        <field name="name">matrix.matrix.form</field>
+        <field name="model">matrix.matrix</field>
+        <field name="arch" type="xml">
+            <form class="o_matrix_matrix">
+                <header>
+                    <button name="send_review"
+                            type="object"
+                            string="Enviar a revisar"
+                            class="btn-primary"
+                            attrs="{'invisible': [('state','!=','elaborate')]}" />
+                    <button name="send_validate"
+                            type="object"
+                            string="Enviar a validar"
+                            class="btn-primary"
+                            attrs="{'invisible': [('state','!=','review')]}" />
+                    <button name="send_validate_ok"
+                            type="object"
+                            string="Validar"
+                            class="btn-primary"
+                            attrs="{'invisible': [('state','!=','validate')]}" />
+                    <button name="send_elaborate"
+                            type="object"
+                            string="Enviar a elaboración"
+                            class="btn-second"
+                            attrs="{'invisible': [('state','!=','validate')]}" />
+                    <button name="send_cancel"
+                            confirm="Esto volverá obsoleto el presente registro. ¿Está seguro(a)?"
+                            type="object"
+                            string="Cancelar"
+                            class="btn-second"
+                            attrs="{'invisible': [('state','=','cancel')]}" />
+                    <field name="state" widget="statusbar" statusbar_visible="draft,elaborate,review,validate,validate_ok" />
+                    <button name="button_new_version"
+                            type="object"
+                            string="Nueva versión"
+                            attrs="{'invisible':[('state', '!=', 'validate_ok')]}"
+                            class="oe_highlight" />
+                </header>
+                <sheet>
+                    <div class="oe_button_box" name="button_box">
+                        <button type="object"
+                                name="action_open_older_versions"
+                                class="oe_stat_button"
+                                icon="fa-archive"
+                                style="white-space: nowrap;"
+                                string="Versiones antiguas" />
+                    </div>
+                    <h1>
+                        <field name="code" />
+                    </h1>
+                    <label for="name" />
+                    <div class="oe_title">
+                        <h3>
+                            <field name="name" attrs="{'readonly':[('state','=','validate_ok')]}" />
+                        </h3>
+                    </div>
+                    <group>
+                        <field name="process_id" />
+                        <field name="system_id" options="{'no_create': True, 'no_edit': True}"  string="Identificador de la oportunidad" attrs="{'invisible':[('type','!=','opportunity')]}" />
+                        <field name="system_id" options="{'no_create': True, 'no_edit': True}"  string="Identificador del riesgo" attrs="{'invisible':[('type','!=','risk')]}" />
+                    </group>
+                    <notebook>
+                        <page string="Detalles de lineas">
+                            <field name="line_ids" domain="[('type', '=', type)]" context="{'default_type': type}" attrs="{'readonly':[('state','=','validate_ok')]}">
+                                <tree>
+                                    <field name="name" />
+                                    <field name="effect" />
+                                    <field name="type" />
+                                    <field name="cause" />
+                                    <field name="ntr" string="Valor" />
+                                    <field name="action_ids" />
+                                    <field name="state" />
+                                </tree>
+                            </field>
+                        </page>
+                        <page string="Validación">
+                            <group>
+                                <group>
+                                    <field name="version" />
+                                </group>
+                                <group colspan="4">
+                                    <separator string="Elaboración" />
+                                    <field name="elaboration_step" colspan="2" nolabel="1" attrs="{'readonly': [('state','not in',('elaborate'))]}" />
+                                    <separator string="Revisión" />
+                                    <field name="review_step" colspan="2" nolabel="1" attrs="{'readonly': [('state','not in',('elaborate', 'review'))]}" />
+                                    <separator string="Validación" />
+                                    <field name="validation_step" colspan="2" nolabel="1" attrs="{'readonly': [('state','not in',('elaborate', 'review', 'validate'))]}" />
+                                </group>
+                                <group>
+                                    <field name="date_review" attrs="{'readonly':[('state','not in',('elaborate','review'))]}" />
+                                    <field name="date_validate" groups="base.group_no_one,base.user_admin" />
+                                    <field name="type" invisible="1" />
+                                </group>
+                            </group>
+                        </page>
+                    </notebook>
+                </sheet>
+
+                <div class="oe_chatter">
+                    <field name="message_follower_ids" widget="mail_followers" />
+                    <field name="activity_ids" widget="mail_activity" />
+                    <field name="message_ids" widget="mail_thread" />
+                </div>
+
+            </form>
+        </field>
+    </record>
+
+    <menuitem name="Matrices"
+              id="menu_matrix_matrix"
+              parent="menu_opportunity_root"
+              sequence="5"
+              groups="base.group_no_one,mgmtsystem_opportunity.group_opportunity_onlyread,mgmtsystem_opportunity.group_opportunity_onlyread_printreport,mgmtsystem_opportunity.group_opportunity_user_secundario,mgmtsystem_opportunity.group_opportunity_write_printreport" />
+
+    <record model="ir.actions.act_window" id="matrix_matrix_risk_action">
+        <field name="name">Matrices de riesgo</field>
+        <field name="res_model">matrix.matrix</field>
+        <field name="view_mode">tree,form</field>
+        <field name="domain">[('type','=','risk'), ('state','!=','cancel')]</field>
+        <field name="context">{"default_type":'risk'}</field>
+    </record>
+
+    <menuitem name="Matrices de riesgo"
+              id="mitem_matrix_matrix_risk"
+              parent="menu_risk"
+              sequence="4"
+              action="matrix_matrix_risk_action"
+              groups="base.group_no_one,mgmtsystem_opportunity.group_opportunity_onlyread,mgmtsystem_opportunity.group_opportunity_onlyread_printreport,mgmtsystem_opportunity.group_opportunity_user_secundario,mgmtsystem_opportunity.group_opportunity_write_printreport" />
+
+    <!-- <menuitem id="mgmtsystem_risk" name="Matrices de riesgo" parent="hola_calidad.menu_plan_main" sequence="65" action="matrix_matrix_risk_action"/> -->
+
+    <record model="ir.actions.act_window" id="matrix_matrix_opportunity_action">
+        <field name="name">Matrices de oportunidades</field>
+        <field name="res_model">matrix.matrix</field>
+        <field name="view_mode">tree,form</field>
+        <field name="domain">[('type','=','opportunity'), ('state','!=','cancel')]</field>
+        <field name="context">{"default_type":'opportunity'}</field>
+    </record>
+
+    <menuitem name="Matrices de oportunidades"
+              id="mitem_matrix_matrix_opportunity"
+              parent="menu_opportunity"
+              sequence="4"
+              action="matrix_matrix_opportunity_action"
+              groups="base.group_no_one,mgmtsystem_opportunity.group_opportunity_onlyread,mgmtsystem_opportunity.group_opportunity_onlyread_printreport,mgmtsystem_opportunity.group_opportunity_user_secundario,mgmtsystem_opportunity.group_opportunity_write_printreport" />
+
+    <!-- <menuitem id="mgmtsystem_opportunity" name="Matrices de oportunidades" parent="hola_calidad.menu_plan_main" sequence="60" action="matrix_matrix_opportunity_action"/> -->
+</odoo>

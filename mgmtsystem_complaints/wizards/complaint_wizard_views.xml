@@ -1,0 +1,43 @@
+<odoo>
+    <data>
+
+        <record id="complaint_wizard_view_form" model="ir.ui.view">
+            <field name="name">complaint.wizard.report.view.form</field>
+            <field name="model">complaint.wizard.report</field>
+            <field name="arch" type="xml">
+                <form string="">
+                    <sheet>
+                        <group>
+                            <field name="date_init"/>
+                            <field name="date_end"/>
+                        </group>
+                        <span>
+                            Imprimir reporte de reclamos
+                        </span>
+                    </sheet>
+                    <footer>
+                        <button name="action_print" type="object" string="Descargar" class="oe_highlight" icon="fa-download"/>
+                    </footer>
+                </form>
+            </field>
+        </record>
+
+        <record id="action_report_complaint" model="ir.actions.act_window">
+            <field name="name">Reporte de reclamos</field>
+            <field name="type">ir.actions.act_window</field>
+            <field name="res_model">complaint.wizard.report</field>
+            <field name="view_mode">form</field>
+            <field name="view_id" ref="complaint_wizard_view_form"/>
+            <field name="target">new</field>
+            <field name="binding_type">report</field>
+        </record>
+
+
+        <menuitem id="complaint_report_menu"
+            name="Reporte de Reclamos"
+            action="action_report_complaint"
+            parent="mgmtsystem_complaints.menu_report"
+            sequence="10"/>
+
+    </data>
+</odoo>

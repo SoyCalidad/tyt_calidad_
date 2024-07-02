@@ -1,0 +1,136 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <!-- ONBOARDING STEPS -->
+
+    <template id="onboarding_comunication_plan_step">
+        <t t-call="base.onboarding_step">
+            <t t-set="title">Programa de comunicaciones</t>
+            <t t-set="description">Cree un programa de comunicaciones.</t>
+            <t t-set="done_icon" t-value="'fa-star'" />
+            <t t-set="btn_text">Crear</t>
+            <t t-set="done_text">Se ve bien!</t>
+            <t t-set="method" t-value="'action_open_comunication_plan'" />
+            <t t-set="model" t-value="'res.company'" />
+            <t t-set="state" t-value="state.get('comunication_plan_onboarding_state')" />
+        </t>
+    </template>
+
+    <template id="onboarding_comunication_comunication_step">
+        <t t-call="base.onboarding_step">
+            <t t-set="title">Plan de comunicaciones</t>
+            <t t-set="description">Cree un plan de comunicaciones.</t>
+            <t t-set="done_icon" t-value="'fa-star'" />
+            <t t-set="btn_text">Crear</t>
+            <t t-set="done_text">Se ve bien!</t>
+            <t t-set="method" t-value="'action_open_comunication_comunication'" />
+            <t t-set="model" t-value="'res.company'" />
+            <t t-set="state" t-value="state.get('comunication_comunication_onboarding_state')" />
+        </t>
+    </template>
+
+    <template id="onboarding_comunication_record_step">
+        <t t-call="base.onboarding_step">
+            <t t-set="title">Actas de reunión</t>
+            <t t-set="description">Cree un acta de reunión.</t>
+            <t t-set="done_icon" t-value="'fa-star'" />
+            <t t-set="btn_text">Crear</t>
+            <t t-set="done_text">Se ve bien!</t>
+            <t t-set="method" t-value="'action_open_comunication_record'" />
+            <t t-set="model" t-value="'res.company'" />
+            <t t-set="state" t-value="state.get('comunication_record_onboarding_state')" />
+        </t>
+    </template>
+
+
+    <!-- ONBOARDING PANELS -->
+    <template id="comunication_onboarding_panel" name="comunication.onboarding.panel">
+        <t t-call="base.onboarding_container">
+            <t t-set="classes" t-value="'o_onboarding_blue'"/>
+            <t t-set="bg_image" t-value="'/account/static/src/img/account_invoice_onboarding_bg.jpg'"/>
+            <t t-set="close_method" t-value="'action_close_comunication_onboarding'"/>
+            <t t-set="close_model" t-value="'res.company'"/>
+            <t t-set="text_completed">Felicitaciones! Ha completado todo.</t>
+            <t t-call="mgmtsystem_comunication.onboarding_comunication_plan_step" name="comunication_plan_step" />
+            <t t-call="mgmtsystem_comunication.onboarding_comunication_comunication_step" name="comunication_comunication_step" />
+            <t t-call="mgmtsystem_comunication.onboarding_comunication_record_step" name="comunication_record_step" />
+        </t>
+    </template>
+
+    <!-- Views -->
+
+    <record id="onboarding_comunication_plan_form" model="ir.ui.view">
+        <field name="name">comunication.plan.inherit.view.form</field>
+        <field name="model">comunication.plan</field>
+        <field name="inherit_id" ref="mgmtsystem_comunication.view_comunication_plan_form"/>
+        <field name="priority">1000</field>
+        <field name="mode">primary</field>
+        <field name="arch" type="xml">
+            <form position="inside">
+                <footer position="replace">
+                    <button name="action_save_onboarding_comunication_plan_step" class="btn btn-primary" type="object" string="Crear" />
+                    <button special="cancel" string="Cancelar" />
+                </footer>
+            </form>
+        </field>
+    </record>
+
+    <record id="onboarding_comunication_comunication_form" model="ir.ui.view">
+        <field name="name">comunication.plan.line.inherit.view.form</field>
+        <field name="model">comunication.plan.line</field>
+        <field name="inherit_id" ref="mgmtsystem_comunication.view_plan_line_form"/>
+        <field name="priority">1000</field>
+        <field name="mode">primary</field>
+        <field name="arch" type="xml">
+            <form position="inside">
+                <footer position="replace">
+                    <button name="action_save_onboarding_comunication_comunication_step" class="btn btn-primary" type="object" string="Crear" />
+                    <button special="cancel" string="Cancelar" />
+                </footer>
+            </form>
+        </field>
+    </record>
+
+    <record id="onboarding_comunication_record_form" model="ir.ui.view">
+        <field name="name">record.meeting.inherit.view.form</field>
+        <field name="model">record.meeting</field>
+        <field name="inherit_id" ref="mgmtsystem_comunication.view_record_meeting_form"/>
+        <field name="priority">1000</field>
+        <field name="mode">primary</field>
+        <field name="arch" type="xml">
+            <form position="inside">
+                <footer position="replace">
+                    <button name="action_save_onboarding_comunication_record_step" class="btn btn-primary" type="object" string="Crear" />
+                    <button special="cancel" string="Cancelar" />
+                </footer>
+            </form>
+        </field>
+    </record>
+
+    <record id="action_comunication_plan_configurator" model="ir.actions.act_window">
+        <field name="type">ir.actions.act_window</field>
+        <field name="name">Cree un programa de comunicaciones</field>
+        <field name="view_mode">form</field>
+        <field name="target">new</field>
+        <field name="res_model">comunication.plan</field>
+        <field name="view_id" ref="mgmtsystem_comunication.onboarding_comunication_plan_form"/>
+    </record>
+
+    <record id="action_comunication_comunication_configurator" model="ir.actions.act_window">
+        <field name="type">ir.actions.act_window</field>
+        <field name="name">Cree un plan de comunicaciones</field>
+        <field name="view_mode">form</field>
+        <field name="target">new</field>
+        <field name="res_model">comunication.plan.line</field>
+        <field name="view_id" ref="mgmtsystem_comunication.onboarding_comunication_comunication_form"/>
+    </record>
+
+    <record id="action_comunication_record_configurator" model="ir.actions.act_window">
+        <field name="type">ir.actions.act_window</field>
+        <field name="name">Cree un acta de reunión</field>
+        <field name="view_mode">form</field>
+        <field name="target">new</field>
+        <field name="res_model">record.meeting</field>
+        <field name="view_id" ref="mgmtsystem_comunication.onboarding_comunication_record_form"/>
+    </record>
+
+</odoo>

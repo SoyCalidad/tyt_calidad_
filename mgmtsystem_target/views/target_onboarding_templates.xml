@@ -1,0 +1,96 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+<!-- ONBOARDING STEPS -->
+
+    <template id="onboarding_target_target_step">
+        <t t-call="base.onboarding_step">
+            <t t-set="title">Objetivos</t>
+            <t t-set="description">Cree un objetivo.</t>
+            <t t-set="done_icon" t-value="'fa-star'"/>
+            <t t-set="btn_text">Crear</t>
+            <t t-set="done_text">Se ve bien!</t>
+            <t t-set="method" t-value="'action_open_target_target'"/>
+            <t t-set="model" t-value="'res.company'"/>
+            <t t-set="state" t-value="state.get('target_target_onboarding_state')"/>
+        </t>
+    </template>
+
+    <template id="onboarding_target_indicator_step">
+        <t t-call="base.onboarding_step">
+            <t t-set="title">Indicadores</t>
+            <t t-set="description">Cree un indicador.</t>
+            <t t-set="done_icon" t-value="'fa-star'"/>
+            <t t-set="btn_text">Crear</t>
+            <t t-set="done_text">Se ve bien!</t>
+            <t t-set="method" t-value="'action_open_target_indicator'"/>
+            <t t-set="model" t-value="'res.company'"/>
+            <t t-set="state" t-value="state.get('target_indicator_onboarding_state')"/>
+        </t>
+    </template>
+
+    <!-- ONBOARDING PANELS -->
+    <template id="target_onboarding_panel" name="target.onboarding.panel">
+        <t t-call="base.onboarding_container">
+            <t t-set="classes" t-value="'o_onboarding_blue'"/>
+            <t t-set="bg_image" t-value="'/account/static/src/img/account_invoice_onboarding_bg.jpg'"/>
+            <t t-set="close_method" t-value="'action_close_target_onboarding'"/>
+            <t t-set="close_model" t-value="'res.company'"/>
+            <t t-set="text_completed">Felicitaciones! Ha completado todo.</t>
+            <t t-call="mgmtsystem_target.onboarding_target_target_step" name="target_target_step"/>
+            <t t-call="mgmtsystem_target.onboarding_target_indicator_step" name="target_indicator_step"/>
+        </t>
+    </template>
+
+    <!-- Views -->
+
+    <record id="onboarding_target_target_form" model="ir.ui.view">
+        <field name="name">mgmtsystem.target.inherit.view.form</field>
+        <field name="model">mgmtsystem.target</field>
+        <field name="inherit_id" ref="mgmtsystem_target.target_view_form"/>
+        <field name="priority">1000</field>
+        <field name="mode">primary</field>
+        <field name="arch" type="xml">
+            <form position="inside">
+                <footer position="replace">
+                    <button name="action_save_onboarding_target_target_step" class="btn btn-primary" type="object" string="Crear"/>
+                    <button special="cancel" string="Cancelar"/>
+                </footer>
+            </form>
+        </field>
+    </record>
+
+    <record id="onboarding_target_indicator_form" model="ir.ui.view">
+        <field name="name">mgmtsystem.indicator.inherit.view.form</field>
+        <field name="model">mgmtsystem.indicator</field>
+        <field name="inherit_id" ref="mgmtsystem_target.indicator_view_form"/>
+        <field name="priority">1000</field>
+        <field name="mode">primary</field>
+        <field name="arch" type="xml">
+            <form position="inside">
+                <footer position="replace">
+                    <button name="action_save_onboarding_target_indicator_step" class="btn btn-primary" type="object" string="Crear"/>
+                    <button special="cancel" string="Cancelar"/>
+                </footer>
+            </form>
+        </field>
+    </record>
+
+    <record id="action_target_target_configurator" model="ir.actions.act_window">
+        <field name="type">ir.actions.act_window</field>
+        <field name="name">Cree un objetivo</field>
+        <field name="view_mode">form</field>
+        <field name="target">new</field>
+        <field name="res_model">mgmtsystem.target</field>
+        <field name="view_id" ref="mgmtsystem_target.onboarding_target_target_form"/>
+    </record>
+
+    <record id="action_target_indicator_configurator" model="ir.actions.act_window">
+        <field name="type">ir.actions.act_window</field>
+        <field name="name">Cree un indicador</field>
+        <field name="view_mode">form</field>
+        <field name="target">new</field>
+        <field name="res_model">mgmtsystem.indicator</field>
+        <field name="view_id" ref="mgmtsystem_target.onboarding_target_indicator_form"/>
+    </record>
+
+</odoo>

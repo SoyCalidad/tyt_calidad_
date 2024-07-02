@@ -1,0 +1,36 @@
+<odoo>
+    <data>
+
+        <record id="context_policy_view_form" model="ir.ui.view">
+            <field name="name">mgmtsystem.context.policy.view.form</field>
+            <field name="model">mgmtsystem.context.policy</field>
+            <field name="inherit_id" ref="mgmtsystem_context.context_policy_view_form" />
+            <field name="arch" type="xml">
+                <xpath expr="//page[1]" position="inside">
+                    <field name="target_ids" invisible="1" />
+                </xpath>
+            </field>
+        </record>
+
+        <record id="context_pest_factor_view_form" model="ir.ui.view">
+            <field name="name">pest.factor.view.form</field>
+            <field name="model">pest.factor</field>
+            <field name="inherit_id" ref="mgmtsystem_context.pest_factor_view_form" />
+            <field name="arch" type="xml">
+                <notebook position="inside">
+                    <page name="target" string="Objetivos">
+                        <separator string="Objetivos" />
+                        <field name="target_ids">
+                            <tree>
+                                <field name="code" />
+                                <field name="name" />
+                                <field name="description" style="white-space:break-spaces;max-width:200px;"/>
+                            </tree>
+                        </field>
+                    </page>
+                </notebook>
+            </field>
+        </record>
+
+    </data>
+</odoo>

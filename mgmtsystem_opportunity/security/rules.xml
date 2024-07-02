@@ -1,0 +1,38 @@
+<?xml version='1.0' encoding='utf-8'?>
+<odoo>
+    <data>
+
+        <record model="ir.rule" id="opp_owner_document">
+            <field name="name">Usuario secundario: Lectura Edición de documentos propios</field>
+            <field name="model_id" ref="model_matrix_block_line"/>
+            <field name="groups" eval="[(4, ref('mgmtsystem_opportunity.group_opportunity_user_secundario'))]"/>
+            <field name="perm_read" eval="1" />
+            <field name="perm_write" eval="1" />
+            <field name="perm_create" eval="1" />
+            <field name="perm_unlink" eval="1" />
+            <field name="domain_force">[('user_id','in',[user.id])]</field>
+        </record>
+
+        <record model="ir.rule" id="opp_noowner_document">
+            <field name="name">Usuario secundario: Documentos ajenos</field>
+            <field name="model_id" ref="model_matrix_block_line"/>
+            <field name="groups" eval="[(4, ref('mgmtsystem_opportunity.group_opportunity_user_secundario'))]"/>
+            <field name="perm_read" eval="1" />
+            <field name="perm_write" eval="0" />
+            <field name="perm_create" eval="0" />
+            <field name="perm_unlink" eval="0" />
+            <field name="domain_force">[('user_id','not in',[user.id])]</field>
+        </record>
+      
+        <record model="ir.rule" id="opp_all_document">
+            <field name="name">Permisos Totales</field>
+            <field name="model_id" ref="model_matrix_block_line"/>
+            <field name="groups" eval="[(4, ref('mgmtsystem_opportunity.group_opportunity_write_printreport'))]"/>
+            <field name="perm_read" eval="1" />
+            <field name="perm_write" eval="1" />
+            <field name="perm_create" eval="1" />
+            <field name="perm_unlink" eval="1" />
+        </record>
+
+    </data>
+</odoo>

@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<templates>
+    <t t-extend="org_chart_employee.org_chart_template">
+        <t t-jquery="div" t-operation="after">
+        </t>
+    </t>
+</templates>

@@ -1,0 +1,50 @@
+<odoo>
+    <data>
+
+        <!-- mgmt.categ.dummy tree view -->
+        <record id="categ_dummy_view_tree" model="ir.ui.view">
+            <field name="name">mgmt.categ.dummy.view.tree</field>
+            <field name="model">mgmt.categ.dummy</field>
+            <field name="arch" type="xml">
+                <tree>
+                    <!-- Add your fields here -->
+                    <field name="name"/>
+                </tree>
+            </field>
+        </record>
+
+        <record id="process_report_categ_view_form" model="ir.ui.view">
+            <field name="name">mgmt.process.report.wizard.view.form</field>
+            <field name="model">mgmt.process.report.wizard</field>
+            <field name="arch" type="xml">
+                <form string="">
+                    <p>
+                        Descargue el mapa de procesos
+                    </p>
+                    <footer>
+                        <button name="action_print" type="object" string="Descargar" class="oe_highlight" icon="fa-download"/>
+                    </footer>
+                </form>
+            </field>
+        </record>
+
+        <record id="action_process_report_categ" model="ir.actions.act_window">
+            <field name="name">Reporte de procesos</field>
+            <field name="type">ir.actions.act_window</field>
+            <field name="res_model">mgmt.process.report.wizard</field>
+            <field name="view_mode">form</field>
+            <field name="view_id" ref="process_report_categ_view_form"/>
+            <field name="target">new</field>
+            <field name="binding_type">report</field>
+        </record>
+
+
+        <menuitem id="process_report_menu"
+            name="Mapa de procesos"
+            action="action_process_report_categ"
+            parent="process_report_root_menu"
+            sequence="10"/>
+
+
+    </data>
+</odoo>

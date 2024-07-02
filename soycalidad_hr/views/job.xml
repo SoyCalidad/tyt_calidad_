@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+
+    <record id="view_hr_job_form_inherit" model="ir.ui.view">
+        <field name="name">hr.job.view.form.inherit</field>
+        <field name="model">hr.job</field>
+        <field name="inherit_id" ref="hr_job_functions.view_hr_job_form" />
+        <field name="arch" type="xml">
+            <page id="skills" position="replace">
+                <page id="skills" string="Habilidades">
+                    <group attrs="{'readonly':[('validation_state','in', ('validate_ok'))]}">
+                        <field name="generic_skills" attrs="{'readonly':[('validation_state','in', ('validate_ok'))]}">
+                            <tree>
+                                <field name="name" style="max-width:200px;" />
+                                <field name="main_skill_id" />
+                                <field name="relevance" />
+                            </tree>
+                        </field>
+                        <field name="workteam_skills" attrs="{'readonly':[('validation_state','in', ('validate_ok'))]}">
+                            <tree>
+                                <field name="name" style="max-width:200px;" />
+                                <field name="main_skill_id" />
+                                <field name="relevance" />
+                            </tree>
+                        </field>
+                        <field name="personal_skills" attrs="{'readonly':[('validation_state','in', ('validate_ok'))]}">
+                            <tree>
+                                <field name="name" style="max-width:200px;" />
+                                <field name="main_skill_id" />
+                                <field name="relevance" />
+                            </tree>
+                        </field>
+                        <field name="strategic_skills" attrs="{'readonly':[('validation_state','in', ('validate_ok'))]}">
+                            <tree>
+                                <field name="name" style="max-width:200px;" />
+                                <field name="main_skill_id" />
+                                <field name="relevance" />
+                            </tree>
+                        </field>
+                    </group>
+                </page>
+            </page>
+        </field>
+    </record>
+
+</odoo>

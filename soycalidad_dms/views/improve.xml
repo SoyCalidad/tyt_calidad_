@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <record id="soycalidad_improve_plan_view_form" model="ir.ui.view">
+        <field name="name">soycalidad.improve.view.form</field>
+        <field name="model">soycalidad.improve_plan</field>
+        <field name="inherit_id" ref="soycalidad_improve.improve_plan_view_form"/>
+        <field name="arch" type="xml">
+            <div class="oe_button_box" position="inside">
+                <button name="action_document_ids" type="object" class="oe_stat_button" icon="fa-file-text-o">
+                    <field string="Documentos" name="documents_count" widget="statinfo"/>
+                </button>
+            </div>
+            <notebook position="inside">
+                <page name="dms_document_ids" string="Documentos anexos">
+                    <field name="dms_document_ids" mode="kanban"></field>
+                </page>
+            </notebook>
+        </field>
+    </record>
+
+    <record id="soycalidad_change_request_inherit_view_form" model="ir.ui.view">
+        <field name="name">soycalidad.change_request_inherit.view.form</field>
+        <field name="model">soycalidad.change_request</field>
+        <field name="inherit_id" ref="soycalidad_improve.soycalidad_change_request_view_form"/>
+        <field name="arch" type="xml">
+            <div class="oe_button_box" position="inside">
+                <button name="action_document_ids" type="object" class="oe_stat_button" icon="fa-file-text-o">
+                    <field string="Documentos" name="documents_count" widget="statinfo"/>
+                </button>
+            </div>
+            <notebook position="inside">
+                <page name="dms_document_ids" string="Documentos anexos">
+                    <field name="dms_document_ids" mode="kanban"></field>
+                </page>
+            </notebook>
+        </field>
+    </record>
+
+
+</odoo>

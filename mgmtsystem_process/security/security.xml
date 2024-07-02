@@ -1,0 +1,36 @@
+<?xml version="1.0"?>
+<odoo>
+    <data>
+        <record id="process_management" model="ir.module.category">
+            <field name="name">Procesos</field>
+            <field name="description">Accesos para módulo procesos</field>
+            <field name="parent_id" ref="hola_calidad.module_mgmt_management" />
+            <field name="sequence">25</field>
+        </record>
+
+        <record id="group_process_readonly" model="res.groups">
+            <field name="name">Procesos: Solo lectura</field>
+            <field name="implied_ids" eval="[(4, ref('base.group_user'))]" />
+            <field name="category_id" ref="mgmtsystem_process.process_management"/>
+        </record>
+
+        <record id="group_process_readonly_printreport" model="res.groups">
+            <field name="name">Procesos: Lectura e impresión</field>
+            <field name="implied_ids" eval="[(4, ref('mgmtsystem_process.group_process_readonly'))]" />
+            <field name="category_id" ref="mgmtsystem_process.process_management"/>
+        </record>
+
+        <record id="group_process_owner" model="res.groups">
+            <field name="name">Procesos: Lectura Edición de documentos propios</field>
+            <field name="implied_ids" eval="[(4, ref('mgmtsystem_process.group_process_readonly_printreport'))]" />
+            <field name="category_id" ref="mgmtsystem_process.process_management"/>
+        </record>
+
+        <record id="group_process_all" model="res.groups">
+            <field name="name">Procesos: Lectura y edición</field>
+            <field name="implied_ids" eval="[(4, ref('mgmtsystem_process.group_process_owner'))]" />
+            <field name="category_id" ref="mgmtsystem_process.process_management"/>
+        </record>
+
+    </data>
+</odoo>

@@ -1,0 +1,70 @@
+<odoo>
+
+	<record model="ir.actions.act_window" id="show_action_ncs_action">
+		<field name="name">No conformidades</field>
+		<field name="res_model">mgmtsystem.nonconformity</field>
+		<field name="view_mode">kanban,form,tree</field>
+		<field name="context">{"search_default_action_ids": active_id}</field>
+		<field name="search_view_id" ref="view_mgmtsystem_nonconformity_filter" />
+	</record>
+
+	<!-- Actions: add link to NCs -->
+	<record id="view_mgmtsystem_action_form" model="ir.ui.view">
+		<field name="name">mgmtsystem.action.form</field>
+		<field name="model">mgmtsystem.action</field>
+		<field name="inherit_id" ref="mgmtsystem_action.view_mgmtsystem_action_form" />
+		<field name="arch" type="xml">
+			<xpath expr="//div[@name='button_box']" position="inside">
+				<button type="action"
+				        name="%(show_action_ncs_action)d"
+				        class="oe_stat_button"
+				        icon="fa-file"
+				        attrs="{'invisible': [('nonconformity_count','=',0)]}">
+					<field name="nonconformity_count" widget="statinfo" string="No conformidades" />
+				</button>
+			</xpath>
+			<field name="process_id" position="after">
+				<field name="approving_authority_id" />
+			</field>
+			<field name="description" position="after">
+				<separator string="No conformidades relacionadas" colspan="4" />
+				<field name="nonconformity_ids" colspan="4" nolabel="1" attrs="{'invisible':[('nonconformity_ids','=',False)]}" />
+			</field>
+		</field>
+	</record>
+
+	<record id="view_audit_report_form" model="ir.ui.view">
+		<field name="name">audit.report.view.form.inherit</field>
+		<field name="model">audit.report</field>
+		<field name="inherit_id" ref="mgmtsystem_audit.view_audit_report_form" />
+		<field name="arch" type="xml">
+			<field name="line_ids" position="before">
+				<field name="datetime_" invisible="1" />
+			</field>
+			<field name="line_ids" position="replace">
+				<field name="line_ids" attrs="{'readonly': [('state','not in',('draft'))] }" context="{'default_datetime': datetime_}">
+					<tree>
+						<field name="name" />
+						<field name="employee_id" />
+						<field name="nc_id" />
+						<field name="datetime" />
+						<field name="found" />
+						<field name="image_attached" string="Adjuntos" />
+					</tree>
+				</field>
+			</field>
+		</field>
+	</record>
+
+	<record id="report_line_view_form_inherit" model="ir.ui.view">
+		<field name="name">report.line.view.form.inherit</field>
+		<field name="model">report.line</field>
+		<field name="inherit_id" ref="mgmtsystem_audit.report_line_view_form" />
+		<field name="arch" type="xml">
+			<field name="datetime" position="after">
+				<field name="nc_id" />
+			</field>
+		</field>
+	</record>
+
+</odoo>

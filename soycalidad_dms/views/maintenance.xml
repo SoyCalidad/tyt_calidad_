@@ -1,0 +1,88 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <record id="maintenance_plan_view_form" model="ir.ui.view">
+        <field name="name">mgmtsystem.maintenance.plan.view.form</field>
+        <field name="model">mgmtsystem.maintenance.plan</field>
+        <field name="inherit_id" ref="mgmtsystem_infrastructure.view_mgmtsystem_maintenance_plan_form"/>
+        <field name="arch" type="xml">
+            <div class="oe_button_box" position="inside">
+                <button name="action_document_ids" type="object" class="oe_stat_button" icon="fa-file-text-o">
+                    <field string="Documentos" name="documents_count" widget="statinfo"/>
+                </button>
+            </div>
+            <notebook position="inside">
+                <page name="dms_document_ids" string="Documentos">
+                    <field name="dms_document_ids" mode="kanban"></field>
+                </page>
+            </notebook>
+        </field>
+    </record>
+    <record id="maintenance_maintenance_view_form" model="ir.ui.view">
+        <field name="name">mgmtsystem.maintenance.line.view.form</field>
+        <field name="model">mgmtsystem.maintenance</field>
+        <field name="inherit_id" ref="mgmtsystem_infrastructure.view_mgmtsystem_maintenance_form"/>
+        <field name="arch" type="xml">
+            <div class="oe_button_box" position="inside">
+                <button name="action_document_ids" type="object" class="oe_stat_button" icon="fa-file-text-o">
+                    <field string="Documentos" name="documents_count" widget="statinfo"/>
+                </button>
+            </div>
+            <notebook position="inside">
+                <page name="dms_document_ids" string="Documentos">
+                    <field name="dms_document_ids" mode="kanban"/>
+                </page>
+            </notebook>
+        </field>
+    </record>
+    <record id="calibration_plan_view_form" model="ir.ui.view">
+        <field name="name">mgmtsystem.calibration.plan.view.form</field>
+        <field name="model">mgmtsystem.calibration.plan</field>
+        <field name="inherit_id" ref="mgmtsystem_infrastructure.view_mgmtsystem_calibration_plan_form"/>
+        <field name="arch" type="xml">
+            <div class="oe_button_box" position="inside">
+                <button name="action_document_ids" type="object" class="oe_stat_button" icon="fa-file-text-o">
+                    <field string="Documentos" name="documents_count" widget="statinfo"/>
+                </button>
+            </div>
+            <notebook position="inside">
+                <page name="dms_document_ids" string="Documentos">
+                    <field name="dms_document_ids" mode="kanban"></field>
+                </page>
+            </notebook>
+        </field>
+    </record>
+    <record id="calibration_calibration_view_form" model="ir.ui.view">
+        <field name="name">mgmtsystem.calibration.line.view.form</field>
+        <field name="model">mgmtsystem.calibration</field>
+        <field name="inherit_id" ref="mgmtsystem_infrastructure.view_mgmtsystem_calibration_form"/>
+        <field name="arch" type="xml">
+            <div class="oe_button_box" position="inside">
+                <button name="action_document_ids" type="object" class="oe_stat_button" icon="fa-file-text-o">
+                    <field string="Documentos" name="documents_count" widget="statinfo"/>
+                </button>
+            </div>
+            <notebook position="inside">
+                <page name="dms_document_ids" string="Documentos">
+                    <field name="dms_document_ids" mode="kanban"/>
+                </page>
+            </notebook>
+        </field>
+    </record>
+    <record id="hr_equipment_view_form_inherit" model="ir.ui.view">
+        <field name="name">maintenance.equipment.view.form.inherit</field>
+        <field name="model">maintenance.equipment</field>
+        <field name="inherit_id" ref="maintenance.hr_equipment_view_form"/>
+        <field name="arch" type="xml">
+            <div class="oe_button_box" position="inside">
+                <button name="action_document_ids" type="object" class="oe_stat_button" icon="fa-file-text-o">
+                    <field string="Documentos" name="documents_count" widget="statinfo"/>
+                </button>
+            </div>
+            <notebook position="inside">
+                <page name="dms_document_ids" string="Documentos">
+                    <field name="dms_document_ids" mode="kanban"/>
+                </page>
+            </notebook>
+        </field>
+    </record>
+</odoo>

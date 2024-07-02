@@ -1,0 +1,43 @@
+<odoo>
+    <data>
+
+        <record id="report_context_stakeholder_view" model="ir.ui.view">
+            <field name="name">Matriz de stakeholders</field>
+            <field name="model">wizard.stakeholder.report</field>
+            <field name="arch" type="xml">
+                <form>
+                    <group>
+                        <field name="stakeholder_matrix_id"/>
+                    </group>
+                    <p>
+                        Escoja una matriz para Imprimir
+                    </p>
+                    <footer>
+                        <button name="action_print" type="object" string="Descargar" class="oe_highlight" icon="fa-download"/>
+                    </footer>
+                </form>
+            </field>
+        </record>
+
+
+        <record id="action_report_context_stakeholder" model="ir.actions.act_window">
+            <field name="name">Matriz de stakeholders</field>
+            <field name="type">ir.actions.act_window</field>
+            <field name="res_model">wizard.stakeholder.report</field>            
+            <field name="view_mode">form</field>
+            <field name="view_id" ref="report_context_stakeholder_view"/>
+            <field name="target">new</field>
+            <field name="binding_model_id" ref="account.model_account_account" />
+            <field name="binding_type">report</field>
+        </record>
+
+        <menuitem
+        id="stakeholder_report_menu"
+        name="Reporte de stakeholder"
+        action="action_report_context_stakeholder"
+        parent="context_report_menu"
+        sequence="10"/>
+
+
+    </data>
+</odoo>

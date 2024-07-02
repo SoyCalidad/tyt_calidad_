@@ -1,0 +1,36 @@
+<?xml version="1.0"?>
+<odoo>
+
+    <!-- Mail template are declared in a NOUPDATE block
+         so users can freely customize/delete them -->
+    <data noupdate="1">
+        <!--Email template -->
+        <record id="email_template_mgmtsystem_target_indicator_measurement_reminder" model="mail.template">
+            <field name="name">Indicadores: Enviar por correo electrónico</field>
+            <field name="model_id" ref="mgmtsystem_target.model_mgmtsystem_target" />
+            <field name="email_from">"${object.company_id.name | safe}" &lt;${(object.company_id.email or user.email) | safe}&gt;</field>
+            <field name="email_to">${object.user_id.login}</field>
+            <field name="subject">${object.company_id.name} Medición de indicador (Ref ${object.name or 'n/a'})</field>
+            <field name="body_html" type="html">
+                <div style="margin: 0px; padding: 0px;">
+                    <p style="margin: 0px; padding: 0px; font-size: 13px;">
+                        Estimado/a
+                        % if object.user_id:
+                            ${object.user_id.name}
+                        % endif
+                        <br />
+                        <br />
+                        Medición del indicador para el objetivo ${object.name}:
+                        <br />
+                        <br />
+                    </p>
+                </div>
+            </field>
+            <field name="report_name">Evaluación de seguimiento_${(object.name or '').replace('/','_')}</field>
+            <field name="lang">${object.user_id.lang}</field>
+            <!--<field name="user_signature" eval="False" />-->
+            <field name="auto_delete" eval="True" />
+        </record>
+    </data>
+
+</odoo>

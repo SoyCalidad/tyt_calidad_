@@ -1,0 +1,46 @@
+<odoo>
+
+    <menuitem name="Procesos"
+        id="menu_process_root"
+        web_icon="mgmtsystem_process,static/description/icon.png"
+        sequence="-2" 
+        groups="mgmtsystem_process.group_process_all,mgmtsystem_process.group_process_readonly,mgmtsystem_process.group_process_readonly_printreport,mgmtsystem_process.group_process_owner,base.group_no_one"/>
+
+    <menuitem
+        id="mgmt_process_process"
+        name="Procesos"
+        parent="menu_process_root"
+        sequence="10" 
+        groups= "base.group_no_one,mgmtsystem_process.group_process_readonly,mgmtsystem_process.group_process_readonly_printreport,mgmtsystem_process.group_process_owner,mgmtsystem_process.group_process_all"/>
+
+    <!--Lista maestra en docmentary_control_views.xml: sequence 20-->
+
+    <menuitem
+        id="mgmt_process_documentation"
+        name="Documentación"
+        parent="menu_process_root"
+        sequence="30" 
+        groups= "base.group_no_one,mgmtsystem_process.group_process_readonly,mgmtsystem_process.group_process_readonly_printreport,mgmtsystem_process.group_process_owner,mgmtsystem_process.group_process_all"/>
+
+    <menuitem
+        id="mgmt_process_manual_quality"
+        name="Manual de calidad"
+        parent="menu_process_root"
+        sequence="40" 
+        groups= "mgmtsystem_process.group_process_readonly,base.group_no_one,mgmtsystem_process.group_process_readonly_printreport,mgmtsystem_process.group_process_owner,mgmtsystem_process.group_process_all"/>
+
+    <menuitem
+        id="mgmt_process_polities"
+        name="Politica"
+        parent="menu_process_root"
+        sequence="40" 
+        groups= "base.group_no_one,mgmtsystem_process.group_process_readonly,mgmtsystem_process.group_process_readonly_printreport,mgmtsystem_process.group_process_owner,mgmtsystem_process.group_process_all"/>
+
+    <menuitem
+        id="menu_nonconformity_report"
+        name="Reportes"
+        parent="menu_process_root"
+        sequence="50" 
+        groups= "base.group_no_one,mgmtsystem_process.group_process_readonly_printreport,mgmtsystem_process.group_process_owner,mgmtsystem_process.group_process_all"/>
+
+</odoo>

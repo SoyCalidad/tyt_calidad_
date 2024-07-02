@@ -1,0 +1,201 @@
+<odoo>
+    <data>
+
+        <record id="target_source_view_form" model="ir.ui.view">
+            <field name="name">target.source.report.view.form</field>
+            <field name="model">target.source.report</field>
+            <field name="arch" type="xml">
+                <form string="">
+                    <sheet>
+                        <group>
+                            <field name="target_ids" />
+                        </group>
+                    </sheet>
+                    <footer>
+                        <button string="Descargar" name="action_print" type="object" class="btn-primary" />
+                    </footer>
+                </form>
+            </field>
+        </record>
+
+        <record id="target_source_action" model="ir.actions.act_window">
+            <field name="name">Objetivos</field>
+            <field name="res_model">target.source.report</field>
+            <field name="view_mode">form</field>
+            <field name="target">new</field>
+            <field name="domain">[]</field>
+            <field name="context">{}</field>
+        </record>
+
+        <menuitem id="target_source_report_menu"
+                  name="Listado de objetivos e indicadores"
+                  action="target_source_action"
+                  parent="report_root_menu"
+                  sequence="10" />
+
+        <report id="action_report_target_source1"
+                model="mgmtsystem.target"
+                string="Objetivos"
+                report_type="qweb-pdf"
+                paperformat="hola_calidad.landscape"
+                name="mgmtsystem_target.target_source_report"
+                file="mgmtsystem_target.target_source_report"
+                groups="base.group_no_one,mgmtsystem_target.group_target_user_interno,mgmtsystem_target.group_target_write_printreport,mgmtsystem_target.group_target_all" />
+
+        <template id="target_source_report">
+            <t t-call="web.html_container">
+                <t t-set="company" t-value="res_company" />
+                <div class="header">
+                    <style type="text/css">
+                        .tg  {border-collapse:collapse;border-spacing:0;margin:0px auto;width:100%;}
+                        .tg td{border-color:#c0c0c0;border-style:solid;border-width:1px;font-family: Palatino, Palatino Linotype, Palatino LT STD, Book Antiqua, Georgia, serif;font-size:14px;
+                        overflow:hidden;padding:10px 5px;word-break:normal;text-align:middle;align:center;}
+                        .tg th{border-color:#c0c0c0;border-style:solid;border-width:1px;font-family: Palatino, Palatino Linotype, Palatino LT STD, Book Antiqua, Georgia, serif;font-size:14px;
+                        font-weight:normal;overflow:hidden;padding:10px 5px;word-break:normal;}
+                        .tg .tg-9wq8{border-color:inherit;text-align:center;vertical-align:middle}
+                        .tg .tg-1wig{border-color:inherit;text-align:center;vertical-align:middle;font-size:16px;font-weight:bold;}
+                        .tg .tg-0lax{border-color:inherit;text-align:center;vertical-align:middle;font-size:12px;}
+                    </style>
+                    <table class="tg">
+                        <tbody>
+                            <tr>
+                                <td class="tg-1wig" rowspan="2" style="width:15%">
+                                    <img t-if="company.logo" t-att-src="'data:image/png;base64,%s' % to_text(company.logo)" style="max-width:100px;max-height:100px;vertical-align:middle;" />
+                                </td>
+                                <td class="tg-1wig" rowspan="2" style="width:70%;">
+                                    <span style="font-size:18px;font-weight:bold;">LISTADO DE OBJETIVOS E INDICADORES</span>
+                                </td>
+                                <td class="tg-0lax" style="width:15%">
+                                    <span>Código:</span>
+                                    <br />
+                                    <span t-esc="code" />
+                                </td>
+                            </tr>
+                            <tr>
+                                <td class="tg-0lax">
+                                    <span>Fecha de impresión:</span>
+                                    <br />
+                                    <span t-esc="context_timestamp(datetime.datetime.now()).strftime('%Y-%m-%d %H:%M')" />
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+                <t t-call="web.external_layout">
+                    <div class="page">
+                        <style type="text/css">
+                            .tg  {border-collapse:collapse;border-spacing:0;border-color:#c0c0c0;align:center;width:100%}
+                            .tg td{font-family: Palatino, Palatino Linotype, Palatino LT STD, Book Antiqua, Georgia, serif;font-size:14px;padding:10px 5px;border-style:solid;border-width:0px;overflow:hidden;word-break:normal;border-color:#c0c0c0;color:#333;}
+                            .tg th{font-family: Palatino, Palatino Linotype, Palatino LT STD, Book Antiqua, Georgia, serif;font-size:14px;font-weight:normal;padding:10px 5px;border-style:solid;border-width:0px;overflow:hidden;word-break:normal;border-color:#c0c0c0;color:#333;background-color:#f0f0f0;}
+                            .tg .tg-cly1{text-align:left;vertical-align:middle}
+                            .tg .tg-wa1i{font-weight:bold;text-align:center;vertical-align:middle}
+                            .tg .tg-sx6j{font-weight:bold;text-align:center;vertical-align:middle}
+                            .tg .tg-0lax{text-align:left;vertical-align:top}
+                        </style>
+                        <center>
+                            <table id="tg-gUttz" class="tg">
+                                <tr>
+                                    <th class="tg-sx6j">PROCESO</th>
+                                    <th class="tg-sx6j">OBJETIVO</th>
+                                    <th class="tg-sx6j">DESCRIPCIÓN</th>
+                                    <th class="tg-sx6j">INDICADOR</th>
+                                    <th class="tg-sx6j">FORMULA</th>
+                                    <th class="tg-sx6j">META</th>
+                                    <th class="tg-sx6j">ACCIÓN</th>
+                                    <th class="tg-sx6j">FRECUENCIA DE MEDICIÓN</th>
+                                    <th class="tg-sx6j">FECHA DE INICIO</th>
+                                    <th class="tg-sx6j">FECHA FIN</th>
+                                    <th class="tg-sx6j">RESPONSABLE</th>
+                                </tr>
+                                <t t-foreach="docs" t-as="e">
+                                    <t t-set="indicator_len" t-value="len(e.indicator_ids)" />
+                                    <tr>
+                                        <td class="tg-cly1">
+                                            <span t-field="e.process_id" />
+                                        </td>
+                                        <td class="tg-cly1" style="max-width:200px;overflow-wrap: break-word;">
+                                            <span t-field="e.name" />
+                                        </td>
+                                        <td class="tg-cly1">
+                                            <span t-field="e.description" />
+                                        </td>
+                                        <td class="tg-cly1">
+                                            <t t-foreach="e.indicator_ids" t-as="i">
+                                                <div>
+                                                    <span t-field="i.name" />
+                                                </div>
+                                            </t>
+                                        </td>
+                                        <td class="tg-cly1">
+                                            <t t-foreach="e.indicator_ids" t-as="i">
+                                                <div>
+                                                    <span t-field="i.formula" />
+                                                </div>
+                                            </t>
+                                        </td>
+                                        <td class="tg-cly1">
+                                            <t t-foreach="e.indicator_ids" t-as="i">
+                                                <div>
+                                                    <span t-field="i.goal_id" />
+                                                </div>
+                                            </t>
+                                        </td>
+                                        <td class="tg-cly1">
+                                            <t t-foreach="e.indicator_ids" t-as="i">
+                                                <div>
+                                                    <span t-field="i.action_id" />
+                                                </div>
+                                            </t>
+                                        </td>
+                                        <td class="tg-cly1">
+                                            <t t-foreach="e.indicator_ids" t-as="i">
+                                                <div>
+                                                    <span t-field="i.measurement_frequency" />
+                                                </div>
+                                            </t>
+                                        </td>
+                                        <td class="tg-cly1">
+                                            <t t-foreach="e.indicator_ids" t-as="i">
+                                                <div>
+                                                    <span t-field="i.start_date" />
+                                                </div>
+                                            </t>
+                                        </td>
+                                        <td class="tg-cly1">
+                                            <t t-foreach="e.indicator_ids" t-as="i">
+                                                <div>
+                                                    <span t-field="i.term_date" />
+                                                </div>
+                                            </t>
+                                        </td>
+                                        <td class="tg-cly1">
+                                            <t t-foreach="e.indicator_ids" t-as="i">
+                                                <div>
+                                                    <span t-field="i.user_id" />
+                                                </div>
+                                            </t>
+                                        </td>
+                                    </tr>
+                                </t>
+                            </table>
+                        </center>
+                    </div>
+                    <div class="footer" style="border-top: 1px solid black;font-size: 8px;">
+                        <div class="text-center" style="border-top: 1px solid black;font-size: 10px;text-align:center;">
+                            ©
+                            <span t-field="company.name" />
+                            . All Rights Reserved.
+                            <br />
+                            PROHIBIDA SU REPRODUCCIÓN SIN AUTORIZACIÓN EXPRESA DE LA DIRECCIÓN.
+                            <br />
+                            CUALQUIER COPIA IMPRESA NO CONTROLADA. DEBE SER ROTULADA COMO "COPIA NO CONTROLADA".
+                            <br />
+                            CONSULTE VERSIÓN ELECTRÓNICA
+                        </div>
+                    </div>
+                </t>
+            </t>
+        </template>
+
+    </data>
+</odoo>

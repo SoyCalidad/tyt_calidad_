@@ -1,0 +1,192 @@
+<odoo>
+    <data>
+        <record model="ir.ui.view" id="view_document_file_kanban_article_document">
+            <field name="name">view.document.file.kanban.legal.article</field>
+            <field name="model">legal.article.document</field>
+            <field name="arch" type="xml">
+                <kanban>
+                    <field name="ir_attachment_id" />
+                    <field name="mimetype" />
+                    <field name="type" />
+                    <field name="name" />
+                    <field name="priority" />
+                    <templates>
+                        <t t-name="kanban-box">
+                            <div class="oe_kanban_global_click">
+                                <div class="oe_kanban_vignette">
+                                    <div class="oe_attachment">
+                                        <div class="row">
+                                            <div class="col-xs-4 o_kanban_primary_left" t-if="record.type.raw_value == 'binary'">
+                                                <a t-attf-href="/web/content/#{record.ir_attachment_id.raw_value}?download=1">
+                                                    <t t-set="webimage" t-value="new RegExp('image.*(gif|jpeg|jpg|png)').test(record.mimetype.value)" />
+                                                    <div t-if="!webimage" class="o_image" t-att-data-mimetype="record.mimetype.value" />
+                                                    <div t-if="webimage" class="o_attachment_image">
+                                                        <img t-attf-src="/web/image/#{record.ir_attachment_id.raw_value}?download=1" />
+                                                    </div>
+                                                </a>
+                                            </div>
+                                            <div class="col-xs-8">
+                                                <strong>
+                                                    <field name="name" />
+                                                </strong>
+                                                <br />
+                                                <div class="mt8">
+                                                    <field name="priority" widget="priority" />
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </t>
+                    </templates>
+                </kanban>
+            </field>
+        </record>
+
+        <record id="view_document_form" model="ir.ui.view">
+            <field name="name">legal.article.document.form</field>
+            <field name="model">legal.article.document</field>
+            <field name="inherit_id" ref="base.view_attachment_form" />
+            <field name="mode">primary</field>
+            <field name="arch" type="xml">
+                <xpath expr="//field[@name='mimetype']" position="after">
+                    <field name="priority" widget="priority" />
+                </xpath>
+            </field>
+        </record>
+
+        <record id="view_legal_legal_tree" model="ir.ui.view">
+            <field name="name">legal.legal.tree</field>
+            <field name="model">legal.legal</field>
+            <field name="arch" type="xml">
+                <tree string="Requisitos legales">
+                    <field name="name" />
+                    <field name="type_id" />
+                    <field name="entity_id" />
+                    <field name="date_release" />
+                    <field name="user_id" />
+                    <field name="state" />
+                </tree>
+            </field>
+        </record>
+
+        <record id="view_legal_legal_form" model="ir.ui.view">
+            <field name="name">legal.legal.form</field>
+            <field name="model">legal.legal</field>
+            <field name="arch" type="xml">
+                <form string="Requisitos legales">
+                    <header>
+                        <field name="state" widget="statusbar" statusbar_visible="elaborate,validate" />
+                        <button string="Validar"
+                                name="send_validate"
+                                type="object"
+                                class="btn-primary"
+                                attrs="{'invisible':[('state','!=', 'elaborate')]}" />
+                        <button string="Caducado"
+                                name="send_caducated"
+                                type="object"
+                                class="btn-second"
+                                attrs="{'invisible':[('state','!=', 'validate')]}" />
+                        <button name="button_new_version"
+                                type="object"
+                                string="Nueva versión"
+                                states="validate"
+                                class="oe_highlight" />
+                    </header>
+                    <sheet>
+                        <div class="oe_button_box" name="button_box">
+                            <!--
+                            <button class="oe_stat_button"
+                                    attrs="{'invisible': [('articles_count','=',0)]}"
+                                    type="action"
+                                    name="%()"
+                                    icon="fa-files-o">
+                                <field name="articles_count" widget="statinfo" string="Articulos" />
+                            </button>
+                            <button type="object"
+                                    name="action_open_older_versions"
+                                    class="oe_stat_button"
+                                    icon="fa-archive"
+                                    style="white-space: nowrap;"
+                                    string="Versiones antiguas" />
+                            -->
+                        </div>
+                        <div class="oe_title">
+                            <label for="name" />
+                            <h2>
+                                <field name="name" attrs="{'readonly': [('state','not in',('elaborate'))] }" />
+                            </h2>
+                        </div>
+                        <group>
+                            <group>
+                                <field name="version" />
+                                <field name="type_id" attrs="{'readonly': [('state','not in',('elaborate'))]}" />
+                                <field name="entity_id" attrs="{'readonly': [('state','not in',('elaborate'))] }" />
+                                <field name="reference" attrs="{'readonly': [('state','not in',('elaborate'))] }" />
+                                <field name="date_release" attrs="{'readonly': [('state','not in',('elaborate'))] }" />
+                            </group>
+                            <group>
+                                <field name="is_outsourcing" attrs="{'readonly': [('state','not in',('elaborate'))] }" />
+                                <field name="partner_id" attrs="{'invisible': [('is_outsourcing','=',False)],'readonly': [('state','not in',('elaborate'))]}" />
+                            </group>
+                        </group>
+                        <group>
+                            <field name="resume" attrs="{'readonly': [('state','not in',('elaborate'))] }" />
+                            <field name="user_id" />
+                        </group>
+                        <notebook>
+                            <page string="Articulos">
+                                <field name="article_ids" attrs="{'readonly': [('state','not in',('elaborate'))]}">
+                                    <tree editable="bottom">
+                                        <field name="name" attrs="{'readonly': [('parent.state','not in',('elaborate'))]}" />
+                                        <field name="resume" attrs="{'readonly': [('parent.state','not in',('elaborate'))]}" />
+                                        <field name="stakeholders" attrs="{'readonly': [('parent.state','not in',('elaborate'))]}" />
+                                        <field name="partner_id" attrs="{'readonly': [('parent.state','not in',('elaborate'))]}" />
+                                        <button name="action_see_attachments" type="object" string="Adjuntos" />
+                                        <field name="has_attachments" invisible="1" />
+                                    </tree>
+                                </field>
+                            </page>
+                        </notebook>
+                    </sheet>
+
+                    <div class="oe_chatter">
+                        <field name="message_follower_ids" widget="mail_followers" />
+                        <field name="activity_ids" widget="mail_activity" />
+                        <field name="message_ids" widget="mail_thread" />
+                    </div>
+
+                </form>
+            </field>
+        </record>
+
+
+        <!--record id="view_mgmtsystem_plan_training_line_search" model="ir.ui.view">
+            <field name="name">mgmtsystem.plan.training.line.search</field>
+            <field name="model">mgmtsystem.plan.training.line</field>
+            <field name="arch" type="xml">
+                <search>
+                    <field name="employee_id" operator="child_of"/>
+                </search>
+            </field>
+        </record-->
+
+        <menuitem id="legal_legal_menu" name="Requisitos legales" parent="menu_legal_root" sequence="1" />
+
+        <record id="legal_legal_action" model="ir.actions.act_window">
+            <field name="name">Requisitos legales</field>
+            <field name="type">ir.actions.act_window</field>
+            <field name="res_model">legal.legal</field>
+
+            <field name="view_mode">tree,form,kanban,graph,pivot</field>
+        </record>
+
+        <menuitem id="legal_legal_item"
+                  name="Requisitos legales"
+                  parent="legal_legal_menu"
+                  sequence="5"
+                  action="legal_legal_action" />
+
+    </data>
+</odoo>

@@ -1,0 +1,109 @@
+<?xml version="1.0"?>
+<odoo>
+    <data>
+
+        <record id="legal_management" model="ir.module.category">
+            <field name="name">Requisitos legales</field>
+            <field name="description">Accesos para módulo de Requisitos Legales</field>
+            <field name="parent_id" ref="hola_calidad.module_mgmt_management" />
+            <field name="sequence">25</field>
+        </record>
+
+        <record id="group_legal_onlyread" model="res.groups">
+            <field name="name">Usuario: Solo lectura</field>
+            <field name="implied_ids" eval="[(4, ref('base.group_user'))]" />
+            <field name="category_id" ref="mgmtsystem_legal.legal_management" />
+        </record>
+        <record id="group_legal_onlyread_printreport" model="res.groups">
+            <field name="name">Usuario interno: Lectura e impresión</field>
+            <field name="implied_ids" eval="[(4, ref('mgmtsystem_legal.group_legal_onlyread'))]" />
+            <field name="category_id" ref="mgmtsystem_legal.legal_management" />
+        </record>
+
+        <record id="group_legal_write_printreport" model="res.groups">
+            <field name="name">Usuario secundario: Lectura Edición de documentos propios</field>
+            <field name="implied_ids" eval="[(4, ref('mgmtsystem_legal.group_legal_onlyread_printreport'))]" />
+            <field name="category_id" ref="mgmtsystem_legal.legal_management" />
+        </record>
+
+        <record id="group_legal_all" model="res.groups">
+            <field name="name">Responsable: Lectura y edición</field>
+            <field name="implied_ids" eval="[(4, ref('mgmtsystem_legal.group_legal_write_printreport'))]" />
+            <field name="category_id" ref="mgmtsystem_legal.legal_management" />
+        </record>
+
+        
+    </data>
+    <data>
+        <!--
+        <record model="ir.rule" id="mgmt_owner_document">
+            <field name="name">Usuario secundario: Lectura Edición de documentos propios</field>
+            <field name="model_id" ref="model_legal_plan" />
+            <field name="groups" eval="[(4, ref('mgmtsystem_legal.group_legal_write_printreport'))]" />
+            <field name="perm_read" eval="1" />
+            <field name="perm_write" eval="1" />
+            <field name="perm_create" eval="1" />
+            <field name="perm_unlink" eval="1" />
+            <field name="domain_force">[('elaborate_ids','in',[user.id])]</field>
+        </record>
+
+        <record model="ir.rule" id="mgmt_noowner_document">
+            <field name="name">Usuario secundario: Documentos ajenos</field>
+            <field name="model_id" ref="model_legal_plan" />
+            <field name="groups" eval="[(4, ref('mgmtsystem_legal.group_legal_write_printreport'))]" />
+            <field name="perm_read" eval="1" />
+            <field name="perm_write" eval="0" />
+            <field name="perm_create" eval="0" />
+            <field name="perm_unlink" eval="0" />
+            <field name="domain_force">[('elaborate_ids','not in',[user.id])]</field>
+        </record>
+        -->
+        <record model="ir.rule" id="mgmt_all_document">
+            <field name="name">Permisos Totales</field>
+            <field name="model_id" ref="model_legal_plan" />
+            <field name="groups" eval="[(4, ref('mgmtsystem_legal.group_legal_all'))]" />
+            <field name="perm_read" eval="1" />
+            <field name="perm_write" eval="1" />
+            <field name="perm_create" eval="1" />
+            <field name="perm_unlink" eval="1" />
+        </record>
+
+    </data>
+    <data>
+
+        <record model="ir.rule" id="mgmt_owner_document">
+            <field name="name">Usuario secundario: Lectura Edición de documentos propios</field>
+            <field name="model_id" ref="model_legal_legal" />
+            <field name="groups" eval="[(4, ref('mgmtsystem_legal.group_legal_write_printreport'))]" />
+            <field name="perm_read" eval="1" />
+            <field name="perm_write" eval="1" />
+            <field name="perm_create" eval="1" />
+            <field name="perm_unlink" eval="1" />
+            <field name="domain_force">[('user_id','in',[user.id])]</field>
+        </record>
+
+        <record model="ir.rule" id="mgmt_noowner_document">
+            <field name="name">Usuario secundario: Documentos ajenos</field>
+            <field name="model_id" ref="model_legal_legal" />
+            <field name="groups" eval="[(4, ref('mgmtsystem_legal.group_legal_write_printreport'))]" />
+            <field name="perm_read" eval="1" />
+            <field name="perm_write" eval="0" />
+            <field name="perm_create" eval="0" />
+            <field name="perm_unlink" eval="0" />
+            <field name="domain_force">[('user_id','not in',[user.id])]</field>
+        </record>
+
+        
+
+        <record model="ir.rule" id="mgmt_all_document">
+            <field name="name">Permisos Totales</field>
+            <field name="model_id" ref="model_legal_legal" />
+            <field name="groups" eval="[(4, ref('mgmtsystem_legal.group_legal_all'))]" />
+            <field name="perm_read" eval="1" />
+            <field name="perm_write" eval="1" />
+            <field name="perm_create" eval="1" />
+            <field name="perm_unlink" eval="1" />
+        </record>
+
+    </data>
+</odoo>

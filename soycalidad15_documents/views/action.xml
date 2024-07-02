@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <record id="action_docs_view_form" model="ir.ui.view">
+        <field name="name">mgmtsystem.action.view.form</field>
+        <field name="model">mgmtsystem.action</field>
+        <field name="inherit_id" ref="mgmtsystem_action.view_mgmtsystem_action_form"/>
+        <field name="arch" type="xml">
+            <xpath expr="//button[@name='open_change_request_view']" position="before">
+                <button name="action_open_documents"
+                    class="oe_stat_button"
+                    groups="documents.group_documents_user"
+                    icon="fa-file-text"
+                    type="object">
+                    <field name="document_count" widget="statinfo" string="Documents"/>
+                </button>
+            </xpath>
+        </field>
+    </record>    
+</odoo>

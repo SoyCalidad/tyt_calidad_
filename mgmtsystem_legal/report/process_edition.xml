@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+        <template id="process_edition_report" inherit_id="mgmtsystem_process.report_process_edition_template">
+            <xpath expr="//div[@class='references']" position="replace">
+                <style type="text/css">
+                    .tg  {border-collapse:collapse;border-spacing:0;margin:0px auto;width:100%;}
+                    .tg td{border-color:black;border-style:solid;border-width:1px;font-family: Palatino, Palatino Linotype, Palatino LT STD, Book Antiqua, Georgia, serif;font-size:14px;
+                    overflow:hidden;padding:10px 5px;word-break:normal;}
+                    .tg th{border-color:black;border-style:solid;border-width:1px;font-family: Palatino, Palatino Linotype, Palatino LT STD, Book Antiqua, Georgia, serif;font-size:14px;
+                    font-weight:normal;overflow:hidden;padding:10px 5px;word-break:normal;}
+                    .tg .tg-d14o{background-color:#efefef;border-color:#c0c0c0;font-weight:bold;text-align:center;vertical-align:middle}
+                    .tg .tg-wo29{border-color:#c0c0c0;text-align:left;vertical-align:top}
+                    .tg .tg-fzdr{border-color:#c0c0c0;text-align:center;vertical-align:top}
+                </style>
+                <table class="tg" width="100%">
+                    <tbody>
+                        <tr>
+                            <td class="tg-d14o">NOMBRE</td>
+                            <td class="tg-d14o">TIPO</td>
+                            <td class="tg-d14o">ENTIDAD</td>
+                            <td class="tg-d14o">FECHA DE PUBLICACIÓN</td>
+                        </tr>
+                        <t t-foreach="o.references" t-as="r">
+                            <tr>
+                                <td class="tg-wo29">
+                                    <span t-field="r.name"/>
+                                </td>
+                                <td class="tg-wo29">
+                                    <span t-field="r.type_id"/>
+                                </td>
+                                <td class="tg-wo29">
+                                    <span t-field="r.entity_id"/>
+                                </td>
+                                <td class="tg-fzdr">
+                                    <span t-field="r.date_release"/>
+                                </td>
+                            </tr>
+                        </t>
+                    </tbody>
+                </table>
+            </xpath>
+        </template>
+    </data>
+</odoo>

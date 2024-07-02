@@ -1,0 +1,135 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--Estructura basica de reportes-->
+<odoo>
+    <data>
+        <template id="applicants_database_report">
+            <t t-if="o and 'company_id' in o">
+                <t t-set="company" t-value="o.company_id" />
+            </t>
+            <t t-if="not o or not 'company_id' in o">
+                <t t-set="company" t-value="res_company" />
+            </t>
+            <t t-call="web.html_container">
+                <div class="header">
+                    <style type="text/css">
+                        .tg  {border-collapse:collapse;border-spacing:0;margin:0px auto;width:100%;}
+                        .tg td{border-color:black;border-style:solid;border-width:1px;font-family: Palatino, Palatino Linotype, Palatino LT STD, Book Antiqua, Georgia, serif;font-size:14px;
+                        overflow:hidden;padding:10px 5px;word-break:normal;text-align:middle;align:center;height:45px;}
+                        .tg th{border-color:black;border-style:solid;border-width:1px;font-family: Palatino, Palatino Linotype, Palatino LT STD, Book Antiqua, Georgia, serif;font-size:14px;
+                        font-weight:normal;overflow:hidden;padding:10px 5px;word-break:normal;}
+                        .tg .tg-9wq8{border-color:inherit;text-align:center;vertical-align:middle}
+                        .tg .tg-1wig{border-color:inherit;text-align:center;vertical-align:middle;font-size:16px;font-weight:bold;}
+                        .tg .tg-0lax{border-color:inherit;text-align:center;vertical-align:middle;font-size:12px;}
+                    </style>
+                    <table class="tg">
+                        <tbody>
+                            <tr>
+                                <td class="tg-1wig" rowspan="3" width="20%" style="width:15%">
+                                    <img t-if="company.logo" t-att-src="'data:image/png;base64,%s' % to_text(company.logo)" style="max-width:100px;max-height:100px;vertical-align:middle;" />
+                                </td>
+                                <td class="tg-1wig" rowspan="2" width="80%" style="width:65%;">
+                                    <span style="font-size:18px;font-weight:bold;">BASE DE DATOS DE POSTULANTES</span>
+                                    <br/>
+                                </td>
+                                <td class="tg-0lax" width="20%" style="width:20%">
+                                    Código:
+                                </td>
+                            </tr>
+                            <tr>
+                                <td class="tg-0lax">
+                                    Fecha de impresión:
+                                    <span t-esc="context_timestamp(datetime.datetime.now()).strftime('%d/%m/%Y %H:%M')"/>
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+                <t t-call="web.external_layout">
+                    <style type="text/css">
+                        .tg  {border-collapse:collapse;border-spacing:0;margin:0px auto;width:100%;}
+                        .tg td{border-style:solid;border-width:0px;font-family: Palatino, Palatino Linotype, Palatino LT STD, Book Antiqua, Georgia, serif;font-size:14px;overflow:hidden;
+                        padding:10px 5px;word-break:normal;text-align:center;}
+                        .tg th{border-style:solid;border-width:0px;font-family: Palatino, Palatino Linotype, Palatino LT STD, Book Antiqua, Georgia, serif;font-size:14px;font-weight:normal;
+                        overflow:hidden;padding:10px 5px;word-break:normal;}
+                        .tg .tg-ve35{border-color:#c0c0c0;text-align:left;vertical-align:middle}
+                        .tg .tg-ve36{border-color:#c0c0c0;text-align:center;vertical-align:middle}
+                        .tg .tg-5d78{background-color:#efefef;border-color:#c0c0c0;color:#000000;font-weight:bold;text-align:center;vertical-align:middle}
+                    </style>
+                    <table class="tg">
+                        <tbody>
+                            <tr>
+                                <td class="tg-5d78">NOMBRE DEL CANDIDATO</td>
+                                <td class="tg-5d78">POSICIÓN A LA QUE POSTULA</td>
+                                <td class="tg-5d78">EDAD</td>
+                                <td class="tg-5d78">E-MAIL</td>
+                                <td class="tg-5d78">TELÉFONO</td>
+                                <td class="tg-5d78">MÓVIL</td>
+                                <td class="tg-5d78">SALARIO ESPERADO</td>
+                                <td class="tg-5d78">SALARIO PROPUESTO</td>
+                                <td class="tg-5d78">DISPONIBILIDAD</td>
+                                <td class="tg-5d78">ETAPA</td>
+                            </tr>
+                            <t t-foreach="docs" t-as="o">
+                                <tr>
+                                    <td class="tg-ve35">
+                                        <span t-field="o.partner_name" />
+                                    </td>
+                                    <td class="tg-ve35">
+                                        <span t-field="o.name" />
+                                    </td>
+                                    <td class="tg-ve35" style="text-align:center;">
+                                        <span t-field="o.age" />
+                                    </td>
+                                    <td class="tg-ve35">
+                                        <span t-field="o.email_from" />
+                                    </td>
+                                    <td class="tg-ve35">
+                                        <span t-field="o.partner_phone" />
+                                    </td>
+                                    <td class="tg-ve35">
+                                        <span t-field="o.partner_mobile" />
+                                    </td>
+                                    <td class="tg-ve35">
+                                        <span t-field="o.salary_expected" />
+                                    </td>
+                                    <td class="tg-ve35">
+                                        <span t-field="o.salary_proposed" />
+                                    </td>
+                                    <td class="tg-ve35">
+                                        <span t-field="o.availability" />
+                                    </td>
+                                    <td class="tg-ve35">
+                                        <span t-field="o.stage_id" />
+                                    </td>
+                                </tr>
+                            </t>
+                        </tbody>
+                    </table>
+                    <div class="footer" style="border-top: 1px solid black;font-size: 8px;">
+                        <div class="text-center" style="border-top: 1px solid black;font-size: 10px;text-align:center;">
+                            ©
+                            <span t-field="company.name"/>
+                            . All Rights Reserved.
+                            <br/>
+                            PROHIBIDA SU REPRODUCCIÓN SIN AUTORIZACIÓN EXPRESA DE LA DIRECCIÓN.
+                            <br/>
+                            CUALQUIER COPIA IMPRESA NO CONTROLADA. DEBE SER ROTULADA COMO "COPIA NO CONTROLADA".
+                            <br/>
+                            CONSULTE VERSIÓN ELECTRÓNICA
+                        </div>
+                    </div>
+                </t>
+            </t>
+        </template>
+
+        <report
+            id="report_applicants_database"
+            string="Base de datos de postulantes"
+            report_type="qweb-pdf"
+            model="hr.applicant"
+            name="mgmtsystem_employees.applicants_database_report"
+            groups="base.group_no_one,mgmtsystem_employees.group_employees_onlyread_printreport,mgmtsystem_employees.group_employees_write_printreport,mgmtsystem_employees.group_employees_all" file="Programa anual de capacitaciones"
+            paperformat="hola_calidad.landscape"/>
+
+    </data>
+</odoo>

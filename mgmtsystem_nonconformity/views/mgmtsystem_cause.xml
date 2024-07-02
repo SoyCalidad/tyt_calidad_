@@ -1,0 +1,130 @@
+<odoo>
+
+	<record id="mgmtsystem_nonconformity_cause_why_view_form" model="ir.ui.view">
+		<field name="name">mgmtsystem.nonconformity.cause_why.view.form</field>
+		<field name="model">mgmtsystem.nonconformity.cause_why</field>
+		<field name="arch" type="xml">
+			<form string="Causa o Por qué">
+				<sheet>
+					<group>
+						<field name="name" invisible="1" />
+						<field name="cause_why_type" invisible="1" />
+						<field name="cause_id" attrs="{'invisible': [('cause_why_type','!=','cause')]}" />
+						<field name="why_id" attrs="{'invisible': [('cause_why_type','!=','why')]}" />
+						<field name="description" />
+						<field name="subcause_ids" attrs="{'invisible': [('cause_why_type','!=','cause')]}" widget="many2many_tags" />
+						<field name="attachment_ids" widget="many2many_binary" />
+					</group>
+				</sheet>
+			</form>
+		</field>
+	</record>
+
+	<record id="mgmtsystem_nonconformity_cause_why_view_tree" model="ir.ui.view">
+		<field name="name">mgmtsystem.nonconformity.cause_why.view.tree</field>
+		<field name="model">mgmtsystem.nonconformity.cause_why</field>
+		<field name="arch" type="xml">
+			<tree string="Causa o Por qué">
+				<field name="name" invisible="1" />
+				<field name="cause_why_type" invisible="1" />
+				<field name="cause_id" attrs="{'invisible': [('cause_why_type','!=','cause')]}" />
+				<field name="why_id" attrs="{'invisible': [('cause_why_type','!=','why')]}" />
+				<field name="subcause_ids" attrs="{'invisible': [('cause_why_type','!=','cause')]}" widget="many2many_tags" />
+			</tree>
+		</field>
+	</record>
+
+	<record id="mgmtsystem_nonconformity_cause_why_action" model="ir.actions.act_window">
+		<field name="name">Causa o Por qué</field>
+		<field name="res_model">mgmtsystem.nonconformity.cause_why</field>
+		<field name="view_mode">tree,form</field>
+		<field name="domain">[]</field>
+		<field name="context">{}</field>
+		<field name="help" type="html">
+			<p>
+				<b>Causa o Por qué</b>
+			</p>
+		</field>
+	</record>
+
+	<!-- Cause -->
+	<record id="open_mgmtsystem_nonconformity_cause_list" model="ir.actions.act_window">
+		<field name="name">Causas</field>
+		<field name="type">ir.actions.act_window</field>
+		<field name="res_model">mgmtsystem.nonconformity.cause</field>
+	</record>
+
+	<record id="mgmtsystem_nonconformity_cause_view_form" model="ir.ui.view">
+		<field name="name">mgmtsystem.nonconformity.cause.view.form</field>
+		<field name="model">mgmtsystem.nonconformity.cause</field>
+		<field name="arch" type="xml">
+			<form string="Causa">
+				<sheet>
+					<group>
+						<field name="name" />
+						<field name="description" />
+						<field name="parent_id" invisible="1" />
+						<field name="is_base" invisible="1" />
+						<field name="subcause_ids">
+							<tree editable="bottom">
+								<field name="name" />
+							</tree>
+						</field>
+					</group>
+				</sheet>
+			</form>
+		</field>
+	</record>
+
+	<record id="mgmtsystem_nonconformity_cause_view_tree" model="ir.ui.view">
+		<field name="name">mgmtsystem.nonconformity.cause.view.tree</field>
+		<field name="model">mgmtsystem.nonconformity.cause</field>
+		<field name="arch" type="xml">
+			<tree string="Causa">
+				<field name="name" />
+				<field name="description" />
+				<field name="parent_id" invisible="1" />
+				<field name="subcause_ids" widget="many2many_tags" />
+			</tree>
+		</field>
+	</record>
+
+	<record id="mgmtsystem_nonconformity_why_view_form" model="ir.ui.view">
+		<field name="name">mgmtsystem.nonconformity.cause.view.form</field>
+		<field name="model">mgmtsystem.nonconformity.cause</field>
+		<field name="arch" type="xml">
+			<form string="Causa">
+				<sheet>
+					<group>
+						<field name="name" />
+						<field name="description" />
+					</group>
+				</sheet>
+			</form>
+		</field>
+	</record>
+
+	<record id="mgmtsystem_nonconformity_why_view_tree" model="ir.ui.view">
+		<field name="name">mgmtsystem.nonconformity.cause.view.tree</field>
+		<field name="model">mgmtsystem.nonconformity.cause</field>
+		<field name="arch" type="xml">
+			<tree string="Causa">
+				<field name="name" />
+				<field name="description" />
+			</tree>
+		</field>
+	</record>
+
+	<record id="mgmtsystem_nonconformity_why_action" model="ir.actions.act_window">
+		<field name="name">Action Name</field>
+		<field name="res_model">mgmtsystem.nonconformity.why</field>
+		<field name="view_mode">tree,form</field>
+		<field name="domain">[]</field>
+		<field name="context">{}</field>
+		<field name="help" type="html">
+			<p></p>
+		</field>
+	</record>
+
+
+</odoo>

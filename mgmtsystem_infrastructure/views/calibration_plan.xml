@@ -1,0 +1,381 @@
+<odoo>
+    <data>
+
+        <!--Requerimiento-->
+        <record id="hr_calibration_request_action" model="ir.actions.act_window">
+            <field name="name">Peticiones de calibración</field>
+            <field name="res_model">maintenance.request</field>
+            <field name="view_mode">kanban,tree,form,pivot,graph,calendar</field>
+            <field name="view_id" ref="maintenance.hr_equipment_request_view_kanban" />
+            <field name="context">{'default_user_id': uid,'default_type_line':'calibration'}</field>
+            <field name="domain">[('type_line','=','calibration')]</field>
+            <field name="help" type="html">
+                <p class="o_view_nocontent_smiling_face">
+                    Agrega una peticion de calibracion
+                </p>
+            </field>
+        </record>
+
+        <record id="hr_calibration_request_action_cal" model="ir.actions.act_window">
+            <field name="name">Peticiones</field>
+            <field name="res_model">maintenance.request</field>
+            <field name="view_mode">calendar,kanban,tree,form,pivot,graph</field>
+            <field name="view_id" ref="maintenance.hr_equipment_view_calendar" />
+            <field name="context">{'default_type_line':'calibration'}</field>
+            <field name="domain">[('type_line','=','calibration')]</field>
+            <field name="help" type="html">
+                <p class="o_view_nocontent_smiling_face">
+                    Agregar un nuevo requisito de calibración
+                </p>
+            </field>
+        </record>
+
+        <!--Historial de Calibraciones-->
+        <record id="view_mgmtsystem_calibration_line_tree" model="ir.ui.view">
+            <field name="name">mgmtsystem.calibration.line.tree</field>
+            <field name="model">mgmtsystem.calibration.line</field>
+            <field name="arch" type="xml">
+                <tree string="Historial de Calibraciones">
+                    <field name="name" />
+                    <field name="scheduled_date" />
+                    <field name="maintenance_request_ids" />
+                </tree>
+            </field>
+        </record>
+
+        <record id="view_mgmtsystem_calibration_line_form" model="ir.ui.view">
+            <field name="name">mgmtsystem.calibration.line.form</field>
+            <field name="model">mgmtsystem.calibration.line</field>
+            <field name="arch" type="xml">
+                <form string="Historial de Calibraciones">
+                    <sheet>
+                        <group>
+                            <field name="name" />
+                            <field name="scheduled_date" />
+                            <field name="maintenance_id" attrs="{'invisible': [('maintenance_id','=',False)]}" />
+                        </group>
+                        <notebook>
+                            <page string="Peticiones de calibración">
+                                <field name="maintenance_request_ids" />
+                            </page>
+                        </notebook>
+                    </sheet>
+                </form>
+            </field>
+        </record>
+
+        <!--Calibraciones-->
+        <record id="view_mgmtsystem_calibration_tree" model="ir.ui.view">
+            <field name="name">mgmtsystem.calibration.tree</field>
+            <field name="model">mgmtsystem.calibration</field>
+            <field name="arch" type="xml">
+                <tree string="Calibraciones">
+                    <field name="name" />
+                    <field name="start_date" />
+                    <field name="limit_date" />
+                    <field name="state" />
+                </tree>
+            </field>
+        </record>
+
+        <record id="view_mgmtsystem_calibration_form" model="ir.ui.view">
+            <field name="name">mgmtsystem.calibration.form</field>
+            <field name="model">mgmtsystem.calibration</field>
+            <field name="arch" type="xml">
+                <form string="Calibraciones">
+                    <header>
+                        <field name="state" widget="statusbar" statusbar_visible="elaborate,review,validate,validate_ok,in_process,final" />
+                        <button string="Enviar a Revisar"
+                                name="send_review"
+                                type="object"
+                                class="btn-primary"
+                                attrs="{'invisible':[('state','not in', ('elaborate'))]}" />
+                        <button string="Enviar a Validar"
+                                name="send_validate"
+                                type="object"
+                                class="btn-primary"
+                                attrs="{'invisible':[('state','not in', ('review'))]}" />
+                        <button string="Validar"
+                                name="send_validate_ok"
+                                type="object"
+                                class="btn-primary"
+                                attrs="{'invisible':[('state','not in', ('validate'))]}" />
+                        <button string="Volver Obsoleto"
+                                confirm="Esto volverá obsoleto el presente registro. ¿Está seguro(a)?"
+                                name="send_cancel"
+                                type="object"
+                                class="btn-second"
+                                attrs="{'invisible': [('state','in',('cancel'))] }" />
+                        <button type="object"
+                                name="generate_maintenance_schedule"
+                                string="Crear cronograma"
+                                class="btn-primary"
+                                attrs="{'invisible': [('state','!=','validate_ok')]}" />
+                        <button name="button_new_version"
+                                type="object"
+                                string="Nueva versión"
+                                attrs="{'invisible':[('state', '!=', 'validate_ok')]}"
+                                class="oe_highlight" />
+                    </header>
+                    <sheet>
+                        <div class="oe_button_box" name="button_box">
+                            <button type="object"
+                                    name="action_open_older_versions"
+                                    class="oe_stat_button"
+                                    icon="fa-archive"
+                                    style="white-space: nowrap;"
+                                    string="Versiones antiguas" />
+                            <button type="object" name="show_request_maintenance_action" class="oe_stat_button" icon="fa-bar-chart-o">
+                                <field name="request_count" widget="statinfo" string="Peticiones" />
+                            </button>
+                        </div>
+                        <group>
+                            <field name="name" />
+                        </group>
+                        <group>
+                            <group string="Detalles">
+                                <field name="employee_id" attrs="{'readonly': [('state','not in',('elaborate'))] }" />
+                                <field name="type" attrs="{'readonly': [('state','not in',('elaborate'))] }" />
+                                <field name="estimate" attrs="{'readonly': [('state','not in',('elaborate'))] }" />
+                                <field name="plan_id" attrs="{'invisible': [('plan_id','=',False)]}" />
+                            </group>
+                            <group string="Fechas">
+                                <field name="start_date" attrs="{'readonly': [('state','in',('validate_ok','cancel'))]}" />
+                                <field name="limit_date" attrs="{'readonly': [('state','in',('validate_ok','cancel'))]}" />
+                                <field name="new_frequency_id" attrs="{'readonly': [('state','not in',('elaborate'))] }" />
+                                <br />
+                            </group>
+                        </group>
+                        <group string="Condiciones de calibraciones">
+                            <label for="max_errors1" string="Máximo de errores" />
+                            <div name="max_error_def">
+                                <div class="oe_edit_only" name="edit_alias">
+                                    <field name="max_errors1" class="oe_inline" placeholder="Unidad" />
+                                    <field name="uom_id" placeholder="Unidad de medida" class="oe_inline" options="{'no_create_edit': True,'no_create': True}" />
+                                    <field name="signe" class="oe_inline" placeholder="Signo" />
+                                    <field name="max_errors2" placeholder="Unidad" class="oe_inline" />
+                                    <field name="uom2_id" placeholder="Unidad de medida" class="oe_inline" options="{'no_create_edit': True,'no_create': True}" />
+                                </div>
+                            </div>
+                            <field name="calibration_range" attrs="{'readonly': [('state','in',('validate_ok','cancel'))]}" />
+                            <field name="resolution" attrs="{'readonly': [('state','in',('validate_ok','cancel'))]}" />
+                        </group>
+                        <notebook>
+                            <page string="Equipos">
+                                <field name="equipment_ids" attrs="{'readonly': [('state','in',('final','caducated','cancel'))]}">
+                                    <tree>
+                                        <field name="name" />
+                                        <field name="employee_id" />
+                                        <field name="department_id" />
+                                        <field name="assign_date" />
+                                        <field name="serial_no" />
+                                        <field name="technician_user_id" />
+                                        <field name="category_id" string="Categoría" />
+                                        <field name="location" />
+                                    </tree>
+                                </field>
+                            </page>
+                            <page string="Cronograma">
+                                <field name="line_ids" attrs="{'readonly': [('state','in',('validate_ok','cancel'))]}" />
+                            </page>
+                            <page string="Validación">
+                                <group>
+                                    <group colspan="4">
+                                        <field name="version" />
+                                    </group>
+                                    <group colspan="4">
+                                        <separator string="Elaboración" />
+                                        <field name="elaboration_step" colspan="2" nolabel="1" attrs="{'readonly': [('state','not in',('elaborate'))]}" />
+                                        <separator string="Revisión" />
+                                        <field name="review_step" colspan="2" nolabel="1" attrs="{'readonly': [('state','not in',('elaborate', 'review'))]}" />
+                                        <separator string="Validación" />
+                                        <field name="validation_step" colspan="2" nolabel="1" attrs="{'readonly': [('state','not in',('elaborate', 'review', 'validate'))]}" />
+                                    </group>
+                                    <group colspan="4">
+                                        <field name="date_elaborate" attrs="{'required': [('state','in',('elaborate'))], 'readonly': True}" />
+                                        <field name="date_review" attrs="{'required': [('state','in',('review'))], 'readonly': True, 'invisible': [('state','in',('elaborate'))] }" />
+                                        <field name="date_validate" groups="base.group_no_one,base.user_admin" attrs="{'invisible': [('state','in',('elaborate','review'))] }" />
+                                    </group>
+                                </group>
+                            </page>
+                        </notebook>
+                    </sheet>
+                    <div class="oe_chatter">
+                        <field name="message_follower_ids" widget="mail_followers" />
+                        <field name="activity_ids" widget="mail_activity" />
+                        <field name="message_ids" widget="mail_thread" />
+                    </div>
+                </form>
+            </field>
+        </record>
+
+        <record id="mgmtsystem_calibration_action" model="ir.actions.act_window">
+            <field name="name">Plan de Calibraciones</field>
+            <field name="type">ir.actions.act_window</field>
+            <field name="res_model">mgmtsystem.calibration</field>
+            <field name="view_mode">tree,form,kanban</field>
+        </record>
+
+        <!--Programa de calibraciones-->
+        <record id="view_mgmtsystem_calibration_plan_tree" model="ir.ui.view">
+            <field name="name">mgmtsystem.calibration.plan.tree</field>
+            <field name="model">mgmtsystem.calibration.plan</field>
+            <field name="arch" type="xml">
+                <tree string="Programa de calibraciones">
+                    <field name="name" />
+                    <field name="version" />
+                    <field name="edition_id" />
+                    <field name="maintenance_ids" />
+                    <field name="state" />
+                </tree>
+            </field>
+        </record>
+
+        <record id="view_mgmtsystem_calibration_plan_form" model="ir.ui.view">
+            <field name="name">mgmtsystem.calibration.form</field>
+            <field name="model">mgmtsystem.calibration.plan</field>
+            <field name="arch" type="xml">
+                <form string="Programa de calibraciones">
+                    <header>
+                        <field name="state" widget="statusbar" statusbar_visible="elaborate,review,validate,validate_ok" />
+                        <button string="Enviar a Elaborar"
+                                name="send_elaborate"
+                                type="object"
+                                class="btn-primary"
+                                attrs="{'invisible':[('state','in', ('elaborate','validate','validate_ok','cancel'))]}" />
+                        <button string="Enviar a Revisar"
+                                name="send_review"
+                                type="object"
+                                class="btn-primary"
+                                attrs="{'invisible':[('state','in', ('review','validate_ok','cancel'))]}" />
+                        <button string="Enviar a Validar"
+                                name="send_validate"
+                                type="object"
+                                class="btn-primary"
+                                attrs="{'invisible':[('state','in', ('elaborate','validate','validate_ok','cancel'))]}" />
+                        <button string="Validar"
+                                name="send_validate_ok"
+                                type="object"
+                                class="btn-primary"
+                                attrs="{'invisible':[('state','not in', ('validate'))]}" />
+                        <button string="Volver Obsoleto"
+                                confirm="Esto volverá obsoleto el presente registro. ¿Está seguro(a)?"
+                                name="send_cancel"
+                                type="object"
+                                class="btn-second"
+                                attrs="{'invisible': [('state','in',('cancel'))] }" />
+                        <button name="button_new_version"
+                                type="object"
+                                string="Nueva versión"
+                                attrs="{'invisible':[('state', '!=', 'validate_ok')]}"
+                                class="oe_highlight" />
+                    </header>
+                    <sheet>
+                        <div class="oe_button_box" name="button_box">
+                            <button type="object"
+                                    name="action_open_older_versions"
+                                    class="oe_stat_button"
+                                    icon="fa-archive"
+                                    style="white-space: nowrap;"
+                                    string="Versiones antiguas" />
+                            <button type="object" name="open_maintenance_ids" class="oe_stat_button" icon="fa-bar-chart-o">
+                                <field name="maintenances_count" widget="statinfo" string="Calibraciones" />
+                            </button>
+                        </div>
+                        <h1>
+                            <field name="code" />
+                        </h1>
+                        <label for="name" />
+                        <div class="oe_title">
+                            <h2>
+                                <field name="name" attrs="{'readonly': [('state','not in',('elaborate','review','validate'))]}" />
+                            </h2>
+                        </div>
+                        <label for="edition_id" />
+                        <div class="o_row">
+                            <field name="edition_id" colspan="3" attrs="{'readonly': [('state','not in',('elaborate'))] }" />
+                        </div>
+                        <notebook>
+                            <page string="Calibraciones">
+                                <field name="maintenance_ids" attrs="{'readonly': [('state','in',('validate_ok', 'cancel'))] }">
+                                    <tree>
+                                        <field name="name" />
+                                        <field name="employee_id" />
+                                        <field name="type" />
+                                        <field name="start_date" />
+                                        <field name="limit_date" />
+                                        <field name="estimate" />
+                                        <field name="frequency_id" />
+                                    </tree>
+                                </field>
+                            </page>
+                            <page string="Validación">
+                                <group>
+                                    <group colspan="4">
+                                        <field name="version" />
+                                    </group>
+                                    <group colspan="4">
+                                        <separator string="Elaboración" />
+                                        <field name="elaboration_step" colspan="2" nolabel="1" attrs="{'readonly': [('state','not in',('elaborate'))]}" />
+                                        <separator string="Revisión" />
+                                        <field name="review_step" colspan="2" nolabel="1" attrs="{'readonly': [('state','not in',('elaborate', 'review'))]}" />
+                                        <separator string="Validación" />
+                                        <field name="validation_step" colspan="2" nolabel="1" attrs="{'readonly': [('state','not in',('elaborate', 'review', 'validate'))]}" />
+                                    </group>
+                                    <group colspan="4">
+                                        <field name="date_elaborate" attrs="{'required': [('state','in',('elaborate'))], 'readonly': True}" />
+                                        <field name="date_review" attrs="{'required': [('state','in',('review'))], 'readonly': True, 'invisible': [('state','in',('elaborate'))] }" />
+                                        <field name="date_validate" groups="base.group_no_one,base.user_admin" attrs="{'invisible': [('state','in',('elaborate','review'))] }" />
+                                    </group>
+                                </group>
+                            </page>
+                        </notebook>
+                    </sheet>
+                    <div class="oe_chatter">
+                        <field name="message_follower_ids" widget="mail_followers" />
+                        <field name="activity_ids" widget="mail_activity" />
+                        <field name="message_ids" widget="mail_thread" />
+                    </div>
+                </form>
+            </field>
+        </record>
+
+        <record id="mgmtsystem_calibration_plan_action" model="ir.actions.act_window">
+            <field name="name">Programa de calibraciones</field>
+            <field name="type">ir.actions.act_window</field>
+            <field name="res_model">mgmtsystem.calibration.plan</field>
+            <field name="view_mode">tree,form,kanban</field>
+        </record>
+
+        <menuitem id="menu_c_request"
+                  name="Calibraciones"
+                  parent="maintenance.menu_maintenance_title"
+                  groups="maintenance.group_equipment_manager,base.group_user"
+                  sequence="1" />
+
+        <menuitem id="mgmtsystem_plan_calibration"
+                  name="Programa de calibraciones"
+                  parent="menu_c_request"
+                  sequence="0"
+                  action="mgmtsystem_calibration_plan_action" />
+
+        <menuitem id="mgmtsystem_calibration2"
+                  name="Plan de Calibraciones"
+                  parent="menu_c_request"
+                  sequence="5"
+                  action="mgmtsystem_calibration_action" />
+
+        <menuitem id="mgmtsystem_request_calibration"
+                  name="Peticiones de calibraciones"
+                  parent="menu_c_request"
+                  sequence="10"
+                  action="hr_calibration_request_action" />
+
+        <menuitem id="mgmtsystem_request_calibration_cal"
+                  name="Calendario de calibraciones"
+                  parent="menu_c_request"
+                  sequence="15"
+                  action="hr_calibration_request_action_cal" />
+
+    </data>
+</odoo>

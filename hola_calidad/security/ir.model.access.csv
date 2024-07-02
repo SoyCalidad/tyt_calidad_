@@ -1,0 +1,41 @@
+id,name,model_id:id,group_id:id,perm_read,perm_write,perm_create,perm_unlink
+
+access_hola_calidad_diagnostic_all,Todos los permisos,model_hola_calidad_diagnostic,group_mgmt_all,1,1,1,1
+access_hola_calidad_diagnostic_write,Permisos de edición,model_hola_calidad_diagnostic,group_mgmt_write_printreport,1,1,1,0
+access_hola_calidad_diagnostic_print,Permisos de impresión,model_hola_calidad_diagnostic,group_mgmt_onlyread_printreport,1,0,0,0
+access_hola_calidad_diagnostic_read,Permisos de lectura,model_hola_calidad_diagnostic,group_mgmt_onlyread,1,0,0,0
+
+access_hola_calidad_diagnostic_line_all,Todos los permisos,model_hola_calidad_diagnostic_line,group_mgmt_all,1,1,1,1
+access_hola_calidad_diagnostic_line_write,Permisos de edición,model_hola_calidad_diagnostic_line,group_mgmt_write_printreport,1,1,1,0
+access_hola_calidad_diagnostic_line_print,Permisos de impresión,model_hola_calidad_diagnostic_line,group_mgmt_onlyread_printreport,1,0,0,0
+access_hola_calidad_diagnostic_line_read,Permisos de lectura,model_hola_calidad_diagnostic_line,group_mgmt_onlyread,1,0,0,0
+
+access_hola_calidad_clause_all,Todos los permisos,model_hola_calidad_clause,group_mgmt_all,1,1,1,1
+access_hola_calidad_clause_write,Permisos de edición,model_hola_calidad_clause,group_mgmt_write_printreport,1,1,1,0
+access_hola_calidad_clause_print,Permisos de impresión,model_hola_calidad_clause,group_mgmt_onlyread_printreport,1,0,0,0
+access_hola_calidad_clause_read,Permisos de lectura,model_hola_calidad_clause,group_mgmt_onlyread,1,0,0,0
+
+access_hola_calidad_requirement_all,Todos los permisos,model_hola_calidad_requirement,group_mgmt_all,1,1,1,1
+access_hola_calidad_requirement_write,Permisos de edición,model_hola_calidad_requirement,group_mgmt_write_printreport,1,1,1,0
+access_hola_calidad_requirement_print,Permisos de impresión,model_hola_calidad_requirement,group_mgmt_onlyread_printreport,1,0,0,0
+access_hola_calidad_requirement_read,Permisos de lectura,model_hola_calidad_requirement,group_mgmt_onlyread,1,0,0,0
+
+access_hola_calidad_xls_helper_all,Todos los permisos,model_hola_calidad_xls_helper,,1,1,1,1
+access_hola_calidad_version_all,Todos los permisos,model_mgmtsystem_version,,1,1,1,1
+access_hola_calidad_frequency_all,Todos los permisos,model_mgmtsystem_frequency,,1,1,1,1
+
+access_mgmtsystem_context_system_onlyread,Solo lectura,model_mgmtsystem_context_system,group_mgmt_onlyread,1,0,0,0
+access_mgmtsystem_context_system_report,Impresión de reportes,model_mgmtsystem_context_system,group_mgmt_onlyread_printreport,1,0,0,0
+access_mgmtsystem_context_system_write,Documentos propios,model_mgmtsystem_context_system,group_mgmt_write_printreport,1,1,1,0
+access_mgmtsystem_context_system_all,Todos los permisos,model_mgmtsystem_context_system,group_mgmt_all,1,1,1,1
+
+access_general_standard_onlyread,Solo lectura,model_general_standard,group_mgmt_onlyread,1,0,0,0
+access_general_standard_report,Impresión de reportes,model_general_standard,group_mgmt_onlyread_printreport,1,0,0,0
+access_general_standard_write,Documentos propios,model_general_standard,group_mgmt_write_printreport,1,1,1,0
+access_general_standard_all,Todos los permisos,model_general_standard,group_mgmt_all,1,1,1,1
+
+access_iso_9001_requirement_onlyread,Solo lectura,model_iso_9001_requirement,group_mgmt_onlyread,1,0,0,0
+access_iso_9001_requirement_report,Impresión de reportes,model_iso_9001_requirement,group_mgmt_onlyread_printreport,1,0,0,0
+access_iso_9001_requirement_write,Documentos propios,model_iso_9001_requirement,group_mgmt_write_printreport,1,1,1,0
+access_iso_9001_requirement_all,Todos los permisos,model_iso_9001_requirement,group_mgmt_all,1,1,1,1
+

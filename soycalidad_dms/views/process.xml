@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <record id="process_categ_view_form" model="ir.ui.view">
+        <field name="name">mgmt.categ.view.form</field>
+        <field name="model">mgmt.categ</field>
+        <field name="inherit_id" ref="mgmtsystem_process.mgmt_categ_form"/>
+        <field name="arch" type="xml">
+            <div class="oe_button_box" position="inside">
+                <button name="action_document_ids" type="object" class="oe_stat_button" icon="fa-file-text-o">
+                    <field string="Documentos" name="documents_count" widget="statinfo"/>
+                </button>
+            </div>
+            <notebook position="inside">
+                <page name="dms_document_ids" string="Documentos">
+                    <field name="dms_document_ids" mode="kanban"></field>
+                </page>
+            </notebook>
+        </field>
+    </record>
+    <record id="process_view_form" model="ir.ui.view">
+        <field name="name">mgmt.process.view.form</field>
+        <field name="model">mgmt.process</field>
+        <field name="inherit_id" ref="mgmtsystem_process.mgmt_process_form"/>
+        <field name="arch" type="xml">
+            <div class="oe_button_box" position="inside">
+                <button name="action_document_ids" type="object" class="oe_stat_button" icon="fa-file-text-o">
+                    <field string="Documentos" name="documents_count" widget="statinfo"/>
+                </button>
+            </div>
+            <notebook position="inside">
+                <page name="dms_document_ids" string="Documentos">
+                    <field name="dms_document_ids" mode="kanban"></field>
+                </page>
+            </notebook>
+        </field>
+    </record>
+    <record id="process_edition_view_form" model="ir.ui.view">
+        <field name="name">process.edition.view.form</field>
+        <field name="model">process.edition</field>
+        <field name="inherit_id" ref="mgmtsystem_process.system_process_edition_form_view_inherit"/>
+        <field name="arch" type="xml">
+            <div class="oe_button_box" position="inside">
+                <button name="action_document_ids" type="object" class="oe_stat_button" icon="fa-file-text-o">
+                    <field string="Documentos" name="documents_count" widget="statinfo"/>
+                </button>
+            </div>
+            <notebook position="inside">
+                <page name="dms_document_ids" string="Documentos">
+                    <field name="dms_document_ids" mode="kanban"/>
+                </page>
+            </notebook>
+        </field>
+    </record>
+</odoo>

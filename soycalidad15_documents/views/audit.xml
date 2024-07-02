@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+
+    <record id="audit_report_docs_view_form" model="ir.ui.view">
+        <field name="name">audit.report.view.form</field>
+        <field name="model">audit.report</field>
+        <field name="inherit_id" ref="mgmtsystem_audit.view_audit_report_form"/>
+        <field name="arch" type="xml">
+            <div class="oe_button_box" position="inside">
+                <button name="action_open_documents"
+                    class="oe_stat_button"
+                    groups="documents.group_documents_user"
+                    icon="fa-file-text"
+                    type="object">
+                    <field name="document_count" widget="statinfo" string="Documents"/>
+                </button>
+            </div>
+        </field>
+    </record>
+
+    <record id="view_audit_audit_docs_form_inherit" model="ir.ui.view">
+        <field name="name">audit.audit.view.form.inherit</field>
+        <field name="model">audit.audit</field>
+        <field name="inherit_id" ref="mgmtsystem_audit.view_audit_audit_form"/>
+        <field name="arch" type="xml">
+            <xpath expr="//button[@name='open_change_request_view']" position="before">
+                <button name="action_open_documents"
+                    class="oe_stat_button"
+                    groups="documents.group_documents_user"
+                    icon="fa-file-text"
+                    type="object">
+                    <field name="document_count" widget="statinfo" string="Documents"/>
+                </button>
+            </xpath>
+        </field>
+    </record> 
+
+    <record id="view_audit_plan_docs_form_inherit" model="ir.ui.view">
+        <field name="name">audit.plan.view.form.inherit</field>
+        <field name="model">audit.plan</field>
+        <field name="inherit_id" ref="mgmtsystem_audit.view_audit_plan_form"/>
+        <field name="arch" type="xml">
+            <xpath expr="//button[@name='open_change_request_view']" position="before">
+                <button name="action_open_documents"
+                    class="oe_stat_button"
+                    groups="documents.group_documents_user"
+                    icon="fa-file-text"
+                    type="object">
+                    <field name="document_count" widget="statinfo" string="Documents"/>
+                </button>
+            </xpath>
+        </field>
+    </record> 
+</odoo>

@@ -1,0 +1,13 @@
+<odoo>
+    <data>
+
+        <report id="action_report_general_process_xls"
+                model="mgmt.categ"
+                string="Ficha de proceso"
+                report_type="xlsx"
+                name="mgmtsystem_process_integration.general_process_xls"
+                file="Ficha de proceso"
+                print_report_name="object.name" />
+
+    </data>
+</odoo>

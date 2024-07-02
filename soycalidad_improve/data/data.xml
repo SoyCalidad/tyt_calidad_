@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+
+    <!-- MOVE TO "SOYCALIDAD_DMS"
+
+    <record id="directory_improve" model="dms.directory">
+        <field name="name">Mejora continua</field>
+        <field name="is_root_directory" eval="True"/>
+        <field name="color" eval="1"/>
+        <field name="storage_id" ref="soycalidad_dms.main_storage"/>
+    </record>
+    -->
+</odoo>

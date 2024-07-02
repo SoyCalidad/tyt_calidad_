@@ -1,0 +1,303 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <template id="report_mgmtreview_document">
+        <t t-if="o and 'company_id' in o">
+            <t t-set="company" t-value="o.company_id" />
+        </t>
+        <t t-if="not o or not 'company_id' in o">
+            <t t-set="company" t-value="res_company" />
+        </t>
+        <t t-call="hola_calidad.iso_header" />
+        <t t-call="web.external_layout">
+            <style t-if="o.state=='cancel'">
+                .page {
+                position: relative;
+                }
+                .page::after {
+                content: "";
+                background: url('/hola_calidad/static/src/img/obsoleto.png');
+                opacity: 0.25;
+                top: 0;
+                left: 0;
+                bottom: 0;
+                right: 0;
+                position: absolute;
+                z-index: -1;
+                }
+            </style>
+            <div class="page">
+                <div class="oe_structure" />
+                <style>
+                    span.title {
+                    display: block;
+                    width: 100%;
+                    font-size: 18px;
+                    font-weight: bold;
+                    padding: 10px;
+                    margin-bottom: 20px;
+                    border: 1px solid black;
+                    background-color: lightgray;
+                    }
+                    span.title_light {
+                    display: block;
+                    width: 100%;
+                    font-size: 18px;
+                    padding: 10px;
+                    border: 1px solid black;
+                    }
+                    span.subtitle_light {
+                    display: block;
+                    width: 100%;
+                    font-size: 18px;
+                    padding: 10px;
+                    border: 1px solid black;
+                    margin-left:20px;
+                    }
+                    div.pagebreak  {
+                    font-size: 16px;
+                    color: black;
+                    margin-left: 100px;
+                    margin-right: 50px;
+                    }
+                </style>
+                <t t-call="hola_calidad.iso_cover" />
+                <div class="pagebreak">
+                    <span class="title">1. INTRODUCCIÓN</span>
+                    <span t-field="o.introduction" />
+                    <br />
+                    <br />
+                    <br />
+                    <span class="title">RESPONSABLES DE REVISIÓN POR LA DIRECCIÓN</span>
+                    <t t-if="o.team_id">
+                        <t t-foreach="o.team_id.member_ids" t-as="e">
+                            <div class='col-xs-6' style="padding: 10px; margin:5px; padding-top:60px; border: 1px solid black;  width:45%;">
+                                <span style="font-weight:bold;" t-field="e.employee_id.name" />
+                                <br />
+                                <t t-if="e.job_id">
+                                    <span t-field="e.job_id" />
+                                </t>
+                            </div>
+                        </t>
+                    </t>
+                </div>
+
+                <div class="pagebreak contents" style="page-break-after:always;">
+                    <span class="title 2">2. INFORMACIÓN DE ENTRADA PARA LA REVISIÓN</span>
+                    <span class="title_light a">A. El estado de las acciones de las revisiones por la dirección previas</span>
+                    <span class="title_light b">B. Los cambios en las cuestiones externas e internas</span>
+                    <span class="title_light c">C. La información sobre el desempeño y la eficacia del sistema de gestión</span>
+                    <span class="subtitle_light c1">C.1. La satisfacción del cliente y la retroalimentación de las partes interesadas pertinentes</span>
+                    <span class="subtitle_light c2">C.2. El grado en que se han logrado los objetivos del sistema de gestión</span>
+                    <span class="subtitle_light c3">C.3. El grado en que se cumplido la política del SIG</span>
+                    <span class="title_light d">D. La información sobre el desempeño</span>
+                    <span class="subtitle_light d1">D.1. El desempeño de los procesos y conformidad de los productos y servicios</span>
+                    <span class="subtitle_light d2">D.2. Las no conformidades y acciones correctivas</span>
+                    <span class="subtitle_light d3">D.3. Los resultados de seguimiento y medición</span>
+                    <span class="subtitle_light d4">D.4. Los resultados de las auditorías</span>
+                    <span class="subtitle_light d5">D.5. El desempeño de los proveedores externos</span>
+                    <span class="title_light e">E. La adecuación de los recursos</span>
+                    <span class="title_light f">F. La eficacia de las acciones tomadas para abordar los riesgos y las oportunidades</span>
+                    <span class="title_light g">G. Las oportunidades de mejora</span>
+                </div>
+                <div class="pagebreak">
+                    <span class="title">A. El estado de las acciones de las revisiones por la dirección previas</span>
+                    <span t-raw="o.record_meeting_actions" />
+                </div>
+                <div class="pagebreak">
+                    <span class="title">B. Los cambios en las cuestiones externas e internas</span>
+                    <t t-raw="o.foda" />
+                    <br />
+                    <span t-field="o.foda_description" />
+                    <br />
+                    <t t-raw="o.foda" />
+                    <br />
+                    <h4>Resumen de las partes interesadas</h4>
+                    <h5>Interesados internos</h5>
+                    <table t-if="o.stakeholders_id" class='table table-bordered'>
+                        <tr>
+                            <th>Parte interesada</th>
+                            <th>Interesado</th>
+                            <th>Calificación</th>
+                        </tr>
+                        <t t-foreach="o.stakeholders_id.stakeholder_in_ids" t-as="record">
+                            <tr>
+                                <td>
+                                    <span t-field="record.stakeholder_id" />
+                                </td>
+                                <td>
+                                    <span t-field="record.partner_id" />
+                                </td>
+                                <td>
+                                    <span t-field="record.calification" />
+                                </td>
+                            </tr>
+                        </t>
+                    </table>
+                    <h5>Interesados externos</h5>
+                    <table t-if="o.stakeholders_id" class='table table-bordered'>
+                        <tr>
+                            <th>Parte interesada</th>
+                            <th>Interesado</th>
+                            <th>Calificación</th>
+                        </tr>
+                        <t t-foreach="o.stakeholders_id.stakeholder_out_ids" t-as="record">
+                            <tr>
+                                <td>
+                                    <span t-field="record.stakeholder_id" />
+                                </td>
+                                <td>
+                                    <span t-field="record.partner_id" />
+                                </td>
+                                <td>
+                                    <span t-field="record.calification" />
+                                </td>
+                            </tr>
+                        </t>
+                    </table>
+                    <br />
+                    <span t-field="o.stakeholders_description" />
+                </div>
+
+                <div class="pagebreak">
+                    <span class="title">C. La información sobre el desempeño y la eficacia del sistema de gestión</span>
+                    <span class="title">C.1. La satisfacción del cliente y la retroalimentación de las partes interesadas pertinentes</span>
+                    <table t-if="o.survey_ids" class='table table-bordered'>
+                        <tr>
+                            <th>Encuesta</th>
+                            <th>Fecha</th>
+                            <th>Descripción</th>
+                        </tr>
+                        <t t-foreach="o.survey_ids" t-as="record">
+                            <tr>
+                                <td>
+                                    <span t-field="record.title" />
+                                </td>
+                                <td>
+                                    <span t-field="record.date_init" />
+                                </td>
+                                <td>
+                                    <span t-field="record.description" />
+                                </td>
+                            </tr>
+                        </t>
+                    </table>
+                    <div>
+                        <span t-field="o.survey_description" />
+                    </div>
+                </div>
+
+                <div class="pagebreak">
+                    <span class="title">C.2. El grado en que se han logrado los objetivos del sistema de gestión</span>
+                    <span t-field="o.target_description" />
+                </div>
+
+                <div class="pagebreak">
+                    <span class="title">C.3. El grado en que se cumplido la política del SIG</span>
+                    <ul>
+                        <t t-foreach="o.policy_ids" t-as="p">
+                            <li>
+                                <span t-field="p.name" />
+                            </li>
+                        </t>
+                    </ul>
+                    <span t-field="o.policy_interpretation" />
+                </div>
+
+                <div class="pagebreak d_title">
+                    <span class="title">D. La información sobre el desempeño</span>
+                    <div class="d1_subtitle">
+                        <span class="title">D.1. El desempeño de los procesos y conformidad de los productos y servicios</span>
+                        <t t-raw="o.process" />
+                        <span t-field="o.process_description" />
+                    </div>
+                    <div class="d2_subtitle">
+                        <span class="title">D.2. Las no conformidades y acciones correctivas</span>
+                        <t t-raw="o.nonconformity_action" />
+                        <span t-field="o.nonconformity_action_description" />
+                    </div>
+                    <div class="d3_subtitle">
+                        <span class="title">D.3. Los resultados de seguimiento y medición</span>
+                        <t t-raw="o.indicator" />
+                        <span t-field="o.indicator_description" />
+                    </div>
+                    <div class="d4_subtitle">
+                        <span class="title">D.4. Los resultados de las auditorías</span>
+                        <t t-raw="o.audit" />
+                        <span t-field="o.audit_description" />
+                    </div>
+                    <div class="d5_subtitle">
+                        <span class="title">D.5. El desempeño de los proveedores externos</span>
+                        <div style="max-width:480px;">
+                            <t t-raw="o.suppliers_info" />
+                        </div>
+                        <span t-field="o.suppliers_description" />
+                    </div>
+                </div>
+
+                <div class="pagebreak e_title">
+                    <span class="title">E. La adecuación de los recursos</span>
+                    <t t-raw="o.resource" />
+                    <span t-field="o.resource" />
+                </div>
+
+                <div class="pagebreak f_title">
+                    <span class="title">F. La eficacia de las acciones tomadas para abordar los riesgos y las oportunidades</span>
+                    <t t-raw="o.risk" />
+                    <span t-field="o.risk_description" />
+                </div>
+
+                <div class="pagebreak g_title">
+                    <span class="title">G. Las oportunidades de mejora</span>
+                    <t t-raw="o.improve_action" />
+                    <span t-field="o.improve_action_des" />
+                </div>
+            </div>
+            <div style="margin-top: 20px;">
+                <t t-call="hola_calidad.iso_footer" />
+            </div>
+        </t>
+    </template>
+
+    <template id="report_managementreview">
+        <t t-call="web.html_container">
+            <t t-foreach="docs" t-as="o">
+                <t t-call="mgmtsystem_management_review.report_mgmtreview_document" />
+            </t>
+        </t>
+    </template>
+
+    <report id="action_report_managementreview2" string="Revisión por la dirección" model="management.review" report_type="qweb-pdf" file="mgmtsystem_management_review.report_managementreview" name="mgmtsystem_management_review.report_managementreview" paperformat="hola_calidad.portrait" />
+
+    <record id="mgm_review_wizard_view_form" model="ir.ui.view">
+        <field name="name">wizard.mgmtsystem_management_review.report.view.form</field>
+        <field name="model">wizard.mgmtsystem_management_review.report</field>
+        <field name="arch" type="xml">
+            <form string="">
+                <sheet>
+                    <group>
+                        <field name="management_review" />
+                    </group>
+                </sheet>
+                <footer>
+                    <button name="action_print" type="object" string="Descargar" class="oe_highlight" icon="fa-download" />
+                </footer>
+            </form>
+        </field>
+    </record>
+
+    <record id="mgm_review_wizard_action" model="ir.actions.act_window">
+        <field name="name">Reporte de revisión por la dirección</field>
+        <field name="res_model">wizard.mgmtsystem_management_review.report</field>
+        <field name="view_mode">form</field>
+        <field name="view_id" ref="mgm_review_wizard_view_form" />
+        <field name="target">new</field>
+        <field name="binding_type">report</field>
+    </record>
+
+    <menuitem id="management_review_report_menu" name="Reportes" parent="menu_review_root" groups="base.group_no_one,mgmtsystem_management_review.group_management_review_write_printreport,mgmtsystem_management_review.group_management_review_all" sequence="100" />
+
+    <menuitem id="mgmt_review_report_menu" name="Revisión por la dirección" action="mgm_review_wizard_action" parent="management_review_report_menu" sequence="10" />
+
+    <menuitem id="record_meeting_report_menu" name="Actas de Reunión" action="mgmtsystem_comunication.record_meeting_wizard_action" parent="management_review_report_menu" sequence="12" />
+
+</odoo>

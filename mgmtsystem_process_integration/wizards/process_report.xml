@@ -1,0 +1,42 @@
+<odoo>
+    <data>
+
+        <record id="process_report_wizard_view_form" model="ir.ui.view">
+            <field name="name">mgmt.process_2.report.wizard.view.form</field>
+            <field name="model">mgmt.process_2.report.wizard</field>
+            <field name="arch" type="xml">
+                <form string="">
+                    <sheet>
+                        <group>
+                            <field name="categ_id" />
+                        </group>
+                    </sheet>
+                    <footer>
+                        <button name="action_print"
+                                type="object"
+                                string="Descargar"
+                                class="oe_highlight"
+                                icon="fa-download" />
+                    </footer>
+                </form>
+            </field>
+        </record>
+
+        <record id="action_process_report" model="ir.actions.act_window">
+            <field name="name">Ficha de proceso</field>
+            <field name="type">ir.actions.act_window</field>
+            <field name="res_model">mgmt.process_2.report.wizard</field>
+            <field name="view_mode">form</field>
+            <field name="view_id" ref="process_report_wizard_view_form" />
+            <field name="target">new</field>
+            <field name="binding_type">report</field>
+        </record>
+
+        <menuitem id="process_report_menu"
+                  name="Ficha de proceso"
+                  action="action_process_report"
+                  parent="mgmtsystem_process.process_report_root_menu"
+                  sequence="10" />
+
+    </data>
+</odoo>

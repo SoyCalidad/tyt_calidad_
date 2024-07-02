@@ -1,0 +1,966 @@
+<odoo>
+    <data>
+
+        <record id="hola_calidad_clause_tree" model="ir.ui.view">
+            <field name="name">hola_calidad.clause.tree</field>
+            <field name="model">hola_calidad.clause</field>
+            <field name="arch" type="xml">
+                <tree>
+                    <field name="name" />
+                    <!-- <field name="complete_name"/> -->
+                    <field name="question" />
+                </tree>
+            </field>
+        </record>
+
+        <record id="hola_calidad_requirement_tree" model="ir.ui.view">
+            <field name="name">hola_calidad.requirement.tree</field>
+            <field name="model">hola_calidad.requirement</field>
+            <field name="arch" type="xml">
+                <tree>
+                    <field name="name" />
+                    <field name="complete_name" />
+                    <field name="position_excel" />
+                </tree>
+            </field>
+        </record>
+
+        <record id="hola_calidad_diagnostic_tree" model="ir.ui.view">
+            <field name="name">hola_calidad.diagnostic.tree</field>
+            <field name="model">hola_calidad.diagnostic</field>
+            <field name="arch" type="xml">
+                <tree>
+                    <field name="date_diagnostic" />
+                    <field name="name" />
+                    <field name="state" />
+                    <field name="user_id" />
+                </tree>
+            </field>
+        </record>
+
+        <record id="hola_calidad_diagnostic_line_form" model="ir.ui.view">
+            <field name="name">hola_calidad.diagnostic.line.form</field>
+            <field name="model">hola_calidad.diagnostic.line</field>
+            <field name="arch" type="xml">
+                <form string="Detalle de linea">
+                    <group>
+                        <field name="requirement_id" />
+                        <field name="qualification" />
+                        <field name="observation" />
+                        <control>
+                            <create name="add_section_control" string="Add a section" context="{'default_is_page': True}" />
+                            <create name="add_question_control" string="Add a question" />
+                        </control>
+                        <field name="info" />
+                    </group>
+                </form>
+            </field>
+        </record>
+
+        <record id="hola_calidad_diagnostic_form" model="ir.ui.view">
+            <field name="name">hola_calidad.diagnostic.form</field>
+            <field name="model">hola_calidad.diagnostic</field>
+            <field name="arch" type="xml">
+                <form string="Diagnostico">
+                    <header>
+                        <button name="evaluate_diagnostic"
+                                attrs="{'invisible': [('state','in',['draft'])]}"
+                                string="Generar Reporte"
+                                type="object"
+                                class="btn-primary"
+                                groups="hola_calidad.group_mgmt_onlyread_printreport,hola_calidad.group_mgmt_write_printreport,hola_calidad.group_mgmt_all" />
+                        <button name="change_state_draft"
+                                attrs="{'invisible': [('state','in',['draft','validate'])]}"
+                                string="Atrás"
+                                type="object"
+                                class="btn-primary"
+                                groups="hola_calidad.group_mgmt_write_printreport,hola_calidad.group_mgmt_all" />
+                        <button name="change_state_eval"
+                                attrs="{'invisible': [('state','in',['validate','evaluate'])]}"
+                                string="Analizar detalladamente"
+                                type="object"
+                                class="btn-primary oe_edit_only"
+                                groups="hola_calidad.group_mgmt_write_printreport,hola_calidad.group_mgmt_all" />
+                        <button name="change_state_validate"
+                                attrs="{'invisible': [('state','in',['draft','validate'])]}"
+                                string="Culminar"
+                                type="object"
+                                class="btn-primary"
+                                groups="hola_calidad.group_mgmt_write_printreport,hola_calidad.group_mgmt_all" />
+                        <field name="state" widget="statusbar" />
+                    </header>
+                    <sheet>
+                        <group string="Detalles" attrs="{'invisible': [('state','in',['evaluate'])]}">
+                            <group>
+                                <field name="name" attrs="{'readonly': [('state','in',['validate'])]}" />
+                                <field name="user_id" attrs="{'readonly': [('state','in',['validate'])]}" />
+                                <field name="company_id" attrs="{'readonly': [('state','in',['validate'])]}" />
+                                <field name="xls_helper" invisible="1" />
+                            </group>
+                            <group>
+                                <field name="date_diagnostic" attrs="{'readonly': True}" />
+                                <field name="date_validate" groups="base.group_no_one,base.user_admin" attrs="{'readonly': True}" />
+                            </group>
+                        </group>
+                        <separator string="Análisis previo" attrs="{'invisible': [('state','in',['evaluate','validate','evaluate'])]}" />
+                        <field name="all_clause" attrs="{'invisible': [('state','in',['evaluate','validate','evaluate'])]}">
+                            <tree editable="bottom" delete="false">
+                                <field name="name" />
+                                <field name="question" readonly="1" />
+                            </tree>
+                        </field>
+                        <separator string="Evaluación" attrs="{'invisible': [('state','in',['draft','validate'])]}" />
+                        <notebook attrs="{'invisible': [('state','in',['draft','validate'])]}">
+                            <page string="4. Contexto">
+                                <h1>4. Contexto</h1>
+                                <h2>4.1 Comprensión de la organización y su contexto</h2>
+                                <h4>La organización debe</h4>
+                                <field name="diagnostic4_ids">
+                                    <tree editable="bottom" delete="false">
+                                        <field name="requirement_id" />
+                                        <field name="name" style="max-width:400px;" />
+                                        <field name="qualification" widget="priority" style="width:120px" />
+                                        <field name="is_page" invisible="1" />
+                                        <field name="observation" />
+                                    </tree>
+                                </field>
+                                <h2>4.2 Comprensión de las necesidades y expectativas de las partes interesadas</h2>
+                                <h4>La organización debe</h4>
+                                <field name="diagnostic4_1_ids">
+                                    <tree editable="bottom" delete="false">
+                                        <field name="requirement_id" />
+                                        <field name="name" style="max-width:400px;" />
+                                        <field name="qualification" widget="priority" style="width:120px" />
+                                        <field name="is_page" invisible="1" />
+                                        <field name="observation" />
+                                    </tree>
+                                </field>
+
+                                <h2>4.3 Determinación del alcance del SGC</h2>
+                                <h4>La organización debe</h4>
+                                <field name="diagnostic4_2_ids">
+                                    <tree editable="bottom" delete="false">
+                                        <field name="requirement_id" />
+                                        <field name="name" style="max-width:400px;" />
+                                        <field name="qualification" widget="priority" style="width:120px" />
+                                        <field name="is_page" invisible="1" />
+                                        <field name="observation" />
+                                    </tree>
+                                </field>
+                                <h2>4.4 SGC y sus procesos</h2>
+                                <h4>4.4.1. La organización debe</h4>
+                                <field name="diagnostic4_3_1_ids">
+                                    <tree editable="bottom" delete="false">
+                                        <field name="requirement_id" />
+                                        <field name="name" style="max-width:400px;" />
+                                        <field name="qualification" widget="priority" style="width:120px" />
+                                        <field name="is_page" invisible="1" />
+                                        <field name="observation" />
+                                    </tree>
+                                </field>
+                                <h3>4.4.2 En la medida en que sea necesario la organización debe</h3>
+                                <field name="diagnostic4_3_2_ids">
+                                    <tree editable="bottom" delete="false">
+                                        <field name="requirement_id" />
+                                        <field name="name" style="max-width:400px;" />
+                                        <field name="qualification" widget="priority" style="width:120px" />
+                                        <field name="is_page" invisible="1" />
+                                        <field name="observation" />
+                                    </tree>
+                                </field>
+                                <group>
+                                    <field name="diagnostic4_ids_100" widget="progressbar" options="{'current_value': 'diagnostic4_ids_100', 'max_value': 'diagnostic4_ids_total', 'editable': false}" />
+                                    <field name="diagnostic4_ids_75" widget="progressbar" options="{'current_value': 'diagnostic4_ids_75', 'max_value': 'diagnostic4_ids_total', 'editable': false}" />
+                                    <field name="diagnostic4_ids_50" widget="progressbar" options="{'current_value': 'diagnostic4_ids_50', 'max_value': 'diagnostic4_ids_total', 'editable': false}" />
+                                    <field name="diagnostic4_ids_25" widget="progressbar" options="{'current_value': 'diagnostic4_ids_25', 'max_value': 'diagnostic4_ids_total', 'editable': false}" />
+                                    <field name="diagnostic4_ids_0" widget="progressbar" options="{'current_value': 'diagnostic4_ids_0', 'max_value': 'diagnostic4_ids_total', 'editable': false}" />
+                                </group>
+                            </page>
+                            <page string="5. Liderazgo">
+                                <h1>5. Liderazgo</h1>
+                                <h2>5.1 Liderazgo y compromiso</h2>
+                                <h3>5.1.1 Generalidades</h3>
+                                <h4>La alta dirección Debe:</h4>
+                                <field name="diagnostic5_1_ids">
+                                    <tree editable="bottom" delete="false">
+                                        <field name="requirement_id" />
+                                        <field name="name" style="max-width:400px;" />
+                                        <field name="is_page" invisible="1" />
+                                        <field name="qualification" widget="priority" style="width:120px" />
+                                        <field name="is_page" invisible="1" />
+                                        <field name="observation" />
+                                    </tree>
+                                </field>
+                                <h3>5.1.2 Enfoque al cliente</h3>
+                                <h4>La alta dirección Debe:</h4>
+                                <field name="diagnostic5_2_ids">
+                                    <tree editable="bottom" delete="false">
+                                        <field name="requirement_id" />
+                                        <field name="name" style="max-width:400px;" />
+                                        <field name="is_page" invisible="1" />
+                                        <field name="qualification" widget="priority" style="width:120px" />
+                                        <field name="is_page" invisible="1" />
+                                        <field name="observation" />
+                                    </tree>
+                                </field>
+
+                                <h2>5.2 Política</h2>
+                                <h3>5.2.1 Establecimiento de la política de calidad</h3>
+                                <h4>La alta dirección Debe:</h4>
+                                <field name="diagnostic5_1_1_ids">
+                                    <tree editable="bottom" delete="false">
+                                        <field name="requirement_id" />
+                                        <field name="name" style="max-width:400px;" />
+                                        <field name="is_page" invisible="1" />
+                                        <field name="qualification" widget="priority" style="width:120px" />
+                                        <field name="is_page" invisible="1" />
+                                        <field name="observation" />
+                                    </tree>
+                                </field>
+                                <h3>5.2.2 Comunicación de la política de calidad</h3>
+                                <h4>La política de calidad Debe:</h4>
+                                <field name="diagnostic5_1_2_ids">
+                                    <tree editable="bottom" delete="false">
+                                        <field name="requirement_id" />
+                                        <field name="name" style="max-width:400px;" />
+                                        <field name="is_page" invisible="1" />
+                                        <field name="qualification" widget="priority" style="width:120px" />
+                                        <field name="is_page" invisible="1" />
+                                        <field name="observation" />
+                                    </tree>
+                                </field>
+                                <h2>5.3 Roles, responsabilidades y autoridades en la organización</h2>
+                                <h4>La alta dirección Debe:</h4>
+                                <field name="diagnostic5_2_1_ids">
+                                    <tree editable="bottom" delete="false">
+                                        <field name="requirement_id" />
+                                        <field name="name" style="max-width:400px;" />
+                                        <field name="is_page" invisible="1" />
+                                        <field name="qualification" widget="priority" style="width:120px" />
+                                        <field name="is_page" invisible="1" />
+                                        <field name="observation" />
+                                    </tree>
+                                </field>
+                                <group>
+                                    <field name="diagnostic5_ids_100" widget="progressbar" options="{'current_value': 'diagnostic5_ids_100', 'max_value': 'diagnostic5_ids_total', 'editable': false}" />
+                                    <field name="diagnostic5_ids_75" widget="progressbar" options="{'current_value': 'diagnostic5_ids_75', 'max_value': 'diagnostic5_ids_total', 'editable': false}" />
+                                    <field name="diagnostic5_ids_50" widget="progressbar" options="{'current_value': 'diagnostic5_ids_50', 'max_value': 'diagnostic5_ids_total', 'editable': false}" />
+                                    <field name="diagnostic5_ids_25" widget="progressbar" options="{'current_value': 'diagnostic5_ids_25', 'max_value': 'diagnostic5_ids_total', 'editable': false}" />
+                                    <field name="diagnostic5_ids_0" widget="progressbar" options="{'current_value': 'diagnostic5_ids_0', 'max_value': 'diagnostic5_ids_total', 'editable': false}" />
+                                </group>
+                            </page>
+                            <page string="6. Planificación">
+                                <h1>6. Planificación</h1>
+                                <h2>6.1 Acciones para abordar riesgos y oportunidades</h2>
+                                <h3>6.1.1 Al planificar el SGC la organización Debe:</h3>
+                                <field name="diagnostic6_1_ids">
+                                    <tree editable="bottom" delete="false">
+                                        <field name="requirement_id" />
+                                        <field name="name" style="max-width:400px;" />
+                                        <field name="qualification" widget="priority" style="width:120px" />
+                                        <field name="is_page" invisible="1" />
+                                        <field name="observation" />
+                                    </tree>
+                                </field>
+                                <h3>6.1.2 La organización debe planificar:</h3>
+                                <field name="diagnostic6_2_ids">
+                                    <tree editable="bottom" delete="false">
+                                        <field name="requirement_id" />
+                                        <field name="name" style="max-width:400px;" />
+                                        <field name="qualification" widget="priority" style="width:120px" />
+                                        <field name="is_page" invisible="1" />
+                                        <field name="observation" />
+                                    </tree>
+                                </field>
+                                <h2>6.2 Objetivos de la calidad y planificación para lograrlos</h2>
+                                <h3>6.2.1 La organización Debe:</h3>
+                                <field name="diagnostic6_1_1_ids">
+                                    <tree editable="bottom" delete="false">
+                                        <field name="requirement_id" />
+                                        <field name="name" style="max-width:400px;" />
+                                        <field name="qualification" widget="priority" style="width:120px" />
+                                        <field name="is_page" invisible="1" />
+                                        <field name="observation" />
+                                    </tree>
+                                </field>
+                                <h3>6.2.2 Al planificar como lograr sus objetivos de la calidad, la organización debe:</h3>
+                                <field name="diagnostic6_1_2_ids">
+                                    <tree editable="bottom" delete="false">
+                                        <field name="requirement_id" />
+                                        <field name="name" style="max-width:400px;" />
+                                        <field name="qualification" widget="priority" style="width:120px" />
+                                        <field name="is_page" invisible="1" />
+                                        <field name="observation" />
+                                    </tree>
+                                </field>
+
+                                <h2>6.3 Planificación de los cambios</h2>
+                                <h4>La organización Debe:</h4>
+                                <field name="diagnostic6_2_1_ids">
+                                    <tree editable="bottom" delete="false">
+                                        <field name="requirement_id" />
+                                        <field name="name" style="max-width:400px;" />
+                                        <field name="qualification" widget="priority" style="width:120px" />
+                                        <field name="is_page" invisible="1" />
+                                        <field name="observation" />
+                                    </tree>
+                                </field>
+                                <group>
+                                    <field name="diagnostic6_ids_100" widget="progressbar" options="{'current_value': 'diagnostic6_ids_100', 'max_value': 'diagnostic6_ids_total', 'editable': false}" />
+                                    <field name="diagnostic6_ids_75" widget="progressbar" options="{'current_value': 'diagnostic6_ids_75', 'max_value': 'diagnostic6_ids_total', 'editable': false}" />
+                                    <field name="diagnostic6_ids_50" widget="progressbar" options="{'current_value': 'diagnostic6_ids_50', 'max_value': 'diagnostic6_ids_total', 'editable': false}" />
+                                    <field name="diagnostic6_ids_25" widget="progressbar" options="{'current_value': 'diagnostic6_ids_25', 'max_value': 'diagnostic6_ids_total', 'editable': false}" />
+                                    <field name="diagnostic6_ids_0" widget="progressbar" options="{'current_value': 'diagnostic6_ids_0', 'max_value': 'diagnostic6_ids_total', 'editable': false}" />
+                                </group>
+                            </page>
+                            <page string="7. Apoyo">
+                                <h1>7. Apoyo</h1>
+                                <h2>7.1 Recurso</h2>
+                                <h3>7.1.1 Generalidades</h3>
+                                <h4>La organización Debe:</h4>
+                                <field name="diagnostic7_1_1_ids">
+                                    <tree editable="bottom" delete="false">
+                                        <field name="requirement_id" />
+                                        <field name="name" style="max-width:400px;" />
+                                        <field name="qualification" widget="priority" style="width:120px" />
+                                        <field name="is_page" invisible="1" />
+                                        <field name="observation" />
+                                    </tree>
+                                </field>
+                                <h3>7.1.2 Personas</h3>
+                                <h4>La organización Debe:</h4>
+                                <field name="diagnostic7_1_2_ids">
+                                    <tree editable="bottom" delete="false">
+                                        <field name="requirement_id" />
+                                        <field name="name" style="max-width:400px;" />
+                                        <field name="qualification" widget="priority" style="width:120px" />
+                                        <field name="is_page" invisible="1" />
+                                        <field name="observation" />
+                                    </tree>
+                                </field>
+                                <h3>7.1.3 Infraestructura</h3>
+                                <h4>La organización Debe:</h4>
+                                <field name="diagnostic7_1_3_ids">
+                                    <tree editable="bottom" delete="false">
+                                        <field name="requirement_id" />
+                                        <field name="name" style="max-width:400px;" />
+                                        <field name="qualification" widget="priority" style="width:120px" />
+                                        <field name="is_page" invisible="1" />
+                                        <field name="observation" />
+                                    </tree>
+                                </field>
+                                <h3>7.1.4 Ambiente para la operación de los procesos</h3>
+                                <h4>La organización Debe:</h4>
+                                <field name="diagnostic7_1_4_ids">
+                                    <tree editable="bottom" delete="false">
+                                        <field name="requirement_id" />
+                                        <field name="name" style="max-width:400px;" />
+                                        <field name="qualification" widget="priority" style="width:120px" />
+                                        <field name="is_page" invisible="1" />
+                                        <field name="observation" />
+                                    </tree>
+                                </field>
+                                <h3>7.1.5 Recursos de Seguimiento y Medicion</h3>
+                                <h4>7.1.5.1 Generalidades</h4>
+                                <h4>La organización Debe:</h4>
+                                <field name="diagnostic7_1_5_1_ids">
+                                    <tree editable="bottom" delete="false">
+                                        <field name="requirement_id" />
+                                        <field name="name" style="max-width:400px;" />
+                                        <field name="qualification" widget="priority" style="width:120px" />
+                                        <field name="is_page" invisible="1" />
+                                        <field name="observation" />
+                                    </tree>
+                                </field>
+                                <h4>7.1.5.2 Trazabilidad de la Medición</h4>
+                                <h4>El equipo de medición debe</h4>
+                                <field name="diagnostic7_1_5_2_ids">
+                                    <tree editable="bottom" delete="false">
+                                        <field name="requirement_id" />
+                                        <field name="name" style="max-width:400px;" />
+                                        <field name="qualification" widget="priority" style="width:120px" />
+                                        <field name="is_page" invisible="1" />
+                                        <field name="observation" />
+                                    </tree>
+                                </field>
+                                <h3>7.1.6 Conocimientos de la Organización</h3>
+                                <h4>La organización Debe:</h4>
+                                <field name="diagnostic7_1_6_ids">
+                                    <tree editable="bottom" delete="false">
+                                        <field name="requirement_id" />
+                                        <field name="name" style="max-width:400px;" />
+                                        <field name="qualification" widget="priority" style="width:120px" />
+                                        <field name="is_page" invisible="1" />
+                                        <field name="observation" />
+                                    </tree>
+                                </field>
+                                <h2>7.2 Competencia</h2>
+                                <h4>La organización Debe:</h4>
+                                <field name="diagnostic7_2_1_ids">
+                                    <tree editable="bottom" delete="false">
+                                        <field name="requirement_id" />
+                                        <field name="name" style="max-width:400px;" />
+                                        <field name="qualification" widget="priority" style="width:120px" />
+                                        <field name="is_page" invisible="1" />
+                                        <field name="observation" />
+                                    </tree>
+                                </field>
+                                <h2>7.3 Toma de Conciencia</h2>
+                                <h4>La organización debe asegurarse de que las personas que realizan el trabajo bajo el control de la organización tomen conciencia de:</h4>
+                                <field name="diagnostic7_3_1_ids">
+                                    <tree editable="bottom" delete="false">
+                                        <field name="requirement_id" />
+                                        <field name="name" style="max-width:400px;" />
+                                        <field name="qualification" widget="priority" style="width:120px" />
+                                        <field name="is_page" invisible="1" />
+                                        <field name="observation" />
+                                    </tree>
+                                </field>
+                                <h2>7.4 Comunicación</h2>
+                                <h4>La organización debe determinar las comunicaciones internas y externas pertinentes al SGC, que incluyan:</h4>
+                                <field name="diagnostic7_4_1_ids">
+                                    <tree editable="bottom" delete="false">
+                                        <field name="requirement_id" />
+                                        <field name="name" style="max-width:400px;" />
+                                        <field name="qualification" widget="priority" style="width:120px" />
+                                        <field name="is_page" invisible="1" />
+                                        <field name="observation" />
+                                    </tree>
+                                </field>
+                                <h2>7.5 Informacion Documentada</h2>
+                                <h3>7.5.1 Generalidades:</h3>
+                                <h4>El SGC de la organización debe incluir:</h4>
+                                <field name="diagnostic7_5_1_ids">
+                                    <tree editable="bottom" delete="false">
+                                        <field name="requirement_id" />
+                                        <field name="name" style="max-width:400px;" />
+                                        <field name="qualification" widget="priority" style="width:120px" />
+                                        <field name="is_page" invisible="1" />
+                                        <field name="observation" />
+                                    </tree>
+                                </field>
+                                <h3>7.5.2 Creación y actualización</h3>
+                                <h4>Al crear y actualizar información documentada, la organización debe asegurarse de que lo siguiente sea apropiado:</h4>
+                                <field name="diagnostic7_5_2_ids">
+                                    <tree editable="bottom" delete="false">
+                                        <field name="requirement_id" />
+                                        <field name="name" style="max-width:400px;" />
+                                        <field name="qualification" widget="priority" style="width:120px" />
+                                        <field name="is_page" invisible="1" />
+                                        <field name="observation" />
+                                    </tree>
+                                </field>
+                                <h3>7.5.3 Control de la Informacion Documentada</h3>
+                                <h4>7.5.3.1 La información documentada requerida por el SGC y por esta Norma Internacional se debe controlar para asegurarse de que:</h4>
+                                <field name="diagnostic7_5_3_1_ids">
+                                    <tree editable="bottom" delete="false">
+                                        <field name="requirement_id" />
+                                        <field name="name" style="max-width:400px;" />
+                                        <field name="qualification" widget="priority" style="width:120px" />
+                                        <field name="is_page" invisible="1" />
+                                        <field name="observation" />
+                                    </tree>
+                                </field>
+                                <h4>7.5.3.2 Para el control de la información documentada, la organización debe abordar las siguientes actividades, según corresponda:</h4>
+                                <field name="diagnostic7_5_3_2_ids">
+                                    <tree editable="bottom" delete="false">
+                                        <field name="requirement_id" />
+                                        <field name="name" style="max-width:400px;" />
+                                        <field name="qualification" widget="priority" style="width:120px" />
+                                        <field name="is_page" invisible="1" />
+                                        <field name="observation" />
+                                    </tree>
+                                </field>
+                                <group>
+                                    <field name="diagnostic7_ids_100" widget="progressbar" options="{'current_value': 'diagnostic7_ids_100', 'max_value': 'diagnostic7_ids_total', 'editable': false}" />
+                                    <field name="diagnostic7_ids_75" widget="progressbar" options="{'current_value': 'diagnostic7_ids_75', 'max_value': 'diagnostic7_ids_total', 'editable': false}" />
+                                    <field name="diagnostic7_ids_50" widget="progressbar" options="{'current_value': 'diagnostic7_ids_50', 'max_value': 'diagnostic7_ids_total', 'editable': false}" />
+                                    <field name="diagnostic7_ids_25" widget="progressbar" options="{'current_value': 'diagnostic7_ids_25', 'max_value': 'diagnostic7_ids_total', 'editable': false}" />
+                                    <field name="diagnostic7_ids_0" widget="progressbar" options="{'current_value': 'diagnostic7_ids_0', 'max_value': 'diagnostic7_ids_total', 'editable': false}" />
+                                </group>
+                            </page>
+                            <page string="8. Operación">
+                                <h1>8. Operación</h1>
+                                <h2>8.1 Planificación y control operacional</h2>
+                                <h4>La organización debe</h4>
+                                <field name="diagnostic8_1_1_ids">
+                                    <tree editable="bottom" delete="false">
+                                        <field name="requirement_id" />
+                                        <field name="name" style="max-width:400px;" />
+                                        <field name="qualification" widget="priority" style="width:120px" />
+                                        <field name="is_page" invisible="1" />
+                                        <field name="observation" />
+                                    </tree>
+                                </field>
+                                <h2>8.2 Requisitos para los productos y servicios</h2>
+                                <h3>8.2.1 Comunicación con el cliente.</h3>
+                                <h4>La comunicación con los clientes debe incluir: </h4>
+                                <field name="diagnostic8_2_1_ids">
+                                    <tree editable="bottom" delete="false">
+                                        <field name="requirement_id" />
+                                        <field name="name" style="max-width:400px;" />
+                                        <field name="qualification" widget="priority" style="width:120px" />
+                                        <field name="is_page" invisible="1" />
+                                        <field name="observation" />
+                                    </tree>
+                                </field>
+                                <h3>8.2.2 Determinación de los requisitos para los productos y servicios.</h3>
+                                <h4>La organización debe asegurarse de que:</h4>
+                                <field name="diagnostic8_2_2_ids">
+                                    <tree editable="bottom" delete="false">
+                                        <field name="requirement_id" />
+                                        <field name="name" style="max-width:400px;" />
+                                        <field name="qualification" widget="priority" style="width:120px" />
+                                        <field name="is_page" invisible="1" />
+                                        <field name="observation" />
+                                    </tree>
+                                </field>
+                                <h3>8.2.3 Revisión de los requisitos para los productos y servicios</h3>
+                                <h4>8.2.3.1 la organización debe:</h4>
+                                <field name="diagnostic8_2_2_3_1_ids">
+                                    <tree editable="bottom" delete="false">
+                                        <field name="requirement_id" />
+                                        <field name="name" style="max-width:400px;" />
+                                        <field name="qualification" widget="priority" style="width:120px" />
+                                        <field name="is_page" invisible="1" />
+                                        <field name="observation" />
+                                    </tree>
+                                </field>
+                                <h4>8.2.3.2 La organización debe conservar la información documentada, cuando sea aplicable:</h4>
+                                <field name="diagnostic8_2_2_3_2_ids">
+                                    <tree editable="bottom" delete="false">
+                                        <field name="requirement_id" />
+                                        <field name="name" style="max-width:400px;" />
+                                        <field name="qualification" widget="priority" style="width:120px" />
+                                        <field name="is_page" invisible="1" />
+                                        <field name="observation" />
+                                    </tree>
+                                </field>
+                                <h3>8.2.4 Cambios en los requisitos para los productos y servicios.</h3>
+                                <field name="diagnostic8_2_4_ids">
+                                    <tree editable="bottom" delete="false">
+                                        <field name="requirement_id" />
+                                        <field name="name" style="max-width:400px;" />
+                                        <field name="qualification" widget="priority" style="width:120px" />
+                                        <field name="is_page" invisible="1" />
+                                        <field name="observation" />
+                                    </tree>
+                                </field>
+                                <h2>8.3 Diseño y desarrollo de los productos y servicios</h2>
+                                <h3>8.3.1 Generalidades.</h3>
+                                <field name="diagnostic8_3_1_ids">
+                                    <tree editable="bottom" delete="false">
+                                        <field name="requirement_id" />
+                                        <field name="name" style="max-width:400px;" />
+                                        <field name="qualification" widget="priority" style="width:120px" />
+                                        <field name="is_page" invisible="1" />
+                                        <field name="observation" />
+                                    </tree>
+                                </field>
+                                <h3>8.3.2 Planificación del diseño y desarrollo</h3>
+                                <h4>Al determinar las etapas del diseño y desarrollo se debe considerar:</h4>
+                                <field name="diagnostic8_3_2_ids">
+                                    <tree editable="bottom" delete="false">
+                                        <field name="requirement_id" />
+                                        <field name="name" style="max-width:400px;" />
+                                        <field name="qualification" widget="priority" style="width:120px" />
+                                        <field name="is_page" invisible="1" />
+                                        <field name="observation" />
+                                    </tree>
+                                </field>
+                                <h3>8.3.3 Entradas para diseño y desarrollo</h3>
+                                <h4>La organización debe:</h4>
+                                <field name="diagnostic8_3_3_ids">
+                                    <tree editable="bottom" delete="false">
+                                        <field name="requirement_id" />
+                                        <field name="name" style="max-width:400px;" />
+                                        <field name="qualification" widget="priority" style="width:120px" />
+                                        <field name="is_page" invisible="1" />
+                                        <field name="observation" />
+                                    </tree>
+                                </field>
+                                <h3>8.3.4 Controles del diseño y desarrollo</h3>
+                                <h4>La organización debe aplicar controles al diseño y desarrollo para asegurarse de que:</h4>
+                                <field name="diagnostic8_3_4_ids">
+                                    <tree editable="bottom" delete="false">
+                                        <field name="requirement_id" />
+                                        <field name="name" style="max-width:400px;" />
+                                        <field name="qualification" widget="priority" style="width:120px" />
+                                        <field name="is_page" invisible="1" />
+                                        <field name="observation" />
+                                    </tree>
+                                </field>
+                                <h3>8.3.5 Salidas del diseño y desarrollo</h3>
+                                <h4>La organización debe asegurarse de que las salidas del diseño y desarrollo</h4>
+                                <field name="diagnostic8_3_5_ids">
+                                    <tree editable="bottom" delete="false">
+                                        <field name="requirement_id" />
+                                        <field name="name" style="max-width:400px;" />
+                                        <field name="qualification" widget="priority" style="width:120px" />
+                                        <field name="is_page" invisible="1" />
+                                        <field name="observation" />
+                                    </tree>
+                                </field>
+                                <h3>8.3.6 Cambios del diseño y desarrollo</h3>
+                                <h4>La organización debe</h4>
+                                <field name="diagnostic8_3_6_ids">
+                                    <tree editable="bottom" delete="false">
+                                        <field name="requirement_id" />
+                                        <field name="name" style="max-width:400px;" />
+                                        <field name="qualification" widget="priority" style="width:120px" />
+                                        <field name="is_page" invisible="1" />
+                                        <field name="observation" />
+                                    </tree>
+                                </field>
+                                <h2>8.4 Control de los procesos, productos y servicios suministrados externamente</h2>
+                                <h3>8.4.1 Generalidades</h3>
+                                <h4>La organización debe:</h4>
+                                <field name="diagnostic8_4_1_ids">
+                                    <tree editable="bottom" delete="false">
+                                        <field name="requirement_id" />
+                                        <field name="name" style="max-width:400px;" />
+                                        <field name="qualification" widget="priority" style="width:120px" />
+                                        <field name="is_page" invisible="1" />
+                                        <field name="observation" />
+                                    </tree>
+                                </field>
+                                <h3>8.4.2 Tipo y alcance del control</h3>
+                                <h4>La organización debe:</h4>
+                                <field name="diagnostic8_4_2_ids">
+                                    <tree editable="bottom" delete="false">
+                                        <field name="requirement_id" />
+                                        <field name="name" style="max-width:400px;" />
+                                        <field name="qualification" widget="priority" style="width:120px" />
+                                        <field name="is_page" invisible="1" />
+                                        <field name="observation" />
+                                    </tree>
+                                </field>
+                                <h3>8.4.3 Información para los proveedores externos</h3>
+                                <h4>La organización debe:</h4>
+                                <field name="diagnostic8_4_3_ids">
+                                    <tree editable="bottom" delete="false">
+                                        <field name="requirement_id" />
+                                        <field name="name" style="max-width:400px;" />
+                                        <field name="qualification" widget="priority" style="width:120px" />
+                                        <field name="is_page" invisible="1" />
+                                        <field name="observation" />
+                                    </tree>
+                                </field>
+                                <h2>8.5 producción y provisión del servicio</h2>
+                                <h3>8.5.1 Control de la producción y de la provisión del servicio</h3>
+                                <field name="diagnostic8_5_1_ids">
+                                    <tree editable="bottom" delete="false">
+                                        <field name="requirement_id" />
+                                        <field name="name" style="max-width:400px;" />
+                                        <field name="qualification" widget="priority" style="width:120px" />
+                                        <field name="is_page" invisible="1" />
+                                        <field name="observation" />
+                                    </tree>
+                                </field>
+                                <h3>8.5.2 Identificación y trazabilidad</h3>
+                                <h4>La organización debe:</h4>
+                                <field name="diagnostic8_5_2_ids">
+                                    <tree editable="bottom" delete="false">
+                                        <field name="requirement_id" />
+                                        <field name="name" style="max-width:400px;" />
+                                        <field name="qualification" widget="priority" style="width:120px" />
+                                        <field name="is_page" invisible="1" />
+                                        <field name="observation" />
+                                    </tree>
+                                </field>
+                                <h3>8.5.3 Propiedad perteneciente a los clientes o proveedores externos</h3>
+                                <h4>La organización debe:</h4>
+                                <field name="diagnostic8_5_3_ids">
+                                    <tree editable="bottom" delete="false">
+                                        <field name="requirement_id" />
+                                        <field name="name" style="max-width:400px;" />
+                                        <field name="qualification" widget="priority" style="width:120px" />
+                                        <field name="is_page" invisible="1" />
+                                        <field name="observation" />
+                                    </tree>
+                                </field>
+                                <h3>8.5.4 Preservación</h3>
+                                <field name="diagnostic8_5_4_ids">
+                                    <tree editable="bottom" delete="false">
+                                        <field name="requirement_id" />
+                                        <field name="name" style="max-width:400px;" />
+                                        <field name="qualification" widget="priority" style="width:120px" />
+                                        <field name="is_page" invisible="1" />
+                                        <field name="observation" />
+                                    </tree>
+                                </field>
+                                <h3>8.5.5 Actividades posteriores a la entrega</h3>
+                                <field name="diagnostic8_5_5_ids">
+                                    <tree editable="bottom" delete="false">
+                                        <field name="requirement_id" />
+                                        <field name="name" style="max-width:400px;" />
+                                        <field name="qualification" widget="priority" style="width:120px" />
+                                        <field name="is_page" invisible="1" />
+                                        <field name="observation" />
+                                    </tree>
+                                </field>
+                                <h3>8.5.6 Control de los cambios</h3>
+                                <h4>La organización debe:</h4>
+                                <field name="diagnostic8_5_6_ids">
+                                    <tree editable="bottom" delete="false">
+                                        <field name="requirement_id" />
+                                        <field name="name" style="max-width:400px;" />
+                                        <field name="qualification" widget="priority" style="width:120px" />
+                                        <field name="is_page" invisible="1" />
+                                        <field name="observation" />
+                                    </tree>
+                                </field>
+                                <h2>8.6 Liberación de los productos y servicios</h2>
+                                <h4>La organización debe:</h4>
+                                <field name="diagnostic8_6_1_ids">
+                                    <tree editable="bottom" delete="false">
+                                        <field name="requirement_id" />
+                                        <field name="name" style="max-width:400px;" />
+                                        <field name="qualification" widget="priority" style="width:120px" />
+                                        <field name="is_page" invisible="1" />
+                                        <field name="observation" />
+                                    </tree>
+                                </field>
+                                <h2>8.7 Control de las salidas no conformes</h2>
+                                <h3>8.7.1 La organización debe</h3>
+                                <field name="diagnostic8_7_1_ids">
+                                    <tree editable="bottom" delete="false">
+                                        <field name="requirement_id" />
+                                        <field name="name" style="max-width:400px;" />
+                                        <field name="qualification" widget="priority" style="width:120px" />
+                                        <field name="is_page" invisible="1" />
+                                        <field name="observation" />
+                                    </tree>
+                                </field>
+                                <h3>8.7.2 La organización debe conservar la información documentada que:</h3>
+                                <field name="diagnostic8_7_2_ids">
+                                    <tree editable="bottom" delete="false">
+                                        <field name="requirement_id" />
+                                        <field name="name" style="max-width:400px;" />
+                                        <field name="qualification" widget="priority" style="width:120px" />
+                                        <field name="is_page" invisible="1" />
+                                        <field name="observation" />
+                                    </tree>
+                                </field>
+                            </page> 
+                            <page string="9. Desempeño">
+                                <h1>9. Desempeño</h1>
+                                <h2>9.1 Seguimiento, medición, análisis y evaluación</h2>
+                                <h3>9.1.1 Generalidades</h3>
+                                <h4>La organización debe:</h4>
+                                <field name="diagnostic9_1_1_ids">
+                                    <tree editable="bottom" delete="false">
+                                        <field name="requirement_id" />
+                                        <field name="name" style="max-width:400px;" />
+                                        <field name="qualification" widget="priority" style="width:120px" />
+                                        <field name="is_page" invisible="1" />
+                                        <field name="observation" />
+                                    </tree>
+                                </field>
+                                <h3>9.1.2 Satisfacción del cliente</h3>
+                                <h4>La organización debe:</h4>
+                                <field name="diagnostic9_1_2_ids">
+                                    <tree editable="bottom" delete="false">
+                                        <field name="requirement_id" />
+                                        <field name="name" style="max-width:400px;" />
+                                        <field name="qualification" widget="priority" style="width:120px" />
+                                        <field name="is_page" invisible="1" />
+                                        <field name="observation" />
+                                    </tree>
+                                </field>
+                                <h3>9.1.3 Análisis y evaluación</h3>
+                                <field name="diagnostic9_1_3_ids">
+                                    <tree editable="bottom" delete="false">
+                                        <field name="requirement_id" />
+                                        <field name="name" style="max-width:400px;" />
+                                        <field name="qualification" widget="priority" style="width:120px" />
+                                        <field name="is_page" invisible="1" />
+                                        <field name="observation" />
+                                    </tree>
+                                </field>
+                                <h2>9.2 Auditoría interna</h2>
+                                <h3>9.2.1 La organización debe</h3>
+                                <field name="diagnostic9_2_1_ids">
+                                    <tree editable="bottom" delete="false">
+                                        <field name="requirement_id" />
+                                        <field name="name" style="max-width:400px;" />
+                                        <field name="qualification" widget="priority" style="width:120px" />
+                                        <field name="is_page" invisible="1" />
+                                        <field name="observation" />
+                                    </tree>
+                                </field>
+                                <h3>9.2.2 La organización debe:</h3>
+                                <field name="diagnostic9_2_2_ids">
+                                    <tree editable="bottom" delete="false">
+                                        <field name="requirement_id" />
+                                        <field name="name" style="max-width:400px;" />
+                                        <field name="qualification" widget="priority" style="width:120px" />
+                                        <field name="is_page" invisible="1" />
+                                        <field name="observation" />
+                                    </tree>
+                                </field>
+                                <h2>9.3 Revisión por la dirección</h2>
+                                <h3>9.3.1 Generalidades</h3>
+                                <field name="diagnostic9_3_1_ids">
+                                    <tree editable="bottom" delete="false">
+                                        <field name="requirement_id" />
+                                        <field name="name" style="max-width:400px;" />
+                                        <field name="qualification" widget="priority" style="width:120px" />
+                                        <field name="is_page" invisible="1" />
+                                        <field name="observation" />
+                                    </tree>
+                                </field>
+                                <h3>9.3.2 Entradas de la revisión por la dirección</h3>
+                                <field name="diagnostic9_3_2_ids">
+                                    <tree editable="bottom" delete="false">
+                                        <field name="requirement_id" />
+                                        <field name="name" style="max-width:400px;" />
+                                        <field name="qualification" widget="priority" style="width:120px" />
+                                        <field name="is_page" invisible="1" />
+                                        <field name="observation" />
+                                    </tree>
+                                </field>
+                                <h3>9.3.3 Las salidas de la revisión por la dirección</h3>
+                                <field name="diagnostic9_3_3_ids">
+                                    <tree editable="bottom" delete="false">
+                                        <field name="requirement_id" />
+                                        <field name="name" style="max-width:400px;" />
+                                        <field name="qualification" widget="priority" style="width:120px" />
+                                        <field name="is_page" invisible="1" />
+                                        <field name="observation" />
+                                    </tree>
+                                </field>
+                                <group>
+                                    <field name="diagnostic9_ids_100" widget="progressbar" options="{'current_value': 'diagnostic9_ids_100', 'max_value': 'diagnostic9_ids_total', 'editable': false}" />
+                                    <field name="diagnostic9_ids_75" widget="progressbar" options="{'current_value': 'diagnostic9_ids_75', 'max_value': 'diagnostic9_ids_total', 'editable': false}" />
+                                    <field name="diagnostic9_ids_50" widget="progressbar" options="{'current_value': 'diagnostic9_ids_50', 'max_value': 'diagnostic9_ids_total', 'editable': false}" />
+                                    <field name="diagnostic9_ids_25" widget="progressbar" options="{'current_value': 'diagnostic9_ids_25', 'max_value': 'diagnostic9_ids_total', 'editable': false}" />
+                                    <field name="diagnostic9_ids_0" widget="progressbar" options="{'current_value': 'diagnostic9_ids_0', 'max_value': 'diagnostic9_ids_total', 'editable': false}" />
+                                </group>
+                            </page>
+                            <page string="10. Mejora">
+                                <h1>10. Mejora</h1>
+                                <h2>10.1 Generalidades</h2>
+                                <h4>La organización Debe:</h4>
+                                <field name="diagnostic10_1_1_ids">
+                                    <tree editable="bottom" delete="false">
+                                        <field name="requirement_id" />
+                                        <field name="name" style="max-width:400px;" />
+                                        <field name="qualification" widget="priority" style="width:120px" />
+                                        <field name="is_page" invisible="1" />
+                                        <field name="observation" />
+                                    </tree>
+                                </field>
+                                <h2>10.2 No conformidad y acción correctiva</h2>
+                                <h3>10.2.1 Cuando ocurra una no conformidad, incluida cualquiera originada por quejas, la organización debe:</h3>
+                                <field name="diagnostic10_2_1_ids">
+                                    <tree editable="bottom" delete="false">
+                                        <field name="requirement_id" />
+                                        <field name="name" style="max-width:400px;" />
+                                        <field name="qualification" widget="priority" style="width:120px" />
+                                        <field name="is_page" invisible="1" />
+                                        <field name="observation" />
+                                    </tree>
+                                </field>
+                                <h3>10.2.2 La organización debe conservar información documentada como evidencia de</h3>
+                                <field name="diagnostic10_2_2_ids">
+                                    <tree editable="bottom" delete="false">
+                                        <field name="requirement_id" />
+                                        <field name="name" style="max-width:400px;" />
+                                        <field name="qualification" widget="priority" style="width:120px" />
+                                        <field name="is_page" invisible="1" />
+                                        <field name="observation" />
+                                    </tree>
+                                </field>
+                                <h2>10.3 Mejora continua</h2>
+                                <h4>La organización Debe:</h4>
+                                <field name="diagnostic10_3_1_ids">
+                                    <tree editable="bottom" delete="false">
+                                        <field name="requirement_id" />
+                                        <field name="name" style="max-width:400px;" />
+                                        <field name="qualification" widget="priority" style="width:120px" />
+                                        <field name="is_page" invisible="1" />
+                                        <field name="observation" />
+                                    </tree>
+                                </field>
+                                <group>
+                                    <field name="diagnostic10_ids_100" widget="progressbar" options="{'current_value': 'diagnostic10_ids_100', 'max_value': 'diagnostic10_ids_total', 'editable': false}" />
+                                    <field name="diagnostic10_ids_75" widget="progressbar" options="{'current_value': 'diagnostic10_ids_75', 'max_value': 'diagnostic10_ids_total', 'editable': false}" />
+                                    <field name="diagnostic10_ids_50" widget="progressbar" options="{'current_value': 'diagnostic10_ids_50', 'max_value': 'diagnostic10_ids_total', 'editable': false}" />
+                                    <field name="diagnostic10_ids_25" widget="progressbar" options="{'current_value': 'diagnostic10_ids_25', 'max_value': 'diagnostic10_ids_total', 'editable': false}" />
+                                    <field name="diagnostic10_ids_0" widget="progressbar" options="{'current_value': 'diagnostic10_ids_0', 'max_value': 'diagnostic10_ids_total', 'editable': false}" />
+                                </group>
+                            </page>
+                        </notebook>
+                        <separator string="El proceso ha sido culminado, para ver los datos puede generar un reporte." attrs="{'invisible': [('state','in',['draft','evaluate'])]}" />
+                    </sheet>
+                </form>
+            </field>
+        </record>
+
+
+        <!-- Menu y actions -->
+        <record model="ir.actions.act_window" id="diagnostic_list_action">
+            <field name="name">Análisis</field>
+            <field name="res_model">hola_calidad.diagnostic</field>
+            <field name="view_mode">tree,form</field>
+            <field name="help" type="html">
+                <p class="oe_view_nocontent_create">Crea diagnosticos de gestión de calidad</p>
+            </field>
+        </record>
+
+        <record model="ir.actions.act_window" id="clause_list_action">
+            <field name="name">Claúsulas</field>
+            <field name="res_model">hola_calidad.clause</field>
+      
+            <field name="view_mode">tree,form</field>
+            <field name="help" type="html">
+                <p class="oe_view_nocontent_create">Crea claúsulas de gestión de calidad</p>
+            </field>
+        </record>
+
+        <record model="ir.actions.act_window" id="requirement_list_action">
+            <field name="name">Requisitos</field>
+            <field name="res_model">hola_calidad.requirement</field>
+      
+            <field name="view_mode">tree,form</field>
+            <field name="help" type="html">
+                <p class="oe_view_nocontent_create">Crea requisitos de gestión de calidad</p>
+            </field>
+        </record>
+
+        <!--menuitems-->
+
+        <menuitem id="calidad_diagnostic_menu"
+                  name="Analisis"
+                  sequence="0"
+                  parent="hola_calidad.menu_mgmtsystem_root"
+                  groups="group_mgmt_onlyread,group_mgmt_onlyread_printreport,group_mgmt_write_printreport,group_mgmt_all" />
+
+        <menuitem id="calidad_analisis_menu"
+                  name="Analisis"
+                  sequence="0"
+                  parent="calidad_diagnostic_menu"
+                  action="diagnostic_list_action"
+                  groups="group_mgmt_onlyread,group_mgmt_onlyread_printreport,group_mgmt_write_printreport,group_mgmt_all" />
+
+        <menuitem id="calidad_data_menu"
+                  name="Datos"
+                  sequence="50"
+                  parent="calidad_diagnostic_menu"
+                  groups="group_mgmt_onlyread,group_mgmt_onlyread_printreport,group_mgmt_write_printreport,group_mgmt_all" />
+
+        <menuitem id="calidad_clause_menu"
+                  name="Clausulas"
+                  sequence="0"
+                  parent="calidad_data_menu"
+                  action="clause_list_action" />
+
+        <menuitem id="calidad_requirement_menu"
+                  name="Requisitos"
+                  sequence="10"
+                  parent="calidad_data_menu"
+                  action="requirement_list_action" />
+
+    </data>
+</odoo>

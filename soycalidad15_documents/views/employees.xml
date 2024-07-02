@@ -1,0 +1,55 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <record id="mgmtsystem_plan_documents_view_form" model="ir.ui.view">
+        <field name="name">mgmtsystem.plan.view.form.inherit.documents</field>
+        <field name="model">mgmtsystem.plan</field>
+        <field name="inherit_id" ref="mgmtsystem_employees.view_mgmtsystem_plan_form"/>
+        <field name="arch" type="xml">
+            <xpath expr="//button[@name='open_change_request_view']" position="before">
+                <button name="action_open_documents"
+                    class="oe_stat_button"
+                    groups="documents.group_documents_user"
+                    icon="fa-file-text"
+                    type="object">
+                    <field name="document_count" widget="statinfo" string="Documents"/>
+                </button>
+            </xpath>
+        </field>
+    </record>
+
+    <record id="mgmtsystem_plan_training_documents_view_form" model="ir.ui.view">
+        <field name="name">mgmtsystem.plan.training.view.form.inherit.documents</field>
+        <field name="model">mgmtsystem.plan.training</field>
+        <field name="inherit_id" ref="mgmtsystem_employees.view_mgmtsystem_plan_training_form"/>
+        <field name="arch" type="xml">
+            <xpath expr="//button[@name='open_change_request_view']" position="before">
+                <button name="action_open_documents"
+                    class="oe_stat_button"
+                    groups="documents.group_documents_user"
+                    icon="fa-file-text"
+                    type="object">
+                    <field name="document_count" widget="statinfo" string="Documents"/>
+                </button>
+            </xpath>
+        </field>
+    </record>
+
+    <record id="mgmtsystem_context_organization_chart_view_form_inherit" model="ir.ui.view">
+        <field name="name">mgmtsystem.context.organization_chart.view.form.inherit</field>
+        <field name="model">mgmtsystem.context.organization_chart</field>
+        <field name="inherit_id" ref="mgmtsystem_context.organization_chart_view_form"/>
+        <field name="arch" type="xml">
+            <div class="oe_button_box" position="inside">
+                <button name="action_open_documents"
+                    class="oe_stat_button"
+                    groups="documents.group_documents_user"
+                    icon="fa-file-text"
+                    type="object">
+                    <field name="document_count" widget="statinfo" string="Documents"/>
+                </button>
+            </div>
+        </field>
+    </record>
+
+
+</odoo>

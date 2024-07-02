@@ -1,0 +1,488 @@
+<odoo>
+    <data>
+
+        <record id="mgmt_process_line_client_supplier_view_form" model="ir.ui.view">
+            <field name="name">mgmt.process.line.client_supplier.view.form</field>
+            <field name="model">mgmt.process.line.client_supplier</field>
+            <field name="arch" type="xml">
+                <form string="Cliente/Proveedor">
+                    <sheet>
+                        <group>
+                            <field name="name" />
+                            <field name="type" />
+                        </group>
+                    </sheet>
+                </form>
+            </field>
+        </record>
+
+        <record id="mgmt_proces_line_client_supplier_view_tree" model="ir.ui.view">
+            <field name="name">mgmt.process.line.client_supplier.view.tree</field>
+            <field name="model">mgmt.process.line.client_supplier</field>
+            <field name="arch" type="xml">
+                <tree string="">
+                    <field name="name" />
+                    <field name="type" invisible="1" />
+                </tree>
+            </field>
+        </record>
+
+        <record id="mgmt_process_line_client_supplier_action" model="ir.actions.act_window">
+            <field name="name">Cliente/Proveedor</field>
+            <field name="res_model">mgmt.process.line.client_supplier</field>
+            <field name="view_mode">tree,form</field>
+            <field name="domain">[]</field>
+            <field name="context">{}</field>
+            <field name="help" type="html">
+                <p>Cliente/Proveedor</p>
+            </field>
+        </record>
+
+        <record id="mgmt_process_interaction_view_form" model="ir.ui.view">
+            <field name="name">mgmt.process.interaction.view.form</field>
+            <field name="model">mgmt.process.interaction</field>
+            <field name="arch" type="xml">
+                <form string="">
+                    <sheet>
+                        <group>
+                            <field name="type" invisible="1" />
+                            <field name="name" />
+                        </group>
+                    </sheet>
+                </form>
+            </field>
+        </record>
+
+        <record id="mgmt_process_interaction_view_tree" model="ir.ui.view">
+            <field name="name">mgmt.process.interaction.view.tree</field>
+            <field name="model">mgmt.process.interaction</field>
+            <field name="arch" type="xml">
+                <tree string="">
+                    <field name="type" invisible="1" />
+                    <field name="name" />
+                </tree>
+            </field>
+        </record>
+
+        <record id="mgmt_process_interaction_action" model="ir.actions.act_window">
+            <field name="name">Interacciones</field>
+            <field name="res_model">mgmt.process.interaction</field>
+            <field name="view_mode">tree,form</field>
+            <field name="domain">[]</field>
+            <field name="context">{}</field>
+        </record>
+
+        <record model="ir.actions.act_window" id="show_target_action_8">
+            <field name="name">Objetivos</field>
+            <field name="res_model">mgmtsystem.target</field>
+            <field name="view_mode">kanban,form,tree</field>
+            <field name="context">{"search_default_process_ids": active_id}</field>
+            <field name="search_view_id" ref="target_filter" />
+        </record>
+
+        <record model="ir.actions.act_window" id="show_target_nc_action_8">
+            <field name="name">No conformidades</field>
+            <field name="res_model">mgmtsystem.nonconformity</field>
+            <field name="view_mode">kanban,form,tree</field>
+            <field name="context">{"search_default_process_ids": active_id}</field>
+            <field name="search_view_id" ref="nc_filter" />
+        </record>
+
+        <record model="ir.actions.act_window" id="show_target_ac_action_8">
+            <field name="name">Acciones</field>
+            <field name="res_model">mgmtsystem.action</field>
+            <field name="view_mode">kanban,form,tree</field>
+            <field name="context">{"search_default_process_ids": active_id}</field>
+            <field name="search_view_id" ref="action_filter" />
+        </record>
+
+        <record id="opportunity_type_view_form" model="ir.ui.view">
+            <field name="name">matrix.block.line.view.form</field>
+            <field name="model">matrix.block.line</field>
+            <field name="inherit_id" ref="mgmtsystem_opportunity.view_matrix_block_line_form" />
+            <field name="arch" type="xml">
+                <field name="name" position="after">
+                    <field name="type" invisible="1" />
+                </field>
+            </field>
+        </record>
+
+
+        <record id="mgmt_process_view_form" model="ir.ui.view">
+            <field name="name">mgmt.process.view.form</field>
+            <field name="model">mgmt.process</field>
+            <field name="inherit_id" ref="mgmtsystem_process.mgmt_process_form" />
+            <field name="arch" type="xml">
+                <xpath expr="//notebook/page[1]" position="inside">
+                    <group>
+                        <field name="resource_ids">
+                            <tree editable="1">
+                                <field name="type_id" />
+                                <field name="name" />
+                                <field name="description" />
+                            </tree>
+                        </field>
+                    </group>
+                </xpath>
+                <xpath expr="//notebook" position="inside">
+                <!--Pestaña Proceso-->
+                    <page name="process" string="Proceso">
+                        <group string="Proceso" col="4">
+                            <separator string="Entradas" colspan="4"/>
+                            <field name="process_line_in_ids" nolabel="1" colspan="4">
+                                <tree editable="bottom">
+                                    <field name="supplier_id" widget="many2many_tags" context="{'default_type': 'input'}"/>
+                                    <field name="input_id" widget="many2many_tags"/>
+                                </tree>
+                            </field>
+                            <separator string="Actividades" colspan="4"/>
+                            <separator string="Planificar" colspan="4"/>
+                            <field name="interaction_plan" context="{'default_type': 'plan'}" colspan="4" nolabel="1">
+                                <tree string="">
+                                    <field name="type" invisible="1"/>
+                                    <field name="name" style="width:200px;max-width:200px;"/>
+                                </tree>
+                            </field>
+                            <separator string="Hacer" colspan="4"/>
+                            <field name="interaction_do" context="{'default_type': 'do'}" colspan="4" nolabel="1">
+                                <tree string="">
+                                    <field name="type" invisible="1"/>
+                                    <field name="name" style="width:200px;max-width:200px;"/>
+                                </tree>
+                            </field>
+                            <separator string="Verificar" colspan="4"/>
+                            <field name="interaction_verify" context="{'default_type': 'verify'}" colspan="4" nolabel="1">
+                                <tree string="">
+                                    <field name="type" invisible="1"/>
+                                    <field name="name" style="width:200px;max-width:200px;"/>
+                                </tree>
+                            </field>
+                            <separator string="Actuar" colspan="4"/>
+                            <field name="interaction_act" context="{'default_type': 'act'}" colspan="4" nolabel="1">
+                                <tree string="">
+                                    <field name="type" invisible="1"/>
+                                    <field name="name" style="width:200px;max-width:200px;"/>
+                                </tree>
+                            </field>
+                            <separator string="Salidas" colspan="4"/>
+                            <field name="process_line_out_ids" nolabel="1" colspan="4">
+                                <tree editable="bottom">
+                                    <field name="output_id" widget="many2many_tags"/>
+                                    <field name="client_id" widget="many2many_tags" context="{'default_type': 'output'}"/>
+                                </tree>
+                            </field>
+                        </group>
+                    </page>
+
+                    <page name="follow" string="Objetivos">
+                        <group string="Objetivos">
+                            <field name="target_ids" nolabel="1" context="{'default_origin_model_id': model_id, 'default_origin_int_id': id}" />
+                        </group>
+                    </page>
+                    <page name="opportunity" string="Riesgos y Oportunidades">
+                        <field name="model_id" />
+                        <group string="Riesgos">
+                            <field name="risk_ids" nolabel="1" context="{'default_origin_model_id': model_id, 'default_origin_int_id': id, 'default_type':'risk'}" />
+                        </group>
+                        <group string="Oportunidades">
+                            <field name="opp_ids" nolabel="1" context="{'default_origin_model_id': model_id, 'default_origin_int_id': id, 'default_type':'opportunity'}" />
+                        </group>
+                    </page>
+                </xpath>
+                <xpath expr="//div[@name='button_box']" position="inside">
+                    <button type="action" name="%(show_target_nc_action_8)d" class="oe_stat_button" icon="fa-frown-o">
+                        <field name="nonconformities_count" widget="statinfo" string="No conformidades" />
+                    </button>
+                    <button type="action"
+                            name="%(show_target_ac_action_8)d"
+                            class="oe_stat_button"
+                            icon="fa-edit"
+                            context="{'default_origin_model_id': model_id, 'default_origin_int_id': id}">
+                        <field name="actions_count" widget="statinfo" string="Acciones" />
+                    </button>
+                    <button name="action_opp_views"
+                            type="object"
+                            context="{'type_action':'opp'}"
+                            class="oe_stat_button"
+                            icon="fa-book">
+                        <field name="opps_count" widget="statinfo" string="Oportunidades" />
+                    </button>
+                    <button name="action_opp_views"
+                            type="object"
+                            context="{'type_action':'risk'}"
+                            class="oe_stat_button"
+                            icon="fa-book">
+                        <field name="risks_count" widget="statinfo" string="Riesgos" />
+                    </button>
+                    <button name="action_legal_views" type="object" class="oe_stat_button" icon="fa-book">
+                        <field name="legals_count" widget="statinfo" string="Requisitos legales" />
+                    </button>
+                </xpath>
+                <xpath expr="//notebook" position="inside">
+                    <page name="action_ids" string="Acciones">
+                        <field name="model_id" invisible="True" />
+                        <field name="action_ids" colspan="4" nolabel="1" context="{'default_origin_model_id': model_id, 'default_origin_int_id': id}" />
+                    </page>
+                    <page name="nonconformity_ids" string="No conformidades">
+                        <field name="nonconformity_ids" colspan="4" nolabel="1" context="{'default_origin_model_id': model_id, 'default_origin_int_id': id}" />
+                    </page>
+                    <page name="legal_ids" string="Requisitos legales">
+                        <field name="legal_ids" colspan="4" nolabel="1" context="{'default_origin_model_id': model_id, 'default_origin_int_id': id}" />
+                    </page>
+                </xpath>
+            </field>
+        </record>
+
+        <record id="process_resource_type_view_form" model="ir.ui.view">
+            <field name="name">mgmt.process.resource.type.view.form</field>
+            <field name="model">mgmt.process.resource.type</field>
+            <field name="arch" type="xml">
+                <form string="Recurso">
+                    <sheet>
+                        <group>
+                            <field name="name" />
+                        </group>
+                    </sheet>
+                </form>
+            </field>
+        </record>
+
+        <record id="process_resource_type_view_tree" model="ir.ui.view">
+            <field name="name">mgmt.process.resource.type.view.tree</field>
+            <field name="model">mgmt.process.resource.type</field>
+            <field name="arch" type="xml">
+                <tree string="Recurso">
+                    <field name="name" />
+                </tree>
+            </field>
+        </record>
+
+        <record id="process_resource_type_action" model="ir.actions.act_window">
+            <field name="name">Tipo de recurso de proceso</field>
+            <field name="res_model">mgmt.process.resource.type</field>
+            <field name="view_mode">tree,form</field>
+            <field name="domain">[]</field>
+            <field name="context">{}</field>
+        </record>
+
+        <record id="process_resource_view_form" model="ir.ui.view">
+            <field name="name">mgmt.process.resource.view.form</field>
+            <field name="model">mgmt.process.resource</field>
+            <field name="arch" type="xml">
+                <form string="">
+                    <sheet>
+                        <group>
+                            <field name="name" />
+                            <field name="type_id" />
+                            <field name="description" />
+                        </group>
+                    </sheet>
+                </form>
+            </field>
+        </record>
+
+        <record id="process_resource_view_tree" model="ir.ui.view">
+            <field name="name">mgmt.process.resource.view.tree</field>
+            <field name="model">mgmt.process.resource</field>
+            <field name="arch" type="xml">
+                <tree string="">
+                    <field name="name" />
+                    <field name="type_id" />
+                    <field name="description" />
+                </tree>
+            </field>
+        </record>
+
+        <record id="process_resource_action" model="ir.actions.act_window">
+            <field name="name">Recurso</field>
+            <field name="res_model">mgmt.process.resource</field>
+            <field name="view_mode">tree,form</field>
+            <field name="domain">[]</field>
+            <field name="context">{}</field>
+        </record>
+
+        <record id="process_line_view_form" model="ir.ui.view">
+            <field name="name">mgmt.process.line.view.form</field>
+            <field name="model">mgmt.process.line</field>
+            <field name="arch" type="xml">
+                <form string="">
+                    <sheet>
+                        <group>
+                            <field name="supplier_id" />
+                            <field name="input_id" />
+                            <field name="output_id" />
+                            <field name="client_id" />
+                        </group>
+                    </sheet>
+                </form>
+            </field>
+        </record>
+
+        <record id="process_line_view_tree" model="ir.ui.view">
+            <field name="name">mgmt.process.line.view.tree</field>
+            <field name="model">mgmt.process.line</field>
+            <field name="arch" type="xml">
+                <tree string="">
+                    <field name="supplier_id" />
+                    <field name="input_id" />
+                    <field name="output_id" />
+                    <field name="client_id" />
+                </tree>
+            </field>
+        </record>
+
+        <record id="process_line_action" model="ir.actions.act_window">
+            <field name="name">Linea</field>
+            <field name="res_model">mgmt.process.line</field>
+            <field name="view_mode">tree,form</field>
+            <field name="domain">[]</field>
+            <field name="context">{}</field>
+        </record>
+
+        <record id="process_line_input_view_form" model="ir.ui.view">
+            <field name="name">mgmt.process.line.input.view.form</field>
+            <field name="model">mgmt.process.line.input</field>
+            <field name="arch" type="xml">
+                <form string="">
+                    <sheet>
+                        <group>
+                            <field name="name" />
+                            <field name="description" />
+                        </group>
+                    </sheet>
+                </form>
+            </field>
+        </record>
+
+        <record id="process_line_input_view_tree" model="ir.ui.view">
+            <field name="name">mgmt.process.line.input.view.tree</field>
+            <field name="model">mgmt.process.line.input</field>
+            <field name="arch" type="xml">
+                <tree string="">
+                    <field name="name" />
+                    <field name="description" />
+                </tree>
+            </field>
+        </record>
+
+        <record id="process_line_input_action" model="ir.actions.act_window">
+            <field name="name">Entrada</field>
+            <field name="res_model">mgmt.process.line.input</field>
+            <field name="view_mode">tree,form</field>
+            <field name="domain">[]</field>
+            <field name="context">{}</field>
+        </record>
+
+        <record id="process_line_output_view_form" model="ir.ui.view">
+            <field name="name">mgmt.process.line.output.view.form</field>
+            <field name="model">mgmt.process.line.output</field>
+            <field name="arch" type="xml">
+                <form string="">
+                    <sheet>
+                        <group>
+                            <field name="name" />
+                            <field name="description" />
+                        </group>
+                    </sheet>
+                </form>
+            </field>
+        </record>
+
+        <record id="process_line_output_view_tree" model="ir.ui.view">
+            <field name="name">mgmt.process.line.output.view.tree</field>
+            <field name="model">mgmt.process.line.output</field>
+            <field name="arch" type="xml">
+                <tree string="">
+                    <field name="name" />
+                    <field name="description" />
+                </tree>
+            </field>
+        </record>
+
+        <record id="process_line_output_action" model="ir.actions.act_window">
+            <field name="name">Entrada</field>
+            <field name="res_model">mgmt.process.line.output</field>
+            <field name="view_mode">tree,form</field>
+            <field name="domain">[]</field>
+            <field name="context">{}</field>
+        </record>
+
+        <record id="mgmt_categ_form_inherit" model="ir.ui.view">
+            <field name="name">mgmt.categ.view.form.inherit</field>
+            <field name="model">mgmt.categ</field>
+            <field name="inherit_id" ref="mgmtsystem_process.mgmt_categ_form" />
+            <field name="arch" type="xml">
+                <xpath expr="//page[1]" position="before">
+                    <page name="process" string="Proceso">
+                        <group string="Proceso" col="4">
+                            <separator string="Recursos" colspan="4" />
+                            <field name="resource_ids" nolabel="1" colspan="4">
+                                <tree editable="bottom">
+                                    <field name="type_id" />
+                                    <field name="name" />
+                                    <field name="description" />
+                                </tree>
+                            </field>
+                            <separator string="Entradas" colspan="4" />
+                            <field name="process_line_in_ids" nolabel="1" colspan="4">
+                                <tree editable="bottom">
+                                    <field name="supplier_id" widget="many2many_tags" context="{'default_type': 'input'}" />
+                                    <field name="input_id" widget="many2many_tags" />
+                                </tree>
+                            </field>
+                            <separator string="Actividades" colspan="4" />
+                            <separator string="Planificar" colspan="4" />
+                            <field name="interaction_plan" context="{'default_type': 'plan'}" colspan="4" nolabel="1">
+                                <tree string="">
+                                    <field name="type" invisible="1" />
+                                    <field name="name" style="width:200px;max-width:200px;" />
+                                </tree>
+                            </field>
+                            <separator string="Hacer" colspan="4" />
+                            <field name="interaction_do" context="{'default_type': 'do'}" colspan="4" nolabel="1">
+                                <tree string="">
+                                    <field name="type" invisible="1" />
+                                    <field name="name" style="width:200px;max-width:200px;" />
+                                </tree>
+                            </field>
+                            <separator string="Verificar" colspan="4" />
+                            <field name="interaction_verify" context="{'default_type': 'verify'}" colspan="4" nolabel="1">
+                                <tree string="">
+                                    <field name="type" invisible="1" />
+                                    <field name="name" style="width:200px;max-width:200px;" />
+                                </tree>
+                            </field>
+                            <separator string="Actuar" colspan="4" />
+                            <field name="interaction_act" context="{'default_type': 'act'}" colspan="4" nolabel="1">
+                                <tree string="">
+                                    <field name="type" invisible="1" />
+                                    <field name="name" style="width:200px;max-width:200px;" />
+                                </tree>
+                            </field>
+                            <separator string="Salidas" colspan="4" />
+                            <field name="process_line_out_ids" nolabel="1" colspan="4">
+                                <tree editable="bottom">
+                                    <field name="output_id" widget="many2many_tags" />
+                                    <field name="client_id" widget="many2many_tags" context="{'default_type': 'output'}" />
+                                </tree>
+                            </field>
+                        </group>
+                    </page>
+                </xpath>
+                <field name="process_ids" position="replace">
+                    <field name="process_ids" context="{'default_categ_id': id}">
+                        <tree>
+                            <field name="code" />
+                            <field name="name" />
+                            <field name="last_edition" />
+                            <field name="validate_date" />
+                            <field name="create_date" />
+                            <button string="Imprimir reporte" name="action_print_report" type="object" class="oe_highlight" />
+                        </tree>
+                    </field>
+                </field>
+            </field>
+        </record>
+
+    </data>
+</odoo>

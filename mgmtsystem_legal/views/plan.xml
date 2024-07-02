@@ -1,0 +1,249 @@
+<odoo>
+    <data>
+
+        <menuitem id="menu_legal_root"
+                  name="Requisitos legales"
+                  web_icon="mgmtsystem_legal,static/description/icon.png"
+                  groups="group_legal_onlyread,group_legal_onlyread_printreport,group_legal_write_printreport,group_legal_all"
+                  sequence="4" />
+
+        <record id="view_legal_plan_search" model="ir.ui.view">
+            <field name="name">legal.plan.search</field>
+            <field name="model">legal.plan</field>
+            <field name="arch" type="xml">
+                <search>
+                    <field name="code" />
+                    <field name="name" />
+                    <filter string="Vigentes" name="vigentis" domain="[('state', '!=', 'cancel')]" />
+                </search>
+            </field>
+        </record>
+
+        <record id="view_legal_plan_tree" model="ir.ui.view">
+            <field name="name">legal.plan.tree</field>
+            <field name="model">legal.plan</field>
+            <field name="arch" type="xml">
+                <tree string="Programa de requisitos legales" banner_route="/legal/legal_onboarding">
+                    <field name="code" />
+                    <field name="name" />
+                    <field name="elaboration_step" widget="many2many_tags" />
+                    <field name="version" />
+                    <field name="state" />
+                </tree>
+            </field>
+        </record>
+
+        <record id="view_legal_plan_history_form" model="ir.ui.view">
+            <field name="name">legal.plan.history.form</field>
+            <field name="model">legal.plan.history</field>
+            <field name="arch" type="xml">
+                <form string="Historial">
+                    <group>
+                        <group>
+                            <field name="date_track" />
+                            <field name="name" />
+                            <field name="plan_id" />
+                        </group>
+                        <group>
+                            <field name="user_id" />
+                        </group>
+                    </group>
+                    <group>
+                        <field name="observations" />
+                    </group>
+                    <separator string="Requisitos" />
+                    <field name="line_ids">
+                        <tree editable="bottom">
+                            <field name="legal_id" />
+                            <field name="date_track" />
+                            <field name="user_id" />
+                            <field name="result" />
+                            <field name="proposal_action_id" />
+                        </tree>
+                    </field>
+                </form>
+            </field>
+        </record>
+
+        <record id="view_legal_plan_line_form" model="ir.ui.view">
+            <field name="name">legal.plan.line.form</field>
+            <field name="model">legal.plan.line</field>
+            <field name="arch" type="xml">
+                <form string="Programa de requisitos legales">
+                    <group string="Información">
+                        <group>
+                            <field name="legal_id" />
+                            <field name="entity_id" readonly="1" />
+                            <field name="partner_id" no_open="1" readonly="1" />
+                            <field name="date_release" readonly="1" />
+                        </group>
+                        <group>
+                            <field name="resume" readonly="1" />
+                        </group>
+                    </group>
+                    <group string="Asignación">
+                        <group>
+                            <field name="user_id" string="Responsable" />
+                            <field name="action_id" />
+                        </group>
+                        <group>
+                            <field name="description_action" readonly="1" />
+                        </group>
+                    </group>
+                </form>
+            </field>
+        </record>
+
+        <record id="view_legal_plan_form" model="ir.ui.view">
+            <field name="name">legal.plan.form</field>
+            <field name="model">legal.plan</field>
+            <field name="arch" type="xml">
+                <form string="Programa de requisitos legales">
+
+                <div name="volver">
+                     <header>
+                            <field name="state" widget="statusbar" statusbar_visible="draft,plan,elaborate,review,validate,validate_ok,on_track,closed" />
+                            <button string="Detallar programa"
+                                    name="init_plan"
+                                    type="object"
+                                    class="btn-primary"
+                                    attrs="{'invisible':[('state','not in', ('draft'))]}" />
+                            <button string="Enviar a Elaborar"
+                                    name="send_elaborate"
+                                    type="object"
+                                    class="btn-primary"
+                                    attrs="{'invisible':[('state','not in', ('plan'))]}" />
+                            <button string="Enviar a Revisar"
+                                    name="send_review"
+                                    type="object"
+                                    class="btn-primary"
+                                    attrs="{'invisible':[('state','not in', ('elaborate'))]}" />
+                            <button string="Enviar a Validar"
+                                    name="send_validate"
+                                    type="object"
+                                    class="btn-primary"
+                                    attrs="{'invisible':[('state','not in', ('review'))]}" />
+                            <button string="Validar"
+                                    name="send_validate_ok"
+                                    type="object"
+                                    class="btn-primary"
+                                    attrs="{'invisible':[('state','not in', ('validate'))]}" />
+                            <button string="Comenzar seguimiento"
+                                    name="send_on_track"
+                                    type="object"
+                                    class="btn-primary"
+                                    attrs="{'invisible':[('state','!=', 'validate_ok')]}" />
+                            <button string="Terminar"
+                                    name="send_closed"
+                                    type="object"
+                                    class="btn-primary"
+                                    attrs="{'invisible':[('state','!=', 'on_track')]}" />
+                            <button string="Volver Obsoleto"
+                                    confirm="Esto volverá obsoleto el presente registro. ¿Está seguro(a)?"
+                                    name="send_cancel"
+                                    type="object"
+                                    class="btn-second"
+                                    attrs="{'invisible': [('state','in',('cancel'))] }" />
+                            <button name="button_new_version"
+                                    type="object"
+                                    string="Nueva versión"
+                                    attrs="{'invisible':[('state', '!=', 'closed')]}"
+                                    class="oe_highlight" />
+                        
+                    </header>
+                </div>
+                    <sheet>
+                        <div class="oe_button_box" name="button_box">
+                            <button type="object"
+                                    name="action_open_older_versions"
+                                    class="oe_stat_button"
+                                    icon="fa-archive"
+                                    style="white-space: nowrap;"
+                                    string="Versiones antiguas" />
+                        </div>
+                        <div class="oe_title">
+                            <h2>
+                                <field name="code" readonly="1" />
+                            </h2>
+                        </div>
+                        <group>
+                            <field name="name" attrs="{'readonly': [('state','in',('validate_ok','cancel'))]}" />
+                            <field name="process_id" attrs="{'readonly': [('state','in',('validate_ok','cancel'))]}" />
+                        </group>
+                        <notebook>
+                            <page string="Requisitos" attrs="{'invisible':[('state','not in', ('draft'))]}">
+                                <field name="legal_ids" attrs="{'readonly': [('state','in',('validate_ok','cancel'))]}">
+                                    <tree>
+                                        <field name="name" />
+                                        <field name="resume" />
+                                        <field name="entity_id" />
+                                        <field name="date_release" />
+                                    </tree>
+                                </field>
+                            </page>
+                            <page string="Detalle del programa" attrs="{'invisible': [('state','in',('draft'))]}">
+                                <field name="line_ids" attrs="{'readonly': [('state','in',('validate_ok','cancel'))]}">
+                                    <tree editable="bottom">
+                                        <field name="legal_id" />
+                                        <field name="date_release" readonly="1" />
+                                        <field name="action_id" />
+                                        <field name="user_id" string="Responsable" />
+                                    </tree>
+                                </field>
+                            </page>
+                            <page string="Evaluaciones" attrs="{'invisible': [('state','not in',('on_track','closed'))]}">
+                                <field name="history_ids" attrs="{'readonly': [('state','in',('closed', 'cancel'))]}" context="{'default_plan_id':id}">
+                                    <tree>
+                                        <field name="name" />
+                                        <field name="user_id" />
+                                        <field name="line_ids" />
+                                    </tree>
+                                </field>
+                            </page>
+                            <page string="Validación">
+                                <group>
+                                    <group colspan="4">
+                                        <field name="version" />
+                                        <separator string="Elaboración" />
+                                        <field name="elaboration_step" colspan="2" nolabel="1" attrs="{'readonly': [('state','not in',('draft', 'plan', 'elaborate', 'review', 'validate'))]}" />
+                                        <separator string="Revisión" />
+                                        <field name="review_step" colspan="2" nolabel="1" attrs="{'readonly': [('state','not in',('draft', 'plan', 'elaborate', 'review', 'validate'))]}" />
+                                        <separator string="Validación" />
+                                        <field name="validation_step" colspan="2" nolabel="1" attrs="{'readonly': [('state','not in',('draft', 'plan', 'elaborate', 'review', 'validate'))]}" />
+                                    </group>
+                                    <group>
+                                        <field name="date_elaborate" attrs="{'required': [('state','in',('elaborate'))], 'readonly': True}" />
+                                        <field name="date_review" attrs="{'required': [('state','in',('review'))], 'readonly': True, 'invisible': [('state','in',('elaborate'))] }" />
+                                        <field name="date_validate" groups="base.group_no_one,base.user_admin" attrs="{'invisible': [('state','in',('elaborate','review'))] }" />
+                                    </group>
+                                </group>
+                            </page>
+
+                        </notebook>
+                    </sheet>
+
+                    <div class="oe_chatter">
+                        <field name="message_follower_ids" widget="mail_followers" />
+                        <field name="activity_ids" widget="mail_activity" />
+                        <field name="message_ids" widget="mail_thread" />
+                    </div>
+
+                </form>
+            </field>
+        </record>
+
+        <record id="legal_plan_action" model="ir.actions.act_window">
+            <field name="name">Programa de requisitos legales</field>
+            <field name="type">ir.actions.act_window</field>
+            <field name="res_model">legal.plan</field>
+            <field name="view_mode">tree,form</field>
+            <field name="context">{"search_default_vigentis":1}</field>
+        </record>
+
+        <menuitem id="legal_item_plan"
+                  name="Programa de requisitos legales"
+                  parent="menu_legal_root"
+                  sequence="2"
+                  action="legal_plan_action" />
+    </data>
+</odoo>

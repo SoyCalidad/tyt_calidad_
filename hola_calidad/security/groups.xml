@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+
+        <record id="module_mgmt_management" model="ir.module.category">
+            <field name="name">Soy Calidad</field>
+            <field name="description">Accesos para módulos de Soy Calidad</field>
+            <field name="sequence">0</field>
+        </record>
+
+        <record id="module_mgmt_management_base" model="ir.module.category">
+            <field name="name">Sistema de Gestión</field>
+            <field name="description">Accesos para módulo de sistema de gestión</field>
+            <field name="parent_id" ref="hola_calidad.module_mgmt_management"/>
+            <field name="sequence">2</field>
+        </record>
+
+        <record id="group_mgmt_onlyread" model="res.groups">
+            <field name="name">Usuario: Solo lectura</field>
+            <field name="implied_ids" eval="[(4, ref('base.group_user'))]" />
+            <field name="category_id" ref="hola_calidad.module_mgmt_management_base" />
+        </record>
+
+        <record id="group_mgmt_onlyread_printreport" model="res.groups">
+            <field name="name">Usuario interno: Lectura e impresión</field>
+            <field name="implied_ids" eval="[(4, ref('hola_calidad.group_mgmt_onlyread'))]" />
+            <field name="category_id" ref="hola_calidad.module_mgmt_management_base" />
+        </record>
+
+        <record id="group_mgmt_write_printreport" model="res.groups">
+            <field name="name">Usuario secundario: Lectura Edición de documentos propios</field>
+            <field name="implied_ids" eval="[(4, ref('hola_calidad.group_mgmt_onlyread_printreport'))]" />
+            <field name="category_id" ref="hola_calidad.module_mgmt_management_base" />
+        </record>
+
+        <record id="group_mgmt_all" model="res.groups">
+            <field name="name">Responsable: Lectura y edición</field>
+            <field name="implied_ids" eval="[(4, ref('hola_calidad.group_mgmt_write_printreport'))]" />
+            <field name="category_id" ref="hola_calidad.module_mgmt_management_base" />
+        </record>
+
+    </data>
+</odoo>

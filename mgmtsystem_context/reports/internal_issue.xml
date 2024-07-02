@@ -1,0 +1,80 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--Estructura basica de reportes-->
+<odoo>
+    <data>
+        
+        <template id="report_internal_issue_template">
+            <t t-call="web.html_container">
+                <t t-foreach="docs" t-as="o">
+                    <t t-if="o and 'company_id' in o">
+                        <t t-set="company" t-value="o.company_id" />
+                    </t>
+                    <t t-if="not o or not 'company_id' in o">
+                        <t t-set="company" t-value="res_company" />
+                    </t>
+                    <t t-call="hola_calidad.iso_header" />
+                    <style t-if="o.state=='cancel'">
+                        .page {
+                        position: relative;
+                        }
+                        .page::after {
+                        content: "";
+                        background: url('/hola_calidad/static/src/img/obsoleto.png');
+                        opacity: 0.25;
+                        top: 0;
+                        left: 0;
+                        bottom: 0;
+                        right: 0;
+                        position: absolute;
+                        z-index: -1;
+                        }
+                    </style>
+                    <t t-call="web.external_layout">
+                        <t t-call="hola_calidad.iso_cover" />
+                        <div class="page">
+                            <div class="g123">
+                                <style type="text/css">
+                                    .g123 {font-family: Palatino, Palatino Linotype, Palatino LT STD, Book Antiqua, Georgia, serif;font-size:14px;}
+                                </style>
+                                <p t-field="o.introduction" />
+                                <p>
+                                    <strong>Misión</strong>
+                                </p>
+                                <p t-field="o.mission" />
+                                <p>
+                                    <strong>Visión</strong>
+                                </p>
+                                <p t-field="o.vision" />
+                                <div name="reference"></div>
+                                <p>
+                                    <strong>Valores</strong>
+                                </p>
+                                <t t-foreach="o.morals" t-as="m">
+                                    <ul>
+                                        <li>
+                                            <span t-field="m.name" />
+                                        </li>
+    
+                                    </ul>
+                                </t>
+                                <p>
+                                    <strong>Política</strong>
+                                </p>
+                                <p t-field="o.quality_policy" />
+                            </div>
+                        </div>
+                        <t t-call="hola_calidad.iso_footer"/>
+                    </t>
+                </t>
+            </t>
+        </template>
+
+        <report id="report_internal_issue" 
+                string="Contexto de la organización" 
+                report_type="qweb-pdf" 
+                groups="base.group_no_one,mgmtsystem_context.group_context_onlyread_printreport,mgmtsystem_context.group_context_write_printreport,mgmtsystem_context.group_context_all" model="mgmtsystem.context.internal_issue" name="mgmtsystem_context.report_internal_issue_template" 
+                file="Contexto de la organización" 
+                paperformat="hola_calidad.portrait" />
+
+    </data>
+</odoo>

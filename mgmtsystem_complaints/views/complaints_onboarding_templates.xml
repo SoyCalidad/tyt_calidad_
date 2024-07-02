@@ -1,0 +1,88 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <!-- ONBOARDING STEPS -->
+
+    <template id="onboarding_complaints_internal_step">
+        <t t-call="base.onboarding_step">
+            <t t-set="title">Reclamos internos</t>
+            <t t-set="description">Cree un reclamo interno.</t>
+            <t t-set="done_icon" t-value="'fa-star'" />
+            <t t-set="btn_text">Crear</t>
+            <t t-set="done_text">Se ve bien!</t>
+            <t t-set="method" t-value="'action_open_complaints_internal'" />
+            <t t-set="model" t-value="'res.company'" />
+            <t t-set="state" t-value="state.get('complaints_internal_onboarding_state')" />
+        </t>
+    </template>
+
+    <template id="onboarding_complaints_external_step">
+        <t t-call="base.onboarding_step">
+            <t t-set="title">Reclamos externos</t>
+            <t t-set="description">Cree un reclamo externo.</t>
+            <t t-set="done_icon" t-value="'fa-star'" />
+            <t t-set="btn_text">Crear</t>
+            <t t-set="done_text">Se ve bien!</t>
+            <t t-set="method" t-value="'action_open_complaints_external'" />
+            <t t-set="model" t-value="'res.company'" />
+            <t t-set="state" t-value="state.get('complaints_external_onboarding_state')" />
+        </t>
+    </template>
+
+
+    <!-- ONBOARDING PANELS -->
+    <template id="complaints_onboarding_panel" name="complaints.onboarding.panel">
+        <t t-call="base.onboarding_container">
+            <t t-set="classes" t-value="'o_onboarding_blue'"/>
+            <t t-set="bg_image" t-value="'/account/static/src/img/account_invoice_onboarding_bg.jpg'"/>
+            <t t-set="close_method" t-value="'action_close_complaints_onboarding'"/>
+            <t t-set="close_model" t-value="'res.company'"/>
+            <t t-set="text_completed">Felicitaciones! Ha completado todo.</t>
+            <t t-call="mgmtsystem_complaints.onboarding_complaints_internal_step" name="complaints_internal_step" />
+            <t t-call="mgmtsystem_complaints.onboarding_complaints_external_step" name="complaints_external_step" />
+        </t>
+    </template>
+
+    <!-- Views -->
+
+
+
+    <record id="onboarding_complaints_form" model="ir.ui.view">
+        <field name="name">complaint.complaint.inherit.view.form</field>
+        <field name="model">complaint.complaint</field>
+        <field name="inherit_id" ref="mgmtsystem_complaints.view_complaint_complaint_form"/>
+        <field name="priority">1000</field>
+        <field name="mode">primary</field>
+        <field name="arch" type="xml">
+            <form position="inside">
+                <footer position="replace">
+                    <button name="action_save_onboarding_complaints_internal_step" class="btn btn-primary" type="object" string="Crear" attrs="{'invisible':[('type','!=','customer')]}" />
+                    <button name="action_save_onboarding_complaints_external_step" class="btn btn-primary" type="object" string="Crear" attrs="{'invisible':[('type','!=','supplier')]}" />
+                    <button special="cancel" string="Cancelar" />
+                </footer>
+            </form>
+        </field>
+    </record>
+
+    <record id="action_complaints_internal_configurator" model="ir.actions.act_window">
+        <field name="type">ir.actions.act_window</field>
+        <field name="name">Cree un reclamo interno</field>
+        <field name="view_mode">form</field>
+        <field name="target">new</field>
+        <field name="res_model">complaint.complaint</field>
+        <field name="domain">[('type','=','customer')]</field>
+        <field name="context">{"search_default_incident_month": 1, "default_type":'customer'}</field>
+        <field name="view_id" ref="mgmtsystem_complaints.onboarding_complaints_form"/>
+    </record>
+
+    <record id="action_complaints_external_configurator" model="ir.actions.act_window">
+        <field name="type">ir.actions.act_window</field>
+        <field name="name">Cree un reclamo externo</field>
+        <field name="view_mode">form</field>
+        <field name="target">new</field>
+        <field name="res_model">complaint.complaint</field>
+        <field name="domain">[('type','=','supplier')]</field>
+        <field name="context">{"search_default_incident_month": 1, "default_type":'supplier'}</field>
+        <field name="view_id" ref="mgmtsystem_complaints.onboarding_complaints_form"/>
+    </record>
+
+</odoo>

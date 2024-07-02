@@ -1,0 +1,71 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+
+    <menuitem
+        id="hr.menu_hr_root"
+        name="Empleados"
+        sequence="-3"/>
+
+    <menuitem
+        id="mgmtsystem_opportunity.menu_opportunity_root"
+        name="Riesgos y Oportunidades"
+        sequence="3"/>
+    
+    <menuitem
+        id="mgmtsystem_legal.menu_legal_root"
+        name="Requisitos Legales"
+        sequence="4"/>
+    
+    <menuitem
+        id="mgmtsystem_comunication.menu_comunication_root"
+        name="Comunicaciones"
+        sequence="5"/>
+
+    <menuitem
+        id="mgmtsystem_employees.menu_training_root"
+        name="Capacitación"
+        sequence="6"/>
+
+    <menuitem
+        id="maintenance.menu_maintenance_title"
+        name="Mantenimiento"
+        sequence="7"/>
+
+    <menuitem
+        id="survey.menu_surveys"
+        name="Encuestas y cuestionarios"
+        sequence="8"/>
+
+    <menuitem
+        id="mgmtsystem_audit.menu_audit_root"
+        name="Auditorías"
+        sequence="8"/>
+    
+    <menuitem
+        id="mgmtsystem_nonconformity.menu_nonconformity_root"
+        name="No conformidades"
+        sequence="9"/>
+
+    <menuitem
+        id="mgmtsystem_action.menu_action_root"
+        name="Acciones"
+        sequence="10"/>
+
+    <menuitem
+        id="mgmtsystem_complaints.menu_complaint_root"
+        name="Reclamos"
+        sequence="11"/>
+
+    <menuitem
+        id="contacts.menu_contacts"
+        sequence="50"/>
+    
+    <menuitem
+        id="mail.menu_root_discuss"
+        sequence="51"/>
+
+    <menuitem
+        id="calendar.mail_menu_calendar"
+        sequence="52"/>
+
+</odoo>

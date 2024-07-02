@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+
+    <menuitem id="committe_menu"
+        name="Comités"
+        action="comittee_action"
+        parent="hr.menu_hr_root"
+        sequence="20"/>
+
+</odoo>

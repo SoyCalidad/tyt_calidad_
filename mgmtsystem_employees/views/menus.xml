@@ -1,0 +1,47 @@
+<odoo>
+    <data>
+        <!-- ESTOS 2 MENUS ESTUVIERON COMENTADOS DESDE ser-calidad(2.0)
+        <menuitem
+            id="org_chart_menu1"
+            name="Organigrama"
+            action="org_chart_employee.action_org_chart_employee"
+            groups="hr.group_hr_manager,hr.group_hr_user,base.group_user"
+            parent="hr.menu_hr_root"
+            sequence="25"/> -->
+        <!--
+        <menuitem
+            id="org_chart_menu2"
+            name="Organigrama"
+            action="org_chart_employee.action_org_chart_employee"
+            groups="hr.group_hr_manager,hr.group_hr_user,base.group_user"
+            parent="hr_recruitment.menu_hr_recruitment_root"
+            sequence="26"/> -->
+
+        <menuitem
+            id="training_report_menu"
+            name="Reportes"
+            parent="mgmtsystem_employees.menu_training_root"
+            groups="base.group_no_one,mgmtsystem_employees.group_employees_onlyread_printreport,mgmtsystem_employees.group_employees_write_printreport,mgmtsystem_employees.group_employees_all"
+            sequence="100"
+            />
+
+        <!-- NO SE ENCONTRÓ action="hr.open_module_tree_department"
+        <menuitem
+            id="covid_mgmtsystem_employee_department_action"
+            name="Departamentos"
+            parent="hr.menu_hr_root"
+            action="hr.open_module_tree_department"
+            sequence="25" />
+        -->
+
+        <menuitem
+            id="hr_report_root_menu"
+            name="Reportes"
+            parent="hr.menu_hr_root"
+            sequence="100"/>
+
+
+
+
+    </data>
+</odoo>

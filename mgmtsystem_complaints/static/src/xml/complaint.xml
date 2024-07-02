@@ -1,0 +1,116 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+
+    <template id="mgmtsystem_complaints.complaint" name="inadequacy">
+        <t t-call="website.layout">
+            <div class="center">
+                <form action="/reclamo_enviado" method="post" id="msform" enctype="multipart/form-data">
+                    <!-- progressbar -->
+                    <ul id="progressbar">
+                        <li class="active">Información del reclamo</li>
+                        <li>Información adicional</li>
+                        <li>Información personal</li>
+                    </ul>
+                    <!-- fieldsets -->
+                    <fieldset>
+                        <h2 class="fs-title">Información del reclamo</h2>
+                        <h3 class="fs-subtitle">Introduzca los datos relativos al reclamo</h3>
+                        <input type="hidden" name="csrf_token" t-att-value="request.csrf_token()" />
+                        <select id="categ_id" name="categ_id" required="">
+                            <option disabled="" selected="selected" value="">Categoría</option>
+                            <t t-foreach="categ_id" t-as="adm">
+                                <option t-att-value="adm.id" t-esc="adm.name" />
+                            </t>
+                        </select>
+                        <select id="type" name="type" required="">
+                            <option disabled="" selected="selected" value="">Tipo</option>
+                            <option t-att-value="customer" t-esc="customer">Interna</option>
+                            <option t-att-value="supplier" t-esc="supplier">Externa</option>
+                        </select>
+                        <input placeholder="Fecha y hora del incidente" class="textbox-n" type="text" onfocus="(this.type='datetime-local')" name="date_incident" />
+                        <input type="text" name="perspective" placeholder="Descripción" />
+                        <input type="file" widget="many2many_binary" multiple="true" class="o_website_form_input" name="complaint_files" style="height:100px"></input>
+                        <input type="button" name="next" class="next action-button" value="Siguiente" />
+                    </fieldset>
+                    <fieldset>
+                        <h2 class="fs-title">Información adicional</h2>
+                        <div class="form-inputs">
+                            <div>
+                                <h4>1. Identifica el motivo del reclamo. Puedes seleccionar máximo 2 opciones.</h4>
+                                <t t-foreach="reason_ids" t-as="adm">
+                                    <label class="checkbox_container">
+                                        <strong>
+                                            <span t-esc="adm.name" />
+                                            :
+                                        </strong>
+                                        <span t-esc="adm.description" />
+                                        <input class="reason_checkbox" t-attf-name="reason_#{adm.id}" t-attf-id="reason_#{adm.id}" type="checkbox" t-att-value="adm.id" />
+                                        <span class="checkmark"></span>
+                                    </label>
+                                </t>
+                                <input type="text" name="reason_other" placeholder="Otro motivo" />
+                            </div>
+                            <div>
+                                <h4>2. ¿Trataron de darte una solución previa al registro del reclamo?</h4>
+                                <select id="solution" name="solution">
+                                    <option t-att-value="1">Sí</option>
+                                    <option t-att-value="0">No</option>
+                                </select>
+                            </div>
+                        </div>
+                        <input type="button" name="previous" class="previous action-button-previous" value="Anterior" />
+                        <input type="button" name="next" class="next action-button" value="Siguiente" />
+                    </fieldset>
+                    <fieldset>
+                        <h2 class="fs-title">Información personal</h2>
+                        <h3 class="fs-subtitle">Introduzca sus datos personales</h3>
+                        <input type="text" name="name" placeholder="Nombres y apellidos" />
+                        <input type="text" name="complainer_document_number" placeholder="Número de documento" />
+                        <select id="complainer_delivery_type" name="complainer_delivery_type" onchange="showDiv('hidden_email', 'hidden_phone', this)">
+                            <option selected="selected">Seleccione como quiere recibir la respuesta a tu reclamo</option>
+                            <option t-att-value="email">Quiero recibirla por correo electronico</option>
+                            <option t-att-value="phone">Quiero recibirla por celular</option>
+                        </select>
+                        <input type="text" id="hidden_phone" name="complainer_phone" placeholder="Teléfono" />
+                        <input type="text" id="hidden_email" name="complainer_email" placeholder="Correo electrónico" />
+                        <input type="button" name="previous" class="previous action-button-previous" value="Anterior" />
+                        <input type="submit" class="submit action-button o_website_form_send" value="Enviar reclamo" />
+                    </fieldset>
+                </form>
+            </div>
+        </t>
+        <script>
+function showDiv(divId1, divId2, element)
+{
+    console.log(element.value)
+    document.getElementById(divId1).style.display = element.value == 'Quiero recibirla por correo electronico' ? 'block' : 'none';
+    document.getElementById(divId2).style.display = element.value == 'Quiero recibirla por celular' ? 'block' : 'none';
+}
+    </script>
+        <script lnguage="JavaScript" type="text/javascript">
+            //
+            <![CDATA[
+var checks = document.querySelectorAll(".reason_checkbox");
+var max = 2;
+for (var i = 0; i < checks.length; i++)
+    checks[i].onclick = selectiveCheck;
+function selectiveCheck (event) 
+{
+    var checkedChecks = document.querySelectorAll(".reason_checkbox:checked");
+    if (checkedChecks.length >= max + 1)
+    return false;
+}
+//]]>
+        </script>
+    </template>
+
+    <template id="mgmtsystem_complaints.complaint_done" name="complaint Done">
+        <form>
+            <div class="form-group form-field o_website_form_required_custom" align="center">
+                <h1 style="align:center;padding-top:100px;text-weight:bold;">Gracias! Su reclamo ha sido enviado</h1>
+            </div>
+        </form>
+    </template>
+
+
+</odoo>

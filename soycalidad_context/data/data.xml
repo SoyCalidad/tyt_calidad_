@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+
+    <record id="policy_template_12" model="mgmtsystem.context.policy.template">
+        <field name="name">Política de Calidad</field>
+        <field name="organization_context">Nuestra organización fue establecida en Fecha de fundación para proporcionar Productos o servicios que ofrece. Tenemos Indique sus sedes y clientes</field>
+        <field name="direction_help">Es compromiso de la Dirección  que  el  sistema  de  la  calidad  esté  alineado  y  apoye  a  la dirección estratégica de  en el logro de sus objetivos.</field>
+        <field name="customer_satisfaction">El cliente es la razón de ser de la empresa, sin clientes no existiría, por tanto, la Dirección está comprometida en mantener y mejorar la satisfacción de los clientes, superando sus expectativas.</field>
+        <field name="legal_req">Es compromiso de la Gerencia General de " " cumplir con los requisitos del cliente y con los requisitos legales y reglamentarios aplicables a la empresa. Actuando con transparencia y lealtad en todo momento, con nuestros clientes, por los servicios otorgados.</field>
+        <field name="standar_commitment">Nuestra organización adopta como modelos para la gestión de la calidad la norma ISO 9001-2015 y se compromete a cumplir sus requisitos, asi como el resto de normativa vigente.</field>
+        <field name="staff_participation">La calidad se obtiene con la participación de todo el personal, ya que todos influyen de una u otra forma en la calidad final de los productos obtenidos, para que mediante el trabajo en equipo lograr nuestros objetivos y metas diariamente.</field>
+        <field name="continous_improvement">La Gerencia General se compromete a mejorar continuamente el sistema de calidad</field>
+        <field name="durability">El principal encargado de lograr el cumplimiento de los descritos es el Gerente General, este debe promover y afianzar el alcance de la calidad en todos los empleados y la compañia</field>
+        <field name="quality_assurance">El principal encargado de lograr el cumplimiento de los descritos es el Gerente General, este debe promover y afianzar el alcance de la calidad en todos los empleados y la compañia</field>
+        <field name="quality_goal_pre">Nuestros principales objetivos de calidad son, mejorar los tiempos de entrega y disminuir el número de productos defectuosos enviadas o entregados a nuestros clientes, 	Anualmente, estos objetivos generales serán medidos.</field>
+        <field name="communication">El principal encargado de lograr el cumplimiento de los descritos es el Gerente General, este debe promover y afianzar el alcance de la calidad en todos los empleados y la compañia</field>
+    </record>
+
+</odoo>

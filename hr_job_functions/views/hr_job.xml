@@ -1,0 +1,565 @@
+<odoo>
+    <data>
+        <menuitem id="menu_human_resources_jobs"
+                    name="Puestos"
+                    action="hr.action_hr_job"
+                    parent="hr.menu_hr_root"
+                    groups="hr.group_hr_manager,hr.group_hr_user,base.group_user"
+                    sequence="25" />
+        
+        <record id="hr_job_survey_inherit" model="ir.ui.view">
+            <field name="name">hr.job.survey.inherit</field>
+            <field name="model">hr.job</field>
+            <field name="inherit_id" ref="hr_recruitment.hr_job_survey" />
+            <field name="arch" type="xml">
+                <xpath expr="//field[@name='user_id']" position="replace">
+                    <field name="user_id" string="Responsable de contratación"/>
+                </xpath>
+            </field>
+        </record>
+
+        <record id="view_hr_job_form" model="ir.ui.view">
+            <field name="name">hr.job.form</field>
+            <field name="model">hr.job</field>
+            <field name="inherit_id" ref="hr.view_hr_job_form" />
+            <field name="arch" type="xml">
+                <xpath expr="/form/sheet/div[@class='oe_button_box']" position="inside">
+                    <button type="object"
+                            name="action_open_older_versions"
+                            class="oe_stat_button"
+                            icon="fa-archive"
+                            style="white-space: nowrap;"
+                            string="Versiones antiguas" />
+                    <widget name="web_ribbon" text="Archivado" bg_color="bg-danger" attrs="{'invisible': [('active', '=', True)]}" />
+                    <button type="object" name="open_employees" class="oe_stat_button" icon="fa-bar-chart-o">
+                        <field name="employee_qty" widget="statinfo" string="Empleados" />
+                    </button>
+                    <field name="active" invisible="1" />
+                    <field name="state" invisible="1"/>
+                </xpath>
+                <xpath expr="//form/sheet" position="before"> <!-- ser-calidad-16-changes -->
+                    <header>                        
+                        <field name="validation_state" widget="statusbar" statusbar_visible="elaborate,review,validate,validate_ok" />
+                        <button string="Comunicar MOF"
+                                name="notify_employee_email"
+                                type="object"
+                                class="btn-primary"
+                                attrs="{'invisible':[('validation_state','!=', 'validate_ok')]}"/>
+                        <button string="Enviar a Elaborar"
+                                name="send_elaborate"
+                                type="object"
+                                class="btn-primary"
+                                attrs="{'invisible':[('validation_state','in', ('elaborate','cancel','validate_ok'))]}" />
+                        <button string="Enviar a Revisar"
+                                name="send_review"
+                                type="object"
+                                class="btn-primary"
+                                attrs="{'invisible':[('validation_state','!=', 'elaborate')]}" />
+                        <button string="Enviar a Validar"
+                                name="send_validate"
+                                type="object"
+                                class="btn-primary"
+                                attrs="{'invisible':[('validation_state','in', ('elaborate','validate','cancel','validate_ok'))]}" />
+                        <button string="Validar"
+                                name="send_validate_ok2"
+                                type="object"
+                                class="btn-primary"
+                                attrs="{'invisible':[('validation_state','not in', ('validate'))]}" />
+                        <button string="Volver Obsoleto"
+                                confirm="Esto volverá obsoleto el presente registro. ¿Está seguro(a)?"
+                                name="send_cancel"
+                                type="object"
+                                class="btn-second"
+                                attrs="{'invisible': [('validation_state','in',('cancel'))] }" />
+                        <button name="button_new_version"
+                                type="object"
+                                string="Nueva versión"
+                                attrs="{'invisible':['|', ('active','=',False), ('validation_state', '!=', 'validate_ok')]}"
+                                class="oe_highlight" />
+
+                    </header>
+                </xpath>
+                <xpath expr="/form/sheet" position="inside">
+                    <notebook>
+                        <page id="info" string="Información Adicional">
+                            <group attrs="{'readonly':[('validation_state','in', ('validate_ok'))]}">
+                                <field name="job_profile" attrs="{'readonly':[('validation_state','in', ('validate_ok'))]}" />
+                                <field name="functions" attrs="{'readonly':[('validation_state','in', ('validate_ok'))]}">
+                                    <tree>
+                                        <field name="name" style="max-width:200px;" />
+                                    </tree>
+                                </field>
+                                <field name="evaluation_factors" attrs="{'readonly':[('validation_state','in', ('validate_ok'))]}">
+                                    <tree>
+                                        <field name="name" style="max-width:200px;" />
+                                    </tree>
+                                </field>
+                            </group>
+                        </page>
+                        <page id="relationships" string="Relaciones">
+                            <group>
+                                <field name="parent_id" attrs="{'readonly':[('validation_state','in', ('validate_ok'))]}" />
+                                <field name="coordinators" attrs="{'readonly':[('validation_state','in', ('validate_ok'))]}" />
+                                <field name="supervisors" attrs="{'readonly':[('validation_state','in', ('validate_ok'))]}" />
+                                <field name="superviseds" attrs="{'readonly':[('validation_state','in', ('validate_ok'))]}" />
+                            </group>
+                        </page>
+                        <page id="skills" string="Habilidades">
+                            <group attrs="{'readonly':[('validation_state','in', ('validate_ok'))]}">
+                                <field name="generic_skills" attrs="{'readonly':[('validation_state','in', ('validate_ok'))]}">
+                                    <tree>
+                                        <field name="name" style="max-width:200px;" />
+                                        <field name="relevance" />
+                                    </tree>
+                                </field>
+                                <field name="workteam_skills" attrs="{'readonly':[('validation_state','in', ('validate_ok'))]}">
+                                    <tree>
+                                        <field name="name" style="max-width:200px;" />
+                                        <field name="relevance" />
+                                    </tree>
+                                </field>
+                                <field name="personal_skills" attrs="{'readonly':[('validation_state','in', ('validate_ok'))]}">
+                                    <tree>
+                                        <field name="name" style="max-width:200px;" />
+                                        <field name="relevance" />
+                                    </tree>
+                                </field>
+                                <field name="strategic_skills" attrs="{'readonly':[('validation_state','in', ('validate_ok'))]}">
+                                    <tree>
+                                        <field name="name" style="max-width:200px;" />
+                                        <field name="relevance" />
+                                    </tree>
+                                </field>
+                            </group>
+                        </page>
+                        <page name="version_info" string="Validación y versión">
+                            <group col="4" attrs="{'readonly':[('validation_state','in', ('validate_ok'))]}">
+                                <group colspan="4">
+                                    <field name="version" />
+                                </group>
+                                <group colspan="4">
+                                    <separator string="" />
+                                    <field name="elaboration_step" colspan="4" nolabel="1" attrs="{'readonly': [('validation_state','not in',('elaborate'))]}" />
+                                    <separator string="Revisión" />
+                                    <field name="review_step" colspan="4" nolabel="1" attrs="{'readonly': [('validation_state','not in',('elaborate', 'review'))]}" />
+                                    <separator string="Validación" />
+                                    <field name="validation_step" colspan="4" nolabel="1" attrs="{'readonly': [('validation_state','not in',('elaborate', 'review', 'validate'))]}" />
+                                </group>
+                                <group colspan="2">
+                                    <field name="date_elaborate" attrs="{'required': [('state','in',('elaborate'))], 'readonly': True}" />
+                                    <field name="date_review" attrs="{'required': [('state','in',('review'))], 'readonly': True, 'invisible': [('state','in',('elaborate'))] }" />
+                                    <field name="date_validate" groups="base.group_no_one,base.user_admin" attrs="{'invisible': [('state','in',('elaborate','review'))] }" />
+                                </group>
+                            </group>
+                        </page>
+                    </notebook>
+                </xpath>
+                <field name="message_follower_ids" position="after">
+                    <field name="activity_ids" widget="mail_activity" />
+                    <field name="message_ids" widget="mail_thread" />
+                </field>
+            </field>
+        </record>
+        <record id="hr_job_cancel_action" model="ir.actions.act_window">
+            <field name="name">Puestos antiguos</field>
+            <field name="res_model">hr.job</field>
+            <field name="view_mode">tree,form</field>
+            <field name="domain">[('validation_state', '=', 'cancel')]</field>
+            <field name="context">{}</field>
+        </record>
+        <record id="hr_job_function_view_form" model="ir.ui.view">
+            <field name="name">hr.job.function.view.form</field>
+            <field name="model">hr.job.function</field>
+            <field name="arch" type="xml">
+                <form string="Funciones">
+                    <sheet>
+                        <group>
+                            <field name="name" />
+                        </group>
+                    </sheet>
+                </form>
+            </field>
+        </record>
+        <record id="hr_job_function_view_tree" model="ir.ui.view">
+            <field name="name">hr.job.function.view.tree</field>
+            <field name="model">hr.job.function</field>
+            <field name="arch" type="xml">
+                <tree string="Funciones" editable="bottom">
+                    <field name="name" />
+                </tree>
+            </field>
+        </record>
+        <record id="hr_job_function_action" model="ir.actions.act_window">
+            <field name="name">hr.job.function.view.action</field>
+            <field name="res_model">hr.job.function</field>
+            <field name="view_mode">tree,form</field>
+            <field name="domain">[]</field>
+            <field name="context">{}</field>
+        </record>
+        <record id="hr_job_evaluation_factor_view_form" model="ir.ui.view">
+            <field name="name">hr.job.evaluation_factor.view.form</field>
+            <field name="model">hr.job.evaluation_factor</field>
+            <field name="arch" type="xml">
+                <form string="Factor de Evaluación">
+                    <sheet>
+                        <group>
+                            <field name="name" />
+                        </group>
+                    </sheet>
+                </form>
+            </field>
+        </record>
+        <record id="hr_job_evaluation_factor_view_tree" model="ir.ui.view">
+            <field name="name">hr.job.evaluation_factor.view.tree</field>
+            <field name="model">hr.job.evaluation_factor</field>
+            <field name="arch" type="xml">
+                <tree string="Factor de Evaluación" editable="bottom">
+                    <field name="name" />
+                </tree>
+            </field>
+        </record>
+        <record id="hr_job_evaluation_factor_action" model="ir.actions.act_window">
+            <field name="name">hr.job.evaluation_factor.action</field>
+            <field name="res_model">hr.job.evaluation_factor</field>
+            <field name="view_mode">tree,form</field>
+            <field name="domain">[]</field>
+            <field name="context">{}</field>
+        </record>
+        <record id="hr_job_coordinator_view_form" model="ir.ui.view">
+            <field name="name">hr.job.coordinator.view.form</field>
+            <field name="model">hr.job.coordinator</field>
+            <field name="arch" type="xml">
+                <form string="Coordinación">
+                    <sheet>
+                        <group>
+                            <field name="related_job" />
+                        </group>
+                    </sheet>
+                </form>
+            </field>
+        </record>
+        <record id="hr_job_coordinator_view_tree" model="ir.ui.view">
+            <field name="name">hr.job.coordinator.view.tree</field>
+            <field name="model">hr.job.coordinator</field>
+            <field name="arch" type="xml">
+                <tree string="Coordinador" editable="bottom">
+                    <field name="related_job" />
+                </tree>
+            </field>
+        </record>
+        <record id="hr_job_coordinator_action" model="ir.actions.act_window">
+            <field name="name">hr.job.coordinator.action</field>
+            <field name="res_model">hr.job.coordinator</field>
+            <field name="view_mode">tree,form</field>
+            <field name="domain">[]</field>
+            <field name="context">{}</field>
+        </record>
+        <record id="hr_job_supervisor_view_form" model="ir.ui.view">
+            <field name="name">hr.job.supervisor.view.form</field>
+            <field name="model">hr.job.supervisor</field>
+            <field name="arch" type="xml">
+                <form string="Coordinación">
+                    <sheet>
+                        <group>
+                            <field name="related_job" />
+                        </group>
+                    </sheet>
+                </form>
+            </field>
+        </record>
+        <record id="hr_job_supervisor_view_tree" model="ir.ui.view">
+            <field name="name">hr.job.supervisor.view.tree</field>
+            <field name="model">hr.job.supervisor</field>
+            <field name="arch" type="xml">
+                <tree string="Supervisor" editable="bottom">
+                    <field name="related_job" />
+                </tree>
+            </field>
+        </record>
+        <record id="hr_job_supervisor_action" model="ir.actions.act_window">
+            <field name="name">hr.job.supervisor.action</field>
+            <field name="res_model">hr.job.supervisor</field>
+            <field name="view_mode">tree,form</field>
+            <field name="domain">[]</field>
+            <field name="context">{}</field>
+        </record>
+        <record id="hr_job_supervised_view_form" model="ir.ui.view">
+            <field name="name">hr.job.supervised.view.form</field>
+            <field name="model">hr.job.supervised</field>
+            <field name="arch" type="xml">
+                <form string="Coordinación">
+                    <sheet>
+                        <group>
+                            <field name="related_job" />
+                        </group>
+                    </sheet>
+                </form>
+            </field>
+        </record>
+        <record id="hr_job_supervised_view_tree" model="ir.ui.view">
+            <field name="name">hr.job.supervised.view.tree</field>
+            <field name="model">hr.job.supervised</field>
+            <field name="arch" type="xml">
+                <tree string="Supervisado" editable="bottom">
+                    <field name="related_job" />
+                </tree>
+            </field>
+        </record>
+        <record id="hr_job_supervised_action" model="ir.actions.act_window">
+            <field name="name">hr.job.supervised.action</field>
+            <field name="res_model">hr.job.supervised</field>
+            <field name="view_mode">tree,form</field>
+            <field name="domain">[]</field>
+            <field name="context">{}</field>
+        </record>
+        <record id="hr_job_profile_view_form" model="ir.ui.view">
+            <field name="name">hr.job.profile.view.form</field>
+            <field name="model">hr.job.profile</field>
+            <field name="arch" type="xml">
+                <form string="">
+                    <sheet>
+                        <group>
+                            <field name="name" />
+                            <field name="degree" />
+                            <field name="specialties" />
+                            <field name="exprience" />
+                        </group>
+                    </sheet>
+                </form>
+            </field>
+        </record>
+        <record id="hr_job_profile_view_tree" model="ir.ui.view">
+            <field name="name">hr.job.profile.view.tree</field>
+            <field name="model">hr.job.profile</field>
+            <field name="arch" type="xml">
+                <tree string="Perfil del puesto" editable="bottom">
+                    <field name="name" />
+                </tree>
+            </field>
+        </record>
+        <record id="hr_job_profile_action" model="ir.actions.act_window">
+            <field name="name">hr.job.profile.action</field>
+            <field name="res_model">hr.job.profile</field>
+            <field name="view_mode">tree,form</field>
+            <field name="domain">[]</field>
+            <field name="context">{}</field>
+        </record>
+        <record id="hr_job_skill_view_form" model="ir.ui.view">
+            <field name="name">hr.job.skill.view.form</field>
+            <field name="model">hr.job.skill</field>
+            <field name="arch" type="xml">
+                <form string="">
+                    <sheet>
+                        <group>
+                            <field name="name" />
+                            <field name="relevance" />
+                        </group>
+                    </sheet>
+                </form>
+            </field>
+        </record>
+        <record id="hr_job_skill_view_tree" model="ir.ui.view">
+            <field name="name">hr.job.skill.view.tree</field>
+            <field name="model">hr.job.skill</field>
+            <field name="arch" type="xml">
+                <tree string="Habilidad" editable="bottom">
+                    <field name="name" />
+                    <field name="relevance" />
+                </tree>
+            </field>
+        </record>
+        <record id="hr_job_skill_action" model="ir.actions.act_window">
+            <field name="name">hr.job.skill.action</field>
+            <field name="res_model">hr.job.skill</field>
+            <field name="view_mode">tree,form</field>
+            <field name="domain">[]</field>
+            <field name="context">{}</field>
+        </record>
+        <record id="hr_job_generic_skill_view_form" model="ir.ui.view">
+            <field name="name">hr.job.generic_skill.view.form</field>
+            <field name="model">hr.job.generic_skill</field>
+            <field name="arch" type="xml">
+                <form string="">
+                    <sheet>
+                        <group>
+                            <field name="name" />
+                            <field name="relevance" />
+                        </group>
+                    </sheet>
+                </form>
+            </field>
+        </record>
+        <record id="hr_job_generic_skill_view_tree" model="ir.ui.view">
+            <field name="name">hr.job.generic_skill.view.tree</field>
+            <field name="model">hr.job.generic_skill</field>
+            <field name="arch" type="xml">
+                <tree string="Habilidad" editable="bottom">
+                    <field name="name" />
+                    <field name="relevance" />
+                </tree>
+            </field>
+        </record>
+        <record id="hr_job_generic_skill_action" model="ir.actions.act_window">
+            <field name="name">hr.job.generic_skill.action</field>
+            <field name="res_model">hr.job.generic_skill</field>
+            <field name="view_mode">tree,form</field>
+            <field name="domain">[]</field>
+            <field name="context">{}</field>
+        </record>
+        <record id="hr_job_workteam_skill_view_form" model="ir.ui.view">
+            <field name="name">hr.job.workteam_skill.view.form</field>
+            <field name="model">hr.job.workteam_skill</field>
+            <field name="arch" type="xml">
+                <form string="">
+                    <sheet>
+                        <group>
+                            <field name="name" />
+                            <field name="relevance" />
+                        </group>
+                    </sheet>
+                </form>
+            </field>
+        </record>
+        <record id="hr_job_workteam_skill_view_tree" model="ir.ui.view">
+            <field name="name">hr.job.workteam_skill.view.tree</field>
+            <field name="model">hr.job.workteam_skill</field>
+            <field name="arch" type="xml">
+                <tree string="Habilidad" editable="bottom">
+                    <field name="name" />
+                    <field name="relevance" />
+                </tree>
+            </field>
+        </record>
+        <record id="hr_job_workteam_skill_action" model="ir.actions.act_window">
+            <field name="name">hr.job.workteam_skill.action</field>
+            <field name="res_model">hr.job.workteam_skill</field>
+            <field name="view_mode">tree,form</field>
+            <field name="domain">[]</field>
+            <field name="context">{}</field>
+        </record>
+        <record id="hr_job_personal_skill_view_form" model="ir.ui.view">
+            <field name="name">hr.job.personal_skill.view.form</field>
+            <field name="model">hr.job.personal_skill</field>
+            <field name="arch" type="xml">
+                <form string="">
+                    <sheet>
+                        <group>
+                            <field name="name" />
+                            <field name="relevance" />
+                        </group>
+                    </sheet>
+                </form>
+            </field>
+        </record>
+        <record id="hr_job_personal_skill_view_tree" model="ir.ui.view">
+            <field name="name">hr.job.personal_skill.view.tree</field>
+            <field name="model">hr.job.personal_skill</field>
+            <field name="arch" type="xml">
+                <tree string="Habilidad" editable="bottom">
+                    <field name="name" />
+                    <field name="relevance" />
+                </tree>
+            </field>
+        </record>
+        <record id="hr_job_personal_skill_action" model="ir.actions.act_window">
+            <field name="name">hr.job.personal_skill.action</field>
+            <field name="res_model">hr.job.personal_skill</field>
+            <field name="view_mode">tree,form</field>
+            <field name="domain">[]</field>
+            <field name="context">{}</field>
+        </record>
+        <record id="hr_job_strategic_skill_view_form" model="ir.ui.view">
+            <field name="name">hr.job.strategic_skill.view.form</field>
+            <field name="model">hr.job.strategic_skill</field>
+            <field name="arch" type="xml">
+                <form string="">
+                    <sheet>
+                        <group>
+                            <field name="name" />
+                            <field name="relevance" />
+                        </group>
+                    </sheet>
+                </form>
+            </field>
+        </record>
+        <record id="hr_job_strategic_skill_view_tree" model="ir.ui.view">
+            <field name="name">hr.job.strategic_skill.view.tree</field>
+            <field name="model">hr.job.strategic_skill</field>
+            <field name="arch" type="xml">
+                <tree string="Habilidad" editable="bottom">
+                    <field name="name" />
+                    <field name="relevance" />
+                </tree>
+            </field>
+        </record>
+        <record id="hr_job_strategic_skill_action" model="ir.actions.act_window">
+            <field name="name">hr.job.strategic_skill.action</field>
+            <field name="res_model">hr.job.strategic_skill</field>
+            <field name="view_mode">tree,form</field>
+            <field name="domain">[]</field>
+            <field name="context">{}</field>
+        </record>
+        <record id="hr_job_profile_specialty_view_form" model="ir.ui.view">
+            <field name="name">hr.job.profile.specialty.view.form</field>
+            <field name="model">hr.job.profile.specialty</field>
+            <field name="arch" type="xml">
+                <form string="Especialidad">
+                    <sheet>
+                        <group>
+                            <field name="name" />
+                        </group>
+                    </sheet>
+                </form>
+            </field>
+        </record>
+        <record id="hr_job_profile_specialty_view_tree" model="ir.ui.view">
+            <field name="name">hr.job.profile.specialty.view.tree</field>
+            <field name="model">hr.job.profile.specialty</field>
+            <field name="arch" type="xml">
+                <tree string="Especialidad" editable="bottom">
+                    <field name="name" />
+                </tree>
+            </field>
+        </record>
+        <record id="hr_job_profile_specialty_action" model="ir.actions.act_window">
+            <field name="name">hr.job.profile.specialty.action</field>
+            <field name="res_model">hr.job.profile.specialty</field>
+            <field name="view_mode">tree,form</field>
+            <field name="domain">[]</field>
+            <field name="context">{}</field>
+        </record>
+        <record id="hr_job_profile_experience_view_form" model="ir.ui.view">
+            <field name="name">hr.job.profile.experience.view.form</field>
+            <field name="model">hr.job.profile.experience</field>
+            <field name="arch" type="xml">
+                <form string="Experiencia">
+                    <sheet>
+                        <group>
+                            <field name="name" />
+                        </group>
+                    </sheet>
+                </form>
+            </field>
+        </record>
+        <record id="hr_job_profile_experience_view_tree" model="ir.ui.view">
+            <field name="name">hr.job.profile.experience.view.tree</field>
+            <field name="model">hr.job.profile.experience</field>
+            <field name="arch" type="xml">
+                <tree string="Experiencia" editable="bottom">
+                    <field name="name" />
+                </tree>
+            </field>
+        </record>
+        <record id="hr_job_profile_experience_action" model="ir.actions.act_window">
+            <field name="name">hr.job.profile.experience.action</field>
+            <field name="res_model">hr.job.profile.experience</field>
+            <field name="view_mode">tree,form</field>
+            <field name="domain">[]</field>
+            <field name="context">{}</field>
+        </record>
+        <!--Rules-->
+        <!-- <record model="ir.rule" id="job_validate_ok_rule"><field name="name">Job validate_ok readonly</field><field name="model_id" ref="model_hr_job"/><field name="global" eval="True"/><field name="perm_read" eval="1"/><field name="perm_write" eval="0"/><field name="perm_create" eval="1"/><field name="perm_unlink" eval="1"/><field name="domain_force">[('validation_state','=','validate_ok')]</field></record> -->
+        <!--Find the corresponding "to be inherited record" with noupdate="1" -->
+        <!-- <function name="write" model="ir.model.data"><function name="search" model="ir.model.data"><value eval="[('module', '=', 'hr'), ('name', '=', 'hr_job_comp_rule')]" /></function><value eval="{'noupdate': False}" /></function><record model="ir.rule" id="hr.hr_job_comp_rule"><field name="domain_force">['&amp;', ('validation_state','!=','validate_ok'), '|',('company_id','=',False),('company_id','in',company_ids)]</field></record> -->
+    </data>
+</odoo>

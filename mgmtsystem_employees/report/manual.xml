@@ -1,0 +1,775 @@
+<odoo>
+    <data>
+
+        <report id="action_report_mof"
+                model="mgmtsystem.mof"
+                string="Manual de organización y funciones"
+                report_type="qweb-pdf"
+                name="mgmtsystem_employees.report_mof"
+                file="Manual de organización y funciones" />
+
+        <template id="report_mof">
+            <t t-call="web.html_container">
+                <t t-foreach="docs" t-as="o">
+                    <t t-if="o and 'company_id' in o">
+                        <t t-set="company" t-value="doc.company_id" />
+                    </t>
+                    <t t-if="not o or not 'company_id' in o">
+                        <t t-set="company" t-value="res_company" />
+                    </t>
+                    <div class="header">
+                        <TABLE width="1300" height="50" style="display:block;border:1px solid black;font-size:14px;font-weight:bold;max-height:50px;" bgcolor="#EEEEEE">
+                            <tr>
+                                <td style="border: 1px solid black;padding-top: 35px;"
+                                    width="20%"
+                                    rowspan="3"
+                                    align="center"
+                                    valign="middle">
+                                    <center>
+                                        <img t-if="company.logo" t-att-src="'data:image/png;base64,%s' % to_text(company.logo)" style="max-height:100px;vertical-align:absmiddle;" />
+                                    </center>
+                                </td>
+                                <td style="border: 1px solid black; text-align:middle"
+                                    width="60%"
+                                    rowspan="3"
+                                    align="center"
+                                    valign="middle">
+                                    <center>
+                                        <h2>MANUAL DE ORGANIZACIÓN Y FUNCIONES</h2>
+                                        <h3>
+                                            <span t-field="o.name" />
+                                        </h3>
+                                    </center>
+                                </td>
+                                <td style="border: 1px solid black;" width="20%" align="center" valign="middle">
+                                    <center>
+                                        <h3>
+                                            <span t-field="o.code" />
+                                        </h3>
+                                    </center>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td style="border: 1px solid black;">
+                                    <CENTER>
+                                        <h4>
+                                            Edición:
+                                            <span t-field="o.version" />
+                                        </h4>
+                                    </CENTER>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td style="border: 1px solid black;vertical-align:middle;" align="center" valign="middle">
+                                    <CENTER>
+                                        <h4>
+                                            Fecha de validación:
+                                            <span t-field="o.date_validate" />
+                                        </h4>
+                                    </CENTER>
+                                </td>
+                            </tr>
+                        </TABLE>
+                    </div>
+                    <t t-call="web.external_layout">
+                        <div class="page">
+                            <div class="cover" style="page-break-after: always;">
+                                <center>
+                                    <style type="text/css">
+                                        .tg  {border-collapse:collapse;border-spacing:0;}
+                                        .tg td{font-family: Palatino, Palatino Linotype, Palatino LT STD, Book Antiqua, Georgia, serif;font-size:14px;padding:10px 5px;border-style:solid;border-width:1px;overflow:hidden;word-break:normal;border-color:black;}
+                                        .tg th{font-family: Palatino, Palatino Linotype, Palatino LT STD, Book Antiqua, Georgia, serif;font-size:14px;font-weight:normal;padding:10px 5px;border-style:solid;border-width:1px;overflow:hidden;word-break:normal;border-color:black;}
+                                        .tg .tg-zv36{font-weight:bold;background-color:#ffffff;border-color:inherit;text-align:left;vertical-align:top}
+                                        .tg .tg-nrix{text-align:center;vertical-align:middle;font-weight: bold;border-style: none;font-size:25px;}
+                                        .tg .tg-rq3n{background-color:#ffffff;text-align:center;vertical-align:middle;border-style: none;font-size:20px;}
+                                        .tg .tg-7g6k{font-weight:bold;background-color:#ffffff;border-color:inherit;text-align:center;vertical-align:top}
+                                        .tg .tg-3xi5{background-color:#ffffff;border-color:inherit;text-align:center;vertical-align:top}
+                                    </style>
+                                    <table class="tg" width="75%">
+                                        <tr>
+                                            <td class="tg-nrix" colspan="3" />
+                                        </tr>
+                                        <tr>
+                                            <td class="tg-nrix" colspan="3" />
+                                        </tr>
+                                        <tr>
+                                            <td class="tg-nrix" colspan="3">
+                                                <span t-raw="company.name" />
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td class="tg-nrix" colspan="3" />
+                                        </tr>
+                                        <tr>
+                                            <td class="tg-nrix" colspan="3" />
+                                        </tr>
+                                        <tr>
+                                            <td class="tg-rq3n" colspan="3" />
+                                        </tr>
+                                        <tr>
+                                            <td class="tg-7g6k">NOMBRE</td>
+                                            <td class="tg-3xi5" colspan="2">
+                                                <span t-raw="o.name" />
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td class="tg-7g6k">VERSIÓN</td>
+                                            <td class="tg-3xi5" colspan="2">
+                                                <span t-raw="o.version" />
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td class="tg-7g6k">FECHA DE ELABORACIÓN</td>
+                                            <td class="tg-3xi5" colspan="2">
+                                                <span t-raw="o.date_elaborate" />
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td class="tg-7g6k">ELABORADO POR</td>
+                                            <td class="tg-3xi5" colspan="2">
+                                                <t t-foreach="o.elaboration_step" t-as="user">
+                                                    <span t-raw="user.user_id.partner_id.name" />
+                                                    <br />
+                                                </t>
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td class="tg-7g6k">
+                                                Actualizado por:
+                                                <br />
+                                                <t t-foreach="o.elaboration_step" t-as="user">
+                                                    <span t-raw="user.user_id.partner_id.name" />
+                                                    <br />
+                                                </t>
+                                            </td>
+                                            <td class="tg-7g6k">
+                                                Revisado por:
+                                                <br />
+                                                <t t-foreach="o.review_step" t-as="user">
+                                                    <span t-if="o.state in ['review', 'validate', 'validate_ok']" t-raw="user.user_id.partner_id.name" />
+                                                    <br />
+                                                </t>
+                                            </td>
+                                            <td class="tg-7g6k">
+                                                Aprobado por:
+                                                <br />
+                                                <t t-foreach="o.validation_step" t-as="user">
+                                                    <span t-if="o.state in ['validate', 'validate_ok']" t-raw="user.user_id.partner_id.name" />
+                                                    <br />
+                                                </t>
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td class="tg-zv36" style="display:block;width:33%;">
+                                                Firma:
+                                                <br />
+                                                <t t-foreach="o.elaboration_step" t-as="user">
+                                                    <span t-raw="user.user_id.signature" style="display:block;" />
+                                                    <br />
+                                                </t>
+                                            </td>
+                                            <td class="tg-zv36" style="display:block;width:33%;">
+                                                Firma:
+                                                <br />
+                                                <t t-foreach="o.review_step" t-as="user">
+                                                    <span t-if="o.state in ['review', 'validate', 'validate_ok']" t-raw="user.user_id.signature" style="display:block;" />
+                                                    <br />
+                                                </t>
+                                            </td>
+                                            <td class="tg-zv36" style="display:block;width:33%;">
+                                                Firma:
+                                                <br />
+                                                <t t-foreach="o.validation_step" t-as="user">
+                                                    <span t-if="o.state in ['validate', 'validate_ok']" t-raw="user.user_id.signature" style="display:block;" />
+                                                    <br />
+                                                </t>
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td class="tg-3xi5">
+                                                <t t-foreach="o.elaboration_step" t-as="user">
+                                                    <t t-foreach="user.user_id.employee_ids" t-as="emp">
+                                                        <span t-raw="emp.job_id.name" />
+                                                        <br />
+                                                    </t>
+                                                    <br />
+                                                </t>
+                                            </td>
+                                            <td class="tg-3xi5">
+                                                <t t-foreach="o.review_step" t-as="user">
+                                                    <t t-foreach="user.user_id.employee_ids" t-as="emp">
+                                                        <span t-if="o.state in ['review', 'validate', 'validate_ok']" t-raw="emp.job_id.name" />
+                                                        <br />
+                                                    </t>
+                                                    <br />
+                                                </t>
+                                            </td>
+                                            <td class="tg-3xi5">
+                                                <t t-foreach="o.validation_step" t-as="user">
+                                                    <t t-foreach="user.user_id.employee_ids" t-as="emp">
+                                                        <span t-if="o.state in ['validate', 'validate_ok']" t-raw="emp.job_id.name" />
+                                                        <br />
+                                                    </t>
+                                                    <br />
+                                                </t>
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td class="tg-zv36" style="display:block;width:33%;">
+                                                Fecha:
+                                                <span t-raw="o.date_elaborate" />
+                                            </td>
+                                            <td class="tg-zv36" style="display:block;width:33%;">
+                                                Fecha:
+                                                <span t-raw="o.date_review" />
+                                            </td>
+                                            <td class="tg-zv36" style="display:block;width:33%;">
+                                                Fecha:
+                                                <span t-raw="o.date_validate" />
+                                            </td>
+                                        </tr>
+                                    </table>
+                                </center>
+                            </div>
+                        </div>
+                        <div id="toc_container" style="page-break-after: always;page-break-after: before;">
+                            <p class="toc_title">Contenidos</p>
+                            <ul class="toc_list">
+                                <li>
+                                    <a>CAPÍTULO 1</a>
+                                    <ul>
+                                        <li>
+                                            <a>1 INTRODUCCIÓN</a>
+                                        </li>
+                                        <li>
+                                            <a>2. OBJETIVO Y CAMPO DE APLICACIÓN</a>
+                                        </li>
+                                        <li>
+                                            <a>3. REFERENCIAS NORMATIVA</a>
+                                        </li>
+                                        <li>
+                                            <a>4. TÉRMINOS Y DEFINICIONES</a>
+                                        </li>
+                                    </ul>
+                                </li>
+                                <li>
+                                    <a>CAPÍTULO 2</a>
+                                    <ul>
+                                        <li>
+                                            <a>1. ESTRUCTURA ORGÁNICA</a>
+                                        </li>
+                                        <li>
+                                            <a>2. ESTRUCTURA DE PUESTOS</a>
+                                        </li>
+                                        <li>
+                                            <a>3. FUNCIONES ESPECÍFICAS DE LOS CARGOS POR DEPARTAMENTO</a>
+                                        </li>
+                                    </ul>
+                                </li>
+
+                            </ul>
+                        </div>
+                        <div name="main" style="padding-top:2em;">
+                            <div t-if="is_custom">
+                                <t t-raw="o.custom_body" />
+                            </div>
+                            <div t-if="not is_custom">
+                                <div style="page-break-after: always;">
+                                    <h1 id="cap1">CAPÍTULO 1</h1>
+                                    <h2 class="o_horizontal_separator" id="1.1.">1. INTRODUCCIÓN</h2>
+                                    <t t-raw="o.introduction" />
+                                    <h2 class="o_horizontal_separator" id="1.2.">2. OBJETIVO Y CAMPO DE APLICACIÓN</h2>
+                                    <h3 class="o_horizontal_separator" id="1.2.1.">2.1. OBJETIVO DEL MANUAL</h3>
+                                    <t t-raw="o.target" />
+                                    <h3 class="o_horizontal_separator" id="1.2.2.">2.2. ALCANCE</h3>
+                                    <t t-raw="o.scope" />
+                                    <h2 class="o_horizontal_separator" id="1.3.">3. REFERENCIAS NORMATIVAS</h2>
+                                    <div>
+                                        <table style="width:100%;border: 1px solid black;border-style: solid;text-align:center;valign:middle">
+                                            <tr style="font-family: Palatino, Palatino Linotype, Palatino LT STD, Book Antiqua, Georgia, serif;font-size:14px;padding:10px 5px;border-style:solid;border-width:1px;overflow:hidden;word-break:normal;border-color:black">
+                                                <th style="text-align:center;font-family: Palatino, Palatino Linotype, Palatino LT STD, Book Antiqua, Georgia, serif;font-size:14px;padding:10px 5px;border-style:solid;border-width:1px;overflow:hidden;word-break:normal;border-color:black;">
+                                                    Título
+                                                </th>
+                                                <th style="text-align:center;font-family: Palatino, Palatino Linotype, Palatino LT STD, Book Antiqua, Georgia, serif;font-size:14px;padding:10px 5px;border-style:solid;border-width:1px;overflow:hidden;word-break:normal;border-color:black;">
+                                                    Tipo
+                                                </th>
+                                                <th style="text-align:center;font-family: Palatino, Palatino Linotype, Palatino LT STD, Book Antiqua, Georgia, serif;font-size:14px;padding:10px 5px;border-style:solid;border-width:1px;overflow:hidden;word-break:normal;border-color:black;">
+                                                    Entidad
+                                                </th>
+                                                <th style="text-align:center;font-family: Palatino, Palatino Linotype, Palatino LT STD, Book Antiqua, Georgia, serif;font-size:14px;padding:10px 5px;border-style:solid;border-width:1px;overflow:hidden;word-break:normal;border-color:black;">
+                                                    Fecha de publicación
+                                                </th>
+                                            </tr>
+                                            <t t-foreach="o.references" t-as="ref">
+                                                <tr style="font-family: Palatino, Palatino Linotype, Palatino LT STD, Book Antiqua, Georgia, serif;font-size:14px;padding:10px 5px;border-style:solid;border-width:1px;overflow:hidden;word-break:normal;border-color:black">
+                                                    <td style="border: 1px solid black;border-style: solid;text-align:center;valign:middle;">
+                                                        <span t-field="ref.name" />
+                                                    </td>
+                                                    <td style="border: 1px solid black;border-style: solid;text-align:center;valign:middle;">
+                                                        <span t-field="ref.type_id.name" />
+                                                    </td>
+                                                    <td style="border: 1px solid black;border-style: solid;text-align:center;valign:middle;">
+                                                        <span t-field="ref.entity_id.name" />
+                                                    </td>
+                                                    <td style="border: 1px solid black;border-style: solid;text-align:center;valign:middle;">
+                                                        <span t-field="ref.date_release" />
+                                                    </td>
+                                                </tr>
+                                            </t>
+                                        </table>
+                                    </div>
+                                    <h2 class="o_horizontal_separator" id="1.4.">4. TÉRMINOS Y DEFINICIONES</h2>
+                                    <div>
+                                        <table style="width:100%;border: 1px solid black;border-style: solid;text-align:center;valign:middle">
+                                            <tr style="font-family: Palatino, Palatino Linotype, Palatino LT STD, Book Antiqua, Georgia, serif;font-size:14px;padding:10px 5px;border-style:solid;border-width:1px;overflow:hidden;word-break:normal;border-color:black">
+                                                <th style="font-family: Palatino, Palatino Linotype, Palatino LT STD, Book Antiqua, Georgia, serif;font-size:14px;padding:10px 5px;border-style:solid;border-width:1px;overflow:hidden;word-break:normal;border-color:black;text-align:center;">
+                                                    Abreviatura
+                                                </th>
+                                                <th style="font-family: Palatino, Palatino Linotype, Palatino LT STD, Book Antiqua, Georgia, serif;font-size:14px;padding:10px 5px;border-style:solid;border-width:1px;overflow:hidden;word-break:normal;border-color:black;text-align:center;">
+                                                    Nombre
+                                                </th>
+                                                <th style="font-family: Palatino, Palatino Linotype, Palatino LT STD, Book Antiqua, Georgia, serif;font-size:14px;padding:10px 5px;border-style:solid;border-width:1px;overflow:hidden;word-break:normal;border-color:black;text-align:center;">
+                                                    Descripción
+                                                </th>
+                                            </tr>
+                                            <t t-foreach="o.menanings" t-as="ref">
+                                                <tr style="font-family: Palatino, Palatino Linotype, Palatino LT STD, Book Antiqua, Georgia, serif;font-size:14px;padding:10px 5px;border-style:solid;border-width:1px;overflow:hidden;word-break:normal;border-color:black">
+                                                    <td style="border: 1px solid black;border-style: solid;text-align:center;valign:middle;">
+                                                        <span t-field="ref.abbre" />
+                                                    </td>
+                                                    <td style="border: 1px solid black;border-style: solid;text-align:center;valign:middle;">
+                                                        <span t-field="ref.name" />
+                                                    </td>
+                                                    <td style="border: 1px solid black;border-style: solid;text-align:center;valign:middle;">
+                                                        <span t-field="ref.description" />
+                                                    </td>
+                                                </tr>
+                                            </t>
+                                        </table>
+                                    </div>
+                                </div>
+                                <div style="page-break-after: always;">
+                                    <h1>CAPÍTULO 2</h1>
+                                    <h2 class="o_horizontal_separator">1. ESTRUCTURA ORGÁNICA</h2>
+                                    <t t-raw="o.structure" />
+                                    <h3>Organigrama</h3>
+                                    <t-field name="org_chart.name" />
+                                    <h2 class="o_horizontal_separator">2. ESTRUCTURA DE PUESTOS</h2>
+                                    <t t-raw="o.jobs_structure" />
+                                    <img t-att-src="o.org_bin" />
+                                    <div>
+                                        <style type="text/css">
+                                            .td .tr {font-family: Palatino, Palatino Linotype, Palatino LT STD, Book Antiqua, Georgia, serif;font-size:14px;padding:10px 5px;border-style:solid;border-width:1px;overflow:hidden;word-break:normal;border-color:black;}
+                                            .td {font-family: Palatino, Palatino Linotype, Palatino LT STD, Book Antiqua, Georgia, serif;font-size:14px;padding:10px 5px;border-style:solid;border-width:1px;overflow:hidden;word-break:normal;border-color:black;}
+                                            .th {font-family: Palatino, Palatino Linotype, Palatino LT STD, Book Antiqua, Georgia, serif;font-size:14px;padding:10px 5px;border-style:solid;border-width:1px;overflow:hidden;word-break:normal;border-color:black;}
+                                        </style>
+                                        <table style="width:100%;border: 1px solid black;border-style: solid;text-align:center;valign:middle">
+                                            <tr style="font-family: Palatino, Palatino Linotype, Palatino LT STD, Book Antiqua, Georgia, serif;font-size:14px;padding:10px 5px;border-style:solid;border-width:1px;overflow:hidden;word-break:normal;border-color:black;">
+                                                <th style="font-family: Palatino, Palatino Linotype, Palatino LT STD, Book Antiqua, Georgia, serif;font-size:14px;border-style:solid;border-width:1px;overflow:hidden;word-break:normal;border-color:black;text-align:center;">Puesto</th>
+                                                <th style="font-family: Palatino, Palatino Linotype, Palatino LT STD, Book Antiqua, Georgia, serif;font-size:14px;border-style:solid;border-width:1px;overflow:hidden;word-break:normal;border-color:black;text-align:center;">Departamento</th>
+                                                <th style="font-family: Palatino, Palatino Linotype, Palatino LT STD, Book Antiqua, Georgia, serif;font-size:14px;border-style:solid;border-width:1px;overflow:hidden;word-break:normal;border-color:black;text-align:center;">Número actual de empleados</th>
+                                            </tr>
+                                            <t t-foreach="jobs" t-as="job">
+                                                <t t-foreach="job" t-as="a">
+                                                    <tr style="font-family: Palatino, Palatino Linotype, Palatino LT STD, Book Antiqua, Georgia, serif;font-size:14px;padding:10px 5px;border-style:solid;border-width:1px;overflow:hidden;word-break:normal;border-color:black;">
+                                                        <td style="font-family: Palatino, Palatino Linotype, Palatino LT STD, Book Antiqua, Georgia, serif;font-size:14px;padding:10px 5px;border-style:solid;border-width:1px;overflow:hidden;word-break:normal;border-color:black;">
+                                                            <span t-field="a.name" />
+                                                        </td>
+                                                        <td style="font-family: Palatino, Palatino Linotype, Palatino LT STD, Book Antiqua, Georgia, serif;font-size:14px;padding:10px 5px;border-style:solid;border-width:1px;overflow:hidden;word-break:normal;border-color:black;">
+                                                            <span t-field="a.department_id.name" />
+                                                        </td>
+                                                        <td style="font-family: Palatino, Palatino Linotype, Palatino LT STD, Book Antiqua, Georgia, serif;font-size:14px;padding:10px 5px;border-style:solid;border-width:1px;overflow:hidden;word-break:normal;border-color:black;">
+                                                            <span t-field="a.no_of_employee" />
+                                                        </td>
+                                                    </tr>
+                                                </t>
+                                            </t>
+                                        </table>
+                                    </div>
+                                    <h2 class="o_horizontal_separator">3. FUNCIONES ESPECÍFICAS DE LOS CARGOS POR DEPARTAMENTO</h2>
+                                    <t t-raw="o.functions" />
+                                    <h2 style="page-break-after: always;">MOF</h2>
+                                    <t t-foreach="jobs" t-as="job">
+                                        <h1 t-field="job[0].department_id.name" />
+                                        <t t-foreach="job" t-as="oa">
+                                            <div style="page-break-after: always;padding-top:2em;">
+                                                <style type="text/css">
+                                                    .td .tr {font-family: Palatino, Palatino Linotype, Palatino LT STD, Book Antiqua, Georgia, serif;font-size:14px;padding:10px 5px;border-style:solid;border-width:1px;overflow:hidden;word-break:normal;border-color:black;}
+                                                    .td {font-family: Palatino, Palatino Linotype, Palatino LT STD, Book Antiqua, Georgia, serif;font-size:14px;padding:10px 5px;border-style:solid;border-width:1px;overflow:hidden;word-break:normal;border-color:black;}
+                                                    .th {font-family: Palatino, Palatino Linotype, Palatino LT STD, Book Antiqua, Georgia, serif;font-size:14px;padding:10px 5px;border-style:solid;border-width:1px;overflow:hidden;word-break:normal;border-color:black;}
+                                                </style>
+                                                <center>
+                                                    <h2>
+                                                        <span t-field="oa.name" />
+                                                    </h2>
+                                                </center>
+                                                <center>
+                                                    <table border="1"
+                                                           style="border: 1px solid black;border-style: solid;text-align:center;valign:middle"
+                                                           align="center"
+                                                           valign="middle"
+                                                           width="90%">
+                                                        <tr style="border: 1px solid black;border-style: solid;text-align:center;valign:middle;font-weight: bold;background-color: #EEEEEE;">
+                                                            <td nowrap="nowrap" colspan="2" bgcolor="#D3D3D3">
+                                                                <h3>
+                                                                    <b>1. IDENTIFICACIÓN</b>
+                                                                </h3>
+                                                            </td>
+                                                        </tr>
+                                                        <tr style="border: 1px solid black;border-style: solid;text-align:center;valign:middle">
+                                                            <td style="border: 1px solid black;border-style: solid;text-align:center;valign:middle;font-weight: bold;background-color: #EEEEEE;">
+                                                                <b>Nombre del Puesto</b>
+                                                            </td>
+                                                            <td style="border: 1px solid black;border-style: solid;text-align:center;valign:middle;">
+                                                                <span t-field="oa.name" />
+                                                            </td>
+                                                        </tr>
+                                                        <tr style="border: 1px solid black;border-style: solid;text-align:center;valign:middle">
+                                                            <td style="border: 1px solid black;border-style: solid;text-align:center;valign:middle;font-weight: bold;background-color: #EEEEEE;">
+                                                                <b>Área a la que pertenece</b>
+                                                            </td>
+                                                            <td style="border: 1px solid black;border-style: solid;text-align:center;valign:middle;">
+                                                                <span t-field="oa.department_id.name" />
+                                                            </td>
+                                                        </tr>
+                                                        <tr style="border: 1px solid black;border-style: solid;text-align:center;valign:middle">
+                                                            <td style="border: 1px solid black;border-style: solid;text-align:center;valign:middle;font-weight: bold;background-color: #EEEEEE;">
+                                                                <b>Cargo del jefe directo</b>
+                                                            </td>
+                                                            <td style="border: 1px solid black;border-style: solid;text-align:center;valign:middle;">
+                                                                <span t-field="oa.parent_id.name" />
+                                                            </td>
+                                                        </tr>
+                                                    </table>
+                                                </center>
+
+                                                <br />
+
+                                                <center>
+                                                    <table border="1"
+                                                           style="border: 1px solid black;border-style: solid;text-align:center;valign:middle"
+                                                           align="center"
+                                                           valign="middle"
+                                                           width="90%">
+                                                        <tr style="border: 1px solid black;border-style: solid;text-align:center;valign:middle">
+                                                            <td bgcolor="#D3D3D3" style="background-color: #EEEEEE;">
+                                                                <H4>
+                                                                    <B>FUNCIONES</B>
+                                                                </H4>
+                                                            </td>
+                                                        </tr>
+                                                        <t t-foreach="oa.functions" t-as="fun">
+                                                            <tr style="border: 1px solid black;border-style: solid;text-align:center;valign:middle">
+                                                                <td>
+                                                                    <span t-field="fun.name" />
+                                                                </td>
+                                                            </tr>
+                                                        </t>
+                                                    </table>
+                                                </center>
+
+                                                <br />
+                                                
+                                                <center>
+                                                    <table border="1"
+                                                           style="border-style: solid;"
+                                                           align="center"
+                                                           valign="middle"
+                                                           width="90%">
+                                                        <tr style="border: 1px solid black;border-style: solid;text-align:center;valign:middle">
+                                                            <td bgcolor="#D3D3D3" style="background-color: #EEEEEE;">
+                                                                <H4>
+                                                                    <B>FACTORES DE EVALUACIÓN</B>
+                                                                </H4>
+                                                            </td>
+                                                        </tr>
+                                                        <t t-foreach="oa.evaluation_factors" t-as="eva">
+                                                            <tr style="border: 1px solid black;border-style: solid;text-align:center;valign:middle">
+                                                                <td>
+                                                                    <span t-field="eva.name" />
+                                                                </td>
+                                                            </tr>
+                                                        </t>
+                                                    </table>
+                                                </center>
+
+                                                <br />
+
+                                                <center>
+                                                    <table border="1"
+                                                           style="border: 1px solid black;border-style: solid;text-align:center;valign:middle"
+                                                           align="center"
+                                                           valign="middle"
+                                                           width="90%">
+                                                        <tr style="border: 1px solid black;border-style: solid;text-align:center;valign:middle">
+                                                            <td bgcolor="#D3D3D3" style="background-color: #EEEEEE;">
+                                                                <H4>
+                                                                    <B>COORDINACIÓN</B>
+                                                                </H4>
+                                                            </td>
+                                                        </tr>
+                                                        <t t-foreach="oa.coordinators" t-as="cor">
+                                                            <tr style="border: 1px solid black;border-style: solid;text-align:center;valign:middle">
+                                                                <td>
+                                                                    <span t-field="cor.related_job.name" />
+                                                                </td>
+                                                            </tr>
+                                                        </t>
+                                                    </table>
+                                                </center>
+
+                                                <br />
+
+                                                <center>
+                                                    <table border="1"
+                                                           style="border: 1px solid black;border-style: solid;text-align:center;valign:middle"
+                                                           align="center"
+                                                           valign="middle"
+                                                           width="90%">
+                                                        <tr style="border: 1px solid black;border-style: solid;text-align:center;valign:middle">
+                                                            <td>
+                                                                <H4>
+                                                                    <b />
+                                                                </H4>
+                                                            </td>
+                                                            <b />
+                                                            <td bgcolor="#D3D3D3" style="background-color: #EEEEEE;">
+                                                                <H4>
+                                                                    <B>SUPERVISORES</B>
+                                                                </H4>
+                                                            </td>
+                                                        </tr>
+                                                        <t t-foreach="oa.supervisors" t-as="sor">
+                                                            <tr style="border: 1px solid black;border-style: solid;text-align:center;valign:middle">
+                                                                <td width="5%"></td>
+                                                                <td>
+                                                                    <span t-field="sor.related_job.name" />
+                                                                </td>
+                                                            </tr>
+                                                        </t>
+                                                    </table>
+                                                </center>
+
+                                                <br />
+
+                                                <center>
+                                                    <table border="1"
+                                                           style="border: 1px solid black;border-style: solid;text-align:center;valign:middle"
+                                                           align="center"
+                                                           valign="middle"
+                                                           width="90%">
+                                                        <tr style="border: 1px solid black;border-style: solid;text-align:center;valign:middle">
+                                                            <td>
+                                                                <H4>
+                                                                    <b />
+                                                                </H4>
+                                                            </td>
+                                                            <b />
+                                                            <td bgcolor="#D3D3D3" style="background-color: #EEEEEE;">
+                                                                <H4>
+                                                                    <B>SUPERVISADOS</B>
+                                                                </H4>
+                                                            </td>
+                                                        </tr>
+                                                        <t t-foreach="oa.superviseds" t-as="sed">
+                                                            <tr style="border: 1px solid black;border-style: solid;text-align:center;valign:middle">
+                                                                <td width="5%"></td>
+                                                                <td>
+                                                                    <span t-field="sed.related_job.name" />
+                                                                </td>
+                                                            </tr>
+                                                        </t>
+                                                    </table>
+                                                </center>
+
+                                                <br />
+
+                                                <center>
+                                                    <table border="1" style="border: 1px solid black;border-style: solid;text-align:center;valign:middle" width="90%">
+                                                        <tr style="border: 1px solid black;border-style: solid;text-align:center;valign:middle;background-color: #EEEEEE;">
+                                                            <td colspan="2">
+                                                                <h3>
+                                                                    <b>2. PERFIL DEL PUESTO</b>
+                                                                </h3>
+                                                            </td>
+                                                        </tr>
+                                                        <tr style="border: 1px solid black;border-style: solid;text-align:center;valign:middle">
+                                                            <td align="center">
+                                                                <strong>Estudios</strong>
+                                                            </td>
+                                                            <td>
+                                                                <span t-field="oa.job_profile.degree" />
+                                                            </td>
+                                                        </tr>
+                                                        <tr style="border: 1px solid black;border-style: solid;text-align:center;valign:middle">
+                                                            <td align="center">
+                                                                <strong>Especialidades</strong>
+                                                            </td>
+                                                            <td>
+                                                                <t t-foreach="oa.job_profile.specialties" t-as="spe">
+                                                                    <span t-field="spe.name" />
+                                                                    <br />
+                                                                </t>
+                                                            </td>
+                                                        </tr>
+                                                        <tr style="border: 1px solid black;border-style: solid;text-align:center;valign:middle">
+                                                            <td align="center">
+                                                                <strong>Experiencia</strong>
+                                                            </td>
+                                                            <td>
+                                                                <t t-foreach="oa.job_profile.exprience" t-as="exp">
+                                                                    <span t-field="exp.name" />
+                                                                    <br />
+                                                                </t>
+                                                            </td>
+                                                        </tr>
+                                                    </table>
+                                                </center>
+
+                                                <br />
+                                                    <center>
+                                                        <table border="1"
+                                                            style="border: 1px solid black;border-style: solid;text-align:center;valign:middle"
+                                                            align="center"
+                                                            valign="middle"
+                                                            width="90%">
+                                                            <tr style="border: 1px solid black;border-style: solid;text-align:center;valign:middle;background-color: #EEEEEE;" bgcolor="#D3D3D3">
+                                                                <td>
+                                                                    <H4>
+                                                                        <b>COMPETENCIAS GENÉRICAS</b>
+                                                                    </H4>
+                                                                </td>
+                                                                <b />
+                                                                <td width="25%">
+                                                                    <H4>
+                                                                        <B>RELEVANCIA</B>
+                                                                    </H4>
+                                                                </td>
+                                                            </tr>
+                                                            <t t-foreach="oa.generic_skills" t-as="gen">
+                                                                <tr style="border: 1px solid black;border-style: solid;text-align:center;valign:middle">
+                                                                    <td style="border: 1px solid black;border-style: solid;text-align:center;valign:middle;">
+                                                                        <span t-field="gen.name" />
+                                                                    </td>
+                                                                    <td width="25%" style="border: 1px solid black;border-style: solid;text-align:center;valign:middle;">
+                                                                        <span t-field="gen.relevance" />
+                                                                    </td>
+                                                                </tr>
+                                                            </t>
+                                                        </table>
+                                                    </center>
+
+                                                    <br />
+
+                                                    <center>
+                                                        <table border="1"
+                                                            style="border: 1px solid black;border-style: solid;text-align:center;valign:middle"
+                                                            align="center"
+                                                            valign="middle"
+                                                            width="90%">
+                                                            <tr style="border: 1px solid black;border-style: solid;text-align:center;valign:middle;background-color: #EEEEEE;" bgcolor="#D3D3D3">
+                                                                <td>
+                                                                    <H4>
+                                                                        <b>COMPETENCIAS DE TRABAJO EN EQUIPO</b>
+                                                                    </H4>
+                                                                </td>
+                                                                <b />
+                                                                <td width="25%">
+                                                                    <H4>
+                                                                        <B>RELEVANCIA</B>
+                                                                    </H4>
+                                                                </td>
+                                                            </tr>
+                                                            <t t-foreach="oa.workteam_skills" t-as="gen">
+                                                                <tr style="border: 1px solid black;border-style: solid;text-align:center;valign:middle">
+                                                                    <td style="border: 1px solid black;border-style: solid;text-align:center;valign:middle;">
+                                                                        <span t-field="gen.name" />
+                                                                    </td>
+                                                                    <td width="25%" style="border: 1px solid black;border-style: solid;text-align:center;valign:middle;">
+                                                                        <span t-field="gen.relevance" />
+                                                                    </td>
+                                                                </tr>
+                                                            </t>
+                                                        </table>
+                                                    </center>
+
+                                                    <br />
+
+                                                    <center>
+                                                        <table border="1"
+                                                            style="border: 1px solid black;border-style: solid;text-align:center;valign:middle"
+                                                            align="center"
+                                                            valign="middle"
+                                                            width="90%">
+                                                            <tr style="border: 1px solid black;border-style: solid;text-align:center;valign:middle;background-color: #EEEEEE;" bgcolor="#D3D3D3">
+                                                                <td>
+                                                                    <H4>
+                                                                        <b>COMPETENCIAS PERSONALES</b>
+                                                                    </H4>
+                                                                </td>
+                                                                <b />
+                                                                <td width="25%">
+                                                                    <H4>
+                                                                        <B>RELEVANCIA</B>
+                                                                    </H4>
+                                                                </td>
+                                                            </tr>
+                                                            <t t-foreach="oa.personal_skills" t-as="gen">
+                                                                <tr style="border: 1px solid black;border-style: solid;text-align:center;valign:middle">
+                                                                    <td style="border: 1px solid black;border-style: solid;text-align:center;valign:middle;">
+                                                                        <span t-field="gen.name" />
+                                                                    </td>
+                                                                    <td width="25%" style="border: 1px solid black;border-style: solid;text-align:center;valign:middle;">
+                                                                        <span t-field="gen.relevance" />
+                                                                    </td>
+                                                                </tr>
+                                                            </t>
+                                                        </table>
+                                                    </center>
+
+                                                    <br />
+
+                                                    <center>
+                                                        <table border="1"
+                                                            style="border: 1px solid black;border-style: solid;text-align:center;valign:middle"
+                                                            align="center"
+                                                            valign="middle"
+                                                            width="90%">
+                                                            <tr style="border: 1px solid black;border-style: solid;text-align:center;valign:middle;background-color: #EEEEEE;" bgcolor="#D3D3D3">
+                                                                <td>
+                                                                    <H4>
+                                                                        <b>COMPETENCIAS ESTRATÉGICAS</b>
+                                                                    </H4>
+                                                                </td>
+                                                                <td width="25%">
+                                                                    <H4>
+                                                                        <B>RELEVANCIA</B>
+                                                                    </H4>
+                                                                </td>
+                                                            </tr>
+                                                            <t t-foreach="oa.strategic_skills" t-as="gen">
+                                                                <tr style="border: 1px solid black;border-style: solid;text-align:center;valign:middle">
+                                                                    <td style="border: 1px solid black;border-style: solid;text-align:center;valign:middle;">
+                                                                        <span t-field="gen.name" />
+                                                                    </td>
+                                                                    <td width="25%" style="border: 1px solid black;border-style: solid;text-align:center;valign:middle;">
+                                                                        <span t-field="gen.relevance" />
+                                                                    </td>
+                                                                </tr>
+                                                            </t>
+                                                        </table>
+                                                    </center>
+                                                
+                                            </div>
+                                        </t>
+                                    </t>
+                                </div>
+                            </div>
+                        </div>
+                    </t>
+                </t>
+            </t>
+        </template>
+
+    </data>
+</odoo>

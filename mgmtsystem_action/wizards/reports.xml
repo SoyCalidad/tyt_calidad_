@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+
+    <!-- Reporte de acciones -->
+
+    <record id="action_action_report_wizard_view_form" model="ir.ui.view">
+        <field name="name">action.action_report.wizard.view.form</field>
+        <field name="model">action.action_report.wizard</field>
+        <field name="arch" type="xml">
+            <form string="">
+                <sheet>
+                    <group>
+                        <field name="filter_by"/>
+                    </group>
+                    <group attrs="{'invisible': [('filter_by','!=','action')]}">
+                        <field name="action_ids"/>
+                    </group>
+                    <group attrs="{'invisible': [('filter_by','!=','date')]}">
+                        <field name="init_date"/>
+                        <field name="end_date"/>
+                    </group>
+                </sheet>
+                <footer>
+                    <div class="oe_button_box" name="button_box">
+                        <button string="Descargar reporte" name="print_action_report" type="object" class="oe_highlight"/>
+                        <button string="Descargar reporte Excel" name="print_action_report_xls" type="object" class="oe_highlight"/>
+                    </div>
+                </footer>
+            </form>
+        </field>
+    </record>
+
+    <record id="action_action_report_wizard_action" model="ir.actions.act_window">
+        <field name="name">Acciones</field>
+        <field name="res_model">action.action_report.wizard</field>
+        <field name="view_mode">form</field>
+        <field name="target">new</field>
+        <field name="view_id" ref="action_action_report_wizard_view_form"/>
+        <field name="domain">[]</field>
+        <field name="context">{}</field>
+    </record>
+
+
+</odoo>

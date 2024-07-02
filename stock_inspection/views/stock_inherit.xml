@@ -1,0 +1,191 @@
+<odoo>
+  <data>
+    <!-- Search view -->
+    <record id="stock_inspection_search_form" model="ir.ui.view">
+      <field name="name">stock_inspection.stock_inspection.search.form</field>
+      <field name="model">stock_inspection.stock_inspection</field>
+      <field name="arch" type="xml">
+        <search>
+          <field name="name" string="Liberaciones" />
+          <field name="stock_picking_id" />
+          <group expand="0" string="Agrupado Por">
+            <filter string="Picking" name="stock_picking" context="{'group_by':'stock_picking_id'}" />
+          </group>
+        </search>
+      </field>
+    </record>
+
+    <!-- explicit list view definition -->
+    <record model="ir.actions.act_window" id="show_stock_inspection_action">
+      <field name="name">Fichas de Inspección</field>
+      <field name="res_model">stock_inspection.stock_inspection</field>
+      
+      <field name="view_mode">tree,form</field>
+      <field name="search_view_id" ref="stock_inspection_search_form" />
+      <field name="context">{
+        'search_default_stock_picking_id': [active_id],
+        'default_stock_picking_id': active_id,
+      }</field>
+      <field name="help" type="html">
+        <p class="oe_view_nocontent_create"> No hay fichas aún, cree una.</p>
+      </field>
+    </record>
+
+    <!-- Mostrar todas las fichas disponibles -->
+    <record model="ir.actions.act_window" id="show_stock_inspection_action_all">
+      <field name="name">Fichas de Inspección</field>
+      <field name="res_model">stock_inspection.stock_inspection</field>
+      
+      <field name="view_mode">tree,form</field>
+      <field name="help" type="html">
+        <p class="oe_view_nocontent_create"> No hay fichas aún, cree una.</p>
+      </field>
+    </record>
+
+    <!-- Los campos de line que mostrará -->
+    <record id="stock_inspection_line_form" model="ir.ui.view">
+      <field name="name">stock_inspection.stock_inspection.line.form</field>
+      <field name="model">stock_inspection.stock_inspection.line</field>
+      <field name="arch" type="xml">
+        <form string="Detalle de linea">
+          <group>
+            <!-- <field name="name" /> -->
+            <field name="complete_name" />
+            <field name="qualification" />
+
+          </group>
+        </form>
+      </field>
+    </record>
+
+    <!-- Los campos mostrados en la ficha de inspección -->
+    <record id="stock_inspection_inspection_form" model="ir.ui.view">
+      <field name="name">stock_inspection.stock_inspection.form</field>
+      <field name="model">stock_inspection.stock_inspection</field>
+      <field name="arch" type="xml">
+        <form string="Ficha de compra" create="true">
+          <header>
+            <!-- <button name="evaluate_diagnostic" attrs="{'invisible': [('state','in',['draft'])]}" string="Generar Reporte" type="object" class="btn-primary"/>
+            <button name="change_state_draft" attrs="{'invisible': [('state','in',['draft','validate'])]}" string="Atrás" type="object" class="btn-primary"/>
+            <button name="change_state_eval" attrs="{'invisible': [('state','in',['validate','evaluate'])]}" string="Analizar detalladamente" type="object" class="btn-primary"/> -->
+            <button name="change_state_validate" attrs="{'invisible': [('state','in',['validate'])]}" string="Culminar" type="object" class="btn-primary" />
+            <field name="state" widget="statusbar" />
+          </header>
+          <sheet>
+            <field name="stock_picking_id"  />
+
+            <group>
+
+              <group>
+                <field name="name" attrs="{'readonly': [('state','in',['validate'])]}" />
+
+              </group>
+
+              <group>
+                <field name="proveedor_ids" attrs="{'readonly': [('state','in',['validate'])]}" />
+                <!-- <field name="purchase_order_id" widget="many2many_tags" attrs="{'readonly': [('state','in',['validate'])]}"/> -->
+              </group>
+
+              <group>
+                <field name="purchase_order_id" attrs="{'readonly': [('state','in',['validate'])]}" />
+
+              </group>
+              <group>
+                <field name="user_ids" attrs="{'readonly': [('state','in',['validate'])]}" />
+              </group>
+
+            </group>
+
+            <group>
+              <group>
+                <field name="date_inspection" attrs="{'readonly': [('state','in',['validate'])]}" />
+              </group>
+              <group></group>
+            </group>
+
+            <group>
+
+              <field name="criterio_ids" attrs="{'readonly': [('state','in',['validate'])]}">
+                <tree editable="bottom">
+                  <!-- <field name="name" /> -->
+                  <field name="complete_name" />
+                  <field name="qualification" />
+                </tree>
+              </field>
+            </group>
+
+            <group>
+              <field name="note" />
+            </group>
+          </sheet>
+
+          <!-- Añadir seguimientos (logs) -->
+          <xpath expr="//sheet" position="after">
+            <div class="oe_chatter">
+              <field name="message_follower_ids" widget="mail_followers" />
+              <field name="activity_ids" widget="mail_activity" />
+              <field name="message_ids" widget="mail_thread" />
+            </div>
+          </xpath>
+
+        </form>
+      </field>
+    </record>
+
+    <!-- Modifica los campos mostrados general en las fichas  -->
+    <record id="stock_inspection_inspection_tree" model="ir.ui.view">
+      <field name="name">stock_inspection.stock_inspection.tree</field>
+      <field name="model">stock_inspection.stock_inspection</field>
+      <field eval="1" name="priority" />
+      <field name="arch" type="xml">
+        <tree string="Ficha de compra">
+          <field name="name" />
+          <field name="proveedor_ids" />
+          <field name="purchase_order_id" />
+          <field name="user_ids" />
+          <field name="date_inspection" />
+        </tree>
+      </field>
+    </record>
+
+    <!-- Aqui hereda de stock y se añade un boton para ir a las fichas -->
+
+
+    <record model="ir.actions.act_window" id="test">
+      <field name="name">Criterios de producto</field>
+      <field name="res_model">stock_inspection.criterio</field>
+      <field name="view_mode">tree,form</field>
+    </record>
+
+    <record id="stock_inspection_criterio_tree" model="ir.ui.view">
+      <field name="name">stock_inspection.criterio.tree</field>
+      <field name="model">stock_inspection.criterio</field>
+      <field name="arch" type="xml">
+        <tree>
+          
+          <field name="complete_name"/>
+          
+        </tree>
+      </field>
+    </record>
+
+    <record model="ir.actions.act_window" id="clause_list_actionn">
+      <field name="name">Claúsulas</field>
+      <field name="res_model">hola_calidad.clause</field>
+      
+      <field name="view_mode">tree,form</field>
+      <field name="help" type="html">
+        <p class="oe_view_nocontent_create">Crea claúsulas de gestión de calidad</p>
+      </field>
+    </record>
+<!-- 
+    <menuitem id="menu_list_inspect" name="Ficha de inspección" parent="purchase.menu_purchase_root" sequence="100" action="test" />
+
+    <menuitem id="purchase_ficha_menu" name="Fichas de inspección" sequence="0" parent="menu_list_inspect" action="show_stock_inspection_action_all" />
+
+
+    <menuitem id="calidad_clause_menuu" name="Criterios de inspección" sequence="0" parent="menu_list_inspect" action="test" />
+ -->
+
+  </data>
+</odoo>

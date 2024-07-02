@@ -1,0 +1,112 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+
+    <template id="policy_report" inherit_id="mgmtsystem_context.politica_de_calidad">
+        <xpath expr="//div[@name='principal']" position="inside">
+            <t t-if="doc.system_id.name == 'Soy Calidad'">
+                <p>
+                    <p t-field="doc.introduction" />
+                </p>
+                <h5>Contexto de la organización</h5>
+                <p>
+                    <p t-field="doc.organization_context" />
+                </p>
+                <h5>Apoyo de la dirección</h5>
+                <p>
+                    <p t-field="doc.direction_help" />
+                </p>
+                <h5>Satisfacción del cliente</h5>
+                <p>
+                    <p t-field="doc.customer_satisfaction" />
+                </p>
+                <h5>Requisitos legales</h5>
+                <p>
+                    <p t-field="doc.legal_req" />
+                </p>
+                <h5>Compromiso para los requisitos de la norma</h5>
+                <p>
+                    <p t-field="doc.standar_commitment" />
+                </p>
+                <h5>Participación del personal</h5>
+                <p>
+                    <p t-field="doc.staff_participation" />
+                </p>
+                <h5>Mejora continua</h5>
+                <p>
+                    <p t-field="doc.continous_improvement" />
+                </p>
+                <h5>Objetivos para la calidad</h5>
+                <p>
+                    <p t-field="doc.quality_goal_pre" />
+                </p>
+                <h5>Objetivos</h5>
+                <ul>
+                    <t t-foreach="doc.target_ids" t-as="tar">
+                        <li>
+                            <span t-field="tar.name" />
+                        </li>
+                    </t>
+                </ul>
+                <h5>Comunicación</h5>
+                <p>  
+                    <p t-field="doc.communication" />
+                </p>
+            </t>
+        </xpath>
+    </template>
+
+    <template id="policy_template_report" inherit_id="mgmtsystem_context.politica_de_calidad_simple">
+        <xpath expr="//div[@name='principal']" position="inside">
+            <t t-if="doc.system_id.name == 'Soy Calidad'">
+                <p>
+                    <p t-field="doc.introduction" />
+                </p>
+                <h5>Contexto de la organización</h5>
+                <p>
+                    <p t-field="doc.organization_context" />
+                </p>
+                <h5>Apoyo de la dirección</h5>
+                <p>
+                    <p t-field="doc.direction_help" />
+                </p>
+                <h5>Satisfacción del cliente</h5>
+                <p>
+                    <p t-field="doc.customer_satisfaction" />
+                </p>
+                <h5>Requisitos legales</h5>
+                <p>
+                    <p t-field="doc.legal_req" />
+                </p>
+                <h5>Compromiso para los requisitos de la norma</h5>
+                <p>
+                    <p t-field="doc.standar_commitment" />
+                </p>
+                <h5>Participación del personal</h5>
+                <p>
+                    <p t-field="doc.staff_participation" />
+                </p>
+                <h5>Mejora continua</h5>
+                <p>
+                    <p t-field="doc.continous_improvement" />
+                </p>
+                <h5>Objetivos para la calidad</h5>
+                <p>
+                    <p t-field="doc.quality_goal_pre" />
+                </p>
+                <h5>Objetivos</h5>
+                <ul>
+                    <t t-foreach="doc.target_ids" t-as="tar">
+                        <li>
+                            <p t-field="tar.name" />
+                        </li>
+                    </t>
+                </ul>
+                <h5>Comunicación</h5>
+                <p>  
+                    <p t-field="doc.communication" />
+                </p>
+            </t>
+        </xpath>
+    </template>
+
+</odoo>

@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+
+    <record id="context_policy_view_form" model="ir.ui.view">
+        <field name="name">mgmtsystem.context.policy.view.form.inherit</field>
+        <field name="model">mgmtsystem.context.policy</field>
+        <field name="inherit_id" ref="mgmtsystem_context.context_policy_view_form" />
+        <field name="arch" type="xml">
+            <div name="button_box" position="inside">
+                <button name="open_action_ids" type="object" class="oe_stat_button" icon="fa-file-text-o">
+                    <field string="Acciones" name="action_count" widget="statinfo" />
+                </button>
+            </div>
+            <notebook position="inside">
+                <page name="action_ids" string="Acciones">
+                    <separator string="Acciones" />
+                    <field name="action_ids" />
+                </page>
+            </notebook>
+        </field>
+    </record>
+
+</odoo>

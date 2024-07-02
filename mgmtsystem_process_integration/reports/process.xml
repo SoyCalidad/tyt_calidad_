@@ -1,0 +1,17 @@
+<odoo>
+    <data>
+    
+        <report id="action_report_process_xls"
+            model="mgmt.process"
+            string="Ficha de procedimiento"
+            report_type="xlsx"
+            name="mgmtsystem_process_integration.process_file_xls"
+            file="Ficha de procedimiento"
+            groups="base.group_no_one,mgmtsystem_process.group_process_readonly_printreport,mgmtsystem_process.group_process_owner,mgmtsystem_process.group_process_all"/>
+        
+        <record id="mgmtsystem_process.reporte_process" model="ir.actions.report">
+            <field name="binding_model_id" eval="False"/>
+        </record>
+
+    </data>
+</odoo>

@@ -1,0 +1,53 @@
+<odoo>
+    <data>
+
+        <report
+            id="action_report_survey_report"
+            model="survey.survey"
+            string="Resultados de encuesta (XLS)"
+            report_type="xlsx"
+            name="mgmtsystem_survey.survey_report"
+            file="Encuesta"
+            />
+
+        <menuitem
+            id="survey_report_menu"
+            name="Reportes"
+            parent="survey.menu_surveys"
+            sequence="100"/>
+
+        <record id="survey_wizard_view_form" model="ir.ui.view">
+            <field name="name">survey_report.wizard.view.form</field>
+            <field name="model">survey_report.wizard</field>
+            <field name="arch" type="xml">
+                <form>
+                    <group>
+                        <field name="survey_id"/>
+                    </group>
+                    <footer>
+                        <button name="action_print" type="object" string="Descargar Informe de encuesta" class="oe_highlight" icon="fa-download" context="{'type_action':'report'}"/>
+                        <button name="action_print" type="object" string="Descargar Análisis de encuesta" class="oe_highlight" icon="fa-download" context="{'type_action':'analysis'}"/>
+                        <button string="Cancelar" special="cancel"/>
+                    </footer>
+                </form>
+            </field>
+        </record>
+
+        <record id="action_report_survey_survey" model="ir.actions.act_window">
+            <field name="name">Encuesta</field>
+            <field name="type">ir.actions.act_window</field>
+            <field name="res_model">survey_report.wizard</field>
+            <field name="view_mode">form</field>
+            <field name="view_id" ref="survey_wizard_view_form"/>
+            <field name="target">new</field>
+            <field name="binding_type">report</field>
+        </record>
+
+        <menuitem id="survey_survey_report_menu"
+            name="Encuesta"
+            action="action_report_survey_survey"
+            parent="survey_report_menu"
+            sequence="2"/>
+
+    </data>
+</odoo>

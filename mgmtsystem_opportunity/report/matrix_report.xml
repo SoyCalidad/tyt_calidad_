@@ -1,0 +1,81 @@
+<odoo>
+
+    <record model='ir.ui.view' id='wizard_matrix_form'>
+        <field name="name">wizard.matrix.report.form</field>
+        <field name="model">wizard.matrix.report</field>
+        <field name="arch" type="xml">
+            <form string="Wizard">
+                <group>
+                    <field name="company_id" />
+                    <field name="type" />
+                </group>
+                <group string="Matrices">
+                    <field name="matrix_ids" />
+                </group>
+                <p>
+                        Escoja una matriz para Imprimir
+                </p>
+                <footer>
+                    <button name="export_xls"
+                            type="object"
+                            default_focus="1"
+                            string="Exportar Reporte Excel"
+                            class="oe_highlight"
+                            context="{'xls_export':1}"
+                            icon="fa-download" />
+                    <button string="Cancelar" special="cancel" />
+                </footer>
+            </form>
+        </field>
+    </record>
+
+    <record model='ir.actions.act_window' id='wizard_act_wizard_matrix_risk_action'>
+        <field name="name">Matriz de riesgos</field>
+        <field name="res_model">wizard.matrix.report</field>
+        <field name="view_mode">form</field>
+        <field name="view_id" ref="wizard_matrix_form" />
+        <field name="context">{'default_type':'risk'}</field>
+        <field name="target">new</field>
+    </record>
+
+    <menuitem name="Matriz de riesgos"
+              parent="menu_report"
+              id="menuitem_wizard_matrix_risk"
+              action="wizard_act_wizard_matrix_risk_action"
+              groups="base.group_no_one,mgmtsystem_opportunity.group_opportunity_onlyread,mgmtsystem_opportunity.group_opportunity_onlyread_printreport,mgmtsystem_opportunity.group_opportunity_user_secundario,mgmtsystem_opportunity.group_opportunity_write_printreport" />
+
+    <record model='ir.actions.act_window' id='wizard_act_wizard_matrix_opportunity_action'>
+        <field name="name">Matriz de oportunidades</field>
+        <field name="res_model">wizard.matrix.report</field>
+        <field name="view_mode">form</field>
+        <field name="view_id" ref="wizard_matrix_form" />
+        <field name="context">{'default_type':'opportunity'}</field>
+        <field name="target">new</field>
+    </record>
+
+    <menuitem name="Matriz de oportunidades"
+              parent="menu_report"
+              id="menuitem_wizard_matrix_opportunity"
+              action="wizard_act_wizard_matrix_opportunity_action"
+              groups="base.group_no_one,mgmtsystem_opportunity.group_opportunity_onlyread,mgmtsystem_opportunity.group_opportunity_onlyread_printreport,mgmtsystem_opportunity.group_opportunity_user_secundario,mgmtsystem_opportunity.group_opportunity_write_printreport" />
+
+    <report id="matrix_xlsx"
+            model="wizard.matrix.report"
+            string="Registros_"
+            report_type="xlsx"
+            name="matrix_report_xls.xlsx"
+            file="Matriz de riesgos y oportunidades"
+            menu="False"
+            print_report_name="'%s' % object.name"
+            groups="base.group_no_one,mgmtsystem_opportunity.group_opportunity_onlyread_printreport,mgmtsystem_opportunity.group_opportunity_user_secundario,mgmtsystem_opportunity.group_opportunity_write_printreport" />
+
+    <report id="matrix_individual_xlsx"
+            model="matrix.matrix"
+            string="Reporte de matriz"
+            report_type="xlsx"
+            name="mgmtsystem_opprisk.report"
+            file="Matriz"
+            print_report_name="'%s' % object.name"
+            groups="base.group_no_one,mgmtsystem_opportunity.group_opportunity_onlyread_printreport,mgmtsystem_opportunity.group_opportunity_user_secundario,mgmtsystem_opportunity.group_opportunity_write_printreport" />
+
+</odoo>

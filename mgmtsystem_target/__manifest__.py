@@ -1,0 +1,36 @@
+{
+    'name': 'Seguimiento, medición e indicadores de desempeño',
+    'version': '1.0',
+    'description': 'Permite crear metas y analizar su desarrollo en el tiempo',
+    'summary': 'Permite crear metas y analizar su desarrollo en el tiempo',
+    'author': '',
+    'website': '',
+    'license': 'LGPL-3',
+    'category': '',
+    'depends': [
+        'hola_calidad',
+        'mgmtsystem_context',
+        'mgmtsystem_process',
+        'mgmtsystem_opportunity',
+        'mgmtsystem_documentary_control',
+    ],
+    'data': [
+        'security/security.xml',
+        'security/ir.model.access.csv',
+        'views/context.xml',
+        'views/target.xml',
+        'views/menus.xml',
+        'views/target_onboarding_templates.xml',
+        'data/data.xml',
+        'data/mail_template_data.xml',
+        'wizards/target.xml',
+        'reports/target.xml',
+        'reports/target_source.xml',
+        'reports/indicator.xml',
+    ],
+    'demo': [
+        ''
+    ],
+    'auto_install': False,
+    'application': True,
+}

@@ -1,0 +1,147 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <!-- ONBOARDING STEPS -->
+
+    <template id="onboarding_hr_department_step">
+        <t t-call="base.onboarding_step">
+            <t t-set="title">Departamento</t>
+            <t t-set="description">Cree un departamento.</t>
+            <t t-set="done_icon" t-value="'fa-star'" />
+            <t t-set="btn_text">Crear</t>
+            <t t-set="done_text">Se ve bien!</t>
+            <t t-set="method" t-value="'action_open_hr_department'" />
+            <t t-set="model" t-value="'res.company'" />
+            <t t-set="state" t-value="state.get('hr_department_onboarding_state')" />
+        </t>
+    </template>
+
+    <template id="onboarding_hr_job_step">
+        <t t-call="base.onboarding_step">
+            <t t-set="title">Puesto</t>
+            <t t-set="description">Cree un puesto.</t>
+            <t t-set="done_icon" t-value="'fa-star'" />
+            <t t-set="btn_text">Crear</t>
+            <t t-set="done_text">Se ve bien!</t>
+            <t t-set="method" t-value="'action_open_hr_job'" />
+            <t t-set="model" t-value="'res.company'" />
+            <t t-set="state" t-value="state.get('hr_job_onboarding_state')" />
+        </t>
+    </template>
+
+    <template id="onboarding_hr_employee_step">
+        <t t-call="base.onboarding_step">
+            <t t-set="title">Empleado</t>
+            <t t-set="description">Cree un empleado.</t>
+            <t t-set="done_icon" t-value="'fa-star'" />
+            <t t-set="btn_text">Crear</t>
+            <t t-set="done_text">Se ve bien!</t>
+            <t t-set="method" t-value="'action_open_hr_employee'" />
+            <t t-set="model" t-value="'res.company'" />
+            <t t-set="state" t-value="state.get('hr_employee_onboarding_state')" />
+        </t>
+    </template>
+
+    <!-- ONBOARDING PANELS -->
+    <template id="employee_onboarding_panel" name="employee.onboarding.panel">
+        <t t-call="base.onboarding_container">
+            <t t-set="classes" t-value="'o_onboarding_blue'"/>
+            <t t-set="bg_image" t-value="'/account/static/src/img/account_invoice_onboarding_bg.jpg'"/>
+            <t t-set="close_method" t-value="'action_close_employee_onboarding'"/>
+            <t t-set="close_model" t-value="'res.company'"/>
+            <t t-set="text_completed">Felicitaciones! Ha completado todo.</t>
+            <t t-call="mgmtsystem_employees.onboarding_hr_department_step" name="hr_department_plan_step" />
+            <t t-call="mgmtsystem_employees.onboarding_hr_job_step" name="hr_job_step" />
+            <t t-call="mgmtsystem_employees.onboarding_hr_employee_step" name="hr_employee_step" />
+        </t>
+    </template>
+
+    <!-- Views -->
+
+    <record id="onboarding_hr_department_form" model="ir.ui.view">
+        <field name="name">hr.department.inherit.view.form</field>
+        <field name="model">hr.department</field>
+        <field name="inherit_id" ref="hr.view_department_form"/>
+        <field name="priority">1000</field>
+        <field name="mode">primary</field>
+        <field name="arch" type="xml">
+            <form position="inside">
+                <footer position="replace">
+                    <button name="action_save_onboarding_hr_department_step" class="btn btn-primary" type="object" string="Crear" />
+                    <button special="cancel" string="Cancelar" />
+                </footer>
+            </form>
+        </field>
+    </record>
+
+    <record id="onboarding_hr_job_form" model="ir.ui.view">
+        <field name="name">hr.job.inherit.view.form</field>
+        <field name="model">hr.job</field>
+        <field name="inherit_id" ref="hr.view_hr_job_form"/>
+        <field name="priority">1000</field>
+        <field name="mode">primary</field>
+        <field name="arch" type="xml">
+            <form position="inside">
+                <footer position="replace">
+                    <button name="action_save_onboarding_hr_job_step" class="btn btn-primary" type="object" string="Crear" />
+                    <button special="cancel" string="Cancelar" />
+                </footer>
+            </form>
+        </field>
+    </record>
+
+    <record id="onboarding_hr_employee_form" model="ir.ui.view">
+        <field name="name">hr.employee.inherit.view.form</field>
+        <field name="model">hr.employee</field>
+        <field name="inherit_id" ref="hr.view_employee_form"/>
+        <field name="priority">1000</field>
+        <field name="mode">primary</field>
+        <field name="arch" type="xml">
+            <form position="inside">
+                <footer position="replace">
+                    <button name="action_save_onboarding_hr_employee_step" class="btn btn-primary" type="object" string="Crear" />
+                    <button special="cancel" string="Cancelar" />
+                </footer>
+            </form>
+        </field>
+    </record>
+
+    <record id="action_hr_department_configurator" model="ir.actions.act_window">
+        <field name="type">ir.actions.act_window</field>
+        <field name="name">Cree un departamento</field>
+        <field name="view_mode">form</field>
+        <field name="target">new</field>
+        <field name="res_model">hr.department</field>
+        <field name="view_id" ref="mgmtsystem_employees.onboarding_hr_department_form"/>
+    </record>
+
+    <record id="action_hr_job_configurator" model="ir.actions.act_window">
+        <field name="type">ir.actions.act_window</field>
+        <field name="name">Cree un puesto</field>
+        <field name="view_mode">form</field>
+        <field name="target">new</field>
+        <field name="res_model">hr.job</field>
+        <field name="view_id" ref="mgmtsystem_employees.onboarding_hr_job_form"/>
+    </record>
+
+    <record id="action_hr_employee_configurator" model="ir.actions.act_window">
+        <field name="type">ir.actions.act_window</field>
+        <field name="name">Cree un empleado</field>
+        <field name="view_mode">form</field>
+        <field name="target">new</field>
+        <field name="res_model">hr.employee</field>
+        <field name="view_id" ref="mgmtsystem_employees.onboarding_hr_employee_form"/>
+    </record>
+
+    <record id="kanban_employee_inherit_onboarding" model="ir.ui.view">
+        <field name="name">hr.employee.view.form.inherit</field>
+        <field name="model">hr.employee</field>
+        <field name="inherit_id" ref="hr.hr_kanban_view_employees"/>
+        <field name="arch" type="xml">
+            <kanban position="attributes">
+                <attribute name="banner_route">/employee/employee_onboarding</attribute>
+            </kanban>
+        </field>
+    </record>
+
+
+</odoo>

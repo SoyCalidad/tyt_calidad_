@@ -1,0 +1,94 @@
+<odoo>
+    <data>
+
+        <report
+            id="action_report_request"
+            model="maintenance.request"
+            string="Petición de mantenimiento"
+            report_type="xlsx"
+            name="mgmtsystem_infrastructure.report_request"
+            file="Petición de mantenimiento/calibración"
+            />
+
+        <record id="maintenance_request_wizard_view_form" model="ir.ui.view">
+            <field name="name">maintenance.request.wizard.view.form</field>
+            <field name="model">maintenance.request.wizard</field>
+            <field name="arch" type="xml">
+                <form string="">
+                    <sheet>
+                        <group>
+                            <field name="maintenance_request_id"/>
+                        </group>
+                    </sheet>
+                    <footer>
+                        <button name="action_print" type="object" string="Descargar" class="oe_highlight" icon="fa-download"/>
+                    </footer>
+                </form>
+            </field>
+        </record>
+
+        <record id="calibration_request_wizard_view_form" model="ir.ui.view">
+            <field name="name">calibration.request.wizard.view.form</field>
+            <field name="model">calibration.request.wizard</field>
+            <field name="arch" type="xml">
+                <form string="">
+                    <sheet>
+                        <group>
+                            <field name="calibration_request_id"/>
+                        </group>
+                    </sheet>
+                    <footer>
+                        <button name="action_print" type="object" string="Descargar" class="oe_highlight" icon="fa-download"/>
+                    </footer>
+                </form>
+            </field>
+        </record>
+
+        <record id="action_report_maintenance_request" model="ir.actions.act_window">
+            <field name="name">Reporte de solicitudes de mantenimiento</field>
+            <field name="type">ir.actions.act_window</field>
+            <field name="res_model">maintenance.request.wizard</field>
+            <field name="view_mode">form</field>
+            <field name="view_id" ref="maintenance_request_wizard_view_form"/>
+            <field name="target">new</field>
+            <field name="binding_type">report</field>
+        </record>
+
+        <record id="action_report_calibration_request" model="ir.actions.act_window">
+            <field name="name">Reporte de solicitudes de calibración</field>
+            <field name="type">ir.actions.act_window</field>
+            <field name="res_model">calibration.request.wizard</field>
+            <field name="view_mode">form</field>
+            <field name="view_id" ref="calibration_request_wizard_view_form"/>
+            <field name="target">new</field>
+            <field name="binding_type">report</field>
+        </record>
+
+        <menuitem
+            id="maintenance_request_wizard_menu"
+            name="Peticiones de mantenimiento"
+            action="action_report_maintenance_request"
+            parent="soycalidad_maintenance_reporting"
+            sequence="22"/>
+
+        <menuitem
+            id="calibration_request_wizard_menu"
+            name="Peticiones de calibración"
+            action="action_report_calibration_request"
+            parent="soycalidad_maintenance_reporting"
+            sequence="22"/>
+
+        <record model="ir.ui.menu" id="maintenance.maintenance_reporting">
+            <field name="groups_id" eval="[(6,0,[ref('hola_calidad.make_invisible')])]"/>
+        </record>
+
+        <menuitem
+            id="maintenance.menu_equipment_form"
+            name="Equipments"
+            parent="maintenance.menu_maintenance_title"
+            action="maintenance.hr_equipment_action"
+            groups="maintenance.group_equipment_manager,base.group_user"
+            sequence="11"/>
+
+    </data>
+</odoo>

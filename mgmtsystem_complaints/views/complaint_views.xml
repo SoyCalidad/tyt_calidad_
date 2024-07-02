@@ -1,0 +1,200 @@
+<odoo>
+
+    <record id="complaint_categ_view_form" model="ir.ui.view">
+        <field name="name">complaint.quick.action.view.form</field>
+        <field name="model">complaint.quick.action</field>
+        <field name="arch" type="xml">
+            <form string="Acción rápida">
+                <sheet>
+                    <group>
+                        <field name="elaborate_ids" />
+                        <field name="name" />
+                        <field name="description" />
+                    </group>
+                </sheet>
+            </form>
+        </field>
+    </record>
+
+    <record model="ir.ui.view" id="view_complaint_complaint_search">
+        <field name="name">complaint.complaint.search</field>
+        <field name="model">complaint.complaint</field>
+        <field name="arch" type="xml">
+            <search>
+                <field name="name" />
+                <field name="categ_id" />
+                <field name="partner_id" />
+                <field name="via_ids" />
+                <group expand="0" name="group_by" string="Agrupado por">
+                    <filter name="incident_day" string="Día" domain="[]" context="{'group_by' : 'date_incident:day'}" />
+                    <filter name="incident_month" string="Mes" domain="[]" context="{'group_by' : 'date_incident:month'}" />
+                    <filter name="incident_year" string="Año" domain="[]" context="{'group_by' : 'date_incident:year'}" />
+                    <filter name="partner" string="Socio" domain="[]" context="{'group_by' : 'partner_id'}" />
+                </group>
+            </search>
+        </field>
+    </record>
+
+    <record model="ir.ui.view" id="view_complaint_complaint_tree">
+        <field name="name">complaint.complaint.tree</field>
+        <field name="model">complaint.complaint</field>
+        <field name="arch" type="xml">
+            <tree banner_route="/complaints/complaints_onboarding">
+                <field name="date_incident" />
+                <field name="employee_id" />
+                <field name="name" />
+                <field name="elaborate_ids" />
+                <field name="categ_id" />
+                <field name="state" />
+            </tree>
+        </field>
+    </record>
+
+    <record model="ir.ui.view" id="view_complaint_complaint_form">
+        <field name="name">complaint.complaint.form</field>
+        <field name="model">complaint.complaint</field>
+        <field name="arch" type="xml">
+            <form>
+                <header>
+                    <field name="state" widget="statusbar" statusbar_visible="open,in_process,close" clickable="True" />
+                </header>
+                <sheet>
+
+                    <div class="oe_title">
+                        <h1>
+                            <field name="code" />
+                        </h1>
+                        <label for="name" />
+                        <h2>
+                            <field name="name" />
+                        </h2>
+                    </div>
+                    <group string="Identificación">
+                        <field name="validation_date" />
+                        <field name="type" invisible="1" />
+                        <field name="reason_ids" widget="many2many_tags" />
+                        <field name="reason_other" />
+                        <field name="categ_id" options="{'no_open': True, 'no_create_edit': True}" />
+                        <field name="department_id" options="{'no_open': True, 'no_create': True, 'no_create_edit': True}" />
+                        <field name="employee_id" options="{'no_create':True,'no_create_edit':True}" attrs="{'invisible': [('type','!=','supplier')]}" string="Implicado" />
+                        <field name="elaborate_ids" />
+                        <field name="partner_id" options="{'no_create':True,'no_create_edit':True}" string="Cliente/Proveedor" attrs="{'invisible': [('type','!=','supplier')]}" />
+                        <field name="employee_notify_id" options="{'no_create':True,'no_create_edit':True}" attrs="{'invisible': [('type','!=','customer')]}" />
+                        <field name="place" />
+                        <field name="solution" />
+                        <field name="via_ids" widget="many2many_tags" />
+                        <field name="date_incident" />
+                        <field name="date_fin" attrs="{'invisible': [('date_fin','=',False)],'required': [('state','=','close')]}" />
+                        <field name="reclamation_book" invisible="1" />
+                        <separator />
+                        <field name="perspective" />
+                        <field name="description" />
+                    </group>
+                    <notebook>
+                        <page name="personal_data" string="Datos personales">
+                            <group>
+                                <field name="complainer_name" />
+                                <field name="complainer_document_type" />
+                                <field name="complainer_document_number" />
+                                <field name="complainer_delivery_type" />
+                                <field name="complainer_phone" />
+                                <field name="complainer_email" />
+                            </group>
+                        </page>
+                        <page name="investigation" string="Investigación">
+                            <group>
+                                <field name="investigation" />
+                                <field name="investigation_method" />
+                            </group>
+                            <group attrs="{'invisible': [('investigation_method','!=','cause')]}">
+                                <field name="cause_ids" context="{'default_cause_why_type': 'cause'}">
+                                    <tree editable="bottom">
+                                        <field name="cause_id" />
+                                        <field name="description" />
+                                        <field name="subcause_ids" widget="many2many_tags" context="{'default_parent_id': cause_id}">
+                                            <form>
+                                                <field name="name" string="Subcausa" />
+                                                <field name="description" />
+                                            </form>
+                                        </field>
+                                        <field name="attachment_ids" widget="many2many_binary" />
+                                    </tree>
+                                </field>
+                                <field name="conclusions" />
+                            </group>
+                            <group attrs="{'invisible': [('investigation_method','!=','why')]}">
+                                <field name="why_ids" context="{'default_cause_why_type': 'why'}">
+                                    <tree editable="bottom">
+                                        <field name="why_id" />
+                                        <field name="description" />
+                                    </tree>
+                                </field>
+                                <field name="root_cause" />
+                            </group>
+                            <group>
+                                <field name="complaint_files" />
+                            </group>
+                        </page>
+                        <page name="solution" string="Solución">
+                            <group string="Solución">
+                                <field name="quick_action_id" />
+                                <field name="date_solution" />
+                                <field name="is_open" class="oe_inline" />
+                            </group>
+                            <group string="Respuesta">
+                                <field name="satisfied" widget="boolean_toggle" />
+                                <field name="quick_response" widget="html" />
+                                <field name="attachment_ids" widget="many2many_binary" />
+                            </group>
+                        </page>
+                        <page string="No conformidades" attrs="{'invisible': [('is_open','=',False)]}">
+                            <field name="nonconformity_ids" />
+                        </page>
+                        <page name="action_ids" string="Acciones" attrs="{'invisible': [('is_open','=',False)]}">
+                            <field name="action_ids" />
+                        </page>
+                    </notebook>
+                </sheet>
+                <div class="oe_chatter">
+                    <field name="message_follower_ids" widget="mail_followers" />
+                    <field name="activity_ids" widget="mail_activity" />
+                    <field name="message_ids" widget="mail_thread" />
+                </div>
+            </form>
+        </field>
+    </record>
+
+    <menuitem name="Reclamos" id="mitem_complaint" parent="menu_complaint_root" sequence="1" />
+
+    <record model="ir.actions.act_window" id="complaint_complaint_customer_action">
+        <field name="name">Reclamos internos</field>
+        <field name="res_model">complaint.complaint</field>
+        <field name="view_mode">tree,form</field>
+        <field name="search_view_id" ref="view_complaint_complaint_search" />
+        <field name="domain">[('type','=','customer')]</field>
+        <field name="context">{"default_type":'customer'}</field>
+    </record>
+
+
+    <menuitem name="Reclamos internos"
+              id="mitem_complaint_customer"
+              parent="mitem_complaint"
+              sequence="1"
+              action="complaint_complaint_customer_action" />
+
+    <record model="ir.actions.act_window" id="complaint_complaint_supplier_action">
+        <field name="name">Reclamos externos</field>
+        <field name="res_model">complaint.complaint</field>
+        <field name="view_mode">tree,form</field>
+        <field name="search_view_id" ref="view_complaint_complaint_search" />
+        <field name="domain">[('type','=','supplier')]</field>
+        <field name="context">{"default_type":'supplier'}</field>
+    </record>
+
+    <menuitem name="Reclamos externos"
+              id="mitem_complaint_supplier"
+              parent="mitem_complaint"
+              sequence="5"
+              action="complaint_complaint_supplier_action" />
+
+</odoo>

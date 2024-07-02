@@ -1,0 +1,45 @@
+<odoo>
+    <data>
+
+        <record id="comunication_plan_wizard_form_view" model="ir.ui.view">
+            <field name="name">Programa de comunicaciones</field>
+            <field name="model">comunication.plan.wizard</field>
+            <field name="arch" type="xml">
+                <form>
+                    <group>
+                        <field name="comunication_plan_id"/>
+                    </group>
+                    <p>
+                        Escoja un Programa de comunicaciones para imprimir
+                    </p>
+                    <footer>
+                        <button name="action_print" type="object" string="Descargar" class="oe_highlight" icon="fa-download"/>
+                    </footer>
+                </form>
+            </field>
+        </record>
+
+
+        <record id="comunication_plan_wizard_action" model="ir.actions.act_window">
+            <field name="name">Programa de comunicaciones</field>
+            <field name="type">ir.actions.act_window</field>
+            <field name="res_model">comunication.plan.wizard</field>
+            <field name="view_mode">form</field>
+            <field name="view_id" ref="comunication_plan_wizard_form_view"/>
+            <field name="target">new</field>
+            <field name="binding_type">report</field>
+        </record>
+
+
+        <report id="report_comunication_plan_wizard"
+            model="comunication.plan.wizard"
+            string="Programa de comunicaciones"
+            report_type="xlsx"
+            name="mgmtsystem_comunication.report_comunication_plan_wizard"
+            file="Programa de Comunicaciones" />
+
+
+
+
+    </data>
+</odoo>

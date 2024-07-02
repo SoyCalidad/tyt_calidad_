@@ -1,0 +1,16 @@
+<odoo>
+    <data>
+
+        <record id="paperfomat_1" model="report.paperformat">
+            <field name="name">Formato</field>
+            <field name="default" eval="True"/>
+            <field name="format">A4</field>
+            <field name="orientation">Landscape</field>
+            <field name="margin_top">50</field>
+            <field name="margin_bottom">25</field>
+            <field name="header_line" eval="False"/>
+            <field name="header_spacing">40</field>
+        </record>
+
+    </data>
+</odoo>

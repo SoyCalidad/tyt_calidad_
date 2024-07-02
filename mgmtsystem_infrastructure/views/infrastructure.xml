@@ -1,0 +1,216 @@
+<odoo>
+    <data>
+        <record model="ir.ui.view" id="view_document_file_kanban_infrastructure_line">
+            <field name="name">view.document.file.kanban.infrastructure.line</field>
+            <field name="model">infrastructure.line.document</field>
+            <field name="arch" type="xml">
+                <kanban>
+                    <field name="ir_attachment_id" />
+                    <field name="mimetype" />
+                    <field name="type" />
+                    <field name="name" />
+                    <field name="priority" />
+                    <templates>
+                        <t t-name="kanban-box">
+                            <div class="oe_kanban_global_click">
+                                <div class="oe_kanban_vignette">
+                                    <div class="oe_attachment">
+                                        <div class="row">
+                                            <div class="col-xs-4 o_kanban_primary_left" t-if="record.type.raw_value == 'binary'">
+                                                <a t-attf-href="/web/content/#{record.ir_attachment_id.raw_value}?download=1">
+                                                    <t t-set="webimage" t-value="new RegExp('image.*(gif|jpeg|jpg|png)').test(record.mimetype.value)" />
+                                                    <div t-if="!webimage" class="o_image" t-att-data-mimetype="record.mimetype.value" />
+                                                    <div t-if="webimage" class="o_attachment_image">
+                                                        <img t-attf-src="/web/image/#{record.ir_attachment_id.raw_value}?download=1" />
+                                                    </div>
+                                                </a>
+                                            </div>
+                                            <div class="col-xs-8">
+                                                <strong>
+                                                    <field name="name" />
+                                                </strong>
+                                                <br></br>
+                                                <div class="mt8">
+                                                    <field name="priority" widget="priority" />
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </t>
+                    </templates>
+                </kanban>
+            </field>
+        </record>
+
+        <record id="view_document_form" model="ir.ui.view">
+            <field name="name">infrastructure.line.document.form</field>
+            <field name="model">infrastructure.line.document</field>
+            <field name="inherit_id" ref="base.view_attachment_form" />
+            <field name="mode">primary</field>
+            <field name="arch" type="xml">
+                <xpath expr="//field[@name='mimetype']" position="after">
+                    <field name="priority" widget="priority" />
+                </xpath>
+            </field>
+        </record>
+
+
+        <record id="view_mgmtsystem_infrastructure_tree" model="ir.ui.view">
+            <field name="name">mgmtsystem.infrastructure.tree</field>
+            <field name="model">mgmtsystem.infrastructure</field>
+            <field name="arch" type="xml">
+                <tree string="Infraestructura">
+                    <field name="name" />
+                    <field name="numero" />
+                    <field name="edition_id" />
+                    <field name="lines_ids" />
+                    <field name="state" />
+                </tree>
+            </field>
+        </record>
+
+        <record id="view_mgmtsystem_infrastructure_form" model="ir.ui.view">
+            <field name="name">mgmtsystem.infrastructure.form</field>
+            <field name="model">mgmtsystem.infrastructure</field>
+            <field name="arch" type="xml">
+                <form string="Infraestructura">
+                    <header>
+                        <field name="state" widget="statusbar" statusbar_visible="elaborate,review,validate,validate_ok" />
+                        <button string="Enviar a Elaborar"
+                                name="send_elaborate"
+                                type="object"
+                                class="btn-primary"
+                                attrs="{'invisible':[('state','in', ('elaborate','validate','validate_ok','cancel'))]}" />
+                        <button string="Enviar a Revisar"
+                                name="send_review"
+                                type="object"
+                                class="btn-primary"
+                                attrs="{'invisible':[('state','in', ('review','validate_ok','cancel'))]}" />
+                        <button string="Enviar a Validar"
+                                name="send_validate"
+                                type="object"
+                                class="btn-primary"
+                                attrs="{'invisible':[('state','in', ('elaborate','validate','validate_ok','cancel'))]}" />
+                        <button string="Validar"
+                                name="send_validate_ok"
+                                type="object"
+                                class="btn-primary"
+                                attrs="{'invisible':[('state','not in', ('validate'))]}" />
+                        <button string="Volver Obsoleto"
+                                confirm="Esto volverá obsoleto el presente registro. ¿Está seguro(a)?"
+                                name="send_cancel"
+                                type="object"
+                                class="btn-second"
+                                attrs="{'invisible': [('state','in',('cancel'))] }" />
+                    </header>
+                    <sheet>
+                        <group>
+                            <label for="name" />
+                            <div class="o_row">
+                                <field name="name" placeholder="Nombre" colspan="3" attrs="{'readonly': [('state','not in',('elaborate'))] }" />
+                                <field name="numero"
+                                       colspan="1"
+                                       nolabel="1"
+                                       class="oe_inline"
+                                       attrs="{'readonly': [('state','not in',('elaborate'))]}" />
+                            </div>
+                            <field name="edition_id" attrs="{'readonly': [('state','in',('validate_ok','cancel'))]}" />
+                            <field name="have_equipment" invisible="1" attrs="{'readonly': [('state','in',('validate_ok','cancel'))]}" />
+                        </group>
+                        <notebook>
+                            <page string="Inventario" attrs="{'invisible': [('have_equipment', '=', False)]}">
+                                <button type="object" name="show_equipments" string="Añadir bienes" class="oe_link oe_right" />
+                                <field name="lines_ids" attrs="{'readonly': [('state','in',('validate_ok', 'cancel'))] }">
+                                    <tree editable="bottom">
+                                        <field name="equipment_id" attrs="{'column_invisible': [('parent.state', '=', 'validate')]}" />
+                                        <field name="name" string="Equipo" attrs="{'column_invisible': [('parent.state', '!=', 'validate')]}" />
+                                        <field name="category_id" />
+                                        <field name="cost" />
+                                        <field name="employee_id" />
+                                        <field name="department_id" />
+                                        <field name="location" />
+                                        <field name="assign_date" />
+                                        <field name="scrap_date" />
+                                        <field name="has_attachments" invisible="1" />
+                                        <button name="action_see_attachments" type="object" icon="fa-files-o" attrs="{'invisible': [('has_attachments', '=', False)]}" />
+                                        <button name="action_see_attachments" type="object" icon="fa-file" attrs="{'invisible': [('has_attachments', '=', True)]}" />
+                                        <field name="observations" />
+                                    </tree>
+                                </field>
+                            </page>
+                            <page string="Bienes" attrs="{'invisible': [('have_equipment', '=', True)]}">
+                                <button type="object" name="action_send_equipments" string="✓ Empezar inventariado" class="oe_link oe_right" />
+                                <field name="equipment_ids" attrs="{'readonly': [('state','in',('validate_ok', 'cancel'))]}">
+                                    <tree edit="False">
+                                        <field name="name" />
+                                        <field name="category_id" string="Categoría" />
+                                        <field name="cost" />
+                                        <field name="location" />
+                                        <field name="assign_date" />
+                                        <field name="scrap_date" />
+                                    </tree>
+                                </field>
+                            </page>
+                            <page string="Información">
+                                <group>
+                                    <group>
+                                        <field name="elaborate_ids" widget="many2many_tags" options="{ 'no_open': True, 'no_create_edit': True, 'no_create': True}" attrs="{'required': [('state','in',('elaborate'))], 'readonly': [('state','not in',('elaborate'))] }" />
+                                        <field name="review_ids" widget="many2many_tags" options="{ 'no_open': True}" attrs="{'required': [('state','in',('elaborate'))], 'readonly': [('state','not in',('elaborate', 'review'))] }" />
+                                        <field name="validate_ids" widget="many2many_tags" options="{ 'no_open': True}" attrs="{'required': [('state','in',('review'))], 'readonly': [('state','not in',('elaborate', 'review', 'validate'))] }" />
+                                    </group>
+                                    <group>
+                                        <field name="date_elaborate" attrs="{'required': [('state','in',('elaborate'))], 'readonly': True}" />
+                                        <field name="date_review" attrs="{'required': [('state','in',('review'))], 'readonly': True, 'invisible': [('state','in',('elaborate'))] }" />
+                                        <field name="date_validate" groups="base.group_no_one,base.user_admin" attrs="{'invisible': [('state','in',('elaborate','review'))] }" />
+                                    </group>
+                                </group>
+                            </page>
+
+                        </notebook>
+                    </sheet>
+
+                    <div class="oe_chatter">
+                        <field name="message_follower_ids" widget="mail_followers" />
+                        <field name="activity_ids" widget="mail_activity" />
+                        <field name="message_ids" widget="mail_thread" />
+                    </div>
+
+                </form>
+            </field>
+        </record>
+
+        <record id="product_infrastructure_action" model="ir.actions.act_window">
+            <field name="name">Inventariado</field>
+            <field name="type">ir.actions.act_window</field>
+            <field name="res_model">mgmtsystem.infrastructure</field>
+            
+            <field name="view_mode">tree,form,kanban</field>
+        </record>
+
+        <record id="product_infrastructure_action" model="ir.actions.act_window">
+            <field name="name">Inventariado</field>
+            <field name="type">ir.actions.act_window</field>
+            <field name="res_model">mgmtsystem.infrastructure</field>
+            
+            <field name="view_mode">tree,form,kanban</field>
+        </record>
+
+        <!-- <menuitem 
+            id="menu_product_infrastructure"
+            name="Inventariado" 
+            parent="maintenance.menu_maintenance_title"
+            groups="maintenance.group_equipment_manager,base.group_user"
+            sequence="15"/>
+
+        <menuitem 
+            id="menu_product_infrastructure_infra"
+            name="Inventariado" 
+            action="product_infrastructure_action"
+            parent="menu_product_infrastructure"
+            groups="maintenance.group_equipment_manager,base.group_user"
+            sequence="1"/> -->
+
+    </data>
+</odoo>

@@ -1,0 +1,257 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+
+    <record id="action_report_mgmtsystem_mof" model="ir.actions.report">
+        <field name="name">Manual de organización y funciones</field>
+        <field name="model">mgmtsystem.mof</field>
+        <field name="report_type">qweb-pdf</field>
+        <field name="report_name">mgmtsystem_mof.report_mgmtsystem_mof</field>
+        <field name="report_file">mgmtsystem_mof.report_mgmtsystem_mof</field>
+        <field name="print_report_name">'%s' % object.name</field>
+        <field name="binding_model_id" ref="model_mgmtsystem_mof" />
+        <field name="binding_type">report</field>
+    </record>
+
+    <template id="report_mgmtsystem_mof">
+        <t t-call="web.html_container">
+            <t t-foreach="docs" t-as="o">
+                <t t-if="o and 'company_id' in o">
+                    <t t-set="company" t-value="o.company_id" />
+                </t>
+                <t t-if="not o or not 'company_id' in o">
+                    <t t-set="company" t-value="res_company" />
+                </t>
+                <t t-call="hola_calidad.iso_header" />
+                <t t-call="web.external_layout">
+                    <div class="page">
+                        <t t-call="hola_calidad.iso_cover" />
+                        <div id="main">
+                            <style type="text/css">
+                                .section
+                                {color:black;padding-left:50px;padding-right:50px;margin-left:30px;margin-right:30px;}
+                                .section-paragraph-title {font-size:
+                                16px;text-align:left;font-weight:bold;margin-top:20px;margin-bottom:20px;}
+                                .section-title {font-size:
+                                18px;text-align:center;font-weight:bold;margin-top:20px;margin-bottom:20px;}
+                                .section-paragraph { text-align: justify;text-justify: inter-word;}
+                                .section-table {border-collapse:collapse;border-spacing:0;display:
+                                block;margin-left: auto;margin-right: auto;width: 70%;}
+                                .section-table th {font-family: Palatino, Palatino Linotype,
+                                Palatino LT STD, Book Antiqua, Georgia,
+                                serif;font-size:14px;font-weight:normal;padding:5px
+                                2px;border-style:solid;border-width:1px;overflow:hidden;word-break:normal;border-color:black;}
+                                .section-table td{font-family: Palatino, Palatino Linotype, Palatino
+                                LT STD, Book Antiqua, Georgia, serif;font-size:14px;padding:5px
+                                2px;border-style:solid;border-width:1px;overflow:hidden;word-break:normal;border-color:black;}
+                                .section-table .table-header
+                                {font-weight:bold;background-color:#ef;text-align:center;vertical-align:top;width:20%;font-weight:
+                                bold;font-size:14px;}
+                                .section-table .table-row
+                                {text-align:center;vertical-align:middle;font-size:14px;}
+                                .section-image {display: block;margin-left: auto;margin-right:
+                                auto;width: 50%;}
+                            </style>
+                            <div class="section">
+                                <div class="section-title">
+                                    <p>TÍTULO I.</p>
+                                    <p>PRESENTACIÓN</p>
+                                </div>
+                                <div class="section-paragraph">
+                                    <p class="section-paragraph-title">
+                                        <b>1.1. IMPORTANCIA</b>
+                                    </p>
+                                    <p>
+                                        <span t-field="o.importance" />
+                                    </p>
+                                </div>
+                                <div class="section-paragraph">
+                                    <p class="section-paragraph-title">
+                                        <b>1.2. OBJETIVO</b>
+                                    </p>
+                                    <p>
+                                        <span t-field="o.target" />
+                                    </p>
+                                </div>
+                                <div class="section-paragraph">
+                                    <p class="section-paragraph-title">
+                                        <b>1.5. DEFINICIONES Y SIGLAS</b>
+                                    </p>
+                                    <table class="table-bordered">
+                                        <thead>
+                                            <tr>
+                                                <th>Abreviatura</th>
+                                                <th>Nombre</th>
+                                                <th>Descripción</th>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                            <t t-foreach="o.definition_ids" t-as="definition">
+                                                <tr>
+                                                    <td>
+                                                        <span t-field="definition.abbre" />
+                                                    </td>
+                                                    <td>
+                                                        <span t-field="definition.name" />
+                                                    </td>
+                                                    <td>
+                                                        <span t-field="definition.description" />
+                                                    </td>
+                                                </tr>
+                                            </t>
+                                        </tbody>
+                                    </table>
+                                </div>
+                            </div>
+                            <div class="section" style="page-break-before:always;">
+                                <div class="section-title">
+                                    <p>TÍTULO II.</p>
+                                    <p>ESTRUCTURA ORGÁNICA Y FUNCIONES</p>
+                                </div>
+                                <div class="section-paragraph">
+                                    <p class="section-paragraph-title">
+                                        <b>2.1. CUADRO ORGÁNICO DE CARGOS</b>
+                                    </p>
+                                    <t t-set="i" t-value="1" />
+                                    <table class="section-table">
+                                        <tr>
+                                            <th class="table-header" width="15%">N°</th>
+                                            <th class="table-header" width="85%">Cargo estructural</th>
+                                        </tr>
+                                        <t t-foreach="o.job_ids" t-as="job">
+                                            <tr>
+                                                <td class="table-row">
+                                                    <t t-raw="i" />
+                                                </td>
+                                                <td class="table-row">
+                                                    <span t-field="job.name" />
+                                                </td>
+                                            </tr>
+                                            <t t-set="i" t-value="i + 1" />
+                                        </t>
+                                    </table>
+                                </div>
+                                <t t-set="i" t-value="2" />
+                                <t t-foreach="o.job_ids" t-as="job">
+                                    <div class="section-paragraph">
+                                        <p class="section-paragraph-title">
+                                            <b>2.<t t-raw="i" />. PUESTO: <span t-field="job.name" />
+                                            </b>
+                                        </p>
+                                        <div>
+                                            <span style="font-weight: bold;">
+                                                Descripción:
+                                            </span>
+                                            <span>
+                                                <span t-field="job.description" />
+                                            </span>
+                                        </div>
+                                        <div>
+                                            <span style="font-weight: bold;">
+                                                Funciones del puesto:
+                                            </span>
+                                            <span>
+                                                <ul>
+                                                    <t t-foreach="job.functions" t-as="function">
+                                                        <li>
+                                                            <span t-field="function.name" />
+                                                        </li>
+                                                    </t>
+                                                </ul>
+                                            </span>
+                                        </div>
+                                        <div>
+                                            <p class="section-paragraph-title">
+                                                <b>2.<t t-raw="i" />.1 CALIFICACIÓN: </b>
+                                            </p>
+                                            <span style="font-weight: bold;">
+                                                Formación Académica:
+                                            </span>
+                                            <t t-if="job.job_profile">
+                                                <span>
+                                                    <ul>
+                                                        <t t-foreach="job.job_profile.specialties"
+                                                            t-as="sp">
+                                                            <li>
+                                                                <span t-field="sp.name" />
+                                                            </li>
+                                                        </t>
+                                                    </ul>
+                                                </span>
+                                            </t>
+                                            <span style="font-weight: bold;">
+                                                Experiencia:
+                                            </span>
+                                            <t t-if="job.job_profile">
+                                                <span>
+                                                    <ul>
+                                                        <t t-foreach="job.job_profile.exprience"
+                                                            t-as="ex">
+                                                            <li>
+                                                                <span t-field="ex.name" />
+                                                            </li>
+                                                        </t>
+                                                    </ul>
+                                                </span>
+                                            </t>
+                                        </div>
+                                        <div>
+                                            <p class="section-paragraph-title">
+                                                <b>2.<t t-raw="i" />.2 COORDINACIÓN: </b>
+                                            </p>
+                                            <span style="font-weight: bold;">
+                                                Coordinadores:
+                                            </span>
+                                            <span>
+                                                <ul>
+                                                    <t t-foreach="job.coordinators" t-as="sp">
+                                                        <li>
+                                                            <span t-field="sp.related_job" />
+                                                        </li>
+                                                    </t>
+                                                </ul>
+                                            </span>
+                                        </div>
+                                        <div>
+                                            <p class="section-paragraph-title">
+                                                <b>2.<t t-raw="i" />.3 SUPERVISIÓN: </b>
+                                            </p>
+                                            <span style="font-weight: bold;">
+                                                Supervisores:
+                                            </span>
+                                            <span>
+                                                <ul>
+                                                    <t t-foreach="job.supervisors" t-as="sp">
+                                                        <t t-if="sp.related_job">
+                                                            <span t-field="sp.related_job" />
+                                                        </t>
+                                                        <t t-else="">
+                                                            No aplica
+                                                        </t>
+                                                    </t>
+                                                </ul>
+                                            </span>
+                                            <span style="font-weight: bold;">
+                                                Supervisados:
+                                            </span>
+                                            <span>
+                                                <ul>
+                                                    <t t-foreach="job.superviseds" t-as="sp">
+                                                        <li>
+                                                            <span t-field="sp.related_job" />
+                                                        </li>
+                                                    </t>
+                                                </ul>
+                                            </span>
+                                        </div>
+                                    </div>
+                                    <t t-set="i" t-value="i+1" />
+                                </t>
+                            </div>
+                        </div>
+                    </div>
+                </t>
+            </t>
+        </t>
+    </template>
+
+</odoo>

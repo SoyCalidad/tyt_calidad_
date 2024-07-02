@@ -1,0 +1,14 @@
+<odoo>
+    <data>
+
+    <report
+        id="action_report_res_partner_evaluation"
+        model="res.partner.evaluation.history"
+        string="Evaluación de seguimiento"
+        report_type="xlsx"
+        name="mgmtsystem_partner_qualification.partner_evaluation"
+        file="Evaluación de seguimiento"
+    />
+
+    </data>
+</odoo>

@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <record id="stock_inspection_management" model="ir.module.category">
+        <field name="name">Inspección de compras</field>
+        <field name="description">Accesos para módulo inspección</field>
+        <field name="parent_id" ref="hola_calidad.module_mgmt_management" />
+        <field name="sequence">25</field>
+    </record>
+    <record id="group_stock_inspection_readonly" model="res.groups">
+        <field name="name">Inspección: Solo lectura</field>
+        <field name="implied_ids" eval="[(4, ref('base.group_user'))]" />
+        <field name="category_id" ref="stock_inspection.stock_inspection_management" />
+    </record>
+    <record id="group_stock_inspection_readonly_printreport" model="res.groups">
+        <field name="name">Inspección: Lectura e impresión</field>
+        <field name="implied_ids" eval="[(4, ref('stock_inspection.group_stock_inspection_readonly'))]" />
+        <field name="category_id" ref="stock_inspection.stock_inspection_management" />
+    </record>
+    <record id="group_stock_inspection_owner" model="res.groups">
+        <field name="name">Inspección: Lectura Edición de documentos propios</field>
+        <field name="implied_ids" eval="[(4, ref('stock_inspection.group_stock_inspection_readonly_printreport'))]" />
+        <field name="category_id" ref="stock_inspection.stock_inspection_management" />
+    </record>
+    <record id="group_stock_inspection_all" model="res.groups">
+        <field name="name">Inspección: Lectura y edición</field>
+        <field name="implied_ids" eval="[(4, ref('stock_inspection.group_stock_inspection_owner'))]" />
+        <field name="category_id" ref="stock_inspection.stock_inspection_management" />
+    </record>
+</odoo>

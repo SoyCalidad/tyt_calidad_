@@ -1,0 +1,40 @@
+<odoo>
+
+    <menuitem
+        id="menu_mgmtsystem_root"
+        name="Sistema de gestión"
+        web_icon="hola_calidad,static/description/icon.png"
+        groups="group_mgmt_onlyread,group_mgmt_onlyread_printreport,group_mgmt_write_printreport,group_mgmt_all"
+        sequence="-3" />
+
+    <menuitem
+      id="menu_plan_main"
+      name="Planificar"
+      parent="menu_mgmtsystem_root"
+      sequence="10" />
+
+    <menuitem
+      id="menu_do_main"
+      name="Hacer"
+      parent="menu_mgmtsystem_root"
+      sequence="20" />
+
+    <menuitem
+      id="menu_check_main"
+      name="Verificar"
+      parent="menu_mgmtsystem_root"
+      sequence="40" />
+
+    <menuitem
+      id="menu_act_main"
+      name="Actuar"
+      parent="menu_mgmtsystem_root"
+      sequence="60" />
+
+    <menuitem
+        id="menu_mgmtsystem_configuration"
+        name="Configuración"
+        parent="hola_calidad.menu_mgmtsystem_root"
+        sequence="100" />
+
+</odoo>

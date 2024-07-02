@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+
+    <menuitem id="improve_report_root_menu" name="Reportes" parent="improve_menu" sequence="100" />
+
+    <menuitem id="report_change_request_menu"
+              name="Planificación de cambios"
+              action="change_request_report_wizard_action"
+              parent="improve_report_root_menu"
+              sequence="10" />
+
+    <menuitem id="report_improve_plan_matrix_menu"
+              name="Matriz de Planificación de cambios"
+              action="improve_plan_matrix_report_wizard_action"
+              parent="improve_report_root_menu"
+              sequence="11" />
+
+    <menuitem id="report_action_list_menu"
+              name="Acciones"
+              action="mgmtsystem_action.action_action_report_wizard_action"
+              parent="improve_report_root_menu"
+              sequence="12" />
+
+    <menuitem id="report_nc_list_menu"
+              name="No conformidades"
+              action="mgmtsystem_nonconformity.report_nc"
+              parent="improve_report_root_menu"
+              sequence="13" />
+
+    <menuitem id="report_nc_ac_list_menu"
+              name="No conformidades y acciones"
+              action="mgmtsystem_nonconformity.report_nc_ac"
+              parent="improve_report_root_menu"
+              sequence="14" />
+
+</odoo>

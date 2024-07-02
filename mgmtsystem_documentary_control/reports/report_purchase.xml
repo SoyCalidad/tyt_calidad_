@@ -1,0 +1,86 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+
+    <template id="report_purchaseorder_document" name="code_report_purchaseorder_document" inherit_id="purchase.report_purchaseorder_document">
+        <t t-call="web.external_layout" position="before"> 
+            <div class="header">
+                <style type="text/css">
+                    .tg  {border-collapse:collapse;border-spacing:0;margin:0px auto;width:100%;margin: 5px;}
+                    .tg td{border-color:black;border-style:solid;border-width:1px;font-family: Palatino, Palatino Linotype, Palatino LT STD, Book Antiqua, Georgia, serif;font-size:14px;
+                    overflow:hidden;padding:10px 5px;word-break:normal;text-align:middle;align:center;}
+                    .tg th{border-color:black;border-style:solid;border-width:1px;font-family: Palatino, Palatino Linotype, Palatino LT STD, Book Antiqua, Georgia, serif;font-size:14px;
+                    font-weight:normal;overflow:hidden;padding:10px 5px;word-break:normal;}
+                    .tg .tg-9wq8{border-color:inherit;text-align:center;vertical-align:middle}
+                    .tg .tg-1wig{border-color:inherit;text-align:center;vertical-align:middle;font-size:16px;font-weight:bold;}
+                    .tg .tg-0lax{border-color:inherit;text-align:center;vertical-align:middle;font-size:12px;}
+                </style>
+                <t t-if="o and 'company_id' in o">
+                    <t t-set="company" t-value="o.company_id" />
+                </t>
+                <t t-if="not o or not 'company_id' in o">
+                    <t t-set="company" t-value="res_company" />
+                </t>
+                <table class="tg">
+                    <tbody>
+                        <tr>
+                            <td class="tg-1wig" style="width:15%">
+                                <img t-if="company.logo" t-att-src="'data:image/png;base64,%s' % to_text(company.logo)" style="max-width:100px;max-height:100px;vertical-align:middle;" />
+                            </td>
+                            <td class="tg-1wig" style="width:65%;">
+                                <span style="font-size:18px;font-weight:bold;">
+                                    <span t-esc="model_description" /> 
+                                </span>
+                            </td>
+                            <td class="tg-0lax" width="20%" style="width:20%">
+                                Código: 
+                                <span t-esc="code" />
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </t>
+    </template>
+
+    <template id="report_purchasequotation_document" name="code_report_purchasequotation_document" inherit_id="purchase.report_purchasequotation_document">
+        <t t-call="web.external_layout" position="before"> 
+            <div class="header">
+                <style type="text/css">
+                            .tg  {border-collapse:collapse;border-spacing:0;margin:0px auto;width:100%;margin: 5px;}
+                            .tg td{border-color:black;border-style:solid;border-width:1px;font-family: Palatino, Palatino Linotype, Palatino LT STD, Book Antiqua, Georgia, serif;font-size:14px;
+                            overflow:hidden;padding:10px 5px;word-break:normal;text-align:middle;align:center;}
+                            .tg th{border-color:black;border-style:solid;border-width:1px;font-family: Palatino, Palatino Linotype, Palatino LT STD, Book Antiqua, Georgia, serif;font-size:14px;
+                            font-weight:normal;overflow:hidden;padding:10px 5px;word-break:normal;}
+                            .tg .tg-9wq8{border-color:inherit;text-align:center;vertical-align:middle}
+                            .tg .tg-1wig{border-color:inherit;text-align:center;vertical-align:middle;font-size:16px;font-weight:bold;}
+                            .tg .tg-0lax{border-color:inherit;text-align:center;vertical-align:middle;font-size:12px;}
+                </style>
+                <t t-if="o and 'company_id' in o">
+                    <t t-set="company" t-value="o.company_id" />
+                </t>
+                <t t-if="not o or not 'company_id' in o">
+                    <t t-set="company" t-value="res_company" />
+                </t>
+                <table class="tg">
+                    <tbody>
+                        <tr>
+                            <td class="tg-1wig" style="width:15%">
+                                <img t-if="company.logo" t-att-src="'data:image/png;base64,%s' % to_text(company.logo)" style="max-width:100px;max-height:100px;vertical-align:middle;" />
+                            </td>
+                            <td class="tg-1wig" style="width:65%;">
+                                <span style="font-size:18px;font-weight:bold;">
+                                    <span t-esc="model_description" /> 
+                                </span>
+                            </td>
+                            <td class="tg-0lax" width="20%" style="width:20%">
+                                Código: 
+                                <span t-esc="code" />
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </t>
+    </template>
+
+</odoo>

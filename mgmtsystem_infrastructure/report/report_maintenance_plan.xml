@@ -1,0 +1,282 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--Estructura basica de reportes-->
+<odoo>
+   <data>
+
+      <template id="maintance_plan_report">
+         <t t-foreach="docs" t-as="o">
+            <t t-if="o and 'company_id' in o">
+               <t t-set="company" t-value="o.company_id"/>
+            </t>
+            <t t-if="not o or not 'company_id' in o">
+               <t t-set="company" t-value="res_company"/>
+            </t>
+            <t t-call="web.html_container">
+               <div class="header">
+                  <style type="text/css">
+                     .tg  {border-collapse:collapse;border-spacing:0;margin:0px auto;width:100%;}
+                     .tg td{border-color:black;border-style:solid;border-width:1px;font-family: Palatino, Palatino Linotype, Palatino LT STD, Book Antiqua, Georgia, serif;font-size:14px;
+                     overflow:hidden;padding:10px 5px;word-break:normal;text-align:middle;align:center;}
+                     .tg th{border-color:black;border-style:solid;border-width:1px;font-family: Palatino, Palatino Linotype, Palatino LT STD, Book Antiqua, Georgia, serif;font-size:14px;
+                     font-weight:normal;overflow:hidden;padding:10px 5px;word-break:normal;}
+                     .tg .tg-9wq8{border-color:inherit;text-align:center;vertical-align:middle}
+                     .tg .tg-1wig{border-color:inherit;text-align:center;vertical-align:middle;font-size:16px;font-weight:bold;}
+                     .tg .tg-0lax{border-color:inherit;text-align:center;vertical-align:middle;font-size:12px;}
+                  </style>
+                  <table class="tg">
+                     <tbody>
+                        <tr>
+                           <td class="tg-1wig" rowspan="3" width="20%" style="width:15%">
+                              <img t-if="company.logo" t-att-src="'data:image/png;base64,%s' % to_text(company.logo)" style="max-width:100px;max-height:100px;vertical-align:middle;" />
+                           </td>
+                           <td class="tg-1wig" rowspan="3" width="80%" style="width:65%;">
+                              <span style="font-size:18px;font-weight:bold;">PROGRAMA DE MANTENIMIENTO</span>
+                              <br/>
+                              <span t-field="o.name" style="font-size:15px;font-weight:bold;"/>
+                           </td>
+                           <td class="tg-0lax" width="20%" style="width:20%">
+                              Código:
+                              <span t-field="o.numero" />
+                           </td>
+                        </tr>
+                        <tr>
+                           <td class="tg-0lax">
+                              Código:
+                              <span t-field="o.code" />
+                           </td>
+                        </tr>
+                        <tr>
+                           <td class="tg-0lax">
+                              Fecha de validacion:
+                              <span t-field="o.date_validate"/>
+                           </td>
+                        </tr>
+                     </tbody>
+                  </table>
+               </div>
+               <t t-call="web.external_layout">
+                  <div class="nav">
+                     <style type="text/css">
+                        .tg  {border-collapse:collapse;border-spacing:0;margin:0px auto;width:100%;}
+                        .tg td{border-color:black;border-style:solid;border-width:1px;font-family: Palatino, Palatino Linotype, Palatino LT STD, Book Antiqua, Georgia, serif;font-size:14px;
+                        overflow:hidden;padding:10px 5px;word-break:normal;}
+                        .tg th{border-color:black;border-style:solid;border-width:1px;font-family: Palatino, Palatino Linotype, Palatino LT STD, Book Antiqua, Georgia, serif;font-size:14px;
+                        font-weight:normal;overflow:hidden;padding:10px 5px;word-break:normal;}
+                        .tg .tg-d14o{background-color:#efefef;border-color:#c0c0c0;font-weight:bold;text-align:center;vertical-align:middle}
+                        .tg .tg-wo29{border-color:#c0c0c0;text-align:left;vertical-align:top}
+                        .tg .tg-fzdr{border-color:#c0c0c0;text-align:center;vertical-align:top}
+                     </style>
+                     <table class="tg">
+                        <tbody>
+                           <tr>
+                              <td class="tg-d14o">NOMBRE</td>
+                              <td class="tg-d14o">RESPONSABLE</td>
+                              <td class="tg-d14o">TIPO</td>
+                              <td class="tg-d14o">FECHA DE INICIO</td>
+                              <td class="tg-d14o">FECHA FIN</td>
+                              <td class="tg-d14o">PRESUPUESTO</td>
+                              <td class="tg-d14o">FRECUENCIA</td>
+                           </tr>
+                           <t t-foreach="o.maintenance_ids" t-as="li">
+                              <tr>
+                                 <td class="tg-wo29">
+                                    <span t-field="li.name"/>
+                                 </td>
+                                 <td class="tg-wo29">
+                                    <span t-field="li.employee_id"/>
+                                 </td>
+                                 <td class="tg-wo29">
+                                    <span t-field="li.type"/>
+                                 </td>
+                                 <td class="tg-fzdr">
+                                    <span t-field="li.start_date"/>
+                                 </td>
+                                 <td class="tg-fzdr">
+                                    <span t-field="li.limit_date"/>
+                                 </td>
+                                 <td class="tg-fzdr">
+                                    <span t-field="li.estimate"/>
+                                 </td>
+                                 <td class="tg-fzdr">
+                                    <span t-field="li.frequency_id.name"/>
+                                 </td>
+                              </tr>
+                           </t>
+                        </tbody>
+                     </table>
+                  </div>
+                  <div class="footer" style="border-top: 1px solid black;font-size: 8px;">
+                     <div class="text-center" style="border-top: 1px solid black;font-size: 10px;text-align:center;">
+                        ©
+                        <span t-field="company.name"/>
+                        . All Rights Reserved.
+                        <br/>
+                        PROHIBIDA SU REPRODUCCIÓN SIN AUTORIZACIÓN EXPRESA DE LA DIRECCIÓN.
+                        <br/>
+                        CUALQUIER COPIA IMPRESA NO CONTROLADA. DEBE SER ROTULADA COMO "COPIA NO CONTROLADA".
+                        <br/>
+                        CONSULTE VERSIÓN ELECTRÓNICA
+                     </div>
+                  </div>
+               </t>
+            </t>
+         </t>
+      </template>
+
+      <record id="paperformat_lowmargi" model="report.paperformat">
+         <field name="name">European A4 low margin</field>
+         <field name="default" eval="True" />
+         <field name="format">A4</field>
+         <field name="page_height">0</field>
+         <field name="page_width">0</field>
+         <field name="orientation">Landscape</field>
+         <field name="margin_top">4</field>
+         <field name="margin_bottom">10</field>
+         <field name="margin_left">4</field>
+         <field name="margin_right">4</field>
+         <field name="header_line" eval="False" />
+         <field name="header_spacing">30</field>
+         <field name="dpi">90</field>
+      </record>
+
+      <report id="reporte_plan_infrastructure"
+         string="Programa de mantenimientos"
+         report_type="qweb-pdf"
+         model="mgmtsystem.maintenance.plan"
+         name="mgmtsystem_infrastructure.maintance_plan_report"
+         file="Programa de mantenimientos"
+         paperformat="hola_calidad.landscape" />
+
+      <record id="maintenance_plan_wizard_view_form" model="ir.ui.view">
+         <field name="name">maintance.plan.wizard.view.form</field>
+         <field name="model">maintance.plan.wizard</field>
+         <field name="arch" type="xml">
+            <form string="">
+               <sheet>
+                  <group>
+                     <field name="maintenance_plan_id"/>
+                  </group>
+               </sheet>
+               <footer>
+                  <button name="action_print" type="object" string="Descargar" class="oe_highlight" icon="fa-download"/>
+               </footer>
+            </form>
+         </field>
+      </record>
+
+      <record id="action_report_maintenance" model="ir.actions.act_window">
+         <field name="name">Reporte de programa de mantenimientos</field>
+         <field name="type">ir.actions.act_window</field>
+         <field name="res_model">maintance.plan.wizard</field>
+         <field name="view_mode">form</field>
+         <field name="view_id" ref="maintenance_plan_wizard_view_form"/>
+         <field name="target">new</field>
+         <field name="binding_type">report</field>
+      </record>
+
+      <menuitem
+         id="soycalidad_maintenance_reporting"
+         name="Reportes"
+         parent="maintenance.menu_maintenance_title"
+         sequence="20"/>
+
+      <menuitem
+         id="maintenance_plan_wizard_menu"
+         name="Programa de mantenimientos"
+         action="action_report_maintenance"
+         parent="mgmtsystem_infrastructure.soycalidad_maintenance_reporting"
+         sequence="22"/>
+
+      <report
+         id="infrastructure_xlsx"
+         model="mgmtsystem.infrastructure"
+         string="Fichero de inventario(XLSX)"
+         report_type="xlsx"
+         name="mgmtsystem_infrastructure_report_xls"
+         file="Fichero de inventario"
+         menu="True"
+         attachment_use="False"/>
+
+      <report
+         id="equipment_xlsx_report"
+         model="maintenance.equipment"
+         string="Equipos"
+         report_type="xlsx"
+         name="equipment_xls"
+         file="Equipos"
+         menu="True"
+         attachment_use="False"/>
+
+      <record id="infrastructure_wizard_view_form" model="ir.ui.view">
+         <field name="name">mgmtsystem.infrastructure.wizard.view.form</field>
+         <field name="model">mgmtsystem.infrastructure.wizard</field>
+         <field name="arch" type="xml">
+            <form string="">
+               <sheet>
+                  <group>
+                     <field name="infrastructure_id"/>
+                  </group>
+               </sheet>
+               <footer>
+                  <button name="action_print" type="object" string="Descargar" class="oe_highlight" icon="fa-download"/>
+               </footer>
+            </form>
+         </field>
+      </record>
+
+      <record id="action_report_infrastructure" model="ir.actions.act_window">
+         <field name="name">Inventariado</field>
+         <field name="type">ir.actions.act_window</field>
+         <field name="res_model">mgmtsystem.infrastructure.wizard</field>
+         <field name="view_mode">form</field>
+         <field name="view_id" ref="infrastructure_wizard_view_form"/>
+         <field name="target">new</field>
+         <field name="binding_type">report</field>
+      </record>
+
+      <!-- <menuitem
+         id="infrastructure_wizard_menu"
+         name="Inventariado"
+         action="action_report_infrastructure"
+         parent="soycalidad_maintenance_reporting"
+         sequence="33"/> -->
+
+      <record id="equipment_wizard_view_form" model="ir.ui.view">
+         <field name="name">maintenance.equipment.wizard.view.form</field>
+         <field name="model">maintenance.equipment.wizard</field>
+         <field name="arch" type="xml">
+            <form string="">
+               <sheet>
+                  <group>
+                     <field name="equipment_ids" />
+                  </group>
+                  <p>
+                     Imprima un reporte de equipos. En caso de no seleccionar ninguno se seleccionarán todos ellos.
+                  </p>
+               </sheet>
+               <footer>
+                  <button name="action_print" type="object" string="Descargar" class="oe_highlight" icon="fa-download"/>
+               </footer>
+            </form>
+         </field>
+      </record>
+
+      <record id="action_report_equipment" model="ir.actions.act_window">
+         <field name="name">Equipos</field>
+         <field name="type">ir.actions.act_window</field>
+         <field name="res_model">maintenance.equipment.wizard</field>
+         <field name="view_mode">form</field>
+         <field name="view_id" ref="equipment_wizard_view_form"/>
+         <field name="target">new</field>
+         <field name="binding_type">report</field>
+      </record>
+
+      <menuitem
+         id="equipment_wizard_menu"
+         name="Equipos"
+         action="action_report_equipment"
+         parent="soycalidad_maintenance_reporting"
+         sequence="33"/>
+
+   </data>
+</odoo>

@@ -1,0 +1,56 @@
+<?xml version="1.0"?>
+<odoo>
+
+    <!-- Mail template are declared in a NOUPDATE block
+         so users can freely customize/delete them -->
+    <data>
+        <!--Email template -->
+        <record id="email_template_record_meeting_2" model="mail.template">
+            <field name="name">Acta de Reunión: Enviar por email</field>
+            <field name="model_id" ref="mgmtsystem_comunication.model_record_meeting" />
+            <field name="email_from">{{(object.user_id.email_formatted or user.email_formatted )}}</field>
+            <field name="subject">Convocatoria a reunión (Nombre: ${object.name or 'n/a'}) (Fecha: ${object.date_release or 'n/a' })</field>
+            <field name="body_html" type="html">
+                <div style="margin: 0px; padding: 0px;">
+                    <p style="margin: 0px; padding: 0px; font-size: 13px;">
+        Queda cordialmente invitado a la reunión ${object.name} con fecha ${object.date_release}
+                        <br />
+                        <br />
+        Se adjunta acta de reunión:
+                    </p>
+                </div>
+            </field>
+            <field name="report_template" ref="action_report_record_conv_meeting" />
+            <field name="report_name">Reporte de Convocatoria</field>
+            <!--<field name="report_name">Acta de Reunión_${object.name or ''}_${object.date_release or ''}</field>-->
+            <field name="lang">${object.user_id.lang}</field>
+            <!--<field name="user_signature" eval="False" /> -->
+            <field name="auto_delete" eval="True" />
+        </record>
+    </data>
+
+    <data>
+    <!--Email template -->
+        <record id="email_template_comunication_plan_line" model="mail.template">
+            <field name="name">Plan de Comunicaciones: Enviar por email</field>
+            <field name="model_id" ref="mgmtsystem_comunication.model_comunication_plan_line" />
+            <field name="email_from">${(user.email_formatted) |safe}</field>
+            <field name="email_to">${object.get_send_to_emails()}</field>
+            <field name="subject">Plan de Comunicaciones (Nombre: ${object.resume or 'n/a'}) (Fecha: ${object.date_release or 'n/a'})</field>
+            <field name="body_html" type="html">
+                <div style="margin: 0px; padding: 0px;">
+                    <p style="margin: 0px; padding: 0px; font-size: 13px;">
+                        Se ha creado un nuevo plan de comunicaciones ${object.resume} con fecha ${object.date_release}
+                        <br />
+                        <br />
+                    </p>
+                </div>
+            </field>
+            <field name="report_template" ref="action_report_comunication_plan_line" />
+            <field name="report_name">Plan de Comunicaciones</field>
+            <field name="lang">${user.lang}</field>
+            <!--<field name="user_signature" eval="False" />-->
+            <field name="auto_delete" eval="True" />
+        </record>
+    </data>
+</odoo>

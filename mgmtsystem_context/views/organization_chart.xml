@@ -1,0 +1,130 @@
+<odoo>
+    <data>
+
+        <record id="organization_chart_view_form" model="ir.ui.view">
+            <field name="name">mgmtsystem.context.organization_chart.view.form</field>
+            <field name="model">mgmtsystem.context.organization_chart</field>
+            <field name="arch" type="xml">
+                <form string="">
+                    <header>
+                        <field name="state" widget="statusbar" statusbar_visible="elaborate,review,validate,validate_ok" />
+                        <button string="Enviar a Elaborar"
+                                name="send_elaborate"
+                                type="object"
+                                class="btn-primary"
+                                attrs="{'invisible':[('state','in', ('elaborate','cancel','validate_ok'))]}" />
+                        <button string="Enviar a Revisar"
+                                name="send_review"
+                                type="object"
+                                class="btn-primary"
+                                attrs="{'invisible':[('state','!=', 'elaborate')]}" />
+                        <button string="Enviar a Validar"
+                                name="send_validate"
+                                type="object"
+                                class="btn-primary"
+                                attrs="{'invisible':[('state','in', ('elaborate','validate','cancel','validate_ok'))]}" />
+                        <button string="Validar"
+                                name="send_validate_ok"
+                                type="object"
+                                class="btn-primary"
+                                attrs="{'invisible':[('state','not in', ('validate'))]}" />
+                        <button string="Volver Obsoleto"
+                                confirm="Esto volverá obsoleto el presente registro. ¿Está seguro(a)?"
+                                name="send_cancel"
+                                type="object"
+                                class="btn-second"
+                                attrs="{'invisible': [('state','in',('cancel'))] }" />
+                        <button name="button_new_version"
+                                type="object"
+                                string="Nueva versión"
+                                attrs="{'invisible':['|', ('active','=',False), ('state', '!=', 'validate_ok')]}"
+                                class="oe_highlight" />
+                    </header>
+                    <sheet>
+                        <div class="oe_button_box" name="button_box">
+                            <button type="object"
+                                    name="action_open_older_versions"
+                                    class="oe_stat_button"
+                                    icon="fa-archive"
+                                    style="white-space: nowrap;"
+                                    string="Versiones antiguas" />
+                            <button string="Ver Organigrama"
+                                    name="%(hr_organizational_chart.action_organizational_chart)d"
+                                    type="action"
+                                    class="oe_highlight"
+                                    icon="fa-users" />
+                            <widget name="web_ribbon" title="Archived" bg_color="bg-danger" attrs="{'invisible': [('active', '=', True)]}" />
+                            <field name="active" invisible="1" />
+                        </div>
+                        <div>
+                            <label for="name" />
+                            <h1>
+                                <field name="name" class="oe_inline" attrs="{'readonly': [('state','in',('validate_ok','cancel'))]}" />
+                            </h1>
+                        </div>
+                        <group string="Datos generales">
+                            <group>
+                                <label for="process_id" />
+                                <div class="o_row">
+                                    <field name="process_id" placeholder="Procedimiento" colspan="3" attrs="{'readonly': [('state','not in',('elaborate'))]}" />
+                                </div>
+                            </group>
+                        </group>
+                        <notebook>
+                            <page string="Valdación y versión">
+                                <group>
+                                    <field name="version" attrs="{'readonly': [('state','in',('validate_ok','cancel'))]}" />
+                                </group>
+                                <group string="Validación" col="4">
+                                    <group colspan="4">
+                                        <separator string="Elaboración" />
+                                        <field name="elaboration_step" colspan="2" nolabel="1" attrs="{'readonly': [('state','not in',('elaborate'))]}" />
+                                        <separator string="Revisión" />
+                                        <field name="review_step" colspan="2" nolabel="1" attrs="{'readonly': [('state','not in',('elaborate', 'review'))]}" />
+                                        <separator string="Validación" />
+                                        <field name="validation_step" colspan="2" nolabel="1" attrs="{'readonly': [('state','not in',('elaborate', 'review', 'validate'))]}" />
+                                    </group>
+                                    <group colspan="2">
+                                        <field name="date_elaborate" attrs="{'required': [('state','in',('elaborate'))], 'readonly': True}" />
+                                        <field name="date_review" attrs="{'required': [('state','in',('review'))], 'readonly': True, 'invisible': [('state','in',('elaborate'))] }" />
+                                        <field name="date_validate" groups="base.group_no_one,base.user_admin" attrs="{'invisible': [('state','in',('elaborate','review'))] }" />
+                                    </group>
+                                </group>
+                            </page>
+                        </notebook>
+                    </sheet>
+                    <div class="oe_chatter">
+                        <field name="message_follower_ids" widget="mail_followers" />
+                        <field name="activity_ids" widget="mail_activity" />
+                        <field name="message_ids" widget="mail_thread" />
+                    </div>
+                </form>
+            </field>
+        </record>
+
+        <record id="organization_chart_view_tree" model="ir.ui.view">
+            <field name="name">mgmtsystem.context.organization_chart.view.tree</field>
+            <field name="model">mgmtsystem.context.organization_chart</field>
+            <field name="arch" type="xml">
+                <tree string="">
+                    <field name="name" />
+                    <field name="process_id" />
+                    <field name="state" />
+                </tree>
+            </field>
+        </record>
+
+        <record id="organization_chart_action" model="ir.actions.act_window">
+            <field name="name">Organigrama</field>
+            <field name="res_model">mgmtsystem.context.organization_chart</field>
+            <field name="view_mode">tree,form</field>
+            <field name="domain">[]</field>
+            <field name="context">{}</field>
+        </record>
+
+        <!-- <menuitem id="organization_chart_menu" name="Organigrama" action="organization_chart_action" parent="menu_org_chart_department" sequence="10"/> -->
+        <!-- <menuitem id="organization_chart_menu_view" name="Organigrama (Vista)" action="org_chart_employee.action_org_chart_employee" parent="menu_org_chart_department" sequence="11"/> -->
+
+
+    </data>
+</odoo>

@@ -1,0 +1,281 @@
+<odoo>
+    <data>
+        <!--WIZARD-->
+        <record id="view_transientmodel_wizard_form" model="ir.ui.view">
+            <field name="name">transient.form</field>
+            <field name="model">wizard.create.products</field>
+            <field name="arch" type="xml">
+                <form string="Crear equipos">
+                    <p class="oe_grey">Esta vista simplifica la creación de equipos tomando como plantilla para la creación de otros.</p>
+                    <br />
+                    <field name="equipment_id" invisible="1" />
+                    <field name="lines_ids">
+                        <tree editable="bottom">
+                            <field name="equipment_id" invisible="1" />
+                            <field name="name" />
+                            <field name="serial_number" />
+                            <field name="category_id" />
+                            <field name="cost" />
+                            <field name="assign_date" />
+                            <field name="location" />
+                            <field name="scrap_date" />
+                        </tree>
+                    </field>
+                    <footer>
+                        <button name="create_products" string="Crear equipos" type="object" class="btn-primary" />
+                        <button string="Cancelar" class="btn-default" special="cancel" />
+                    </footer>
+                </form>
+            </field>
+        </record>
+
+        <record id="action_createproduct_wizard" model="ir.actions.act_window">
+            <field name="name">Crear equipos</field>
+            <field name="type">ir.actions.act_window</field>
+            <field name="res_model">wizard.create.products</field>
+            <field name="view_mode">form</field>
+            <field name="target">new</field>
+        </record>
+        <!--WIZARD-->
+
+        <!-- equipment : views inheritance -->
+        <record id="hr_equipment_view_kanban_inherit" model="ir.ui.view">
+            <field name="name">maintenance.equipment.view.kanban.inherit</field>
+            <field name="model">maintenance.equipment</field>
+            <field name="inherit_id" ref="maintenance.hr_equipment_view_kanban" />
+            <field name="arch" type="xml">
+                <field name="name" position="before">
+                    <field name="id" />
+                </field>
+                <div class="o_dropdown_kanban dropdown" position="before">
+                    <div class="o_kanban_image">
+                        <img t-att-src="kanban_image('maintenance.equipment', 'image_variant_128', record.id.raw_value)" alt="Equipment" class="o_image_64_contain"/>
+                    </div>
+                </div>
+            </field>
+        </record>
+
+
+        <record id="hr_equipment_view_form" model="ir.ui.view">
+            <field name="name">equipment.form.inherit</field>
+            <field name="inherit_id" ref="maintenance.hr_equipment_view_form" />
+            <field name="model">maintenance.equipment</field>
+            <field name="arch" type="xml">
+                <div class="oe_title" position="before">
+                    <field name="image_variant_1920" widget="image" class="oe_avatar" options="{'preview_image': 'image_variant_128'}" />
+                </div>
+                <div name="button_box" position="replace">
+                    <div class="oe_button_box" name="button_box">
+                        <button name="maintenance_action"
+                                type="object"
+                                class="oe_stat_button"
+                                icon="fa-wrench"
+                                context="{'type_maintenance':'maintenance','default_equipment_id': id}">
+                            <field string="Mantenimiento" name="maintenance_count" widget="statinfo" />
+                        </button>
+                        <button name="maintenance_action"
+                                type="object"
+                                class="oe_stat_button"
+                                icon="fa-ticket"
+                                context="{'type_maintenance':'calibration','default_equipment_id': id}">
+                            <field string="Calibracion" name="calibration_count" widget="statinfo" />
+                        </button>
+                    </div>
+                </div>
+                <sheet position="before">
+                    <header>
+                        <button name="%(action_createproduct_wizard)d"
+                                string="Generar más equipos como este"
+                                type="action"
+                                class="btn-primary"
+                                context="{'default_equipment_id': id}" />
+                        <field name="state" widget="statusbar" />
+                    </header>
+                </sheet>
+                <field name="assign_date" position="replace">
+                    <field name="assign_date" string="Fecha de adquisición" />
+                </field>
+                <field name="scrap_date" position="replace">
+                    <field name="scrap_date" string="Fecha de desecho" />
+                </field>
+                <field name="category_id" position="attributes">
+                    <attribute name="string">Categoría</attribute>
+                </field>
+                <field name="category_id" position="after">
+                    <field name="barcode" />
+                    <field name="default_code" />
+                    <field name="account_id" />
+                </field>
+                <notebook position="inside">
+                    <page name="request_maintenance" string="Mantenimiento">
+                        <separator string="Peticiones de Mantenimiento" />
+                        <field name="request_maintenance_m_ids" domain="[('equipment_id', '=', id)]"> 
+                        </field>
+                    </page>
+                </notebook>
+                <notebook position="inside">
+                    <page name="calibration" string="Calibración">
+                        <separator string="Peticiones de calibración" />
+                        <field name="request_calibration_m_ids" />
+                    </page>
+                </notebook>
+                <xpath expr="//notebook/page[3]" position="attributes">
+                    <attribute name="invisible">True</attribute>
+                </xpath>
+                <field name="partner_id" position="before">
+                    <field name="property_type" />
+                </field>
+                <field name="technician_user_id" position="after">
+                    <field name="calibration_needed" />
+                </field>
+                <field name="effective_date" position="attributes">
+                    <attribute name="required">0</attribute>
+                </field>
+            </field>
+        </record>
+
+        <record id="hr_equipment_view_form_edit" model="ir.ui.view">
+            <field name="name">equipment.form.inherit.edit</field>
+            <field name="inherit_id" ref="maintenance.hr_equipment_request_view_form" />
+            <field name="model">maintenance.request</field>
+            <field name="arch" type="xml">
+                <xpath expr="//field[@name='description']" position="replace">
+                    <field name="state" invisible="1"/>
+                    <field name="description" placeholder="Internal Note ......." attrs="{'readonly':[('state', '=', '4repaired')]}"/>
+                </xpath>
+            </field>
+        </record>
+
+        <!-- maintenance.request inherit form view -->
+        <record id="hr_equipment_request_view_form" model="ir.ui.view">
+            <field name="name">maintenance.request.inherit.view.form</field>
+            <field name="model">maintenance.request</field>
+            <field name="inherit_id" ref="maintenance_plan.hr_equipment_request_view_form" />
+            <field name="arch" type="xml">
+                <!-- Add your xpath here -->
+                <field name="maintenance_kind_id" position="attributes">
+                    <attribute name="invisible">1</attribute>
+                </field>
+                <field name="name" position="replace">
+                    <field name="name" placeholder="Maintenance Request"  attrs="{'invisible' : [('type_line','!=','maintenance')]}" />
+                    <field name="name" placeholder="Petición de calibración" attrs="{'invisible' : [('type_line','!=','calibration')]}"/>
+                </field>
+                <field name="user_id" position="replace">
+                    <field name="type_line" invisible="1" />
+                    <field name="user_id" string="Responsable de mantenimiento" attrs="{'invisible' : [('type_line','!=','maintenance')]}" />
+                    <field name="user_id" string="Responsable de calibración" attrs="{'invisible' : [('type_line','!=','calibration')]}" />
+                </field>
+            </field>
+        </record>
+
+
+        <record id="maintenance_request_view_kanban_inherit" model="ir.ui.view">
+            <field name="name">maintenance.request.kanban.inherit</field>
+            <field name="inherit_id" ref="maintenance.hr_equipment_request_view_kanban" />
+            <field name="model">maintenance.request</field>
+            <field name="arch" type="xml">
+                <kanban position="attributes">
+                    <attribute name="default_group_by">state</attribute>
+                    <attribute name="disable_drag_drop_record">true</attribute>
+                    <!--attribute name="edit">False</attribute-->
+                </kanban>
+            </field>
+        </record>
+
+        <!-- maintenance.request inherit tree view -->
+        <record id="hr_equipment_request_view_tree" model="ir.ui.view">
+            <field name="name">maintenance.request.inherit.view.tree</field>
+            <field name="model">maintenance.request</field>
+            <field name="inherit_id" ref="maintenance.hr_equipment_request_view_tree" />
+            <field name="arch" type="xml">
+                <!-- Add your xpath here -->
+                <field name="name" position="replace">
+                    <field name="name" string="Título"/>
+                </field>
+                <field name="employee_id" position="replace">
+                    <field name="employee_id" invisible="1"/>
+                </field>
+                <field name="user_id" position="replace">
+                    <field name="user_id" string="Responsable"/>
+                </field>
+                <field name="category_id" position="replace">
+                    <field name="maintenance_type" string="Tipo de Mantenimiento"/>
+                </field>
+                <field name="request_date" position="attributes">
+                    <attribute name="string">Fecha de ejecución</attribute>
+                </field>
+                <field name="stage_id" position="replace">
+                    <field name="description" string="Observación"/>
+                </field>
+            </field>
+        </record>
+
+
+        <record id="maintenance_request_view_form_inherit" model="ir.ui.view">
+            <field name="name">maintenance.request.form.inherit</field>
+            <field name="inherit_id" ref="maintenance.hr_equipment_request_view_form" />
+            <field name="model">maintenance.request</field>
+            <field name="arch" type="xml">
+                <field name="stage_id" position="attributes">
+                    <attribute name="invisible">True</attribute>
+                </field>
+                <field name="request_date" position="attributes">
+                    <attribute name="string">Fecha de solicitud</attribute>
+                    <attribute name="readonly">0</attribute>
+                </field>
+                <field name="equipment_id" position="attributes">
+                    <attribute name="string">Nombre de equipos</attribute>
+                </field>
+                <form>
+                    <header>
+                          <field name="state" widget="statusbar" statusbar_visible="1new,2approved,3in_process,4repaired" attrs="{'invisible': True}" />
+                    </header>
+                </form>
+                <button name="archive_equipment_request" position="before">
+                    <button string="Enviar solicitud"
+                            name="action_notify_employee"
+                            type="object"
+                            class="btn-primary"
+                            attrs="{'invisible': ['|',('state', '!=', '1new'),('archive', '=', True)]}" />
+                    <button string="Validar" name="send_approved" type="object" attrs="{'invisible': ['|',('state', '!=', '1new'),('archive', '=', True)]}" />
+                    <button string="Iniciar proceso"
+                            name="send_in_process"
+                            type="object"
+                            attrs="{'invisible': ['|',('state', '!=', '2approved'),('archive', '=', True)]}"
+                            class="btn-primary" />
+                    <button string="Realizado"
+                            name="send_repaired"
+                            type="object"
+                            attrs="{'invisible': ['|',('state', '!=', '3in_process'),('archive', '=', True)]}"
+                            class="btn-primary" />
+                    <button string="Desecho"
+                            name="send_scrap"
+                            type="object"
+                            attrs="{'invisible': ['|',('state', '!=', '3in_process'),('archive', '=', True)]}"
+                            class="btn-primary" />
+                </button>
+                <header>
+                    <field name="state" widget="statusbar" statusbar_visible="1new,2approved,3in_process,4repaired" />
+                </header>
+                <field name="equipment_id" position="after">
+                    <field name="cost" />
+                    <field name="responsable_id" attrs="{'readonly': [('state','!=','1new')]}" options="{ 'no_open': True, 'no_edit': True, 'no_create_edit': True, 'no_create': True}" />
+                    <field name="type_line" />
+                    <field name="maintenance_line_id" attrs="{'invisible': [('type_line','!=','maintenance'),('maintenance_line_id','=',False)]}" />
+                    <field name="calibration_line_id" attrs="{'invisible': [('type_line','!=','calibration'),('calibration_line_id','=',False)]}" />
+                </field>
+            </field>
+        </record>
+
+        <record id="maintenance_reminder" model="ir.cron">
+            <field name="name">Notificación de Mantenimiento</field>
+            <field name="model_id" ref="model_mgmtsystem_maintenance" />
+            <field name="state">code</field>
+            <field name="code">model.mail_reminder()</field>
+            <field name="interval_number">1</field>
+            <field name="interval_type">days</field>
+            <field name="numbercall">-1</field>
+        </record>
+
+    </data>
+</odoo>

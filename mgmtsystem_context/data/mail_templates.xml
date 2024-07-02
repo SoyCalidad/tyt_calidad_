@@ -1,0 +1,30 @@
+<?xml version="1.0"?>
+<odoo>
+
+    <!-- Mail template are declared in a NOUPDATE block
+         so users can freely customize/delete them -->
+    <data noupdate="0">
+        <!--Email template -->
+        <record id="email_template_mgmtsystem_context_policy" model="mail.template">
+            <field name="name">Política: Enviar por email</field>
+            <field name="model_id" ref="mgmtsystem_context.model_mgmtsystem_context_policy" />
+            <field name="email_from">${(user.email_formatted) |safe}</field>
+            <field name="email_to">${object.get_send_to_emails()}</field>
+            <field name="subject">Política (Nombre: ${object.name or 'n/a'}) (Fecha: ${object.date or 'n/a' })</field>
+            <field name="body_html" type="html">
+                <div style="margin: 0px; padding: 0px;">
+                    <p style="margin: 0px; padding: 0px; font-size: 13px;">
+                        Se ha creado una nueva política ${object.name} con fecha ${object.date}
+                        <br />
+                        <br />
+                    </p>
+                </div>
+            </field>
+            <field name="report_template" ref="action_context_policy_report_2" />
+            <field name="report_name">Política ${(object.name or '')}</field>
+            <field name="lang">${user.lang}</field>
+            <!--<field name="user_signature" eval="False" /> -->
+            <field name="auto_delete" eval="True" />
+        </record>
+    </data>
+</odoo>

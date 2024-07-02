@@ -1,0 +1,37 @@
+<odoo>
+    <data>
+
+        <record id="measurement_wizard_view_form" model="ir.ui.view">
+            <field name="name">mgmtsystem.measurement.wizard.view.form</field>
+            <field name="model">mgmtsystem.measurement.wizard</field>
+            <field name="arch" type="xml">
+                <form string="">
+                    <sheet>
+                        <group>
+                            <field name="name"/>
+                            <field name="date"/>
+                            <field name="formula"/>
+                            <field name="success"/>
+                            <field name="comments"/>
+                        </group>
+                    </sheet>
+                    <footer>
+                        <button string="Hacer medición" name="calculate" type="object" class="btn-primary"/>
+                    </footer>
+                </form>
+            </field>
+        </record>
+
+        <record id="measurement_wizard_action" model="ir.actions.act_window">
+            <field name="name">Formula</field>
+            <field name="res_model">mgmtsystem.measurement.wizard</field>
+            
+            <field name="view_mode">form</field>
+            <field name="target">new</field>
+            <field name="domain">[]</field>
+            <field name="context">{}</field>
+        </record>
+
+
+    </data>
+</odoo>

@@ -1,0 +1,55 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+
+    <record id="mgmt_categ_documents_view_form" model="ir.ui.view">
+        <field name="name">mgmt.categ.view.form.inherit.documents</field>
+        <field name="model">mgmt.categ</field>
+        <field name="inherit_id" ref="mgmtsystem_process.mgmt_categ_form"/>
+        <field name="arch" type="xml">
+            <xpath expr="//button[@name='action_open_older_versions']" position="after">
+                <button name="action_open_documents"
+                    class="oe_stat_button"
+                    groups="documents.group_documents_user"
+                    icon="fa-file-text"
+                    type="object">
+                    <field name="document_count" widget="statinfo" string="Documents"/>
+                </button>
+            </xpath>
+        </field>
+    </record>
+
+    <record id="mgmt_process_documents_view_form" model="ir.ui.view">
+        <field name="name">mgmt.process.line.view.form.inherit.documents</field>
+        <field name="model">mgmt.process</field>
+        <field name="inherit_id" ref="mgmtsystem_process.mgmt_process_form"/>
+        <field name="arch" type="xml">
+            <xpath expr="//sheet[1]/div[@name='button_box']/button[@name='open_change_request_view']" position="before">
+                <button name="action_open_documents"
+                    class="oe_stat_button"
+                    groups="documents.group_documents_user"
+                    icon="fa-file-text"
+                    type="object">
+                    <field name="document_count" widget="statinfo" string="Documents"/>
+                </button>
+            </xpath>
+        </field>
+    </record>
+
+    <record id="process_edition_documents_view_form" model="ir.ui.view">
+        <field name="name">process.edition.view.form.inherit.documents</field>
+        <field name="model">process.edition</field>
+        <field name="inherit_id" ref="mgmtsystem_process.system_process_edition_form_view_inherit"/>
+        <field name="arch" type="xml">
+            <xpath expr="//button[@name='action_open_older_versions']" position="after">
+                <button name="action_open_documents"
+                    class="oe_stat_button"
+                    groups="documents.group_documents_user"
+                    icon="fa-file-text"
+                    type="object">
+                    <field name="document_count" widget="statinfo" string="Documents"/>
+                </button>
+            </xpath>
+        </field>
+    </record>
+
+</odoo>

@@ -1,0 +1,210 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<odoo>
+  <data noupdate="1">
+
+
+    <record id="foda_swot_sequence" model="ir.sequence">
+      <field name="name">Secuencia de foda</field>
+      <field name="code">E-PE-1-</field>
+      <field name="active">TRUE</field>
+      <field name="prefix">E-PE-1-</field>
+      <field name="padding">4</field>
+      <field name="number_next">1</field>
+      <field name="number_increment">1</field>
+    </record>
+
+    <record id="f1" model="mgmtsystem.context.force">
+      <field name="code">F1</field>
+      <field name="name">Poder de negociación de los clientes o compradores</field>
+    </record>
+    <record id="f2" model="mgmtsystem.context.force">
+      <field name="code">F2</field>
+      <field name="name">Poder de negociación de los proveedores o vendedores</field>
+    </record>
+    <record id="f3" model="mgmtsystem.context.force">
+      <field name="code">F3</field>
+      <field name="name">Amenaza de nuevos competidores entrantes</field>
+    </record>
+    <record id="f4" model="mgmtsystem.context.force">
+      <field name="code">F4</field>
+      <field name="name">Amenaza de productos sustitutos</field>
+    </record>
+    <record id="f5" model="mgmtsystem.context.force">
+      <field name="code">F5</field>
+      <field name="name">Rivalidad entre los competidores</field>
+    </record>
+
+
+    <!-- Stakeholders -->
+    
+    <record id="partner" model="mgmtsystem.stakeholder">
+      <field name="name">Socios</field>
+      <field name="power">1</field>
+      <field name="interest">1</field>
+      <field name="type">in</field>
+      <field name="original">1</field>
+    </record>
+
+    <record id="ceo" model="mgmtsystem.stakeholder">
+      <field name="name">Gerente General</field>
+      <field name="power">1</field>
+      <field name="interest">1</field>
+      <field name="type">in</field>
+      <field name="original">1</field>
+    </record>
+
+    <record id="friends" model="mgmtsystem.stakeholder">
+      <field name="name">Colaboradores</field>
+      <field name="power">1</field>
+      <field name="interest">1</field>
+      <field name="type">in</field>
+      <field name="original">1</field>
+    </record>
+
+    <record id="provider" model="mgmtsystem.stakeholder">
+      <field name="name">Proveedores</field>
+      <field name="power">1</field>
+      <field name="interest">1</field>
+      <field name="type">out</field>
+      <field name="original">1</field>
+    </record>
+
+    <record id="client" model="mgmtsystem.stakeholder">
+      <field name="name">Clientes</field>
+      <field name="power">1</field>
+      <field name="interest">1</field>
+      <field name="type">out</field>
+      <field name="original">1</field>
+    </record>
+
+    <record id="state" model="mgmtsystem.stakeholder">
+      <field name="name">Estado</field>
+      <field name="power">1</field>
+      <field name="interest">1</field>
+      <field name="type">out</field>
+      <field name="original">1</field>
+    </record>
+
+    <record id="cocacola" model="mgmtsystem.stakeholder">
+      <field name="name">Competencia</field>
+      <field name="power">1</field>
+      <field name="interest">1</field>
+      <field name="type">out</field>
+      <field name="original">1</field>
+    </record>
+
+    <record id="vivimosenuna" model="mgmtsystem.stakeholder">
+      <field name="name">Comunidad</field>
+      <field name="power">1</field>
+      <field name="interest">1</field>
+      <field name="type">out</field>
+      <field name="original">1</field>
+    </record>
+
+  </data>
+  <data>
+
+    <record id="politic" model="pest.factor.type">
+      <field name="name">Políticos</field>
+      <field name="type">external</field>
+      <field name="description">Aquellos factores asociados a la 
+      clase política que puedan determinar e influir en la actividad 
+      de la empresa en el futuro.</field>
+    </record>
+
+    <record id="economic" model="pest.factor.type">
+      <field name="name">Económicos</field>
+      <field name="type">external</field>
+      <field name="description">Consiste en analizar, pensar y estudiar sobre las
+cuestiones económicas actuales y futuras nos pueden afectar en
+la ejecución de nuestra estrategia.</field>
+    </record>
+
+    <record id="soccult" model="pest.factor.type">
+      <field name="name">Socioculturales</field>
+      <field name="type">external</field>
+      <field name="description">En este caso, lo que nos interesa reflexionar es
+sobre qué elementos de la sociedad pueden afectar en nuestro
+proyecto y cómo están cambiando (porque seguro que están
+cambiando). Buscamos identificar tendencias en la sociedad
+actual.</field>
+    </record>
+
+    <record id="tech" model="pest.factor.type">
+      <field name="name">Tecnológicos</field>
+      <field name="type">external</field>
+      <field name="description">En punto es más complejo, puesto que, aunque
+los cambios tecnológicos siempre han existido, la velocidad con
+la que se producen hoy día es realmente vertiginosa. Nos
+interesa la reflexión sobre como las tecnologías que están
+apareciendo hoy pueden cambiar la sociedad en un futuro
+próximo. Sobre todo es interesante el estudio de aquellos
+factores que más nos pueden afectar.</field>
+    </record>
+
+    <record id="ecologic" model="pest.factor.type">
+      <field name="name">Ecológicos</field>
+      <field name="type">external</field>
+      <field name="description">Estos factores puede parecer que a priori sólo
+afectan a las empresas de sectores muy específicos, pero en
+realidad es todo lo contrario. Nos interesa estar al tanto no sólo
+sobre los posibles cambios normativos referidos a la ecología,
+sino también en cuanto a la conciencia social de este
+movimiento.</field>
+    </record>
+
+    <record id="legal" model="pest.factor.type">
+      <field name="name">Legales</field>
+      <field name="type">external</field>
+      <field name="description">Estos factores se refieren a todos aquellos cambios en
+la normativa legal relacionada con nuestro proyecto, que le
+puede afectar de forma positiva o negativa. Por supuesto, si
+estamos inmersos en un negocio internacional, nos interesará
+estudiar los aspectos legales tanto del país de origen como de
+destino.</field>
+    </record>
+
+    <record id="admin" model="pest.factor.type">
+      <field name="name">Administración</field>
+      <field name="type">internal</field>
+      <field name="description"></field>
+    </record>
+
+    <record id="marketing" model="pest.factor.type">
+      <field name="name">Marketing y ventas</field>
+      <field name="type">internal</field>
+      <field name="description"></field>
+    </record>
+
+    <record id="logistic" model="pest.factor.type">
+      <field name="name">Operaciones, productos y logística</field>
+      <field name="type">internal</field>
+      <field name="description"></field>
+    </record>
+
+    <record id="accounting" model="pest.factor.type">
+      <field name="name">Finanzas y contabilidad</field>
+      <field name="type">internal</field>
+      <field name="description"></field>
+    </record>
+
+    <record id="rrhh" model="pest.factor.type">
+      <field name="name">Recursos humanos</field>
+      <field name="type">internal</field>
+      <field name="description"></field>
+    </record>
+
+    <record id="it" model="pest.factor.type">
+      <field name="name">Sistemas de información y comunicaciones</field>
+      <field name="type">internal</field>
+      <field name="description"></field>
+    </record>
+
+    <record id="internal_tech" model="pest.factor.type">
+      <field name="name">Tecnología, investigación y desarrollo</field>
+      <field name="type">internal</field>
+      <field name="description"></field>
+    </record>
+
+  </data>
+</odoo>

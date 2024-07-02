@@ -1,0 +1,110 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <!-- ONBOARDING STEPS -->
+
+    <template id="onboarding_purchase_product_step">
+        <t t-call="base.onboarding_step">
+            <t t-set="title">Productos</t>
+            <t t-set="description">Cree un nuevo producto.</t>
+            <t t-set="done_icon" t-value="'fa-star'" />
+            <t t-set="btn_text">Crear</t>
+            <t t-set="done_text">Se ve bien!</t>
+            <t t-set="method" t-value="'action_open_purchase_product'" />
+            <t t-set="model" t-value="'res.company'" />
+            <t t-set="state" t-value="state.get('purchase_product_onboarding_state')" />
+        </t>
+    </template>
+
+    <template id="onboarding_purchase_order_step">
+        <t t-call="base.onboarding_step">
+            <t t-set="title">Solicitudes de presupuesto</t>
+            <t t-set="description">Cree una nueva solicitud de presupuesto.</t>
+            <t t-set="done_icon" t-value="'fa-star'" />
+            <t t-set="btn_text">Crear</t>
+            <t t-set="done_text">Se ve bien!</t>
+            <t t-set="method" t-value="'action_open_purchase_order'" />
+            <t t-set="model" t-value="'res.company'" />
+            <t t-set="state" t-value="state.get('purchase_order_onboarding_state')" />
+        </t>
+    </template>
+
+
+    <!-- ONBOARDING PANELS -->
+    <template id="purchase_onboarding_panel" name="nonconformity.onboarding.panel">
+        <t t-call="base.onboarding_container">
+            <t t-set="classes" t-value="'o_onboarding_blue'"/>
+            <t t-set="bg_image" t-value="'/account/static/src/img/account_invoice_onboarding_bg.jpg'"/>
+            <t t-set="close_method" t-value="'action_close_purchase_onboarding'"/>
+            <t t-set="close_model" t-value="'res.company'"/>
+            <t t-set="text_completed">Felicitaciones! Ha completado todo.</t>
+            <t t-call="soy_calidad_onboarding.onboarding_purchase_product_step" name="purchase_product_step" />
+            <t t-call="soy_calidad_onboarding.onboarding_purchase_order_step" name="purchase_order_step" />
+        </t>
+    </template>
+
+    <!-- Views -->
+
+
+    <record id="onboarding_purchase_product_form" model="ir.ui.view">
+        <field name="name">product.template.inherit.view.form</field>
+        <field name="model">product.template</field>
+        <field name="inherit_id" ref="product.product_template_only_form_view"/>
+        <field name="priority">1000</field>
+        <field name="mode">primary</field>
+        <field name="arch" type="xml">
+            <form position="inside">
+                <footer position="replace">
+                    <button name="action_save_onboarding_purchase_product_step" class="btn btn-primary" type="object" string="Crear" />
+                    <button special="cancel" string="Cancelar" />
+                </footer>
+            </form>
+        </field>
+    </record>
+
+    <record id="onboarding_purchase_order_form" model="ir.ui.view">
+        <field name="name">purchase.order.inherit.view.form</field>
+        <field name="model">purchase.order</field>
+        <field name="inherit_id" ref="purchase.purchase_order_form"/>
+        <field name="priority">1000</field>
+        <field name="mode">primary</field>
+        <field name="arch" type="xml">
+            <form position="inside">
+                <footer position="replace">
+                    <button name="action_save_onboarding_purchase_order_step" class="btn btn-primary" type="object" string="Crear" />
+                    <button special="cancel" string="Cancelar" />
+                </footer>
+            </form>
+        </field>
+    </record>
+
+
+    <record id="action_purchase_product_configurator" model="ir.actions.act_window">
+        <field name="type">ir.actions.act_window</field>
+        <field name="name">Cree un nuevo producto</field>
+        <field name="view_mode">form</field>
+        <field name="target">new</field>
+        <field name="res_model">product.template</field>
+        <field name="view_id" ref="soy_calidad_onboarding.onboarding_purchase_product_form"/>
+    </record>
+
+    <record id="action_purchase_order_configurator" model="ir.actions.act_window">
+        <field name="type">ir.actions.act_window</field>
+        <field name="name">Cree una nueva orden de compra</field>
+        <field name="view_mode">form</field>
+        <field name="target">new</field>
+        <field name="res_model">purchase.order</field>
+        <field name="view_id" ref="soy_calidad_onboarding.onboarding_purchase_order_form"/>
+    </record>
+
+    <record id="purchase_order_tree" model="ir.ui.view">
+        <field name="name">purchase.order.view.tree</field>
+        <field name="model">purchase.order</field>
+        <field name="inherit_id" ref="purchase.purchase_order_tree"/>
+        <field name="arch" type="xml">
+            <tree position="attributes">
+                <attribute name="banner_route">/onboarding/purchase_onboarding</attribute>
+            </tree>
+        </field>
+    </record>
+
+</odoo>

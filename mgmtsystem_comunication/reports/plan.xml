@@ -1,0 +1,13 @@
+<odoo>
+    <data>
+
+        <report
+            id="report_comunication_plan"
+            model="comunication.plan"
+            string="Programa de Comunicaciones"
+            report_type="xlsx"
+            name="mgmtsystem_comunication.report_comunication_plan"
+            file="Programa de Comunicaciones" />
+
+    </data>
+</odoo>

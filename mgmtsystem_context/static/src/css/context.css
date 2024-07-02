@@ -1,0 +1,7 @@
+@media screen and (max-device-width: 800px) {
+    .foda_name {
+        width: 200px;
+        max-width: 200px;
+        display: block;
+    }
+}

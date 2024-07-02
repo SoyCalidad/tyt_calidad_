@@ -1,0 +1,76 @@
+<odoo>
+    <data>
+        <record id="view_legal_article_tree" model="ir.ui.view">
+            <field name="name">legal.article.tree</field>
+            <field name="model">legal.article</field>
+            <field name="arch" type="xml">
+                <tree string="Artículo">
+                    <field name="legal_id" />
+                    <field name="name" />
+                    <field name="type_id" />
+                    <field name="entity_id" />
+                    <field name="date_release" />
+                    <field name="state" />
+                </tree>
+            </field>
+        </record>
+
+        <record id="view_legal_article_form" model="ir.ui.view">
+            <field name="name">legal.article.form</field>
+            <field name="model">legal.article</field>
+            <field name="arch" type="xml">
+                <form string="Artículo">
+                    <header>
+                        <field name="state" widget="statusbar" statusbar_visible="elaborate,validate"/>
+                        <button string="Validar" name="send_validate" type="object" class="btn-primary" 
+                            attrs="{'invisible':[('state','!=', 'elaborate')]}"/>
+                        <button string="Caducado" name="send_caducated" type="object" class="btn-second" 
+                            attrs="{'invisible':[('state','!=', 'validate')]}"/>
+                    </header>
+                    <sheet>
+                        <div class="oe_button_box" name="button_box">
+                            <button type="object" name="action_see_attachments" class="oe_stat_button" icon="fa-files-o">
+                                <field name="attachs_count" widget="statinfo" string="Adjuntos"/>
+                            </button>
+                        </div>
+                        <div class="oe_title">
+                            <h2>
+                                <field name="name" attrs="{'readonly': [('state','not in',('elaborate'))] }"/>
+                            </h2>
+                        </div>
+                        <group>
+                            <group>
+                                <field name="legal_id" attrs="{'readonly': [('state','not in',('elaborate'))]}"/>
+                                <field name="type_id" attrs="{'readonly': [('state','not in',('elaborate'))]}"/>
+                                <field name="entity_id" attrs="{'readonly': [('state','not in',('elaborate'))] }"/>
+                                <field name="partner_id" attrs="{'readonly': [('state','not in',('elaborate'))]}"/>
+                            </group>
+                            <group>
+                                <field name="date_release" attrs="{'readonly': [('state','not in',('elaborate'))] }"/>
+                            </group>
+                        </group>
+                        <separator string="Resumen"/>
+                        <field name="resume" attrs="{'readonly': [('state','not in',('elaborate'))] }"/>
+                    </sheet>
+
+                </form>
+            </field>
+        </record>
+
+        <record id="legal_article_action" model="ir.actions.act_window">
+            <field name="name">Artículos</field>
+            <field name="type">ir.actions.act_window</field>
+            <field name="res_model">legal.article</field>
+            
+            <field name="view_mode">tree,form,kanban,graph,pivot</field>
+        </record>
+
+        <menuitem
+            id="legal_article_item"
+            name="Artículos"
+            parent="legal_legal_menu"
+            sequence="10"
+            action="legal_article_action"/>
+
+    </data>
+</odoo>

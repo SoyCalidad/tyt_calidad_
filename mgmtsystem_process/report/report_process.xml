@@ -1,0 +1,482 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--Estructura basica de reportes-->
+<odoo>
+
+      <data>
+            <template id="reporte_process_hola_calidad_template">
+                  <t t-call="web.html_container">
+                        <style type="text/css">
+i {
+   border: solid #1787a1;
+   border-width: 0 10px 10px 0;
+   display: inline-block;
+   padding: 10px;
+   }
+
+.right {
+   transform: rotate(-45deg);
+   -webkit-transform: rotate(-45deg);
+   }
+
+.left {
+   transform: rotate(135deg);
+   -webkit-transform: rotate(135deg);
+   }
+
+.up {
+   transform: rotate(-135deg);
+   -webkit-transform: rotate(-135deg);
+   }
+
+.down {
+   transform: rotate(45deg);
+   -webkit-transform: rotate(45deg);
+   }
+ .centertable td
+               {
+               text-align: center;
+               vertical-align: middle;
+               }
+.flex-container {
+  padding: 1rem;
+  background-color: #EBB970;
+  margin-bottom: 1rem;
+  border-radius: 2px;
+  flex-wrap: wrap;
+  border: 1px solid black;
+
+}
+
+.row            { 
+    display: -webkit-box; /* wkhtmltopdf uses this one */
+    display: flex;
+    -webkit-box-pack: center; /* wkhtmltopdf uses this one */
+    justify-content: center;
+  background: #f0f0f0;
+}
+
+.flex-item {
+  padding: 5px;
+  nax-width:25%;
+  margin: 5px;
+  font-weight: bold;
+  font-size: 12px;
+  text-align: center;
+  background: #EBB970;
+  color: white;
+  word-wrap: break-word;
+}
+h1 {
+    border: 2px solid #1687a1; 
+    background: #319190;
+    color: #FFFFEA;
+    text-align: center;
+}
+.legend { list-style: none; margin-left:10px;}
+.legend ul {columns: 2; -webkit-columns: 2; -moz-columns: 2;}
+.legend li { float: left; margin-right: 15px;}
+.legend span { border: 1px solid #ccc; float: left; width: 10px; height: 12px; margin: 2px;}
+.legend .tag {border: none; width:150px;}
+.legend .color_1 { background-color: #FF0000;}
+.legend .color_2 { background-color: #FFA500; }
+.legend .color_3 { background-color: #FFFF00; }
+.legend .color_4 { background-color: #ADD8E6; }
+.legend .color_5 { background-color: #871F78;}
+.legend .color_6 { background-color: #FF91A4; }
+.legend .color_7 { background-color: #0000CD; }
+.legend .color_8 { background-color: #00008B; }
+.legend .color_9 { background-color: #FF00FF;}
+.legend .color_10 { background-color: green; }
+.legend .color_11 { background-color: purple; }
+                        </style>
+                        <table height="80%" class="centertable">
+                              <tr>
+                                    <td style="border: 2px solid #319190;" width="1%">
+                                          <h2 style="color:#319190">
+                              C
+                                                <br />
+                              L
+                                                <br />
+                              I
+                                                <br />
+                              E
+                                                <br />
+                              N
+                                                <br />
+                              T
+                                                <br />
+                              E
+                                                <br />
+                              S
+                                          </h2>
+                                    </td>
+                                    <td width="1%" />
+                                    <td style="border: 2px solid #EBB970;" width="1%">
+                                          <h2 style="color:#EBB970">
+                              R
+                                                <br />
+                              E
+                                                <br />
+                              Q
+                                                <br />
+                              U
+                                                <br />
+                              E
+                                                <br />
+                              R
+                                                <br />
+                              I
+                                                <br />
+                              M
+                                                <br />
+                              I
+                                                <br />
+                              E
+                                                <br />
+                              N
+                                                <br />
+                              T
+                                                <br />
+                              O
+                                                <br />
+                              S
+                                          </h2>
+                                    </td>
+                                    <td width="1%" />
+                                    <td width="1%">
+                                          <i class="right" />
+                                    </td>
+                                    <td width="1%" />
+                                    <td width="90%">
+                                          <t t-set="count" t-value="0" />
+                                          <t t-foreach="docs" t-as="doc">
+                                                <t t-set="count" t-value="count+1" />
+                                                <i t-if="count!=1" class="up" />
+                                                <h1 t-field="doc[0].type.name" />
+                                                <i t-if="count!=1" class="down" />
+                                                <t t-set="categs_count" t-value="len(doc)" />
+                                                <table width="100%" style="table-layout: fixed;">
+                                                      <t t-if="categs_count &lt; 4">
+                                                            <tr>
+                                                                  <t t-foreach="doc" t-as="item">
+                                                                        <td>
+                                                                              <t t-if="item.color == 0">
+                                                                                    <div class="flex-item">
+                                                                                          <span t-field="item.name" />
+                                                                                    </div>
+                                                                              </t>
+                                                                              <t t-elif="item.color == 1">
+                                                                                    <div class="flex-item" style="background:#FF0000;">
+                                                                                          <span t-field="item.name" />
+                                                                                    </div>
+                                                                              </t>
+                                                                              <t t-elif="item.color == 2">
+                                                                                    <div class="flex-item" style="background:#FFA500;">
+                                                                                          <span t-field="item.name" />
+                                                                                    </div>
+                                                                              </t>
+                                                                              <t t-elif="item.color == 3">
+                                                                                    <div class="flex-item" style="background:#FFFF00;">
+                                                                                          <span t-field="item.name" />
+                                                                                    </div>
+                                                                              </t>
+                                                                              <t t-elif="item.color == 4">
+                                                                                    <div class="flex-item" style="background:#ADD8E6;">
+                                                                                          <span t-field="item.name" />
+                                                                                    </div>
+                                                                              </t>
+                                                                              <t t-elif="item.color == 5">
+                                                                                    <div class="flex-item" style="background:#871F78;">
+                                                                                          <span t-field="item.name" />
+                                                                                    </div>
+                                                                              </t>
+                                                                              <t t-elif="item.color == 6">
+                                                                                    <div class="flex-item" style="background:#FF91A4;">
+                                                                                          <span t-field="item.name" />
+                                                                                    </div>
+                                                                              </t>
+                                                                              <t t-elif="item.color == 7">
+                                                                                    <div class="flex-item" style="background:#0000CD;">
+                                                                                          <span t-field="item.name" />
+                                                                                    </div>
+                                                                              </t>
+                                                                              <t t-elif="item.color == 8">
+                                                                                    <div class="flex-item" style="background:#00008B;">
+                                                                                          <span t-field="item.name" />
+                                                                                    </div>
+                                                                              </t>
+                                                                              <t t-elif="item.color == 9">
+                                                                                    <div class="flex-item" style="background:#FF00FF;">
+                                                                                          <span t-field="item.name" />
+                                                                                    </div>
+                                                                              </t>
+                                                                              <t t-elif="item.color == 10">
+                                                                                    <div class="flex-item" style="background:green;">
+                                                                                          <span t-field="item.name" />
+                                                                                    </div>
+                                                                              </t>
+                                                                              <t t-elif="item.color == 11">
+                                                                                    <div class="flex-item" style="background:purple;">
+                                                                                          <span t-field="item.name" />
+                                                                                    </div>
+                                                                              </t>
+                                                                              <t t-else=""></t>
+                                                                        </td>
+                                                                  </t>
+                                                            </tr>
+                                                      </t>
+                                                      <t t-else="">
+                                                            <tr>
+                                                                  <t t-foreach="doc" t-as="item">
+                                                                        <td>
+                                                                              <t t-if="item.color == 0">
+                                                                                    <div class="flex-item">
+                                                                                          <span t-field="item.name" />
+                                                                                    </div>
+                                                                              </t>
+                                                                              <t t-elif="item.color == 1">
+                                                                                    <div class="flex-item" style="background:#FF0000;">
+                                                                                          <span t-field="item.name" />
+                                                                                    </div>
+                                                                              </t>
+                                                                              <t t-elif="item.color == 2">
+                                                                                    <div class="flex-item" style="background:#FFA500;">
+                                                                                          <span t-field="item.name" />
+                                                                                    </div>
+                                                                              </t>
+                                                                              <t t-elif="item.color == 3">
+                                                                                    <div class="flex-item" style="background:#FFFF00;">
+                                                                                          <span t-field="item.name" />
+                                                                                    </div>
+                                                                              </t>
+                                                                              <t t-elif="item.color == 4">
+                                                                                    <div class="flex-item" style="background:#ADD8E6;">
+                                                                                          <span t-field="item.name" />
+                                                                                    </div>
+                                                                              </t>
+                                                                              <t t-elif="item.color == 5">
+                                                                                    <div class="flex-item" style="background:#871F78;">
+                                                                                          <span t-field="item.name" />
+                                                                                    </div>
+                                                                              </t>
+                                                                              <t t-elif="item.color == 6">
+                                                                                    <div class="flex-item" style="background:#FF91A4;">
+                                                                                          <span t-field="item.name" />
+                                                                                    </div>
+                                                                              </t>
+                                                                              <t t-elif="item.color == 7">
+                                                                                    <div class="flex-item" style="background:#0000CD;">
+                                                                                          <span t-field="item.name" />
+                                                                                    </div>
+                                                                              </t>
+                                                                              <t t-elif="item.color == 8">
+                                                                                    <div class="flex-item" style="background:#00008B;">
+                                                                                          <span t-field="item.name" />
+                                                                                    </div>
+                                                                              </t>
+                                                                              <t t-elif="item.color == 9">
+                                                                                    <div class="flex-item" style="background:#FF00FF;">
+                                                                                          <span t-field="item.name" />
+                                                                                    </div>
+                                                                              </t>
+                                                                              <t t-elif="item.color == 10">
+                                                                                    <div class="flex-item" style="background:green;">
+                                                                                          <span t-field="item.name" />
+                                                                                    </div>
+                                                                              </t>
+                                                                              <t t-elif="item.color == 11">
+                                                                                    <div class="flex-item" style="background:purple;">
+                                                                                          <span t-field="item.name" />
+                                                                                    </div>
+                                                                              </t>
+                                                                              <t t-else=""></t>
+                                                                        </td>
+                                                                        <t t-if="item_index != 0">
+                                                                              <t t-if="(item_index + 1)  % 4 == 0">
+                        &lt;/tr &gt;
+                        &lt;tr &gt;
+                                                                              </t>
+                                                                        </t>
+                                                                  </t>
+
+                                                            </tr>
+                                                      </t>
+                                                </table>
+                                          </t>
+                                    </td>
+                                    <td width="1%" />
+                                    <td width="1%" style="vertical-align:text-top;">
+                                          <i class="right" style="position: absolute;top:50%;" />
+                                          <br />
+                                          <br />
+                                          <br />
+                                          <br />
+                                          <br />
+                                          <br />
+                                          <br />
+                                          <br />
+                                          <br />
+                                          <i class="right" />
+                                    </td>
+
+                                    <td width="1%" />
+
+                                    <td style="border: 2px solid #EBB970;" width="1%">
+                                          <h2 style="color:#EBB970">
+                              S
+                                                <br />
+                              A
+                                                <br />
+                              T
+                                                <br />
+                              I
+                                                <br />
+                              S
+                                                <br />
+                              F
+                                                <br />
+                              A
+                                                <br />
+                              C
+                                                <br />
+                              C
+                                                <br />
+                              I
+                                                <br />
+                              Ó
+                                                <br />
+                              N
+                                          </h2>
+                                    </td>
+                                    <td width="1%" />
+                                    <td style="border: 2px solid #319190;" width="1%">
+                                          <h2 style="color:#319190">
+                              C
+                                                <br />
+                              L
+                                                <br />
+                              I
+                                                <br />
+                              E
+                                                <br />
+                              N
+                                                <br />
+                              T
+                                                <br />
+                              E
+                                                <br />
+                              S
+                                          </h2>
+                                    </td>
+                              </tr>
+                        </table>
+                        <div class="legend">
+                              <t t-if="1 in color.keys()">
+                                    <div>
+                                          <span class="color_1" />
+                                          <span class="tag" t-raw="color[1]" />
+                                    </div>
+                              </t>
+                              
+                              <t t-if="2 in color.keys()">
+                                    <div>
+                                          <span class="color_2" />
+                                          <span class="tag" t-raw="color[2]" />
+                                    </div>
+                              </t>
+                              
+                              <t t-if="3 in color.keys()">
+                                    <div>
+                                          <span class="color_3" />
+                                          <span class="tag" t-raw="color[3]" />
+                                    </div>
+                              </t>
+                              
+                              <t t-if="4 in color.keys()">
+                                    <div>
+                                          <span class="color_4" />
+                                          <span class="tag" t-raw="color[4]" />
+                                    </div>
+                              </t>
+                              
+                              <t t-if="5 in color.keys()">
+                                    <div>
+                                          <span class="color_5" />
+                                          <span class="tag" t-raw="color[5]" />
+                                    </div>
+                              </t>
+                              
+                              <t t-if="6 in color.keys()">
+                                    <div>
+                                          <span class="color_6" />
+                                          <span class="tag" t-raw="color[6]" />
+                                    </div>
+                              </t>
+                              
+                              <t t-if="7 in color.keys()">
+                                    <div>
+                                          <span class="color_7" />
+                                          <span class="tag" t-raw="color[7]" />
+                                    </div>
+                              </t>
+                              
+                              <t t-if="8 in color.keys()">
+                                    <div>
+                                          <span class="color_8" />
+                                          <span class="tag" t-raw="color[8]" />
+                                    </div>
+                              </t>
+                              
+                              <t t-if="9 in color.keys()">
+                                    <div>
+                                          <span class="color_9" />
+                                          <span class="tag" t-raw="color[9]" />
+                                    </div>
+                              </t>
+                              
+                              <t t-if="10 in color.keys()">
+                                    <div>
+                                          <span class="color_10" />
+                                          <span class="tag" t-raw="color[10]" />
+                                    </div>
+                              </t>
+                              
+                              <t t-if="11 in color.keys()">
+                                    <div>
+                                          <span class="color_11" />
+                                          <span class="tag" t-raw="color[11]" />
+                                    </div>
+                              </t>                              
+                        </div>
+                        <div style="padding-top:20px;padding-right:20px;font-weight:bold;text-align:right;font-size:14px;">
+                              Código: 
+                              <t t-esc="code"/>
+                        </div>
+                  </t>
+            </template>
+            <record id="paperformat_lowmargin" model="report.paperformat">
+                  <field name="name">European A4 low margin</field>
+                  <field name="default" eval="True" />
+                  <field name="format">A4</field>
+                  <field name="page_height">0</field>
+                  <field name="page_width">0</field>
+                  <field name="orientation">Landscape</field>
+                  <field name="margin_top">4</field>
+                  <field name="margin_bottom">4</field>
+                  <field name="margin_left">4</field>
+                  <field name="margin_right">4</field>
+                  <field name="header_line" eval="False" />
+                  <field name="header_spacing">30</field>
+                  <field name="dpi">90</field>
+            </record>
+            <report id="reporte_process"
+                    string="Mapa de procesos"
+                    report_type="qweb-pdf"
+                    model="mgmt.categ"
+                    name="mgmtsystem_process.reporte_process_hola_calidad_template"
+                    file="Mapa de Procesos"
+                    paperformat="paperformat_lowmargin"
+                    groups="base.group_no_one,mgmtsystem_process.group_process_readonly_printreport,mgmtsystem_process.group_process_owner,mgmtsystem_process.group_process_all" />
+     
+      </data>
+</odoo>

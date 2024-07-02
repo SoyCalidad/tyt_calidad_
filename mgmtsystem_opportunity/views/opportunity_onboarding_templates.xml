@@ -1,0 +1,150 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <!-- ONBOARDING STEPS -->
+
+    <template id="onboarding_opportunity_matrix_opp_step">
+        <t t-call="base.onboarding_step">
+            <t t-set="title">Matriz de oportunidades</t>
+            <t t-set="description">Cree una matriz de oportunidades.</t>
+            <t t-set="done_icon" t-value="'fa-star'" />
+            <t t-set="btn_text">Crear</t>
+            <t t-set="done_text">Se ve bien!</t>
+            <t t-set="method" t-value="'action_open_opportunity_matrix_opp'" />
+            <t t-set="model" t-value="'res.company'" />
+            <t t-set="state" t-value="state.get('opportunity_matrix_opp_onboarding_state')" />
+        </t>
+    </template>
+
+    <template id="onboarding_opportunity_matrix_risk_step">
+        <t t-call="base.onboarding_step">
+            <t t-set="title">Matriz de riesgos</t>
+            <t t-set="description">Cree una matriz de riesgos.</t>
+            <t t-set="done_icon" t-value="'fa-star'" />
+            <t t-set="btn_text">Crear</t>
+            <t t-set="done_text">Se ve bien!</t>
+            <t t-set="method" t-value="'action_open_opportunity_matrix_risk'" />
+            <t t-set="model" t-value="'res.company'" />
+            <t t-set="state" t-value="state.get('opportunity_matrix_risk_onboarding_state')" />
+        </t>
+    </template>
+
+    <template id="onboarding_opportunity_opp_step">
+        <t t-call="base.onboarding_step">
+            <t t-set="title">Oportunidades</t>
+            <t t-set="description">Cree una nueva oportunidad.</t>
+            <t t-set="done_icon" t-value="'fa-star'" />
+            <t t-set="btn_text">Crear</t>
+            <t t-set="done_text">Se ve bien!</t>
+            <t t-set="method" t-value="'action_open_opportunity_opp'" />
+            <t t-set="model" t-value="'res.company'" />
+            <t t-set="state" t-value="state.get('opportunity_opp_onboarding_state')" />
+        </t>
+    </template>
+
+    <template id="onboarding_opportunity_risk_step">
+        <t t-call="base.onboarding_step">
+            <t t-set="title">Riesgos</t>
+            <t t-set="description">Cree un nuevo riesgo.</t>
+            <t t-set="done_icon" t-value="'fa-star'" />
+            <t t-set="btn_text">Crear</t>
+            <t t-set="done_text">Se ve bien!</t>
+            <t t-set="method" t-value="'action_open_opportunity_risk'" />
+            <t t-set="model" t-value="'res.company'" />
+            <t t-set="state" t-value="state.get('opportunity_risk_onboarding_state')" />
+        </t>
+    </template>
+
+    <!-- ONBOARDING PANELS -->
+    <template id="opportunity_onboarding_panel" name="opportunity.onboarding.panel">
+        <t t-call="base.onboarding_container">
+            <t t-set="classes" t-value="'o_onboarding_blue'"/>
+            <t t-set="bg_image" t-value="'/account/static/src/img/account_invoice_onboarding_bg.jpg'"/>
+            <t t-set="close_method" t-value="'action_close_opportunity_onboarding'"/>
+            <t t-set="close_model" t-value="'res.company'"/>
+            <t t-set="text_completed">Felicitaciones! Ha completado todo.</t>
+            <t t-call="mgmtsystem_opportunity.onboarding_opportunity_risk_step" name="opportunity_risk_step" />
+            <t t-call="mgmtsystem_opportunity.onboarding_opportunity_matrix_risk_step" name="opportunity_matrix_risk_step" />
+            <t t-call="mgmtsystem_opportunity.onboarding_opportunity_opp_step" name="opportunity_opp_step" />
+            <t t-call="mgmtsystem_opportunity.onboarding_opportunity_matrix_opp_step" name="opportunity_matrix_opp_step" />
+        </t>
+    </template>
+
+    <!-- Views -->
+
+    <record id="onboarding_opportunity_matrix_form" model="ir.ui.view">
+        <field name="name">matrix.matrix.inherit.view.form</field>
+        <field name="model">matrix.matrix</field>
+        <field name="inherit_id" ref="mgmtsystem_opportunity.view_matrix_matrix_form"/>
+        <field name="priority">1000</field>
+<field name="mode">primary</field>
+<field name="arch" type="xml">
+            <form position="inside">
+                <footer position="replace">
+                    <button name="action_save_onboarding_opportunity_matrix_step" class="btn btn-primary" type="object" string="Crear" />
+                    <button special="cancel" string="Cancelar" />
+                </footer>
+            </form>
+        </field>
+    </record>
+
+    <record id="onboarding_opportunity_matrix_line_form" model="ir.ui.view">
+        <field name="name">matrix.block.line.inherit.view.form</field>
+        <field name="model">matrix.block.line</field>
+        <field name="inherit_id" ref="mgmtsystem_opportunity.view_matrix_block_line_form"/>
+        <field name="priority">1000</field>
+<field name="mode">primary</field>
+<field name="arch" type="xml">
+            <form position="inside">
+                <footer position="replace">
+                    <button name="action_save_onboarding_opportunity_matrix_line_step" class="btn btn-primary" type="object" string="Crear" />
+                    <button special="cancel" string="Cancelar" />
+                </footer>
+            </form>
+        </field>
+    </record>
+
+    <record id="action_opportunity_matrix_opp_configurator" model="ir.actions.act_window">
+        <field name="type">ir.actions.act_window</field>
+        <field name="name">Cree una matriz de oportunidades</field>
+        <field name="view_mode">form</field>
+        <field name="target">new</field>
+        <field name="res_model">matrix.matrix</field>
+        <field name="view_id" ref="mgmtsystem_opportunity.onboarding_opportunity_matrix_form"/>
+        <field name="domain">[('type','=','opportunity')]</field>
+        <field name="context">{'default_type':'opportunity'}</field>
+    </record>
+
+    <record id="action_opportunity_matrix_risk_configurator" model="ir.actions.act_window">
+        <field name="type">ir.actions.act_window</field>
+        <field name="name">Cree una matriz de riesgos</field>
+        <field name="view_mode">form</field>
+        <field name="target">new</field>
+        <field name="res_model">matrix.matrix</field>
+        <field name="view_id" ref="mgmtsystem_opportunity.onboarding_opportunity_matrix_form"/>
+        <field name="domain">[('type','=','risk')]</field>
+        <field name="context">{'default_type':'risk'}</field>
+    </record>
+
+    <record id="action_opportunity_opp_configurator" model="ir.actions.act_window">
+        <field name="type">ir.actions.act_window</field>
+        <field name="name">Cree una oportunidad</field>
+        <field name="view_mode">form</field>
+        <field name="target">new</field>
+        <field name="res_model">matrix.block.line</field>
+        <field name="view_id" ref="mgmtsystem_opportunity.onboarding_opportunity_matrix_line_form"/>
+        <field name="domain">[('type','=','opportunity')]</field>
+        <field name="context">{'default_type':'opportunity'}</field>
+    </record>
+
+    <record id="action_opportunity_risk_configurator" model="ir.actions.act_window">
+        <field name="type">ir.actions.act_window</field>
+        <field name="name">Cree un riesgo</field>
+        <field name="view_mode">form</field>
+        <field name="target">new</field>
+        <field name="res_model">matrix.block.line</field>
+        <field name="view_id" ref="mgmtsystem_opportunity.onboarding_opportunity_matrix_line_form"/>
+        <field name="domain">[('type','=','risk')]</field>
+        <field name="context">{'default_type':'risk'}</field>
+    </record>
+
+</odoo>

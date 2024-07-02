@@ -1,0 +1,150 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+
+    <report id="action_report_mgmtsystem_nonconformity"
+            model="mgmtsystem.nonconformity"
+            string="Reporte Causa-Efecto"
+            report_type="qweb-pdf"
+            name="mgmtsystem_nonconformity.report_mgmtsystem_nonconformity"
+            file="mgmtsystem_nonconformity.report_mgmtsystem_nonconformity" />
+
+    <template id="report_mgmtsystem_nonconformity">
+        <t t-call="web.html_container">
+            <t t-foreach="docs" t-as="doc">
+                <t t-if="doc and 'company_id' in doc">
+                    <t t-set="company" t-value="doc.company_id" />
+                </t>
+                <t t-if="not doc or not 'company_id' in doc">
+                    <t t-set="company" t-value="res_company" />
+                </t>
+                <div class="header">
+                    <style type="text/css">
+                     .tg  {border-collapse:collapse;border-spacing:0;margin:0px auto;width:100%;max-height:90px;}
+                     .tg td{border-color:black;border-style:solid;border-width:1px;font-family: Palatino, Palatino Linotype, Palatino LT STD, Book Antiqua, Georgia, serif;font-size:14px;
+                     overflow:hidden;padding:10px 5px;word-break:normal;text-align:middle;align:center;}
+                     .tg th{border-color:black;border-style:solid;border-width:1px;font-family: Palatino, Palatino Linotype, Palatino LT STD, Book Antiqua, Georgia, serif;font-size:14px;
+                     font-weight:normal;overflow:hidden;padding:10px 5px;word-break:normal;}
+                     .tg .tg-9wq8{border-color:inherit;text-align:center;vertical-align:middle}
+                     .tg .tg-1wig{border-color:inherit;text-align:center;vertical-align:middle;font-size:16px;font-weight:bold;}
+                     .tg .tg-0lax{border-color:inherit;text-align:center;vertical-align:middle;font-size:12px;}
+                    </style>
+                    <table class="tg">
+                        <tbody>
+                            <tr>
+                                <td class="tg-1wig" rowspan="3" width="20%" style="width:15%">
+                                    <img t-if="company.logo" t-att-src="'data:image/png;base64,%s' % to_text(company.logo)" style="max-width:100px;max-height:100px;vertical-align:middle;" />
+                                </td>
+                                <td class="tg-1wig" rowspan="3" width="80%" style="width:65%;">
+                                    <span>Investigación de la no conformidad</span>
+                                </td>
+                                <td class="tg-0lax" width="20%" style="width:20%">
+                              Código:
+                                    <span t-field="doc.code" />
+                                </td>
+                            </tr>
+                            <tr>
+                                <td class="tg-0lax">
+                              Fecha de hallazgo:
+                                    <span t-field="doc.date_found" />
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+                <t t-call="web.external_layout">
+                    <div class="page">
+                        <div class="divisor">
+                            <span>
+                                <b>Método de investigación:</b>
+                                Causa-Efecto
+                            </span> 
+                        </div>
+                        <div class="divisor">
+                            <span>
+                                <b>DESCRIPCIÓN:</b>
+                                <span t-field="doc.description" />
+                            </span> 
+                        </div>
+                        <style type="text/css">
+                        .divisor  {padding-bottom:10px;padding-top:10px;}
+                        </style>
+                        <div class="divisor">
+                            <style type="text/css">
+.tg  {border-collapse:collapse;border-spacing:0;width:100%;}
+.tg td{border-color:black;border-style:solid;border-width:1px;font-family:Arial, sans-serif;font-size:14px;
+  overflow:hidden;padding:10px 5px;word-break:normal;}
+.tg th{border-color:black;border-style:solid;border-width:1px;font-family:Arial, sans-serif;font-size:14px;
+  font-weight:normal;overflow:hidden;padding:10px 5px;word-break:normal;}
+.tg .tg-wman{border-color:#c0c0c0;text-align:center;vertical-align:middle}
+.tg .tg-wmam{border-color:#c0c0c0;text-align:left;vertical-align:middle;text-justify:inter-word;}
+.tg .tg-d14o{background-color:#efefef;border-color:#c0c0c0;font-weight:bold;text-align:center;vertical-align:middle}
+.tg .tg-5d78{background-color:#efefef;border-color:#c0c0c0;color:#000000;font-weight:bold;text-align:center;vertical-align:middle}
+                            </style>
+                            <table class="tg">
+                                <thead>
+                                    <tr>
+                                        <th class="tg-5d78" colspan="3">
+                                            <span t-field="doc.name" />
+                                        </th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr>
+                                        <td class="tg-d14o">CAUSA</td>
+                                        <td class="tg-d14o">DESCRIPCIÓN</td>
+                                        <td class="tg-d14o">SUBCAUSAS</td>
+                                    </tr>
+                                    <t t-foreach="doc.cause_ids" t-as="cause">
+                                        <tr>
+                                            <td class="tg-wman">
+                                                <span t-field="cause.name" />
+                                            </td>
+                                            <td class="tg-wman" style="max-width:480px;overflow-wrap: break-word;">
+                                                <span t-field="cause.description" />
+                                            </td>
+                                            <td class="tg-wmam" style="max-width:480px;overflow-wrap: break-word;">
+                                                <ul>
+                                                    <t t-foreach="cause.subcause_ids" t-as="subcause">
+                                                        <li>
+                                                            <span t-field="subcause.name" />
+                                                        </li>
+                                                    </t>
+                                                </ul>
+                                            </td>
+                                        </tr>
+                                    </t>
+                                </tbody>
+                            </table>
+                        </div>
+                        <div class="divisor">
+                            <span>
+                                <b>EFECTO:</b> 
+                                <span t-field="doc.effect" />
+                            </span>
+                        </div>
+                        <div class="divisor">
+                            <span>
+                                <b>CONCLUSIONES:</b> 
+                                <span t-field="doc.conclusions" />
+                            </span>
+                        </div>
+                    </div>
+                    <div class="footer" style="border-top: 1px solid black;font-size: 8px;">
+                        <div class="text-center" style="border-top: 1px solid black;font-size: 10px;text-align:center;">
+                                ©
+                            <span t-field="company.name" />
+                                . All Rights Reserved.
+                            <br />
+                                PROHIBIDA SU REPRODUCCIÓN SIN AUTORIZACIÓN EXPRESA DE LA DIRECCIÓN.
+                            <br />
+                                CUALQUIER COPIA IMPRESA NO CONTROLADA. DEBE SER ROTULADA COMO "COPIA NO CONTROLADA".
+                            <br />
+                                CONSULTE VERSIÓN ELECTRÓNICA
+                        </div>
+                    </div>
+                </t>
+            </t>
+        </t>
+    </template>
+
+</odoo>

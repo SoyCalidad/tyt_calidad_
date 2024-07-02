@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <record id="comunication_plan_documents_view_form" model="ir.ui.view">
+        <field name="name">comunication.plan.view.form.inherit.documents</field>
+        <field name="model">comunication.plan</field>
+        <field name="inherit_id" ref="mgmtsystem_comunication.view_comunication_plan_form"/>
+        <field name="arch" type="xml">
+            <xpath expr="//button[@name='open_change_request_view']" position="before">
+                <button name="action_open_documents"
+                    class="oe_stat_button"
+                    groups="documents.group_documents_user"
+                    icon="fa-file-text"
+                    type="object">
+                    <field name="document_count" widget="statinfo" string="Documents"/>
+                </button>
+            </xpath>
+        </field>
+    </record>
+
+    <record id="comunication_plan_line_documents_view_form" model="ir.ui.view">
+        <field name="name">comunication.plan.line.view.form.inherit.documents</field>
+        <field name="model">comunication.plan.line</field>
+        <field name="inherit_id" ref="mgmtsystem_comunication.view_plan_line_form"/>
+        <field name="arch" type="xml">
+            <xpath expr="//button[@name='open_change_request_view']" position="before">
+                <button name="action_open_documents"
+                    class="oe_stat_button"
+                    groups="documents.group_documents_user"
+                    icon="fa-file-text"
+                    type="object">
+                    <field name="document_count" widget="statinfo" string="Documents"/>
+                </button>
+            </xpath>
+        </field>
+    </record>
+
+    <record id="record_meeting_documents_view_form" model="ir.ui.view">
+        <field name="name">record.meeting.view.form.inherit.documents</field>
+        <field name="model">record.meeting</field>
+        <field name="inherit_id" ref="mgmtsystem_comunication.view_record_meeting_form"/>
+        <field name="arch" type="xml">
+            <xpath expr="//button[@name='open_change_request_view']" position="before">
+                <button name="action_open_documents"
+                    class="oe_stat_button"
+                    groups="documents.group_documents_user"
+                    icon="fa-file-text"
+                    type="object">
+                    <field name="document_count" widget="statinfo" string="Documents"/>
+                </button>
+            </xpath>
+        </field>
+    </record>
+
+</odoo>

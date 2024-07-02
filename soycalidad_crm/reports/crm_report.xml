@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+
+    <record id="crm_resume_view_form" model="ir.ui.view">
+         <field name="name">crm.lead.crm_resume.view.form</field>
+         <field name="model">crm.lead.crm_resume</field>
+         <field name="arch" type="xml">
+            <form string="">
+               <sheet>
+                  <group>
+                     <field name="user_id" />
+                     <field name="init_date"/>
+                     <field name="end_date" />
+                     <field name="stage_ids" widget="many2many_tags"/>
+                  </group>
+               </sheet>
+               <footer>
+                  <button name="action_print" type="object" string="Descargar" class="oe_highlight" icon="fa-download"/>
+               </footer>
+            </form>
+         </field>
+      </record>
+
+      <record id="crm_resume_action" model="ir.actions.act_window">
+         <field name="name">Gestión de oportunidades</field>
+         <field name="type">ir.actions.act_window</field>
+         <field name="res_model">crm.lead.crm_resume</field>
+         <field name="view_mode">form</field>
+         <field name="view_id" ref="crm_resume_view_form"/>
+         <field name="target">new</field>
+         <field name="binding_type">report</field>
+      </record>
+
+      <menuitem
+         id="crm_resume_menu"
+         name="Gestión de oportunidades"
+         action="crm_resume_action"
+         parent="crm_report_menu"
+         sequence="1"/>
+
+    <report
+        id="action_report_crm_resume"
+        model="crm.lead"
+        string="Gestión de oportunidades"
+        report_type="xlsx"
+        name="soycalidad_crm.crm_resume"
+        file="Gestión de oportunidades"
+    />
+
+</odoo>

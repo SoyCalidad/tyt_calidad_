@@ -1,0 +1,36 @@
+<?xml version="1.0"?>
+<odoo>
+    <data>
+        <record id="survey_management" model="ir.module.category">
+            <field name="name">Encuestas</field>
+            <field name="description">Accesos para módulo de encuestas</field>
+            <field name="parent_id" ref="hola_calidad.module_mgmt_management" />
+            <field name="sequence">25</field>
+        </record>
+
+        <record id="group_survey_readonly" model="res.groups">
+            <field name="name">Encuestas: Solo lectura</field>
+            <field name="implied_ids" eval="[(4, ref('base.group_user'))]" />
+            <field name="category_id" ref="mgmtsystem_survey.survey_management" />
+        </record>
+
+        <record id="group_survey_readonly_printreport" model="res.groups">
+            <field name="name">Encuestas: Lectura e impresión</field>
+            <field name="implied_ids" eval="[(4, ref('mgmtsystem_survey.group_survey_readonly'))]" />
+            <field name="category_id" ref="mgmtsystem_survey.survey_management" />
+        </record>
+
+        <record id="group_survey_owner" model="res.groups">
+            <field name="name">Encuestas: Lectura Edición de documentos propios</field>
+            <field name="implied_ids" eval="[(4, ref('mgmtsystem_survey.group_survey_readonly_printreport'))]" />
+            <field name="category_id" ref="mgmtsystem_survey.survey_management" />
+        </record>
+
+        <record id="group_survey_all" model="res.groups">
+            <field name="name">Encuestas: Lectura y edición</field>
+            <field name="implied_ids" eval="[(4, ref('mgmtsystem_survey.group_survey_owner'))]" />
+            <field name="category_id" ref="mgmtsystem_survey.survey_management" />
+        </record>
+
+    </data>
+</odoo>

@@ -1,0 +1,38 @@
+<odoo>
+    <data>
+    
+    
+        <menuitem id="menu_comunication_root" 
+        name="Comunicación" 
+        web_icon="mgmtsystem_comunication,static/description/icon.png" 
+        groups="group_comunication_onlyread,group_comunication_onlyread_printreport,group_comunication_write_printreport,group_comunication_all"
+        sequence="6"/>
+
+
+        <menuitem
+            id="plan_line_item"
+            name="Plan de Comunicaciones"
+            parent="menu_comunication_root"
+            sequence="10"
+            action="plan_line_action"/>
+
+        <menuitem id="legal_item_plan" 
+            name="Programa de comunicaciones" 
+            parent="menu_comunication_root" 
+            sequence="5" 
+            action="comunication_plan_action"/>
+
+        <!-- <menuitem id="mgmtsystem_plan_comunication" 
+            name="Comunicaciones" 
+            parent="hola_calidad.menu_plan_main" 
+            sequence="40"
+            action="comunication_plan_action"/> -->
+
+        <menuitem id="record_meeting_item" 
+            name="Actas de reunión" 
+            parent="menu_comunication_root" 
+            sequence="50" 
+            action="record_meeting_action"/>
+
+    </data>
+</odoo>

@@ -1,0 +1,39 @@
+<odoo>
+    <data>
+        <record id="view_hr_config_settings_inherit" model="ir.ui.view">
+            <field name="name">hr.config.settings.inherit</field>
+            <field name="model">res.config.settings</field>
+            <field name="inherit_id" ref="hola_calidad.view_hola_calidad_configuration"/>
+            <field name="arch" type="xml">
+                <xpath expr="//div[@class='col-xs-12 col-md-6 o_setting_box hola_calidad']" position="inside">
+                    <div class="o_setting_right_pane">
+                        <label for="infrastructure_process_id"/>
+                        <div class="row">
+                            <div class="text-muted col-md-8">
+                            Inventariado: asignar un proceso ayuda a crear evidencia sobre el proceso de bienes. Tomará automaticamente la última edición vigente.
+                            </div>
+                        </div>
+                        <div class="content-group">
+                            <div class="mt16">
+                                <field name="infrastructure_process_id" class="o_light_label"/>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="o_setting_right_pane">
+                        <label for="maintenance_process_id"/>
+                        <div class="row">
+                            <div class="text-muted col-md-8">
+                            Mantenimiento: asignar un proceso ayuda a crear evidencia sobre el proceso de mantenimiento de bienes. Tomará automaticamente la última edición vigente.
+                            </div>
+                        </div>
+                        <div class="content-group">
+                            <div class="mt16">
+                                <field name="maintenance_process_id" class="o_light_label"/>
+                            </div>
+                        </div>
+                    </div>
+                </xpath>
+            </field>
+        </record>
+    </data>
+</odoo>

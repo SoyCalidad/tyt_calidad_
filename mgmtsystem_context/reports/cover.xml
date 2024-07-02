@@ -1,0 +1,183 @@
+<odoo>
+    <data>
+
+        <template id="report_cover" name="Carátula">
+            <div class="cover" style="page-break-after: always;">
+                <style type="text/css">
+                    .tg  {border-collapse:collapse;border-spacing:0;}
+                    .tg td{font-family: Palatino, Palatino Linotype, Palatino LT STD, Book Antiqua, Georgia, serif;font-size:14px;padding:10px 5px;border-style:solid;border-width:1px;overflow:hidden;word-break:normal;border-color:black;}
+                    .tg th{font-family: Palatino, Palatino Linotype, Palatino LT STD, Book Antiqua, Georgia, serif;font-size:14px;font-weight:normal;padding:10px 5px;border-style:solid;border-width:1px;overflow:hidden;word-break:normal;border-color:black;}
+                    .tg .tg-zv36{font-weight:bold;background-color:#ffffff;border-color:inherit;text-align:left;vertical-align:top}
+                    .tg .tg-nrix{text-align:center;vertical-align:middle;font-weight: bold;border-style: none;font-size:25px;}
+                    .tg .tg-rq3n{background-color:#ffffff;text-align:center;vertical-align:middle;border-style: none;font-size:20px;}
+                    .tg .tg-7g6k{font-weight:bold;background-color:#ffffff;border-color:inherit;text-align:center;vertical-align:top}
+                    .tg .tg-3xi5{background-color:#ffffff;border-color:inherit;text-align:center;vertical-align:top}
+                </style>
+                <center>
+                    <table class="tg" width="75%">
+                        <tr>
+                            <th class="tg-nrix" colspan="3">
+                                <span>MATRIZ FODA</span>
+                            </th>
+                        </tr>
+                        <tr>
+                            <td class="tg-nrix" colspan="3"/>
+                        </tr>
+                        <tr>
+                            <td class="tg-nrix" colspan="3"/>
+                        </tr>
+                        <tr>
+                            <td class="tg-nrix" colspan="3">
+                                <span t-field="company.name"/>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td class="tg-nrix" colspan="3"/>
+                        </tr>
+                        <tr>
+                            <td class="tg-nrix" colspan="3"/>
+                        </tr>
+                        <tr>
+                            <td class="tg-rq3n" colspan="3"/>
+                        </tr>
+                        <tr>
+                            <td class="tg-7g6k">NOMBRE</td>
+                            <td class="tg-3xi5" colspan="2">
+                                <t t-if="o.state=='cancel'">OBSOLETO</t>
+                                <span t-field="o.name"/>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td class="tg-7g6k">VERSIÓN</td>
+                            <td class="tg-3xi5" colspan="2">
+                                <span t-field="o.version"/>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td class="tg-7g6k">FECHA DE ELABORACIÓN</td>
+                            <td class="tg-3xi5" colspan="2">
+                                <span t-field="o.date_elaborate"/>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td class="tg-7g6k">ELABORADO POR</td>
+                            <td class="tg-3xi5" colspan="2">
+                                <t t-foreach="o.elaboration_step" t-as="user">
+                                    <span t-field="user.user_id.partner_id.name" />
+                                    <br/>
+                                    <br/>
+                                </t>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td class="tg-7g6k">
+                                Actualizado por:
+                                <t t-foreach="o.elaboration_step" t-as="user">
+                                    <span t-field="user.user_id.partner_id.name" />
+                                    <br/>
+                                    <br/>
+                                </t>
+                            </td>
+                            <td class="tg-7g6k">
+                                Revisado por:
+                                <t t-foreach="o.elaboration_step" t-as="user">
+                                    <span t-field="user.user_id.partner_id.name" />
+                                    <br/>
+                                    <br/>
+                                </t>
+                            </td>
+                            <td class="tg-7g6k">
+                                Aprobado por:
+                                <t t-foreach="o.validation_step" t-as="user">
+                                    <span t-field="user.user_id.partner_id.name" />
+                                    <br/>
+                                    <br/>
+                                </t>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td class="tg-zv36" style="display:block;width:33%;">
+                                Firma:
+                                <t t-foreach="o.elaboration_step" t-as="user">
+                                    <t t-if="o.state=='validate_ok'" t-raw="user.user_id.signature" />
+                                    <br/>
+                                    <br/>
+                                    <br/>
+                                </t>
+                            </td>
+                            <td class="tg-zv36" style="display:block;width:33%;">
+                                Firma:
+                                <t t-foreach="o.review_step" t-as="user">
+                                    <t t-if="o.state=='validate_ok'" t-raw="user.user_id.signature" />
+                                    <br/>
+                                    <br/>
+                                    <br/>
+                                </t>
+                            </td>
+                            <td class="tg-zv36" style="display:block;width:33%;">
+                                Firma:
+                                <t t-foreach="o.validation_step" t-as="user">
+                                    <t t-if="o.state=='validate_ok'" t-raw="user.user_id.signature" />
+                                    <br/>
+                                    <br/>
+                                    <br/>
+                                </t>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td class="tg-3xi5">
+                                <t t-foreach="o.elaboration_step" t-as="user">
+                                    <t t-raw="user.partner_id.function" />
+                                    <br/>
+                                    <br/>
+                                    <br/>
+                                </t>
+                            </td>
+                            <td class="tg-3xi5">
+                                <t t-foreach="o.review_step" t-as="user">
+                                    <t t-raw="user.partner_id.function" />
+                                    <br/>
+                                    <br/>
+                                    <br/>
+                                </t>
+                            </td>
+                            <td class="tg-3xi5">
+                                <t t-foreach="o.validation_step" t-as="user">
+                                    <t t-raw="user.partner_id.function" />
+                                    <br/>
+                                    <br/>
+                                    <br/>
+                                </t>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td class="tg-zv36" style="display:block;width:33%;">
+                                Fecha:
+                                <span t-field="o.date_elaborate"/>
+                            </td>
+                            <td class="tg-zv36" style="display:block;width:33%;">
+                                Fecha:
+                                <t t-foreach="o.review_step" t-as="step">
+                                    <span t-field="step.date"/>
+                                    <br/>
+                                </t>
+                            </td>
+                            <td class="tg-zv36" style="display:block;width:33%;">
+                                Fecha:
+                                <t t-foreach="o.validation_step" t-as="step">
+                                    <span t-field="step.date"/>
+                                    <br/>
+                                </t>
+                            </td>
+                        </tr>
+                    </table>
+                </center>
+
+                <br/>
+                <br/>
+            </div>
+        </template>
+
+
+    </data>
+</odoo>

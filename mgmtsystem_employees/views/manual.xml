@@ -1,0 +1,133 @@
+<odoo>
+    <data noupdate="0">
+
+        <!-- mgmtsystem.mof form view -->
+        <record id="mof_view_form" model="ir.ui.view">
+            <field name="name">mgmtsystem.mof.view.form</field>
+            <field name="model">mgmtsystem.mof</field>
+            <field name="arch" type="xml">
+                <form string="Manual de organización y funciones">
+                    <header>
+                        <field name="state" widget="statusbar" statusbar_visible="elaborate,review,validate,validate_ok" />
+                        <button string="Enviar a Elaborar"
+                                name="send_elaborate"
+                                type="object"
+                                class="btn-primary"
+                                attrs="{'invisible':[('state','in', ('elaborate','cancel','validate_ok'))]}" />
+                        <button string="Enviar a Revisar"
+                                name="send_review"
+                                type="object"
+                                class="btn-primary"
+                                attrs="{'invisible':[('state','!=', 'elaborate')]}" />
+                        <button string="Enviar a Validar"
+                                name="send_validate"
+                                type="object"
+                                class="btn-primary"
+                                attrs="{'invisible':[('state','in', ('elaborate','validate','cancel','validate_ok'))]}" />
+                        <button string="Validar"
+                                name="send_validate_ok"
+                                type="object"
+                                class="btn-primary"
+                                attrs="{'invisible':[('state','not in', ('validate'))]}" />
+                        <button string="Volver Obsoleto"
+                                confirm="Esto volverá obsoleto el presente registro. ¿Está seguro(a)?"
+                                name="send_cancel"
+                                type="object"
+                                class="btn-second"
+                                attrs="{'invisible': [('state','in',('cancel'))] }" />
+                        <button name="button_new_version"
+                                type="object"
+                                string="Nueva versión"
+                                attrs="{'invisible':[('state', '!=', 'validate_ok')]}"
+                                class="oe_highlight" />
+                    </header>
+                    <sheet>
+                        <group>
+                            <!-- Add your fields here -->
+                            <field name="name" />
+                            <field name="process_id" />
+                            <field name="is_custom" />
+                        </group>
+                        <notebook>
+                            <page name="validation" string="Validación y Versión">
+                                <group colspan="4">
+                                    <field name="version" />
+                                </group>
+                                <group col="4">
+                                    <group colspan="2">
+                                        <field name="elaborate_ids" widget="many2many_tags" options="{ 'no_open': True, 'no_create_edit': True, 'no_create': True}" attrs="{'readonly': [('state','not in',('elaborate'))] }" />
+                                        <field name="review_ids" widget="many2many_tags" options="{ 'no_open': True}" attrs="{'readonly': [('state','not in',('elaborate', 'review'))] }" />
+                                        <field name="validate_ids" widget="many2many_tags" options="{ 'no_open': True}" attrs="{'readonly': [('state','not in',('elaborate', 'review', 'validate'))] }" />
+                                    </group>
+                                    <group colspan="2">
+                                        <field name="date_validate" groups="base.group_no_one,base.user_admin" attrs="{'readonly': False, 'invisible': [('state','in',('elaborate','review'))] }" />
+                                    </group>
+                                </group>
+                            </page>
+                            <page string="Contenido" name="custom_body" attrs="{'readonly': [('state','in',('validate_ok'))], 'invisible': [('is_custom','=',False)]}">
+                                <group>
+                                    <field name="custom_body" widget="html" />
+                                </group>
+                            </page>
+                            <page string="Capitulo 1" attrs="{'readonly': [('state','in',('validate_ok'))], 'invisible': [('is_custom','=',True)]}">
+                                <h1 class="o_horizontal_separator">1. INTRODUCCIÓN</h1>
+                                <field name="introduction" />
+                                <h1 class="o_horizontal_separator">2. OBJETIVO Y CAMPO DE APLICACIÓN</h1>
+                                <h2>2.1. OBJETIVO DEL MANUAL</h2>
+                                <field name="target" />
+                                <h2>2.2. ALCANCE</h2>
+                                <field name="scope" />
+                                <h1 class="o_horizontal_separator">3. REFERENCIAS NORMATIVAS</h1>
+                                <field name="references" />
+                                <h1 class="o_horizontal_separator">4. TÉRMINOS Y DEFINICIONES</h1>
+                                <field name="menanings" />
+                            </page>
+                            <page string="Capitulo 2" attrs="{'readonly': [('state','in',('validate_ok'))], 'invisible': [('is_custom','=',True)]}">
+                                <h1 class="o_horizontal_separator">1. ESTRUCTURA ORGÁNICA</h1>
+                                <field name="structure" />
+                                <group>
+                                    <field name="org_chart" />
+                                    <field name="org_bin" string="Archivo" help="Adjunte una imagen de su organigrama" />
+                                </group>
+                                <h1 class="o_horizontal_separator">2. ESTRUCTURA DE PUESTOS</h1>
+                                <field name="jobs_structure" />
+                                <h1 class="o_horizontal_separator">3. FUNCIONES ESPECÍFICAS DE LOS CARGOS POR DEPARTAMENTO</h1>
+                                <field name="functions" />
+                                <h2>Puestos</h2>
+                                <label for="job_ids" />
+                                <field name="job_ids" />
+                            </page>
+                        </notebook>
+                    </sheet>
+                </form>
+            </field>
+        </record>
+
+        <!-- mgmtsystem.mof tree view -->
+        <record id="mof_view_tree" model="ir.ui.view">
+            <field name="name">mgmtsystem.mof.view.tree</field>
+            <field name="model">mgmtsystem.mof</field>
+            <field name="arch" type="xml">
+                <tree>
+                    <!-- Add your fields here -->
+                    <field name="name" />
+                    <field name="state" />
+                    <field name="version" />
+                    <field name="elaborate_ids" />
+                </tree>
+            </field>
+        </record>
+
+        <!-- mgmtsystem.mof action window -->
+        <record id="mof_action" model="ir.actions.act_window">
+            <field name="name">MOF</field>
+            <field name="type">ir.actions.act_window</field>
+            <field name="res_model">mgmtsystem.mof</field>
+            <field name="view_mode">tree,form</field>
+            
+        </record>
+
+        
+
+    </data>
+</odoo>

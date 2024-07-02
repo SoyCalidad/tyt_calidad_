@@ -1,0 +1,34 @@
+<odoo>
+    <data noupdate="1">
+        <record model="legal.type" id="type_law">
+            <field name="name">Ley</field>
+            <field name="description">En el régimen constitucional, disposición votada por las cámaras legislativas y sancionada por el Jefe del Estado</field>
+        </record>
+        <record model="legal.type" id="type_decret">
+            <field name="name">Decreto</field>
+            <field name="description">Resolución o decisión que toma una persona o un organismo con autoridad para ello</field>
+        </record>
+        
+        <record model="res.partner" id="entity_congress">
+            <field name="name">Congreso de la República</field>
+            <field name="company_id" ref="base.main_company"/>
+            <field name="purchase_warn">no-message</field>
+            <field name="email">participa@congreso.gob.pe</field>
+        </record>
+
+        <record model="res.partner" id="entity_minsa">
+            <field name="name">Ministerio de Salud</field>
+            <field name="company_id" ref="base.main_company"/>
+            <field name="purchase_warn">no-message</field>
+            <field name="email">minsa@gob.pe</field>
+        </record>
+
+        <record model="res.partner" id="entity_mintra">
+            <field name="name">Ministerio de Trabajo</field>
+            <field name="company_id" ref="base.main_company"/>
+            <field name="purchase_warn">no-message</field>
+            <field name="email">mintra@gob.pe</field>
+        </record>
+
+    </data>
+</odoo>

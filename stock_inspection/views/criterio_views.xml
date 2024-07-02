@@ -1,0 +1,57 @@
+<odoo>
+  <data>
+    <!-- explicit list view definition -->
+    
+    <record model="ir.ui.view" id="stock_inspection.list">
+      <field name="name">stock_inspection list</field>
+      <field name="model">stock_inspection.criterio</field>
+      <field name="arch" type="xml">
+        <tree>
+          <!-- <field name="name"/> -->
+          <field name="complete_name"/>
+          <!-- <field name="value2"/> -->
+        </tree>
+      </field>
+    </record>
+   
+
+    <!-- actions opening views on models -->
+    
+    <record model="ir.actions.act_window" id="stock_inspection.action_window">
+      <field name="name">Criterios de producto</field>
+      <field name="res_model">stock_inspection.criterio</field>
+      <field name="view_mode">tree,form</field>
+    </record>
+   
+
+    <!-- server action to the one above -->
+    
+    <record model="ir.actions.server" id="stock_inspection.action_server">
+      <field name="name">stock_inspection server</field>
+      <field name="model_id" ref="model_stock_inspection_stock_inspection"/>
+      <field name="state">code</field>
+      <field name="code">
+        action = {
+          "type": "ir.actions.act_window",
+          "view_mode": "tree,form",
+          "res_model": self._name,
+        }
+      </field>
+    </record>
+   
+
+    <!-- Top menu item -->
+    
+    <menuitem name="Criterios" id="stock_inspection.menu_root" />
+   
+    <!-- menu categories -->
+    
+    <menuitem name="Menu 1" id="stock_inspection.menu_1" parent="stock_inspection.menu_root"/>
+    <menuitem name="Menu 2" id="stock_inspection.menu_2" parent="stock_inspection.menu_root"/>
+   
+    <!-- actions -->
+    
+
+   
+  </data>
+</odoo>

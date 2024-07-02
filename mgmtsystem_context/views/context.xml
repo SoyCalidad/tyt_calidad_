@@ -1,0 +1,1099 @@
+<odoo>
+    <data>
+
+
+        <!-- Views -->
+
+        <record id="context_view_form" model="ir.ui.view">
+            <field name="name">mgmtsystem.context.view.form</field>
+            <field name="model">mgmtsystem.context</field>
+            <field name="arch" type="xml">
+                <form string="">
+                    <sheet>
+                        <group>
+                            <h2>
+                                <field name="name" />
+                            </h2>
+                        </group>
+                        <group>
+                            <field name="date" />
+                        </group>
+                        <group>
+                            <field name="current_internal_issues" widget="html" />
+                        </group>
+                        <group>
+                            <field name="current_external_issues" widget="html" />
+                        </group>
+                    </sheet>
+                </form>
+            </field>
+        </record>
+
+        <record id="context_view_tree" model="ir.ui.view">
+            <field name="name">mgmtsystem.context.view.tree</field>
+            <field name="model">mgmtsystem.context</field>
+            <field name="arch" type="xml">
+                <tree string="">
+                    <field name="name" />
+                    <field name="date" />
+                    <field name="current_internal_issues" widget="html" />
+                    <field name="current_external_issues" widget="html" />
+                </tree>
+            </field>
+        </record>
+
+        <record id="context_action" model="ir.actions.act_window">
+            <field name="name">Contexto de la organización</field>
+            <field name="res_model">mgmtsystem.context</field>
+
+            <field name="view_mode">tree,form</field>
+            <field name="domain">[]</field>
+            <field name="context">{}</field>
+            <field name="help" type="html">
+                <p>Contexto de la organización</p>
+            </field>
+        </record>
+
+        <record id="context_internal_issue_view_form" model="ir.ui.view">
+            <field name="name">mgmtsystem.context.internal_issue.view.form</field>
+            <field name="model">mgmtsystem.context.internal_issue</field>
+            <field name="arch" type="xml">
+                <form string="Contexto Interno">
+                    <header>
+                        <field name="state" widget="statusbar" statusbar_visible="elaborate,review,validate,validate_ok" />
+                        <button string="Enviar a Elaborar"
+                                name="send_elaborate"
+                                type="object"
+                                class="btn-primary"
+                                attrs="{'invisible':[('state','in', ('elaborate','cancel','validate_ok'))]}" />
+                        <button string="Enviar a Revisar"
+                                name="send_review"
+                                type="object"
+                                class="btn-primary"
+                                attrs="{'invisible':[('state','!=', 'elaborate')]}" />
+                        <button string="Enviar a Validar"
+                                name="send_validate"
+                                type="object"
+                                class="btn-primary"
+                                attrs="{'invisible':[('state','in', ('elaborate','validate','cancel','validate_ok'))]}" />
+                        <button string="Validar"
+                                name="send_validate_ok"
+                                type="object"
+                                class="btn-primary"
+                                attrs="{'invisible':[('state','not in', ('validate'))]}" />
+                        <button string="Volver Obsoleto"
+                                confirm="Esto volverá obsoleto el presente registro. ¿Está seguro(a)?"
+                                name="send_cancel"
+                                type="object"
+                                class="btn-second"
+                                attrs="{'invisible': [('state','in',('cancel'))] }" />
+                        <button name="button_new_version"
+                                type="object"
+                                string="Nueva versión"
+                                attrs="{'invisible':['|', ('active','=',False), ('state', '!=', 'validate_ok')]}"
+                                class="oe_highlight" />
+                    </header>
+                    <sheet>
+                        <div class="oe_button_box" name="button_box">
+                            <button type="object"
+                                    name="action_open_older_versions"
+                                    class="oe_stat_button"
+                                    icon="fa-archive"
+                                    style="white-space: nowrap;"
+                                    string="Versiones antiguas" />
+                            <widget name="web_ribbon" title="Archived" bg_color="bg-danger" attrs="{'invisible': [('active', '=', True)]}" />
+                            <field name="active" invisible="1" />
+                        </div>
+                        <div class="oe-title">
+                            <label for="code" />
+                            <h1>
+                                <field name="code" class="oe_inline" />
+                            </h1>
+                            <label for="name" />
+                            <h1>
+                                <field name="name" class="oe_inline" attrs="{'readonly': [('state','not in',('elaborate'))] }" />
+                            </h1>
+                        </div>
+                        <group>
+                            <label for="process_id" />
+                            <div class="o_row">
+                                <field name="process_id" placeholder="Procedimiento" colspan="3" attrs="{'readonly': [('state','not in',('elaborate'))]}" />
+                            </div>
+                        </group>
+                        <notebook>
+                            <page name="general_info" string="General">
+                                <group>
+                                    <field name="introduction" attrs="{'readonly': [('state','in',('validate_ok','cancel'))]}" />
+                                    <field name="mission" attrs="{'readonly': [('state','in',('validate_ok','cancel'))]}" />
+                                    <field name="vision" attrs="{'readonly': [('state','in',('validate_ok','cancel'))]}" />
+                                    <field name="scope" invisible="1" />
+                                    <field name="morals" attrs="{'readonly': [('state','in',('validate_ok','cancel'))]}">
+                                        <tree editable="bottom">
+                                            <field name="name" style="max-width:240px;overflow-wrap: break-word;" />
+                                        </tree>
+                                    </field>
+                                    <field name="quality_policy" attrs="{'required' :[('state','in',['validate'])]}" />
+                                    <field name="product_ids" widget="many2many_tags" attrs="{'readonly': [('state','in',('validate_ok','cancel'))]}" />
+                                </group>
+                            </page>
+                            <page name="version_info" string="Validación y versión">
+                                <group col="4">
+                                    <group colspan="4">
+                                        <field name="version" attrs="{'readonly': [('state','in',('validate_ok','cancel'))]}" />
+                                    </group>
+                                    <group colspan="4">
+                                        <separator string="Elaboración" />
+                                        <field name="elaboration_step" colspan="2" nolabel="1" attrs="{'readonly': [('state','not in',('elaborate'))]}" />
+                                        <separator string="Revisión" />
+                                        <field name="review_step" colspan="2" nolabel="1" attrs="{'readonly': [('state','not in',('elaborate', 'review'))]}" />
+                                        <separator string="Validación" />
+                                        <field name="validation_step" colspan="2" nolabel="1" attrs="{'readonly': [('state','not in',('elaborate', 'review', 'validate'))]}" />
+                                    </group>
+                                    <group colspan="2">
+                                        <field name="date_elaborate" attrs="{'required': [('state','in',('elaborate'))], 'readonly': True}" />
+                                        <field name="date_review" attrs="{'required': [('state','in',('review'))], 'readonly': True, 'invisible': [('state','in',('elaborate'))] }" />
+                                        <field name="date_validate" groups="base.group_no_one,base.user_admin" attrs="{'invisible': [('state','in',('elaborate','review'))] }" />
+                                    </group>
+                                </group>
+                            </page>
+                        </notebook>
+                    </sheet>
+                    <div class="oe_chatter">
+                        <field name="message_follower_ids" widget="mail_followers" />
+                        <field name="activity_ids" widget="mail_activity" />
+                        <field name="message_ids" widget="mail_thread" />
+                    </div>
+                </form>
+            </field>
+        </record>
+
+        <record id="context_internal_issue_view_tree" model="ir.ui.view">
+            <field name="name">mgmtsystem.context.internal_issue.view.tree</field>
+            <field name="model">mgmtsystem.context.internal_issue</field>
+            <field name="arch" type="xml">
+                <tree string="Contexto Interno" banner_route="/context/context_onboarding">
+                    <field name="name" />
+                    <field name="mission" />
+                    <field name="vision" />
+                    <field name="morals" />
+                    <field name="quality_policy"/>
+                    <field name="state" />
+                    <field name="version" />
+                    <field name="date_validate" groups="base.group_no_one,base.user_admin" />
+                </tree>
+            </field>
+        </record>
+
+        <record id="context_internal_issue_action" model="ir.actions.act_window">
+            <field name="name">Contexto Interno</field>
+            <field name="res_model">mgmtsystem.context.internal_issue</field>
+            <field name="view_mode">tree,form</field>
+            <field name="domain">[]</field>
+            <field name="context">{'active_version': True, 'form_view_ref': 'context_internal_issue_view_form'}</field>
+            <field name="view_id" ref="mgmtsystem_context.context_internal_issue_view_tree" />
+            <field name="help" type="html">
+                <p>
+                    Información sobre el contexto interno de la organización
+                </p>
+            </field>
+        </record>
+
+        <record id="context_internal_issue_cancel_action" model="ir.actions.act_window">
+            <field name="name">Contexto Interno</field>
+            <field name="res_model">mgmtsystem.context.internal_issue</field>
+            <field name="view_mode">tree,form</field>
+            <field name="domain">[('state', '=', 'cancel')]</field>
+            <field name="context">{}</field>
+        </record>
+
+
+
+        <record id="context_moral_view_form" model="ir.ui.view">
+            <field name="name">mgmtsystem.context.moral.view.form</field>
+            <field name="model">mgmtsystem.context.moral</field>
+            <field name="arch" type="xml">
+                <form string="">
+                    <sheet>
+                        <group>
+                            <field name="name" />
+                        </group>
+                    </sheet>
+                </form>
+            </field>
+        </record>
+
+        <record id="context_moral_view_tree" model="ir.ui.view">
+            <field name="name">mgmtsystem.context.moral.view.tree</field>
+            <field name="model">mgmtsystem.context.moral</field>
+            <field name="arch" type="xml">
+                <tree string="Valores" editable="bottom">
+                    <field name="name" />
+                </tree>
+            </field>
+        </record>
+
+        <record id="context_moral_action" model="ir.actions.act_window">
+            <field name="name">Valores</field>
+            <field name="res_model">mgmtsystem.context.moral</field>
+
+            <field name="view_mode">tree,form</field>
+            <field name="domain">[]</field>
+            <field name="context">{}</field>
+            <field name="help" type="html">
+                <p>Añada sus valores</p>
+            </field>
+        </record>
+
+        <record id="policy_template_view_form" model="ir.ui.view">
+            <field name="name">mgmtsystem.context.policy.template.view.form</field>
+            <field name="model">mgmtsystem.context.policy.template</field>
+            <field name="arch" type="xml">
+                <form string="">
+                    <sheet>
+                        <group>
+                            <field name="name" />
+                            <field name="system_id" options="{'no_create': True, 'no_edit': True}" />
+                            <field name="custom" />
+                            <notebook>
+                                <page name="content" string="Contenido">
+                                    <group attrs="{'invisible': [('custom','=',False)]}">
+                                        <field name="custom_text" widget="html" />
+                                    </group>
+                                    <group string="Documento" attrs="{'invisible': [('custom','=',True)]}">
+                                        <field name="introduction" />
+                                    </group> 
+                                </page>
+                            </notebook>
+                            
+                        </group>
+                    </sheet>
+                </form>
+            </field>
+        </record>
+
+        <record id="policy_template_view_tree" model="ir.ui.view">
+            <field name="name">mgmtsystem.context.policy.template.view.tree</field>
+            <field name="model">mgmtsystem.context.policy.template</field>
+            <field name="arch" type="xml">
+                <tree string="">
+                    <field name="name" />
+                    <field name="system_id" options="{'no_create': True, 'no_edit': True}" />
+                </tree>
+            </field>
+        </record>
+
+        <record id="policy_template_action" model="ir.actions.act_window">
+            <field name="name">Plantilla de Política</field>
+            <field name="res_model">mgmtsystem.context.policy.template</field>
+
+            <field name="view_mode">tree,form</field>
+            <field name="domain">[]</field>
+            <field name="context">{}</field>
+            <field name="help" type="html">
+                <p>Agregue una plantilla para las políticas</p>
+            </field>
+        </record>
+
+        <record id="context_policy_view_form" model="ir.ui.view">
+            <field name="name">mgmtsystem.context.policy.view.form</field>
+            <field name="model">mgmtsystem.context.policy</field>
+            <field name="arch" type="xml">
+                <form>
+                    <header>
+                        <field name="state" widget="statusbar" statusbar_visible="elaborate,review,validate,validate_ok" />
+                        <button string="Enviar a Elaborar"
+                                name="send_elaborate"
+                                type="object"
+                                class="btn-primary"
+                                attrs="{'invisible':[('state','in', ('elaborate','cancel','validate_ok'))]}" />
+                        <button string="Enviar a Revisar"
+                                name="send_review"
+                                type="object"
+                                class="btn-primary"
+                                attrs="{'invisible':[('state','!=', 'elaborate')]}" />
+                        <button string="Enviar a Validar"
+                                name="send_validate"
+                                type="object"
+                                class="btn-primary"
+                                attrs="{'invisible':[('state','in', ('elaborate','validate','cancel','validate_ok'))]}" />
+                        <button string="Validar"
+                                name="send_validate_ok"
+                                type="object"
+                                class="btn-primary"
+                                attrs="{'invisible':[('state','not in', ('validate'))]}" />
+                        <button string="Volver Obsoleto"
+                                confirm="Esto volverá obsoleto el presente registro. ¿Está seguro(a)?"
+                                name="send_cancel"
+                                type="object"
+                                class="btn-second"
+                                attrs="{'invisible': [('state','in',('cancel'))] }" />
+                        <button name="button_new_version"
+                                type="object"
+                                string="Nueva versión"
+                                attrs="{'invisible':['|', ('active','=',False), ('state', '!=', 'validate_ok')]}"
+                                class="oe_highlight" />
+                        <button string="Notificar política" name="notify_policy" type="object" class="oe_highlight" />
+                    </header>
+                    <sheet>
+                        <div class="oe_button_box" name="button_box">
+                            <button type="object"
+                                    name="action_open_older_versions"
+                                    class="oe_stat_button"
+                                    icon="fa-archive"
+                                    style="white-space: nowrap;"
+                                    string="Versiones antiguas" />
+                            <widget name="web_ribbon" title="Archived" bg_color="bg-danger" attrs="{'invisible': [('active', '=', True)]}" />
+                            <field name="active" invisible="1" />
+                        </div>
+                        <div>
+                            <label for="code" />
+                            <h1>
+                                <field name="code" />
+                            </h1>
+                        </div>
+                        <div>
+                            <label for="name" />
+                            <h1>
+                                <field name="name" class="oe_inline" attrs="{'readonly': [('state','in',('validate_ok','cancel'))]}" />
+                            </h1>
+                        </div>
+                        <group string="Datos generales">
+                            <group>
+                                <field name="date" />
+                                <field name="process_id" placeholder="Procedimiento" colspan="3" attrs="{'readonly': [('state','not in',('elaborate'))]}" />
+                                <field name="system_id" options="{'no_create': True, 'no_edit': True}" attrs="{'readonly': [('state','in',('validate_ok','cancel'))]}" />
+                                <field name="company_id" invisible="1" attrs="{'readonly': [('state','in',('validate_ok','cancel'))]}" />
+                            </group>
+                        </group>
+                        <notebook>
+                            <page name="document" string="Documento">
+                                <group>
+                                    <field name="template_" attrs="{'readonly': [('state','in',('validate_ok','cancel'))]}" />
+                                </group>
+                                <group string="Documento" attrs="{'invisible': [('system_id','=',%(hola_calidad.policy_system_0)d)]}">
+                                    <field name="introduction" />
+                                </group>
+                                <group attrs="{'invisible': [('system_id','!=',%(hola_calidad.policy_system_0)d)]}">
+                                    <field name="custom_text" widget="html" attrs="{'readonly': [('state','in',('validate_ok','cancel'))]}" />
+                                    <!--<field name="attached_files" widget="many2many_binary"/>--> 
+                                </group>
+                            </page>
+                            <page name="validation" string="Validación y Versión">
+                                <group colspan="4">
+                                    <field name="version" />
+                                </group>
+                                <group col="4">
+                                    <group colspan="4">
+                                        <separator string="Elaboración" />
+                                        <field name="elaboration_step" colspan="2" nolabel="1" attrs="{'readonly': [('state','not in',('elaborate'))]}" />
+                                        <separator string="Revisión" />
+                                        <field name="review_step" colspan="2" nolabel="1" attrs="{'readonly': [('state','not in',('elaborate', 'review'))]}" />
+                                        <separator string="Validación" />
+                                        <field name="validation_step" colspan="2" nolabel="1" attrs="{'readonly': [('state','not in',('elaborate', 'review', 'validate'))]}" />
+                                    </group>
+                                    <group colspan="2">
+                                        <field name="date_elaborate" attrs="{'required': [('state','in',('elaborate'))], 'readonly': True}" />
+                                        <field name="date_review" attrs="{'required': [('state','in',('review'))], 'readonly': True, 'invisible': [('state','in',('elaborate'))] }" />
+                                        <field name="date_validate" groups="base.group_no_one,base.user_admin" attrs="{'invisible': [('state','in',('elaborate','review'))] }" />
+                                    </group>
+                                </group>
+                            </page>
+                        </notebook>
+                    </sheet>
+                    <div class="oe_chatter">
+                        <field name="message_follower_ids" widget="mail_followers" />
+                        <field name="activity_ids" widget="mail_activity" />
+                        <field name="message_ids" widget="mail_thread" />
+                    </div>
+                </form>
+            </field>
+        </record>
+
+        <record id="context_policy_view_tree" model="ir.ui.view">
+            <field name="name">mgmtsystem.context.policy.view.tree</field>
+            <field name="model">mgmtsystem.context.policy</field>
+            <field name="arch" type="xml">
+                <tree>
+                    <field name="name" />
+                    <field name="date" />
+                    <field name="state" />
+                    <field name="version" />
+                    <field name="date_validate" groups="base.group_no_one,base.user_admin" />
+                </tree>
+            </field>
+        </record>
+
+        <record id="policies_action" model="ir.actions.act_window">
+            <field name="name">Políticas</field>
+            <field name="res_model">mgmtsystem.context.policy</field>
+            <field name="view_mode">tree,form</field>
+            <field name="domain">[]</field>
+            <field name="context">{}</field>
+        </record>
+
+        <record id="policies_cancel_action" model="ir.actions.act_window">
+            <field name="name">Políticas obseltas</field>
+            <field name="res_model">mgmtsystem.context.policy</field>
+            <field name="view_mode">tree,form</field>
+            <field name="domain">[('state','=','cancel')]</field>
+            <field name="context">{}</field>
+        </record>
+
+        <record id="context_policy_action_view_form" model="ir.ui.view">
+            <field name="name">mgmtsystem.context.policy.action.view.form</field>
+            <field name="model">mgmtsystem.context.policy.action</field>
+            <field name="arch" type="xml">
+                <form string="">
+                    <sheet>
+                        <group>
+                            <field name="policy_id" />
+                            <field name="code" />
+                            <field name="name" />
+                        </group>
+                    </sheet>
+                </form>
+            </field>
+        </record>
+
+        <record id="context_policy_action_view_tree" model="ir.ui.view">
+            <field name="name">mgmtsystem.context.policy.action.view.tree</field>
+            <field name="model">mgmtsystem.context.policy.action</field>
+            <field name="arch" type="xml">
+                <tree string="" editable="bottom">
+                    <field name="code" />
+                    <field name="name" />
+                </tree>
+            </field>
+        </record>
+
+        <record id="context_policy_action_action" model="ir.actions.act_window">
+            <field name="name">Acciones de Política</field>
+            <field name="res_model">mgmtsystem.context.policy.action</field>
+            <field name="view_mode">tree,form</field>
+            <field name="domain">[]</field>
+            <field name="context">{}</field>
+        </record>
+
+        <record id="context_external_issue_view_form" model="ir.ui.view">
+            <field name="name">mgmtsystem.context.external_issue.view.form</field>
+            <field name="model">mgmtsystem.context.external_issue</field>
+            <field name="arch" type="xml">
+                <form string="">
+                    <header>
+                        <field name="state" widget="statusbar" statusbar_visible="elaborate,review,validate,validate_ok" />
+                        <button string="Enviar a Elaborar"
+                                name="send_elaborate"
+                                type="object"
+                                class="btn-primary"
+                                attrs="{'invisible':[('state','in', ('elaborate','cancel','validate_ok'))]}" />
+                        <button string="Enviar a Revisar"
+                                name="send_review"
+                                type="object"
+                                class="btn-primary"
+                                attrs="{'invisible':[('state','!=', 'elaborate')]}" />
+                        <button string="Enviar a Validar"
+                                name="send_validate"
+                                type="object"
+                                class="btn-primary"
+                                attrs="{'invisible':[('state','in', ('elaborate','validate','cancel','validate_ok'))]}" />
+                        <button string="Validar"
+                                name="send_validate_ok"
+                                type="object"
+                                class="btn-primary"
+                                attrs="{'invisible':[('state','not in', ('validate'))]}" />
+                        <button string="Volver Obsoleto"
+                                confirm="Esto volverá obsoleto el presente registro. ¿Está seguro(a)?"
+                                name="send_cancel"
+                                type="object"
+                                class="btn-second"
+                                attrs="{'invisible': [('state','in',('cancel'))] }" />
+                        <button name="button_new_version"
+                                type="object"
+                                string="Nueva versión"
+                                attrs="{'invisible':['|', ('active','=',False), ('state', '!=', 'validate_ok')]}"
+                                class="oe_highlight" />
+                    </header>
+                    <sheet>
+                        <div class="oe_button_box" name="button_box">
+                            <button type="object"
+                                    name="action_open_older_versions"
+                                    class="oe_stat_button"
+                                    icon="fa-archive"
+                                    style="white-space: nowrap;"
+                                    string="Versiones antiguas" />
+                            <!-- <button name="toggle_active" type="object" groups="document_page.group_document_manager" class="oe_stat_button" icon="fa-archive">
+                                <field name="active" widget="boolean_button" options="{'terminology': 'archive'}"/>
+                            </button> -->
+                            <widget name="web_ribbon" title="Archived" bg_color="bg-danger" attrs="{'invisible': [('active', '=', True)]}" />
+                            <field name="active" invisible="1" />
+                        </div>
+                        <label for="code" />
+                        <h2>
+                            <field name="code" />
+                        </h2>
+                        <label for="name" />
+                        <h2>
+                            <field name="name" attrs="{'readonly': [('state','in',('validate_ok','cancel'))]}" />
+                        </h2>
+                        <group>
+                            <label for="process_id" />
+                            <div class="o_row">
+                                <field name="process_id" placeholder="Procedimiento" colspan="3" attrs="{'readonly': [('state','not in',('elaborate'))]}" />
+                            </div>
+                        </group>
+                        <notebook>
+                            <page name="general_info" string="General">
+                                <group>
+                                    <field name="additional_info" attrs="{'readonly': [('state','in',('validate_ok','cancel'))]}" />
+                                </group>
+                                <group string="Fuerzas de Porter - Análisis de micro-entorno">
+                                    <field name="forces" nolabel="1" attrs="{'readonly': [('state','in',('validate_ok','cancel'))]}">
+                                        <tree string="Fuerzas de Porter" class="external_issue" editable="bottom">
+                                            <field name="context_force" style="max-width:15vw;overflow-wrap: break-word;" />
+                                            <field name="description" style="max-width:20vw;overflow-wrap: break-word;" />
+                                            <field name="relevance" style="max-width:10vw;overflow-wrap: break-word;" />
+                                        </tree>
+                                    </field>
+                                </group>
+                            </page>
+                            <page name="validation" string="Validación y versión">
+                                <group col="4">
+                                    <group colspan="4">
+                                        <field name="version" />
+                                    </group>
+                                    <group colspan="4">
+                                        <separator string="Elaboración" />
+                                        <field name="elaboration_step" colspan="2" nolabel="1" attrs="{'readonly': [('state','not in',('elaborate'))]}" />
+                                        <separator string="Revisión" />
+                                        <field name="review_step" colspan="2" nolabel="1" attrs="{'readonly': [('state','not in',('elaborate', 'review'))]}" />
+                                        <separator string="Validación" />
+                                        <field name="validation_step" colspan="2" nolabel="1" attrs="{'readonly': [('state','not in',('elaborate', 'review', 'validate'))]}" />
+                                    </group>
+                                    <group colspan="4">
+                                        <field name="date_elaborate" attrs="{'required': [('state','in',('elaborate'))], 'readonly': True}" />
+                                        <field name="date_review" attrs="{'required': [('state','in',('review'))], 'readonly': True, 'invisible': [('state','in',('elaborate'))] }" />
+                                        <field name="date_validate" groups="base.group_no_one,base.user_admin" attrs="{'invisible': [('state','in',('elaborate','review'))] }" />
+                                    </group>
+                                </group>
+                            </page>
+                        </notebook>
+                    </sheet>
+                    <div class="oe_chatter">
+                        <field name="message_follower_ids" widget="mail_followers" />
+                        <field name="activity_ids" widget="mail_activity" />
+                        <field name="message_ids" widget="mail_thread" />
+                    </div>
+                </form>
+            </field>
+        </record>
+
+        <record id="context_external_issue_view_tree" model="ir.ui.view">
+            <field name="name">mgmtsystem.context.external_issue.view.form</field>
+            <field name="model">mgmtsystem.context.external_issue</field>
+            <field name="arch" type="xml">
+                <tree string="">
+                    <field name="name" />
+                    <field name="additional_info" />
+
+
+                    <field name="date_validate" groups="base.group_no_one,base.user_admin" attrs="{'readonly': False, 'invisible': [('state','in',('elaborate','review'))] }" />
+                    <field name="version" />
+                    <field name="state" />
+                </tree>
+            </field>
+        </record>
+
+        <record id="context_external_issue_action" model="ir.actions.act_window">
+            <field name="name">Análisis de Porter</field>
+            <field name="res_model">mgmtsystem.context.external_issue</field>
+
+            <field name="view_mode">tree,form</field>
+            <field name="domain">[]</field>
+            <field name="context">{}</field>
+            <field name="help" type="html">
+                <p>Añada sus Análisis de Porter</p>
+            </field>
+        </record>
+
+        <record id="context_external_issue_cancel_action" model="ir.actions.act_window">
+            <field name="name">Análisis de Porter</field>
+            <field name="res_model">mgmtsystem.context.external_issue</field>
+
+            <field name="view_mode">tree,form</field>
+            <field name="domain">[('state', '=', 'cancel')]</field>
+            <field name="context">{}</field>
+        </record>
+
+        <record id="external_issue_force_view_form" model="ir.ui.view">
+            <field name="name">mgmtsystem.context.external_issue.force.view.form</field>
+            <field name="model">mgmtsystem.context.external_issue.force</field>
+            <field name="arch" type="xml">
+                <form string="">
+                    <sheet>
+                        <group>
+                            <field name="context_force" />
+                            <field name="description" />
+                            <field name="relevance" />
+                        </group>
+                    </sheet>
+                </form>
+            </field>
+        </record>
+
+        <record id="external_issue_force_view_tree" model="ir.ui.view">
+            <field name="name">mgmtsystem.context.external_issue.force.view.tree</field>
+            <field name="model">mgmtsystem.context.external_issue.force</field>
+            <field name="arch" type="xml">
+                <tree string="Fuerzas de Porter" class="external_issue" editable="bottom">
+                    <field name="context_force" />
+                    <field name="description" />
+                    <field name="relevance" />
+                </tree>
+            </field>
+        </record>
+
+        <record id="external_issue_force_action" model="ir.actions.act_window">
+            <field name="name">Fuerza de Porter</field>
+            <field name="res_model">mgmtsystem.context.external_issue.force</field>
+
+            <field name="view_mode">tree,form</field>
+            <field name="domain">[]</field>
+            <field name="context">{}</field>
+            <field name="help" type="html">
+                <p>Añada fuerzas de Porter</p>
+            </field>
+        </record>
+
+        <record id="context_force_view_form" model="ir.ui.view">
+            <field name="name">mgmtsystem.context.force.view.form</field>
+            <field name="model">mgmtsystem.context.force</field>
+            <field name="arch" type="xml">
+                <form string="Fuerza">
+                    <sheet>
+                        <group>
+                            <field name="code" />
+                            <field name="name" />
+                            <field name="description" />
+                        </group>
+                    </sheet>
+                </form>
+            </field>
+        </record>
+
+        <record id="context_force_view_tree" model="ir.ui.view">
+            <field name="name">mgmtsystem.context.force.view.tree</field>
+            <field name="model">mgmtsystem.context.force</field>
+            <field name="arch" type="xml">
+                <tree string="Fuerza">
+                    <field name="code" />
+                    <field name="name" />
+                    <field name="description" />
+                </tree>
+            </field>
+        </record>
+
+        <record id="context_force_action" model="ir.actions.act_window">
+            <field name="name">Fuerza</field>
+            <field name="res_model">mgmtsystem.context.force</field>
+
+            <field name="view_mode">tree,form</field>
+            <field name="domain">[]</field>
+            <field name="context">{}</field>
+            <field name="help" type="html">
+                <p>Añadir fuerza</p>
+            </field>
+        </record>
+
+        <record id="stakeholder_view_form" model="ir.ui.view">
+            <field name="name">mgmtsystem.stakeholder.view.form</field>
+            <field name="model">mgmtsystem.stakeholder</field>
+            <field name="arch" type="xml">
+                <form string="Interesado">
+                    <sheet>
+                        <group string="Información general">
+                            <field name="name"/>
+                            <!--<field name="stakeholder_id" />-->
+                            <field name="system_id" options="{'no_create': True, 'no_edit': True}" />
+                            <field name="partner_id" />
+                            <field name="type" invisible="0" />
+                        </group>
+                        <group string="Pertenencia">
+                            <field name="power" />
+                            <field name="interest" />
+                            <field name="membership" />
+                            <field name="calification" />
+                        </group>
+                        <group>
+                            <field name="requirements">
+                                <tree string="Requerimientos">
+                                    <field name="name" style="max-width:15vw;overflow-wrap: break-word;" />
+                                    <field name="type" />
+                                </tree>
+                            </field>
+                        </group>
+                        <separator string="Análisis" />
+                        <notebook>
+                            <page name="risk" string="Riesgos">
+                                <separator string="Riesgos" />
+                                <div class="alert alert-info">
+                                    RIESGOS: Es la probabilidad de que algo suceda y las consecuencias que puedan afectar positiva o negativamente, los resultado de los procesos u objetivos de la empresa.
+                                </div>
+                                <field name="risk_ids" colspan="2" context="{'default_type': 'risk'}" />
+                            </page>
+                            <page name="opportunity" string="Oportunidades">
+                                <separator string="Oportunidades" />
+                                <div class="alert alert-info">
+                                    OPORTUNIDADES: se entiende como los beneficios o las posibilidades que se presentan como consecuencia de la ocurrencia de un determinado evento. Curiosamente, un riesgo, que representa una amenaza algo negativo y la oportunidad algo positivo.
+                                </div>
+                                <field name="opportunity_ids" colspan="2" context="{'default_type': 'opportunity'}" />
+                            </page>
+                        </notebook>
+                    </sheet>
+                </form>
+            </field>
+        </record>
+
+        <record id="stakeholder_view_tree" model="ir.ui.view">
+            <field name="name">mgmtsystem.stakeholder.view.tree</field>
+            <field name="model">mgmtsystem.stakeholder</field>
+            <field name="arch" type="xml">
+                <tree string="Interesado">
+                    <field name="name" />
+                    <field name="partner_id" />
+                    <field name="membership" />
+                    <field name="calification" />
+                    <field name="requirements" />
+                    <field name="type"/>
+                    <!--<field name="risk_ids" />
+                    <field name="opportunity_ids" />-->
+                </tree>
+            </field>
+        </record>
+
+        <record id="stakeholder_action" model="ir.actions.act_window">
+            <field name="name">Interesados</field>
+            <field name="res_model">mgmtsystem.stakeholder</field>
+            <field name="view_mode">tree,form</field>
+            <field name="domain">[]</field>
+            <field name="context">{}</field>
+            <field name="help" type="html">
+                <p>Ingrese a las partes interesadas</p>
+            </field>
+        </record>
+
+        <record id="stakeholder_req_view_form" model="ir.ui.view">
+            <field name="name">mgmtsystem.stakeholder.req.view.form</field>
+            <field name="model">mgmtsystem.stakeholder.req</field>
+            <field name="arch" type="xml">
+                <form string="Requisito">
+                    <sheet>
+                        <group>
+                            <field name="name" />
+                            <field name="type" />
+                        </group>
+                    </sheet>
+                </form>
+            </field>
+        </record>
+
+        <record id="stakeholder_req_view_tree" model="ir.ui.view">
+            <field name="name">mgmtsystem.stakeholder.req.view.tree</field>
+            <field name="model">mgmtsystem.stakeholder.req</field>
+            <field name="arch" type="xml">
+                <tree string="Requisito" editable="bottom">
+                    <field name="name" />
+                    <field name="type" />
+                </tree>
+            </field>
+        </record>
+
+        <record id="stakeholder_req_action" model="ir.actions.act_window">
+            <field name="name">Requisito</field>
+            <field name="res_model">mgmtsystem.stakeholder.req</field>
+
+            <field name="view_mode">tree,form</field>
+            <field name="domain">[]</field>
+            <field name="context">{}</field>
+            <field name="help" type="html">
+                <p>Añada los requisitos del interesado</p>
+            </field>
+        </record>
+
+        <record id="stakeholder_opp_view_form" model="ir.ui.view">
+            <field name="name">mgmtsystem.stakeholder.opp.view.form</field>
+            <field name="model">mgmtsystem.stakeholder.opp</field>
+            <field name="arch" type="xml">
+                <form string="Oportunidad">
+                    <sheet>
+                        <group>
+                            <field name="name" />
+                        </group>
+                    </sheet>
+                </form>
+            </field>
+        </record>
+
+        <record id="stakeholder_opp_view_tree" model="ir.ui.view">
+            <field name="name">mgmtsystem.stakeholder.opp.view.tree</field>
+            <field name="model">mgmtsystem.stakeholder.opp</field>
+            <field name="arch" type="xml">
+                <tree string="Oportunidad" editable="bottom">
+                    <field name="name" />
+                </tree>
+            </field>
+        </record>
+
+        <record id="stakeholder_opp_action" model="ir.actions.act_window">
+            <field name="name">Oportunidad</field>
+            <field name="res_model">mgmtsystem.stakeholder.opp</field>
+
+            <field name="view_mode">tree,form</field>
+            <field name="domain">[]</field>
+            <field name="context">{}</field>
+            <field name="help" type="html">
+                <p>Añada las oportunidades del interesado</p>
+            </field>
+        </record>
+
+        <record id="stakeholders_view_form" model="ir.ui.view">
+            <field name="name">mgmtsystem.stakeholders.view.form</field>
+            <field name="model">mgmtsystem.stakeholders</field>
+            <field name="arch" type="xml">
+                <form string="Interesados">
+                    <header>
+                        <field name="state" widget="statusbar" statusbar_visible="elaborate,review,validate,validate_ok" />
+                        <button string="Enviar a Elaborar"
+                                name="send_elaborate"
+                                type="object"
+                                class="btn-primary"
+                                attrs="{'invisible':[('state','in', ('elaborate','cancel','validate_ok'))]}" />
+                        <button string="Enviar a Revisar"
+                                name="send_review"
+                                type="object"
+                                class="btn-primary"
+                                attrs="{'invisible':[('state','!=', 'elaborate')]}" />
+                        <button string="Enviar a Validar"
+                                name="send_validate"
+                                type="object"
+                                class="btn-primary"
+                                attrs="{'invisible':[('state','in', ('elaborate','validate','cancel','validate_ok'))]}" />
+                        <button string="Validar"
+                                name="send_validate_ok"
+                                type="object"
+                                class="btn-primary"
+                                attrs="{'invisible':[('state','not in', ('validate'))]}" />
+                        <button string="Volver Obsoleto"
+                                confirm="Esto volverá obsoleto el presente registro. ¿Está seguro(a)?"
+                                name="send_cancel"
+                                type="object"
+                                class="btn-second"
+                                attrs="{'invisible': [('state','in',('cancel'))] }" />
+                        <button name="button_new_version"
+                                type="object"
+                                string="Nueva versión"
+                                attrs="{'invisible':['|', ('active','=',False), ('state', '!=', 'validate_ok')]}"
+                                class="oe_highlight" />
+                    </header>
+                    <sheet>
+                        <div class="oe_button_box" name="button_box">
+                            <button type="object"
+                                    name="action_open_older_versions"
+                                    class="oe_stat_button"
+                                    icon="fa-archive"
+                                    style="white-space: nowrap;"
+                                    string="Versiones antiguas" />
+                            <widget name="web_ribbon" title="Archived" bg_color="bg-danger" attrs="{'invisible': [('active', '=', True)]}" />
+                            <field name="active" invisible="1" />
+                        </div>
+                        <div>
+                            <label for="code" />
+                            <h1>
+                                <field name="code" />
+                            </h1>
+                        </div>
+                        <div>
+                            <label for="name" />
+                            <h1>
+                                <field name="name" class="oe_inline" attrs="{'readonly': [('state','in',('validate_ok','cancel'))]}" />
+                            </h1>
+                        </div>
+                        <label for="process_id" />
+                        <div class="o_row">
+                            <field name="process_id" placeholder="Procedimiento" colspan="3" />
+                        </div>
+                        <group>
+                            <field name="system_id" options="{'no_create': True, 'no_edit': True}" />
+                        </group>
+                        <notebook>
+                            <page name="general_info" string="General">
+                                <group>
+                                    <separator string="Interesados internos" />
+                                    <field name="stakeholder_in_ids"
+                                           nolabel="1"
+                                           colspan="2"
+                                           attrs="{'readonly': [('state','in',('validate_ok','cancel'))]}"
+                                           context="{'default_type': 'in', 'default_system_id': system_id}"
+                                           >
+                                        <tree>
+                                            <field name="name" />
+                                            <field name="partner_id" />
+                                            <field name="calification" />
+                                        </tree>
+                                    </field>
+                                    <separator string="Interesados externos" />
+                                    <field name="stakeholder_out_ids"
+                                           nolabel="1"
+                                           colspan="2"
+                                           attrs="{'readonly': [('state','in',('validate_ok','cancel'))]}"
+                                           context="{'default_type': 'out', 'default_system_id': system_id}"
+                                           >
+                                        <tree>
+                                            <field name="name" />
+                                            <field name="partner_id" />
+                                            <field name="calification" />
+                                        </tree>
+                                    </field>
+                                </group>
+                            </page>
+                            <page name="validation" string="Validación y versión">
+                                <group col="4">
+                                    <group colspan="4">
+                                        <field name="version" />
+                                    </group>
+                                    <group colspan="4">
+                                        <separator string="Elaboración" />
+                                        <field name="elaboration_step" colspan="2" nolabel="1" attrs="{'readonly': [('state','not in',('elaborate'))]}" />
+                                        <separator string="Revisión" />
+                                        <field name="review_step" colspan="2" nolabel="1" attrs="{'readonly': [('state','not in',('elaborate', 'review'))]}" />
+                                        <separator string="Validación" />
+                                        <field name="validation_step" colspan="2" nolabel="1" attrs="{'readonly': [('state','not in',('elaborate', 'review', 'validate'))]}" />
+                                    </group>
+                                    <group colspan="4">
+                                        <field name="date_elaborate" attrs="{'required': [('state','in',('elaborate'))], 'readonly': True}" />
+                                        <field name="date_review" attrs="{'required': [('state','in',('review'))], 'readonly': True, 'invisible': [('state','in',('elaborate'))] }" />
+                                        <field name="date_validate" groups="base.group_no_one,base.user_admin" attrs="{'invisible': [('state','in',('elaborate','review'))] }" />
+                                    </group>
+                                </group>
+                            </page>
+                        </notebook>
+                    </sheet>
+                    <div class="oe_chatter">
+                        <field name="message_follower_ids" widget="mail_followers" />
+                        <field name="activity_ids" widget="mail_activity" />
+                        <field name="message_ids" widget="mail_thread" />
+                    </div>
+                </form>
+            </field>
+        </record>
+
+        <record id="stakeholders_view_tree" model="ir.ui.view">
+            <field name="name">mgmtsystem.stakeholders.view.tree</field>
+            <field name="model">mgmtsystem.stakeholders</field>
+            <field name="arch" type="xml">
+                <tree string="">
+                    <field name="name" />
+                    <field name="process_id" />
+                    <field name="state" />
+                    <field name="version" />
+                    <field name="date_validate" groups="base.group_no_one,base.user_admin" />
+                </tree>
+            </field>
+        </record>
+
+        <record id="stakeholders_action" model="ir.actions.act_window">
+            <field name="name">Interesados</field>
+            <field name="res_model">mgmtsystem.stakeholders</field>
+            <field name="view_mode">tree,form</field>
+            <field name="domain">[]</field>
+            <field name="context">{}</field>
+            <field name="help" type="html">
+                <p>Matriz de interesados</p>
+            </field>
+        </record>
+
+        <record id="stakeholders_cancel_action" model="ir.actions.act_window">
+            <field name="name">Interesados</field>
+            <field name="res_model">mgmtsystem.stakeholders</field>
+            <field name="view_mode">tree,form</field>
+            <field name="domain">[('state', '=', 'cancel')]</field>
+            <field name="context">{}</field>
+            <field name="help" type="html">
+                <p>Matriz de interesados</p>
+            </field>
+        </record>
+
+        <record id="context_org_chart_cancel_action" model="ir.actions.act_window">
+            <field name="name">Organigramas antiguos</field>
+            <field name="res_model">mgmtsystem.context.organization_chart</field>
+
+            <field name="view_mode">tree,form</field>
+            <field name="domain">[('state','=','cancel')]</field>
+            <field name="context">{}</field>
+        </record>
+
+
+        <!-- Menus -->
+
+        <!-- <menuitem id="menu_mgmtsystem_manuals_policies" name="Políticas" action="policies_action" parent="hola_calidad.menu_plan_main" sequence="30"/> -->
+
+        <menuitem id="context_menu"
+                  name="Contexto"
+                  web_icon="mgmtsystem_context,static/description/icon.png"
+                  sequence="-2"
+                  groups="group_context_onlyread,group_context_onlyread_printreport,group_context_write_printreport,group_context_all" />
+
+        <menuitem id="context_context_menu"
+                  name="Contexto de la organización"
+                  action="context_internal_issue_action"
+                  parent="context_menu"
+                  sequence="1" />
+
+        <menuitem id="context_issues_menu" name="Factores" parent="context_menu" sequence="10" />
+
+        <menuitem id="context_external_issues_menu"
+                  name="Análisis de Porter"
+                  action="context_external_issue_action"
+                  parent="context_issues_menu"
+                  sequence="10" />
+
+        <menuitem id="context_stakeholder_menu" name="Partes interesadas" parent="context_menu" sequence="10" />
+
+        <menuitem id="stakeholders_menu"
+                  name="Matriz de partes interesadas"
+                  action="stakeholders_action"
+                  parent="context_stakeholder_menu"
+                  sequence="10" />
+        
+        <menuitem id="stakeholder_menu"
+                  name="Partes interesadas"
+                  action="stakeholder_action"
+                  parent="context_stakeholder_menu"
+                  sequence="10" />
+        
+
+        <!-- <menuitem id="menu_org_chart_department" name="Organigrama" action="org_chart_employee.action_org_chart_employee" parent="context_menu" sequence="3"/> -->
+
+        <menuitem id="context_policy_root_menu" name="Políticas" parent="context_menu" sequence="15" />
+        <menuitem id="context_policy_menu"
+                  name="Políticas"
+                  parent="context_policy_root_menu"
+                  action="policies_action"
+                  sequence="15" />
+        <menuitem id="context_policy_template_menu"
+                  name="Plantillas"
+                  action="policy_template_action"
+                  parent="context_policy_root_menu"
+                  sequence="16" />
+
+        <menuitem id="menu_mgmtsystem_configuration_policies" name="Políticas" parent="hola_calidad.menu_mgmtsystem_configuration" sequence="15" />
+        <menuitem id="menu_mgmtsystem_configuration_policies_templates" name="Plantillas de Políticas" parent="menu_mgmtsystem_configuration_policies" sequence="15" />
+
+        <menuitem id="context_policy_quality_manual_menu"
+                  name="Políticas"
+                  action="policies_action"
+                  sequence="20"
+                  parent="mgmtsystem_process.menu_process_root" />
+
+
+    </data>
+</odoo>

@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+
+    <menuitem id="mgmtsystem_mof_action_menu"
+              name="Manual de organización y funciones"
+              parent="hr.menu_hr_root"
+              action="mgmtsystem_mof_action"
+              sequence="27" />
+
+</odoo>

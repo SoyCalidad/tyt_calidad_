@@ -1,0 +1,33 @@
+<odoo>
+    <!--
+    <data>
+        <record id="complement_emplo2" model="ir.ui.view">
+            <field name="name">complemento_2</field>
+            <field name="model">hr.employee</field>
+            <field name="inherit_id" ref="hr.view_employee_form"/>
+            <field name="priority" eval="1001"/>
+            <field name="arch" type="xml">
+                <xpath expr="//notebook/page[1]/div/div/group[1]/field[@name='job_id']" position="attributes">
+                    <attribute name="domain">['|', ('company_id', '=', False), ('company_id', '=', company_id)]</attribute>
+                </xpath>
+            </field>
+        </record>            
+    </data>
+    -->
+    
+    <data>
+        <record id="complement_emplo2" model="ir.ui.view">
+            <field name="name">complemento_2</field>
+            <field name="model">hr.employee</field>
+            <field name="inherit_id" ref="hr.view_employee_form"/>
+            <field name="priority" eval="1001"/>
+            <field name="arch" type="xml">
+                <field name="job_id" position="attributes">
+                    <attribute name="domain">['|', ('company_id', '=', False), ('company_id', '=', company_id)]</attribute>
+                </field>
+            </field>
+        </record>            
+    </data>
+    
+
+</odoo>

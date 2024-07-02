@@ -1,0 +1,579 @@
+<odoo>
+    <data>
+
+        <report id="action_pest_report"
+            model="mgmtsystem.context.pest"
+            string="Análisis PESTEL/AMOFHIT"
+            report_type="qweb-pdf"
+            groups="mgmtsystem_context.group_context_onlyread_printreport,mgmtsystem_context.group_context_write_printreport,mgmtsystem_context.group_context_all"
+            name="mgmtsystem_context.report_pest"
+            file="Análisis PESTEL/AMOFHIT"
+            paperformat="hola_calidad.portrait" />
+
+        <report id="action_pest_xls_report"
+            model="mgmtsystem.context.pest"
+            string="Análisis PESTEL/AMOFHIT (Excel)"
+            report_type="xlsx"
+            groups="base.group_no_one,base.group_no_one,mgmtsystem_context.group_context_onlyread_printreport,mgmtsystem_context.group_context_write_printreport,mgmtsystem_context.group_context_all"
+            name="mgmtsystem_context.report_xls_pest"
+            file="Análisis PESTEL/AMOFHIT" />
+
+
+
+        <template id="report_pest">
+            <t t-call="web.html_container">
+                <t t-foreach="docs" t-as="s">
+                    <style type="text/css">
+                        .tftable {font-size:12px;color:#333333;width:100%;border-width: 1px;border-color: #729ea5;border-collapse: collapse;}
+                        .tftable th {font-size:12px;background-color:#acc8cc;border-width: 1px;padding: 8px;border-style: solid;border-color: #729ea5;text-align:left;}
+                        .tftable tr {background-color:#d4e3e5;}
+                        .tftable td {font-size:12px;border-width: 1px;padding: 8px;border-style: solid;border-color: #729ea5;}
+                        .tftable tr:hover {background-color:#ffffff;}
+                    </style>
+                    <div class="header">
+                        <style type="text/css">
+                            .tg  {border-collapse:collapse;border-spacing:0;margin:0px auto;width:100%;}
+                            .tg td{border-color:black;border-style:solid;border-width:1px;font-family: Palatino, Palatino Linotype, Palatino LT STD, Book Antiqua, Georgia, serif;font-size:14px;
+                            overflow:hidden;padding:10px 5px;word-break:normal;text-align:middle;align:center;}
+                            .tg th{border-color:black;border-style:solid;border-width:1px;font-family: Palatino, Palatino Linotype, Palatino LT STD, Book Antiqua, Georgia, serif;font-size:14px;
+                            font-weight:normal;overflow:hidden;padding:10px 5px;word-break:normal;}
+                            .tg .tg-9wq8{border-color:inherit;text-align:center;vertical-align:middle}
+                            .tg .tg-1wig{border-color:inherit;text-align:center;vertical-align:middle;font-size:16px;font-weight:bold;}
+                            .tg .tg-0lax{border-color:inherit;text-align:center;vertical-align:middle;font-size:12px;}
+                        </style>
+                        <table class="tg">
+                            <tbody>
+                                <tr>
+                                    <td class="tg-1wig" rowspan="3" width="20%" style="width:15%">
+                                        <t t-if="company.logo">
+                                            <img t-att-src="image_data_uri(company.logo)" style="max-width:100px;max-height:100px;vertical-align:middle;" alt="Logo"/>
+                                        </t>
+                                    </td>
+                                    <td class="tg-1wig" rowspan="3" width="80%" style="width:65%;">
+                                        <span style="font-size:18px;font-weight:bold;">ANÁLISIS PESTEL/AMOFHIT</span>
+                                        <br/>
+                                        <span t-field="s.name" style="font-size:15px;font-weight:bold;"/>
+                                    </td>
+                                    <td class="tg-0lax" width="20%" style="width:20%">
+                                        Código:
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td class="tg-0lax">
+                                        <span>Edición:</span>
+                                        <span t-field="s.version" />
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td class="tg-0lax">
+                                        <span>Fecha de aprobación:</span>
+                                        <span t-field="s.date_validate"/>
+                                    </td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                    <br/>
+                    <div>
+                        <TABLE width="100%" height="50" style="display:block;border:1px solid black;font-size:14px;font-weight:bold;max-height:60px; padding-top: 55px ;  border: #c0c0c0000 2px" cellspacing="0">
+                            <tr>
+                                <td class="tg-nrix" height="50" colspan="3"/>
+                            </tr>
+                        </TABLE>
+                    </div>
+                    <br/>
+                    <br/>
+                    <div>
+                        <TABLE width="100%" height="50" style="display:block;border:1px solid black;font-size:14px;font-weight:bold;max-height:60px; padding-top: 55px ;  border: #c0c0c0000 2px" cellspacing="0">
+                            <tr>
+                                <td class="tg-nrix" height="50" colspan="3"/>
+                            </tr>
+                        </TABLE>
+                    </div>
+                    <br/>
+                    <br/>
+                    <div>
+                        <TABLE width="100%" height="50" style="display:block;border:1px solid black;font-size:14px;font-weight:bold;max-height:60px; padding-top: 55px ;  border: #c0c0c0000 2px" cellspacing="0">
+                            <tr>
+                                <td class="tg-nrix" height="50" colspan="3"/>
+                            </tr>
+                        </TABLE>
+                    </div>
+                    <br/>
+                    <br/>
+                    <div>
+                        <TABLE width="100%" height="50" style="display:block;border:1px solid black;font-size:14px;font-weight:bold;max-height:60px; padding-top: 55px ;  border: #c0c0c0000 2px" cellspacing="0">
+                            <tr>
+                                <td class="tg-nrix" height="50" colspan="3"/>
+                            </tr>
+                        </TABLE>
+                    </div>
+                    <br/>
+
+                    <t t-call="web.external_layout">
+                        <style t-if="s.state=='cancel'">
+                            .page {
+                            position: relative;
+                            }
+                            .page::after {
+                            content: "";
+                            background: url('/hola_calidad/static/src/img/obsoleto.png');
+                            opacity: 0.25;
+                            top: 0;
+                            left: 0;
+                            bottom: 0;
+                            right: 0;
+                            position: absolute;
+                            z-index: -1;
+                            }
+                        </style>
+                        <div class="page">
+                            <style type="text/css">
+                                .tg  {border-collapse:collapse;border-spacing:0;}
+                                .tg td{font-family: Palatino, Palatino Linotype, Palatino LT STD, Book Antiqua, Georgia, serif;font-size:14px;padding:10px 5px;border-style:solid;border-width:1px;overflow:hidden;word-break:normal;border-color:black;}
+                                .tg th{font-family: Palatino, Palatino Linotype, Palatino LT STD, Book Antiqua, Georgia, serif;font-size:14px;font-weight:normal;padding:10px 5px;border-style:solid;border-width:1px;overflow:hidden;word-break:normal;border-color:black;}
+                                .tg .tg-zv36{font-weight:bold;background-color:#ffffff;border-color:inherit;text-align:left;vertical-align:top}
+                                .tg .tg-nrix{text-align:center;vertical-align:middle;font-weight: bold;border-style: none;font-size:25px;}
+                                .tg .tg-rq3n{background-color:#ffffff;text-align:center;vertical-align:middle;border-style: none;font-size:20px;}
+                                .tg .tg-7g6k{font-weight:bold;background-color:#ffffff;border-color:inherit;text-align:center;vertical-align:top}
+                                .tg .tg-3xi5{background-color:#ffffff;border-color:inherit;text-align:center;vertical-align:top}
+                            </style>
+                            <div class="cover" style="page-break-after: always;">
+                                <center>
+                                    <style type="text/css">
+                                        .tg  {border-collapse:collapse;border-spacing:0;}
+                                        .tg td{font-family: Palatino, Palatino Linotype, Palatino LT STD, Book Antiqua, Georgia, serif;font-size:16px;padding:10px 5px;border-style:solid;border-width:1px;overflow:hidden;word-break:normal;border-color:black;}
+                                        .tg th{font-family: Palatino, Palatino Linotype, Palatino LT STD, Book Antiqua, Georgia, serif;font-size:16px;font-weight:normal;padding:10px 5px;border-style:solid;border-width:1px;overflow:hidden;word-break:normal;border-color:black;}
+                                        .tg .tg-zv36{font-weight:bold;background-color:#ffffff;border-color:inherit;text-align:left;vertical-align:top;width:33%}
+                                        .tg .tg-nrix{text-align:center;vertical-align:middle;font-weight: bold;border-style: none;font-size:25px;}
+                                        .tg .tg-rq3n{background-color:#ffffff;text-align:center;vertical-align:middle;border-style: none;font-size:20px;}
+                                        .tg .tg-7g6k{font-weight:bold;background-color:#efefef;border-color:inherit;text-align:center;vertical-align:top;font-size:16px;}
+                                        .tg .tg-3xi5{background-color:#ffffff;border-color:inherit;text-align:center;vertical-align:middle;font-size:14px;}
+                                    </style>
+                                    <table class="tg" width="85%">
+                                        <tr>
+                                            <td class="tg-nrix" colspan="3"/>
+                                        </tr>
+                                        <tr>
+                                            <td class="tg-nrix" colspan="3"/>
+                                        </tr>
+                                        <tr>
+                                            <td class="tg-nrix" colspan="3">
+                                                <span t-field="company.name"/>
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td class="tg-nrix" colspan="3"/>
+                                        </tr>
+                                        <tr>
+                                            <td class="tg-nrix" colspan="3"/>
+                                        </tr>
+                                        <tr>
+                                            <td class="tg-rq3n" colspan="3"/>
+                                        </tr>
+                                        <tr>
+                                            <td class="tg-7g6k">NOMBRE</td>
+                                            <td class="tg-3xi5" colspan="2">
+                                                <span t-field="s.name"/>
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td class="tg-7g6k">PROCEDIMIENTO</td>
+                                            <td class="tg-3xi5" colspan="2">
+                                                <span t-field="s.process_id"/>
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td class="tg-7g6k">VERSIÓN</td>
+                                            <td class="tg-3xi5" colspan="2">
+                                                <span t-field="s.version"/>
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td class="tg-7g6k">FECHA DE ELABORACIÓN</td>
+                                            <td class="tg-3xi5" colspan="2">
+                                                <span t-field="s.date_elaborate"/>
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td class="tg-7g6k">ELABORADO POR</td>
+                                            <td class="tg-3xi5" colspan="2">
+                                                <t t-foreach="s.elaboration_step" t-as="user">
+                                                    <span t-field="user.user_id.partner_id.name" />
+                                                    <br/>
+                                                </t>
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td class="tg-7g6k">
+                                                Actualizado por:
+                                                <br/>
+                                                <t t-foreach="s.elaboration_step" t-as="user">
+                                                    <span t-field="user.user_id.partner_id.name" />
+                                                    <br/>
+                                                </t>
+                                            </td>
+                                            <td class="tg-7g6k">
+                                                Revisado por:
+                                                <br/>
+                                                <t t-foreach="s.review_step" t-as="user">
+                                                    <span t-field="user.user_id.partner_id.name" />
+                                                    <br/>
+                                                </t>
+                                            </td>
+                                            <td class="tg-7g6k">
+                                                Aprobado por:
+                                                <br/>
+                                                <t t-foreach="s.validation_step" t-as="user">
+                                                    <span t-field="user.user_id.partner_id.name" />
+                                                    <br/>
+                                                </t>
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td class="tg-zv36">
+                                                Firma:
+                                                <br/>
+                                                <t t-foreach="s.elaboration_step" t-as="user">
+                                                    <span t-if="s.state=='validate_ok'" t-raw="user.user_id.signature" style="display:block;"/>
+                                                    <br/>
+                                                </t>
+                                            </td>
+                                            <td class="tg-zv36">
+                                                Firma:
+                                                <br/>
+                                                <t t-foreach="s.review_step" t-as="user">
+                                                    <span t-if="s.state=='validate_ok'" t-raw="user.user_id.signature" style="display:block;"/>
+                                                    <br/>
+                                                </t>
+                                            </td>
+                                            <td class="tg-zv36">
+                                                Firma:
+                                                <br/>
+                                                <t t-foreach="s.validation_step" t-as="user">
+                                                    <span t-if="s.state=='validate_ok'" t-raw="user.user_id.signature" style="display:block;"/>
+                                                    <br/>
+                                                </t>
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td class="tg-3xi5">
+                                                <t t-foreach="s.elaboration_step" t-as="user">
+                                                    <t t-foreach="user.user_id.employee_ids" t-as="emp">
+                                                        <span t-field="emp.job_id.name" />
+                                                        <br/>
+                                                    </t>
+                                                    <br/>
+                                                </t>
+                                            </td>
+                                            <td class="tg-3xi5">
+                                                <t t-foreach="s.review_step" t-as="user">
+                                                    <t t-foreach="user.user_id.employee_ids" t-as="emp">
+                                                        <span t-field="emp.job_id.name" />
+                                                        <br/>
+                                                    </t>
+                                                    <br/>
+                                                </t>
+                                            </td>
+                                            <td class="tg-3xi5">
+                                                <t t-foreach="s.validation_step" t-as="user">
+                                                    <t t-foreach="user.user_id.employee_ids" t-as="emp">
+                                                        <span t-field="emp.job_id.name" />
+                                                        <br/>
+                                                    </t>
+                                                    <br/>
+                                                </t>
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td class="tg-zv36">
+                                                Fecha:
+                                                <span t-field="s.date_elaborate"/>
+                                            </td>
+                                            <td class="tg-zv36">
+                                                Fecha:
+                                                <span t-field="s.date_review"/>
+                                            </td>
+                                            <td class="tg-zv36">
+                                                Fecha:
+                                                <span t-field="s.date_validate"/>
+                                            </td>
+                                        </tr>
+                                    </table>
+                                </center>
+                                <br/>
+                                <br/>
+                            </div>
+                            <div class="main_table">
+                                <center>
+                                    <table style="border: 1px solid #efefef;vertical-align: middle;" align="center" valign="middle" width="100%" cellspacing="0">
+
+                                        <tr align="center" valign="middle" style="border: 1px solid #efefef; background-color:#efefef;">
+                                            <td style="border: 1px solid #efefef ;border-top: 0px solid #c0c0c0 ; border-left: 1px solid #fff;border-right: 1px solid #fff;">
+                                                <H3>
+                                                    <B>CUESTIÓN</B>
+                                                </H3>
+                                            </td>
+                                            <td style="border: 1px solid #efefef ;border-top: 0px solid #c0c0c0;border-left: 1px solid #c0c0c0; border-right: 1px solid #c0c0c0; background-color:#efefef;">
+                                                <H3>
+                                                    <B>DETALLE</B>
+                                                </H3>
+                                            </td>
+                                            <td style="border: 1px solid #efefef ;border-top: 0px solid #c0c0c0; border-left: 1px solid #c0c0c0;border-right: 1px solid #c0c0c0; background-color:#efefef;">
+                                                <H3>
+                                                    <B>CALIFICACIÓN</B>
+                                                </H3>
+                                            </td>
+                                            <td style="border: 1px solid #efefef ;border-top: 0px solid #c0c0c0;border-left: 1px solid #fff; background-color:#efefef;">
+                                                <H3>
+                                                    <B>PLAZO</B>
+                                                </H3>
+                                            </td>
+                                            <td style="border: 1px solid #efefef ;border-top: 0px solid #c0c0c0; border-left: 1px solid #fff;border-right: 1px solid #c0c0c0; background-color:#efefef;">
+                                                <H3>
+                                                    <B>RIESGO</B>
+                                                </H3>
+                                            </td>
+                                            <td style="border: 1px solid #efefef ;border-top: 0px solid #c0c0c0;border-left: 1px solid #fff;border-right: 1px solid #fff; background-color:#efefef;">
+                                                <H3>
+                                                    <B>OPORTUNIDAD</B>
+                                                </H3>
+                                            </td>
+                                        </tr>
+                                        <tr style="border: 1px solid #efefef;">
+                                            <td colspan="6" style="text-size:bold;padding-left:5px;text-align:center;">
+                                                <h4 style="text-size:bold;padding-left:5px; color: gray; font-size:30px">
+                                                    <span>Factores internos (AMOFHIT)</span>
+                                                </h4>
+                                            </td>
+                                        </tr>
+                                        <t t-foreach="internal_factor" t-as="fun">
+                                            <tr style="border: 1px solid #efefef;">
+                                                <td colspan="6" style="text-size:bold;padding-left:5px;text-align:center; font-size:24px">
+                                                    <h3 style="text-size:bold;padding-left:5px;">
+                                                        <span t-field="fun[0].type_id.name"/>
+                                                    </h3>
+                                                </td>
+                                            </tr>
+                                            <t t-foreach="fun" t-as="o">
+                                                <tr style="border: 1px solid #efefef;">
+                                                    <td style="border: 1px solid #efefef; font-size:24px ;  border-left: 1px solid #fff;border-right: 1px solid #fff;">
+                                                        <center>
+                                                            <h5>
+                                                                <span t-field="o.name"/>
+                                                            </h5>
+                                                        </center>
+                                                    </td>
+                                                    <td style="border: 1px solid #efefef; font-size:24px">
+                                                        <center>
+                                                            <h5>
+                                                                <span t-field="o.details"/>
+                                                            </h5>
+                                                        </center>
+                                                    </td>
+                                                    <t t-if="o.calification == 'v_negative'">
+                                                        <td style="border: 1px solid #efefef;background-color:red; font-size:24px" bgcolor="#red">
+                                                            <center>
+                                                                <h5>
+                                                                    <span t-field="o.calification"/>
+                                                                </h5>
+                                                            </center>
+                                                        </td>
+                                                    </t>
+                                                    <t t-if="o.calification == 'negative'">
+                                                        <td style="border: 1px solid #efefef;background-color:orange; font-size:24px" bgcolor="#orange">
+                                                            <center>
+                                                                <h5>
+                                                                    <span t-field="o.calification"/>
+                                                                </h5>
+                                                            </center>
+                                                        </td>
+                                                    </t>
+                                                    <t t-if="o.calification == 'indifferent'">
+                                                        <td style="border: 1px solid #efefef;background-color:gray; font-size:24px" bgcolor="gray">
+                                                            <center>
+                                                                <h5>
+                                                                    <span t-field="o.calification"/>
+                                                                </h5>
+                                                            </center>
+                                                        </td>
+                                                    </t>
+                                                    <t t-if="o.calification == 'positive'">
+                                                        <td style="border: 1px solid #efefef;background-color:yellow; font-size:24px" bgcolor="yellow">
+                                                            <center>
+                                                                <h5>
+                                                                    <span t-field="o.calification"/>
+                                                                </h5>
+                                                            </center>
+                                                        </td>
+                                                    </t>
+                                                    <t t-if="o.calification == 'v_positive'">
+                                                        <td style="border: 1px solid #efefef;background-color:green; font-size:24px" bgcolor="green">
+                                                            <center>
+                                                                <h5>
+                                                                    <span t-field="o.calification"/>
+                                                                </h5>
+                                                            </center>
+                                                        </td>
+                                                    </t>
+                                                    <td style="border: 1px solid #efefef; font-size:24px ; border-left: 1px solid #fff;">
+                                                        <center>
+                                                            <h5>
+                                                                <span t-field="o.term"/>
+                                                            </h5>
+                                                        </center>
+                                                    </td>
+                                                    <td style="border: 1px solid #efefef; font-size:24px ;  border-left: 1px solid #fff;border-right: 1px solid #c0c0c0;">
+                                                        <center>
+                                                            <h5>
+                                                                <t t-foreach="o.risk_ids" t-as="r">
+                                                                    <span t-field="r.name" />
+                                                                    <br/>
+                                                                </t>
+                                                            </h5>
+                                                        </center>
+                                                    </td>
+                                                    <td style="border: 1px solid #efefef; font-size:24px ;border-left: 1px solid #fff;border-right: 1px solid #fff;">
+                                                        <center>
+                                                            <h5>
+                                                                <t t-foreach="o.opportunity_ids" t-as="opp">
+                                                                    <span t-field="opp.name" />
+                                                                    <br/>
+                                                                </t>
+                                                            </h5>
+                                                        </center>
+                                                    </td>
+                                                </tr>
+                                            </t>
+                                        </t>
+                                        <tr style="border: 1px solid #efefef;">
+                                            <td colspan="6" style="text-size:bold;padding-left:5px;text-align:center;">
+                                                <h4 style="text-size:bold;padding-left:5px; color: gray; font-size:30px">
+                                                    <span>Factores externos (PESTEL)</span>
+                                                </h4>
+                                            </td>
+                                        </tr>
+                                        <t t-foreach="external_factor" t-as="fun">
+                                            <tr style="border: 1px solid #efefef;">
+                                                <td colspan="6" style="text-size:bold;padding-left:5px;text-align:center; font-size:24px">
+                                                    <h3 style="text-size:bold;padding-left:5px;">
+                                                        <span t-field="fun[0].type_id.name"/>
+                                                    </h3>
+                                                </td>
+                                            </tr>
+                                            <t t-foreach="fun" t-as="o">
+                                                <tr style="border: 1px solid #efefef;">
+                                                    <td style="border: 1px solid #efefef; font-size:24px ;  border-left: 1px solid #fff;border-right: 1px solid #fff;">
+                                                        <center>
+                                                            <h5>
+                                                                <span t-field="o.name"/>
+                                                            </h5>
+                                                        </center>
+                                                    </td>
+                                                    <td style="border: 1px solid #efefef; font-size:24px">
+                                                        <center>
+                                                            <h5>
+                                                                <span t-field="o.details"/>
+                                                            </h5>
+                                                        </center>
+                                                    </td>
+                                                    <t t-if="o.calification == 'v_negative'">
+                                                        <td style="border: 1px solid #efefef;background-color:red; font-size:24px" bgcolor="#red">
+                                                            <center>
+                                                                <h5>
+                                                                    <span t-field="o.calification"/>
+                                                                </h5>
+                                                            </center>
+                                                        </td>
+                                                    </t>
+                                                    <t t-if="o.calification == 'negative'">
+                                                        <td style="border: 1px solid #efefef;background-color:orange; font-size:24px" bgcolor="#orange">
+                                                            <center>
+                                                                <h5>
+                                                                    <span t-field="o.calification"/>
+                                                                </h5>
+                                                            </center>
+                                                        </td>
+                                                    </t>
+                                                    <t t-if="o.calification == 'indifferent'">
+                                                        <td style="border: 1px solid #efefef;background-color:gray; font-size:24px" bgcolor="gray">
+                                                            <center>
+                                                                <h5>
+                                                                    <span t-field="o.calification"/>
+                                                                </h5>
+                                                            </center>
+                                                        </td>
+                                                    </t>
+                                                    <t t-if="o.calification == 'positive'">
+                                                        <td style="border: 1px solid #efefef;background-color:yellow; font-size:24px" bgcolor="yellow">
+                                                            <center>
+                                                                <h5>
+                                                                    <span t-field="o.calification"/>
+                                                                </h5>
+                                                            </center>
+                                                        </td>
+                                                    </t>
+                                                    <t t-if="o.calification == 'v_positive'">
+                                                        <td style="border: 1px solid #efefef;background-color:green; font-size:24px" bgcolor="green">
+                                                            <center>
+                                                                <h5>
+                                                                    <span t-field="o.calification"/>
+                                                                </h5>
+                                                            </center>
+                                                        </td>
+                                                    </t>
+                                                    <td style="border: 1px solid #efefef; font-size:24px; border-left: 1px solid #fff;">
+                                                        <center>
+                                                            <h5>
+                                                                <span t-field="o.term"/>
+                                                            </h5>
+                                                        </center>
+                                                    </td>
+                                                    <td style="border: 1px solid #efefef; font-size:24px ;  border-left: 1px solid #fff;border-right: 1px solid #c0c0c0;">
+                                                        <center>
+                                                            <h5>
+                                                                <t t-foreach="o.risk_ids" t-as="r">
+                                                                    <span t-field="r.name" />
+                                                                    <br/>
+                                                                </t>
+                                                            </h5>
+                                                        </center>
+                                                    </td>
+                                                    <td style="border: 1px solid #efefef; font-size:24px; border-left: 1px solid #fff;border-right: 1px solid #fff;">
+                                                        <center>
+                                                            <h5>
+                                                                <t t-foreach="o.opportunity_ids" t-as="opp">
+                                                                    <span t-field="opp.name" />
+                                                                    <br/>
+                                                                </t>
+                                                            </h5>
+                                                        </center>
+                                                    </td>
+                                                </tr>
+                                            </t>
+                                        </t>
+                                    </table>
+                                </center>
+                            </div>
+                        </div>
+                        <div class="footer" style="border-top: 1px solid black;font-size: 8px;">
+                            <div class="text-center" style="border-top: 1px solid black;font-size: 10px;text-align:center;">
+                                ©
+                                <span t-field="company.name"/>
+                                . All Rights Reserved.
+                                <br/>
+                                PROHIBIDA SU REPRODUCCIÓN SIN AUTORIZACIÓN EXPRESA DE LA DIRECCIÓN.
+                                <br/>
+                                CUALQUIER COPIA IMPRESA NO CONTROLADA. DEBE SER ROTULADA COMO "COPIA NO CONTROLADA".
+                                <br/>
+                                CONSULTE VERSIÓN ELECTRÓNICA
+                            </div>
+                        </div>
+                    </t>
+                </t>
+            </t>
+        </template>
+
+
+    </data>
+</odoo>

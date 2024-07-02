@@ -1,0 +1,43 @@
+<odoo>
+
+    <menuitem name="No conformidades"
+              id="menu_nonconformity_root"
+              web_icon="mgmtsystem_nonconformity,static/description/icon.png"
+              groups="mgmtsystem_nonconformity.group_nonconformity_onlyread,mgmtsystem_nonconformity.group_nonconformity_user_secundario,mgmtsystem_nonconformity.group_nonconformity_write_printreport"
+              sequence="18" />
+
+    <menuitem id="mgmtsystem_nonconformity"
+              name="No conformidades"
+              parent="menu_nonconformity_root"
+              sequence="10"
+              action="open_mgmtsystem_nonconformity_list" />
+
+    <!--Para hola_calidad -->
+    <!-- <menuitem
+        id="mgmtsystem_hc_nonconformity"
+        name="No conformidades"
+        parent="hola_calidad.menu_act_main"
+        sequence="30"
+        action="open_mgmtsystem_nonconformity_list"/> -->
+    <!--Para hola_calidad -->
+
+
+    <menuitem name="Reportes" id="menu_nonconformity_report" parent="menu_nonconformity_root" sequence="20" />
+
+    <menuitem id="report_excel_nc"
+              name="Reporte de No conformidades"
+              action="report_nc"
+              sequence="10"
+              parent="menu_nonconformity_report" />
+
+    <menuitem id="report_excel_nc_ac"
+              name="Reporte de No conformidades y acciones"
+              action="report_nc_ac"
+              sequence="100"
+              parent="menu_nonconformity_report" />
+
+    <menuitem name="Datos" id="menu_nonconformity_config" parent="menu_nonconformity_root" sequence="50" />
+
+    <menuitem id="menu_open_nonconformity_cause" action="open_mgmtsystem_nonconformity_cause_list" parent="menu_nonconformity_config" sequence="30" />
+
+</odoo>

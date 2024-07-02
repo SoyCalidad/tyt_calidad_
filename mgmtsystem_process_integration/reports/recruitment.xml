@@ -1,0 +1,89 @@
+<odoo>
+    <data>
+
+        <record id="applicant_wizard_view_form" model="ir.ui.view">
+            <field name="name">hr.applicant.report.wizard.view.form</field>
+            <field name="model">hr.applicant.report.wizard</field>
+            <field name="arch" type="xml">
+                <form string="">
+                    <sheet>
+                        <group>
+                            <field name="applicant_id"/>
+                        </group>
+                    </sheet>
+                    <footer>
+                        <button name="action_print" type="object" string="Descargar" class="oe_highlight" icon="fa-download"/>
+                    </footer>
+                </form>
+            </field>
+        </record>
+
+        <record id="action_report_applicant" model="ir.actions.act_window">
+            <field name="name">Solicitud de empleo</field>
+            <field name="type">ir.actions.act_window</field>
+            <field name="res_model">hr.applicant.report.wizard</field>
+            
+            <field name="view_mode">form</field>
+            <field name="view_id" ref="applicant_wizard_view_form"/>
+            <field name="target">new</field>
+            <field name="binding_type">report</field>
+        </record>
+
+
+        <menuitem id="applicant_report_menu" 
+        name="Solicitud de empleo" 
+        action="action_report_applicant" 
+        parent="hr_recruitment.report_hr_recruitment" 
+        sequence="10"/>
+
+
+
+
+        <record id="general_applicant_wizard_view_form" model="ir.ui.view">
+            <field name="name">hr.general.applicant.report.wizard.view.form</field>
+            <field name="model">hr.general.applicant.report.wizard</field>
+            <field name="arch" type="xml">
+                <form string="">
+                    <sheet>
+                        <group>
+                            <field name="applicant_ids"/>
+                        </group>
+                    </sheet>
+                    <footer>
+                        <button name="action_print" type="object" string="Descargar" class="oe_highlight" icon="fa-download"/>
+                    </footer>
+                </form>
+            </field>
+        </record>
+
+        <record id="action_report_general_applicant" model="ir.actions.act_window">
+            <field name="name">Solicitudes de empleo</field>
+            <field name="type">ir.actions.act_window</field>
+            <field name="res_model">hr.general.applicant.report.wizard</field>
+            
+            <field name="view_mode">form</field>
+            <field name="view_id" ref="general_applicant_wizard_view_form"/>
+            <field name="target">new</field>
+            <field name="binding_type">report</field>
+        </record>
+
+        <report
+            id="report_general_applicant"
+            model="hr.general.applicant.report.wizard"
+            string="Solicitudes de empleo"
+            report_type="xlsx"
+            name="mgmtsystem_process_integration.general_applicant_report"
+            file="Solicitudes de empleo"
+        />
+
+
+        <menuitem id="general_applicant_report_menu" 
+        name="Solicitudes de empleo" 
+        action="action_report_general_applicant" 
+        parent="hr_recruitment.report_hr_recruitment" 
+        sequence="10"/>
+
+
+
+    </data>
+</odoo>

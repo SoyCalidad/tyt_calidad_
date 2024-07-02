@@ -1,0 +1,73 @@
+<odoo>
+    <data>
+
+    <menuitem
+        id="target_root_menu"
+        web_icon="mgmtsystem_target,static/description/target.jpg"
+        name="Objetivos y Medición"
+        groups="group_target_onlyread,group_target_user_interno,group_target_write_printreport,group_target_all"
+        sequence="10"/>
+    
+    
+    <menuitem
+        id="target_main_menu"
+        name="Objetivos"
+        parent="target_root_menu"
+        sequence="7"/>
+    
+    <menuitem
+        id="target_menu"
+        name="Objetivos"
+        action="target_action"
+        parent="target_main_menu"
+        sequence="10"/>
+
+    
+     <menuitem
+        id="goal_menu"
+        name="Metas"
+        action="goal_action"
+        parent="target_main_menu"
+        sequence="11"/>
+
+            
+     <menuitem
+        id="indicator_menu"
+        name="Indicadores"
+        action="indicator_action_2"
+        parent="target_root_menu"
+        sequence="8"/>
+
+    <menuitem
+        id="mes_menu"
+        name="Historial de medición"
+        action="measurement_history_action"
+        parent="target_main_menu"
+        sequence="14"/>
+    
+    <menuitem
+        id="target_conf_menu"
+        name="Configuración"
+        parent="target_root_menu"
+        sequence="12"/>
+    
+     <menuitem
+        id="freq_menu"
+        name="Objetivos"
+        action="measurement_frequency_action"
+        parent="target_conf_menu"
+        sequence="10"/>
+    
+    <menuitem
+        id="report_root_menu"
+        name="Reportes"
+        parent="target_root_menu"
+        sequence="100"
+        groups= "base.group_no_one,group_target_user_interno,group_target_write_printreport,group_target_all"
+       />
+
+
+    
+
+    </data>
+</odoo>

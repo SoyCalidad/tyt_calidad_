@@ -1,0 +1,59 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <!-- ONBOARDING STEPS -->
+
+    <template id="onboarding_nonconformity_nonconformity_step">
+        <t t-call="base.onboarding_step">
+            <t t-set="title">No conformidades</t>
+            <t t-set="description">Cree un nuevo No conformidad.</t>
+            <t t-set="done_icon" t-value="'fa-star'" />
+            <t t-set="btn_text">Crear</t>
+            <t t-set="done_text">Se ve bien!</t>
+            <t t-set="method" t-value="'action_open_nonconformity_nonconformity'" />
+            <t t-set="model" t-value="'res.company'" />
+            <t t-set="state" t-value="state.get('nonconformity_nonconformity_onboarding_state')" />
+        </t>
+    </template>
+
+
+    <!-- ONBOARDING PANELS -->
+    <template id="nonconformity_onboarding_panel" name="nonconformity.onboarding.panel">
+        <t t-call="base.onboarding_container">
+            <t t-set="classes" t-value="'o_onboarding_blue'"/>
+            <t t-set="bg_image" t-value="'/account/static/src/img/account_invoice_onboarding_bg.jpg'"/>
+            <t t-set="close_method" t-value="'action_close_nonconformity_onboarding'"/>
+            <t t-set="close_model" t-value="'res.company'"/>
+            <t t-set="text_completed">Felicitaciones! Ha completado todo.</t>
+            <t t-call="mgmtsystem_nonconformity.onboarding_nonconformity_nonconformity_step" name="nonconformity_nonconformity_step" />
+        </t>
+    </template>
+
+    <!-- Views -->
+
+    <record id="onboarding_nonconformity_nonconformity_form" model="ir.ui.view">
+        <field name="name">mgmtsystem.nonconformity.inherit.view.form</field>
+        <field name="model">mgmtsystem.nonconformity</field>
+        <field name="inherit_id" ref="mgmtsystem_nonconformity.view_mgmtsystem_nonconformity_form"/>
+        <field name="priority">1000</field>
+<field name="mode">primary</field>
+<field name="arch" type="xml">
+            <form position="inside">
+                <footer position="replace">
+                    <button name="action_save_onboarding_nonconformity_nonconformity_step" class="btn btn-primary" type="object" string="Crear" />
+                    <button special="cancel" string="Cancelar" />
+                </footer>
+            </form>
+        </field>
+    </record>
+
+
+    <record id="action_nonconformity_nonconformity_configurator" model="ir.actions.act_window">
+        <field name="type">ir.actions.act_window</field>
+        <field name="name">Cree un nuevo No conformidad</field>
+        <field name="view_mode">form</field>
+        <field name="target">new</field>
+        <field name="res_model">mgmtsystem.nonconformity</field>
+        <field name="view_id" ref="mgmtsystem_nonconformity.onboarding_nonconformity_nonconformity_form"/>
+    </record>
+
+</odoo>

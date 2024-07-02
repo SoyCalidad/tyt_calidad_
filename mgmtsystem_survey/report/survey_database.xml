@@ -1,0 +1,158 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+
+    <record id="survey_database_view_form" model="ir.ui.view">
+        <field name="name">survey.survey.database_report.view.form</field>
+        <field name="model">survey.survey.database_report</field>
+        <field name="arch" type="xml">
+            <form string="Evaluación de proveedor">
+                <sheet>
+                    <group>
+                        <!-- Add your fields here -->
+                        <field name="start_date"/>
+                        <field name="end_date"/>
+                    </group>
+                    <footer>
+                        <button name="action_print" type="object" string="Descargar" class="oe_highlight" icon="fa-download"/>
+                    </footer>
+                </sheet>
+            </form>
+        </field>
+    </record>
+
+    <record id="survey_database_action" model="ir.actions.act_window">
+        <field name="name">Base de datos de encuestas</field>
+        <field name="type">ir.actions.act_window</field>
+        <field name="res_model">survey.survey.database_report</field>
+        <field name="view_mode">form</field>
+        <field name="target">new</field>
+        <field name="binding_type">report</field>
+    </record>
+
+    <menuitem
+        id="survey_database_report_menu"
+        name="Base de datos de encuestas"
+        parent="survey_report_menu"
+        action="survey_database_action"/>
+
+    <report
+        id="action_report_survey_database"
+        model="survey.survey.database_report"
+        string="Base de datos de encuestas"
+        report_type="qweb-pdf"
+        name="mgmtsystem_survey.report_survey_database"
+        file="Base de datos de encuestas"
+        />
+
+    <template id="report_survey_database">
+        <t t-call="web.html_container">
+            <t t-if="o and 'company_id' in o">
+                <t t-set="company" t-value="o.company_id" />
+            </t>
+            <t t-if="not o or not 'company_id' in o">
+                <t t-set="company" t-value="res_company" />
+            </t>
+            <div class="header">
+                <style type="text/css">
+                    .tg  {border-collapse:collapse;border-spacing:0;margin:0px auto;width:100%;}
+                    .tg td{border-color:black;border-style:solid;border-width:1px;font-family: Palatino, Palatino Linotype, Palatino LT STD, Book Antiqua, Georgia, serif;font-size:14px;
+                    overflow:hidden;padding:10px 5px;word-break:normal;text-align:middle;align:center;}
+                    .tg th{border-color:black;border-style:solid;border-width:1px;font-family: Palatino, Palatino Linotype, Palatino LT STD, Book Antiqua, Georgia, serif;font-size:14px;
+                    font-weight:normal;overflow:hidden;padding:10px 5px;word-break:normal;}
+                    .tg .tg-9wq8{border-color:inherit;text-align:center;vertical-align:middle}
+                    .tg .tg-1wig{border-color:inherit;text-align:center;vertical-align:middle;font-size:16px;font-weight:bold;}
+                    .tg .tg-0lax{border-color:inherit;text-align:center;vertical-align:middle;font-size:12px;}
+                </style>
+                <table class="tg">
+                    <tbody>
+                        <tr>
+                            <td class="tg-1wig" rowspan="2" width="20%" style="width:15%">
+                                <img t-if="company.logo" t-att-src="'data:image/png;base64,%s' % to_text(company.logo)" style="max-width:100px;max-height:100px;vertical-align:middle;" />
+                            </td>
+                            <td class="tg-1wig" rowspan="2" width="80%" style="width:65%;">
+                                <span style="font-size:18px;font-weight:bold;">BASE DE DATOS DE ENCUESTAS</span>
+                            </td>
+                            <td class="tg-0lax" width="20%" style="width:20%">
+                                Código:
+                            </td>
+                        </tr>
+                        <tr>
+                            <td class="tg-0lax">
+                                Fecha de impresión:
+                                <span t-esc="context_timestamp(datetime.datetime.now()).strftime('%d/%m/%Y %H:%M')"/>
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+            <t t-call="web.external_layout">
+                <div class="page">
+                    <div class="nav">
+                        <style type="text/css">
+                            .tg  {border-collapse:collapse;border-spacing:0;margin:0px auto;width:100%;}
+                            .tg td{border-color:black;border-style:solid;border-width:1px;font-family: Palatino, Palatino Linotype, Palatino LT STD, Book Antiqua, Georgia, serif;font-size:14px;
+                            overflow:hidden;padding:10px 5px;word-break:normal;}
+                            .tg th{border-color:black;border-style:solid;border-width:1px;font-family: Palatino, Palatino Linotype, Palatino LT STD, Book Antiqua, Georgia, serif;font-size:14px;
+                            font-weight:normal;overflow:hidden;padding:10px 5px;word-break:normal;}
+                            .tg .tg-d14o{background-color:#efefef;border-color:#c0c0c0;font-weight:bold;text-align:center;vertical-align:middle}
+                            .tg .tg-wo29{border-color:#c0c0c0;text-align:left;vertical-align:top}
+                            .tg .tg-fzdr{border-color:#c0c0c0;text-align:center;vertical-align:top}
+                        </style>
+                        <table class="tg">
+                            <tbody>
+                                <tr>
+                                    <td class="tg-d14o">NOMBRE</td>
+                                    <td class="tg-d14o">FECHA DE REALIZACIÓN</td>
+                                    <td class="tg-d14o">UNIDAD DE MUESTREO</td>
+                                    <td class="tg-d14o">MUESTREO</td>
+                                    <td class="tg-d14o">PÚBLICO OBJETIVO</td>
+                                    <td class="tg-d14o">POBLACIÓN TOTAL</td>
+                                    <td class="tg-d14o">SITIO DE ENCUESTA</td>
+                                </tr>
+                                <t t-foreach="surveys" t-as="li">
+                                    <tr>
+                                        <td class="tg-wo29">
+                                            <span t-field="li.title"/>
+                                        </td>
+                                        <td class="tg-wo29">
+                                            <span t-field="li.date_init"/>
+                                        </td>
+                                        <td class="tg-wo29">
+                                            <span t-field="li.sampling_unit"/>
+                                        </td>
+                                        <td class="tg-fzdr">
+                                            <span t-field="li.sampling"/>
+                                        </td>
+                                        <td class="tg-fzdr">
+                                            <span t-field="li.target_audiences"/>
+                                        </td>
+                                        <td class="tg-fzdr">
+                                            <span t-field="li.total_population"/>
+                                        </td>
+                                        <td class="tg-fzdr">
+                                            <span t-field="li.site"/>
+                                        </td>
+                                    </tr>
+                                </t>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+                <div class="footer" style="border-top: 1px solid black;font-size: 8px;">
+                    <div class="text-center" style="border-top: 1px solid black;font-size: 10px;text-align:center;">
+                        ©
+                        <span t-field="company.name"/>
+                        . All Rights Reserved.
+                        <br/>
+                        PROHIBIDA SU REPRODUCCIÓN SIN AUTORIZACIÓN EXPRESA DE LA DIRECCIÓN.
+                        <br/>
+                        CUALQUIER COPIA IMPRESA NO CONTROLADA. DEBE SER ROTULADA COMO "COPIA NO CONTROLADA".
+                        <br/>
+                        CONSULTE VERSIÓN ELECTRÓNICA
+                    </div>
+                </div>
+            </t>
+        </t>
+    </template>
+
+</odoo>

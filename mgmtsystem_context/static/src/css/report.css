@@ -1,0 +1,123 @@
+.apply_dimension {
+    width: 40%;
+    height: 100% !important;
+}
+
+h1 {
+    font-weight: 300;
+    font-size: 38px;
+    margin: 0px 0px 0px 0px;
+    line-height: 120%;
+    font-family: 'Open sans', sans-serif;
+}
+
+p {
+    font-family: 'Open sans', sans-serif;
+    font-size: 14px;
+}
+
+a {
+    color: #f20553;
+    text-decoration: none;
+}
+
+a:hover {
+    color: #D80649;
+    text-decoration: none;
+}
+
+/* Clearfix */
+
+.cf:before, .cf:after {
+    content: " ";
+    display: table;
+}
+
+.cf:after {
+    clear: both
+}
+
+blockquote {
+    padding: 30px 40px;
+    font-family: 'Bitter', serif;
+    font-size: 18px;
+    border-left: 5px solid #d0d0d0;
+    margin: 20px 40px;
+    color: #a9a9a9;
+}
+
+.post {
+    width: 800px;
+    margin: 100px auto;
+    background: #ffffff;
+    -webkit-box-shadow: 0px 0px 25px 10px #a9a9a9;
+    box-shadow: 0px 0px 25px 10px #a9a9a9;
+    border-radius: 3px;
+}
+
+.header-title {
+    padding: 40px 40px
+}
+
+.header-title h1 {
+    color: #111111
+}
+
+.date {
+    background: #f20553;
+    width: 70px;
+    height: 55px;
+    border-radius: 35px;
+    float: left;
+    margin: 10px 30px 0px 0px;
+    padding: 15px 0px 0px 0px;
+    color: #ffffff;
+    font-size: 24px;
+    font-weight: 900;
+    text-align: center;
+    line-height: 100%;
+    font-family: 'Open sans', sans-serif;
+}
+
+.date span {
+    font-size: 14px;
+    text-transform: uppercase;
+    font-weight: 400;
+    display: block;
+    color: #ffffff;
+}
+
+.post-content {
+    padding: 0px 40px 40px 40px;
+    line-height: 24px;
+}
+
+.post-meta {
+    background: #f7f7f7;
+    padding: 30px 40px 40px 40px;
+    clear: both;
+    border-top: 1px solid #d0d0d0;
+}
+
+.meta-field {
+    font-family: 'Open sans', sans-serif;
+    width: 200px;
+    float: left;
+    margin-right: 20px;
+    text-transform: uppercase;
+    color: #111111;
+    font-weight: 700;
+    font-size: 12px;
+}
+
+.meta-field span {
+    font-size: 10px;
+    font-weight: 400;
+    display: block;
+    color: #777777;
+    text-transform: uppercase;
+}
+
+.principal {
+    margin: 10px 20px;
+}

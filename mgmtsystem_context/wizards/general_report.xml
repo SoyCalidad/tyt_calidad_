@@ -1,0 +1,1264 @@
+<odoo>
+    <data>
+
+        <record id="report_context_general_view" model="ir.ui.view">
+            <field name="name">Reporte General de contexto</field>
+            <field name="model">wizard.general.report</field>
+            <field name="arch" type="xml">
+                <form>
+                    <group>
+                        <p>Imprima el reporte General de Contexto</p>
+                    </group>
+                    <footer>
+                        <button name="action_print" type="object" string="Descargar" class="oe_highlight" icon="fa-download"/>
+                    </footer>
+                </form>
+            </field>
+        </record>
+
+
+        <record id="action_report_general" model="ir.actions.act_window">
+            <field name="name">Contexto</field>
+            <field name="type">ir.actions.act_window</field>
+            <field name="res_model">wizard.general.report</field>
+
+            <field name="view_mode">form</field>
+            <field name="view_id" ref="report_context_general_view"/>
+            <field name="target">new</field>
+            <field name="binding_type">report</field>
+        </record>
+
+
+        <report id="report_general_pdf" model="wizard.general.report" string="Reporte General de Contexto" report_type="qweb-pdf" name="mgmtsystem_context.report_general_template_pdf" file="Reporte General de Contexto" />
+
+
+        <template id="report_general_template_pdf">
+            <t t-call="web.html_container">
+                <div class="header">
+                    <TABLE width="1300" height="70" style="height:80px;border: 1px solid black;" bgcolor="#EEEEEE">
+                        <tr>
+                            <td style="border: 1px solid black;padding-top: 35px;" width="20%" rowspan="3" align="center" valign="middle">
+                                <center>
+                                    <t t-if="company.logo">
+                                        <img t-att-src="image_data_uri(company.logo)" style="max-height:140;vertical-align:absmiddle;" alt="Logo"/>
+                                    </t>
+                                    <!--<img t-if="company.logo" t-att-src="'data:image/png;base64,%s' % to_text(company.logo)" style="max-height:140;vertical-align:absmiddle;" />-->
+                                </center>
+                            </td>
+                            <td style="border: 1px solid black; text-align:middle" width="80%" rowspan="3" align="center" valign="middle">
+                                <center>
+                                    <h2>CONTEXTO DE LA ORGANIZACIÓN</h2>
+                                </center>
+                            </td>
+                        </tr>
+                    </TABLE>
+                </div>
+                <t t-call="web.external_layout">
+                    <t t-if="internal_issue">
+                        <div class="internal_issue" style="page-break-after: always;">
+                            <style type="text/css">
+                                .tg  {border-collapse:collapse;border-spacing:0;}
+                                .tg td{font-family: Palatino, Palatino Linotype, Palatino LT STD, Book Antiqua, Georgia, serif;font-size:14px;padding:10px 5px;border-style:solid;border-width:1px;overflow:hidden;word-break:normal;border-color:black;}
+                                .tg th{font-family: Palatino, Palatino Linotype, Palatino LT STD, Book Antiqua, Georgia, serif;font-size:14px;font-weight:normal;padding:10px 5px;border-style:solid;border-width:1px;overflow:hidden;word-break:normal;border-color:black;}
+                                .tg .tg-zv36{font-weight:bold;background-color:#ffffff;border-color:inherit;text-align:left;vertical-align:top}
+                                .tg .tg-nrix{text-align:center;vertical-align:middle;font-weight: bold;border-style: none;font-size:25px;}
+                                .tg .tg-rq3n{background-color:#ffffff;text-align:center;vertical-align:middle;border-style: none;font-size:20px;}
+                                .tg .tg-7g6k{font-weight:bold;background-color:#ffffff;border-color:inherit;text-align:center;vertical-align:top}
+                                .tg .tg-3xi5{background-color:#ffffff;border-color:inherit;text-align:center;vertical-align:top}
+                            </style>
+                            <t t-foreach="internal_issue" t-as="o">
+                                <div class="page" style="font-family: Palatino, Palatino Linotype, Palatino LT STD, Book Antiqua, Georgia, serif; font-size:14px;">
+                                    <style type="text/css">
+                                        .tg  {border-collapse:collapse;border-spacing:0;}
+                                        .tg td{font-family: Palatino, Palatino Linotype, Palatino LT STD, Book Antiqua, Georgia, serif;font-size:14px;padding:10px 5px;border-style:solid;border-width:1px;overflow:hidden;word-break:normal;border-color:black;}
+                                        .tg th{font-family: Palatino, Palatino Linotype, Palatino LT STD, Book Antiqua, Georgia, serif;font-size:14px;font-weight:normal;padding:10px 5px;border-style:solid;border-width:1px;overflow:hidden;word-break:normal;border-color:black;}
+                                        .tg .tg-zv36{font-weight:bold;background-color:#ffffff;border-color:inherit;text-align:left;vertical-align:top}
+                                        .tg .tg-nrix{text-align:center;vertical-align:middle;font-weight: bold;border-style: none;font-size:25px;}
+                                        .tg .tg-rq3n{background-color:#ffffff;text-align:center;vertical-align:middle;border-style: none;font-size:20px;}
+                                        .tg .tg-7g6k{font-weight:bold;background-color:#ffffff;border-color:inherit;text-align:center;vertical-align:top}
+                                        .tg .tg-3xi5{background-color:#ffffff;border-color:inherit;text-align:center;vertical-align:top}
+                                    </style>
+                                    <div class="cover" style="page-break-after: always;font-size: 18px;">
+                                        <center>
+                                            <table class="tg" width="100%">
+
+                                                <tr>
+                                                    <td class="tg-nrix" colspan="3"/>
+                                                </tr>
+                                                <tr>
+                                                    <td class="tg-nrix" colspan="3"/>
+                                                </tr>
+                                                <tr>
+                                                    <td class="tg-nrix" colspan="3">
+                                                        <span t-field="company.name"/>
+                                                    </td>
+                                                </tr>
+                                                <tr>
+                                                    <td class="tg-nrix" colspan="3"/>
+                                                </tr>
+                                                <tr>
+                                                    <td class="tg-nrix" colspan="3"/>
+                                                </tr>
+                                                <tr>
+                                                    <td class="tg-rq3n" colspan="3"/>
+                                                </tr>
+                                                <tr>
+                                                    <td class="tg-7g6k">NOMBRE</td>
+                                                    <td class="tg-3xi5" colspan="2">
+                                                        <t t-if="o.state=='cancel'">OBSOLETO</t>
+                                                        <span t-field="o.name"/>
+                                                    </td>
+                                                </tr>
+                                                <tr>
+                                                    <td class="tg-7g6k">VERSIÓN</td>
+                                                    <td class="tg-3xi5" colspan="2">
+                                                        <span t-field="o.version"/>
+                                                    </td>
+                                                </tr>
+                                                <tr>
+                                                    <td class="tg-7g6k">FECHA DE ELABORACIÓN</td>
+                                                    <td class="tg-3xi5" colspan="2">
+                                                         <t t-foreach="o.elaboration_step" t-as="step">
+                                       <span t-field="step.date"/>
+                                       <br/>
+                                    </t>
+                                                    </td>
+                                                </tr>
+                                                <tr>
+                                                    <td class="tg-7g6k">ELABORADO POR</td>
+                                                    <td class="tg-3xi5" colspan="2">
+                                                        <t t-foreach="o.elaboration_step" t-as="user">
+                                                            <span t-field="user.user_id.partner_id.name" />
+                                                            <br/>
+                                                        </t>
+                                                    </td>
+                                                </tr>
+                                                <tr>
+                                                    <td class="tg-7g6k">
+                                                        Actualizado por:
+                                                        <t t-foreach="o.elaboration_step" t-as="user">
+                                                            <span t-field="user.user_id.partner_id.name" />
+                                                            <br/>
+                                                        </t>
+                                                    </td>
+                                                    <td class="tg-7g6k">
+                                                        Revisado por:
+                                                        <span t-field="o.review_step[0].name"/>
+                                                    </td>
+                                                    <td class="tg-7g6k">
+                                                        Aprobado por:
+                                                        <span t-field="o.validation_step[0].name"/>
+                                                    </td>
+                                                </tr>
+                                                <tr>
+                                                    <td class="tg-zv36" style="display:block;width:33%;">
+                                                        Firma:
+                                                        <span t-if="o.state=='validate_ok'" t-field="o.elaboration_step[0].signature"/>
+                                                    </td>
+                                                    <td class="tg-zv36" style="display:block;width:33%;">
+                                                        Firma:
+                                                        <span t-if="o.state=='validate_ok'" t-field="o.review_step[0].signature"/>
+                                                    </td>
+                                                    <td class="tg-zv36" style="display:block;width:33%;">
+                                                        Firma:
+                                                        <span t-if="o.state=='validate_ok'" t-field="o.validation_step[0].signature"/>
+                                                    </td>
+                                                </tr>
+                                                <tr>
+                                                    <td class="tg-3xi5">
+                                                        <span t-field="o.elaboration_step[0].partner_id.function"/>
+                                                    </td>
+                                                    <td class="tg-3xi5">
+                                                        <span t-field="o.review_step[0].partner_id.function"/>
+                                                    </td>
+                                                    <td class="tg-3xi5">
+                                                        <span t-field="o.validation_step[0].partner_id.function"/>
+                                                    </td>
+                                                </tr>
+                                                <tr>
+                                                    <td class="tg-zv36" style="display:block;width:33%;">
+                                                        Fecha:
+                                                         <t t-foreach="o.elaboration_step" t-as="step">
+                                       <span t-field="step.date"/>
+                                       <br/>
+                                    </t>
+                                                    </td>
+                                                    <td class="tg-zv36" style="display:block;width:33%;">
+                                                        Fecha:
+                                                        <t t-foreach="o.review_step" t-as="step">
+                                                <span t-field="step.date"/>
+                                                <br/>
+                                            </t>
+                                                    </td>
+                                                    <td class="tg-zv36" style="display:block;width:33%;">
+                                                        Fecha:
+                                                        <t t-foreach="o.validation_step" t-as="step">
+                                                <span t-field="step.date"/>
+                                                <br/>
+                                            </t>
+                                                    </td>
+                                                </tr>
+                                            </table>
+                                        </center>
+
+                                        <br/>
+                                        <br/>
+                                    </div>
+
+                                    <div class="g123">
+                                        <style type="text/css">
+                                            .g123 {font-family: Palatino, Palatino Linotype, Palatino LT STD, Book Antiqua, Georgia, serif;font-size:14px;}
+                                        </style>
+                                        <span>
+                                            <strong>Nombre</strong>
+                                        </span>
+                                        <br/>
+                                        <br/>
+                                        <span t-field="o.name" />
+                                        <br/>
+                                        <br/>
+                                        <span>
+                                            <strong>Proceso</strong>
+                                        </span>
+                                        <br/>
+                                        <br/>
+                                        <span t-field="o.process_id.name" />
+                                        <br/>
+                                        <br/>
+                                        <span>
+                                            <strong>Misión</strong>
+                                        </span>
+                                        <br/>
+                                        <br/>
+                                        <span t-field="o.mission" />
+                                        <br/>
+                                        <br/>
+                                        <span>
+                                            <strong>Visión</strong>
+                                        </span>
+                                        <br/>
+                                        <br/>
+                                        <span t-field="o.vision" />
+                                        <br/>
+                                        <br/>
+                                        <span>
+                                            <strong>Alcance</strong>
+                                        </span>
+                                        <br/>
+                                        <br/>
+                                        <span t-field="o.scope" />
+                                        <br/>
+                                        <br/>
+                                        <span>
+                                            <strong>Valores</strong>
+                                        </span>
+                                        <br/>
+                                        <br/>
+                                        <t t-foreach="o.morals" t-as="m">
+                                            <ul>
+                                                <li>
+                                                    <span t-field="m.name" />
+                                                </li>
+
+                                            </ul>
+                                        </t>
+                                        <br/>
+                                        <br/>
+                                        <span>
+                                            <strong>Política de Calidad</strong>
+                                        </span>
+                                        <br/>
+                                        <br/>
+                                        <span t-field="o.quality_policy" />
+                                        <br/>
+                                        <br/>
+                                        <span>
+                                            <strong>Productos y servicios</strong>
+                                        </span>
+                                        <br/>
+                                        <br/>
+                                        <t t-foreach="o.product_ids" t-as="p">
+                                            <ul style="list-style-type:square;">
+                                                <li>
+                                                    <span t-field="p.name" />
+                                                </li>
+                                            </ul>
+                                        </t>
+                                    </div>
+                                </div>
+                            </t>
+                        </div>
+                    </t>
+
+                    <t t-if="swot_id">
+                        <div class="swot" style="page-break-after: always;">
+                            <t t-foreach="swot_id" t-as="o">
+                                <div class="page" style="font-family: Palatino, Palatino Linotype, Palatino LT STD, Book Antiqua, Georgia, serif; font-size:14px;">
+                                    <div class="cover" style="page-break-after: always;font-size: 18px;">
+                                        <center>
+                                            <table class="tg" width="100%">
+                                                <tr>
+                                                    <th class="tg-nrix" style="text-align:center;vertical-align:middle;font-weight: bold;border-style: none;font-size:25px;" colspan="3">
+                                                        <span>MATRIZ FODA</span>
+                                                    </th>
+                                                </tr>
+                                                <tr>
+                                                    <td class="tg-nrix" style="text-align:center;vertical-align:middle;font-weight: bold;border-style: none;font-size:25px;" colspan="3"/>
+                                                </tr>
+                                                <tr>
+                                                    <td class="tg-nrix" style="text-align:center;vertical-align:middle;font-weight: bold;border-style: none;font-size:25px;" colspan="3"/>
+                                                </tr>
+                                                <tr>
+                                                    <td class="tg-nrix" style="text-align:center;vertical-align:middle;font-weight: bold;border-style: none;font-size:25px;" colspan="3">
+                                                        <span t-field="company.name"/>
+                                                    </td>
+                                                </tr>
+                                                <tr>
+                                                    <td class="tg-nrix" style="text-align:center;vertical-align:middle;font-weight: bold;border-style: none;font-size:25px;" colspan="3"/>
+                                                </tr>
+                                                <tr>
+                                                    <td class="tg-nrix" style="text-align:center;vertical-align:middle;font-weight: bold;border-style: none;font-size:25px;" colspan="3"/>
+                                                </tr>
+                                                <tr>
+                                                    <td class="tg-rq3n" style="background-color:#ffffff;text-align:center;vertical-align:middle;border-style: none;font-size:20px;" colspan="3"/>
+                                                </tr>
+                                                <tr>
+                                                    <td class="tg-7g6k" style="font-weight:bold;background-color:#ffffff;border-color:inherit;text-align:center;vertical-align:top">Nombre</td>
+                                                    <td class="tg-3xi5" colspan="2">
+                                                        <span t-field="o.name"/>
+                                                    </td>
+                                                </tr>
+                                                <tr>
+                                                    <td class="tg-7g6k" style="font-weight:bold;background-color:#ffffff;border-color:inherit;text-align:center;vertical-align:top">Versión</td>
+                                                    <td class="tg-3xi5" colspan="2">
+                                                        <span t-field="o.version"/>
+                                                    </td>
+                                                </tr>
+                                                <tr>
+                                                    <td class="tg-7g6k" style="font-weight:bold;background-color:#ffffff;border-color:inherit;text-align:center;vertical-align:top">Fecha de elaboración</td>
+                                                    <td class="tg-3xi5" colspan="2">
+                                                         <t t-foreach="o.elaboration_step" t-as="step">
+                                       <span t-field="step.date"/>
+                                       <br/>
+                                    </t>
+                                                    </td>
+                                                </tr>
+                                                <tr>
+                                                    <td class="tg-7g6k" style="font-weight:bold;background-color:#ffffff;border-color:inherit;text-align:center;vertical-align:top">Elaborado por</td>
+                                                    <td class="tg-3xi5" colspan="2">
+                                                        <t t-foreach="o.elaboration_step" t-as="user">
+                                                            <span t-field="user.user_id.partner_id.name" />
+                                                            <br/>
+                                                        </t>
+                                                    </td>
+                                                </tr>
+                                                <tr>
+                                                    <td class="tg-7g6k" style="font-weight:bold;background-color:#ffffff;border-color:inherit;text-align:center;vertical-align:top">
+                                                        Actualizado por:
+                                                        <t t-foreach="o.elaboration_step" t-as="user">
+                                                            <span t-field="user.user_id.partner_id.name" />
+                                                            <br/>
+                                                        </t>
+                                                    </td>
+                                                    <td class="tg-7g6k" style="font-weight:bold;background-color:#ffffff;border-color:inherit;text-align:center;vertical-align:top">
+                                                        Revisado por:
+                                                        <span t-field="o.review_step[0].name"/>
+                                                    </td>
+                                                    <td class="tg-7g6k" style="font-weight:bold;background-color:#ffffff;border-color:inherit;text-align:center;vertical-align:top">
+                                                        Aprobado por:
+                                                        <span t-field="o.validation_step[0].name"/>
+                                                    </td>
+                                                </tr>
+                                                <tr>
+                                                    <td class="tg-zv36" style="background-color:#ffffff;border-color:inherit;text-align:center;vertical-align:top">
+                                                        Firma:
+                                                        <span t-field="o.elaboration_step[0].signature"/>
+                                                    </td>
+                                                    <td class="tg-zv36" style="background-color:#ffffff;border-color:inherit;text-align:center;vertical-align:top">
+                                                        Firma:
+                                                        <span t-field="o.review_step[0].signature"/>
+                                                    </td>
+                                                    <td class="tg-zv36" style="background-color:#ffffff;border-color:inherit;text-align:center;vertical-align:top">
+                                                        Firma:
+                                                        <span t-field="o.validation_step[0].signature"/>
+                                                    </td>
+                                                </tr>
+                                                <tr>
+                                                    <td class="tg-3xi5">
+                                                        <span t-field="o.elaboration_step[0].partner_id.function"/>
+                                                    </td>
+                                                    <td class="tg-3xi5">
+                                                        <span t-field="o.review_step[0].partner_id.function"/>
+                                                    </td>
+                                                    <td class="tg-3xi5">
+                                                        <span t-field="o.validation_step[0].partner_id.function"/>
+                                                    </td>
+                                                </tr>
+                                                <tr>
+                                                    <td class="tg-zv36" style="display:block;width:33%;">
+                                                        Fecha:
+                                                         <t t-foreach="o.elaboration_step" t-as="step">
+                                       <span t-field="step.date"/>
+                                       <br/>
+                                    </t>
+                                                    </td>
+                                                    <td class="tg-zv36" style="display:block;width:33%;">
+                                                        Fecha:
+                                                        <t t-foreach="o.review_step" t-as="step">
+                                                <span t-field="step.date"/>
+                                                <br/>
+                                            </t>
+                                                    </td>
+                                                    <td class="tg-zv36" style="display:block;width:33%;">
+                                                        Fecha:
+                                                        <t t-foreach="o.validation_step" t-as="step">
+                                                <span t-field="step.date"/>
+                                                <br/>
+                                            </t>
+                                                    </td>
+                                                </tr>
+                                            </table>
+                                        </center>
+
+                                        <br/>
+                                        <br/>
+                                    </div>
+
+                                    <br/>
+                                    <br/>
+
+                                    <div>
+                                        <center>
+                                            <table class="tg" border="1" width="100%">
+                                                <tr style="font-weight:bold;text-align: center;font-size:14px;background-color: #EEEEEE" bgcolor="#EEEEEE">
+                                                    <th class="tg-wa1i" colspan="2" width="70%">
+                                                        <b>Factores Internos</b>
+                                                    </th>
+                                                    <th class="tg-9cqb" width="10%">
+                                                        <b>Peso</b>
+                                                    </th>
+                                                    <th class="tg-9cqb" width="10%">
+                                                        <b>Calificación</b>
+                                                    </th>
+                                                    <th class="tg-9cqb" width="10%">
+                                                        <b>
+                                                            Calificación
+                                                            <br/>
+                                                            Ponderada
+                                                        </b>
+                                                    </th>
+                                                </tr>
+                                                <tr bgcolor="#EEEEEE" style="font-weight:bold;text-align: center;font-size:14px;background-color: #EEEEEE">
+                                                    <td class="tg-wa1i" colspan="2">
+                                                        <b>Fortalezas</b>
+                                                    </td>
+                                                    <td class="tg-wa1i">50%</td>
+                                                    <td class="tg-cly1" colspan="2"/>
+                                                </tr>
+                                                <t t-foreach="o.fortalezas" t-as="f">
+                                                    <tr>
+                                                        <td class="tg-0lax">
+                                                        </td>
+                                                        <td class="tg-0lax">
+                                                            <span t-field="f.name" />
+                                                        </td>
+                                                        <td class="tg-0lax">
+                                                            <span t-field="f.weight" />
+                                                        </td>
+                                                        <td class="tg-0lax">
+                                                            <span t-field="f.rating" />
+                                                        </td>
+                                                        <td class="tg-0lax">
+                                                            <span t-field="f.weighted_rating" />
+                                                        </td>
+                                                    </tr>
+                                                </t>
+                                                <tr style="font-weight:bold;text-align: center;font-size:14px;background-color: #EEEEEE" bgcolor="#EEEEEE">
+                                                    <td class="tg-wa1i" colspan="2">
+                                                        <b>Debilidades</b>
+                                                    </td>
+                                                    <td class="tg-wa1i">50%</td>
+                                                    <td class="tg-cly1" colspan="2"/>
+                                                </tr>
+                                                <t t-foreach="o.debilidades" t-as="f">
+                                                    <tr>
+                                                        <td class="tg-0lax">
+                                                        </td>
+                                                        <td class="tg-0lax">
+                                                            <span t-field="f.name" />
+                                                        </td>
+                                                        <td class="tg-0lax">
+                                                            <span t-field="f.weight" />
+                                                        </td>
+                                                        <td class="tg-0lax">
+                                                            <span t-field="f.rating" />
+                                                        </td>
+                                                        <td class="tg-0lax">
+                                                            <span t-field="f.weighted_rating" />
+                                                        </td>
+                                                    </tr>
+                                                </t>
+                                                <tr bgcolor="#EEEEEE" style="font-weight:bold;text-align: center;font-size:14px;background-color: #EEEEEE">
+                                                    <td class="tg-0lax">
+                                                    </td>
+                                                    <td class="tg-0lax">
+                                                    </td>
+                                                    <td class="tg-0lax">
+                                                        <t t-esc="sum(l.weight for l in o.fortalezas) + sum(l.weight for l in o.debilidades)" />
+                                                    </td>
+                                                    <td class="tg-0lax">
+                                                    </td>
+                                                    <td class="tg-0lax">
+                                                        <t t-esc="sum(l.weighted_rating for l in o.fortalezas) + sum(l.weighted_rating for l in o.debilidades)"/>
+                                                    </td>
+                                                </tr>
+                                            </table>
+                                        </center>
+                                    </div>
+
+                                    <br/>
+                                    <br/>
+
+                                    <div>
+                                        <center>
+                                            <table class="tg" border="1" width="100%" style="page-break-inside: avoid;">
+                                                <tr style="font-weight:bold;text-align: center;font-size:14px;background-color:#EEEEEE" bgcolor="#EEEEEE">
+                                                    <th class="tg-wa1i" colspan="2" width="70%">
+                                                        <b>Factores externos</b>
+                                                    </th>
+                                                    <th class="tg-9cqb" width="10%">
+                                                        <b>Peso</b>
+                                                    </th>
+                                                    <th class="tg-9cqb" width="10%">
+                                                        <b>Calificación</b>
+                                                    </th>
+                                                    <th class="tg-9cqb" width="10%">
+                                                        <b>
+                                                            Calificación
+                                                            <br/>
+                                                            Ponderada
+                                                        </b>
+                                                    </th>
+                                                </tr>
+                                                <tr style="font-weight:bold;text-align:center;font-size:14px;background-color: #EEEEEE" bgcolor="#EEEEEE">
+                                                    <td class="tg-wa1i" colspan="2">
+                                                        <b>Oportunidades</b>
+                                                    </td>
+                                                    <td class="tg-wa1i">50%</td>
+                                                    <td class="tg-cly1" colspan="2"/>
+                                                </tr>
+                                                <t t-foreach="o.oportunidades" t-as="f">
+                                                    <tr>
+                                                        <td class="tg-0lax">
+                                                        </td>
+                                                        <td class="tg-0lax">
+                                                            <span t-field="f.name" />
+                                                        </td>
+                                                        <td class="tg-0lax">
+                                                            <span t-field="f.weight" />
+                                                        </td>
+                                                        <td class="tg-0lax">
+                                                            <span t-field="f.rating" />
+                                                        </td>
+                                                        <td class="tg-0lax">
+                                                            <span t-field="f.weighted_rating" />
+                                                        </td>
+                                                    </tr>
+                                                </t>
+                                                <tr style="font-weight:bold;text-align: center;font-size:14px;background-color: #EEEEEE" bgcolor="#EEEEEE">
+                                                    <td class="tg-wa1i" colspan="2">
+                                                        <b>Amenazas</b>
+                                                    </td>
+                                                    <td class="tg-wa1i">50%</td>
+                                                    <td class="tg-cly1" colspan="2"/>
+                                                </tr>
+                                                <t t-foreach="o.amenazas" t-as="f">
+                                                    <tr>
+                                                        <td class="tg-0lax">
+                                                        </td>
+                                                        <td class="tg-0lax">
+                                                            <span t-field="f.name" />
+                                                        </td>
+                                                        <td class="tg-0lax">
+                                                            <span t-field="f.weight" />
+                                                        </td>
+                                                        <td class="tg-0lax">
+                                                            <span t-field="f.rating" />
+                                                        </td>
+                                                        <td class="tg-0lax">
+                                                            <span t-field="f.weighted_rating" />
+                                                        </td>
+                                                    </tr>
+                                                </t>
+                                                <tr bgcolor="#EEEEEE" style="font-weight:bold;text-align: center;font-size:14px;background-color: #EEEEEE">
+                                                    <td class="tg-0lax">
+                                                    </td>
+                                                    <td class="tg-0lax">
+                                                    </td>
+                                                    <td class="tg-0lax">
+                                                        <t t-esc="sum(l.weight for l in o.oportunidades) + sum(l.weight for l in o.amenazas)" />
+                                                    </td>
+                                                    <td class="tg-0lax">
+                                                    </td>
+                                                    <td class="tg-0lax">
+                                                        <t t-esc="sum(l.weighted_rating for l in o.oportunidades) + sum(l.weighted_rating for l in o.amenazas)"/>
+                                                    </td>
+                                                </tr>
+                                            </table>
+                                        </center>
+                                    </div>
+                                </div>
+                            </t>
+                        </div>
+                    </t>
+
+                    <t t-if="external_issue_id">
+                        <div class="external_issue" style="page-break-after: always;">
+                            <t t-foreach="external_issue_id" t-as="doc">
+                                <div class="page" style="font-family: Palatino, Palatino Linotype, Palatino LT STD, Book Antiqua, Georgia, serif; font-size:14px;">
+                                    <div class="cover" style="page-break-after: always;font-size: 18px;">
+                                        <center>
+                                            <table class="tg" width="100%" style="text-align:center;">
+                                                <tr>
+                                                    <th class="tg-nrix" colspan="3">
+                                                        <span>ANÁLISIS DE PORTER</span>
+                                                    </th>
+                                                </tr>
+                                                <tr>
+                                                    <td class="tg-nrix" colspan="3"/>
+                                                </tr>
+                                                <tr>
+                                                    <td class="tg-nrix" colspan="3"/>
+                                                </tr>
+                                                <tr>
+                                                    <td class="tg-nrix" colspan="3">
+                                                        <span t-field="company.name"/>
+                                                    </td>
+                                                </tr>
+                                                <tr>
+                                                    <td class="tg-nrix" colspan="3"/>
+                                                </tr>
+                                                <tr>
+                                                    <td class="tg-nrix" colspan="3"/>
+                                                </tr>
+                                                <tr>
+                                                    <td class="tg-rq3n" colspan="3"/>
+                                                </tr>
+                                                <tr>
+                                                    <td class="tg-7g6k">NOMBRE</td>
+                                                    <td class="tg-3xi5" colspan="2">
+                                                        <span t-field="doc.name"/>
+                                                    </td>
+                                                </tr>
+                                                <tr>
+                                                    <td class="tg-7g6k">VERSIÓN</td>
+                                                    <td class="tg-3xi5" colspan="2">
+                                                        <span t-field="doc.version"/>
+                                                    </td>
+                                                </tr>
+                                                <tr>
+                                                    <td class="tg-7g6k">FECHA DE ELABORACIÓN</td>
+                                                    <td class="tg-3xi5" colspan="2">
+                                                        <t t-foreach="o.elaboration_step" t-as="step">
+                                       <span t-field="step.date"/><br/>
+                                    </t>
+                                                    </td>
+                                                </tr>
+                                                <tr>
+                                                    <td class="tg-7g6k">ELABORADO POR</td>
+                                                    <td class="tg-3xi5" colspan="2">
+                                                        <span t-field="doc.elaboration_step[0].name"/>
+                                                    </td>
+                                                </tr>
+                                                <tr>
+                                                    <td class="tg-7g6k">
+                                                        Actualizado por:
+                                                        <span t-field="doc.elaboration_step[0].name"/>
+                                                    </td>
+                                                    <td class="tg-7g6k">
+                                                        Revisado por:
+                                                        <span t-field="doc.review_step[0].name"/>
+                                                    </td>
+                                                    <td class="tg-7g6k">
+                                                        Aprobado por:
+                                                        <span t-field="doc.validation_step[0].name"/>
+                                                    </td>
+                                                </tr>
+                                                <tr>
+                                                    <td class="tg-zv36" style="display:block;width:33%;">
+                                                        Firma:
+                                                        <span t-field="doc.elaboration_step[0].signature"/>
+                                                    </td>
+                                                    <td class="tg-zv36" style="display:block;width:33%;">
+                                                        Firma:
+                                                        <span t-field="doc.review_step[0].signature"/>
+                                                    </td>
+                                                    <td class="tg-zv36" style="display:block;width:33%;">
+                                                        Firma:
+                                                        <span t-field="doc.validation_step[0].signature"/>
+                                                    </td>
+                                                </tr>
+                                                <tr>
+                                                    <td class="tg-3xi5">
+                                                        <span t-field="doc.elaboration_step[0].partner_id.function"/>
+                                                    </td>
+                                                    <td class="tg-3xi5">
+                                                        <span t-field="doc.review_step[0].partner_id.function"/>
+                                                    </td>
+                                                    <td class="tg-3xi5">
+                                                        <span t-field="doc.validation_step[0].partner_id.function"/>
+                                                    </td>
+                                                </tr>
+                                                <tr>
+                                                    <td class="tg-zv36" style="display:block;width:33%;">
+                                                        Fecha:
+                                                        <t t-foreach="o.elaboration_step" t-as="step">
+                                       <span t-field="step.date"/><br/>
+                                    </t>
+                                                    </td>
+                                                    <td class="tg-zv36" style="display:block;width:33%;">
+                                                        Fecha:
+                                                        <t t-foreach="doc.review_step" t-as="step">
+                                                <span t-field="step.date"/>
+                                                <br/>
+                                            </t>
+                                                    </td>
+                                                    <td class="tg-zv36" style="display:block;width:33%;">
+                                                        Fecha:
+                                                        <t t-foreach="doc.validation_step" t-as="step">
+                                                <span t-field="step.date"/>
+                                                <br/>
+                                            </t>
+                                                    </td>
+                                                </tr>
+                                            </table>
+                                        </center>
+
+                                        <br/>
+                                        <br/>
+                                    </div>
+                                    <div class="table">
+                                        <style type="text/css">
+                                            .tg  {border-collapse:collapse;border-spacing:0;}
+                                            .tg td{font-family: Palatino, Palatino Linotype, Palatino LT STD, Book Antiqua, Georgia, serif;font-size:14px;padding:10px 5px;border-style:solid;border-width:1px;overflow:hidden;word-break:normal;border-color:black;}
+                                            .tg th{font-family: Palatino, Palatino Linotype, Palatino LT STD, Book Antiqua, Georgia, serif;font-size:14px;font-weight:normal;padding:10px 5px;border-style:solid;border-width:1px;overflow:hidden;word-break:normal;border-color:black;}
+                                            .tg .tg-zv36{font-weight:bold;background-color:#ffffff;border-color:inherit;text-align:left;vertical-align:top}
+                                            .tg .tg-nrix{text-align:center;vertical-align:middle;font-weight: bold;border-style: none;font-size:25px;}
+                                            .tg .tg-rq3n{background-color:#ffffff;text-align:center;vertical-align:middle;border-style: none;font-size:20px;}
+                                            .tg .tg-7g6k{font-weight:bold;background-color:#ffffff;border-color:inherit;text-align:center;vertical-align:top}
+                                            .tg .tg-3xi5{background-color:#ffffff;border-color:inherit;text-align:center;vertical-align:top}
+                                        </style>
+                                        <div class="table_headers">
+                                            <center>
+                                                <table border="1" style="border: 1px solid black;width: 100%;font-size: 14 px; text-align: center;vertical-align:middle;border-color:inherit;" align="center" valign="middle" width="700" height="70">
+                                                    <tr align="center" valign="middle">
+                                                        <td bgcolor="#7393D3">
+                                                            <H4>
+                                                                <b>FUERZA</b>
+                                                            </H4>
+                                                        </td>
+                                                        <b/>
+                                                        <td bgcolor="#7393D3">
+                                                            <H4>
+                                                                <B>ANÁLISIS</B>
+                                                            </H4>
+                                                        </td>
+                                                        <td bgcolor="#7393D3">
+                                                            <H4>
+                                                                <B>PUNT.</B>
+                                                            </H4>
+                                                        </td>
+                                                    </tr>
+                                                    <t t-foreach="doc.forces" t-as="f">
+                                                        <tr align="center" valign="middle">
+                                                            <td>
+                                                                <h5>
+                                                                    <span t-field="f.context_force.name" />
+                                                                </h5>
+                                                            </td>
+                                                            <td>
+                                                                <h5>
+                                                                    <span t-field="f.description" />
+                                                                </h5>
+                                                            </td>
+                                                            <td>
+                                                                <h5>
+                                                                    <span t-field="f.relevance" />
+                                                                </h5>
+                                                            </td>
+                                                        </tr>
+                                                    </t>
+                                                </table>
+                                            </center>
+                                        </div>
+                                    </div>
+                                </div>
+                            </t>
+                        </div>
+                    </t>
+
+                    <t t-if="stakeholder_id">
+                        <div class="stakeholder" style="page-break-after: always;">
+                            <t t-foreach="stakeholder_id" t-as="s">
+                                <div class="page">
+                                    <style type="text/css">
+                                        .tg  {border-collapse:collapse;border-spacing:0;}
+                                        .tg td{font-family: Palatino, Palatino Linotype, Palatino LT STD, Book Antiqua, Georgia, serif;font-size:14px;padding:10px 5px;border-style:solid;border-width:1px;overflow:hidden;word-break:normal;border-color:black;}
+                                        .tg th{font-family: Palatino, Palatino Linotype, Palatino LT STD, Book Antiqua, Georgia, serif;font-size:14px;font-weight:normal;padding:10px 5px;border-style:solid;border-width:1px;overflow:hidden;word-break:normal;border-color:black;}
+                                        .tg .tg-zv36{font-weight:bold;background-color:#ffffff;border-color:inherit;text-align:left;vertical-align:top}
+                                        .tg .tg-nrix{text-align:center;vertical-align:middle;font-weight: bold;border-style: none;font-size:25px;}
+                                        .tg .tg-rq3n{background-color:#ffffff;text-align:center;vertical-align:middle;border-style: none;font-size:20px;}
+                                        .tg .tg-7g6k{font-weight:bold;background-color:#ffffff;border-color:inherit;text-align:center;vertical-align:top}
+                                        .tg .tg-3xi5{background-color:#ffffff;border-color:inherit;text-align:center;vertical-align:top}
+                                    </style>
+                                    <div class="cover" style="page-break-after: always;">
+                                        <center>
+                                            <table class="tg" width="75%">
+                                                <tr>
+                                                    <td class="tg-nrix" colspan="3"/>
+                                                </tr>
+                                                <tr>
+                                                    <td class="tg-nrix" colspan="3"/>
+                                                </tr>
+                                                <tr>
+                                                    <td class="tg-nrix" colspan="3">
+                                                        <span t-field="company.name"/>
+                                                    </td>
+                                                </tr>
+                                                <tr>
+                                                    <td class="tg-nrix" colspan="3"/>
+                                                </tr>
+                                                <tr>
+                                                    <td class="tg-nrix" colspan="3"/>
+                                                </tr>
+                                                <tr>
+                                                    <td class="tg-rq3n" colspan="3"/>
+                                                </tr>
+                                                <tr>
+                                                    <td class="tg-7g6k">NOMBRE</td>
+                                                    <td class="tg-3xi5" colspan="2">
+                                                        <span t-field="s.name"/>
+                                                    </td>
+                                                </tr>
+                                                <tr>
+                                                    <td class="tg-7g6k">VERSIÓN</td>
+                                                    <td class="tg-3xi5" colspan="2">
+                                                        <span t-field="s.version"/>
+                                                    </td>
+                                                </tr>
+                                                <tr>
+                                                    <td class="tg-7g6k">FECHA DE ELABORACIÓN</td>
+                                                    <td class="tg-3xi5" colspan="2">
+                                                        <span t-field="o.date_elaborate"/>
+                                                    </td>
+                                                </tr>
+                                                <tr>
+                                                    <td class="tg-7g6k">ELABORADO POR</td>
+                                                    <td class="tg-3xi5" colspan="2">
+                                                        <span t-field="s.elaboration_step[0].name"/>
+                                                    </td>
+                                                </tr>
+                                                <tr>
+                                                    <td class="tg-7g6k">
+                                                        Actualizado por:
+                                                        <br/>
+                                                        <t t-foreach="s.elaboration_step" t-as="user">
+                                                            <span t-field="user.user_id.partner_id.name" />
+                                                            <br/>
+                                                        </t>
+                                                    </td>
+                                                    <td class="tg-7g6k">
+                                                        Revisado por:
+                                                        <br/>
+                                                        <t t-foreach="s.review_step" t-as="user">
+                                                            <span t-field="user.user_id.partner_id.name" />
+                                                            <br/>
+                                                        </t>
+                                                    </td>
+                                                    <td class="tg-7g6k">
+                                                        Aprobado por:
+                                                        <br/>
+                                                        <t t-foreach="s.validation_step" t-as="user">
+                                                            <span t-field="user.user_id.partner_id.name" />
+                                                            <br/>
+                                                        </t>
+                                                    </td>
+                                                </tr>
+                                                <tr>
+                                                    <td class="tg-zv36" style="display:block;width:33%;">
+                                                        Firma:
+                                                        <br/>
+                                                        <t t-foreach="s.elaboration_step" t-as="user">
+                                                            <span t-if="user.state=='validate_ok'" t-raw="user.user_id.signature" style="display:block;"/>
+                                                            <br/>
+                                                        </t>
+                                                    </td>
+                                                    <td class="tg-zv36" style="display:block;width:33%;">
+                                                        Firma:
+                                                        <br/>
+                                                        <t t-foreach="s.review_step" t-as="user">
+                                                            <span t-if="user.state=='validate_ok'" t-raw="user.user_id.signature" style="display:block;"/>
+                                                            <br/>
+                                                        </t>
+                                                    </td>
+                                                    <td class="tg-zv36" style="display:block;width:33%;">
+                                                        Firma:
+                                                        <br/>
+                                                        <t t-foreach="s.validation_step" t-as="user">
+                                                            <span t-if="user.state=='validate_ok'" t-raw="user.user_id.signature" style="display:block;"/>
+                                                            <br/>
+                                                        </t>
+                                                    </td>
+                                                </tr>
+                                                <tr>
+                                                    <td class="tg-3xi5">
+                                                        <t t-foreach="s.elaboration_step" t-as="user">
+                                                            <t t-foreach="user.user_id.employee_ids" t-as="emp">
+                                                                <span t-field="emp.job_id.name" />
+                                                                <br/>
+                                                            </t>
+                                                            <br/>
+                                                        </t>
+                                                    </td>
+                                                    <td class="tg-3xi5">
+                                                        <t t-foreach="s.review_step" t-as="user">
+                                                            <t t-foreach="user.user_id.employee_ids" t-as="emp">
+                                                                <span t-field="emp.job_id.name" />
+                                                                <br/>
+                                                            </t>
+                                                            <br/>
+                                                        </t>
+                                                    </td>
+                                                    <td class="tg-3xi5">
+                                                        <t t-foreach="s.validation_step" t-as="user">
+                                                            <t t-foreach="user.user_id.employee_ids" t-as="emp">
+                                                                <span t-field="emp.job_id.name" />
+                                                                <br/>
+                                                            </t>
+                                                            <br/>
+                                                        </t>
+                                                    </td>
+                                                </tr>
+                                                <tr>
+                                                    <td class="tg-zv36" style="display:block;width:33%;">
+                                                        Fecha:
+                                                        <span t-field="o.date_elaborate"/>
+                                                    </td>
+                                                    <td class="tg-zv36" style="display:block;width:33%;">
+                                                        Fecha:
+                                                        <t t-foreach="o.review_step" t-as="step">
+                                                <span t-field="step.date"/>
+                                                <br/>
+                                            </t>
+                                                    </td>
+                                                    <td class="tg-zv36" style="display:block;width:33%;">
+                                                        Fecha:
+                                                        <t t-foreach="o.validation_step" t-as="step">
+                                                <span t-field="step.date"/>
+                                                <br/>
+                                            </t>
+                                                    </td>
+                                                </tr>
+                                            </table>
+                                        </center>
+                                        <br/>
+                                        <br/>
+                                    </div>
+                                    <div class="main_table">
+                                        <center>
+                                            <table style="border: 1px solid black;  vertical-align: middle;" align="center" valign="middle" width="1300" height="70">
+                                                <tr align="center" valign="middle" style="border: 1px solid black;">
+                                                    <td style="border: 1px solid black;">
+                                                        <H4>
+                                                            <b>N°</b>
+                                                        </H4>
+                                                    </td>
+                                                    <b/>
+                                                    <td style="border: 1px solid black;">
+                                                        <H4>
+                                                            <B>PARTE INTERESADA</B>
+                                                        </H4>
+                                                    </td>
+                                                    <td style="border: 1px solid black;">
+                                                        <H4>
+                                                            <B>TIPO</B>
+                                                        </H4>
+                                                    </td>
+                                                    <td style="border: 1px solid black;">
+                                                        <H4>
+                                                            <B>REQUISITOS</B>
+                                                        </H4>
+                                                    </td>
+                                                    <td style="border: 1px solid black;">
+                                                        <H4>
+                                                            <B>PODER</B>
+                                                        </H4>
+                                                    </td>
+                                                    <td style="border: 1px solid black;">
+                                                        <H4>
+                                                            <B>INTERES</B>
+                                                        </H4>
+                                                    </td>
+                                                    <td style="border: 1px solid black;">
+                                                        <H4>
+                                                            <B>NIVEL DE PERTENENCIA</B>
+                                                        </H4>
+                                                    </td>
+                                                    <td style="border: 1px solid black;">
+                                                        <H4>
+                                                            <B>CALIFICACIÓN</B>
+                                                        </H4>
+                                                    </td>
+                                                    <td style="border: 1px solid black;">
+                                                        <H4>
+                                                            <B>RIESGO</B>
+                                                        </H4>
+                                                    </td>
+                                                    <td style="border: 1px solid black;">
+                                                        <H4>
+                                                            <B>OPORTUNIDAD</B>
+                                                        </H4>
+                                                    </td>
+                                                </tr>
+                                                <tr>
+                                                    <td style="font-size:18px;font-color:#4173AF;font-family:Verdana;font-weight:bold;padding-left:1em;" colspan="10">
+                                                        Interesados internos
+                                                    </td>
+                                                </tr>
+                                                <t t-foreach="s.stakeholder_in_ids" t-as="fun">
+                                                    <tr style="border: 1px solid black;">
+                                                        <td style="border: 1px solid black;">
+                                                            <center>
+                                                                <h5>
+                                                                    <span t-field="fun.id" />
+                                                                </h5>
+                                                            </center>
+                                                        </td>
+                                                        <td style="border: 1px solid black;">
+                                                            <center>
+                                                                <h5>
+                                                                    <span t-field="fun.name" />
+                                                                </h5>
+                                                            </center>
+                                                        </td>
+                                                        <td style="border: 1px solid black;">
+                                                            <center>
+                                                                <h5>
+                                                                    <span t-field="fun.type" />
+                                                                </h5>
+                                                            </center>
+                                                        </td>
+                                                        <td style="border: 1px solid black;">
+                                                            <center>
+                                                                <h5>
+                                                                    <t t-foreach="fun.requirements" t-as="req">
+                                                                        <span t-field="req.name" />
+                                                                        <br/>
+                                                                    </t>
+                                                                </h5>
+                                                            </center>
+                                                        </td>
+                                                        <td style="border: 1px solid black;">
+                                                            <center>
+                                                                <h5>
+                                                                    <span t-field="fun.power" />
+                                                                </h5>
+                                                            </center>
+                                                        </td>
+                                                        <td style="border: 1px solid black;">
+                                                            <center>
+                                                                <h5>
+                                                                    <span t-field="fun.interest" />
+                                                                </h5>
+                                                            </center>
+                                                        </td>
+                                                        <td style="border: 1px solid black;">
+                                                            <center>
+                                                                <h5>
+                                                                    <span t-field="fun.membership" />
+                                                                </h5>
+                                                            </center>
+                                                        </td>
+                                                        <t t-if="fun.calification == 'low'">
+                                                            <td style="border: 1px solid black;background-color:#008000;" bgcolor="#008000">
+                                                                <center>
+                                                                    <h5>
+                                                                        <span t-field="fun.calification" />
+                                                                    </h5>
+                                                                </center>
+                                                            </td>
+                                                        </t>
+                                                        <t t-if="fun.calification == 'medium'">
+                                                            <td style="border: 1px solid black;background-color:#FFFF00;" bgcolor="#FFFF00">
+                                                                <center>
+                                                                    <h5>
+                                                                        <span t-field="fun.calification" />
+                                                                    </h5>
+                                                                </center>
+                                                            </td>
+                                                        </t>
+                                                        <t t-if="fun.calification == 'high'">
+                                                            <td style="border: 1px solid black;background-color:#FF0000;" bgcolor="#FF0000">
+                                                                <center>
+                                                                    <h5>
+                                                                        <span t-field="fun.calification" />
+                                                                    </h5>
+                                                                </center>
+                                                            </td>
+                                                        </t>
+                                                        <td style="border: 1px solid black;">
+                                                            <center>
+                                                                <h5>
+                                                                    <t t-foreach="fun.risk_ids" t-as="r">
+                                                                        <span t-field="r.name" />
+                                                                        <br/>
+                                                                    </t>
+                                                                </h5>
+                                                            </center>
+                                                        </td>
+                                                        <td style="border: 1px solid black;">
+                                                            <center>
+                                                                <h5>
+                                                                    <t t-foreach="fun.opportunity_ids" t-as="opp">
+                                                                        <span t-field="opp.name" />
+                                                                        <br/>
+                                                                    </t>
+                                                                </h5>
+                                                            </center>
+                                                        </td>
+                                                    </tr>
+                                                </t>
+                                                <tr>
+                                                    <td style="font-size:18px;font-color:#4173AF;font-family:Verdana;font-weight:bold;padding-left:1em;" colspan="10">
+                                                        Interesados externos
+                                                    </td>
+                                                </tr>
+                                                <t t-foreach="s.stakeholder_out_ids" t-as="fun">
+                                                    <tr style="border: 1px solid black;">
+                                                        <td style="border: 1px solid black;">
+                                                            <center>
+                                                                <h5>
+                                                                    <span t-field="fun.id" />
+                                                                </h5>
+                                                            </center>
+                                                        </td>
+                                                        <td style="border: 1px solid black;">
+                                                            <center>
+                                                                <h5>
+                                                                    <span t-field="fun.name" />
+                                                                </h5>
+                                                            </center>
+                                                        </td>
+                                                        <td style="border: 1px solid black;">
+                                                            <center>
+                                                                <h5>
+                                                                    <span t-field="fun.type" />
+                                                                </h5>
+                                                            </center>
+                                                        </td>
+                                                        <td style="border: 1px solid black;">
+                                                            <center>
+                                                                <h5>
+                                                                    <t t-foreach="fun.requirements" t-as="req">
+                                                                        <span t-field="req.name" />
+                                                                        <br/>
+                                                                    </t>
+                                                                </h5>
+                                                            </center>
+                                                        </td>
+                                                        <td style="border: 1px solid black;">
+                                                            <center>
+                                                                <h5>
+                                                                    <span t-field="fun.power" />
+                                                                </h5>
+                                                            </center>
+                                                        </td>
+                                                        <td style="border: 1px solid black;">
+                                                            <center>
+                                                                <h5>
+                                                                    <span t-field="fun.interest" />
+                                                                </h5>
+                                                            </center>
+                                                        </td>
+                                                        <td style="border: 1px solid black;">
+                                                            <center>
+                                                                <h5>
+                                                                    <span t-field="fun.membership" />
+                                                                </h5>
+                                                            </center>
+                                                        </td>
+                                                        <t t-if="fun.calification == 'low'">
+                                                            <td style="border: 1px solid black;background-color:#008000;" bgcolor="#008000">
+                                                                <center>
+                                                                    <h5>
+                                                                        <span t-field="fun.calification" />
+                                                                    </h5>
+                                                                </center>
+                                                            </td>
+                                                        </t>
+                                                        <t t-if="fun.calification == 'medium'">
+                                                            <td style="border: 1px solid black;background-color:#FFFF00;" bgcolor="#FFFF00">
+                                                                <center>
+                                                                    <h5>
+                                                                        <span t-field="fun.calification" />
+                                                                    </h5>
+                                                                </center>
+                                                            </td>
+                                                        </t>
+                                                        <t t-if="fun.calification == 'high'">
+                                                            <td style="border: 1px solid black;background-color:#FF0000;" bgcolor="#FF0000">
+                                                                <center>
+                                                                    <h5>
+                                                                        <span t-field="fun.calification" />
+                                                                    </h5>
+                                                                </center>
+                                                            </td>
+                                                        </t>
+                                                        <td style="border: 1px solid black;">
+                                                            <center>
+                                                                <h5>
+                                                                    <t t-foreach="fun.risk_ids" t-as="r">
+                                                                        <span t-field="r.name" />
+                                                                        <br/>
+                                                                    </t>
+                                                                </h5>
+                                                            </center>
+                                                        </td>
+                                                        <td style="border: 1px solid black;">
+                                                            <center>
+                                                                <h5>
+                                                                    <t t-foreach="fun.opportunity_ids" t-as="opp">
+                                                                        <span t-field="opp.name" />
+                                                                        <br/>
+                                                                    </t>
+                                                                </h5>
+                                                            </center>
+                                                        </td>
+                                                    </tr>
+                                                </t>
+                                            </table>
+                                        </center>
+                                    </div>
+                                </div>
+                            </t>
+                        </div>
+                        <div class="footer" style="border-top: 1px solid black;font-size: 8px;">
+                            <div class="text-center" style="border-top: 1px solid black;font-size: 10px;text-align:center;">
+                                ©
+                                <span t-field="company.name"/>
+                                . All Rights Reserved.
+                                <br/>
+                                PROHIBIDA SU REPRODUCCIÓN SIN AUTORIZACIÓN EXPRESA DE LA DIRECCIÓN.
+                                <br/>
+                                CUALQUIER COPIA IMPRESA NO CONTROLADA. DEBE SER ROTULADA COMO "COPIA NO CONTROLADA".
+                                <br/>
+                                CONSULTE VERSIÓN ELECTRÓNICA
+                            </div>
+                        </div>
+                    </t>
+                </t>
+            </t>
+        </template>
+
+    </data>
+</odoo>

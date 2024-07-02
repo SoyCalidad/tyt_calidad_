@@ -1,0 +1,260 @@
+<odoo>
+    <data>
+        <record id="initial_evaluation_item_view_form" model="ir.ui.view">
+            <field name="name">evaluation.initial_evaluation.item.view.form</field>
+            <field name="model">evaluation.initial_evaluation.item</field>
+            <field name="arch" type="xml">
+                <form string="Criterio de evaluación">
+                    <sheet>
+                        <group>
+                            <field name="name" />
+                        </group>
+                    </sheet>
+                </form>
+            </field>
+        </record>
+        <record id="initial_evaluation_item_view_tree" model="ir.ui.view">
+            <field name="name">evaluation.initial_evaluation.item.view.tree</field>
+            <field name="model">evaluation.initial_evaluation.item</field>
+            <field name="arch" type="xml">
+                <tree string="Criterio de evaluación">
+                    <field name="name" />
+                </tree>
+            </field>
+        </record>
+        <record id="initial_evaluation_item_action" model="ir.actions.act_window">
+            <field name="name">Criterio de evaluación</field>
+            <field name="res_model">evaluation.initial_evaluation.item</field>
+            <field name="view_mode">tree,form</field>
+            <field name="domain">[]</field>
+            <field name="context">{}</field>
+        </record>
+        <record id="initial_evaluation_view_form" model="ir.ui.view">
+            <field name="name">evaluation.initial_evaluation.view.form</field>
+            <field name="model">evaluation.initial_evaluation</field>
+            <field name="arch" type="xml">
+                <form string="Evaluación">
+                    <header>
+                        <field name="state" widget="statusbar" statusbar_visible="elaborate,review,validate,validate_ok,on_track,closed" />
+                        <button string="Enviar a Elaborar"
+                                name="send_elaborate"
+                                type="object"
+                                class="btn-primary"
+                                attrs="{'invisible':[('state','not in', ('review'))]}" />
+                        <button string="Enviar a Revisar"
+                                name="send_review"
+                                type="object"
+                                class="btn-primary"
+                                attrs="{'invisible':[('state','not in', ('elaborate'))]}" />
+                        <button string="Enviar a Validar"
+                                name="send_validate"
+                                type="object"
+                                class="btn-primary"
+                                attrs="{'invisible':[('state','not in', ('review'))]}" />
+                        <button string="Validar"
+                                name="send_validate_ok"
+                                type="object"
+                                class="btn-primary"
+                                attrs="{'invisible':[('state','not in', ('validate'))]}" />
+                        <button string="Volver Obsoleto"
+                                confirm="Esto volverá obsoleto el presente registro. ¿Está seguro(a)?"
+                                name="send_cancel"
+                                type="object"
+                                class="btn-second"
+                                attrs="{'invisible': [('state','in',('cancel'))] }" />
+                        <button name="button_new_version"
+                                type="object"
+                                string="Nueva versión"
+                                attrs="{'invisible':[('state', '!=', 'validate_ok')]}"
+                                class="oe_highlight" />
+                    </header>
+                    <sheet>
+                        <div class="oe_button_box" name="button_box">
+                            <button type="object"
+                                    name="action_open_older_versions"
+                                    class="oe_stat_button"
+                                    icon="fa-archive"
+                                    style="white-space: nowrap;"
+                                    string="Versiones antiguas" />
+                        </div>
+                        <div class="oe_title">
+                            <label for="name" />
+                            <h2>
+                                <field name="name" attrs="{'readonly': [('state','in',('validate_ok'))] }" />
+                            </h2>
+                        </div>
+                        <group>
+                            <field name="final_criteria" />
+                        </group>
+                        <notebook>
+                            <page name="criteria" string="Criterios">
+                                <group>
+                                    <separator string="Criterios" colspan="2" />
+                                    <field name="item_ids" nolabel="1" attrs="{'readonly': [('state','in',('validate_ok'))] }" />
+                                </group>
+                            </page>
+                            <page name="validation" string="Validación y Versión">
+                                <group>
+                                    <group colspan="4">
+                                        <field name="version" />
+                                    </group>
+                                    <group colspan="4">
+                                        <separator string="Elaboración" />
+                                        <field name="elaboration_step" colspan="2" nolabel="1" attrs="{'readonly': [('state','not in',('elaborate'))]}" />
+                                        <separator string="Revisión" />
+                                        <field name="review_step" colspan="2" nolabel="1" attrs="{'readonly': [('state','not in',('elaborate', 'review'))]}" />
+                                        <separator string="Validación" />
+                                        <field name="validation_step" colspan="2" nolabel="1" attrs="{'readonly': [('state','not in',('elaborate', 'review', 'validate'))]}" />
+                                    </group>
+                                    <group colspan="4">
+                                        <field name="date_elaborate" attrs="{'required': [('state','in',('elaborate'))], 'readonly': True}" />
+                                        <field name="date_review" attrs="{'required': [('state','in',('review'))], 'readonly': True, 'invisible': [('state','in',('elaborate'))] }" />
+                                        <field name="date_validate" groups="base.group_no_one,base.user_admin" attrs="{'invisible': [('state','in',('elaborate','review'))] }" />
+                                    </group>
+                                </group>
+                            </page>
+                        </notebook>
+                    </sheet>
+                    <div class="oe_chatter">
+                        <field name="message_follower_ids" widget="mail_followers" />
+                        <field name="activity_ids" widget="mail_activity" />
+                        <field name="message_ids" widget="mail_thread" />
+                    </div>
+                </form>
+            </field>
+        </record>
+        <record id="initial_evaluation_view_tree" model="ir.ui.view">
+            <field name="name">evaluation.initial_evaluation.view.tree</field>
+            <field name="model">evaluation.initial_evaluation</field>
+            <field name="arch" type="xml">
+                <tree string="Evaluación">
+                    <field name="name" />
+                    <field name="item_ids" />
+                </tree>
+            </field>
+        </record>
+        <record id="initial_evaluation_action" model="ir.actions.act_window">
+            <field name="name">Evaluación inicial</field>
+            <field name="res_model">evaluation.initial_evaluation</field>
+            <field name="view_mode">tree,form</field>
+            <field name="domain">[]</field>
+            <field name="context">{}</field>
+        </record>
+        <record id="partner_initial_evaluation_item_view_form" model="ir.ui.view">
+            <field name="name">res.partner.initial_evaluation.item.view.form</field>
+            <field name="model">res.partner.initial_evaluation.item</field>
+            <field name="arch" type="xml">
+                <form string="Evaluación">
+                    <sheet>
+                        <group>
+                            <field name="name" />
+                            <field name="yes" />
+                            <field name="no" />
+                        </group>
+                    </sheet>
+                </form>
+            </field>
+        </record>
+        <record id="partner_initial_evaluation_item_view_tree" model="ir.ui.view">
+            <field name="name">res.partner.initial_evaluation.item.view.tree</field>
+            <field name="model">res.partner.initial_evaluation.item</field>
+            <field name="arch" type="xml">
+                <tree string="Evaluación">
+                    <field name="name" />
+                    <field name="yes" />
+                    <field name="no" />
+                </tree>
+            </field>
+        </record>
+        <record id="partner_initial_evaluation_item_action" model="ir.actions.act_window">
+            <field name="name">Evaluación</field>
+            <field name="res_model">res.partner.initial_evaluation.item</field>
+            <field name="view_mode">tree,form</field>
+            <field name="domain">[]</field>
+            <field name="context">{}</field>
+        </record>
+        <record id="partner_initial_evaluation_view_form" model="ir.ui.view">
+            <field name="name">res.partner.initial_evaluation.view.form</field>
+            <field name="model">res.partner.initial_evaluation</field>
+            <field name="arch" type="xml">
+                <form string="">
+                    <sheet>
+                        <group>
+                            <field name="initial_evaluation_id" />
+                            <field name="initial_evaluation_date" />
+                            <field name="employee_id" />
+                            <field name="final_criteria" />
+                        </group>
+                        <group>
+                            <field name="item_ids">
+                                <tree editable="bottom">
+                                    <field name="name" />
+                                    <field name="yes" />
+                                    <field name="no" />
+                                </tree>
+                            </field>
+                        </group>
+                        <group>
+                            <field name="observations" />
+                        </group>
+                        <group col="5">
+                            <strong>Aprobado</strong>
+                            <field name="select_yes" />
+                            <field name="select_no" />
+                        </group>
+                    </sheet>
+                </form>
+            </field>
+        </record>
+        <record id="partner_initial_evaluation_view_tree" model="ir.ui.view">
+            <field name="name">res.partner.initial_evaluation.view.tree</field>
+            <field name="model">res.partner.initial_evaluation</field>
+            <field name="arch" type="xml">
+                <tree string="">
+                    <field name="initial_evaluation_id" />
+                    <field name="partner_id" />
+                    <field name="initial_evaluation_date" />
+                    <field name="employee_id" />
+                    <button string="Descargar evaluación" type="object" class="btn-primary" name="print_evaluation" />
+                </tree>
+            </field>
+        </record>
+        <record id="partner_initial_evaluation_action" model="ir.actions.act_window">
+            <field name="name">Listado de evaluaciones iniciales</field>
+            <field name="res_model">res.partner.initial_evaluation</field>
+            <field name="view_mode">tree,form</field>
+            <field name="domain">[]</field>
+            <field name="context">{}</field>
+        </record>
+        <!-- <record id="res_partner_initial_evaluation_form" model="ir.ui.view">
+            <field name="name">res.partner.view.form.inherit</field>
+            <field name="model">res.partner</field>
+            <field name="inherit_id" ref="base.view_partner_form" />
+            <field name="arch" type="xml">
+                <page name="evaluation_history" position="after">
+                    <page name="initial_evaluation" string="Evaluación inicial">
+                        <group>
+                            <field name="current_initial_evaluation_id" />
+                        </group>
+                        <field name="initial_evaluation_ids" />
+                    </page>
+                    <page name="products" string="Productos y servicios">
+                        <field name="product_ids" />
+                    </page>
+                </page>
+            </field>
+        </record> -->
+        <menuitem id="initial_evaluation_menu"
+                  name="Evaluación inicial"
+                  sequence="-2"
+                  parent="menu_partner_qualification"
+                  action="initial_evaluation_action" />
+                  
+        <menuitem id="partner_initial_evaluation_menu"
+                  name="Listado de evaluaciones iniciales"
+                  sequence="-1"
+                  parent="menu_partner_qualification"
+                  action="partner_initial_evaluation_action" />
+
+    </data>
+</odoo>

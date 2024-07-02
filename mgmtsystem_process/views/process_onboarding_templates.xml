@@ -1,0 +1,181 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <!-- ONBOARDING STEPS -->
+
+    <template id="onboarding_process_categ_type_step">
+        <t t-call="base.onboarding_step">
+            <t t-set="title">Tipos de categoría de proceso</t>
+            <t t-set="description">Cree una nueva categoría de proceso.</t>
+            <t t-set="done_icon" t-value="'fa-star'" />
+            <t t-set="btn_text">Crear</t>
+            <t t-set="done_text">Se ve bien!</t>
+            <t t-set="method" t-value="'action_open_process_categ_type'" />
+            <t t-set="model" t-value="'res.company'" />
+            <t t-set="state" t-value="state.get('process_categ_type_onboarding_state')" />
+        </t>
+    </template>
+
+    <template id="onboarding_process_categ_step">
+        <t t-call="base.onboarding_step">
+            <t t-set="title">Categorías de proceso</t>
+            <t t-set="description">Cree una nueva categoría de proceso.</t>
+            <t t-set="done_icon" t-value="'fa-star'" />
+            <t t-set="btn_text">Crear</t>
+            <t t-set="done_text">Se ve bien!</t>
+            <t t-set="method" t-value="'action_open_process_categ'" />
+            <t t-set="model" t-value="'res.company'" />
+            <t t-set="state" t-value="state.get('process_categ_onboarding_state')" />
+        </t>
+    </template>
+
+    <template id="onboarding_process_process_step">
+        <t t-call="base.onboarding_step">
+            <t t-set="title">Procedimiento</t>
+            <t t-set="description">Cree un nuevo procedimiento.</t>
+            <t t-set="done_icon" t-value="'fa-star'" />
+            <t t-set="btn_text">Crear</t>
+            <t t-set="done_text">Se ve bien!</t>
+            <t t-set="method" t-value="'action_open_process_process'" />
+            <t t-set="model" t-value="'res.company'" />
+            <t t-set="state" t-value="state.get('process_process_onboarding_state')" />
+        </t>
+    </template>
+
+    <template id="onboarding_process_edition_step">
+        <t t-call="base.onboarding_step">
+            <t t-set="title">Edición de procedimiento</t>
+            <t t-set="description">Cree una edición de procedimiento.</t>
+            <t t-set="done_icon" t-value="'fa-star'" />
+            <t t-set="btn_text">Crear</t>
+            <t t-set="done_text">Se ve bien!</t>
+            <t t-set="method" t-value="'action_open_process_edition'" />
+            <t t-set="model" t-value="'res.company'" />
+            <t t-set="state" t-value="state.get('process_edition_onboarding_state')" />
+        </t>
+    </template>
+
+    <!-- ONBOARDING PANELS -->
+    <template id="process_onboarding_panel" name="process.onboarding.panel">
+        <t t-call="base.onboarding_container">
+            <t t-set="classes" t-value="'o_onboarding_violet'"/>
+            <t t-set="bg_image" t-value="'/account/static/src/img/account_invoice_onboarding_bg.jpg'"/>
+            <t t-set="close_method" t-value="'action_close_process_onboarding'"/>
+            <t t-set="close_model" t-value="'res.company'"/>
+            <t t-set="text_completed">Felicitaciones.</t>
+            <t t-call="mgmtsystem_process.onboarding_process_categ_type_step" name="process_categ_type_step" />
+            <t t-call="mgmtsystem_process.onboarding_process_categ_step" name="process_categ_step" />
+            <t t-call="mgmtsystem_process.onboarding_process_process_step" name="process_process_step" />
+            <t t-call="mgmtsystem_process.onboarding_process_edition_step" name="process_edition_step" />
+        </t>
+    </template>
+
+    <!-- Views -->
+
+    <record id="onboarding_process_categ_type_form" model="ir.ui.view">
+        <field name="name">mgmt.categ.type.inherit.view.form</field>
+        <field name="model">mgmt.categ.type</field>
+        <field name="inherit_id" ref="mgmtsystem_process.mgmt_process_categ_type_view_form"/>
+        <field name="priority">1000</field>
+        <field name="mode">primary</field>
+        <field name="arch" type="xml">
+            <field name="name" position="after">
+                <field name="user_id"/>
+            </field>
+            <form position="inside">
+                <footer position="replace">
+                    <button name="action_save_onboarding_process_categ_type_step" class="btn btn-primary" type="object" string="Crear y validar" />
+                    <button special="cancel" string="Cancelar" />
+                </footer>
+            </form>
+        </field>
+    </record>
+
+    <record id="onboarding_process_categ_form" model="ir.ui.view">
+        <field name="name">mgmt.categ.inherit.view.form</field>
+        <field name="model">mgmt.categ</field>
+        <field name="inherit_id" ref="mgmtsystem_process.mgmt_categ_form"/>
+        <field name="priority">1000</field>
+        <field name="mode">primary</field>
+        <field name="arch" type="xml">
+            <form position="inside">
+                <footer position="replace">
+                    <button name="action_save_onboarding_process_categ_step" class="btn btn-primary" type="object" string="Crear y validar" />
+                    <button special="cancel" string="Cancelar" />
+                </footer>
+            </form>
+        </field>
+    </record>
+
+    <record id="onboarding_process_process_form" model="ir.ui.view">
+        <field name="name">mgmt.process.inherit.view.form</field>
+        <field name="model">mgmt.process</field>
+        <field name="inherit_id" ref="mgmtsystem_process.mgmt_process_form"/>
+        <field name="priority">1000</field>
+        <field name="mode">primary</field>
+        <field name="arch" type="xml">
+            <field name="name" position="after">
+                <field name="user_id"/>
+            </field>
+            <form position="inside">
+                <footer position="replace">
+                    <button name="action_save_onboarding_process_process_step" class="btn btn-primary" type="object" string="Crear y validar" />
+                    <button special="cancel" string="Cancelar" />
+                </footer>
+            </form>
+        </field>
+    </record>
+
+    <record id="onboarding_process_edition_form" model="ir.ui.view">
+        <field name="name">process.edition.inherit.view.form</field>
+        <field name="model">process.edition</field>
+        <field name="inherit_id" ref="mgmtsystem_process.system_process_edition_form_view_inherit"/>
+        <field name="priority">1000</field>
+        <field name="mode">primary</field>
+        <field name="arch" type="xml">
+            <form position="inside">
+                <footer position="replace">
+                    <button name="action_save_onboarding_process_edition_step" class="btn btn-primary" type="object" string="Crear" />
+                    <button special="cancel" string="Cancelar" />
+                </footer>
+            </form>
+        </field>
+    </record>
+
+    <record id="action_process_categ_type_configurator" model="ir.actions.act_window">
+        <field name="type">ir.actions.act_window</field>
+        <field name="name">Cree un tipo de categoría de proceso</field>
+        <field name="view_mode">form</field>
+        <field name="target">new</field>
+        <field name="res_model">mgmt.categ.type</field>
+        <field name="view_id" ref="mgmtsystem_process.onboarding_process_categ_type_form"/>
+    </record>
+
+    <record id="action_process_categ_configurator" model="ir.actions.act_window">
+        <field name="type">ir.actions.act_window</field>
+        <field name="name">Cree una categoría de proceso</field>
+        <field name="view_mode">form</field>
+        <field name="target">new</field>
+        <field name="res_model">mgmt.categ</field>
+        <field name="view_id" ref="mgmtsystem_process.onboarding_process_categ_form"/>
+    </record>
+
+    <record id="action_process_process_configurator" model="ir.actions.act_window">
+        <field name="type">ir.actions.act_window</field>
+        <field name="name">Cree un de procedimiento</field>
+        <field name="view_mode">form</field>
+        <field name="target">new</field>
+        <field name="res_model">mgmt.process</field>
+        <field name="view_id" ref="mgmtsystem_process.onboarding_process_process_form"/>
+    </record>
+
+    <record id="action_process_edition_configurator" model="ir.actions.act_window">
+        <field name="type">ir.actions.act_window</field>
+        <field name="name">Cree una edición de procedimiento</field>
+        <field name="view_mode">form</field>
+        <field name="target">new</field>
+        <field name="res_model">process.edition</field>
+        <field name="view_id" ref="mgmtsystem_process.onboarding_process_edition_form"/>
+    </record>
+
+
+</odoo>

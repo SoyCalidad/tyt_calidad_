@@ -1,0 +1,436 @@
+<odoo>
+    <menuitem name="Revisión por la dirección" id="menu_review_root" web_icon="mgmtsystem_management_review,static/description/icon.png" groups="group_management_review_onlyread,group_management_review_write_printreport,group_management_review_all" sequence="17" />
+    <!--Plan de revision-->
+    <record id="management_review_plan_tree_view" model="ir.ui.view">
+        <field name="name">management.review.plan.tree.view</field>
+        <field name="model">management.review.plan</field>
+        <field name="arch" type="xml">
+            <tree banner_route="/mgmt_review/mgmt_review_onboarding">
+                <field name="name" />
+                <field name="elaboration_step" widget="many2many_tags" />
+                <field name="state" />
+                <field name="date_validate" groups="base.group_no_one,base.user_admin" />
+            </tree>
+        </field>
+    </record>
+    <record id="management_review_plan_form_view" model="ir.ui.view">
+        <field name="name">management.review.plan.form.view</field>
+        <field name="model">management.review.plan</field>
+        <field name="arch" type="xml">
+            <form>
+                <header>
+                    <field name="state" widget="statusbar" />
+                    <button string="Enviar a Elaborar" name="send_elaborate" type="object" class="btn-primary" attrs="{'invisible':[('state','in', ('elaborate','validate','validate_ok','closed','cancel'))]}" />
+                    <button string="Enviar a Revisar" name="send_review" type="object" class="btn-primary" attrs="{'invisible':[('state','in', ('review','validate_ok','closed','cancel'))]}" />
+                    <button string="Enviar a Validar" name="send_validate" type="object" class="btn-primary" attrs="{'invisible':[('state','in', ('elaborate','validate','validate_ok','closed','cancel'))]}" />
+                    <button string="Validar" name="send_validate_ok" type="object" class="btn-primary" attrs="{'invisible':[('state','not in', ('validate'))]}" />
+                    <button name="button_new_version" type="object" string="Nueva versión" attrs="{'invisible':[('state', '!=', 'validate_ok')]}" class="oe_highlight" />
+                    <button string="Volver Obsoleto" confirm="Esto volverá obsoleto el presente registro. ¿Está seguro(a)?" name="send_cancel" type="object" class="btn-second" attrs="{'invisible': [('state','in',('cancel'))] }" />
+                </header>
+                <sheet>
+                    <div class="oe_button_box" name="button_box">
+                        <button type="object" name="action_open_older_versions" class="oe_stat_button" icon="fa-archive" style="white-space: nowrap;" string="Versiones antiguas" />
+                    </div>
+                    <div>
+                        <label for="name" />
+                        <div class="oe_title">
+                            <h2>
+                                <field name="name" style="width:70%%" attrs="{'readonly': [('state','not in',('elaborate','review','validate'))]}" />
+                            </h2>
+                        </div>
+                        <label for="edition_id" />
+                        <div class="o_row">
+                            <field name="edition_id" style="width:70%%" colspan="3" attrs="{'readonly': [('state','not in',('elaborate'))] }" />
+                        </div>
+                        <notebook>
+                            <page string="Revisiones">
+                                <!-- <button type="object" name="line_ids" states="review,validate" string="⇒ Validar todo" class="oe_link oe_right"/> -->
+                                <!--<field name="line_ids" attrs="{'readonly': [('state','in',('validate_ok', 'cancel'))] }"> -->
+                                <field name="line_ids" attrs="{'readonly': [('state','in',('cancel'))] }">
+                                    <tree>
+                                        <field name="code" />
+                                        <field name="name" />
+                                        <field name="date_management_review" />
+                                        <field name="state" />
+                                    </tree>
+                                </field>
+                            </page>
+                            <page string="Validación">
+                                <group>
+                                    <group colspan="4">
+                                        <separator string="Elaboración" />
+                                        <field name="elaboration_step" colspan="2" nolabel="1" attrs="{'readonly': [('state','not in',('elaborate'))]}" />
+                                        <separator string="Revisión" />
+                                        <field name="review_step" colspan="2" nolabel="1" attrs="{'readonly': [('state','not in',('elaborate', 'review'))]}" />
+                                        <separator string="Validación" />
+                                        <field name="validation_step" colspan="2" nolabel="1" attrs="{'readonly': [('state','not in',('elaborate', 'review', 'validate'))]}" />
+                                    </group>
+                                    <group colspan="4">
+                                        <field name="date_elaborate" attrs="{'required': [('state','in',('elaborate'))], 'readonly': True}" />
+                                        <field name="date_review" attrs="{'required': [('state','in',('review'))], 'readonly': True, 'invisible': [('state','in',('elaborate'))] }" />
+                                        <field name="date_validate" groups="base.group_no_one,base.user_admin" attrs="{'invisible': [('state','in',('elaborate','review'))] }" />
+                                    </group>
+                                </group>
+                            </page>
+                        </notebook>
+                    </div>
+                </sheet>
+                <div class="oe_chatter">
+                    <field name="message_follower_ids" widget="mail_followers" />
+                    <field name="activity_ids" widget="mail_activity" />
+                    <field name="message_ids" widget="mail_thread" />
+                </div>
+            </form>
+        </field>
+    </record>
+    <!--Comité de calidad-->
+    <record id="qlty_job_view_form" model="ir.ui.view">
+        <field name="name">review.team.job.view.form</field>
+        <field name="model">review.team.job</field>
+        <field name="arch" type="xml">
+            <form string="">
+                <sheet>
+                    <group>
+                        <field name="name" />
+                        <field name="description" />
+                    </group>
+                </sheet>
+            </form>
+        </field>
+    </record>
+    <record id="qlty_job_view_tree" model="ir.ui.view">
+        <field name="name">review.team.job.view.tree</field>
+        <field name="model">review.team.job</field>
+        <field name="arch" type="xml">
+            <tree string="">
+                <field name="name" />
+                <field name="description" />
+            </tree>
+        </field>
+    </record>
+    <record id="qlty_job_action" model="ir.actions.act_window">
+        <field name="name">Puesto en el comité de calidad</field>
+        <field name="res_model">review.team.job</field>
+        <field name="view_mode">tree,form</field>
+        <field name="domain">[]</field>
+        <field name="context">{}</field>
+    </record>
+    <record id="management_review_team_line_tree_view" model="ir.ui.view">
+        <field name="name">management.review.team.line.tree.view</field>
+        <field name="model">management.review.team.line</field>
+        <field name="arch" type="xml">
+            <tree>
+                <field name="employee_id" />
+                <field name="job_id" />
+                <field name="puesto_comité" />
+                <field name="description" />
+            </tree>
+        </field>
+    </record>
+    <record id="management_review_team_line_form_view" model="ir.ui.view">
+        <field name="name">management.review.team.line.form.view</field>
+        <field name="model">management.review.team.line</field>
+        <field name="arch" type="xml">
+            <form>
+                <group>
+                    <field name="employee_id" />
+                    <field name="job_id" />
+                    <field name="puesto_comité" />
+                    <field name="description" />
+                </group>
+            </form>
+        </field>
+    </record>
+    <record id="qlty_job_view_tree" model="ir.ui.view">
+        <field name="name">review.team.job.view.tree</field>
+        <field name="model">review.team.job</field>
+        <field name="arch" type="xml">
+            <tree string="">
+                <field name="name" />
+                <field name="description" />
+            </tree>
+        </field>
+    </record>
+    <!--Revisión-->
+    <record id="management_review_tree_view" model="ir.ui.view">
+        <field name="name">management.review.tree.view</field>
+        <field name="model">management.review</field>
+        <field name="arch" type="xml">
+            <tree>
+                <field name="code" />
+                <field name="name" />
+                <field name="date_management_review" />
+                <field name="state" />
+            </tree>
+        </field>
+    </record>
+   
+    <record id="management_review_form_view" model="ir.ui.view">
+        <field name="name">management.review.form.view</field>
+        <field name="model">management.review</field>
+        <field name="arch" type="xml">
+            <form>
+                <header>
+                    <field name="state" widget="statusbar" statusbar_visible="elaborate,review,validate,validate_ok,tracked,closed" />
+                    <button string="Enviar a Elaborar" name="send_elaborate" type="object" class="btn-primary" attrs="{'invisible':[('state','in', ('elaborate','cancel','validate_ok','tracked','closed'))]}" />
+                    <button string="Enviar a Revisar" name="send_review" type="object" class="btn-primary" attrs="{'invisible':[('state','!=', 'elaborate')]}" />
+                    <button string="Enviar a Validar" name="send_validate" type="object" class="btn-primary" attrs="{'invisible':[('state','in', ('elaborate','validate','cancel','validate_ok','tracked','closed'))]}" />
+                    <button string="Validar" name="send_validate_ok" type="object" class="btn-primary" attrs="{'invisible':[('state','not in', ('validate'))]}" />
+                    <button string="Iniciar" name="send_tracked" type="object" class="btn-primary" attrs="{'invisible':[('state','not in', ('validate_ok'))]}" />
+                    <button string="Terminar" name="send_closed" type="object" class="btn-primary" attrs="{'invisible':[('state','not in', ('tracked'))]}" />
+                    <button string="Volver Obsoleto" confirm="Esto volverá obsoleto el presente registro. ¿Está seguro(a)?" name="send_cancel" type="object" class="btn-second" attrs="{'invisible': [('state','in',('cancel'))] }" />
+                    <button name="button_new_version" type="object" string="Nueva versión" attrs="{'invisible':[('state', 'not in', ('validate_ok', 'closed'))]}" class="oe_highlight" />
+                </header>
+                <sheet>
+                    <div class="oe_button_box" name="button_box">
+                        <button type="object" name="action_show_meetings" class="oe_stat_button" icon="fa-bars">
+                            <field name="meetings_count" widget="statinfo" string="Actas de reunión" />
+                        </button>
+                    </div>
+
+                    <div class="oe_title">
+                        <label for="code" />
+                        <h2>
+                            <field name="code" readonly="1" />
+
+                        </h2>
+                        <label for="name" />
+                        <h2>
+                            <field name="name" attrs="{'readonly': [('state','in',('validate_ok','closed','cancel'))]}" />
+                        </h2>
+                    </div>
+                    <group>
+                        <group>
+                            <field name="plan_id" string='Programa de revisiones' attrs="{'invisible': [('plan_id','=',False)]}" />
+                            <field name="managementreview_id" attrs="{'readonly': [('state','in',('validate_ok','closed','cancel'))]}" />
+                            <field name="date_management_review" attrs="{'readonly': [('state','in',('validate_ok','closed','cancel'))]}" />
+                            <br />
+                        </group>
+                        <group string="Filtros de datos">
+                            <field name="date_ini" attrs="{'readonly': [('state','in',('cancel'))]}" />
+                            <field name="date_fin" attrs="{'readonly': [('state','in',('cancel'))]}" />
+                            <field name="is_last" attrs="{'readonly': ['|', ('state','in',('cancel')), '|', ('date_ini','!=',False), ('date_fin','!=',False)]}" />
+                            <button type="object" name="update_data" string="Actualizar datos" help="Presione para actualizar toda la información según las fechas declaradas arriba" class="btn btn-primary" />
+                        </group>
+                    </group>
+                    <notebook>
+                        <page string="Introducción">
+                            <group>
+                                <field name="team_id" attrs="{'readonly': [('state','in',('validate_ok','closed','cancel'))]}" />
+                                <field name="introduction" attrs="{'readonly': [('state','in',('validate_ok','closed','cancel'))]}" />
+                            </group>
+                        </page>
+                        <page name="detail" string="Detalles" col="4">
+                            <div class="main_s">
+                                <style type="text/css">
+                                    .script {
+                                    font-size: 1.5em;
+                                    position: relative;
+                                    margin: 0 auto 1em;
+                                    text-transform: uppercase;
+                                    }
+                                </style>
+                                <group>
+                                    <div class="plate">
+                                        <p class="script">
+                                            <h2>a. El estado de las acciones de las revisiones por la dirección previas</h2>
+                                        </p>
+                                        <group>
+                                            <field name="record_meeting_ids" widget="many2many_tags" attrs="{'readonly': [('state','in',('validate_ok','closed','cancel'))]}" />
+                                            <field name="record_meeting_actions" />
+                                        </group>
+                                    </div>
+                                </group>
+                                <group>
+                                    <div class="plate">
+                                        <p class="script">
+                                            <h2>b. Los cambios en las cuestiones externas e internas</h2>
+                                        </p>
+                                        <group>
+                                            <field name="foda" colspan="3" attrs="{'readonly': [('state','in',('validate_ok','closed','cancel'))]}" />
+                                            <field name="foda_description" colspan="3" attrs="{'readonly': [('state','in',('validate_ok','closed','cancel'))]}" />
+                                        </group>
+                                        <group>
+                                            <field name="stakeholders_id" colspan="3" attrs="{'readonly': [('state','in',('validate_ok','closed','cancel'))]}" />
+                                            <field name="stakeholders_description" colspan="3" attrs="{'readonly': [('state','in',('validate_ok','closed','cancel'))]}" />
+                                        </group>
+                                    </div>
+                                </group>
+                                <group id="item_c">
+                                    <div class="plate">
+                                        <p class="script">
+                                            <h2>c. La información sobre el desempeño y la eficacia del sistema de gestión</h2>
+                                        </p>
+                                        <p class="script" style="margin-left:5em">
+                                            <h3>c.1. la satisfacción del cliente y la retroalimentación de las partes interesadas pertinentes</h3>
+                                        </p>
+                                        <group>
+                                            <field name="survey_ids" attrs="{'readonly': [('state','in',('validate_ok','closed','cancel'))]}">
+                                                <tree>
+                                                    <field name="title" />
+                                                    <field name="title_complete" />
+                                                </tree>
+                                            </field>
+                                            <field name="survey_description" />
+                                        </group>
+                                        <p class="script" style="margin-left:5em">
+                                            <h3>c.2. el grado en que se han logrado los objetivos del sistema de gestión</h3>
+                                        </p>
+                                        <group>
+                                            <button type="object" name="action_view_graph_indicator" string="Ver gráfico resumido de objetivos" class="btn btn-primary oe_right" />
+                                        </group>
+                                        <group colspan="3">
+                                            <field name="target_description" attrs="{'readonly': [('state','in',('validate_ok','closed','cancel'))]}" />
+                                        </group>
+                                        <p class="script" style="margin-left:5em">
+                                            <h3>c.3. el grado en que se cumplido la política del SIG</h3>
+                                        </p>
+                                        <group>
+                                            <field name="policy_ids" widget="many2many_tags" attrs="{'readonly': [('state','in',('validate_ok','closed','cancel'))]}" />
+                                        </group>
+                                        <group colspan="3">
+                                            <field name="policy_interpretation" attrs="{'readonly': [('state','in',('validate_ok','closed','cancel'))]}" />
+                                        </group>
+                                    </div>
+                                </group>
+                                <group id="item_d">
+                                    <div class="plate">
+                                        <p class="script">
+                                            <h2>d. La información sobre el desempeño</h2>
+                                        </p>
+                                        <p class="script" style="margin-left:5em">
+                                            <h3>d.1. el desempeño de los procesos y conformidad de los productos y servicios</h3>
+                                        </p>
+                                        <group colspan="3">
+                                            <field name="process" attrs="{'readonly': [('state','in',('validate_ok','closed','cancel'))]}" />
+                                            <field name="process_description" attrs="{'readonly': [('state','in',('validate_ok','closed','cancel'))]}" />
+                                        </group>
+                                        <p class="script" style="margin-left:5em">
+                                            <h3>d.2. las No conformidades y acciones correctivas</h3>
+                                        </p>
+                                        <group>
+                                            <field name="nonconformity_action" attrs="{'readonly': [('state','in',('validate_ok','closed','cancel'))]}" />
+                                            <field name="nonconformity_action_description" attrs="{'readonly': [('state','in',('validate_ok','closed','cancel'))]}" />
+                                        </group>
+                                        <p class="script" style="margin-left:5em">
+                                            <h3>d.3. los resultados de seguimiento y medición</h3>
+                                        </p>
+                                        <group>
+                                            <field name="indicator" attrs="{'readonly': [('state','in',('validate_ok','closed','cancel'))]}" />
+                                            <field name="indicator_description" attrs="{'readonly': [('state','in',('validate_ok','closed','cancel'))]}" />
+                                        </group>
+                                        <p class="script" style="margin-left:5em">
+                                            <h3>d.4. los resultados de las auditorías</h3>
+                                        </p>
+                                        <group>
+                                            <field name="audit" attrs="{'readonly': [('state','in',('validate_ok','closed','cancel'))]}" />
+                                            <field name="audit_description" attrs="{'readonly': [('state','in',('validate_ok','closed','cancel'))]}" />
+                                        </group>
+                                        <p class="script" style="margin-left:5em">
+                                            <h3>d.5. el desempeño de los proveedores externos</h3>
+                                        </p>
+                                        <group colspan="3">
+                                            <field name="suppliers_info" colspan="3" attrs="{'readonly': [('state','in',('validate_ok','closed','cancel'))]}" />
+                                            <field name="suppliers_description" colspan="3" attrs="{'readonly': [('state','in',('validate_ok','closed','cancel'))]}" />
+                                        </group>
+                                    </div>
+                                </group>
+                                <group id="item_e">
+                                    <div class="plate">
+                                        <p class="script">
+                                            <h2>e. La adecuación de los recursos</h2>
+                                        </p>
+                                        <group>
+                                            <field name="resource" attrs="{'readonly': [('state','in',('validate_ok','closed','cancel'))]}" />
+                                            <field name="resource_description" attrs="{'readonly': [('state','in',('validate_ok','closed','cancel'))]}" />
+                                        </group>
+                                    </div>
+                                </group>
+                                <group id="item_f">
+                                    <div class="plate">
+                                        <p class="script">
+                                            <h2>f. La eficacia de las acciones tomadas para abordar los riesgos y las oportunidades</h2>
+                                        </p>
+                                        <group>
+                                            <field name="risk" attrs="{'readonly': [('state','in',('validate_ok','closed','cancel'))]}" />
+                                            <field name="risk_description" attrs="{'readonly': [('state','in',('validate_ok','closed','cancel'))]}" />
+                                        </group>
+                                    </div>
+                                </group>
+                                <group id="item_g">
+                                    <div class="plate">
+                                        <p class="script">
+                                            <h2>g. Las oportunidades de mejora</h2>
+                                        </p>
+                                    </div>
+                                    <br />
+                                    <group colspan="3">
+                                        <field name="improve_action_ids" widget="many2many_tags" colspan="3" attrs="{'readonly': [('state','in',('validate_ok','closed','cancel'))]}" />
+                                        <field name="improve_action" colspan="3" attrs="{'readonly': [('state','in',('validate_ok','closed','cancel'))]}" />
+                                        <field name="improve_action_des" colspan="3" attrs="{'readonly': [('state','in',('validate_ok','closed','cancel'))]}" />
+                                    </group>
+                                </group>
+                            </div>
+                        </page>
+                        <page name="record_meeting_ids" string="Actas de reunión">
+                            <field name="record_meeting_ids" />
+                        </page>
+                        <page name="validation" string="Validación">
+                            <group col="4">
+                                <group colspan="4">
+                                    <field name="version" attrs="{'readonly': [('state','in',('validate_ok','closed','cancel'))]}" />
+                                </group>
+                                <group colspan="4">
+                                    <separator string="Elaboración" />
+                                    <field name="elaboration_step" colspan="2" nolabel="1" attrs="{'readonly': [('state','not in',('elaborate'))]}" />
+                                    <separator string="Revisión" />
+                                    <field name="review_step" colspan="2" nolabel="1" attrs="{'readonly': [('state','not in',('elaborate', 'review'))]}" />
+                                    <separator string="Validación" />
+                                    <field name="validation_step" colspan="2" nolabel="1" attrs="{'readonly': [('state','not in',('elaborate', 'review', 'validate'))]}" />
+                                </group>
+                                <group colspan="2">
+                                    <field name="date_elaborate" attrs="{'required': [('state','in',('elaborate'))], 'readonly': True}" />
+                                    <field name="date_review" attrs="{'required': [('state','in',('review'))], 'readonly': True, 'invisible': [('state','in',('elaborate'))] }" />
+                                    <field name="date_validate" groups="base.group_no_one,base.user_admin" attrs="{'invisible': [('state','in',('elaborate','review'))] }" />
+                                </group>
+                            </group>
+                        </page>
+                        <!--<page name="validation" string="Validación y Versión"><group col="4"><group colspan="2"><field name="elaborate_ids" widget="many2many_tags" options="{ 'no_open': True, 'no_create_edit': True, 'no_create': True}" attrs="{'readonly': [('state','not in',('elaborate'))] }"/><field name="review_ids" widget="many2many_tags" options="{ 'no_open': True}" attrs="{'readonly': [('state','not in',('elaborate', 'review'))] }"/><field name="validate_ids" widget="many2many_tags" options="{ 'no_open': True}" attrs="{'readonly': [('state','not in',('elaborate', 'review', 'validate'))] }"/></group><group colspan="2"><field name="date_validate" groups="base.group_no_one,base.user_admin" attrs="{'readonly': False, 'invisible': [('state','in',('elaborate','review'))] }"/></group></group></page>-->
+                    </notebook>
+                </sheet>
+                <div class="oe_chatter">
+                    <field name="message_follower_ids" widget="mail_followers" />
+                    <field name="activity_ids" widget="mail_activity" />
+                    <field name="message_ids" widget="mail_thread" />
+                </div>
+            </form>
+        </field>
+    </record>
+    <record id="mgmtsystem_review_plan_action1" model="ir.actions.act_window">
+        <field name="name">Programa de revisiones</field>
+        <field name="type">ir.actions.act_window</field>
+        <field name="res_model">management.review.plan</field>
+        <field name="view_mode">tree,form,kanban</field>
+    </record>
+    <menuitem id="item_mgmtsystem_review_plan_action1" name="Programa de revisiones" action="mgmtsystem_review_plan_action1" sequence="2" parent="menu_review_root" />
+    <record model="ir.actions.act_window" id="action_management_review">
+        <field name="name">Revisión por la dirección</field>
+        <field name="res_model">management.review</field>
+        <field name="view_mode">tree,form</field>
+        <field name="context">{'form_view_ref':'mgmtsystem_management_review.management_review_form_view'}</field>
+    </record>
+    <!-- management.review action window -->
+    <record id="review_internal_issue_cancel_action" model="ir.actions.act_window">
+        <field name="name">Revisión por la dirección</field>
+        <field name="type">ir.actions.act_window</field>
+        <field name="res_model">management.review</field>
+        <field name="view_mode">tree,form</field>
+        <field name="domain">[('state', '=', 'cancel')]</field>
+        <field name="help" type="html">
+            <p class="oe_view_nocontent_create"></p>
+            <p></p>
+        </field>
+    </record>
+    <menuitem id="item_management_review" name="Revisión por la dirección" action="action_management_review" sequence="10" parent="menu_review_root" />
+    <menuitem id="item_record_meeting" name="Actas de reunión" action="mgmtsystem_comunication.record_meeting_action" sequence="20" parent="menu_review_root" />
+</odoo>

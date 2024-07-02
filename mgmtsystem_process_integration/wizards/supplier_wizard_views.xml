@@ -1,0 +1,99 @@
+<odoo>
+    <data>
+
+        <record id="supplier_wizard_view_form" model="ir.ui.view">
+            <field name="name">supplier.wizard.report.view.form</field>
+            <field name="model">supplier.wizard.report</field>
+            <field name="arch" type="xml">
+                <form string="">
+                    <sheet>
+                        <group>
+                            <field name="is_critical" />
+                        </group>
+                        <span>
+                            Imprimir reporte de proveedores
+                        </span>
+                    </sheet>
+                    <footer>
+                        <button name="action_print" type="object" string="Descargar" class="oe_highlight" icon="fa-download"/>
+                    </footer>
+                </form>
+            </field>
+        </record>
+
+        <record id="action_report_supplier" model="ir.actions.act_window">
+            <field name="name">Reporte de proveedores</field>
+            <field name="type">ir.actions.act_window</field>
+            <field name="res_model">supplier.wizard.report</field>
+            <field name="view_mode">form</field>
+            <field name="view_id" ref="supplier_wizard_view_form"/>
+            <field name="target">new</field>
+            <field name="binding_type">report</field>
+        </record>
+
+        <menuitem
+            id="supplier_report_menu"
+            name="Lista de Proveedores"
+            action="action_report_supplier"
+            parent="mgmtsystem_partner_qualification.reports_contact_menu"
+            sequence="10"/>
+
+        <menuitem
+            id="reports_purchase_menu"
+            name="Reportes"
+            parent="purchase.menu_purchase_root"
+            sequence="10"/>
+
+        <menuitem
+            id="supplier_report_menu_2"
+            name="Lista de Proveedores"
+            action="action_report_supplier"
+            parent="reports_purchase_menu"
+            sequence="10"/>
+
+        <record id="customer_wizard_view_form" model="ir.ui.view">
+            <field name="name">customer.wizard.report.view.form</field>
+            <field name="model">customer.wizard.report</field>
+            <field name="arch" type="xml">
+                <form string="">
+                    <sheet>
+                        <group>
+                            <field name="is_critical" />
+                        </group>
+                        <span>
+                            Imprimir reporte de clientes
+                        </span>
+                    </sheet>
+                    <footer>
+                        <button name="action_print" type="object" string="Descargar" class="oe_highlight" icon="fa-download"/>
+                    </footer>
+                </form>
+            </field>
+        </record>
+
+        <record id="action_report_customer" model="ir.actions.act_window">
+            <field name="name">Reporte de clientes</field>
+            <field name="type">ir.actions.act_window</field>
+            <field name="res_model">customer.wizard.report</field>
+            <field name="view_mode">form</field>
+            <field name="view_id" ref="customer_wizard_view_form"/>
+            <field name="target">new</field>
+            <field name="binding_type">report</field>
+        </record>
+
+        <menuitem
+            id="customer_report_menu"
+            name="Lista de Clientes"
+            action="action_report_customer"
+            parent="mgmtsystem_partner_qualification.reports_contact_menu"
+            sequence="10"/>
+
+        <menuitem
+            id="customer_report_menu_2"
+            name="Lista de Clientes"
+            action="action_report_customer"
+            parent="reports_purchase_menu"
+            sequence="10"/>
+
+    </data>
+</odoo>

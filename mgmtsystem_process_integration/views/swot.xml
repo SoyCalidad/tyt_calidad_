@@ -1,0 +1,248 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+
+    <record id="swot_fortaleza_view_form_inherit" model="ir.ui.view">
+        <field name="name">mgmtsystem.context.swot.fortaleza.view.form.inherit</field>
+        <field name="model">mgmtsystem.context.swot.fortaleza</field>
+        <field name="inherit_id" ref="mgmtsystem_context.swot_fortaleza_view_form" />
+        <field name="arch" type="xml">
+            <xpath expr="//group[3]" position="replace">
+                <notebook>
+                    <page name="calification" string="Calificación">
+                        <div class="row">
+                            <div class="col-md-6 col-sm-6">
+                                <div class="oe_account_help">
+                                    <style>
+                                        <style type="text/css">
+                                                .tg  {border-collapse:collapse;border-spacing:0;}
+                                                .tg td{font-family: Palatino, Palatino Linotype, Palatino LT STD, Book Antiqua, Georgia, serif;font-size:14px;padding:10px 5px;border-style:solid;border-width:1px;overflow:hidden;word-break:normal;border-color:black;}
+                                                .tg th{font-family: Palatino, Palatino Linotype, Palatino LT STD, Book Antiqua, Georgia, serif;font-size:14px;font-weight:normal;padding:10px 5px;border-style:solid;border-width:1px;overflow:hidden;word-break:normal;border-color:black;}
+                                                .tg .tg-wa1i{font-weight:bold;text-align:center;vertical-align:middle}
+                                        </style>
+                                    </style>
+                                    <div class="table-responsive">
+                                        <table class="table">
+                                            <tr>
+                                                <td rowspan="4">Calificar entre 1 y 4</td>
+                                                <td class="row">4</td>
+                                                <td>Fortaleza Mayor</td>
+                                            </tr>
+                                            <tr>
+                                                <td class="row">3</td>
+                                                <td>Fortaleza Menor</td>
+                                            </tr>
+                                            <tr>
+                                                <td class="row">2</td>
+                                                <td>Debilidad Mayor</td>
+                                            </tr>
+                                            <tr>
+                                                <td class="row">1</td>
+                                                <td>Debilidad Menor</td>
+                                            </tr>
+                                        </table>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </page>
+                    <page name="target_ids" string="Objetivos">
+                        <separator string="Objetivos" />
+                        <field name="target_ids" />
+                    </page>
+                    <page name="risk_ids" string="Riesgos">
+                        <separator string="Riesgos" />
+                        <field name="risk_ids" context="{'default_type': 'risk'}"/>
+                    </page>
+                    <page name="opportunity_ids" string="Oportunidades">
+                        <separator string="Oportunidades" />
+                        <field name="opp_ids" context="{'default_type': 'opportunity'}" />
+                    </page>
+                </notebook>
+            </xpath>
+        </field>
+    </record>
+
+    <record id="swot_debilidad_view_form_inherit" model="ir.ui.view">
+        <field name="name">mgmtsystem.context.swot.debilidad.view.form.inherit</field>
+        <field name="model">mgmtsystem.context.swot.debilidad</field>
+        <field name="inherit_id" ref="mgmtsystem_context.swot_debilidad_view_form" />
+        <field name="arch" type="xml">
+            <xpath expr="//group[3]" position="replace">
+                <notebook>
+                    <page name="calification" string="Calificación">
+                        <div class="row">
+                            <div class="col-md-6 col-sm-6">
+                                <div class="oe_account_help">
+                                    <style>
+                                        <style type="text/css">
+                                                .tg  {border-collapse:collapse;border-spacing:0;}
+                                                .tg td{font-family: Palatino, Palatino Linotype, Palatino LT STD, Book Antiqua, Georgia, serif;font-size:14px;padding:10px 5px;border-style:solid;border-width:1px;overflow:hidden;word-break:normal;border-color:black;}
+                                                .tg th{font-family: Palatino, Palatino Linotype, Palatino LT STD, Book Antiqua, Georgia, serif;font-size:14px;font-weight:normal;padding:10px 5px;border-style:solid;border-width:1px;overflow:hidden;word-break:normal;border-color:black;}
+                                                .tg .tg-wa1i{font-weight:bold;text-align:center;vertical-align:middle}
+                                        </style>
+                                    </style>
+                                    <div class="table-responsive">
+                                        <table class="table">
+                                            <tr>
+                                                <td rowspan="4">Calificar entre 1 y 4</td>
+                                                <td class="row">4</td>
+                                                <td>Fortaleza Mayor</td>
+                                            </tr>
+                                            <tr>
+                                                <td class="row">3</td>
+                                                <td>Fortaleza Menor</td>
+                                            </tr>
+                                            <tr>
+                                                <td class="row">2</td>
+                                                <td>Debilidad Mayor</td>
+                                            </tr>
+                                            <tr>
+                                                <td class="row">1</td>
+                                                <td>Debilidad Menor</td>
+                                            </tr>
+                                        </table>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </page>
+                    <page name="target_ids" string="Objetivos">
+                        <separator string="Objetivos" />
+                        <field name="target_ids" />
+                    </page>
+                    <page name="risk_ids" string="Riesgos">
+                        <separator string="Riesgos" />
+                        <field name="risk_ids" context="{'default_type': 'risk'}" />
+                    </page>
+                    <page name="opportunity_ids" string="Oportunidades">
+                        <separator string="Oportunidades" />
+                        <field name="opp_ids" context="{'default_type': 'opportunity'}" />
+                    </page>
+                </notebook>
+            </xpath>
+        </field>
+    </record>
+
+    <record id="swot_amenaza_view_form_inherit" model="ir.ui.view">
+        <field name="name">mgmtsystem.context.swot.amenaza.view.form.inherit</field>
+        <field name="model">mgmtsystem.context.swot.amenaza</field>
+        <field name="inherit_id" ref="mgmtsystem_context.swot_amenaza_view_form" />
+        <field name="arch" type="xml">
+            <xpath expr="//group[3]" position="replace">
+                <notebook>
+                    <page name="calification" string="Calificación">
+                        <div class="row">
+                            <div class="col-md-6 col-sm-6">
+                                <div class="oe_account_help">
+                                    <style>
+                                        <style type="text/css">
+                                                .tg  {border-collapse:collapse;border-spacing:0;}
+                                                .tg td{font-family: Palatino, Palatino Linotype, Palatino LT STD, Book Antiqua, Georgia, serif;font-size:14px;padding:10px 5px;border-style:solid;border-width:1px;overflow:hidden;word-break:normal;border-color:black;}
+                                                .tg th{font-family: Palatino, Palatino Linotype, Palatino LT STD, Book Antiqua, Georgia, serif;font-size:14px;font-weight:normal;padding:10px 5px;border-style:solid;border-width:1px;overflow:hidden;word-break:normal;border-color:black;}
+                                                .tg .tg-wa1i{font-weight:bold;text-align:center;vertical-align:middle}
+                                        </style>
+                                    </style>
+                                    <div class="table-responsive">
+                                        <table class="table">
+                                            <tr>
+                                                <td rowspan="4">Calificar entre 1 y 4</td>
+                                                <td class="row">4</td>
+                                                <td>Respuesta superior</td>
+                                            </tr>
+                                            <tr>
+                                                <td class="row">3</td>
+                                                <td>Respuesta superior a la media</td>
+                                            </tr>
+                                            <tr>
+                                                <td class="row">2</td>
+                                                <td>Respuesta media</td>
+                                            </tr>
+                                            <tr>
+                                                <td class="row">1</td>
+                                                <td>Respuesta mala</td>
+                                            </tr>
+                                        </table>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </page>
+                    <page name="target_ids" string="Objetivos">
+                        <separator string="Objetivos" />
+                        <field name="target_ids" />
+                    </page>
+                    <page name="risk_ids" string="Riesgos">
+                        <separator string="Riesgos" />
+                        <field name="risk_ids" context="{'default_type': 'risk'}" />
+                    </page>
+                    <page name="opportunity_ids" string="Oportunidades">
+                        <separator string="Oportunidades" />
+                        <field name="opp_ids" context="{'default_type': 'opportunity'}" />
+                    </page>
+                </notebook>
+            </xpath>
+        </field>
+    </record>
+
+    <record id="swot_oportunidad_view_form_inherit" model="ir.ui.view">
+        <field name="name">mgmtsystem.context.swot.oportunidad.view.form.inherit</field>
+        <field name="model">mgmtsystem.context.swot.oportunidad</field>
+        <field name="inherit_id" ref="mgmtsystem_context.swot_oportunidad_view_form" />
+        <field name="arch" type="xml">
+            <xpath expr="//group[3]" position="replace">
+                <notebook>
+                    <page name="calification" string="Calificación">
+                        <div class="row">
+                            <div class="col-md-6 col-sm-6">
+                                <div class="oe_account_help">
+                                    <style>
+                                        <style type="text/css">
+                                                .tg  {border-collapse:collapse;border-spacing:0;}
+                                                .tg td{font-family: Palatino, Palatino Linotype, Palatino LT STD, Book Antiqua, Georgia, serif;font-size:14px;padding:10px 5px;border-style:solid;border-width:1px;overflow:hidden;word-break:normal;border-color:black;}
+                                                .tg th{font-family: Palatino, Palatino Linotype, Palatino LT STD, Book Antiqua, Georgia, serif;font-size:14px;font-weight:normal;padding:10px 5px;border-style:solid;border-width:1px;overflow:hidden;word-break:normal;border-color:black;}
+                                                .tg .tg-wa1i{font-weight:bold;text-align:center;vertical-align:middle}
+                                        </style>
+                                    </style>
+                                    <div class="table-responsive">
+                                        <table class="table">
+                                            <tr>
+                                                <td rowspan="4">Calificar entre 1 y 4</td>
+                                                <td class="row">4</td>
+                                                <td>Respuesta superior</td>
+                                            </tr>
+                                            <tr>
+                                                <td class="row">3</td>
+                                                <td>Respuesta superior a la media</td>
+                                            </tr>
+                                            <tr>
+                                                <td class="row">2</td>
+                                                <td>Respuesta media</td>
+                                            </tr>
+                                            <tr>
+                                                <td class="row">1</td>
+                                                <td>Respuesta mala</td>
+                                            </tr>
+                                        </table>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </page>
+                    <page name="target_ids" string="Objetivos">
+                        <separator string="Objetivos" />
+                        <field name="target_ids" />
+                    </page>
+                    <page name="risk_ids" string="Riesgos">
+                        <separator string="Riesgos" />
+                        <field name="risk_ids" context="{'default_type': 'risk'}" />
+                    </page>
+                    <page name="opportunity_ids" string="Oportunidades">
+                        <separator string="Oportunidades" />
+                        <field name="opp_ids" context="{'default_type': 'opportunity'}" />
+                    </page>
+                </notebook>
+            </xpath>
+        </field>
+    </record>
+
+</odoo>

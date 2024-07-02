@@ -1,0 +1,238 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <record id="certificate" model="report.paperformat">
+        <field name="name">Certificado</field>
+        <field name="default" eval="True"/>
+        <field name="orientation">Landscape</field>
+        <field name="margin_top">5</field>
+        <field name="margin_bottom">5</field>
+        <field name="margin_left">5</field>
+        <field name="margin_right">5</field>
+        <field name="header_line" eval="False"/>
+        <field name="header_spacing">0</field>
+        <field name="dpi">80</field>
+    </record>
+    <record id="cert" model="report.paperformat">
+        <field name="name">Certificado</field>
+        <field name="default" eval="True"/>
+        <field name="orientation">Landscape</field>
+        <field name="margin_top">0</field>
+        <field name="margin_bottom">0</field>
+        <field name="margin_left">0</field>
+        <field name="margin_right">0</field>
+        <field name="header_line" eval="False"/>
+        <field name="header_spacing">0</field>
+        <field name="dpi">80</field>
+    </record>
+    <report id="action_report_training_certificate"
+        model="mgmtsystem.plan.training.line"
+        string="Certificado de capacitación"
+        report_type="qweb-pdf"
+        name="mgmtsystem_employees.report_training_certificate"
+        file="Certificado"
+        paperformat="cert"/>
+    <template id="report_training_certificate">
+        <div class="header"></div>
+        <t t-call="web.html_container">
+            <t t-set="company" t-value="res_company"/>
+            <t t-foreach="docs" t-as="doc">
+                <center>
+                    <style>
+.signature, .title { 
+float:left;
+  border-top: 1px solid #000;
+  width: 200px; 
+  text-align: center;
+}
+                    </style>
+                    <br/>
+                    <br/>
+                    <br/>
+                    <t t-if="len(docs)>1">
+                        <div style="width:1000px; height:600px; text-align:center; border: 40px solid #008DCA; page-break-after: always;">
+                            <div style="width:950px; height:570px; padding-left:20px; text-align:center; border: 20px solid #3466deb">
+                                <br/>
+                                <br/>
+                                <img t-if="res_company.logo" t-att-src="'data:image/png;base64,%s' % to_text(res_company.logo)" style="max-height:125px;vertical-align:middle;"/>
+                                <br/>
+                                <br/>
+                                <span style="font-size:50px; font-weight:bold">Certificado de participación</span>
+                                <br/>
+                                <br/>
+                                <span style="font-size:15px">
+                                    <i><t t-raw="company.name" /> confiere este certificado a:</i>
+                                </span>
+                                <br/>
+                                <br/>
+                                <span style="font-size:50px;color: #fcba03;font-weight: bold;">
+                                    <span t-field="doc.employee_id.name"/>
+                                </span>
+                                <br/>
+                                <br/>
+                                <span style="font-size:15px">
+                                        
+ Por su participación en la capacitación     
+                                        
+                                        
+                                        
+                                        
+                                        
+                                    <span t-field="doc.training_id.name"/>
+                                    <br/>
+ Realizada el 
+                                        
+                                        
+                                        
+                                        
+                                        
+                                    <span t-field="doc.training_id.date_training"/>
+ con una duración de 
+                                        
+                                        
+                                        
+                                        
+                                        
+                                    <span t-field="doc.training_id.duration"/>
+                                </span>
+                                <br/>
+                                <br/>
+                                <br/>
+                                <br/>
+                                <table style="margin-top:40px;float:left;padding-left:50px;">
+                                    <tr>
+                                        <td>
+                                            <span>
+                                                <b></b>
+                                            </span>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td style="width:200px;float:left;border:0;border-bottom:1px solid #000;"></td>
+                                    </tr>
+                                    <tr>
+                                        <td style="text-align:center">
+                                            <span>
+                                                <b>Firma</b>
+                                            </span>
+                                        </td>
+                                    </tr>
+                                </table>
+                                <table style="margin-top:40px;float:right;padding-right:50px;">
+                                    <tr>
+                                        <td>
+                                            <span>
+                                                <b></b>
+                                            </span>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td style="width:200px;float:right;border:0;border-bottom:1px solid #000;"></td>
+                                    </tr>
+                                    <tr>
+                                        <td style="text-align:center">
+                                            <span>
+                                                <b>Firma</b>
+                                            </span>
+                                        </td>
+                                    </tr>
+                                </table>
+                            </div>
+                        </div>
+                    </t>
+                    <t t-else="">
+                        <div style="width:1000px; height:600px; text-align:center; border: 40px solid #008DCA;">
+                            <div style="width:950px; height:570px; padding-left:20px; text-align:center; border: 20px solid #3466deb">
+                                <br/>
+                                <br/>
+                                <img t-if="res_company.logo" t-att-src="'data:image/png;base64,%s' % to_text(res_company.logo)" style="max-height:125px;vertical-align:middle;"/>
+                                <br/>
+                                <br/>
+                                <span style="font-size:50px; font-weight:bold">Certificado de participación</span>
+                                <br/>
+                                <br/>
+                                <span style="font-size:15px">
+                                    <i><t t-raw="company.name" /> confiere este certificado a:</i>
+                                </span>
+                                <br/>
+                                <br/>
+                                <span style="font-size:50px;color: #fcba03;font-weight: bold;">
+                                    <span t-field="doc.employee_id.name"/>
+                                </span>
+                                <br/>
+                                <br/>
+                                <span style="font-size:15px">
+                                        
+ Por su participación en la capacitación     
+                                        
+                                        
+                                        
+                                        
+                                        
+                                    <span t-field="doc.training_id.name"/>
+                                    <br/>
+ Realizada el 
+                                        
+                                        
+                                        
+                                        
+                                        
+                                    <span t-field="doc.training_id.date_training"/>
+ con una duración de 
+                                        
+                                        
+                                        
+                                        
+                                        
+                                    <span t-field="doc.training_id.duration"/>
+                                </span>
+                                <br/>
+                                <br/>
+                                <br/>
+                                <br/>
+                                <table style="margin-top:40px;float:left;padding-left:50px;">
+                                    <tr>
+                                        <td>
+                                            <span>
+                                                <b></b>
+                                            </span>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td style="width:200px;float:left;border:0;border-bottom:1px solid #000;"></td>
+                                    </tr>
+                                    <tr>
+                                        <td style="text-align:center">
+                                            <span>
+                                                <b>Firma</b>
+                                            </span>
+                                        </td>
+                                    </tr>
+                                </table>
+                                <table style="margin-top:40px;float:right;padding-right:50px;">
+                                    <tr>
+                                        <td>
+                                            <span>
+                                                <b></b>
+                                            </span>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td style="width:200px;float:right;border:0;border-bottom:1px solid #000;"></td>
+                                    </tr>
+                                    <tr>
+                                        <td style="text-align:center">
+                                            <span>
+                                                <b>Firma</b>
+                                            </span>
+                                        </td>
+                                    </tr>
+                                </table>
+                            </div>
+                        </div>
+                    </t>
+                </center>
+                <div class="footer"></div>
+            </t>
+        </t>
+    </template>
+</odoo>

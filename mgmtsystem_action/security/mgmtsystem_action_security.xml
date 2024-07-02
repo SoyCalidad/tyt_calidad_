@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+
+        <record id="action_management" model="ir.module.category">
+            <field name="name">Acciones</field>
+            <field name="description">Accesos para módulo acciones</field>
+            <field name="parent_id" ref="hola_calidad.module_mgmt_management" />
+            <field name="sequence">25</field>
+        </record>
+
+        <record id="group_action_readonly" model="res.groups">
+            <field name="name">Acciones: Solo lectura</field>
+            <field name="implied_ids" eval="[(4, ref('base.group_user'))]" />
+            <field name="category_id" ref="mgmtsystem_action.action_management" />
+        </record>
+
+        <record id="group_action_readonly_printreport" model="res.groups">
+            <field name="name">Acciones: Impresión de reportes</field>
+            <field name="implied_ids" eval="[(4, ref('mgmtsystem_action.group_action_readonly'))]" />
+            <field name="category_id" ref="mgmtsystem_action.action_management" />
+        </record>
+
+        <record id="group_action_owner" model="res.groups">
+            <field name="name">Acciones: Edición de documentos propios</field>
+            <field name="implied_ids" eval="[(4, ref('mgmtsystem_action.group_action_readonly_printreport'))]" />
+            <field name="category_id" ref="mgmtsystem_action.action_management" />
+        </record>
+
+        <record id="group_action_all" model="res.groups">
+            <field name="name">Acciones: Lectura y edición</field>
+            <field name="implied_ids" eval="[(4, ref('mgmtsystem_action.group_action_owner'))]" />
+            <field name="category_id" ref="mgmtsystem_action.action_management" />
+        </record>
+
+    </data>
+</odoo>

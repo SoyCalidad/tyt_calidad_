@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+
+    <record id="action_report_nonconformity_output" model="ir.actions.report">
+        <field name="name">Salidas no conformes</field>
+        <field name="model">mgmtsystem.nonconformity</field>
+        <field name="report_type">xlsx</field>
+        <field name="report_name">report_nonconformity_output</field>
+        <field name="report_file">Salidas no conformes</field>
+        <field name="print_report_name">'Salidas no conformes'</field>
+        <field name="binding_model_id" ref="model_mgmtsystem_nonconformity"/>
+        <field name="binding_type">report</field>
+    </record>
+
+</odoo>

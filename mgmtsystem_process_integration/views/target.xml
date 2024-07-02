@@ -1,0 +1,56 @@
+<odoo>
+    <data>
+
+        <record id="mgmt_target_process_action" model="ir.actions.act_window">
+            <field name="name">Procedimientos de Objetivos</field>
+            <field name="res_model">mgmt.process</field>
+
+            <field name="view_mode">kanban,tree,form</field>
+            <field name="domain">[('name', '=', 'Seguimiento y medición de indicadores')]</field>
+            <field name="context">{}</field>
+        </record>
+
+
+        <record id="mgmtsystem_target_form_inherit_integration" model="ir.ui.view">
+            <field name="name">mgmtsystem.target.view.inherit</field>
+            <field name="model">mgmtsystem.target</field>
+            <field name="inherit_id" ref="mgmtsystem_target.target_view_form"/>
+            <field name="arch" type="xml">
+                <field name="user_id" position="after">
+                    <field name="resource_ids" widget="many2many_tags" options="{'no_open': True}" attrs="{'readonly': [('state','in',('validate_ok','cancel'))]}"/>
+                </field>
+                <notebook position="inside">
+                    <page name="comunication" string="Comunicaciones">
+                        <field name="comunication_ids" attrs="{'readonly': [('state','in',('validate_ok','cancel'))]}"/>
+                    </page>
+                    <page string="No conformidades" name="No conformidades">
+                        <group>
+                            <field name="model_id"/>
+                            <field name="nonconformity_ids" context="{'default_origin_model_id': model_id, 'default_origin_int_id': id}"/>
+                        </group>
+                    </page>
+                    <page name="origins" string="Origenes">
+                        <field name="origin_model_id" invisible="1"/>
+                        <field name="origin_int_id" invisible="1"/>
+                        <field name="origin_ids">
+                            <tree>
+                                <field name="origin_model_id"/>
+                                <button string="Abrir origen" name="open_origin_record" type="object" class="oe_highlight"/>
+                            </tree>
+                        </field>
+                    </page>
+                </notebook>
+                <field name="action_ids" position="attributes">
+                    <attribute name="context">{'default_origin_model_id': model_id, 'default_origin_int_id': id}</attribute>
+                </field>
+            </field>
+        </record>
+
+        <menuitem id="process_integration_target_menu"
+            name="Procedimientos"
+            action="mgmt_target_process_action"
+            parent="mgmtsystem_target.report_root_menu"
+            sequence="100"/>
+
+    </data>
+</odoo>

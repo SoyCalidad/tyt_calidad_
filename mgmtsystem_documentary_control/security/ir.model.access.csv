@@ -1,0 +1,6 @@
+id,name,model_id:id,group_id:id,perm_read,perm_write,perm_create,perm_unlink
+
+access_mgmtsystem_code_onlyread,Solo lectura,model_mgmtsystem_code,hola_calidad.group_mgmt_onlyread,1,0,0,0
+access_mgmtsystem_code_report,Impresión de reportes,model_mgmtsystem_code,hola_calidad.group_mgmt_onlyread_printreport,1,0,0,0
+access_mgmtsystem_code_write,Documentos propios,model_mgmtsystem_code,hola_calidad.group_mgmt_write_printreport,1,1,1,0
+access_mgmtsystem_code_all,Todos los permisos,model_mgmtsystem_code,hola_calidad.group_mgmt_all,1,1,1,1

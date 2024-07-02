@@ -1,0 +1,156 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+
+    <record id="mgmtsystem_mof_view_form" model="ir.ui.view">
+        <field name="name">mgmtsystem.mof.view.form</field>
+        <field name="model">mgmtsystem.mof</field>
+        <field name="arch" type="xml">
+            <form string="Manual de organización y funciones">
+                <header>
+                    <field name="state" widget="statusbar" statusbar_visible="elaborate,review,validate,validate_ok,approved" />
+                    <button string="Enviar a Elaborar"
+                            name="send_elaborate"
+                            type="object"
+                            class="btn-primary"
+                            attrs="{'invisible':[('state','in', ('elaborate','cancel','validate_ok'))]}" />
+                    <button string="Enviar a Revisar"
+                            name="send_review"
+                            type="object"
+                            class="btn-primary"
+                            attrs="{'invisible':[('state','!=', 'elaborate')]}" />
+                    <button string="Enviar a Validar"
+                            name="send_validate"
+                            type="object"
+                            class="btn-primary"
+                            attrs="{'invisible':[('state','in', ('elaborate','validate','cancel','validate_ok'))]}" />
+                    <button string="Validar"
+                            name="send_validate_ok"
+                            type="object"
+                            class="btn-primary"
+                            attrs="{'invisible':[('state','not in', ('validate'))]}" />
+                    <button string="Volver Obsoleto"
+                            confirm="Esto volverá obsoleto el presente registro. ¿Está seguro(a)?"
+                            name="send_cancel"
+                            type="object"
+                            class="btn-second"
+                            attrs="{'invisible': [('state','in',('cancel'))] }" />
+                    <button name="button_new_version"
+                            type="object"
+                            string="Nueva versión"
+                            attrs="{'invisible':[('state', '!=', 'validate_ok')]}"
+                            class="oe_highlight" />
+                </header>
+                <sheet>
+                    <div class="oe_button_box" name="button_box">
+                        <button type="object"
+                                name="action_open_older_versions"
+                                class="oe_stat_button"
+                                icon="fa-archive"
+                                style="white-space: nowrap;"
+                                string="Versiones antiguas" />
+                    </div>
+                    <div class="oe_title">
+                        <label for="code" />
+                        <h2>
+                            <field name="code" readonly="0" />
+                        </h2>
+                        <label for="name" />
+                        <h1>
+                            <field name="name" />
+                        </h1>
+                    </div>
+                    <group>
+                        <field name="importance" />
+                        <field name="target" />
+                        <field name="definition_ids" />
+                    </group>
+                    <notebook>
+                        <page name="job_ids" string="Puestos">
+                            <field name="job_ids">
+                                <field name="name" />
+                                <field name="department_id" />
+                                <field name="no_of_employee" />
+                            </field>
+                        </page>
+                        <page name="validation" string="Validación y Versión">
+                            <group>
+                                <group colspan="4">
+                                    <field name="version" />
+                                </group>
+                                <group colspan="4">
+                                    <separator string="Elaboración" />
+                                    <field name="elaboration_step" colspan="2" nolabel="1" attrs="{'readonly': [('state','not in',('elaborate'))]}" />
+                                    <separator string="Revisión" />
+                                    <field name="review_step" colspan="2" nolabel="1" attrs="{'readonly': [('state','not in',('elaborate', 'review'))]}" />
+                                    <separator string="Validación" />
+                                    <field name="validation_step" colspan="2" nolabel="1" attrs="{'readonly': [('state','not in',('elaborate', 'review', 'validate'))]}" />
+                                </group>
+                                <group colspan="4">
+                                    <field name="date_elaborate" attrs="{'required': [('state','in',('elaborate'))], 'readonly': True}" />
+                                    <field name="date_review" attrs="{'required': [('state','in',('review'))], 'readonly': True, 'invisible': [('state','in',('elaborate'))] }" />
+                                    <field name="date_validate" attrs="{'readonly': True, 'invisible': [('state','in',('elaborate','review'))] }" />
+                                </group>
+                            </group>
+                        </page>
+                        <page name="target_ids" string="Objetivos">
+                            <group name="target_ids" string="Objetivos">
+                                <field name="target_ids" />
+                            </group>
+                        </page>
+                        <page name="action_ids" string="Acciones">
+                            <group name="action_ids" string="Acciones">
+                                <field name="action_ids" />
+                            </group>
+                        </page>
+                        <page name="nc_ids" string="No conformidades">
+                            <group name="nc_ids" string="No conformidades">
+                                <field name="nc_ids" />
+                            </group>
+                        </page>
+                        <page name="risk_opps" string="Riesgos y oportunidades">
+                            <group name="risk_ids" string="Riesgos y Oportunidades">
+                                <field name="risk_ids" />
+                                <field name="opp_ids" />
+                            </group>
+                        </page>
+                        <page name="change_request_ids" string="Solicitud de cambios">
+                            <field name="change_request_ids" />
+                        </page>
+                    </notebook>
+                </sheet>
+                <div class="oe_chatter">
+                    <field name="message_follower_ids" widget="mail_followers" />
+                    <field name="activity_ids" widget="mail_activity" />
+                    <field name="message_ids" widget="mail_thread" />
+                </div>
+            </form>
+        </field>
+    </record>
+
+    <record id="mgmtsystem_mof_view_tree" model="ir.ui.view">
+        <field name="name">mgmtsystem.mof.view.tree</field>
+        <field name="model">mgmtsystem.mof</field>
+        <field name="arch" type="xml">
+            <tree string="Manual de organización y funciones">
+                <field name="name" />
+                <field name="importance" />
+                <field name="target" />
+                <field name="validity" />
+            </tree>
+        </field>
+    </record>
+
+    <record id="mgmtsystem_mof_action" model="ir.actions.act_window">
+        <field name="name">Manual de organización y funciones</field>
+        <field name="res_model">mgmtsystem.mof</field>
+        <field name="view_mode">tree,form</field>
+        <field name="domain">[]</field>
+        <field name="context">{}</field>
+        <field name="help" type="html">
+            <p>
+                <b>Manual de organización y funciones</b>
+            </p>
+        </field>
+    </record>
+
+</odoo>

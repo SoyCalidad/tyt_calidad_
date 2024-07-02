@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+
+        <record id="cause_1" model="mgmtsystem.nonconformity.cause">
+            <field name="name">Hombre</field>
+            <field name="is_base">1</field>
+        </record>
+
+        <record id="cause_2" model="mgmtsystem.nonconformity.cause">
+            <field name="name">Máquina</field>
+            <field name="is_base">1</field>
+        </record>
+
+        <record id="cause_3" model="mgmtsystem.nonconformity.cause">
+            <field name="name">Entorno</field>
+            <field name="is_base">1</field>
+        </record>
+
+        <record id="cause_4" model="mgmtsystem.nonconformity.cause">
+            <field name="name">Material</field>
+            <field name="is_base">1</field>
+        </record>
+
+        <record id="cause_5" model="mgmtsystem.nonconformity.cause">
+            <field name="name">Método</field>
+            <field name="is_base">1</field>
+        </record>
+
+        <record id="cause_6" model="mgmtsystem.nonconformity.cause">
+            <field name="name">Medida</field>
+            <field name="is_base">1</field>
+        </record>
+
+    </data>
+</odoo>

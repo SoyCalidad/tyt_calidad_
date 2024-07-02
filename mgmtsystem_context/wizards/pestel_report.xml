@@ -1,0 +1,40 @@
+<odoo>
+    <data>
+
+        <record id="report_context_pest_view" model="ir.ui.view">
+            <field name="name">Reporte PESTEL/AMOFHIT</field>
+            <field name="model">wizard.pest.report</field>
+            <field name="arch" type="xml">
+                <form>
+                    <group>
+                        <field name="pestel_id"></field>
+                    </group>
+                    <footer>
+                        <button name="action_print" type="object" string="Descargar PDF" class="oe_highlight" icon="fa-download"/>
+                        <button name="action_print_xls" type="object" string="Descargar XLS" class="oe_highlight" icon="fa-download"/>
+                    </footer>
+                </form>
+            </field>
+        </record>
+
+        <record id="action_report_pest" model="ir.actions.act_window">
+            <field name="name">Reporte PESTEL/AMOFHIT</field>
+            <field name="type">ir.actions.act_window</field>
+            <field name="res_model">wizard.pest.report</field>        
+            <field name="view_mode">form</field>
+            <field name="view_id" ref="report_context_pest_view"/>
+            <field name="target">new</field>
+            <field name="binding_type">report</field>
+        </record>
+
+        <menuitem
+            id="report_pest_menu"
+            name="Reporte PESTEL/AMOFHIT"
+            action="action_report_pest"
+            parent="context_report_menu"
+            sequence="10"/>
+    
+
+
+    </data>
+</odoo>

@@ -1,0 +1,287 @@
+<odoo>
+    <data>
+
+        <record id="action_report_complaints" model="ir.actions.report">
+            <field name="name">Lista de reclamos</field>
+            <field name="model">complaint.complaint</field>
+            <field name="report_type">qweb-pdf</field>
+            <field name="report_name">mgmtsystem_complaints.complaint_report_list</field>
+            <field name="report_file">mgmtsystem_complaints.complaint_report_list</field>
+            <field name="print_report_name">'Lista de reclamos'</field>
+            <field name="binding_model_id" eval="False" />
+            <field name="paperformat_id" ref="hola_calidad.landscape" />
+            <field name="binding_type">report</field>
+        </record>
+        
+        <template id="complaint_report_list">
+            <t t-call="web.html_container">
+                <t t-set="company" t-value="res_company" />
+                <div class="header">
+                    <style type="text/css">
+                            .tg  {border-collapse:collapse;border-spacing:0;margin:0px auto;width:100%;}
+                            .tg td{border-color:black;border-style:solid;border-width:1px;font-family: Palatino, Palatino Linotype, Palatino LT STD, Book Antiqua, Georgia, serif;font-size:14px;
+                            overflow:hidden;padding:10px 5px;word-break:normal;text-align:middle;align:center;}
+                            .tg th{border-color:black;border-style:solid;border-width:1px;font-family: Palatino, Palatino Linotype, Palatino LT STD, Book Antiqua, Georgia, serif;font-size:14px;
+                            font-weight:normal;overflow:hidden;padding:10px 5px;word-break:normal;}
+                            .tg .tg-9wq8{border-color:inherit;text-align:center;vertical-align:middle}
+                            .tg .tg-1wig{border-color:inherit;text-align:center;vertical-align:middle;font-size:16px;font-weight:bold;}
+                            .tg .tg-0lax{border-color:inherit;text-align:center;vertical-align:middle;font-size:12px;}
+                        </style>
+                    <table class="tg">
+                        <tbody>
+                            <tr>
+                                <td class="tg-1wig" rowspan="3" width="20%" style="width:15%">
+                                    <img t-if="company.logo" t-att-src="'data:image/png;base64,%s' % to_text(company.logo)" style="max-width:100px;max-height:100px;vertical-align:middle;" />
+                                </td>
+                                <td class="tg-1wig" rowspan="3" width="80%" style="width:65%;">
+                                        RECLAMOS
+                                    </td>
+                                <td class="tg-0lax" width="20%" style="width:20%">
+                                    Código:
+                                    <span t-esc="code" />
+                                </td>
+                            </tr>
+                            <tr>
+                                <td class="tg-0lax">
+                                    <span>Versión: 1</span>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td class="tg-0lax">
+                                    <span>Fecha de validación:</span>
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+                <t t-call="web.external_layout">
+                    <div class="page">
+                        <table class="tg">
+                            <tr>
+                                <th class="tg-d14o">DESCRIPCIÓN</th>
+                                <th class="tg-d14o">NOTIFICADA POR</th>
+                                <th class="tg-d14o">ACCIÓN</th>
+                                <th class="tg-d14o">PERCEPCIÓN DEL CLIENTE</th>
+                                <th class="tg-d14o">LIBRO DE RECLAMACIONES</th>
+                                <th class="tg-d14o">PRODUCTO/SERVICIO</th>
+                                <th class="tg-d14o">FECHA DE DETECCIÓN</th>
+                                <th class="tg-d14o">FECHA DE SOLUCIÓN</th>
+                                <th class="tg-d14o">SATISFECHO</th>
+                            </tr>
+                            <t t-foreach="docs" t-as="doc">
+                                <tr>
+                                    <td class="tg-wo30">
+                                        <span t-field="doc.name" />
+                                    </td>
+                                    <td class="tg-wo30">
+                                        <t t-if="doc.type == 'customer'">
+                                            <span t-field="doc.employee_notify_id.name" />
+                                        </t>
+                                        <t t-if="doc.type == 'supplier'">
+                                            <span t-field="doc.partner_id.name" />
+                                        </t>
+                                    </td>
+                                    <td class="tg-wo30">
+                                        <span t-field="doc.quick_action_id.name" />
+                                    </td>
+                                    <td class="tg-wo30">
+                                        <span t-field="doc.perspective" />
+                                    </td>
+                                    <td class="tg-wo30">
+                                        <t t-if="doc.reclamation_book">
+                                            <span>Sí</span>
+                                        </t>
+                                        <t t-else="">
+                                            <span>No</span>
+                                        </t>
+                                    </td>
+                                    <td class="tg-wo30">
+                                        <span t-field="doc.product_id" />
+                                    </td>
+                                    <td class="tg-wo30">
+                                        <span t-field="doc.date_incident" />
+                                    </td>
+                                    <td class="tg-wo30">
+                                        <span t-field="doc.date_solution" />
+                                    </td>
+                                    <td class="tg-wo30">
+                                        <t t-if="doc.satisfied">
+                                            <span>Sí</span>
+                                        </t>
+                                        <t t-else="">
+                                            <span>No</span>
+                                        </t>
+                                    </td>
+                                </tr>
+                            </t>
+                        </table>
+                    </div>
+                    <div class="footer" style="border-top: 1px solid black;font-size: 8px;">
+                        <div class="text-center" style="border-top: 1px solid black;font-size: 10px;text-align:center;">
+                            ©
+                            <span t-field="company.name" />
+                            . All Rights Reserved.
+                            <br />
+                            PROHIBIDA SU REPRODUCCIÓN SIN AUTORIZACIÓN EXPRESA DE LA DIRECCIÓN.
+                            <br />
+                            CUALQUIER COPIA IMPRESA NO CONTROLADA. DEBE SER ROTULADA COMO "COPIA NO CONTROLADA".
+                            <br />
+                            CONSULTE VERSIÓN ELECTRÓNICA
+                        </div>
+                    </div>
+                </t>
+            </t>
+        </template>
+
+        <report id="action_report_complaint2" model="complaint.complaint" string="Reclamo" report_type="qweb-pdf" name="mgmtsystem_complaints.single_complaint_report2" file="Reporte de reclamo" paperformat="hola_calidad.portrait" />
+
+        <template id="single_complaint_report2">
+            <t t-call="web.html_container">
+                <t t-foreach="docs" t-as="doc">
+                    <t t-if="doc and 'company_id' in doc">
+                        <t t-set="company" t-value="doc.company_id" />
+                    </t>
+                    <t t-if="not doc or not 'company_id' in doc">
+                        <t t-set="company" t-value="res_company" />
+                    </t>
+                    <div class="header">
+                        <style type="text/css">
+                            .tg  {border-collapse:collapse;border-spacing:0;margin:0px auto;width:100%;}
+                            .tg td{border-color:black;border-style:solid;border-width:1px;font-family: Palatino, Palatino Linotype, Palatino LT STD, Book Antiqua, Georgia, serif;font-size:14px;
+                            overflow:hidden;padding:10px 5px;word-break:normal;text-align:middle;align:center;}
+                            .tg th{border-color:black;border-style:solid;border-width:1px;font-family: Palatino, Palatino Linotype, Palatino LT STD, Book Antiqua, Georgia, serif;font-size:14px;
+                            font-weight:normal;overflow:hidden;padding:10px 5px;word-break:normal;}
+                            .tg .tg-9wq8{border-color:inherit;text-align:center;vertical-align:middle}
+                            .tg .tg-1wig{border-color:inherit;text-align:center;vertical-align:middle;font-size:16px;font-weight:bold;}
+                            .tg .tg-0lax{border-color:inherit;text-align:center;vertical-align:middle;font-size:12px;}
+                        </style>
+                        <table class="tg">
+                            <tbody>
+                                <tr>
+                                    <td class="tg-1wig" rowspan="3" width="20%" style="width:15%">
+                                        <img t-if="company.logo" t-att-src="'data:image/png;base64,%s' % to_text(company.logo)" style="max-width:100px;max-height:100px;vertical-align:middle;" />
+                                    </td>
+                                    <td class="tg-1wig" rowspan="3" width="80%" style="width:65%;">
+                                        RECLAMOS
+                                    </td>
+                                    <td class="tg-0lax" width="20%" style="width:20%">
+                                        Código:
+                                        <span t-field="doc.code" />
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td class="tg-0lax">
+                                        <span>Versión: 1</span>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td class="tg-0lax">
+                                        <span>Fecha de validación:</span>
+                                        <span t-field="doc.validation_date" />
+                                    </td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                    <t t-call="web.external_layout">
+                        <div class="page">
+                            <style type="text/css">
+                                .tg  {border-collapse:collapse;border-spacing:0;width:100%;}
+                                .tg td{border-color:black;border-style:solid;border-width:1px;font-family:Arial, sans-serif;font-size:14px;
+                                overflow:hidden;padding:10px 5px;word-break:normal;}
+                                .tg th{border-color:black;border-style:solid;border-width:1px;font-family:Arial, sans-serif;font-size:14px;
+                                font-weight:normal;overflow:hidden;padding:10px 5px;word-break:normal;}
+                                .tg .tg-amwm{background-color:#efefef;border-color:#c0c0c0;font-weight:bold;text-align:left;vertical-align:top}
+                                .tg .tg-1wig{background-color:#efefef;border-color:#c0c0c0;font-weight:bold;text-align:center;vertical-align:top}
+                                .tg .tg-0lax{border-color:#c0c0c0;text-align:left;vertical-align:top}
+                            </style>
+                            <table class="tg">
+                                <tbody>
+                                    <tr>
+                                        <td class="tg-amwm">FECHA DE DETECCIÓN</td>
+                                        <td class="tg-0lax">
+                                            <span t-field="doc.date_incident" />
+                                        </td>
+                                        <td class="tg-1wig">CÓDIGO</td>
+                                        <td class="tg-0lax">
+                                            <span t-field="doc.code" />
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td class="tg-amwm">FECHA DE SOLUCIÓN</td>
+                                        <td class="tg-0lax" colspan="3">
+                                            <span t-field="doc.date_solution" />
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td class="tg-amwm">NOTIFICADA POR</td>
+                                        <td class="tg-0lax" colspan="3">
+                                            <t t-if="doc.type == 'customer'">
+                                                <span t-field="doc.employee_notify_id.name" />
+                                            </t>
+                                            <t t-if="doc.type == 'supplier'">
+                                                <span t-field="doc.partner_id.name" />
+                                            </t>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td class="tg-amwm">PRODUCTO</td>
+                                        <td class="tg-0lax" colspan="3">
+                                            <span t-field="doc.product_id.name" />
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td class="tg-amwm">CÓDIGO DEL PRODUCTO</td>
+                                        <td class="tg-0lax" colspan="3">
+                                            <span t-field="doc.product_id.default_code" />
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td class="tg-amwm">DESCRIPCIÓN DEL PRODUCTO</td>
+                                        <td class="tg-0lax" colspan="3">
+                                            <span t-field="doc.product_id.description" />
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td class="tg-amwm">TIPO DE RECLAMO</td>
+                                        <td class="tg-0lax" colspan="3">
+                                            <span t-field="doc.type" />
+                                        </td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                            <div style="padding-top:2em;">
+                                <strong>Investigación</strong>
+                                <div style="border:1px solid #c0c0c0;vertical-align:top;">
+                                    <span t-field="doc.investigation" style="vertical-align:top;padding: 10px 10px 10px 10px;" />
+                                </div>
+                                <strong>Conclusiones</strong>
+                                <div style="border:1px solid #c0c0c0;vertical-align:top;">
+                                    <span t-field="doc.conclusions" style="vertical-align:top;padding: 10px 10px 10px 10px;" />
+                                </div>
+                                <strong>Acción correctiva</strong>
+                                <div style="border:1px solid #c0c0c0;vertical-align:top;">
+                                    <span t-field="doc.quick_action_id" style="vertical-align:top;padding: 10px 10px 10px 10px;" />
+                                </div>
+                            </div>
+                        </div>
+                        <div class="footer" style="border-top: 1px solid black;font-size: 8px;">
+                            <div class="text-center" style="border-top: 1px solid black;font-size: 10px;text-align:center;">
+                                ©
+                                <span t-field="company.name" />
+                                . All Rights Reserved.
+                                <br />
+                                PROHIBIDA SU REPRODUCCIÓN SIN AUTORIZACIÓN EXPRESA DE LA DIRECCIÓN.
+                                <br />
+                                CUALQUIER COPIA IMPRESA NO CONTROLADA. DEBE SER ROTULADA COMO "COPIA NO CONTROLADA".
+                                <br />
+                                CONSULTE VERSIÓN ELECTRÓNICA
+                            </div>
+                        </div>
+                    </t>
+                </t>
+            </t>
+        </template>
+
+    </data>
+</odoo>

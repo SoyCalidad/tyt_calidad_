@@ -1,0 +1,222 @@
+<odoo>
+    <data>
+
+        <record id="record_meeting_wizard_form_view" model="ir.ui.view">
+            <field name="name">Actas de Reunión</field>
+            <field name="model">record.meeting.wizard</field>
+            <field name="arch" type="xml">
+                <form>
+                    <group>
+                        <field name="record_meeting_id"/>
+                    </group>
+                    <p>
+                        Escoja una Acta de Reunión para imprimir
+                    </p>
+                    <footer>
+                        <button name="action_print" type="object" string="Descargar Acuerdos" class="oe_highlight" icon="fa-download" context="{'type_action':'accordance'}"/>
+                        <button name="action_print" type="object" string="Descargar Convocatoria" class="oe_highlight" icon="fa-download" context="{'type_action':'announcement'}"/>
+                        <button name="action_print" type="object" string="Descargar Asistencia" class="oe_highlight" icon="fa-download" context="{'type_action':'attendance'}"/>
+                    </footer>
+                </form>
+            </field>
+        </record>
+
+
+        <record id="record_meeting_wizard_action" model="ir.actions.act_window">
+            <field name="name">Actas de Reunión</field>
+            <field name="type">ir.actions.act_window</field>
+            <field name="res_model">record.meeting.wizard</field>
+
+            <field name="view_mode">form</field>
+            <field name="view_id" ref="record_meeting_wizard_form_view"/>
+            <field name="target">new</field>
+            <field name="binding_type">report</field>
+        </record>
+
+        <report id="report_record_meeting_wizard"
+            model="record.meeting.wizard"
+            string="Actas de Reunión"
+            report_type="qweb-pdf"
+            name="mgmtsystem_comunication.record_meeting_wiz_report"
+            file="Acta de Reunión" />
+
+        <template id="record_meeting_wiz_report">
+
+            <t t-foreach="docs" t-as="doc">
+                <t t-if="doc and 'company_id' in doc">
+                    <t t-set="company" t-value="doc.company_id"/>
+                </t>
+                <t t-if="not doc or not 'company_id' in doc">
+                    <t t-set="company" t-value="res_company"/>
+                </t>
+                <t t-call="web.html_container">
+                    <div class="header">
+                        <TABLE width="100%" height="50" style="display:block;border:1px solid black;font-size:14px;font-weight:bold;max-height:60px; padding-top: 55px ;  border: #000000 2px; padding-left: 0em;" cellspacing="0">
+                            <tr>
+                                <td class="tg-nrix" height="70" colspan="3"/>
+                            </tr>
+                            <tr>
+                                <td style="border: 1px solid black;padding-top: 35px; border-right: 1px solid #fff;" width="20%" rowspan="3" align="center" valign="middle">
+                                    <center>
+                                        <t t-if="company.logo">
+                                            <img t-att-src="image_data_uri(company.logo)" style="max-height:140px;vertical-align:absmiddle;" alt="Logo"/>
+                                        </t>
+                                    </center>
+                                </td>
+                                <td style="border: 1px solid black; text-align:middle;font-weight: bold;  border-left: 1px solid #000;border-right: 1px solid #fff; " width="60%" rowspan="3" align="center" valign="middle">
+                                    <center>
+                                        <h2>ACTA DE REUNIÓN</h2>
+                                        <h3>
+                                            <span t-field="doc.name"/>
+                                        </h3>
+                                    </center>
+                                </td>
+                                <td style="border: 1px solid black; border-left: 1px solid #000;" width="20%" align="center" valign="middle">
+                                    <center>
+                                        <h4>Código: <span t-field="doc.code" /></h4>
+                                    </center>
+                                </td>
+
+                            </tr>
+                            <tr>
+                                <td style="border: 1px solid black;border-top: 1px solid #fff; border-left: 1px solid #000; border-right: 1px solid #000">
+                                    <CENTER>
+                                        <h4>
+                                            Edición:
+                                             
+                                        </h4>
+                                    </CENTER>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td style="border: 1px solid black; border-top: 1px solid #fff; border-left: 1px solid #000;" align="center" valign="middle">
+                                    <CENTER>
+                                        <h4>
+                                            Fecha de aprobación:
+                                            <span t-field="doc.date_release"/>
+                                        </h4>
+                                    </CENTER>
+                                </td>
+                            </tr>
+                        </TABLE>
+
+                    </div>
+
+
+                    <t t-call="web.external_layout">
+
+
+                        <div class="page">
+                            <div class="principal">
+                                <div>
+                                    <TABLE width="100%" height="50" style="display:block;border:1px solid black;font-size:14px;font-weight:bold;max-height:60px; padding-top: 55px ;  border: #000000 2px" cellspacing="0">
+                                        <tr>
+                                            <td class="tg-nrix" height="50" colspan="3"/>
+                                        </tr>
+                                    </TABLE>
+                                </div>
+                                <h4>
+                                    Mediante la presente ACTA DE REUNIÓN se formaliza lo debatido, coordinado y acordado en la reunión realizada con fecha
+                                    <span t-field="doc.date_release" />
+                                    en las instalaciones de
+                                    <span t-field="company.name" />
+                                    , donde estuvieron convocadas las siguientes personas:
+                                    <br/>
+                                    <br/>
+                                    <ul>
+                                        <t t-foreach="doc.employee_ids" t-as="e">
+                                            <li>
+                                                <span t-field="e.name"/>
+                                            </li>
+                                        </t>
+                                    </ul>
+                                    <br/>
+                                    Y con la presencia de los siguientes:
+                                    <br/>
+                                    <br/>
+                                    <ul>
+                                        <t t-foreach="doc.assistance_ids" t-as="a">
+                                            <t t-if="a.assistance != 'F'">
+                                                <li>
+                                                    <span t-field="a.employee_id.name"/>
+                                                </li>
+                                            </t>
+                                        </t>
+                                    </ul>
+                                    <br/>
+                                    <br/>
+                                    A continuación se detalla los temas y acuerdos coordinados en reunión.
+                                    <br/>
+                                    <br/>
+                                    <div class="table">
+                                        <style type="text/css">
+                                            .tg  {border-collapse:collapse;border-spacing:0;border-color:#EEE;width:100%}
+                                            .tg td{font-family: Palatino, Palatino Linotype, Palatino LT STD, Book Antiqua, Georgia, serif;font-size:14px;padding:10px 5px;border-style:solid;border-width:0px;overflow:hidden;word-break:normal;border-color:#000;color:#002b36;background-color:#000;}
+                                            .tg th{font-family: Palatino, Palatino Linotype, Palatino LT STD, Book Antiqua, Georgia, serif;font-size:14px;font-weight:normal;padding:10px 5px;border-style:solid;border-width:0px;overflow:hidden;word-break:normal;border-color:#000;color:#000;background-color:#EEE;}
+                                            .tg .tg-cly1{text-align:center;vertical-align:middle}
+                                            .tg .tg-1wig{font-weight:bold;text-align:center;vertical-align:middle}
+                                            .tg .tg-yla0{font-weight:bold;text-align:center;vertical-align:middle}
+                                            .tg .tg-0lax{text-align:left;vertical-align:top}
+                                        </style>
+                                        <table class="tg">
+                                            <tr>
+                                                <th class="tg-cly1">
+                                                    <span style="font-weight:bold">TEMA ESPECÍFICO</span>
+                                                </th>
+                                                <th class="tg-yla0">DETALLE</th>
+                                                <th class="tg-yla0">ACUERDOS</th>
+                                                <th class="tg-1wig">RESPONSABLES</th>
+                                            </tr>
+                                            <t t-foreach="doc.line_ids" t-as="l">
+                                                <tr>
+                                                    <td>
+                                                        <h4>
+                                                            <span t-field="l.name"/>
+                                                        </h4>
+                                                    </td>
+                                                    <td>
+                                                        <h4>
+                                                            <span t-field="l.detail"/>
+                                                        </h4>
+                                                    </td>
+                                                    <td>
+                                                        <h4>
+                                                            <span t-field="l.resume"/>
+                                                        </h4>
+                                                    </td>
+                                                    <td>
+                                                        <h4>
+                                                            <span t-field="l.user_id.name"/>
+                                                        </h4>
+                                                    </td>
+                                                </tr>
+                                            </t>
+                                        </table>
+                                    </div>
+                                </h4>
+                                <br/>
+                            </div>
+                        </div>
+                        <div class="footer" style="border-top: 1px solid black;font-size: 8px;">
+                            <div class="text-center" style="border-top: 1px solid black;font-size: 10px;text-align:center;">
+                                ©
+                                <span t-field="company.name"/>
+                                . All Rights Reserved.
+                                <br/>
+                                PROHIBIDA SU REPRODUCCIÓN SIN AUTORIZACIÓN EXPRESA DE LA DIRECCIÓN.
+                                <br/>
+                                CUALQUIER COPIA IMPRESA NO CONTROLADA. DEBE SER ROTULADA COMO "COPIA NO CONTROLADA".
+                                <br/>
+                                CONSULTE VERSIÓN ELECTRÓNICA
+                            </div>
+                        </div>
+                    </t>
+                </t>
+            </t>
+        </template>
+
+
+
+
+    </data>
+</odoo>

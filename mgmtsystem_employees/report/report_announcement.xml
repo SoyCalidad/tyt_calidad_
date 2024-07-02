@@ -1,0 +1,172 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--Estructura basica de reportes-->
+<odoo>
+   <data>
+      <template id="report_announcement_template">
+         <t t-foreach="docs" t-as="o">
+            <t t-if="o and 'company_id' in o">
+               <t t-set="company" t-value="o.company_id" />
+            </t>
+            <t t-if="not o or not 'company_id' in o">
+               <t t-set="company" t-value="res_company" />
+            </t>
+            <t t-call="web.html_container">
+               <div class="header">
+                  <style type="text/css">
+                     .tg  {border-collapse:collapse;border-spacing:0;margin:0px auto;width:100%;}
+                     .tg td{border-color:black;border-style:solid;border-width:1px;font-family: Palatino, Palatino Linotype, Palatino LT STD, Book Antiqua, Georgia, serif;font-size:14px;
+                     overflow:hidden;padding:10px 5px;word-break:normal;text-align:middle;align:center;}
+                     .tg th{border-color:black;border-style:solid;border-width:1px;font-family: Palatino, Palatino Linotype, Palatino LT STD, Book Antiqua, Georgia, serif;font-size:14px;
+                     font-weight:normal;overflow:hidden;padding:10px 5px;word-break:normal;}
+                     .tg .tg-9wq8{border-color:inherit;text-align:center;vertical-align:middle}
+                     .tg .tg-1wig{border-color:inherit;text-align:center;vertical-align:middle;font-size:16px;font-weight:bold;}
+                     .tg .tg-0lax{border-color:inherit;text-align:center;vertical-align:middle;font-size:12px;font-weigth:bold;}
+                  </style>
+                  <table class="tg">
+                     <tbody>
+                        <tr>
+                           <td class="tg-1wig" rowspan="2" width="20%" style="width:15%">
+                              <img t-if="company.logo" t-att-src="'data:image/png;base64,%s' % to_text(company.logo)" style="max-width:100px;max-height:100px;vertical-align:middle;" />
+                           </td>
+                           <td class="tg-1wig" rowspan="2" width="80%" style="width:65%;">
+                              INFORME DE CONVOCATORIAS
+                           </td>
+                           <td class="tg-0lax" width="20%" style="width:20%">
+                              Código:
+                              <span t-field="o.reference" />
+                           </td>
+                        </tr>
+                        <!-- <tr>
+                          <td class="tg-0lax" width="20%" style="width:20%">
+                              Edición: <span t-field="o.reference"/>
+                           </td>
+                        </tr> -->
+                        <tr>
+                           <td class="tg-0lax">
+                              
+                                 Hoja
+                              <span class="page" />
+                                 de
+                              <span class="topage" />
+                              
+                           </td>
+                        </tr>
+                     </tbody>
+                  </table>
+
+               </div>
+               <t t-call="web.external_layout">
+                  <div class="page">
+                     <style type="text/css">
+                        .tg  {border-collapse:collapse;border-spacing:0;margin:0px auto;width:100%}
+                        .tg td{border-color:black;border-style:solid;border-width:1px;font-family: Palatino, Palatino Linotype, Palatino LT STD, Book Antiqua, Georgia, serif;font-size:14px;
+                        overflow:hidden;padding:10px 5px;word-break:normal;widht:25%;}
+                        .tg th{border-color:black;border-style:solid;border-width:1px;font-family: Palatino, Palatino Linotype, Palatino LT STD, Book Antiqua, Georgia, serif;font-size:14px;
+                        font-weight:normal;overflow:hidden;padding:10px 5px;word-break:normal;}
+                        .tg .tg-mevu{background-color:#efefef;border-color:#c0c0c0;color:#000000;font-weight:bold;text-align:left;vertical-align:top}
+                        .tg .tg-hx12{background-color:#efefef;border-color:#c0c0c0;font-weight:bold;text-align:left;vertical-align:top}
+                        .tg .tg-wo29{border-color:#c0c0c0;text-align:left;vertical-align:top}
+                     </style>
+                     <table class="tg">
+                        <tbody>
+                           <tr>
+                              <td class="tg-hx12">TEMA</td>
+                              <td class="tg-wo29" colspan="3">
+                                 <span t-field="o.name" />
+                              </td>
+                           </tr>
+                           <tr>
+                              <td class="tg-hx12">EXPOSITOR/PONENTE</td>
+                              <td class="tg-wo29" colspan="3">
+                                 <t t-if="o.exponent_id">
+                                    <span t-field="o.exponent_id.name" />
+                                 </t>
+                              </td>
+                           </tr>
+                           <tr>
+                              <td class="tg-hx12">MES</td>
+                              <td class="tg-wo29">
+                                 <span t-field="o.month_training" />
+                              </td>
+                              <td class="tg-mevu" width="20%">FIRMA</td>
+                              <td class="tg-wo29" />
+                           </tr>
+                           <tr>
+                              <td class="tg-hx12">FECHA Y HORA</td>
+                              <td class="tg-wo29">
+                                 <span t-field="o.date_training" />
+                              </td>
+                              <td class="tg-mevu">DURACIÓN (Min.)</td>
+                              <td class="tg-wo29">
+                                 <span t-field="o.minutes_duration" />
+                              </td>
+                           </tr>
+                        </tbody>
+                     </table>
+                     <br />
+                     <style type="text/css">
+                        .tg  {border-collapse:collapse;border-spacing:0;margin:0px auto;}
+                        .tg td{border-style:solid;border-width:0px;font-family: Palatino, Palatino Linotype, Palatino LT STD, Book Antiqua, Georgia, serif;font-size:14px;overflow:hidden;
+                        padding:10px 5px;word-break:normal;text-align:center;}
+                        .tg th{border-style:solid;border-width:0px;font-family: Palatino, Palatino Linotype, Palatino LT STD, Book Antiqua, Georgia, serif;font-size:14px;font-weight:normal;
+                        overflow:hidden;padding:10px 5px;word-break:normal;}
+                        .tg .tg-ve35{border-color:#c0c0c0;text-align:left;vertical-align:middle}
+                        .tg .tg-5d78{background-color:#efefef;border-color:#c0c0c0;color:#000000;font-weight:bold;text-align:center;vertical-align:middle}
+                     </style>
+                     <table class="tg">
+                        <tbody>
+                           <tr>
+                              <td class="tg-5d78" width="25%">NOMBRES Y APELLIDOS</td>
+                              <td class="tg-5d78" widht="15%">DEPARTAMENTO</td>
+                              <td class="tg-5d78" widht="15%">CARGO</td>
+                              <td class="tg-5d78" widht="15%">TELÉFONO</td>
+                              <td class="tg-5d78" style="min-width:30%;">FIRMA</td>
+                           </tr>
+                           <t t-foreach="o.employee_ids" t-as="i">
+                              <tr>
+                                 <td class="tg-ve35">
+                                    <span t-field="i.name" />
+                                 </td>
+                                 <td class="tg-ve35">
+                                    <span t-field="i.department_id" />
+                                 </td>
+                                 <td class="tg-ve35">
+                                    <span t-field="i.job_id" />
+                                 </td>
+                                 <td class="tg-ve35">
+                                    <span t-field="i.work_phone" />
+                                 </td>
+                                 <td class="tg-ve35" />
+                              </tr>
+                           </t>
+                        </tbody>
+                     </table>
+                  </div>
+                  <div class="footer" style="border-top: 1px solid black;font-size: 8px;">
+                     <div class="text-center" style="border-top: 1px solid black;font-size: 10px;text-align:center;">
+                        ©
+                        <span t-field="company.name" />
+                        . All Rights Reserved.
+                        <br />
+                        PROHIBIDA SU REPRODUCCIÓN SIN AUTORIZACIÓN EXPRESA DE LA DIRECCIÓN.
+                        <br />
+                        CUALQUIER COPIA IMPRESA NO CONTROLADA. DEBE SER ROTULADA COMO "COPIA NO CONTROLADA".
+                        <br />
+                        CONSULTE VERSIÓN ELECTRÓNICA
+                     </div>
+                  </div>
+               </t>
+            </t>
+         </t>
+      </template>
+
+      <report id="report_announcement"
+              string="Reporte de la convocatoria"
+              report_type="qweb-pdf"
+              model="mgmtsystem.plan.training"
+              name="mgmtsystem_employees.report_announcement_template"
+              file="Reporte de convocatoria"
+              paperformat="hola_calidad.landscape" />
+
+   </data>
+</odoo>

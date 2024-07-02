@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <record id="comunication_plan_view_form" model="ir.ui.view">
+        <field name="name">comunication.plan.view.form</field>
+        <field name="model">comunication.plan</field>
+        <field name="inherit_id" ref="mgmtsystem_comunication.view_comunication_plan_form"/>
+        <field name="arch" type="xml">
+            <div class="oe_button_box" position="inside">
+                <button name="action_document_ids" type="object" class="oe_stat_button" icon="fa-file-text-o">
+                    <field string="Documentos" name="documents_count" widget="statinfo"/>
+                </button>
+            </div>
+            <notebook position="inside">
+                <page name="dms_document_ids" string="Documentos">
+                    <field name="dms_document_ids" mode="kanban"></field>
+                </page>
+            </notebook>
+        </field>
+    </record>
+    <record id="comunication_plan_line_view_form" model="ir.ui.view">
+        <field name="name">comunication.plan.line.view.form</field>
+        <field name="model">comunication.plan.line</field>
+        <field name="inherit_id" ref="mgmtsystem_comunication.view_plan_line_form"/>
+        <field name="arch" type="xml">
+            <div class="oe_button_box" position="inside">
+                <button name="action_document_ids" type="object" class="oe_stat_button" icon="fa-file-text-o">
+                    <field string="Documentos" name="documents_count" widget="statinfo"/>
+                </button>
+            </div>
+            <notebook position="inside">
+                <page name="dms_document_ids" string="Documentos">
+                    <field name="dms_document_ids" mode="kanban"></field>
+                </page>
+            </notebook>
+        </field>
+    </record>
+    <record id="record_meeting_view_form" model="ir.ui.view">
+        <field name="name">record.meeting.view.form</field>
+        <field name="model">record.meeting</field>
+        <field name="inherit_id" ref="mgmtsystem_comunication.view_record_meeting_form"/>
+        <field name="arch" type="xml">
+            <div class="oe_button_box" position="inside">
+                <button name="action_document_ids" type="object" class="oe_stat_button" icon="fa-file-text-o">
+                    <field string="Documentos" name="documents_count" widget="statinfo"/>
+                </button>
+            </div>
+            <notebook position="inside">
+                <page name="dms_document_ids" string="Documentos">
+                    <field name="dms_document_ids" mode="kanban"/>
+                </page>
+            </notebook>
+        </field>
+    </record>
+</odoo>

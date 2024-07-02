@@ -1,0 +1,105 @@
+<odoo>
+    <data>
+        <report id="action_report_stock_inspection" model="stock_inspection.stock_inspection" string="Ficha de inspección" report_type="qweb-pdf" name="stock_inspection.inspection_report" file="stock_inspection.inspection_report" />
+        <template id="inspection_report">
+            <t t-call="web.html_container">
+                <t t-foreach="docs" t-as="doc">
+                    <t t-if="doc and 'company_id' in doc">
+                        <t t-set="company" t-value="doc.company_id" /></t>
+                    <t t-if="not doc or not 'company_id' in doc">
+                        <t t-set="company" t-value="res_company" /></t>
+                    <div class="header">
+                        <TABLE style="border: 1px solid black;" bgcolor="#EEEEEE" width="100%">
+                            <tr>
+                                <td style="border: 1px solid black;padding-top: 35px;" width="20%" rowspan="3" align="center" valign="middle">
+                                    <center>
+                                        <img t-if="company.logo" t-att-src="'data:image/png;base64,%s' % to_text(company.logo)" style="max-height:140;vertical-align:absmiddle;" />
+                                    </center>
+                                </td>
+                                <td style="border: 1px solid black; text-align:middle" width="60%" rowspan="3" align="center" valign="middle">
+                                    <center>
+                                        <h2>FICHA DE INSPECCIÓN</h2>
+                                        <h3>
+                                            <span t-field="doc.name" />
+                                        </h3>
+                                    </center>
+                                </td>
+                            </tr>
+                        </TABLE>
+                    </div>
+                    <t t-call="web.external_layout">
+                        <div class="page">
+                            <style type="text/css">
+.tg  {border-collapse:collapse;border-spacing:0;width:100%}
+.tg td{font-family:Arial, sans-serif;font-size:14px;padding:10px 5px;border-style:solid;border-width:1px;overflow:hidden;word-break:normal;border-color:black;}
+.tg th{font-family:Arial, sans-serif;font-size:14px;font-weight:normal;padding:10px 5px;border-style:solid;border-width:1px;overflow:hidden;word-break:normal;border-color:black;}
+.tg .tg-cly1{text-align:left;vertical-align:middle}
+.tg .tg-wa1i{font-weight:bold;text-align:center;vertical-align:middle;background-color:#dae8fc;}
+.tg .tg-0lax{text-align:left;vertical-align:top}
+                            </style>
+                            <div class="tg-wrap">
+                                <table class="tg" width="100%">
+                                    <tr>
+                                        <td class="tg-wa1i">PROVEEDOR</td>
+                                        <td class="tg-0lax">
+                                            <span t-field="doc.proveedor_ids.name"/>
+                                        </td>
+                                        <td class="tg-wa1i">ORDEN DE PEDIDO</td>
+                                        <td class="tg-cly1">
+                                            <span t-field="doc.purchase_order_id"/>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td class="tg-wa1i">RESPONSABLE</td>
+                                        <td class="tg-0lax">
+                                            <span t-field="doc.user_ids.name"/>
+                                        </td>
+                                        <td class="tg-wa1i">FECHA DE INSPECCIÓN</td>
+                                        <td class="tg-cly1">
+                                            <span t-field="doc.date_inspection"/>
+                                        </td>
+                                    </tr>
+                                </table>
+                            </div>
+                        </div>
+                        <br></br>
+                        <br></br>
+                        <style type="text/css">
+.tg  {border-collapse:collapse;border-spacing:0;width:100%}
+.tg td{font-family:Arial, sans-serif;font-size:14px;padding:10px 5px;border-style:solid;border-width:1px;overflow:hidden;word-break:normal;border-color:black;}
+.tg th{font-family:Arial, sans-serif;font-size:14px;font-weight:normal;padding:10px 5px;border-style:solid;border-width:1px;overflow:hidden;word-break:normal;border-color:black;}
+.tg .tg-cly1{text-align:left;vertical-align:middle}
+.tg .tg-wa1i{font-weight:bold;text-align:center;vertical-align:middle;background-color:#dae8fc;}
+                        </style>
+                        <div class="tg-wrap">
+                            <table class="tg" width="100%">
+                                <tr>
+                                    <th class="tg-wa1i">DESCRIPCIÓN</th>
+                                    <th class="tg-wa1i">CRITERIO</th>
+                                </tr>
+                                <t t-foreach="doc.criterio_ids" t-as="c">
+                                    <tr>
+                                        <td class="tg-cly1">
+                                            <span t-field="c.complete_name"/>
+                                        </td>
+                                        <td class="tg-cly1">
+                                            <span t-field="c.qualification"/>
+                                        </td>
+                                    </tr>
+                                </t>
+                            </table>
+                        </div>
+                    </t>
+                </t>
+            </t>
+        </template>
+        <report
+            id="action_report_stock_picking_inspection"
+            model="stock.picking.inspection"
+            string="Evaluación de compras"
+            report_type="xlsx"
+            name="stock_inspection.stock_picking_inspection_report"
+            file="Evaluación de compras"
+        />
+    </data>
+</odoo>

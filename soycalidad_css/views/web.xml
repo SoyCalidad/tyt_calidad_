@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+
+    <record model="ir.ui.view" id="frontend_layout_fix">
+        <field name="name">Frontend Layout fix</field>
+        <field name="inherit_id" ref="web.frontend_layout" />
+        <field name="arch" type="xml">
+            <data>
+                <xpath expr="//main" position="attributes">
+                    <attribute name="style">height: auto;</attribute>
+                </xpath>
+            </data>
+        </field>
+    </record>
+
+
+</odoo>

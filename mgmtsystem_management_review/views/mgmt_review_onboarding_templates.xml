@@ -1,0 +1,120 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <!-- ONBOARDING STEPS -->
+
+    <template id="onboarding_mgmt_review_plan_step">
+        <t t-call="base.onboarding_step">
+            <t t-set="title">Programa de revisiones</t>
+            <t t-set="description">Cree un programa de revisiones.</t>
+            <t t-set="done_icon" t-value="'fa-star'" />
+            <t t-set="btn_text">Crear</t>
+            <t t-set="done_text">Se ve bien!</t>
+            <t t-set="method" t-value="'action_open_mgmt_review_plan'" />
+            <t t-set="model" t-value="'res.company'" />
+            <t t-set="state" t-value="state.get('mgmt_review_plan_onboarding_state')" />
+        </t>
+    </template>
+
+    <template id="onboarding_mgmt_review_review_step">
+        <t t-call="base.onboarding_step">
+            <t t-set="title">Revisión por la dirección</t>
+            <t t-set="description">Cree un Revisión por la dirección.</t>
+            <t t-set="done_icon" t-value="'fa-star'" />
+            <t t-set="btn_text">Crear</t>
+            <t t-set="done_text">Se ve bien!</t>
+            <t t-set="method" t-value="'action_open_mgmt_review_review'" />
+            <t t-set="model" t-value="'res.company'" />
+            <t t-set="state" t-value="state.get('mgmt_review_review_onboarding_state')" />
+        </t>
+    </template>
+
+    <template id="onboarding_mgmt_review_record_step">
+        <t t-call="base.onboarding_step">
+            <t t-set="title">Actas de reunión</t>
+            <t t-set="description">Cree un acta de reunión.</t>
+            <t t-set="done_icon" t-value="'fa-star'" />
+            <t t-set="btn_text">Crear</t>
+            <t t-set="done_text">Se ve bien!</t>
+            <t t-set="method" t-value="'action_open_mgmt_review_record'" />
+            <t t-set="model" t-value="'res.company'" />
+            <t t-set="state" t-value="state.get('mgmt_review_record_onboarding_state')" />
+        </t>
+    </template>
+
+
+    <!-- ONBOARDING PANELS -->
+    <template id="mgmt_review_onboarding_panel" name="mgmt_review.onboarding.panel">
+        <t t-call="base.onboarding_container">
+            <t t-set="classes" t-value="'o_onboarding_blue'"/>
+            <t t-set="bg_image" t-value="'/account/static/src/img/account_invoice_onboarding_bg.jpg'"/>
+            <t t-set="close_method" t-value="'action_close_mgmt_review_onboarding'"/>
+            <t t-set="close_model" t-value="'res.company'"/>
+            <t t-set="text_completed">Felicitaciones! Ha completado todo.</t>
+            <t t-call="mgmtsystem_management_review.onboarding_mgmt_review_plan_step" name="mgmt_review_plan_step" />
+            <t t-call="mgmtsystem_management_review.onboarding_mgmt_review_review_step" name="mgmt_review_review_step" />
+            <t t-call="mgmtsystem_management_review.onboarding_mgmt_review_record_step" name="mgmt_review_record_step" />
+        </t>
+    </template>
+
+    <!-- Views -->
+
+    <record id="onboarding_mgmt_review_plan_form" model="ir.ui.view">
+        <field name="name">management.review.plan.inherit.view.form</field>
+        <field name="model">management.review.plan</field>
+        <field name="inherit_id" ref="mgmtsystem_management_review.management_review_plan_form_view"/>
+        <field name="priority">1000</field>
+        <field name="mode">primary</field>
+        <field name="arch" type="xml">
+            <form position="inside">
+                <footer position="replace">
+                    <button name="action_save_onboarding_mgmt_review_plan_step" class="btn btn-primary" type="object" string="Crear" />
+                    <button special="cancel" string="Cancelar" />
+                </footer>
+            </form>
+        </field>
+    </record>
+
+    <record id="onboarding_mgmt_review_review_form" model="ir.ui.view">
+        <field name="name">management.review.inherit.view.form</field>
+        <field name="model">management.review</field>
+        <field name="inherit_id" ref="mgmtsystem_management_review.management_review_form_view"/>
+        <field name="priority">1000</field>
+        <field name="mode">primary</field>
+        <field name="arch" type="xml">
+            <form position="inside">
+                <footer position="replace">
+                    <button name="action_save_onboarding_mgmt_review_review_step" class="btn btn-primary" type="object" string="Crear" />
+                    <button special="cancel" string="Cancelar" />
+                </footer>
+            </form>
+        </field>
+    </record>
+
+    <record id="action_mgmt_review_plan_configurator" model="ir.actions.act_window">
+        <field name="type">ir.actions.act_window</field>
+        <field name="name">Cree un Programa de revisiones</field>
+        <field name="view_mode">form</field>
+        <field name="target">new</field>
+        <field name="res_model">management.review.plan</field>
+        <field name="view_id" ref="mgmtsystem_management_review.onboarding_mgmt_review_plan_form"/>
+    </record>
+
+    <record id="action_mgmt_review_review_configurator" model="ir.actions.act_window">
+        <field name="type">ir.actions.act_window</field>
+        <field name="name">Cree un Revisión por la dirección</field>
+        <field name="view_mode">form</field>
+        <field name="target">new</field>
+        <field name="res_model">management.review</field>
+        <field name="view_id" ref="mgmtsystem_management_review.onboarding_mgmt_review_review_form"/>
+    </record>
+
+    <record id="action_mgmt_review_record_configurator" model="ir.actions.act_window">
+        <field name="type">ir.actions.act_window</field>
+        <field name="name">Cree un acta de reunión</field>
+        <field name="view_mode">form</field>
+        <field name="target">new</field>
+        <field name="res_model">record.meeting</field>
+        <field name="view_id" ref="mgmtsystem_comunication.onboarding_comunication_record_form"/>
+    </record>
+
+</odoo>

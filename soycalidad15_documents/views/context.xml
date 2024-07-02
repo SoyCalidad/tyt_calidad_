@@ -1,0 +1,105 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <record id="internal_issue_docs_view_form" model="ir.ui.view">
+        <field name="name">mgmtsystem.context.internal_issue.view.form</field>
+        <field name="model">mgmtsystem.context.internal_issue</field>
+        <field name="inherit_id" ref="mgmtsystem_context.context_internal_issue_view_form"/>
+        <field name="arch" type="xml">
+            <xpath expr="//button[@name='open_change_request_view']" position="before">
+                <button name="action_open_documents"
+                    class="oe_stat_button"
+                    groups="documents.group_documents_user"
+                    icon="fa-file-text"
+                    type="object">
+                    <field name="document_count" widget="statinfo" string="Documents"/>
+                </button>
+            </xpath>
+        </field>
+    </record>
+
+    <record id="external_issue_docs_view_form" model="ir.ui.view">
+        <field name="name">mgmtsystem.context.external_issue.view.form</field>
+        <field name="model">mgmtsystem.context.external_issue</field>
+        <field name="inherit_id" ref="mgmtsystem_context.context_external_issue_view_form"/>
+        <field name="arch" type="xml">
+            <xpath expr="//button[@name='open_change_request_view']" position="before">
+                <button name="action_open_documents"
+                    class="oe_stat_button"
+                    groups="documents.group_documents_user"
+                    icon="fa-file-text"
+                    type="object">
+                    <field name="document_count" widget="statinfo" string="Documents"/>
+                </button>
+            </xpath>
+        </field>
+    </record>
+
+    <record id="swot_docs_view_form" model="ir.ui.view">
+        <field name="name">mgmtsystem.context.swot.view.form</field>
+        <field name="model">mgmtsystem.context.swot</field>
+        <field name="inherit_id" ref="mgmtsystem_context.context_swot_view_form"/>
+        <field name="arch" type="xml">
+            <xpath expr="//button[@name='open_change_request_view']" position="before">
+                <button name="action_open_documents"
+                    class="oe_stat_button"
+                    groups="documents.group_documents_user"
+                    icon="fa-file-text"
+                    type="object">
+                    <field name="document_count" widget="statinfo" string="Documents"/>
+                </button>
+            </xpath>
+        </field>
+    </record>
+
+    <record id="pest_docs_view_form" model="ir.ui.view">
+        <field name="name">mgmtsystem.context.pest.view.form</field>
+        <field name="model">mgmtsystem.context.pest</field>
+        <field name="inherit_id" ref="mgmtsystem_context.pest_analysis_view_form"/>
+        <field name="arch" type="xml">
+            <xpath expr="//button[@name='open_change_request_view']" position="before">
+                <button name="action_open_documents"
+                    class="oe_stat_button"
+                    groups="documents.group_documents_user"
+                    icon="fa-file-text"
+                    type="object">
+                    <field name="document_count" widget="statinfo" string="Documents"/>
+                </button>
+            </xpath>
+        </field>
+    </record>
+
+    <record id="stakeholders_docs_view_form" model="ir.ui.view">
+        <field name="name">mgmtsystem.stakeholders.view.form</field>
+        <field name="model">mgmtsystem.stakeholders</field>
+        <field name="inherit_id" ref="mgmtsystem_context.stakeholders_view_form"/>
+        <field name="arch" type="xml">
+            <xpath expr="//button[@name='open_change_request_view']" position="before">
+                <button name="action_open_documents"
+                    class="oe_stat_button"
+                    groups="documents.group_documents_user"
+                    icon="fa-file-text"
+                    type="object">
+                    <field name="document_count" widget="statinfo" string="Documents"/>
+                </button>
+            </xpath>
+        </field>
+    </record>
+
+    <record id="policy_docs_view_form" model="ir.ui.view">
+        <field name="name">mgmtsystem.context.policy.view.form</field>
+        <field name="model">mgmtsystem.context.policy</field>
+        <field name="inherit_id" ref="mgmtsystem_context.context_policy_view_form"/>
+        <field name="arch" type="xml">
+            <xpath expr="//button[@name='open_change_request_view']" position="before">
+                <button name="action_open_documents"
+                    class="oe_stat_button"
+                    groups="documents.group_documents_user"
+                    icon="fa-file-text"
+                    type="object">
+                    <field name="document_count" widget="statinfo" string="Documents"/>
+                </button>
+            </xpath>
+        </field>
+    </record>
+
+</odoo>

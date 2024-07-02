@@ -1,0 +1,405 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--Estructura basica de reportes-->
+<odoo>
+   <data>
+      <template id="reporte_encuestas_template">
+         <t t-foreach="docs" t-as="o">
+            <t t-if="o and 'company_id' in o">
+               <t t-set="company" t-value="o.company_id" />
+            </t>
+            <t t-if="not o or not 'company_id' in o">
+               <t t-set="company" t-value="res_company" />
+            </t>
+            <div class="header">
+               <style type="text/css">
+                  .tg  {border-collapse:collapse;border-spacing:0;margin:0px auto;width:100%;}
+                  .tg td{border-color:black;border-style:solid;border-width:1px;font-family: Palatino, Palatino Linotype, Palatino LT STD, Book Antiqua, Georgia, serif;font-size:14px;
+                  overflow:hidden;padding:10px 5px;word-break:normal;text-align:middle;align:center;}
+                  .tg th{border-color:black;border-style:solid;border-width:1px;font-family: Palatino, Palatino Linotype, Palatino LT STD, Book Antiqua, Georgia, serif;font-size:14px;
+                  font-weight:normal;overflow:hidden;padding:10px 5px;word-break:normal;}
+                  .tg .tg-9wq8{border-color:inherit;text-align:center;vertical-align:middle}
+                  .tg .tg-1wig{border-color:inherit;text-align:center;vertical-align:middle;font-size:16px;font-weight:bold;}
+                  .tg .tg-0lax{border-color:inherit;text-align:center;vertical-align:middle;font-size:12px;}
+               </style>
+               <table class="tg">
+                  <tbody>
+                     <tr>
+                        <td class="tg-1wig" rowspan="3" width="20%" style="width:15%">
+                           <img t-if="company.logo" t-att-src="'data:image/png;base64,%s' % to_text(company.logo)" style="max-width:100px;max-height:100px;vertical-align:middle;" />
+                        </td>
+                        <td class="tg-1wig" rowspan="3" width="80%" style="width:65%;">
+                           <span style="font-size:18px;font-weight:bold;">ENCUESTA</span>
+                           <br />
+                           <span t-field="o.title" style="font-size:15px;font-weight:bold;" />
+                        </td>
+                        <td class="tg-0lax" width="20%" style="width:20%">
+                           Código:
+                           <t t-esc="code" />
+                        </td>
+                     </tr>
+                     <tr>
+                        <td class="tg-0lax">
+                           Versión:
+                        </td>
+                     </tr>
+                     <tr>
+                        <td class="tg-0lax">
+                           Fecha de realización:
+                           <span t-field="o.date_init" />
+                        </td>
+                     </tr>
+                  </tbody>
+               </table>
+            </div>
+            <t t-call="web.html_container">
+               <t t-call="web.external_layout">
+                  <div class="page">
+                     <div class="cover" style="page-break-after: always;top:50%;">
+                        <center>
+                           <style type="text/css">
+                              .tg  {border-collapse:collapse;border-spacing:0;}
+                              .tg td{font-family: Palatino, Palatino Linotype, Palatino LT STD, Book Antiqua, Georgia, serif;font-size:16px;padding:10px 5px;border-style:solid;border-width:1px;overflow:hidden;word-break:normal;border-color:black;}
+                              .tg th{font-family: Palatino, Palatino Linotype, Palatino LT STD, Book Antiqua, Georgia, serif;font-size:16px;font-weight:normal;padding:10px 5px;border-style:solid;border-width:1px;overflow:hidden;word-break:normal;border-color:black;}
+                              .tg .tg-zv36{font-weight:bold;background-color:#ffffff;border-color:inherit;text-align:left;vertical-align:top;width:33%}
+                              .tg .tg-nrix{text-align:center;vertical-align:middle;font-weight: bold;border-style: none;font-size:25px;}
+                              .tg .tg-rq3n{background-color:#ffffff;text-align:center;vertical-align:middle;border-style: none;font-size:20px;}
+                              .tg .tg-7g6k{font-weight:bold;background-color:#efefef;border-color:inherit;text-align:center;vertical-align:top;font-size:16px;}
+                              .tg .tg-3xi5{background-color:#ffffff;border-color:inherit;text-align:center;vertical-align:middle;font-size:14px;}
+                           </style>
+                           <table class="tg" width="85%">
+                              <tr>
+                                 <td class="tg-nrix" colspan="3" />
+                              </tr>
+                              <tr>
+                                 <td class="tg-nrix" colspan="3" />
+                              </tr>
+                              <tr>
+                                 <td class="tg-nrix" colspan="3">
+                                    <span t-field="company.name" />
+                                 </td>
+                              </tr>
+                              <tr>
+                                 <td class="tg-nrix" colspan="3" />
+                              </tr>
+                              <tr>
+                                 <td class="tg-nrix" colspan="3" />
+                              </tr>
+                              <tr>
+                                 <td class="tg-rq3n" colspan="3" />
+                              </tr>
+                              <tr>
+                                 <td class="tg-7g6k">NOMBRE</td>
+                                 <td class="tg-3xi5" colspan="2">
+                                    <span t-field="o.title" />
+                                 </td>
+                              </tr>
+                              <tr>
+                                 <td class="tg-7g6k">FECHA DE ELABORACIÓN</td>
+                                 <td class="tg-3xi5" colspan="2">
+                                    <span t-field="o.date_elaborate" />
+                                 </td>
+                              </tr>
+                              <tr>
+                                 <td class="tg-7g6k">ELABORADO POR</td>
+                                 <td class="tg-3xi5" colspan="2">
+                                    <t t-foreach="o.elaboration_step" t-as="user">
+                                       <span t-field="user.user_id.partner_id.name" />
+                                       <br />
+                                    </t>
+                                 </td>
+                              </tr>
+                              <tr>
+                                 <td class="tg-7g6k">
+                                    Actualizado por:
+                                    <br />
+                                    <t t-foreach="o.elaboration_step" t-as="user">
+                                       <span t-field="user.user_id.partner_id.name" />
+                                       <br />
+                                    </t>
+                                 </td>
+                                 <td class="tg-7g6k">
+                                    Revisado por:
+                                    <br />
+                                    <t t-foreach="o.review_step" t-as="user">
+                                       <span t-field="user.user_id.partner_id.name" />
+                                       <br />
+                                    </t>
+                                 </td>
+                                 <td class="tg-7g6k">
+                                    Aprobado por:
+                                    <br />
+                                    <t t-foreach="o.validation_step" t-as="user">
+                                       <span t-field="user.user_id.partner_id.name" />
+                                       <br />
+                                    </t>
+                                 </td>
+                              </tr>
+                              <tr>
+                                 <td class="tg-zv36">
+                                    Firma:
+                                    <br />
+                                    <t t-foreach="o.elaboration_step" t-as="user">
+                                       <span t-if="o.state in ('validate_ok', 'open', 'closed')" t-raw="user.user_id.signature" style="display:block;" />
+                                       <br />
+                                    </t>
+                                 </td>
+                                 <td class="tg-zv36">
+                                    Firma:
+                                    <br />
+                                    <t t-foreach="o.review_step" t-as="user">
+                                       <span t-if="o.state in ('validate_ok', 'open', 'closed')" t-raw="user.user_id.signature" style="display:block;" />
+                                       <br />
+                                    </t>
+                                 </td>
+                                 <td class="tg-zv36">
+                                    Firma:
+                                    <br />
+                                    <t t-foreach="o.validation_step" t-as="user">
+                                       <span t-if="o.state in ('validate_ok', 'open', 'closed')" t-raw="user.user_id.signature" style="display:block;" />
+                                       <br />
+                                    </t>
+                                 </td>
+                              </tr>
+                              <tr>
+                                 <td class="tg-3xi5">
+                                    <t t-foreach="o.elaboration_step" t-as="user">
+                                       <t t-foreach="user.user_id.employee_ids" t-as="emp">
+                                          <span t-field="emp.job_id.name" />
+                                          <br />
+                                       </t>
+                                       <br />
+                                    </t>
+                                 </td>
+                                 <td class="tg-3xi5">
+                                    <t t-foreach="o.review_step" t-as="user">
+                                       <t t-foreach="user.user_id.employee_ids" t-as="emp">
+                                          <span t-field="emp.job_id.name" />
+                                          <br />
+                                       </t>
+                                       <br />
+                                    </t>
+                                 </td>
+                                 <td class="tg-3xi5">
+                                    <t t-foreach="o.validation_step" t-as="user">
+                                       <t t-foreach="user.user_id.employee_ids" t-as="emp">
+                                          <span t-field="emp.job_id.name" />
+                                          <br />
+                                       </t>
+                                       <br />
+                                    </t>
+                                 </td>
+                              </tr>
+                              <tr>
+                                 <td class="tg-zv36">
+                                    Fecha:
+                                    <span t-field="o.date_elaborate" />
+                                 </td>
+                                 <td class="tg-zv36">
+                                    Fecha:
+                                    <span t-field="o.date_review" />
+                                 </td>
+                                 <td class="tg-zv36">
+                                    Fecha:
+                                    <span t-field="o.date_validate" />
+                                 </td>
+                              </tr>
+                           </table>
+                        </center>
+                        <br />
+                        <br />
+                     </div>
+                     <div>
+                        <font color="black">
+                           <h3 style="text-indent: 50px;">1.FICHA TÉCNICA:</h3>
+                        </font>
+                        <br />
+                        <style type="text/css">
+                           .tg  {border-collapse:collapse;border-spacing:0;margin:0px auto;width:100%}
+                           .tg td{border-color:black;border-style:solid;border-width:1px;font-family: Palatino, Palatino Linotype, Palatino LT STD, Book Antiqua, Georgia, serif;font-size:14px;
+                           overflow:hidden;padding:10px 5px;word-break:normal;}
+                           .tg th{border-color:black;border-style:solid;border-width:1px;font-family: Palatino, Palatino Linotype, Palatino LT STD, Book Antiqua, Georgia, serif;font-size:14px;
+                           font-weight:normal;overflow:hidden;padding:10px 5px;word-break:normal;}
+                           .tg .tg-ve35{border-color:#c0c0c0;text-align:left;vertical-align:middle}
+                           .tg .tg-pwmi{background-color:#efefef;border-color:#c0c0c0;font-weight:bold;text-align:left;vertical-align:middle;width:50%;}
+                           .tg .tg-3n58{background-color:#e2e2e2;border-color:#c0c0c0;font-weight:bold;text-align:center;vertical-align:middle;width:50%;}
+                        </style>
+                        <table class="tg main_data">
+                           <tbody>
+                              <tr>
+                                 <td class="tg-3n58" colspan="2">DATOS PRINCIPALES</td>
+                              </tr>
+                              <tr>
+                                 <td class="tg-pwmi">Títulos de la investigación</td>
+                                 <td class="tg-ve35">
+                                    <span t-field="o.title_complete" />
+                                 </td>
+                              </tr>
+                              <tr>
+                                 <td class="tg-pwmi">Tipo de encuesta</td>
+                                 <td class="tg-ve35">
+                                    <span t-field="o.type_id" />
+                                 </td>
+                              </tr>
+                              <tr>
+                                 <td class="tg-pwmi">Unidad de muestreo</td>
+                                 <td class="tg-ve35">
+                                    <span t-field="o.sampling_unit" />
+                                 </td>
+                              </tr>
+                              <tr>
+                                 <td class="tg-pwmi">Muestreo</td>
+                                 <td class="tg-ve35">
+                                    <span t-field="o.sampling" />
+                                 </td>
+                              </tr>
+                              <tr>
+                                 <td class="tg-pwmi">Público objetivo</td>
+                                 <td class="tg-ve35">
+                                    <span t-field="o.target_audiences" />
+                                 </td>
+                              </tr>
+                              <tr>
+                                 <td class="tg-pwmi">Población total</td>
+                                 <td class="tg-ve35">
+                                    <span t-field="o.total_population" />
+                                 </td>
+                              </tr>
+                              <tr>
+                                 <td class="tg-pwmi">Sitio de encuesta</td>
+                                 <td class="tg-ve35">
+                                    <span t-field="o.site" />
+                                 </td>
+                              </tr>
+                           </tbody>
+                        </table>
+                        <table class="tg dates">
+                           <tbody>
+                              <tr>
+                                 <td class="tg-3n58" colspan="2">FECHAS</td>
+                              </tr>
+                              <tr>
+                                 <td class="tg-pwmi">Fecha de realización</td>
+                                 <td class="tg-ve35">
+                                    <span t-field="o.date_init" />
+                                 </td>
+                              </tr>
+                              <tr>
+                                 <td class="tg-pwmi">Fecha de finalización</td>
+                                 <td class="tg-ve35">
+                                    <span t-field="o.date_fin" />
+                                 </td>
+                              </tr>
+                           </tbody>
+                        </table>
+                        <table class="tg">
+                           <tbody>
+                              <tr>
+                                 <td class="tg-3n58" colspan="2">PROCESAMIENTO DE DATOS</td>
+                              </tr>
+                              <tr>
+                                 <td class="tg-pwmi">Fecha de inicio de proceso</td>
+                                 <td class="tg-ve35">
+                                    <span t-field="o.date_process_init" />
+                                 </td>
+                              </tr>
+                              <tr>
+                                 <td class="tg-pwmi">Fecha de finalización de proceso</td>
+                                 <td class="tg-ve35">
+                                    <span t-field="o.date_process_fin" />
+                                 </td>
+                              </tr>
+                           </tbody>
+                        </table>
+                     </div>
+                  </div>
+                  <div>
+                     <font color="black">
+                        <h3 style="text-indent: 50px;">2.PREGUNTAS:</h3>
+                     </font>
+                     <br />
+                     <table class="tg">
+                        <tbody>
+                           <tr>
+                              <td class="tg-3n58" colspan="2">PREGUNTAS</td>
+                           </tr>
+                           <tr>
+                              <td class="tg-pwmi">Título</td>
+                              <td class="tg-pwmi">Tipo</td>
+                           </tr>
+                           <t t-foreach="o.question_and_page_ids" t-as="q">
+                              <tr>
+                                 <td class="tg-ve35">
+                                    <span t-field="q.title" />
+                                 </td>
+                                 <td class="tg-ve35">
+                                    <span t-field="q.question_type" />
+                                 </td>
+                              </tr>
+                           </t>
+                        </tbody>
+                     </table>
+                  </div>
+                  <div>
+                     <font color="black">
+                        <h3 style="text-indent: 50px;">3. CONCLUSIONES Y RECOMENDACIONES:</h3>
+                     </font>
+                     <br />
+                     <table class="tg">
+                        <tbody>
+                           <tr>
+                              <td class="tg-pwmi">Pregunta</td>
+                              <td class="tg-pwmi">Descripción</td>
+                              <td class="tg-pwmi">No conformidad relacionada</td>
+                              <td class="tg-pwmi">Acción correctiva relacionada</td>
+                           </tr>
+                           <t t-foreach="o.line_ids" t-as="q">
+                              <tr>
+                                 <td class="tg-ve35">
+                                    <span t-field="q.question_id" />
+                                 </td>
+                                 <td class="tg-ve35">
+                                    <span t-field="q.description" />
+                                 </td>
+                                 <td class="tg-ve35">
+                                    <span t-field="q.nc_id" />
+                                 </td>
+                                 <td class="tg-ve35">
+                                    <span t-field="q.action_id" />
+                                 </td>
+                              </tr>
+                              <t t-foreach="q.attachment_ids" t-as="att">
+                                 <tr>
+                                    <td class="tg-ve35" colspan="4">
+                                       <img t-att-src="att.image_src" style="max-height:420px; max-width:425px;text-align: center;" />
+                                    </td>
+                                 </tr>
+                              </t>
+                           </t>
+                        </tbody>
+                     </table>
+                     <font color="black">
+                        <h3 style="text-indent: 50px;">4. CONCLUSIONES Y RECOMENDACIONES GENERALES:</h3>
+                     </font>
+                     <br />
+                     <span t-raw="o.con_rec" />
+                  </div>
+                  <div class="footer" style="border-top: 1px solid black;font-size: 8px;">
+                     <div class="text-center" style="border-top: 1px solid black;font-size: 10px;text-align:center;">
+                        ©
+                        <span t-field="company.name" />
+                        . All Rights Reserved.
+                        <br />
+                        PROHIBIDA SU REPRODUCCIÓN SIN AUTORIZACIÓN EXPRESA DE LA DIRECCIÓN.
+                        <br />
+                        CUALQUIER COPIA IMPRESA NO CONTROLADA. DEBE SER ROTULADA COMO "COPIA NO CONTROLADA".
+                        <br />
+                        CONSULTE VERSIÓN ELECTRÓNICA
+                     </div>
+                  </div>
+               </t>
+            </t>
+         </t>
+      </template>
+      <report id="reporte_survey" string="Informe de encuesta" report_type="qweb-pdf" model="survey.survey" name="mgmtsystem_survey.reporte_encuestas_template" file="Informe de encuesta" paperformat="hola_calidad.portrait" />
+   </data>
+</odoo>

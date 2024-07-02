@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data noupdate = "1">
+        <record id="proc_categ_planeaci" model="mgmt.categ">
+            <field name="code">PLAN</field>
+            <field name="name">PLANEACIÓN ESTRATÉGICA</field>
+            <field name="type" ref="mgmtsystem_process.categ_stra" />
+        </record>
+
+        <record id="proc_categ_gestin" model="mgmt.categ">
+            <field name="code">GES</field>
+            <field name="name">GESTIÓN DE LA CALIDAD</field>
+            <field name="type" ref="mgmtsystem_process.categ_stra" />
+        </record>
+
+        <record id="proc_categ_recursos" model="mgmt.categ">
+            <field name="code">REC</field>
+            <field name="name">RECURSOS HUMANOS</field>
+            <field name="type" ref="mgmtsystem_process.categ_help" />
+        </record>
+        
+        <record id="proc_categ_mantenim" model="mgmt.categ">
+            <field name="code">MAN</field>
+            <field name="name">MANTENIMIENTO</field>
+            <field name="type" ref="mgmtsystem_process.categ_help" />
+        </record>
+
+        <record id="proc_categ_legal" model="mgmt.categ">
+            <field name="code">LEG</field>
+            <field name="name">LEGAL</field>
+            <field name="type" ref="mgmtsystem_process.categ_help" />
+        </record>
+
+        <record id="proc_categ_logistic" model="mgmt.categ">
+            <field name="code">LOG</field>
+            <field name="name">LOGISTICA</field>
+            <field name="type" ref="mgmtsystem_process.categ_help" />
+        </record>
+
+        <record id="proc_categ_seguimie" model="mgmt.categ">
+            <field name="code">SEG</field>
+            <field name="name">SEGUIMIENTO Y MEDICIÓN</field>
+            <field name="type" ref="mgmtsystem_process.categ_stra" />
+        </record>
+
+        <record id="proc_categ_revisin" model="mgmt.categ">
+            <field name="code">REV</field>
+            <field name="name">REVISIÓN POR LA DIRECCIÓN</field>
+            <field name="type" ref="mgmtsystem_process.categ_stra" />
+        </record>
+
+    </data>
+</odoo>

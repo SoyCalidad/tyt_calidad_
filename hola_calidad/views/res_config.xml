@@ -1,0 +1,59 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+
+    <record id="view_hola_calidad_configuration" model="ir.ui.view">
+        <field name="name">res.config.settings.view.form.inherit.hola_calidad</field>
+        <field name="model">res.config.settings</field>
+        <field name="inherit_id" ref="base.res_config_settings_view_form"/>
+        <field name="priority" eval="95"/>
+        <field name="arch" type="xml">
+
+            <xpath expr="//div[hasclass('settings')]" position="inside">
+                <div class="app_settings_block" 
+                     data-string="Sistema de gestión" string="Sistema de gestión"
+                     data-key="hola_calidad">
+
+                    <h2>Sistema de gestión</h2>
+                    <div class="row mt16 o_settings_container">
+                        <div class="col-xs-12 col-md-6 o_setting_box hola_calidad">
+                        <!--
+                            <div class="o_setting_right_pane" name="hola_calidad_right_panel">
+                                <label for="resource_calendar_id"/>
+                                <div class="row">
+                                    <div class="text-muted col-md-8">
+                                        Set default calendar used to compute time allocation for leaves, timesheets, ...
+                                    </div>
+                                </div>
+                                <div class="content-group">
+                                    <div class="mt16">
+                                        <field name="resource_calendar_id" class="o_light_label" domain="[('company_id', '=', company_id)]" context="{'default_company_id': company_id}"/>
+                                    </div>
+                                </div> 
+                            </div>
+                            <div class="o_setting_left_pane" name="hola_calidad_left_panel">
+                            </div>-->
+
+                        </div>
+                    </div>
+
+                </div>
+            </xpath>
+
+        </field>
+    </record>
+
+    <record id="action_mgmtsystem_configuration" model="ir.actions.act_window">
+        <field name="name">Ajustes</field>
+        <field name="res_model">res.config.settings</field>
+        <field name="view_mode">form</field>
+        <field name="target">inline</field>
+        <field name="context">{'module': 'hola_calidad'}</field>
+    </record>
+
+    <menuitem id="menu_mgmtsystem_settings"
+              name="Ajustes"
+              parent="hola_calidad.menu_mgmtsystem_configuration"
+              action="action_mgmtsystem_configuration"
+              sequence="10"/>
+
+</odoo>

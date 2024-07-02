@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+
+    
+    <template id="report_internal_issue_template" inherit_id="mgmtsystem_context.report_internal_issue_template">
+        <xpath expr="//div[@name='reference']" position="after">
+            <p>
+                <strong>Alcance del Sistema de Gestión de Calidad</strong>
+            </p>
+            <p t-field="o.quality_scope" />
+        </xpath>
+    </template>
+
+</odoo>

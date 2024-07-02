@@ -1,0 +1,384 @@
+<odoo>
+    <data>
+
+        <record id="pest_analysis_view_form" model="ir.ui.view">
+            <field name="name">mgmtsystem.context.pest.view.form</field>
+            <field name="model">mgmtsystem.context.pest</field>
+            <field name="arch" type="xml">
+                <form string="">
+                    <header>
+                        <field name="state" widget="statusbar" statusbar_visible="elaborate,review,validate,validate_ok" />
+                        <button string="Enviar a Elaborar"
+                                name="send_elaborate"
+                                type="object"
+                                class="btn-primary"
+                                attrs="{'invisible':[('state','in', ('elaborate','cancel','validate_ok'))]}" />
+                        <button string="Enviar a Revisar"
+                                name="send_review"
+                                type="object"
+                                class="btn-primary"
+                                attrs="{'invisible':[('state','!=', 'elaborate')]}" />
+                        <button string="Enviar a Validar"
+                                name="send_validate"
+                                type="object"
+                                class="btn-primary"
+                                attrs="{'invisible':[('state','in', ('elaborate','validate','cancel','validate_ok'))]}" />
+                        <button string="Validar"
+                                name="send_validate_ok"
+                                type="object"
+                                class="btn-primary"
+                                attrs="{'invisible':[('state','not in', ('validate'))]}" />
+                        <button string="Volver Obsoleto"
+                                confirm="Esto volverá obsoleto el presente registro. ¿Está seguro(a)?"
+                                name="send_cancel"
+                                type="object"
+                                class="btn-second"
+                                attrs="{'invisible': [('state','in',('cancel'))] }" />
+                        <button name="button_new_version"
+                                type="object"
+                                string="Nueva versión"
+                                attrs="{'invisible':['|', ('active','=',False), ('state', '!=', 'validate_ok')]}"
+                                class="oe_highlight" />
+                    </header>
+                    <sheet>
+                        <div class="oe_button_box" name="button_box">
+                            <button type="object"
+                                    name="action_open_older_versions"
+                                    class="oe_stat_button"
+                                    icon="fa-archive"
+                                    style="white-space: nowrap;"
+                                    string="Versiones antiguas" />
+                            <widget name="web_ribbon" title="Archived" bg_color="bg-danger" attrs="{'invisible': [('active', '=', True)]}" />
+                            <field name="active" invisible="1" />
+                        </div>
+                        <div>
+                            <label for="code" />
+                            <h1>
+                                <field name="code" class="oe_inline" />
+                            </h1>
+                        </div>
+                        <div>
+                            <label for="name" />
+                            <h1>
+                                <field name="name" class="oe_inline" attrs="{'readonly': [('state','not in',('elaborate'))] }" />
+                            </h1>
+                        </div>
+                        <group>
+                            <label for="process_id" />
+                            <div class="o_row">
+                                <field name="process_id" placeholder="Procedimiento" colspan="3" attrs="{'readonly': [('state','not in',('elaborate'))]}" />
+                            </div>
+                            <field name="custom_analysis" />
+                        </group>
+                        <notebook>
+                            <page name="general_info_2" string="General">
+                                <group name="Información general">
+                                    <field name="analysis_date" />
+                                    <field name="description" />
+                                </group>
+                            </page>
+                            <page name="internal_factor" string="AMOFHIT">
+                                <group string="Factores internos (AMOFHIT)" attrs="{'invisible': [('custom_analysis','=',False)]}">
+                                    <field name="internal_factor_ids" nolabel="1">
+                                        <tree>
+                                            <field name="type_id" readonly="1" />
+                                            <field name="details" string="Situación actual" style="max-width:200px;" />
+                                            <field name="term" />
+                                            <field name="calification" />
+                                        </tree>
+                                    </field>
+                                </group>
+                                <group attrs="{'invisible': [('custom_analysis','=',True)]}">
+                                    <separator string="Administración" colspan="4" />
+                                    <field name="admin_factor_ids" context="{'default_type_id':%(mgmtsystem_context.admin)d}" nolabel="1">
+                                        <tree>
+                                            <field name="type_id" readonly="1" />
+                                            <field name="details" string="Situación actual" style="max-width:200px;" />
+                                            <field name="term" />
+                                            <field name="calification" />
+                                        </tree>
+                                    </field>
+                                    <separator string="Marketing y ventas" colspan="4" />
+                                    <field name="marketing_factor_ids" context="{'default_type_id':%(mgmtsystem_context.marketing)d}" nolabel="1">
+                                        <tree>
+                                            <field name="type_id" readonly="1" />
+                                            <field name="details" string="Situación actual" style="max-width:200px;" />
+                                            <field name="term" />
+                                            <field name="calification" />
+                                        </tree>
+                                    </field>
+                                    <separator string="Operaciones, productos y logística" colspan="4" />
+                                    <field name="logistic_factor_ids" context="{'default_type_id':%(mgmtsystem_context.logistic)d}" nolabel="1">
+                                        <tree>
+                                            <field name="type_id" readonly="1" />
+                                            <field name="details" string="Situación actual" style="max-width:200px;" />
+                                            <field name="term" />
+                                            <field name="calification" />
+                                        </tree>
+                                    </field>
+                                    <separator string="Finanzas y contabilidad" colspan="4" />
+                                    <field name="accounting_factor_ids" context="{'default_type_id':%(mgmtsystem_context.accounting)d}" nolabel="1">
+                                        <tree>
+                                            <field name="type_id" readonly="1" />
+                                            <field name="details" string="Situación actual" style="max-width:200px;" />
+                                            <field name="term" />
+                                            <field name="calification" />
+                                        </tree>
+                                    </field>
+                                    <separator string="Recursos humanos" colspan="4" />
+                                    <field name="rrhh_factor_ids" context="{'default_type_id':%(mgmtsystem_context.rrhh)d}" nolabel="1">
+                                        <tree>
+                                            <field name="type_id" readonly="1" />
+                                            <field name="details" string="Situación actual" style="max-width:200px;" />
+                                            <field name="term" />
+                                            <field name="calification" />
+                                        </tree>
+                                    </field>
+                                    <separator string="Sistemas de información y comunicaciones" colspan="4" />
+                                    <field name="it_factor_ids" context="{'default_type_id':%(mgmtsystem_context.it)d}" nolabel="1">
+                                        <tree>
+                                            <field name="type_id" readonly="1" />
+                                            <field name="details" string="Situación actual" style="max-width:200px;" />
+                                            <field name="term" />
+                                            <field name="calification" />
+                                        </tree>
+                                    </field>
+                                    <separator string="Tecnología, investigación y desarrollo" colspan="4" />
+                                    <field name="internal_tech_factor_ids" context="{'default_type_id':%(mgmtsystem_context.internal_tech)d}" nolabel="1">
+                                        <tree>
+                                            <field name="type_id" readonly="1" />
+                                            <field name="details" string="Situación actual" style="max-width:200px;" />
+                                            <field name="term" />
+                                            <field name="calification" />
+                                        </tree>
+                                    </field>
+                                </group>
+                            </page>
+                            <page name="external_factor" string="PESTEL">
+                                <group string="Factores externos (PESTEL)" attrs="{'invisible': [('custom_analysis','=',False)]}">
+                                    <field name="external_factor_ids" nolabel="1">
+                                        <tree>
+                                            <field name="type_id" readonly="1" />
+                                            <field name="details" string="Situación actual" style="max-width:200px;" />
+                                            <field name="term" />
+                                            <field name="calification" />
+                                        </tree>
+                                    </field>
+                                </group>
+                                <group attrs="{'invisible': [('custom_analysis','=',True)]}">
+                                    <separator string="Factores políticos" colspan="4" />
+                                    <field name="politic_factor_ids" context="{'default_type_id':%(mgmtsystem_context.politic)d}" nolabel="1">
+                                        <tree>
+                                            <field name="type_id" readonly="1" />
+                                            <field name="details" string="Situación actual" style="max-width:200px;" />
+                                            <field name="term" />
+                                            <field name="calification" />
+                                        </tree>
+                                    </field>
+                                    <separator string="Factores económicos" colspan="4" />
+                                    <field name="economic_factor_ids" context="{'default_type_id':%(mgmtsystem_context.economic)d}" nolabel="1">
+                                        <tree>
+                                            <field name="type_id" readonly="1" />
+                                            <field name="details" string="Situación actual" style="max-width:200px;" />
+                                            <field name="term" />
+                                            <field name="calification" />
+                                        </tree>
+                                    </field>
+                                    <separator string="Factores socioculturales" colspan="4" />
+                                    <field name="sociocult_factor_ids" context="{'default_type_id':%(mgmtsystem_context.soccult)d}" nolabel="1">
+                                        <tree>
+                                            <field name="type_id" readonly="1" />
+                                            <field name="details" string="Situación actual" style="max-width:200px;" />
+                                            <field name="term" />
+                                            <field name="calification" />
+                                        </tree>
+                                    </field>
+                                    <separator string="Factores tecnológicos" colspan="4" />
+                                    <field name="tech_factor_ids" context="{'default_type_id':%(mgmtsystem_context.tech)d}" nolabel="1">
+                                        <tree>
+                                            <field name="type_id" readonly="1" />
+                                            <field name="details" string="Situación actual" style="max-width:200px;" />
+                                            <field name="term" />
+                                            <field name="calification" />
+                                        </tree>
+                                    </field>
+                                    <separator string="Factores ecológicos" colspan="4" />
+                                    <field name="ecologic_factor_ids" context="{'default_type_id':%(mgmtsystem_context.ecologic)d}" nolabel="1">
+                                        <tree>
+                                            <field name="type_id" readonly="1" />
+                                            <field name="details" string="Situación actual" style="max-width:200px;" />
+                                            <field name="term" />
+                                            <field name="calification" />
+                                        </tree>
+                                    </field>
+                                    <separator string="Factores legales" colspan="4" />
+                                    <field name="legal_factor_ids" context="{'default_type_id':%(mgmtsystem_context.legal)d}" nolabel="1">
+                                        <tree>
+                                            <field name="type_id" readonly="1" />
+                                            <field name="details" string="Situación actual" style="max-width:200px;" />
+                                            <field name="term" />
+                                            <field name="calification" />
+                                        </tree>
+                                    </field>
+                                </group>
+                            </page>
+                            <page name="version_info" string="Validación y versión">
+                                <group col="4">
+                                    <group colspan="4">
+                                        <field name="version" attrs="{'readonly': [('state','in',('validate_ok','cancel'))]}" />
+                                    </group>
+                                    <group colspan="4">
+                                        <separator string="Elaboración" />
+                                        <field name="elaboration_step" colspan="2" nolabel="1" attrs="{'readonly': [('state','not in',('elaborate'))]}" />
+                                        <separator string="Revisión" />
+                                        <field name="review_step" colspan="2" nolabel="1" attrs="{'readonly': [('state','not in',('elaborate', 'review'))]}" />
+                                        <separator string="Validación" />
+                                        <field name="validation_step" colspan="2" nolabel="1" attrs="{'readonly': [('state','not in',('elaborate', 'review', 'validate'))]}" />
+                                    </group>
+                                    <group colspan="2">
+                                        <field name="date_elaborate" attrs="{'required': [('state','in',('elaborate'))], 'readonly': True}" />
+                                        <field name="date_review" attrs="{'required': [('state','in',('review'))], 'readonly': True, 'invisible': [('state','in',('elaborate'))] }" />
+                                        <field name="date_validate" groups="base.group_no_one,base.user_admin" attrs="{'invisible': [('state','in',('elaborate','review'))] }" />
+                                    </group>
+                                </group>
+                            </page>
+                        </notebook>
+                    </sheet>
+                    <div class="oe_chatter">
+                        <field name="message_follower_ids" widget="mail_followers" />
+                        <field name="activity_ids" widget="mail_activity" />
+                        <field name="message_ids" widget="mail_thread" />
+                    </div>
+                </form>
+            </field>
+        </record>
+
+        <record id="pest_analysis_view_tree" model="ir.ui.view">
+            <field name="name">mgmtsystem.context.pest.view.tree</field>
+            <field name="model">mgmtsystem.context.pest</field>
+            <field name="arch" type="xml">
+                <tree string="">
+                    <field name="name" />
+                    <field name="analysis_date" />
+                    <field name="description" />
+                    <field name="state" />
+                    <field name="version" />
+                    <field name="date_validate" groups="base.group_no_one,base.user_admin" />
+                </tree>
+            </field>
+        </record>
+
+        <record id="pest_analysis_action" model="ir.actions.act_window">
+            <field name="name">Análisis PESTEL/AMOFHIT</field>
+            <field name="res_model">mgmtsystem.context.pest</field>
+            <field name="view_mode">tree,form</field>
+            <field name="domain">[]</field>
+            <field name="context">{}</field>
+        </record>
+
+        <record id="context_pest_cancel_action" model="ir.actions.act_window">
+            <field name="name">Análisis PESTEL/AMOFHIT antiguos</field>
+            <field name="res_model">mgmtsystem.context.pest</field>
+            <field name="view_mode">tree,form</field>
+            <field name="domain">[('state', '=', 'cancel')]</field>
+            <field name="context">{}</field>
+        </record>
+
+        <record id="pest_factor_view_form" model="ir.ui.view">
+            <field name="name">pest.factor.view.form</field>
+            <field name="model">pest.factor</field>
+            <field name="arch" type="xml">
+                <form string="">
+                    <sheet>
+                        <group>
+                            <field name="type_id" readonly="1" />
+                            <field name="details" string="Situación actual" />
+                            <field name="term" />
+                            <field name="calification" />
+                        </group>
+                        <notebook>
+                            <page name="risk" string="Riesgos">
+                                <separator string="Riesgos" />
+                                <div class="alert alert-info">
+                                    RIESGOS: Es la probabilidad de que algo suceda y las consecuencias que puedan afectar positiva o negativamente, los resultado de los procesos u objetivos de la empresa.
+                                </div>
+                                <field name="risk_ids" colspan="2" context="{'default_type': 'risk'}" />
+                            </page>
+                            <page name="opportunity" string="Oportunidades">
+                                <separator string="Oportunidades" />
+                                <div class="alert alert-info">
+                                    OPORTUNIDADES: se entiende como los beneficios o las posibilidades que se presentan como consecuencia de la ocurrencia de un determinado evento. Curiosamente, un riesgo, que representa una amenaza algo negativo y la oportunidad algo positivo.
+                                </div>
+                                <field name="opportunity_ids" colspan="2" context="{'default_type': 'opportunity'}" />
+                            </page>
+                        </notebook>
+                    </sheet>
+                </form>
+            </field>
+        </record>
+
+        <record id="pest_factor_view_tree" model="ir.ui.view">
+            <field name="name">pest.factor.view.tree</field>
+            <field name="model">pest.factor</field>
+            <field name="arch" type="xml">
+                <tree string="">
+                    <field name="type_id" />
+                    <field name="details" string="Situación actual" />
+                    <field name="term" />
+                    <field name="calification" />
+                    <field name="risk_ids" />
+                    <field name="opportunity_ids" />
+                </tree>
+            </field>
+        </record>
+
+        <record id="pest_factor_action" model="ir.actions.act_window">
+            <field name="name">Factores PESTEL/AMOFHIT</field>
+            <field name="res_model">pest.factor</field>
+            <field name="view_mode">tree,form</field>
+            <field name="domain">[]</field>
+            <field name="context">{}</field>
+        </record>
+
+        <record id="pest_factor_type_view_form" model="ir.ui.view">
+            <field name="name">pest.factor.type.view.form</field>
+            <field name="model">pest.factor.type</field>
+            <field name="arch" type="xml">
+                <form string="">
+                    <sheet>
+                        <group>
+                            <field name="name" />
+                            <field name="description" />
+                        </group>
+                    </sheet>
+                </form>
+            </field>
+        </record>
+
+        <record id="pest_factor_type_view_tree" model="ir.ui.view">
+            <field name="name">pest.factor.type.view.tree</field>
+            <field name="model">pest.factor.type</field>
+            <field name="arch" type="xml">
+                <tree string="">
+                    <field name="name" />
+                    <field name="description" />
+                </tree>
+            </field>
+        </record>
+
+        <record id="pest_factor_type_action" model="ir.actions.act_window">
+            <field name="name">Tipo de factor PESTEL/AMOFHIT</field>
+            <field name="res_model">pest.factor.type</field>
+            <field name="view_mode">tree,form</field>
+            <field name="domain">[]</field>
+            <field name="context">{}</field>
+        </record>
+
+        <menuitem id="pest_factor_menu"
+                  name="Análisis PESTEL/AMOFHIT"
+                  action="pest_analysis_action"
+                  parent="context_issues_menu"
+                  sequence="25" />
+
+    </data>
+</odoo>

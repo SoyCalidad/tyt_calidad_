@@ -1,0 +1,42 @@
+<odoo>
+    <data>
+
+        <record id="quality_manual_wizard_report" model="ir.ui.view">
+            <field name="name">mgmt.quality_manual.report.wizard.view.form</field>
+            <field name="model">mgmt.quality_manual.report.wizard</field>
+            <field name="arch" type="xml">
+                <form string="">
+                    <sheet>
+                        <group>
+                            <field name="quality_manual_id" />
+                        </group>
+                    </sheet>
+                    <footer>
+                        <button name="action_print" type="object" string="Descargar" class="oe_highlight" icon="fa-download"/>
+                    </footer>
+                </form>
+            </field>
+        </record>
+
+        <record id="action_quality_manual_report" model="ir.actions.act_window">
+            <field name="name">Manual de calidad</field>
+            <field name="type">ir.actions.act_window</field>
+            <field name="res_model">mgmt.quality_manual.report.wizard</field>
+            
+            <field name="view_mode">form</field>
+            <field name="view_id" ref="quality_manual_wizard_report"/>
+            <field name="target">new</field>
+            <field name="binding_type">report</field>
+        </record>
+
+        <menuitem 
+            id="quality_manual_report_menu" 
+            name="Manual de calidad" 
+            action="action_quality_manual_report" 
+            parent="mgmtsystem_process.process_report_root_menu" 
+            sequence="10"
+            groups= "base.group_no_one,mgmtsystem_process.group_process_readonly,mgmtsystem_process.group_process_readonly_printreport,mgmtsystem_process.group_process_owner,mgmtsystem_process.group_process_all"
+        />
+
+    </data>
+</odoo>

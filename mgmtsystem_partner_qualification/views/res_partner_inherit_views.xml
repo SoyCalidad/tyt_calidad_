@@ -1,0 +1,76 @@
+<odoo>
+    <record id="res_partner_form_inherit" model="ir.ui.view">
+        <field name="name">view.res.partner.form.inherit</field>
+        <field name="model">res.partner</field>
+        <field name="inherit_id" ref="base.view_partner_form" />
+        <field name="arch" type="xml">
+            <sheet position="before">
+                <header>
+                    <button string="Descargar evaluación de seguimiento" type="object" class="btn-primary" name="print_evaluation" />
+                </header>
+            </sheet>
+            <xpath expr="//group/group[2]" position="after">
+                <div class="partner_type">
+                    <group col="4">
+                        <field name="supplier" />
+                        <field name="vip_supplier" attrs="{'invisible': [('supplier', '=', False)]}" />
+                        <field name="customer" />
+                        <field name="vip_customer" attrs="{'invisible': [('customer', '=', False)]}" />
+                        <field name="stockist" />
+                    </group>
+                </div>
+            </xpath>
+            <notebook position="inside">
+                <page name="initial_evaluation" string="Evaluación inicial">
+                    <group>
+                        <field name="current_initial_evaluation_id" />
+                    </group>
+                    <field name="initial_evaluation_ids"/>
+                </page>
+                <page string="Evaluaciones de seguimiento" name="evaluation_history">
+                    <group>
+                        <field name="responsible_id" />
+                        <field name="evaluation_date" attrs="{'required': [('vip_supplier', '=', True)]}" />
+                        <field name="frequency_id" />
+                        <field name="next_evaluation_date" invisible="1" />
+                        <field name="evaluation_id" invisible="1" />
+                    </group>
+                    <separator string="Historial" />
+                    <field name="history_ids" context="{'default_partner_id': id,'default_evaluation_id': evaluation_id}" />
+                </page>
+                <page name="products" string="Productos y servicios">
+                    <field name="product_ids" />
+                </page>
+            </notebook>
+        </field>
+    </record>
+
+    <menuitem id="reports_contact_menu" name="Reportes" parent="contacts.menu_contacts" sequence="10" />
+
+    <record id="res_partner_cron" model="ir.cron">
+        <field name="name">Reevaluación de proveedor</field>
+        <field name="model_id" ref="model_res_partner" />
+        <field name="interval_number">1</field>
+        <field name="interval_type">days</field>
+        <field name="numbercall">-1</field>
+        <field name="state">code</field>
+        <field name="code">model.action_notify()</field>
+    </record>
+    
+    <record id="res_partner_view_search_inherit" model="ir.ui.view">
+        <field name="name">res.partner.view.search.inherit</field>
+        <field name="model">res.partner</field>
+        <field name="inherit_id" ref="account.res_partner_view_search" />
+        <field name="arch" type="xml">
+            <filter name="customer" position="replace">
+                <filter string="Customers" name="mgmt_customer" domain="[('customer','=', True)]" />
+                <filter string="Critical Customers" name="mgmt_vip_customer" domain="[('vip_customer','=', True)]" />
+            </filter>
+            <filter name="supplier" position="replace">
+                <filter string="Vendors" name="supplier" domain="[('supplier','=', True)]" />
+                <filter string="Critical Vendors" name="vip_supplier" domain="[('vip_supplier','=', True)]" />
+            </filter>
+        </field>
+    </record>
+
+</odoo>

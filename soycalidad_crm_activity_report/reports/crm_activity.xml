@@ -1,0 +1,145 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+
+    <report id="action_report_crm_activity"
+model="crm.lead"
+string="Reporte de actividades"
+report_type="qweb-pdf"
+name="soycalidad_crm_activity_report.report_crm_activity"
+file="soycalidad_crm_activity_report.report_crm_activity" />
+
+    <template id="report_crm_activity">
+        <t t-call="web.html_container">
+            <t t-foreach="docs" t-as="doc">
+                <t t-if="doc and 'company_id' in doc">
+                    <t t-set="company" t-value="doc.company_id" />
+                </t>
+                <t t-if="not doc or not 'company_id' in doc">
+                    <t t-set="company" t-value="res_company" />
+                </t>
+                <div class="header">
+                    <style type="text/css">
+                            .tg  {border-collapse:collapse;border-spacing:0;margin:0px auto;width:100%;}
+                            .tg td{border-color:black;border-style:solid;border-width:1px;font-family: Palatino, Palatino Linotype, Palatino LT STD, Book Antiqua, Georgia, serif;font-size:14px;
+                            overflow:hidden;padding:10px 5px;word-break:normal;text-align:middle;align:center;}
+                            .tg th{border-color:black;border-style:solid;border-width:1px;font-family: Palatino, Palatino Linotype, Palatino LT STD, Book Antiqua, Georgia, serif;font-size:14px;
+                            font-weight:normal;overflow:hidden;padding:10px 5px;word-break:normal;}
+                            .tg .tg-9wq8{border-color:inherit;text-align:center;vertical-align:middle}
+                            .tg .tg-1wig{border-color:inherit;text-align:center;vertical-align:middle;font-size:16px;font-weight:bold;}
+                            .tg .tg-0lax{border-color:inherit;text-align:center;vertical-align:middle;font-size:12px;}
+                    </style>
+                    <table class="tg" style="width:100%;">
+                        <tbody>
+                            <tr>
+                                <td class="tg-1wig" rowspan="2" width="20%" style="width:15%">
+                                    <img t-if="company.logo" t-att-src="'data:image/png;base64,%s' % to_text(company.logo)" style="max-width:100px;max-height:100px;vertical-align:middle;" />
+                                </td>
+                                <td class="tg-1wig" rowspan="2" width="80%" style="width:65%;">
+                                    <h3>Resumen de actividades</h3><br/>
+                                    <span t-field="doc.name" style="font-size:15px;font-weight:bold;" />
+                                </td>
+                                <td class="tg-0lax" width="20%" style="width:20%">
+                                        Código:
+                                </td>
+                            </tr>
+                            <tr>
+                                <td class="tg-0lax">
+                                    <span>Fecha de impresión:</span>
+                                    <span t-esc="context_timestamp(datetime.datetime.now()).strftime('%d/%m/%Y %H:%M')" />
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+                <t t-call="web.external_layout">
+                    <div class="page">
+                        <div class="activity_ids">
+                            <style type="text/css">
+.tg  {border-collapse:collapse;border-spacing:0;width:100%;}
+.tg td{border-color:black;border-style:solid;border-width:1px;font-family:Arial, sans-serif;font-size:14px;
+  overflow:hidden;padding:10px 5px;word-break:normal;}
+.tg th{border-color:black;border-style:solid;border-width:1px;font-family:Arial, sans-serif;font-size:14px;
+  font-weight:normal;overflow:hidden;padding:10px 5px;word-break:normal;}
+.tg .tg-wman{border-color:#c0c0c0;text-align:center;vertical-align:middle}
+.tg .tg-d14o{background-color:#efefef;border-color:#c0c0c0;font-weight:bold;text-align:center;vertical-align:middle}
+.tg .tg-z4hz{background-color:#efefef;border-color:#c0c0c0;color:#4C4C4C;font-weight:bold;text-align:center;vertical-align:middle}
+                            </style>
+                            <table class="tg">
+                                <thead>
+                                    <tr>
+                                        <th class="tg-z4hz">Tipo de actividad</th>
+                                        <th class="tg-z4hz">Resumen</th>
+                                        <th class="tg-d14o">Fecha de vencimiento</th>
+                                        <th class="tg-d14o">Asignada a</th>
+                                        <th class="tg-d14o">Nota</th>
+                                        <th class="tg-d14o">Estado</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <t t-foreach="doc.activity_ids" t-as="act">
+                                        <tr>
+                                            <td class="tg-wman">
+                                                <span t-field="act.activity_type_id" />
+                                            </td>
+                                            <td class="tg-wman">
+                                                <span t-field="act.summary" />
+                                            </td>
+                                            <td class="tg-wman">
+                                                <span t-field="act.date_deadline" />
+                                            </td>
+                                            <td class="tg-wman">
+                                                <span t-field="act.user_id" />
+                                            </td>
+                                            <td class="tg-wman">
+                                                <span t-field="act.note" />
+                                            </td>
+                                            <td class="tg-wman">
+                                                <span t-field="act.state" />
+                                            </td>
+                                        </tr>
+                                    </t>
+                                    <!-- <t t-foreach="doc.message_ids" t-as="act">
+                                        <tr>
+                                            <td class="tg-wman">
+                                                <span t-field="act.activity_type_id" />
+                                            </td>
+                                            <td class="tg-wman">
+                                                <span t-field="act.summary" />
+                                            </td>
+                                            <td class="tg-wman">
+                                                <span t-field="act.date_deadline" />
+                                            </td>
+                                            <td class="tg-wman">
+                                                <span t-field="act.user_id" />
+                                            </td>
+                                            <td class="tg-wman">
+                                                <span t-field="act.note" />
+                                            </td>
+                                            <td class="tg-wman">
+                                                <span t-field="act.state" />
+                                            </td>
+                                        </tr>
+                                    </t> -->
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                    <div class="footer" style="border-top: 1px solid black;font-size: 8px;">
+                        <div class="text-center" style="border-top: 1px solid black;font-size: 10px;text-align:center;">
+                                ©
+                            <span t-field="company.name" />
+                                . All Rights Reserved.
+                            <br />
+                                PROHIBIDA SU REPRODUCCIÓN SIN AUTORIZACIÓN EXPRESA DE LA DIRECCIÓN.
+                            <br />
+                                CUALQUIER COPIA IMPRESA NO CONTROLADA. DEBE SER ROTULADA COMO "COPIA NO CONTROLADA".
+                            <br />
+                                CONSULTE VERSIÓN ELECTRÓNICA
+                        </div>
+                    </div>
+                </t>
+            </t>
+        </t>
+    </template>
+
+</odoo>

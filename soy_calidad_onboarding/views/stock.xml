@@ -1,0 +1,109 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <!-- ONBOARDING STEPS -->
+
+    <template id="onboarding_stock_in_step">
+        <t t-call="base.onboarding_step">
+            <t t-set="title">Recepciones</t>
+            <t t-set="description">Cree una nueva recepción.</t>
+            <t t-set="done_icon" t-value="'fa-star'" />
+            <t t-set="btn_text">Crear</t>
+            <t t-set="done_text">Se ve bien!</t>
+            <t t-set="method" t-value="'action_open_stock_in'" />
+            <t t-set="model" t-value="'res.company'" />
+            <t t-set="state" t-value="state.get('stock_in_onboarding_state')" />
+        </t>
+    </template>
+
+    <template id="onboarding_stock_out_step">
+        <t t-call="base.onboarding_step">
+            <t t-set="title">Entregas</t>
+            <t t-set="description">Cree una nueva entrega.</t>
+            <t t-set="done_icon" t-value="'fa-star'" />
+            <t t-set="btn_text">Crear</t>
+            <t t-set="done_text">Se ve bien!</t>
+            <t t-set="method" t-value="'action_open_stock_out'" />
+            <t t-set="model" t-value="'res.company'" />
+            <t t-set="state" t-value="state.get('stock_out_onboarding_state')" />
+        </t>
+    </template>
+
+
+    <!-- ONBOARDING PANELS -->
+    <template id="stock_onboarding_panel" name="nonconformity.onboarding.panel">
+        <t t-call="base.onboarding_container">
+            <t t-set="classes" t-value="'o_onboarding_blue'"/>
+            <t t-set="bg_image" t-value="'/account/static/src/img/account_invoice_onboarding_bg.jpg'"/>
+            <t t-set="close_method" t-value="'action_close_stock_onboarding'"/>
+            <t t-set="close_model" t-value="'res.company'"/>
+            <t t-set="text_completed">Felicitaciones! Ha completado todo.</t>
+            <t t-call="soy_calidad_onboarding.onboarding_stock_in_step" name="stock_in_step" />
+            <t t-call="soy_calidad_onboarding.onboarding_stock_out_step" name="stock_out_step" />
+        </t>
+    </template>
+
+    <!-- Views -->
+
+    <record id="onboarding_stock_in_form" model="ir.ui.view">
+        <field name="name">stock.picking.inherit.view.form</field>
+        <field name="model">stock.picking</field>
+        <field name="inherit_id" ref="stock.view_picking_form"/>
+        <field name="priority">1000</field>
+        <field name="mode">primary</field>
+        <field name="arch" type="xml">
+            <form position="inside">
+                <footer position="replace">
+                    <button name="action_save_onboarding_stock_stock_step" class="btn btn-primary" type="object" string="Crear" />
+                    <button special="cancel" string="Cancelar" />
+                </footer>
+            </form>
+        </field>
+    </record>
+
+    <record id="onboarding_stock_stock_form" model="ir.ui.view">
+        <field name="name">stock.picking.inherit.view.form</field>
+        <field name="model">stock.picking</field>
+        <field name="inherit_id" ref="stock.view_picking_form"/>
+        <field name="priority">1000</field>
+        <field name="mode">primary</field>
+        <field name="arch" type="xml">
+            <form position="inside">
+                <footer position="replace">
+                    <button name="action_save_onboarding_stock_stock_step" class="btn btn-primary" type="object" string="Crear" />
+                    <button special="cancel" string="Cancelar" />
+                </footer>
+            </form>
+        </field>
+    </record>
+
+
+    <record id="action_stock_in_configurator" model="ir.actions.act_window">
+        <field name="type">ir.actions.act_window</field>
+        <field name="name">Cree una nueva recepción</field>
+        <field name="view_mode">form</field>
+        <field name="target">new</field>
+        <field name="res_model">stock.picking</field>
+        <field name="view_id" ref="soy_calidad_onboarding.onboarding_stock_stock_form"/>
+    </record>
+
+    <record id="action_stock_out_configurator" model="ir.actions.act_window">
+        <field name="type">ir.actions.act_window</field>
+        <field name="name">Cree una nueva entrega</field>
+        <field name="view_mode">form</field>
+        <field name="target">new</field>
+        <field name="res_model">stock.picking</field>
+        <field name="view_id" ref="soy_calidad_onboarding.onboarding_stock_stock_form"/>
+    </record>
+
+    <record id="stock_picking_view_kanban" model="ir.ui.view">
+        <field name="name">stock.picking.type.view.kanban</field>
+        <field name="model">stock.picking.type</field>
+        <field name="inherit_id" ref="stock.stock_picking_type_kanban"/>
+        <field name="arch" type="xml">
+            <kanban position="attributes">
+                <attribute name="banner_route">/onboarding/stock_onboarding</attribute>
+            </kanban>
+        </field>
+    </record>
+
+</odoo>

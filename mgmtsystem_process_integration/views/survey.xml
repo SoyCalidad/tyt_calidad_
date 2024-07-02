@@ -1,0 +1,101 @@
+<odoo>
+    <data>
+
+
+        <record id="target_survey_filter" model="ir.ui.view">
+            <field name="name">mgmtsystem.target.filter</field>
+            <field name="model">mgmtsystem.target</field>
+            <field name="inherit_id" ref="mgmtsystem_target.view_target_search"/>
+            
+            <field name="arch" type="xml">
+                <field name="action_ids" position="after">
+                    <field name="survey_ids"/>
+                </field>
+            </field>
+        </record>
+
+        <record id="nc_survey_filter" model="ir.ui.view">
+            <field name="name">mgmtsystem.nonconformity.filter</field>
+            <field name="model">mgmtsystem.nonconformity</field>
+            <field name="inherit_id" ref="mgmtsystem_nonconformity.view_mgmtsystem_nonconformity_filter"/>
+            
+            <field name="arch" type="xml">
+                <field name="action_ids" position="after">
+                    <field name="survey_ids"/>
+                </field>
+            </field>
+        </record>
+
+        <record id="action_survey_filter" model="ir.ui.view">
+            <field name="name">mgmtsystem.action.filter</field>
+            <field name="model">mgmtsystem.action</field>
+            <field name="inherit_id" ref="mgmtsystem_action.view_mgmtsystem_action_filter"/>
+            
+            <field name="arch" type="xml">
+                <field name="user_id" position="after">
+                    <field name="survey_ids"/>
+                </field>
+            </field>
+        </record>
+
+
+        <record model="ir.actions.act_window" id="show_target_survey_action">
+            <field name="name">Objetivos</field>
+            <field name="res_model">mgmtsystem.target</field>
+            
+            <field name="view_mode">kanban,form,tree</field>
+            <field name="context">{"search_default_survey_ids": active_id}</field>
+            <field name="search_view_id" ref="target_survey_filter"/>
+        </record>
+
+        <record model="ir.actions.act_window" id="show_nc_survey_action">
+            <field name="name">No conformidades</field>
+            <field name="res_model">mgmtsystem.nonconformity</field>
+            
+            <field name="view_mode">kanban,form,tree</field>
+            <field name="context">{"search_default_survey_ids": active_id}</field>
+            <field name="search_view_id" ref="nc_survey_filter"/>
+        </record>
+
+
+        <record model="ir.actions.act_window" id="show_ac_survey_action">
+            <field name="name">Acciones</field>
+            <field name="res_model">mgmtsystem.action</field>
+            
+            <field name="view_mode">kanban,form,tree</field>
+            <field name="context">{"search_default_survey_ids": active_id}</field>
+            <field name="search_view_id" ref="action_survey_filter"/>
+        </record>
+
+        <record id="survey_view_form" model="ir.ui.view">
+            <field name="name">survey.survey.view.form</field>
+            <field name="model">survey.survey</field>
+            <field name="inherit_id" ref="survey.survey_survey_view_form" />
+            <field name="arch" type="xml">
+                <xpath expr="//div[@name='button_box']" position="inside">
+                    <button type="action" name="%(show_target_survey_action)d" class="oe_stat_button" icon="fa-bar-chart-o">
+                        <field name="targets_count" widget="statinfo" string="Objetivos"/>
+                    </button>
+                    <button type="action" name="%(show_nc_survey_action)d" class="oe_stat_button" icon="fa-frown-o">
+                        <field name="nonconformities_count" widget="statinfo" string="No conformidades"/>
+                    </button>
+                    <button type="action" name="%(show_ac_survey_action)d" class="oe_stat_button" icon="fa-edit" context="{'default_origin_model_id': model_id, 'default_origin_int_id': id}">
+                        <field name="actions_count" widget="statinfo" string="Acciones"/>
+                    </button>
+                </xpath>
+                <xpath expr="//notebook" position="inside">
+                    <page name="action_ids" string="Acciones">
+                        <field name="model_id" invisible="True"/>
+                        <field name="action_ids" colspan="4" nolabel="1" context="{'default_origin_model_id': model_id, 'default_origin_int_id': id}"/>
+                    </page>
+                    <page name="nonconformity_ids" string="No conformidades">
+                        <field name="nonconformity_ids" colspan="4" nolabel="1" context="{'default_origin_model_id': model_id, 'default_origin_int_id': id}"/>
+                    </page>
+                    <page name="target_ids" string="Objetivos">
+                        <field name="target_ids" colspan="4" nolabel="1" context="{'default_origin_model_id': model_id, 'default_origin_int_id': id}"/>
+                    </page>
+                </xpath>
+            </field>
+        </record>
+    </data>
+</odoo>

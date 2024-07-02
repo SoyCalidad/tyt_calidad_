@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+
+    <record id="crm_user_transfer_wizard_view_form" model="ir.ui.view">
+            <field name="name">crm.user_transfer.view.form</field>
+            <field name="model">crm.user_transfer</field>
+            <field name="arch" type="xml">
+                <form string="Transferir vendedor">
+                    <sheet>
+                        <group>
+                            <field name="lead_ids"/>
+                            <field name="user_id"/>
+                        </group>
+                        <strong>Transfiere las oportunidades seleccionadas a un nuevo vendedor</strong>
+                    </sheet>
+                    <footer>
+                        <button string="Transferir seleccionadas" name="transfer_user" type="object" class="btn-primary"/>
+                        <button string="Transferir todas las existentes" name="transfer_all" type="object" class="btn-primary"/>
+                    </footer>
+                </form>
+            </field>
+        </record>
+     
+        <record id="crm_user_transfer_wizard_action" model="ir.actions.act_window">
+            <field name="name">Transferir vendedor de oportunidad</field>
+            <field name="type">ir.actions.act_window</field>
+            <field name="res_model">crm.user_transfer</field>
+            <field name="view_mode">form</field>
+            <field name="view_id" ref="crm_user_transfer_wizard_view_form"/>
+            <field name="target">new</field>
+        </record>
+
+        <menuitem
+            id="crm_user_transfer_wizard_menu"
+            name="Transferir vendedor de oportunidad"
+            action="crm_user_transfer_wizard_action"
+            parent="crm.crm_menu_config"
+            sequence="26"/>
+
+</odoo>

@@ -1,0 +1,33 @@
+"id","name","type"
+generic_skill_1,"Capacidad de aplicar los conocimientos en la práctica",generic
+generic_skill_2,"Capacidad para organizar y planificar el tiempo",generic
+generic_skill_3,"Conocimientos sobre el área de estudio y la profesión",generic
+generic_skill_4,"Habilidades en el uso de las tecnologías de la información y de la comunicación",generic
+generic_skill_5,"Capacidad de aprender y actualizarse permanentemente",generic
+generic_skill_6,"Capacidad para actuar en nuevas situaciones",generic
+generic_skill_7,"Capacidad creativa",generic
+generic_skill_8,"Capacidad para identificar, plantear y resolver problemas",generic
+generic_skill_9,"Capacidad para tomar decisiones",generic
+generic_skill_10,"Capacidad de trabajo en equipo",generic
+generic_skill_11,"Capacidad para formular y gestionar proyectos",generic
+generic_skill_12,"Capacidad de motivar y conducir hacia metas comunes",generic
+workteam_skill_1,"Liderazgo",workteam
+workteam_skill_2,"Adaptabilidad",workteam
+workteam_skill_3,"Automotivación",workteam
+workteam_skill_4,"Comunicación verbal y no verbal persuasiva",workteam
+workteam_skill_5,"Delegación",workteam
+workteam_skill_6,"Desarrollo de subordinados",workteam
+workteam_skill_7,"Decisión",workteam
+personal_skill_1,"Adaptabilidad personal",personal
+personal_skill_2,"Aprendizaje",personal
+personal_skill_3,"Colaboración",personal
+personal_skill_4,"Gestión de la información",personal
+personal_skill_5,"Lealtad",personal
+personal_skill_6,"Motivación",personal
+personal_skill_7,"Responsabilidad",personal
+strategic_skill_1,"Visión de negocio",strategic
+strategic_skill_2,"Orientación interfuncional",strategic
+strategic_skill_3,"Gestión de recursos",strategic
+strategic_skill_4,"Orientación al cliente",strategic
+strategic_skill_5,"Red de relaciones efectivas",strategic
+strategic_skill_6,"Negociación",strategic

@@ -1,0 +1,9 @@
+<odoo>
+
+  <menuitem name="Acciones"
+    id="menu_action_root"
+    web_icon="mgmtsystem_action,static/description/icon.png"
+    groups="base.group_no_one,group_action_readonly,group_action_owner,group_action_readonly_printreport"
+    sequence="18"/>
+
+</odoo>

@@ -1,0 +1,57 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+
+    <record id="sales_resume_view_form" model="ir.ui.view">
+         <field name="name">sale.order.resume_report.view.form</field>
+         <field name="model">sale.order.resume_report</field>
+         <field name="arch" type="xml">
+            <form string="">
+               <sheet>
+                  <group>
+                     <field name="user_id" />
+                     <field name="init_date"/>
+                     <field name="end_date" />
+                  </group>
+               </sheet>
+               <footer>
+                  <button name="action_print" type="object" string="Descargar" class="oe_highlight" icon="fa-download"/>
+               </footer>
+            </form>
+         </field>
+      </record>
+
+
+      <record id="sales_resume_action" model="ir.actions.act_window">
+         <field name="name">Resumen de ventas</field>
+         <field name="type">ir.actions.act_window</field>
+         <field name="res_model">sale.order.resume_report</field>
+         <field name="view_mode">form</field>
+         <field name="view_id" ref="sales_resume_view_form"/>
+         <field name="target">new</field>
+         <field name="binding_type">report</field>
+      </record>
+
+      <menuitem
+          id="crm_report_menu"
+          name="Reportes"
+          parent="crm.crm_menu_root"
+          sequence="30"/>
+
+      <menuitem
+         id="sales_resume_menu"
+         name="Resumen de ventas"
+         action="sales_resume_action"
+         parent="crm_report_menu"
+         sequence="1"/>
+
+
+    <report
+        id="action_report_sales_resume"
+        model="sale.order"
+        string="Resumen de ventas"
+        report_type="xlsx"
+        name="soycalidad_crm.sales_resume"
+        file="Resumen de venta"
+    />
+
+</odoo>

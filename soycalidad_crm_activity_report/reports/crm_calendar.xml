@@ -1,0 +1,121 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+
+    <report id="action_report_calendar"
+model="calendar.event"
+string="Reporte de calendario"
+report_type="qweb-pdf"
+name="soycalidad_crm_activity_report.report_calendar"
+file="soycalidad_crm_activity_report.report_calendar" />
+
+    <template id="report_calendar">
+        <t t-call="web.html_container">
+            <t t-set="company" t-value="res_company" />
+            <div class="header">
+                <style type="text/css">
+                            .tg  {border-collapse:collapse;border-spacing:0;margin:0px auto;width:100%;}
+                            .tg td{border-color:black;border-style:solid;border-width:1px;font-family: Palatino, Palatino Linotype, Palatino LT STD, Book Antiqua, Georgia, serif;font-size:14px;
+                            overflow:hidden;padding:10px 5px;word-break:normal;text-align:middle;align:center;}
+                            .tg th{border-color:black;border-style:solid;border-width:1px;font-family: Palatino, Palatino Linotype, Palatino LT STD, Book Antiqua, Georgia, serif;font-size:14px;
+                            font-weight:normal;overflow:hidden;padding:10px 5px;word-break:normal;}
+                            .tg .tg-9wq8{border-color:inherit;text-align:center;vertical-align:middle}
+                            .tg .tg-1wig{border-color:inherit;text-align:center;vertical-align:middle;font-size:16px;font-weight:bold;}
+                            .tg .tg-0lax{border-color:inherit;text-align:center;vertical-align:middle;font-size:12px;}
+                </style>
+                <table class="tg">
+                    <tbody>
+                        <tr>
+                            <td class="tg-1wig" rowspan="2" width="20%" style="width:15%">
+                                <img t-if="company.logo" t-att-src="'data:image/png;base64,%s' % to_text(company.logo)" style="max-width:100px;max-height:100px;vertical-align:middle;" />
+                            </td>
+                            <td class="tg-1wig" rowspan="2" width="80%" style="width:65%;">
+                                <span t-field="doc.name" style="font-size:15px;font-weight:bold;" />
+                            </td>
+                            <td class="tg-0lax" width="20%" style="width:20%">
+                                        Código:
+                            </td>
+                        </tr>
+                        <tr>
+                            <td class="tg-0lax">
+                                <span>Fecha de impresión:</span>
+                                <span t-esc="context_timestamp(datetime.datetime.now()).strftime('%d/%m/%Y %H:%M')" />
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+            <t t-call="web.external_layout">
+                <div class="page">
+                    <div class="activity_ids">
+                        <style type="text/css">
+.tg  {border-collapse:collapse;border-spacing:0;widht:100%;}
+.tg td{border-color:black;border-style:solid;border-width:1px;font-family:Arial, sans-serif;font-size:14px;
+  overflow:hidden;padding:10px 5px;word-break:normal;}
+.tg th{border-color:black;border-style:solid;border-width:1px;font-family:Arial, sans-serif;font-size:14px;
+  font-weight:normal;overflow:hidden;padding:10px 5px;word-break:normal;}
+.tg .tg-wman{border-color:#c0c0c0;text-align:center;vertical-align:middle}
+.tg .tg-d14o{background-color:#efefef;border-color:#c0c0c0;font-weight:bold;text-align:center;vertical-align:middle}
+.tg .tg-z4hz{background-color:#efefef;border-color:#c0c0c0;color:#4C4C4C;font-weight:bold;text-align:center;vertical-align:middle}
+                        </style>
+                        <table class="tg">
+                            <thead>
+                                <tr>
+                                    <th class="tg-z4hz">Nombre</th>
+                                    <th class="tg-z4hz">Comenzando en</th>
+                                    <th class="tg-d14o">Duración</th>
+                                    <th class="tg-d14o">Ubicación</th>
+                                    <th class="tg-d14o">Descripción</th>
+                                    <th class="tg-d14o">Participantes</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <t t-foreach="docs" t-as="doc">
+                                    <tr>
+                                        <td class="tg-wman">
+                                            <!-- <span t-field="doc.name" /> -->
+                                        </td>
+                                        <td class="tg-wman">
+                                            <span t-field="doc.start_datetime" />
+                                        </td>
+                                        <td class="tg-wman">
+                                            <span t-field="doc.duration" />
+                                        </td>
+                                        <td class="tg-wman">
+                                            <span t-field="doc.location" />
+                                        </td>
+                                        <td class="tg-wman">
+                                            <span t-field="doc.description" />
+                                        </td>
+                                        <td class="tg-wman">
+                                            <ul>
+                                                <t t-foreach="doc.attendee_ids" t-as="att">
+                                                    <li>
+                                                        <span t-field="att.name" />
+                                                    </li>
+                                                </t>                
+                                            </ul>
+                                        </td>
+                                    </tr>
+                                </t>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+                <div class="footer" style="border-top: 1px solid black;font-size: 8px;">
+                    <div class="text-center" style="border-top: 1px solid black;font-size: 10px;text-align:center;">
+                                ©
+                        <span t-field="company.name" />
+                                . All Rights Reserved.
+                        <br />
+                                PROHIBIDA SU REPRODUCCIÓN SIN AUTORIZACIÓN EXPRESA DE LA DIRECCIÓN.
+                        <br />
+                                CUALQUIER COPIA IMPRESA NO CONTROLADA. DEBE SER ROTULADA COMO "COPIA NO CONTROLADA".
+                        <br />
+                                CONSULTE VERSIÓN ELECTRÓNICA
+                    </div>
+                </div>
+            </t>
+        </t>
+    </template>
+
+</odoo>

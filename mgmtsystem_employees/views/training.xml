@@ -1,0 +1,444 @@
+<odoo>
+    <data>
+        <record model="ir.ui.view" id="view_document_file_kanban_training">
+            <field name="name">view.document.file.kanban.training</field>
+            <field name="model">training.document</field>
+            <field name="arch" type="xml">
+                <kanban>
+                    <field name="ir_attachment_id" />
+                    <field name="mimetype" />
+                    <field name="type" />
+                    <field name="name" />
+                    <field name="priority" />
+                    <templates>
+                        <t t-name="kanban-box">
+                            <div class="oe_kanban_global_click">
+                                <div class="oe_kanban_vignette">
+                                    <div class="oe_attachment">
+                                        <div class="row">
+                                            <div class="col-xs-4 o_kanban_primary_left" t-if="record.type.raw_value == 'binary'">
+                                                <a t-attf-href="/web/content/#{record.ir_attachment_id.raw_value}?download=1">
+                                                    <t t-set="webimage" t-value="new RegExp('image.*(gif|jpeg|jpg|png)').test(record.mimetype.value)" />
+                                                    <div t-if="!webimage" class="o_image" t-att-data-mimetype="record.mimetype.value" />
+                                                    <div t-if="webimage" class="o_attachment_image">
+                                                        <img t-attf-src="/web/image/#{record.ir_attachment_id.raw_value}?download=1" />
+                                                    </div>
+                                                </a>
+                                            </div>
+                                            <div class="col-xs-8">
+                                                <strong>
+                                                    <field name="name" />
+                                                </strong>
+                                                <br />
+                                                <br />
+                                                <div class="mt8">
+                                                    <field name="priority" widget="priority" />
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </t>
+                    </templates>
+                </kanban>
+            </field>
+        </record>
+
+        <record id="view_document_form" model="ir.ui.view">
+            <field name="name">training.document.form</field>
+            <field name="model">training.document</field>
+            <field name="inherit_id" ref="base.view_attachment_form" />
+            <field name="mode">primary</field>
+            <field name="arch" type="xml">
+                <xpath expr="//field[@name='mimetype']" position="after">
+                    <field name="priority" widget="priority" />
+                </xpath>
+            </field>
+        </record>
+
+        <record id="view_mgmtsystem_plan_training_search" model="ir.ui.view">
+            <field name="name">mgmtsystem.plan.training.search</field>
+            <field name="model">mgmtsystem.plan.training</field>
+            <field name="arch" type="xml">
+                <search>
+                    <separator string="Estados" />
+                    <filter string="En elaboración" name="filter_elaborate" domain="[('state','=','elaborate')]" />
+                    <filter string="Validado" name="filter_validate_ok" domain="[('state','=','validate_ok')]" />
+                    <filter string="En proceso" name="filter_in_process" domain="[('state','=','in_process')]" />
+                    <filter string="Finalizado" name="filter_final" domain="[('state','=','final')]" />
+                    <filter string="Caducado" name="filter_caducated" domain="[('state','=','caducated')]" />
+                    <filter string="Obsoleto" name="filter_cancel" domain="[('state','=','cancel')]" />
+                    <separator />
+                    <filter string="Sin plan" name="filter_noplan" domain="[('plan_id','=',False)]" />
+                    <separator />
+                    <filter string="Aprobados" name="filter_aprobates" domain="[('state','not in',['elaborate'])]" />
+                </search>
+            </field>
+        </record>
+
+        <record id="view_mgmtsystem_plan_training_tree" model="ir.ui.view">
+            <field name="name">mgmtsystem.plan.training.tree</field>
+            <field name="model">mgmtsystem.plan.training</field>
+            <field name="arch" type="xml">
+                <tree string="Capacitación">
+                    <field name="name" />
+                    <field name="exponent_id" />
+                    <field name="month_training" />
+                    <field name="date_training" />
+                    <field name="duration" widget="float_time" />
+                    <field name="type" />
+                    <field name="line_ids" string="Empleados" />
+                    <field name="state" />
+                    <field name="version" />
+                </tree>
+            </field>
+        </record>
+
+        <record id="view_mgmtsystem_plan_training_form" model="ir.ui.view">
+            <field name="name">mgmtsystem.plan.training.form</field>
+            <field name="model">mgmtsystem.plan.training</field>
+            <field name="arch" type="xml">
+                <form string="Capacitación">
+                    <header>
+                        <field name="state" widget="statusbar" statusbar_visible="elaborate,review,validate,validate_ok,in_process,final" />
+                        <button string="Notificar por email"
+                                name="action_mail_send"
+                                type="object"
+                                class="oe_highlight"
+                                attrs="{'invisible':[('state','not in', ('in_process'))]}" />
+                        <button string="Notificar por sistema"
+                                name="action_notify_employee"
+                                type="object"
+                                class="btn-success"
+                                attrs="{'invisible':[('state','not in', ('in_process'))]}" />
+                        <button string="Enviar a Elaborar"
+                                name="send_elaborate"
+                                type="object"
+                                class="btn-primary"
+                                attrs="{'invisible':[('state','not in', ('review'))]}" />
+                        <button string="Enviar a Revisar"
+                                name="send_review"
+                                type="object"
+                                class="btn-primary"
+                                attrs="{'invisible':[('state','not in', ('elaborate'))]}" />
+                        <button string="Enviar a Validar"
+                                name="send_validate"
+                                type="object"
+                                class="btn-primary"
+                                attrs="{'invisible':[('state','not in', ('review'))]}" />
+                        <button string="Validar"
+                                name="send_validate_ok"
+                                type="object"
+                                class="btn-primary"
+                                attrs="{'invisible':[('state','not in', ('validate'))]}" />
+                        <button string="Iniciar"
+                                name="send_process"
+                                type="object"
+                                class="btn-primary"
+                                attrs="{'invisible':[('state','not in', ('validate_ok'))]}" />
+                        <button string="Finalizar"
+                                name="send_final"
+                                type="object"
+                                class="btn-primary"
+                                attrs="{'invisible':[('state','not in', ('in_process'))]}" />
+                        <button string="Caducado"
+                                name="send_cancel"
+                                confirm="Esto volverá obsoleto el presente registro, con opción a reprogramación. ¿Está seguro?"
+                                type="object"
+                                class="btn-second"
+                                attrs="{'invisible':[('state','in', ('cancel'))]}" />
+                        <button name="button_new_version"
+                                type="object"
+                                string="Nueva versión"
+                                attrs="{'invisible':[('state', '!=', 'final')]}"
+                                class="oe_highlight" />
+                    </header>
+                    <sheet>
+                        <div name="button_box" class="oe_button_box"></div>
+                        <div class="oe_title">
+                            <h1>
+                                <field name="code" />
+                            </h1>
+                        </div>
+                        <group>
+                            <label for='name' />
+                            <h2>
+                                <field name="name" attrs="{'readonly': [('state','not in',('elaborate'))] }" />
+
+                            </h2>
+                        </group>
+                        <group>
+                            <group>
+                                <field name="plan_id" attrs="{'readonly': [('state','not in',('elaborate','validate_ok'))]}" colspan="4" />
+                                <field name="exponent_id" attrs="{'readonly': [('state','not in',('elaborate','validate_ok'))]}" />
+                                <field name="type" attrs="{'readonly': [('state','not in',('elaborate'))] }" />
+                            </group>
+                            <group>
+                                <field name="month_training" attrs="{'readonly': [('state','not in',('elaborate'))] }" />
+                                <field name="date_training" />
+                                <field name="duration" widget="float_time" attrs="{'readonly': [('state','not in',('elaborate','validate_ok'))]}" />
+                            </group>
+                            <group name="responsible">
+                                <field name="responsible_status" />
+                                <field name="responsible_in_id" attrs="{'invisible': [('responsible_status','=',True)]}" />
+                                <field name="responsible_ex_id" attrs="{'invisible': [('responsible_status','=',False)]}" />
+                            </group>
+                        </group>
+                        <group>
+                            <field name="observations" attrs="{'readonly': [('state','in',('final','cancel'))]}" />
+                        </group>
+                        <notebook>
+                            <page string="Interesados">
+                                <field name="line_ids" attrs="{'readonly': [('state','in',('final','cancel'))], 'invisible': [('state','in',('elaborate','review','validate','validate_ok'))]}">
+                                    <tree editable="bottom">
+                                        <field name="state" invisible="1" />
+                                        <field name="employee_id" />
+                                        <field name="department" />
+                                        <field name="assistance" attrs="{'readonly': [('state','in',('final','cancel'))]}" />
+                                        <field name="note" attrs="{'column_invisible': [('parent.state', 'not in', ['in_process', 'final'])]}" />
+                                        <field name="state_test" attrs="{'column_invisible': [('parent.state', 'not in', ['in_process', 'final'])]}" />
+                                        <field name="has_attachments" invisible="1" />
+                                        <button name="action_see_attachments" type="object" icon="fa-files-o" attrs="{'invisible': [('has_attachments', '=', False)]}" />
+                                        <button name="action_see_attachments" type="object" icon="fa-file" attrs="{'invisible': [('has_attachments', '=', True)]}" />
+                                        <field name="observations" attrs="{'readonly': [('state','in',('final','cancel'))]}" />
+                                        <field name="confirm" />
+                                        <button name="print_certficate" type="object" icon="fa-download" />
+                                    </tree>
+                                </field>
+                                <field name="employee_ids" attrs="{'invisible': [('state','not in',('elaborate','review','validate','validate_ok'))]}" />
+                            </page>
+                            <page string="Evaluaciones">
+                                <group>
+                                    <label for="employee_survey_id" />
+                                    <div class="o_row">
+                                        <field name="employee_survey_id" attrs="{'readonly': [('state','in',('final','cancel'))]}" />
+                                        <button string="Ver cuestionario"
+                                                name="action_print_survey"
+                                                type="object"
+                                                context="{'typesurvey': 'employee'}"
+                                                attrs="{'invisible':[('employee_survey_id','=',False)]}"
+                                                class="oe_link" />
+                                    </div>
+                                </group>
+                                <group>
+                                    <label for="exponent_survey_id" />
+                                    <div class="o_row">
+                                        <field name="exponent_survey_id" attrs="{'readonly': [('state','in',('final','cancel'))]}" />
+                                        <button string="Ver cuestionario"
+                                                name="action_print_survey"
+                                                type="object"
+                                                context="{'typesurvey': 'exponent'}"
+                                                attrs="{'invisible':[('exponent_survey_id','=',False)]}"
+                                                class="oe_link" />
+                                    </div>
+                                </group>
+                                <group>
+                                    <label for="efficiency_survey_id" />
+                                    <div class="o_row">
+                                        <field name="efficiency_survey_id" attrs="{'readonly': [('state','in',('final','cancel'))]}" />
+                                        <button string="Ver cuestionario"
+                                                name="action_print_survey"
+                                                type="object"
+                                                context="{'typesurvey': 'efficiency'}"
+                                                attrs="{'invisible':[('efficiency_survey_id','=',False)]}"
+                                                class="oe_link" />
+                                    </div>
+                                </group>
+                            </page>
+                            <page name="validation" string="Validación y Versión">
+                                <group>
+                                    <group colspan="4">
+                                        <field name="version" />
+                                    </group>
+                                    <group colspan="4">
+                                        <separator string="Elaboración" />
+                                        <field name="elaboration_step" colspan="2" nolabel="1" attrs="{'readonly': [('state','not in',('elaborate'))]}" />
+                                        <separator string="Revisión" />
+                                        <field name="review_step" colspan="2" nolabel="1" attrs="{'readonly': [('state','not in',('elaborate', 'review'))]}" />
+                                        <separator string="Validación" />
+                                        <field name="validation_step" colspan="2" nolabel="1" attrs="{'readonly': [('state','not in',('elaborate', 'review', 'validate'))]}" />
+                                    </group>
+                                    <group colspan="4">
+                                        <field name="date_elaborate" attrs="{'required': [('state','in',('elaborate'))], 'readonly': True}" />
+                                        <field name="date_review" attrs="{'required': [('state','in',('review'))], 'readonly': True, 'invisible': [('state','in',('elaborate'))] }" />
+                                        <field name="date_validate" groups="base.group_no_one,base.user_admin" attrs="{'invisible': [('state','in',('elaborate','review'))] }" />
+                                    </group>
+                                </group>
+                            </page>
+                        </notebook>
+                    </sheet>
+                    <div class="oe_chatter">
+                        <field name="message_follower_ids" widget="mail_followers" />
+                        <field name="activity_ids" widget="mail_activity" />
+                        <field name="message_ids" widget="mail_thread" />
+                    </div>
+
+                </form>
+            </field>
+        </record>
+
+        <record id="view_mgmtsystem_plan_training_line_search" model="ir.ui.view">
+            <field name="name">mgmtsystem.plan.training.line.search</field>
+            <field name="model">mgmtsystem.plan.training.line</field>
+            <field name="arch" type="xml">
+                <search>
+                    <field name="employee_id" operator="child_of" />
+                </search>
+            </field>
+        </record>
+
+        <record id="view_mgmtsystem_plan_training_line_tree" model="ir.ui.view">
+            <field name="name">mgmtsystem.plan.training.line.tree</field>
+            <field name="model">mgmtsystem.plan.training.line</field>
+            <field name="arch" type="xml">
+                <tree string="Interesados">
+                    <field name="training_id" />
+                    <field name="employee_id" />
+                    <field name="department" />
+                    <field name="assistance" />
+                    <field name="note" />
+                    <field name="state_test" />
+                    <field name="observations" />
+                    <field name="confirm" />
+                    <button name="print_certficate"
+                            type="object"
+                            string="Descargar"
+                            class="oe_highlight"
+                            icon="fa-download" />
+                </tree>
+            </field>
+        </record>
+
+        <record id="view_mgmtsystem_plan_training_line_form" model="ir.ui.view">
+            <field name="name">mgmtsystem.plan.training.line.form</field>
+            <field name="model">mgmtsystem.plan.training.line</field>
+            <field name="arch" type="xml">
+                <form string="Interesados">
+                    <header>
+                        <field name="state" widget="statusbar" />
+                    </header>
+                    <sheet>
+                        <div class="oe_button_box" name="button_box_left">
+                            <button name="action_start_survey"
+                                    class="oe_stat_button"
+                                    icon="fa-user"
+                                    type="object"
+                                    help="Responda la pregunta de capacitacion relacionada"
+                                    context="{'survey_id': employee_survey_id, 'typesurvey': 'employee'}"
+                                    attrs="{'invisible':[('employee_survey_id','=',False)]}">
+                                <div class="o_field_widget o_stat_info">
+                                    <span class="o_stat_text">Formulario</span>
+                                    <span class="o_stat_text">empleado</span>
+                                </div>
+                            </button>
+                            <button name="action_print_survey"
+                                    class="oe_stat_button"
+                                    icon="fa-pencil-square-o"
+                                    type="object"
+                                    help="Descargar informe de cuestionario"
+                                    context="{'typesurvey': 'employee'}"
+                                    attrs="{'invisible':[('employee_survey_id','=',False)]}">
+                                <div class="o_field_widget o_stat_info">
+                                    <span class="o_stat_text">Ver</span>
+                                    <span class="o_stat_text">respuestas</span>
+                                </div>
+                            </button>
+                            <button name="action_start_survey"
+                                    style="border-left: 1px solid gray;"
+                                    class="oe_stat_button"
+                                    icon="fa-microphone"
+                                    type="object"
+                                    help="Responda la pregunta de capacitacion relacionada"
+                                    context="{'survey_id': exponent_survey_id, 'typesurvey': 'exponent'}"
+                                    attrs="{'invisible':[('exponent_survey_id','=',False)]}">
+                                <div class="o_field_widget o_stat_info">
+                                    <span class="o_stat_text">Formulario</span>
+                                    <span class="o_stat_text">expositor</span>
+                                </div>
+                            </button>
+                            <button name="action_print_survey"
+                                    class="oe_stat_button"
+                                    icon="fa-pencil-square-o"
+                                    type="object"
+                                    help="Descargar informe de cuestionario"
+                                    context="{'typesurvey': 'exponent'}"
+                                    attrs="{'invisible':[('exponent_survey_id','=',False)]}">
+                                <div class="o_field_widget o_stat_info">
+                                    <span class="o_stat_text">Ver</span>
+                                    <span class="o_stat_text">respuestas</span>
+                                </div>
+                            </button>
+                            <button name="action_start_survey"
+                                    style="border-left: 1px solid gray;"
+                                    class="oe_stat_button"
+                                    icon="fa-trophy"
+                                    type="object"
+                                    help="Responda la pregunta de capacitacion relacionada"
+                                    context="{'survey_id': efficiency_survey_id, 'typesurvey': 'efficiency'}"
+                                    attrs="{'invisible':[('efficiency_survey_id','=',False)]}">
+                                <div class="o_field_widget o_stat_info">
+                                    <span class="o_stat_text">Formulario</span>
+                                    <span class="o_stat_text">eficiencia</span>
+                                </div>
+                            </button>
+                            <button name="action_print_survey"
+                                    class="oe_stat_button"
+                                    icon="fa-pencil-square-o"
+                                    type="object"
+                                    help="Descargar informe de cuestionario"
+                                    context="{'typesurvey': 'efficiency'}"
+                                    attrs="{'invisible':[('efficiency_survey_id','=',False)]}">
+                                <div class="o_field_widget o_stat_info">
+                                    <span class="o_stat_text">Ver</span>
+                                    <span class="o_stat_text">respuestas</span>
+                                </div>
+                            </button>
+                        </div>
+                        <group>
+                            <group string="Detalle">
+                                <field name="employee_id" />
+                                <field name="department" />
+                                <field name="assistance" />
+                                <field name="observations" />
+                                <field name="employee_survey_id" invisible="1" />
+                                <field name="emresponse_id" invisible="1" />
+                                <field name="note" />
+                                <field name="state_test" />
+                                <field name="confirm" />
+                                <field name="exponent_survey_id" invisible="1" />
+                                <field name="exresponse_id" invisible="1" />
+                                <field name="efficiency_survey_id" invisible="1" />
+                                <field name="efresponse_id" invisible="1" />
+                            </group>
+                        </group>
+                    </sheet>
+
+                    <div class="oe_chatter">
+                        <field name="message_follower_ids" widget="mail_followers" />
+                        <field name="activity_ids" widget="mail_activity" />
+                        <field name="message_ids" widget="mail_thread" />
+                    </div>
+
+                </form>
+            </field>
+        </record>
+
+        <record id="hr_item_training_action" model="ir.actions.act_window">
+            <field name="name">Plan de Capacitaciones</field>
+            <field name="type">ir.actions.act_window</field>
+            <field name="res_model">mgmtsystem.plan.training</field>
+            <field name="context">{"search_default_filter_aprobates":1}</field>
+            <field name="view_mode">tree,form,kanban,graph,pivot</field>
+        </record>
+
+        <menuitem id="hr_item_training1"
+                  name="Plan de Capacitaciones"
+                  parent="menu_training_root"
+                  sequence="7"
+                  action="hr_item_training_action" />
+
+        <!-- <menuitem id="mgmtsystem_plan_training" name="Capacitaciones" parent="hola_calidad.menu_do_main" sequence="10" action="hr_item_training_action"/> -->
+
+    </data>
+</odoo>

@@ -1,0 +1,40 @@
+<odoo>
+
+    <menuitem name="Reclamos" id="menu_configuration_complaint" 
+        parent="menu_configuration"
+        sequence="1" />
+
+    <!-- CONFIGURACIÓN -> CATEGORÍAS -->
+    <record model="ir.actions.act_window" id="complaint_categ_action">
+        <field name="name">Categorías</field>
+        <field name="res_model">complaint.categ</field>
+        <field name="view_mode">tree,form</field>
+    </record>
+
+    <menuitem name="Categorías" id="mitem_complaint_categ" 
+        parent="menu_configuration_complaint"
+        action="complaint_categ_action" />
+
+    <!-- CONFIGURACIÓN -> CATEGORÍAS -->
+    <record model="ir.actions.act_window" id="complaint_via_action">
+        <field name="name">Medios</field>
+        <field name="res_model">complaint.via</field>
+        <field name="view_mode">tree,form</field>
+    </record>
+
+    <menuitem name="Medios" id="mitem_complaint_via" 
+        parent="menu_configuration_complaint"
+        action="complaint_via_action" />
+
+    <!-- CONFIGURACIÓN -> CATEGORÍAS -->
+    <record model="ir.actions.act_window" id="complaint_quick_action_action">
+        <field name="name">Acciones rápidas</field>
+        <field name="res_model">complaint.quick.action</field>
+        <field name="view_mode">tree,form</field>
+    </record>
+
+    <menuitem name="Acciones rápidas" id="mitem_complaint_quick_action" 
+        parent="menu_configuration_complaint"
+        action="complaint_quick_action_action" />
+
+</odoo>

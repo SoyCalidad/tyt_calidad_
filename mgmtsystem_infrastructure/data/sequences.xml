@@ -1,0 +1,35 @@
+<odoo>
+    <data noupdate="1">
+
+        <record id="plan_de_mantenimiento" model="ir.sequence">
+            <field name="name">Secuencia de foda</field>
+            <field name="code">APY-MAN-1-</field>
+            <field name="active">TRUE</field>
+            <field name="prefix">APY-MAN-1-</field>
+            <field name="padding">4</field>
+            <field name="number_next">1</field>
+            <field name="number_increment">1</field>
+        </record>
+        
+        <record id="planinfra_sequence_sequence" model="ir.sequence">
+            <field name="name">Programa de infraestructura</field>
+            <field name="code">planinfra.sequence</field>
+            <field name="active">TRUE</field>
+            <field name="prefix">Edición-nro.</field>
+            <field name="padding">4</field>
+            <field name="number_next">1</field>
+            <field name="number_increment">1</field>
+        </record>
+
+        <record id="planmaintenance_sequence_sequence" model="ir.sequence">
+            <field name="name">Programa de mantenimiento</field>
+            <field name="code">planmaintenance.sequence</field>
+            <field name="active">TRUE</field>
+            <field name="prefix">Edición-nro.</field>
+            <field name="padding">4</field>
+            <field name="number_next">1</field>
+            <field name="number_increment">1</field>
+        </record>
+
+    </data>
+</odoo>

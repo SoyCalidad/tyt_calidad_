@@ -1,0 +1,43 @@
+<odoo>
+
+    <menuitem
+        id="menu_opportunity_root"
+        name="Riesgos y oportunidades"
+        web_icon="mgmtsystem_opportunity,static/description/icon.png"
+        groups="base.group_no_one,mgmtsystem_opportunity.group_opportunity_onlyread,mgmtsystem_opportunity.group_opportunity_onlyread_printreport,mgmtsystem_opportunity.group_opportunity_user_secundario,mgmtsystem_opportunity.group_opportunity_write_printreport"
+        sequence="4"
+        />
+
+    <menuitem
+        id="menu_risk"
+        name="Gestión de riesgos"
+        parent="menu_opportunity_root"
+        sequence="10"
+        groups="base.group_no_one,mgmtsystem_opportunity.group_opportunity_onlyread,mgmtsystem_opportunity.group_opportunity_onlyread_printreport,mgmtsystem_opportunity.group_opportunity_user_secundario,mgmtsystem_opportunity.group_opportunity_write_printreport"
+        />
+
+    <menuitem
+        id="menu_opportunity"
+        name="Gestión de oportunidades"
+        parent="menu_opportunity_root"
+        sequence="15"
+        groups="base.group_no_one,mgmtsystem_opportunity.group_opportunity_onlyread,mgmtsystem_opportunity.group_opportunity_onlyread_printreport,mgmtsystem_opportunity.group_opportunity_user_secundario,mgmtsystem_opportunity.group_opportunity_write_printreport"
+        />
+
+    <menuitem
+        id="menu_report"
+        name="Reportes"
+        parent="menu_opportunity_root"
+        sequence="70"
+        groups="base.group_no_one,mgmtsystem_opportunity.group_opportunity_onlyread_printreport,mgmtsystem_opportunity.group_opportunity_user_secundario,mgmtsystem_opportunity.group_opportunity_write_printreport"
+        />
+
+    <menuitem
+        id="menu_configuration"
+        name="Configuración"
+        parent="menu_opportunity_root"
+        sequence="150"
+        groups="base.group_no_one,mgmtsystem_opportunity.group_opportunity_onlyread,mgmtsystem_opportunity.group_opportunity_onlyread_printreport,mgmtsystem_opportunity.group_opportunity_user_secundario,mgmtsystem_opportunity.group_opportunity_write_printreport"
+        />
+
+</odoo>

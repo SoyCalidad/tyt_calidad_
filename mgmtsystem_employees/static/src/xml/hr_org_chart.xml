@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<templates id="template" xml:space="preserve">
+
+    <t t-extend="hr_org_chart_employee">
+        <t t-jquery="div.media-body" t-operation="replace">
+            <div class="media-body">
+                <span t-if="employee.indirect_sub_count &gt; 0"
+                      class="badge badge-pill"
+                      tabindex="0"
+                      data-trigger="focus"
+                      t-att-data-emp-name="employee.name"
+                      t-att-data-emp-id="employee.id"
+                      t-att-data-emp-dir-subs="employee.direct_sub_count"
+                      t-att-data-emp-ind-subs="employee.indirect_sub_count"
+                      data-toggle="popover">
+                    <t t-esc="employee.indirect_sub_count" />
+                </span>
+
+                <t t-if="!is_self">
+                    <a t-att-href="employee.link" class="o_employee_redirect" t-att-data-employee-id="employee.id">
+                        <h5 class="o_media_heading">
+                            <b>
+                                <t t-esc="employee.name" />
+                            </b>
+                        </h5>
+                        <strong>
+                            <t t-esc="employee.job_name" />
+                        </strong>
+                    </a>
+                </t>
+                <t t-if="is_self">
+                    <h5 class="o_media_heading">
+                        <b>
+                            <t t-esc="employee.name" />
+                        </b>
+                    </h5>
+                    <strong>
+                        <t t-esc="employee.job_name" />
+                    </strong>
+                </t>
+            </div>
+        </t>
+    </t>
+
+</templates>

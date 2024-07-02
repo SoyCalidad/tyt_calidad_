@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+
+    <record id="view_documentary_control_form_inherit" model="ir.ui.view">
+        <field name="name">documentary.control.view.form.inherit</field>
+        <field name="model">documentary.control</field>
+        <field name="inherit_id" ref="mgmtsystem_process.view_documentary_control_form" />
+        <field name="arch" type="xml">
+            <sheet position="before">
+                <header>
+                    <button string="Actualizar códigos de registros"
+                            name="update_codes_from_documentary_control"
+                            type="object"
+                            class="oe_highlight"
+                            confirm="Esto cambiará todos los códigos del modelo seleccionado. ¿Está seguro(a)?" />
+                </header>
+            </sheet>
+            <field name="code" position="replace">
+                <field name="code" />
+            </field>
+            <field name="module_id" position="after">
+                <field name="config_type" />
+            </field>
+            <!--
+            <field name="model_id" position="after">
+                <field name="document_id" attrs="{'invisible': [('config_type','!=','document')]}" />
+            </field>
+            -->
+            <field name="model_id" position="replace">
+                <field name="model_id" attrs="{'invisible': [('config_type','!=','model')]}" />
+            </field>
+        </field>
+    </record>
+
+</odoo>

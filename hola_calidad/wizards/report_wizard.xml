@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+
+    <record id="report_wizard_view_form" model="ir.ui.view">
+        <field name="name">wizard.report.view.form</field>
+        <field name="model">wizard.report</field>
+        <field name="arch" type="xml">
+            <form string="Reporte">
+                <sheet>
+                    <group>
+                        <field name="entry_id" />
+                        <field name="pdf_bool" invisible="1" />
+                        <field name="xls_bool" invisible="1" />
+                    </group>
+                </sheet>
+                <footer>
+                    <button name="action_print" type="object" string="Descargar" class="oe_highlight" icon="fa-download" attrs="{'invisible':[('pdf_bool', '=',True)]}"/>
+                    <button name="action_print_xls" type="object" string="Descargar XLS" class="oe_highlight" icon="fa-download" attrs="{'invisible':[('xls_bool', '=',True)]}"/>
+                    <button special="cancel" string="Cancelar"/>
+                </footer>
+            </form>
+        </field>
+    </record>
+
+</odoo>

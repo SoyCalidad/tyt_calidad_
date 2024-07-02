@@ -1,0 +1,88 @@
+<odoo>
+    <data>
+
+        <record model="ir.actions.act_window" id="show_risk_action_action">
+            <field name="name">Riesgos</field>
+            <field name="res_model">matrix.block.line</field>
+            
+            <field name="view_mode">kanban,form,tree</field>
+            <field name="context">{}</field>
+        </record>
+
+        <record model="ir.actions.act_window" id="show_opp_action_action">
+            <field name="name">Oportunidades</field>
+            <field name="res_model">matrix.block.line</field>
+            
+            <field name="view_mode">kanban,form,tree</field>
+            <field name="context">{}</field>
+        </record>
+
+        <record id="action_view_form" model="ir.ui.view">
+            <field name="name">mgmtsystem.action.form.view.form</field>
+            <field name="model">mgmtsystem.action</field>
+            <field name="inherit_id" ref="mgmtsystem_action.view_mgmtsystem_action_form" />
+            <field name="arch" type="xml">
+                <xpath expr="//div[@name='button_box']" position="inside">
+                    <button name="action_action_views"
+                            type="object"
+                            context="{'type_action':'opp'}"
+                            class="oe_stat_button"
+                            icon="fa-book">
+                        <field name="opps_count" widget="statinfo" string="Oportunidades" />
+                    </button>
+                    <button name="action_action_views"
+                            type="object"
+                            context="{'type_action':'risk'}"
+                            class="oe_stat_button"
+                            icon="fa-book">
+                        <field name="risks_count" widget="statinfo" string="Riesgos" />
+                    </button>
+                </xpath>
+                <field name="priority" position="after">
+                    <field name="count_origin_ids" string="Reincidencias" />
+                </field>
+                <xpath expr="//notebook" position="inside">
+                    <page string="Origenes">
+                        <field name="origin_model_id" invisible="1" />
+                        <field name="origin_int_id" invisible="1" />
+                        <field name="origin_ids">
+                            <tree>
+                                <field name="origin_model_id" />
+                                <button string="Abrir origen" name="open_origin_record" type="object" class="oe_highlight" />    
+                            </tree>
+                        </field>
+                    </page>
+                    <page name="context" string="Contexto">
+                        <field name="internal_issue_ids" nolabel="1" />
+                        <field name="external_issue_ids" nolabel="1" />
+                        <field name="swot_ids" nolabel="1" />
+                        <field name="cross_swot_ids" nolabel="1" />
+                    </page>
+                    <page name="risk_opp" string="Riesgos y oportunidades">
+                        <field name="model_id" invisible="1" />
+                        <separator string="Riesgos" />
+                        <field name="risk_ids" context="{'default_origin_model_id': model_id, 'default_origin_int_id': id, 'default_type': 'risk'}" />
+                        <separator string="Oportunidades" />
+                        <field name="opp_ids" context="{'default_origin_model_id': model_id, 'default_origin_int_id': id, 'default_type': 'opportunity'}" />
+                    </page>
+                </xpath>
+            </field>
+        </record>
+
+        <record id="mgmt_action_process_action" model="ir.actions.act_window">
+            <field name="name">Procedimientos de Acciones</field>
+            <field name="res_model">mgmt.process</field>
+            <field name="view_mode">kanban,tree,form</field>
+            <field name="domain">[('name', '=', 'ACCIONES CORRECTIVAS, PREVENTIVAS Y DE MEJORA')]</field>
+            <field name="context">{}</field>
+        </record>
+
+        <!-- <menuitem id="action_report_menu"
+                  name="Reportes"
+                  parent="mgmtsystem_action.menu_action_root"
+                  groups="base.group_no_one,mgmtsystem_action.group_action_owner,mgmtsystem_action.group_action_readonly_printreport"
+                  sequence="100" /> -->
+
+
+    </data>
+</odoo>

@@ -1,0 +1,12 @@
+<odoo>
+    <data>
+
+    <menuitem
+        id="context_report_menu"
+        parent="context_menu"
+        name="Reportes"
+        groups= "mgmtsystem_context.group_context_onlyread_printreport,mgmtsystem_context.group_context_write_printreport,mgmtsystem_context.group_context_all,base.group_no_one"
+        sequence="25"/>
+
+    </data> 
+</odoo>

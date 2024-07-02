@@ -1,0 +1,38 @@
+<odoo>
+    <data noupdate="1">
+        
+        <record id="complaints_sequence" model="ir.sequence">
+            <field name="name">Secuencia de Reclamos</field>
+            <field name="code">EST-GES-5-</field>
+            <field name="active">TRUE</field>
+            <field name="prefix">EST-GES-5-</field>
+            <field name="padding">4</field>
+            <field name="number_next">1</field>
+            <field name="number_increment">1</field>
+        </record>
+
+        <record model="complaint.categ" id="categ1">
+            <field name="name">Queja</field>
+            <field name="description">Reclamación o protesta que se hace ante una autoridad a causa de un desacuerdo o no conformidad.</field>
+            <field name="elaborate_ids" />
+        </record>
+        <record model="complaint.categ" id="categ2">
+            <field name="name">Reclamo</field>
+        </record>
+        <record model="complaint.categ" id="categ3">
+            <field name="name">Sugerencia</field>
+        </record>
+        <record model="complaint.categ" id="categ4">
+            <field name="name">Observación</field>
+        </record>
+
+        <record model="complaint.via" id="via1">
+            <field name="name">Verbal</field>
+            <field name="elaborate_ids" />
+        </record>
+        <record model="complaint.via" id="via2">
+            <field name="name">Libro de reclamaciones</field>
+            <field name="elaborate_ids" />
+        </record>
+    </data>
+</odoo>

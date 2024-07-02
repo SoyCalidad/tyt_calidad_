@@ -1,0 +1,129 @@
+<odoo>
+    <data>
+
+        <record model="ir.actions.act_window" id="show_training_line_employee_action">
+            <field name="name">Capacitaciones</field>
+            <field name="res_model">mgmtsystem.plan.training.line</field>
+            <field name="view_mode">tree,form</field>
+            <field name="context">{"search_default_employee_id": active_id}</field>
+            <field name="search_view_id" ref="view_mgmtsystem_plan_training_line_search" />
+            <field name="help" type="html">
+                <p class="oe_view_nocontent_create">No existen capacitaciones para este empleado</p>
+            </field>
+        </record>
+        
+        <record id="hr_kanban_view_employees_inherit" model="ir.ui.view">
+            <field name="name">hr.employee.view.kanban.inherit</field>
+            <field name="model">hr.employee</field>
+            <field name="inherit_id" ref="hr.hr_kanban_view_employees" />
+            <field name="arch" type="xml">
+                <span class="o_kanban_record_subtitle" position="replace">
+                    <span t-if="record.job_id.raw_value" class="o_kanban_record_subtitle">
+                        <field name="job_id" />
+                    </span>
+                </span>
+            </field>
+        </record>
+
+        <record id="mgmt_hr_employee_inherit_form" model="ir.ui.view">
+            <field name="name">mgmt.hr.employee.inherit.form</field>
+            <field name="model">hr.employee</field>
+            <field name="inherit_id" ref="hr.view_employee_form" />
+            <field name="arch" type="xml">
+                <div name="button_box" position="inside">
+                    <button type="action"
+                            name="%(show_training_line_employee_action)d"
+                            class="oe_stat_button"
+                            attrs="{'invisible': [('trainings_count','=',0)]}"
+                            icon="fa-briefcase"
+                            groups="hr.group_hr_manager">
+                        <field name="trainings_count" widget="statinfo" string="Capacitaciones" />
+                    </button>
+                </div>
+                <button name="%(hr.plan_wizard_action)d" position="replace" />
+            </field>
+        </record>
+
+        <record id="complement_emplo" model="ir.ui.view">
+            <field name="name">complemento</field>
+            <field name="model">hr.employee</field>
+            <field name="inherit_id" ref="hr.view_employee_form" />
+            <field name="arch" type="xml">
+                <xpath expr="//div[@class='oe_title']/h1" position="before">
+                    <label for="code" />
+                    <h1>
+                        <field name="code" />
+                    </h1>
+                </xpath>
+                <field name="identification_id" position="before">
+                    <field name="document_type_id" />
+                </field>
+                
+                <xpath expr="//sheet/notebook/page[@name='personal_information']/group[1]" position="inside">
+                    <group string="Educación">
+                        <field name="level" />
+                        <field name="institution" />
+                        <field name="profession" />
+                        <field name="obtained_title" />
+                        <field name="enabled" />
+                        <field name="language" />
+                    </group>
+                    <group string="Caracteristicas" name="carac">
+                        <field name="type_blood" />
+                        <field name="license_driver" />
+                        <field name="category_driver" />
+                    </group>
+                </xpath>
+                
+
+                <!--
+                <field name="job_id" position="attributes">
+                    <attribute name="domain">[('state', '=', 'validate_ok')]</attribute>
+                </field>
+                -->
+                <field name="job_title" position="attributes">
+                    <attribute name="invisible">True</attribute>
+                </field>
+                <xpath expr="//notebook/page[@name='personal_information']/group[1]/group[2]" position="attributes"> <!--Calidad_16c-->
+                    <attribute name="invisible">True</attribute>
+                </xpath>
+                <field name="km_home_work" position="attributes">
+                    <attribute name="invisible">True</attribute>
+                </field>
+                <field name="language" position="attributes">
+                    <attribute name="string">Idioma natal</attribute>
+                </field>
+                <field name="language" position="after">
+                    <field name="other_languages" />
+                    <!---->
+                </field>
+                <xpath expr="//sheet/group[1]" position="replace"></xpath>
+                <xpath expr="//notebook/page[1]/div/div/group[1]" position="before">
+                    <group>
+                        <field name="mobile_phone" widget="phone" />
+                        <field name="work_phone" widget="phone" />
+                        <field name="work_email" widget="email" />
+                        <field name="work_location_id" />
+                        <field name="company_id" groups="base.group_multi_company" />
+                        <field name="department_id" />
+                        <field name="job_id" />
+                        <field name="parent_id" />
+                    </group>
+                </xpath>
+                <field name="job_id" position="attributes">
+                    <attribute name="string">Puesto Principal</attribute>
+                </field>
+                <field name="department_id" position="attributes">
+                    <attribute name="string">Departamento principal</attribute>
+                </field>
+                <field name="job_id" position="after">
+                    <field name="multiple_job_ids" widget="many2many_tags" />
+                </field>
+                <field name="department_id" position="after">
+                    <field name="multiple_department_ids" widget="many2many_tags" />
+                </field>
+            </field>
+        </record>
+
+    </data>
+</odoo>

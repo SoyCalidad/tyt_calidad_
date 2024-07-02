@@ -1,0 +1,131 @@
+<odoo>
+    <data>
+
+        <record id="fo_wizard_view_form" model="ir.ui.view">
+            <field name="name">mgmtsystem.context.cross.swot.fo.action_wizard.view.form</field>
+            <field name="model">mgmtsystem.context.cross.swot.fo.action_wizard</field>
+            <field name="arch" type="xml">
+                <form string="">
+                    <sheet>
+                        <header>
+                            <div class="guide">
+                                <h2>
+                                    <strong>Añada o cree nuevas acciones para desarrollar la estrategia.</strong>
+                                </h2>
+                            </div>
+                        </header>
+                        <group>
+                            <field name="action_ids"/>
+                        </group>
+                    </sheet>
+                    <footer>
+                        <div class="oe_button_box" name="button_box">
+                            <button string="Crear acción" name="create_action" type="object" class="oe_highlight"/>
+                        </div>
+                    </footer>
+                </form>
+            </field>
+        </record>
+
+        <record id="fo_wizard_action" model="ir.actions.act_window">
+            <field name="name">Acción FO</field>
+            <field name="res_model">mgmtsystem.context.cross.swot.fo.action_wizard</field>
+            <field name="view_mode">form</field>
+            <field name="target">new</field>
+            <field name="view_id" ref="fo_wizard_view_form"/>
+            <field name="domain">[]</field>
+            <field name="context">{}</field>
+        </record>
+
+        <record id="do_wizard_view_form" model="ir.ui.view">
+            <field name="name">mgmtsystem.context.cross.swot.do.action_wizard.view.form</field>
+            <field name="model">mgmtsystem.context.cross.swot.do.action_wizard</field>
+            <field name="arch" type="xml">
+                <form string="">
+                    <sheet>
+                        <group>
+                            <field name="action_ids"/>
+                        </group>
+                    </sheet>
+                    <dooter>
+                        <div class="oe_button_box" name="button_box">
+                            <button string="Crear acción" name="create_action" type="object" class="oe_highlight"/>
+                        </div>
+                    </dooter>
+                </form>
+            </field>
+        </record>
+
+        <record id="do_wizard_action" model="ir.actions.act_window">
+            <field name="name">Acción do</field>
+            <field name="res_model">mgmtsystem.context.cross.swot.do.action_wizard</field>
+            
+            <field name="view_mode">form</field>
+            <field name="target">new</field>
+            <field name="view_id" ref="do_wizard_view_form"/>
+            <field name="domain">[]</field>
+            <field name="context">{}</field>
+        </record>
+
+        <record id="fa_wizard_view_form" model="ir.ui.view">
+            <field name="name">mgmtsystem.context.cross.swot.fa.action_wizard.view.form</field>
+            <field name="model">mgmtsystem.context.cross.swot.fa.action_wizard</field>
+            <field name="arch" type="xml">
+                <form string="">
+                    <sheet>
+                        <group>
+                            <field name="action_ids"/>
+                        </group>
+                    </sheet>
+                    <footer>
+                        <div class="oe_button_box" name="button_box">
+                            <button string="Crear acción" name="create_action" type="object" class="oe_highlight"/>
+                        </div>
+                    </footer>
+                </form>
+            </field>
+        </record>
+
+        <record id="fa_wizard_action" model="ir.actions.act_window">
+            <field name="name">Acción fa</field>
+            <field name="res_model">mgmtsystem.context.cross.swot.fa.action_wizard</field>
+            
+            <field name="view_mode">form</field>
+            <field name="target">new</field>
+            <field name="view_id" ref="fa_wizard_view_form"/>
+            <field name="domain">[]</field>
+            <field name="context">{}</field>
+        </record>
+
+        <record id="da_wizard_view_form" model="ir.ui.view">
+            <field name="name">mgmtsystem.context.cross.swot.da.action_wizard.view.form</field>
+            <field name="model">mgmtsystem.context.cross.swot.da.action_wizard</field>
+            <field name="arch" type="xml">
+                <form string="">
+                    <sheet>
+                        <group>
+                            <field name="action_ids"/>
+                        </group>
+                    </sheet>
+                    <footer>
+                        <div class="oe_button_box" name="button_box">
+                            <button string="Crear acción" name="create_action" type="object" class="oe_highlight"/>
+                        </div>
+                    </footer>
+                </form>
+            </field>
+        </record>
+
+        <record id="da_wizard_action" model="ir.actions.act_window">
+            <field name="name">Acción fa</field>
+            <field name="res_model">mgmtsystem.context.cross.swot.da.action_wizard</field>
+            
+            <field name="view_mode">form</field>
+            <field name="target">new</field>
+            <field name="view_id" ref="da_wizard_view_form"/>
+            <field name="domain">[]</field>
+            <field name="context">{}</field>
+        </record>
+
+    </data>
+</odoo>

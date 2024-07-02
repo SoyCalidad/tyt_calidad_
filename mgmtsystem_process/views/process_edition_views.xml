@@ -1,0 +1,347 @@
+<odoo>
+
+    <record model="ir.actions.act_window" id="p_mail_activity_action">
+        <field name="name">Crear actividad</field>
+        <field name="type">ir.actions.act_window</field>
+        <field name="res_model">mail.activity</field>
+        <field name="view_id" ref="mail.mail_activity_view_form_popup" />
+        <field name="target">new</field>
+    </record>
+
+    <!-- edition.abbreviation form view -->
+    <record id="edition_abbreviation_view_form" model="ir.ui.view">
+        <field name="name">edition.abbreviation.view.form</field>
+        <field name="model">edition.abbreviation</field>
+        <field name="arch" type="xml">
+            <form string="">
+                <sheet>
+                    <group>
+                        <!-- Add your fields here -->
+                        <field name="abbre" />
+                        <field name="name" />
+                        <field name="description" />
+                    </group>
+                </sheet>
+            </form>
+        </field>
+    </record>
+
+
+    <record id="mgmt_edition_abbreviation_tree" model="ir.ui.view">
+        <field name="name">view.edition.abbreviation.tree</field>
+        <field name="model">edition.abbreviation</field>
+        <field name="arch" type="xml">
+            <tree>
+                <field name="abbre" />
+                <field name="name" />
+                <field name="description" />
+            </tree>
+        </field>
+    </record>
+
+    <!-- edition.abbreviation action window -->
+    <record id="edition_abbreviation_action" model="ir.actions.act_window">
+        <field name="name">Glosario</field>
+        <field name="type">ir.actions.act_window</field>
+        <field name="res_model">edition.abbreviation</field>
+        <field name="view_mode">tree,form</field>
+    </record>
+
+    <!-- This Menu Item must have a parent and an action -->
+    <menuitem id="edition_abbreviation_menu_act"
+              name="Glosario"
+              parent="menu_process_root"
+              action="edition_abbreviation_action"
+              sequence="10" />
+
+    <record id="system_process_edition_form_view_inherit" model="ir.ui.view">
+        <field name="name">system.process.edition.form.view.inherit</field>
+        <field name="model">process.edition</field>
+        <field name="arch" type="xml">
+            <form>
+                <header>
+                    <field name="state" widget="statusbar" statusbar_visible="elaborate,review,validate,validate_ok" />
+                    <button string="Enviar a Elaborar"
+                            name="send_elaborate"
+                            type="object"
+                            class="btn-primary"
+                            attrs="{'invisible':[('state','in', ('elaborate','cancel','validate_ok'))]}" />
+                    <button string="Enviar a Revisar"
+                            name="send_review"
+                            type="object"
+                            class="btn-primary"
+                            attrs="{'invisible':[('state','!=', 'elaborate')]}" />
+                    <button string="Enviar a Validar"
+                            name="send_validate"
+                            type="object"
+                            class="btn-primary"
+                            attrs="{'invisible':[('state','in', ('elaborate','validate','cancel','validate_ok'))]}" />
+                    <button string="Validar"
+                            name="send_validate_ok"
+                            type="object"
+                            class="btn-primary"
+                            attrs="{'invisible':[('state','not in', ('validate'))]}" />
+                    <button string="Volver Obsoleto"
+                            confirm="Esto volverá obsoleto el presente registro. ¿Está seguro(a)?"
+                            name="send_cancel"
+                            type="object"
+                            class="btn-second"
+                            attrs="{'invisible': [('state','in',('cancel'))] }" />
+                    <button name="button_new_version"
+                            type="object"
+                            string="Nueva versión"
+                            attrs="{'invisible':[('state', '!=', 'validate_ok')]}"
+                            class="oe_highlight" />
+                    <button string="Comunicar procedimiento" name="send_edition_by_email" type="object" class="oe_highlight" />
+                </header>
+                <sheet>
+                    <field name="active" invisible="1" />
+                    <widget name="web_ribbon" title="Archivado" bg_color="bg-danger" attrs="{'invisible': [('active', '=', True)]}" />
+                    <div class="oe_button_box" name="button_box">
+                        <button type="object"
+                                name="action_open_older_versions"
+                                class="oe_stat_button"
+                                icon="fa-archive"
+                                style="white-space: nowrap;"
+                                string="Versiones antiguas" />
+                    </div>
+                    <div class="oe_title">
+                        <h2>
+                            <field name="code" readonly="1" />
+                        </h2>
+                    </div>
+                    <label for="process_id" />
+                    <div class="o_row">
+                        <field name="process_id" placeholder="Procedimiento" colspan="3" attrs="{'readonly': [('state','not in',('elaborate'))]}" />
+                        <field name="version_as_string" colspan="1" nolabel="1" class="oe_inline" />
+                    </div>
+                    <field name="name" invisible="1" />
+                    <field name="company_id" invisible="1" />
+                    <group>
+                        <field name="economic_activity_id" />
+                        <field name="economic_activity_name" invisible="1" />
+                        <field name="custom" />
+                    </group>
+                    <notebook>
+                        <page name="custom_detail" string="Contenido" attrs="{'readonly': [('state','in',('validate_ok'))], 'invisible': [('custom','=',False)]}">
+                            <group attrs="{'readonly': [('state','in',('validate_ok'))]}">
+                                <field name="custom_template_id" placeholder="Sin plantilla..." attrs="{'readonly': [('state','in',('validate_ok'))]}" />
+                            </group>
+                            <group>
+                                <field name="custom_body" widget="html" attrs="{'readonly': [('state','in',('validate_ok'))]}" />
+                            </group>
+                        </page>
+                        <page name="detail" string="Contenido" attrs="{'readonly': [('state','in',('validate_ok'))], 'invisible': [('custom','=',True)]}">
+                            <group attrs="{'readonly': [('state','in',('validate_ok'))]}">
+                                <field name="template_id" placeholder="Sin plantilla..." attrs="{'readonly': [('state','in',('validate_ok'))]}" />
+                            </group>
+                            <separator string="1. Objeto" />
+                            <field name="purpose" widget="html" attrs="{'readonly': [('state','in',('validate_ok'))]}" />
+                            <separator string="2. Alcance" />
+                            <field name="scope" widget="html" attrs="{'readonly': [('state','in',('validate_ok'))]}" />
+                            <separator string="3. Referencias" />
+                            <field name="references" widget="html" attrs="{'readonly': [('state','in',('validate_ok'))]}" />
+                            <separator string="4. Responsables" />
+                            <field name="responsible_ids" widget="one2many" attrs="{'readonly': [('state','in',('validate_ok'))]}">
+                                <tree editable="bottom">
+                                    <field name="name" />
+                                    <field name="description" />
+                                </tree>
+                            </field>
+                            <separator string="5. Definición y Abreviaturas" attrs="{'readonly': [('state','in',('validate_ok'))]}" />
+                            <field name="abbreviation_ids" attrs="{'readonly': [('state','in',('validate_ok'))]}">
+                                <tree>
+                                    <field name="name" />
+                                    <field name="description" />
+                                </tree>
+                            </field>
+                            <separator string="6. Desarrollo" attrs="{'readonly': [('state','in',('validate_ok'))]}" />
+                            <field name="body" widget="html" attrs="{'readonly': [('state','in',('validate_ok'))]}" />
+                            <separator string="7. Anexos" />
+                            <field name="flowchart" widget="html" attrs="{'readonly': [('state','in',('validate_ok'))]}" />
+                            <separator string="8. Registros" />
+                            <field name="documentarycontrol_ids" attrs="{'readonly': [('state','in',('validate_ok'))]}">
+                                <tree>
+                                    <field name="name" />
+                                    <field name="department_id" />
+                                    <field name="type" />
+                                    <field name="records_count" />
+                                </tree>
+                            </field>
+                        </page>
+                        <page name="info" string="Validación y versión">
+                            <group attrs="{'readonly': [('state','in',('validate_ok'))]}">
+                                <group colspan="4">
+                                    <field name="version" />
+                                </group>
+                            </group>
+                        </page>
+                        <page name="change_history" string="Historial">
+                            <field name="change_history">
+                                <tree>
+                                    <field name="numero" />
+                                    <field name="publish_date" />
+                                    <field name="name" />
+                                </tree>
+                            </field>
+                        </page>
+                    </notebook>
+                </sheet>
+                <div class="oe_chatter">
+                    <field name="message_follower_ids" widget="mail_followers" />
+                    <field name="activity_ids" widget="mail_activity" />
+                    <field name="message_ids" widget="mail_thread" />
+                </div>
+            </form>
+        </field>
+    </record>
+
+    <record id="view_wiki_tree_view_inherit" model="ir.ui.view">
+        <field name="name">view.wiki.tree.view.inherit</field>
+        <field name="model">process.edition</field>
+        <field name="arch" type="xml">
+            <tree string="Ediciones">
+                <field name="code" />
+                <field name="name" />
+                <field name="version_as_string" />
+                <field name="state" />
+                <field name="categ_id" />
+                <field name="write_date" string="Ultima actualización" />
+            </tree>
+        </field>
+    </record>
+
+    <record id="process_edition_view_search" model="ir.ui.view">
+        <field name="name">process.edition.view.search</field>
+        <field name="model">process.edition</field>
+        <field name="arch" type="xml">
+            <search string="Edición de procedimiento">
+                <field name="name" />
+                <field name="code" />
+                <field name="version_as_string" />
+                <field name="state" />
+                <field name="categ_id" />
+                <field name="process_id" />
+                <filter string="Archivado" name="inactive" domain="[('active', '=', False)]"/>
+                <searchpanel>
+                    <field name="categ_id" icon="fa-users" />
+                </searchpanel>
+            </search>
+        </field>
+    </record>
+
+    <record model="ir.actions.act_window" id="action_mgmt_process_edition">
+        <field name="name">Ediciones</field>
+        <field name="res_model">process.edition</field>
+        <field name="view_mode">tree,form</field>
+        <field name="domain">[('state', '!=', 'cancel')]</field>
+        <field name="help">Ediciones de procedimientos</field>
+    </record>
+
+    <record id="process_edition_cancel_action" model="ir.actions.act_window">
+        <field name="name">Procesos</field>
+        <field name="res_model">mgmt.process</field>
+        <field name="view_mode">tree,form</field>
+        <field name="domain">[('state', '=', 'cancel')]</field>
+        <field name="context">{}</field>
+    </record>
+
+    <!-- process.edition.template form view -->
+    <record id="process_edition_template_view_form" model="ir.ui.view">
+        <field name="name">process.edition.template.view.form</field>
+        <field name="model">process.edition.template</field>
+        <field name="arch" type="xml">
+            <form string="">
+                <sheet>
+                    <group>
+                        <field name="custom" />
+                        <field name="economic_activity_id" />
+                        <field name="economic_activity_name" invisible="1" />
+                        <field name="company_id" invisible="1" />
+                    </group>
+                    <group attrs="{'invisible': [('custom', '=', True)]}">
+                        <!-- Add your fields here -->
+                        <field name="name" />
+                        <field name="purpose" />
+                        <field name="scope" />
+                        <field name="references" />
+                        <field name="body" />
+                        <field name="flowchart" />
+                    </group>
+                    <group attrs="{'invisible': [('custom', '=', False)]}">
+                        <field name="name" />
+                        <field name="custom_body" widget="html" />
+                    </group>
+                </sheet>
+            </form>
+        </field>
+    </record>
+
+    <!-- process.edition.template tree view -->
+    <record id="process_edition_template_view_tree" model="ir.ui.view">
+        <field name="name">process.edition.template.view.tree</field>
+        <field name="model">process.edition.template</field>
+        <field name="arch" type="xml">
+            <tree>
+                <!-- Add your fields here -->
+                <field name="name" />
+                <field name="custom" />
+                <field name="economic_activity_id" />
+            </tree>
+        </field>
+    </record>
+
+    <!-- process.edition.template action window -->
+    <record id="process_edition_template_action" model="ir.actions.act_window">
+        <field name="name">Plantillas</field>
+        <field name="type">ir.actions.act_window</field>
+        <field name="res_model">process.edition.template</field>
+        <field name="view_mode">tree,form</field>
+
+    </record>
+
+    <!-- res.company inherit form view -->
+    <record id="view_company_form" model="ir.ui.view">
+        <field name="name">res.company.inherit.view.form</field>
+        <field name="model">res.company</field>
+        <field name="inherit_id" ref="base.view_company_form" />
+        <field name="arch" type="xml">
+            <!-- Add your xpath here -->
+            <field name="vat" position="after">
+                <field name="economic_activity_id" />
+                <field name="economic_activity_name" invisible="1" />
+            </field>
+        </field>
+    </record>
+
+    <!-- ir.attachment inherit form view -->
+    <record id="view_attachment_tree" model="ir.ui.view">
+        <field name="name">ir.attachment.inherit.view.form</field>
+        <field name="model">ir.attachment</field>
+        <field name="inherit_id" ref="base.view_attachment_tree" />
+        <field name="arch" type="xml">
+            <field name="res_model" position="attributes">
+                <attribute name="invisible">1</attribute>
+            </field>
+            <field name="res_field" position="attributes">
+                <attribute name="invisible">1</attribute>
+            </field>
+            <field name="res_id" position="attributes">
+                <attribute name="invisible">1</attribute>
+            </field>
+        </field>
+    </record>
+
+    <menuitem id="menu_process_edition"
+              name="Ediciones"
+              action="action_mgmt_process_edition"
+              sequence="30"
+              parent="mgmt_process_process" />
+
+    <menuitem id="menu_process_edition_template"
+              name="Plantillas"
+              action="process_edition_template_action"
+              sequence="311"
+              parent="mgmt_process_process" />
+
+</odoo>

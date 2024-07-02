@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+
+    <menuitem id="maintenance_report_wizard_menu"
+              name="Planes de mantenimiento"
+              action="maintenance_report_wizard_action"
+              parent="mgmtsystem_infrastructure.soycalidad_maintenance_reporting"
+              sequence="23" />
+
+    <menuitem id="calibration_report_wizard_menu"
+              name="Planes de calibración"
+              action="calibration_report_wizard_action"
+              parent="mgmtsystem_infrastructure.soycalidad_maintenance_reporting"
+              sequence="23" />
+
+
+</odoo>

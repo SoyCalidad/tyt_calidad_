@@ -1,0 +1,179 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <!-- ONBOARDING STEPS -->
+
+    <template id="onboarding_maintenance_plan_step">
+        <t t-call="base.onboarding_step">
+            <t t-set="title">Programa de mantenimientos</t>
+            <t t-set="description">Cree un programa de mantenimientos.</t>
+            <t t-set="done_icon" t-value="'fa-star'" />
+            <t t-set="btn_text">Crear</t>
+            <t t-set="done_text">Se ve bien!</t>
+            <t t-set="method" t-value="'action_open_maintenance_plan'" />
+            <t t-set="model" t-value="'res.company'" />
+            <t t-set="state" t-value="state.get('maintenance_plan_onboarding_state')" />
+        </t>
+    </template>
+
+    <template id="onboarding_maintenance_maintenance_step">
+        <t t-call="base.onboarding_step">
+            <t t-set="title">Plan de mantenimientos</t>
+            <t t-set="description">Cree un plan de mantenimientos.</t>
+            <t t-set="done_icon" t-value="'fa-star'" />
+            <t t-set="btn_text">Crear</t>
+            <t t-set="done_text">Se ve bien!</t>
+            <t t-set="method" t-value="'action_open_maintenance_maintenance'" />
+            <t t-set="model" t-value="'res.company'" />
+            <t t-set="state" t-value="state.get('maintenance_maintenance_onboarding_state')" />
+        </t>
+    </template>
+
+    <template id="onboarding_calibration_plan_step">
+        <t t-call="base.onboarding_step">
+            <t t-set="title">Programa de calibraciones</t>
+            <t t-set="description">Cree un nuevo programa de calibraciones.</t>
+            <t t-set="done_icon" t-value="'fa-star'" />
+            <t t-set="btn_text">Crear</t>
+            <t t-set="done_text">Se ve bien!</t>
+            <t t-set="method" t-value="'action_open_calibration_plan'" />
+            <t t-set="model" t-value="'res.company'" />
+            <t t-set="state" t-value="state.get('calibration_plan_onboarding_state')" />
+        </t>
+    </template>
+
+    <template id="onboarding_calibration_calibration_step">
+        <t t-call="base.onboarding_step">
+            <t t-set="title">Plan de calibraciones</t>
+            <t t-set="description">Cree un nuevo plan de calibraciones.</t>
+            <t t-set="done_icon" t-value="'fa-star'" />
+            <t t-set="btn_text">Crear</t>
+            <t t-set="done_text">Se ve bien!</t>
+            <t t-set="method" t-value="'action_open_calibration_calibration'" />
+            <t t-set="model" t-value="'res.company'" />
+            <t t-set="state" t-value="state.get('calibration_calibration_onboarding_state')" />
+        </t>
+    </template>
+
+
+
+    <!-- ONBOARDING PANELS -->
+    <template id="maintenance_onboarding_panel" name="context.onboarding.panel">
+        <t t-call="base.onboarding_container">
+            <t t-set="classes" t-value="'o_onboarding_blue'"/>
+            <t t-set="bg_image" t-value="'/account/static/src/img/account_invoice_onboarding_bg.jpg'"/>
+            <t t-set="close_method" t-value="'action_close_context_onboarding'"/>
+            <t t-set="close_model" t-value="'res.company'"/>
+            <t t-set="text_completed">Felicitaciones! Ha completado todo.</t>
+            <t t-call="mgmtsystem_infrastructure.onboarding_maintenance_plan_step" name="maintenance_plan_step" />
+            <t t-call="mgmtsystem_infrastructure.onboarding_maintenance_maintenance_step" name="maintenance_maintenance_step" />
+            <t t-call="mgmtsystem_infrastructure.onboarding_calibration_plan_step" name="calibration_plan_step" />
+            <t t-call="mgmtsystem_infrastructure.onboarding_calibration_calibration_step" name="calibration_calibration_step" />
+        </t>
+    </template>
+
+    <!-- Views -->
+
+    <record id="onboarding_maintenance_plan_form" model="ir.ui.view">
+        <field name="name">mgmtsystem.maintenance.plan.inherit.view.form</field>
+        <field name="model">mgmtsystem.maintenance.plan</field>
+        <field name="inherit_id" ref="mgmtsystem_infrastructure.view_mgmtsystem_maintenance_plan_form"/>
+        <field name="priority">1000</field>
+        <field name="mode">primary</field>
+        <field name="arch" type="xml">
+            <form position="inside">
+                <footer position="replace">
+                    <button name="action_save_onboarding_maintenance_plan_step" class="btn btn-primary" type="object" string="Crear" />
+                    <button special="cancel" string="Cancelar" />
+                </footer>
+            </form>
+        </field>
+    </record>
+
+    <record id="onboarding_maintenance_maintenance_form" model="ir.ui.view">
+        <field name="name">mgmtsystem.maintenance.inherit.view.form</field>
+        <field name="model">mgmtsystem.maintenance</field>
+        <field name="inherit_id" ref="mgmtsystem_infrastructure.view_mgmtsystem_maintenance_form"/>
+        <field name="priority">1000</field>
+        <field name="mode">primary</field>
+        <field name="arch" type="xml">
+            <form position="inside">
+                <footer position="replace">
+                    <button name="action_save_onboarding_maintenance_maintenance_step" class="btn btn-primary" type="object" string="Crear" />
+                    <button special="cancel" string="Cancelar" />
+                </footer>
+            </form>
+        </field>
+    </record>
+
+    <record id="onboarding_calibration_plan_form" model="ir.ui.view">
+        <field name="name">mgmtsystem.calibration.plan.inherit.view.form</field>
+        <field name="model">mgmtsystem.calibration.plan</field>
+        <field name="inherit_id" ref="mgmtsystem_infrastructure.view_mgmtsystem_calibration_plan_form"/>
+        <field name="priority">1000</field>
+        <field name="mode">primary</field>
+        <field name="arch" type="xml">
+            <form position="inside">
+                <footer position="replace">
+                    <button name="action_save_onboarding_calibration_plan_step" class="btn btn-primary" type="object" string="Crear" />
+                    <button special="cancel" string="Cancelar" />
+                </footer>
+            </form>
+        </field>
+    </record>
+
+    <record id="onboarding_calibration_calibration_form" model="ir.ui.view">
+        <field name="name">mgmtsystem.calibration.inherit.view.form</field>
+        <field name="model">mgmtsystem.calibration</field>
+        <field name="inherit_id" ref="mgmtsystem_infrastructure.view_mgmtsystem_calibration_form"/>
+        <field name="priority">1000</field>
+        <field name="mode">primary</field>
+        <field name="arch" type="xml">
+            <form position="inside">
+                <footer position="replace">
+                    <button name="action_save_onboarding_calibration_calibration_step" class="btn btn-primary" type="object" string="Crear" />
+                    <button special="cancel" string="Cancelar" />
+                </footer>
+            </form>
+        </field>
+    </record>
+
+
+
+    <record id="action_maintenance_plan_configurator" model="ir.actions.act_window">
+        <field name="type">ir.actions.act_window</field>
+        <field name="name">Cree un programa de mantenimientos</field>
+        <field name="view_mode">form</field>
+        <field name="target">new</field>
+        <field name="res_model">mgmtsystem.maintenance.plan</field>
+        <field name="view_id" ref="mgmtsystem_infrastructure.onboarding_maintenance_plan_form"/>
+    </record>
+
+    <record id="action_maintenance_maintenance_configurator" model="ir.actions.act_window">
+        <field name="type">ir.actions.act_window</field>
+        <field name="name">Cree un plan de mantenimientos</field>
+        <field name="view_mode">form</field>
+        <field name="target">new</field>
+        <field name="res_model">mgmtsystem.maintenance</field>
+        <field name="view_id" ref="mgmtsystem_infrastructure.onboarding_maintenance_maintenance_form"/>
+    </record>
+
+    <record id="action_calibration_plan_configurator" model="ir.actions.act_window">
+        <field name="type">ir.actions.act_window</field>
+        <field name="name">Cree un Programa de calibraciones</field>
+        <field name="view_mode">form</field>
+        <field name="target">new</field>
+        <field name="res_model">mgmtsystem.calibration.plan</field>
+        <field name="view_id" ref="mgmtsystem_infrastructure.onboarding_calibration_plan_form"/>
+    </record>
+
+    <record id="action_calibration_calibration_configurator" model="ir.actions.act_window">
+        <field name="type">ir.actions.act_window</field>
+        <field name="name">Cree un plan de calibraciones</field>
+        <field name="view_mode">form</field>
+        <field name="target">new</field>
+        <field name="res_model">mgmtsystem.calibration</field>
+        <field name="view_id" ref="mgmtsystem_infrastructure.onboarding_calibration_calibration_form"/>
+    </record>
+
+
+</odoo>

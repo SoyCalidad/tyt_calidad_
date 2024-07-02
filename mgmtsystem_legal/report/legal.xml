@@ -1,0 +1,57 @@
+<odoo>
+    <data>
+
+        <report
+            id="report_plan_legal_xlsx"
+            model="legal.plan"
+            string="Matriz de requisitos legales(XLSX)"
+            report_type="xlsx"
+            name="mgmtsystem_legal.legal_plan"
+            file="Matriz de requisitos legales"
+            attachment_use="False"
+            groups="base.group_no_one,mgmtsystem_legal.group_legal_onlyread_printreport,mgmtsystem_legal.group_legal_write_printreport,mgmtsystem_legal.group_legal_all"
+            />
+
+        <record id="legal_wizard_view_form" model="ir.ui.view">
+            <field name="name">legal.plan.report.wizard.view.form</field>
+            <field name="model">legal.plan.report.wizard</field>
+            <field name="arch" type="xml">
+                <form string="">
+                    <group>
+                        <field name="plan_ids"/>
+                    </group>
+                    <footer>
+                        <button name="export_xls" type="object" default_focus="1" string="Exportar Reporte Excel" class="oe_highlight" context="{'xls_export':1}" icon="fa-download"/>
+                        <button string="Cancelar" special="cancel"/>
+                    </footer>
+                </form>
+            </field>
+        </record>
+
+        <record id="action_report_legal" model="ir.actions.act_window">
+            <field name="name">Programa de requisitos legales</field>
+            <field name="type">ir.actions.act_window</field>
+            <field name="res_model">legal.plan.report.wizard</field>
+
+            <field name="view_mode">form</field>
+            <field name="view_id" ref="legal_wizard_view_form"/>
+            <field name="target">new</field>
+            <field name="binding_type">report</field>
+        </record>
+
+        <menuitem
+            id="legal_report_menu"
+            name="Reportes"
+            parent="mgmtsystem_legal.menu_legal_root"
+            sequence="100"
+            groups="base.group_no_one,mgmtsystem_legal.group_legal_onlyread_printreport,mgmtsystem_legal.group_legal_write_printreport,mgmtsystem_legal.group_legal_all"
+            />
+
+        <menuitem id="legal_plan_report_menu"
+            name="Programa de requisitos legales"
+            action="action_report_legal"
+            parent="legal_report_menu"
+            sequence="10"/>
+
+    </data>
+</odoo>

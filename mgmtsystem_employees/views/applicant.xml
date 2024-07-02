@@ -1,0 +1,92 @@
+<odoo>
+    <data>
+        
+        <record id="hr_applicant_view_form" model="ir.ui.view">
+            <field name="name">hr.applicant.view.form</field>
+            <field name="model">hr.applicant</field>
+            <field name="inherit_id" ref="hr_recruitment.hr_applicant_view_form" />
+            <field name="arch" type="xml">
+                <xpath expr="//group[1]//group[1]" position="replace">
+                    <group string="Datos de solicitud">
+                        <field name="company_id" invisible="1"/>
+                        <field name="requested_by"/>
+                        <field name="responsable_id"/>
+                        <field name="approved_by"/>
+                        <field name="create_date" string="Fecha de creación"/>
+                    </group>
+                </xpath>
+                <xpath expr="//group[1]//group[2]" position="replace">
+                    <group string="Datos del postulante">
+                        <field name="partner_id" string="Nombre y apellidos"/>
+                        <field name="birthdate"/>
+                        <field name="age"/>
+                        <field name="email_from" widget="email"/>
+                        <field name="partner_phone"/>
+                        <field name="partner_mobile"/>
+                        <field name="priority" widget="priority"/>
+                        <field name="date_closed" attrs="{'invisible': [('date_closed', '=', False)]}" />
+                    </group>
+                </xpath>
+                <xpath expr="//group[1]//group[3]" position="replace">
+                    <group string="Datos del puesto">
+                        <field name="department_id"/>
+                        <field name="job_id" string="Puesto de trabajo"/>
+                        <field name="user_id"/>
+                        <field name="genre"/>
+                        <field name="turn_id"/>
+                        <field name="journal"/>
+                    </group>
+                </xpath>
+            </field>
+        </record>
+        
+        <record id="turn_view_form" model="ir.ui.view">
+            <field name="name">hr.applicant.turn.view.form</field>
+            <field name="model">hr.applicant.turn</field>
+            <field name="arch" type="xml">
+                <form string="">
+                    <sheet>
+                        <group>
+                            <field name="name"/>
+                            <field name="description"/>
+                        </group>
+                    </sheet>
+                </form>
+            </field>
+        </record>
+
+        <record id="turn_view_tree" model="ir.ui.view">
+            <field name="name">hr.applicant.turn.view.tree</field>
+            <field name="model">hr.applicant.turn</field>
+            <field name="arch" type="xml">
+                <tree string="">
+                    <field name="name"/>
+                    <field name="description"/>
+                </tree>
+            </field>
+        </record>
+
+        <record id="turn_action" model="ir.actions.act_window">
+            <field name="name">Turno</field>
+            <field name="res_model">hr.applicant.turn</field>
+
+            <field name="view_mode">tree,form</field>
+            <field name="domain">[]</field>
+            <field name="context">{}</field>
+        </record>
+
+
+
+        <record id="ir_attachment_view_form" model="ir.ui.view">
+            <field name="name">ir.attachment.view.form</field>
+            <field name="model">ir.attachment</field>
+            <field name="inherit_id" ref="base.view_attachment_form" />
+            <field name="arch" type="xml">
+                <field name="mimetype" position="after">
+                    <field name="origin_link"/>
+                </field>
+            </field>
+        </record>
+
+    </data>
+</odoo>

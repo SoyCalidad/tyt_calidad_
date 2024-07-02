@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--Estructura basica de reportes-->
+<odoo>
+   <data>
+      <template id="calibration_plan_report" inherit_id="mgmtsystem_infrastructure.maintance_plan_report"></template>
+
+
+      <report id="action_calibration_plan_report"
+              string="Programa de calibraciones"
+              report_type="qweb-pdf"
+              model="mgmtsystem.calibration.plan"
+              name="mgmtsystem_infrastructure.calibration_plan_report"
+              file="Programa de calibraciones"
+              paperformat="hola_calidad.landscape" />
+
+      <record id="calibration_plan_wizard_view_form" model="ir.ui.view">
+         <field name="name">calibration.plan.wizard.view.form</field>
+         <field name="model">calibration.plan.wizard</field>
+         <field name="arch" type="xml">
+            <form string="">
+               <sheet>
+                  <group>
+                     <field name="calibration_plan_id" />
+                  </group>
+               </sheet>
+               <footer>
+                  <button name="action_print"
+                          type="object"
+                          string="Descargar"
+                          class="oe_highlight"
+                          icon="fa-download" />
+               </footer>
+            </form>
+         </field>
+      </record>
+
+      <record id="action_report_calibration" model="ir.actions.act_window">
+         <field name="name">Report de programa de calibraciones</field>
+         <field name="type">ir.actions.act_window</field>
+         <field name="res_model">calibration.plan.wizard</field>
+         <field name="view_mode">form</field>
+         <field name="view_id" ref="calibration_plan_wizard_view_form" />
+         <field name="target">new</field>
+         <field name="binding_type">report</field>
+      </record>
+
+      <menuitem id="calibration_plan_wizard_menu"
+                name="Programa de calibraciones"
+                action="action_report_calibration"
+                parent="mgmtsystem_infrastructure.soycalidad_maintenance_reporting"
+                sequence="22" />
+
+   </data>
+</odoo>

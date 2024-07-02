@@ -1,0 +1,100 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <!-- ONBOARDING STEPS -->
+
+    <template id="general_analysis_onboarding_state">
+        <t t-call="base.onboarding_step">
+            <t t-set="title">Análisis</t>
+            <t t-set="description"></t>
+            <t t-set="done_icon" t-value="'fa-star'" />
+            <t t-set="btn_text">Verificar</t>
+            <t t-set="done_text">Se ve bien!</t>
+            <t t-set="method" t-value="'action_verify_general_analysis'" />
+            <t t-set="model" t-value="'res.company'" />
+            <t t-set="state" t-value="state.get('general_analysis_onboarding_state')" />
+        </t>
+    </template>
+
+    <template id="general_plan_onboarding_state">
+        <t t-call="base.onboarding_step">
+            <t t-set="title">Planificar</t>
+            <t t-set="description"></t>
+            <t t-set="done_icon" t-value="'fa-star'" />
+            <t t-set="btn_text">Verificar</t>
+            <t t-set="done_text">Se ve bien! Has implementado el 20%</t>
+            <t t-set="method" t-value="'action_verify_general_plan'" />
+            <t t-set="model" t-value="'res.company'" />
+            <t t-set="state" t-value="state.get('general_plan_onboarding_state')" />
+        </t>
+    </template>
+
+    <template id="general_do_onboarding_state">
+        <t t-call="base.onboarding_step">
+            <t t-set="title">Hacer</t>
+            <t t-set="description"></t>
+            <t t-set="done_icon" t-value="'fa-star'" />
+            <t t-set="btn_text">Verificar</t>
+            <t t-set="done_text">Se ve bien!</t>
+            <t t-set="method" t-value="'action_verify_general_do'" />
+            <t t-set="model" t-value="'res.company'" />
+            <t t-set="state" t-value="state.get('general_do_onboarding_state')" />
+        </t>
+    </template>
+
+    <template id="general_check_onboarding_state">
+        <t t-call="base.onboarding_step">
+            <t t-set="title">Verificar</t>
+            <t t-set="description"></t>
+            <t t-set="done_icon" t-value="'fa-star'" />
+            <t t-set="btn_text">Verificar</t>
+            <t t-set="done_text">Se ve bien!</t>
+            <t t-set="method" t-value="'action_verify_general_check'" />
+            <t t-set="model" t-value="'res.company'" />
+            <t t-set="state" t-value="state.get('general_check_onboarding_state')" />
+        </t>
+    </template>
+
+    <template id="general_act_onboarding_state">
+        <t t-call="base.onboarding_step">
+            <t t-set="title">Actuar</t>
+            <t t-set="description"></t>
+            <t t-set="done_icon" t-value="'fa-star'" />
+            <t t-set="btn_text">Verificar</t>
+            <t t-set="done_text">Se ve bien!</t>
+            <t t-set="method" t-value="'action_verify_general_act'" />
+            <t t-set="model" t-value="'res.company'" />
+            <t t-set="state" t-value="state.get('general_act_onboarding_state')" />
+        </t>
+    </template>
+
+    <!-- ONBOARDING PANELS -->
+    <template id="general_onboarding_panel" name="general.onboarding.panel">
+        <t t-call="base.onboarding_container">
+            <t t-set="classes" t-value="'o_onboarding_blue'"/>
+            <t t-set="bg_image" t-value="'/account/static/src/img/account_invoice_onboarding_bg.jpg'"/>
+            <t t-set="close_method" t-value="'action_close_general_onboarding'"/>
+            <t t-set="close_model" t-value="'res.company'"/>
+            <t t-set="text_completed">Felicitaciones! Ha completado todo.</t>
+            <t t-call="menus_hola_calidad.general_analysis_onboarding_state" name="general_analysis_step" />
+            <t t-call="menus_hola_calidad.general_plan_onboarding_state" name="general_plan_step" />
+            <t t-call="menus_hola_calidad.general_do_onboarding_state" name="general_do_step" />
+            <t t-call="menus_hola_calidad.general_check_onboarding_state" name="general_check_step" />
+            <t t-call="menus_hola_calidad.general_act_onboarding_state" name="general_act_step" />
+        </t>
+    </template>
+
+    <!-- hola_calidad.diagnostic inherit tree view -->
+    <record id="view_id" model="ir.ui.view">
+        <field name="name">hola_calidad.diagnostic.inherit.view.tree</field>
+        <field name="model">hola_calidad.diagnostic</field>
+        <field name="inherit_id" ref="hola_calidad.hola_calidad_diagnostic_tree"/>
+        <field name="arch" type="xml">
+            <!-- Add your xpath here -->
+            <tree position="attributes">
+                <attribute name="banner_route">/general/general_onboarding</attribute>
+            </tree>
+        </field>
+    </record>
+
+
+</odoo>

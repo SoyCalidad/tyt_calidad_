@@ -1,0 +1,22 @@
+<odoo>
+    <data>
+
+        <record id="mgmt_context_process_action" model="ir.actions.act_window">
+            <field name="name">Procedimientos de Contexto Organizacional</field>
+            <field name="res_model">mgmt.process</field>
+            
+            <field name="view_mode">kanban,tree,form</field>
+            <field name="domain">[('name', '=', 'Contexto de la organización')]</field>
+            <field name="context">{}</field>
+        </record>
+
+        <menuitem
+            id="process_integration_context_menu"
+            name="Procedimientos"
+            action="mgmt_context_process_action"
+            parent="mgmtsystem_context.context_report_menu"
+            groups="mgmtsystem_context.group_context_onlyread,mgmtsystem_context.group_context_onlyread_printreport,mgmtsystem_context.group_context_write_printreport,mgmtsystem_context.group_context_all"
+            sequence="100"/>
+
+    </data>
+</odoo>

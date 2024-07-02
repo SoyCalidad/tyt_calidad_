@@ -1,0 +1,725 @@
+<odoo>
+    <data>
+
+        <record id="employee_data_reminder" model="ir.cron">
+            <field name="name">Notificación de medición</field>
+            <field name="model_id" ref="model_mgmtsystem_indicator" />
+            <field name="state">code</field>
+            <field name="code">model.mail_reminder()</field>
+            <field name="interval_number">1</field>
+            <field name="interval_type">days</field>
+            <field name="numbercall">-1</field>
+        </record>
+
+        <record id="view_indicator_actions_search" model="ir.ui.view">
+            <field name="name">mgmtsystem.indicator.search</field>
+            <field name="model">mgmtsystem.indicator</field>
+            <field name="arch" type="xml">
+                <search>
+                    <field name="target_id" />
+                </search>
+            </field>
+        </record>
+
+        <record model="ir.actions.act_window" id="show_indicator_action">
+            <field name="name">Indicadores</field>
+            <field name="res_model">mgmtsystem.indicator</field>
+            <field name="view_mode">kanban,form,tree</field>
+            <field name="context">{"search_default_target_id": active_id}</field>
+            <field name="search_view_id" ref="view_indicator_actions_search" />
+        </record>
+
+        <record id="view_process_actions_search" model="ir.ui.view">
+            <field name="name">mgmt.process.view.search.inherit</field>
+            <field name="model">mgmt.process</field>
+            <field name="inherit_id" ref="mgmtsystem_process.mgmt_process_search" />
+            <field name="arch" type="xml">
+                <field name="name" position="after">
+                    <field name="target_ids" />
+                </field>
+            </field>
+        </record>
+
+        <record model="ir.actions.act_window" id="show_process_action">
+            <field name="name">Indicadores</field>
+            <field name="res_model">mgmt.process</field>
+            <field name="view_mode">kanban,form,tree</field>
+            <field name="context">{"search_default_target_ids": active_id}</field>
+            <field name="search_view_id" ref="view_process_actions_search" />
+        </record>
+
+        <record id="target_view_form" model="ir.ui.view">
+            <field name="name">mgmtsystem.target.view.form</field>
+            <field name="model">mgmtsystem.target</field>
+            <field name="arch" type="xml">
+                <form string="">
+                    <header>
+                        <field name="do_stage" invisible="1" />
+                        <field name="state" widget="statusbar" statusbar_visible="elaborate,review,validate,validate_ok,active,inactive" />
+                        <button string="Enviar a Elaborar"
+                            name="send_elaborate"
+                            type="object"
+                            class="btn-primary"
+                            attrs="{'invisible':[('state','in', ('elaborate','cancel','validate_ok','active','inactive'))]}" />
+                        <button string="Enviar a Revisar"
+                            name="send_review"
+                            type="object"
+                            class="btn-primary"
+                            attrs="{'invisible':[('state','!=', 'elaborate')]}" />
+                        <button string="Enviar a Validar"
+                            name="send_validate"
+                            type="object"
+                            class="btn-primary"
+                            attrs="{'invisible':[('state','in', ('elaborate','validate','cancel','validate_ok','active','inactive'))]}" />
+                        <button string="Validar"
+                            name="send_validate_ok"
+                            type="object"
+                            class="btn-primary"
+                            attrs="{'invisible':[('state','not in', ('validate'))]}" />
+                        <button string="Finalizar"
+                            name="send_finish"
+                            type="object"
+                            class="btn-primary"
+                            attrs="{'invisible':[('state','not in', ('active'))]}" 
+                            confirm="Esto finalizará el presente objetivo. ¿Está seguro(a)?"/>
+                        <button string="Iniciar planificación"
+                            name="proceed_to_do_stage"
+                            type="object"
+                            class="oe_highlight"
+                            attrs="{'invisible': [('state','!=','validate_ok')]}" />
+                        <button name="button_new_version"
+                            type="object"
+                            string="Nueva versión"
+                            attrs="{'invisible':[('state', 'not in', ('validate_ok', 'active'))]}"
+                            class="btn-second" />
+                        <button string="Volver Obsoleto"
+                            confirm="Esto volverá obsoleto el presente registro. ¿Está seguro(a)?"
+                            name="send_cancel"
+                            type="object"
+                            class="btn-second"
+                            attrs="{'invisible': [('state','in',('cancel'))] }" />
+                    </header>
+                    <sheet>
+                        <div class="oe_button_box" name="button_box">
+                            <button type="action" name="%(show_process_action)d" class="oe_stat_button" icon="fa-file">
+                                <field name="process_count" widget="statinfo" string="Procesos" />
+                            </button>
+                            <button type="object" name="action_target_views" class="oe_stat_button" icon="fa-file">
+                                <field name="actions_count" widget="statinfo" string="Acciones" />
+                            </button>
+                            <button name="action_indicator_action" type="object" class="oe_stat_button" icon="fa-pencil-square">
+                                <field name="indicator_count" widget="statinfo" string="Indicadores" />
+                            </button>
+                            <button name="action_risk_views" type="object" class="oe_stat_button" icon="fa-star">
+                                <field name="risks_count" widget="statinfo" string="Riesgos" />
+                            </button>
+                            <button name="action_opp_views" type="object" class="oe_stat_button" icon="fa-star-o">
+                                <field name="opps_count" widget="statinfo" string="Oportunidades" />
+                            </button>
+                            <button type="object"
+                                name="action_open_older_versions"
+                                class="oe_stat_button"
+                                icon="fa-archive"
+                                style="white-space: nowrap;"
+                                string="Versiones antiguas" />
+                        </div>
+                        <div class="oe_title">
+                            <label for="code" />
+                            <h2>
+                                <field name="code" readonly="1" class="oe_view_only" />
+                            </h2>
+                        </div>
+                        <group string="Información del objetivo" col="4">
+                            <field name="name" colspan="4" attrs="{'readonly': [('state','in',('validate_ok','cancel'))]}" style="overflow-wrap: break-word;" />
+                            <field name="requirements" colspan="4" attrs="{'readonly': [('state','in',('validate_ok','cancel'))]}" style="overflow-wrap: break-word;" />
+                            <field name="process_id" attrs="{'readonly': [('state','in',('validate_ok','cancel'))]}" />
+                            <field name="process_ids_2" attrs="{'readonly': [('state','in',('validate_ok','cancel'))]}" widget="many2many_tags" />
+                            <field name="system_id" options="{'no_create': True, 'no_edit': True}" attrs="{'readonly': [('state','in',('validate_ok','cancel'))]}" />
+                            <field name="description" attrs="{'readonly': [('state','in',('validate_ok','cancel'))]}" />
+                            <field name="user_id" options="{'no_open': True}" attrs="{'readonly': [('state','in',('validate_ok','cancel'))]}" />
+                            <field name="department_id" />
+                            <field name="department_ids" widget="many2many_tags" />
+                            <field name="category_ids" widget="many2many_tags" options="{'color_field': 'color',}" placeholder="Categorías" />
+                        </group>
+                        <notebook>
+                            <page name="indicator" string="Indicadores" col="4">
+                                <group string="Indicadores" col="4">
+                                    <field name="indicator_ids"
+                                        nolabel="1"
+                                        colspan="4"
+                                        context="{'default_target_id': id}"
+                                        attrs="{'readonly': [('state','in',('validate_ok', 'inactive', 'active', 'closed', 'cancel'))] }">
+                                        <tree>
+                                            <field name="name" />
+                                            <field name="goal_value" />
+                                            <field name="action_id" />
+                                            <field name="resources" style="max-width:200px;word-break:break-word;" />
+                                            <field name="measurement_frequency" />
+                                            <field name="do_state" />
+                                            <button name="open_form_view"
+                                                string="Abrir planificación"
+                                                type="object"
+                                                class="oe_highlight"
+                                                attrs="{'invisible': [('parent.state','not in',('validate_ok', 'active'))] }" />
+                                        </tree>
+                                    </field>
+                                    <field name="goal_progress" attrs="{'readonly': [('state','in',('validate_ok','cancel'))]}" />
+                                </group>
+                            </page>
+                            <page name="action" string="Acciones">
+                                <field name="action_ids" attrs="{'readonly': [('state','in',('validate_ok','cancel'))]}" />
+                            </page>
+                            <page name="risk_opp" string="Riesgos y oportunidades">
+                                <separator string="Riesgos" />
+                                <field name="risk_ids" attrs="{'readonly': [('state','in',('validate_ok','cancel'))]}" />
+                                <separator string="Oportunidades" />
+                                <field name="opp_ids" attrs="{'readonly': [('state','in',('validate_ok','cancel'))]}" />
+                            </page>
+                            <page name="validation" string="Validación y versión">
+                                <group>
+                                    <field name="version" attrs="{'readonly': [('state','in',('validate_ok','cancel'))]}" />
+                                </group>
+                                <group col="4">
+                                    <group string="Encargados de formulación" colspan="4">
+                                        <separator string="Elaboración" />
+                                        <field name="elaboration_step" colspan="2" nolabel="1" attrs="{'readonly': [('state','not in',('elaborate'))]}" />
+                                        <separator string="Revisión" />
+                                        <field name="review_step" colspan="2" nolabel="1" attrs="{'readonly': [('state','not in',('elaborate', 'review'))]}" />
+                                        <separator string="Validación" />
+                                        <field name="validation_step" colspan="2" nolabel="1" attrs="{'readonly': [('state','not in',('elaborate', 'review', 'validate'))]}" />
+                                    </group>
+                                    <group string="Fechas de formulación" colspan="4">
+                                        <field name="date_elaborate" attrs="{'required': [('state','in',('elaborate'))], 'readonly': True}" />
+                                        <field name="date_review" attrs="{'required': [('state','in',('review'))], 'readonly': True, 'invisible': [('state','in',('elaborate'))] }" />
+                                        <field name="date_validate" groups="base.group_no_one,base.user_admin" attrs="{'invisible': [('state','in',('elaborate','review'))] }" />
+                                    </group>
+                                </group>
+                            </page>
+                        </notebook>
+                    </sheet>
+                    <div class="oe_chatter">
+                        <field name="message_follower_ids" widget="mail_followers" />
+                        <field name="activity_ids" widget="mail_activity" />
+                        <field name="message_ids" widget="mail_thread" />
+                    </div>
+                </form>
+            </field>
+        </record>
+
+        <record id="target_view_tree" model="ir.ui.view">
+            <field name="name">mgmtsystem.target.view.tree</field>
+            <field name="model">mgmtsystem.target</field>
+            <field name="arch" type="xml">
+                <tree string="Objetivo" banner_route="/target/target_onboarding">
+                    <field name="name" />
+                    <field name="indicator_ids" />
+                    <field name="process_id" />
+                    <field name="department_id" />
+                    <field name="create_date" />
+                    <field name="user_id" />
+                    <field name="description" />
+                    <field name="state" />
+                </tree>
+            </field>
+        </record>
+
+        <record id="target_view_kanban" model="ir.ui.view">
+            <field name="name">mgmtsystem.target.kanban</field>
+            <field name="model">mgmtsystem.target</field>
+            <field name="arch" type="xml">
+                <kanban default_group_by="state" class="o_kanban_small_column" banner_route="/target/target_onboarding">
+                    <field name="code" />
+                    <field name="name" />
+                    <field name="description" />
+                    <field name="state" />
+                    <templates>
+                        <div t-name="kanban-box" t-attf-class="oe_kanban_card oe_kanban_global_click">
+                            <small>
+                                [
+                                <field name="code" />
+                                ]
+                            </small>
+                            <strong style="max-width:240px;overflow-wrap: break-word;">
+                                <field name="name" />
+                            </strong>
+                            <br />
+                            <div class="o_kanban_record_bottom">
+                                <ul class="list-unstyled">
+                                    <li>
+                                        <button class="btn-success" type="action" name="%(show_indicator_action)d">Ver Indicadores</button>
+                                    </li>
+                                </ul>
+                            </div>
+                        </div>
+                    </templates>
+                </kanban>
+            </field>
+        </record>
+
+
+        <record id="target_action" model="ir.actions.act_window">
+            <field name="name">Objetivo</field>
+            <field name="res_model">mgmtsystem.target</field>
+            <field name="view_mode">kanban,tree,form</field>
+            <field name="domain">[]</field>
+            <field name="context">{}</field>
+            <field name="help" type="html">
+                <p>
+                    Los objetivos de calidad marcan las pautas que se requieren para la mejora continua.
+                </p>
+            </field>
+        </record>
+
+        <record id="target_cancel_action" model="ir.actions.act_window">
+            <field name="name">Políticas obsoletas</field>
+            <field name="res_model">mgmtsystem.target</field>
+            <field name="view_mode">tree,form</field>
+            <field name="domain">[('state','=','cancel')]</field>
+            <field name="context">{}</field>
+        </record>
+
+        <record id="show_ac_target_action" model="ir.actions.act_window">
+            <field name="name">Acciones</field>
+            <field name="res_model">mgmtsystem.action</field>
+            <field name="view_mode">tree,form</field>
+            <field name="context">{}</field>
+        </record>
+
+        <record id="show_risk_target_action" model="ir.actions.act_window">
+            <field name="name">Acciones</field>
+            <field name="res_model">matrix.block.line</field>
+            <field name="view_mode">tree,form</field>
+            <field name="context">{}</field>
+        </record>
+
+
+        <record id="goal_view_form" model="ir.ui.view">
+            <field name="name">mgmtsystem.goal.view.form</field>
+            <field name="model">mgmtsystem.goal</field>
+            <field name="arch" type="xml">
+                <form string="">
+                    <sheet>
+                        <label for="name" />
+                        <h2>
+                            <field name="name" />
+                        </h2>
+                        <group name="Información general">
+                            <field name="type" />
+                            <field name="value" />
+                            <field name="user_id" />
+                        </group>
+                    </sheet>
+                </form>
+            </field>
+        </record>
+
+        <record id="goal_view_tree" model="ir.ui.view">
+            <field name="name">mgmtsystem.goal.view.tree</field>
+            <field name="model">mgmtsystem.goal</field>
+            <field name="arch" type="xml">
+                <tree string="">
+                    <field name="name" />
+                    <field name="type" />
+                    <field name="value" />
+                </tree>
+            </field>
+        </record>
+
+        <record id="goal_action" model="ir.actions.act_window">
+            <field name="name">Metas</field>
+            <field name="res_model">mgmtsystem.goal</field>
+            <field name="view_mode">tree,form</field>
+            <field name="domain">[]</field>
+            <field name="context">{}</field>
+            <field name="help" type="html">
+                <p>
+                    Las metas establecen la situación esperada para dar por cumplido el objetvo de calidad
+                </p>
+            </field>
+        </record>
+
+        <record id="measurement_frequency_view_form" model="ir.ui.view">
+            <field name="name">mgmtsystem.target.frequency.view.form</field>
+            <field name="model">mgmtsystem.target.frequency</field>
+            <field name="arch" type="xml">
+                <form string="Frecuencia de medición">
+                    <sheet>
+                        <group>
+                            <div class="oe_button_box" name="button_box">
+                                <widget name="web_ribbon" title="Archived" bg_color="bg-danger" attrs="{'invisible': [('active', '=', True)]}" />
+                                <field name="active" invisible="1" />
+                            </div>
+                            <group>
+                                <field name="name" />
+                                <field name="note" />
+                            </group>
+                            <group string="Periodo">
+                                <field name="type" />
+                                <field name="years" />
+                                <field name="months" />
+                                <field name="weeks" />
+                                <field name="days" />
+                            </group>
+                        </group>
+                    </sheet>
+                </form>
+            </field>
+        </record>
+
+        <record id="measurement_frequency_view_tree" model="ir.ui.view">
+            <field name="name">mgmtsystem.target.frequency.view.tree</field>
+            <field name="model">mgmtsystem.target.frequency</field>
+            <field name="arch" type="xml">
+                <tree string="">
+                    <field name="name" />
+                    <field name="active" />
+                    <field name="note" />
+                    <field name="years" />
+                    <field name="months" />
+                    <field name="weeks" />
+                    <field name="days" />
+                </tree>
+            </field>
+        </record>
+
+        <record id="measurement_frequency_action" model="ir.actions.act_window">
+            <field name="name">Periodo de tiempo</field>
+            <field name="res_model">mgmtsystem.target.frequency</field>
+            <field name="view_mode">tree,form</field>
+            <field name="domain">[]</field>
+            <field name="context">{}</field>
+            <field name="help" type="html">
+                <p>
+                    La frecuencia de medición establece el periodo tiempo entre mediciones de las metas de calidad.
+                </p>
+            </field>
+        </record>
+
+        <record model="ir.ui.view" id="measurement_history_view_graph">
+            <field name="name">mgmtsystem.indicator.history.view.graph</field>
+            <field name="model">mgmtsystem.indicator.history</field>
+            <field name="type">graph</field>
+            <field name="arch" type="xml">
+                <graph string="Valores estimados">
+                    <field name="date" type="row" interval="month" />
+                    <field name="goal_value" type="col" />
+                    <field name="real_result" type="col" />
+                </graph>
+            </field>
+        </record>
+
+        <record id="measurement_history_view_form" model="ir.ui.view">
+            <field name="name">mgmtsystem.indicator.history.view.form</field>
+            <field name="model">mgmtsystem.indicator.history</field>
+            <field name="arch" type="xml">
+                <form string="">
+                    <sheet>
+                        <group>
+                            <field name="date" />
+                            <field name="goal_value" />
+                            <field name="real_result" />
+                            <field name="comments" />
+                        </group>
+                    </sheet>
+                </form>
+            </field>
+        </record>
+
+        <record id="measurement_history_view_tree" model="ir.ui.view">
+            <field name="name">mgmtsystem.indicator.history.view.tree</field>
+            <field name="model">mgmtsystem.indicator.history</field>
+            <field name="arch" type="xml">
+                <tree string="">
+                    <field name="date" />
+                    <field name="goal_value" />
+                    <field name="real_result" />
+                    <field name="comments" />
+                </tree>
+            </field>
+        </record>
+
+        <record id="measurement_history_action" model="ir.actions.act_window">
+            <field name="name">Historial de medición</field>
+            <field name="res_model">mgmtsystem.indicator.history</field>
+            <field name="view_mode">graph,tree,form</field>
+            <field name="domain">[]</field>
+            <field name="context">{}</field>
+        </record>
+
+        <record id="view_actions_action_search" model="ir.ui.view">
+            <field name="name">mgmtsystem.action.search</field>
+            <field name="model">mgmtsystem.action</field>
+            <field name="arch" type="xml">
+                <search>
+                    <field name="target_ids" />
+                </search>
+            </field>
+        </record>
+
+        <record model="ir.actions.act_window" id="show_actions_action">
+            <field name="name">Acciones</field>
+            <field name="res_model">mgmtsystem.action</field>
+            <field name="view_mode">kanban,form,tree</field>
+            <field name="context">{"search_default_target_ids": active_id}</field>
+            <field name="search_view_id" ref="view_actions_action_search" />
+        </record>
+
+        <record id="indicator_view_search" model="ir.ui.view">
+            <field name="name">mgmtsystem.indicator.view.search</field>
+            <field name="model">mgmtsystem.indicator</field>
+            <field name="arch" type="xml">
+                <search>
+                    <field name="name" />
+                    <field name="target_id" />
+                </search>
+            </field>
+        </record>
+
+        <record id="indicator_view_graph" model="ir.ui.view">
+            <field name="name">mgmtsystem.indicator.view.graph</field>
+            <field name="model">mgmtsystem.indicator</field>
+            <field name="arch" type="xml">
+                <graph string="Indicadores">
+                    <field name="target_id" group="True" />
+                    <field name="name" />
+                    <field name="goal_value" type="measure" />
+                    <field name="c_goal_progress" type="measure" />
+                </graph>
+            </field>
+        </record>
+
+        <record id="indicator_view_form" model="ir.ui.view">
+            <field name="name">mgmtsystem.indicator.view.form</field>
+            <field name="model">mgmtsystem.indicator</field>
+            <field name="arch" type="xml">
+                <form string="">
+                    <header>
+                        <field name="do_state" widget="statusbar" statusbar_visible="plan,tracked,accomplished,caducated,reconsidered" />
+                        <button string="Logrado con observaciones" name="do_accomplished_observation" type="object" class="oe_highlight" attrs="{'invisible':[('do_state','!=', 'tracked')]}" />
+                        <button string="Iniciar medición"
+                            name="do_tracked"
+                            type="object"
+                            class="btn-primary"
+                            attrs="{'invisible':[('do_state','not in', ('plan'))]}" />
+                        <button string="Caducar"
+                            name="do_caducated"
+                            type="object"
+                            class="btn-primary"
+                            attrs="{'invisible':[('do_state','not in', ('tracked'))]}" />
+                        <button string="Cancelar" name="do_cancel" type="object" />
+                    </header>
+                    <sheet>
+                        <div class="oe_button_box" />
+                        <h1>
+                            <field name="code" />
+                        </h1>
+                        <group>
+                            <field name="name" />
+                        </group>
+                        <group string="Periodo de medición" col="4" attrs="{'readonly':[('do_state','in', ('accomplished', 'cancel'))]}">
+                            <field name="start_date" attrs="{'readonly':[('do_state','in', ('accomplished', 'cancel'))]}" />
+                            <field name="term_date" attrs="{'readonly':[('do_state','in', ('accomplished', 'cancel'))]}" />
+                            <field name="measurement_frequency" attrs="{'readonly':[('do_state','in', ('accomplished', 'cancel'))]}" />
+                            <field name="goal_id" />
+                            <field name="formula" />
+                            <field name="target_id" style="max-width:200px;word-break:break-word;" />
+                            <field name="categ_id" />
+                            <field name="category_ids" widget="many2many_tags" />
+                            <field name="user_id" />
+                            <field name="resources" style="max-width:200px;word-break:break-word;" />
+                        </group>
+                        <notebook>
+                            <page name="measurement" string="Mediciones">
+                                <group string="Historial de mediciones" colspan="4">
+                                    <group class="pull-right" colspan="4">
+                                        <button string="Crear cronograma"
+                                            name="create_history"
+                                            type="object"
+                                            class="btn-primary"
+                                            attrs="{'invisible':[('do_state','not in', ('plan', 'open'))]}" />
+                                    </group>
+                                    <field name="history_ids">
+                                        <tree editable="bottom">
+                                            <field name="date" />
+                                            <field name="goal_value" />
+                                            <field name="real_result" />
+                                            <field name="comments" />
+                                            <field name="accomplished" />
+                                        </tree>
+                                    </field>
+                                    <group>
+                                        <label for="c_goal_progress" />
+                                        <div class="oe_inline">
+                                            <field name="c_goal_progress" class="oe_inline" />
+                                            <span class="oe_inline">%</span>
+                                        </div>
+                                    </group>
+                                </group>
+
+                            </page>
+                            <page name="details" string="Detalles">
+                                <group>
+                                    <field name="action_id" />
+                                    <field name="goal_id" />
+                                </group>
+                            </page>
+                            <page string="No conformidades" name="No conformidades">
+                                <group>
+                                    <!-- <field name="model_id"/> -->
+                                    <field name="nonconformity_ids" />
+                                </group>
+                            </page>
+                        </notebook>
+                    </sheet>
+                    <div class="oe_chatter">
+                        <field name="message_follower_ids" widget="mail_followers" />
+                        <field name="activity_ids" widget="mail_activity" />
+                        <field name="message_ids" widget="mail_thread" />
+                    </div>
+                </form>
+            </field>
+        </record>
+
+        <record id="indicator_view_tree" model="ir.ui.view">
+            <field name="name">mgmtsystem.indicator.view.tree</field>
+            <field name="model">mgmtsystem.indicator</field>
+            <field name="arch" type="xml">
+                <tree string="Indicadores">
+                    <field name="target_id" invisible="1" />
+                    <field name="code" />
+                    <field name="name" />
+                    <field name="goal_id" />
+                    <field name="estimated_start_date" />
+                    <field name="start_date" />
+                    <field name="term_date" />
+                    <field name="measurement_frequency" />
+                </tree>
+            </field>
+        </record>
+
+        <record id="indicator_view_kanban_1" model="ir.ui.view">
+            <field name="name">mgmtsystem.indicator.kanban</field>
+            <field name="model">mgmtsystem.indicator</field>
+            <field name="arch" type="xml">
+                <kanban default_group_by="do_state" class="o_kanban_small_column" banner_route="/target/target_onboarding">
+                    <field name="target_id" invisible="1" />
+                    <field name="name" />
+                    <field name="description" />
+                    <field name="start_date" />
+                    <field name="term_date" />
+                    <field name="do_state" />
+                    <field name="goal_id" />
+                    <field name="c_goal_progress" />
+                    <templates>
+                        <t t-name="kanban-box">
+                            <div t-attf-class="oe_kanban_card oe_kanban_global_click">
+                                <div class="o_kanban_content">
+                                    <p>
+                                        <strong>
+                                            <h4 class="oe_goal_name text-center">
+                                                <field name="name" />
+                                            </h4>
+                                        </strong>
+                                    </p>
+                                    <field name="description" />
+                                    <div class="o_goal_state_block" align="center">
+                                        <field name="c_goal_progress" widget="gauge" options="{'max_value': '100', 'style': 'width:160px; height: 120px;'}" />
+                                    </div>
+                                </div>
+                                <div class="o_kanban_record_bottom">
+                                    <button class="btn-primary" type="action" name="%(show_actions_action)d">Ver acciones</button>
+                                </div>
+                            </div>
+                        </t>
+                    </templates>
+                </kanban>
+            </field>
+        </record>
+
+        <record id="indicator_action" model="ir.actions.act_window">
+            <field name="name">Indicadores</field>
+            <field name="res_model">mgmtsystem.indicator</field>
+            <field name="view_mode">tree,form</field>
+            <field name="domain">[]</field>
+            <field name="context">{}</field>
+            <field name="help" type="html">
+                <p>Ingrese sus nuevos indicadores</p>
+            </field>
+        </record>
+
+        <record id="indicator_action_2" model="ir.actions.act_window">
+            <field name="name">Indicadores</field>
+            <field name="res_model">mgmtsystem.indicator</field>
+            <field name="view_mode">kanban,tree,form,graph</field>
+            <field name="domain">[]</field>
+            <field name="context">{}</field>
+            <field name="help" type="html">
+                <p>Ingrese sus nuevos indicadores</p>
+            </field>
+        </record>
+
+        <record id="view_target_search" model="ir.ui.view">
+            <field name="name">mgmtsystem.target.search</field>
+            <field name="model">mgmtsystem.target</field>
+            <field name="arch" type="xml">
+                <search>
+                    <field name="process_ids" />
+                    <field name="action_ids" />
+                    <field name="department_id" />
+                    <filter name="department_id" string="Departamento" context="{'group_by': 'department_id'}" />
+                    <field name="category_ids" string="Categorías" filter_domain="[('category_ids','ilike', self)]" />
+                </search>
+            </field>
+        </record>
+
+        <record model="ir.actions.act_window" id="show_target_action">
+            <field name="name">Objetivos</field>
+            <field name="res_model">mgmtsystem.target</field>
+            <field name="view_mode">kanban,form,tree</field>
+            <field name="context">{"search_default_process_ids": active_id}</field>
+            <field name="search_view_id" ref="view_target_search" />
+        </record>
+
+        <record id="process_view_form" model="ir.ui.view">
+            <field name="name">Proceso</field>
+            <field name="model">mgmt.process</field>
+            <field name="inherit_id" ref="mgmtsystem_process.mgmt_process_form" />
+            <field name="arch" type="xml">
+                <xpath expr="//div[@name='button_box']" position="inside">
+                    <button type="action" name="%(show_target_action)d" class="oe_stat_button" icon="fa-bar-chart-o">
+                        <field name="targets_count" widget="statinfo" string="Objetivos" />
+                    </button>
+                </xpath>
+            </field>
+        </record>
+
+        <record model="ir.actions.act_window" id="show_target_action_action">
+            <field name="name">Objetivos</field>
+            <field name="res_model">mgmtsystem.target</field>
+            <field name="view_mode">kanban,form,tree</field>
+            <field name="context">{"search_default_action_ids": active_id}</field>
+            <field name="search_view_id" ref="view_target_search" />
+        </record>
+
+        <record id="action_view_form" model="ir.ui.view">
+            <field name="name">Acciones</field>
+            <field name="model">mgmtsystem.action</field>
+            <field name="inherit_id" ref="mgmtsystem_action.view_mgmtsystem_action_form" />
+            <field name="arch" type="xml">
+                <xpath expr="//div[@name='button_box']" position="inside">
+                    <button type="action" name="%(show_target_action_action)d" class="oe_stat_button" icon="fa-file">
+                        <field name="targets_count" widget="statinfo" string="Objetivos" />
+                    </button>
+                </xpath>
+                <xpath expr="//page[1]" position="after">
+                    <page string="Objetivos">
+                        <group name="Objetivos">
+                            <field name="target_ids" />
+                        </group>
+                    </page>
+                </xpath>
+            </field>
+        </record>
+
+    </data>
+</odoo>

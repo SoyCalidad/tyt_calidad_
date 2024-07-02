@@ -1,0 +1,10 @@
+<odoo>
+    <data noupdate="1">
+        <record id="action_type_1" model="mgmtsystem.action.type">
+            <field name="name">Acción correctiva</field>
+        </record>
+        <record id="action_type_2" model="mgmtsystem.action.type">
+            <field name="name">Acción de mejora</field>
+        </record>
+    </data>
+</odoo>

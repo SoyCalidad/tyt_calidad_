@@ -1,0 +1,161 @@
+<odoo>
+    <data>
+
+        <menuitem id="menu_audit_root"
+                  name="Auditorías"
+                  web_icon="mgmtsystem_audit,static/description/icon.png"
+                  groups="base.group_no_one,mgmtsystem_audit.group_audit_onlyread_printreport,mgmtsystem_audit.group_audit_write_printreport,mgmtsystem_audit.group_audit_all"
+                  sequence="17" />
+
+        <menuitem id="menu_hr_audit" name="Auditorías internas" parent="menu_audit_root" sequence="15" />
+
+        <record id="view_audit_plan_tree" model="ir.ui.view">
+            <field name="name">audit.plan.tree</field>
+            <field name="model">audit.plan</field>
+            <field name="arch" type="xml">
+                <tree string="Programa" banner_route="/audit/audit_onboarding">
+                    <field name="name" />
+                    <field name="version" />
+                    <field name="audit_ids" />
+                    <field name="state" />
+                    <field name="create_date" string="Fecha de creación" />
+                </tree>
+            </field>
+        </record>
+
+        <record id="view_audit_plan_form" model="ir.ui.view">
+            <field name="name">audit.plan.form</field>
+            <field name="model">audit.plan</field>
+            <field name="arch" type="xml">
+                <form string="Programa">
+                    <header>
+                        <field name="state" widget="statusbar" statusbar_visible="elaborate,review,validate,validate_ok" />
+                        <button string="Enviar a Elaborar"
+                                name="send_elaborate"
+                                type="object"
+                                class="btn-primary"
+                                attrs="{'invisible':[('state','in', ('elaborate','validate','validate_ok','cancel'))]}" />
+                        <button string="Enviar a Revisar"
+                                name="send_review"
+                                type="object"
+                                class="btn-primary"
+                                attrs="{'invisible':[('state','in', ('review','validate_ok','cancel'))]}" />
+                        <button string="Enviar a Validar"
+                                name="send_validate"
+                                type="object"
+                                class="btn-primary"
+                                attrs="{'invisible':[('state','in', ('elaborate','validate','validate_ok','cancel'))]}" />
+                        <button string="Validar"
+                                name="send_validate_ok"
+                                type="object"
+                                class="btn-primary"
+                                attrs="{'invisible':[('state','not in', ('validate'))]}" />
+                        <button string="Volver Obsoleto"
+                                confirm="Esto volverá obsoleto el presente registro. ¿Está seguro(a)?"
+                                name="send_cancel"
+                                type="object"
+                                class="btn-second"
+                                attrs="{'invisible': [('state','in',('cancel'))] }" />
+                        <button name="button_new_version"
+                                type="object"
+                                string="Nueva versión"
+                                attrs="{'invisible':['|', ('active','=',False), ('state', '!=', 'validate_ok')]}"
+                                class="oe_highlight" />
+                    </header>
+                    <sheet>
+                        <div class="oe_button_box" name="button_box">
+                            <button type="object"
+                                    name="open_audit_ids"
+                                    class="oe_stat_button"
+                                    icon="fa-calendar"
+                                    string="Planes de auditoría" />
+                            <button type="object"
+                                    name="action_open_older_versions"
+                                    class="oe_stat_button"
+                                    icon="fa-archive"
+                                    style="white-space: nowrap;"
+                                    string="Versiones antiguas" />
+                            <widget name="web_ribbon" title="Archived" bg_color="bg-danger" attrs="{'invisible': [('active', '=', True)]}" />
+                            <field name="active" invisible="1" />
+                        </div>
+                        <h1>
+                            <field name="code" />
+                        </h1>
+                        <label for="name" />
+                        <div class="oe_title">
+                            <h2>
+                                <field name="name" colspan="2" style="width:80%%" />
+                            </h2>
+                        </div>
+                        <div class="oe_title">
+                            <label for="edition_id" />
+                            <div class="o_row">
+                                <field name="edition_id" colspan="3" attrs="{'readonly': [('state','not in',('elaborate'))] }" />
+                            </div>
+                        </div>
+                        <notebook>
+                            <page string="Auditorías">
+                                <!-- <button type="object" name="action_reset_all_aproval" states="review,validate" string="⇒ Validar todas las auditorías" class="oe_link oe_right"/> -->
+                                <field name="audit_ids" attrs="{'readonly': [('state','in',('validate_ok', 'cancel'))]}" context="{'default_plan_id': id}">
+                                    <tree>
+                                        <field name="name" />
+                                        <field name="date_init" />
+                                        <field name="date_fin" />
+                                        <field name="duration" widget="float_time" />
+                                        <field name="type" />
+                                        <field name="aproval" attrs="{'column_invisible': [('parent.state', 'not in', ['review', 'validate'])]}" />
+                                        <field name="observations" attrs="{'column_invisible': [('parent.state', 'not in', ['elaborate', 'review', 'validate'])]}" />
+                                        <field name="state" attrs="{'column_invisible': [('parent.state', 'not in', ['validate_ok'])]}" />
+                                    </tree>
+                                </field>
+                            </page>
+                            <page name="validation" string="Validación y versión">
+                                <group col="4">
+                                    <group colspan="4">
+                                        <field name="version" />
+                                    </group>
+                                    <group colspan="4">
+                                        <separator string="Elaboración" />
+                                        <field name="elaboration_step" colspan="2" nolabel="1" attrs="{'readonly': [('state','not in',('elaborate'))]}" />
+                                        <separator string="Revisión" />
+                                        <field name="review_step" colspan="2" nolabel="1" attrs="{'readonly': [('state','not in',('elaborate', 'review'))]}" />
+                                        <separator string="Validación" />
+                                        <field name="validation_step" colspan="2" nolabel="1" attrs="{'readonly': [('state','not in',('elaborate', 'review', 'validate'))]}" />
+                                    </group>
+                                    <group colspan="4">
+                                        <field name="date_elaborate" attrs="{'required': [('state','in',('elaborate'))], 'readonly': True}" />
+                                        <field name="date_review" attrs="{'required': [('state','in',('review'))], 'readonly': True, 'invisible': [('state','in',('elaborate'))] }" />
+                                        <field name="date_validate" groups="base.group_no_one,base.user_admin" attrs="{'invisible': [('state','in',('elaborate','review'))] }" />
+                                    </group>
+                                </group>
+                            </page>
+                        </notebook>
+                    </sheet>
+
+                    <div class="oe_chatter">
+                        <field name="message_follower_ids" widget="mail_followers" />
+                        <field name="activity_ids" widget="mail_activity" />
+                        <field name="message_ids" widget="mail_thread" />
+                    </div>
+
+                </form>
+            </field>
+        </record>
+
+        <record id="audit_plan_action" model="ir.actions.act_window">
+            <field name="name">Programa de auditorías</field>
+            <field name="type">ir.actions.act_window</field>
+            <field name="res_model">audit.plan</field>
+            <field name="view_mode">tree,form,kanban,graph,pivot</field>
+        </record>
+
+        <menuitem id="hr_item_annual_plan"
+                  name="Programa de auditorías"
+                  parent="menu_audit_root"
+                  sequence="1"
+                  action="audit_plan_action" />
+
+        <menuitem id="audit_report_menu" name="Reportes" parent="menu_audit_root" sequence="100" />
+
+    </data>
+</odoo>

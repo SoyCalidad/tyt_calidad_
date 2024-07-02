@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+
+    <record id="change_request_report_wizard_view_form" model="ir.ui.view">
+        <field name="name">mgmtsystem.change_request.report_wizard.view.form</field>
+        <field name="model">mgmtsystem.change_request.report_wizard</field>
+        <field name="arch" type="xml">
+            <form string="">
+                <sheet>
+                    <group>
+                        <field name="change_request_ids" widget="many2many_tags" />
+                    </group>
+                </sheet>
+                <footer>
+                    <button name="action_print"
+                            type="object"
+                            string="Descargar"
+                            class="oe_highlight"
+                            icon="fa-download" />
+                </footer>
+            </form>
+        </field>
+    </record>
+   
+    <record id="change_request_report_wizard_action" model="ir.actions.act_window">
+        <field name="name">Reporte de planificaciones de cambios</field>
+        <field name="type">ir.actions.act_window</field>
+        <field name="res_model">mgmtsystem.change_request.report_wizard</field>
+        <field name="view_mode">form</field>
+        <field name="view_id" ref="change_request_report_wizard_view_form" />
+        <field name="target">new</field>
+        <field name="binding_type">report</field>
+    </record>
+
+    <report id="action_report_change_request"
+            model="soycalidad.change_request"
+            string="Planificación de cambio"
+            report_type="xlsx"
+            name="report_change_request"
+            file="Planificación de cambio" />
+
+</odoo>

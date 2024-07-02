@@ -1,0 +1,308 @@
+.tg {
+    border-collapse: collapse;
+    border-spacing: 0;
+    width: 100%;
+}
+
+.tg td {
+    border-color: black;
+    border-style: solid;
+    border-width: 1px;
+    font-family: Arial, sans-serif;
+    font-size: 14px;
+    overflow: hidden;
+    padding: 10px 5px;
+    word-break: break-word;
+}
+
+.tg th {
+    border-color: black;
+    border-style: solid;
+    border-width: 1px;
+    font-family: Arial, sans-serif;
+    font-size: 14px;
+    font-weight: normal;
+    overflow: hidden;
+    padding: 10px 5px;
+    word-break: normal;
+}
+
+.tg .tg-nmgu {
+    background-color: #ffffff;
+    border-color: #c0c0c0;
+    text-align: left;
+    vertical-align: middle;
+}
+
+.tg .tg-d14o {
+    background-color: #efefef;
+    border-color: #c0c0c0;
+    font-weight: bold;
+    text-align: center;
+    vertical-align: middle;
+}
+
+.tg .tg-x2l4 {
+    background-color: #efefef;
+    border-color: #c0c0c0;
+    font-weight: bold;
+    text-align: center;
+    vertical-align: middle;
+}
+
+.tg .tg-wo29 {
+    border-color: #c0c0c0;
+    text-align: left;
+    vertical-align: middle;
+    word-break: break-word;
+}
+
+.tg .tg-wo30 {
+    border-color: #c0c0c0;
+    text-align: center;
+    vertical-align: middle;
+}
+
+.tg .tg-wo31 {
+    border-color: #c0c0c0;
+    text-align: justify;
+    text-justify: inter-word;
+    vertical-align: middle;
+    word-break: break-word;
+}
+
+// div pseudo-tables
+
+.di {
+    width: 100%;
+    overflow: auto;
+}
+
+.di .di-td {
+    border-color: #c0c0c0;
+    border-style: solid;
+    border-width: 1px;
+    font-family: Arial, sans-serif;
+    font-size: 12px;
+    overflow: hidden;
+    padding: 10px 5px;
+    word-break: break-word;
+}
+
+.di .di-th {
+    border-color: black;
+    border-style: solid;
+    border-width: 1px;
+    font-family: Arial, sans-serif;
+    font-weight: normal;
+    font-size: 14px;
+    overflow: hidden;
+    padding: 10px 5px;
+    word-break: normal;
+}
+
+.di .di-nmgu {
+    background-color: #ffffff;
+    border-color: #c0c0c0;
+    text-align: left;
+    vertical-align: middle;
+}
+
+.di .di-d14o {
+    background-color: #efefef;
+    border-color: #c0c0c0;
+    font-weight: bold;
+    text-align: center;
+    vertical-align: middle;
+}
+
+.di .di-x2l4 {
+    background-color: #efefef;
+    background-size: 100%;
+    border-color: #c0c0c0;
+    font-weight: bold;
+    text-align: center;
+    vertical-align: middle;
+    overflow: auto;
+    padding: 0;
+}
+
+.di .di-wo29 {
+    border-color: #c0c0c0;
+    text-align: left;
+    vertical-align: middle;
+    word-break: break-word;
+}
+
+.di .di-wo30 {
+    border-color: #c0c0c0;
+    text-align: center;
+    vertical-align: middle;
+}
+
+.di .di-wo31 {
+    border-color: #c0c0c0;
+    text-align: justify;
+    text-justify: inter-word;
+    vertical-align: middle;
+    word-break: break-word;
+}
+
+// Typography
+
+.soycalidad_subtitle {
+    font-size: 1.2em;
+    font-weight: bold;
+    margin-top: 2em;
+    margin-bottom: 2em;
+}
+
+.soycalidad_title {
+    text-align: center;
+    font-size: 1.4em;
+    font-weight: bold;
+    margin-top: 2em;
+    margin-bottom: 2em;
+}
+
+// Header
+
+.header_table {
+    border-collapse: collapse;
+    border-spacing: 0;
+    margin: 0px auto;
+    width: 100%;
+}
+
+.header_table td {
+    border-color: black;
+    border-style: solid;
+    border-width: 1px;
+    font-family: Palatino, Palatino Linotype, Palatino LT STD, Book Antiqua, Georgia, serif;
+    font-size: 12px;
+    overflow: hidden;
+    padding: 10px 5px;
+    word-break: normal;
+    text-align: middle;
+    align-items: center;
+}
+
+.header_table th {
+    border-color: black;
+    border-style: solid;
+    border-width: 1px;
+    font-family: Palatino, Palatino Linotype, Palatino LT STD, Book Antiqua, Georgia, serif;
+    font-size: 12px;
+    font-weight: normal;
+    overflow: hidden;
+    padding: 10px 5px;
+    word-break: normal;
+}
+
+.header_table .header_table-9wq8 {
+    border-color: inherit;
+    text-align: center;
+    vertical-align: middle
+}
+
+.header_table .header_table-1wig {
+    border-color: inherit;
+    text-align: center;
+    vertical-align: middle;
+    font-size: 16px;
+    font-weight: bold;
+}
+
+.header_table .header_table-0lax {
+    border-color: inherit;
+    text-align: center;
+    vertical-align: middle;
+    font-size: 12px;
+}
+
+// Cover
+
+.cover-table {
+	border-collapse: collapse;
+	border-spacing: 0;
+	td {
+		font-family: Palatino, Palatino Linotype, Palatino LT STD, Book Antiqua, Georgia, serif;
+		font-size: 16px;
+		padding: 10px 5px;
+		border-style: solid;
+		border-width: 1px;
+		overflow: hidden;
+		word-break: normal;
+		border-color: black;
+	}
+	th {
+		font-family: Palatino, Palatino Linotype, Palatino LT STD, Book Antiqua, Georgia, serif;
+		font-size: 16px;
+		font-weight: normal;
+		padding: 10px 5px;
+		border-style: solid;
+		border-width: 1px;
+		overflow: hidden;
+		word-break: normal;
+		border-color: black;
+	}
+    img {
+        display: block;
+        height: auto;
+        max-width: 100%;
+    }
+	.cover-table-zv36 {
+		font-weight: bold;
+		background-color: #ffffff;
+		border-color: inherit;
+		text-align: left;
+		vertical-align: top;
+		width: 33%;
+	}
+    .cover-table-zv37 {
+		font-weight: bold;
+		background-color: #ffffff;
+		border-color: inherit;
+		text-align: center;
+		vertical-align: top;
+		width: 33%;
+	}
+	.cover-table-nrix {
+		text-align: center;
+		vertical-align: middle;
+		font-weight: bold;
+		border-style: none;
+		font-size: 25px;
+	}
+	.cover-table-rq3n {
+		background-color: #ffffff;
+		text-align: center;
+		vertical-align: middle;
+		border-style: none;
+		font-size: 20px;
+	}
+	.cover-table-7g6k {
+		font-weight: bold;
+		background-color: #efefef;
+		border-color: inherit;
+		text-align: center;
+		vertical-align: top;
+		font-size: 16px;
+	}
+    .cover-table-7g6j {
+		font-weight: bold;
+		background-color: #efefef;
+		border-color: inherit;
+		text-align: center;
+		vertical-align: top;
+		font-size: 13px;
+	}
+	.cover-table-3xi5 {
+		background-color: #ffffff;
+		border-color: inherit;
+		text-align: center;
+		vertical-align: middle;
+		font-size: 14px;
+	}
+}
+

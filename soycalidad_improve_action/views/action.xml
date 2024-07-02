@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+
+    <record id="view_mgmtsystem_action_form_inherit" model="ir.ui.view">
+        <field name="name">mgmtsystem.action.view.form.inherit</field>
+        <field name="model">mgmtsystem.action</field>
+        <field name="inherit_id" ref="mgmtsystem_action.view_mgmtsystem_action_form"/>
+        <field name="arch" type="xml">
+            <field name="date_open" position="after">
+                <field name="recurring"/>
+            </field>
+            <field name="date_deadline" position="attributes">
+                <attribute name="onchange">on_date_deadline_change(date_deadline, recurring)</attribute>
+                <attribute name="attrs">{'invisible': [('recurring', '=', True)]}</attribute>
+            </field>
+            <field name="number_of_days_to_close" position="attributes">
+                <attribute name="attrs">{'invisible': [('recurring', '=', True)]}</attribute>
+            </field>
+            <field name="number_of_days_of_ret" position="attributes">
+                <attribute name="attrs">{'invisible': [('recurring', '=', True)]}</attribute>
+            </field>
+        </field>
+    </record>
+
+</odoo>

@@ -1,0 +1,96 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <!-- ONBOARDING STEPS -->
+
+    <template id="onboarding_training_plan_step">
+        <t t-call="base.onboarding_step">
+            <t t-set="title">Programa de capacitaciones</t>
+            <t t-set="description">Cree un programa de capacitaciones.</t>
+            <t t-set="done_icon" t-value="'fa-star'" />
+            <t t-set="btn_text">Crear</t>
+            <t t-set="done_text">Se ve bien!</t>
+            <t t-set="method" t-value="'action_open_training_plan'" />
+            <t t-set="model" t-value="'res.company'" />
+            <t t-set="state" t-value="state.get('training_plan_onboarding_state')" />
+        </t>
+    </template>
+
+    <template id="onboarding_training_training_step">
+        <t t-call="base.onboarding_step">
+            <t t-set="title">Plan de capacitaciones</t>
+            <t t-set="description">Cree un plan de capacitaciones.</t>
+            <t t-set="done_icon" t-value="'fa-star'" />
+            <t t-set="btn_text">Crear</t>
+            <t t-set="done_text">Se ve bien!</t>
+            <t t-set="method" t-value="'action_open_training_training'" />
+            <t t-set="model" t-value="'res.company'" />
+            <t t-set="state" t-value="state.get('training_training_onboarding_state')" />
+        </t>
+    </template>
+
+    <!-- ONBOARDING PANELS -->
+    <template id="training_onboarding_panel" name="training.onboarding.panel">
+        <t t-call="base.onboarding_container">
+            <t t-set="classes" t-value="'o_onboarding_blue'"/>
+            <t t-set="bg_image" t-value="'/account/static/src/img/account_invoice_onboarding_bg.jpg'"/>
+            <t t-set="close_method" t-value="'action_close_training_onboarding'"/>
+            <t t-set="close_model" t-value="'res.company'"/>
+            <t t-set="text_completed">Felicitaciones! Ha completado todo.</t>
+            <t t-call="mgmtsystem_employees.onboarding_training_plan_step" name="training_plan_step" />
+            <t t-call="mgmtsystem_employees.onboarding_training_training_step" name="training_training_step" />
+        </t>
+    </template>
+
+    <!-- Views -->
+
+    <record id="onboarding_training_plan_form" model="ir.ui.view">
+        <field name="name">mgmtsystem.plan.inherit.view.form</field>
+        <field name="model">mgmtsystem.plan</field>
+        <field name="inherit_id" ref="mgmtsystem_employees.view_mgmtsystem_plan_form"/>
+        <field name="priority">1000</field>
+        <field name="mode">primary</field>
+        <field name="arch" type="xml">
+            <form position="inside">
+                <footer position="replace">
+                    <button name="action_save_onboarding_training_plan_step" class="btn btn-primary" type="object" string="Crear" />
+                    <button special="cancel" string="Cancelar" />
+                </footer>
+            </form>
+        </field>
+    </record>
+
+    <record id="onboarding_training_training_form" model="ir.ui.view">
+        <field name="name">mgmtsystem.plan.training.inherit.view.form</field>
+        <field name="model">mgmtsystem.plan.training</field>
+        <field name="inherit_id" ref="mgmtsystem_employees.view_mgmtsystem_plan_training_form"/>
+        <field name="priority">1000</field>
+        <field name="mode">primary</field>
+        <field name="arch" type="xml">
+            <form position="inside">
+                <footer position="replace">
+                    <button name="action_save_onboarding_training_training_step" class="btn btn-primary" type="object" string="Crear" />
+                    <button special="cancel" string="Cancelar" />
+                </footer>
+            </form>
+        </field>
+    </record>
+
+    <record id="action_training_plan_configurator" model="ir.actions.act_window">
+        <field name="type">ir.actions.act_window</field>
+        <field name="name">Cree un programa de capacitaciones</field>
+        <field name="view_mode">form</field>
+        <field name="target">new</field>
+        <field name="res_model">mgmtsystem.plan</field>
+        <field name="view_id" ref="mgmtsystem_employees.onboarding_training_plan_form"/>
+    </record>
+
+    <record id="action_training_training_configurator" model="ir.actions.act_window">
+        <field name="type">ir.actions.act_window</field>
+        <field name="name">Cree un plan de capacitaciones</field>
+        <field name="view_mode">form</field>
+        <field name="target">new</field>
+        <field name="res_model">mgmtsystem.plan.training</field>
+        <field name="view_id" ref="mgmtsystem_employees.onboarding_training_training_form"/>
+    </record>
+
+</odoo>

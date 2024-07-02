@@ -1,0 +1,96 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+
+<!-- soycalidad.comittee.member form view -->
+    <record id="comittee_member_view_form" model="ir.ui.view">
+        <field name="name">soycalidad.comittee.member.view.form</field>
+        <field name="model">soycalidad.comittee.member</field>
+        <field name="arch" type="xml">
+            <form string="Miembro">
+                <sheet>
+                    <group>
+                        <field name="employee_id"/>
+                        <field name="job_id"/>
+                        <field name="position_id"/>
+                        <field name="function_ids">
+                            <tree editable="bottom">
+                                <field name="name"/>
+                                <field name="description"/>
+                            </tree>
+                        </field>
+                    </group>
+                </sheet>
+            </form>
+        </field>
+    </record>
+    <!-- soycalidad.comittee.member tree view -->
+    <record id="comittee_member_view_tree" model="ir.ui.view">
+        <field name="name">soycalidad.comittee.member.view.tree</field>
+        <field name="model">soycalidad.comittee.member</field>
+        <field name="arch" type="xml">
+            <tree>
+                <field name="employee_id"/>
+                <field name="job_id"/>
+                <field name="position_id"/>
+            </tree>
+        </field>
+    </record>
+    <!-- soycalidad.comittee action window -->
+    <record id="covid_comittee_action" model="ir.actions.act_window">
+        <field name="name">Comité</field>
+        <field name="type">ir.actions.act_window</field>
+        <field name="res_model">soycalidad.comittee</field>
+        <field name="view_mode">tree,form</field>
+
+        <field name="help" type="html">
+            <p class="oe_view_nocontent_create">
+            <!-- Add Text Here -->
+            </p>
+            <p>
+            <!-- More details about what a user can do with this object will be OK -->
+            </p>
+        </field>
+    </record>
+    <!-- soycalidad.comittee form view -->
+    <record id="comittee_view_form" model="ir.ui.view">
+        <field name="name">soycalidad.comittee.view.form</field>
+        <field name="model">soycalidad.comittee</field>
+        <field name="arch" type="xml">
+            <form string="Comité">
+                <sheet>
+                    <group>
+                        <field name="name"/>
+                        <field name="member_ids"/>
+                    </group>
+                </sheet>
+            </form>
+        </field>
+    </record>
+    <!-- soycalidad.comittee tree view -->
+    <record id="comittee_view_tree" model="ir.ui.view">
+        <field name="name">soycalidad.comittee.view.tree</field>
+        <field name="model">soycalidad.comittee</field>
+        <field name="arch" type="xml">
+            <tree>
+                <field name="name"/>
+                <field name="member_ids"/>
+            </tree>
+        </field>
+    </record>
+    <!-- soycalidad.comittee action window -->
+    <record id="comittee_action" model="ir.actions.act_window">
+        <field name="name">soycalidad.comittee.action</field>
+        <field name="type">ir.actions.act_window</field>
+        <field name="res_model">soycalidad.comittee</field>
+        <field name="view_mode">tree,form</field>
+        <field name="help" type="html">
+            <p class="oe_view_nocontent_create">
+            <!-- Add Text Here -->
+            </p>
+            <p>
+            <!-- More details about what a user can do with this object will be OK -->
+            </p>
+        </field>
+    </record>
+
+</odoo>

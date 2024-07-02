@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--Estructura basica de reportes-->
+<odoo>
+   <data>
+      <template id="report_requirements_template">
+         
+      </template>
+      <record id="requirements" model="report.paperformat">
+         <field name="name">European A4 low margin</field>
+         <field name="default" eval="True" />
+         <field name="format">A4</field>
+         <field name="page_height">0</field>
+         <field name="page_width">0</field>
+         <field name="orientation">Portrait</field>
+         <field name="margin_top">0</field>
+         <field name="margin_bottom">0</field>
+         <field name="margin_left">0</field>
+         <field name="margin_right">0</field>
+         <field name="header_line" eval="False" />
+         <field name="header_spacing">30</field>
+         <field name="dpi">80</field>
+      </record>
+      <report id="report_requirements" 
+      string="Reporte de requisitos legales" 
+      report_type="qweb-pdf" 
+      model="legal.plan" 
+      name="report_requirements_template" 
+      file="report_requirements_template"
+      paperformat="requirements"
+      groups="base.group_no_one,mgmtsystem_legal.group_legal_onlyread_printreport,mgmtsystem_legal.group_legal_write_printreport,mgmtsystem_legal.group_legal_all"
+       />
+   </data>
+</odoo>

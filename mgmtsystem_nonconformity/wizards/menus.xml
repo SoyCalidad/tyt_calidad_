@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+
+    <menuitem
+        id="nonconformity_output_wizard_report_menu"
+        name="Salidas no conformes"
+        action="action_nonconformity_output_wizard_report"
+        parent="menu_nonconformity_report"
+        sequence="10"/>
+
+</odoo>

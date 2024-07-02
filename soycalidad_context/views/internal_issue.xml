@@ -1,0 +1,66 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+
+    <record id="context_internal_issue_view_form_inherit" model="ir.ui.view">
+        <field name="name">mgmtsystem.context.internal_issue.view.form.inherit</field>
+        <field name="model">mgmtsystem.context.internal_issue</field>
+        <field name="inherit_id" ref="mgmtsystem_context.context_internal_issue_view_form" />
+        <field name="arch" type="xml">
+            <field name="vision" position="after">
+                <field name="quality_scope" attrs="{'readonly': [('state','in',('validate_ok','cancel'))]}" placeholder="a) las cuestiones externas e internas b) los requisitos de las partes interesadas c) los productos, servicios de la organización y las actividades con el trabajo." />
+            </field>
+        </field>
+    </record>
+
+    <record id="policy_template_view_form_inherit" model="ir.ui.view">
+        <field name="name">mgmtsystem.context.policy.template.view.form.inherit</field>
+        <field name="model">mgmtsystem.context.policy.template</field>
+        <field name="inherit_id" ref="mgmtsystem_context.policy_template_view_form" />
+        <field name="arch" type="xml">
+            <xpath expr="//notebook" position="inside">
+                <group attrs="{'invisible': [('system_id','!=',%(hola_calidad.policy_system_1)d)]}">
+                    <field name="organization_context" />
+                    <field name="direction_help" />
+                    <field name="customer_satisfaction" />
+                    <field name="legal_req" />
+                    <field name="standar_commitment" />
+                    <field name="staff_participation" />
+                    <field name="continous_improvement" />
+                    <field name="quality_goal_pre" />
+                    <field name="communication" />
+                </group>
+            </xpath>
+        </field>
+    </record>
+
+    <record id="policy_view_form" model="ir.ui.view">
+        <field name="name">mgmtsystem.context.policy.view.form</field>
+        <field name="model">mgmtsystem.context.policy</field>
+        <field name="inherit_id" ref="mgmtsystem_context.context_policy_view_form" />
+        <field name="arch" type="xml">
+            <page name="document" position="inside">
+                <group attrs="{'invisible': [('system_id','!=',%(hola_calidad.policy_system_1)d)]}">
+                    <field name="organization_context" attrs="{'readonly': [('state','in',('validate_ok','cancel'))]}" />
+                    <field name="direction_help" attrs="{'readonly': [('state','in',('validate_ok','cancel'))]}" />
+                    <field name="customer_satisfaction" attrs="{'readonly': [('state','in',('validate_ok','cancel'))]}" />
+                    <field name="legal_req" attrs="{'readonly': [('state','in',('validate_ok','cancel'))]}" />
+                    <field name="standar_commitment" attrs="{'readonly': [('state','in',('validate_ok','cancel'))]}" />
+                    <field name="staff_participation" attrs="{'readonly': [('state','in',('validate_ok','cancel'))]}" />
+                    <field name="continous_improvement" attrs="{'readonly': [('state','in',('validate_ok','cancel'))]}" />
+                    <field name="quality_goal_pre" attrs="{'readonly': [('state','in',('validate_ok','cancel'))]}" />
+                    <field name="communication" attrs="{'readonly': [('state','in',('validate_ok','cancel'))]}" />
+                </group>
+            </page>
+            <field name="target_ids" position="replace">
+                <!-- <field name="target_ids" attrs="{'readonly': [('state','in',('validate_ok','cancel'))]}">
+                    <tree>
+                        <field name="code" />
+                        <field name="name" />
+                        <field name="description" style="white-space:break-spaces !important;max-width:200px !important;" />
+                    </tree>
+                </field> -->
+            </field>
+        </field>
+    </record>
+
+</odoo>

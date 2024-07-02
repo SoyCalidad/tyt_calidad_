@@ -1,0 +1,144 @@
+/* @import url("https://fonts.googleapis.com/css?family=Mukta:300,400,700");
+.tooltip,
+.cont__sources:before,
+.cont__build:before,
+.cont__deploy:before {
+  position: absolute;
+  right: 0;
+  bottom: 100%;
+  color: #fff;
+  background: #ffb238;
+  text-transform: uppercase;
+  font-size: 0.9rem;
+  padding: 0.25rem 0.75rem;
+  border-radius: 2.5px;
+}
+.card,
+.cont__sources div,
+.cont__build div {
+  line-height: 2;
+  background: #fff;
+  padding: 1.2rem 1rem;
+  border-radius: 4px;
+  box-shadow: 0 2px 10px #e6e6e6;
+}
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+body {
+  min-height: 100vh;
+  width: 100%;
+  font-family: 'Mukta', sans-serif;
+  color: #5f39dd;
+  background: #5f39dd;
+}
+.cont {
+  margin: 5vh 2.5vw;
+  padding: 15vh 0;
+  background: #fff;
+  border-radius: 5px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+}
+.cont svg {
+  height: 5rem;
+}
+.cont svg line {
+  stroke: #5f39dd;
+  stroke-width: 3px;
+  stroke-linecap: round;
+  stroke-dasharray: 2px 20px;
+  animation: animateline 5s linear both infinite;
+}
+h3 {
+  font-size: 1.1rem;
+  color: #411fb2;
+}
+p {
+  font-size: 0.95rem;
+  font-weight: 300;
+}
+.cont__sources {
+  display: flex;
+  border-radius: 8px;
+  padding: 1.5rem;
+  background: #f9f9f9;
+  position: relative;
+}
+.cont__sources:before {
+  content: 'data sources';
+}
+.cont__sources div {
+  text-align: left;
+  margin: 0 1rem;
+}
+.cont__build {
+  padding: 10vh 10vw;
+  border-radius: 8px;
+  background: #f9f9f9;
+  position: relative;
+}
+.cont__build:before {
+  content: 'build';
+}
+.cont__build div {
+  margin: 2rem 0;
+}
+.cont__build div svg {
+  width: 4rem;
+  height: auto;
+  fill: #5f39dd;
+}
+.cont__deploy {
+  background: #f9f9f9;
+  padding: 1.5rem;
+  border-radius: 8px;
+  position: relative;
+}
+.cont__deploy:before {
+  content: 'deploy';
+}
+@media (max-width: 700px) {
+  .cont__sources {
+    flex-direction: column;
+  }
+  .cont__sources div {
+    margin: 1rem 0;
+  }
+}
+@-moz-keyframes animateline {
+  from {
+    stroke-dashoffset: 0;
+  }
+  to {
+    stroke-dashoffset: -5rem;
+  }
+}
+@-webkit-keyframes animateline {
+  from {
+    stroke-dashoffset: 0;
+  }
+  to {
+    stroke-dashoffset: -5rem;
+  }
+}
+@-o-keyframes animateline {
+  from {
+    stroke-dashoffset: 0;
+  }
+  to {
+    stroke-dashoffset: -5rem;
+  }
+}
+@keyframes animateline {
+  from {
+    stroke-dashoffset: 0;
+  }
+  to {
+    stroke-dashoffset: -5rem;
+  }
+} */

@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+
+    <record id="evaluation_1" model="stock.inspection">
+        <field name="name">Evaluación de compra</field>
+    </record>
+
+    <record id="evaluation_1_item_1" model="stock.inspection.item">
+        <field name="name">Cantidad completa</field>
+        <field name="inspection_id" ref="stock_inspection.evaluation_1"/>
+    </record>
+
+    <record id="evaluation_1_item_2" model="stock.inspection.item">
+        <field name="name">Marca solicitada</field>
+        <field name="inspection_id" ref="stock_inspection.evaluation_1"/>
+    </record>
+
+    <record id="evaluation_1_item_3" model="stock.inspection.item">
+        <field name="name">Envases intactos y limpios</field>
+        <field name="inspection_id" ref="stock_inspection.evaluation_1"/>
+    </record>
+
+    <record id="evaluation_1_item_4" model="stock.inspection.item">
+        <field name="name">Embalajes intactos</field>
+        <field name="inspection_id" ref="stock_inspection.evaluation_1"/>
+    </record>
+
+    <record id="evaluation_1_item_5" model="stock.inspection.item">
+        <field name="name">Envasados sin abombamientos</field>
+        <field name="inspection_id" ref="stock_inspection.evaluation_1"/>
+    </record>
+
+    <record id="evaluation_1_item_6" model="stock.inspection.item">
+        <field name="name">Tiempo de entrega</field>
+        <field name="inspection_id" ref="stock_inspection.evaluation_1"/>
+    </record>
+
+    
+</odoo>

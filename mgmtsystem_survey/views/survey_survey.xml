@@ -1,0 +1,13 @@
+<odoo>
+        <!-- window actions and menus -->
+        <record id="action_survey_form" model="ir.actions.act_window">
+            <field name="name">Surveys</field>
+            <field name="res_model">survey.survey</field>
+            <field name="view_mode">tree,form</field>
+        </record>
+        <menuitem
+            id="menu_open_survey"
+            action="action_survey_form"
+            parent="hola_calidad.menu_mgmtsystem_configuration"
+            sequence="50"/>
+</odoo>

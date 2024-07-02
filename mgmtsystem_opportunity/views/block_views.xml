@@ -1,0 +1,304 @@
+<odoo>
+
+    <record id="evaluation_criterio_line_view_form" model="ir.ui.view">
+        <field name="name">evaluation.criterio.line.view.form</field>
+        <field name="model">evaluation.criterio.line</field>
+        <field name="arch" type="xml">
+            <form string="Criterio">
+                <sheet>
+                    <group>
+                        <field name="name" />
+                        <field name="description" />
+                        <field name="value_less" />
+                        <field name="value_high" />
+                    </group>
+                </sheet>
+            </form>
+        </field>
+    </record>
+
+    <record id="evaluation_criterio_line_view_tree" model="ir.ui.view">
+        <field name="name">evaluation.criterio.line.view.tree</field>
+        <field name="model">evaluation.criterio.line</field>
+        <field name="arch" type="xml">
+            <tree string="Criterio">
+                <field name="name" />
+                <field name="description" />
+                <field name="value_less" />
+                <field name="value_high" />
+            </tree>
+        </field>
+    </record>
+
+    <record id="evaluation_result_view_form" model="ir.ui.view">
+        <field name="name">evaluation.result.view.form</field>
+        <field name="model">evaluation.result</field>
+        <field name="arch" type="xml">
+            <form string="Evaluación">
+                <sheet>
+                    <group>
+                        <field name="criterio_id" />
+                        <field name="description" />
+                        <field name="alternative" />
+                        <field name="alternative_description" />
+                    </group>
+                    <group>
+                        <field name="value" string='Valor' />
+                        <field name="text_values" string='' />
+                    </group>
+                </sheet>
+            </form>
+        </field>
+    </record>
+
+    <record model="ir.ui.view" id="view_matrix_block_search">
+        <field name="name">matrix.block.search</field>
+        <field name="model">matrix.block</field>
+        <field name="arch" type="xml">
+            <search>
+                <field name="name" />
+                <field name="state" />
+            </search>
+        </field>
+    </record>
+
+    <record model="ir.ui.view" id="view_matrix_block_tree">
+        <field name="name">matrix.block.tree</field>
+        <field name="model">matrix.block</field>
+        <field name="arch" type="xml">
+            <tree string="Fuentes" class="o_matrix_block" decoration-muted="state=='cancel'">
+                <field name="name" />
+                <field name="line_ids" />
+                <field name="state" />
+            </tree>
+        </field>
+    </record>
+
+    <record model="ir.ui.view" id="view_matrix_block_form">
+        <field name="name">matrix.block.form</field>
+        <field name="model">matrix.block</field>
+        <field name="arch" type="xml">
+            <form string="Fuentes" class="o_matrix_block">
+                <header>
+                    <button name="send_in_process"
+                            type="object"
+                            string="Iniciar"
+                            class="btn-primary"
+                            attrs="{'invisible': [('state','!=','draft')]}" />
+                    <button name="send_validate"
+                            type="object"
+                            string="Validar"
+                            class="btn-primary"
+                            attrs="{'invisible': [('state','!=','in_process')]}" />
+                    <button name="send_cancel"
+                            confirm="Esto volverá obsoleto el presente registro. ¿Está seguro(a)?"
+                            type="object"
+                            string="Cancelar"
+                            class="btn-second"
+                            attrs="{'invisible': [('state','=','cancel')]}" />
+                    <field name="state" widget="statusbar" statusbar_visible="draft,in_process,validate" />
+                </header>
+                <sheet>
+                    <div class="oe_title">
+                        <label for="name" />
+                        <field name="name" invisible="1" />
+                    </div>
+                    <group>
+                        <field name="process_id" attrs="{'required': [('other','=',False)],'readonly': [('state','!=','draft')]}" options="{'no_create':True,'no_create_edit':True}" />
+                        <field name="other" attrs="{'readonly': [('state','!=','draft')]}" />
+                        <field name="type" invisible="1" />
+                    </group>
+                    <notebook>
+                        <page string="Lineas">
+                            <field name="line_ids" attrs="{'readonly': [('state','not in',('draft','in_process'))]}">
+                                <tree>
+                                    <field name="department_id" />
+                                    <field name="name" />
+                                    <field name="effect" />
+                                    <field name="cause" />
+                                    <field name="ntr" string="Valor de riesgo" attrs="{'invisible': [('type','!=','risk')]}" />
+                                    <field name="ntr" string="Valor de oportunidad" attrs="{'invisible': [('type','!=','opportunity')]}" />
+                                    <field name="action_ids" />
+                                    <field name="state" />
+                                    <field name="type" invisible="1" />
+                                </tree>
+                            </field>
+                        </page>
+                    </notebook>
+                </sheet>
+            </form>
+        </field>
+    </record>
+
+    <record model="ir.ui.view" id="view_matrix_block_line_tree">
+        <field name="name">matrix.block.line.tree</field>
+        <field name="model">matrix.block.line</field>
+        <field name="arch" type="xml">
+            <tree class="o_matrix_block_line" banner_route="/opportunity/opportunity_onboarding">
+                <field name="name" />
+                <field name="effect" />
+                <field name="cause" />
+                <field name="version" />
+                <field name="user_id" />
+            </tree>
+        </field>
+    </record>
+
+    <record model="ir.ui.view" id="view_matrix_block_line_form">
+        <field name="name">matrix.block.line.form</field>
+        <field name="model">matrix.block.line</field>
+        <field name="arch" type="xml">
+            <form class="o_matrix_block_line">
+                <header>
+                    <button name="send_validate"
+                            type="object"
+                            string="Validar"
+                            class="btn-primary"
+                            attrs="{'invisible': [('state','!=','draft')]}" />
+                    <button name="send_cancel"
+                            confirm="Esto volverá obsoleto el presente registro. ¿Está seguro(a)?"
+                            type="object"
+                            string="Cancelar"
+                            class="btn-second"
+                            attrs="{'invisible': [('state','=','cancel')]}" />
+                    <field name="state" widget="statusbar" statusbar_visible="draft,validate" />
+                    <button name="button_new_version"
+                            type="object"
+                            string="Nueva versión"
+                            attrs="{'invisible':[('state', '!=', 'validate')]}"
+                            class="oe_highlight" />
+                </header>
+                <sheet>
+                    <div class="oe_button_box" name="button_box">
+                        <button type="object"
+                                name="action_open_older_versions"
+                                class="oe_stat_button"
+                                icon="fa-archive"
+                                style="white-space: nowrap;"
+                                string="Versiones antiguas" />
+                    </div>
+                    <h1>
+                        <field name="code" />
+                    </h1>
+                    <div class="oe_title">
+                        <label for="name" />
+                        <h2>
+                            <field name="name" attrs="{'readonly': [('state','!=','draft')]}" class="o_mbline_name" />
+                        </h2>
+                    </div>
+                    <group col="4">
+                        <field name="process_id" attrs="{'readonly': [('state','not in',('draft','in_process'))]}" />
+                        <field name="department_id" options="{'no_create':True,'no_create_edit':True,'no_open':True}" attrs="{'readonly': [('state','not in',('draft','in_process'))]}" class="o_mbline_department_id" />
+                        <field name="system_id" options="{'no_create': True, 'no_edit': True}"  />
+                        <field name="type_id" />
+                        <field name="type" invisible="1" />
+                        <field name="description" attrs="{'readonly': [('state','not in',('draft','in_process'))]}" />
+                        <field name="cause" attrs="{'readonly': [('state','not in',('draft','in_process'))]}" class="o_mbline_cause" />
+                        <field name="agent_id" />
+                        <field name="effect" attrs="{'readonly': [('state','not in',('draft','in_process'))]}" class="o_mbline_effect" />
+                        <field name="user_id" />
+                        <field name="version" />
+                    </group>
+
+                    <notebook>
+                        <page string="Evaluación">
+                            <group>
+                                <field name="evaluation_id"
+                                       string="Indicador"
+                                       attrs="{'readonly': [('state','not in',('draft','in_process'))]}"
+                                       options="{'no_create':True,'no_create_edit':True}"
+                                       domain="[('type','=',type)]"
+                                       class="o_mbline_evaluation_id" />
+                                <field name="result_ids" widget="one2many" attrs="{'readonly': [('state','not in',('draft','in_process'))]}" class="o_mbline_result_ids">
+                                    <tree create="false" delete="false">
+                                        <field name="criterio_id" options="{'no_create':True,'no_create_edit':True}" />
+                                        <field name="description" style="max-width: 200px" />
+                                        <field name="alternative" />
+                                        <field name="value" />
+                                    </tree>
+                                </field>
+                                <field name="ntr" string="Valor de riesgo" attrs="{'invisible': [('type','!=','risk')], 'readonly': [('state','not in',('draft','in_process'))]}" />
+                                <field name="ntr" string="Valor de oportunidad" attrs="{'invisible': [('type','!=','opportunity')], 'readonly': [('state','not in',('draft','in_process'))]}" />
+                                <field name="type" invisible="1" />
+                                <field name="interpretation_risk" attrs="{'invisible': [('type','!=','risk')], 'readonly': [('state','not in',('draft','in_process'))]}" />
+                                <field name="interpretation_opportunity" attrs="{'invisible': [('type','!=','opportunity')], 'readonly': [('state','not in',('draft','in_process'))]}" />
+                            </group>
+                        </page>
+                        <page string="Acciones">
+                            <field name="action_ids" />
+                        </page>
+                    </notebook>
+                </sheet>
+                <div class="oe_chatter">
+                    <field name="message_follower_ids" widget="mail_followers" />
+                    <field name="activity_ids" widget="mail_activity" />
+                    <field name="message_ids" widget="mail_thread" />
+                </div>
+            </form>
+        </field>
+    </record>
+
+    <record model="ir.actions.act_window" id="matrix_block_risk_action">
+        <field name="name">Fuentes</field>
+        <field name="res_model">matrix.block</field>
+        <field name="view_mode">tree,form</field>
+        <field name="domain">[('type','=','risk')]</field>
+        <field name="context">{'default_type':'risk'}</field>
+    </record>
+
+    <!-- <menuitem
+        name="Fuentes"
+        id="mitem_block_risk"
+        parent="menu_risk"
+        sequence="8"
+        action="matrix_block_risk_action"
+        groups="base.group_no_one,mgmtsystem_opportunity.group_opportunity_onlyread,mgmtsystem_opportunity.group_opportunity_onlyread_printreport,mgmtsystem_opportunity.group_opportunity_user_secundario,mgmtsystem_opportunity.group_opportunity_write_printreport" /> -->
+
+
+    <record model="ir.actions.act_window" id="matrix_block_line_risk_action">
+        <field name="name">Riesgos</field>
+        <field name="res_model">matrix.block.line</field>
+        <field name="view_mode">tree,form</field>
+        <field name="domain">[('type','=','risk')]</field>
+        <field name="context">{'default_type':'risk'}</field>
+    </record>
+
+    <menuitem name="Riesgos"
+              id="mitem_block_line_risk"
+              parent="menu_risk"
+              sequence="2"
+              action="matrix_block_line_risk_action"
+              groups="base.group_no_one,mgmtsystem_opportunity.group_opportunity_onlyread,mgmtsystem_opportunity.group_opportunity_onlyread_printreport,mgmtsystem_opportunity.group_opportunity_user_secundario,mgmtsystem_opportunity.group_opportunity_write_printreport" />
+
+    <!--Oportunidades-->
+    <record model="ir.actions.act_window" id="matrix_block_opportunity_action">
+        <field name="name">Fuentes</field>
+        <field name="res_model">matrix.block</field>
+        <field name="view_mode">tree,form</field>
+        <field name="domain">[('type','=','opportunity')]</field>
+        <field name="context">{'default_type':'opportunity'}</field>
+    </record>
+
+    <!-- <menuitem
+        name="Fuentes"
+        id="mitem_block_opportunity"
+        parent="menu_opportunity"
+        sequence="8"
+        action="matrix_block_opportunity_action" groups="base.group_no_one,mgmtsystem_opportunity.group_opportunity_onlyread,mgmtsystem_opportunity.group_opportunity_onlyread_printreport,mgmtsystem_opportunity.group_opportunity_user_secundario,mgmtsystem_opportunity.group_opportunity_write_printreport" /> -->
+
+    <record model="ir.actions.act_window" id="matrix_block_line_opportunity_action">
+        <field name="name">Oportunidades</field>
+        <field name="res_model">matrix.block.line</field>
+        <field name="view_mode">tree,form</field>
+        <field name="domain">[('type','=','opportunity')]</field>
+        <field name="context">{'default_type':'opportunity'}</field>
+    </record>
+
+    <menuitem name="Oportunidades"
+              id="mitem_block_line_opportunity"
+              parent="menu_opportunity"
+              sequence="2"
+              action="matrix_block_line_opportunity_action"
+              groups="base.group_no_one,mgmtsystem_opportunity.group_opportunity_onlyread,mgmtsystem_opportunity.group_opportunity_onlyread_printreport,mgmtsystem_opportunity.group_opportunity_user_secundario,mgmtsystem_opportunity.group_opportunity_write_printreport" />
+
+</odoo>

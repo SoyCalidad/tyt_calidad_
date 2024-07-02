@@ -1,0 +1,145 @@
+<odoo>
+    <data>
+
+
+
+        <record id="target_complaint_filter" model="ir.ui.view">
+            <field name="name">mgmtsystem.target.filter</field>
+            <field name="model">mgmtsystem.target</field>
+            <field name="inherit_id" ref="mgmtsystem_target.view_target_search"/>
+
+            <field name="arch" type="xml">
+                <field name="action_ids" position="after">
+                    <field name="complaint_ids"/>
+                </field>
+            </field>
+        </record>
+
+        <record id="nc_complaint_filter" model="ir.ui.view">
+            <field name="name">mgmtsystem.nonconformity.filter</field>
+            <field name="model">mgmtsystem.nonconformity</field>
+            <field name="inherit_id" ref="mgmtsystem_nonconformity.view_mgmtsystem_nonconformity_filter"/>
+
+            <field name="arch" type="xml">
+                <field name="action_ids" position="after">
+                    <field name="complaint_ids"/>
+                </field>
+            </field>
+        </record>
+
+        <record id="action_complaint_filter" model="ir.ui.view">
+            <field name="name">mgmtsystem.action.filter</field>
+            <field name="model">mgmtsystem.action</field>
+            <field name="inherit_id" ref="mgmtsystem_action.view_mgmtsystem_action_filter"/>
+
+            <field name="arch" type="xml">
+                <field name="user_id" position="after">
+                    <field name="complaint_ids" />
+                </field>
+            </field>
+        </record>
+
+
+        <record model="ir.actions.act_window" id="show_target_complaint_action">
+            <field name="name">Objetivos</field>
+            <field name="res_model">mgmtsystem.target</field>
+
+            <field name="view_mode">kanban,form,tree</field>
+            <field name="context">{"search_default_complaint_ids": active_id}</field>
+            <field name="search_view_id" ref="target_complaint_filter"/>
+        </record>
+
+        <record model="ir.actions.act_window" id="show_nc_complaint_action">
+            <field name="name">No conformidades</field>
+            <field name="res_model">mgmtsystem.nonconformity</field>
+
+            <field name="view_mode">kanban,form,tree</field>
+            <field name="context">{"search_default_complaint_ids": active_id}</field>
+            <field name="search_view_id" ref="nc_complaint_filter"/>
+        </record>
+
+        <record model="ir.actions.act_window" id="show_ac_complaint_action">
+            <field name="name">Acciones</field>
+            <field name="res_model">mgmtsystem.action</field>
+
+            <field name="view_mode">kanban,form,tree</field>
+            <field name="context">{"search_default_complaint_ids": active_id}</field>
+            <field name="search_view_id" ref="action_complaint_filter"/>
+        </record>
+
+        <record model="ir.actions.act_window" id="show_risk_complaint_action">
+            <field name="name">Riesgos y oportunidades</field>
+            <field name="res_model">matrix.block.line</field>
+
+            <field name="view_mode">kanban,form,tree</field>
+            <field name="context">{"search_default_nonconformity_ids": active_id}</field>
+            <field name="search_view_id" ref="view_matrix_block_line_search"/>
+        </record>
+
+        <record id="complaint_view_form" model="ir.ui.view">
+            <field name="name">complaint.complaint.view.form</field>
+            <field name="model">complaint.complaint</field>
+            <field name="inherit_id" ref="mgmtsystem_complaints.view_complaint_complaint_form"/>
+            <field name="arch" type="xml">
+                <xpath expr="//div[@class='oe_title']" position="before">
+                    <div class="oe_button_box" name="button_box">
+                        <button type="action" name="%(show_target_complaint_action)d" class="oe_stat_button" icon="fa-bar-chart-o">
+                            <field name="targets_count" widget="statinfo" string="Objetivos"/>
+                        </button>
+                        <button type="action" name="%(show_nc_complaint_action)d" class="oe_stat_button" icon="fa-frown-o">
+                            <field name="nonconformities_count" widget="statinfo" string="No conformidades"/>
+                        </button>
+                        <button type="action" name="%(show_ac_complaint_action)d" class="oe_stat_button" icon="fa-edit">
+                            <field name="actions_count" widget="statinfo" string="Acciones"/>
+                        </button>
+                        <button type="action" name="%(show_risk_complaint_action)d" class="oe_stat_button" icon="fa-star-o">
+                            <field name="opps_count" widget="statinfo" string="Oportunidades"/>
+                        </button>
+                        <button type="action" name="%(show_risk_complaint_action)d" class="oe_stat_button" icon="fa-star">
+                            <field name="risks_count" widget="statinfo" string="Riesgos"/>
+                        </button>
+                    </div>
+                </xpath>
+                <xpath expr="//notebook" position="inside">
+                    <page name="target_ids" string="Objetivos">
+                        <separator string="Objetivos"/>
+                        <field name="target_ids" colspan="4" nolabel="1" context="{'default_origin_model_id': model_id, 'default_origin_int_id': id}"/>
+                    </page>
+                    <page name="risk_opp" string="Riesgos y oportunidades">
+                        <field name="model_id" invisible="1"/>
+                        <separator string="Riesgos"/>
+                        <field name="risk_ids" context="{'default_origin_model_id': model_id, 'default_origin_int_id': id, 'default_type': 'risk'}"/>
+                        <separator string="Oportunidades"/>
+                        <field name="opp_ids" context="{'default_origin_model_id': model_id, 'default_origin_int_id': id, 'default_type': 'opportunity'}"/>
+                        <group>
+                            <field name="model_id" invisible="True"/>
+                        </group>
+                    </page>
+                </xpath>
+                <field name="action_ids" position="attributes">
+                    <attribute name="context">{'default_origin_model_id': model_id, 'default_origin_int_id': id}</attribute>
+                </field>
+                <field name="nonconformity_ids" position="attributes">
+                    <attribute name="context">{'default_origin_model_id': model_id, 'default_origin_int_id': id}</attribute>
+                </field>
+            </field>
+        </record>
+
+        <record id="mgmt_inciden_process_action" model="ir.actions.act_window">
+            <field name="name">Procedimientos de satisfacción del cliente</field>
+            <field name="res_model">mgmt.process</field>
+
+            <field name="view_mode">kanban,tree,form</field>
+            <field name="domain">[('name', '=', 'SATISFACCIÓN DEL CLIENTE')]</field>
+            <field name="context">{}</field>
+        </record>
+
+        <menuitem
+            id="process_complaint_menu"
+            name="Procedimientos"
+            action="mgmt_inciden_process_action"
+            parent="mgmtsystem_complaints.menu_report"
+            sequence="100"/>
+
+    </data>
+</odoo>

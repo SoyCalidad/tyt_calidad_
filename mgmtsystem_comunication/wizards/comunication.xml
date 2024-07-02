@@ -1,0 +1,242 @@
+<odoo>
+    <data>
+
+        <record id="comunication_plan_line_wizard_form_view" model="ir.ui.view">
+            <field name="name">Comunicación</field>
+            <field name="model">comunication.plan.line.wizard</field>
+            <field name="arch" type="xml">
+                <form>
+                    <group>
+                        <field name="comunication_plan_line_id"/>
+                    </group>
+                    <p>
+                        Escoja una comunicación para imprimir
+                    </p>
+                    <footer>
+                        <button name="action_print" type="object" string="Descargar" class="oe_highlight" icon="fa-download"/>
+                    </footer>
+                </form>
+            </field>
+        </record>
+
+
+        <record id="comunication_plan_line_wizard_action" model="ir.actions.act_window">
+            <field name="name">Plan de comunicación</field>
+            <field name="type">ir.actions.act_window</field>
+            <field name="res_model">comunication.plan.line.wizard</field>
+            <field name="view_mode">form</field>
+            <field name="view_id" ref="comunication_plan_line_wizard_form_view"/>
+            <field name="target">new</field>
+            <field name="binding_type">report</field>
+        </record>
+
+        <report id="repor_com_line_wiz" 
+        model="comunication.plan.line.wizard" 
+        string="Comunicaciones" 
+        report_type="qweb-pdf"
+        name="mgmtsystem_comunication.comunication_wizard_report" 
+        file="Comunicaciones" />
+
+
+        <template id="comunication_wizard_report">
+            <t t-call="web.html_container">
+                <t t-foreach="docs" t-as="doc">
+                    <t t-if="doc and 'company_id' in doc">
+                        <t t-set="company" t-value="doc.company_id" />
+                    </t>
+                    <t t-if="not doc or not 'company_id' in doc">
+                        <t t-set="company" t-value="res_company" />
+                    </t>
+                    <div class="header">
+                        <TABLE width="100%" height="50" style="display:block;border:1px solid black;font-size:14px;font-weight:bold;max-height:60px; padding-top: 55px ;  border: #000000 2px; padding-left: 0em;" cellspacing="0">
+                            <tr>
+                                        <td class="tg-nrix" height="50" colspan="3"/>
+                                    </tr>
+                         <tr>
+                               <td style="border: 1px solid black;padding-top: 35px;  padding-top: 35px;  border-right: 1px solid #fff;" width="20%" rowspan="3" align="center" valign="middle">
+                                    <center>
+                                        <t t-if="company.logo">
+                                            <img t-att-src="image_data_uri(company.logo)" style="max-height:140px;vertical-align:absmiddle;" alt="Logo"/>
+                                        </t>
+                                    </center>
+                                </td>
+                                <td style="border: 1px solid black; text-align:middle;font-weight: bold; border-left: 1px solid #000;border-right: 1px solid #fff" width="60%" rowspan="3" align="center" valign="middle">
+                                    <center>
+                                        <h2>REPORTE DE COMUNICACIÓN</h2>
+                                        <h3>
+                                            <span t-field="doc.name" />
+                                        </h3>
+                                    </center>
+                                </td>
+                                <td style="border: 1px solid black;  border-left: 1px solid #000;" width="20%" align="center" valign="middle">
+                                    <center>
+                                        <h4>Código: <span t-field="doc.code" /></h4> 
+                                    </center>
+                                </td>
+
+                            </tr>
+                            <tr>
+                                <td style="border: 1px solid black; border-left: 1px solid #000; border-right: 1px solid #000">
+                                    <CENTER>
+                                        <h4>Edición: 
+                                            <span t-field="doc.reference" />
+                                        </h4>
+                                    </CENTER>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td style="border: 1px solid black; border-top: 1px solid #ffffff; border-left: 1px solid #000;" align="center" valign="middle">
+                                    <CENTER>
+                                        <h4>Fecha de aprobación:
+                                            <span t-field="doc.date_release" />
+                                        </h4>
+                                    </CENTER>
+                                </td>
+                            </tr>
+                        </TABLE>
+                    </div>
+                    <t t-call="web.external_layout">
+                        <div class="page">
+                            <div class="cover" style="page-break-after: always;">
+                                <style type="text/css">
+.tg  {border-collapse:collapse;border-spacing:0;}
+.tg td{font-family: Palatino, Palatino Linotype, Palatino LT STD, Book Antiqua, Georgia, serif;font-size:14px;padding:10px 5px;border-style:solid;border-width:1px;overflow:hidden;word-break:normal;border-color:black;}
+.tg th{font-family: Palatino, Palatino Linotype, Palatino LT STD, Book Antiqua, Georgia, serif;font-size:14px;font-weight:normal;padding:10px 5px;border-style:solid;border-width:1px;overflow:hidden;word-break:normal;border-color:black;}
+.tg .tg-zv36{font-weight:bold;background-color:#ffffff;border-color:inherit;text-align:left;vertical-align:top}
+.tg .tg-nrix{text-align:center;vertical-align:middle;font-weight: bold;border-style: none;font-size:25px;}
+.tg .tg-rq3n{background-color:#ffffff;text-align:center;vertical-align:middle;border-style: none;font-size:20px;}
+.tg .tg-7g6k{font-weight:bold;background-color:#ffffff;border-color:inherit;text-align:center;vertical-align:top}
+.tg .tg-3xi5{background-color:#ffffff;border-color:inherit;text-align:center;vertical-align:top}
+                                </style>
+                                
+                                <center>
+                                    <table class="tg" width="75%">
+                                        <tr>
+                                        <td class="tg-nrix" height="70" colspan="3"/>
+                                    </tr>
+                                        <tr>
+                                            <th class="tg-nrix" colspan="3">
+                                                <span>REPORTE DE COMUNICACIÓN</span>
+                                            </th>
+                                        </tr>
+                                        <tr>
+                                            <td class="tg-nrix" colspan="3"></td>
+                                        </tr>
+                                        <tr>
+                                            <td class="tg-nrix" colspan="3"></td>
+                                        </tr>
+                                        <tr>
+                                            <td class="tg-nrix" colspan="3">
+                                                <span t-field="company.name"/>
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td class="tg-nrix" colspan="3"></td>
+                                        </tr>
+                                        <tr>
+                                            <td class="tg-nrix" colspan="3"></td>
+                                        </tr>
+                                        <tr>
+                                            <td class="tg-rq3n" colspan="3"></td>
+                                        </tr>
+                                        <tr>
+                                            <td class="tg-7g6k">NOMBRE</td>
+                                            <td class="tg-3xi5" colspan="2">
+                                                <span t-field="doc.name"/>
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td class="tg-7g6k"  style="background-color: #EEE; text-transform: uppercase;">REFERENCIA</td>
+                                            <td class="tg-3xi5" colspan="2">
+                                                <span t-field="doc.reference"/>
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td class="tg-7g6k"  style="background-color: #EEE; text-transform: uppercase;">FECHA</td>
+                                            <td class="tg-3xi5" colspan="2">
+                                                <span t-field="doc.date_release"/>
+                                            </td>
+                                        </tr>
+                                    </table>
+                                </center>
+                                <br></br>
+                                <br></br>
+                            </div>
+                            <div class="main">
+                                <div>
+                              <TABLE width="100%" height="50" style="display:block;border:1px solid black;font-size:14px;font-weight:bold;max-height:60px; padding-top: 55px ;  border: #000000 2px" cellspacing="0">
+                            <tr>
+                                        <td class="tg-nrix" height="50" colspan="3"/>
+                                    </tr>
+                              </TABLE>
+                            </div>
+                                <style type="text/css">
+.tg  {border-collapse:collapse;border-spacing:0;width:100%;}
+.tg td{font-family: Palatino, Palatino Linotype, Palatino LT STD, Book Antiqua, Georgia, serif;font-size:14px;padding:10px 5px;border-style:solid;border-width:1px;overflow:hidden;word-break:normal;border-color:black;}
+.tg th{font-family: Palatino, Palatino Linotype, Palatino LT STD, Book Antiqua, Georgia, serif;font-size:14px;font-weight:normal;padding:10px 5px;border-style:solid;border-width:1px;overflow:hidden;word-break:normal;border-color:black;}
+.tg .tg-hv0c{font-weight:bold;font-family:Georgia, serif !important;;background-color:#dae8fc;border-color:inherit;text-align:center;vertical-align:top}
+.tg .tg-3e90{font-weight:bold;font-family:Georgia, serif !important;;background-color:#dae8fc;border-color:inherit;text-align:center;vertical-align:middle}
+.tg .tg-0pky{border-color:inherit;text-align:left;vertical-align:top}
+.tg .tg-s24t{font-weight:bold;font-family:Georgia, serif !important;;background-color:#dae8fc;color:#002b36;border-color:inherit;text-align:center;vertical-align:top}
+                                </style>
+                                <table class="tg">
+                                    <tr>
+                                        <th class="tg-3e90" style="background-color: #EEE; text-transform: uppercase;">CÓDIGO</th>
+                                        <th class="tg-0pky" colspan="5">
+                                            <span t-field="doc.reference"/>
+                                        </th>
+                                    </tr>
+                                    <tr>
+                                        <td class="tg-3e90"  style="background-color: #EEE; text-transform: uppercase;">NOMBRE</td>
+                                        <td class="tg-0pky" colspan="5">
+                                            <span t-field="doc.name"/>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td class="tg-hv0c" style="background-color: #EEE; text-transform: uppercase;">FECHA</td>
+                                        <td class="tg-0pky" colspan="2">
+                                            <span t-field="doc.date_release"/>
+                                        </td>
+                                        <td class="tg-hv0c" style="background-color: #EEE; text-transform: uppercase;">FECHA DE REPROGRAMACIÓN</td>
+                                        <td class="tg-0pky" colspan="2">
+                                            <span t-field="doc.date_reprogramming"/>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td class="tg-3e90"  style="background-color: #EEE; text-transform: uppercase;">PARA</td>
+                                        <td class="tg-0pky" colspan="2">
+                                            <span t-field="doc.partner_id.name"/>
+                                        </td>
+                                        <td class="tg-hv0c"  style="background-color: #EEE; text-transform: uppercase;">DE</td>
+                                        <td class="tg-0pky" colspan="2">
+                                            <span t-field="doc.user_id.name"/>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td class="tg-hv0c"  style="background-color: #EEE; text-transform: uppercase;">VÍA</td>
+                                        <td class="tg-0pky" colspan="2">
+                                            <span t-field="doc.via"/>
+                                        </td>
+                                        <td class="tg-s24t"  style="background-color: #EEE; text-transform: uppercase;">TIPO</td>
+                                        <td class="tg-0pky" colspan="2">
+                                            <span t-field="doc.type"/>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td class="tg-hv0c" colspan="6"  style="background-color: #EEE; text-transform: uppercase;">RESUMEN</td>
+                                    </tr>
+                                    <tr>
+                                        <td class="tg-0pky" colspan="6">
+                                            <span t-field="doc.resume"/>
+                                        </td>
+                                    </tr>
+                                </table>
+                            </div>
+                        </div>
+                    </t>
+                </t>
+            </t>
+        </template>
+
+    </data>
+</odoo>

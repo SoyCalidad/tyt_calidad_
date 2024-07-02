@@ -1,0 +1,105 @@
+<odoo>
+    <data>
+
+        <record id="training_wizard_view_form" model="ir.ui.view">
+            <field name="name">announcement.wizard.view.form</field>
+            <field name="model">announcement.wizard</field>
+            <field name="arch" type="xml">
+                <form>
+                    <group>
+                        <field name="company_id"/>
+                        <field name="training_ids"/>
+                    </group>
+                    <footer>
+                        <button name="export_xls" type="object" default_focus="1" string="Exportar Reporte Excel" class="oe_highlight" context="{'xls_export':1}" icon="fa-download"/>
+                        <button string="Cancelar" special="cancel"/>
+                    </footer>
+                </form>
+            </field>
+        </record>
+
+        <record id="training_wizard_view_form2" model="ir.ui.view">
+            <field name="name">announcement.wizard.view.form</field>
+            <field name="model">announcement.wizard</field>
+            <field name="arch" type="xml">
+                <form>
+                    <group>
+                        <field name="company_id"/>
+                        <field name="training_ids"/>
+                    </group>
+                    <footer>
+                        <button name="action_print" type="object" string="Descargar Convocatoria" class="oe_highlight" icon="fa-download" context="{'type_action':'announcement'}"/>
+                        <button string="Cancelar" special="cancel"/>
+                    </footer>
+                </form>
+            </field>
+        </record>
+
+        <record id="training_wizard_view_form3" model="ir.ui.view">
+            <field name="name">announcement.wizard.view.form</field>
+            <field name="model">announcement.wizard</field>
+            <field name="arch" type="xml">
+                <form>
+                    <group>
+                        <field name="company_id"/>
+                        <field name="training_ids"/>
+                    </group>
+                    <footer>
+                        <button name="action_print" type="object" string="Descargar Asistencia" class="oe_highlight" icon="fa-download" context="{'type_action':'attendance'}"/>
+                        <button string="Cancelar" special="cancel"/>
+                    </footer>
+                </form>
+            </field>
+        </record>
+
+        <record id="action_report_training_training" model="ir.actions.act_window">
+            <field name="name">Plan de Capacitación</field>
+            <field name="type">ir.actions.act_window</field>
+            <field name="res_model">announcement.wizard</field>
+            <field name="view_mode">form</field>
+            <field name="view_id" ref="training_wizard_view_form"/>
+            <field name="target">new</field>
+            <field name="binding_type">report</field>
+        </record>
+
+        <record id="action_report_training_training2" model="ir.actions.act_window">
+            <field name="name">Plan de Capacitación</field>
+            <field name="type">ir.actions.act_window</field>
+            <field name="res_model">announcement.wizard</field>
+            <field name="view_mode">form</field>
+            <field name="view_id" ref="training_wizard_view_form2"/>
+            <field name="target">new</field>
+            <field name="binding_type">report</field>
+        </record>
+
+        <record id="action_report_training_training3" model="ir.actions.act_window">
+            <field name="name">Plan de Capacitación</field>
+            <field name="type">ir.actions.act_window</field>
+            <field name="res_model">announcement.wizard</field>
+            <field name="view_mode">form</field>
+            <field name="view_id" ref="training_wizard_view_form3"/>
+            <field name="target">new</field>
+            <field name="binding_type">report</field>
+        </record>
+
+        <!-- <menuitem id="training_training1_report_menu"
+            name="Plan de capacitaciones"
+            action="action_report_training_training"
+            parent="training_report_menu"
+            sequence="2"/> -->
+
+        <menuitem id="training_training2_report_menu"
+            name="Reporte de convocatoria"
+            action="action_report_training_training2"
+            parent="training_report_menu"
+            sequence="2"/>
+
+        <menuitem id="training_training3_report_menu"
+            name="Reporte de asistencia"
+            action="action_report_training_training3"
+            parent="training_report_menu"
+            sequence="2"/>
+
+
+    </data>
+</odoo>

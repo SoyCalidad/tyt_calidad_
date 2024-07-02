@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+
+    <menuitem id="action_report_menu"
+              name="Reportes"
+              groups="base.group_no_one,group_action_owner,group_action_readonly_printreport,group_action_all"
+              parent="menu_action_root"
+              sequence="100" />
+
+    <menuitem id="action_list_report_menu"
+              name="Lista de acciones"
+              action="action_action_report_wizard_action"
+              parent="action_report_menu"
+              sequence="10" />
+
+</odoo>

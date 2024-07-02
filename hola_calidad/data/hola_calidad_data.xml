@@ -1,0 +1,19 @@
+<odoo>
+
+    <data noupdate="1">
+
+        <record id="policy_system_0" model="mgmtsystem.context.system">
+            <field name="name">Personalizada</field>
+        </record>
+
+        <record id="policy_system_1" model="mgmtsystem.context.system">
+            <field name="name">Soy Calidad</field>
+        </record>
+        
+        <record id="xls_helper" model="hola_calidad.xls_helper">
+            <field name="name">Archivo excel de apoyo</field>
+            <!--<field name="suffix">d</field>-->
+        </record>
+
+    </data>
+</odoo>

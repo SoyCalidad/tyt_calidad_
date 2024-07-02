@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+        <record id="res_partner_form_inherit_restricted" model="ir.ui.view">
+            <field name="name">res.partner.form.inherit.restricted</field>
+            <field name="model">res.partner</field>
+            <field name="inherit_id" ref="mgmtsystem_partner_qualification.res_partner_form_inherit"/>
+            <field name="arch" type="xml">
+                <data>
+                    <!-- Restringe el botón "Descargar evaluación de seguimiento" -->
+                    <xpath expr="//header/button[@name='print_evaluation']" position="attributes">
+                        <attribute name="groups">mgmtsystem_partner_qualification.group_partner_evaluation_onlyread_printreport,mgmtsystem_partner_qualification.group_partner_evaluation_write_printreport,mgmtsystem_partner_qualification.group_partner_evaluation_all</attribute>
+                    </xpath>
+                    <!-- Restringe Los checkbox Tipo de Contacto -->
+                    <xpath expr="//div[@class='partner_type']/group" position="attributes">
+                        <attribute name="groups">mgmtsystem_partner_qualification.group_partner_evaluation_onlyread_printreport,mgmtsystem_partner_qualification.group_partner_evaluation_write_printreport,mgmtsystem_partner_qualification.group_partner_evaluation_all</attribute>
+                    </xpath>
+
+                    <!-- Restringe la pestaña "Evaluación inicial" -->
+                    <xpath expr="//page[@name='initial_evaluation']" position="attributes">
+                        <attribute name="groups">mgmtsystem_partner_qualification.group_partner_evaluation_onlyread_printreport,mgmtsystem_partner_qualification.group_partner_evaluation_write_printreport,mgmtsystem_partner_qualification.group_partner_evaluation_all</attribute>
+                    </xpath>
+                    <!-- Restringe la pestaña "Evaluaciones de seguimiento" -->
+                    <xpath expr="//page[@name='evaluation_history']" position="attributes">
+                        <attribute name="groups">mgmtsystem_partner_qualification.group_partner_evaluation_onlyread_printreport,mgmtsystem_partner_qualification.group_partner_evaluation_write_printreport,mgmtsystem_partner_qualification.group_partner_evaluation_all</attribute>
+                    </xpath>
+                    <!-- Restringe la pestaña "Productos y servicios" -->
+                    <xpath expr="//page[@name='products']" position="attributes">
+                        <attribute name="groups">mgmtsystem_partner_qualification.group_partner_evaluation_onlyread_printreport,mgmtsystem_partner_qualification.group_partner_evaluation_write_printreport,mgmtsystem_partner_qualification.group_partner_evaluation_all</attribute>
+                    </xpath>
+                </data>
+            </field>
+        </record>
+    
+
+        <!-- MENUS -->
+
+        <!-- Reportes -->
+        <record id="mgmtsystem_partner_qualification.reports_contact_menu" model="ir.ui.menu">
+            <field name="groups_id" eval="[(4, ref('mgmtsystem_partner_qualification.group_partner_evaluation_onlyread_printreport')), 
+                                            (4, ref('mgmtsystem_partner_qualification.group_partner_evaluation_write_printreport')),
+                                            (4, ref('mgmtsystem_partner_qualification.group_partner_evaluation_all'))]"/>
+        </record>
+        
+
+        <!-- Calificación -->
+        <record id="mgmtsystem_partner_qualification.menu_partner_qualification" model="ir.ui.menu">
+            <field name="groups_id" eval="[(4, ref('mgmtsystem_partner_qualification.group_partner_evaluation_onlyread_printreport')), 
+                                            (4, ref('mgmtsystem_partner_qualification.group_partner_evaluation_write_printreport')),
+                                            (4, ref('mgmtsystem_partner_qualification.group_partner_evaluation_all'))]"/>
+        </record>    
+    </data>
+</odoo>

@@ -1,0 +1,31 @@
+<?xml version='1.0' encoding='utf-8'?>
+<odoo>
+    <data noupdate="0">
+
+        <!-- process.edition inherit form view -->
+        <record id="system_process_edition_form_view_inherit" model="ir.ui.view">
+            <field name="name">process.edition.inherit.view.form</field>
+            <field name="model">process.edition</field>
+            <field name="inherit_id" ref="mgmtsystem_process.system_process_edition_form_view_inherit"/>
+            <field name="arch" type="xml">
+                <field name="references" position="replace">
+                    <field name="references"/>
+                </field>
+            </field>
+        </record>
+
+        <!-- process.edition.template inherit form view -->
+        <record id="process_edition_template_view_form" model="ir.ui.view">
+            <field name="name">process.edition.template.inherit.view.form</field>
+            <field name="model">process.edition.template</field>
+            <field name="inherit_id" ref="mgmtsystem_process.process_edition_template_view_form"/>
+            <field name="arch" type="xml">
+                <!-- Add your xpath here -->
+                <field name="references" position="replace">
+                    <field name="references"/>
+                </field>
+            </field>
+        </record>
+
+    </data>
+</odoo>

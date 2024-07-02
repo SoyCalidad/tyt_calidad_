@@ -1,0 +1,379 @@
+<odoo>
+    <data>
+        <!--Planificar-->
+
+        <menuitem id="context_menu"
+                  name="Contexto Organizacional"
+                  parent="hola_calidad.menu_plan_main"
+                  groups="mgmtsystem_context.group_context_onlyread,mgmtsystem_context.group_context_onlyread_printreport,mgmtsystem_context.group_context_write_printreport,mgmtsystem_context.group_context_all"
+                  sequence="30" />
+        <menuitem id="hola_calidad_mgmtsystem_context_context_internal_issue_action"
+                  name="Contexto interno"
+                  action="mgmtsystem_context.context_internal_issue_action"
+                  parent="context_menu"
+                  sequence="0" />
+        <menuitem id="hola_calidad_mgmtsystem_context_stakeholder_matrix_action1"
+                  name="Matriz de Partes interesadas"
+                  action="mgmtsystem_context.stakeholders_action"
+                  parent="context_menu"
+                  sequence="1" />
+        <menuitem id="hola_calidad_mgmtsystem_context_stakeholder_action"
+                  name="Partes interesadas"
+                  action="mgmtsystem_context.stakeholder_action"
+                  parent="context_menu"
+                  sequence="2" />
+        <menuitem id="hola_calidad_mgmtsystem_context_quality_manual_action"
+                  name="Manual de calidad"
+                  parent="context_menu"
+                  action="mgmtsystem_qualitymanual.action_mgmtsystem_qualitymanual"
+                  sequence="3" />
+        <!-- <menuitem 
+            id="hola_calidad_mgmtsystem_context_org_chart_action" 
+            name="Organigrama" 
+            parent="context_menu"
+            action="org_chart_employee.action_org_chart_employee"
+            sequence="4" /> -->
+        <menuitem id="hola_calidad_mgmtsystem_context_internal_factors_action"
+                  name="Factores internos"
+                  parent="context_menu"
+                  action="mgmtsystem_context.context_internal_issue_action"
+                  sequence="5" />
+        <menuitem id="hola_calidad_mgmtsystem_context_external_factors_action"
+                  name="Factores externos"
+                  parent="context_menu"
+                  action="mgmtsystem_context.context_external_issue_action"
+                  sequence="6" />
+
+
+        <menuitem id="process_menu"
+                  name="Procesos"
+                  parent="hola_calidad.menu_plan_main"
+                  groups="mgmtsystem_process.group_process_all,mgmtsystem_process.group_process_readonly,mgmtsystem_process.group_process_readonly_printreport,mgmtsystem_process.group_process_owner"
+                  sequence="20" />
+        
+
+
+        <menuitem id="hola_calidad_mgmtsystem_process_categ_action"
+                  name="Mapa de procesos"
+                  parent="process_menu"
+                  action="mgmtsystem_process.action_mgmt_categ_procedures"
+                  sequence="1" />
+
+        <menuitem id="hola_calidad_mgmtsystem_process_process_action"
+                  name="Procedimientos"
+                  parent="process_menu"
+                  action="mgmtsystem_process.action_mgmt_procedures"
+                  sequence="2" />
+
+        <menuitem id="hola_calidad_mgmtsystem_process_documentary_action"
+                  name="Lista Maestra"
+                  parent="process_menu"
+                  action="mgmtsystem_process.documentary_control_action"
+                  sequence="2"
+                  groups="base.group_no_one,mgmtsystem_process.group_process_readonly,mgmtsystem_process.group_process_readonly_printreport,mgmtsystem_process.group_process_owner,mgmtsystem_process.group_process_all" />
+
+        <menuitem id="employees_menu"
+                  name="Empleados"
+                  parent="hola_calidad.menu_plan_main"
+                  groups="mgmtsystem_employees.group_employees_onlyread,mgmtsystem_employees.group_employees_onlyread_printreport,mgmtsystem_employees.group_employees_write_printreport,mgmtsystem_employees.group_employees_all"
+                  sequence="10" />
+
+        <menuitem id="hola_calidad_mgmtsystem_employee_employee_action"
+                  name="Empleados"
+                  parent="employees_menu"
+                  action="hr.open_view_employee_list_my"
+                  sequence="1" />
+
+        <menuitem id="hola_calidad_mgmtsystem_employee_job_action"
+                  name="Puestos"
+                  parent="employees_menu"
+                  action="hr.action_hr_job"
+                  sequence="1" />
+
+        <!--
+        <menuitem id="hola_calidad_mgmtsystem_employee_department_action"
+                  name="Departamentos"
+                  parent="employees_menu"
+                  action="hr.open_module_tree_department"
+                  sequence="1" />
+        -->
+        <menuitem id="opp_menu"
+                  name="Riesgos y Oportunidades"
+                  parent="hola_calidad.menu_plan_main"
+                  groups="mgmtsystem_opportunity.group_opportunity_onlyread,mgmtsystem_opportunity.group_opportunity_onlyread_printreport,mgmtsystem_opportunity.group_opportunity_user_secundario,mgmtsystem_opportunity.group_opportunity_write_printreport"
+                  sequence="40" />
+
+        <menuitem id="hola_calidad_mgmtsystem_opp_risk_action"
+                  name="Matriz de Riesgos"
+                  parent="opp_menu"
+                  action="mgmtsystem_opportunity.matrix_block_line_risk_action"
+                  sequence="1" />
+
+        <menuitem id="hola_calidad_mgmtsystem_opp_opp_action"
+                  name="Matriz de Oportunidades"
+                  parent="opp_menu"
+                  action="mgmtsystem_opportunity.matrix_block_line_opportunity_action"
+                  sequence="2" />
+
+        <menuitem id="legal_menu"
+                  name="Requisitos Legales"
+                  parent="hola_calidad.menu_plan_main"
+                  groups="mgmtsystem_legal.group_legal_onlyread,mgmtsystem_legal.group_legal_onlyread_printreport,mgmtsystem_legal.group_legal_write_printreport,mgmtsystem_legal.group_legal_all"
+                  sequence="50" />
+
+        <menuitem id="hola_calidad_mgmtsystem_legal_action"
+                  name="Requisitos Legales"
+                  action="mgmtsystem_legal.legal_plan_action"
+                  parent="legal_menu"
+                  sequence="1" />
+
+        <menuitem id="policy_menu"
+                  name="Políticas"
+                  parent="hola_calidad.menu_plan_main"
+                  groups="mgmtsystem_legal.group_legal_onlyread,mgmtsystem_legal.group_legal_onlyread_printreport,mgmtsystem_legal.group_legal_write_printreport,mgmtsystem_legal.group_legal_all"
+                  sequence="60" />
+
+        <menuitem id="hola_calidad_mgmtsystem_policy_action"
+                  name="Política"
+                  action="mgmtsystem_context.context_policy_action_action"
+                  parent="policy_menu"
+                  sequence="1" />
+
+        <menuitem id="hola_calidad_mgmtsystem_policy_template_action"
+                  name="Plantilla de Política"
+                  action="mgmtsystem_context.policy_template_action"
+                  parent="policy_menu"
+                  sequence="1" />
+
+        <!--Hacer-->
+
+        <menuitem id="recruitment_menu"
+                  name="Reclutamiento"
+                  parent="hola_calidad.menu_do_main"
+                  groups="hr.group_hr_manager,hr.group_hr_user,base.group_user"
+                  sequence="10" />
+
+        <menuitem id="hola_calidad_mgmtsystem_recruitment_job_action_2"
+                  name="Puestos"
+                  parent="recruitment_menu"
+                  action="hr.action_hr_job"
+                  sequence="1" />
+
+        <menuitem id="hola_calidad_mgmtsystem_recruitment_act_job"
+                  name="Solicitudes"
+                  parent="recruitment_menu"
+                  action="hr_recruitment.crm_case_categ0_act_job"
+                  sequence="1" />
+
+        <menuitem id="comunication_menu"
+                  name="Comunicaciones"
+                  parent="hola_calidad.menu_do_main"
+                  groups="mgmtsystem_comunication.group_comunication_onlyread,mgmtsystem_comunication.group_comunication_onlyread_printreport,mgmtsystem_comunication.group_comunication_write_printreport,mgmtsystem_comunication.group_comunication_all"
+                  sequence="20" />
+
+        <menuitem id="hola_calidad_mgmtsystem_comunication_comunication_plan"
+                  name="Programa de comunicaciones"
+                  parent="comunication_menu"
+                  action="mgmtsystem_comunication.comunication_plan_action"
+                  sequence="1" />
+
+        <menuitem id="hola_calidad_mgmtsystem_comunication_record_meeting"
+                  name="Actas de reunión"
+                  parent="comunication_menu"
+                  action="mgmtsystem_comunication.record_meeting_action"
+                  sequence="2" />
+
+        <menuitem id="training_menu"
+                  name="Capacitaciones"
+                  parent="hola_calidad.menu_do_main"
+                  groups="mgmtsystem_employees.group_employees_onlyread,mgmtsystem_employees.group_employees_onlyread_printreport,mgmtsystem_employees.group_employees_write_printreport,mgmtsystem_employees.group_employees_all"
+                  sequence="20" />
+
+        <menuitem id="hola_calidad_mgmtsystem_training_plan"
+                  name="Programa anual de capacitaciones"
+                  parent="training_menu"
+                  action="mgmtsystem_employees.hr_item_plan_action"
+                  groups="base.group_no_one,mgmtsystem_employees.group_employees_onlyread,mgmtsystem_employees.group_employees_onlyread_printreport,mgmtsystem_employees.group_employees_write_printreport,mgmtsystem_employees.group_employees_all"
+                  sequence="1" />
+
+        <menuitem id="hola_calidad_mgmtsystem_training_training1"
+                  name="Plan de Capacitaciones"
+                  parent="training_menu"
+                  action="mgmtsystem_employees.hr_item_training_action"
+                  sequence="2" />
+
+        <menuitem id="purchase_menu"
+                  name="Compras"
+                  parent="hola_calidad.menu_do_main"
+                  groups="purchase.group_purchase_user,purchase.group_purchase_manager"
+                  sequence="30" />
+
+        <menuitem id="hola_calidad_mgmtsystem_purchase_order"
+                  name="Pedidos de compra"
+                  parent="purchase_menu"
+                  action="purchase.purchase_form_action"
+                  sequence="1" />
+
+        <menuitem id="hola_calidad_mgmtsystem_purchase_suppliers"
+                  name="Proveedores"
+                  parent="purchase_menu"
+                  action="base.action_partner_supplier_form"
+                  sequence="2" />
+
+        <menuitem id="hola_calidad_mgmtsystem_purchase_product"
+                  name="Productos"
+                  parent="purchase_menu"
+                  action="purchase.product_normal_action_puchased"
+                  sequence="3" />
+
+        <menuitem id="stock_menu"
+                  name="Inventario"
+                  parent="hola_calidad.menu_do_main"
+                  groups="stock.group_stock_multi_locations,stock.group_stock_multi_warehouses,stock.group_stock_user,stock.group_stock_manager"
+                  sequence="40" />
+
+        <menuitem id="hola_calidad_mgmtsystem_stock_dashboard"
+                  name="Tablero"
+                  parent="stock_menu"
+                  action="stock.stock_picking_type_action"
+                  sequence="1" />
+
+        <menuitem id="maintance_menu"
+                  name="Mantenimiento"
+                  parent="hola_calidad.menu_do_main"
+                  groups="mgmtsystem_infrastructure.group_infrastructure_onlyread,mgmtsystem_infrastructure.group_infrastructure_onlyread_printreport,mgmtsystem_infrastructure.group_infrastructure_write_printreport,mgmtsystem_infrastructure.group_infrastructure_all"
+                  sequence="50" />
+
+        <menuitem id="hola_calidad_mgmtsystem_maintance_plan"
+                  name="Programa de mantenimientos"
+                  parent="maintance_menu"
+                  groups="base.group_no_one,mgmtsystem_infrastructure.group_infrastructure_onlyread,mgmtsystem_infrastructure.group_infrastructure_onlyread_printreport,mgmtsystem_infrastructure.group_infrastructure_write_printreport,mgmtsystem_infrastructure.group_infrastructure_all"
+                  action="mgmtsystem_infrastructure.mgmtsystem_maintenance_plan_action"
+                  sequence="1" />
+
+        <menuitem id="hola_calidad_mgmtsystem_maintance_maintance"
+                  name="Plan de Mantenimiento"
+                  parent="maintance_menu"
+                  action="mgmtsystem_infrastructure.mgmtsystem_maintenance_action"
+                  sequence="2" />
+
+        <menuitem id="hola_calidad_mgmtsystem_maintance_calendar"
+                  name="Calendarios"
+                  parent="maintance_menu"
+                  action="maintenance.hr_equipment_request_action_cal"
+                  sequence="3" />
+
+        <!-- <menuitem
+            id="hola_calidad_mgmtsystem_maintance_inventory"
+            name="Inventariado"
+            parent="maintance_menu"
+            action="mgmtsystem_infrastructure.product_infrastructure_action"
+            sequence="4" /> -->
+
+        <!--Verificar-->
+
+        <menuitem id="target_menu"
+                  name="Objetivos y medición"
+                  parent="hola_calidad.menu_check_main"
+                  groups="mgmtsystem_target.group_target_onlyread,mgmtsystem_target.group_target_user_interno,mgmtsystem_target.group_target_write_printreport,mgmtsystem_target.group_target_all"
+                  sequence="10" />
+
+        <menuitem id="hola_calidad_mgmtsystem_target_indicator_action"
+                  name="Indicadores"
+                  action="mgmtsystem_target.indicator_action_2"
+                  parent="target_menu"
+                  sequence="1" />
+
+        <menuitem id="hola_calidad_mgmtsystem_target_target_action"
+                  name="Objetivos"
+                  action="mgmtsystem_target.target_action"
+                  parent="target_menu"
+                  sequence="2" />
+
+        <menuitem id="audit_menu"
+                  name="Auditorías"
+                  parent="hola_calidad.menu_check_main"
+                  groups="mgmtsystem_audit.group_audit_onlyread,mgmtsystem_audit.group_audit_onlyread_printreport,mgmtsystem_audit.group_audit_write_printreport,mgmtsystem_audit.group_audit_all"
+                  sequence="20" />
+
+        <menuitem id="hola_calidad_mgmtsystem_audit_plan"
+                  name="Programa de auditorías"
+                  action="mgmtsystem_audit.audit_plan_action"
+                  parent="audit_menu"
+                  sequence="1" />
+
+        <menuitem id="hola_calidad_mgmtsystem_audit_audit"
+                  name="Auditorías"
+                  action="mgmtsystem_audit.audit_audit_action"
+                  parent="audit_menu"
+                  sequence="2" />
+
+        <menuitem id="review_menu"
+                  name="Revisión por la dirección"
+                  parent="hola_calidad.menu_check_main"
+                  groups="mgmtsystem_management_review.group_management_review_onlyread,mgmtsystem_management_review.group_management_review_write_printreport,mgmtsystem_management_review.group_management_review_all"
+                  sequence="30" />
+
+        <menuitem id="hola_calidad_mgmtsystem_review_plan"
+                  name="Programa de revisiones"
+                  action="mgmtsystem_management_review.mgmtsystem_review_plan_action1"
+                  parent="review_menu"
+                  sequence="1" />
+
+        <menuitem id="hola_calidad_mgmtsystem_review_review"
+                  name="Revisión por la dirección"
+                  action="mgmtsystem_management_review.action_management_review"
+                  parent="review_menu"
+                  sequence="2" />
+
+        <menuitem id="hola_calidad_mgmtsystem_review_act"
+                  name="Actas"
+                  action="mgmtsystem_comunication.record_meeting_action"
+                  parent="review_menu"
+                  sequence="3" />
+
+        <!-- Actuar -->
+
+        <menuitem id="nc_menu"
+                  name="No conformidades"
+                  parent="hola_calidad.menu_act_main"
+                  groups="mgmtsystem_nonconformity.group_nonconformity_onlyread,mgmtsystem_nonconformity.group_nonconformity_user_secundario,mgmtsystem_nonconformity.group_nonconformity_write_printreport"
+                  sequence="10" />
+
+        <menuitem id="hola_calidad_mgmtsystem_nc_nc"
+                  name="No conformidades"
+                  action="mgmtsystem_nonconformity.open_mgmtsystem_nonconformity_list"
+                  parent="nc_menu"
+                  sequence="1" />
+
+        <menuitem id="hola_calidad_mgmtsystem_nc_cause"
+                  name="Causas"
+                  action="mgmtsystem_nonconformity.open_mgmtsystem_nonconformity_cause_list"
+                  parent="nc_menu"
+                  sequence="3" />
+
+        <menuitem id="actions_menu"
+                  name="Acciones"
+                  parent="hola_calidad.menu_act_main"
+                  groups="mgmtsystem_action.group_action_readonly,mgmtsystem_action.group_action_owner,mgmtsystem_action.group_action_readonly_printreport"
+                  sequence="20" />
+
+        <menuitem id="hola_calidad_mgmtsystem_action_action"
+                  name="Acciones"
+                  action="mgmtsystem_action.open_mgmtsystem_action_list"
+                  parent="actions_menu"
+                  sequence="1" />
+
+        <menuitem id="complaint_menu"
+                  name="Reclamos"
+                  parent="hola_calidad.menu_act_main"
+                  groups="mgmtsystem_complaints.group_complaints_onlyread,mgmtsystem_complaints.group_complaints_user_secundario,mgmtsystem_complaints.group_complaints_write_printreport"
+                  sequence="30" />
+
+        <menuitem id="covid_mgmtsystem_complaint_complaint_3" name="Reclamos internos" parent="complaint_menu" sequence="1" />
+
+        <menuitem id="covid_mgmtsystem_complaint_complaint_4" name="Reclamos externos" parent="complaint_menu" sequence="2" />
+
+
+    </data>
+</odoo>

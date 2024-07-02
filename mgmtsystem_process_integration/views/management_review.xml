@@ -1,0 +1,205 @@
+<odoo>
+    <data>
+
+        <record model="ir.actions.act_window" id="show_risk_managementreview_action">
+            <field name="name">Riesgos y oportunidades</field>
+            <field name="res_model">matrix.block.line</field>
+
+            <field name="view_mode">kanban,form,tree</field>
+            <field name="context">{"search_default_nonconformity_ids": active_id}</field>
+            <field name="search_view_id" ref="view_matrix_block_line_search"/>
+        </record>
+
+        <record id="target_managementreview_filter" model="ir.ui.view">
+            <field name="name">mgmtsystem.target.filter</field>
+            <field name="model">mgmtsystem.target</field>
+            <field name="inherit_id" ref="mgmtsystem_target.view_target_search"/>
+
+            <field name="arch" type="xml">
+                <field name="action_ids" position="after">
+                    <field name="managementreview_ids"/>
+                </field>
+            </field>
+        </record>
+
+        <record id="nc_managementreview_filter" model="ir.ui.view">
+            <field name="name">mgmtsystem.nonconformity.filter</field>
+            <field name="model">mgmtsystem.nonconformity</field>
+            <field name="inherit_id" ref="mgmtsystem_nonconformity.view_mgmtsystem_nonconformity_filter"/>
+
+            <field name="arch" type="xml">
+                <field name="action_ids" position="after">
+                    <field name="managementreview_ids"/>
+                </field>
+            </field>
+        </record>
+
+        <record id="action_managementreview_filter" model="ir.ui.view">
+            <field name="name">mgmtsystem.action.filter</field>
+            <field name="model">mgmtsystem.action</field>
+            <field name="inherit_id" ref="mgmtsystem_action.view_mgmtsystem_action_filter"/>
+
+            <field name="arch" type="xml">
+                <field name="user_id" position="after">
+                    <field name="managementreview_ids" />
+                </field>
+            </field>
+        </record>
+
+
+        <record model="ir.actions.act_window" id="show_target_managementreview_action">
+            <field name="name">Objetivos</field>
+            <field name="res_model">mgmtsystem.target</field>
+
+            <field name="view_mode">kanban,form,tree</field>
+            <field name="context">{"search_default_managementreview_ids": active_id}</field>
+            <field name="search_view_id" ref="target_managementreview_filter"/>
+        </record>
+
+        <record model="ir.actions.act_window" id="show_nc_managementreview_action">
+            <field name="name">No conformidades</field>
+            <field name="res_model">mgmtsystem.nonconformity</field>
+
+            <field name="view_mode">kanban,form,tree</field>
+            <field name="context">{"search_default_managementreview_ids": active_id}</field>
+            <field name="search_view_id" ref="nc_managementreview_filter"/>
+        </record>
+
+        <record model="ir.actions.act_window" id="show_ac_managementreview_action">
+            <field name="name">Acciones</field>
+            <field name="res_model">mgmtsystem.action</field>
+
+            <field name="view_mode">kanban,form,tree</field>
+            <field name="context">{"search_default_managementreview_ids": active_id}</field>
+            <field name="search_view_id" ref="action_managementreview_filter"/>
+        </record>
+
+        <record id="managementreview_view_form" model="ir.ui.view">
+            <field name="name">management.review.view.form</field>
+            <field name="model">management.review</field>
+            <field name="inherit_id" ref="mgmtsystem_management_review.management_review_form_view"/>
+            <field name="arch" type="xml">
+                <div class="oe_button_box" position="inside">
+                    <button type="action" name="%(show_target_managementreview_action)d" class="oe_stat_button" icon="fa-bar-chart-o">
+                        <field name="targets_count" widget="statinfo" string="Objetivos"/>
+                    </button>
+                    <button type="action" name="%(show_nc_managementreview_action)d" class="oe_stat_button" icon="fa-frown-o">
+                        <field name="nonconformities_count" widget="statinfo" string="No conformidades"/>
+                    </button>
+                    <button type="action" name="%(show_ac_managementreview_action)d" class="oe_stat_button" icon="fa-edit" context="{'default_origin_model_id': model_id, 'default_origin_int_id': id}">
+                        <field name="actions_count" widget="statinfo" string="Acciones"/>
+                    </button>
+                    <button type="action" name="%(show_risk_managementreview_action)d" class="oe_stat_button" icon="fa-star-o">
+                        <field name="opps_count" widget="statinfo" string="Oportunidades"/>
+                    </button>
+                    <button type="action" name="%(show_risk_managementreview_action)d" class="oe_stat_button" icon="fa-star">
+                        <field name="risks_count" widget="statinfo" string="Riesgos"/>
+                    </button>
+                </div>
+                <xpath expr="//notebook" position="inside">
+                    <page name="target_ids" string="Objetivos">
+                        <field name="target_ids" colspan="4" nolabel="1" context="{'default_origin_model_id': model_id, 'default_origin_int_id': id}"/>
+                    </page>
+                    <page name="action_ids" string="Acciones">
+                        <field name="model_id" invisible="True"/>
+                        <field name="action_ids" colspan="4" nolabel="1" context="{'default_origin_model_id': model_id, 'default_origin_int_id': id}"/>
+                    </page>
+                    <group string="No conformidades">
+                        <field name="nonconformity_ids" nolabel="1" colspan="4" context="{'default_origin_model_id': model_id, 'default_origin_int_id': id}"/>
+                    </group>
+                    <page name="risk_opp" string="Riesgos y oportunidades">
+                        <field name="model_id" invisible="1"/>
+                        <separator string="Riesgos"/>
+                        <field name="risk_ids" />
+                        <separator string="Oportunidades"/>
+                        <field name="opp_ids" />
+                    </page>
+                </xpath>
+            </field>
+        </record>
+
+        <record id="managementreview_plan_view_form" model="ir.ui.view">
+            <field name="name">management.review.plan.view.form</field>
+            <field name="model">management.review.plan</field>
+            <field name="inherit_id" ref="mgmtsystem_management_review.management_review_plan_form_view"/>
+            <field name="arch" type="xml">
+                <div class="oe_button_box" position="inside">
+                        <button name="action_mgmtreviewplan_views" type="object" context="{'type_action':'action'}" class="oe_stat_button" icon="fa-book">
+                            <field string="Acciones" name="actions_count" widget="statinfo"/>
+                        </button>
+                        <button name="action_mgmtreviewplan_views" type="object" context="{'type_action':'nc'}" class="oe_stat_button" icon="fa-clipboard">
+                            <field string="No conformidades" name="nonconformities_count" widget="statinfo"/>
+                        </button>
+                        <button name="action_mgmtreviewplan_views" type="object" context="{'type_action':'target'}" class="oe_stat_button" icon="fa-check-square-o">
+                            <field string="Objetivos" name="targets_count" widget="statinfo"/>
+                        </button>
+                        <button name="action_show_revisiones" type="object" context="{'type_action':'revi'}" class="oe_stat_button" icon="fa-bars">
+                            <field name="revisiones_count" widget="statinfo"/>
+                        </button>
+                </div>
+                <xpath expr="//notebook" position="inside">
+                    <page name="action_ids" string="Acciones">
+                        <field name="action_ids" />
+                    </page>
+                    <page name="target_ids" string="Objetivos">
+                        <field name="target_ids" />
+                    </page>
+                    <page string="No conformidades">
+                        <field name="nonconformity_ids" nolabel="1" colspan="4" />
+                    </page>
+                </xpath>
+            </field>
+        </record>
+
+        <record model="ir.actions.act_window" id="action_mgmtreview_plan_target">
+            <field name="name">Objetivos</field>
+            <field name="res_model">mgmtsystem.target</field>
+
+            <field name="view_mode">kanban,form,tree</field>
+            <field name="context">{}</field>
+        </record>
+
+        <record model="ir.actions.act_window" id="action_mgmtreview_plan_nc">
+            <field name="name">No conformidades</field>
+            <field name="res_model">mgmtsystem.nonconformity</field>
+
+            <field name="view_mode">kanban,form,tree</field>
+            <field name="context">{}</field>
+        </record>
+
+        <record model="ir.actions.act_window" id="action_mgmtreview_plan_action">
+            <field name="name">Acciones</field>
+            <field name="res_model">mgmtsystem.action</field>
+
+            <field name="view_mode">kanban,form,tree</field>
+            <field name="context">{}</field>
+        </record>
+
+        <record model="ir.actions.act_window" id="action_mgmtreview_revisiones">
+            <field name="name">Revisiones</field>
+            <field name="res_model">management.review</field>
+
+            <field name="view_mode">kanban,form,tree</field>
+
+        </record>
+
+
+        <record id="mgmt_review_process_action" model="ir.actions.act_window">
+            <field name="name">Procedimientos de Revisión por la dirección</field>
+            <field name="res_model">mgmt.process</field>
+
+            <field name="view_mode">kanban,tree,form</field>
+            <field name="domain">[('categ_id.name', '=', 'REVISIÓN POR LA DIRECCIÓN')]</field>
+            <field name="context">{}</field>
+        </record>
+
+        <menuitem
+            id="process_integration_mgm_review_menu"
+            name="Procedimientos"
+            action="mgmt_review_process_action"
+            parent="mgmtsystem_management_review.management_review_report_menu"
+            sequence="15"/>
+
+
+    </data>
+</odoo>

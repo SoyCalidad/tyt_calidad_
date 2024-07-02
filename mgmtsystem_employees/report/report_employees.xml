@@ -1,0 +1,459 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--Estructura basica de reportes-->
+<odoo>
+    <data>
+        <template id="report_employees_template">
+            <t t-foreach="docs" t-as="o">
+                <t t-if="o and 'company_id' in o">
+                    <t t-set="company" t-value="o.company_id" />
+                </t>
+                <t t-if="not o or not 'company_id' in o">
+                    <t t-set="company" t-value="res_company" />
+                </t>
+                <t t-call="web.html_container">
+                    <div class="header">
+                        <style type="text/css">
+                            .tg  {border-collapse:collapse;border-spacing:0;margin:0px auto;width:100%;}
+                            .tg td{border-color:black;border-style:solid;border-width:1px;font-family: Palatino, Palatino Linotype, Palatino LT STD, Book Antiqua, Georgia, serif;font-size:14px;
+                            overflow:hidden;padding:10px 5px;word-break:normal;text-align:middle;align:center;height:45px;}
+                            .tg th{border-color:black;border-style:solid;border-width:1px;font-family: Palatino, Palatino Linotype, Palatino LT STD, Book Antiqua, Georgia, serif;font-size:14px;
+                            font-weight:normal;overflow:hidden;padding:10px 5px;word-break:normal;}
+                            .tg .tg-9wq8{border-color:inherit;text-align:center;vertical-align:middle}
+                            .tg .tg-1wig{border-color:inherit;text-align:center;vertical-align:middle;font-size:16px;font-weight:bold;}
+                            .tg .tg-0lax{border-color:inherit;text-align:center;vertical-align:middle;font-size:12px;}
+                            .tg-header{background-color:#efefef;border: 1px solid #c0c0c0;padding: .4em;}
+                            .tg-row{border: 1px solid #c0c0c0; border-collapse:collapse;padding: .4em;}
+                        </style>
+                        <table class="tg">
+                            <tbody>
+                                <tr>
+                                    <td class="tg-1wig" rowspan="3" width="20%" style="width:15%">
+                                        <img t-if="company.logo" t-att-src="'data:image/png;base64,%s' % to_text(company.logo)" style="max-width:100px;max-height:100px;vertical-align:middle;" />
+                                    </td>
+                                    <td class="tg-1wig" rowspan="2" width="80%" style="width:65%;">
+                                        <span style="font-size:18px;font-weight:bold;">FICHA DE DATOS DEL TRABAJADOR</span>
+                                        <br />
+                                    </td>
+                                    <td class="tg-0lax" width="20%" style="width:20%">
+                                        Código:
+                                        <span t-esc="code" />
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td class="tg-0lax">
+                                        Fecha de impresión:
+                                        <span t-esc="context_timestamp(datetime.datetime.now()).strftime('%d/%m/%Y %H:%M')" />
+                                    </td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                    <t t-call="web.external_layout">
+                        <div class="nav">
+                            <style type="text/css">
+                            .tg  {border-collapse:collapse;border-spacing:0;margin:0px auto;width:100%;}
+                            .tg td{border-color:black;border-style:solid;border-width:1px;font-family: Palatino, Palatino Linotype, Palatino LT STD, Book Antiqua, Georgia, serif;font-size:14px;
+                            overflow:hidden;padding:10px 5px;word-break:normal;text-align:middle;align:center;height:45px;}
+                            .tg th{border-color:black;border-style:solid;border-width:1px;font-family: Palatino, Palatino Linotype, Palatino LT STD, Book Antiqua, Georgia, serif;font-size:14px;
+                            font-weight:normal;overflow:hidden;padding:10px 5px;word-break:normal;}
+                            .tg .tg-9wq8{border-color:inherit;text-align:center;vertical-align:middle}
+                            .tg .tg-1wig{border-color:inherit;text-align:center;vertical-align:middle;font-size:16px;font-weight:bold;}
+                            .tg .tg-0lax{border-color:inherit;text-align:center;vertical-align:middle;font-size:12px;}
+                            .tg-header{background-color:#efefef;border: 1px solid #c0c0c0;padding: .4em;text-weight:bold;}
+                            .tg-standar{border: 1px solid #c0c0c0; border-collapse:collapse;padding: .4em;}
+                            </style>
+                            <center>
+                                <table width="100%" style="border: 1px solid #c0c0c0;border-collapse:collapse;">
+                                    <tr>
+                                        <td style="background-color:#efefef;border: 1px solid #c0c0c0;" width="20%" align="center" valign="middle">
+                                            <center>
+                                                <h4>I.DATOS PERSONALES</h4>
+                                            </center>
+                                        </td>
+                                    </tr>
+                                </table>
+                                <table width="100%" height="30" style="border: 1px solid #c0c0c0; border-collapse:collapse;">
+                                    <tr>
+                                        <td class="tg-header" width="30%" valign="middle">
+                                            Nombres completos
+                                        </td>
+                                        <td class="tg-standar" width="70%" colspan="3" valign="middle">
+                                            <span t-field="o.name" />
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td class="tg-header" width="30%" valign="middle">
+                                            Tipo de documento
+                                        </td>
+                                        <td class="tg-standar" width="70%" colspan="3" valign="middle">
+                                            <span t-field="o.document_type_id" />
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td class="tg-header" width="30%" valign="middle">
+                                            N° documento
+                                        </td>
+                                        <td class="tg-standar" width="70%" colspan="3" valign="middle">
+
+                                            <span t-field="o.identification_id" />
+
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td class="tg-header" width="30%" valign="middle">
+                                            Nacionalidad
+                                        </td>
+                                        <td class="tg-standar" width="70%" colspan="3" valign="middle">
+                                            <span t-field="o.country_id" />
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td class="tg-header" width="30%" valign="middle">
+                                            Fecha de nacimiento
+                                        </td>
+                                        <td class="tg-standar" width="70%" colspan="3" valign="middle">
+
+                                            <span t-field="o.birthday" />
+
+                                        </td>
+                                    </tr>
+
+                                    <tr>
+                                        <td class="tg-header" width="30%" valign="middle">
+                                            Dirección
+                                        </td>
+                                        <td class="tg-standar" width="70%" colspan="3" valign="middle">
+
+                                            <span t-field="o.address_home_id.street" />
+                                            , 
+                                            <span t-field="o.address_home_id.city" />
+                                            , 
+                                            <span t-field="o.address_home_id.state_id" />
+                                            , 
+                                            <span t-field="o.address_home_id.country_id" />
+
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td class="tg-header" width="30%" valign="middle">
+                                            Sexo
+                                        </td>
+                                        <td class="tg-standar" width="20%" valign="middle">
+
+                                            <span t-field="o.gender" />
+
+                                        </td>
+                                        <td class="tg-header" width="30%" valign="middle">
+                                            Estado civil
+                                        </td>
+                                        <td class="tg-standar" width="20%" valign="middle">
+
+                                            <span t-field="o.marital" />
+
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td class="tg-header" width="30%" valign="middle">
+                                            Correo electrónico
+                                        </td>
+                                        <td class="tg-standar" width="70%" colspan="3" valign="middle">
+
+                                            <span t-field="o.work_email" />
+
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td class="tg-header" width="30%" valign="middle">
+                                            Teléfono
+                                        </td>
+                                        <td class="tg-standar" width="70%" colspan="3" valign="middle">
+
+                                            <span t-field="o.address_home_id.phone" />
+
+                                        </td>
+                                    </tr>
+                                </table>
+                                <table width="100%" height="35" style="border: 1px solid #c0c0c0; border-collapse:collapse;">
+                                    <tr>
+                                        <td style="background-color:#efefef;border: 1px solid #c0c0c0;" width="20%" align="center" valign="middle">
+                                            <center>
+                                                <h4>II. CARACTERÍSTICAS</h4>
+                                            </center>
+                                        </td>
+                                    </tr>
+                                </table>
+                                <table width="100%" height="30" style="border: 1px solid #c0c0c0; border-collapse:collapse;">
+                                    <tr>
+                                        <td class="tg-header" width="30%" valign="middle">
+                                            Tipo de sangre
+                                        </td>
+                                        <td class="tg-standar" colspan="3" width="70%" valign="middle">
+
+                                            <span t-field="o.type_blood" />
+
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td class="tg-header" width="30%" valign="middle">
+                                            Licencia de conducir
+                                        </td>
+                                        <td class="tg-standar" width="20%" valign="middle">
+
+                                            <span t-field="o.license_driver" />
+
+                                        </td>
+                                        <td class="tg-header" width="30%" valign="middle">
+                                            Categoría
+                                        </td>
+                                        <td class="tg-standar" width="20%" valign="middle">
+
+                                            <span t-field="o.category_driver" />
+
+                                        </td>
+                                    </tr>
+                                </table>
+                                <table width="100%" height="35" style="border: 1px solid #c0c0c0; border-collapse:collapse;">
+                                    <tr>
+                                        <td style="background-color:#efefef;border: 1px solid #c0c0c0;" width="20%" align="center" valign="middle">
+                                            <center>
+                                                <h4>III. EDUCACION</h4>
+                                            </center>
+                                        </td>
+                                    </tr>
+                                </table>
+                                <table width="100%" height="30" style="border: 1px solid #c0c0c0; border-collapse:collapse;">
+                                    <tr>
+                                        <td class="tg-header" width="30%" valign="middle">
+                                            Nivel
+                                        </td>
+                                        <td class="tg-standar" width="70%" valign="middle">
+
+                                            <span t-field="o.level" />
+
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td class="tg-header" width="30%" valign="middle">
+                                            Institución
+                                        </td>
+                                        <td class="tg-standar" width="20%" valign="middle">
+
+                                            <span t-field="o.institution" />
+
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td class="tg-header" width="30%" valign="middle">
+                                            Profesión
+                                        </td>
+                                        <td class="tg-standar" width="20%" valign="middle">
+
+                                            <span t-field="o.profession" />
+
+                                        </td>
+                                    </tr>
+                                </table>
+                                <table width="100%" height="35" style="border: 1px solid #c0c0c0; border-collapse:collapse;">
+                                    <tr>
+                                        <td style="background-color:#efefef;border: 1px solid #c0c0c0;" width="20%" align="center" valign="middle">
+                                            <center>
+                                                <h4>IV. DATOS LABORALES</h4>
+                                            </center>
+                                        </td>
+                                    </tr>
+                                </table>
+                                <table width="100%" height="30" style="border: 1px solid #c0c0c0; border-collapse:collapse;">
+                                    <tr>
+                                        <td class="tg-header" width="30%" valign="middle">
+                                            Ubicación de trabajo
+                                        </td>
+                                        <td class="tg-standar" width="20%" colspan="3" valign="middle">
+
+                                            <span t-field="o.work_location" />
+
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td class="tg-header" width="30%" valign="middle">
+                                            Correo electrónico de trabajo
+                                        </td>
+                                        <td class="tg-standar" width="20%" colspan="3" valign="middle">
+
+                                            <span t-field="o.work_email" />
+
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td class="tg-header" width="30%" valign="middle">
+                                            Móvil de trabajo
+                                        </td>
+                                        <td class="tg-standar" width="20%" colspan="3" valign="middle">
+
+                                            <span t-field="o.mobile_phone" />
+
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td class="tg-header" width="30%" valign="middle">
+                                            Teléfono de trabajo
+                                        </td>
+                                        <td class="tg-standar" width="20%" colspan="3" valign="middle">
+                                            <span t-field="o.work_phone" />
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td class="tg-header" width="30%" valign="middle">
+                                            Área/Departamento principal
+                                        </td>
+                                        <td class="tg-standar" width="70%" colspan="3" valign="middle">
+                                            <span t-field="o.department_id" />
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td class="tg-header" width="30%" valign="middle">
+                                            Áreas/Departamentos adicionales
+                                        </td>
+                                        <td class="tg-standar" width="70%" colspan="3" valign="middle">
+                                            <t t-foreach="o.multiple_department_ids" t-as="dep">
+                                                <div>
+                                                    <span t-field="dep.name" />
+                                                </div>
+                                            </t>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td class="tg-header" width="30%" valign="middle">
+                                            Puesto/Ocupación Principal
+                                        </td>
+                                        <td class="tg-standar" width="70%" colspan="3" valign="middle">
+                                            <span t-field="o.job_id" />
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td class="tg-header" width="30%" valign="middle">
+                                            Puestos/Ocupaciones adicionales
+                                        </td>
+                                        <td class="tg-standar" width="70%" colspan="3" valign="middle">
+                                            <t t-foreach="o.multiple_job_ids" t-as="job">
+                                                <div>
+                                                    <span t-field="job.name" />
+                                                </div>
+                                            </t>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td class="tg-header" width="30%" valign="middle">
+                                            Responsable
+                                        </td>
+                                        <td class="tg-standar" width="20%" colspan="3" valign="middle">
+
+                                            <span t-field="o.parent_id" />
+
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td class="tg-header" width="30%" valign="middle">
+                                            Monitor
+                                        </td>
+                                        <td class="tg-standar" width="20%" colspan="3" valign="middle">
+
+                                            <span t-field="o.coach_id" />
+
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td class="tg-header" width="30%" valign="middle">
+                                            Horas de trabajo
+                                        </td>
+                                        <td class="tg-standar" width="20%" colspan="3" valign="middle">
+
+                                            <span t-field="o.resource_calendar_id" />
+
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td class="tg-header" width="30%" valign="middle">
+                                            N° de cuenta bancaria
+                                        </td>
+                                        <td class="tg-standar" width="20%" valign="middle">
+
+                                            <span t-field="o.bank_account_id" />
+
+                                        </td>
+                                        <td class="tg-header" width="30%" valign="middle">
+                                            Banco
+                                        </td>
+                                        <td class="tg-standar" width="20%" valign="middle">
+
+                                            <span t-field="o.bank_account_id.bank_id" />
+
+                                        </td>
+                                    </tr>
+                                </table>
+                                <div class="helper"></div>
+                                <table width="100%" height="100" style="border: 1px solid #c0c0c0; border-collapse:collapse;">
+                                    <tr>
+                                        <td style="border: 1px solid #c0c0c0;" width="33%" align="center" valign="middle"></td>
+                                        <td style="border: 1px solid #c0c0c0; border-collapse:collapse;" width="33%" align="center" valign="middle"></td>
+                                        <td style="border: 1px solid #c0c0c0; border-collapse:collapse;" width="33%" align="center" valign="middle"></td>
+                                    </tr>
+                                </table>
+                                <table class="file_footer" width="100%" style="border: 1px solid #c0c0c0; border-collapse:collapse;">
+                                    <tr>
+                                        <td style="background-color:#efefef;border: 1px solid #c0c0c0;"
+                                            height="10"
+                                            width="33%"
+                                            align="center"
+                                            valign="middle">
+                                            <h6>RRHH</h6>
+                                        </td>
+                                        <td style="background-color:#efefef;border: 1px solid #c0c0c0;"
+                                            height="10"
+                                            width="33%"
+                                            align="center"
+                                            valign="middle">
+                                            <h6>FIRMA DEL TRABAJADOR</h6>
+                                        </td>
+                                        <td style="background-color:#efefef;border: 1px solid #c0c0c0;"
+                                            height="10"
+                                            width="33%"
+                                            align="center"
+                                            valign="middle">
+                                            <h6>HUELLA DACTILAR</h6>
+                                        </td>
+                                    </tr>
+                                </table>
+                            </center>
+                        </div>
+                        <div class="footer" style="border-top: 1px solid black;font-size: 8px;">
+                            <div class="text-center" style="border-top: 1px solid black;font-size: 10px;text-align:center;">
+                                ©
+                                <span t-field="company.name" />
+                                . All Rights Reserved.
+                                <br />
+                                PROHIBIDA SU REPRODUCCIÓN SIN AUTORIZACIÓN EXPRESA DE LA DIRECCIÓN.
+                                <br />
+                                CUALQUIER COPIA IMPRESA NO CONTROLADA. DEBE SER ROTULADA COMO "COPIA NO CONTROLADA".
+                                <br />
+                                CONSULTE VERSIÓN ELECTRÓNICA
+                            </div>
+                        </div>
+                    </t>
+                </t>
+            </t>
+        </template>
+            
+        <record id="action_report_hr_employee_data" model="ir.actions.report">
+            <field name="name">Ficha de datos del empleado</field>
+            <field name="model">hr.employee</field>
+            <field name="report_type">qweb-pdf</field>
+            <field name="report_name">mgmtsystem_employees.report_employees_template</field>
+            <field name="report_file">mgmtsystem_employees.report_employees_template</field>
+            <field name="print_report_name">'%s' % object.name</field>
+            <field name="binding_model_id" ref="model_hr_employee" />
+            <field name="paperformat_id" ref="hola_calidad.portrait" />
+            <field name="binding_type">report</field>
+        </record>
+
+    </data>
+</odoo>

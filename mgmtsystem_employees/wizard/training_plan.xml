@@ -1,0 +1,44 @@
+<odoo>
+    <data>
+
+        <record id="training_plan_wizard_view_form" model="ir.ui.view">
+            <field name="name">training.plan.wizard.view.form</field>
+            <field name="model">training.plan.wizard</field>
+            <field name="arch" type="xml">
+                <form string="">
+                    <sheet>
+                        <group>
+                            <field name="training_plan_id"/>
+                        </group>
+                        <span>
+                            Imprimir el programa anual de capacitaciones
+                        </span>
+                    </sheet>
+                    <footer>
+                        <button name="action_print" type="object" string="Descargar" class="oe_highlight" icon="fa-download"/>
+                    </footer>
+                </form>
+            </field>
+        </record>
+
+        <record id="action_report_training_plan" model="ir.actions.act_window">
+            <field name="name">Programa anual de capacitaciones</field>
+            <field name="type">ir.actions.act_window</field>
+            <field name="res_model">training.plan.wizard</field>
+            
+            <field name="view_mode">form</field>
+            <field name="view_id" ref="training_plan_wizard_view_form"/>
+            <field name="target">new</field>
+            <field name="binding_type">report</field>
+        </record>
+
+        <menuitem id="training_plan_report_menu" 
+            name="Programa anual de capacitaciones" 
+            action="action_report_training_plan" 
+            parent="training_report_menu" 
+            groups="base.group_no_one,mgmtsystem_employees.group_employees_onlyread,mgmtsystem_employees.group_employees_onlyread_printreport,mgmtsystem_employees.group_employees_write_printreport,mgmtsystem_employees.group_employees_all"
+            sequence="1"/>
+
+
+    </data>
+</odoo>

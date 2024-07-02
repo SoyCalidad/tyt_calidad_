@@ -1,0 +1,397 @@
+<odoo>
+    <data>
+
+        <record id="report_context_porter_forces_view" model="ir.ui.view">
+            <field name="name">Fuerza de Porter</field>
+            <field name="model">wizard.porter_forces.report</field>
+            <field name="arch" type="xml">
+                <form>
+                    <group>
+                        <field name="external_issue_id"/>
+                    </group>
+                    <group>
+                        <p>Imprima un representación gráfica de las fuerzas Porter</p>
+                    </group>
+                    <footer>
+                        <button name="action_pdf" type="object" string="Descargar PDF" class="oe_highlight" icon="fa-download"/>
+                    </footer>
+                </form>
+            </field>
+        </record>
+
+
+        <record id="action_report_context_porter_forces" model="ir.actions.act_window">
+            <field name="name">Fuerza de Porter</field>
+            <field name="type">ir.actions.act_window</field>
+            <field name="res_model">wizard.porter_forces.report</field>
+
+            <field name="view_mode">form</field>
+            <field name="view_id" ref="report_context_porter_forces_view"/>
+            <field name="target">new</field>
+            <field name="binding_model_id" ref="account.model_account_account" />
+            <field name="binding_type">report</field>
+        </record>
+
+        <report id="external_issue_report_xls" model="wizard.porter_forces.report" string="Fuerza de Porter" report_type="xlsx" name="mgmtsystem_context.report_porter_forces" file="Fuerzas de Porter" />
+
+        <report id="external_issue_report_pdf" model="wizard.porter_forces.report" string="Fuerza de Porter" report_type="qweb-pdf" name="mgmtsystem_context.report_porter_forces_pdf" file="Fuerzas de Porter" />
+
+        <template id="report_porter_forces_pdf">
+            <t t-call="web.html_container">
+                <t t-foreach="docs" t-as="doc">
+                    <t t-if="doc and 'company_id' in doc">
+                        <t t-set="company" t-value="doc.company_id" />
+                    </t>
+                    <t t-if="not doc or not 'company_id' in doc">
+                        <t t-set="company" t-value="res_company" />
+                    </t>
+                    <div class="header">
+                        <TABLE width="1300" height="70" style="border: 1px solid black;" bgcolor="#EEEEEE">
+                            <tr>
+                                <td style="border: 1px solid black;padding-top: 35px;" width="20%" rowspan="3" align="center" valign="middle">
+                                    <center>
+                                        <t t-if="company.logo">
+                                            <img t-att-src="image_data_uri(company.logo)" style="max-height:140;vertical-align:absmiddle;" alt="Logo"/>
+                                        </t>                                    
+                                    </center>
+                                </td>
+                                <td style="border: 1px solid black; text-align:middle" width="60%" rowspan="3" align="center" valign="middle">
+                                    <center>
+                                        <h2>ANÁLISIS DE PORTER</h2>
+                                        <h3>
+                                            <span t-field="doc.name" />
+                                        </h3>
+                                    </center>
+                                </td>
+                                <td style="border: 1px solid black;" width="20%" align="center" valign="middle">
+                                    <center>
+                                        <h4>
+                                            Código:
+                                            <span t-field="doc.code" />
+                                        </h4>
+                                    </center>
+                                </td>
+
+                            </tr>
+                            <tr>
+                                <td style="border: 1px solid black;">
+                                    <CENTER>
+                                        <h4>
+                                            Edición:
+                                            <span t-field="doc.version" />
+                                        </h4>
+                                    </CENTER>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td style="border: 1px solid black;" align="center" valign="middle">
+                                    <CENTER>
+                                        <h4>
+                                            Fecha de aprobación:
+                                            <span t-field="doc.date_validate" />
+                                        </h4>
+                                    </CENTER>
+                                </td>
+                            </tr>
+                        </TABLE>
+                        <TABLE width="1300" height="70" style="border: 1px solid black;" bgcolor="#EEEEEE">
+                            <tr>
+                                <td style="border: 1px solid black;padding-top: 35px;" width="20%" rowspan="3" align="center" valign="middle">
+                                    <center>
+                                        <t t-if="company.logo">
+                                            <img t-att-src="image_data_uri(company.logo)" style="max-height:140;vertical-align:absmiddle;" alt="Logo"/>
+                                        </t>
+                                    </center>
+                                </td>
+                                <td style="border: 1px solid black; text-align:middle" width="60%" rowspan="3" align="center" valign="middle">
+                                    <center>
+                                        <h2>ANÁLISIS DE PORTER</h2>
+                                        <h3>
+                                            <span t-field="doc.name" />
+                                        </h3>
+                                    </center>
+                                </td>
+                                <td style="border: 1px solid black;" width="20%" align="center" valign="middle">
+                                    <center>
+                                        <h4>
+                                            Código:
+                                            <span t-field="doc.code" />
+                                        </h4>
+                                    </center>
+                                </td>
+
+                            </tr>
+                            <tr>
+                                <td style="border: 1px solid black;">
+                                    <CENTER>
+                                        <h4>
+                                            Edición:
+                                            <span t-field="doc.version" />
+                                        </h4>
+                                    </CENTER>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td style="border: 1px solid black;" align="center" valign="middle">
+                                    <CENTER>
+                                        <h4>
+                                            Fecha de aprobación:
+                                            <span t-field="doc.date_validate" />
+                                        </h4>
+                                    </CENTER>
+                                </td>
+                            </tr>
+                        </TABLE>
+                    </div>
+                    <t t-call="web.external_layout">
+                        <style t-if="doc.state=='cancel'">
+                            .page {
+                            position: relative;
+                            }
+                            .page::after {
+                            content: "";
+                            background: url('/hola_calidad/static/src/img/obsoleto.png');
+                            opacity: 0.25;
+                            top: 0;
+                            left: 0;
+                            bottom: 0;
+                            right: 0;
+                            position: absolute;
+                            z-index: -1;
+                            }
+                        </style>
+                        <div class="page">
+                            <div class="cover" style="page-break-after: always;">
+                                <center>
+                                    <style type="text/css">
+                                        .tg  {border-collapse:collapse;border-spacing:0;}
+                                        .tg td{font-family: Palatino, Palatino Linotype, Palatino LT STD, Book Antiqua, Georgia, serif;font-size:14px;padding:10px 5px;border-style:solid;border-width:1px;overflow:hidden;word-break:normal;border-color:black;}
+                                        .tg th{font-family: Palatino, Palatino Linotype, Palatino LT STD, Book Antiqua, Georgia, serif;font-size:14px;font-weight:normal;padding:10px 5px;border-style:solid;border-width:1px;overflow:hidden;word-break:normal;border-color:black;}
+                                        .tg .tg-zv36{font-weight:bold;background-color:#ffffff;border-color:inherit;text-align:left;vertical-align:top}
+                                        .tg .tg-nrix{text-align:center;vertical-align:middle;font-weight: bold;border-style: none;font-size:25px;}
+                                        .tg .tg-rq3n{background-color:#ffffff;text-align:center;vertical-align:middle;border-style: none;font-size:20px;}
+                                        .tg .tg-7g6k{font-weight:bold;background-color:#ffffff;border-color:inherit;text-align:center;vertical-align:top}
+                                        .tg .tg-3xi5{background-color:#ffffff;border-color:inherit;text-align:center;vertical-align:top}
+                                    </style>
+                                    <table class="tg" width="75%">
+                                        <tr>
+                                            <td class="tg-nrix" colspan="3"/>
+                                        </tr>
+                                        <tr>
+                                            <td class="tg-nrix" colspan="3"/>
+                                        </tr>
+                                        <tr>
+                                            <td class="tg-nrix" colspan="3">
+                                                <span t-field="company.name"/>
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td class="tg-nrix" colspan="3"/>
+                                        </tr>
+                                        <tr>
+                                            <td class="tg-nrix" colspan="3"/>
+                                        </tr>
+                                        <tr>
+                                            <td class="tg-rq3n" colspan="3"/>
+                                        </tr>
+                                        <tr>
+                                            <td class="tg-7g6k">NOMBRE</td>
+                                            <td class="tg-3xi5" colspan="2">
+                                                <span t-field="doc.name"/>
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td class="tg-7g6k">VERSIÓN</td>
+                                            <td class="tg-3xi5" colspan="2">
+                                                <span t-field="doc.version"/>
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td class="tg-7g6k">FECHA DE ELABORACIÓN</td>
+                                            <td class="tg-3xi5" colspan="2">
+                                                <t t-foreach="o.elaboration_step" t-as="step">
+                                       <span t-field="step.date"/><br/>
+                                    </t>
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td class="tg-7g6k">ELABORADO POR</td>
+                                            <td class="tg-3xi5" colspan="2">
+                                                <span t-field="doc.elaboration_step[0].name"/>
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td class="tg-7g6k">
+                                                Actualizado por:
+                                                <br/>
+                                                <t t-foreach="doc.elaboration_step" t-as="user">
+                                                    <span t-field="user.user_id.partner_id.name" />
+                                                    <br/>
+                                                </t>
+                                            </td>
+                                            <td class="tg-7g6k">
+                                                Revisado por:
+                                                <br/>
+                                                <t t-foreach="doc.review_step" t-as="user">
+                                                    <span t-field="user.user_id.partner_id.name" />
+                                                    <br/>
+                                                </t>
+                                            </td>
+                                            <td class="tg-7g6k">
+                                                Aprobado por:
+                                                <br/>
+                                                <t t-foreach="doc.validation_step" t-as="user">
+                                                    <span t-field="user.user_id.partner_id.name" />
+                                                    <br/>
+                                                </t>
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td class="tg-zv36" style="display:block;width:33%;">
+                                                Firma:
+                                                <br/>
+                                                <t t-foreach="doc.elaboration_step" t-as="user">
+                                                    <span t-if="o.state=='validate_ok'" t-raw="user.user_id.signature" style="display:block;"/>
+                                                    <br/>
+                                                </t>
+                                            </td>
+                                            <td class="tg-zv36" style="display:block;width:33%;">
+                                                Firma:
+                                                <br/>
+                                                <t t-foreach="doc.review_step" t-as="user">
+                                                    <span t-if="o.state=='validate_ok'" t-raw="user.user_id.signature" style="display:block;"/>
+                                                    <br/>
+                                                </t>
+                                            </td>
+                                            <td class="tg-zv36" style="display:block;width:33%;">
+                                                Firma:
+                                                <br/>
+                                                <t t-foreach="doc.validation_step" t-as="user">
+                                                    <span t-if="o.state=='validate_ok'" t-raw="user.user_id.signature" style="display:block;"/>
+                                                    <br/>
+                                                </t>
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td class="tg-3xi5">
+                                                <t t-foreach="doc.elaboration_step" t-as="user">
+                                                    <t t-foreach="user.user_id.employee_ids" t-as="emp">
+                                                        <span t-field="emp.job_id.name" />
+                                                        <br/>
+                                                    </t>
+                                                    <br/>
+                                                </t>
+                                            </td>
+                                            <td class="tg-3xi5">
+                                                <t t-foreach="doc.review_step" t-as="user">
+                                                    <t t-foreach="user.user_id.employee_ids" t-as="emp">
+                                                        <span t-field="emp.job_id.name" />
+                                                        <br/>
+                                                    </t>
+                                                    <br/>
+                                                </t>
+                                            </td>
+                                            <td class="tg-3xi5">
+                                                <t t-foreach="doc.validation_step" t-as="user">
+                                                    <t t-foreach="user.user_id.employee_ids" t-as="emp">
+                                                        <span t-field="emp.job_id.name" />
+                                                        <br/>
+                                                    </t>
+                                                    <br/>
+                                                </t>
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td class="tg-zv36" style="display:block;width:33%;">
+                                                Fecha:
+                                                <t t-foreach="o.elaboration_step" t-as="step">
+                                       <span t-field="step.date"/><br/>
+                                    </t>
+                                            </td>
+                                            <td class="tg-zv36" style="display:block;width:33%;">
+                                                Fecha:
+                                                <t t-foreach="doc.review_step" t-as="step">
+                                                <span t-field="step.date"/>
+                                                <br/>
+                                            </t>
+                                            </td>
+                                            <td class="tg-zv36" style="display:block;width:33%;">
+                                                Fecha:
+                                                <t t-foreach="doc.validation_step" t-as="step">
+                                                <span t-field="step.date"/>
+                                                <br/>
+                                            </t>
+                                            </td>
+                                        </tr>
+                                    </table>
+                                </center>
+
+                                <br/>
+                                <br/>
+                            </div>
+                            <div class="data">
+                                <style type="text/css">
+                                    .tg  {border-collapse:collapse;border-spacing:0;border-color:#C44D58;}
+                                    .tg td{font-family: Palatino, Palatino Linotype, Palatino LT STD, Book Antiqua, Georgia, serif;font-size:14px;padding:10px 5px;border-style:solid;border-width:0px;overflow:hidden;word-break:normal;border-color:#C44D58;background-color:#EEEEEE;}
+                                    .tg th{font-family: Palatino, Palatino Linotype, Palatino LT STD, Book Antiqua, Georgia, serif;font-size:14px;font-weight:normal;padding:10px 5px;border-style:solid;border-width:0px;overflow:hidden;word-break:normal;border-color:#C44D58;}
+                                    .tg .tg-cly1{text-align:left;vertical-align:middle}
+                                    .tg .tg-bvym{font-weight:bold;font-size:15px;font-family:Arial, Helvetica, sans-serif !important;;background-color:#f4002c;text-align:center;vertical-align:middle}
+                                </style>
+                                <center>
+                                    <table class="tg" width="90%">
+                                        <tr>
+                                            <th class="tg-bvym">FUERZA</th>
+                                            <th class="tg-bvym">ANÁLISIS</th>
+                                            <th class="tg-bvym">PUNTAJE</th>
+                                        </tr>
+                                        <t t-foreach="doc.forces" t-as="f">
+                                            <tr align="center" valign="middle">
+                                                <td>
+                                                    <h5>
+                                                        <span t-field="f.context_force.name" />
+                                                    </h5>
+                                                </td>
+                                                <td>
+                                                    <h5>
+                                                        <span t-field="f.description" />
+                                                    </h5>
+                                                </td>
+                                                <td>
+                                                    <h5>
+                                                        <span t-field="f.relevance" />
+                                                    </h5>
+                                                </td>
+                                            </tr>
+                                        </t>
+                                    </table>
+                                </center>
+                            </div>
+                        </div>
+                        <div class="footer" style="border-top: 1px solid black;font-size: 8px;">
+                            <div class="text-center" style="border-top: 1px solid black;font-size: 10px;text-align:center;">
+                                ©
+                                <span t-field="company.name"/>
+                                . All Rights Reserved.
+                                <br/>
+                                PROHIBIDA SU REPRODUCCIÓN SIN AUTORIZACIÓN EXPRESA DE LA DIRECCIÓN.
+                                <br/>
+                                CUALQUIER COPIA IMPRESA NO CONTROLADA. DEBE SER ROTULADA COMO "COPIA NO CONTROLADA".
+                                <br/>
+                                CONSULTE VERSIÓN ELECTRÓNICA
+                            </div>
+                        </div>
+                    </t>
+                </t>
+            </t>
+        </template>
+
+        <menuitem
+            id="porter_forces_report_menu"
+            name="Fuerzas de Porter"
+            action="action_report_context_porter_forces"
+            parent="context_report_menu"
+            sequence="11"/>
+
+
+    </data>
+</odoo>

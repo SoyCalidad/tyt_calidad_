@@ -1,0 +1,31 @@
+<odoo>
+    <data>
+        <report 
+        id="action_report_organization_chart" 
+        model="mgmtsystem.context.organization_chart" 
+        string="Organigrama" 
+        report_type="qweb-pdf" 
+        groups= "base.group_no_one,mgmtsystem_context.group_context_onlyread_printreport,mgmtsystem_context.group_context_write_printreport,mgmtsystem_context.group_context_all"
+        name="mgmtsystem_context.organization_chart_report" 
+        file="mgmtsystem_context.organization_chart_report" 
+        groups= "mgmtsystem_context.group_context_onlyread_printreport,mgmtsystem_context.group_context_write_printreport,mgmtsystem_context.group_context_all"
+        />
+
+        <template id="organization_chart_report">
+            <t t-call="web.html_container">
+                <t t-foreach="docs" t-as="doc">
+                    <t t-call="web.external_layout">
+                        <div class="page">
+                            <h1>
+                                Organigrama
+                            </h1>
+                        </div>
+                    </t>
+                </t>
+            </t>
+        </template>
+
+  
+
+    </data>
+</odoo>

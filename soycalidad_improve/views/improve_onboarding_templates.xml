@@ -1,0 +1,138 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <!-- ONBOARDING STEPS -->
+
+    <template id="onboarding_change_request_step">
+        <t t-call="base.onboarding_step">
+            <t t-set="title">Planificación de cambio</t>
+            <t t-set="description">Cree una planificación de cambio.</t>
+            <t t-set="done_icon" t-value="'fa-star'" />
+            <t t-set="btn_text">Crear</t>
+            <t t-set="done_text">Se ve bien!</t>
+            <t t-set="method" t-value="'action_open_change_request'" />
+            <t t-set="model" t-value="'res.company'" />
+            <t t-set="state" t-value="state.get('change_request_onboarding_state')" />
+        </t>
+    </template>
+
+    <template id="onboarding_improve_plan_step">
+        <t t-call="base.onboarding_step">
+            <t t-set="title">Matriz de planificación de cambios</t>
+            <t t-set="description">Cree una matriz de planificación de cambios.</t>
+            <t t-set="done_icon" t-value="'fa-star'" />
+            <t t-set="btn_text">Crear</t>
+            <t t-set="done_text">Se ve bien!</t>
+            <t t-set="method" t-value="'action_open_improve_plan'" />
+            <t t-set="model" t-value="'res.company'" />
+            <t t-set="state" t-value="state.get('improve_plan_onboarding_state')" />
+        </t>
+    </template>
+
+    <template id="onboarding_improve_improve_step">
+        <t t-call="base.onboarding_step">
+            <t t-set="title">Planificación de cambios</t>
+            <t t-set="description">Cree una planificación de cambios.</t>
+            <t t-set="done_icon" t-value="'fa-star'" />
+            <t t-set="btn_text">Crear</t>
+            <t t-set="done_text">Se ve bien!</t>
+            <t t-set="method" t-value="'action_open_improve_improve'" />
+            <t t-set="model" t-value="'res.company'" />
+            <t t-set="state" t-value="state.get('improve_improve_onboarding_state')" />
+        </t>
+    </template>
+
+    <!-- ONBOARDING PANELS -->
+    <template id="improve_onboarding_panel" name="improve.onboarding.panel">
+        <t t-call="base.onboarding_container">
+            <t t-set="classes" t-value="'o_onboarding_blue'" />
+            <t t-set="bg_image" t-value="'/account/static/src/img/account_invoice_onboarding_bg.jpg'" />
+            <t t-set="close_method" t-value="'action_close_improve_onboarding'" />
+            <t t-set="close_model" t-value="'res.company'" />
+            <t t-set="text_completed">Felicitaciones! Ha completado todo.</t>
+            <t t-call="soycalidad_improve.onboarding_change_request_step" name="change_request_step" />
+            <t t-call="soycalidad_improve.onboarding_improve_plan_step" name="improve_plan_step" />
+            <t t-call="mgmtsystem_action.onboarding_action_action_step" name="action_action_step" />
+            <t t-call="mgmtsystem_nonconformity.onboarding_nonconformity_nonconformity_step" name="nonconformity_nonconformity_step" />
+        </t>
+    </template>
+
+    <!-- Views -->
+
+    <record id="onboarding_change_request_form" model="ir.ui.view">
+        <field name="name">soycalidad.change_request.inherit.view.form</field>
+        <field name="model">soycalidad.change_request</field>
+        <field name="inherit_id" ref="soycalidad_improve.soycalidad_change_request_view_form" />
+        <field name="priority">1000</field>
+        <field name="mode">primary</field>
+        <field name="arch" type="xml">
+            <form position="inside">
+                <footer position="replace">
+                    <button name="action_save_onboarding_change_request_step" class="btn btn-primary" type="object" string="Crear" />
+                    <button special="cancel" string="Cancelar" />
+                </footer>
+            </form>
+        </field>
+    </record>
+
+    <record id="onboarding_improve_plan_form" model="ir.ui.view">
+        <field name="name">soycalidad.improve_plan.matrix.inherit.view.form</field>
+        <field name="model">soycalidad.improve_plan.matrix</field>
+        <field name="inherit_id" ref="soycalidad_improve.improve_plan_matrix_view_form" />
+        <field name="priority">1000</field>
+        <field name="mode">primary</field>
+        <field name="arch" type="xml">
+            <form position="inside">
+                <footer position="replace">
+                    <button name="action_save_onboarding_improve_plan_step" class="btn btn-primary" type="object" string="Crear" />
+                    <button special="cancel" string="Cancelar" />
+                </footer>
+            </form>
+        </field>
+    </record>
+
+    <record id="onboarding_improve_improve_form" model="ir.ui.view">
+        <field name="name">soycalidad.improve_plan.inherit.view.form</field>
+        <field name="model">soycalidad.improve_plan</field>
+        <field name="inherit_id" ref="soycalidad_improve.improve_plan_view_form" />
+        <field name="priority">1000</field>
+        <field name="mode">primary</field>
+        <field name="arch" type="xml">
+            <form position="inside">
+                <footer position="replace">
+                    <button name="action_save_onboarding_improve_improve_step" class="btn btn-primary" type="object" string="Crear" />
+                    <button special="cancel" string="Cancelar" />
+                </footer>
+            </form>
+        </field>
+    </record>
+
+    
+
+    <record id="action_change_request_configurator" model="ir.actions.act_window">
+        <field name="type">ir.actions.act_window</field>
+        <field name="name">Cree una solicitud de cambio</field>
+        <field name="view_mode">form</field>
+        <field name="target">new</field>
+        <field name="res_model">soycalidad.change_request</field>
+        <field name="view_id" ref="soycalidad_improve.onboarding_change_request_form" />
+    </record>
+    
+    <record id="action_improve_plan_configurator" model="ir.actions.act_window">
+        <field name="type">ir.actions.act_window</field>
+        <field name="name">Cree una matriz de planificación de cambios</field>
+        <field name="view_mode">form</field>
+        <field name="target">new</field>
+        <field name="res_model">soycalidad.improve_plan.matrix</field>
+        <field name="view_id" ref="soycalidad_improve.onboarding_improve_plan_form" />
+    </record>
+
+    <record id="action_improve_improve_configurator" model="ir.actions.act_window">
+        <field name="type">ir.actions.act_window</field>
+        <field name="name">Cree una planificación de cambios</field>
+        <field name="view_mode">form</field>
+        <field name="target">new</field>
+        <field name="res_model">soycalidad.improve_plan</field>
+        <field name="view_id" ref="soycalidad_improve.onboarding_improve_improve_form" />
+    </record>
+
+</odoo>

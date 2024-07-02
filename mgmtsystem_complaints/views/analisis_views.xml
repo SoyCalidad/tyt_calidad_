@@ -1,0 +1,121 @@
+<odoo>
+
+    <record model="ir.ui.view" id="view_complaint_plan_tree">
+        <field name="name">complaint.analisis.tree</field>
+        <field name="model">complaint.analisis</field>
+        <field name="arch" type="xml">
+            <tree>
+                <field name="name" />
+                <field name="filter" />
+                <field name="date" />
+            </tree>
+        </field>
+    </record>
+
+    <record model="ir.ui.view" id="view_complaint_plan_form">
+        <field name="name">complaint.analisis.form</field>
+        <field name="model">complaint.analisis</field>
+        <field name="arch" type="xml">
+            <form>
+                <header>
+                    <button name="start_filter"
+                            type="object"
+                            string="Iniciar analisis"
+                            class="btn-primary"
+                            attrs="{'invisible': [('state','!=','draft')]}" />
+                    <button name="send_close"
+                            type="object"
+                            string="Terminar"
+                            class="btn-primary"
+                            attrs="{'invisible': [('state','!=','in_process')]}" />
+                    <button name="send_cancel"
+                            type="object"
+                            string="Cancelar"
+                            class="btn-second"
+                            attrs="{'invisible': [('state','=','cancel')]}" />
+                    <field name="state" widget="statusbar" statusbar_visible="draft,in_process,close" />
+                </header>
+                <sheet>
+                    <div class="oe_button_box" name="button_box"></div>
+                    <div class="oe_title">
+                        <label for="name" />
+                        <h1>
+                            <field name="name" attrs="{'readonly': [('state','!=','draft')]}" />
+                        </h1>
+                    </div>
+                    <group>
+                        <group>
+                            <field name="elaborate_ids" />
+                            <field name="filter" widget="radio" attrs="{'readonly': [('state','!=','draft')]}" />
+                        </group>
+                        <group>
+                            <field name="date" />
+                            <field name="date_init" attrs="{'invisible': [('filter','!=','date')],'required': [('filter','=','date')],'readonly': [('state','!=','draft')]}" />
+                            <field name="date_fin" attrs="{'invisible': [('filter','!=','date')],'required': [('filter','=','date')],'readonly': [('state','!=','draft')]}" />
+                            <field name="complaint_state" attrs="{'invisible': [('filter','!=','state')],'required': [('filter','=','state')],'readonly': [('state','!=','draft')]}" />
+                            <field name="categ_id" attrs="{'invisible': [('filter','!=','categ')],'required': [('filter','=','categ')],'readonly': [('state','!=','draft')]}" />
+                            <field name="close" attrs="{'readonly': [('state','!=','draft')]}" />
+                        </group>
+                    </group>
+                    <notebook attrs="{'invisible': [('state','=','draft')]}">
+                        <page string="Detalles de reclamos">
+                            <field name="complaint_ids" attrs="{'readonly': [('state','!=','in_process')]}">
+                                <tree>
+                                    <field name="date_incident" />
+                                    <field name="name" />
+                                    <field name="categ_id" />
+                                    <field name="quick_action_id" />
+                                    <field name="is_open" />
+                                    <field name="state" />
+                                </tree>
+                            </field>
+                        </page>
+                    </notebook>
+                </sheet>
+            </form>
+        </field>
+    </record>
+
+    <menuitem name="Analisis" id="mitem_analisis" parent="menu_complaint_root" sequence="3" />
+
+    <record model="ir.actions.act_window" id="complaint_analisis_customer_action">
+        <field name="name">Reclamos internos</field>
+        <field name="res_model">complaint.analisis</field>
+        <field name="view_mode">tree,form</field>
+        <field name="domain">[('type','=','customer')]</field>
+        <field name="context">{'default_type':'customer'}</field>
+    </record>
+
+    <menuitem name="Reclamos internos"
+              id="mitem_analisis_customer"
+              parent="mitem_analisis"
+              sequence="3"
+              action="complaint_analisis_customer_action" />
+
+    <record model="ir.actions.act_window" id="complaint_analisis_supplier_action">
+        <field name="name">Reclamos externos</field>
+        <field name="res_model">complaint.analisis</field>
+        <field name="view_mode">tree,form</field>
+        <field name="domain">[('type','=','supplier')]</field>
+        <field name="context">{'default_type':'supplier'}</field>
+    </record>
+
+    <menuitem name="Reclamos externos"
+              id="mitem_analisis_supplier"
+              parent="mitem_analisis"
+              sequence="6"
+              action="complaint_analisis_supplier_action" />
+
+    <record model="ir.actions.act_window" id="complaint_analisis_all_action">
+        <field name="name">Reclamos externos</field>
+        <field name="res_model">complaint.analisis</field>
+        <field name="view_mode">tree,form</field>
+    </record>
+
+    <menuitem name="Reclamos"
+              id="mitem_analisis_all"
+              parent="mitem_analisis"
+              sequence="1"
+              action="complaint_analisis_all_action" />    
+
+</odoo>

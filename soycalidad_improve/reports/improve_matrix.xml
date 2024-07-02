@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+
+    <record id="improve_plan_matrix_report_wizard_view_form" model="ir.ui.view">
+        <field name="name">mgmtsystem.improve_plan_matrix.report_wizard.view.form</field>
+        <field name="model">mgmtsystem.improve_plan_matrix.report_wizard</field>
+        <field name="arch" type="xml">
+            <form string="">
+                <sheet>
+                    <group>
+                        <field name="matrix_ids" widget="many2many_tags" />
+                    </group>
+                </sheet>
+                <footer>
+                    <button name="action_print"
+                            type="object"
+                            string="Descargar"
+                            class="oe_highlight"
+                            icon="fa-download" />
+                </footer>
+            </form>
+        </field>
+    </record>
+   
+    <record id="improve_plan_matrix_report_wizard_action" model="ir.actions.act_window">
+        <field name="name">Reporte de matrices de planificación de cambios</field>
+        <field name="type">ir.actions.act_window</field>
+        <field name="res_model">mgmtsystem.improve_plan_matrix.report_wizard</field>
+        <field name="view_mode">form</field>
+        <field name="view_id" ref="improve_plan_matrix_report_wizard_view_form" />
+        <field name="target">new</field>
+        <field name="binding_type">report</field>
+    </record>
+   
+
+    <report id="action_report_improve_plan_matrix"
+            model="soycalidad.improve_plan.matrix"
+            string="Matriz de planificación de cambios"
+            report_type="xlsx"
+            name="report_improve_plan_matrix"
+            file="Matriz de planificación de cambios" />
+
+</odoo>

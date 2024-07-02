@@ -1,0 +1,57 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <record id="training_plan_view_form" model="ir.ui.view">
+        <field name="name">mgmtsystem.plan.form.view.form</field>
+        <field name="model">mgmtsystem.plan</field>
+        <field name="inherit_id" ref="mgmtsystem_employees.view_mgmtsystem_plan_form"/>
+        <field name="arch" type="xml">
+            <div class="oe_button_box" position="inside">
+                <button name="action_document_ids" type="object" class="oe_stat_button" icon="fa-file-text-o">
+                    <field string="Documentos" name="documents_count" widget="statinfo"/>
+                </button>
+            </div>
+            <notebook position="inside">
+                <page name="dms_document_ids" string="Documentos">
+                    <field name="dms_document_ids" mode="kanban"></field>
+                </page>
+            </notebook>
+        </field>
+    </record>
+
+    <record id="training_plan_line_view_form" model="ir.ui.view">
+        <field name="name">mgmtsystem.plan.training.form.view.form</field>
+        <field name="model">mgmtsystem.plan.training</field>
+        <field name="inherit_id" ref="mgmtsystem_employees.view_mgmtsystem_plan_training_form"/>
+        <field name="arch" type="xml">
+            <div class="oe_button_box" position="inside">
+                <button name="action_document_ids" type="object" class="oe_stat_button" icon="fa-file-text-o">
+                    <field string="Documentos" name="documents_count" widget="statinfo"/>
+                </button>
+            </div>
+            <notebook position="inside">
+                <page name="dms_document_ids" string="Documentos">
+                    <field name="dms_document_ids" mode="kanban"/>
+                </page>
+            </notebook>
+        </field>
+    </record>
+
+    <record id="organization_chart_view_form_inherit" model="ir.ui.view">
+        <field name="name">mgmtsystem.context.organization_chart.view.form.inherit</field>
+        <field name="model">mgmtsystem.context.organization_chart</field>
+        <field name="inherit_id" ref="mgmtsystem_context.organization_chart_view_form"/>
+        <field name="arch" type="xml">
+            <div class="oe_button_box" position="inside">
+                <button name="action_document_ids" type="object" class="oe_stat_button" icon="fa-file-text-o">
+                    <field string="Documentos" name="documents_count" widget="statinfo"/>
+                </button>
+            </div>
+            <notebook position="inside">
+                <page name="dms_document_ids" string="Documentos">
+                    <field name="dms_document_ids" mode="kanban"/>
+                </page>
+            </notebook>
+        </field>
+    </record>
+
+</odoo>

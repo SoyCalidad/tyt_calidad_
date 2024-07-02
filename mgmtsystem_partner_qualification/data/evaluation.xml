@@ -1,0 +1,101 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+
+    <record id="evaluation_1" model="res.partner.evaluation">
+        <field name="name">Evaluación de proveedor</field>
+    </record>
+
+    <record id="evaluation_1_item_1" model="res.partner.evaluation.item">
+        <field name="name">Estratégico</field>
+        <field name="evaluation_id" ref="mgmtsystem_partner_qualification.evaluation_1"/>
+    </record>
+
+    <record id="evaluation_1_item_2" model="res.partner.evaluation.item">
+        <field name="name">Calidad</field>
+        <field name="evaluation_id" ref="mgmtsystem_partner_qualification.evaluation_1"/>
+    </record>
+
+    <record id="evaluation_1_item_3" model="res.partner.evaluation.item">
+        <field name="name">Comercial</field>
+        <field name="evaluation_id" ref="mgmtsystem_partner_qualification.evaluation_1"/>
+    </record>
+
+    <record id="item_1_line_1" model="res.partner.evaluation.item.line">
+        <field name="name">Experiencia, tiempo en el mercado</field>
+        <field name="weight">9</field>
+        <field name="item_id" ref="mgmtsystem_partner_qualification.evaluation_1_item_1"/>
+    </record>
+
+    <record id="item_1_line_2" model="res.partner.evaluation.item.line">
+        <field name="name">Entrega de documentación requerida</field>
+        <field name="weight">6</field>
+        <field name="item_id" ref="mgmtsystem_partner_qualification.evaluation_1_item_1"/>
+    </record>
+
+    <record id="item_1_line_3" model="res.partner.evaluation.item.line">
+        <field name="name">Pedidos realizados atendidos</field>
+        <field name="weight">7</field>
+        <field name="item_id" ref="mgmtsystem_partner_qualification.evaluation_1_item_1"/>
+    </record>
+
+    <record id="item_1_line_4" model="res.partner.evaluation.item.line">
+        <field name="name">Cumplimiento de entregas</field>
+        <field name="weight">8</field>
+        <field name="item_id" ref="mgmtsystem_partner_qualification.evaluation_1_item_1"/>
+    </record>
+    
+    <record id="item_2_line_1" model="res.partner.evaluation.item.line">
+        <field name="name">Cuidado y manipulación de productos</field>
+        <field name="weight">10</field>
+        <field name="item_id" ref="mgmtsystem_partner_qualification.evaluation_1_item_2"/>
+    </record>
+
+    <record id="item_2_line_2" model="res.partner.evaluation.item.line">
+        <field name="name">Vehículos de reparto con ambientes adecuados de temperatura y humedad de acuerdo al producto</field>
+        <field name="weight">9</field>
+        <field name="item_id" ref="mgmtsystem_partner_qualification.evaluation_1_item_2"/>
+    </record>
+
+    <record id="item_2_line_3" model="res.partner.evaluation.item.line">
+        <field name="name">Condiciones de almacenamiento que eviten puntos de contaminación</field>
+        <field name="weight">10</field>
+        <field name="item_id" ref="mgmtsystem_partner_qualification.evaluation_1_item_2"/>
+    </record>
+
+    <record id="item_2_line_4" model="res.partner.evaluation.item.line">
+        <field name="name">Envases / embalaje en buen estado, limpios y/o herméticos</field>
+        <field name="weight">9</field>
+        <field name="item_id" ref="mgmtsystem_partner_qualification.evaluation_1_item_2"/>
+    </record>
+
+    <record id="item_2_line_5" model="res.partner.evaluation.item.line">
+        <field name="name">Cuenta con certificado de calidad del producto</field>
+        <field name="weight">7</field>
+        <field name="item_id" ref="mgmtsystem_partner_qualification.evaluation_1_item_2"/>
+    </record>
+
+    <record id="item_3_line_1" model="res.partner.evaluation.item.line">
+        <field name="name">Facilidades de pago</field>
+        <field name="weight">8</field>
+        <field name="item_id" ref="mgmtsystem_partner_qualification.evaluation_1_item_3"/>
+    </record>
+
+    <record id="item_3_line_2" model="res.partner.evaluation.item.line">
+        <field name="name">Precios</field>
+        <field name="weight">6</field>
+        <field name="item_id" ref="mgmtsystem_partner_qualification.evaluation_1_item_3"/>
+    </record>
+
+    <record id="item_3_line_3" model="res.partner.evaluation.item.line">
+        <field name="name">Descuento</field>
+        <field name="weight">5</field>
+        <field name="item_id" ref="mgmtsystem_partner_qualification.evaluation_1_item_3"/>
+    </record>
+
+    <record id="item_3_line_4" model="res.partner.evaluation.item.line">
+        <field name="name">Servicio al cliente</field>
+        <field name="weight">6</field>
+        <field name="item_id" ref="mgmtsystem_partner_qualification.evaluation_1_item_3"/>
+    </record>
+
+</odoo>

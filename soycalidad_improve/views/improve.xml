@@ -1,0 +1,260 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+
+    <record id="improve_plan_view_form" model="ir.ui.view">
+        <field name="name">soycalidad.improve_plan.view.form</field>
+        <field name="model">soycalidad.improve_plan</field>
+        <field name="arch" type="xml">
+            <form string="Planificación de cambios">
+                <header>
+                    <field name="state" widget="statusbar" />
+                    <button string="Validar"
+                            name="send_validate_ok"
+                            type="object"
+                            class="btn-primary"
+                            attrs="{'invisible':[('state','not in', ('draft'))]}" />
+                </header>
+                <sheet>
+                    <div class="oe_button_box" name="button_box">
+                        <!-- MOVE TO "soycalidad_dms"
+                        <button name="action_document_ids" type="object" class="oe_stat_button" icon="fa-file-text-o">
+                            <field string="Documentos" name="documents_count" widget="statinfo" />
+                        </button>
+                        -->
+                        <button name="action_improve_views"
+                                type="object"
+                                context="{'type_action':'action'}"
+                                class="oe_stat_button"
+                                icon="fa-book">
+                            <field string="Acciones" name="actions_count" widget="statinfo" />
+                        </button>
+                        <button name="action_improve_views"
+                                type="object"
+                                context="{'type_action':'nc'}"
+                                class="oe_stat_button"
+                                icon="fa-clipboard">
+                            <field string="No conformidades" name="nonconformities_count" widget="statinfo" />
+                        </button>
+                        <button name="action_improve_views"
+                                type="object"
+                                context="{'type_action':'target'}"
+                                class="oe_stat_button"
+                                icon="fa-check-square-o">
+                            <field string="Objetivos" name="targets_count" widget="statinfo" />
+                        </button>
+                    </div>
+                    <div class="oe_title">
+                        <label for="name" />
+                        <h2>
+                            <field name="name" attrs="{'readonly': [('state','in',('validate_ok','cancel'))]}" />
+                        </h2>
+                    </div>
+                    <group>
+                        <field name="change_type" />
+                        <field name="cosequence" />
+                        <field name="action_id" />
+                        <field name="job_id" />
+                        <field name="ref_doc" />
+                        <field name="register" />
+                        <field name="resource_ids" />
+                    </group>
+                    <notebook>
+                        <!--MOVE TO "soycalidad_dms"
+                        <page name="document_ids" string="Documentos">
+                            <notebook>
+                                <page name="dms_document_ids" string="Documentos">
+                                    <field name="dms_document_ids" mode="kanban"></field>
+                                </page>
+                            </notebook>
+                        </page>
+                        -->
+                        <page name="target_ids" string="Objetivos">
+                            <field name="target_ids" colspan="4" nolabel="1" context="{'default_origin_model_id': model_id, 'default_origin_int_id': id}" />
+                        </page>
+                        <page name="action_ids" string="Acciones">
+                            <field name="model_id" invisible="True" />
+                            <field name="action_ids" colspan="4" nolabel="1" context="{'default_origin_model_id': model_id, 'default_origin_int_id': id}" />
+                        </page>
+                        <page string="No conformidades">
+                            <field name="nonconformity_ids" nolabel="1" colspan="4" context="{'default_origin_model_id': model_id, 'default_origin_int_id': id}" />
+                        </page>
+                    </notebook>
+                </sheet>
+                <div class="oe_chatter">
+                    <field name="message_follower_ids" widget="mail_followers" />
+                    <field name="activity_ids" widget="mail_activity" />
+                    <field name="message_ids" widget="mail_thread" />
+                </div>
+            </form>
+        </field>
+    </record>
+
+    <record id="improve_plan_view_tree" model="ir.ui.view">
+        <field name="name">soycalidad.improve_plan.view.tree</field>
+        <field name="model">soycalidad.improve_plan</field>
+        <field name="arch" type="xml">
+            <tree string="Planficación de cambios">
+                <field name="name" />
+                <field name="change_type" />
+                <field name="cosequence" />
+                <field name="job_id" />
+            </tree>
+        </field>
+    </record>
+
+    <record id="improve_plan_action" model="ir.actions.act_window">
+        <field name="name">Planificación de cambios</field>
+        <field name="res_model">soycalidad.improve_plan</field>
+        <field name="view_mode">tree,form</field>
+        <field name="domain">[]</field>
+        <field name="context">{}</field>
+    </record>
+
+    <record id="improve_plan_matrix_view_form" model="ir.ui.view">
+        <field name="name">soycalidad.improve_plan.matrix.view.form</field>
+        <field name="model">soycalidad.improve_plan.matrix</field>
+        <field name="arch" type="xml">
+            <form string="Matriz de planificación de cambios">
+                <header>
+                    <field name="state" widget="statusbar" statusbar_visible="draft,plan,elaborate,review,validate,validate_ok,on_track,closed" />
+                    <button string="Enviar a Elaborar"
+                            name="send_elaborate"
+                            type="object"
+                            class="btn-primary"
+                            attrs="{'invisible':[('state','not in', ('plan'))]}" />
+                    <button string="Enviar a Revisar"
+                            name="send_review"
+                            type="object"
+                            class="btn-primary"
+                            attrs="{'invisible':[('state','not in', ('elaborate'))]}" />
+                    <button string="Enviar a Validar"
+                            name="send_validate"
+                            type="object"
+                            class="btn-primary"
+                            attrs="{'invisible':[('state','not in', ('review'))]}" />
+                    <button string="Validar"
+                            name="send_validate_ok"
+                            type="object"
+                            class="btn-primary"
+                            attrs="{'invisible':[('state','not in', ('validate'))]}" />
+                    <button string="Volver Obsoleto"
+                            confirm="Esto volverá obsoleto el presente registro. ¿Está seguro(a)?"
+                            name="send_cancel"
+                            type="object"
+                            class="btn-second"
+                            attrs="{'invisible': [('state','in',('cancel'))] }" />
+                    <button name="button_new_version"
+                            type="object"
+                            string="Nueva versión"
+                            attrs="{'invisible':[('state', '!=', 'validate_ok')]}"
+                            class="oe_highlight" />
+                </header>
+                <sheet>
+                    <div class="oe_button_box" name="button_box">
+                        <button type="object"
+                                name="action_open_older_versions"
+                                class="oe_stat_button"
+                                icon="fa-archive"
+                                style="white-space: nowrap;"
+                                string="Versiones antiguas" />
+                        <button name="action_improve_views"
+                                type="object"
+                                context="{'type_action':'action'}"
+                                class="oe_stat_button"
+                                icon="fa-book">
+                            <field string="Acciones" name="actions_count" widget="statinfo" />
+                        </button>
+                        <button name="action_improve_views"
+                                type="object"
+                                context="{'type_action':'nc'}"
+                                class="oe_stat_button"
+                                icon="fa-clipboard">
+                            <field string="No conformidades" name="nonconformities_count" widget="statinfo" />
+                        </button>
+                        <button name="action_improve_views"
+                                type="object"
+                                context="{'type_action':'target'}"
+                                class="oe_stat_button"
+                                icon="fa-check-square-o">
+                            <field string="Objetivos" name="targets_count" widget="statinfo" />
+                        </button>
+                    </div>
+                    <div class="oe_title">
+                        <label for="name" />
+                        <h2>
+                            <field name="name" attrs="{'readonly': [('state','in',('validate_ok','cancel'))]}" />
+                        </h2>
+                    </div>
+                    <group>
+                        <field name="process_id" attrs="{'readonly': [('state','in',('validate_ok','cancel'))]}" />
+                    </group>
+                    <notebook>
+                        <page string="Planificación de cambios">
+                            <separator string="Planificación de cambios" />
+                            <field name="improve_plan_ids" attrs="{'readonly': [('state','in',('validate_ok','cancel'))]}" />
+                        </page>
+                        <page string="Validación">
+                            <group>
+                                <group colspan="4">
+                                    <field name="version" />
+                                    <separator string="Elaboración" />
+                                    <field name="elaboration_step" colspan="2" nolabel="1" attrs="{'readonly': [('state','not in',('draft', 'plan', 'elaborate', 'review', 'validate'))]}" />
+                                    <separator string="Revisión" />
+                                    <field name="review_step" colspan="2" nolabel="1" attrs="{'readonly': [('state','not in',('draft', 'plan', 'elaborate', 'review', 'validate'))]}" />
+                                    <separator string="Validación" />
+                                    <field name="validation_step" colspan="2" nolabel="1" attrs="{'readonly': [('state','not in',('draft', 'plan', 'elaborate', 'review', 'validate'))]}" />
+                                </group>
+                                <group>
+                                    <field name="date_elaborate" attrs="{'required': [('state','in',('elaborate'))], 'readonly': True}" />
+                                    <field name="date_review" attrs="{'required': [('state','in',('review'))], 'readonly': True, 'invisible': [('state','in',('elaborate'))] }" />
+                                    <field name="date_validate" groups="base.group_no_one,base.user_admin" attrs="{'invisible': [('state','in',('elaborate','review'))] }" />
+                                </group>
+                            </group>
+                        </page>
+                        <page name="target_ids" string="Objetivos">
+                            <field name="target_ids" colspan="4" nolabel="1" context="{'default_origin_model_id': model_id, 'default_origin_int_id': id}" />
+                        </page>
+                        <page name="action_ids" string="Acciones">
+                            <field name="model_id" invisible="True" />
+                            <field name="action_ids" colspan="4" nolabel="1" context="{'default_origin_model_id': model_id, 'default_origin_int_id': id}" />
+                        </page>
+                        <page string="No conformidades">
+                            <field name="nonconformity_ids" nolabel="1" colspan="4" context="{'default_origin_model_id': model_id, 'default_origin_int_id': id}" />
+                        </page>
+                    </notebook>
+                </sheet>
+                <div class="oe_chatter">
+                    <field name="message_follower_ids" widget="mail_followers" />
+                    <field name="activity_ids" widget="mail_activity" />
+                    <field name="message_ids" widget="mail_thread" />
+                </div>
+            </form>
+        </field>
+    </record>
+
+    <record id="improve_plan_matrix_view_tree" model="ir.ui.view">
+        <field name="name">soycalidad.improve_plan.matrix.view.tree</field>
+        <field name="model">soycalidad.improve_plan.matrix</field>
+        <field name="arch" type="xml">
+            <tree string="Matriz de planificación de cambios">
+                <field name="name" />
+                <field name="date_elaborate" />
+                <field name="elaboration_step" widget="many2many_tags" />
+                <field name="state" />
+                <field name="version" />
+            </tree>
+        </field>
+    </record>
+
+    <record id="improve_plan_matrix_action" model="ir.actions.act_window">
+        <field name="name">Matriz de planificación de cambios</field>
+        <field name="res_model">soycalidad.improve_plan.matrix</field>
+        <field name="view_mode">tree,form</field>
+        <field name="domain">[]</field>
+        <field name="context">{}</field>
+        <field name="help" type="html">
+            <p>La matriz de planificación de cambios permite condensar los cambios</p>
+        </field>
+    </record>
+
+</odoo>

@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+
+    <!-- Wizard form view nonconformity_output.wizard_report -->
+    <record id="view_nonconformity_output_wizard_report_form" model="ir.ui.view">
+        <field name="name">nonconformity_output.wizard_report.form</field>
+        <field name="model">nonconformity_output.wizard_report</field>
+        <field name="arch" type="xml">
+            <form string="Salidas no conformes">
+                <group>
+                    <field name="nonconformity_ids"/>
+                </group>
+                <footer>
+                    <button name="print_report" string="Imprimir" type="object" class="oe_highlight"/>
+                    <button string="Cancelar" class="oe_link" special="cancel"/>
+                </footer>
+            </form>
+        </field>
+    </record>
+
+    <!-- Wizard action nonconformity_output.wizard_report -->
+    <record id="action_nonconformity_output_wizard_report" model="ir.actions.act_window">
+        <field name="name">Salidas no conformes</field>
+        <field name="res_model">nonconformity_output.wizard_report</field>
+        <field name="view_mode">form</field>
+        <field name="view_id" ref="view_nonconformity_output_wizard_report_form"/>
+        <field name="target">new</field>
+    </record>
+
+</odoo>

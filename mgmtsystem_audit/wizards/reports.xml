@@ -1,0 +1,110 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+
+    <record id="audit_report_wizard_view_form" model="ir.ui.view">
+        <field name="name">audit.report.wizard.view.form</field>
+        <field name="model">audit.report.wizard</field>
+        <field name="arch" type="xml">
+            <form string="Reporte de auditoría">
+                <sheet>
+                    <group>
+                        <field name="audit_id"/>
+                    </group>
+                    <footer>
+                        <button name="action_print" type="object" string="Descargar" class="oe_highlight" icon="fa-download"/>
+                    </footer>
+                </sheet>
+            </form>
+        </field>
+    </record>
+
+
+    <record id="audit_report_wizard_action2" model="ir.actions.act_window">
+        <field name="name">Plan de auditorías</field>
+        <field name="type">ir.actions.act_window</field>
+        <field name="res_model">audit.report.wizard</field>
+        <field name="view_mode">form</field>
+        <field name="view_id" ref="audit_report_wizard_view_form"/>
+        <field name="target">new</field>
+        <field name="binding_type">report</field>
+    </record>
+
+    <menuitem
+        id="audit_audit_wizard_menu1"
+        name="Plan de auditorías"
+        action="audit_report_wizard_action2"
+        parent="mgmtsystem_audit.audit_report_menu"
+        groups="base.group_user"
+        sequence="2"/>
+        
+
+    <record id="audit_plan_report_wizard_view_form" model="ir.ui.view">
+        <field name="name">audit.plan.report.wizard.view.form</field>
+        <field name="model">audit.plan.report.wizard</field>
+        <field name="arch" type="xml">
+            <form string="Reporte de Programa de auditorías">
+                <sheet>
+                    <group>
+                        <field name="audit_plan_id"/>
+                    </group>
+                    <footer>
+                        <button name="action_print" type="object" string="Descargar" class="oe_highlight" icon="fa-download"/>
+                    </footer>
+                </sheet>
+            </form>
+        </field>
+    </record>
+
+    <record id="audit_plan_report_wizard_action2" model="ir.actions.act_window">
+        <field name="name">Programa de auditorías</field>
+        <field name="type">ir.actions.act_window</field>
+        <field name="res_model">audit.plan.report.wizard</field>
+        <field name="view_mode">form</field>
+        <field name="target">new</field>
+        <field name="view_id" ref="audit_plan_report_wizard_view_form"/>
+        <field name="binding_type">report</field>
+    </record>
+
+    <menuitem
+        id="audit_plan_wizard_menu1"
+        name="Programa de auditorías"
+        parent="mgmtsystem_audit.audit_report_menu"
+        action="audit_plan_report_wizard_action2"
+        sequence="1"/>
+
+    <record id="audit_report_report_wizard_view_form" model="ir.ui.view">
+        <field name="name">audit.report.report.wizard.view.form</field>
+        <field name="model">audit.report.report.wizard</field>
+        <field name="arch" type="xml">
+            <form string="Reporte de Programa de auditorías">
+                <sheet>
+                    <group>
+                        <field name="audit_report_id"/>
+                    </group>
+                    <footer>
+                        <button name="action_print" type="object" string="Descargar" class="oe_highlight" icon="fa-download"/>
+                    </footer>
+                </sheet>
+            </form>
+        </field>
+    </record>
+
+    <record id="audit_report_report_wizard_action2" model="ir.actions.act_window">
+        <field name="name">Informe de auditorías</field>
+        <field name="type">ir.actions.act_window</field>
+        <field name="res_model">audit.report.report.wizard</field>
+        <field name="view_mode">form</field>
+        <field name="target">new</field>
+        <field name="view_id" ref="audit_report_report_wizard_view_form"/>
+        <field name="binding_type">report</field>
+    </record>
+
+
+    <menuitem
+        id="audit_report_wizard_menu1"
+        name="Informe de auditorías"
+        parent="mgmtsystem_audit.audit_report_menu"
+        action="audit_report_report_wizard_action2"
+        sequence="3"/>
+
+</odoo>

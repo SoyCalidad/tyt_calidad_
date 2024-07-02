@@ -1,0 +1,37 @@
+<odoo>
+    <data>
+
+        <menuitem
+            id="comunication_report_menu"
+            name="Reportes"
+            parent="menu_comunication_root"
+            sequence="150"
+            groups="base.group_no_one,group_comunication_onlyread_printreport,group_comunication_write_printreport,group_comunication_all"
+            />
+
+        <menuitem
+            id="comunication_plan_report_menu"
+            name="Programa de comunicaciones"
+            action="comunication_plan_wizard_action"
+            parent="comunication_report_menu"
+            sequence="10"/>
+
+        <menuitem
+            id="comunication_plan_line1_report_menu"
+            name="Plan de comunicaciones"
+            action="comunication_plan_line_wizard_action"
+            parent="comunication_report_menu"
+            sequence="11"/>
+
+        <menuitem
+            id="record_meeting_report_menu"
+            name="Actas de Reunión"
+            action="record_meeting_wizard_action"
+            parent="comunication_report_menu"
+            sequence="12"/>
+
+
+
+
+    </data>
+</odoo>

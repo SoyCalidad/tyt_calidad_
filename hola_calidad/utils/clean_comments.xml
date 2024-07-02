@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+
+    <!-- mail.message - def _cron_clean_message_ids -->
+    <record id="mail_message_cron_clean_message_ids" model="ir.cron">
+        <field name="name">Clean message ids</field>
+        <field name="model_id" ref="model_mail_message"/>
+        <field name="state">code</field>
+        <field name="code">model._cron_clean_message_ids()</field>
+        <field name="interval_number">1</field>
+        <field name="interval_type">weeks</field>
+        <field name="numbercall">-1</field>
+        <field name="active" eval="False"/>
+    </record>
+
+</odoo>

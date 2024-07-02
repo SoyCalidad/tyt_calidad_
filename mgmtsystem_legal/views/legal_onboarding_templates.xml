@@ -1,0 +1,97 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <!-- ONBOARDING STEPS -->
+
+    <template id="onboarding_legal_plan_step">
+        <t t-call="base.onboarding_step">
+            <t t-set="title">Programa de requisitos legales</t>
+            <t t-set="description">Cree un programa de requisitos legales.</t>
+            <t t-set="done_icon" t-value="'fa-star'" />
+            <t t-set="btn_text">Crear</t>
+            <t t-set="done_text">Se ve bien!</t>
+            <t t-set="method" t-value="'action_open_legal_plan'" />
+            <t t-set="model" t-value="'res.company'" />
+            <t t-set="state" t-value="state.get('legal_plan_onboarding_state')" />
+        </t>
+    </template>
+
+    <template id="onboarding_legal_legal_step">
+        <t t-call="base.onboarding_step">
+            <t t-set="title">Requisitos legales</t>
+            <t t-set="description">Cree un requisito legal.</t>
+            <t t-set="done_icon" t-value="'fa-star'" />
+            <t t-set="btn_text">Crear</t>
+            <t t-set="done_text">Se ve bien!</t>
+            <t t-set="method" t-value="'action_open_legal_legal'" />
+            <t t-set="model" t-value="'res.company'" />
+            <t t-set="state" t-value="state.get('legal_legal_onboarding_state')" />
+        </t>
+    </template>
+
+
+    <!-- ONBOARDING PANELS -->
+    <template id="legal_onboarding_panel" name="legal.onboarding.panel">
+        <t t-call="base.onboarding_container">
+            <t t-set="classes" t-value="'o_onboarding_blue'"/>
+            <t t-set="bg_image" t-value="'/account/static/src/img/account_invoice_onboarding_bg.jpg'"/>
+            <t t-set="close_method" t-value="'action_close_legal_onboarding'"/>
+            <t t-set="close_model" t-value="'res.company'"/>
+            <t t-set="text_completed">Felicitaciones! Ha completado todo.</t>
+            <t t-call="mgmtsystem_legal.onboarding_legal_legal_step" name="legal_legal_step" />
+            <t t-call="mgmtsystem_legal.onboarding_legal_plan_step" name="legal_plan_step" />
+        </t>
+    </template>
+
+    <!-- Views -->
+
+    <record id="onboarding_legal_plan_form" model="ir.ui.view">
+        <field name="name">legal.plan.inherit.view.form</field>
+        <field name="model">legal.plan</field>
+        <field name="inherit_id" ref="mgmtsystem_legal.view_legal_plan_form"/>
+        <field name="priority">1000</field>
+        <field name="mode">primary</field>
+        <field name="arch" type="xml">
+            <form position="inside">
+                <footer position="replace">
+                    <button name="action_save_onboarding_legal_plan_step" class="btn btn-primary" type="object" string="Crear" />
+                    <button special="cancel" string="Cancelar" />
+                </footer>
+            </form>
+        </field>
+    </record>
+
+    <record id="onboarding_legal_legal_form" model="ir.ui.view">
+        <field name="name">legal.legal.inherit.view.form</field>
+        <field name="model">legal.legal</field>
+        <field name="inherit_id" ref="mgmtsystem_legal.view_legal_legal_form"/>
+        <field name="priority">1000</field>
+        <field name="mode">primary</field>
+        <field name="arch" type="xml">
+            <form position="inside">
+                <footer position="replace">
+                    <button name="action_save_onboarding_legal_legal_step" class="btn btn-primary" type="object" string="Crear" />
+                    <button special="cancel" string="Cancelar" />
+                </footer>
+            </form>
+        </field>
+    </record>
+
+    <record id="action_legal_plan_configurator" model="ir.actions.act_window">
+        <field name="type">ir.actions.act_window</field>
+        <field name="name">Cree un programa de requisitos legales</field>
+        <field name="view_mode">form</field>
+        <field name="target">new</field>
+        <field name="res_model">legal.plan</field>
+        <field name="view_id" ref="mgmtsystem_legal.onboarding_legal_plan_form"/>
+    </record>
+
+    <record id="action_legal_legal_configurator" model="ir.actions.act_window">
+        <field name="type">ir.actions.act_window</field>
+        <field name="name">Cree un requisito legal</field>
+        <field name="view_mode">form</field>
+        <field name="target">new</field>
+        <field name="res_model">legal.legal</field>
+        <field name="view_id" ref="mgmtsystem_legal.onboarding_legal_legal_form"/>
+    </record>
+
+</odoo>

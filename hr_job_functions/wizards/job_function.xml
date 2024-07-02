@@ -1,0 +1,81 @@
+<odoo>
+    <data>
+
+        <record id="job_report_wizard_view_form" model="ir.ui.view">
+            <field name="name">mgmt.job_function.report.wizard.view.form</field>
+            <field name="model">mgmt.job_function.report.wizard</field>
+            <field name="arch" type="xml">
+                <form string="">
+                    <sheet>
+                        <group>
+                            <field name="job_id"/>
+                        </group>
+                    </sheet>
+                    <footer>
+                        <button name="action_print" type="object" string="Descargar" class="oe_highlight" icon="fa-download"/>
+                    </footer>
+                </form>
+            </field>
+        </record>
+
+        <record id="action_job_report" model="ir.actions.act_window">
+            <field name="name">Manual de organización y funciones</field>
+            <field name="type">ir.actions.act_window</field>
+            <field name="res_model">mgmt.job_function.report.wizard</field>
+
+            <field name="view_mode">form</field>
+            <field name="view_id" ref="job_report_wizard_view_form"/>
+            <field name="target">new</field>
+            <field name="binding_type">report</field>
+        </record>
+
+        
+        <menuitem id="job_report_menu"
+            name="Manual de organización y funciones"
+            action="action_job_report"
+            parent="mgmtsystem_employees.hr_report_root_menu"
+            sequence="10"/>
+
+
+        <record id="employee_report_wizard_view_form" model="ir.ui.view">
+            <field name="name">mgmt.employee.report.wizard.view.form</field>
+            <field name="model">mgmt.employee.report.wizard</field>
+            <field name="arch" type="xml">
+                <form string="">
+                    <sheet>
+                        <group>
+                            <field name="employee_id"/>
+                        </group>
+                    </sheet>
+                    <footer>
+                        <button name="action_print" type="object" string="Descargar" class="oe_highlight" icon="fa-download"/>
+                    </footer>
+                </form>
+            </field>
+        </record>
+
+        <record id="action_employee_report" model="ir.actions.act_window">
+            <field name="name">Ficha de empleado</field>
+            <field name="type">ir.actions.act_window</field>
+            <field name="res_model">mgmt.employee.report.wizard</field>
+            <field name="view_mode">form</field>
+            <field name="view_id" ref="employee_report_wizard_view_form"/>
+            <field name="target">new</field>
+            <field name="binding_type">report</field>
+        </record>
+
+
+        <menuitem id="employee_report_menu"
+            name="Ficha de empleado"
+            action="action_employee_report"
+            parent="mgmtsystem_employees.hr_report_root_menu"
+            sequence="10"/>
+
+        <menuitem id="organization_chart_menu"
+            name="Organigrama"
+            action="mgmtsystem_context.organization_chart_action"
+            parent="hr.menu_hr_root"
+            sequence="25"/>
+
+    </data>
+</odoo>

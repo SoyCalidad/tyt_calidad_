@@ -1,0 +1,117 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data noupdate="1">
+    
+        <record id="main_storage" model="dms.storage">
+            <field name="name">Almacenamiento principal</field>
+            <field name="save_type">database</field>
+        </record>
+        <record id="directory_com" model="dms.directory">
+            <field name="name">Comunicaciones</field>
+            <field name="is_root_directory" eval="True" />
+            <field name="color" eval="1" />
+            <field name="storage_id" ref="soycalidad_dms.main_storage" />
+        </record>
+        <record id="directory_cap" model="dms.directory">
+            <field name="name">Capacitaciones</field>
+            <field name="is_root_directory" eval="True" />
+            <field name="color" eval="1" />
+            <field name="storage_id" ref="soycalidad_dms.main_storage" />
+        </record>
+        <record id="directory_pro" model="dms.directory">
+            <field name="name">Procesos</field>
+            <field name="is_root_directory" eval="True" />
+            <field name="color" eval="1" />
+            <field name="storage_id" ref="soycalidad_dms.main_storage" />
+        </record>
+        <record id="directory_context" model="dms.directory">
+            <field name="name">Contexto</field>
+            <field name="is_root_directory" eval="True" />
+            <field name="color" eval="1" />
+            <field name="storage_id" ref="soycalidad_dms.main_storage" />
+        </record>
+         <record id="directory_opp" model="dms.directory">
+            <field name="name">Riesgos y oportunidades</field>
+            <field name="is_root_directory" eval="True" />
+            <field name="color" eval="1" />
+            <field name="storage_id" ref="soycalidad_dms.main_storage" />
+        </record>
+        <record id="directory_comunication" model="dms.directory">
+            <field name="name">Comunicaciones </field>
+            <field name="is_root_directory" eval="True" />
+            <field name="color" eval="1" />
+            <field name="storage_id" ref="soycalidad_dms.main_storage" />
+        </record>
+        <record id="directory_legal" model="dms.directory">
+            <field name="name">Requisitos legales</field>
+            <field name="is_root_directory" eval="True" />
+            <field name="color" eval="1" />
+            <field name="storage_id" ref="soycalidad_dms.main_storage" />
+        </record>
+        <record id="directory_survey" model="dms.directory">
+            <field name="name">Requisitos </field>
+            <field name="is_root_directory" eval="True" />
+            <field name="color" eval="1" />
+            <field name="storage_id" ref="soycalidad_dms.main_storage" />
+        </record>
+        <record id="directory_survey2" model="dms.directory">
+            <field name="name">Encuestas</field>
+            <field name="is_root_directory" eval="True" />
+            <field name="color" eval="1" />
+            <field name="storage_id" ref="soycalidad_dms.main_storage" />
+        </record>
+        <record id="directory_target" model="dms.directory">
+            <field name="name">Objetivos y medición</field>
+            <field name="is_root_directory" eval="True" />
+            <field name="color" eval="1" />
+            <field name="storage_id" ref="soycalidad_dms.main_storage" />
+        </record>
+        <record id="directory_indicator" model="dms.directory">
+            <field name="name">Indicadores</field>
+            <field name="is_root_directory" eval="True" />
+            <field name="color" eval="1" />
+            <field name="storage_id" ref="soycalidad_dms.main_storage" />
+        </record>
+        <record id="directory_maintenance" model="dms.directory">
+            <field name="name">Mantenimiento y Calibración</field>
+            <field name="is_root_directory" eval="True" />
+            <field name="color" eval="1" />
+            <field name="storage_id" ref="soycalidad_dms.main_storage" />
+        </record>
+        <record id="directory_review" model="dms.directory">
+            <field name="name">Revisión por la dirección</field>
+            <field name="is_root_directory" eval="True" />
+            <field name="color" eval="1" />
+            <field name="storage_id" ref="soycalidad_dms.main_storage" />
+        </record>
+        <record id="directory_nc" model="dms.directory">
+            <field name="name">No conformidades</field>
+            <field name="is_root_directory" eval="True" />
+            <field name="color" eval="1" />
+            <field name="storage_id" ref="soycalidad_dms.main_storage" />
+        </record>
+        <record id="directory_action" model="dms.directory">
+            <field name="name">Acciones</field>
+            <field name="is_root_directory" eval="True" />
+            <field name="color" eval="1" />
+            <field name="storage_id" ref="soycalidad_dms.main_storage" />
+        </record>
+        <record id="directory_audit" model="dms.directory">
+            <field name="name">Auditorías</field>
+            <field name="is_root_directory" eval="True" />
+            <field name="color" eval="1" />
+            <field name="storage_id" ref="soycalidad_dms.main_storage" />
+        </record>
+
+    <!-- IMPROVE DIRECTORY -->
+    <record id="directory_improve" model="dms.directory">
+        <field name="name">Mejora continua</field>
+        <field name="is_root_directory" eval="True"/>
+        <field name="color" eval="1"/>
+        <field name="storage_id" ref="soycalidad_dms.main_storage"/>
+    </record>
+
+    </data>
+    
+    
+</odoo>

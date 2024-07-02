@@ -1,0 +1,483 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--Estructura basica de reportes-->
+<odoo>
+   <data>
+      <template id="report_process_edition_template">
+         <t t-if="o and 'company_id' in o">
+            <t t-set="company" t-value="o.company_id" />
+         </t>
+         <t t-if="not o or not 'company_id' in o">
+            <t t-set="company" t-value="res_company" />
+         </t>
+         <t t-call="web.html_container">
+            <t t-foreach="docs" t-as="o">
+               <div class="header">
+                  <style type="text/css">
+                     .tg  {border-collapse:collapse;border-spacing:0;margin:0px auto;width:100%;max-height:90px;}
+                     .tg td{border-color:black;border-style:solid;border-width:1px;font-family: Palatino, Palatino Linotype, Palatino LT STD, Book Antiqua, Georgia, serif;font-size:14px;
+                     overflow:hidden;padding:10px 5px;word-break:normal;text-align:middle;align:center;}
+                     .tg th{border-color:black;border-style:solid;border-width:1px;font-family: Palatino, Palatino Linotype, Palatino LT STD, Book Antiqua, Georgia, serif;font-size:14px;
+                     font-weight:normal;overflow:hidden;padding:10px 5px;word-break:normal;}
+                     .tg .tg-9wq8{border-color:inherit;text-align:center;vertical-align:middle}
+                     .tg .tg-1wig{border-color:inherit;text-align:center;vertical-align:middle;font-size:16px;font-weight:bold;}
+                     .tg .tg-0lax{border-color:inherit;text-align:center;vertical-align:middle;font-size:12px;}
+                  </style>
+                  <table class="tg">
+                     <tbody>
+                        <tr>
+                           <td class="tg-1wig" rowspan="3" width="20%" style="width:15%">
+                                 <t t-if="company.logo">
+                                    <img t-att-src="image_data_uri(company.logo)" style="max-width:100px;vertical-align:middle;" alt="Logo"/>
+                                 </t>
+                           </td>                        
+                           <td class="tg-1wig" rowspan="3" width="80%" style="width:65%;">
+                              <span t-field="o.process_id.name" style="font-size:15px;font-weight:bold;" />
+                           </td>
+                           <td class="tg-0lax" width="20%" style="width:20%">
+                              Código:
+                              <span t-field="o.code" />
+                           </td>
+                        </tr>
+                        <tr>
+                           <td class="tg-0lax">
+                           Versión:
+                              <span t-field="o.version" />
+                           </td>
+                        </tr>
+                        <tr>
+                           <td class="tg-0lax">
+                              Fecha de aprobación:
+                              <span t-field="o.last_validate_date" />
+                           </td>
+                        </tr>
+                     </tbody>
+                  </table>
+               </div>
+               <t t-call="web.external_layout">
+                  <style t-if="o.state=='cancel'">
+                     .page {
+                     position: relative;
+                     }
+                     .page::after {
+                     content: "";
+                     background: url('/hola_calidad/static/src/img/obsoleto.png');
+                     opacity: 0.25;
+                     top: 0;
+                     left: 0;
+                     bottom: 0;
+                     right: 0;
+                     position: absolute;
+                     z-index: -1;
+                     }
+                  </style>
+                  <div class="page">
+                     <div class="cover" style="page-break-after: always;">
+                        <center>
+                           <style type="text/css">
+                              .tg  {border-collapse:collapse;border-spacing:0;}
+                              .tg td{font-family: Palatino, Palatino Linotype, Palatino LT STD, Book Antiqua, Georgia, serif;font-size:16px;padding:10px 5px;border-style:solid;border-width:1px;overflow:hidden;word-break:normal;border-color:black;}
+                              .tg th{font-family: Palatino, Palatino Linotype, Palatino LT STD, Book Antiqua, Georgia, serif;font-size:16px;font-weight:normal;padding:10px 5px;border-style:solid;border-width:1px;overflow:hidden;word-break:normal;border-color:black;}
+                              .tg .tg-zv36{font-weight:bold;background-color:#ffffff;border-color:inherit;text-align:left;vertical-align:top;width:33%}
+                              .tg .tg-nrix{text-align:center;vertical-align:middle;font-weight: bold;border-style: none;font-size:25px;border: 1px solid white;background-color: white;}
+                              .tg .tg-rq3n{background-color:#ffffff;text-align:center;vertical-align:middle;border-style: none;font-size:20px;}
+                              .tg .tg-7g6k{font-weight:bold;background-color:#efefef;border-color:inherit;text-align:center;vertical-align:top;font-size:16px;}
+                              .tg .tg-3xi5{background-color:#ffffff;border-color:inherit;text-align:center;vertical-align:middle;font-size:14px;}
+                           </style>
+                           <table class="tg" width="85%">
+                              <tr>
+                                 <td class="tg-nrix" colspan="3" />
+                              </tr>
+                              <tr>
+                                 <td class="tg-nrix" colspan="3" />
+                              </tr>
+                              <tr>
+                                 <td class="tg-nrix" colspan="3">
+                                    <span t-field="company.name" />
+                                 </td>
+                              </tr>
+                              <tr>
+                                 <td class="tg-nrix" colspan="3" />
+                              </tr>
+                              <tr>
+                                 <td class="tg-nrix" colspan="3" />
+                              </tr>
+                              <tr>
+                                 <td class="tg-rq3n" colspan="3" />
+                              </tr>
+                              <tr>
+                                 <td class="tg-7g6k">PROCEDIMIENTO</td>
+                                 <td class="tg-3xi5" colspan="2">
+                                    <span t-field="o.process_id" />
+                                 </td>
+                              </tr>
+                              <tr>
+                                 <td class="tg-7g6k">VERSIÓN</td>
+                                 <td class="tg-3xi5" colspan="2">
+                                    <span t-field="o.version" />
+                                 </td>
+                              </tr>
+                              <tr>
+                                 <td class="tg-7g6k">FECHA DE ELABORACIÓN</td>
+                                 <td class="tg-3xi5" colspan="2">
+                                    <t t-foreach="o.elaboration_step" t-as="step">
+                                       <span t-field="step.date" />
+                                       <br />
+                                    </t>
+                                 </td>
+                              </tr>
+                              <tr>
+                                 <td class="tg-7g6k">ELABORADO POR</td>
+                                 <td class="tg-3xi5" colspan="2">
+                                    <t t-foreach="o.elaboration_step" t-as="user">
+                                       <span t-field="user.user_id.partner_id.name" />
+                                       <br />
+                                    </t>
+                                 </td>
+                              </tr>
+                              <tr>
+                                 <td class="tg-7g6k">
+                                    Actualizado por:
+                                    <br />
+                                    <t t-foreach="o.elaboration_step" t-as="user">
+                                       <span t-field="user.user_id.partner_id.name" />
+                                       <br />
+                                    </t>
+                                 </td>
+                                 <td class="tg-7g6k">
+                                    Revisado por:
+                                    <br />
+                                    <t t-foreach="o.review_step" t-as="user">
+                                       <span t-field="user.user_id.partner_id.name" />
+                                       <br />
+                                    </t>
+                                 </td>
+                                 <td class="tg-7g6k">
+                                    Aprobado por:
+                                    <br />
+                                    <t t-foreach="o.validation_step" t-as="user">
+                                       <span t-field="user.user_id.partner_id.name" />
+                                       <br />
+                                    </t>
+                                 </td>
+                              </tr>
+                              <tr>
+                                 <td class="tg-zv36">
+                                    Firma:
+                                    <br />
+                                    <t t-foreach="o.elaboration_step" t-as="user">
+                                       <span t-if="o.state=='validate_ok'" t-raw="user.user_id.signature" style="display:block;" />
+                                       <br />
+                                    </t>
+                                 </td>
+                                 <td class="tg-zv36">
+                                    Firma:
+                                    <br />
+                                    <t t-foreach="o.review_step" t-as="user">
+                                       <span t-if="o.state=='validate_ok'" t-raw="user.user_id.signature" style="display:block;" />
+                                       <br />
+                                    </t>
+                                 </td>
+                                 <td class="tg-zv36">
+                                    Firma:
+                                    <br />
+                                    <t t-foreach="o.validation_step" t-as="user">
+                                       <span t-if="o.state=='validate_ok'" t-raw="user.user_id.signature" style="display:block;" />
+                                       <br />
+                                    </t>
+                                 </td>
+                              </tr>
+                              <tr>
+                                 <td class="tg-3xi5">
+                                    <t t-foreach="o.elaboration_step" t-as="user">
+                                       <t t-foreach="user.user_id.employee_ids" t-as="emp">
+                                          <span t-field="emp.job_id.name" />
+                                          <br />
+                                       </t>
+                                       <br />
+                                    </t>
+                                 </td>
+                                 <td class="tg-3xi5">
+                                    <t t-foreach="o.review_step" t-as="user">
+                                       <t t-foreach="user.user_id.employee_ids" t-as="emp">
+                                          <span t-field="emp.job_id.name" />
+                                          <br />
+                                       </t>
+                                       <br />
+                                    </t>
+                                 </td>
+                                 <td class="tg-3xi5">
+                                    <t t-foreach="o.validation_step" t-as="user">
+                                       <t t-foreach="user.user_id.employee_ids" t-as="emp">
+                                          <span t-field="emp.job_id.name" />
+                                          <br />
+                                       </t>
+                                       <br />
+                                    </t>
+                                 </td>
+                              </tr>
+                              <tr>
+                                 <td class="tg-zv36">
+                                    Fecha:
+                                    <br />
+                                    <t t-foreach="o.elaboration_step" t-as="step">
+                                       <span t-field="step.date" />
+                                    </t>
+                                 </td>
+                                 <td class="tg-zv36">
+                                    Fecha:
+                                    <br />
+                                    <t t-foreach="o.review_step" t-as="step">
+                                       <span t-field="step.date" />
+                                    </t>
+                                 </td>
+                                 <td class="tg-zv36">
+                                    Fecha:
+                                    <br />
+                                    <t t-foreach="o.review_step" t-as="step">
+                                       <span t-field="step.date" />
+                                    </t>
+                                 </td>
+                              </tr>
+                           </table>
+                        </center>
+                        <br />
+                        <br />
+                     </div>
+                     <style type="text/css">
+                        .html_container  {page-break-before: always;display: table;font-size:16px;color:black;margin-left:   30px;margin-right:  30px;text-align: justify;text-justify: inter-word;"}
+                        img {max-height: 700px; object-fit: contain;display: block;margin-left: auto;margin-right: auto;}
+                     </style>
+                     <t t-if="o.custom">
+                        <t t-raw="o.custom_body" />
+                     </t>
+                     <t t-if="not o.custom">
+                        <div class="index" width="90%" style="page-break-before:always;page-break-after:always;padding-left:25px;padding-right:25px;margin-left:30px;margin-right:30px;">
+                           <style type="text/css">
+                              .lmn  {padding-left: 30px;font-size:14px;color:black;text-align: justify;text-justify: inter-word;}
+                              .lmn img{height: 100%;width: 100%;}
+                           </style>
+                           <h4>
+                              <b>Índice</b>
+                           </h4>
+                           <p style="font-size:16px;color:black;">
+                              1. Objetivo
+                              <br />
+                              2. Alcance
+                              <br />
+                              3. Referencias
+                              <br />
+                              4. Responsabilidad
+                              <br />
+                              5. Definiciones
+                              <br />
+                              6. Descripción del proceso
+                              <br />
+                              7. Registros
+                              <br />
+                              8. Anexos
+                              <br />
+                           </p>
+                        </div>
+                        <div width="90%" style="page-break-inside: avoid;
+                           display: table;
+                           font-size:16px;color:black;
+                           margin-left:   30px;
+                           margin-right:  30px;
+                           text-align: justify;
+                           text-justify: inter-word;">
+                           <h4>1. Objetivo</h4>
+                           <div class="lmn" style="padding-left: 30px;font-size:16px;color:black;text-align: justify;text-justify: inter-word;">
+                              <t t-raw="o.purpose" />
+                           </div>
+                        </div>
+                        <div width="90%" style="page-break-inside: avoid;
+                           display: table;
+                           font-size:16px;color:black;
+                           margin-left:   30px;
+                           margin-right:  30px;
+                           text-align: justify;
+                           text-justify: inter-word;">
+                           <h4>2. Alcance</h4>
+                           <div class="lmn" style="padding-left: 30px;font-size:16px;color:black;text-align: justify;text-justify: inter-word;">
+                              <t t-raw="o.scope" />
+                           </div>
+                        </div>
+                        <div width="90%" style="page-break-inside: avoid;
+                           display: table;
+                           font-size:16px;color:black;
+                           margin-left:   30px;
+                           margin-right:  30px;
+                           text-align: justify;
+                           text-justify: inter-word;">
+                           <h4>3. Referencias</h4>
+                           <div class="references" style="padding-left: 30px;font-size:16px;color:black;text-align: justify;text-justify: inter-word;">
+                              <style type="text/css">
+                                 .tg  {border-collapse:collapse;border-spacing:0;margin:0px auto;width:100%;}
+                                 .tg td{border-color:black;border-style:solid;border-width:1px;font-family: Palatino, Palatino Linotype, Palatino LT STD, Book Antiqua, Georgia, serif;font-size:14px;
+                                 overflow:hidden;padding:10px 5px;word-break:normal;}
+                                 .tg th{border-color:black;border-style:solid;border-width:1px;font-family: Palatino, Palatino Linotype, Palatino LT STD, Book Antiqua, Georgia, serif;font-size:14px;
+                                 font-weight:normal;overflow:hidden;padding:10px 5px;word-break:normal;}
+                                 .tg .tg-d14o{background-color:#efefef;border-color:#c0c0c0;font-weight:bold;text-align:center;vertical-align:middle}
+                                 .tg .tg-wo29{border-color:#c0c0c0;text-align:left;vertical-align:top}
+                                 .tg .tg-fzdr{border-color:#c0c0c0;text-align:center;vertical-align:top}
+                              </style>
+                              <table class="tg" width="100%">
+                                 <tbody>
+                                    <tr>
+                                       <td class="tg-d14o">NOMBRE</td>
+                                       <td class="tg-d14o">TIPO</td>
+                                       <td class="tg-d14o">ENTIDAD</td>
+                                       <td class="tg-d14o">FECHA DE PUBLICACIÓN</td>
+                                    </tr>
+                                    <t t-foreach="o.references" t-as="r">
+                                       <tr>
+                                          <td class="tg-wo29">
+                                             <span t-field="r.name" />
+                                          </td>
+                                          <td class="tg-wo29">
+                                             <span t-field="r.type_id" />
+                                          </td>
+                                          <td class="tg-wo29">
+                                             <span t-field="r.entity_id" />
+                                          </td>
+                                          <td class="tg-fzdr">
+                                             <span t-field="r.date_release" />
+                                          </td>
+                                       </tr>
+                                    </t>
+                                 </tbody>
+                              </table>
+                           </div>
+                        </div>
+                        <div class="responsibles" width="90%" style="page-break-inside: avoid;
+                           display: table;
+                           font-size:16px;color:black;
+                           margin-left:   30px;
+                           margin-right:  30px;
+                           text-align: justify;
+                           text-justify: inter-word;">
+                           <h4>4. Responsabilidad</h4>
+                           <ul>
+                              <t t-foreach="o.responsible_ids" t-as="r">
+                                 <div class="lmn" style="padding-left: 30px;font-size:16px;color:black;text-align: justify;text-justify: inter-word;">
+                                    <li>
+                                       <strong>
+                                          <t t-if="r.name">
+                                             <span t-field="r.name" />
+                                          </t>
+                                          <t t-else=""></t>
+                                          :
+                                       </strong>
+                                       <span t-field="r.description" />
+                                    </li>
+                                 </div>
+                              </t>
+                           </ul>
+                        </div>
+                        <div width="90%" style="page-break-inside: avoid;
+                           display: table;
+                           font-size:16px;color:black;
+                           margin-left:   30px;
+                           margin-right:  30px;
+                           text-align: justify;
+                           text-justify: inter-word;">
+                           <h4>5. Definiciones</h4>
+                           <ul>
+                              <t t-foreach="o.abbreviation_ids" t-as="a">
+                                 <div class="lmn" style="padding-left: 30px;font-size:16px;color:black;text-align: justify;text-justify: inter-word;">
+                                    <li>
+                                       <strong>
+                                          <span t-field="a.name" />
+                                          :
+                                          <span t-field="a.abbre" />
+                                       </strong>
+                                       <span t-field="a.description" />
+                                    </li>
+                                 </div>
+                              </t>
+                           </ul>
+                        </div>
+                        <div width="90%" style="page-break-before:always;
+                           display: table;
+                           font-size:16px;color:black;
+                           margin-left:   30px;
+                           margin-right:  30px;
+                           text-align: justify;
+                           text-justify: inter-word;">
+                           <h4>6. Descripción del proceso</h4>
+                           <div class="lmn" style="padding-left: 30px;font-size:16px;color:black;text-align: justify;text-justify: inter-word;">
+                              <t t-raw="o.body" />
+                           </div>
+                        </div>
+                        <div class="flujograma" width="90%" style="page-break-before:always;
+                           display: table;
+                           font-size:16px;color:black;
+                           margin-left:   30px;
+                           margin-right:  30px;
+                           text-align: justify;
+                           text-justify: inter-word;">
+                           <h4>7. Registros</h4>
+                           <div class="lmn" style="padding-left: 30px;font-size:16px;color:black;text-align: justify;text-justify: inter-word;width:800px;">
+                              <t t-raw="o.flowchart" />
+                           </div>
+                        </div>
+                        <center>
+                           <div style="page-break-before:always;">
+                              <table width="95%" style="font-size:16px;border-collapse:collapse;">
+                                 <tr style=" background-color:#DBDCE3;">
+                                    <th class="col-xs-1" style="border: 1px solid black; vertical-align: middle;font-size:16px;">Versión</th>
+                                    <th class="col-xs-2" style="border: 1px solid black; vertical-align: middle;font-size:16px;" valign="middle">
+                                       <center>Fecha de publicación</center>
+                                    </th>
+                                    <th class="col-xs-9" style="border: 1px solid black; vertical-align: middle;font-size:16px;" valign="middle">
+                                       <center>IDENTIFICACION DE LA EDICION O CAMBIO</center>
+                                    </th>
+                                 </tr>
+                                 <t t-foreach="o.change_history" t-as="des">
+                                    <tr>
+                                       <td style="border: 1px solid black;font-size:14px;" align="center" valign="middle">
+                                          <span t-field="des.numero" />
+                                       </td>
+                                       <td style="border: 1px solid black;font-size:14px;" align="center" valign="middle">
+                                          <span t-field="des.publish_date" />
+                                       </td>
+                                       <td style="border: 1px solid black;font-size:14px;" align="center" valign="middle">
+                                          <span t-field="des.name" />
+                                       </td>
+                                    </tr>
+                                 </t>
+                              </table>
+                           </div>
+                        </center>
+                     </t>
+                  </div>
+                  <div class="footer" style="border-top: 1px solid black;font-size: 8px;">
+                     <div class="text-center" style="border-top: 1px solid black;font-size: 10px;text-align:center;">
+                        ©
+                        <span t-field="company.name" />
+                        . All Rights Reserved.
+                        <br />
+                        PROHIBIDA SU REPRODUCCIÓN SIN AUTORIZACIÓN EXPRESA DE LA DIRECCIÓN.
+                        <br />
+                        CUALQUIER COPIA IMPRESA NO CONTROLADA. DEBE SER ROTULADA COMO "COPIA NO CONTROLADA".
+                        <br />
+                        CONSULTE VERSIÓN ELECTRÓNICA
+                     </div>
+                  </div>
+               </t>
+            </t>
+         </t>
+      </template>
+
+      <report id="report_process_edition"
+              string="Edición de procedimiento"
+              report_type="qweb-pdf"
+              model="process.edition"
+              name="mgmtsystem_process.report_process_edition_template"
+              file="Edición de Procedimiento"
+              print_report_name="object.name"
+              paperformat="hola_calidad.portrait"
+              groups="base.group_no_one,mgmtsystem_process.group_process_readonly_printreport,mgmtsystem_process.group_process_owner,mgmtsystem_process.group_process_all" />
+
+   </data>
+</odoo>

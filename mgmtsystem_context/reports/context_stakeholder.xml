@@ -1,0 +1,97 @@
+<odoo>
+    <data>
+
+        <report id="report_stakeholders"
+            model="mgmtsystem.stakeholders"
+            string="Matriz de stakeholders"
+            report_type="qweb-pdf"
+            name="mgmtsystem_context.report_stakeholder_2"
+            file="Matriz de stakeholders"
+            groups="base.group_no_one,mgmtsystem_context.group_context_onlyread_printreport,mgmtsystem_context.group_context_write_printreport,mgmtsystem_context.group_context_all"
+            paperformat="hola_calidad.portrait" />
+
+        <template id="report_stakeholder_2">
+            <t t-call="web.html_container">
+                <t t-foreach="docs" t-as="o">
+                    <t t-call="hola_calidad.iso_header" />
+                    <t t-call="web.external_layout">
+                        <t t-call="hola_calidad.iso_cover" />
+                        <style t-if="o.state=='cancel'">
+                            .page {
+                            position: relative;
+                            }
+                            .page::after {
+                            content: "";
+                            background: url('/hola_calidad/static/src/img/obsoleto.png');
+                            opacity: 0.25;
+                            top: 0;
+                            left: 0;
+                            bottom: 0;
+                            right: 0;
+                            position: absolute;
+                            z-index: -1;
+                            }
+                        </style>
+                        <div class="page">
+                            <div class="main_table">
+                                <table class="tg">
+                                    <tr>
+                                        <th class="tg-d14o">PARTE INTERESADA</th>
+                                        <th class="tg-d14o">REQUISITOS</th>
+                                        <th class="tg-d14o">TIPO</th>
+                                        <th class="tg-d14o">CALIFICACIÓN</th>
+                                    </tr>
+                                    <tr>
+                                        <th class="tg-d14o" colspan="4">INTERESADOS INTERNOS</th>
+                                    </tr>
+                                    <t t-foreach="o.stakeholder_in_ids" t-as="internal_stakeholder">
+                                        <t t-set="requirements_len" t-value="len(internal_stakeholder.requirements) + 1" />
+                                        <tr>
+                                            <td class="tg-wo31" t-att-rowspan="requirements_len">
+                                                <span t-field="internal_stakeholder.name" />
+                                            </td>
+                                        </tr>
+                                        <t t-foreach="internal_stakeholder.requirements" t-as="req">
+                                            <tr>
+                                                <td class="tg-wo31">
+                                                    <span t-field="req.name" />
+                                                </td>
+                                                <td class="tg-wo31">
+                                                    <span t-field="req.type" />
+                                                </td>
+                                                <td class="tg-wo31"></td>
+                                            </tr>
+                                        </t>
+                                    </t>
+                                    <tr>
+                                        <th class="tg-d14o" colspan="4">INTERESADOS EXTERNOS</th>
+                                    </tr>
+                                    <t t-foreach="o.stakeholder_out_ids" t-as="external_stakeholder">
+                                        <t t-set="requirements_len" t-value="len(external_stakeholder.requirements) + 1" />
+                                        <tr>
+                                            <td class="tg-wo31" t-att-rowspan="requirements_len">
+                                                <span t-field="external_stakeholder.name" />
+                                            </td>
+                                            <t t-foreach="external_stakeholder.requirements" t-as="req">
+                                                <td class="tg-wo31">
+                                                    <span t-field="req.name" />
+                                                </td>
+                                                <td class="tg-wo31">
+                                                    <span t-field="req.type" />
+                                                </td>
+                                                <td class="tg-wo31"></td>
+                                            </t>
+                                        </tr>
+                                    </t>
+                                </table>
+                            </div>
+                        </div>
+                        <t t-call="hola_calidad.iso_footer" />
+                    </t>
+                </t>
+            </t>
+        </template>
+
+
+    </data>
+</odoo>

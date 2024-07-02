@@ -1,0 +1,48 @@
+<odoo>
+    <data>
+
+        <record id="process_edition_wizard_view_form" model="ir.ui.view">
+            <field name="name">mgmt.process_edition.report.wizard.view.form</field>
+            <field name="model">mgmt.process_edition.report.wizard</field>
+            <field name="arch" type="xml">
+                <form string="">
+                    <sheet>
+                        <group>
+                            <field name="process_edition_id" widget="m2m_tags"/>
+                        </group>
+                    </sheet>
+                    <footer>
+                        <button name="action_print" type="object" string="Descargar" class="oe_highlight" icon="fa-download"/>
+                    </footer>
+                </form>
+            </field>
+        </record>
+
+        <record id="action_process_edition_report" model="ir.actions.act_window">
+            <field name="name">Reporte de procesos</field>
+            <field name="type">ir.actions.act_window</field>
+            <field name="res_model">mgmt.process_edition.report.wizard</field>
+            <field name="view_mode">form</field>
+            <field name="view_id" ref="process_edition_wizard_view_form"/>
+            <field name="target">new</field>
+            <field name="binding_type">report</field>
+        </record>
+
+        <record id="mgmt_process_cron" model="ir.cron">
+            <field name="name">Creación de procesos</field>
+            <field name="model_id" ref="model_mgmt_process"/>
+            <field name="interval_number">1</field>
+            <field name="interval_type">days</field>
+            <field name="numbercall">-1</field>
+            <field name="state">code</field>
+            <field name="code">model.export_process()</field>
+        </record>
+
+        <menuitem id="process_edition_report_menu" 
+        name="Edición de procedimiento" 
+        action="action_process_edition_report" 
+        parent="process_report_root_menu" 
+        sequence="10"/>
+
+    </data>
+</odoo>

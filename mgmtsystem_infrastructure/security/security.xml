@@ -1,0 +1,262 @@
+<?xml version="1.0"?>
+<odoo>
+    <data>
+        <record id="infrastructure_management" model="ir.module.category">
+            <field name="name">Mantenimiento</field>
+            <field name="description">Accesos para módulo de Mantenimiento</field>
+            <field name="parent_id" ref="hola_calidad.module_mgmt_management" />
+            <field name="sequence">25</field>
+        </record>
+    
+        <record id="group_infrastructure_onlyread" model="res.groups">
+            <field name="name">Usuario: Solo lectura</field>
+            <field name="implied_ids" eval="[(4, ref('base.group_user'))]" />
+            <field name="category_id" ref="mgmtsystem_infrastructure.infrastructure_management" />
+        </record>
+        <record id="group_infrastructure_onlyread_printreport" model="res.groups">
+            <field name="name">Usuario interno: Lectura e impresión</field>
+            <field name="implied_ids" eval="[(4, ref('mgmtsystem_infrastructure.group_infrastructure_onlyread'))]" />
+            <field name="category_id" ref="mgmtsystem_infrastructure.infrastructure_management" />
+        </record>
+
+        <record id="group_infrastructure_write_printreport" model="res.groups">
+            <field name="name">Usuario secundario: Lectura Edición de documentos propios</field>
+            <field name="implied_ids" eval="[(4, ref('mgmtsystem_infrastructure.group_infrastructure_onlyread_printreport'))]" />
+            <field name="category_id" ref="mgmtsystem_infrastructure.infrastructure_management" />
+        </record>
+
+        <record id="group_infrastructure_all" model="res.groups">
+            <field name="name">Responsable: Lectura y edición</field>
+            <field name="implied_ids" eval="[(4, ref('mgmtsystem_infrastructure.group_infrastructure_write_printreport'))]" />
+            <field name="category_id" ref="mgmtsystem_infrastructure.infrastructure_management" />
+        </record>
+
+    </data>
+    <data>
+
+        <record model="ir.rule" id="mgmt_owner_document">
+            <field name="name">Usuario secundario: Lectura Edición de documentos propios</field>
+            <field name="model_id" ref="model_mgmtsystem_maintenance_plan" />
+            <field name="groups" eval="[(4, ref('mgmtsystem_infrastructure.group_infrastructure_write_printreport'))]" />
+            <field name="perm_read" eval="1" />
+            <field name="perm_write" eval="1" />
+            <field name="perm_create" eval="1" />
+            <field name="perm_unlink" eval="1" />
+            <field name="domain_force">[('elaboration_step.user_id','in',[user.id])]</field>
+        </record>
+
+        <record model="ir.rule" id="mgmt_noowner_document">
+            <field name="name">Usuario secundario: Documentos ajenos</field>
+            <field name="model_id" ref="model_mgmtsystem_maintenance_plan" />
+            <field name="groups" eval="[(4, ref('mgmtsystem_infrastructure.group_infrastructure_write_printreport'))]" />
+            <field name="perm_read" eval="1" />
+            <field name="perm_write" eval="0" />
+            <field name="perm_create" eval="0" />
+            <field name="perm_unlink" eval="0" />
+            <field name="domain_force">[('elaboration_step.user_id','not in',[user.id])]</field>
+        </record>
+
+        <record model="ir.rule" id="mgmt_all_document">
+            <field name="name">Permisos Totales</field>
+            <field name="model_id" ref="model_mgmtsystem_maintenance_plan" />
+            <field name="groups" eval="[(4, ref('mgmtsystem_infrastructure.group_infrastructure_all'))]" />
+            <field name="perm_read" eval="1" />
+            <field name="perm_write" eval="1" />
+            <field name="perm_create" eval="1" />
+            <field name="perm_unlink" eval="1" />
+        </record>
+
+        <record model="ir.rule" id="mgmt_owner_document1">
+            <field name="name">Usuario secundario: Lectura Edición de documentos propios</field>
+            <field name="model_id" ref="model_mgmtsystem_maintenance" />
+            <field name="groups" eval="[(4, ref('mgmtsystem_infrastructure.group_infrastructure_write_printreport'))]" />
+            <field name="perm_read" eval="1" />
+            <field name="perm_write" eval="1" />
+            <field name="perm_create" eval="1" />
+            <field name="perm_unlink" eval="1" />
+            <field name="domain_force">[('responsable_id','in',[user.id])]</field>
+        </record>
+
+        <record model="ir.rule" id="mgmt_noowner_document1">
+            <field name="name">Usuario secundario: Documentos ajenos</field>
+            <field name="model_id" ref="model_mgmtsystem_maintenance" />
+            <field name="groups" eval="[(4, ref('mgmtsystem_infrastructure.group_infrastructure_write_printreport'))]" />
+            <field name="perm_read" eval="1" />
+            <field name="perm_write" eval="0" />
+            <field name="perm_create" eval="0" />
+            <field name="perm_unlink" eval="0" />
+            <field name="domain_force">[('responsable_id','not in',[user.id])]</field>
+        </record>
+
+        <record model="ir.rule" id="mgmt_all_document1">
+            <field name="name">Permisos Totales</field>
+            <field name="model_id" ref="model_mgmtsystem_maintenance" />
+            <field name="groups" eval="[(4, ref('mgmtsystem_infrastructure.group_infrastructure_all'))]" />
+            <field name="perm_read" eval="1" />
+            <field name="perm_write" eval="1" />
+            <field name="perm_create" eval="1" />
+            <field name="perm_unlink" eval="1" />
+        </record>
+        <!--
+        <record model="ir.rule" id="mgmt_owner_document2">
+            <field name="name">Usuario secundario: Lectura Edición de documentos propios</field>
+            <field name="model_id" ref="model_maintenance_request" />
+            <field name="groups" eval="[(4, ref('mgmtsystem_infrastructure.group_infrastructure_write_printreport'))]" />
+            <field name="perm_read" eval="1" />
+            <field name="perm_write" eval="1" />
+            <field name="perm_create" eval="1" />
+            <field name="perm_unlink" eval="1" />
+            <field name="domain_force">[('technician_user_id','in',[user.id])]</field>
+        </record>
+
+        <record model="ir.rule" id="mgmt_noowner_document2">
+            <field name="name">Usuario secundario: Documentos ajenos</field>
+            <field name="model_id" ref="model_maintenance_request" />
+            <field name="groups" eval="[(4, ref('mgmtsystem_infrastructure.group_infrastructure_write_printreport'))]" />
+            <field name="perm_read" eval="1" />
+            <field name="perm_write" eval="0" />
+            <field name="perm_create" eval="0" />
+            <field name="perm_unlink" eval="0" />
+            <field name="domain_force">[('technician_user_id','not in',[user.id])]</field>
+        </record>
+        -->
+        <record model="ir.rule" id="mgmt_all_document2">
+            <field name="name">Permisos Totales</field>
+            <field name="model_id" ref="model_maintenance_request" />
+            <field name="groups" eval="[(4, ref('mgmtsystem_infrastructure.group_infrastructure_all'))]" />
+            <field name="perm_read" eval="1" />
+            <field name="perm_write" eval="1" />
+            <field name="perm_create" eval="1" />
+            <field name="perm_unlink" eval="1" />
+        </record>
+        <!--
+        <record model="ir.rule" id="mgmt_owner_document3">
+            <field name="name">Usuario secundario: Lectura Edición de documentos propios</field>
+            <field name="model_id" ref="model_mgmtsystem_infrastructure" />
+            <field name="groups" eval="[(4, ref('mgmtsystem_infrastructure.group_infrastructure_write_printreport'))]" />
+            <field name="perm_read" eval="1" />
+            <field name="perm_write" eval="1" />
+            <field name="perm_create" eval="1" />
+            <field name="perm_unlink" eval="1" />
+            <field name="domain_force">[('elaboration_step.user_id','in',[user.id])]</field>
+        </record>
+
+        <record model="ir.rule" id="mgmt_noowner_document3">
+            <field name="name">Usuario secundario: Documentos ajenos</field>
+            <field name="model_id" ref="model_mgmtsystem_infrastructure" />
+            <field name="groups" eval="[(4, ref('mgmtsystem_infrastructure.group_infrastructure_write_printreport'))]" />
+            <field name="perm_read" eval="1" />
+            <field name="perm_write" eval="0" />
+            <field name="perm_create" eval="0" />
+            <field name="perm_unlink" eval="0" />
+            <field name="domain_force">[('elaboration_step.user_id','not in',[user.id])]</field>
+        </record>
+        -->
+        <record model="ir.rule" id="mgmt_all_document3">
+            <field name="name">Permisos Totales</field>
+            <field name="model_id" ref="model_mgmtsystem_infrastructure" />
+            <field name="groups" eval="[(4, ref('mgmtsystem_infrastructure.group_infrastructure_all'))]" />
+            <field name="perm_read" eval="1" />
+            <field name="perm_write" eval="1" />
+            <field name="perm_create" eval="1" />
+            <field name="perm_unlink" eval="1" />
+        </record>
+
+        <record model="ir.rule" id="mgmt_owner_document3">
+            <field name="name">Usuario secundario: Lectura Edición de documentos propios</field>
+            <field name="model_id" ref="model_mgmtsystem_calibration_plan" />
+            <field name="groups" eval="[(4, ref('mgmtsystem_infrastructure.group_infrastructure_write_printreport'))]" />
+            <field name="perm_read" eval="1" />
+            <field name="perm_write" eval="1" />
+            <field name="perm_create" eval="1" />
+            <field name="perm_unlink" eval="1" />
+            <field name="domain_force">[('elaboration_step.user_id','in',[user.id])]</field>
+        </record>
+
+        <record model="ir.rule" id="mgmt_noowner_document3">
+            <field name="name">Usuario secundario: Documentos ajenos</field>
+            <field name="model_id" ref="model_mgmtsystem_calibration_plan" />
+            <field name="groups" eval="[(4, ref('mgmtsystem_infrastructure.group_infrastructure_write_printreport'))]" />
+            <field name="perm_read" eval="1" />
+            <field name="perm_write" eval="0" />
+            <field name="perm_create" eval="0" />
+            <field name="perm_unlink" eval="0" />
+            <field name="domain_force">[('elaboration_step.user_id','not in',[user.id])]</field>
+        </record>
+
+        <record model="ir.rule" id="mgmt_all_document3">
+            <field name="name">Permisos Totales</field>
+            <field name="model_id" ref="model_mgmtsystem_calibration_plan" />
+            <field name="groups" eval="[(4, ref('mgmtsystem_infrastructure.group_infrastructure_all'))]" />
+            <field name="perm_read" eval="1" />
+            <field name="perm_write" eval="1" />
+            <field name="perm_create" eval="1" />
+            <field name="perm_unlink" eval="1" />
+        </record>
+        <!--
+        <record model="ir.rule" id="mgmt_owner_document4">
+            <field name="name">Usuario secundario: Lectura Edición de documentos propios</field>
+            <field name="model_id" ref="model_mgmtsystem_infrastructure" />
+            <field name="groups" eval="[(4, ref('mgmtsystem_infrastructure.group_infrastructure_write_printreport'))]" />
+            <field name="perm_read" eval="1" />
+            <field name="perm_write" eval="1" />
+            <field name="perm_create" eval="1" />
+            <field name="perm_unlink" eval="1" />
+            <field name="domain_force">[('elaboration_step.user_id','in',[user.id])]</field>
+        </record>
+
+        <record model="ir.rule" id="mgmt_noowner_document4">
+            <field name="name">Usuario secundario: Documentos ajenos</field>
+            <field name="model_id" ref="model_mgmtsystem_infrastructure" />
+            <field name="groups" eval="[(4, ref('mgmtsystem_infrastructure.group_infrastructure_write_printreport'))]" />
+            <field name="perm_read" eval="1" />
+            <field name="perm_write" eval="0" />
+            <field name="perm_create" eval="0" />
+            <field name="perm_unlink" eval="0" />
+            <field name="domain_force">[('elaboration_step.user_id','not in',[user.id])]</field>
+        </record>
+        -->
+        <record model="ir.rule" id="mgmt_all_document4">
+            <field name="name">Permisos Totales</field>
+            <field name="model_id" ref="model_mgmtsystem_infrastructure" />
+            <field name="groups" eval="[(4, ref('mgmtsystem_infrastructure.group_infrastructure_all'))]" />
+            <field name="perm_read" eval="1" />
+            <field name="perm_write" eval="1" />
+            <field name="perm_create" eval="1" />
+            <field name="perm_unlink" eval="1" />
+        </record>
+
+        <record model="ir.rule" id="mgmt_owner_document5">
+            <field name="name">Usuario secundario: Lectura Edición de documentos propios</field>
+            <field name="model_id" ref="model_maintenance_equipment_category" />
+            <field name="groups" eval="[(4, ref('mgmtsystem_infrastructure.group_infrastructure_write_printreport'))]" />
+            <field name="perm_read" eval="1" />
+            <field name="perm_write" eval="1" />
+            <field name="perm_create" eval="1" />
+            <field name="perm_unlink" eval="1" />
+            <field name="domain_force">[('technician_user_id','in',[user.id])]</field>
+        </record>
+
+        <record model="ir.rule" id="mgmt_noowner_document5">
+            <field name="name">Usuario secundario: Documentos ajenos</field>
+            <field name="model_id" ref="model_maintenance_equipment_category" />
+            <field name="groups" eval="[(4, ref('mgmtsystem_infrastructure.group_infrastructure_write_printreport'))]" />
+            <field name="perm_read" eval="1" />
+            <field name="perm_write" eval="0" />
+            <field name="perm_create" eval="0" />
+            <field name="perm_unlink" eval="0" />
+            <field name="domain_force">[('technician_user_id','not in',[user.id])]</field>
+        </record>
+
+        <record model="ir.rule" id="mgmt_all_document5">
+            <field name="name">Permisos Totales</field>
+            <field name="model_id" ref="model_maintenance_equipment_category" />
+            <field name="groups" eval="[(4, ref('mgmtsystem_infrastructure.group_infrastructure_all'))]" />
+            <field name="perm_read" eval="1" />
+            <field name="perm_write" eval="1" />
+            <field name="perm_create" eval="1" />
+            <field name="perm_unlink" eval="1" />
+        </record>
+
+    </data>
+</odoo>

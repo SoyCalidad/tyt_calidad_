@@ -1,0 +1,202 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+
+        <record id="complaints_management" model="ir.module.category">
+            <field name="name">Reclamos</field>
+            <field name="description">Accesos para módulo de Reclamos</field>
+            <field name="parent_id" ref="hola_calidad.module_mgmt_management" />
+            <field name="sequence">25</field>
+        </record>
+
+        <record id="group_complaints_onlyread" model="res.groups">
+            <field name="name">Usuario: Solo lectura</field>
+            <field name="implied_ids" eval="[(4, ref('base.group_user'))]" />
+            <field name="category_id" ref="mgmtsystem_complaints.complaints_management" />
+        </record>    
+
+        <record id="group_complaints_report_access" model="res.groups">
+            <field name="name">Acceso a reportes</field>
+            <field name="implied_ids" eval="[(4, ref('mgmtsystem_complaints.group_complaints_onlyread'))]" />
+            <field name="category_id" ref="mgmtsystem_complaints.complaints_management" />
+        </record>
+        
+        <record id="group_complaints_user_secundario" model="res.groups">
+            <field name="name">Usuario Secundario: Edición de documentos propios</field>
+            <field name="implied_ids" eval="[(4, ref('mgmtsystem_complaints.group_complaints_report_access'))]" />
+            <field name="category_id" ref="mgmtsystem_complaints.complaints_management" />
+        </record>
+    
+        <record id="group_complaints_write_printreport" model="res.groups">
+            <field name="name">Responsable: Lectura y edición</field>
+            <field name="implied_ids" eval="[(4, ref('mgmtsystem_complaints.group_complaints_user_secundario'))]" />
+            <field name="category_id" ref="mgmtsystem_complaints.complaints_management" />
+        </record>
+        
+    </data>
+
+    <data> 
+
+        <record model="ir.rule" id="mgmt_owner_document">
+            <field name="name">Usuario secundario: Lectura Edición de documentos propios</field>
+            <field name="model_id" ref="model_complaint_complaint" />
+            <field name="groups" eval="[(4, ref('mgmtsystem_complaints.group_complaints_user_secundario'))]" />
+            <field name="perm_read" eval="1" />
+            <field name="perm_write" eval="1" />
+            <field name="perm_create" eval="1" />
+            <field name="perm_unlink" eval="1" />
+            <field name="domain_force">[('elaborate_ids','in',[user.id])]</field>
+        </record>
+
+        <record model="ir.rule" id="mgmt_noowner_documen">
+            <field name="name">Usuario secundario: Documentos ajenos</field>
+            <field name="model_id" ref="model_complaint_complaint" />
+            <field name="groups" eval="[(4, ref('mgmtsystem_complaints.group_complaints_user_secundario'))]" />
+            <field name="perm_read" eval="1" />
+            <field name="perm_write" eval="0" />
+            <field name="perm_create" eval="0" />
+            <field name="perm_unlink" eval="0" />
+            <field name="domain_force">[('elaborate_ids','not in',[user.id])]</field>
+        </record>
+
+        <record model="ir.rule" id="mgmt_all_document">
+            <field name="name">Permisos Totales</field>
+            <field name="model_id" ref="model_complaint_complaint" />
+            <field name="groups" eval="[(4, ref('mgmtsystem_complaints.group_complaints_write_printreport'))]" />
+            <field name="perm_read" eval="1" />
+            <field name="perm_write" eval="1" />
+            <field name="perm_create" eval="1" />
+            <field name="perm_unlink" eval="1" />
+        </record>
+        
+        
+        <record model="ir.rule" id="mgmt_owner_document1">
+            <field name="name">Usuario secundario: Lectura Edición de documentos propios</field>
+            <field name="model_id" ref="model_complaint_analisis" />
+            <field name="groups" eval="[(4, ref('mgmtsystem_complaints.group_complaints_user_secundario'))]" />
+            <field name="perm_read" eval="1" />
+            <field name="perm_write" eval="1" />
+            <field name="perm_create" eval="1" />
+            <field name="perm_unlink" eval="1" />
+            <field name="domain_force">[('elaborate_ids','in',[user.id])]</field>
+        </record>
+
+        <record model="ir.rule" id="mgmt_noowner_documen1">
+            <field name="name">Usuario secundario: Documentos ajenos</field>
+            <field name="model_id" ref="model_complaint_analisis" />
+            <field name="groups" eval="[(4, ref('mgmtsystem_complaints.group_complaints_user_secundario'))]" />
+            <field name="perm_read" eval="1" />
+            <field name="perm_write" eval="0" />
+            <field name="perm_create" eval="0" />
+            <field name="perm_unlink" eval="0" />
+            <field name="domain_force">[('elaborate_ids','not in',[user.id])]</field>
+        </record>
+
+        <record model="ir.rule" id="mgmt_all_document1">
+            <field name="name">Permisos Totales</field>
+            <field name="model_id" ref="model_complaint_analisis" />
+            <field name="groups" eval="[(4, ref('mgmtsystem_complaints.group_complaints_write_printreport'))]" />
+            <field name="perm_read" eval="1" />
+            <field name="perm_write" eval="1" />
+            <field name="perm_create" eval="1" />
+            <field name="perm_unlink" eval="1" />
+        </record>
+        <record model="ir.rule" id="mgmt_owner_document2">
+            <field name="name">Usuario secundario: Lectura Edición de documentos propios</field>
+            <field name="model_id" ref="model_complaint_categ" />
+            <field name="groups" eval="[(4, ref('mgmtsystem_complaints.group_complaints_user_secundario'))]" />
+            <field name="perm_read" eval="1" />
+            <field name="perm_write" eval="1" />
+            <field name="perm_create" eval="1" />
+            <field name="perm_unlink" eval="1" />
+            <field name="domain_force">[('elaborate_ids','in',[user.id])]</field>
+        </record>
+
+        <record model="ir.rule" id="mgmt_noowner_documen2">
+            <field name="name">Usuario secundario: Documentos ajenos</field>
+            <field name="model_id" ref="model_complaint_categ" />
+            <field name="groups" eval="[(4, ref('mgmtsystem_complaints.group_complaints_user_secundario'))]" />
+            <field name="perm_read" eval="1" />
+            <field name="perm_write" eval="0" />
+            <field name="perm_create" eval="0" />
+            <field name="perm_unlink" eval="0" />
+            <field name="domain_force">[('elaborate_ids','not in',[user.id])]</field>
+        </record>
+
+        <record model="ir.rule" id="mgmt_all_document2">
+            <field name="name">Permisos Totales</field>
+            <field name="model_id" ref="model_complaint_categ" />
+            <field name="groups" eval="[(4, ref('mgmtsystem_complaints.group_complaints_write_printreport'))]" />
+            <field name="perm_read" eval="1" />
+            <field name="perm_write" eval="1" />
+            <field name="perm_create" eval="1" />
+            <field name="perm_unlink" eval="1" />
+        </record>
+
+        <record model="ir.rule" id="mgmt_owner_document4">
+            <field name="name">Usuario secundario: Lectura Edición de documentos propios</field>
+            <field name="model_id" ref="model_complaint_via" />
+            <field name="groups" eval="[(4, ref('mgmtsystem_complaints.group_complaints_user_secundario'))]" />
+            <field name="perm_read" eval="1" />
+            <field name="perm_write" eval="1" />
+            <field name="perm_create" eval="1" />
+            <field name="perm_unlink" eval="1" />
+            <field name="domain_force">[('elaborate_ids','in',[user.id])]</field>
+        </record>
+
+        <record model="ir.rule" id="mgmt_noowner_documen4">
+            <field name="name">Usuario secundario: Documentos ajenos</field>
+            <field name="model_id" ref="model_complaint_via" />
+            <field name="groups" eval="[(4, ref('mgmtsystem_complaints.group_complaints_user_secundario'))]" />
+            <field name="perm_read" eval="1" />
+            <field name="perm_write" eval="0" />
+            <field name="perm_create" eval="0" />
+            <field name="perm_unlink" eval="0" />
+            <field name="domain_force">[('elaborate_ids','not in',[user.id])]</field>
+        </record>
+
+        <record model="ir.rule" id="mgmt_all_document4">
+            <field name="name">Permisos Totales</field>
+            <field name="model_id" ref="model_complaint_via" />
+            <field name="groups" eval="[(4, ref('mgmtsystem_complaints.group_complaints_write_printreport'))]" />
+            <field name="perm_read" eval="1" />
+            <field name="perm_write" eval="1" />
+            <field name="perm_create" eval="1" />
+            <field name="perm_unlink" eval="1" />
+        </record>
+
+
+        <record model="ir.rule" id="mgmt_owner_document6">
+            <field name="name">Usuario secundario: Lectura Edición de documentos propios</field>
+            <field name="model_id" ref="model_complaint_quick_action" />
+            <field name="groups" eval="[(4, ref('mgmtsystem_complaints.group_complaints_user_secundario'))]" />
+            <field name="perm_read" eval="1" />
+            <field name="perm_write" eval="1" />
+            <field name="perm_create" eval="1" />
+            <field name="perm_unlink" eval="1" />
+            <field name="domain_force">[('elaborate_ids','in',[user.id])]</field>
+        </record>
+
+        <record model="ir.rule" id="mgmt_noowner_documen6">
+            <field name="name">Usuario secundario: Documentos ajenos</field>
+            <field name="model_id" ref="model_complaint_quick_action" />
+            <field name="groups" eval="[(4, ref('mgmtsystem_complaints.group_complaints_user_secundario'))]" />
+            <field name="perm_read" eval="1" />
+            <field name="perm_write" eval="0" />
+            <field name="perm_create" eval="0" />
+            <field name="perm_unlink" eval="0" />
+            <field name="domain_force">[('elaborate_ids','not in',[user.id])]</field>
+        </record>
+
+        <record model="ir.rule" id="mgmt_all_document6">
+            <field name="name">Permisos Totales</field>
+            <field name="model_id" ref="model_complaint_quick_action" />
+            <field name="groups" eval="[(4, ref('mgmtsystem_complaints.group_complaints_write_printreport'))]" />
+            <field name="perm_read" eval="1" />
+            <field name="perm_write" eval="1" />
+            <field name="perm_create" eval="1" />
+            <field name="perm_unlink" eval="1" />
+        </record>
+
+    </data>
+</odoo>
