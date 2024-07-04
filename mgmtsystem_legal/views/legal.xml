@@ -43,7 +43,8 @@
                 </kanban>
             </field>
         </record>
-
+        
+        <!--
         <record id="view_document_form" model="ir.ui.view">
             <field name="name">legal.article.document.form</field>
             <field name="model">legal.article.document</field>
@@ -54,7 +55,7 @@
                     <field name="priority" widget="priority" />
                 </xpath>
             </field>
-        </record>
+        </record>-->
 
         <record id="view_legal_legal_tree" model="ir.ui.view">
             <field name="name">legal.legal.tree</field>

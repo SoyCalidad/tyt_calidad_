@@ -68,11 +68,12 @@
     sequence="10" 
     groups= "base.group_no_one,group_process_readonly,mgmtsystem_process.group_process_readonly_printreport,mgmtsystem_process.group_process_owner,mgmtsystem_process.group_process_all"/> -->
 
+    <!--
     <menuitem id="mgmt_process_documentation_docs"
               name="Documentos"
               parent="mgmt_process_documentation"
               action="knowledge.knowledge_action_documents"
               sequence="20"
               groups="base.group_no_one,mgmtsystem_process.group_process_readonly,mgmtsystem_process.group_process_readonly_printreport,mgmtsystem_process.group_process_owner,mgmtsystem_process.group_process_all" />
-
+    -->
 </odoo>

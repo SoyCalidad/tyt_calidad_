@@ -44,6 +44,7 @@
             </field>
         </record>
 
+        <!--
         <record id="complement_emplo" model="ir.ui.view">
             <field name="name">complemento</field>
             <field name="model">hr.employee</field>
@@ -76,15 +77,10 @@
                 </xpath>
                 
 
-                <!--
-                <field name="job_id" position="attributes">
-                    <attribute name="domain">[('state', '=', 'validate_ok')]</attribute>
-                </field>
-                -->
                 <field name="job_title" position="attributes">
                     <attribute name="invisible">True</attribute>
                 </field>
-                <xpath expr="//notebook/page[@name='personal_information']/group[1]/group[2]" position="attributes"> <!--Calidad_16c-->
+                <xpath expr="//notebook/page[@name='personal_information']/group[1]/group[2]" position="attributes">
                     <attribute name="invisible">True</attribute>
                 </xpath>
                 <field name="km_home_work" position="attributes">
@@ -95,7 +91,7 @@
                 </field>
                 <field name="language" position="after">
                     <field name="other_languages" />
-                    <!---->
+                    
                 </field>
                 <xpath expr="//sheet/group[1]" position="replace"></xpath>
                 <xpath expr="//notebook/page[1]/div/div/group[1]" position="before">
@@ -124,6 +120,6 @@
                 </field>
             </field>
         </record>
-
+        -->
     </data>
 </odoo>

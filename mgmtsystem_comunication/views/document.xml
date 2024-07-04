@@ -41,6 +41,7 @@
         </field>
     </record>
 
+    <!--
     <record id="view_document_form" model="ir.ui.view">
         <field name="name">comunication.plan.line.document.form</field>
         <field name="model">comunication.plan.line.document</field>
@@ -52,5 +53,5 @@
         </xpath>
         </field>
     </record>
-
+    -->
 </odoo>
