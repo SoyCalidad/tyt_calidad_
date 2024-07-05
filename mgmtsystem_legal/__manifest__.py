@@ -20,12 +20,9 @@
     'data': [
         'security/security.xml',
         'security/ir.model.access.csv',
-        'views/res_config_settings.xml',
         'data/legal_data.xml',
         'data/sequences.xml',
         'views/plan.xml',
-        
-        #'views/nonconformity.xml',
         'views/legal.xml',
         'views/article.xml',
         'views/process.xml',
