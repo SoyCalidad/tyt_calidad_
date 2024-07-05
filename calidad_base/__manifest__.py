@@ -26,7 +26,7 @@
         'mgmtsystem_qualitymanual',
         'mgmtsystem_management_review',
         'contacts',
-        'knowledge',
+        'document_knowledge',
         'mgmtsystem_validation',
         
         # post menus_hola_calidad

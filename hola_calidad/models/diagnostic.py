@@ -989,9 +989,9 @@ class Diagnostic(models.Model):
             self.diagnostic9_3_2_ids = False
             self.diagnostic9_3_3_ids = False
 
-            self.diagnostic10_ids = False
-            self.diagnostic10_1_ids = False
-            self.diagnostic10_2_ids = False
+            # self.diagnostic10_ids = False
+            # self.diagnostic10_1_ids = False
+            # self.diagnostic10_2_ids = False
 
         # Cambia de estado al analizar detalladamente
         self.state = 'evaluate'

@@ -53,7 +53,6 @@
     ],
     'assets': {
         'web.assets_backend': [
-            "/mgmtsystem_context/static/lib/fontawesome/css/font-awesome-extra.css",
             "/mgmtsystem_context/static/src/css/context.css",
         ],
         'web.report_assets_common': [

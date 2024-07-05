@@ -15,7 +15,7 @@
     'version': '1.1',
 
     'depends': ['hola_calidad','hr',
-                'knowledge',
+                'document_knowledge',
                 'document_knowledge','document_page','report_xlsx', 'mgmtsystem_validation', 'purchase', 'stock'],
 
     'data': [
