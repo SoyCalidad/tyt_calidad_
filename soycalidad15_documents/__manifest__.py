@@ -8,8 +8,8 @@
     'license': '',
     'category': 'soycalidad',
     'depends': [
-        'hola_calidad',
-        'menus_hola_calidad',
+        #'hola_calidad',
+        #'menus_hola_calidad',
         'calidad_base',
         'documents',
         'mgmtsystem_process_integration',

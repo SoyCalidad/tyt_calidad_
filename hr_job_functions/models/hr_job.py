@@ -32,10 +32,12 @@ class Job(models.Model):
         'hr.job.strategic_skill', 'job_id', string='Competencias Estratégicas', copy=True)
     active = fields.Boolean('Active', default=True)
 
+    '''
     state = fields.Selection([
         ('recruit', 'Contratación en curso'),
         ('open', 'No seleccionado'),
     ], string='Estado')
+    '''
 
     validation_state = fields.Selection(
         string=u'Estado',
