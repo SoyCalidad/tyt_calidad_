@@ -88,10 +88,20 @@
                         </group>
                         <notebook>
                             <page name="criteria" string="Criterios">
+                                <div class="o_form_label">
+                                    <h2>Criterios</h2>
+                                </div>
+                                <field name="item_ids" widget="one2many_list">
+                                    <tree>
+                                        <field name="name"/>
+                                    </tree>
+                                </field>                                
+                                <!--
                                 <group>
-                                    <separator string="Criterios" colspan="2" />
-                                    <field name="item_ids" nolabel="1" attrs="{'readonly': [('state','in',('validate_ok'))] }" />
+                                    <separator string="Criterios" />
+                                    <field name="item_ids" nolabel="1" width="70%" attrs="{'readonly': [('state','in',('validate_ok'))] }" />
                                 </group>
+                                -->
                             </page>
                             <page name="validation" string="Validación y Versión">
                                 <group>
