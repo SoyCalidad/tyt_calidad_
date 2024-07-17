@@ -127,7 +127,7 @@ class MgmtsystemNonconformity(models.Model):
          ('blocked', 'Blocked')],
         'Estado del kanban',
         default='normal',
-        tracking=True
+        tracking=True,
         required=True, copy=False)
 
     def send_acction(self):
