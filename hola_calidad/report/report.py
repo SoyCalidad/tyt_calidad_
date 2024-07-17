@@ -1,4 +1,6 @@
 from odoo import api, models
+from odoo.tools import is_html_empty
+
 
 class IrModelReferenceReport(models.AbstractModel):
     _inherit = 'report.base.report_irmodulereference'
@@ -8,7 +10,7 @@ class IrModelReferenceReport(models.AbstractModel):
     def _get_report_values(self, docids, data=None):
         report = self.env['ir.actions.report']._get_report_from_name('base.report_irmodulereference')
         selected_modules = self.env['ir.module.module'].browse(docids)
-        print (report.model_id.name)
+
         return {
             'doc_ids': docids,
             'doc_model': report.model,
@@ -41,4 +43,7 @@ class IrActionsReport(models.Model):
                 'model_description': self.name,
                 'docs': docs,
             })
+            
+        data['is_html_empty'] = is_html_empty
+
         return data
