@@ -51,7 +51,7 @@ class Validation(models.Model):
         ],
         default='elaborate',
         copy=False,
-        track_visibility="always"
+        tracking=True
     )
 
     def write(self, values):
@@ -86,11 +86,11 @@ class Validation(models.Model):
         compute='_get_users_check', string='Aprobada validación')
 
     date_elaborate = fields.Date(
-        string='Fecha de elaboración', default=fields.Date.today(), track_visibility="always")
+        string='Fecha de elaboración', default=fields.Date.today(), tracking=True)
     date_review = fields.Date(
-        string='Fecha de revisión', track_visibility="always")
+        string='Fecha de revisión', tracking=True)
     date_validate = fields.Date(
-        string='Fecha de validación', track_visibility="always")
+        string='Fecha de validación', tracking=True)
 
     last_validate_date = fields.Date(
         compute='_compute_last_validate_date', string='Última fecha de validación')

@@ -97,7 +97,7 @@ class MgmtsystemNonconformity(models.Model):
         'res.users',
         'Autor',
         default=lambda self: self.env.user,
-        track_visibility=True,
+        tracking=True
     )
     description = fields.Text('Descripción', required=True)
     image = fields.Image("Image", max_width=1024, max_height=1024)
@@ -127,7 +127,7 @@ class MgmtsystemNonconformity(models.Model):
          ('blocked', 'Blocked')],
         'Estado del kanban',
         default='normal',
-        track_visibility='onchange',
+        tracking=True
         required=True, copy=False)
 
     def send_acction(self):

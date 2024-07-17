@@ -61,7 +61,7 @@ class Training(models.Model):
     )
     date_training = fields.Datetime(
         string=u'Fecha',
-        track_visibility='onchange'
+        tracking=True
     )
 
     duration = fields.Float(
