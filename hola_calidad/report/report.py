@@ -47,9 +47,3 @@ class IrActionsReport(models.Model):
         data['is_html_empty'] = is_html_empty
 
         return data
-    
-class AccountMove(models.Model):
-    _inherit = 'account.move'
-    
-    ir_attachment_id = fields.Many2one(
-        'ir.attachment', string='Documentos adjuntos')
