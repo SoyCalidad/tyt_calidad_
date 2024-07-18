@@ -10,7 +10,7 @@
     'category': 'Uncategorized',
     'version': '1.1',
 
-    'depends': ['contacts', 'report_xlsx', 'hola_calidad', 'mgmtsystem_process'],
+    'depends': ['base','contacts', 'report_xlsx', 'hola_calidad', 'mgmtsystem_process'],
 
     'data': [
         'data/evaluation.xml',

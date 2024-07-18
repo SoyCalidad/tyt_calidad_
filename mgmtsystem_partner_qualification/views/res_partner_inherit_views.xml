@@ -6,11 +6,13 @@
         <field name="arch" type="xml">
             <sheet position="before">
                 <header>
-                    <button string="Descargar evaluación de seguimiento" type="object" class="btn-primary" name="print_evaluation" />
+                    <button string="Descargar evaluación de seguimiento" type="object" class="btn-primary" name="print_evaluation" 
+                        groups="mgmtsystem_partner_qualification.group_partner_evaluation_onlyread_printreport,mgmtsystem_partner_qualification.group_partner_evaluation_write_printreport,mgmtsystem_partner_qualification.group_partner_evaluation_all"/>
                 </header>
-            </sheet>
+            </sheet>            
             <xpath expr="//group/group[2]" position="after">
-                <div class="partner_type">
+                <div class="partner_type" 
+                    groups="mgmtsystem_partner_qualification.group_partner_evaluation_onlyread_printreport,mgmtsystem_partner_qualification.group_partner_evaluation_write_printreport,mgmtsystem_partner_qualification.group_partner_evaluation_all">
                     <group col="4">
                         <field name="supplier" />
                         <field name="vip_supplier" attrs="{'invisible': [('supplier', '=', False)]}" />
@@ -21,13 +23,15 @@
                 </div>
             </xpath>
             <notebook position="inside">
-                <page name="initial_evaluation" string="Evaluación inicial">
+                <page name="initial_evaluation" string="Evaluación inicial"
+                    groups="mgmtsystem_partner_qualification.group_partner_evaluation_onlyread_printreport,mgmtsystem_partner_qualification.group_partner_evaluation_write_printreport,mgmtsystem_partner_qualification.group_partner_evaluation_all">
                     <group>
                         <field name="current_initial_evaluation_id" />
                     </group>
                     <field name="initial_evaluation_ids"/>
                 </page>
-                <page string="Evaluaciones de seguimiento" name="evaluation_history">
+                <page string="Evaluaciones de seguimiento" name="evaluation_history"
+                    groups="mgmtsystem_partner_qualification.group_partner_evaluation_onlyread_printreport,mgmtsystem_partner_qualification.group_partner_evaluation_write_printreport,mgmtsystem_partner_qualification.group_partner_evaluation_all">
                     <group>
                         <field name="responsible_id" />
                         <field name="evaluation_date" attrs="{'required': [('vip_supplier', '=', True)]}" />
@@ -38,7 +42,8 @@
                     <separator string="Historial" />
                     <field name="history_ids" context="{'default_partner_id': id,'default_evaluation_id': evaluation_id}" />
                 </page>
-                <page name="products" string="Productos y servicios">
+                <page name="products" string="Productos y servicios"
+                    groups="mgmtsystem_partner_qualification.group_partner_evaluation_onlyread_printreport,mgmtsystem_partner_qualification.group_partner_evaluation_write_printreport,mgmtsystem_partner_qualification.group_partner_evaluation_all">
                     <field name="product_ids" />
                 </page>
             </notebook>
@@ -63,12 +68,16 @@
         <field name="inherit_id" ref="account.res_partner_view_search" />
         <field name="arch" type="xml">
             <filter name="customer" position="replace">
-                <filter string="Customers" name="mgmt_customer" domain="[('customer','=', True)]" />
-                <filter string="Critical Customers" name="mgmt_vip_customer" domain="[('vip_customer','=', True)]" />
+                <filter string="Customers" name="mgmt_customer" domain="[('customer','=', True)]"
+                    groups="mgmtsystem_partner_qualification.group_partner_evaluation_onlyread_printreport,mgmtsystem_partner_qualification.group_partner_evaluation_write_printreport,mgmtsystem_partner_qualification.group_partner_evaluation_all" />
+                <filter string="Critical Customers" name="mgmt_vip_customer" domain="[('vip_customer','=', True)]"
+                    groups="mgmtsystem_partner_qualification.group_partner_evaluation_onlyread_printreport,mgmtsystem_partner_qualification.group_partner_evaluation_write_printreport,mgmtsystem_partner_qualification.group_partner_evaluation_all" />
             </filter>
             <filter name="supplier" position="replace">
-                <filter string="Vendors" name="supplier" domain="[('supplier','=', True)]" />
-                <filter string="Critical Vendors" name="vip_supplier" domain="[('vip_supplier','=', True)]" />
+                <filter string="Vendors" name="supplier" domain="[('supplier','=', True)]"
+                    groups="mgmtsystem_partner_qualification.group_partner_evaluation_onlyread_printreport,mgmtsystem_partner_qualification.group_partner_evaluation_write_printreport,mgmtsystem_partner_qualification.group_partner_evaluation_all" />
+                <filter string="Critical Vendors" name="vip_supplier" domain="[('vip_supplier','=', True)]"
+                    groups="mgmtsystem_partner_qualification.group_partner_evaluation_onlyread_printreport,mgmtsystem_partner_qualification.group_partner_evaluation_write_printreport,mgmtsystem_partner_qualification.group_partner_evaluation_all" />
             </filter>
         </field>
     </record>
