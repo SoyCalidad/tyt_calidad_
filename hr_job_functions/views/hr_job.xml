@@ -79,80 +79,79 @@
 
                     </header>
                 </xpath>
-                <xpath expr="/form/sheet" position="inside">
-                    <notebook>
-                        <page id="info" string="Información Adicional">
-                            <group attrs="{'readonly':[('validation_state','in', ('validate_ok'))]}">
-                                <field name="job_profile" attrs="{'readonly':[('validation_state','in', ('validate_ok'))]}" />
-                                <field name="functions" attrs="{'readonly':[('validation_state','in', ('validate_ok'))]}">
-                                    <tree>
-                                        <field name="name" style="max-width:200px;" />
-                                    </tree>
-                                </field>
-                                <field name="evaluation_factors" attrs="{'readonly':[('validation_state','in', ('validate_ok'))]}">
-                                    <tree>
-                                        <field name="name" style="max-width:200px;" />
-                                    </tree>
-                                </field>
+                <xpath expr="/form/sheet/notebook" position="inside">
+                    <page id="info" string="Información Adicional">
+                        <group attrs="{'readonly':[('validation_state','in', ('validate_ok'))]}">
+                            <field name="job_profile" attrs="{'readonly':[('validation_state','in', ('validate_ok'))]}" />
+                            <field name="functions" attrs="{'readonly':[('validation_state','in', ('validate_ok'))]}">
+                                <tree>
+                                    <field name="name" style="max-width:200px;" />
+                                </tree>
+                            </field>
+                            <field name="evaluation_factors" attrs="{'readonly':[('validation_state','in', ('validate_ok'))]}">
+                                <tree>
+                                    <field name="name" style="max-width:200px;" />
+                                </tree>
+                            </field>
+                        </group>
+                    </page>
+                    <page id="relationships" string="Relaciones">
+                        <group>
+                            <field name="parent_id" attrs="{'readonly':[('validation_state','in', ('validate_ok'))]}" />
+                            <field name="coordinators" attrs="{'readonly':[('validation_state','in', ('validate_ok'))]}" />
+                            <field name="supervisors" attrs="{'readonly':[('validation_state','in', ('validate_ok'))]}" />
+                            <field name="superviseds" attrs="{'readonly':[('validation_state','in', ('validate_ok'))]}" />
+                        </group>
+                    </page>
+                    <page id="skills" string="Habilidades">
+                        <group attrs="{'readonly':[('validation_state','in', ('validate_ok'))]}">
+                            <field name="generic_skills" attrs="{'readonly':[('validation_state','in', ('validate_ok'))]}">
+                                <tree>
+                                    <field name="name" style="max-width:200px;" />
+                                    <field name="relevance" />
+                                </tree>
+                            </field>
+                            <field name="workteam_skills" attrs="{'readonly':[('validation_state','in', ('validate_ok'))]}">
+                                <tree>
+                                    <field name="name" style="max-width:200px;" />
+                                    <field name="relevance" />
+                                </tree>
+                            </field>
+                            <field name="personal_skills" attrs="{'readonly':[('validation_state','in', ('validate_ok'))]}">
+                                <tree>
+                                    <field name="name" style="max-width:200px;" />
+                                    <field name="relevance" />
+                                </tree>
+                            </field>
+                            <field name="strategic_skills" attrs="{'readonly':[('validation_state','in', ('validate_ok'))]}">
+                                <tree>
+                                    <field name="name" style="max-width:200px;" />
+                                    <field name="relevance" />
+                                </tree>
+                            </field>
+                        </group>
+                    </page>
+                    <page name="version_info" string="Validación y versión">
+                        <group col="4" attrs="{'readonly':[('validation_state','in', ('validate_ok'))]}">
+                            <group colspan="4">
+                                <field name="version" />
                             </group>
-                        </page>
-                        <page id="relationships" string="Relaciones">
-                            <group>
-                                <field name="parent_id" attrs="{'readonly':[('validation_state','in', ('validate_ok'))]}" />
-                                <field name="coordinators" attrs="{'readonly':[('validation_state','in', ('validate_ok'))]}" />
-                                <field name="supervisors" attrs="{'readonly':[('validation_state','in', ('validate_ok'))]}" />
-                                <field name="superviseds" attrs="{'readonly':[('validation_state','in', ('validate_ok'))]}" />
+                            <group colspan="4">
+                                <separator string="" />
+                                <field name="elaboration_step" colspan="4" nolabel="1" attrs="{'readonly': [('validation_state','not in',('elaborate'))]}" />
+                                <separator string="Revisión" />
+                                <field name="review_step" colspan="4" nolabel="1" attrs="{'readonly': [('validation_state','not in',('elaborate', 'review'))]}" />
+                                <separator string="Validación" />
+                                <field name="validation_step" colspan="4" nolabel="1" attrs="{'readonly': [('validation_state','not in',('elaborate', 'review', 'validate'))]}" />
                             </group>
-                        </page>
-                        <page id="skills" string="Habilidades">
-                            <group attrs="{'readonly':[('validation_state','in', ('validate_ok'))]}">
-                                <field name="generic_skills" attrs="{'readonly':[('validation_state','in', ('validate_ok'))]}">
-                                    <tree>
-                                        <field name="name" style="max-width:200px;" />
-                                        <field name="relevance" />
-                                    </tree>
-                                </field>
-                                <field name="workteam_skills" attrs="{'readonly':[('validation_state','in', ('validate_ok'))]}">
-                                    <tree>
-                                        <field name="name" style="max-width:200px;" />
-                                        <field name="relevance" />
-                                    </tree>
-                                </field>
-                                <field name="personal_skills" attrs="{'readonly':[('validation_state','in', ('validate_ok'))]}">
-                                    <tree>
-                                        <field name="name" style="max-width:200px;" />
-                                        <field name="relevance" />
-                                    </tree>
-                                </field>
-                                <field name="strategic_skills" attrs="{'readonly':[('validation_state','in', ('validate_ok'))]}">
-                                    <tree>
-                                        <field name="name" style="max-width:200px;" />
-                                        <field name="relevance" />
-                                    </tree>
-                                </field>
+                            <group colspan="2">
+                                <field name="date_elaborate" attrs="{'required': [('validation_state','in',('elaborate'))], 'readonly': True}" />
+                                <field name="date_review" attrs="{'required': [('validation_state','in',('review'))], 'readonly': True, 'invisible': [('validation_state','in',('elaborate'))] }" />
+                                <field name="date_validate" groups="base.group_no_one,base.user_admin" attrs="{'invisible': [('validation_state','in',('elaborate','review'))] }" />
                             </group>
-                        </page>
-                        <page name="version_info" string="Validación y versión">
-                            <group col="4" attrs="{'readonly':[('validation_state','in', ('validate_ok'))]}">
-                                <group colspan="4">
-                                    <field name="version" />
-                                </group>
-                                <group colspan="4">
-                                    <separator string="" />
-                                    <field name="elaboration_step" colspan="4" nolabel="1" attrs="{'readonly': [('validation_state','not in',('elaborate'))]}" />
-                                    <separator string="Revisión" />
-                                    <field name="review_step" colspan="4" nolabel="1" attrs="{'readonly': [('validation_state','not in',('elaborate', 'review'))]}" />
-                                    <separator string="Validación" />
-                                    <field name="validation_step" colspan="4" nolabel="1" attrs="{'readonly': [('validation_state','not in',('elaborate', 'review', 'validate'))]}" />
-                                </group>
-                                <group colspan="2">
-                                    <field name="date_elaborate" attrs="{'required': [('validation_state','in',('elaborate'))], 'readonly': True}" />
-                                    <field name="date_review" attrs="{'required': [('validation_state','in',('review'))], 'readonly': True, 'invisible': [('validation_state','in',('elaborate'))] }" />
-                                    <field name="date_validate" groups="base.group_no_one,base.user_admin" attrs="{'invisible': [('validation_state','in',('elaborate','review'))] }" />
-                                </group>
-                            </group>
-                        </page>
-                    </notebook>
+                        </group>
+                    </page>
+
                 </xpath>
                 <field name="message_follower_ids" position="after">
                     <field name="activity_ids" widget="mail_activity" />
