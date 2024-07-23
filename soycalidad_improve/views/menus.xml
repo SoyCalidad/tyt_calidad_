@@ -1,7 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
 <odoo>
 
-    <menuitem id="improve_menu" name="Mejora" web_icon="soycalidad_improve,static/description/icon.png" sequence="39" />
+    <menuitem id="improve_menu" name="Mejora" web_icon="soycalidad_improve,static/description/icon.png" sequence="39"
+        groups="group_improve_onlyread,group_improve_onlyread_printreport,group_improve_write_printreport,group_improve_all" />
 
     <menuitem id="change_request_menu"
               name="Planificación de cambios"

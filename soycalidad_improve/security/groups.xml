@@ -1,0 +1,37 @@
+<?xml version="1.0"?>
+<odoo>
+    <data>
+
+        <record id="improve_management" model="ir.module.category">
+            <field name="name">Mejora Continua</field>
+            <field name="description">Accesos para módulo de mejora continua</field>
+            <field name="parent_id" ref="hola_calidad.module_mgmt_management" />
+            <field name="sequence">35</field>
+        </record>
+
+        <record id="group_improve_onlyread" model="res.groups">
+            <field name="name">Usuario: Solo lectura</field>
+            <field name="implied_ids" eval="[(4, ref('base.group_user'))]" />
+            <field name="category_id" ref="soycalidad_improve.improve_management" />
+        </record>
+        <!--
+        <record id="group_improve_onlyread_printreport" model="res.groups">
+            <field name="name">Usuario interno: Lectura e impresión</field>
+            <field name="implied_ids" eval="[(4, ref('soycalidad_improve.group_improve_onlyread'))]" />
+            <field name="category_id" ref="soycalidad_improve.improve_management" />
+        </record>
+
+        <record id="group_improve_write_printreport" model="res.groups">
+            <field name="name">Usuario secundario: Lectura Edición de documentos propios</field>
+            <field name="implied_ids" eval="[(4, ref('soycalidad_improve.group_improve_onlyread_printreport'))]" />
+            <field name="category_id" ref="soycalidad_improve.improve_management" />
+        </record>
+        -->
+        <record id="group_improve_all" model="res.groups">
+            <field name="name">Responsable: Lectura y edición</field>
+            <field name="implied_ids" eval="[(4, ref('soycalidad_improve.group_improve_onlyread'))]" />
+            <field name="category_id" ref="soycalidad_improve.improve_management" />
+        </record>
+        
+    </data>
+</odoo>

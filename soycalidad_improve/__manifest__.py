@@ -26,6 +26,7 @@
         'reports/improve_matrix.xml',
         'reports/change_request.xml',
         'reports/menus.xml',
+        'security/groups.xml',
         'security/ir.model.access.csv',
     ],
     'demo': [
