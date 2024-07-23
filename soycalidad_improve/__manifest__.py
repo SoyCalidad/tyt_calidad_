@@ -18,6 +18,8 @@
         'data/data.xml',
         'data/soycalidad.improve_plan.change_type.csv',
         'data/soycalidad.change_request.area.csv',
+        'security/groups.xml',
+        'security/ir.model.access.csv',        
         'views/improve.xml',
         'views/change_request.xml',
         'views/change_request_origin.xml',
@@ -26,8 +28,7 @@
         'reports/improve_matrix.xml',
         'reports/change_request.xml',
         'reports/menus.xml',
-        'security/groups.xml',
-        'security/ir.model.access.csv',
+
     ],
     'demo': [
 
