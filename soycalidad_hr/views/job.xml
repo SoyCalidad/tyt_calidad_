@@ -7,7 +7,8 @@
         <field name="inherit_id" ref="hr_job_functions.view_hr_job_form" />
         <field name="arch" type="xml">
             <page id="skills" position="replace">
-                <page id="skills" string="Habilidades">
+            <page id="skills" position="replace"
+                groups="base.group_no_one,mgmtsystem_employees.group_employees_onlyread_printreport,mgmtsystem_employees.group_employees_write_printreport,mgmtsystem_employees.group_employees_all" >
                     <group attrs="{'readonly':[('validation_state','in', ('validate_ok'))]}">
                         <field name="generic_skills" attrs="{'readonly':[('validation_state','in', ('validate_ok'))]}">
                             <tree>

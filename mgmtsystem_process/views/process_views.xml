@@ -518,7 +518,7 @@
         <field name="inherit_id" ref="hr.view_hr_job_form" />
         <field name="arch" type="xml">
             <xpath expr="//sheet/div[2]" position="after">
-                <group>
+                <group groups="mgmtsystem_process.group_process_readonly_printreport,mgmtsystem_process.group_process_owner,mgmtsystem_process.group_process_all">
                     <field name="related_process_ids">
                         <tree>
                             <field name="code" />

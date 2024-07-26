@@ -29,58 +29,71 @@
                             class="oe_stat_button"
                             icon="fa-archive"
                             style="white-space: nowrap;"
-                            string="Versiones antiguas" />
+                            string="Versiones antiguas"
+                            groups="mgmtsystem_employees.group_employees_onlyread_printreport,mgmtsystem_employees.group_employees_write_printreport,mgmtsystem_employees.group_employees_all" />
                     <widget name="web_ribbon" text="Archivado" bg_color="bg-danger" attrs="{'invisible': [('active', '=', True)]}" />
-                    <button type="object" name="open_employees" class="oe_stat_button" icon="fa-bar-chart-o">
+                    <button type="object" name="open_employees" class="oe_stat_button" icon="fa-bar-chart-o" groups="mgmtsystem_employees.group_employees_onlyread_printreport,mgmtsystem_employees.group_employees_write_printreport,mgmtsystem_employees.group_employees_all">
                         <field name="employee_qty" widget="statinfo" string="Empleados" />
                     </button>
                     <field name="active" invisible="1" />
                     <field name="state" invisible="1"/>
+                    <field name="validation_state" invisible="1"/>
                 </xpath>
-                <xpath expr="//form/sheet" position="before"> <!-- ser-calidad-16-changes -->
-                    <header>                        
-                        <field name="validation_state" widget="statusbar" statusbar_visible="elaborate,review,validate,validate_ok" />
-                        <button string="Comunicar MOF"
-                                name="notify_employee_email"
-                                type="object"
-                                class="btn-primary"
-                                attrs="{'invisible':[('validation_state','!=', 'validate_ok')]}"/>
-                        <button string="Enviar a Elaborar"
-                                name="send_elaborate"
-                                type="object"
-                                class="btn-primary"
-                                attrs="{'invisible':[('validation_state','in', ('elaborate','cancel','validate_ok'))]}" />
-                        <button string="Enviar a Revisar"
-                                name="send_review"
-                                type="object"
-                                class="btn-primary"
-                                attrs="{'invisible':[('validation_state','!=', 'elaborate')]}" />
-                        <button string="Enviar a Validar"
-                                name="send_validate"
-                                type="object"
-                                class="btn-primary"
-                                attrs="{'invisible':[('validation_state','in', ('elaborate','validate','cancel','validate_ok'))]}" />
-                        <button string="Validar"
-                                name="send_validate_ok2"
-                                type="object"
-                                class="btn-primary"
-                                attrs="{'invisible':[('validation_state','not in', ('validate'))]}" />
-                        <button string="Volver Obsoleto"
-                                confirm="Esto volverá obsoleto el presente registro. ¿Está seguro(a)?"
-                                name="send_cancel"
-                                type="object"
-                                class="btn-second"
-                                attrs="{'invisible': [('validation_state','in',('cancel'))] }" />
-                        <button name="button_new_version"
-                                type="object"
-                                string="Nueva versión"
-                                attrs="{'invisible':['|', ('active','=',False), ('validation_state', '!=', 'validate_ok')]}"
-                                class="oe_highlight" />
-
+                <xpath expr="//form/sheet" position="before"> <!-- ser-calidad-16-changes -->              
+                    <header>                          
+                            <div style=" margin-right: 90px;">  
+                                <button string="Comunicar MOF"
+                                        name="notify_employee_email"
+                                        type="object"
+                                        class="btn-primary"
+                                        attrs="{'invisible':[('validation_state','!=', 'validate_ok')]}"
+                                        groups="mgmtsystem_employees.group_employees_onlyread_printreport,mgmtsystem_employees.group_employees_write_printreport,mgmtsystem_employees.group_employees_all"/>
+                                <button string="Enviar a Elaborar"
+                                        name="send_elaborate"
+                                        type="object"
+                                        class="btn-primary"
+                                        attrs="{'invisible':[('validation_state','in', ('elaborate','cancel','validate_ok'))]}"
+                                        groups="mgmtsystem_employees.group_employees_onlyread_printreport,mgmtsystem_employees.group_employees_write_printreport,mgmtsystem_employees.group_employees_all" />
+                                <button string="Enviar a Revisar"
+                                        name="send_review"
+                                        type="object"
+                                        class="btn-primary"
+                                        attrs="{'invisible':[('validation_state','!=', 'elaborate')]}"
+                                        groups="mgmtsystem_employees.group_employees_onlyread_printreport,mgmtsystem_employees.group_employees_write_printreport,mgmtsystem_employees.group_employees_all" />
+                                <button string="Enviar a Validar"
+                                        name="send_validate"
+                                        type="object"
+                                        class="btn-primary"
+                                        attrs="{'invisible':[('validation_state','in', ('elaborate','validate','cancel','validate_ok'))]}"
+                                        groups="mgmtsystem_employees.group_employees_onlyread_printreport,mgmtsystem_employees.group_employees_write_printreport,mgmtsystem_employees.group_employees_all" />
+                                <button string="Validar"
+                                        name="send_validate_ok2"
+                                        type="object"
+                                        class="btn-primary"
+                                        attrs="{'invisible':[('validation_state','not in', ('validate'))]}"
+                                        groups="mgmtsystem_employees.group_employees_onlyread_printreport,mgmtsystem_employees.group_employees_write_printreport,mgmtsystem_employees.group_employees_all" />
+                                <button string="Volver Obsoleto"
+                                        confirm="Esto volverá obsoleto el presente registro. ¿Está seguro(a)?"
+                                        name="send_cancel"
+                                        type="object"
+                                        class="btn-second"
+                                        attrs="{'invisible': [('validation_state','in',('cancel'))] }"
+                                        groups="mgmtsystem_employees.group_employees_onlyread_printreport,mgmtsystem_employees.group_employees_write_printreport,mgmtsystem_employees.group_employees_all" />
+                                <button name="button_new_version"
+                                        type="object"
+                                        string="Nueva versión"
+                                        attrs="{'invisible':['|', ('active','=',False), ('validation_state', '!=', 'validate_ok')]}"
+                                        class="oe_highlight"
+                                        groups="mgmtsystem_employees.group_employees_onlyread_printreport,mgmtsystem_employees.group_employees_write_printreport,mgmtsystem_employees.group_employees_all" />
+                            </div>
+                            <div groups="mgmtsystem_employees.group_employees_onlyread_printreport,mgmtsystem_employees.group_employees_write_printreport,mgmtsystem_employees.group_employees_all">
+                                <field name="validation_state" widget="statusbar" statusbar_visible="elaborate,review,validate,validate_ok"/>
+                            </div>    
                     </header>
                 </xpath>
                 <xpath expr="/form/sheet/notebook" position="inside">
-                    <page id="info" string="Información Adicional">
+                    <page id="info" string="Información Adicional" 
+                        groups="mgmtsystem_employees.group_employees_onlyread_printreport,mgmtsystem_employees.group_employees_write_printreport,mgmtsystem_employees.group_employees_all">
                         <group attrs="{'readonly':[('validation_state','in', ('validate_ok'))]}">
                             <field name="job_profile" attrs="{'readonly':[('validation_state','in', ('validate_ok'))]}" />
                             <field name="functions" attrs="{'readonly':[('validation_state','in', ('validate_ok'))]}">
@@ -95,7 +108,8 @@
                             </field>
                         </group>
                     </page>
-                    <page id="relationships" string="Relaciones">
+                    <page id="relationships" string="Relaciones"
+                        groups="mgmtsystem_employees.group_employees_onlyread_printreport,mgmtsystem_employees.group_employees_write_printreport,mgmtsystem_employees.group_employees_all">
                         <group>
                             <field name="parent_id" attrs="{'readonly':[('validation_state','in', ('validate_ok'))]}" />
                             <field name="coordinators" attrs="{'readonly':[('validation_state','in', ('validate_ok'))]}" />
@@ -103,7 +117,8 @@
                             <field name="superviseds" attrs="{'readonly':[('validation_state','in', ('validate_ok'))]}" />
                         </group>
                     </page>
-                    <page id="skills" string="Habilidades">
+                    <page id="skills" string="Habilidades"
+                        groups="mgmtsystem_employees.group_employees_onlyread_printreport,mgmtsystem_employees.group_employees_write_printreport,mgmtsystem_employees.group_employees_all">
                         <group attrs="{'readonly':[('validation_state','in', ('validate_ok'))]}">
                             <field name="generic_skills" attrs="{'readonly':[('validation_state','in', ('validate_ok'))]}">
                                 <tree>
@@ -131,7 +146,8 @@
                             </field>
                         </group>
                     </page>
-                    <page name="version_info" string="Validación y versión">
+                    <page name="version_info" string="Validación y versión"
+                        groups="mgmtsystem_employees.group_employees_onlyread_printreport,mgmtsystem_employees.group_employees_write_printreport,mgmtsystem_employees.group_employees_all">
                         <group col="4" attrs="{'readonly':[('validation_state','in', ('validate_ok'))]}">
                             <group colspan="4">
                                 <field name="version" />

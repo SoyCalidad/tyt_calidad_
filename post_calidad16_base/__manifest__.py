@@ -19,7 +19,6 @@
         'dms',
         'soycalidad_dms',
         'soycalidad_fast_validation',
-        'soycalidad_hr',
         'soycalidad_improve',
 
         #'dms_user_role', # necesita de otro modulo base "base_user_role" y causa errores si dejas de comentarlo
