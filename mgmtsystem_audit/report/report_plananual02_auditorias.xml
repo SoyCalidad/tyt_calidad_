@@ -37,7 +37,9 @@
                      <tbody>
                         <tr>
                            <td class="tg-1wig" rowspan="3" width="20%" style="width:15%">
-                              <img t-if="company.logo" t-att-src="'data:image/png;base64,%s' % to_text(company.logo)" style="max-width:100px;max-height:100px;vertical-align:middle;" />
+                              <t t-if="company.logo">
+                                 <img t-att-src="image_data_uri(company.logo)" style="max-width:100px;max-height:100px;vertical-align:middle;" alt="Logo"/>
+                              </t>
                            </td>
                            <td class="tg-1wig" rowspan="3" width="80%" style="width:65%;">
                               <span style="font-size:18px;font-weight:bold;">PROGRAMA DE AUDITORÍAS</span>
