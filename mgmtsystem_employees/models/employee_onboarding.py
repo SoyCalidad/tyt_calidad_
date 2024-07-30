@@ -70,7 +70,7 @@ class ResCompanyEmployeeOnboarding(models.Model):
 
 class HrDepartment(models.Model):
     _inherit = 'hr.department'
-    _rec_name = 'name'
+    #_rec_name = 'name'
 
     def action_save_onboarding_hr_department_step(self):
         """ Set the onboarding step as done """
