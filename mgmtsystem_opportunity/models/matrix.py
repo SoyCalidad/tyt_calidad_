@@ -445,12 +445,10 @@ class Line(models.Model):
         comodel_name='evaluation.evaluation',
         ondelete='restrict',
     )
-    result_ids = fields.Many2many(
+    result_ids = fields.One2many(
         string='Resultados',
         comodel_name='evaluation.result',
-        relation='block_line_evaluation_result_rel',
-        column1='result_id',
-        column2='line_id',
+        inverse_name='matrix_block_line_id',
         copy=True,
     )
     ntr = fields.Integer(

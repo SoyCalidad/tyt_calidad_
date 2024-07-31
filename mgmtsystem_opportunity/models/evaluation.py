@@ -6,6 +6,14 @@ from odoo.exceptions import UserError
 class Result(models.Model):
     _name = 'evaluation.result'
 
+    # new Many2one field
+    matrix_block_line_id = fields.Many2one(
+        comodel_name='matrix.block.line',
+        string='Registro de matriz',
+        ondelete='cascade',
+        required=True,
+    )
+
     criterio_id = fields.Many2one(
         string='Criterio',
         comodel_name='evaluation.criterio',
