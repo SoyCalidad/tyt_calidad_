@@ -87,9 +87,9 @@
                     <field name="process_id" />
                 </group>
             </notebook>
-            <field name="description" position="replace"></field>
+            <!--<field name="description" position="replace"></field>-->
 
-            <xpath expr="//page[2]" position="before">
+            <xpath expr="//notebook/page[2]" position="before">
                 <page string="Ficha técnica">
                     <group>
                         <group string="Datos principales">
@@ -154,7 +154,7 @@
                 <attribute name="help">La descripción será mostrada en la página principal de la encuesta. Puedes usar esto para dar un propósito y guía a tus candidatos antes de que la empiecen</attribute>
             </field>
 
-            <xpath expr="//notebook/page[5]" position="replace"></xpath>
+            <!--<xpath expr="//notebook/page[5]" position="replace"></xpath>-->
 
         </field>
     </record>
