@@ -11,7 +11,6 @@ class Result(models.Model):
         comodel_name='matrix.block.line',
         string='Registro de matriz',
         ondelete='cascade',
-        required=True,
     )
 
     criterio_id = fields.Many2one(
