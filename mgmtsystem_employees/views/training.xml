@@ -170,7 +170,7 @@
                         </group>
                         <group>
                             <group>
-                                <field name="plan_id" attrs="{'readonly': [('state','not in',('elaborate','validate_ok'))]}" colspan="4" />
+                                <field name="plan_id" attrs="{'readonly': [('state','not in',('elaborate','validate_ok'))]}" />
                                 <field name="exponent_id" attrs="{'readonly': [('state','not in',('elaborate','validate_ok'))]}" />
                                 <field name="type" attrs="{'readonly': [('state','not in',('elaborate'))] }" />
                             </group>
