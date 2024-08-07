@@ -128,6 +128,7 @@ class ProcessEdition(models.Model):
         compute='_compute_name_code',
         default='Sin nombre',
         search='_search_name',
+        store=True
     )
     active = fields.Boolean('Active', default=True, tracking=True)
     categ_id = fields.Many2one(
@@ -169,6 +170,7 @@ class ProcessEdition(models.Model):
         default='Nuevo',
         compute='_compute_name_code',
         search='_search_code',
+        store=True
     )
 
     numero = fields.Char(
@@ -177,11 +179,13 @@ class ProcessEdition(models.Model):
         required=True,
         default='Sin definir',
         copy=False,
+        store=True
     )
 
     version_as_string = fields.Char(
         string='Version',
         compute='_compute_version_as_string',
+        store=True,
     )
     
     @api.depends('version')
@@ -268,7 +272,7 @@ class ProcessEdition(models.Model):
     def _search_code(self, operator, value):
         if operator == 'like':
             operator = 'ilike'
-        return [('name', operator, value)]
+        return [('code', operator, value)]
 
     def _copy_edition(self):
         new_edition = self.copy({
