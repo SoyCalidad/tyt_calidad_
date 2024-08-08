@@ -1,0 +1,41 @@
+<odoo>    
+    <data>
+        <record id="mgmtsystem_plan_training_form_tyt" model="ir.ui.view">
+            <field name="name">mgmtsystem_plan_training_form_tyt</field>
+            <field name="model">mgmtsystem.plan.training</field>
+            <field name="inherit_id" ref="mgmtsystem_employees.view_mgmtsystem_plan_training_form"/>
+            <field name="arch" type="xml">
+                <xpath expr="//sheet/group[2]" position="replace">
+                    <group>
+                        <group>
+                            <field name="plan_id" attrs="{'readonly': [('state','not in',('elaborate','validate_ok'))]}" />                            
+                            <field name="exponent_id" attrs="{'readonly': [('state','not in',('elaborate','validate_ok'))]}" />
+                        </group>
+                        
+                        <group>
+                            <field name="training_frequency" attrs="{'readonly': [('state','not in',('elaborate'))] }" />
+                            <field name="month_training" attrs="{'readonly': [('state','not in',('elaborate'))] }" />
+                        </group>                    
+                    </group>                  
+                    <group>
+                        <group>
+                            <field name="exponent_job_id" string="Puesto del Emisor"  readonly="1" attrs="{'invisible': [('exponent_job_id','=',False)]}" />
+                            <field name="type" attrs="{'readonly': [('state','not in',('elaborate'))] }" />                        
+                            <field name="responsible_status" />
+                            <field name="responsible_in_id" attrs="{'invisible': [('responsible_status','=',True)]}" />
+                            <field name="responsible_ex_id" attrs="{'invisible': [('responsible_status','=',False)]}" />                        
+                        </group>
+                        <group>
+                            <field name="date_training" />
+                            <field name="duration" widget="float_time" attrs="{'readonly': [('state','not in',('elaborate','validate_ok'))]}" />                  
+                            <field name="training_target" attrs="{'readonly': [('state','not in',('elaborate'))] }" />
+                            <field name="training_format" attrs="{'readonly': [('state','not in',('elaborate'))] }" />
+                            <field name="training_place" attrs="{'readonly': [('state','not in',('elaborate'))] }" />
+                            <field name="training_media" attrs="{'readonly': [('state','not in',('elaborate'))] }" />
+                        </group>
+                    </group>                
+                </xpath>
+            </field>
+        </record>
+    </data>
+</odoo>
