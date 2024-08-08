@@ -1,0 +1,16 @@
+<odoo>    
+    <data>
+        <record id="view_matrix_block_line_form_inherit_g2" model="ir.ui.view">
+            <field name="name">view_matrix_block_line_form_inherit_g2</field>
+            <field name="model">matrix.block.line</field>
+            <field name="inherit_id" ref="mgmtsystem_opportunity.view_matrix_block_line_form"/>
+            <field name="arch" type="xml">
+                <xpath expr="//sheet/group[1]/group[2]" position="inside">
+                    <field name="stakeholder_id" attrs="{'readonly': [('state','not in',('draft','in_process'))]}" />
+                    <field name="risk_origin" attrs="{'readonly': [('state','not in',('draft','in_process'))]}" />
+                    <field name="hr_job_id" widget="many2many_tags" attrs="{'readonly': [('state','not in',('draft','in_process'))]}" />
+                </xpath>
+            </field>
+        </record>            
+    </data>
+</odoo>
