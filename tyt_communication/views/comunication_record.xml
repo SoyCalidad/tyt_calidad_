@@ -1,0 +1,34 @@
+<odoo>    
+    <data>
+        <record id="mgmtsystem_plan_training_form_tyt" model="ir.ui.view">
+            <field name="name">mgmtsystem_plan_training_form_tyt</field>
+            <field name="model">comunication.plan.line</field>
+            <field name="inherit_id" ref="mgmtsystem_comunication.view_plan_line_form"/>
+            <field name="arch" type="xml">
+                <xpath expr="//sheet/group[2]" position="replace">
+                    <group>
+                        <group>
+                            <field name="user_id">
+                                <tree string="Puestos de Usuarios">
+                                    <field name="name" string="Usuario"/>
+                                    <field name="job_id" string="Puesto del Emisor"/>
+                                </tree>
+                            </field>
+                            <field name="type" attrs="{'readonly': [('state','not in',('elaborate', 'validate_ok'))] }" />
+                            <field name="date_release" attrs="{'readonly': [('state','not in',('elaborate'))] }" />
+                            <field name="via" attrs="{'readonly': [('state','not in',('elaborate'))] }" />
+                            <field name="frequency_text" />
+                        </group>                    
+                        <group>
+                            <field name="communication_target" attrs="{'readonly': [('state','not in',('elaborate'))] }" />
+                            <field name="communication_format" attrs="{'readonly': [('state','not in',('elaborate'))] }" />
+                            <field name="communication_place" attrs="{'readonly': [('state','not in',('elaborate'))] }" />
+                            <field name="communication_media" attrs="{'readonly': [('state','not in',('elaborate'))] }" />
+                            <field name="responsible_in_id" attrs="{'readonly': [('state','not in',('elaborate'))] }" />
+                        </group>                
+                    </group>                              
+                </xpath>
+            </field>
+        </record>
+    </data>
+</odoo>
