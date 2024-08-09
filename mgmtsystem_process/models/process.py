@@ -252,7 +252,7 @@ class Process(models.Model):
 
     @api.model
     def create(self, values):
-        sequence = self.env['ir.sequence'].create({
+        sequence = self.env['ir.sequence'].sudo().create({
             'name': 'Secuencia de '+values.get('name'),
             'active': True,
             'prefix': 'Edición-nro.',
