@@ -15,7 +15,7 @@
         'soycalidad_bugtracker',
         'soycalidad_ciiu',
         'soycalidad_context',
-        'soycalidad_default_processes',        
+        #'soycalidad_default_processes',        
         #'dms',
         #'soycalidad_dms',
         'soycalidad15_documents',

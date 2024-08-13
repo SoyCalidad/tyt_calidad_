@@ -1,0 +1,71 @@
+<odoo>    
+    <data>
+        <record id="mgmtsystem_stakeholder_form_tyt" model="ir.ui.view">
+            <field name="name">mgmtsystem_stakeholder_form_tyt</field>
+            <field name="model">mgmtsystem.stakeholder</field>
+            <field name="inherit_id" ref="mgmtsystem_context.stakeholder_view_form"/>
+            <field name="arch" type="xml">
+                <xpath expr="//sheet/group[3]" position="replace">
+                    <group>
+                        <field name="requirements">
+                            <tree string="Requerimientos">
+                                <field name="target_req" />
+                                <field name="name" style="max-width:15vw;overflow-wrap: break-word;" />
+                                <field name="legal_id" />
+                                <field name="job_req" />
+                                <field name="limit_date_req" />
+                                <field name="type" />
+                            </tree>
+                        </field>
+                    </group>                           
+                </xpath>
+            </field>
+        </record>
+
+        <record id="stakeholder_req_view_form_2" model="ir.ui.view">
+            <field name="name">mgmtsystem.stakeholder.req.view.form.2</field>
+            <field name="model">mgmtsystem.stakeholder.req</field>
+            <field name="inherit_id" ref="mgmtsystem_context.stakeholder_req_view_form" />
+            <field name="arch" type="xml">
+                <xpath expr="//sheet/group[1]" position="replace">
+                    <group>
+                        <field name="target_req" />
+                        <field name="name" style="max-width:15vw;overflow-wrap: break-word;" />
+                        <field name="is_legal" />
+                        <field name="legal_id" attrs="{'readonly': [('is_legal','=',False)]}" />
+                        <field name="type" />
+                        <field name="job_req" />
+                        <field name="limit_date_req" string="Fecha Límite para cumplir con el requisito"/>                        
+                    </group>                           
+                </xpath>
+            </field>
+        </record>
+
+        <record id="stakeholder_req_view_tree_2" model="ir.ui.view">
+            <field name="name">mgmtsystem.stakeholder.req.view.tree.2</field>
+            <field name="model">mgmtsystem.stakeholder.req</field>
+            <field name="inherit_id" ref="mgmtsystem_context.stakeholder_req_view_tree" />
+            <field name="arch" type="xml">
+                <field name="legal_id" position="after"> 
+                    <!--<field name="target_req" />
+                    <field name="name" style="max-width:15vw;overflow-wrap: break-word;" />
+                    <field name="is_legal" />
+                    <field name="legal_id" attrs="{'readonly': [('is_legal','=',False)]}" />-->
+                    <field name="job_req" />
+                    <field name="limit_date_req"  />
+                    <!--<field name="type" />-->
+                </field>
+                <field name="name" position="before"> 
+                    <field name="target_req" />
+                    <!--<field name="name" style="max-width:15vw;overflow-wrap: break-word;" />
+                    <field name="is_legal" />
+                    <field name="legal_id" attrs="{'readonly': [('is_legal','=',False)]}" />
+                    <field name="job_req" />
+                    <field name="limit_date_req" />-->
+                    <!--<field name="type" />-->
+                </field>                
+            </field>
+        </record>
+
+    </data>
+</odoo>
