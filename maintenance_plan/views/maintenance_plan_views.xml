@@ -194,6 +194,7 @@
             False), ('search_equipment_id', '=', active_id)]
         </field>
     </record>
+    <!-- hiding "Planes de mantenimiento" MENU
     <menuitem
         id="menu_m_plan_form"
         name="Maintenance Plans"
@@ -201,4 +202,5 @@
         action="maintenance_plan_action"
         groups="maintenance.group_equipment_manager,base.group_user"
     />
+    -->
 </odoo>
