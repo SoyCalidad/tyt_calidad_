@@ -1,9 +1,6 @@
 import uuid
 
 from odoo import models, fields, api, _
-from odoo.exceptions import UserError, RedirectWarning, ValidationError
-import difflib
-import pydevd_pycharm
 
 
 class ProcessEdition(models.Model):

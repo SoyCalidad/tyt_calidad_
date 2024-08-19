@@ -4,7 +4,7 @@ from odoo.http import request
 
 class ShareController(http.Controller):
 
-    @http.route(['/edition/share/<int:edition_id>/<token>'], type='http', auth='user', website=True)
+    @http.route(['/edition/share/<int:edition_id>/<token>'], type='http', auth='public', website=True)
     def share_edition(self, edition_id, token):
         edition = request.env['process.edition'].sudo().browse(edition_id)
         if not edition.exists() or edition.access_token != token:
@@ -15,7 +15,7 @@ class ShareController(http.Controller):
             'pdf_url': f'/edition/download/{edition.id}'
         })
 
-    @http.route('/edition/download/<int:edition_id>', type='http', auth='user')
+    @http.route('/edition/download/<int:edition_id>', type='http', auth='public')
     def download_edition(self, edition_id):
         edition = request.env['process.edition'].sudo().browse(edition_id)
         if not edition.exists():
