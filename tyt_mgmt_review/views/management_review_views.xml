@@ -1,0 +1,29 @@
+<odoo>    
+    <data>
+        <record id="management_review_form_tyt" model="ir.ui.view">
+            <field name="name">management_review_form_tyt</field>
+            <field name="model">management.review</field>
+            <field name="inherit_id" ref="mgmtsystem_management_review.management_review_form_view"/>
+            <field name="arch" type="xml">
+                <xpath expr="//sheet/notebook/page[2]" position="after">
+                    <page string="Nueva pestaña">
+                        <group>
+                            <field name="line2_ids" nolabel="1" attrs="{'readonly': [('state','in',('cancel'))] }" colspan="2">
+                                <tree>
+                                    <field name="name" />
+                                    <field name="job_id" />
+                                    <field name="clausule_id" />
+                                    <field name="description" />
+                                    <field name="process2_id" />
+                                    <field name="department_pro_id" />
+                                    <field name="department_clau_id" />
+                                    <field name="achieved" />
+                                </tree>
+                            </field>
+                        </group>
+                    </page>               
+                </xpath>
+            </field>
+        </record>
+    </data>
+</odoo>

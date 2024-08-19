@@ -1,0 +1,54 @@
+<odoo>    
+    <data>
+        <record id="management_review_line2_tree_view" model="ir.ui.view">
+            <field name="name">management.review.line2.tree.view</field>
+            <field name="model">management.review.line2</field>
+            <field name="arch" type="xml">
+                <tree>
+                    <field name="name" />
+                    <field name="job_id" />
+                    <field name="clausule_id" />
+                    <field name="description" />
+                    <field name="process2_id" />
+                    <field name="department_pro_id" />
+                    <field name="department_clau_id" />
+                    <field name="achieved" />
+                </tree>
+            </field>
+        </record>
+        <record id="management_review_line2_form_view" model="ir.ui.view">
+            <field name="name">management.review.line2.form.view</field>
+            <field name="model">management.review.line2</field>
+            <field name="arch" type="xml">
+                <form>
+                    <group>
+                        <field name="name" />
+                        <field name="job_id" />
+                        <field name="clausule_id" />
+                        <field name="description" />
+                        <field name="process2_id" />
+                        <field name="department_pro_id" />
+                        <field name="department_clau_id" />
+                        <field name="achieved" />
+                    </group>
+                </form>
+            </field>
+        </record>
+
+        <record id="mgmtsystem_review_line2_action1" model="ir.actions.act_window">
+            <field name="name">Programa de revisiones</field>
+            <field name="type">ir.actions.act_window</field>
+            <field name="res_model">management.review.line2</field>
+            <field name="view_mode">tree,form</field>
+        </record>        
+        <!--
+        <record id="qlty_job_action" model="ir.actions.act_window">
+            <field name="name">Puesto en el comité de calidad</field>
+            <field name="res_model">review.team.job</field>
+            <field name="view_mode">tree,form</field>
+            <field name="domain">[]</field>
+            <field name="context">{}</field>
+        </record>
+        -->
+    </data>
+</odoo>
