@@ -5,6 +5,10 @@
             <field name="model">management.review</field>
             <field name="inherit_id" ref="mgmtsystem_management_review.management_review_form_view"/>
             <field name="arch" type="xml">
+                <xpath expr="//sheet/group[1]/group[1]/field[@name='date_management_review']" position="after">
+                    <field name="location_id" />
+                </xpath>
+
                 <xpath expr="//sheet/notebook/page[2]" position="after">
                     <page string="Informe">
                         <group>
