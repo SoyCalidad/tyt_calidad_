@@ -6,7 +6,7 @@
             <field name="inherit_id" ref="mgmtsystem_management_review.management_review_form_view"/>
             <field name="arch" type="xml">
                 <xpath expr="//sheet/notebook/page[2]" position="after">
-                    <page string="Nueva pestaña">
+                    <page string="Informe">
                         <group>
                             <field name="line2_ids" nolabel="1" attrs="{'readonly': [('state','in',('cancel'))] }" colspan="2">
                                 <tree>
