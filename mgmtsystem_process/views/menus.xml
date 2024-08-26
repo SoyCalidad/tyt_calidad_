@@ -13,7 +13,7 @@
         sequence="10" 
         groups= "base.group_no_one,mgmtsystem_process.group_process_readonly,mgmtsystem_process.group_process_readonly_printreport,mgmtsystem_process.group_process_owner,mgmtsystem_process.group_process_all"/>
 
-    <!--Acta de registro en docmentary_control_views.xml: sequence 20-->
+    <!--Registro de inventario en docmentary_control_views.xml: sequence 20-->
 
     <menuitem
         id="mgmt_process_documentation"
