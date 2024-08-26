@@ -25,7 +25,7 @@
 
         <menuitem
             id="record_meeting_report_menu"
-            name="Actas de Reunión"
+            name="Minutas de reunión"
             action="record_meeting_wizard_action"
             parent="comunication_report_menu"
             sequence="12"/>

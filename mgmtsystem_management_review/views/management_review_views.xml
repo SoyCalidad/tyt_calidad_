@@ -40,7 +40,7 @@
                         </div>
                         <label for="edition_id" />
                         <div class="o_row">
-                            <field name="edition_id" style="width:70%%" colspan="2" attrs="{'readonly': [('state','not in',('elaborate'))] }" />
+                            <field name="edition_id" options="{'no_create': True}" style="width:70%%" colspan="2" attrs="{'readonly': [('state','not in',('elaborate'))] }" />
                         </div>
                         <notebook>
                             <page string="Revisiones">
@@ -184,7 +184,7 @@
                 <sheet>
                     <div class="oe_button_box" name="button_box">
                         <button type="object" name="action_show_meetings" class="oe_stat_button" icon="fa-bars">
-                            <field name="meetings_count" widget="statinfo" string="Actas de reunión" />
+                            <field name="meetings_count" widget="statinfo" string="Minutas de reunión" />
                         </button>
                     </div>
 
@@ -393,7 +393,7 @@
                                 </group>
                             </div>
                         </page>
-                        <page name="record_meeting_ids" string="Actas de reunión">
+                        <page name="record_meeting_ids" string="Minutas de reunión">
                             <field name="record_meeting_ids" />
                         </page>
                         <page name="validation" string="Validación">

@@ -1,8 +1,8 @@
 <odoo>
     <data>
-        <!-- Acta de Reunión Report -->
+        <!-- Minuta de reunión Report -->
         <record id="action_report_record_meeting" model="ir.actions.report">
-            <field name="name">Acta de Reunión</field>
+            <field name="name">Minuta de reunión</field>
             <field name="model">record.meeting</field>
             <field name="report_type">qweb-pdf</field>
             <field name="report_name">mgmtsystem_comunication.record_meeting_report_template</field>
@@ -88,7 +88,7 @@
                     <t t-call="web.external_layout">
                         <div class="page">
                             <div class="principal">
-                                Mediante la presente ACTA DE REUNIÓN se formaliza lo debatido, coordinado y acordado en la reunión realizada con fecha
+                                Mediante la presente Minuta de reunión se formaliza lo debatido, coordinado y acordado en la reunión realizada con fecha
                                 
                                 
                                 <span t-field="doc.date_release" />

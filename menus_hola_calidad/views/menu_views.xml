@@ -178,7 +178,7 @@
                   sequence="1" />
 
         <menuitem id="hola_calidad_mgmtsystem_comunication_record_meeting"
-                  name="Actas de reunión"
+                  name="Minuta de reunión"
                   parent="comunication_menu"
                   action="mgmtsystem_comunication.record_meeting_action"
                   sequence="2" />
