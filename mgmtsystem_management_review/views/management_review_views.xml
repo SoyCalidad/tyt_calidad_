@@ -286,7 +286,7 @@
                                         <field name="survey_description" />
                                     </group>
                                     <div class="spacer"></div>
-                                    <p class="script" style="margin-left:2em">
+                                    <p class="script plate" style="margin-left:2em">
                                         <h3>c.2. el grado en que se han logrado los objetivos del sistema de gestión</h3>
                                     </p>
                                     <group colspan="2">
@@ -296,7 +296,7 @@
                                         <field name="target_description" attrs="{'readonly': [('state','in',('validate_ok','closed','cancel'))]}" />
                                     </group>
                                     <div class="spacer"></div>
-                                    <p class="script" style="margin-left:2em">
+                                    <p class="script plate" style="margin-left:2em">
                                         <h3>c.3. el grado en que se cumplido la política del SIG</h3>
                                     </p>
                                     <group colspan="2">
@@ -321,7 +321,7 @@
                                         <field name="process_description" attrs="{'readonly': [('state','in',('validate_ok','closed','cancel'))]}" />
                                     </group>
                                     <div class="spacer"></div>
-                                    <p class="script" style="margin-left:2em">
+                                    <p class="script plate" style="margin-left:2em">
                                         <h3>d.2. las No conformidades y acciones correctivas</h3>
                                     </p>
                                     <group colspan="2">
@@ -329,7 +329,7 @@
                                         <field name="nonconformity_action_description" attrs="{'readonly': [('state','in',('validate_ok','closed','cancel'))]}" />
                                     </group>
                                     <div class="spacer"></div>
-                                    <p class="script" style="margin-left:2em">
+                                    <p class="script plate" style="margin-left:2em">
                                         <h3>d.3. los resultados de seguimiento y medición</h3>
                                     </p>
                                     <group colspan="2">
@@ -337,7 +337,7 @@
                                         <field name="indicator_description" attrs="{'readonly': [('state','in',('validate_ok','closed','cancel'))]}" />
                                     </group>
                                     <div class="spacer"></div>
-                                    <p class="script" style="margin-left:2em">
+                                    <p class="script plate" style="margin-left:2em">
                                         <h3>d.4. los resultados de las auditorías</h3>
                                     </p>
                                     <group colspan="2">
@@ -345,7 +345,7 @@
                                         <field name="audit_description" attrs="{'readonly': [('state','in',('validate_ok','closed','cancel'))]}" />
                                     </group>
                                     <div class="spacer"></div>
-                                    <p class="script" style="margin-left:2em">
+                                    <p class="script plate" style="margin-left:2em">
                                         <h3>d.5. el desempeño de los proveedores externos</h3>
                                     </p>
                                     <group colspan="2">
