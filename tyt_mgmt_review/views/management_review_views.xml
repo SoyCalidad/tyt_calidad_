@@ -27,6 +27,17 @@
                         </group>
                     </page>               
                 </xpath>
+
+                <!--Minuta de reunión-->
+                <xpath expr="//sheet/notebook/page[@name='record_meeting_ids']" position="attributes">
+                    <attribute name="string">Minuta de reunión</attribute>
+                </xpath>
+                <xpath expr="//sheet/notebook/page[@name='detail']/div[1]/group[1]/group[1]" position="replace">
+                    <group colspan="2">
+                        <field name="record_meeting_ids" string="Minutas de reunión" attrs="{'readonly': [('state','in',('validate_ok','closed','cancel'))]}" />
+                        <field name="record_meeting_actions" string="Acciones de Minutas de reunión"/>
+                    </group>
+                </xpath>                
             </field>
         </record>
     </data>
