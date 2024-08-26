@@ -75,7 +75,7 @@
     </record>
 
     <record model="ir.actions.act_window" id="documentary_control_action">
-        <field name="name">Lista maestra</field>
+        <field name="name">Acta de registro</field>
         <field name="res_model">documentary.control</field>
         <field name="view_mode">tree,form</field>
     </record>
