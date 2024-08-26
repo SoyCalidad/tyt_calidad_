@@ -117,7 +117,7 @@
                         <group>
                             <label for="process_id" />
                             <div class="o_row">
-                                <field name="process_id" placeholder="Procedimiento" colspan="3" attrs="{'readonly': [('state','not in',('elaborate'))]}" />
+                                <field name="process_id" options="{'no_create': True}" placeholder="Procedimiento" colspan="3" attrs="{'readonly': [('state','not in',('elaborate'))]}" />
                             </div>
                         </group>
                         <notebook>
@@ -360,7 +360,7 @@
                         <group string="Datos generales">
                             <group>
                                 <field name="date" />
-                                <field name="process_id" placeholder="Procedimiento" colspan="3" attrs="{'readonly': [('state','not in',('elaborate'))]}" />
+                                <field name="process_id" options="{'no_create': True}" placeholder="Procedimiento" colspan="3" attrs="{'readonly': [('state','not in',('elaborate'))]}" />
                                 <field name="system_id" options="{'no_create': True, 'no_edit': True}" attrs="{'readonly': [('state','in',('validate_ok','cancel'))]}" />
                                 <field name="company_id" invisible="1" attrs="{'readonly': [('state','in',('validate_ok','cancel'))]}" />
                             </group>
@@ -538,7 +538,7 @@
                         <group>
                             <label for="process_id" />
                             <div class="o_row">
-                                <field name="process_id" placeholder="Procedimiento" colspan="3" attrs="{'readonly': [('state','not in',('elaborate'))]}" />
+                                <field name="process_id" options="{'no_create': True}" placeholder="Procedimiento" colspan="3" attrs="{'readonly': [('state','not in',('elaborate'))]}" />
                             </div>
                         </group>
                         <notebook>
@@ -919,7 +919,7 @@
                         </div>
                         <label for="process_id" />
                         <div class="o_row">
-                            <field name="process_id" placeholder="Procedimiento" colspan="3" />
+                            <field name="process_id" options="{'no_create': True}" placeholder="Procedimiento" colspan="3" />
                         </div>
                         <group>
                             <field name="system_id" options="{'no_create': True, 'no_edit': True}" />

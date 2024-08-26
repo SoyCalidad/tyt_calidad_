@@ -73,7 +73,7 @@
                         </h3>
                     </div>
                     <group>
-                        <field name="process_id" />
+                        <field name="process_id" options="{'no_create': True, 'no_edit': True}" />
                         <field name="system_id" options="{'no_create': True, 'no_edit': True}"  string="Identificador de la oportunidad" attrs="{'invisible':[('type','!=','opportunity')]}" />
                         <field name="system_id" options="{'no_create': True, 'no_edit': True}"  string="Identificador del riesgo" attrs="{'invisible':[('type','!=','risk')]}" />
                     </group>

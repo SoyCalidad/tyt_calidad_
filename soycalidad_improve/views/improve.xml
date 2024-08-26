@@ -186,7 +186,7 @@
                         </h2>
                     </div>
                     <group>
-                        <field name="process_id" attrs="{'readonly': [('state','in',('validate_ok','cancel'))]}" />
+                        <field name="process_id" options="{'no_create': True}" attrs="{'readonly': [('state','in',('validate_ok','cancel'))]}" />
                     </group>
                     <notebook>
                         <page string="Planificación de cambios">

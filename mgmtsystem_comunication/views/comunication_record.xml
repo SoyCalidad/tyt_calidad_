@@ -63,7 +63,7 @@
                         </div>
                         <group>
                             <group>
-                                <field name="document_id" attrs="{'readonly': [('state','not in',('elaborate'))]}" />
+                                <field name="document_id" options="{'no_create': True}" attrs="{'readonly': [('state','not in',('elaborate'))]}" />
                                 <field name="user_id" attrs="{'readonly': [('state','not in',('elaborate'))]}" />
                                 <field name="reference" invisible="1" />
                                 <field name="line_id" attrs="{'readonly': [('state','not in',('elaborate'))], 'invisible':[('line_id','=', False)]}" />

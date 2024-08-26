@@ -64,7 +64,7 @@
                             <field name="name" attrs="{'readonly': [('state','in',('validate_ok','cancel'))]}" />
                         </h1>
                         <group>
-                            <field name="process_id" placeholder="Procedimiento" colspan="4" attrs="{'readonly': [('state','not in',('elaborate'))]}" />
+                            <field name="process_id" options="{'no_create': True}" placeholder="Procedimiento" colspan="4" attrs="{'readonly': [('state','not in',('elaborate'))]}" />
                             <group string="Información">
                                 <field name="date" invisible="1" attrs="{'readonly': [('state','in',('validate_ok','cancel'))]}" />
                                 <field name="company_id" invisible="1" attrs="{'readonly': [('state','in',('validate_ok','cancel'))]}" />
@@ -739,7 +739,7 @@
                             <group string="Información General" colspan="4">
                                 <label for="process_id" />
                                 <div class="o_row">
-                                    <field name="process_id" placeholder="Procedimiento" colspan="3" attrs="{'readonly': [('state','not in',('elaborate'))]}" />
+                                    <field name="process_id" options="{'no_create': True}" placeholder="Procedimiento" colspan="3" attrs="{'readonly': [('state','not in',('elaborate'))]}" />
                                 </div>
                                 <field name="swot_id" required="1" attrs="{'readonly': [('state','in',('validate_ok','cancel'))]}" />
                             </group>

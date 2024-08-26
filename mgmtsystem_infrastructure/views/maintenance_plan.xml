@@ -255,7 +255,7 @@
                         </div>
                         <label for="edition_id" />
                         <div class="o_row">
-                            <field name="edition_id" colspan="3" attrs="{'readonly': [('state','not in',('elaborate'))] }" />
+                            <field name="edition_id" options="{'no_create': True}" colspan="3" attrs="{'readonly': [('state','not in',('elaborate'))] }" />
                         </div>
                         <notebook>
                             <page string="Mantenimientos">
