@@ -5,7 +5,7 @@
             <field name="name">record.meeting.tree</field>
             <field name="model">record.meeting</field>
             <field name="arch" type="xml">
-                <tree string="Actas de reunión">
+                <tree string="Minuta de reunión">
                     <field name="name" />
                     <field name="date_release" />
                     <field name="user_id" />
@@ -30,7 +30,7 @@
             <field name="name">record.meeting.form</field>
             <field name="model">record.meeting</field>
             <field name="arch" type="xml">
-                <form string="Actas de reunión">
+                <form string="Minuta de reunión">
                     <header>
                         <field name="state" widget="statusbar" statusbar_visible="elaborate,in_process,close" />
                         <button name="action_mail_send"

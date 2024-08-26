@@ -453,5 +453,5 @@
         </field>
     </record>
     <menuitem id="item_management_review" name="Revisión por la dirección" action="action_management_review" sequence="10" parent="menu_review_root" />
-    <menuitem id="item_record_meeting" name="Actas de reunión" action="mgmtsystem_comunication.record_meeting_action" sequence="20" parent="menu_review_root" />
+    <menuitem id="item_record_meeting" name="Minuta de reunión" action="mgmtsystem_comunication.record_meeting_action" sequence="20" parent="menu_review_root" />
 </odoo>

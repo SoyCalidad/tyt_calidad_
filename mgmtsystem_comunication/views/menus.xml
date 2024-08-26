@@ -29,7 +29,7 @@
             action="comunication_plan_action"/> -->
 
         <menuitem id="record_meeting_item" 
-            name="Actas de reunión" 
+            name="Minuta de reunión" 
             parent="menu_comunication_root" 
             sequence="50" 
             action="record_meeting_action"/>
