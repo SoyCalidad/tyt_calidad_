@@ -12,6 +12,7 @@
     ],
     'data': [
         'security/ir.model.access.csv',
+        'views/documentary_control_views.xml',
         'views/procedure_edition.xml',
         'reports/report_paperformat.xml',
         'reports/report_layout.xml',

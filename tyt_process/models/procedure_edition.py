@@ -1,10 +1,6 @@
 import logging
-import base64
-
-from PyPDF2 import PdfFileReader, PdfFileWriter, PdfFileMerger
 
 from odoo import api, fields, models, _
-from odoo.exceptions import UserError
 
 _logger = logging.getLogger(__name__)
 
