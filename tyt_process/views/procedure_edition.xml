@@ -1,0 +1,140 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+
+    <!-- tyt.distribution.list views -->
+
+    <record id="tyt_distribution_list_view_form" model="ir.ui.view">
+        <field name="name">tyt.distribution.list.view.form</field>
+        <field name="model">tyt.distribution.list</field>
+        <field name="arch" type="xml">
+            <form string="Distribution List">
+                <sheet>
+                    <group>
+                        <field name="number_of_copy" />
+                        <field name="distributed_to" />
+                        <field name="job_id" />
+                        <field name="distribution_date" />
+                        <field name="place" />
+                    </group>
+                </sheet>
+            </form>
+        </field>
+    </record>
+
+    <record id="tyt_distribution_list_view_tree" model="ir.ui.view">
+        <field name="name">tyt.distribution.list.view.tree</field>
+        <field name="model">tyt.distribution.list</field>
+        <field name="arch" type="xml">
+            <tree string="Distribution List">
+                <field name="number_of_copy" />
+                <field name="distributed_to" />
+                <field name="job_id" />
+                <field name="distribution_date" />
+                <field name="place" />
+            </tree>
+        </field>
+    </record>
+
+    <record id="tyt_distribution_list_view_search" model="ir.ui.view">
+        <field name="name">tyt.distribution.list.view.search</field>
+        <field name="model">tyt.distribution.list</field>
+        <field name="arch" type="xml">
+            <search string="Distribution List">
+                <field name="number_of_copy" />
+                <field name="distributed_to" />
+                <field name="job_id" />
+                <field name="distribution_date" />
+                <field name="place" />
+            </search>
+        </field>
+    </record>
+
+    <record id="tyt_distribution_list_action" model="ir.actions.act_window">
+        <field name="name">Distribution List</field>
+        <field name="res_model">tyt.distribution.list</field>
+        <field name="view_mode">tree,form</field>
+    </record>
+
+    <!-- tyt.document.record -->
+
+    <record id="tyt_document_record_view_form" model="ir.ui.view">
+        <field name="name">tyt.document.record.view.form</field>
+        <field name="model">tyt.document.record</field>
+        <field name="arch" type="xml">
+            <form string="Document Record">
+                <sheet>
+                    <group>
+                        <field name="prefix" />
+                        <field name="name" />
+                        <field name="responsible" />
+                        <field name="location" />
+                    </group>
+                </sheet>
+            </form>
+        </field>
+    </record>
+
+    <record id="tyt_document_record_view_tree" model="ir.ui.view">
+        <field name="name">tyt.document.record.view.tree</field>
+        <field name="model">tyt.document.record</field>
+        <field name="arch" type="xml">
+            <tree string="Document Record">
+                <field name="prefix" />
+                <field name="name" />
+                <field name="responsible" />
+                <field name="location" />
+            </tree>
+        </field>
+    </record>
+
+    <record id="tyt_document_record_view_search" model="ir.ui.view">
+        <field name="name">tyt.document.record.view.search</field>
+        <field name="model">tyt.document.record</field>
+        <field name="arch" type="xml">
+            <search string="Document Record">
+                <field name="prefix" />
+                <field name="name" />
+                <field name="responsible" />
+                <field name="location" />
+            </search>
+        </field>
+    </record>
+
+    <!-- Inherits -->
+
+    <record id="tyt_document_record_action" model="ir.actions.act_window">
+        <field name="name">Document Record</field>
+        <field name="res_model">tyt.document.record</field>
+        <field name="view_mode">tree,form</field>
+    </record>
+
+    <record id="system_process_edition_form_view_inherit_inherit" model="ir.ui.view">
+        <field name="name">process.edition.view.form.inherit</field>
+        <field name="model">process.edition</field>
+        <field name="inherit_id" ref="mgmtsystem_process.system_process_edition_form_view_inherit" />
+        <field name="arch" type="xml">
+            <page name="detail" position="replace">
+                <page name="tyt_content" string="Content">
+                    <separator string="1. Objective, Scope, and Users" />
+                    <field name="tyt_objective_scope_users" />
+                    <separator string="2. Reference Documents" />
+                    <field name="tyt_reference_documents" />
+                    <separator string="3. Description" />
+                    <field name="tyt_procedure_description" />
+                    <separator string="4. Management of Records Kept Based on This Document" />
+                    <field name="tyt_document_record_ids" />
+                    <separator string="5. Appendices" />
+                    <field name="tyt_appendices" />
+                </page>
+            </page>
+            <notebook position="inside">
+                <page name="distribution_list" string="Distribution List">
+                    <group name="distribution_list" string="Distribution List">
+                        <field name="tyt_distribution_list_ids" nolabel="1" />
+                    </group>
+                </page>
+            </notebook>
+        </field>
+    </record>
+
+</odoo>
