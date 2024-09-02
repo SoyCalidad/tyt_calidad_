@@ -4,7 +4,7 @@
         <field name="name">documentary.control.tree</field>
         <field name="model">documentary.control</field>
         <field name="arch" type="xml">
-            <tree string="Lista maestra">
+            <tree string="Registro de inventario">
                 <field name="process_code" string="Código de procedimiento"/>
                 <field name="process_last_edition"/>
                 <field name="process_id" string="Nombre del procedimiento"/>
@@ -22,7 +22,7 @@
         <field name="name">documentary.control.form</field>
         <field name="model">documentary.control</field>
         <field name="arch" type="xml">
-            <form string="Lista maestra">
+            <form string="Registro de inventario">
                 <sheet>
                     <div class="oe_button_box" name="button_box">
                         <button type="object" name="button_go" class="oe_stat_button" icon="fa-bars">
@@ -75,7 +75,7 @@
     </record>
 
     <record model="ir.actions.act_window" id="documentary_control_action">
-        <field name="name">Lista maestra</field>
+        <field name="name">Registro de inventario</field>
         <field name="res_model">documentary.control</field>
         <field name="view_mode">tree,form</field>
     </record>
@@ -83,7 +83,7 @@
 
     <menuitem
         id="mgmt_process_master_list"
-        name="Lista maestra"
+        name="Registro de inventario"
         parent="menu_process_root"
         action="documentary_control_action"
         sequence="20" 

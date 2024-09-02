@@ -84,7 +84,7 @@
                     <field name="access_mode" invisible="1"/>
                     <field name="questions_selection" invisible="1"/>
 
-                    <field name="process_id" />
+                    <field name="process_id" options="{'no_create': True}"/>
                 </group>
             </notebook>
             <!--<field name="description" position="replace"></field>-->

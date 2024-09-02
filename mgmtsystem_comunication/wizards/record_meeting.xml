@@ -2,15 +2,15 @@
     <data>
 
         <record id="record_meeting_wizard_form_view" model="ir.ui.view">
-            <field name="name">Actas de Reunión</field>
+            <field name="name">Minutas de reunión</field>
             <field name="model">record.meeting.wizard</field>
             <field name="arch" type="xml">
                 <form>
                     <group>
-                        <field name="record_meeting_id"/>
+                        <field name="record_meeting_id" string="Minuta de Reunión"/>
                     </group>
                     <p>
-                        Escoja una Acta de Reunión para imprimir
+                        Escoja una Minuta de reunión para imprimir
                     </p>
                     <footer>
                         <button name="action_print" type="object" string="Descargar Acuerdos" class="oe_highlight" icon="fa-download" context="{'type_action':'accordance'}"/>
@@ -23,7 +23,7 @@
 
 
         <record id="record_meeting_wizard_action" model="ir.actions.act_window">
-            <field name="name">Actas de Reunión</field>
+            <field name="name">Minutas de reunión</field>
             <field name="type">ir.actions.act_window</field>
             <field name="res_model">record.meeting.wizard</field>
 
@@ -35,10 +35,10 @@
 
         <report id="report_record_meeting_wizard"
             model="record.meeting.wizard"
-            string="Actas de Reunión"
+            string="Minutas de reunión"
             report_type="qweb-pdf"
             name="mgmtsystem_comunication.record_meeting_wiz_report"
-            file="Acta de Reunión" />
+            file="Minuta de reunión" />
 
         <template id="record_meeting_wiz_report">
 
@@ -65,7 +65,7 @@
                                 </td>
                                 <td style="border: 1px solid black; text-align:middle;font-weight: bold;  border-left: 1px solid #000;border-right: 1px solid #fff; " width="60%" rowspan="3" align="center" valign="middle">
                                     <center>
-                                        <h2>ACTA DE REUNIÓN</h2>
+                                        <h2>MINUTA DE REUNIÓN</h2>
                                         <h3>
                                             <span t-field="doc.name"/>
                                         </h3>
@@ -116,7 +116,7 @@
                                     </TABLE>
                                 </div>
                                 <h4>
-                                    Mediante la presente ACTA DE REUNIÓN se formaliza lo debatido, coordinado y acordado en la reunión realizada con fecha
+                                    Mediante la presente MINUTA DE REUNIÓN se formaliza lo debatido, coordinado y acordado en la reunión realizada con fecha
                                     <span t-field="doc.date_release" />
                                     en las instalaciones de
                                     <span t-field="company.name" />

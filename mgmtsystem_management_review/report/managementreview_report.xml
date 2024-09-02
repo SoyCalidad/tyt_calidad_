@@ -298,6 +298,6 @@
 
     <menuitem id="mgmt_review_report_menu" name="Revisión por la dirección" action="mgm_review_wizard_action" parent="management_review_report_menu" sequence="10" />
 
-    <menuitem id="record_meeting_report_menu" name="Actas de Reunión" action="mgmtsystem_comunication.record_meeting_wizard_action" parent="management_review_report_menu" sequence="12" />
+    <menuitem id="record_meeting_report_menu" name="Minutas de reunión" action="mgmtsystem_comunication.record_meeting_wizard_action" parent="management_review_report_menu" sequence="12" />
 
 </odoo>

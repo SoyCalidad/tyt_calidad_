@@ -6,7 +6,7 @@
     <data>
         <!--Email template -->
         <record id="email_template_record_meeting_2" model="mail.template">
-            <field name="name">Acta de Reunión: Enviar por email</field>
+            <field name="name">Minuta de reunión: Enviar por email</field>
             <field name="model_id" ref="mgmtsystem_comunication.model_record_meeting" />
             <field name="email_from">{{(object.user_id.email_formatted or user.email_formatted )}}</field>
             <field name="subject">Convocatoria a reunión (Nombre: ${object.name or 'n/a'}) (Fecha: ${object.date_release or 'n/a' })</field>
@@ -16,13 +16,13 @@
         Queda cordialmente invitado a la reunión ${object.name} con fecha ${object.date_release}
                         <br />
                         <br />
-        Se adjunta acta de reunión:
+        Se adjunta Minuta de reunión:
                     </p>
                 </div>
             </field>
             <field name="report_template" ref="action_report_record_conv_meeting" />
             <field name="report_name">Reporte de Convocatoria</field>
-            <!--<field name="report_name">Acta de Reunión_${object.name or ''}_${object.date_release or ''}</field>-->
+            <!--<field name="report_name">Minuta de reunión_${object.name or ''}_${object.date_release or ''}</field>-->
             <field name="lang">${object.user_id.lang}</field>
             <!--<field name="user_signature" eval="False" /> -->
             <field name="auto_delete" eval="True" />
