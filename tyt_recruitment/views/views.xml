@@ -1,0 +1,45 @@
+<odoo>
+  <data>
+    <!-- explicit list view definition -->
+
+    <record model="ir.ui.view" id="tyt_recruitment.list">
+      <field name="name">Lista de requisicionesss</field>
+      <field name="model">tyt_recruitment.requisition</field>
+      <field name="arch" type="xml">
+        <tree>
+          <field name="campaign_id"/>
+          <field name="request_date"/>
+          <field name="closing_date"/>
+          <field name="weeks"/>
+          <field name="current_staff"/>
+          <field name="request_staff"/>
+          <field name="goal_staff"/>
+          <field name="turn"/>
+          <field name="priority"/>
+        </tree>
+      </field>
+    </record>
+
+    <!-- actions opening views on models -->
+
+    <record model="ir.actions.act_window" id="tyt_recruitment.action_window">
+      <field name="name">Lista de requisiciones</field>
+      <field name="res_model">tyt_recruitment.requisition</field>
+      <field name="view_mode">tree,form</field>
+    </record>
+
+    <!-- Top menu item -->
+
+    <menuitem id="menu_custom_recruitment"
+      name="Reclutamiento"
+      parent="hr_recruitment.menu_hr_recruitment_root"
+      sequence="20"
+    />
+
+    <menuitem id="menu_custom_requisition"
+      name="Requisición"
+      parent="menu_custom_recruitment"
+      action="tyt_recruitment.action_window"
+    />
+  </data>
+</odoo>
