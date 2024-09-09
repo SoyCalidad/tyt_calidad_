@@ -1,0 +1,3 @@
+id,name,model_id:id,group_id:id,perm_read,perm_write,perm_create,perm_unlink
+access_tyt_recruitment_requisition_user,access_tyt_recruitment_requisition_user,tyt_recruitment.model_tyt_recruitment_requisition,,1,1,1,1
+access_tyt_recruitment_campaign_user,access_tyt_recruitment_campaign_user,tyt_recruitment.model_tyt_recruitment_campaign,,1,1,1,1
