@@ -113,7 +113,7 @@
                     <field name="real_last_edition" invisible="1" />
                     <notebook>
                         <page name="general" string="General"></page>
-                        <page name="documentarycontrol_ids" string="Registro de inventario">
+                        <page name="documentarycontrol_ids" string="Inventario de Registro">
                             <label for="documentarycontrol_ids" />
                             <field name="documentarycontrol_ids" context="{'default_process_id': id}">
                                 <tree>
