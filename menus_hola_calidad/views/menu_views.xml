@@ -197,7 +197,7 @@
                   sequence="1" />
 
         <menuitem id="hola_calidad_mgmtsystem_training_training1"
-                  name="Plan de Capacitaciones"
+                  name="Plan de Capacitación"
                   parent="training_menu"
                   action="mgmtsystem_employees.hr_item_training_action"
                   sequence="2" />

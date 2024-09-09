@@ -329,7 +329,7 @@ class QualityManual(models.Model):
     competitions_process_id = fields.Many2many(comodel_name='mgmt.process', relation='q_comp_d_rel',
                                                string='Procedimiento',)
     training_knw_ids = fields.Many2many(
-        'mgmtsystem.plan.training', relation='qlty_traknow_rel', string='Plan de capacitaciones recibidas')
+        'mgmtsystem.plan.training', relation='qlty_traknow_rel', string='Plan de Capacitación recibidas')
     training_survey_ids = fields.Many2many(
         'survey.survey', relation='qlty_trasur_rel', string='Eficacia de la capacitación')
 
@@ -339,7 +339,7 @@ class QualityManual(models.Model):
     awareness_process_id = fields.Many2many(comodel_name='mgmt.process', relation='q_aw_d_rel',
                                             string='Procedimiento',)
     training_aw_ids = fields.Many2many(
-        'mgmtsystem.plan.training', relation='qlty_trainingaw_rel', string='Plan de capacitaciones')
+        'mgmtsystem.plan.training', relation='qlty_trainingaw_rel', string='Plan de Capacitación')
     training_survey2_ids = fields.Many2one(
         'survey.survey', string='Evaluacíón')
 

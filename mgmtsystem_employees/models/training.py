@@ -19,7 +19,7 @@ from odoo.exceptions import RedirectWarning, UserError, ValidationError, Warning
 class Training(models.Model):
     _name = "mgmtsystem.plan.training"
     _inherit = ['mgmtsystem.validation.mail', 'mgmtsystem.code']
-    _description = "Plan de Capacitaciones"
+    _description = "Plan de Capacitación"
     _order = 'date_training, month_training asc'
 
     plan_id = fields.Many2one(
