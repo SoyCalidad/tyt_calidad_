@@ -1,0 +1,133 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+
+    <record id="matrix_block_line_system_3" model="matrix.block.line.system">
+        <field name="name">TYT Calidad</field>
+    </record>
+
+    <!--Evaluaciones-->
+    <record model="evaluation.evaluation" id="tyt_evaluation_1">
+        <field name="name">TYT - Evaluación con Indices IOD (riesgo)</field>
+        <field name="type">risk</field>
+    </record>
+    <record model="evaluation.evaluation" id="tyt_evaluation_2">
+        <field name="name">TYT - Evaluación con Indices (oportunidad)</field>
+        <field name="type">opportunity</field>
+    </record>
+
+    <!--Criterios: tyt_evaluation_1-->
+    <record model="evaluation.criterio" id="tyt_criterio_1">
+        <field name="name">Impacto</field>
+        <field name="description">Para cada modo de fallo (Riesgo) se tiene en cuenta y se puntúa el peor efecto que tiene en el cliente el fallo especificado. Todas las causas que tienen el mismo efecto tienen la misma gravedad.</field>
+        <field name="evaluation_id" ref="tyt_evaluation_1"/>
+    </record>
+    <record model="evaluation.criterio" id="tyt_criterio_2">
+        <field name="name">Probabilidad</field>
+        <field name="description">Es la probabilidad de que ocurra un modo de fallo (Riesgo), dependiendo de la probabilidad de ocurrencia de la causa.</field>
+        <field name="evaluation_id" ref="tyt_evaluation_1"/>
+    </record>
+
+    <!--Criterios: tyt_evaluation_2-->
+    <record model="evaluation.criterio" id="tyt_criterio_2_1">
+        <field name="name">Impacto</field>
+        <field name="description">Para cada oportunidad se tiene en cuenta y se puntúa el mejor efecto que tenga en el cliente la oportunidad especificada.</field>
+        <field name="evaluation_id" ref="tyt_evaluation_2"/>
+    </record>
+    <record model="evaluation.criterio" id="tyt_criterio_2_2">
+        <field name="name">Probabilidad</field>
+        <field name="description">Es la probabilidad de que se presente la oportunidad especificada.</field>
+        <field name="evaluation_id" ref="tyt_evaluation_2"/>
+    </record>
+
+    <!--lineas de Impacto tyt_criterio_1-->
+    <record model="evaluation.criterio.line" id="tyt_criterio_line_1_1">
+        <field name="name">Impacto nulo</field>
+        <field name="criterio_id" ref="tyt_criterio_1"/>
+        <field name="description"></field>
+        <field name="value_less">0</field>
+        <field name="value_high">0</field>
+    </record>
+    <record model="evaluation.criterio.line" id="tyt_criterio_line_1_2">
+        <field name="name">Impacto menor</field>
+        <field name="criterio_id" ref="tyt_criterio_1"/>
+        <field name="description"></field>
+        <field name="value_less">1</field>
+        <field name="value_high">1</field>
+    </record>
+    <record model="evaluation.criterio.line" id="tyt_criterio_line_1_3">
+        <field name="name">Impacto mayor</field>
+        <field name="criterio_id" ref="tyt_criterio_1"/>
+        <field name="description"></field>
+        <field name="value_less">2</field>
+        <field name="value_high">2</field>
+    </record>
+
+    <!--lineas de Impacto de tyt_criterio_2_1-->
+    <record model="evaluation.criterio.line" id="tyt_criterio_line_2_1_1">
+        <field name="name">Impacto nulo</field>
+        <field name="criterio_id" ref="tyt_criterio_2_1"/>
+        <field name="description"></field>
+        <field name="value_less">0</field>
+        <field name="value_high">0</field>
+    </record>
+    <record model="evaluation.criterio.line" id="tyt_criterio_line_2_1_2">
+        <field name="name">Impacto menor</field>
+        <field name="criterio_id" ref="tyt_criterio_2_1"/>
+        <field name="description"></field>
+        <field name="value_less">1</field>
+        <field name="value_high">1</field>
+    </record>
+    <record model="evaluation.criterio.line" id="tyt_criterio_line_2_1_3">
+        <field name="name">Impacto mayor</field>
+        <field name="criterio_id" ref="tyt_criterio_2_1"/>
+        <field name="description"></field>
+        <field name="value_less">2</field>
+        <field name="value_high">2</field>
+    </record>
+
+    <!--lineas de Probabilidad tyt_criterio_2-->
+    <record model="evaluation.criterio.line" id="tyt_criterio_line_2_1">
+        <field name="name">Impacto nulo</field>
+        <field name="criterio_id" ref="tyt_criterio_2"/>
+        <field name="description"></field>
+        <field name="value_less">0</field>
+        <field name="value_high">0</field>
+    </record>
+    <record model="evaluation.criterio.line" id="tyt_criterio_line_2_2">
+        <field name="name">Impacto menor</field>
+        <field name="criterio_id" ref="tyt_criterio_2"/>
+        <field name="description"></field>
+        <field name="value_less">1</field>
+        <field name="value_high">1</field>
+    </record>
+    <record model="evaluation.criterio.line" id="tyt_criterio_line_2_3">
+        <field name="name">Impacto mayor</field>
+        <field name="criterio_id" ref="tyt_criterio_2"/>
+        <field name="description"></field>
+        <field name="value_less">2</field>
+        <field name="value_high">2</field>
+    </record>
+
+    <!--lineas de Probabilidad tyt_criterio_2_2-->
+    <record model="evaluation.criterio.line" id="tyt_criterio_line_2_2_1">
+        <field name="name">Impacto nulo</field>
+        <field name="criterio_id" ref="tyt_criterio_2_2"/>
+        <field name="description"></field>
+        <field name="value_less">0</field>
+        <field name="value_high">0</field>
+    </record>
+    <record model="evaluation.criterio.line" id="tyt_criterio_line_2_2_2">
+        <field name="name">Impacto menor</field>
+        <field name="criterio_id" ref="tyt_criterio_2_2"/>
+        <field name="description"></field>
+        <field name="value_less">1</field>
+        <field name="value_high">1</field>
+    </record>
+    <record model="evaluation.criterio.line" id="tyt_criterio_line_2_2_3">
+        <field name="name">Impacto mayor</field>
+        <field name="criterio_id" ref="tyt_criterio_2_2"/>
+        <field name="description"></field>
+        <field name="value_less">2</field>
+        <field name="value_high">2</field>
+    </record>
+</odoo>
