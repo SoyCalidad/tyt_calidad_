@@ -107,7 +107,7 @@
               action="complaint_analisis_supplier_action" />
 
     <record model="ir.actions.act_window" id="complaint_analisis_all_action">
-        <field name="name">Reclamos externos</field>
+        <field name="name">Reclamos</field>
         <field name="res_model">complaint.analisis</field>
         <field name="view_mode">tree,form</field>
     </record>

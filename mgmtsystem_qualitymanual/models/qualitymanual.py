@@ -160,7 +160,8 @@ class QualityManual(models.Model):
         categs_ids = self.env['mgmt.categ'].search([])
         ids = [x.id for x in categs_ids]
         context = dict(self.env.context)
-        html = report.with_context(context).render_qweb_html(ids, data={})[0]
+        result = report.with_context(context).render(ids, data={})
+        html = result[0] if result else ''
         self.process_preview = html
 
     def _compute_context_processdescription_ids(self):
