@@ -21,4 +21,8 @@
         </t>
     </template>
 
+    <record id="mgmtsystem_process.report_process_edition" model="ir.actions.report">
+        <field name="binding_model_id" eval="False" />
+    </record>
+
 </odoo>
