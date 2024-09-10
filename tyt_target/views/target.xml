@@ -1,0 +1,42 @@
+<odoo>    
+    <data>
+        <record id="target_view_form_tyt1" model="ir.ui.view">
+            <field name="name">mgmtsystem.target.view.form.2</field>
+            <field name="model">mgmtsystem.target</field>
+            <field name="inherit_id" ref="mgmtsystem_target.target_view_form" />
+            <field name="arch" type="xml">
+                <xpath expr="//sheet/group[1]" position="attributes">
+                    <attribute name="col">2</attribute>
+                </xpath>
+
+                <xpath expr="//sheet/group[1]" position="replace">
+                    <group string="Información del objetivo" col="2">
+                        <field name="name" colspan="2" attrs="{'readonly': [('state','in',('validate_ok','cancel'))]}" style="overflow-wrap: break-word;" />
+                        <field name="requirements" colspan="2" attrs="{'readonly': [('state','in',('validate_ok','cancel'))]}" style="overflow-wrap: break-word;" />
+                    </group>
+                </xpath>
+                <xpath expr="//sheet/group[1]" position="after">
+                    <group>
+                        <group>
+                            <field name="process_id" attrs="{'readonly': [('state','in',('validate_ok','cancel'))]}" />
+                            <field name="system_id" options="{'no_create': True, 'no_edit': True}" attrs="{'readonly': [('state','in',('validate_ok','cancel'))]}" />
+                            <field name="job_id" options="{'no_create': True, 'no_edit': True}" attrs="{'readonly': [('state','in',('validate_ok','cancel'))]}" />
+                            <field name="department_id" />
+                            <field name="category_ids" widget="many2many_tags" options="{'color_field': 'color',}" placeholder="Categorías" />
+                        </group>
+                        <group>
+                            <field name="timeframe" />
+                            <field name="process_ids_2" attrs="{'readonly': [('state','in',('validate_ok','cancel'))]}" widget="many2many_tags" />
+                            <field name="description" attrs="{'readonly': [('state','in',('validate_ok','cancel'))]}" />
+                            <field name="resource_ids" widget="many2many_tags" attrs="{'readonly': [('state','in',('validate_ok','cancel'))]}" />
+                            <field name="department_ids" widget="many2many_tags" />
+                            <field name="evidence" />
+                        </group>
+                    </group>              
+                </xpath>
+            </field>
+        </record>
+
+
+    </data>
+</odoo>
