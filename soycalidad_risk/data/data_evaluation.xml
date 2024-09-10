@@ -1,0 +1,183 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+     <!--Evaluaciones-->
+        <record model="evaluation.evaluation" id="evaluation_1">
+            <field name="name">Evaluación con Indices IOD (riesgo)</field>
+            <field name="type">risk</field>
+        </record>
+        <record model="evaluation.evaluation" id="evaluation_2">
+            <field name="name">Evaluación con Indices (oportunidad)</field>
+            <field name="type">opportunity</field>
+        </record>
+
+        <!--Criterios: evaluation_1-->
+        <record model="evaluation.criterio" id="criterio_1">
+            <field name="name">Impacto (I)</field>
+            <field name="description">Para cada modo de fallo (Riesgo) se tiene en cuenta y se puntúa el peor efecto que tiene en el cliente el fallo especificado. Todas las causas que tienen el mismo efecto tienen la misma gravedad.</field>
+            <field name="evaluation_id" ref="evaluation_1"/>
+        </record>
+        <record model="evaluation.criterio" id="criterio_2">
+            <field name="name">Ocurrencia (O)</field>
+            <field name="description">Es la probabilidad de que ocurra un modo de fallo (Riesgo), dependiendo de la probabilidad de ocurrencia de la causa.</field>
+            <field name="evaluation_id" ref="evaluation_1"/>
+        </record>
+        <record model="evaluation.criterio" id="criterio_3">
+            <field name="name">Detección (D)</field>
+            <field name="description">Se evalúa la probabilidad de detectar un defecto antes de que el producto llegue al cliente, sea este el usuario final o el cliente interno. Puede asociarse a la probabilidad de que el plan de control detecte el modo de fallo.</field>
+            <field name="evaluation_id" ref="evaluation_1"/>
+        </record>
+        <!--Criterio: evaluation_2-->
+        <record model="evaluation.criterio" id="criterio_2_1">
+            <field name="name">Impacto (I)</field>
+            <field name="description">Para cada oportunidad se tiene en cuenta y se puntúa el mejor efecto que tenga en el cliente la oportunidad especificada.</field>
+            <field name="evaluation_id" ref="evaluation_2"/>
+        </record>
+
+        <!--lineas de Impacto(I)-->
+        <record model="evaluation.criterio.line" id="criterio_line_1_1">
+            <field name="name">Muy baja. Repercusiones imperceptibles</field>
+            <field name="criterio_id" ref="criterio_1"/>
+            <field name="description">No es razonable esperar que este fallo de pequeña importancia origine efecto real alguno sobre el rendimiento del sistema. Probablemente, el cliente ni se daría cuenta del fallo</field>
+            <field name="value_less">1</field>
+            <field name="value_high">1</field>
+        </record>
+        <record model="evaluation.criterio.line" id="criterio_line_1_2">
+            <field name="name">Baja repercusiones. Irrelevantes apenas perceptibles</field>
+            <field name="criterio_id" ref="criterio_1"/>
+            <field name="description">El tipo de fallo originaría un ligero inconveniente, este observará un pequeño deterioro del rendimiento del sistema sin importancia. Es fácilmente subsanable.</field>
+            <field name="value_less">2</field>
+            <field name="value_high">3</field>
+        </record>
+        <record model="evaluation.criterio.line" id="criterio_line_1_3">
+            <field name="name">Moderada Defectos de relativa importancia</field>
+            <field name="criterio_id" ref="criterio_1"/>
+            <field name="description">El fallo produce cierto disgusto e insatisfacción en el cliente. El cliente observará deterioro en el rendimiento del sistema.</field>
+            <field name="value_less">4</field>
+            <field name="value_high">6</field>
+        </record>
+        <record model="evaluation.criterio.line" id="criterio_line_1_4">
+            <field name="name">Alta</field>
+            <field name="criterio_id" ref="criterio_1"/>
+            <field name="description">El fallo puede ser crítico y verse inutilizado el sistema. Produce un grado de insatisfacción elevado.</field>
+            <field name="value_less">7</field>
+            <field name="value_high">8</field>
+        </record>
+        <record model="evaluation.criterio.line" id="criterio_line_1_5">
+            <field name="name">Muy alta</field>
+            <field name="criterio_id" ref="criterio_1"/>
+            <field name="description">Modalidad de fallo potencial muy crítico que afecta el funcionamiento de seguridad del producto o procesos y/o involucra seriamente el incumplimiento de normas reglamentarias.</field>
+            <field name="value_less">9</field>
+            <field name="value_high">10</field>
+        </record>
+        <!--lineas de Impacto(I) de criterio_2_1-->
+        <record model="evaluation.criterio.line" id="criterio_line_op_1">
+            <field name="name">Muy baja, Impactos imperceptibles</field>
+            <field name="criterio_id" ref="criterio_2_1"/>
+            <field name="description">No es razonable esperar que esta oportunidad de pequeña importancia origine efecto real alguno sobre el rendimiento del sistema. Se debe evaluar el costo y beneficio</field>
+            <field name="value_less">1</field>
+            <field name="value_high">1</field>
+        </record>
+        <record model="evaluation.criterio.line" id="criterio_line_op_2">
+            <field name="name">Baja, Impactos apenas perceptibles</field>
+            <field name="criterio_id" ref="criterio_2_1"/>
+            <field name="description">La oportunidad detectada originaría un ligero cambio en el sistema, sin mayor importancia. Se debe evaluar el costo y beneficio.</field>
+            <field name="value_less">2</field>
+            <field name="value_high">3</field>
+        </record>
+        <record model="evaluation.criterio.line" id="criterio_line_op_3">
+            <field name="name">Moderada, Impacto de relativa importancia</field>
+            <field name="criterio_id" ref="criterio_2_1"/>
+            <field name="description">La oportunidad puede tener relativa importancia para la mejora del sistema. Se debe evaluar el costo y beneficio</field>
+            <field name="value_less">4</field>
+            <field name="value_high">6</field>
+        </record>
+        <record model="evaluation.criterio.line" id="criterio_line_op_4">
+            <field name="name">Alta</field>
+            <field name="criterio_id" ref="criterio_2_1"/>
+            <field name="description">La oportunidad tiene un impacto de mejora alto en el sistema. Es conveniente evaluar el costo y beneficio</field>
+            <field name="value_less">7</field>
+            <field name="value_high">8</field>
+        </record>
+        <record model="evaluation.criterio.line" id="criterio_line_op_5">
+            <field name="name">Muy alta</field>
+            <field name="criterio_id" ref="criterio_2_1"/>
+            <field name="description">Oportunidad con impacto positivo muy alto, ya que presentaría una mejora muy importante en el Sistema</field>
+            <field name="value_less">9</field>
+            <field name="value_high">10</field>
+        </record>
+
+        <!--lineas de Ocurrencia(O)-->
+        <record model="evaluation.criterio.line" id="criterio_line_2_1">
+            <field name="name">Muy baja, improbable</field>
+            <field name="criterio_id" ref="criterio_2"/>
+            <field name="description">Ningún fallo se asocia a procesos casi idénticos, ni se ha dado nunca en el pasado, pero es concebible</field>
+            <field name="value_less">1</field>
+            <field name="value_high">1</field>
+        </record>
+        <record model="evaluation.criterio.line" id="criterio_line_2_2">
+            <field name="name">Baja</field>
+            <field name="criterio_id" ref="criterio_2"/>
+            <field name="description">Fallos aislados en procesos similares o casi idénticos. Es razonablemente esperable en la vida del sistema, aunque es poco probable que suceda.</field>
+            <field name="value_less">2</field>
+            <field name="value_high">3</field>
+        </record>
+        <record model="evaluation.criterio.line" id="criterio_line_2_3">
+            <field name="name">Moderada</field>
+            <field name="criterio_id" ref="criterio_2"/>
+            <field name="description">Defecto aparecido ocasionalmente en procesos similares o previos al actual. Probablemente aparecerá algunas veces en la vida del componente / sistema</field>
+            <field name="value_less">4</field>
+            <field name="value_high">6</field>
+        </record>
+        <record model="evaluation.criterio.line" id="criterio_line_2_4">
+            <field name="name">Alta</field>
+            <field name="criterio_id" ref="criterio_2"/>
+            <field name="description">El fallo se ha presentado con cierta frecuencia en el pasado en procesos similares o previos procesos que han fallado</field>
+            <field name="value_less">7</field>
+            <field name="value_high">8</field>
+        </record>
+        <record model="evaluation.criterio.line" id="criterio_line_2_5">
+            <field name="name">Muy alta</field>
+            <field name="criterio_id" ref="criterio_2"/>
+            <field name="description">Fallo casi inevitable. Es seguro que el fallo se producirá frecuentemente.</field>
+            <field name="value_less">9</field>
+            <field name="value_high">10</field>
+        </record>
+
+        <!--lineas de Deteccion(D)-->
+        <record model="evaluation.criterio.line" id="criterio_line_3_1">
+            <field name="name">Muy Alta</field>
+            <field name="criterio_id" ref="criterio_3"/>
+            <field name="description">El defecto es obvio. Resulta muy improbable que no sea detectado por los controles existentes.</field>
+            <field name="value_less">1</field>
+            <field name="value_high">1</field>
+        </record>
+        <record model="evaluation.criterio.line" id="criterio_line_3_2">
+            <field name="name">Alta</field>
+            <field name="criterio_id" ref="criterio_3"/>
+            <field name="description">El defecto, aunque es obvio y fácilmente detectable, podría en alguna ocasión escapar a un primer control, aunque sería detectado con toda seguridad a posterior.</field>
+            <field name="value_less">2</field>
+            <field name="value_high">3</field>
+        </record>
+        <record model="evaluation.criterio.line" id="criterio_line_3_3">
+            <field name="name">Mediana</field>
+            <field name="criterio_id" ref="criterio_3"/>
+            <field name="description">El defecto es detectable y posiblemente no llegue al cliente. Posiblemente se detecte en las últimas etapas de producción.</field>
+            <field name="value_less">4</field>
+            <field name="value_high">6</field>
+        </record>
+        <record model="evaluation.criterio.line" id="criterio_line_3_4">
+            <field name="name">Pequeña</field>
+            <field name="criterio_id" ref="criterio_3"/>
+            <field name="description">El defecto es de tal naturaleza que resulta difícil detectarlo con los procedimientos establecidos hasta el momento.</field>
+            <field name="value_less">7</field>
+            <field name="value_high">8</field>
+        </record>
+        <record model="evaluation.criterio.line" id="criterio_line_3_5">
+            <field name="name">Improbable</field>
+            <field name="criterio_id" ref="criterio_3"/>
+            <field name="description">El defecto no puede detectarse. Casi seguro que lo percibirá el cliente final.</field>
+            <field name="value_less">9</field>
+            <field name="value_high">10</field>
+        </record>
+
+</odoo>
