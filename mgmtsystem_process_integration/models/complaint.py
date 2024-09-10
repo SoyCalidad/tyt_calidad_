@@ -137,10 +137,10 @@ class TargetComplaint(models.Model):
 
     complaint_ids = fields.Many2many(
         'complaint.complaint', 
-        string='Reclamos',
+        string='Quejas y Reclamos',
         relation='target_complaint_rel')
     complaints_count = fields.Integer(
-        compute='_compute_complaints_count', string='Reclamos')
+        compute='_compute_complaints_count', string='Quejas y Reclamos')
 
     @api.depends('complaint_ids')
     def _compute_complaints_count(self):
@@ -156,12 +156,12 @@ class NonconformityComplaint(models.Model):
 
     complaint_ids = fields.Many2many(
         'complaint.complaint',
-        string='Reclamos',
+        string='Quejas y Reclamos',
         relation='nonconformity_complaint_rel',
         column1='complaint_id',
         column2='nonconformity_id',)
     complaints_count = fields.Integer(
-        compute='_compute_complaints_count', string='Reclamos')
+        compute='_compute_complaints_count', string='Quejas y Reclamos')
 
     @api.depends('complaint_ids')
     def _compute_complaints_count(self):
@@ -181,7 +181,7 @@ class ActionComplaint(models.Model):
         column1='complaint_id',
         column2='action_id',)
     complaints_count = fields.Integer(
-        compute='_compute_complaints_count', string='Reclamos')
+        compute='_compute_complaints_count', string='Quejas y Reclamos')
 
     @api.depends('complaint_ids')
     def _compute_complaints_count(self):
@@ -201,7 +201,7 @@ class RiskOppComplaint(models.Model):
         column1='complaint_id',
         column2='action_id',)
     complaints_count = fields.Integer(
-        compute='_compute_complaints_count', string='Reclamos')
+        compute='_compute_complaints_count', string='Quejas y Reclamos')
 
     @api.depends('complaint_ids')
     def _compute_complaints_count(self):

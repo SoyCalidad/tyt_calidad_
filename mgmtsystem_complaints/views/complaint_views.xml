@@ -164,10 +164,10 @@
         </field>
     </record>
 
-    <menuitem name="Reclamos" id="mitem_complaint" parent="menu_complaint_root" sequence="1" />
+    <menuitem name="Quejas y Reclamos" id="mitem_complaint" parent="menu_complaint_root" sequence="1" />
 
     <record model="ir.actions.act_window" id="complaint_complaint_customer_action">
-        <field name="name">Reclamos internos</field>
+        <field name="name">Quejas y Reclamos internos</field>
         <field name="res_model">complaint.complaint</field>
         <field name="view_mode">tree,form</field>
         <field name="search_view_id" ref="view_complaint_complaint_search" />
@@ -176,14 +176,14 @@
     </record>
 
 
-    <menuitem name="Reclamos internos"
+    <menuitem name="Quejas y Reclamos internos"
               id="mitem_complaint_customer"
               parent="mitem_complaint"
               sequence="1"
               action="complaint_complaint_customer_action" />
 
     <record model="ir.actions.act_window" id="complaint_complaint_supplier_action">
-        <field name="name">Reclamos externos</field>
+        <field name="name">Quejas y Reclamos externos</field>
         <field name="res_model">complaint.complaint</field>
         <field name="view_mode">tree,form</field>
         <field name="search_view_id" ref="view_complaint_complaint_search" />
@@ -191,7 +191,7 @@
         <field name="context">{"default_type":'supplier'}</field>
     </record>
 
-    <menuitem name="Reclamos externos"
+    <menuitem name="Quejas y Reclamos externos"
               id="mitem_complaint_supplier"
               parent="mitem_complaint"
               sequence="5"

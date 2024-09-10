@@ -2,7 +2,7 @@
     <data noupdate="1">
         
         <record id="complaints_sequence" model="ir.sequence">
-            <field name="name">Secuencia de Reclamos</field>
+            <field name="name">Secuencia de Quejas y Reclamos</field>
             <field name="code">EST-GES-5-</field>
             <field name="active">TRUE</field>
             <field name="prefix">EST-GES-5-</field>
@@ -17,7 +17,7 @@
             <field name="elaborate_ids" />
         </record>
         <record model="complaint.categ" id="categ2">
-            <field name="name">Reclamo</field>
+            <field name="name">Queja o Reclamo</field>
         </record>
         <record model="complaint.categ" id="categ3">
             <field name="name">Sugerencia</field>

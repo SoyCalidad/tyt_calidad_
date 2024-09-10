@@ -1,6 +1,6 @@
 <odoo>
 
-    <menuitem name="Reclamos" id="menu_configuration_complaint" 
+    <menuitem name="Quejas y Reclamos" id="menu_configuration_complaint" 
         parent="menu_configuration"
         sequence="1" />
 

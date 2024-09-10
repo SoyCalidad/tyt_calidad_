@@ -4,7 +4,7 @@ from odoo import api, fields, models
 class ComplaintWizard(models.TransientModel):
     _name = 'complaint.wizard.report'
     _inherit = 'mgmtsystem.code'
-    _description = 'Lista de reclamos'
+    _description = 'Lista de quejas y reclamos'
 
     date_init = fields.Datetime(string='Fecha inicial')
     date_end = fields.Datetime(string='Fecha final')

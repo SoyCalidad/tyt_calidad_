@@ -2,7 +2,7 @@
 
     <menuitem
         id="menu_complaint_root"
-        name="Reclamos"
+        name="Quejas y Reclamos"
         web_icon="mgmtsystem_complaints,static/description/icon.png"
         groups="group_complaints_onlyread,group_complaints_user_secundario,group_complaints_write_printreport"
         sequence="19"

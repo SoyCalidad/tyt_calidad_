@@ -2,12 +2,12 @@
     <data>
 
         <record id="action_report_complaints" model="ir.actions.report">
-            <field name="name">Lista de reclamos</field>
+            <field name="name">Lista de quejas y reclamos</field>
             <field name="model">complaint.complaint</field>
             <field name="report_type">qweb-pdf</field>
             <field name="report_name">mgmtsystem_complaints.complaint_report_list</field>
             <field name="report_file">mgmtsystem_complaints.complaint_report_list</field>
-            <field name="print_report_name">'Lista de reclamos'</field>
+            <field name="print_report_name">'Lista de quejas y reclamos'</field>
             <field name="binding_model_id" eval="False" />
             <field name="paperformat_id" ref="hola_calidad.landscape" />
             <field name="binding_type">report</field>
@@ -36,7 +36,7 @@
                                     </t>
                                 </td>
                                 <td class="tg-1wig" rowspan="3" width="80%" style="width:65%;">
-                                        RECLAMOS
+                                        QUEJAS Y RECLAMOS
                                     </td>
                                 <td class="tg-0lax" width="20%" style="width:20%">
                                     Código:
@@ -135,7 +135,7 @@
             </t>
         </template>
 
-        <report id="action_report_complaint2" model="complaint.complaint" string="Reclamo" report_type="qweb-pdf" name="mgmtsystem_complaints.single_complaint_report2" file="Reporte de reclamo" paperformat="hola_calidad.portrait" />
+        <report id="action_report_complaint2" model="complaint.complaint" string="Quejas y Reclamos" report_type="qweb-pdf" name="mgmtsystem_complaints.single_complaint_report2" file="Reporte de quejas y reclamos" paperformat="hola_calidad.portrait" />
 
         <template id="single_complaint_report2">
             <t t-call="web.html_container">
@@ -166,7 +166,7 @@
                                         </t>
                                     </td>
                                     <td class="tg-1wig" rowspan="3" width="80%" style="width:65%;">
-                                        RECLAMOS
+                                        QUEJAS Y RECLAMOS
                                     </td>
                                     <td class="tg-0lax" width="20%" style="width:20%">
                                         Código:
@@ -247,7 +247,7 @@
                                         </td>
                                     </tr>
                                     <tr>
-                                        <td class="tg-amwm">TIPO DE RECLAMO</td>
+                                        <td class="tg-amwm">TIPO DE QUEJAS Y RECLAMOS</td>
                                         <td class="tg-0lax" colspan="3">
                                             <span t-field="doc.type" />
                                         </td>
