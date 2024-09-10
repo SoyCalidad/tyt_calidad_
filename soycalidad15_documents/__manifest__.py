@@ -10,7 +10,7 @@
     'depends': [
         #'hola_calidad',
         #'menus_hola_calidad',
-        'calidad_base',
+        #'calidad_base',
         'documents',
         'mgmtsystem_process_integration',
         'soycalidad_improve',
