@@ -160,7 +160,8 @@ class QualityManual(models.Model):
         categs_ids = self.env['mgmt.categ'].search([])
         ids = [x.id for x in categs_ids]
         context = dict(self.env.context)
-        html = report.with_context(context).render_qweb_html(ids, data={})[0]
+        report_data = report.report_action(self, data={'ids': ids})
+        html = report_data.get('html', '')
         self.process_preview = html
 
     def _compute_context_processdescription_ids(self):
@@ -328,7 +329,7 @@ class QualityManual(models.Model):
     competitions_process_id = fields.Many2many(comodel_name='mgmt.process', relation='q_comp_d_rel',
                                                string='Procedimiento',)
     training_knw_ids = fields.Many2many(
-        'mgmtsystem.plan.training', relation='qlty_traknow_rel', string='Plan de capacitaciones recibidas')
+        'mgmtsystem.plan.training', relation='qlty_traknow_rel', string='Planes de Capacitacion recibidas')
     training_survey_ids = fields.Many2many(
         'survey.survey', relation='qlty_trasur_rel', string='Eficacia de la capacitación')
 
@@ -338,7 +339,7 @@ class QualityManual(models.Model):
     awareness_process_id = fields.Many2many(comodel_name='mgmt.process', relation='q_aw_d_rel',
                                             string='Procedimiento',)
     training_aw_ids = fields.Many2many(
-        'mgmtsystem.plan.training', relation='qlty_trainingaw_rel', string='Plan de capacitaciones')
+        'mgmtsystem.plan.training', relation='qlty_trainingaw_rel', string='Plan de Capacitación')
     training_survey2_ids = fields.Many2one(
         'survey.survey', string='Evaluacíón')
 
@@ -384,7 +385,7 @@ class QualityManual(models.Model):
     complaint_process_id = fields.Many2many(comodel_name='mgmt.process', relation='q_compla_d_rel',
                                             string='Procedimiento',)
     complaints_ids = fields.Many2many(
-        'complaint.complaint', relation='qlty_complaint_rel', string='Reclamos',)
+        'complaint.complaint', relation='qlty_complaint_rel', string='Quejas y Reclamos',)
 
     ope_determination = fields.Text(
         string='8.2.2 Determinación de los requisitos para los productos y servicios',
@@ -527,9 +528,9 @@ class QualityManual(models.Model):
     tcustomer_process_id = fields.Many2many(comodel_name='mgmt.process', relation='q_tcustomer_d_rel',
                                             string='Procedimiento',)
     complaint_int_ids = fields.Many2many(
-        comodel_name='complaint.complaint', relation='qlty_compint_rel', string='Reclamos internos', domain="[('type','=','customer')]")
+        comodel_name='complaint.complaint', relation='qlty_compint_rel', string='Quejas y Reclamos internos', domain="[('type','=','customer')]")
     complaint_ext_ids = fields.Many2many(
-        comodel_name='complaint.complaint', relation='qlty_compext_rel', string='Reclamos externos', domain="[('type','=','supplier')]")
+        comodel_name='complaint.complaint', relation='qlty_compext_rel', string='Quejas y Reclamos externos', domain="[('type','=','supplier')]")
     eva_survey_ids = fields.Many2many(
         comodel_name='survey.survey', relation='qlty_evasurvey_rel', string='Encuestas')
 

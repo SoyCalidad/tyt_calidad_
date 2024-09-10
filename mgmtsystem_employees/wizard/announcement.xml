@@ -83,7 +83,7 @@
         </record>
 
         <!-- <menuitem id="training_training1_report_menu"
-            name="Plan de capacitaciones"
+            name="Plan de Capacitación"
             action="action_report_training_training"
             parent="training_report_menu"
             sequence="2"/> -->

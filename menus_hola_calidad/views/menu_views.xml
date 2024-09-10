@@ -66,7 +66,7 @@
                   sequence="2" />
 
         <menuitem id="hola_calidad_mgmtsystem_process_documentary_action"
-                  name="Registro de inventario"
+                  name="Inventario de Registro"
                   parent="process_menu"
                   action="mgmtsystem_process.documentary_control_action"
                   sequence="2"
@@ -197,7 +197,7 @@
                   sequence="1" />
 
         <menuitem id="hola_calidad_mgmtsystem_training_training1"
-                  name="Plan de Capacitaciones"
+                  name="Plan de Capacitación"
                   parent="training_menu"
                   action="mgmtsystem_employees.hr_item_training_action"
                   sequence="2" />
@@ -365,14 +365,14 @@
                   sequence="1" />
 
         <menuitem id="complaint_menu"
-                  name="Reclamos"
+                  name="Quejas y Reclamos"
                   parent="hola_calidad.menu_act_main"
                   groups="mgmtsystem_complaints.group_complaints_onlyread,mgmtsystem_complaints.group_complaints_user_secundario,mgmtsystem_complaints.group_complaints_write_printreport"
                   sequence="30" />
 
-        <menuitem id="covid_mgmtsystem_complaint_complaint_3" name="Reclamos internos" parent="complaint_menu" sequence="1" />
+        <menuitem id="covid_mgmtsystem_complaint_complaint_3" name="Quejas y Reclamos internos" parent="complaint_menu" sequence="1" />
 
-        <menuitem id="covid_mgmtsystem_complaint_complaint_4" name="Reclamos externos" parent="complaint_menu" sequence="2" />
+        <menuitem id="covid_mgmtsystem_complaint_complaint_4" name="Quejas y Reclamos externos" parent="complaint_menu" sequence="2" />
 
 
     </data>

@@ -155,7 +155,6 @@ class Article(models.Model):
         string=u'Requisito legal',
         comodel_name='legal.legal',
         ondelete='restrict',
-        required=True,
     )
 
     name = fields.Char(
@@ -192,9 +191,11 @@ class Article(models.Model):
         store=False
     )
     state = fields.Selection(
-        related='legal_id.state',
-        readonly=True,
-        store=False
+        [('elaborate', 'Elaborate'), ('validate', 'Validate'), ('caducated', 'Caducated'), ('cancel', 'Obsoleto')],
+        string='State',
+        default='elaborate',
+        compute='_compute_state',
+        store=True
     )
 
     def send_validate(self):
@@ -208,6 +209,14 @@ class Article(models.Model):
         compute='_compute_has_attachments',
         store=False,
     )
+
+    @api.depends('legal_id')
+    def _compute_state(self):
+        for record in self:
+            if record.legal_id:
+                record.state = record.legal_id.state
+            else:
+                record.state = 'elaborate'
 
     @api.depends('legal_id')
     def _compute_has_attachments(self):

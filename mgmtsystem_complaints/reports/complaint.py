@@ -3,7 +3,7 @@ from odoo import api, fields, models
 
 class ComplaintReport(models.AbstractModel):
     _name = 'report.mgmtsystem_complaints.complaint_report_list'
-    _description = 'Lista de reclamos'
+    _description = 'Lista de quejas y reclamos'
 
     @api.model
     def _get_report_values(self, docids, data=None):

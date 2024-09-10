@@ -58,7 +58,7 @@
                         </group>
                     </group>
                     <notebook attrs="{'invisible': [('state','=','draft')]}">
-                        <page string="Detalles de reclamos">
+                        <page string="Detalles de quejas y reclamos">
                             <field name="complaint_ids" attrs="{'readonly': [('state','!=','in_process')]}">
                                 <tree>
                                     <field name="date_incident" />
@@ -79,40 +79,40 @@
     <menuitem name="Analisis" id="mitem_analisis" parent="menu_complaint_root" sequence="3" />
 
     <record model="ir.actions.act_window" id="complaint_analisis_customer_action">
-        <field name="name">Reclamos internos</field>
+        <field name="name">Quejas y Reclamos internos</field>
         <field name="res_model">complaint.analisis</field>
         <field name="view_mode">tree,form</field>
         <field name="domain">[('type','=','customer')]</field>
         <field name="context">{'default_type':'customer'}</field>
     </record>
 
-    <menuitem name="Reclamos internos"
+    <menuitem name="Quejas y Reclamos internos"
               id="mitem_analisis_customer"
               parent="mitem_analisis"
               sequence="3"
               action="complaint_analisis_customer_action" />
 
     <record model="ir.actions.act_window" id="complaint_analisis_supplier_action">
-        <field name="name">Reclamos externos</field>
+        <field name="name">Quejas y Reclamos externos</field>
         <field name="res_model">complaint.analisis</field>
         <field name="view_mode">tree,form</field>
         <field name="domain">[('type','=','supplier')]</field>
         <field name="context">{'default_type':'supplier'}</field>
     </record>
 
-    <menuitem name="Reclamos externos"
+    <menuitem name="Quejas y Reclamos externos"
               id="mitem_analisis_supplier"
               parent="mitem_analisis"
               sequence="6"
               action="complaint_analisis_supplier_action" />
 
     <record model="ir.actions.act_window" id="complaint_analisis_all_action">
-        <field name="name">Reclamos externos</field>
+        <field name="name">Quejas y Reclamos</field>
         <field name="res_model">complaint.analisis</field>
         <field name="view_mode">tree,form</field>
     </record>
 
-    <menuitem name="Reclamos"
+    <menuitem name="Quejas y Reclamos"
               id="mitem_analisis_all"
               parent="mitem_analisis"
               sequence="1"
