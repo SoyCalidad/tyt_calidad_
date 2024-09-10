@@ -18,7 +18,7 @@ class TYTDistributionList(models.Model):
     number_of_copy= fields.Integer(
         string='Number of copy',
     )
-    distributed_to = fields.Many2many(
+    distributed_to = fields.Many2one(
         comodel_name='hr.employee',
         string='Distributed to'
     )

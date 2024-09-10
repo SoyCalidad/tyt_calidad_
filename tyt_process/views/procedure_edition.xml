@@ -129,9 +129,15 @@
             </page>
             <notebook position="inside">
                 <page name="distribution_list" string="Distribution List">
-                    <group name="distribution_list" string="Distribution List">
-                        <field name="tyt_distribution_list_ids" nolabel="1" />
-                    </group>
+                    <field name="tyt_distribution_list_ids">
+                        <tree>
+                            <field name="number_of_copy" />
+                            <field name="distributed_to" />
+                            <field name="job_id" />
+                            <field name="distribution_date" />
+                            <field name="place" />
+                        </tree>
+                    </field>
                 </page>
             </notebook>
         </field>
