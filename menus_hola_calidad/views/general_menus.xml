@@ -53,7 +53,7 @@
 
     <menuitem
         id="mgmtsystem_complaints.menu_complaint_root"
-        name="Reclamos"
+        name="Quejas y Reclamos"
         sequence="11"/>
 
     <menuitem

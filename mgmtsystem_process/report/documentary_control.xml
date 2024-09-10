@@ -4,10 +4,10 @@
         <report
             id="documentary_control_report_xls"
             model="documentary.control"
-            string="Registro de inventario"
+            string="Inventario de Registro"
             report_type="xlsx"
             name="mgmtsystem_process.documentary_control_xls"
-            file="Registro de inventario"
+            file="Inventario de Registro"
             groups="base.group_no_one,mgmtsystem_process.group_process_readonly_printreport,mgmtsystem_process.group_process_owner,mgmtsystem_process.group_process_all"/>
 
         <menuitem
@@ -19,7 +19,7 @@
 
         <menuitem
             id="documentary_control_report_menu"
-            name="Registro de inventario"
+            name="Inventario de Registro"
             action="documentary_control_report_xls"
             parent="process_report_root_menu"
             sequence="10"

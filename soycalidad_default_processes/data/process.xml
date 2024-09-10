@@ -923,7 +923,7 @@
 
 <record id="definition_118rtyk" model="edition.abbreviation">
                     <field name="abbre">REC</field>
-                    <field name="name">Reclamos</field>
+                    <field name="name">Quejas y Reclamos</field>
                     <field name="description">Petición por un incumplimiento de un requisito pactado con la(s) parte(s) interesada(s) con compensación económica.</field>
                 </record>
 

@@ -17,8 +17,8 @@
 
     <template id="onboarding_training_training_step">
         <t t-call="base.onboarding_step">
-            <t t-set="title">Plan de capacitaciones</t>
-            <t t-set="description">Cree un plan de capacitaciones.</t>
+            <t t-set="title">Plan de Capacitación</t>
+            <t t-set="description">Cree un Plan de Capacitación.</t>
             <t t-set="done_icon" t-value="'fa-star'" />
             <t t-set="btn_text">Crear</t>
             <t t-set="done_text">Se ve bien!</t>
@@ -86,7 +86,7 @@
 
     <record id="action_training_training_configurator" model="ir.actions.act_window">
         <field name="type">ir.actions.act_window</field>
-        <field name="name">Cree un plan de capacitaciones</field>
+        <field name="name">Cree un Plan de Capacitación</field>
         <field name="view_mode">form</field>
         <field name="target">new</field>
         <field name="res_model">mgmtsystem.plan.training</field>

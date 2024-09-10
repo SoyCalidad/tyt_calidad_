@@ -3,8 +3,8 @@
     <data>
 
         <record id="complaints_management" model="ir.module.category">
-            <field name="name">Reclamos</field>
-            <field name="description">Accesos para módulo de Reclamos</field>
+            <field name="name">Quejas y Reclamos</field>
+            <field name="description">Accesos para módulo de Quejas y Reclamos</field>
             <field name="parent_id" ref="hola_calidad.module_mgmt_management" />
             <field name="sequence">25</field>
         </record>

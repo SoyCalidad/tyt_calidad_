@@ -9,7 +9,7 @@ class ComplaintComplaintCauseWhy(models.Model):
 
 class Analisis(models.Model):
     _name = 'complaint.analisis'
-    _description = 'Análisis de reclamos'
+    _description = 'Análisis de quejas y reclamos'
 
     name = fields.Char(
         string='Referencia',
@@ -27,7 +27,7 @@ class Analisis(models.Model):
         store=True,
     )
     close = fields.Boolean(
-        string='Incluir reclamos terminadas',
+        string='Incluir quejas y reclamos terminadas',
     )
 
     type = fields.Selection(
@@ -40,7 +40,7 @@ class Analisis(models.Model):
     filter = fields.Selection(
         string='Filtrar por',
         selection=[
-            ('none', 'Todas las reclamos pendientes'),
+            ('none', 'Todas las quejas y reclamos pendientes'),
             ('date', 'Entre un rango de fechas'),
             ('categ', 'Un tipo de reclamo'),
             ('state', 'Estado de reclamo'),
@@ -79,7 +79,7 @@ class Analisis(models.Model):
     )
 
     complaint_ids = fields.Many2many(
-        string='Reclamos',
+        string='Quejas y Reclamos',
         comodel_name='complaint.complaint',
         relation='analisis_complaint_rel',
         column1='complaint_id',

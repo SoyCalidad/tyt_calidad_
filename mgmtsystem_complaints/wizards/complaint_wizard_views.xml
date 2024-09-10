@@ -12,7 +12,7 @@
                             <field name="date_end"/>
                         </group>
                         <span>
-                            Imprimir reporte de reclamos
+                            Imprimir reporte de quejas y reclamos
                         </span>
                     </sheet>
                     <footer>
@@ -23,7 +23,7 @@
         </record>
 
         <record id="action_report_complaint" model="ir.actions.act_window">
-            <field name="name">Reporte de reclamos</field>
+            <field name="name">Reporte de quejas y reclamos</field>
             <field name="type">ir.actions.act_window</field>
             <field name="res_model">complaint.wizard.report</field>
             <field name="view_mode">form</field>
@@ -34,7 +34,7 @@
 
 
         <menuitem id="complaint_report_menu"
-            name="Reporte de Reclamos"
+            name="Reporte de Quejas y Reclamos"
             action="action_report_complaint"
             parent="mgmtsystem_complaints.menu_report"
             sequence="10"/>

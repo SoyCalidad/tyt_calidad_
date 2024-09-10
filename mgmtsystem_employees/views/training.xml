@@ -425,7 +425,7 @@
         </record>
 
         <record id="hr_item_training_action" model="ir.actions.act_window">
-            <field name="name">Plan de Capacitaciones</field>
+            <field name="name">Plan de Capacitación</field>
             <field name="type">ir.actions.act_window</field>
             <field name="res_model">mgmtsystem.plan.training</field>
             <field name="context">{"search_default_filter_aprobates":1}</field>
@@ -433,7 +433,7 @@
         </record>
 
         <menuitem id="hr_item_training1"
-                  name="Plan de Capacitaciones"
+                  name="Plan de Capacitación"
                   parent="menu_training_root"
                   sequence="7"
                   action="hr_item_training_action" />

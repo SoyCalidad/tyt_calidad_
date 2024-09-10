@@ -12,7 +12,7 @@ class AnnouncementWizard(models.TransientModel):
     )
 
     training_ids = fields.Many2one(
-        string='Plan de Capacitaciones',
+        string='Plan de Capacitación',
         comodel_name='mgmtsystem.plan.training',
         relation='training_wizard_report_rel',
         column1='training_id',

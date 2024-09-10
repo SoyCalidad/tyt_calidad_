@@ -24,11 +24,11 @@
     </record>
 
     <!-- REPORT DE INCIDENCIAS -->
-    <!--  <menuitem name="Reclamos" id="mitem_complaint_complaint_report"
+    <!--  <menuitem name="Quejas y Reclamos" id="mitem_complaint_complaint_report"
        parent="menu_report" />
 
     <record model="ir.actions.act_window" id="complaint_complaint_customer_report_action">
-        <field name="name">Reclamos internos</field>
+        <field name="name">Quejas y Reclamos internos</field>
         <field name="res_model">complaint.complaint</field>
         <field name="view_mode">tree,form,graph,pivot</field>
         <field name="domain">[('type','=','customer')]</field>
@@ -42,7 +42,7 @@
 
 
     <record model="ir.actions.act_window" id="complaint_complaint_supplier_report_action">
-        <field name="name">Reclamos externos</field>
+        <field name="name">Quejas y Reclamos externos</field>
         <field name="res_model">complaint.complaint</field>
         <field name="view_mode">tree,form,graph,pivot</field>
         <field name="domain">[('type','=','supplier')]</field>

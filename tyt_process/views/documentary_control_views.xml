@@ -7,7 +7,7 @@
             <field name="inherit_id" ref="mgmtsystem_process.mgmt_process_form"/>  
             <field name="arch" type="xml">
                 <xpath expr="//sheet/notebook/page[@name='documentarycontrol_ids']" position="attributes">
-                    <attribute name="string">Registro de inventario</attribute>
+                    <attribute name="string">Inventario de Registro</attribute>
                 </xpath>
             </field>
         </record>
@@ -18,14 +18,14 @@
             <field name="inherit_id" ref="mgmtsystem_process.view_mgmtsystem_infrastructure_tree"/> 
             <field name="arch" type="xml">
                 <xpath expr="//tree" position="attributes">
-                    <attribute name="string">Registro de inventario</attribute>
+                    <attribute name="string">Inventario de Registro</attribute>
                 </xpath>
             </field>
         </record>
         -->
         <!--
         <record id="mgmt_process_master_list" model="ir.ui.menu">
-            <field name="name">Registro de inventario</field>
+            <field name="name">Inventario de Registro</field>
         </record>
         -->
 
