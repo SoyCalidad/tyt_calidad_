@@ -16,8 +16,8 @@ class Result(models.Model):
     criterio_id = fields.Many2one(
         string='Criterio',
         comodel_name='evaluation.criterio',
-        ondelete='restrict',
-    )
+        ondelete='cascade',
+    ) # ondelete='restrict',
     name = fields.Char(
         string='Nombre',
         related='criterio_id.name',
