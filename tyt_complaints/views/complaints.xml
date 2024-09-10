@@ -1,0 +1,35 @@
+<odoo>    
+    <data>
+        <record id="complaint_complaint_view_form_2" model="ir.ui.view">
+            <field name="name">complaint.complaint.view.form.2</field>
+            <field name="model">complaint.complaint</field>
+            <field name="inherit_id" ref="mgmtsystem_complaints.view_complaint_complaint_form" />
+            <field name="arch" type="xml">
+                <xpath expr="//sheet/group[1]/field[@name='validation_date']" position="before">
+                    <field name="claim_number" />                        
+                </xpath>
+                <xpath expr="//sheet/group[1]/field[@name='reason_other']" position="after">
+                    <field name="claim_reviewed_by" />
+                </xpath>
+                <xpath expr="//sheet/notebook/page[@name='investigation']/group[2]/field[@name='conclusions']" position="after">
+                    <field name="claim_state" />
+                </xpath>
+                <!--                
+                <xpath expr="//sheet/group[1]/field name="validation_date"" position="before">
+                    <group>
+                        <field name="target_req" />
+                        <field name="name" style="max-width:15vw;overflow-wrap: break-word;" />
+                        <field name="is_legal" />
+                        <field name="legal_id" attrs="{'readonly': [('is_legal','=',False)]}" />
+                        <field name="type" />
+                        <field name="job_req" />
+                        <field name="limit_date_req" string="Fecha Límite para cumplir con el requisito"/>                        
+                    </group>                           
+                </xpath>
+                -->          
+            </field>
+        </record>
+
+
+    </data>
+</odoo>
