@@ -1,0 +1,63 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+
+    <record id="action_report_procedure_edition_tyt_meta" model="ir.actions.report">
+        <field name="name">Procedure Edition Meta</field>
+        <field name="model">process.edition</field>
+        <field name="report_type">qweb-pdf</field>
+        <field name="report_name">tyt_process.report_procedure_edition_tyt_meta</field>
+        <field name="report_file">tyt_process.report_procedure_edition_tyt_meta</field>
+        <field name="print_report_name">'%s' % object.name</field>
+        <field name="binding_model_id" eval="False" />
+        <field name="binding_type">report</field>
+    </record>
+
+    <template id="report_procedure_edition_tyt_meta">
+        <t t-call="web.html_container">
+            <t t-foreach="docs" t-as="o">
+                <t t-call="tyt_process.external_layout_tyt_document">
+                    <div class="page">
+                        <div class="tyt_meta">
+                            <div class="distribution_list">
+                                <h1>Distribution List</h1>
+                                <table class="distribution_list_table">
+                                    <tr>
+                                        <th>Copia N°</th>
+                                        <th>Distribuida a</th>
+                                        <th>Puesto</th>
+                                        <th>Fecha</th>
+                                        <th>Lugar</th>
+                                    </tr>
+                                    <t t-foreach="o.tyt_distribution_list_ids" t-as="dl">
+                                        <tr>
+                                            <td>
+                                                <span t-field="o.number_of_copy" />
+                                                <span t-field="o.distributed_to" />
+                                                <span t-field="o.job_id" />
+                                                <span t-field="o.distribution_date" />
+                                                <span t-field="o.place" />
+                                            </td>
+                                        </tr>
+                                    </t>
+                                </table>
+                            </div>
+                            <div class="change_history">
+                                <h1>Change History</h1>
+                                <table class="change_history_table">
+                                    <tr>
+                                        <th>Fecha</th>
+                                        <th>Versión</th>
+                                        <th>Elaborado por</th>
+                                        <th>Descripción de la modificación</th>
+                                    </tr>
+                                </table>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="footer" />
+                </t>
+            </t>
+        </t>
+    </template>
+
+</odoo>

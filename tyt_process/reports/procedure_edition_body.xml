@@ -1,0 +1,71 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+
+    <record id="action_report_procedure_edition_tyt_body" model="ir.actions.report">
+        <field name="name">Process Edition TYT Body</field>
+        <field name="model">process.edition</field>
+        <field name="report_type">qweb-pdf</field>
+        <field name="report_name">tyt_process.report_procedure_edition_tyt_body</field>
+        <field name="report_file">tyt_process.report_procedure_edition_tyt_body</field>
+        <field name="print_report_name">'%s' % object.name</field>
+        <field name="binding_model_id" eval="False" />
+        <field name="binding_type">report</field>
+    </record>
+
+    <template id="report_procedure_edition_tyt_body">
+        <t t-call="web.html_container">
+            <t t-foreach="docs" t-as="o">
+                <t t-call="tyt_process.external_layout_tyt_document">
+                    <div class="page">
+                        <div class="tyt_body">
+                            <div class="tyt_objectives">
+                                <h1>1. Objetivo, alcance y usuarios </h1>
+                                <p t-out="o.tyt_objective_scope_users" />
+                            </div>
+                            <div class="tyt_docs">
+                                <h1>2. Documentos de Referencia </h1>
+                                <p t-out="o.tyt_reference_documents" />
+                            </div>
+                            <div class="tyt_description">
+                                <h1>3. Descripción</h1>
+                                <p t-out="o.tyt_procedure_description" />
+                            </div>
+                            <div class="tyt_records">
+                                <h1>4. Gestión de registros guardados con base en este documento</h1>
+                                <table class="records_table">
+                                    <tr>
+                                        <th>Prefijo</th>
+                                        <th>Nombre</th>
+                                        <th>Responsable</th>
+                                        <th>Ubicación</th>
+                                    </tr>
+                                    <t t-foreach="o.tyt_document_record_ids" t-as="record">
+                                        <tr>
+                                            <td>
+                                                <span t-field="record.prefix" />
+                                            </td>
+                                            <td>
+                                                <span t-field="record.name" />
+                                            </td>
+                                            <td>
+                                                <span t-field="record.responsible" />
+                                            </td>
+                                            <td>
+                                                <span t-field="record.location" />
+                                            </td>
+                                        </tr>
+                                    </t>
+                                </table>
+                            </div>
+                            <div class="tyt_appendix">
+                                <h1>5. Apéndices </h1>
+                                <p t-out="o.tyt_appendices" />
+                            </div>
+                        </div>
+                    </div>
+                </t>
+            </t>
+        </t>
+    </template>
+
+</odoo>

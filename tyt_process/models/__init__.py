@@ -1,2 +1,2 @@
-# -*- coding: utf-8 -*-
-#from . import res_users
+from . import procedure_edition
+from . import ir_actions_report
