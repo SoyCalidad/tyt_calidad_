@@ -1,0 +1,11 @@
+id,name,model_id:id,group_id:id,perm_read,perm_write,perm_create,perm_unlink
+
+access_tyt_distribution_list_onlyread,Solo lectura,model_tyt_distribution_list,mgmtsystem_process.group_process_readonly,1,0,0,0
+access_tyt_distribution_list_report,Impresión de reportes,model_tyt_distribution_list,mgmtsystem_process.group_process_readonly_printreport,1,0,0,0
+access_tyt_distribution_list_write,Documentos propios,model_tyt_distribution_list,mgmtsystem_process.group_process_owner,1,1,1,0
+access_tyt_distribution_list_all,Todos los permisos,model_tyt_distribution_list,mgmtsystem_process.group_process_all,1,1,1,1
+
+access_tyt_document_record_onlyread,Solo lectura,model_tyt_document_record,mgmtsystem_process.group_process_readonly,1,0,0,0
+access_tyt_document_record_report,Impresión de reportes,model_tyt_document_record,mgmtsystem_process.group_process_readonly_printreport,1,0,0,0
+access_tyt_document_record_write,Documentos propios,model_tyt_document_record,mgmtsystem_process.group_process_owner,1,1,1,0
+access_tyt_document_record_all,Todos los permisos,model_tyt_document_record,mgmtsystem_process.group_process_all,1,1,1,1
