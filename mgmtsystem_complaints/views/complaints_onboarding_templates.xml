@@ -5,7 +5,7 @@
     <template id="onboarding_complaints_internal_step">
         <t t-call="base.onboarding_step">
             <t t-set="title">Quejas y Reclamos internos</t>
-            <t t-set="description">Cree un reclamo interno.</t>
+            <t t-set="description">Cree una queja y/o reclamo</t>
             <t t-set="done_icon" t-value="'fa-star'" />
             <t t-set="btn_text">Crear</t>
             <t t-set="done_text">Se ve bien!</t>
@@ -18,7 +18,7 @@
     <template id="onboarding_complaints_external_step">
         <t t-call="base.onboarding_step">
             <t t-set="title">Quejas y Reclamos externos</t>
-            <t t-set="description">Cree un reclamo externo.</t>
+            <t t-set="description">Cree una queja y/o reclamo</t>
             <t t-set="done_icon" t-value="'fa-star'" />
             <t t-set="btn_text">Crear</t>
             <t t-set="done_text">Se ve bien!</t>
