@@ -1,0 +1,6 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <report id="plan_report_individual_xlsx" model="management.review.plan" string="Programa de revisión por la dirección (Excel)" report_type="xlsx" name="tyt_mgmt_review.general_report" file="Matriz" print_report_name="'%s' % object.name"/>
+
+    <report id="plan_report_review_xlsx" model="management.review" string="Revisión por la dirección (Excel)" report_type="xlsx" name="tyt_mgmt_review.individual_report" file="Matriz" print_report_name="'%s' % object.name"/>
+</odoo>

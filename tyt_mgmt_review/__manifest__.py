@@ -14,6 +14,7 @@
         'security/ir.model.access.csv',
         'views/management_review_views.xml',
         'views/management_review_line2.xml',
+        'report/management_review_plan_report.xml',
     ],
     'auto_install': False,
     'installable': True,
