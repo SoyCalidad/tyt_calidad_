@@ -44,3 +44,5 @@ access_mgmt_job_function_report_wizard_all,Todos los permisos,model_mgmt_job_fun
 
 access_mgmt_employee_report_wizard_all,Todos los permisos,model_mgmt_employee_report_wizard,hr.group_hr_user,1,1,1,1
 
+access_mgmtsystem_validation_hr_job_all,Todos los permisos,model_mgmtsystem_validation_hr_job,hr.group_hr_user,1,1,1,1
+

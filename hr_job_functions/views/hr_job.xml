@@ -148,22 +148,22 @@
                     </page>
                     <page name="version_info" string="Validación y versión"
                         groups="mgmtsystem_employees.group_employees_onlyread_printreport,mgmtsystem_employees.group_employees_write_printreport,mgmtsystem_employees.group_employees_all">
-                        <group col="4" attrs="{'readonly':[('validation_state','in', ('validate_ok'))]}">
-                            <group colspan="4">
+                        <group col="2" attrs="{'readonly':[('validation_state','in', ('validate_ok'))]}">
+                            <group colspan="2">
                                 <field name="version" />
                             </group>
-                            <group colspan="4">
+                            <group colspan="2">
                                 <separator string="" />
-                                <field name="elaboration_step" colspan="4" nolabel="1" attrs="{'readonly': [('validation_state','not in',('elaborate'))]}" />
+                                <field name="elaboration_step" colspan="2" nolabel="1" attrs="{'readonly': [('validation_state','not in',('elaborate'))]}" />
                                 <separator string="Revisión" />
-                                <field name="review_step" colspan="4" nolabel="1" attrs="{'readonly': [('validation_state','not in',('elaborate', 'review'))]}" />
+                                <field name="review_step" colspan="2" nolabel="1" attrs="{'readonly': [('validation_state','not in',('elaborate', 'review'))]}" />
                                 <separator string="Validación" />
-                                <field name="validation_step" colspan="4" nolabel="1" attrs="{'readonly': [('validation_state','not in',('elaborate', 'review', 'validate'))]}" />
+                                <field name="validation_step" colspan="2" nolabel="1" attrs="{'readonly': [('validation_state','not in',('elaborate', 'review', 'validate'))]}" />
                             </group>
                             <group colspan="2">
-                                <field name="date_elaborate" attrs="{'required': [('validation_state','in',('elaborate'))], 'readonly': True}" />
-                                <field name="date_review" attrs="{'required': [('validation_state','in',('review'))], 'readonly': True, 'invisible': [('validation_state','in',('elaborate'))] }" />
-                                <field name="date_validate" groups="base.group_no_one,base.user_admin" attrs="{'invisible': [('validation_state','in',('elaborate','review'))] }" />
+                                <field name="date_elaborate" invisible="1" attrs="{'required': [('validation_state','in',('elaborate'))], 'readonly': True}" />
+                                <field name="date_review" invisible="1" attrs="{'required': [('validation_state','in',('review'))], 'readonly': True, 'invisible': [('validation_state','in',('elaborate'))] }" />
+                                <field name="date_validate" invisible="1" groups="base.group_no_one,base.user_admin" attrs="{'invisible': [('validation_state','in',('elaborate','review'))] }" />
                             </group>
                         </group>
                     </page>
