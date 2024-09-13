@@ -24,11 +24,13 @@
         <field name="arch" type="xml">
             <form string="Inventario de Registro">
                 <sheet>
+                    <!--
                     <div class="oe_button_box" name="button_box">
                         <button type="object" name="button_go" class="oe_stat_button" icon="fa-bars">
                             <field name="records_count" widget="statinfo" string="Registros"/>
                         </button>
                     </div>
+                    -->
                     <div class="oe_title">
                         <label for="code"/>
                         <h1>
