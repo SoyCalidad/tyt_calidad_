@@ -127,45 +127,45 @@
                 <xpath expr="//notebook" position="inside">
                 <!--Pestaña Proceso-->
                     <page name="process" string="Proceso">
-                        <group string="Proceso" col="4">
-                            <separator string="Entradas" colspan="4"/>
-                            <field name="process_line_in_ids" nolabel="1" colspan="4">
+                        <group string="Proceso" col="2">
+                            <separator string="Entradas" colspan="2"/>
+                            <field name="process_line_in_ids" nolabel="1" colspan="2">
                                 <tree editable="bottom">
                                     <field name="supplier_id" widget="many2many_tags" context="{'default_type': 'input'}"/>
                                     <field name="input_id" widget="many2many_tags"/>
                                 </tree>
                             </field>
-                            <separator string="Actividades" colspan="4"/>
-                            <separator string="Planificar" colspan="4"/>
-                            <field name="interaction_plan" context="{'default_type': 'plan'}" colspan="4" nolabel="1">
+                            <separator string="Actividades" colspan="2"/>
+                            <separator string="Planificar" colspan="2"/>
+                            <field name="interaction_plan" context="{'default_type': 'plan'}" colspan="2" nolabel="1">
                                 <tree string="">
                                     <field name="type" invisible="1"/>
                                     <field name="name" style="width:200px;max-width:200px;"/>
                                 </tree>
                             </field>
-                            <separator string="Hacer" colspan="4"/>
-                            <field name="interaction_do" context="{'default_type': 'do'}" colspan="4" nolabel="1">
+                            <separator string="Hacer" colspan="2"/>
+                            <field name="interaction_do" context="{'default_type': 'do'}" colspan="2" nolabel="1">
                                 <tree string="">
                                     <field name="type" invisible="1"/>
                                     <field name="name" style="width:200px;max-width:200px;"/>
                                 </tree>
                             </field>
-                            <separator string="Verificar" colspan="4"/>
-                            <field name="interaction_verify" context="{'default_type': 'verify'}" colspan="4" nolabel="1">
+                            <separator string="Verificar" colspan="2"/>
+                            <field name="interaction_verify" context="{'default_type': 'verify'}" colspan="2" nolabel="1">
                                 <tree string="">
                                     <field name="type" invisible="1"/>
                                     <field name="name" style="width:200px;max-width:200px;"/>
                                 </tree>
                             </field>
-                            <separator string="Actuar" colspan="4"/>
-                            <field name="interaction_act" context="{'default_type': 'act'}" colspan="4" nolabel="1">
+                            <separator string="Actuar" colspan="2"/>
+                            <field name="interaction_act" context="{'default_type': 'act'}" colspan="2" nolabel="1">
                                 <tree string="">
                                     <field name="type" invisible="1"/>
                                     <field name="name" style="width:200px;max-width:200px;"/>
                                 </tree>
                             </field>
-                            <separator string="Salidas" colspan="4"/>
-                            <field name="process_line_out_ids" nolabel="1" colspan="4">
+                            <separator string="Salidas" colspan="2"/>
+                            <field name="process_line_out_ids" nolabel="1" colspan="2">
                                 <tree editable="bottom">
                                     <field name="output_id" widget="many2many_tags"/>
                                     <field name="client_id" widget="many2many_tags" context="{'default_type': 'output'}"/>
@@ -176,16 +176,16 @@
 
                     <page name="follow" string="Objetivos">
                         <group string="Objetivos">
-                            <field name="target_ids" nolabel="1" context="{'default_origin_model_id': model_id, 'default_origin_int_id': id}" />
+                            <field name="target_ids" colspan="2" nolabel="1" context="{'default_origin_model_id': model_id, 'default_origin_int_id': id}" />
                         </group>
                     </page>
-                    <page name="opportunity" string="Riesgos y Oportunidades">
+                    <page name="opportunity" string="Riesgos y Oportunidades" >
                         <field name="model_id" />
-                        <group string="Riesgos">
-                            <field name="risk_ids" nolabel="1" context="{'default_origin_model_id': model_id, 'default_origin_int_id': id, 'default_type':'risk'}" />
+                        <group string="Riesgos" >
+                            <field name="risk_ids" colspan="2" nolabel="1" context="{'default_origin_model_id': model_id, 'default_origin_int_id': id, 'default_type':'risk'}" />
                         </group>
-                        <group string="Oportunidades">
-                            <field name="opp_ids" nolabel="1" context="{'default_origin_model_id': model_id, 'default_origin_int_id': id, 'default_type':'opportunity'}" />
+                        <group string="Oportunidades" >
+                            <field name="opp_ids" colspan="2" nolabel="1" context="{'default_origin_model_id': model_id, 'default_origin_int_id': id, 'default_type':'opportunity'}" />
                         </group>
                     </page>
                 </xpath>
@@ -221,13 +221,13 @@
                 <xpath expr="//notebook" position="inside">
                     <page name="action_ids" string="Acciones">
                         <field name="model_id" invisible="True" />
-                        <field name="action_ids" colspan="4" nolabel="1" context="{'default_origin_model_id': model_id, 'default_origin_int_id': id}" />
+                        <field name="action_ids" colspan="2" nolabel="1" context="{'default_origin_model_id': model_id, 'default_origin_int_id': id}" />
                     </page>
                     <page name="nonconformity_ids" string="No conformidades">
-                        <field name="nonconformity_ids" colspan="4" nolabel="1" context="{'default_origin_model_id': model_id, 'default_origin_int_id': id}" />
+                        <field name="nonconformity_ids" colspan="2" nolabel="1" context="{'default_origin_model_id': model_id, 'default_origin_int_id': id}" />
                     </page>
                     <page name="legal_ids" string="Requisitos legales">
-                        <field name="legal_ids" colspan="4" nolabel="1" context="{'default_origin_model_id': model_id, 'default_origin_int_id': id}" />
+                        <field name="legal_ids" colspan="2" nolabel="1" context="{'default_origin_model_id': model_id, 'default_origin_int_id': id}" />
                     </page>
                 </xpath>
             </field>
@@ -414,53 +414,53 @@
             <field name="arch" type="xml">
                 <xpath expr="//page[1]" position="before">
                     <page name="process" string="Proceso">
-                        <group string="Proceso" col="4">
-                            <separator string="Recursos" colspan="4" />
-                            <field name="resource_ids" nolabel="1" colspan="4">
+                        <group string="Proceso" col="2">
+                            <separator string="Recursos" colspan="2" />
+                            <field name="resource_ids" nolabel="1" colspan="2">
                                 <tree editable="bottom">
                                     <field name="type_id" />
                                     <field name="name" />
                                     <field name="description" />
                                 </tree>
                             </field>
-                            <separator string="Entradas" colspan="4" />
-                            <field name="process_line_in_ids" nolabel="1" colspan="4">
+                            <separator string="Entradas" colspan="2" />
+                            <field name="process_line_in_ids" nolabel="1" colspan="2">
                                 <tree editable="bottom">
                                     <field name="supplier_id" widget="many2many_tags" context="{'default_type': 'input'}" />
                                     <field name="input_id" widget="many2many_tags" />
                                 </tree>
                             </field>
-                            <separator string="Actividades" colspan="4" />
-                            <separator string="Planificar" colspan="4" />
-                            <field name="interaction_plan" context="{'default_type': 'plan'}" colspan="4" nolabel="1">
+                            <separator string="Actividades" colspan="2" />
+                            <separator string="Planificar" colspan="2" />
+                            <field name="interaction_plan" context="{'default_type': 'plan'}" colspan="2" nolabel="1">
                                 <tree string="">
                                     <field name="type" invisible="1" />
                                     <field name="name" style="width:200px;max-width:200px;" />
                                 </tree>
                             </field>
-                            <separator string="Hacer" colspan="4" />
-                            <field name="interaction_do" context="{'default_type': 'do'}" colspan="4" nolabel="1">
+                            <separator string="Hacer" colspan="2" />
+                            <field name="interaction_do" context="{'default_type': 'do'}" colspan="2" nolabel="1">
                                 <tree string="">
                                     <field name="type" invisible="1" />
                                     <field name="name" style="width:200px;max-width:200px;" />
                                 </tree>
                             </field>
-                            <separator string="Verificar" colspan="4" />
-                            <field name="interaction_verify" context="{'default_type': 'verify'}" colspan="4" nolabel="1">
+                            <separator string="Verificar" colspan="2" />
+                            <field name="interaction_verify" context="{'default_type': 'verify'}" colspan="2" nolabel="1">
                                 <tree string="">
                                     <field name="type" invisible="1" />
                                     <field name="name" style="width:200px;max-width:200px;" />
                                 </tree>
                             </field>
-                            <separator string="Actuar" colspan="4" />
-                            <field name="interaction_act" context="{'default_type': 'act'}" colspan="4" nolabel="1">
+                            <separator string="Actuar" colspan="2" />
+                            <field name="interaction_act" context="{'default_type': 'act'}" colspan="2" nolabel="1">
                                 <tree string="">
                                     <field name="type" invisible="1" />
                                     <field name="name" style="width:200px;max-width:200px;" />
                                 </tree>
                             </field>
-                            <separator string="Salidas" colspan="4" />
-                            <field name="process_line_out_ids" nolabel="1" colspan="4">
+                            <separator string="Salidas" colspan="2" />
+                            <field name="process_line_out_ids" nolabel="1" colspan="2">
                                 <tree editable="bottom">
                                     <field name="output_id" widget="many2many_tags" />
                                     <field name="client_id" widget="many2many_tags" context="{'default_type': 'output'}" />
