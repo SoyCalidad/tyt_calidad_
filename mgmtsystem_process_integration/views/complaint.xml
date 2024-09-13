@@ -124,7 +124,7 @@
                 </field>
             </field>
         </record>
-
+        <!--
         <record id="mgmt_inciden_process_action" model="ir.actions.act_window">
             <field name="name">Procedimientos de satisfacción del cliente</field>
             <field name="res_model">mgmt.process</field>
@@ -140,6 +140,6 @@
             action="mgmt_inciden_process_action"
             parent="mgmtsystem_complaints.menu_report"
             sequence="100"/>
-
+        -->
     </data>
 </odoo>

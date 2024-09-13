@@ -126,6 +126,7 @@
                 </xpath>
             </field>
         </record>
+        <!--
         <record id="mgmt_training_process_action" model="ir.actions.act_window">
             <field name="name">Procedimientos de Capacitaciones</field>
             <field name="res_model">mgmt.process</field>
@@ -134,5 +135,6 @@
             <field name="context">{}</field>
         </record>
         <menuitem id="process_integration_training_menu" name="Procedimientos" action="mgmt_training_process_action" parent="mgmtsystem_employees.training_report_menu" sequence="10"/>
+        -->
     </data>
 </odoo>

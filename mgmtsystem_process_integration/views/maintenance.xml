@@ -210,7 +210,7 @@
                 </xpath>
             </field>
         </record>
-
+        <!--
         <record id="mgmt_maintenance_process_action" model="ir.actions.act_window">
             <field name="name">Procedimientos de Mantenimiento</field>
             <field name="res_model">mgmt.process</field>
@@ -221,7 +221,7 @@
         </record>
 
         <menuitem id="process_integration_maintenance_menu" name="Procedimientos" action="mgmt_maintenance_process_action" parent="mgmtsystem_infrastructure.soycalidad_maintenance_reporting" sequence="100"/>
-
+        -->
 
     </data>
 </odoo>

@@ -1,6 +1,6 @@
 <odoo>
     <data>
-
+        <!--
         <record id="mgmt_target_process_action" model="ir.actions.act_window">
             <field name="name">Procedimientos de Objetivos</field>
             <field name="res_model">mgmt.process</field>
@@ -9,7 +9,7 @@
             <field name="domain">[('name', '=', 'Seguimiento y medición de indicadores')]</field>
             <field name="context">{}</field>
         </record>
-
+        -->
 
         <record id="mgmtsystem_target_form_inherit_integration" model="ir.ui.view">
             <field name="name">mgmtsystem.target.view.inherit</field>
@@ -45,12 +45,12 @@
                 </field>
             </field>
         </record>
-
+        <!--
         <menuitem id="process_integration_target_menu"
             name="Procedimientos"
             action="mgmt_target_process_action"
             parent="mgmtsystem_target.report_root_menu"
             sequence="100"/>
-
+        -->
     </data>
 </odoo>
