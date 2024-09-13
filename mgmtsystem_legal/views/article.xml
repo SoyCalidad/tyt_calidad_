@@ -42,16 +42,18 @@
                             <group>
                                 <!--<field name="legal_id" attrs="{'readonly': [('state','not in',('elaborate'))]}"/>-->
                                 <field name="legal_id" />
-                                <field name="type_id" attrs="{'readonly': [('state','not in',('elaborate'))]}"/>
-                                <field name="entity_id" attrs="{'readonly': [('state','not in',('elaborate'))] }"/>
-                                <field name="partner_id" attrs="{'readonly': [('state','not in',('elaborate'))]}"/>
+                                <field name="type_id" attrs="{'readonly': [('state','not in',('elaborate'))],'invisible': [('legal_id', '=', False)]}"/>
+                                <field name="entity_id" attrs="{'readonly': [('state','not in',('elaborate'))],'invisible': [('legal_id', '=', False)]}"/>
+                                <field name="article_responsable" string="Responsable" attrs="{'readonly': [('state','not in',('elaborate'))],'invisible': [('article_responsable', '=', False)]}"/>                           
                             </group>
                             <group>
-                                <field name="date_release" attrs="{'readonly': [('state','not in',('elaborate'))] }"/>
+                                <field name="date_release" attrs="{'readonly': [('state','not in',('elaborate'))],'invisible': [('legal_id', '=', False)] }"/>
                             </group>
                         </group>
-                        <separator string="Resumen"/>
-                        <field name="resume" attrs="{'readonly': [('state','not in',('elaborate'))] }"/>
+                        <div attrs="{'invisible': [('legal_id', '=', False)]}">
+                            <separator string="Resumen"/>
+                        </div>
+                        <field name="resume" attrs="{'readonly': [('state','not in',('elaborate'))],'invisible': [('legal_id', '=', False)] }"/>
                     </sheet>
 
                 </form>

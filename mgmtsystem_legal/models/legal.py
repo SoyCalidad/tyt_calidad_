@@ -163,15 +163,43 @@ class Article(models.Model):
     )
     resume = fields.Text(
         string=u'Resumen',
+        related='legal_id.resume',
+        store=False,
+        readonly=True,
     )
     stakeholders = fields.Char(
         string=u'Stakeholders',
     )
+    
+    ###
+    article_responsable = fields.Char(
+        string='Article Responsable', 
+        compute='_compute_article_responsable', 
+        store=True
+    )
+
+    @api.depends('legal_id.user_id', 'legal_id.partner_id', 'legal_id.is_outsourcing')
+    def _compute_article_responsable(self):
+        for record in self:
+            if record.legal_id:
+                # Si user_id tiene un valor, muestra el nombre de user_id
+                if record.legal_id.user_id:
+                    record.article_responsable = record.legal_id.user_id.name
+                # Si es outsourcing y partner_id tiene un valor, muestra el nombre de partner_id
+                elif record.legal_id.is_outsourcing and record.legal_id.partner_id:
+                    record.article_responsable = record.legal_id.partner_id.name
+                else:
+                    record.article_responsable = False
+            else:
+                record.article_responsable = False    
+
     partner_id = fields.Many2one(
         string=u'Responsable',
         comodel_name='res.partner',
         ondelete='restrict',
     )
+    ###
+
     type_id = fields.Many2one(
         string=u'Tipo',
         related='legal_id.type_id',
