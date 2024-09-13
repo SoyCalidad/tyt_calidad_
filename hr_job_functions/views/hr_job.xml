@@ -41,14 +41,13 @@
                 </xpath>
                 <xpath expr="//form/sheet" position="before"> <!-- ser-calidad-16-changes -->              
                     <header>                          
-                            <div style=" margin-right: 90px;">
-                                <!--  
+                            <div style=" margin-right: 90px;">  
                                 <button string="Comunicar MOF"
                                         name="notify_employee_email"
                                         type="object"
                                         class="btn-primary"
                                         attrs="{'invisible':[('validation_state','!=', 'validate_ok')]}"
-                                        groups="mgmtsystem_employees.group_employees_onlyread_printreport,mgmtsystem_employees.group_employees_write_printreport,mgmtsystem_employees.group_employees_all"/>-->
+                                        groups="mgmtsystem_employees.group_employees_onlyread_printreport,mgmtsystem_employees.group_employees_write_printreport,mgmtsystem_employees.group_employees_all"/>
                                 <button string="Enviar a Elaborar"
                                         name="send_elaborate"
                                         type="object"
