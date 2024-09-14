@@ -79,6 +79,30 @@ class Legal(models.Model):
         comodel_name='res.partner',
         ondelete='restrict',
     )
+
+    @api.onchange('is_outsourcing')
+    def _onchange_is_outsourcing(self):
+        """
+        Si se marca el campo `is_outsourcing`, se limpia `user_id` 
+        y se hace obligatorio `partner_id`.
+        """
+        if self.is_outsourcing:
+            # Limpiar el campo user_id
+            self.user_id = False
+        else:
+            # Resetear la obligatoriedad de partner_id si se desmarca el booleano
+            self.partner_id = False
+
+    @api.constrains('is_outsourcing', 'partner_id')
+    def _check_partner_id_required(self):
+        """
+        Validación que hace obligatorio `partner_id` si `is_outsourcing` es verdadero.
+        """
+        for record in self:
+            if record.is_outsourcing and not record.partner_id:
+                raise ValidationError("Atención! cuando se marca '¿Tercerización?', debe seleccionar un 'Responsable' por favor.")
+
+
     resume = fields.Text(
         string=u'Resumen',
     )
