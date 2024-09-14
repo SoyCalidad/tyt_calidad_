@@ -670,18 +670,12 @@
             </style>
         </template>
 
-        <record id="report_funinings" model="ir.actions.report">
-            <field name="name">Manual de organización y funciones</field>
-            <field name="model">hr.job</field>
-            <field name="report_type">qweb-pdf</field>
-            <field name="report_name">hr_job_functions.reporte_resultados_employees_template</field>
-            <field name="report_file">hr_job_functions.reporte_resultados_employees_template</field>
-            <field name="print_report_name">object.name</field>
-            <field name="attachment"/>
-            <field name="binding_model_id" ref="model_hr_job"/>
-            <field name="binding_type">report</field>
-            <field name="groups_id" eval="[(4, ref('base.group_user'))]"/>
-            <field name="paperformat_id" ref="hola_calidad.portrait"/>
-        </record>
+        <report id="report_funinings"
+                string="Manual de organización y funciones"
+                report_type="qweb-pdf"
+                model="hr.job"
+                name="hr_job_functions.reporte_resultados_employees_template"
+                file="Manual de organización y funciones"
+                paperformat="hola_calidad.portrait" />
     </data>
 </odoo>
