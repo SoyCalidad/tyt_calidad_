@@ -1,0 +1,59 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <template id="template_report_requisition">
+        <t t-call="web.html_container">
+            <div class="header"/>
+            <t t-foreach="docs" t-as="doc">
+                <t t-call="web.external_layout">
+                    <!-- <div style="height:200px;width:200px">
+                        <img t-att-src="'/tyt_recruitment/static/src/img/logo.png'" alt="Logo" style="max-width: 150px;"/>
+                        <img t-att-src="'http://localhost:8147/tyt_recruitment/static/src/img/logo.png'" alt="Logo" style="max-width: 150px;"/>
+                    </div> -->
+                    <div>
+                        <h1 style="background-color: #31869B; color: #FFFFFF; text-align: center; padding-top: 15px; padding-bottom: 10px;">REQUISICIÓN DE PERSONAL</h1>
+                        <p>Fecha de Solicitud: <t t-esc="doc.request_date"/></p>
+                        <p>Fecha de cierre: <t t-esc="doc.closing_date"/></p>
+                        <p>Semana: <t t-esc="doc.weeks"/></p>
+                    </div>
+                    <div>
+                        <table class="table table-condensed" style="border-collapse: collapse; width: 100%;">
+                            <thead>
+                                <tr>
+                                    <th colspan="6" style="text-align: center; font-weight: bold; border: 1px solid black; font-size: 20px; background-color: #215967; color: #FFFFFF;padding-top: 15px;padding-bottom: 10px;">REQUERIMIENTO</th>
+                                </tr>
+                                <tr>
+                                    <th style="border: 1px solid black; background-color: #B7DEE8; color: #000000; text-align: center; padding-top: 8px;padding-bottom: 5px;">CAMPAÑA</th>
+                                    <th style="border: 1px solid black; background-color: #B7DEE8; color: #000000; text-align: center; padding-top: 8px;padding-bottom: 5px;">PERSONAL ACTUAL</th>
+                                    <th style="border: 1px solid black; background-color: #B7DEE8; color: #000000; text-align: center; padding-top: 8px;padding-bottom: 5px;">PERSONAL OBJETIVO</th>
+                                    <th style="border: 1px solid black; background-color: #B7DEE8; color: #000000; text-align: center; padding-top: 8px;padding-bottom: 5px;">PERSONAL SOLICITADO</th>
+                                    <th style="border: 1px solid black; background-color: #B7DEE8; color: #000000; text-align: center; padding-top: 8px;padding-bottom: 5px;">TURNO</th>
+                                    <th style="border: 1px solid black; background-color: #B7DEE8; color: #000000; text-align: center; padding-top: 8px;padding-bottom: 5px;">PRIORIDAD</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <t t-if="doc.campaign_ids">
+                                    <t t-foreach="doc.campaign_ids" t-as="campaign">
+                                        <tr>
+                                            <td style="border: 1px solid black;text-align: center;padding-top: 5px;"><t t-esc="campaign.tag_id.name"/></td>
+                                            <td style="border: 1px solid black;text-align: center;padding-top: 5px;"><t t-esc="campaign.current_staff"/></td>
+                                            <td style="border: 1px solid black;text-align: center;padding-top: 5px;"><t t-esc="campaign.goal_staff"/></td>
+                                            <td style="border: 1px solid black;text-align: center;padding-top: 5px;"><t t-esc="campaign.request_staff"/></td>
+                                            <td style="border: 1px solid black;text-align: center;padding-top: 5px;"><t t-esc="campaign.turn"/></td>
+                                            <td style="border: 1px solid black;text-align: center;padding-top: 5px;"><t t-esc="campaign.priority"/></td>
+                                        </tr>
+                                    </t>
+                                </t>
+                                <t t-if="not doc.campaign_ids">
+                                    <tr>
+                                        <td colspan="2">No hay campañas relacionadas.</td>
+                                    </tr>
+                                </t>
+                            </tbody>
+                        </table>
+                    </div>
+                </t>
+            </t>
+            <div class="footer"/>
+        </t>
+    </template>
+</odoo>
