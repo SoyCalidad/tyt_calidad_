@@ -1,4 +1,12 @@
 <odoo>
-  <data>
-  </data>
+  <record id="action_report_report_requisition" model="ir.actions.report">
+	    <field name="name">Descargar reporte</field>
+	    <field name="model">tyt_recruitment.requisition</field>
+	    <field name="report_type">xlsx</field>
+	    <field name="report_name">tyt_recruitment.report_requisition</field>
+	    <field name="report_file">tyt_recruitment.report_requisition</field>
+	    <field name="binding_model_id" ref="model_tyt_recruitment_requisition"/>
+	    <field name="binding_type">report</field>
+	    <field name="attachment_use" eval="False"/>
+	</record>
 </odoo>
