@@ -31,14 +31,14 @@
 
           <sheet>  
             <group>
-              <field name="request_date" />
-              <field name="closing_date" />
-              <field name="weeks" />
+              <field name="request_date" attrs="{'readonly': [('state', '=', 'sent')]}"/>
+              <field name="closing_date" attrs="{'readonly': [('state', '=', 'sent')]}"/>
+              <field name="weeks" attrs="{'readonly': [('state', '=', 'sent')]}"/>
             </group>
 
             <notebook>
               <page string="Campañas">
-                <field name="campaign_ids" nolabel="1">
+                <field name="campaign_ids" nolabel="1" attrs="{'readonly': [('state', '=', 'sent')]}">
                   <tree editable="bottom">
                     <field name="tag_id" width="50px" />
                     <field name="current_staff" />
