@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <record id="survey_survey_view_form" model="ir.ui.view">
+        <field name="name">survey.survey.view.form.inherit</field>
+        <field name="model">survey.survey</field>
+        <field name="inherit_id" ref="enhanced_survey_management.survey_survey_view_form"/>
+        <field name="arch" type="xml">
+            <xpath expr="//notebook//page[@name='options']//group[@name='participants']//field[@name='access_mode']" position="after">
+                <field name="criteria_id" attrs="{'invisible': [('access_mode', '!=', 'website')]}"/>
+                <field name="is_published" widget="boolean_toggle" attrs="{'invisible': [('access_mode', '!=', 'website')]}"/>
+                <field name="published_date" attrs="{'invisible': ['|', ('access_mode', '!=', 'website'), ('is_published', '=', False)]}"/>
+            </xpath>
+            <xpath expr="//field[@name='users_login_required']" position="attributes">
+                <attribute name="attrs">{'invisible': [('access_mode', '=', 'website')]}</attribute>
+            </xpath>
+            <xpath expr="//label[@for='is_attempts_limited']" position="attributes">
+                <attribute name="attrs">{'invisible': ['|', ('access_mode', '=', 'website'), '&amp;', ('access_mode', '=', 'public'), ('users_login_required', '=', False)]}</attribute>
+            </xpath>
+            <xpath expr="//field[@name='is_attempts_limited']" position="attributes">
+                <attribute name="attrs">{'invisible': ['|', ('access_mode', '=', 'website'), '&amp;', ('access_mode', '=', 'public'), ('users_login_required', '=', False)]}</attribute>
+            </xpath>
+            <xpath expr="//field[@name='visibility']" position="attributes">
+                <attribute name="invisible">1</attribute>
+            </xpath>
+        </field>
+    </record>
+
+    <record id="survey_survey_view_search" model="ir.ui.view">
+        <field name="name">survey.survey.search.inherit</field>
+        <field name="model">survey.survey</field>
+        <field name="inherit_id" ref="survey.survey_survey_view_search"/> <!-- Reference to the original view -->
+        <field name="arch" type="xml">
+            <xpath expr="//group" position="inside">
+                <!-- Add a new Group By filter for criteria_id -->
+                <filter string="Criterio de visibilidad" name="group_by_criteria" context="{'group_by': 'criteria_id'}"/>
+                <filter string="Departamento" name="group_by_department" context="{'group_by': 'department_id'}"/>
+                <filter string="Puesto de trabajo" name="group_by_job" context="{'group_by': 'job_id'}"/>
+                <filter string="Sitio0" name="group_by_sites" context="{'group_by': 'sites_id'}"/>
+                <filter string="Publicado" name="group_by_is_published" context="{'group_by': 'is_published'}"/>
+            </xpath>
+        </field>
+    </record>
+</odoo>

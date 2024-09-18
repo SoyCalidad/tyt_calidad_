@@ -1,0 +1,66 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <record id="intranet_criteria_view_form" model="ir.ui.view">
+        <field name="name">intranet.criteria.view.form</field>
+        <field name="model">intranet.criteria</field>
+        <field name="arch" type="xml">
+            <form>
+                <header>
+                    <button name="action_filter_employees_by_criteria" string="Filtrar empleados" type="object" class="btn-primary"/>
+                </header>
+                <sheet>
+                    <div class="oe_title">
+						<label for="name"/>
+						<h1>
+							<field name="name"/>
+						</h1>
+					</div>
+                    <group>
+                        <group>
+                            <field name="department_id"/>
+                            <field name="job_id"/>
+                            <field name="sites_id"/>
+                        </group>
+                        <group>
+                            <field name="company_id"/>
+                        </group>
+                    </group>
+
+                    <notebook>
+                        <page string="Empleados">
+                            <field name="employee_ids" readonly="1"/>
+                        </page>
+                        <page string="Empleados excluidos">
+                            <field name="excluded_employee_ids"/>
+                        </page>
+                    </notebook>
+                </sheet>
+                <div class="oe_chatter">
+                    <field name="message_follower_ids" widget="mail_followers"/>
+                    <field name="activity_ids" widget="mail_activity"/>
+                    <field name="message_ids" widget="mail_thread"/>
+                </div>
+            </form>
+        </field>
+    </record>
+
+    <record id="intranet_criteria_view_tree" model="ir.ui.view">
+        <field name="name">intranet.criteria.view.tree</field>
+        <field name="model">intranet.criteria</field>
+        <field name="arch" type="xml">
+            <tree>
+                <field name="name"/>
+                <field name="department_id"/>
+                <field name="job_id"/>
+                <field name="sites_id"/>
+                <field name="company_id"/>
+            </tree>
+        </field>
+    </record>
+
+    <record id="intranet_criteria_action" model="ir.actions.act_window">
+        <field name="name">Criterios de visibilidad</field>
+        <field name="res_model">intranet.criteria</field>
+        <field name="view_mode">tree,form</field>
+    </record>
+</odoo>

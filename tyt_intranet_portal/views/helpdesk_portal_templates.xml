@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <template id="portal_my_home_helpdesk_ticket" inherit_id="helpdesk.portal_my_home_helpdesk_ticket" priority="50">
+        <xpath expr="//div[hasclass('o_portal_docs')]" position="before">
+            <t t-set="portal_service_category_enable" t-value="True"/>
+        </xpath>
+        <div id="portal_service_category" position="inside">
+            <t t-call="portal.portal_docs_entry">
+                <t t-set="icon" t-value="'/tyt_intranet_portal/static/src/img/tickets.svg'"/>
+                <t t-set="title">Tickets</t>
+                <t t-set="text">Lleve seguimiento de todos sus tickets de soporte al cliente</t>
+                <t t-set="url" t-value="'/my/tickets'"/>
+            </t>
+        </div>
+    </template>
+</odoo>
