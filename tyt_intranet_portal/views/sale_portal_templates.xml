@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <template id="portal_my_home_sale" inherit_id="sale.portal_my_home_sale" priority="20">
+        <xpath expr="//div[hasclass('o_portal_docs')]" position="before">
+            <t t-set="portal_client_category_enable" t-value="True"/>
+        </xpath>
+        <div id="portal_client_category" position="inside">
+            <t t-call="portal.portal_docs_entry">
+                <t t-set="icon" t-value="'/tyt_intranet_portal/static/src/img/quotation.svg'"/>
+                <t t-set="title">Cotizaciones</t>
+                <t t-set="url" t-value="'/my/quotes'"/>
+                <t t-set="text">Cotizaciones por revisar</t>
+            </t>
+            <t t-call="portal.portal_docs_entry">
+                <t t-set="icon" t-value="'/tyt_intranet_portal/static/src/img/bag.svg'"/>
+                <t t-set="title">Órdenes de venta</t>
+                <t t-set="url" t-value="'/my/orders'"/>
+                <t t-set="text">Siga, vea o pague sus órdenes</t>
+            </t>
+        </div>
+    </template>
+</odoo>
