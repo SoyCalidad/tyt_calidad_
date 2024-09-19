@@ -1,0 +1,14 @@
+<odoo>    
+    <data>
+        <record id="mgmtsystem_nonconformity__tyt_inherit" model="ir.ui.view">
+            <field name="name">mgmtsystem_nonconformity_tyt_inherit</field>
+            <field name="model">mgmtsystem.nonconformity</field>
+            <field name="inherit_id" ref="mgmtsystem_nonconformity.view_mgmtsystem_nonconformity_form"/>
+            <field name="arch" type="xml">
+                <xpath expr="//sheet/group[1]/group[1]/field[@name='nc_output']" position="after">
+                    <field name="found_description" />
+                </xpath>              
+            </field>
+        </record>
+    </data>
+</odoo>

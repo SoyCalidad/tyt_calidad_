@@ -1,0 +1,23 @@
+<odoo>    
+    <data>
+        <record id="report_line_form_tyt" model="ir.ui.view">
+            <field name="name">report_line_form_tyt</field>
+            <field name="model">report.line</field>
+            <field name="inherit_id" ref="mgmtsystem_audit.report_line_view_form"/>
+            <field name="arch" type="xml">
+                <xpath expr="//sheet/group[1]" position="replace">
+                    <group>
+                        <field name="date_audit" />
+                        <field name="employee_id" />
+                        <field name="datetime" />
+                        <field name="nc_id" />
+                        <field name="found" style="display:block;max-width:480px;overflow-wrap:break-word;"/>
+                        <field name="observations" style="display:block;max-width:480px;overflow-wrap:break-word;" />
+                        <field name="image_attached" />
+                    </group>                          
+                </xpath>
+            </field>
+        </record>
+
+    </data>
+</odoo>
