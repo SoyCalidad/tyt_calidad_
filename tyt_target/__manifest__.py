@@ -14,6 +14,9 @@
     'data': [
         #'security/ir.model.access.csv',
         'views/target.xml',
+        'report/helpers.xml',
+        'report/target.xml',
+        'report/template.xml',
     ],
     'auto_install': False,
     'installable': True,
