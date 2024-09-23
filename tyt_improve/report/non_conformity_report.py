@@ -7,7 +7,7 @@ from PIL import Image
 from datetime import datetime
 
 class NonconformityReportMixin(models.AbstractModel):
-    _name = 'report.tyt_nonconformity.nonconformity_report_mixin'
+    _name = 'report.tyt_improve.nonconformity_report_mixin'
     _inherit = 'report.report_xlsx.abstract'
 
     def generate_nonconformity_report(self, workbook, data, nonconformities):
@@ -148,15 +148,15 @@ class NonconformityReportMixin(models.AbstractModel):
             sheet.write(row, 7, nonconformity.description or '', data_format)
 
 class IndividualNonconformityReport(models.AbstractModel):
-    _name = 'report.tyt_nonconformity.individual_nonconformity_report'
-    _inherit = 'report.tyt_nonconformity.nonconformity_report_mixin'
+    _name = 'report.tyt_improve.individual_nonconformity_report'
+    _inherit = 'report.tyt_improve.nonconformity_report_mixin'
 
     def generate_xlsx_report(self, workbook, data, nonconformities):
         self.generate_nonconformity_report(workbook, data, nonconformities)
 
 class GeneralNonconformityReport(models.AbstractModel):
-    _name = 'report.tyt_nonconformity.general_nonconformity_report'
-    _inherit = 'report.tyt_nonconformity.nonconformity_report_mixin'
+    _name = 'report.tyt_improve.general_nonconformity_report'
+    _inherit = 'report.tyt_improve.nonconformity_report_mixin'
 
     def generate_xlsx_report(self, workbook, data, records):
         date_init = datetime.strptime(data['form']['date_init'], '%Y-%m-%d')

@@ -12,4 +12,4 @@ class ExtendedNcReport(models.TransientModel):
         for field in datas['form'].keys():
             if isinstance(datas['form'][field], tuple):
                 datas['form'][field] = datas['form'][field][0]
-        return self.env.ref('tyt_nonconformity.tyt_report_nc_xlsx').report_action(self, data=datas)
+        return self.env.ref('tyt_improve.tyt_report_nc_xlsx').report_action(self, data=datas)

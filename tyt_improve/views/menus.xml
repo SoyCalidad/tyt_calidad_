@@ -20,7 +20,7 @@
         </record>
 
         <!--Accion de reporte de no conformidad-->
-        <report id="tyt_report_nc_xlsx" model="wizard.nc.report" string="Registro de no conformidad" report_type="xlsx" name="tyt_nonconformity.general_nonconformity_report" file="Reporte de No conformidades" menu="False" attachment_use="False" />
+        <report id="tyt_report_nc_xlsx" model="wizard.nc.report" string="Registro de no conformidad" report_type="xlsx" name="tyt_improve.general_nonconformity_report" file="Reporte de No conformidades" menu="False" attachment_use="False" />
 
         <!-- Heredar el menú de reportes existente -->
         <record id="menu_nonconformity_report_inherit" model="ir.ui.menu">
@@ -33,7 +33,7 @@
             <field name="name">Reporte de Registro de no conformidad</field>
             <field name="res_model">wizard.nc.report</field>
             <field name="view_mode">form</field>
-            <field name="view_id" ref="tyt_nonconformity.tyt_report_nc_excel" />
+            <field name="view_id" ref="tyt_improve.tyt_report_nc_excel" />
             <field name="target">new</field>
         </record>
 
