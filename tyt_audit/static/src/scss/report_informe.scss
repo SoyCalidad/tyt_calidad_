@@ -1,0 +1,241 @@
+.o_report_layout_standard_tyt {
+
+    position: relative;
+    margin: 0;
+
+}
+
+.tyt_cover {
+    position: relative;
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    overflow: hidden;
+    margin: 0 auto;
+    color: #595959;
+    top: 0px;
+    left: 0px;
+
+    .watermark {
+        position: absolute;
+        display: flex; /* Activar flexbox */
+        justify-content: center; /* Centrar horizontalmente */
+        align-items: center; /* Centrar verticalmente */        
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        z-index: -1; /* Asegura que la marca de agua esté detrás del contenido */
+        opacity: 0.2; /* Ajusta la transparencia */
+        text-align: center;
+    }
+
+    .watermark img {
+        width: 100%; /* Ajusta el ancho al 100% del contenedor */
+        height: 100%; /* Ajusta la altura al 100% del contenedor */
+        max-width: calc(100% - 8cm); /* Limita el ancho máximo respetando los bordes */
+        max-height: calc(100% - 8cm); /* Limita la altura máxima respetando los bordes */
+        object-fit: contain;
+        /*max-width: calc(100% - 8cm);  Restringe el ancho máximo restando los 8 cm de los bordes 
+        max-height: calc(100% - 8cm);*/        
+        /*opacity: 0.2;  Ajusta la opacidad de la marca de agua */
+    }
+
+    .title-container {
+        text-align: center;
+        margin-top: 20px;
+        background-color: #215967;
+        padding-top: 50px; /* Mantiene 20px de padding en la parte superior */
+        /*padding: 20px 0;  El formato 20px 0 significa, Añade 20px arriba y abajo, y 0px a los lados. */
+        overflow: hidden; /* le estamos indicando al contenedor que se ajuste automáticamente a los elementos que contiene, incluidos los elementos flotantes (IMAGENES)*/
+    }
+    
+    .title-container h1 {
+        color: white;
+        font-size: 54px; /* Tamaño ajustado para h1 , standar (36px)*/
+        font-weight: bold;
+    }
+    
+    .title-container h2 {
+        color: white;
+        font-size: 42px; /* Tamaño ajustado para h2 , standar (28px) */
+    }
+
+    .cover-table {
+        width: 100%;
+        border-collapse: collapse;
+        margin-top: 30px;
+    }
+    
+    .cover-table td {
+        padding: 10px;
+        vertical-align: top;
+        color: #215967; /* Color de texto */
+    }
+    
+    .cover-table .bold-text {
+        font-weight: bold; /* Negrita */
+        color: #215967; /* Color de texto para títulos */
+        font-size: 35px;
+    }
+
+    .td-font {
+        font-size: 21px;  /* Ajusta el tamaño de la fuente */
+        font-family: Arial, sans-serif;  /* Cambia el tipo de fuente si lo deseas */
+        color: #000000;  /* Ajusta el color de la letra */
+    }
+    
+    .tr-font {
+        font-size: 21px;
+        font-family: Arial, sans-serif;
+        color: #000000;
+    }
+
+    .background-image {
+        position: absolute;
+        top: 100px;
+        left: 0px;
+        width: auto;
+        height: 1850px;
+        overflow: hidden;
+    }
+
+    .content {
+        position: relative;
+        z-index: 1; /* Asegura que el contenido esté sobre la marca de agua */
+        padding: 20px;
+        text-align: center;
+    }
+
+    .top-image {
+        position: absolute;
+        margin: auto;
+        top: 0;
+        left: -600px;
+        text-align: center;
+        z-index: 1;
+        height: 1450px;
+        width: auto;
+        object-fit: contain;
+
+    }
+
+    .general_info {
+
+        position: absolute;
+        left: 120px;
+        top: 1500px;
+        text-align: left;
+
+        .company_info {
+
+            font-size: 60px;
+            font-weight: 600;
+            font-family: 'BebasNeue';
+        }
+
+        .procedure_name {
+
+            font-size: 30px;
+            font-weight: 500;
+            font-family: 'Montserrat';
+        }
+
+    }
+
+    .procedure_info {
+
+        position: absolute;
+        left: 120px;
+        top: 1650px;
+        text-align: left;
+        padding-top: 15px;
+        font-size: 25px;
+        width: 45%;
+        font-weight: 400;
+
+        p {
+
+            vertical-align: middle;
+
+        }
+
+        img {
+            margin-right: 5px;
+            width: 40px;
+            height: 40px;
+        }
+
+    }
+
+    .creation_info {
+
+        position: absolute;
+        left: 850px;
+        top: 1400px;
+        width: 30%;
+        height: 250px;
+        text-align: center;
+
+        .current_year {
+
+            font-family: 'BebasNeue';
+            height: 200px;
+            font-size: 100px;
+            text-align: left;
+            padding-left: 10.5%;
+            background-image: -webkit-linear-gradient(right, #477da5 50%, #595959 50%) !important;
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        .creation_user {
+
+            font-family: 'Montserrat';
+            font-size: 15px;
+        }
+
+    }
+
+    .validator_info {
+
+        position: absolute;
+        left: 850px;
+        top: 1740px;
+        width: 30%;
+        font-size: 20px;
+        text-align: center;
+        font-family: 'Montserrat';
+
+        p {
+
+            margin-top: 0px;
+            line-height: 5px;
+
+        }
+
+        .validator_name {
+
+            font-size: 18px;
+
+        }
+
+        .validator_job {
+
+            font-size: 15px;
+
+        }
+
+        .signature_line {
+
+            width: 100%;
+            height: 2px;
+            background-color: #595959;
+            margin: 13px 0;
+
+        }
+
+
+    }
+
+}

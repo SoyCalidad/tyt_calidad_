@@ -1,0 +1,101 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+
+    <template id="external_layout_tyt_cover">
+        <t t-if="not o" t-set="o" t-value="doc" />
+        <t t-if="not company">
+            <!-- Multicompany -->
+            <t t-if="company_id">
+                <t t-set="company" t-value="company_id" />
+            </t>
+            <t t-elif="o and 'company_id' in o and o.company_id.sudo()">
+                <t t-set="company" t-value="o.company_id.sudo()" />
+            </t>
+            <t t-else="else">
+                <t t-set="company" t-value="res_company" />
+            </t>
+        </t>
+
+        <div t-attf-class="header tyt_layout_header"></div>
+
+        <div t-attf-class="article o_report_layout_standard_tyt">
+            <t t-out="0" style="margin:0" />
+        </div>
+
+        <div t-attf-class="footer tyt_layout_footer"></div>
+
+    </template>
+    <!--
+    <template id="external_layout_tyt_document">
+        <t t-if="not o" t-set="o" t-value="doc" />
+        <t t-if="not company">
+            <t t-if="company_id">
+                <t t-set="company" t-value="company_id" />
+            </t>
+            <t t-elif="o and 'company_id' in o and o.company_id.sudo()">
+                <t t-set="company" t-value="o.company_id.sudo()" />
+            </t>
+            <t t-else="else">
+                <t t-set="company" t-value="res_company" />
+            </t>
+        </t>
+
+        <div t-attf-class="header o_company_#{company.id}_layout"
+            t-att-style="report_header_style">
+            <div class="row">
+                <div class="tyt_header col-12 mt-1">
+                    <img t-att-src="image_data_uri(company.logo)"
+                        style="max-height: 90px;float: right;margin-top:20px;" alt="Logo" />
+                </div>
+            </div>            
+        </div>
+
+        <div
+            t-attf-class="article o_report_layout_standard o_company_#{company.id}_layout {{  'o_report_layout_background' if company.layout_background in ['Geometric', 'Custom']  else  '' }}"
+            t-att-data-oe-model="o and o._name" t-att-data-oe-id="o and o.id"
+            t-att-data-oe-lang="o and o.env.context.get('lang')">
+            <div class="pt-5">
+                <t t-call="web.address_layout" />
+            </div>
+            <t t-out="0" />
+        </div>
+
+        <div t-attf-class="footer o_company_#{company.id}_layout">
+            <div style="border-top: 1px solid black; padding-top: 5px;font-size:11px;">
+                <div style="width: 33.33%; float: left; text-align: left;">
+                    <span t-field="o.name"/>
+                </div>
+                <div style="width: 33.33%; float: left; text-align: center;">
+                    Ver. <span t-field="o.version"/> <span t-if="o.date_validate" t-esc="abbr_months[o.date_validate.strftime('%m')]"/>-<span t-if="o.date_validate" t-esc="o.date_validate.strftime('%Y')" />
+                </div>
+                <div style="width: 33.33%; float: right; text-align: right;">
+                    <span>Page <span class="page"/></span> of <span class="topage"/>
+                </div>
+            </div>
+        </div>
+    </template>
+
+    <template id="external_layout_tyt_toc">
+        <t t-if="not o" t-set="o" t-value="doc" />
+        <t t-if="not company">
+            <t t-if="company_id">
+                <t t-set="company" t-value="company_id" />
+            </t>
+            <t t-elif="o and 'company_id' in o and o.company_id.sudo()">
+                <t t-set="company" t-value="o.company_id.sudo()" />
+            </t>
+            <t t-else="else">
+                <t t-set="company" t-value="res_company" />
+            </t>
+        </t>
+
+        <div t-attf-class="header o_company_#{company.id}_layout">
+        </div>
+        <div
+            t-attf-class="article o_report_layout_standard o_company_#{company.id}_layout {{  'o_report_layout_background' if company.layout_background in ['Geometric', 'Custom']  else  '' }}">
+            <t t-out="0" />
+        </div>
+        <div t-attf-class="footer o_company_#{company.id}_layout" />
+    </template>
+    -->
+</odoo>
