@@ -15,6 +15,7 @@
     'data': [
         #'security/ir.model.access.csv',
         'views/context.xml',
+        'report/stakeholders_report.xml',
     ],
     'auto_install': False,
     'installable': True,
