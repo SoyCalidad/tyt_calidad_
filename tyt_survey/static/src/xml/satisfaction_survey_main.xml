@@ -1,0 +1,115 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+
+    <template id="tyt_survey.satisfaction_survey_main" name="satisfaction_survey_main">
+        <t t-call="website.layout">
+            <div class="center">
+                <form action="/satisfaction_survey_main" method="post" id="msform"
+                    enctype="multipart/form-data">
+                    <div class="flex items-center justify-center min-h-screen">
+                        <div
+                            class="w-3/5 aspect-video cursor-pointer rounded-xl relative group rounded color_f_2 text-teal-900 ">
+                            <h1 class="text-2xl p-8 text-center">¡En <span class="font-bold">TYT
+                                Contact Center </span> su opinión nos ayuda a mejorar
+                                continuamente...!</h1>
+                            <h2 class="text-lg px-20">¡Hola! Nos ayudaría mucho que nos apoyara a
+                                contestar la siguiente encuesta, de forma honesta, no le tomará más
+                                de 3 minutos.</h2>
+                            <h3 class="text-base px-20 py-4">Primero, verifique que sus datos sean
+                                correctos.</h3>
+                            <div class="flex items-center justify-center">
+                                <div class="relative w-full max-w-xl">
+                                    <div class="m-8 relative space-y-4">
+                                        <div
+                                            class="p-5 bg-white rounded-lg flex items-center justify-between">
+                                            <div
+                                                class="flex-1 flex justify-between items-center space-x-2">
+                                                <div
+                                                    class="w-36 h-8 items-center flex rounded-lg bg-teal-900 text-white text-lg pl-2">
+                                                    Nombre:</div>
+                                                <div
+                                                    class="h-8 w-full items-center flex bg-gray-300 rounded pl-2 text-base">Karla
+                                                    Lizett Zermeño</div>
+                                            </div>
+                                        </div>
+                                        <div
+                                            class="p-5 bg-white rounded-lg flex items-center justify-between">
+                                            <div
+                                                class="flex-1 flex justify-between items-center space-x-2">
+                                                <div
+                                                    class="w-36 h-8 items-center flex rounded-lg bg-teal-900 text-white text-lg pl-2">
+                                                    Puesto:</div>
+                                                <div
+                                                    class="h-8 w-full items-center flex bg-gray-300 rounded pl-2 text-base">Gerente
+                                                    de Marketing R5 </div>
+                                            </div>
+                                        </div>
+                                        <div
+                                            class="p-5 bg-white rounded-lg flex items-center justify-between ">
+                                            <div
+                                                class="flex-1 flex justify-between items-center space-x-2">
+                                                <div
+                                                    class="w-36 h-8 items-center flex rounded-lg bg-teal-900 text-white text-lg pl-2">
+                                                    Correo:</div>
+                                                <div
+                                                    class="h-8 w-full items-center flex bg-gray-300 rounded pl-2 text-base">
+                                                    karla.zermeno@telcel.com </div>
+                                            </div>
+                                        </div>
+                                        <div
+                                            class="p-5 bg-white rounded-lg flex items-center justify-between">
+                                            <div
+                                                class="flex-1 flex justify-between items-center space-x-2">
+                                                <div
+                                                    class="w-36 h-8 items-center flex rounded-lg bg-teal-900 text-white text-lg pl-2">
+                                                    Empresa:</div>
+                                                <div
+                                                    class="h-8 w-full items-center flex bg-gray-300 rounded pl-2 text-base">
+                                                    Telcel </div>
+                                            </div>
+                                        </div>
+                                        <div
+                                            class="p-5 bg-white rounded-lg flex items-center justify-between">
+                                            <div
+                                                class="flex-1 flex justify-between items-center space-x-2">
+                                                <div
+                                                    class="w-36 h-8 items-center flex rounded-lg bg-teal-900 text-white text-lg pl-2">
+                                                    Campaña:</div>
+                                                <div
+                                                    class="h-8 w-full items-center flex bg-gray-300 rounded pl-2 text-base">
+                                                    General </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="max-w-2xl mx-auto">
+                                <div class="grid grid-rows-2 space-y-4 block">
+                                    <div
+                                        class="flex items-center bg-blue-300 text-base rounded rounded-xl p-4 space-x-4">
+                                        <svg stroke="currentColor" fill="currentColor"
+                                            stroke-width="0" viewBox="0 0 512 512" height="1em"
+                                            width="1em" xmlns="http://www.w3.org/2000/svg">
+                                            <path
+                                                d="M504 256c0 136.997-111.043 248-248 248S8 392.997 8 256C8 119.083 119.043 8 256 8s248 111.083 248 248zm-248 50c-25.405 0-46 20.595-46 46s20.595 46 46 46 46-20.595 46-46-20.595-46-46-46zm-43.673-165.346l7.418 136c.347 6.364 5.609 11.346 11.982 11.346h48.546c6.373 0 11.635-4.982 11.982-11.346l7.418-136c.375-6.874-5.098-12.654-11.982-12.654h-63.383c-6.884 0-12.356 5.78-11.981 12.654z"></path>
+                                        </svg>
+                                        <span>Iniciaremos la encuesta, las preguntas se muestran a
+                                            continuación...</span>
+                                    </div>
+                                    <div class="flex items-center justify-center">
+                                        <a href="/satisfaccion_clientes/encuesta/KarlaLizettZermeño">
+                                            <button type="button"
+                                                class="text-white texl-2xl bg-[#2557D6] hover:bg-[#2557D6]/90 focus:ring-4 focus:ring-[#2557D6]/50 font-medium rounded-lg px-5 py-2.5 text-center inline-flex items-center dark:focus:ring-[#2557D6]/50 mr-2 mb-2">
+                                                Ir a encuesta</button>
+                                        </a>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </form>
+            </div>
+        </t>
+    </template>
+
+</odoo>
