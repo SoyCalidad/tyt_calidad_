@@ -1,0 +1,4 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <report id="action_report_tyt_mgmtsystem_nonconformity" model="mgmtsystem.nonconformity" string="Reporte de Registro de no conformidad" report_type="xlsx" name="tyt_nonconformity.individual_nonconformity_report" file="Matriz" print_report_name="'Registro de no conformidad - %s' % object.name"/>
+</odoo>

@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<odoo>
+    <data>
+        <!-- Definir la vista de formulario para el wizard -->
+        <record id="tyt_report_nc_excel" model="ir.ui.view">
+            <field name="name">wizard.nc.report.excel</field>
+            <field name="model">wizard.nc.report</field>
+            <field name="arch" type="xml">
+                <form string="Wizard">
+                    <group>
+                        <field name="date_init" />
+                        <field name="date_fin" />
+                    </group>
+                    <footer>
+                        <button name="export_nc_xls" type="object" default_focus="1" string="Exportar Reporte Excel" class="oe_highlight" context="{'xls_export':1}" icon="fa-download" />
+                        <button string="Cancelar" special="cancel" />
+                    </footer>
+                </form>
+            </field>
+        </record>
+
+        <!--Accion de reporte de no conformidad-->
+        <report id="tyt_report_nc_xlsx" model="wizard.nc.report" string="Registro de no conformidad" report_type="xlsx" name="tyt_nonconformity.general_nonconformity_report" file="Reporte de No conformidades" menu="False" attachment_use="False" />
+
+        <!-- Heredar el menú de reportes existente -->
+        <record id="menu_nonconformity_report_inherit" model="ir.ui.menu">
+            <field name="name">Reportes</field>
+            <field name="parent_id" ref="mgmtsystem_nonconformity.menu_nonconformity_root"/>
+        </record>
+
+        <!-- Definir la acción asociada al nuevo menú -->
+        <record id="action_tyt_report_nc" model="ir.actions.act_window">
+            <field name="name">Reporte de Registro de no conformidad</field>
+            <field name="res_model">wizard.nc.report</field>
+            <field name="view_mode">form</field>
+            <field name="view_id" ref="tyt_nonconformity.tyt_report_nc_excel" />
+            <field name="target">new</field>
+        </record>
+
+        <!-- Agregar nuevo elemento de menú en la sección de reportes -->
+        <menuitem id="report_tyt_nc" name="Reporte de Registro de no conformidad" parent="mgmtsystem_nonconformity.menu_nonconformity_report" action="action_tyt_report_nc" sequence="150"/>
+    </data>
+</odoo>
