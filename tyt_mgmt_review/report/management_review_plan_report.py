@@ -354,9 +354,11 @@ class IndividualReport(models.AbstractModel):
 
     def generate_xlsx_report(self, workbook, data, actions):
         formats = self._get_workbook_formats(workbook)
-        sheet = workbook.add_worksheet(actions.location_id.name if actions.location_id else f"Revisión {actions.name}")
-        self._insert_logo(sheet, workbook, actions)
-        self._write_individual_sheet(sheet, formats, actions)
+        for action in actions:
+            sheet_name = action.location_id.name if action.location_id else f"Revisión {action.name}"
+            sheet = workbook.add_worksheet(sheet_name[:31])
+            self._insert_logo(sheet, workbook, action)
+            self._write_individual_sheet(sheet, formats, action)
 
     def _write_individual_sheet(self, sheet, formats, actions):
         sheet.merge_range('D2:G3', 'CUMPLIMIENTO DE AUDITORIAS', formats['cumplimiento_auditorias'])
