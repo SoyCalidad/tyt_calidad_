@@ -1,0 +1,69 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <template id="report_prospects_pdf">
+        <t t-call="web.html_container">
+            <div class="header"/>
+            <t t-foreach="docs" t-as="doc">
+                <t t-call="web.external_layout">
+                    <div style="height:200px;width:200px">
+                        <img t-att-src="'/tyt_recruitment/static/src/img/logo.png'" alt="Logo" style="max-width: 150px;"/>
+                        <img t-att-src="'http://localhost:8147/tyt_recruitment/static/src/img/logo.png'" alt="Logo" style="max-width: 150px;"/>
+                    </div>
+                    <div>
+                        <h1 style="background-color: #31869B; color: #FFFFFF; text-align: center; padding-top: 15px; padding-bottom: 10px;">LISTA DE PROSPECTOS</h1>
+                        <p>Sitio: <t t-esc="doc.site_id"/></p>
+                        <p>Semana: <t t-esc="doc.week"/></p>
+                        <p>Prospectos: <t t-esc="doc.prospects"/></p>
+                        <p>T/M: <t t-esc="doc.turn_m"/></p>
+                        <p>T/V: <t t-esc="doc.turn_v"/></p>
+                    </div>
+                    <div>
+                        <table class="table table-condensed" style="border-collapse: collapse; width: 100%;">
+                            <thead>
+                                <tr>
+                                    <th colspan="10" style="text-align: center; font-weight: bold; border: 1px solid black; font-size: 20px; background-color: #215967; color: #FFFFFF;padding-top: 15px;padding-bottom: 10px;">REQUERIMIENTO</th>
+                                </tr>
+                                <tr>
+                                    <th style="border: 1px solid black; background-color: #B7DEE8; color: #000000; text-align: center; padding-top: 8px;padding-bottom: 5px;">APELLIDO PATERNO</th>
+                                    <th style="border: 1px solid black; background-color: #B7DEE8; color: #000000; text-align: center; padding-top: 8px;padding-bottom: 5px;">APELLIDO MATERNO</th>
+                                    <th style="border: 1px solid black; background-color: #B7DEE8; color: #000000; text-align: center; padding-top: 8px;padding-bottom: 5px;">NOMBRE (S)</th>
+                                    <th style="border: 1px solid black; background-color: #B7DEE8; color: #000000; text-align: center; padding-top: 8px;padding-bottom: 5px;">Número de Empleado</th>
+                                    <th style="border: 1px solid black; background-color: #B7DEE8; color: #000000; text-align: center; padding-top: 8px;padding-bottom: 5px;">TELÉFONO</th>
+                                    <th style="border: 1px solid black; background-color: #B7DEE8; color: #000000; text-align: center; padding-top: 8px;padding-bottom: 5px;">FECHA DE NACIMIENTO</th>
+                                    <th style="border: 1px solid black; background-color: #B7DEE8; color: #000000; text-align: center; padding-top: 8px;padding-bottom: 5px;">LUGAR DE NACIMIENTO</th>
+                                    <th style="border: 1px solid black; background-color: #B7DEE8; color: #000000; text-align: center; padding-top: 8px;padding-bottom: 5px;">RFC</th>
+                                    <th style="border: 1px solid black; background-color: #B7DEE8; color: #000000; text-align: center; padding-top: 8px;padding-bottom: 5px;">CURP</th>
+                                    <th style="border: 1px solid black; background-color: #B7DEE8; color: #000000; text-align: center; padding-top: 8px;padding-bottom: 5px;">NSS</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <t t-if="doc.prospect_ids">
+                                    <t t-foreach="doc.prospect_ids" t-as="campaign">
+                                        <tr>
+                                            <td style="border: 1px solid black;text-align: center;padding-top: 5px;"><t t-esc="campaign.paternal_surname"/></td>
+                                            <td style="border: 1px solid black;text-align: center;padding-top: 5px;"><t t-esc="campaign.maternal_surname"/></td>
+                                            <td style="border: 1px solid black;text-align: center;padding-top: 5px;"><t t-esc="campaign.names"/></td>
+                                            <td style="border: 1px solid black;text-align: center;padding-top: 5px;"><t t-esc="campaign.employee_number"/></td>
+                                            <td style="border: 1px solid black;text-align: center;padding-top: 5px;"><t t-esc="campaign.phone_number"/></td>
+                                            <td style="border: 1px solid black;text-align: center;padding-top: 5px;"><t t-esc="campaign.birthday"/></td>
+                                            <td style="border: 1px solid black;text-align: center;padding-top: 5px;"><t t-esc="campaign.place_birth"/></td>
+                                            <td style="border: 1px solid black;text-align: center;padding-top: 5px;"><t t-esc="campaign.rfc"/></td>
+                                            <td style="border: 1px solid black;text-align: center;padding-top: 5px;"><t t-esc="campaign.curp"/></td>
+                                            <td style="border: 1px solid black;text-align: center;padding-top: 5px;"><t t-esc="campaign.nss"/></td>
+                                        </tr>
+                                    </t>
+                                </t>
+                                <t t-if="not doc.prospect_ids">
+                                    <tr>
+                                        <td colspan="2">No hay campañas relacionadas.</td>
+                                    </tr>
+                                </t>
+                            </tbody>
+                        </table>
+                    </div>
+                </t>
+            </t>
+            <div class="footer"/>
+        </t>
+    </template>
+</odoo>

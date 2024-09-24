@@ -1,6 +1,6 @@
 <odoo>
   <data>
-    <!-- list -->
+    <!-- Requisiciones -->
 
     <record model="ir.ui.view" id="tyt_recruitment.list">
       <field name="name">Lista de requisiciones</field>
@@ -16,7 +16,8 @@
       </field>
     </record>
 
-    <!-- form -->
+
+    <!-- Requisiciones form -->
     <record id="view_requisition_form" model="ir.ui.view">
       <field name="name">Formulario de Requisición</field>
       <field name="model">tyt_recruitment.requisition</field>
@@ -59,12 +60,88 @@
         </form>
       </field>
     </record>
+
+    <!-- Lista de Prospectos -->
+
+    <record model="ir.ui.view" id="tyt_recruitment.list_prospects">
+      <field name="name">Lista de prospectos</field>
+      <field name="model">tyt_recruitment.pgroup</field>
+      <field name="arch" type="xml">
+        <tree>
+          <field name="id" width="50px"/>
+          <field name="week" width="50px"/>
+          <field name="prospects" />
+          <field name="turn_m" width="50px" />
+          <field name="turn_v" width="50px" />
+          <field name="group" />
+          <field name="state" />
+        </tree>
+      </field>
+    </record>
     
-    <!-- actions opening views on models -->
+    <!-- Lista de prospectos form -->
+
+    <record id="view_bgroup_form" model="ir.ui.view">
+      <field name="name">Formulario de lista de prospectos</field>
+      <field name="model">tyt_recruitment.pgroup</field>
+      <field name="arch" type="xml">
+        <form string="Prospectos">
+          <header>
+            <field name="state" invisible="1"/>
+            <button name="action_open_popup" string="Comunicar por Correo" type="object" class="oe_highlight"/>
+            <button name="action_confirm" string="Confirmar" type="object" class="oe_highlight"/>
+            <field name="state" widget="statusbar" statusbar_visible="draft,sent"/>
+          </header>
+
+          <sheet>  
+            <group>
+              <field name="week" attrs="{'readonly': [('state', '=', 'sent')]}"/>
+              <field name="prospects" attrs="{'readonly': [('state', '=', 'sent')]}"/>
+              <field name="turn_m" attrs="{'readonly': [('state', '=', 'sent')]}"/>
+              <field name="turn_v" attrs="{'readonly': [('state', '=', 'sent')]}"/>
+              <field name="group" attrs="{'readonly': [('state', '=', 'sent')]}"/>
+              <field name="turn_m" attrs="{'readonly': [('state', '=', 'sent')]}"/>
+            </group>
+
+            <notebook>
+              <page string="Prospectos">
+                <field name="prospect_ids" nolabel="1" attrs="{'readonly': [('state', '=', 'sent')]}">
+                  <tree editable="bottom">
+                    <field name="names" width="50px" />
+                    <field name="paternal_surname" />
+                    <field name="maternal_surname" />
+                    <field name="employee_number"/>
+                    <field name="phone_number" width="100px" />
+                    <field name="birthday" width="100px" />
+                    <field name="place_birth" width="100px" />
+                    <field name="rfc" width="50px" />
+                    <field name="curp" width="50px" />
+                    <field name="nss" width="50px" />
+                  </tree>
+                </field>
+              </page>
+            </notebook>
+          </sheet>
+          <div class="oe_chatter">
+              <field name="message_follower_ids" widget="mail_followers" />
+              <field name="activity_ids" widget="mail_activity" />
+              <field name="message_ids" widget="mail_thread" />
+          </div>
+        </form>
+      </field>
+    </record>
+
+    <!-- ACTIONS opening views on models -->
 
     <record model="ir.actions.act_window" id="tyt_recruitment.action_window">
       <field name="name">Lista de requisiciones</field>
       <field name="res_model">tyt_recruitment.requisition</field>
+      <field name="view_mode">tree,form</field>
+    </record>
+
+    <record model="ir.actions.act_window" id="tyt_recruitment.action_prospects">
+      <field name="name">Lista de prospectos</field>
+      <field name="res_model">tyt_recruitment.pgroup</field>
       <field name="view_mode">tree,form</field>
     </record>
 
@@ -80,6 +157,11 @@
       name="Requisición"
       parent="menu_custom_recruitment"
       action="tyt_recruitment.action_window"
+    />
+    <menuitem id="menu_custom_prospects"
+      name="Lista de prospectos"
+      parent="menu_custom_recruitment"
+      action="tyt_recruitment.action_prospects"
     />
   </data>
 </odoo>

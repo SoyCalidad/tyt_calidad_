@@ -4,9 +4,19 @@
         <field name="name">Requisición PDF</field>
         <field name="model">tyt_recruitment.requisition</field>
         <field name="report_type">qweb-pdf</field>
-        <field name="report_name">tyt_recruitment.template_report_requisition</field>
+        <field name="report_name">tyt_recruitment.report_requisition_pdf</field>
         <field name="binding_model_id" ref="model_tyt_recruitment_requisition"/>
         <field name="binding_type">report</field>
         <field name="print_report_name">'Requisición_%s (%s)' % (str(object.id), str(object.request_date)[0:10])</field>
+    </record>
+
+    <record id="action_report_prospects_pdf" model="ir.actions.report">
+        <field name="name">Lista de prospectos PDF</field>
+        <field name="model">tyt_recruitment.pgroup</field>
+        <field name="report_type">qweb-pdf</field>
+        <field name="report_name">tyt_recruitment.report_prospects_pdf</field>
+        <field name="binding_model_id" ref="model_tyt_recruitment_pgroup"/>
+        <field name="binding_type">report</field>
+        <field name="print_report_name">'Lista de prospectos %s (%s)' % (str(object.id), str(object.register_date)[0:10])</field>
     </record>
 </odoo>

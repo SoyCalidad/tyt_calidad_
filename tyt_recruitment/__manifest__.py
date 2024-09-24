@@ -18,8 +18,9 @@
         'data/mail_templates.xml',
         'views/share_templates.xml',
         'reports/reports_xls.xml',
-        'reports/reports_pdf.xml',  # Definición del reporte
-        'views/template_report_requisition.xml',  # Plantilla QWeb
+        'reports/reports_pdf.xml',
+        'views/report_requisition_pdf.xml',
+        'views/report_prospects_pdf.xml',
     ],
     'auto_install': False,
     'installable': True,

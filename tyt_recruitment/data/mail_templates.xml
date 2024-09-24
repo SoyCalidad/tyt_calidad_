@@ -28,7 +28,38 @@
                     </p>
                 </div>
             </field>
-            
+            <field name="auto_delete" eval="True"/>
+        </record>
+    </data>
+
+    <data noupdate="1">
+        <record id="mail_template_prospects" model="mail.template">
+            <field name="name">Lista de prospectos: Comunicar por correo electrónico</field>
+            <field name="model_id" ref="model_tyt_recruitment_pgroup"/>
+            <field name="email_from">info@tytcontact.com</field>
+            <field name="email_to">${object.get_emails()}</field>
+            <field name="subject">Lista de prospectos {{object.id}} ( {{str(object.register_date)[0:10]}} )</field>
+            <field name="body_html" type="html">
+                <div style="margin: 0px; padding: 0px;">
+                    <p style="margin: 0px; padding: 0px; font-size: 13px;">
+                        Estimados/as
+                        <br/>
+                        <br/>
+                        Estimados se hace envío de la presente Lista de Prospectos para su conocimiento y uso respectivo.
+                        <br/>
+                        <br/>
+                        Puede acceder al contenido mediante el siguiente enlace:
+                        <br/>
+                        <a t-att-href="object.get_share_url()">
+                            VER LISTA DE PROSPECTOS
+                        </a>
+                        <br/>
+                        <br/>
+                        Saludos cordiales
+                        <br/>
+                    </p>
+                </div>
+            </field>
             <field name="auto_delete" eval="True"/>
         </record>
     </data>
