@@ -12,7 +12,7 @@ class RecruitmentController(http.Controller):
             return request.not_found()
 
         return request.render('tyt_recruitment.edition_share_template', {
-            'pdf_filename': f'{requisition_temp.weeks}.pdf',
+            'pdf_filename': f'{requisition_temp.id}.pdf',
             'pdf_url': f'/recruitment/download/{requisition_temp.id}'
         })
 
@@ -28,7 +28,7 @@ class RecruitmentController(http.Controller):
         pdf_content, _ = request.env['ir.actions.report'].sudo()._render_qweb_pdf(
             'tyt_recruitment.action_report_requisition_pdf', [requisition_temp.id]
         )
-        pdf_filename = f'{requisition_temp.weeks}.pdf'
+        pdf_filename = f'{requisition_temp.id}.pdf'
         headers = [
             ('Content-Type', 'application/pdf'),
             ('Content-Length', len(pdf_content)),

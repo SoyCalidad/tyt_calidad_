@@ -4,6 +4,7 @@ from odoo import api, models, fields, tools
 import uuid
 from io import BytesIO
 import base64
+from datetime import datetime
 
 class Requisition(models.Model):
     _name = 'tyt_recruitment.requisition'
@@ -13,14 +14,22 @@ class Requisition(models.Model):
 
     request_date = fields.Datetime(required=True, string="Fecha de solicitud", tracking=True)
     closing_date = fields.Datetime(required=True, string="Fecha de cierre", tracking=True)
-    weeks = fields.Char(required=True, string="Semanas", tracking=True)
+    week = fields.Char(string="Semana", default="0", tracking=True)
     state = fields.Selection([('draft', "En creación"),('sent', "Enviado"),], string="Estado", required=True, tracking=True, default='draft')
 
     campaign_ids = fields.One2many("tyt_recruitment.campaign", "requisition_id", string="Campaña", tracking=True)
-    
     employee_ids = fields.Many2many('hr.employee', string="Empleados relacionados")
 
     access_token = fields.Char(string="Access Token", default=lambda self: str(uuid.uuid4()), readonly=True, copy=False)
+
+    @api.onchange('request_date')
+    def _onchange_request_date(self):
+        if self.request_date:
+            date_obj = self.request_date.date()
+            week_num = date_obj.isocalendar()[1]
+            self.week = str(week_num)
+        else:
+            self.week = "0"
 
     def get_emails(self):
         emails = []
@@ -121,10 +130,12 @@ class Campaign(models.Model):
     goal_staff = fields.Integer(required=True, string="Personal objetivo", tracking=True)
     request_staff = fields.Integer(required=True, string="Personal requerido", tracking=True)
     turn = fields.Selection([('AM', 'AM'), ('PM', 'PM')], string="Turno", required=True, tracking=True)
-    priority = fields.Selection([('1', '1'), ('2', '2')], string="Prioridad", required=True, tracking=True)
+    priority = fields.Selection([('1', '1'), ('2', '2'), ('3', '3'), ('4', '4')], string="Prioridad", required=True, tracking=True)
+
 
     requisition_id = fields.Many2one("tyt_recruitment.requisition")
-    tag_id = fields.Many2one("tyt_recruitment.tag", string="Campaña")
+    tag_id = fields.Many2one('hr.department', string='Dept', options={'no_create': True}, required=True)
+    # tag_id = fields.Many2one("tyt_recruitment.tag", string="Campaña")
 
 class Tag(models.Model):
     _name = 'tyt_recruitment.tag'
