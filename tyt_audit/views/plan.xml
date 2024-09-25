@@ -1,0 +1,64 @@
+<odoo>    
+    <data>
+        <!-- Cronograma de Auditorías -->
+        <record id="inherit_audit_plan_report_wizard_tyt_view_form" model="ir.ui.view">
+            <field name="name">inherit.audit.plan.report.wizard.tyt.view.form</field>
+            <field name="model">audit.plan.report.wizard</field>
+            <field name="inherit_id" ref="mgmtsystem_audit.audit_plan_report_wizard_view_form"/>
+            <field name="arch" type="xml">
+                <xpath expr="//sheet/group[1]/field[@name='audit_plan_id']" position="attributes">
+                    <attribute name="string">Cronograma de Auditorías</attribute>
+                </xpath>
+            </field>
+        </record>
+        <!-- Window Actions-->
+
+        <record id="mgmtsystem_audit.audit_plan_action" model="ir.actions.act_window">
+            <field name="name">Cronograma de Auditorías</field>
+            <field name="type">ir.actions.act_window</field>
+            <field name="res_model">audit.plan</field>
+            <field name="view_mode">tree,form,kanban,graph,pivot</field>
+        </record>
+
+        <record id="mgmtsystem_audit.audit_plan_report_wizard_action2" model="ir.actions.act_window">
+            <field name="name">Cronograma de Auditorías</field>
+            <field name="type">ir.actions.act_window</field>
+            <field name="res_model">audit.plan.report.wizard</field>
+            <field name="view_mode">form</field>
+            <field name="target">new</field>
+            <field name="view_id" ref="mgmtsystem_audit.audit_plan_report_wizard_view_form"/>
+            <field name="binding_type">report</field>
+        </record>
+
+        <record id="mgmtsystem_audit.action_audit_plan_configurator" model="ir.actions.act_window">
+            <field name="type">ir.actions.act_window</field>
+            <field name="name">Cree un Cronograma de Auditorías.</field>
+            <field name="view_mode">form</field>
+            <field name="target">new</field>
+            <field name="res_model">audit.plan</field>
+            <field name="view_id" ref="mgmtsystem_audit.onboarding_audit_plan_form"/>
+        </record>
+
+        <!-- Menu Items-->
+
+        <record model="ir.ui.menu" id="mgmtsystem_audit.hr_item_annual_plan">
+            <field name="name">Cronograma de Auditorías</field>
+        </record>
+
+        <record model="ir.ui.menu" id="mgmtsystem_audit.audit_plan_wizard_menu1">
+            <field name="name">Cronograma de Auditorías</field>
+        </record>
+
+        <!-- Onboard Template-->
+
+        <template id="inherit_onboarding_audit_plan_step" inherit_id="mgmtsystem_audit.onboarding_audit_plan_step">
+            <xpath expr="//t[@t-set='title']" position="replace">
+                <t t-set="title">Cronograma de Auditorías</t>
+            </xpath>
+            <xpath expr="//t[@t-set='description']" position="replace">
+                <t t-set="description">Cree un Cronograma de Auditorías.</t>
+            </xpath>
+        </template>
+
+    </data>
+</odoo>
