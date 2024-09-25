@@ -1,123 +1,105 @@
+<?xml version="1.0" encoding="utf-8"?>
 <odoo>
     <data>
-        <template id="target_quality_report">
+        <template id="tyt_target_quality_report">
             <t t-call="web.html_container">
-                <t t-set="company" t-value="res_company" />
+            <t t-set="tyt_company" t-value="res_company" />
                 <div class="header">
                     <style type="text/css">
-                        .header-table {
-                            width: 100%;
-                            border-collapse: collapse;
-                        }
-                        .header-table td {
-                            padding: 10px 5px;
-                            vertical-align: middle;
-                            height: 80px; 
-                        }
-                        .company-name {
-                            font-size: 11px;
-                            text-align: left;
-                            display: flex;
-                            align-items: center;
-                            justify-content: flex-start;
-                            height: 100%;
-                            margin-top: 10px;
-                        }
-                        .logo {
-                            text-align: right;
-                            display: flex;
-                            align-items: center;
-                            justify-content: flex-end;
-                            height: 100%;
-                        }
-                        .logo img {
-                            max-width: 70px;
-                            max-height: 70px;
-                        }
+                    .header-container {
+                        font-size: 9px;
+                        display: table;
+                        width: 100%;
+                        border-bottom: 1px solid black;
+                    }
+                    .header-cell {
+                        display: table-cell;
+                        vertical-align: middle;
+                        height: 80px;
+                    }
+                    .company-name {
+                        font-size: 11px;
+                        text-align: left;
+                        height: 80px;
+                    }
+                    .logo {
+                        text-align: right;
+                        height: 80px;
+                    }
+                    .logo img {
+                        max-width: 70px;
+                        max-height: 70px;
+                    }
                     </style>
-                    <table class="header-table">
-                        <tr>
-                            <td class="company-name">
-                                <span t-field="company.name"/>
-                            </td>
-                            <td class="logo">
-                                <t t-if="company.logo">
-                                    <img t-att-src="image_data_uri(company.logo)" alt="Logo"/>
-                                </t>
-                            </td>
-                        </tr>
-                    </table>
+                    <div class="header-container">
+                        <div class="header-cell company-name">
+                            <span t-field="tyt_company.name"/>
+                        </div>
+                        <div class="header-cell logo">
+                            <t t-if="tyt_company.logo">
+                                <img t-att-src="image_data_uri(tyt_company.logo)" alt="Logo"/>
+                            </t>
+                        </div>
+                    </div>
                 </div>
                 <t t-call="web.external_layout">
-                    <div class="page">
-                        <!-- Added text above the table -->
+                    <div class="page mt-5" style="overflow: auto;">
                         <style type="text/css">
-                                @font-face {
-                                    font-family: 'Calibri';
-                                    src: url('/web/static/fonts/Calibri.ttf') format('truetype');
-                                }
-                                .quality-title {
-                                    font-family: 'Calibri', sans-serif;
-                                    font-size: 14px;
-                                    color: #215967;
-                                }
-                                .quality-description {
-                                    font-family: 'Calibri', sans-serif;
-                                    font-size: 11px;
-                                }
-                                .tg {
-                                    border-collapse: collapse;
-                                    border-spacing: 0;
-                                    width: 100%;
-                                    border: 1px solid #ccc;
-                                }
-                                .tg td {
-                                    font-family: Arial, sans-serif;
-                                    font-size: 12px;
-                                    padding: 5px 3px;
-                                    overflow: hidden;
-                                    word-break: normal;
-                                    color: #333;
-                                    border: 1px solid #ccc;
-                                }
-                                .tg th {
-                                    font-family: Arial, sans-serif;
-                                    font-size: 12px;
-                                    font-weight: bold;
-                                    padding: 5px 3px;
-                                    overflow: hidden;
-                                    word-break: normal;
-                                    color: white;
-                                    background-color: #306f7c;
-                                    border: 1px solid #ccc;
-                                }
-                                .tg .tg-cly1 {
-                                    text-align: left;
-                                    vertical-align: middle;
-                                }
-                                .tg .tg-sx6j {
-                                    text-align: center;
-                                    vertical-align: middle;
-                                }
-                                .numbered-list {
-                                    list-style-type: decimal;
-                                    padding-left: 20px;
-                                }
-                                .bulleted-list {
-                                    list-style-type: disc;
-                                    padding-left: 20px;
-                                }
-                                .tg .col-objetivo { width: 20%; }
-                                .tg .col-recursos { width: 20%; }
-                                .tg .col-responsable { width: 15%; }
-                                .tg .col-plazo { width: 10%; }
-                                .tg .col-metrica { width: 20%; }
-                                .tg .col-evidencia { width: 15%; }
+                        @font-face {
+                            font-family: 'Calibri';
+                            src: url('/web/static/fonts/Calibri.ttf') format('truetype');
+                        }
+                        .quality-title {
+                            font-family: 'Calibri', sans-serif;
+                            font-size: 14px;
+                            color: #215967;
+                        }
+                        .quality-description {
+                            font-family: 'Calibri', sans-serif;
+                            font-size: 11px;
+                        }
+                        .tg {
+                            border-collapse: collapse;
+                            border-spacing: 0;
+                            width: 100%;
+                            border: 1px solid #ccc;
+                        }
+                        .tg td, .tg th {
+                            font-family: Arial, sans-serif;
+                            font-size: 12px;
+                            padding: 5px 3px;
+                            overflow: hidden;
+                            word-break: normal;
+                            border: 1px solid #ccc;
+                        }
+                        .tg th {
+                            font-weight: bold;
+                            color: white;
+                            background-color: #306f7c;
+                        }
+                        .tg .tg-cly1 {
+                            text-align: left;
+                            vertical-align: middle;
+                        }
+                        .tg .tg-sx6j {
+                            text-align: center;
+                            vertical-align: middle;
+                        }
+                        .numbered-list, .bulleted-list {
+                            padding-left: 20px;
+                        }
+                        .tg .col-objetivo { width: 20%; }
+                        .tg .col-recursos { width: 20%; }
+                        .tg .col-responsable { width: 15%; }
+                        .tg .col-plazo { width: 10%; }
+                        .tg .col-metrica { width: 20%; }
+                        .tg .col-evidencia { width: 15%; }
                         </style>
                         <div style="margin-bottom: 20px;">
                             <h3 class="quality-title">Objetivos de calidad</h3>
                             <p class="quality-description">Los objetivos detallados abajo son de alto nivel para el Sistema de Gestión de Calidad; los objetivos de los procesos y productos están detallados en la Matriz de Indicadores clave de desempeño.</p>
                         </div>
+                        <!-- Table of Objectives -->
                         <table id="tg-gUttz" class="tg">
                             <colgroup>
                                 <col class="col-objetivo"/>
@@ -135,62 +117,59 @@
                                 <th class="tg-sx6j col-metrica">Métrica (como se evalúa los resultados)</th>
                                 <th class="tg-sx6j col-evidencia">Evidencia</th>
                             </tr>
-                            <t t-set="objective_number" t-value="0"/>
+                            <t t-set="tyt_objective_number" t-value="0"/>
                             <t t-foreach="docs" t-as="e">
                                 <tr>
                                     <td class="tg-cly1 col-objetivo">
-                                        <t t-set="objective_number" t-value="objective_number + 1" t-if="objective_number"/>
-                                        <t t-set="objective_number" t-value="1" t-if="not objective_number"/>
-                                        <span t-esc="objective_number"/>. <span t-field="e.name" />
+                                        <t t-set="tyt_objective_number" t-value="tyt_objective_number + 1" t-if="tyt_objective_number"/>
+                                        <t t-set="tyt_objective_number" t-value="1" t-if="not tyt_objective_number"/>
+                                        <span t-esc="tyt_objective_number"/>
+                                        <span t-field="e.name"/>
                                     </td>
                                     <td class="tg-cly1 col-recursos">
                                         <ul class="bulleted-list">
                                             <t t-foreach="e.resource_ids" t-as="resource">
                                                 <li>
-                                                    <span t-field="resource.name" />
+                                                    <span t-field="resource.name"/>
                                                 </li>
                                             </t>
                                         </ul>
                                     </td>
                                     <td class="tg-cly1 col-responsable">
-                                        <span t-field="e.job_id.name" />
+                                        <span t-field="e.job_id.name"/>
                                     </td>
                                     <td class="tg-cly1 col-plazo">
-                                        <span t-field="e.timeframe" />
+                                        <span t-field="e.timeframe"/>
                                     </td>
                                     <td class="tg-cly1 col-metrica">
-                                        <t t-set="metrics" t-value="e.indicator_ids.mapped('name')"/>
-                                        <span t-esc="', '.join(metrics)"/>
+                                        <t t-set="tyt_metrics" t-value="e.indicator_ids.mapped('name')"/>
+                                        <span t-esc="', '.join(tyt_metrics)"/>
                                     </td>
                                     <td class="tg-cly1 col-evidencia">
-                                        <span t-field="e.evidence" />
+                                        <span t-field="e.evidence"/>
                                     </td>
                                 </tr>
                             </t>
                         </table>
                     </div>
-                    <div class="footer" style="border-top: 1px solid black; font-size: 9px;">
-                        <table style="width: 100%; border-collapse: collapse;">
-                            <tr>
-                                <td style="width: 33%; text-align: left; padding: 5px;">Objetivos de calidad</td>
-                                <td style="width: 34%; text-align: center; padding: 5px;">
-                Ver. <span t-field="e.version"/>
-                                <t t-if="e.date_validate">
-                                    <t t-esc="e.date_validate.strftime('%b. %Y').capitalize()"/>
-                                </t>
-                                <t t-else="">
-                    (No validado)
-                                </t>
-                            </td>
-                            <td style="width: 33%; text-align: right; padding: 5px;">
-                Página <span class="page"/>
- de <span class="topage"/>
-                        </td>
-                    </tr>
-                </table>
-            </div>
-        </t>
-    </t>
-</template>
-</data>
+                    <!-- Footer Content -->
+                    <div class="footer" style="border-top: 1px solid black; font-size: 9px; display: table; width: 100%; padding: 5px;">
+                        <div style="display: table-cell; width: 33%; text-align: left;">Objetivos de calidad</div>
+                        <div style="display: table-cell; width: 34%; text-align: center;">
+                            Ver. <span t-field="e.version"/>
+                            <t t-if="e.date_validate">
+                                <t t-esc="e.date_validate.strftime('%b. %Y').capitalize()"/>
+                            </t>
+                            <t t-else="">
+                                (No validado)
+                            </t>
+                        </div>
+                        <div style="display: table-cell; width: 33%; text-align: right;">
+                            Página <span class="page"/> de <span class="topage"/>
+                        </div>
+                    </div>
+                </t>
+            </t>
+        </template>
+    </data>
 </odoo>

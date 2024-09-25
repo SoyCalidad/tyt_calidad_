@@ -1,5 +1,5 @@
 <odoo>
     <data>
-        <report id="action_report_target_quality" model="mgmtsystem.target" string="Objetivos de Calidad" report_type="qweb-pdf" paperformat="tyt_target.landscape" name="tyt_target.target_quality_report" file="tyt_target.target_quality_report" groups="base.group_no_one,mgmtsystem_target.group_target_user_interno,mgmtsystem_target.group_target_write_printreport,mgmtsystem_target.group_target_all" />
+        <report id="action_report_target_quality" model="mgmtsystem.target" string="Objetivos de Calidad" report_type="qweb-pdf" paperformat="tyt_target.landscape" name="tyt_target.tyt_target_quality_report" file="tyt_target.tyt_target_quality_report" groups="base.group_no_one,mgmtsystem_target.group_target_user_interno,mgmtsystem_target.group_target_write_printreport,mgmtsystem_target.group_target_all" />
     </data>
 </odoo>
