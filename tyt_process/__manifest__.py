@@ -22,6 +22,7 @@
         'reports/procedure_edition_meta.xml',
         'reports/procedure_edition_body.xml',
         'reports/procedure_edition_back_cover.xml',
+        'reports/documentary_control_views.xml',
     ],
     'assets': {
         'web.report_assets_common': [
