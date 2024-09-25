@@ -1,13 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <odoo>
-    <record id="plan_report_general_xlsx" model="ir.actions.report">
-        <field name="model">management.review.plan</field>
-        <field name="name">Programa de revisión por la dirección (Excel)</field>
-        <field name="report_type">xlsx</field>
-        <field name="report_name">tyt_mgmt_review.general_report</field>
-        <field name="report_file">Matriz</field>
-        <field name="print_report_name">'%s' % object.name</field>
-    </record>
+    <report id="plan_report_general_xlsx" model="management.review.plan" string="Programa de revisión por la dirección (Excel)" report_type="xlsx" name="tyt_mgmt_review.general_report" file="Matriz" print_report_name="'%s' % object.name"/>
 
     <record id="plan_report_individual_xlsx" model="ir.actions.report">
         <field name="name">Revisión por la dirección (Excel)</field>
