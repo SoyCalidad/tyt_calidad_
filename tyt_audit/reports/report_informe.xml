@@ -79,7 +79,7 @@
                     <!-- Segunda Hoja -->
                     <div class="page">
                         <!-- Información del sitio -->
-                        <table style="width: 100%; border-collapse: collapse; margin-top: 20px;">
+                        <table style="width: 100%; border-collapse: collapse; margin-top: 20px;font-size: 21px;">
                             <tr>
                                 <td style="background-color: #31869B; color: white; padding: 10px; font-weight: bold;font-size: 28px;">
                                     Información del Sitio
@@ -94,33 +94,36 @@
                             </tr>
                         </table>
 
-                        <table style="width: 100%; border-collapse: collapse; margin-top: 10px;">
+                        <table style="width: 100%; border-collapse: collapse; margin-top: 20px;font-size: 21px;">
                             <tr>
                                 <td class="td-font" style="background-color: #E7F5E5; padding: 10px; font-weight: bold;">
                                     La fecha de la próxima auditoría es:
                                 </td>
-                                <td style="padding: 10px; width: 30%;">
+                                <td style="padding: 10px; width: 40%;">
                                     ______________________________________
                                 </td>
                             </tr>
                         </table>
 
                         <!-- Información de la auditoría -->
-                        <table style="width: 100%; border-collapse: collapse; margin-top: 20px;">
+                        <table style="width: 100%; border-collapse: collapse; margin-top: 20px;font-size: 21px;">
                             <tr>
                                 <td style="background-color: #31869B; color: white; padding: 10px; font-weight: bold;font-size: 28px;">
                                     Información de la Auditoría
                                 </td>
                             </tr>
                             <tr>
-                                <td style="padding: 10px;">
-                                    Duración de la Auditoría (en días): ___________________________
+                                <td style="padding: 10px;background-color: #E7F5E5;">
+                                    Duración de la Auditoría (en días):
                                 </td>
+                                <td style="padding: 10px; width: 40%;">
+                                    ______________________________________
+                                </td>                                
                             </tr>
                         </table>
 
                         <!-- Tabla del equipo auditor -->
-                        <table style="width: 100%; border-collapse: collapse; margin-top: 20px; border: 1px solid black;">
+                        <table style="width: 100%; border-collapse: collapse; margin-top: 20px; border: 1px solid black;font-size: 21px;">
                             <thead>
                                 <tr style="background-color: #31869B; color: white; text-align: center;">
                                     <th style="padding: 5px;" colspan="2">Equipo Auditor</th>
@@ -150,7 +153,7 @@
                         </table>
 
                         <!-- Conclusión de la auditoría -->
-                        <table style="width: 100%; border-collapse: collapse; margin-top: 20px;">
+                        <table style="width: 100%; border-collapse: collapse; margin-top: 20px;font-size: 21px;">
                             <tr>
                                 <td style="background-color: #31869B; color: white; padding: 10px; font-weight: bold;font-size: 28px;">
                                     Conclusión de la Auditoría
@@ -166,7 +169,7 @@
                         </table>
 
                         <!-- Medidas post-auditoría -->
-                        <table style="width: 100%; border-collapse: collapse; margin-top: 20px;">
+                        <table style="width: 100%; border-collapse: collapse; margin-top: 20px;font-size: 21px;">
                             <tr>
                                 <td style="background-color: #31869B; color: white; padding: 10px; font-weight: bold;font-size: 28px;">
                                     Medidas post-auditoría
@@ -179,18 +182,18 @@
                             </tr>
                         </table>
                         <!-- Cuadro de Evaluación -->
-                        <table style="width: 100%; border-collapse: collapse; margin-top: 20px; border: 1px solid black;">
+                        <table style="width: 100%; border-collapse: collapse; margin-top: 20px; border: 1px solid black;font-size: 21px;">
                             <tr style="background-color: #31869B; color: white;">
-                                <td style="padding: 10px; font-weight: bold; width: 30%;">Documento:</td>
-                                <td style="padding: 10px; background-color: white; width: 70%;"></td> <!-- Segunda columna con fondo blanco -->
+                                <td style="padding: 10px; font-weight: bold; width: 20%;">Documento:</td>
+                                <td style="padding: 10px; background-color: white; width: 80%;"></td> <!-- Segunda columna con fondo blanco -->
                             </tr>
                             <tr style="background-color: #31869B; color: white;">
-                                <td style="padding: 10px; font-weight: bold; width: 30%;">Auditados:</td>
-                                <td style="padding: 10px; background-color: white; width: 70%;"></td> <!-- Segunda columna con fondo blanco -->
+                                <td style="padding: 10px; font-weight: bold; width: 20%;">Auditados:</td>
+                                <td style="padding: 10px; background-color: white; width: 80%;"></td> <!-- Segunda columna con fondo blanco -->
                             </tr>
                             <tr style="background-color: #31869B; color: white;">
-                                <td style="padding: 10px; font-weight: bold; width: 30%;">Auditor:</td>
-                                <td style="padding: 10px; background-color: white; width: 70%;"></td> <!-- Segunda columna con fondo blanco -->
+                                <td style="padding: 10px; font-weight: bold; width: 20%;">Auditor:</td>
+                                <td style="padding: 10px; background-color: white; width: 80%;"></td> <!-- Segunda columna con fondo blanco -->
                             </tr>
                             <tr style="background-color: #31869B; color: white;">
                                 <td colspan="2" style="padding: 10px; font-weight: bold;">Evaluación:</td>

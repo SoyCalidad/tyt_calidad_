@@ -18,6 +18,7 @@
         'reports/report_paperformat.xml',               
         'reports/report_layout.xml',        
         'reports/report_informe.xml',
+        'reports/audit_checklist.xml',
     ],
     'assets': {
         'web.report_assets_common': [
