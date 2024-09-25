@@ -6,9 +6,27 @@
         <field name="arch" type="xml">
             <form>
                 <header>
-                    <button name="action_filter_employees_by_criteria" string="Filtrar empleados" type="object" class="btn-primary"/>
+                    <button name="action_filter_employees_by_criteria" string="Filter Employees" type="object" class="btn-primary"/>
                 </header>
                 <sheet>
+                    <div class="oe_button_box" name="button_box">
+                        <button name="action_show_employees" type="object" class="oe_stat_button" icon="fa-users">
+                            <div class="o_form_field o_stat_info">
+                                <span class="o_stat_value">
+                                    <field name="employee_count"/>
+                                </span>
+                                <span class="o_stat_text">Employees</span>
+                            </div>
+                        </button>
+                        <button name="action_show_users" type="object" class="oe_stat_button" icon="fa-users">
+                            <div class="o_form_field o_stat_info">
+                                <span class="o_stat_value">
+                                    <field name="user_count"/>
+                                </span>
+                                <span class="o_stat_text">Users</span>
+                            </div>
+                        </button>
+                    </div>
                     <div class="oe_title">
 						<label for="name"/>
 						<h1>
@@ -19,7 +37,6 @@
                         <group>
                             <field name="department_id"/>
                             <field name="job_id"/>
-                            <field name="sites_id"/>
                         </group>
                         <group>
                             <field name="company_id"/>
@@ -27,10 +44,10 @@
                     </group>
 
                     <notebook>
-                        <page string="Empleados">
+                        <page string="Employees">
                             <field name="employee_ids" readonly="1"/>
                         </page>
-                        <page string="Empleados excluidos">
+                        <page string="Excluded Employees">
                             <field name="excluded_employee_ids"/>
                         </page>
                     </notebook>
@@ -52,14 +69,13 @@
                 <field name="name"/>
                 <field name="department_id"/>
                 <field name="job_id"/>
-                <field name="sites_id"/>
                 <field name="company_id"/>
             </tree>
         </field>
     </record>
 
     <record id="intranet_criteria_action" model="ir.actions.act_window">
-        <field name="name">Criterios de visibilidad</field>
+        <field name="name">Visibility Criteria</field>
         <field name="res_model">intranet.criteria</field>
         <field name="view_mode">tree,form</field>
     </record>

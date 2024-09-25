@@ -12,6 +12,7 @@
     ],
     'data': [
         'views/survey_survey_views.xml',
+        'views/menus.xml',
     ],
     'installable': True,
     'auto_install': False,

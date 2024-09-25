@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+        <menuitem id="survey_survey_menu_action"
+                  name="Encuestas"
+                  parent="tyt_intranet_base.intranet_menu_root"
+                  action="survey.action_survey_form"
+                  sequence="10"/>
+</odoo>

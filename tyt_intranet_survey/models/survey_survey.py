@@ -8,7 +8,6 @@ class Survey(models.Model):
 
     department_id = fields.Many2one(related='criteria_id.department_id', string='Departamento', store=True)
     job_id = fields.Many2one(related='criteria_id.job_id', string='Puesto de trabajo', store=True,)
-    sites_id = fields.Many2one(related='criteria_id.sites_id', string='Sitios0', store=True)
 
     is_published = fields.Boolean('Publicado', default=False)
     published_date = fields.Date('Fecha de publicación', compute='_compute_published_date', readonly=False, store=True)

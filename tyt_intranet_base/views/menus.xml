@@ -5,19 +5,13 @@
               web_icon="tyt_intranet_base,static/description/icon.png"
               sequence="1"/>
 
-    <menuitem id="survey_survey_menu_action"
-              name="Encuestas"
-              parent="tyt_intranet_base.intranet_menu_root"
-              action="survey.action_survey_form"
-              sequence="20"/>
-
     <menuitem id="intranet_configuration_menu"
-              name="Configuración"
+              name="Configuration"
               parent="tyt_intranet_base.intranet_menu_root"
               sequence="100"/>
 
     <menuitem id="intranet_criteria_menu_action"
-              name="Criterios de visibilidad"
+              name="Visibility Criteria"
               action="intranet_criteria_action"
               parent="intranet_configuration_menu"
               sequence="10"/>

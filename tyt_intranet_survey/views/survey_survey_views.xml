@@ -35,7 +35,6 @@
                 <filter string="Criterio de visibilidad" name="group_by_criteria" context="{'group_by': 'criteria_id'}"/>
                 <filter string="Departamento" name="group_by_department" context="{'group_by': 'department_id'}"/>
                 <filter string="Puesto de trabajo" name="group_by_job" context="{'group_by': 'job_id'}"/>
-                <filter string="Sitio0" name="group_by_sites" context="{'group_by': 'sites_id'}"/>
                 <filter string="Publicado" name="group_by_is_published" context="{'group_by': 'is_published'}"/>
             </xpath>
         </field>
