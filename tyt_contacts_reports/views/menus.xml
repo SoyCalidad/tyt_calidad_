@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <menuitem id="supplier_complaints_inventory_menu_action"
+              name="Supplier Complaints Inventory"
+              action="tyt_contacts_reports.supplier_complaints_inventory_action"
+              parent="studio_customization.contactos_contactos_dbdd023c-ffbb-4e12-988a-ab1ce6f8358e"
+              sequence="10"/>
+
+    <menuitem id="customer_directory_menu_action"
+              name="Customer Directory"
+              action="tyt_contacts_reports.customer_directory_action"
+              parent="studio_customization.contactos_contactos_dbdd023c-ffbb-4e12-988a-ab1ce6f8358e"
+              sequence="20"/>
+
+    <menuitem id="tyt_contacts_reports_menu"
+              name="Extra Reports"
+              parent="mgmtsystem_partner_qualification.reports_contact_menu"
+              sequence="50"/>
+
+    <menuitem id="supplier_complaints_inventory_report_menu_action"
+              name="Supplier Complaints Inventory Report"
+              action="tyt_contacts_reports.supplier_complaints_inventory_export_action"
+              parent="tyt_contacts_reports_menu"
+              sequence="10"/>
+
+    <menuitem id="customer_directory_report_menu_action"
+              name="Customer Directory Report"
+              action="tyt_contacts_reports.customer_directory_export_action"
+              parent="tyt_contacts_reports_menu"
+              sequence="20"/>
+
+</odoo>
