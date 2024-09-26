@@ -9,5 +9,6 @@
         <field name="print_report_name">'Supplier Complaints Inventory XLSX Report'</field>
         <field name="binding_model_id" ref="model_supplier_complaints_inventory"/>
         <field name="binding_type">report</field>
+        <field name="binding_view_types">list</field>
     </record>
 </odoo>

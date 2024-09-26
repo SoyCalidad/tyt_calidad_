@@ -10,7 +10,7 @@ class SupplierComplaintsInventoryXlsxReport(models.AbstractModel):
 
     def generate_xlsx_report(self, workbook, data, records):
         white_bg_format = workbook.add_format({'bg_color': '#FFFFFF', 'border': 0})
-        format_title = workbook.add_format({'font_size': 22, 'color': '#FFFFFF', 'bg_color': '#31869B', 'valign': 'vcenter', 'align': 'center', 'bold': True, 'text_wrap': True, 'border': 2})
+        format_title = workbook.add_format({'font_size': 22, 'color': '#FFFFFF', 'bg_color': '#31869B', 'valign': 'vbottom', 'align': 'center', 'bold': True, 'text_wrap': True, 'border': 2})
         format_header_left = workbook.add_format({'font_size': 11, 'bg_color': '#B7DEE8', 'valign': 'vcenter', 'align': 'left', 'bold': True, 'text_wrap': True, 'border': 2})
         format_cell_left = workbook.add_format({'font_size': 11, 'align': 'left', 'valign': 'vcenter', 'bold': False, 'text_wrap': True, 'border': 2})
 
@@ -26,7 +26,7 @@ class SupplierComplaintsInventoryXlsxReport(models.AbstractModel):
         image_width = width
         image_height = height
         cell_width = 150
-        cell_height = 124
+        cell_height = 144
         x_scale = cell_width / image_width
         y_scale = cell_height / image_height
         sheet.insert_image('B1:B3', "logo.png",
@@ -48,6 +48,8 @@ class SupplierComplaintsInventoryXlsxReport(models.AbstractModel):
         sheet.set_column('D:E', 30)
         sheet.set_column('F:F', 30)
         sheet.set_column('H:H', 30)
+        sheet.set_row(2, 35)
+        sheet.set_row(3, 25)
 
         if data.get('is_wizard'):
             date_from = data.get('date_from')
