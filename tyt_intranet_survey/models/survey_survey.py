@@ -11,6 +11,7 @@ class Survey(models.Model):
 
     is_published = fields.Boolean('Publicado', default=False)
     published_date = fields.Date('Fecha de publicación', compute='_compute_published_date', readonly=False, store=True)
+    to_date = fields.Date('Fecha de finalización', readonly=False, store=True)
 
     @api.depends('is_published')
     def _compute_published_date(self):

@@ -9,6 +9,7 @@
                 <field name="criteria_id" attrs="{'invisible': [('access_mode', '!=', 'website')]}"/>
                 <field name="is_published" widget="boolean_toggle" attrs="{'invisible': [('access_mode', '!=', 'website')]}"/>
                 <field name="published_date" attrs="{'invisible': ['|', ('access_mode', '!=', 'website'), ('is_published', '=', False)]}"/>
+                <field name="to_date" attrs="{'invisible': ['|', ('access_mode', '!=', 'website'), ('is_published', '=', False)]}"/>
             </xpath>
             <xpath expr="//field[@name='users_login_required']" position="attributes">
                 <attribute name="attrs">{'invisible': [('access_mode', '=', 'website')]}</attribute>
