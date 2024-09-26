@@ -1,0 +1,213 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+
+    <template id="tyt_survey.satisfaction_survey" name="satisfaction_survey">
+        <t t-call="website.layout">
+            <div class="center">
+                <form method="post" enctype="multipart/form-data">
+                    <!-- progressbar -->
+                    <!-- <ul id="progressbar">
+                        <li class="active">Comunicación</li>
+                        <li>Atención</li>
+                        <li>Desempeño</li>
+                        <li>Eficiencia</li>
+                        <li>Seguridad y TI</li>
+                        <li>Mantenimiento</li>
+                        <li>Mejora continua</li>
+                    </ul> -->
+                    <!-- fieldsets -->
+                    <div id="satisfaction_survey_body" class="satisfaction_survey_body">
+                        <!-- Barra de categorías -->
+                        <div class="category-bar">
+                            <div class="category-item active" data-category="cat_1">Comunicación</div>
+                            <div class="category-item" data-category="cat_2">Atención</div>
+                            <div class="category-item" data-category="cat_3">Desempeño</div>
+                            <div class="category-item" data-category="cat_4">Eficiencia</div>
+                            <div class="category-item" data-category="cat_5">Seguridad y TI</div>
+                            <div class="category-item" data-category="cat_6">Mantenimiento</div>
+                            <div class="category-item" data-category="cat_7">Mejora continua</div>
+                        </div>
+                        <div class="csfr_token">
+                            <input type="hidden" name="csrf_token"
+                                t-att-value="request.csrf_token()" />
+                        </div>
+                        <!-- Contenedor de preguntas -->
+                        <div class="question-container">
+                            <div id="cat_1_1" class="question">
+                                <div id="question_cat_1_1">¿Qué tan claras fueron nuestras
+                                    comunicaciones
+                                    con usted? siendo el 1 nada claras, y el 10 completamente
+                                    claras. *</div>
+                                <div class="TYTradioContainer" id="TYTradioContainer"></div>
+                            </div>
+                            <div id="cat_1_2" class="question">
+                                <div id=" question_cat_1_2" class="question">¿Qué nivel de
+                                    conocimiento tiene
+                                    usted sobre los movimientos internos que llegan a afectar sus
+                                    campañas? siendo el 1 nada informado, y el 10 completamente
+                                    informado. *</div>
+                            </div>
+                            <div id="cat_1_3" class="question">
+                                <div id="question_cat_1_3" class="question">¿Cómo califica la
+                                    comunicación con el
+                                    Responsable de Operaciones? siendo el 1 mala comunicación, y el
+                                    10
+                                    muy buena comunicación. *</div>
+                            </div>
+                            <div id="cat_1_4" class="question">
+                                <div id=" question_cat_1_4" class="question">¿Desea hacer un
+                                    comentario sobre el
+                                    tema de Comunicación?</div>
+                            </div>
+                            <div id="cat_2_1" class="question">
+                                <div id="question_cat_2_1" class="question">¿Qué nivel de atención a
+                                    soluciones
+                                    recibe del Responsable de Operaciones? siendo el 1 pésima
+                                    atención,
+                                    y el 10 excelente atención. *</div>
+                            </div>
+                            <div id="cat_2_2" class="question">
+                                <div id=" question_cat_2_2" class="question">¿Qué nivel de atención
+                                    a soluciones
+                                    recibe del Gerente de Sitio? siendo el 1 pésima atención, y el
+                                    10
+                                    excelente atención. *</div>
+                            </div>
+                            <div id="cat_2_3" class="question">
+                                <div id="question_cat_2_3" class="question">¿Desea hacer algún
+                                    comentario sobre
+                                    el tema de atención?</div>
+                            </div>
+                            <div id="cat_3_1" class="question">
+                                <div id=" question_cat_3_1" class="question">Podría evaluar el
+                                    desempeño del
+                                    personal del área de Operaciones hablando de cumplimiento de
+                                    objetivos, siendo el 1 bajo desempeño, y el 10 excelente
+                                    desempeño.
+                                    *</div>
+                            </div>
+                            <div id="cat_3_2" class="question">
+                                <div id="question_cat_3_2" class="question">Podría evaluar el
+                                    desempeño del
+                                    personal de Calidad hablando de cumplimiento de objetivos,
+                                    siendo el
+                                    1 bajo desempeño, y el 10 excelente desempeño. *</div>
+                            </div>
+                            <div id="cat_3_3" class="question">
+                                <div id=" question_cat_3_3" class="question">Podría evaluar el
+                                    desempeño del
+                                    personal de Reclutamiento hablando de cumplimiento de objetivos,
+                                    siendo el 1 bajo desempeño, y el 10 excelente desempeño. *</div>
+                            </div>
+                            <div id="cat_3_4" class="question">
+                                <div id="question_cat_3_4" class="question">¿Desea hacer algún
+                                    comentario sobre
+                                    el tema de desempeño?</div>
+                            </div>
+                            <div id="cat_4_1" class="question">
+                                <div id=" question_cat_4_1" class="question">¿Con qué nivel de
+                                    puntualidad recibe
+                                    las facturas? siendo el 1 nada puntual, y el 10 muy puntual. *</div>
+                            </div>
+                            <div id="cat_4_2" class="question">
+                                <div id="question_cat_4_2" class="question">¿Qué tan rápido
+                                    respondemos ante los
+                                    problemas? siendo el 1 muy lento, y el 10 completamente rápido.
+                                    *</div>
+                            </div>
+                            <div id="cat_4_3" class="question">
+                                <div id=" question_cat_4_3" class="question">¿Desea hacer algún
+                                    comentario sobre
+                                    el tema de eficiencia?</div>
+                            </div>
+                            <div id="cat_5_1" class="question">
+                                <div id="question_cat_5_1" class="question">Podría calificar el
+                                    funcionamiento de
+                                    los aplicativos internos para el buen manejo de su información
+                                    en
+                                    términos de seguridad, siendo el 1 nada seguro, y el 10
+                                    completamente seguro. *</div>
+                            </div>
+                            <div id="cat_5_2" class="question">
+                                <div id=" question_cat_5_2" class="question">Podría calificar el
+                                    funcionamiento de
+                                    los aplicativos internos para el buen manejo de su información
+                                    en
+                                    términos de rapidez, siendo el 1 muy lento, y el 10
+                                    completamente
+                                    rápido. *</div>
+                            </div>
+                            <div id="cat_5_3" class="question">
+                                <div id="question_cat_5_3" class="question">Podría calificar el
+                                    funcionamiento de
+                                    los aplicativos internos para el buen manejo de su información
+                                    en
+                                    términos de diseño e imagen, siendo el 1 nada estético, y el 10
+                                    muy
+                                    estético. *</div>
+                            </div>
+                            <div id="cat_5_4" class="question">
+                                <div id=" question_cat_5_4" class="question">¿Desea hacer algún
+                                    comentario sobre
+                                    el tema de Seguridad y TI?</div>
+                            </div>
+                            <div id="cat_6_1" class="question">
+                                <div id="question_cat_6_1" class="question">Podría calificar
+                                    nuestras
+                                    instalaciones en función de imagen, siendo el 1 nada estético, y
+                                    el
+                                    10 muy estético. *</div>
+                            </div>
+                            <div id="cat_6_2" class="question">
+                                <div id=" question_cat_6_2" class="question">Podría calificar
+                                    nuestras
+                                    instalaciones en función de comodidad, siendo el 1 nada cómodo,
+                                    y el
+                                    10 muy cómodo. *</div>
+                            </div>
+                            <div id="cat_6_3" class="question">
+                                <div id="question_cat_6_3" class="question">¿Desea hacer algún
+                                    comentario sobre
+                                    el tema de Mantenimiento?</div>
+                            </div>
+                            <div id="cat_7_1" class="question">
+                                <div id=" question_cat_7_1" class="question">¿Cuáles son las
+                                    probabilidades de que
+                                    nos recomiende con otras empresas?, siendo el 1 nada de
+                                    probabilidad, y el 10 muy probable. *</div>
+                            </div>
+                            <div id="cat_7_2" class="question">
+                                <div id="question_cat_7_2" class="question">¿Cuáles son las
+                                    probabilidades de que
+                                    realice actividades comerciales con nosotros en un futuro?
+                                    siendo el
+                                    1 nada de probabilidad, y el 10 extremadamente probable. *</div>
+                            </div>
+                            <div id="cat_7_3" class="question">
+                                <div id=" question_cat_7_3" class="question">Califique la calidad
+                                    general de
+                                    nuestros servicios*</div>
+                            </div>
+                            <div id="cat_7_4" class="question">
+                                <div id="question_cat_7_4" class="question">Podría hacer algún
+                                    comentario sobre
+                                    nuestros servicios con el fin de mejorar</div>
+                            </div>
+                        </div>
+
+                        <!-- Botones de navegación -->
+                        <div class="navigation-buttons">
+                            <input type="button" id="previous" class="button tyt_previous"
+                                value="Anterior" />
+                            <input type="button" id="submit" class="button tyt_submit"
+                                value="Enviar Respuesta" />
+                            <input type="button" id="next" class="button tyt_next" value="Siguiente" />
+                        </div>
+
+                    </div>
+                </form>
+            </div>
+        </t>
+    </template>
+
+</odoo>

@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+
+    <menuitem
+        id="res_partner_tyt_contacts_menu"
+        name="TYT Contacts"
+        action="res_partner_tyt_action"
+        groups="group_tyt_user"
+        parent="contacts.menu_contacts"
+        sequence="10"/>
+
+    <menuitem
+        id="res_partner_frescos_contacts_menu"
+        name="Frescos Contacts"
+        action="res_partner_frescos_action"
+        groups="group_frescos_user"
+        parent="contacts.menu_contacts"
+        sequence="10"/>
+
+</odoo>

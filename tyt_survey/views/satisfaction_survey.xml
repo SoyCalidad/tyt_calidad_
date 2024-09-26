@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+
+    <record id="tyt_satisfaction_survey_view_form" model="ir.ui.view">
+        <field name="name">tyt.satisfaction.survey.view.form</field>
+        <field name="model">tyt.satisfaction.survey</field>
+        <field name="arch" type="xml">
+            <form string="TYT Satisfaction Survey">
+                <sheet>
+                    <group>
+                        <field name="name" />
+                    </group>
+                </sheet>
+            </form>
+        </field>
+    </record>
+
+    <record id="tyt_satisfaction_survey_view_tree" model="ir.ui.view">
+        <field name="name">tyt.satisfaction.survey.view.tree</field>
+        <field name="model">tyt.satisfaction.survey</field>
+        <field name="arch" type="xml">
+            <tree string="TYT Satisfaction Survey">
+                <field name="name" />
+            </tree>
+        </field>
+    </record>
+
+    <record id="tyt_satisfaction_survey_view_search" model="ir.ui.view">
+        <field name="name">tyt.satisfaction.survey.view.search</field>
+        <field name="model">tyt.satisfaction.survey</field>
+        <field name="arch" type="xml">
+            <search string="TYT Satisfaction Survey">
+                <field name="name" />
+            </search>
+        </field>
+    </record>
+
+    <record id="tyt_satisfaction_survey_action" model="ir.actions.act_window">
+        <field name="name">TYT Satisfaction Survey</field>
+        <field name="res_model">tyt.satisfaction.survey</field>
+        <field name="view_mode">tree,form</field>
+    </record>
+
+</odoo>

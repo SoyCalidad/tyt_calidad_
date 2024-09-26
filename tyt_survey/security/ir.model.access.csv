@@ -1,0 +1,3 @@
+id,name,model_id:id,group_id:id,perm_read,perm_write,perm_create,perm_unlink
+
+access_tyt_satisfaction_survey_all,Satisfaction Survey,model_tyt_satisfaction_survey,,1,1,1,1

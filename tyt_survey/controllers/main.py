@@ -14,10 +14,16 @@ import datetime
 _logger = logging.getLogger(__name__)
 
 
-class Complaint(http.Controller):
+class TYTSatisfactionSurvey(http.Controller):
 
-    @http.route('/satisfaction_survey_main', type='http', auth='public', website=True, sitemap=False)
+    @http.route('/website/satisfaction_survey', type='http', auth='public', website=True, sitemap=False)
     def satisfaction_survey_main(self, *args, **kw):
         values = request.params.copy()
         response = request.render('tyt_survey.satisfaction_survey_main', values)
+        return response
+    
+    @http.route('/website/survey/satisfaction_survey', type='http', auth='public', website=True, sitemap=False)
+    def satisfaction_survey(self, *args, **kw):
+        values = request.params.copy()
+        response = request.render('tyt_survey.satisfaction_survey', values)
         return response
