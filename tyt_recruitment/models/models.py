@@ -129,8 +129,8 @@ class Campaign(models.Model):
     current_staff = fields.Integer(required=True, string="Personal actual", tracking=True)
     goal_staff = fields.Integer(required=True, string="Personal objetivo", tracking=True)
     request_staff = fields.Integer(required=True, string="Personal requerido", tracking=True)
-    turn = fields.Selection([('AM', 'AM'), ('PM', 'PM')], string="Turno", required=True, tracking=True)
-    priority = fields.Selection([('1', '1'), ('2', '2'), ('3', '3'), ('4', '4')], string="Prioridad", required=True, tracking=True)
+    turn = fields.Selection([('T/M', 'T/M'), ('T/V', 'T/V'), ('T/N', 'T/N')], string="Turno", tracking=True)
+    priority = fields.Selection([('1', '1'), ('2', '2'), ('3', '3'), ('4', '4')], string="Prioridad", tracking=True)
 
 
     requisition_id = fields.Many2one("tyt_recruitment.requisition")
