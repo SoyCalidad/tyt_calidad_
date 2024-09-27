@@ -1,6 +1,6 @@
 <odoo>
   <data>
-    <!-- list -->
+    <!-- list requisition -->
 
     <record model="ir.ui.view" id="tyt_recruitment.list">
       <field name="name">Lista de requisiciones</field>
@@ -10,13 +10,13 @@
           <field name="id" />
           <field name="request_date" />
           <field name="closing_date" />
-          <field name="weeks" />
+          <field name="week" />
           <field name="state" />
         </tree>
       </field>
     </record>
 
-    <!-- form -->
+    <!-- form requisition -->
     <record id="view_requisition_form" model="ir.ui.view">
       <field name="name">Formulario de Requisición</field>
       <field name="model">tyt_recruitment.requisition</field>
@@ -33,12 +33,12 @@
             <group>
               <field name="request_date" attrs="{'readonly': [('state', '=', 'sent')]}"/>
               <field name="closing_date" attrs="{'readonly': [('state', '=', 'sent')]}"/>
-              <field name="weeks" attrs="{'readonly': [('state', '=', 'sent')]}"/>
+              <field name="week" attrs="{'readonly': True}"/>
             </group>
 
             <notebook>
               <page string="Campañas">
-                <field name="campaign_ids" nolabel="1" attrs="{'readonly': [('state', '=', 'sent')]}">
+                <field name="campaign_ids" nolabel="1" attrs="{'readonly': [('state', '=', 'sent')]}" options="{'no_create': True}">
                   <tree editable="bottom">
                     <field name="tag_id" width="50px" />
                     <field name="current_staff" />
