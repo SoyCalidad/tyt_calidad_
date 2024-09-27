@@ -6,10 +6,10 @@
         <field name="inherit_id" ref="enhanced_survey_management.survey_survey_view_form"/>
         <field name="arch" type="xml">
             <xpath expr="//notebook//page[@name='options']//group[@name='participants']//field[@name='access_mode']" position="after">
-                <field name="criteria_id" attrs="{'invisible': [('access_mode', '!=', 'website')]}"/>
+                <field name="authorized_group_id" widget="many2one" attrs="{'invisible': [('access_mode', '!=', 'website')]}"/>
                 <field name="is_published" widget="boolean_toggle" attrs="{'invisible': [('access_mode', '!=', 'website')]}"/>
-                <field name="published_date" attrs="{'invisible': ['|', ('access_mode', '!=', 'website'), ('is_published', '=', False)]}"/>
-                <field name="to_date" attrs="{'invisible': ['|', ('access_mode', '!=', 'website'), ('is_published', '=', False)]}"/>
+                <field name="published_date_start" attrs="{'invisible': ['|', ('access_mode', '!=', 'website'), ('is_published', '=', False)]}"/>
+                <field name="published_date_end" attrs="{'invisible': ['|', ('access_mode', '!=', 'website'), ('is_published', '=', False)]}"/>
             </xpath>
             <xpath expr="//field[@name='users_login_required']" position="attributes">
                 <attribute name="attrs">{'invisible': [('access_mode', '=', 'website')]}</attribute>
@@ -32,11 +32,10 @@
         <field name="inherit_id" ref="survey.survey_survey_view_search"/> <!-- Reference to the original view -->
         <field name="arch" type="xml">
             <xpath expr="//group" position="inside">
-                <!-- Add a new Group By filter for criteria_id -->
-                <filter string="Criterio de visibilidad" name="group_by_criteria" context="{'group_by': 'criteria_id'}"/>
-                <filter string="Departamento" name="group_by_department" context="{'group_by': 'department_id'}"/>
-                <filter string="Puesto de trabajo" name="group_by_job" context="{'group_by': 'job_id'}"/>
-                <filter string="Publicado" name="group_by_is_published" context="{'group_by': 'is_published'}"/>
+                <filter string="Authorized Group" name="group_by_authorized_group" context="{'group_by': 'authorized_group_id'}"/>
+                <filter string="Department" name="group_by_department" context="{'group_by': 'department_id'}"/>
+                <filter string="Job Position" name="group_by_job" context="{'group_by': 'job_id'}"/>
+                <filter string="Published" name="group_by_is_published" context="{'group_by': 'is_published'}"/>
             </xpath>
         </field>
     </record>

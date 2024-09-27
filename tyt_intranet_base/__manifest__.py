@@ -13,7 +13,7 @@
     'data': [
         'security/intranet_security.xml',
         'security/ir.model.access.csv',
-        'views/criteria_views.xml',
+        'views/intranet_groups_views.xml',
         'views/menus.xml',
     ],
     'installable': True,
