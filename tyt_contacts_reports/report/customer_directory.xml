@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <record id="customer_directory_xlsx_report_action" model="ir.actions.report">
+        <field name="name">Customer Directory XLSX Report</field>
+        <field name="model">customer_directory</field>
+        <field name="report_type">xlsx</field>
+        <field name="report_name">customer_directory_xlsx_report</field>
+        <field name="report_file">customer_directory_xlsx_report</field>
+        <field name="print_report_name">'Reporte de directorio clientes'</field>
+        <field name="binding_model_id" ref="model_customer_directory"/>
+        <field name="binding_type">report</field>
+    </record>
+</odoo>

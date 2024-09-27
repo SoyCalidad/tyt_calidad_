@@ -1,0 +1,73 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <record id="supplier_complaints_inventory_view_form" model="ir.ui.view">
+        <field name="name">supplier_complaints_inventory.view.form</field>
+        <field name="model">supplier_complaints_inventory</field>
+        <field name="arch" type="xml">
+            <form>
+                <sheet>
+                    <group>
+                         <group>
+                            <field name="shipment_date"/>
+                            <field name="product_service"/>
+                            <field name="supplier_id"/>
+                            <field name="description"/>
+                         </group>
+                        <group>
+                            <field name="description"/>
+                            <field name="document_reference"/>
+                            <field name="resolution_date"/>
+                            <field name="register_id"/>
+                        </group>
+                    </group>
+                </sheet>
+                <div class="oe_chatter">
+                    <field name="message_follower_ids" widget="mail_followers"/>
+                    <field name="activity_ids" widget="mail_activity"/>
+                    <field name="message_ids" widget="mail_thread"/>
+                </div>
+            </form>
+        </field>
+    </record>
+
+    <record id="supplier_complaints_inventory_view_tree" model="ir.ui.view">
+        <field name="name">supplier_complaints_inventory.view.tree</field>
+        <field name="model">supplier_complaints_inventory</field>
+        <field name="arch" type="xml">
+            <tree>
+                <field name="shipment_date"/>
+                <field name="product_service"/>
+                <field name="supplier_id"/>
+                <field name="resolution_date"/>
+                <field name="register_id"/>
+            </tree>
+        </field>
+    </record>
+
+    <record id="supplier_complaints_inventory_view_search" model="ir.ui.view">
+        <field name="name">supplier_complaints_inventory.view.search</field>
+        <field name="model">supplier_complaints_inventory</field>
+        <field name="arch" type="xml">
+            <search>
+                <field name="shipment_date"/>
+                <field name="product_service"/>
+                <field name="supplier_id"/>
+                <field name="resolution_date"/>
+                <field name="register_id"/>
+                <group expand="0" string="Group By">
+                    <filter string="Shipment Date" name="shipment_date" context="{'group_by': 'shipment_date'}"/>
+                    <filter string="Product/Service" name="product_service" context="{'group_by': 'product_service'}"/>
+                    <filter string="Supplier" name="supplier_id" context="{'group_by': 'supplier_id'}"/>
+                    <filter string="Resolution Date" name="resolution_date" context="{'group_by': 'resolution_date'}"/>
+                    <filter string="Registered By" name="register_id" context="{'group_by': 'register_id'}"/>
+                </group>
+            </search>
+        </field>
+    </record>
+
+    <record id="supplier_complaints_inventory_action" model="ir.actions.act_window">
+        <field name="name">Supplier Complaints Inventory</field>
+        <field name="res_model">supplier_complaints_inventory</field>
+        <field name="view_mode">tree,form</field>
+    </record>
+</odoo>
