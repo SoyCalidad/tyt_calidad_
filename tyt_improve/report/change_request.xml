@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+	<record id="action_update_notification_xlsx" model="ir.actions.report">
+	    <field name="name">Notificación de Actualización</field>
+	    <field name="model">soycalidad.change_request</field>
+	    <field name="report_type">xlsx</field>
+	    <field name="report_name">tyt_improve.report_update_notification</field>
+	    <field name="report_file">tyt_improve.report_update_notification</field>
+        <field name="print_report_name">object.name</field>
+	    <field name="binding_model_id" ref="soycalidad_improve.model_soycalidad_change_request"/>
+	    <field name="binding_type">report</field>
+	    <field name="attachment_use" eval="False"/>
+	</record>
+
+</odoo>

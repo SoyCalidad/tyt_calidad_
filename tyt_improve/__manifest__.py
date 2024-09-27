@@ -18,6 +18,7 @@
         #'security/ir.model.access.csv',
         'views/change_request.xml',
         'views/mgmtsystem_nonconformity.xml',
+        'report/change_request.xml',
     ],
     'auto_install': False,
     'installable': True,
