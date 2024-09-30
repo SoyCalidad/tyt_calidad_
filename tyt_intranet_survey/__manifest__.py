@@ -8,10 +8,12 @@
     'license': 'Other proprietary',
     'category': 'soycalidad',
     'depends': [
-        'tyt_intranet_base', 'enhanced_survey_management',
+        'tyt_intranet_base',
     ],
     'data': [
+        'security/ir.model.access.csv',
         'views/survey_survey_views.xml',
+        'views/survey_management_views.xml',
         'views/menus.xml',
     ],
     'installable': True,
