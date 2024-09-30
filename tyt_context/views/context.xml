@@ -1,4 +1,4 @@
-<odoo>    
+<odoo>
     <data>
         <record id="mgmtsystem_stakeholder_form_tyt" model="ir.ui.view">
             <field name="name">mgmtsystem_stakeholder_form_tyt</field>
@@ -17,7 +17,8 @@
                                 <field name="type" />
                             </tree>
                         </field>
-                    </group>                           
+                        <field name="mgmt_process" options="{'no_create': False}" />
+                    </group>
                 </xpath>
             </field>
         </record>
@@ -35,8 +36,8 @@
                         <field name="legal_id" attrs="{'readonly': [('is_legal','=',False)]}" />
                         <field name="type" />
                         <field name="job_req" />
-                        <field name="limit_date_req" string="Fecha Límite para cumplir con el requisito"/>                        
-                    </group>                           
+                        <field name="limit_date_req" string="Fecha Límite para cumplir con el requisito"/>
+                    </group>
                 </xpath>
             </field>
         </record>
@@ -46,16 +47,16 @@
             <field name="model">mgmtsystem.stakeholder.req</field>
             <field name="inherit_id" ref="mgmtsystem_context.stakeholder_req_view_tree" />
             <field name="arch" type="xml">
-                <field name="legal_id" position="after"> 
+                <field name="legal_id" position="after">
                     <!--<field name="target_req" />
                     <field name="name" style="max-width:15vw;overflow-wrap: break-word;" />
                     <field name="is_legal" />
                     <field name="legal_id" attrs="{'readonly': [('is_legal','=',False)]}" />-->
                     <field name="job_req" />
-                    <field name="limit_date_req"  />
+                    <field name="limit_date_req" />
                     <!--<field name="type" />-->
                 </field>
-                <field name="name" position="before"> 
+                <field name="name" position="before">
                     <field name="target_req" />
                     <!--<field name="name" style="max-width:15vw;overflow-wrap: break-word;" />
                     <field name="is_legal" />
@@ -63,7 +64,7 @@
                     <field name="job_req" />
                     <field name="limit_date_req" />-->
                     <!--<field name="type" />-->
-                </field>                
+                </field>
             </field>
         </record>
 
