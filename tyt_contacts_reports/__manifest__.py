@@ -8,7 +8,7 @@
     'license': 'Other proprietary',
     'category': 'soycalidad',
     'depends': [
-        'contacts',
+        'mgmtsystem_partner_qualification', 'mgmtsystem_process_integration',
     ],
     'data': [
         'security/ir.model.access.csv',
@@ -26,8 +26,10 @@
         'wizard/supplier_evaluation_verification_export.xml',
 
         'views/supplier_complaints_inventory_views.xml',
-        'views/customer_directory_views.xml',
+        'views/res_partner_views.xml',
         'views/menus.xml',
+
+        'data/data.xml',
     ],
     'installable': True,
     'auto_install': False,

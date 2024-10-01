@@ -25,7 +25,7 @@ class CustomerDirectoryXlsxReport(models.AbstractModel):
              'bold': True,
              'text_wrap': True, 'border': 2})
         format_cell_left = workbook.add_format(
-            {'font_size': 11, 'align': 'left', 'valign': 'vcenter', 'bold': False, 'text_wrap': True, 'border': 2})
+            {'font_size': 11, 'align': 'left', 'valign': 'vcenter', 'bold': False, 'text_wrap': True, 'border': 1})
 
         sheet = workbook.add_worksheet('Directorio')
         sheet.set_column('A:XFD', None, white_bg_format)
@@ -38,8 +38,8 @@ class CustomerDirectoryXlsxReport(models.AbstractModel):
         width, height = im.size
         image_width = width
         image_height = height
-        cell_width = 150
-        cell_height = 124
+        cell_width = 130
+        cell_height = 104
         x_scale = cell_width / image_width
         y_scale = cell_height / image_height
         sheet.insert_image('B1:B3', "logo.png",
@@ -56,16 +56,32 @@ class CustomerDirectoryXlsxReport(models.AbstractModel):
         sheet.write(row, 6, 'CAMPAÑA', format_header_left)
         sheet.write(row, 7, 'EMPRESA', format_header_left)
         sheet.write(row, 8, 'OBSERVACIONES', format_header_left)
-        sheet.write(row, 8, 'LIGA', format_header_left)
+        sheet.write(row, 9, 'LIGA', format_header_left)
 
-        sheet.set_column('B:I', 20)
+        sheet.set_column('B:B', 15)
         sheet.set_column('C:E', 30)
-        sheet.set_column('I:I', 50)
+        sheet.set_column('F:G', 20)
+        sheet.set_column('H:I', 30)
+        sheet.set_column('J:J', 50)
         sheet.set_row(7, 30)
 
+        if data.get('is_wizard'):
+            domain = [('customer', '=', True)]
+            if data.get('is_critical'):
+                domain.append(('vip_customer', '=', True))
+            records = self.env['res.partner'].search(domain, order='create_date desc')
 
-
-
-
-
-
+        record_count = 0
+        if records:
+            for record in records:
+                row += 1
+                record_count += 1
+                sheet.write(row, 1, record_count, format_cell_left)
+                sheet.write(row, 2, record.name or '', format_cell_left)
+                sheet.write(row, 3, record.function or '', format_cell_left)
+                sheet.write(row, 4, record.email or '', format_cell_left)
+                sheet.write(row, 5, record.phone or '', format_cell_left)
+                sheet.write(row, 6, '\n'.join(['- ' + x.name for x in record.customer_campaign_ids] if record.customer else ''), format_cell_left)
+                sheet.write(row, 7, record.parent_id.name or '', format_cell_left)
+                sheet.write(row, 8, record.observations or '', format_cell_left)
+                sheet.write(row, 9, record.website or '', format_cell_left)

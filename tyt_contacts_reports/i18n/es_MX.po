@@ -6,8 +6,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Odoo Server 16.0+e-20240730\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2024-09-26 16:14+0000\n"
-"PO-Revision-Date: 2024-09-26 16:14+0000\n"
+"POT-Creation-Date: 2024-10-01 13:27+0000\n"
+"PO-Revision-Date: 2024-10-01 13:27+0000\n"
 "Last-Translator: \n"
 "Language-Team: \n"
 "MIME-Version: 1.0\n"
@@ -21,10 +21,14 @@ msgid "'Approved Supplier Report'"
 msgstr ""
 
 #. module: tyt_contacts_reports
+#: model:ir.actions.report,print_report_name:tyt_contacts_reports.customer_directory_xlsx_report_action
+msgid "'Customer Directory XLSX Report'"
+msgstr "Directorio de clientes"
+
+#. module: tyt_contacts_reports
 #: model:ir.actions.report,print_report_name:tyt_contacts_reports.customer_property_xlsx_report_action
 msgid "'Customer Property XLSX Report'"
-msgstr ""
-
+msgstr "Propiedad de los clientes"
 
 #. module: tyt_contacts_reports
 #: model:ir.actions.report,print_report_name:tyt_contacts_reports.supplier_complaint_inventory_xlsx_report_action
@@ -38,7 +42,6 @@ msgstr ""
 
 #. module: tyt_contacts_reports
 #: model:ir.model.fields,field_description:tyt_contacts_reports.field_approved_supplier__message_needaction
-#: model:ir.model.fields,field_description:tyt_contacts_reports.field_customer_directory__message_needaction
 #: model:ir.model.fields,field_description:tyt_contacts_reports.field_customer_property__message_needaction
 #: model:ir.model.fields,field_description:tyt_contacts_reports.field_supplier_complaints_inventory__message_needaction
 #: model:ir.model.fields,field_description:tyt_contacts_reports.field_supplier_evaluation_verification__message_needaction
@@ -46,8 +49,12 @@ msgid "Action Needed"
 msgstr ""
 
 #. module: tyt_contacts_reports
+#: model:ir.model.fields,field_description:tyt_contacts_reports.field_res_partner_customer_campaign__active
+msgid "Active"
+msgstr "Activo"
+
+#. module: tyt_contacts_reports
 #: model:ir.model.fields,field_description:tyt_contacts_reports.field_approved_supplier__activity_ids
-#: model:ir.model.fields,field_description:tyt_contacts_reports.field_customer_directory__activity_ids
 #: model:ir.model.fields,field_description:tyt_contacts_reports.field_customer_property__activity_ids
 #: model:ir.model.fields,field_description:tyt_contacts_reports.field_supplier_complaints_inventory__activity_ids
 #: model:ir.model.fields,field_description:tyt_contacts_reports.field_supplier_evaluation_verification__activity_ids
@@ -56,7 +63,6 @@ msgstr ""
 
 #. module: tyt_contacts_reports
 #: model:ir.model.fields,field_description:tyt_contacts_reports.field_approved_supplier__activity_exception_decoration
-#: model:ir.model.fields,field_description:tyt_contacts_reports.field_customer_directory__activity_exception_decoration
 #: model:ir.model.fields,field_description:tyt_contacts_reports.field_customer_property__activity_exception_decoration
 #: model:ir.model.fields,field_description:tyt_contacts_reports.field_supplier_complaints_inventory__activity_exception_decoration
 #: model:ir.model.fields,field_description:tyt_contacts_reports.field_supplier_evaluation_verification__activity_exception_decoration
@@ -65,7 +71,6 @@ msgstr ""
 
 #. module: tyt_contacts_reports
 #: model:ir.model.fields,field_description:tyt_contacts_reports.field_approved_supplier__activity_state
-#: model:ir.model.fields,field_description:tyt_contacts_reports.field_customer_directory__activity_state
 #: model:ir.model.fields,field_description:tyt_contacts_reports.field_customer_property__activity_state
 #: model:ir.model.fields,field_description:tyt_contacts_reports.field_supplier_complaints_inventory__activity_state
 #: model:ir.model.fields,field_description:tyt_contacts_reports.field_supplier_evaluation_verification__activity_state
@@ -74,7 +79,6 @@ msgstr ""
 
 #. module: tyt_contacts_reports
 #: model:ir.model.fields,field_description:tyt_contacts_reports.field_approved_supplier__activity_type_icon
-#: model:ir.model.fields,field_description:tyt_contacts_reports.field_customer_directory__activity_type_icon
 #: model:ir.model.fields,field_description:tyt_contacts_reports.field_customer_property__activity_type_icon
 #: model:ir.model.fields,field_description:tyt_contacts_reports.field_supplier_complaints_inventory__activity_type_icon
 #: model:ir.model.fields,field_description:tyt_contacts_reports.field_supplier_evaluation_verification__activity_type_icon
@@ -99,7 +103,6 @@ msgstr ""
 
 #. module: tyt_contacts_reports
 #: model:ir.model.fields,field_description:tyt_contacts_reports.field_approved_supplier__message_attachment_count
-#: model:ir.model.fields,field_description:tyt_contacts_reports.field_customer_directory__message_attachment_count
 #: model:ir.model.fields,field_description:tyt_contacts_reports.field_customer_property__message_attachment_count
 #: model:ir.model.fields,field_description:tyt_contacts_reports.field_supplier_complaints_inventory__message_attachment_count
 #: model:ir.model.fields,field_description:tyt_contacts_reports.field_supplier_evaluation_verification__message_attachment_count
@@ -116,12 +119,22 @@ msgid "Cancel"
 msgstr "Cancelar"
 
 #. module: tyt_contacts_reports
+#: model:ir.model.fields,field_description:tyt_contacts_reports.field_res_partner_customer_campaign__color
+msgid "Color"
+msgstr ""
+
+#. module: tyt_contacts_reports
+#: model:ir.model,name:tyt_contacts_reports.model_res_partner
+msgid "Contact"
+msgstr ""
+
+#. module: tyt_contacts_reports
 #: model:ir.model.fields,field_description:tyt_contacts_reports.field_approved_supplier__create_uid
 #: model:ir.model.fields,field_description:tyt_contacts_reports.field_approved_supplier_export__create_uid
-#: model:ir.model.fields,field_description:tyt_contacts_reports.field_customer_directory__create_uid
 #: model:ir.model.fields,field_description:tyt_contacts_reports.field_customer_directory_export__create_uid
 #: model:ir.model.fields,field_description:tyt_contacts_reports.field_customer_property__create_uid
 #: model:ir.model.fields,field_description:tyt_contacts_reports.field_customer_property_export__create_uid
+#: model:ir.model.fields,field_description:tyt_contacts_reports.field_res_partner_customer_campaign__create_uid
 #: model:ir.model.fields,field_description:tyt_contacts_reports.field_supplier_complaints_inventory__create_uid
 #: model:ir.model.fields,field_description:tyt_contacts_reports.field_supplier_complaints_inventory_export__create_uid
 #: model:ir.model.fields,field_description:tyt_contacts_reports.field_supplier_evaluation_verification__create_uid
@@ -132,10 +145,10 @@ msgstr ""
 #. module: tyt_contacts_reports
 #: model:ir.model.fields,field_description:tyt_contacts_reports.field_approved_supplier__create_date
 #: model:ir.model.fields,field_description:tyt_contacts_reports.field_approved_supplier_export__create_date
-#: model:ir.model.fields,field_description:tyt_contacts_reports.field_customer_directory__create_date
 #: model:ir.model.fields,field_description:tyt_contacts_reports.field_customer_directory_export__create_date
 #: model:ir.model.fields,field_description:tyt_contacts_reports.field_customer_property__create_date
 #: model:ir.model.fields,field_description:tyt_contacts_reports.field_customer_property_export__create_date
+#: model:ir.model.fields,field_description:tyt_contacts_reports.field_res_partner_customer_campaign__create_date
 #: model:ir.model.fields,field_description:tyt_contacts_reports.field_supplier_complaints_inventory__create_date
 #: model:ir.model.fields,field_description:tyt_contacts_reports.field_supplier_complaints_inventory_export__create_date
 #: model:ir.model.fields,field_description:tyt_contacts_reports.field_supplier_evaluation_verification__create_date
@@ -144,38 +157,54 @@ msgid "Created on"
 msgstr ""
 
 #. module: tyt_contacts_reports
-#: model:ir.actions.act_window,name:tyt_contacts_reports.customer_directory_action
-#: model:ir.model,name:tyt_contacts_reports.model_customer_directory
-#: model:ir.model.fields,field_description:tyt_contacts_reports.field_customer_directory_export__customer_directory_ids
-msgid "Customer Directory"
-msgstr ""
+#: model:ir.model.fields,field_description:tyt_contacts_reports.field_customer_directory_export__is_critical
+#: model:ir.model.fields,field_description:tyt_contacts_reports.field_customer_property_export__is_critical
+msgid "Critical Customer"
+msgstr "Solo clientes críticos"
+
+#. module: tyt_contacts_reports
+#: model:ir.model,name:tyt_contacts_reports.model_res_partner_customer_campaign
+msgid "Customer Campaign"
+msgstr "Campaña"
+
+#. module: tyt_contacts_reports
+#: model:ir.model.fields,field_description:tyt_contacts_reports.field_res_partner__customer_campaign_ids
+#: model:ir.model.fields,field_description:tyt_contacts_reports.field_res_users__customer_campaign_ids
+msgid "Customer Campaigns"
+msgstr "Campañas"
 
 #. module: tyt_contacts_reports
 #: model:ir.actions.act_window,name:tyt_contacts_reports.customer_directory_export_action
 #: model:ir.model,name:tyt_contacts_reports.model_customer_directory_export
 msgid "Customer Directory Export"
-msgstr ""
+msgstr "Directorio de clientes"
 
 #. module: tyt_contacts_reports
 #: model:ir.actions.report,name:tyt_contacts_reports.customer_directory_xlsx_report_action
 msgid "Customer Directory XLSX Report"
-msgstr ""
+msgstr "Directorio de clientes"
 
 #. module: tyt_contacts_reports
 #: model:ir.model,name:tyt_contacts_reports.model_customer_property
+#: model_terms:ir.ui.view,arch_db:tyt_contacts_reports.res_partner_form_inherit
 msgid "Customer Property"
-msgstr ""
+msgstr "Propiedad de los clientes"
 
 #. module: tyt_contacts_reports
 #: model:ir.actions.act_window,name:tyt_contacts_reports.customer_property_export_action
 #: model:ir.model,name:tyt_contacts_reports.model_customer_property_export
 msgid "Customer Property Export"
-msgstr ""
+msgstr "Propiedad de los clientes"
+
+#. module: tyt_contacts_reports
+#: model:ir.ui.menu,name:tyt_contacts_reports.customer_property_report_menu_action
+msgid "Customer Property Report"
+msgstr "Propiedad de los clientes"
 
 #. module: tyt_contacts_reports
 #: model:ir.actions.report,name:tyt_contacts_reports.customer_property_xlsx_report_action
 msgid "Customer Property XLSX Report"
-msgstr ""
+msgstr "Propiedad de los clientes"
 
 #. module: tyt_contacts_reports
 #: model:ir.model.fields,field_description:tyt_contacts_reports.field_supplier_complaints_inventory__description
@@ -185,10 +214,10 @@ msgstr "Descripción del reclamo"
 #. module: tyt_contacts_reports
 #: model:ir.model.fields,field_description:tyt_contacts_reports.field_approved_supplier__display_name
 #: model:ir.model.fields,field_description:tyt_contacts_reports.field_approved_supplier_export__display_name
-#: model:ir.model.fields,field_description:tyt_contacts_reports.field_customer_directory__display_name
 #: model:ir.model.fields,field_description:tyt_contacts_reports.field_customer_directory_export__display_name
 #: model:ir.model.fields,field_description:tyt_contacts_reports.field_customer_property__display_name
 #: model:ir.model.fields,field_description:tyt_contacts_reports.field_customer_property_export__display_name
+#: model:ir.model.fields,field_description:tyt_contacts_reports.field_res_partner_customer_campaign__display_name
 #: model:ir.model.fields,field_description:tyt_contacts_reports.field_supplier_complaints_inventory__display_name
 #: model:ir.model.fields,field_description:tyt_contacts_reports.field_supplier_complaints_inventory_export__display_name
 #: model:ir.model.fields,field_description:tyt_contacts_reports.field_supplier_evaluation_verification__display_name
@@ -217,7 +246,6 @@ msgstr "Reportes adicionales"
 
 #. module: tyt_contacts_reports
 #: model:ir.model.fields,field_description:tyt_contacts_reports.field_approved_supplier__message_follower_ids
-#: model:ir.model.fields,field_description:tyt_contacts_reports.field_customer_directory__message_follower_ids
 #: model:ir.model.fields,field_description:tyt_contacts_reports.field_customer_property__message_follower_ids
 #: model:ir.model.fields,field_description:tyt_contacts_reports.field_supplier_complaints_inventory__message_follower_ids
 #: model:ir.model.fields,field_description:tyt_contacts_reports.field_supplier_evaluation_verification__message_follower_ids
@@ -226,7 +254,6 @@ msgstr ""
 
 #. module: tyt_contacts_reports
 #: model:ir.model.fields,field_description:tyt_contacts_reports.field_approved_supplier__message_partner_ids
-#: model:ir.model.fields,field_description:tyt_contacts_reports.field_customer_directory__message_partner_ids
 #: model:ir.model.fields,field_description:tyt_contacts_reports.field_customer_property__message_partner_ids
 #: model:ir.model.fields,field_description:tyt_contacts_reports.field_supplier_complaints_inventory__message_partner_ids
 #: model:ir.model.fields,field_description:tyt_contacts_reports.field_supplier_evaluation_verification__message_partner_ids
@@ -235,7 +262,6 @@ msgstr ""
 
 #. module: tyt_contacts_reports
 #: model:ir.model.fields,help:tyt_contacts_reports.field_approved_supplier__activity_type_icon
-#: model:ir.model.fields,help:tyt_contacts_reports.field_customer_directory__activity_type_icon
 #: model:ir.model.fields,help:tyt_contacts_reports.field_customer_property__activity_type_icon
 #: model:ir.model.fields,help:tyt_contacts_reports.field_supplier_complaints_inventory__activity_type_icon
 #: model:ir.model.fields,help:tyt_contacts_reports.field_supplier_evaluation_verification__activity_type_icon
@@ -249,7 +275,6 @@ msgstr ""
 
 #. module: tyt_contacts_reports
 #: model:ir.model.fields,field_description:tyt_contacts_reports.field_approved_supplier__has_message
-#: model:ir.model.fields,field_description:tyt_contacts_reports.field_customer_directory__has_message
 #: model:ir.model.fields,field_description:tyt_contacts_reports.field_customer_property__has_message
 #: model:ir.model.fields,field_description:tyt_contacts_reports.field_supplier_complaints_inventory__has_message
 #: model:ir.model.fields,field_description:tyt_contacts_reports.field_supplier_evaluation_verification__has_message
@@ -259,10 +284,10 @@ msgstr ""
 #. module: tyt_contacts_reports
 #: model:ir.model.fields,field_description:tyt_contacts_reports.field_approved_supplier__id
 #: model:ir.model.fields,field_description:tyt_contacts_reports.field_approved_supplier_export__id
-#: model:ir.model.fields,field_description:tyt_contacts_reports.field_customer_directory__id
 #: model:ir.model.fields,field_description:tyt_contacts_reports.field_customer_directory_export__id
 #: model:ir.model.fields,field_description:tyt_contacts_reports.field_customer_property__id
 #: model:ir.model.fields,field_description:tyt_contacts_reports.field_customer_property_export__id
+#: model:ir.model.fields,field_description:tyt_contacts_reports.field_res_partner_customer_campaign__id
 #: model:ir.model.fields,field_description:tyt_contacts_reports.field_supplier_complaints_inventory__id
 #: model:ir.model.fields,field_description:tyt_contacts_reports.field_supplier_complaints_inventory_export__id
 #: model:ir.model.fields,field_description:tyt_contacts_reports.field_supplier_evaluation_verification__id
@@ -272,7 +297,6 @@ msgstr ""
 
 #. module: tyt_contacts_reports
 #: model:ir.model.fields,field_description:tyt_contacts_reports.field_approved_supplier__activity_exception_icon
-#: model:ir.model.fields,field_description:tyt_contacts_reports.field_customer_directory__activity_exception_icon
 #: model:ir.model.fields,field_description:tyt_contacts_reports.field_customer_property__activity_exception_icon
 #: model:ir.model.fields,field_description:tyt_contacts_reports.field_supplier_complaints_inventory__activity_exception_icon
 #: model:ir.model.fields,field_description:tyt_contacts_reports.field_supplier_evaluation_verification__activity_exception_icon
@@ -281,7 +305,6 @@ msgstr ""
 
 #. module: tyt_contacts_reports
 #: model:ir.model.fields,help:tyt_contacts_reports.field_approved_supplier__activity_exception_icon
-#: model:ir.model.fields,help:tyt_contacts_reports.field_customer_directory__activity_exception_icon
 #: model:ir.model.fields,help:tyt_contacts_reports.field_customer_property__activity_exception_icon
 #: model:ir.model.fields,help:tyt_contacts_reports.field_supplier_complaints_inventory__activity_exception_icon
 #: model:ir.model.fields,help:tyt_contacts_reports.field_supplier_evaluation_verification__activity_exception_icon
@@ -290,7 +313,6 @@ msgstr ""
 
 #. module: tyt_contacts_reports
 #: model:ir.model.fields,help:tyt_contacts_reports.field_approved_supplier__message_needaction
-#: model:ir.model.fields,help:tyt_contacts_reports.field_customer_directory__message_needaction
 #: model:ir.model.fields,help:tyt_contacts_reports.field_customer_property__message_needaction
 #: model:ir.model.fields,help:tyt_contacts_reports.field_supplier_complaints_inventory__message_needaction
 #: model:ir.model.fields,help:tyt_contacts_reports.field_supplier_evaluation_verification__message_needaction
@@ -300,8 +322,6 @@ msgstr ""
 #. module: tyt_contacts_reports
 #: model:ir.model.fields,help:tyt_contacts_reports.field_approved_supplier__message_has_error
 #: model:ir.model.fields,help:tyt_contacts_reports.field_approved_supplier__message_has_sms_error
-#: model:ir.model.fields,help:tyt_contacts_reports.field_customer_directory__message_has_error
-#: model:ir.model.fields,help:tyt_contacts_reports.field_customer_directory__message_has_sms_error
 #: model:ir.model.fields,help:tyt_contacts_reports.field_customer_property__message_has_error
 #: model:ir.model.fields,help:tyt_contacts_reports.field_customer_property__message_has_sms_error
 #: model:ir.model.fields,help:tyt_contacts_reports.field_supplier_complaints_inventory__message_has_error
@@ -313,7 +333,6 @@ msgstr ""
 
 #. module: tyt_contacts_reports
 #: model:ir.model.fields,field_description:tyt_contacts_reports.field_approved_supplier__message_is_follower
-#: model:ir.model.fields,field_description:tyt_contacts_reports.field_customer_directory__message_is_follower
 #: model:ir.model.fields,field_description:tyt_contacts_reports.field_customer_property__message_is_follower
 #: model:ir.model.fields,field_description:tyt_contacts_reports.field_supplier_complaints_inventory__message_is_follower
 #: model:ir.model.fields,field_description:tyt_contacts_reports.field_supplier_evaluation_verification__message_is_follower
@@ -323,10 +342,10 @@ msgstr ""
 #. module: tyt_contacts_reports
 #: model:ir.model.fields,field_description:tyt_contacts_reports.field_approved_supplier____last_update
 #: model:ir.model.fields,field_description:tyt_contacts_reports.field_approved_supplier_export____last_update
-#: model:ir.model.fields,field_description:tyt_contacts_reports.field_customer_directory____last_update
 #: model:ir.model.fields,field_description:tyt_contacts_reports.field_customer_directory_export____last_update
 #: model:ir.model.fields,field_description:tyt_contacts_reports.field_customer_property____last_update
 #: model:ir.model.fields,field_description:tyt_contacts_reports.field_customer_property_export____last_update
+#: model:ir.model.fields,field_description:tyt_contacts_reports.field_res_partner_customer_campaign____last_update
 #: model:ir.model.fields,field_description:tyt_contacts_reports.field_supplier_complaints_inventory____last_update
 #: model:ir.model.fields,field_description:tyt_contacts_reports.field_supplier_complaints_inventory_export____last_update
 #: model:ir.model.fields,field_description:tyt_contacts_reports.field_supplier_evaluation_verification____last_update
@@ -337,10 +356,10 @@ msgstr ""
 #. module: tyt_contacts_reports
 #: model:ir.model.fields,field_description:tyt_contacts_reports.field_approved_supplier__write_uid
 #: model:ir.model.fields,field_description:tyt_contacts_reports.field_approved_supplier_export__write_uid
-#: model:ir.model.fields,field_description:tyt_contacts_reports.field_customer_directory__write_uid
 #: model:ir.model.fields,field_description:tyt_contacts_reports.field_customer_directory_export__write_uid
 #: model:ir.model.fields,field_description:tyt_contacts_reports.field_customer_property__write_uid
 #: model:ir.model.fields,field_description:tyt_contacts_reports.field_customer_property_export__write_uid
+#: model:ir.model.fields,field_description:tyt_contacts_reports.field_res_partner_customer_campaign__write_uid
 #: model:ir.model.fields,field_description:tyt_contacts_reports.field_supplier_complaints_inventory__write_uid
 #: model:ir.model.fields,field_description:tyt_contacts_reports.field_supplier_complaints_inventory_export__write_uid
 #: model:ir.model.fields,field_description:tyt_contacts_reports.field_supplier_evaluation_verification__write_uid
@@ -351,10 +370,10 @@ msgstr ""
 #. module: tyt_contacts_reports
 #: model:ir.model.fields,field_description:tyt_contacts_reports.field_approved_supplier__write_date
 #: model:ir.model.fields,field_description:tyt_contacts_reports.field_approved_supplier_export__write_date
-#: model:ir.model.fields,field_description:tyt_contacts_reports.field_customer_directory__write_date
 #: model:ir.model.fields,field_description:tyt_contacts_reports.field_customer_directory_export__write_date
 #: model:ir.model.fields,field_description:tyt_contacts_reports.field_customer_property__write_date
 #: model:ir.model.fields,field_description:tyt_contacts_reports.field_customer_property_export__write_date
+#: model:ir.model.fields,field_description:tyt_contacts_reports.field_res_partner_customer_campaign__write_date
 #: model:ir.model.fields,field_description:tyt_contacts_reports.field_supplier_complaints_inventory__write_date
 #: model:ir.model.fields,field_description:tyt_contacts_reports.field_supplier_complaints_inventory_export__write_date
 #: model:ir.model.fields,field_description:tyt_contacts_reports.field_supplier_evaluation_verification__write_date
@@ -364,7 +383,6 @@ msgstr ""
 
 #. module: tyt_contacts_reports
 #: model:ir.model.fields,field_description:tyt_contacts_reports.field_approved_supplier__message_main_attachment_id
-#: model:ir.model.fields,field_description:tyt_contacts_reports.field_customer_directory__message_main_attachment_id
 #: model:ir.model.fields,field_description:tyt_contacts_reports.field_customer_property__message_main_attachment_id
 #: model:ir.model.fields,field_description:tyt_contacts_reports.field_supplier_complaints_inventory__message_main_attachment_id
 #: model:ir.model.fields,field_description:tyt_contacts_reports.field_supplier_evaluation_verification__message_main_attachment_id
@@ -373,7 +391,6 @@ msgstr ""
 
 #. module: tyt_contacts_reports
 #: model:ir.model.fields,field_description:tyt_contacts_reports.field_approved_supplier__message_has_error
-#: model:ir.model.fields,field_description:tyt_contacts_reports.field_customer_directory__message_has_error
 #: model:ir.model.fields,field_description:tyt_contacts_reports.field_customer_property__message_has_error
 #: model:ir.model.fields,field_description:tyt_contacts_reports.field_supplier_complaints_inventory__message_has_error
 #: model:ir.model.fields,field_description:tyt_contacts_reports.field_supplier_evaluation_verification__message_has_error
@@ -382,7 +399,6 @@ msgstr ""
 
 #. module: tyt_contacts_reports
 #: model:ir.model.fields,field_description:tyt_contacts_reports.field_approved_supplier__message_ids
-#: model:ir.model.fields,field_description:tyt_contacts_reports.field_customer_directory__message_ids
 #: model:ir.model.fields,field_description:tyt_contacts_reports.field_customer_property__message_ids
 #: model:ir.model.fields,field_description:tyt_contacts_reports.field_supplier_complaints_inventory__message_ids
 #: model:ir.model.fields,field_description:tyt_contacts_reports.field_supplier_evaluation_verification__message_ids
@@ -391,7 +407,6 @@ msgstr ""
 
 #. module: tyt_contacts_reports
 #: model:ir.model.fields,field_description:tyt_contacts_reports.field_approved_supplier__my_activity_date_deadline
-#: model:ir.model.fields,field_description:tyt_contacts_reports.field_customer_directory__my_activity_date_deadline
 #: model:ir.model.fields,field_description:tyt_contacts_reports.field_customer_property__my_activity_date_deadline
 #: model:ir.model.fields,field_description:tyt_contacts_reports.field_supplier_complaints_inventory__my_activity_date_deadline
 #: model:ir.model.fields,field_description:tyt_contacts_reports.field_supplier_evaluation_verification__my_activity_date_deadline
@@ -399,8 +414,12 @@ msgid "My Activity Deadline"
 msgstr ""
 
 #. module: tyt_contacts_reports
+#: model:ir.model.fields,field_description:tyt_contacts_reports.field_res_partner_customer_campaign__name
+msgid "Name"
+msgstr "Nombre"
+
+#. module: tyt_contacts_reports
 #: model:ir.model.fields,field_description:tyt_contacts_reports.field_approved_supplier__activity_calendar_event_id
-#: model:ir.model.fields,field_description:tyt_contacts_reports.field_customer_directory__activity_calendar_event_id
 #: model:ir.model.fields,field_description:tyt_contacts_reports.field_customer_property__activity_calendar_event_id
 #: model:ir.model.fields,field_description:tyt_contacts_reports.field_supplier_complaints_inventory__activity_calendar_event_id
 #: model:ir.model.fields,field_description:tyt_contacts_reports.field_supplier_evaluation_verification__activity_calendar_event_id
@@ -409,7 +428,6 @@ msgstr ""
 
 #. module: tyt_contacts_reports
 #: model:ir.model.fields,field_description:tyt_contacts_reports.field_approved_supplier__activity_date_deadline
-#: model:ir.model.fields,field_description:tyt_contacts_reports.field_customer_directory__activity_date_deadline
 #: model:ir.model.fields,field_description:tyt_contacts_reports.field_customer_property__activity_date_deadline
 #: model:ir.model.fields,field_description:tyt_contacts_reports.field_supplier_complaints_inventory__activity_date_deadline
 #: model:ir.model.fields,field_description:tyt_contacts_reports.field_supplier_evaluation_verification__activity_date_deadline
@@ -418,7 +436,6 @@ msgstr ""
 
 #. module: tyt_contacts_reports
 #: model:ir.model.fields,field_description:tyt_contacts_reports.field_approved_supplier__activity_summary
-#: model:ir.model.fields,field_description:tyt_contacts_reports.field_customer_directory__activity_summary
 #: model:ir.model.fields,field_description:tyt_contacts_reports.field_customer_property__activity_summary
 #: model:ir.model.fields,field_description:tyt_contacts_reports.field_supplier_complaints_inventory__activity_summary
 #: model:ir.model.fields,field_description:tyt_contacts_reports.field_supplier_evaluation_verification__activity_summary
@@ -427,7 +444,6 @@ msgstr ""
 
 #. module: tyt_contacts_reports
 #: model:ir.model.fields,field_description:tyt_contacts_reports.field_approved_supplier__activity_type_id
-#: model:ir.model.fields,field_description:tyt_contacts_reports.field_customer_directory__activity_type_id
 #: model:ir.model.fields,field_description:tyt_contacts_reports.field_customer_property__activity_type_id
 #: model:ir.model.fields,field_description:tyt_contacts_reports.field_supplier_complaints_inventory__activity_type_id
 #: model:ir.model.fields,field_description:tyt_contacts_reports.field_supplier_evaluation_verification__activity_type_id
@@ -436,7 +452,6 @@ msgstr ""
 
 #. module: tyt_contacts_reports
 #: model:ir.model.fields,field_description:tyt_contacts_reports.field_approved_supplier__message_needaction_counter
-#: model:ir.model.fields,field_description:tyt_contacts_reports.field_customer_directory__message_needaction_counter
 #: model:ir.model.fields,field_description:tyt_contacts_reports.field_customer_property__message_needaction_counter
 #: model:ir.model.fields,field_description:tyt_contacts_reports.field_supplier_complaints_inventory__message_needaction_counter
 #: model:ir.model.fields,field_description:tyt_contacts_reports.field_supplier_evaluation_verification__message_needaction_counter
@@ -445,7 +460,6 @@ msgstr ""
 
 #. module: tyt_contacts_reports
 #: model:ir.model.fields,field_description:tyt_contacts_reports.field_approved_supplier__message_has_error_counter
-#: model:ir.model.fields,field_description:tyt_contacts_reports.field_customer_directory__message_has_error_counter
 #: model:ir.model.fields,field_description:tyt_contacts_reports.field_customer_property__message_has_error_counter
 #: model:ir.model.fields,field_description:tyt_contacts_reports.field_supplier_complaints_inventory__message_has_error_counter
 #: model:ir.model.fields,field_description:tyt_contacts_reports.field_supplier_evaluation_verification__message_has_error_counter
@@ -454,7 +468,6 @@ msgstr ""
 
 #. module: tyt_contacts_reports
 #: model:ir.model.fields,help:tyt_contacts_reports.field_approved_supplier__message_needaction_counter
-#: model:ir.model.fields,help:tyt_contacts_reports.field_customer_directory__message_needaction_counter
 #: model:ir.model.fields,help:tyt_contacts_reports.field_customer_property__message_needaction_counter
 #: model:ir.model.fields,help:tyt_contacts_reports.field_supplier_complaints_inventory__message_needaction_counter
 #: model:ir.model.fields,help:tyt_contacts_reports.field_supplier_evaluation_verification__message_needaction_counter
@@ -463,7 +476,6 @@ msgstr ""
 
 #. module: tyt_contacts_reports
 #: model:ir.model.fields,help:tyt_contacts_reports.field_approved_supplier__message_has_error_counter
-#: model:ir.model.fields,help:tyt_contacts_reports.field_customer_directory__message_has_error_counter
 #: model:ir.model.fields,help:tyt_contacts_reports.field_customer_property__message_has_error_counter
 #: model:ir.model.fields,help:tyt_contacts_reports.field_supplier_complaints_inventory__message_has_error_counter
 #: model:ir.model.fields,help:tyt_contacts_reports.field_supplier_evaluation_verification__message_has_error_counter
@@ -471,10 +483,58 @@ msgid "Number of messages with delivery error"
 msgstr ""
 
 #. module: tyt_contacts_reports
+#: model:ir.model.fields,field_description:tyt_contacts_reports.field_res_partner__observations
+#: model:ir.model.fields,field_description:tyt_contacts_reports.field_res_users__observations
+msgid "Observations"
+msgstr "Observaciones"
+
+#. module: tyt_contacts_reports
 #: model:ir.model.fields,field_description:tyt_contacts_reports.field_supplier_complaints_inventory__product_service
 #: model_terms:ir.ui.view,arch_db:tyt_contacts_reports.supplier_complaints_inventory_view_search
 msgid "Product/Service"
 msgstr "Producto/Nombre del servicio"
+
+#. module: tyt_contacts_reports
+#: model:ir.model.fields,field_description:tyt_contacts_reports.field_res_partner__property_response_activity_ids
+#: model:ir.model.fields,field_description:tyt_contacts_reports.field_res_users__property_response_activity_ids
+msgid "Property Actions"
+msgstr "Actividad de respuesta"
+
+#. module: tyt_contacts_reports
+#: model:ir.model.fields,field_description:tyt_contacts_reports.field_res_partner__property_activity
+#: model:ir.model.fields,field_description:tyt_contacts_reports.field_res_users__property_activity
+msgid "Property Activity"
+msgstr "Actividad de cuidado para la propiedad del cliente"
+
+#. module: tyt_contacts_reports
+#: model:ir.model.fields,field_description:tyt_contacts_reports.field_res_partner__property_client
+#: model:ir.model.fields,field_description:tyt_contacts_reports.field_res_users__property_client
+msgid "Property Client"
+msgstr "Cliente - Proyecto - Plaza"
+
+#. module: tyt_contacts_reports
+#: model:ir.model.fields,field_description:tyt_contacts_reports.field_res_partner__property_corrective_action_initiated
+#: model:ir.model.fields,field_description:tyt_contacts_reports.field_res_users__property_corrective_action_initiated
+msgid "Property Corrective Action Initiated"
+msgstr "Medida correctiva iniciada"
+
+#. module: tyt_contacts_reports
+#: model:ir.model.fields,field_description:tyt_contacts_reports.field_res_partner__property_date
+#: model:ir.model.fields,field_description:tyt_contacts_reports.field_res_users__property_date
+msgid "Property Date"
+msgstr "Fecha"
+
+#. module: tyt_contacts_reports
+#: model:ir.model.fields,field_description:tyt_contacts_reports.field_res_partner__property_inadequate_condition
+#: model:ir.model.fields,field_description:tyt_contacts_reports.field_res_users__property_inadequate_condition
+msgid "Property Inadequate Condition"
+msgstr "Estado inadecuado de la propiedad"
+
+#. module: tyt_contacts_reports
+#: model:ir.model.fields,field_description:tyt_contacts_reports.field_res_partner__property_name
+#: model:ir.model.fields,field_description:tyt_contacts_reports.field_res_users__property_name
+msgid "Property Name"
+msgstr "Propiedad"
 
 #. module: tyt_contacts_reports
 #: model:ir.model.fields,field_description:tyt_contacts_reports.field_supplier_complaints_inventory__register_id
@@ -490,7 +550,6 @@ msgstr "Fecha de resolución del reclamo"
 
 #. module: tyt_contacts_reports
 #: model:ir.model.fields,field_description:tyt_contacts_reports.field_approved_supplier__activity_user_id
-#: model:ir.model.fields,field_description:tyt_contacts_reports.field_customer_directory__activity_user_id
 #: model:ir.model.fields,field_description:tyt_contacts_reports.field_customer_property__activity_user_id
 #: model:ir.model.fields,field_description:tyt_contacts_reports.field_supplier_complaints_inventory__activity_user_id
 #: model:ir.model.fields,field_description:tyt_contacts_reports.field_supplier_evaluation_verification__activity_user_id
@@ -499,7 +558,6 @@ msgstr ""
 
 #. module: tyt_contacts_reports
 #: model:ir.model.fields,field_description:tyt_contacts_reports.field_approved_supplier__message_has_sms_error
-#: model:ir.model.fields,field_description:tyt_contacts_reports.field_customer_directory__message_has_sms_error
 #: model:ir.model.fields,field_description:tyt_contacts_reports.field_customer_property__message_has_sms_error
 #: model:ir.model.fields,field_description:tyt_contacts_reports.field_supplier_complaints_inventory__message_has_sms_error
 #: model:ir.model.fields,field_description:tyt_contacts_reports.field_supplier_evaluation_verification__message_has_sms_error
@@ -524,7 +582,6 @@ msgstr "Fecha de envío final"
 
 #. module: tyt_contacts_reports
 #: model:ir.model.fields,help:tyt_contacts_reports.field_approved_supplier__activity_state
-#: model:ir.model.fields,help:tyt_contacts_reports.field_customer_directory__activity_state
 #: model:ir.model.fields,help:tyt_contacts_reports.field_customer_property__activity_state
 #: model:ir.model.fields,help:tyt_contacts_reports.field_supplier_complaints_inventory__activity_state
 #: model:ir.model.fields,help:tyt_contacts_reports.field_supplier_evaluation_verification__activity_state
@@ -582,7 +639,6 @@ msgstr ""
 
 #. module: tyt_contacts_reports
 #: model:ir.model.fields,help:tyt_contacts_reports.field_approved_supplier__activity_exception_decoration
-#: model:ir.model.fields,help:tyt_contacts_reports.field_customer_directory__activity_exception_decoration
 #: model:ir.model.fields,help:tyt_contacts_reports.field_customer_property__activity_exception_decoration
 #: model:ir.model.fields,help:tyt_contacts_reports.field_supplier_complaints_inventory__activity_exception_decoration
 #: model:ir.model.fields,help:tyt_contacts_reports.field_supplier_evaluation_verification__activity_exception_decoration
@@ -591,7 +647,6 @@ msgstr ""
 
 #. module: tyt_contacts_reports
 #: model:ir.model.fields,field_description:tyt_contacts_reports.field_approved_supplier__website_message_ids
-#: model:ir.model.fields,field_description:tyt_contacts_reports.field_customer_directory__website_message_ids
 #: model:ir.model.fields,field_description:tyt_contacts_reports.field_customer_property__website_message_ids
 #: model:ir.model.fields,field_description:tyt_contacts_reports.field_supplier_complaints_inventory__website_message_ids
 #: model:ir.model.fields,field_description:tyt_contacts_reports.field_supplier_evaluation_verification__website_message_ids
@@ -600,7 +655,6 @@ msgstr ""
 
 #. module: tyt_contacts_reports
 #: model:ir.model.fields,help:tyt_contacts_reports.field_approved_supplier__website_message_ids
-#: model:ir.model.fields,help:tyt_contacts_reports.field_customer_directory__website_message_ids
 #: model:ir.model.fields,help:tyt_contacts_reports.field_customer_property__website_message_ids
 #: model:ir.model.fields,help:tyt_contacts_reports.field_supplier_complaints_inventory__website_message_ids
 #: model:ir.model.fields,help:tyt_contacts_reports.field_supplier_evaluation_verification__website_message_ids
@@ -615,12 +669,12 @@ msgstr ""
 #. module: tyt_contacts_reports
 #: model:ir.model,name:tyt_contacts_reports.model_report_customer_directory_xlsx_report
 msgid "report.customer_directory_xlsx_report"
-msgstr ""
+msgstr "Directorio de clientes"
 
 #. module: tyt_contacts_reports
 #: model:ir.model,name:tyt_contacts_reports.model_report_customer_property_xlsx_report
 msgid "report.customer_property_xlsx_report"
-msgstr ""
+msgstr "Propiedad de los clientes"
 
 #. module: tyt_contacts_reports
 #: model:ir.model,name:tyt_contacts_reports.model_report_supplier_complaints_inventory_xlsx_report

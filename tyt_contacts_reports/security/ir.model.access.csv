@@ -2,13 +2,12 @@ id,name,model_id:id,group_id:id,perm_read,perm_write,perm_create,perm_unlink
 access_supplier_complaints_inventory,supplier_complaints_inventory,model_supplier_complaints_inventory,base.group_user,1,1,1,1
 access_supplier_complaints_inventory_export,supplier_complaints_inventory.export,model_supplier_complaints_inventory_export,base.group_user,1,1,1,1
 
-access_customer_directory,customer_directory,model_customer_directory,base.group_user,1,1,1,1
 access_customer_directory_export,customer_directory.export,model_customer_directory_export,base.group_user,1,1,1,1
+access_res_partner_customer_campaign,res.partner.customer_campaign,model_res_partner_customer_campaign,base.group_user,1,1,1,1
 
 access_approved_supplier,approved_supplier,model_approved_supplier,base.group_user,1,1,1,1
 access_approved_supplier_export,approved_supplier.export,model_approved_supplier_export,base.group_user,1,1,1,1
 
-access_customer_property,customer_property,model_customer_property,base.group_user,1,1,1,1
 access_customer_property_export,customer_property.export,model_customer_property_export,base.group_user,1,1,1,1
 
 access_supplier_evaluation_verification,supplier_evaluation_verification,model_supplier_evaluation_verification,base.group_user,1,1,1,1
