@@ -12,8 +12,10 @@
         'website',
     ],
     'data': [
+        'data/tyt.satisfaction.survey.question.csv',
         'security/ir.model.access.csv',
         'views/satisfaction_survey.xml',
+        'views/menus.xml',
         'static/src/xml/satisfaction_survey_main.xml',
         'static/src/xml/satisfaction_survey.xml',
     ],

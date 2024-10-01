@@ -4,21 +4,12 @@
     <template id="tyt_survey.satisfaction_survey" name="satisfaction_survey">
         <t t-call="website.layout">
             <div class="center">
-                <form method="post" enctype="multipart/form-data">
-                    <!-- progressbar -->
-                    <!-- <ul id="progressbar">
-                        <li class="active">Comunicación</li>
-                        <li>Atención</li>
-                        <li>Desempeño</li>
-                        <li>Eficiencia</li>
-                        <li>Seguridad y TI</li>
-                        <li>Mantenimiento</li>
-                        <li>Mejora continua</li>
-                    </ul> -->
-                    <!-- fieldsets -->
+                <form action="/website/survey/satisfaction_survey_done" method="post"
+                    enctype="multipart/form-data">
                     <div id="satisfaction_survey_body" class="satisfaction_survey_body">
                         <!-- Barra de categorías -->
                         <div class="category-bar">
+                            <div class="category-item active" data-category="cat_0">Datos</div>
                             <div class="category-item active" data-category="cat_1">Comunicación</div>
                             <div class="category-item" data-category="cat_2">Atención</div>
                             <div class="category-item" data-category="cat_3">Desempeño</div>
@@ -31,8 +22,78 @@
                             <input type="hidden" name="csrf_token"
                                 t-att-value="request.csrf_token()" />
                         </div>
-                        <!-- Contenedor de preguntas -->
                         <div class="question-container">
+                            <div id="cat_0_1" class="tyt_data question">
+                                <div data-type="char"
+                                    data-name="Field">
+                                    <div>
+                                        <label
+                                            for="sale1">
+                                            <span class="s_website_form_label_content">Name</span>
+                                        </label>
+                                        <div>
+                                            <input id="satisfaction_survey_1" type="text"
+                                                class="s_website_form_input form-control"
+                                                name="partner_name" />
+                                        </div>
+                                    </div>
+                                </div>
+                                <div data-type="char"
+                                    data-name="Field">
+                                    <div>
+                                        <label
+                                            for="satisfaction_survey_1">
+                                            <span class="s_website_form_label_content">Job</span>
+                                        </label>
+                                        <div>
+                                            <input id="satisfaction_survey_2" type="text"
+                                                class="s_website_form_input form-control" name="job" />
+                                        </div>
+                                    </div>
+                                </div>
+                                <div data-type="char"
+                                    data-name="Field">
+                                    <div>
+                                        <label
+                                            for="satisfaction_survey_2">
+                                            <span class="s_website_form_label_content">E-mail</span>
+                                        </label>
+                                        <div>
+                                            <input id="satisfaction_survey_3" type="text"
+                                                class="s_website_form_input form-control"
+                                                name="email" />
+                                        </div>
+                                    </div>
+                                </div>
+                                <div data-type="char"
+                                    data-name="Field">
+                                    <div>
+                                        <label
+                                            for="satisfaction_survey_3">
+                                            <span class="s_website_form_label_content">Company</span>
+                                        </label>
+                                        <div>
+                                            <input id="satisfaction_survey_4" type="text"
+                                                class="s_website_form_input form-control"
+                                                name="partner_company" />
+                                        </div>
+                                    </div>
+                                </div>
+                                <div data-type="char"
+                                    data-name="Field">
+                                    <div>
+                                        <label
+                                            for="satisfaction_survey_4">
+                                            <span class="s_website_form_label_content">Campaign</span>
+                                        </label>
+                                        <div>
+                                            <input id="satisfaction_survey_5" type="text"
+                                                class="s_website_form_input form-control"
+                                                name="campaign" />
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
                             <div id="cat_1_1" class="question">
                                 <div id="question_cat_1_1">¿Qué tan claras fueron nuestras
                                     comunicaciones
@@ -46,6 +107,7 @@
                                     usted sobre los movimientos internos que llegan a afectar sus
                                     campañas? siendo el 1 nada informado, y el 10 completamente
                                     informado. *</div>
+                                <div class="TYTradioContainer" id="TYTradioContainer"></div>
                             </div>
                             <div id="cat_1_3" class="question">
                                 <div id="question_cat_1_3" class="question">¿Cómo califica la
@@ -53,11 +115,13 @@
                                     Responsable de Operaciones? siendo el 1 mala comunicación, y el
                                     10
                                     muy buena comunicación. *</div>
+                                <div class="TYTradioContainer" id="TYTradioContainer"></div>
                             </div>
                             <div id="cat_1_4" class="question">
                                 <div id=" question_cat_1_4" class="question">¿Desea hacer un
                                     comentario sobre el
                                     tema de Comunicación?</div>
+                                <input type="text" class="tyt_text" name="cat_1_4" />
                             </div>
                             <div id="cat_2_1" class="question">
                                 <div id="question_cat_2_1" class="question">¿Qué nivel de atención a
@@ -65,6 +129,7 @@
                                     recibe del Responsable de Operaciones? siendo el 1 pésima
                                     atención,
                                     y el 10 excelente atención. *</div>
+                                <div class="TYTradioContainer" id="TYTradioContainer"></div>
                             </div>
                             <div id="cat_2_2" class="question">
                                 <div id=" question_cat_2_2" class="question">¿Qué nivel de atención
@@ -72,11 +137,13 @@
                                     recibe del Gerente de Sitio? siendo el 1 pésima atención, y el
                                     10
                                     excelente atención. *</div>
+                                <div class="TYTradioContainer" id="TYTradioContainer"></div>
                             </div>
                             <div id="cat_2_3" class="question">
                                 <div id="question_cat_2_3" class="question">¿Desea hacer algún
                                     comentario sobre
                                     el tema de atención?</div>
+                                <input type="text" class="tyt_text" name="cat_2_3" />
                             </div>
                             <div id="cat_3_1" class="question">
                                 <div id=" question_cat_3_1" class="question">Podría evaluar el
@@ -85,6 +152,7 @@
                                     objetivos, siendo el 1 bajo desempeño, y el 10 excelente
                                     desempeño.
                                     *</div>
+                                <div class="TYTradioContainer" id="TYTradioContainer"></div>
                             </div>
                             <div id="cat_3_2" class="question">
                                 <div id="question_cat_3_2" class="question">Podría evaluar el
@@ -92,33 +160,39 @@
                                     personal de Calidad hablando de cumplimiento de objetivos,
                                     siendo el
                                     1 bajo desempeño, y el 10 excelente desempeño. *</div>
+                                <div class="TYTradioContainer" id="TYTradioContainer"></div>
                             </div>
                             <div id="cat_3_3" class="question">
                                 <div id=" question_cat_3_3" class="question">Podría evaluar el
                                     desempeño del
                                     personal de Reclutamiento hablando de cumplimiento de objetivos,
                                     siendo el 1 bajo desempeño, y el 10 excelente desempeño. *</div>
+                                <div class="TYTradioContainer" id="TYTradioContainer"></div>
                             </div>
                             <div id="cat_3_4" class="question">
                                 <div id="question_cat_3_4" class="question">¿Desea hacer algún
                                     comentario sobre
                                     el tema de desempeño?</div>
+                                <input type="text" class="tyt_text" name="cat_3_4" />
                             </div>
                             <div id="cat_4_1" class="question">
                                 <div id=" question_cat_4_1" class="question">¿Con qué nivel de
                                     puntualidad recibe
                                     las facturas? siendo el 1 nada puntual, y el 10 muy puntual. *</div>
+                                <div class="TYTradioContainer" id="TYTradioContainer"></div>
                             </div>
                             <div id="cat_4_2" class="question">
                                 <div id="question_cat_4_2" class="question">¿Qué tan rápido
                                     respondemos ante los
                                     problemas? siendo el 1 muy lento, y el 10 completamente rápido.
                                     *</div>
+                                <div class="TYTradioContainer" id="TYTradioContainer"></div>
                             </div>
                             <div id="cat_4_3" class="question">
                                 <div id=" question_cat_4_3" class="question">¿Desea hacer algún
                                     comentario sobre
                                     el tema de eficiencia?</div>
+                                <input type="text" class="tyt_text" name="cat_4_3" />
                             </div>
                             <div id="cat_5_1" class="question">
                                 <div id="question_cat_5_1" class="question">Podría calificar el
@@ -127,6 +201,7 @@
                                     en
                                     términos de seguridad, siendo el 1 nada seguro, y el 10
                                     completamente seguro. *</div>
+                                <div class="TYTradioContainer" id="TYTradioContainer"></div>
                             </div>
                             <div id="cat_5_2" class="question">
                                 <div id=" question_cat_5_2" class="question">Podría calificar el
@@ -136,6 +211,7 @@
                                     términos de rapidez, siendo el 1 muy lento, y el 10
                                     completamente
                                     rápido. *</div>
+                                <div class="TYTradioContainer" id="TYTradioContainer"></div>
                             </div>
                             <div id="cat_5_3" class="question">
                                 <div id="question_cat_5_3" class="question">Podría calificar el
@@ -145,11 +221,13 @@
                                     términos de diseño e imagen, siendo el 1 nada estético, y el 10
                                     muy
                                     estético. *</div>
+                                <div class="TYTradioContainer" id="TYTradioContainer"></div>
                             </div>
                             <div id="cat_5_4" class="question">
                                 <div id=" question_cat_5_4" class="question">¿Desea hacer algún
                                     comentario sobre
                                     el tema de Seguridad y TI?</div>
+                                <input type="text" class="tyt_text" name="cat_5_4" />
                             </div>
                             <div id="cat_6_1" class="question">
                                 <div id="question_cat_6_1" class="question">Podría calificar
@@ -157,6 +235,7 @@
                                     instalaciones en función de imagen, siendo el 1 nada estético, y
                                     el
                                     10 muy estético. *</div>
+                                <div class="TYTradioContainer" id="TYTradioContainer"></div>
                             </div>
                             <div id="cat_6_2" class="question">
                                 <div id=" question_cat_6_2" class="question">Podría calificar
@@ -164,17 +243,20 @@
                                     instalaciones en función de comodidad, siendo el 1 nada cómodo,
                                     y el
                                     10 muy cómodo. *</div>
+                                <div class="TYTradioContainer" id="TYTradioContainer"></div>
                             </div>
                             <div id="cat_6_3" class="question">
                                 <div id="question_cat_6_3" class="question">¿Desea hacer algún
                                     comentario sobre
                                     el tema de Mantenimiento?</div>
+                                <input type="text" class="tyt_text" name="cat_6_3" />
                             </div>
                             <div id="cat_7_1" class="question">
                                 <div id=" question_cat_7_1" class="question">¿Cuáles son las
                                     probabilidades de que
                                     nos recomiende con otras empresas?, siendo el 1 nada de
                                     probabilidad, y el 10 muy probable. *</div>
+                                <div class="TYTradioContainer" id="TYTradioContainer"></div>
                             </div>
                             <div id="cat_7_2" class="question">
                                 <div id="question_cat_7_2" class="question">¿Cuáles son las
@@ -182,16 +264,19 @@
                                     realice actividades comerciales con nosotros en un futuro?
                                     siendo el
                                     1 nada de probabilidad, y el 10 extremadamente probable. *</div>
+                                <div class="TYTradioContainer" id="TYTradioContainer"></div>
                             </div>
                             <div id="cat_7_3" class="question">
                                 <div id=" question_cat_7_3" class="question">Califique la calidad
                                     general de
                                     nuestros servicios*</div>
+                                <input type="text" class="tyt_text" name="cat_7_3" />
                             </div>
                             <div id="cat_7_4" class="question">
                                 <div id="question_cat_7_4" class="question">Podría hacer algún
                                     comentario sobre
                                     nuestros servicios con el fin de mejorar</div>
+                                <input type="text" class="tyt_text" name="cat_7_4" />
                             </div>
                         </div>
 
@@ -199,8 +284,7 @@
                         <div class="navigation-buttons">
                             <input type="button" id="previous" class="button tyt_previous"
                                 value="Anterior" />
-                            <input type="button" id="submit" class="button tyt_submit"
-                                value="Enviar Respuesta" />
+                            <button type="submit" class="button tyt_submit">Enviar respuesta</button>
                             <input type="button" id="next" class="button tyt_next" value="Siguiente" />
                         </div>
 
@@ -208,6 +292,15 @@
                 </form>
             </div>
         </t>
+    </template>
+
+    <template id="tyt_survey.satisfaction_survey_done" name="satisfaction_survey_done">
+        <form>
+            <div class="form-group form-field o_website_form_required_custom" align="center">
+                <h1 style="align:center;padding-top:100px;text-weight:bold;">Gracias! Su encuesta ha
+                    sido enviada</h1>
+            </div>
+        </form>
     </template>
 
 </odoo>
