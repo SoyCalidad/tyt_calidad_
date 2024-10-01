@@ -10,7 +10,38 @@
                     <field name="risk_origin" attrs="{'readonly': [('state','not in',('draft','in_process'))]}" />
                     <field name="hr_job_id" widget="many2many_tags" attrs="{'readonly': [('state','not in',('draft','in_process'))]}" />
                 </xpath>
+                <field name="name" position="attributes">
+                    <attribute name="string">Descripción</attribute>
+                </field>
+                <field name="description" position="attributes">
+                    <attribute name="string">Detalle</attribute>
+                </field>
+                <field name="interpretation_risk" position="attributes">
+                    <attribute name="invisible">1</attribute>
+                </field>                        
             </field>
-        </record>            
+        </record>
+
+        <record id="view_matrix_block_line_tyt_tree_inherit" model="ir.ui.view">
+            <field name="name">matrix.block.line.tree.inherit</field>
+            <field name="model">matrix.block.line</field>
+            <field name="inherit_id" ref="mgmtsystem_opportunity.view_matrix_block_line_tree"/>
+            <field name="arch" type="xml">
+                <field name="name" position="attributes">
+                    <attribute name="string">Descripción</attribute>
+                </field>
+
+                <field name="effect" position="replace">
+                    <field name="stakeholder_id" />
+                </field>
+            
+                <field name="cause" position="replace">
+                    <field name="ntr" />
+                </field>
+            </field>
+        </record>
+
+
+
     </data>
 </odoo>
