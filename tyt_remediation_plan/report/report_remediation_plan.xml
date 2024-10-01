@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <!-- <report
+            id="action_report_report_remediation_plan"
+            model="maintenance.remediationplan"
+            string="Remediation Plan"
+            report_type="xlsx"
+            name="tyt_remediation_plan.report_remediation_plan"
+            file="Remediation Plan"
+            /> -->
+</odoo>
