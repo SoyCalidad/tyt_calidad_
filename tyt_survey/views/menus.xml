@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+
+    <menuitem
+        id="tyt_satisfaction_survey_main_menu"
+        name="Satisfaction Survey"
+        parent="survey.menu_surveys"
+        sequence="100"/>
+
+    <menuitem
+        id="tyt_satisfaction_survey_menu"
+        name="Satisfaction Survey"
+        action="tyt_satisfaction_survey_action"
+        parent="tyt_satisfaction_survey_main_menu"
+        sequence="10"/>
+
+    <menuitem
+        id="tyt_satisfaction_survey_line_menu"
+        name="Satisfaction Survey Line"
+        action="tyt_satisfaction_survey_line_action"
+        parent="tyt_satisfaction_survey_main_menu"
+        sequence="20"/>
+
+    <menuitem
+        id="tyt_satisfaction_survey_question_menu"
+        name="Satisfaction Survey Question"
+        action="tyt_satisfaction_survey_question_action"
+        parent="tyt_satisfaction_survey_main_menu"
+        sequence="30"/>
+
+</odoo>
