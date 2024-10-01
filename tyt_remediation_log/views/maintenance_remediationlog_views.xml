@@ -1,0 +1,66 @@
+<odoo>
+    <!-- Vista para el modelo Remediation Log -->
+    <record id="view_maintenance_remediationlog_form" model="ir.ui.view">
+        <field name="name">maintenance.remediationlog.form</field>
+        <field name="model">maintenance.remediationlog</field>
+        <field name="arch" type="xml">
+            <form string="Remediation Log">
+                <header>
+                    <button name="action_save" string="Save" type="object" class="oe_highlight"/>
+                    <button name="action_cancel" string="Cancel" type="object" class="oe_link"/>
+                </header>
+                <sheet>
+                    <group>
+                        <field name="name"/>
+                        <field name="user_id"/>
+                        <field name="production_date"/>
+                    </group>
+
+                    <notebook>
+                        <page string="Development">
+                            <field name="remediation_log_line_ids">
+                                <tree editable="bottom" create="false" delete="false">
+                                    <field name="location"/>
+                                    <field name="detection"/>
+                                    <field name="remediation"/>
+                                </tree>
+                            </field>
+                        </page>
+                        <page string="Validation and version">
+                        </page>
+                    </notebook>
+                    <group>
+                        <field name="observations"/>
+                    </group>
+                </sheet>
+            </form>
+        </field>
+    </record>
+
+    <!-- Vista de árbol para la lista de Remediation Logs -->
+    <record id="view_maintenance_remediationlog_tree" model="ir.ui.view">
+        <field name="name">maintenance.remediationlog.tree</field>
+        <field name="model">maintenance.remediationlog</field>
+        <field name="arch" type="xml">
+            <tree string="Remediation Logs">
+                <field name="name"/>
+                <field name="user_id"/>
+                <field name="production_date"/>
+            </tree>
+        </field>
+    </record>
+
+    <!-- Acción para abrir el menú de Remediation Logs -->
+    <record id="action_maintenance_remediationlog" model="ir.actions.act_window">
+        <field name="name">Remediation Logs</field>
+        <field name="res_model">maintenance.remediationlog</field>
+        <field name="view_mode">tree,form</field>
+    </record>
+
+    <!-- Submenú para Remediation dentro de Maintenance -->
+    <menuitem id="menu_maintenance_remediation_root" name="Remediation" parent="maintenance.menu_maintenance_title" sequence="5"/>
+
+    <!-- Submenú para acceder a los Remediation Logs -->
+    <menuitem id="menu_maintenance_remediationlog" name="Remediation Logs"
+              parent="menu_maintenance_remediation_root" action="action_maintenance_remediationlog" sequence="10"/>
+</odoo>
