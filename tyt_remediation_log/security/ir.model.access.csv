@@ -1,0 +1,4 @@
+id,name,model_id:id,group_id:id,perm_read,perm_write,perm_create,perm_unlink
+
+access_maintenance_remediationlog,access_maintenance_remediationlog,model_maintenance_remediationlog,base.group_user,1,1,1,1
+access_maintenance_remediationlog_line,access_maintenance_remediationlog_line,model_maintenance_remediationlog_line,base.group_user,1,1,1,1

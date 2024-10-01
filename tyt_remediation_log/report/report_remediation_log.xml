@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <record id="remediation_log_report_xlsx" model="ir.actions.report">
+        <field name="name">Remediation Log Report (Excel)</field>
+        <field name="model">maintenance.remediationlog</field>
+        <field name="report_type">xlsx</field>
+        <field name="report_name">tyt_remediation_log.remediation_report</field>
+        <field name="report_file">Report</field>
+        <field name="binding_model_id" ref="model_management_review"/>
+        <field name="binding_type">report</field>
+        <field name="attachment_use" eval="False"/>
+        <field name="multi" eval="False"/>
+    </record>
+</odoo>
