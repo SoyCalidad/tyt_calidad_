@@ -13,7 +13,8 @@ class SurveySatisfactionQuestion(models.Model):
     
     name = fields.Char(string="Name", required=True)
     code = fields.Char(string="Code", required=True)
-    qualification = fields.Integer(string="Qualification", required=True)
+    text = fields.Text(string="Text")
+    qualification = fields.Integer(string="Qualification")
     
     survey_id = fields.Many2one("tyt.satisfaction.survey", string="Survey")
 

@@ -47,22 +47,18 @@ class TYTSatisfactionSurvey(http.Controller):
         
         lines = [(5, 0, 0)]
         
-        question_values_list = []
+        cat_text_fields = ['cat_1_4', 'cat_2_3', 'cat_3_4', 'cat_4_3', 'cat_5_4', 'cat_6_3', 'cat_7_3', 'cat_7_4']
         
         for key, value in kw.items():            
             if 'cat_' in key:
                 
                 question_id = satisfaction_survey_question_model.search([('code', '=', key)])
                 
-                print (question_id)
-                
-                for question in question_id:
-                    print (question.name, question.code, question.id)
-                
                 question_values = {
                     'name': question_id.name,
                     'code': question_id.code,
-                    'qualification': value
+                    'qualification': value if key not in cat_text_fields else False,
+                    'text': value if key in cat_text_fields else False,
                 }
                 
                 lines.append((0, 0, question_values))
