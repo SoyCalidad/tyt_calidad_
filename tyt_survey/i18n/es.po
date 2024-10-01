@@ -1,0 +1,631 @@
+# Translation of Odoo Server.
+# This file contains the translation of the following modules:
+# 	* tyt_survey
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: Odoo Server 16.0+e-20240912\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2024-10-01 15:25+0000\n"
+"PO-Revision-Date: 2024-10-01 15:25+0000\n"
+"Last-Translator: \n"
+"Language-Team: \n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: \n"
+"Plural-Forms: \n"
+
+#. module: tyt_survey
+#: model_terms:ir.ui.view,arch_db:tyt_survey.satisfaction_survey
+#: model_terms:ir.ui.view,arch_db:tyt_survey.satisfaction_survey_main
+msgid "<span class=\"s_website_form_label_content\">Campaign</span>"
+msgstr "<span class=\"s_website_form_label_content\">Campaña</span>"
+
+#. module: tyt_survey
+#: model_terms:ir.ui.view,arch_db:tyt_survey.satisfaction_survey
+#: model_terms:ir.ui.view,arch_db:tyt_survey.satisfaction_survey_main
+msgid "<span class=\"s_website_form_label_content\">Company</span>"
+msgstr "<span class=\"s_website_form_label_content\">Empresa</span>"
+
+#. module: tyt_survey
+#: model_terms:ir.ui.view,arch_db:tyt_survey.satisfaction_survey
+#: model_terms:ir.ui.view,arch_db:tyt_survey.satisfaction_survey_main
+msgid "<span class=\"s_website_form_label_content\">Correo electrónico</span>"
+msgstr ""
+
+#. module: tyt_survey
+#: model_terms:ir.ui.view,arch_db:tyt_survey.satisfaction_survey
+#: model_terms:ir.ui.view,arch_db:tyt_survey.satisfaction_survey_main
+msgid "<span class=\"s_website_form_label_content\">Job</span>"
+msgstr "<span class=\"s_website_form_label_content\">Puesto</span>"
+
+#. module: tyt_survey
+#: model_terms:ir.ui.view,arch_db:tyt_survey.satisfaction_survey
+#: model_terms:ir.ui.view,arch_db:tyt_survey.satisfaction_survey_main
+msgid "<span class=\"s_website_form_label_content\">Name</span>"
+msgstr "<span class=\"s_website_form_label_content\">Nombre</span>"
+
+#. module: tyt_survey
+#. odoo-javascript
+#: code:addons/tyt_survey/static/src/xml/satisfaction_survey.xml:0
+#, python-format
+msgid "Anterior"
+msgstr ""
+
+#. module: tyt_survey
+#. odoo-javascript
+#: code:addons/tyt_survey/static/src/xml/satisfaction_survey.xml:0
+#: model_terms:ir.ui.view,arch_db:tyt_survey.satisfaction_survey
+#, python-format
+msgid "Atención"
+msgstr ""
+
+#. module: tyt_survey
+#. odoo-javascript
+#: code:addons/tyt_survey/static/src/xml/satisfaction_survey.xml:0
+#: model_terms:ir.ui.view,arch_db:tyt_survey.satisfaction_survey
+#, python-format
+msgid ""
+"Califique la calidad\n"
+"                                    general de\n"
+"                                    nuestros servicios*"
+msgstr ""
+
+#. module: tyt_survey
+#. odoo-javascript
+#: code:addons/tyt_survey/static/src/xml/satisfaction_survey.xml:0
+#: code:addons/tyt_survey/static/src/xml/satisfaction_survey_main.xml:0
+#: model:ir.model.fields,field_description:tyt_survey.field_tyt_satisfaction_survey__campaign
+#, python-format
+msgid "Campaign"
+msgstr "Campaña"
+
+#. module: tyt_survey
+#: model:ir.model.fields,field_description:tyt_survey.field_tyt_satisfaction_survey_line__code
+#: model:ir.model.fields,field_description:tyt_survey.field_tyt_satisfaction_survey_question__code
+msgid "Code"
+msgstr "Código"
+
+#. module: tyt_survey
+#. odoo-javascript
+#: code:addons/tyt_survey/static/src/xml/satisfaction_survey.xml:0
+#: code:addons/tyt_survey/static/src/xml/satisfaction_survey_main.xml:0
+#, python-format
+msgid "Company"
+msgstr "Empresa"
+
+#. module: tyt_survey
+#. odoo-javascript
+#: code:addons/tyt_survey/static/src/xml/satisfaction_survey.xml:0
+#: model_terms:ir.ui.view,arch_db:tyt_survey.satisfaction_survey
+#, python-format
+msgid "Comunicación"
+msgstr ""
+
+#. module: tyt_survey
+#: model:ir.model.fields,field_description:tyt_survey.field_tyt_satisfaction_survey__create_uid
+#: model:ir.model.fields,field_description:tyt_survey.field_tyt_satisfaction_survey_line__create_uid
+#: model:ir.model.fields,field_description:tyt_survey.field_tyt_satisfaction_survey_question__create_uid
+msgid "Created by"
+msgstr "Creado por"
+
+#. module: tyt_survey
+#: model:ir.model.fields,field_description:tyt_survey.field_tyt_satisfaction_survey__create_date
+#: model:ir.model.fields,field_description:tyt_survey.field_tyt_satisfaction_survey_line__create_date
+#: model:ir.model.fields,field_description:tyt_survey.field_tyt_satisfaction_survey_question__create_date
+msgid "Created on"
+msgstr "Creado el"
+
+#. module: tyt_survey
+#. odoo-javascript
+#: code:addons/tyt_survey/static/src/xml/satisfaction_survey.xml:0
+#: model_terms:ir.ui.view,arch_db:tyt_survey.satisfaction_survey
+#, python-format
+msgid "Datos"
+msgstr ""
+
+#. module: tyt_survey
+#. odoo-javascript
+#: code:addons/tyt_survey/static/src/xml/satisfaction_survey.xml:0
+#: model_terms:ir.ui.view,arch_db:tyt_survey.satisfaction_survey
+#, python-format
+msgid "Desempeño"
+msgstr ""
+
+#. module: tyt_survey
+#: model:ir.model.fields,field_description:tyt_survey.field_tyt_satisfaction_survey__display_name
+#: model:ir.model.fields,field_description:tyt_survey.field_tyt_satisfaction_survey_line__display_name
+#: model:ir.model.fields,field_description:tyt_survey.field_tyt_satisfaction_survey_question__display_name
+msgid "Display Name"
+msgstr "Nombre a mostrar"
+
+#. module: tyt_survey
+#. odoo-javascript
+#: code:addons/tyt_survey/static/src/xml/satisfaction_survey.xml:0
+#: code:addons/tyt_survey/static/src/xml/satisfaction_survey_main.xml:0
+#, python-format
+msgid "E-mail"
+msgstr "Correo electrónico"
+
+#. module: tyt_survey
+#. odoo-javascript
+#: code:addons/tyt_survey/static/src/xml/satisfaction_survey.xml:0
+#: model_terms:ir.ui.view,arch_db:tyt_survey.satisfaction_survey
+#, python-format
+msgid "Eficiencia"
+msgstr ""
+
+#. module: tyt_survey
+#: model:ir.model.fields,field_description:tyt_survey.field_tyt_satisfaction_survey__email
+msgid "Email"
+msgstr "Correo electrónico"
+
+#. module: tyt_survey
+#. odoo-javascript
+#: code:addons/tyt_survey/static/src/xml/satisfaction_survey.xml:0
+#: model_terms:ir.ui.view,arch_db:tyt_survey.satisfaction_survey
+#, python-format
+msgid "Enviar respuesta"
+msgstr ""
+
+#. module: tyt_survey
+#. odoo-javascript
+#: code:addons/tyt_survey/static/src/xml/satisfaction_survey_main.xml:0
+#, python-format
+msgid "Go to survey"
+msgstr "Ir a encuesta"
+
+#. module: tyt_survey
+#: model_terms:ir.ui.view,arch_db:tyt_survey.satisfaction_survey_main
+msgid ""
+"Go to survey\n"
+"                                <i class=\"fa fa-angle-right ms-2 fw-light\"/>"
+msgstr ""
+
+#. module: tyt_survey
+#. odoo-javascript
+#: code:addons/tyt_survey/static/src/xml/satisfaction_survey.xml:0
+#: model_terms:ir.ui.view,arch_db:tyt_survey.satisfaction_survey_done
+#, python-format
+msgid ""
+"Gracias! Su encuesta ha\n"
+"                    sido enviada"
+msgstr ""
+
+#. module: tyt_survey
+#: model:ir.model.fields,field_description:tyt_survey.field_tyt_satisfaction_survey__id
+#: model:ir.model.fields,field_description:tyt_survey.field_tyt_satisfaction_survey_line__id
+#: model:ir.model.fields,field_description:tyt_survey.field_tyt_satisfaction_survey_question__id
+msgid "ID"
+msgstr ""
+
+#. module: tyt_survey
+#. odoo-javascript
+#: code:addons/tyt_survey/static/src/xml/satisfaction_survey.xml:0
+#: code:addons/tyt_survey/static/src/xml/satisfaction_survey_main.xml:0
+#: model:ir.model.fields,field_description:tyt_survey.field_tyt_satisfaction_survey__job
+#, python-format
+msgid "Job"
+msgstr "Puesto"
+
+#. module: tyt_survey
+#: model:ir.model.fields,field_description:tyt_survey.field_tyt_satisfaction_survey____last_update
+#: model:ir.model.fields,field_description:tyt_survey.field_tyt_satisfaction_survey_line____last_update
+#: model:ir.model.fields,field_description:tyt_survey.field_tyt_satisfaction_survey_question____last_update
+msgid "Last Modified on"
+msgstr "Última modificación el"
+
+#. module: tyt_survey
+#: model:ir.model.fields,field_description:tyt_survey.field_tyt_satisfaction_survey__write_uid
+#: model:ir.model.fields,field_description:tyt_survey.field_tyt_satisfaction_survey_line__write_uid
+#: model:ir.model.fields,field_description:tyt_survey.field_tyt_satisfaction_survey_question__write_uid
+msgid "Last Updated by"
+msgstr "Última modificación por"
+
+#. module: tyt_survey
+#: model:ir.model.fields,field_description:tyt_survey.field_tyt_satisfaction_survey__write_date
+#: model:ir.model.fields,field_description:tyt_survey.field_tyt_satisfaction_survey_line__write_date
+#: model:ir.model.fields,field_description:tyt_survey.field_tyt_satisfaction_survey_question__write_date
+msgid "Last Updated on"
+msgstr "Última actualización el"
+
+#. module: tyt_survey
+#. odoo-javascript
+#: code:addons/tyt_survey/static/src/xml/satisfaction_survey.xml:0
+#: model_terms:ir.ui.view,arch_db:tyt_survey.satisfaction_survey
+#, python-format
+msgid "Mantenimiento"
+msgstr ""
+
+#. module: tyt_survey
+#. odoo-javascript
+#: code:addons/tyt_survey/static/src/xml/satisfaction_survey.xml:0
+#: model_terms:ir.ui.view,arch_db:tyt_survey.satisfaction_survey
+#, python-format
+msgid "Mejora continua"
+msgstr ""
+
+#. module: tyt_survey
+#. odoo-javascript
+#: code:addons/tyt_survey/static/src/xml/satisfaction_survey.xml:0
+#: code:addons/tyt_survey/static/src/xml/satisfaction_survey_main.xml:0
+#: model:ir.model.fields,field_description:tyt_survey.field_tyt_satisfaction_survey__partner_name
+#: model:ir.model.fields,field_description:tyt_survey.field_tyt_satisfaction_survey_line__name
+#: model:ir.model.fields,field_description:tyt_survey.field_tyt_satisfaction_survey_question__name
+#, python-format
+msgid "Name"
+msgstr "Nombre"
+
+#. module: tyt_survey
+#: model:ir.model.fields,field_description:tyt_survey.field_tyt_satisfaction_survey__partner_company
+msgid "Partner"
+msgstr "Empresa"
+
+#. module: tyt_survey
+#. odoo-javascript
+#: code:addons/tyt_survey/static/src/xml/satisfaction_survey.xml:0
+#: model_terms:ir.ui.view,arch_db:tyt_survey.satisfaction_survey
+#, python-format
+msgid ""
+"Podría calificar\n"
+"                                    nuestras\n"
+"                                    instalaciones en función de comodidad, siendo el 1 nada cómodo,\n"
+"                                    y el\n"
+"                                    10 muy cómodo. *"
+msgstr ""
+
+#. module: tyt_survey
+#. odoo-javascript
+#: code:addons/tyt_survey/static/src/xml/satisfaction_survey.xml:0
+#: model_terms:ir.ui.view,arch_db:tyt_survey.satisfaction_survey
+#, python-format
+msgid ""
+"Podría calificar\n"
+"                                    nuestras\n"
+"                                    instalaciones en función de imagen, siendo el 1 nada estético, y\n"
+"                                    el\n"
+"                                    10 muy estético. *"
+msgstr ""
+
+#. module: tyt_survey
+#. odoo-javascript
+#: code:addons/tyt_survey/static/src/xml/satisfaction_survey.xml:0
+#: model_terms:ir.ui.view,arch_db:tyt_survey.satisfaction_survey
+#, python-format
+msgid ""
+"Podría calificar el\n"
+"                                    funcionamiento de\n"
+"                                    los aplicativos internos para el buen manejo de su información\n"
+"                                    en\n"
+"                                    términos de diseño e imagen, siendo el 1 nada estético, y el 10\n"
+"                                    muy\n"
+"                                    estético. *"
+msgstr ""
+
+#. module: tyt_survey
+#. odoo-javascript
+#: code:addons/tyt_survey/static/src/xml/satisfaction_survey.xml:0
+#: model_terms:ir.ui.view,arch_db:tyt_survey.satisfaction_survey
+#, python-format
+msgid ""
+"Podría calificar el\n"
+"                                    funcionamiento de\n"
+"                                    los aplicativos internos para el buen manejo de su información\n"
+"                                    en\n"
+"                                    términos de rapidez, siendo el 1 muy lento, y el 10\n"
+"                                    completamente\n"
+"                                    rápido. *"
+msgstr ""
+
+#. module: tyt_survey
+#. odoo-javascript
+#: code:addons/tyt_survey/static/src/xml/satisfaction_survey.xml:0
+#: model_terms:ir.ui.view,arch_db:tyt_survey.satisfaction_survey
+#, python-format
+msgid ""
+"Podría calificar el\n"
+"                                    funcionamiento de\n"
+"                                    los aplicativos internos para el buen manejo de su información\n"
+"                                    en\n"
+"                                    términos de seguridad, siendo el 1 nada seguro, y el 10\n"
+"                                    completamente seguro. *"
+msgstr ""
+
+#. module: tyt_survey
+#. odoo-javascript
+#: code:addons/tyt_survey/static/src/xml/satisfaction_survey.xml:0
+#: model_terms:ir.ui.view,arch_db:tyt_survey.satisfaction_survey
+#, python-format
+msgid ""
+"Podría evaluar el\n"
+"                                    desempeño del\n"
+"                                    personal de Calidad hablando de cumplimiento de objetivos,\n"
+"                                    siendo el\n"
+"                                    1 bajo desempeño, y el 10 excelente desempeño. *"
+msgstr ""
+
+#. module: tyt_survey
+#. odoo-javascript
+#: code:addons/tyt_survey/static/src/xml/satisfaction_survey.xml:0
+#: model_terms:ir.ui.view,arch_db:tyt_survey.satisfaction_survey
+#, python-format
+msgid ""
+"Podría evaluar el\n"
+"                                    desempeño del\n"
+"                                    personal de Reclutamiento hablando de cumplimiento de objetivos,\n"
+"                                    siendo el 1 bajo desempeño, y el 10 excelente desempeño. *"
+msgstr ""
+
+#. module: tyt_survey
+#. odoo-javascript
+#: code:addons/tyt_survey/static/src/xml/satisfaction_survey.xml:0
+#: model_terms:ir.ui.view,arch_db:tyt_survey.satisfaction_survey
+#, python-format
+msgid ""
+"Podría evaluar el\n"
+"                                    desempeño del\n"
+"                                    personal del área de Operaciones hablando de cumplimiento de\n"
+"                                    objetivos, siendo el 1 bajo desempeño, y el 10 excelente\n"
+"                                    desempeño.\n"
+"                                    *"
+msgstr ""
+
+#. module: tyt_survey
+#. odoo-javascript
+#: code:addons/tyt_survey/static/src/xml/satisfaction_survey.xml:0
+#: model_terms:ir.ui.view,arch_db:tyt_survey.satisfaction_survey
+#, python-format
+msgid ""
+"Podría hacer algún\n"
+"                                    comentario sobre\n"
+"                                    nuestros servicios con el fin de mejorar"
+msgstr ""
+
+#. module: tyt_survey
+#: model:ir.model.fields,field_description:tyt_survey.field_tyt_satisfaction_survey_line__qualification
+msgid "Qualification"
+msgstr "Calificación"
+
+#. module: tyt_survey
+#: model:ir.model.fields,field_description:tyt_survey.field_tyt_satisfaction_survey__line_ids
+msgid "Questions"
+msgstr "Preguntas"
+
+#. module: tyt_survey
+#: model:ir.model,name:tyt_survey.model_tyt_satisfaction_survey
+#: model:ir.ui.menu,name:tyt_survey.tyt_satisfaction_survey_main_menu
+#: model:ir.ui.menu,name:tyt_survey.tyt_satisfaction_survey_menu
+msgid "Satisfaction Survey"
+msgstr "Encuesta de satisfacción"
+
+#. module: tyt_survey
+#: model:ir.actions.act_window,name:tyt_survey.tyt_satisfaction_survey_line_action
+#: model:ir.model,name:tyt_survey.model_tyt_satisfaction_survey_line
+#: model:ir.ui.menu,name:tyt_survey.tyt_satisfaction_survey_line_menu
+msgid "Satisfaction Survey Line"
+msgstr "Linea de la encuesta de satisfacción"
+
+#. module: tyt_survey
+#: model:ir.model,name:tyt_survey.model_tyt_satisfaction_survey_question
+#: model:ir.ui.menu,name:tyt_survey.tyt_satisfaction_survey_question_menu
+msgid "Satisfaction Survey Question"
+msgstr "Pregunta de la encuesta de satisfacción"
+
+#. module: tyt_survey
+#. odoo-javascript
+#: code:addons/tyt_survey/static/src/xml/satisfaction_survey.xml:0
+#: model_terms:ir.ui.view,arch_db:tyt_survey.satisfaction_survey
+#, python-format
+msgid "Seguridad y TI"
+msgstr ""
+
+#. module: tyt_survey
+#. odoo-javascript
+#: code:addons/tyt_survey/static/src/xml/satisfaction_survey.xml:0
+#, python-format
+msgid "Siguiente"
+msgstr ""
+
+#. module: tyt_survey
+#: model:ir.model.fields,field_description:tyt_survey.field_tyt_satisfaction_survey_line__survey_id
+msgid "Survey"
+msgstr "Encuesta"
+
+#. module: tyt_survey
+#: model:ir.actions.act_window,name:tyt_survey.tyt_satisfaction_survey_action
+#: model_terms:ir.ui.view,arch_db:tyt_survey.tyt_satisfaction_survey_view_form
+#: model_terms:ir.ui.view,arch_db:tyt_survey.tyt_satisfaction_survey_view_search
+#: model_terms:ir.ui.view,arch_db:tyt_survey.tyt_satisfaction_survey_view_tree
+msgid "TYT Satisfaction Survey"
+msgstr "Encuesta de satisfacción TYT"
+
+#. module: tyt_survey
+#: model_terms:ir.ui.view,arch_db:tyt_survey.tyt_satisfaction_survey_line_view_form
+msgid "TYT Satisfaction Survey Line"
+msgstr "Linea de encuesta de satisfacción TYT"
+
+#. module: tyt_survey
+#: model:ir.actions.act_window,name:tyt_survey.tyt_satisfaction_survey_question_action
+#: model_terms:ir.ui.view,arch_db:tyt_survey.tyt_satisfaction_survey_line_view_tree
+#: model_terms:ir.ui.view,arch_db:tyt_survey.tyt_satisfaction_survey_question_view_form
+#: model_terms:ir.ui.view,arch_db:tyt_survey.tyt_satisfaction_survey_question_view_tree
+msgid "TYT Satisfaction Survey Question"
+msgstr "Pregunt de encuesta de satisfacción TYT"
+
+#. module: tyt_survey
+#. odoo-javascript
+#: code:addons/tyt_survey/static/src/xml/satisfaction_survey.xml:0
+#: model_terms:ir.ui.view,arch_db:tyt_survey.satisfaction_survey
+#, python-format
+msgid ""
+"¿Con qué nivel de\n"
+"                                    puntualidad recibe\n"
+"                                    las facturas? siendo el 1 nada puntual, y el 10 muy puntual. *"
+msgstr ""
+
+#. module: tyt_survey
+#. odoo-javascript
+#: code:addons/tyt_survey/static/src/xml/satisfaction_survey.xml:0
+#: model_terms:ir.ui.view,arch_db:tyt_survey.satisfaction_survey
+#, python-format
+msgid ""
+"¿Cuáles son las\n"
+"                                    probabilidades de que\n"
+"                                    nos recomiende con otras empresas?, siendo el 1 nada de\n"
+"                                    probabilidad, y el 10 muy probable. *"
+msgstr ""
+
+#. module: tyt_survey
+#. odoo-javascript
+#: code:addons/tyt_survey/static/src/xml/satisfaction_survey.xml:0
+#: model_terms:ir.ui.view,arch_db:tyt_survey.satisfaction_survey
+#, python-format
+msgid ""
+"¿Cuáles son las\n"
+"                                    probabilidades de que\n"
+"                                    realice actividades comerciales con nosotros en un futuro?\n"
+"                                    siendo el\n"
+"                                    1 nada de probabilidad, y el 10 extremadamente probable. *"
+msgstr ""
+
+#. module: tyt_survey
+#. odoo-javascript
+#: code:addons/tyt_survey/static/src/xml/satisfaction_survey.xml:0
+#: model_terms:ir.ui.view,arch_db:tyt_survey.satisfaction_survey
+#, python-format
+msgid ""
+"¿Cómo califica la\n"
+"                                    comunicación con el\n"
+"                                    Responsable de Operaciones? siendo el 1 mala comunicación, y el\n"
+"                                    10\n"
+"                                    muy buena comunicación. *"
+msgstr ""
+
+#. module: tyt_survey
+#. odoo-javascript
+#: code:addons/tyt_survey/static/src/xml/satisfaction_survey.xml:0
+#: model_terms:ir.ui.view,arch_db:tyt_survey.satisfaction_survey
+#, python-format
+msgid ""
+"¿Desea hacer algún\n"
+"                                    comentario sobre\n"
+"                                    el tema de Mantenimiento?"
+msgstr ""
+
+#. module: tyt_survey
+#. odoo-javascript
+#: code:addons/tyt_survey/static/src/xml/satisfaction_survey.xml:0
+#: model_terms:ir.ui.view,arch_db:tyt_survey.satisfaction_survey
+#, python-format
+msgid ""
+"¿Desea hacer algún\n"
+"                                    comentario sobre\n"
+"                                    el tema de Seguridad y TI?"
+msgstr ""
+
+#. module: tyt_survey
+#. odoo-javascript
+#: code:addons/tyt_survey/static/src/xml/satisfaction_survey.xml:0
+#: model_terms:ir.ui.view,arch_db:tyt_survey.satisfaction_survey
+#, python-format
+msgid ""
+"¿Desea hacer algún\n"
+"                                    comentario sobre\n"
+"                                    el tema de atención?"
+msgstr ""
+
+#. module: tyt_survey
+#. odoo-javascript
+#: code:addons/tyt_survey/static/src/xml/satisfaction_survey.xml:0
+#: model_terms:ir.ui.view,arch_db:tyt_survey.satisfaction_survey
+#, python-format
+msgid ""
+"¿Desea hacer algún\n"
+"                                    comentario sobre\n"
+"                                    el tema de desempeño?"
+msgstr ""
+
+#. module: tyt_survey
+#. odoo-javascript
+#: code:addons/tyt_survey/static/src/xml/satisfaction_survey.xml:0
+#: model_terms:ir.ui.view,arch_db:tyt_survey.satisfaction_survey
+#, python-format
+msgid ""
+"¿Desea hacer algún\n"
+"                                    comentario sobre\n"
+"                                    el tema de eficiencia?"
+msgstr ""
+
+#. module: tyt_survey
+#. odoo-javascript
+#: code:addons/tyt_survey/static/src/xml/satisfaction_survey.xml:0
+#: model_terms:ir.ui.view,arch_db:tyt_survey.satisfaction_survey
+#, python-format
+msgid ""
+"¿Desea hacer un\n"
+"                                    comentario sobre el\n"
+"                                    tema de Comunicación?"
+msgstr ""
+
+#. module: tyt_survey
+#. odoo-javascript
+#: code:addons/tyt_survey/static/src/xml/satisfaction_survey.xml:0
+#: model_terms:ir.ui.view,arch_db:tyt_survey.satisfaction_survey
+#, python-format
+msgid ""
+"¿Qué nivel de\n"
+"                                    conocimiento tiene\n"
+"                                    usted sobre los movimientos internos que llegan a afectar sus\n"
+"                                    campañas? siendo el 1 nada informado, y el 10 completamente\n"
+"                                    informado. *"
+msgstr ""
+
+#. module: tyt_survey
+#. odoo-javascript
+#: code:addons/tyt_survey/static/src/xml/satisfaction_survey.xml:0
+#: model_terms:ir.ui.view,arch_db:tyt_survey.satisfaction_survey
+#, python-format
+msgid ""
+"¿Qué nivel de atención\n"
+"                                    a soluciones\n"
+"                                    recibe del Gerente de Sitio? siendo el 1 pésima atención, y el\n"
+"                                    10\n"
+"                                    excelente atención. *"
+msgstr ""
+
+#. module: tyt_survey
+#. odoo-javascript
+#: code:addons/tyt_survey/static/src/xml/satisfaction_survey.xml:0
+#: model_terms:ir.ui.view,arch_db:tyt_survey.satisfaction_survey
+#, python-format
+msgid ""
+"¿Qué nivel de atención a\n"
+"                                    soluciones\n"
+"                                    recibe del Responsable de Operaciones? siendo el 1 pésima\n"
+"                                    atención,\n"
+"                                    y el 10 excelente atención. *"
+msgstr ""
+
+#. module: tyt_survey
+#. odoo-javascript
+#: code:addons/tyt_survey/static/src/xml/satisfaction_survey.xml:0
+#: model_terms:ir.ui.view,arch_db:tyt_survey.satisfaction_survey
+#, python-format
+msgid ""
+"¿Qué tan claras fueron nuestras\n"
+"                                    comunicaciones\n"
+"                                    con usted? siendo el 1 nada claras, y el 10 completamente\n"
+"                                    claras. *"
+msgstr ""
+
+#. module: tyt_survey
+#. odoo-javascript
+#: code:addons/tyt_survey/static/src/xml/satisfaction_survey.xml:0
+#: model_terms:ir.ui.view,arch_db:tyt_survey.satisfaction_survey
+#, python-format
+msgid ""
+"¿Qué tan rápido\n"
+"                                    respondemos ante los\n"
+"                                    problemas? siendo el 1 muy lento, y el 10 completamente rápido.\n"
+"                                    *"
+msgstr ""

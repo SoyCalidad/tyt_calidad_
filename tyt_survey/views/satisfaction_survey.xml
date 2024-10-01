@@ -1,0 +1,122 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+
+    <record id="tyt_satisfaction_survey_line_view_form" model="ir.ui.view">
+        <field name="name">tyt.satisfaction.survey.line.view.form</field>
+        <field name="model">tyt.satisfaction.survey.line</field>
+        <field name="arch" type="xml">
+            <form string="TYT Satisfaction Survey Line">
+                <sheet>
+                    <group>
+                        <field name="name" />
+                        <field name="text" />
+                        <field name="qualification" />
+                    </group>
+                </sheet>
+            </form>
+        </field>
+    </record>
+
+    <record id="tyt_satisfaction_survey_line_view_tree" model="ir.ui.view">
+        <field name="name">tyt.satisfaction.survey.line.view.tree</field>
+        <field name="model">tyt.satisfaction.survey.line</field>
+        <field name="arch" type="xml">
+            <tree string="TYT Satisfaction Survey Question">
+                <field name="name" />
+                <field name="text" />
+                <field name="qualification" />
+            </tree>
+        </field>
+    </record>
+
+    <record id="tyt_satisfaction_survey_line_action" model="ir.actions.act_window">
+        <field name="name">Satisfaction Survey Line</field>
+        <field name="res_model">tyt.satisfaction.survey.line</field>
+        <field name="view_mode">tree,form</field>
+    </record>
+
+    <record id="tyt_satisfaction_survey_question_view_form" model="ir.ui.view">
+        <field name="name">tyt.satisfaction.survey.question.view.form</field>
+        <field name="model">tyt.satisfaction.survey.question</field>
+        <field name="arch" type="xml">
+            <form string="TYT Satisfaction Survey Question">
+                <sheet>
+                    <group>
+                        <field name="name" />
+                        <field name="code" />
+                    </group>
+                </sheet>
+            </form>
+        </field>
+    </record>
+
+    <record id="tyt_satisfaction_survey_question_view_tree" model="ir.ui.view">
+        <field name="name">tyt.satisfaction.survey.question.view.tree</field>
+        <field name="model">tyt.satisfaction.survey.question</field>
+        <field name="arch" type="xml">
+            <tree string="TYT Satisfaction Survey Question">
+                <field name="name" />
+                <field name="code" />
+            </tree>
+        </field>
+    </record>
+
+    <record id="tyt_satisfaction_survey_question_action" model="ir.actions.act_window">
+        <field name="name">TYT Satisfaction Survey Question</field>
+        <field name="res_model">tyt.satisfaction.survey.question</field>
+        <field name="view_mode">tree,form</field>
+    </record>
+
+    <record id="tyt_satisfaction_survey_view_form" model="ir.ui.view">
+        <field name="name">tyt.satisfaction.survey.view.form</field>
+        <field name="model">tyt.satisfaction.survey</field>
+        <field name="arch" type="xml">
+            <form string="TYT Satisfaction Survey">
+                <sheet>
+                    <group>
+                        <field name="partner_name" />
+                        <field name="job" />
+                        <field name="email" />
+                        <field name="partner_company" />
+                        <field name="campaign" />
+                        <field name="line_ids" />
+                    </group>
+                </sheet>
+            </form>
+        </field>
+    </record>
+
+    <record id="tyt_satisfaction_survey_view_tree" model="ir.ui.view">
+        <field name="name">tyt.satisfaction.survey.view.tree</field>
+        <field name="model">tyt.satisfaction.survey</field>
+        <field name="arch" type="xml">
+            <tree string="TYT Satisfaction Survey">
+                <field name="partner_name" />
+                <field name="job" />
+                <field name="partner_company" />
+                <field name="campaign" />
+            </tree>
+        </field>
+    </record>
+
+    <record id="tyt_satisfaction_survey_view_search" model="ir.ui.view">
+        <field name="name">tyt.satisfaction.survey.view.search</field>
+        <field name="model">tyt.satisfaction.survey</field>
+        <field name="arch" type="xml">
+            <search string="TYT Satisfaction Survey">
+                <field name="partner_name" />
+                <field name="job" />
+                <field name="email" />
+                <field name="partner_company" />
+                <field name="campaign" />
+            </search>
+        </field>
+    </record>
+
+    <record id="tyt_satisfaction_survey_action" model="ir.actions.act_window">
+        <field name="name">TYT Satisfaction Survey</field>
+        <field name="res_model">tyt.satisfaction.survey</field>
+        <field name="view_mode">tree,form</field>
+    </record>
+
+</odoo>

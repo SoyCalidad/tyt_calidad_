@@ -1,0 +1,76 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+
+    <record id="res_partner_tyt_view_form" model="ir.ui.view">
+        <field name="name">res.partner.view.form</field>
+        <field name="model">res.partner</field>
+        <field name="priority" eval="999" />
+        <field name="arch" type="xml">
+            <form string="TYT Partner">
+                <sheet>
+                    <group>
+                        <field name="name" />
+                        <field name="website" />
+                    </group>
+                </sheet>
+            </form>
+        </field>
+    </record>
+
+    <record id="res_partner_tyt_action" model="ir.actions.act_window">
+        <field name="name">TYT Contacts</field>
+        <field name="res_model">res.partner</field>
+        <field name="view_mode">tree,form</field>
+    </record>
+
+    <record id="res_partner_tyt_action_view_tree" model="ir.actions.act_window.view">
+        <field name="sequence" eval="3"/>
+        <field name="view_mode">tree</field>
+        <field name="view_id" ref="base.view_partner_tree"/>
+        <field name="act_window_id" ref="res_partner_tyt_action"/>
+    </record>
+    
+    <record id="res_partner_tyt_action_view_form" model="ir.actions.act_window.view">
+        <field name="sequence" eval="3"/>
+        <field name="view_mode">form</field>
+        <field name="view_id" ref="res_partner_tyt_view_form"/>
+        <field name="act_window_id" ref="res_partner_tyt_action"/>
+    </record>
+
+    <record id="res_partner_frescos_view_form" model="ir.ui.view">
+        <field name="name">res.partner.view.form</field>
+        <field name="model">res.partner</field>
+        <field name="priority" eval="999" />
+        <field name="arch" type="xml">
+            <form string="Frescos Partner">
+                <sheet>
+                    <group>
+                        <field name="name" />
+                        <field name="email" />
+                    </group>
+                </sheet>
+            </form>
+        </field>
+    </record>
+
+    <record id="res_partner_frescos_action" model="ir.actions.act_window">
+        <field name="name">Frescos Contacts</field>
+        <field name="res_model">res.partner</field>
+        <field name="view_mode">tree,form</field>
+    </record>
+
+    <record id="res_partner_frescos_action_view_tree" model="ir.actions.act_window.view">
+        <field name="sequence" eval="3"/>
+        <field name="view_mode">tree</field>
+        <field name="view_id" ref="base.view_partner_tree"/>
+        <field name="act_window_id" ref="res_partner_frescos_action"/>
+    </record>
+
+    <record id="res_partner_frescos_action_view_form" model="ir.actions.act_window.view">
+        <field name="sequence" eval="3"/>
+        <field name="view_mode">form</field>
+        <field name="view_id" ref="res_partner_frescos_view_form"/>
+        <field name="act_window_id" ref="res_partner_frescos_action"/>
+    </record>
+
+</odoo>
