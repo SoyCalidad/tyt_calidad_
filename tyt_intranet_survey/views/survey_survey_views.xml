@@ -1,54 +1,24 @@
 <?xml version="1.0" encoding="utf-8"?>
 <odoo>
-<!--    <record id="survey_survey_view_form" model="ir.ui.view">-->
-<!--        <field name="name">survey.survey.view.form.inherit</field>-->
-<!--        <field name="model">survey.survey</field>-->
-<!--        <field name="inherit_id" ref="enhanced_survey_management.survey_survey_view_form"/>-->
-<!--        <field name="arch" type="xml">-->
-<!--            <xpath expr="//notebook//page[@name='options']//group[@name='participants']//field[@name='access_mode']" position="after">-->
-<!--                <field name="authorized_group_id" widget="many2one" attrs="{'invisible': [('access_mode', '!=', 'website')]}"/>-->
-<!--                <field name="is_published" widget="boolean_toggle" attrs="{'invisible': [('access_mode', '!=', 'website')]}"/>-->
-<!--                <field name="published_date_start" attrs="{'invisible': ['|', ('access_mode', '!=', 'website'), ('is_published', '=', False)]}"/>-->
-<!--                <field name="published_date_end" attrs="{'invisible': ['|', ('access_mode', '!=', 'website'), ('is_published', '=', False)]}"/>-->
-<!--            </xpath>-->
-<!--            <xpath expr="//field[@name='users_login_required']" position="attributes">-->
-<!--                <attribute name="attrs">{'invisible': [('access_mode', '=', 'website')]}</attribute>-->
-<!--            </xpath>-->
-<!--            <xpath expr="//label[@for='is_attempts_limited']" position="attributes">-->
-<!--                <attribute name="attrs">{'invisible': ['|', ('access_mode', '=', 'website'), '&amp;', ('access_mode', '=', 'public'), ('users_login_required', '=', False)]}</attribute>-->
-<!--            </xpath>-->
-<!--            <xpath expr="//field[@name='is_attempts_limited']" position="attributes">-->
-<!--                <attribute name="attrs">{'invisible': ['|', ('access_mode', '=', 'website'), '&amp;', ('access_mode', '=', 'public'), ('users_login_required', '=', False)]}</attribute>-->
-<!--            </xpath>-->
-<!--            <xpath expr="//field[@name='visibility']" position="attributes">-->
-<!--                <attribute name="invisible">1</attribute>-->
-<!--            </xpath>-->
-<!--        </field>-->
-<!--    </record>-->
-
-<!--    <record id="survey_survey_view_search" model="ir.ui.view">-->
-<!--        <field name="name">survey.survey.search.inherit</field>-->
-<!--        <field name="model">survey.survey</field>-->
-<!--        <field name="inherit_id" ref="survey.survey_survey_view_search"/> &lt;!&ndash; Reference to the original view &ndash;&gt;-->
-<!--        <field name="arch" type="xml">-->
-<!--            <xpath expr="//group" position="inside">-->
-<!--                <filter string="Authorized Group" name="group_by_authorized_group" context="{'group_by': 'authorized_group_id'}"/>-->
-<!--                <filter string="Department" name="group_by_department" context="{'group_by': 'department_id'}"/>-->
-<!--                <filter string="Job Position" name="group_by_job" context="{'group_by': 'job_id'}"/>-->
-<!--                <filter string="Published" name="group_by_is_published" context="{'group_by': 'is_published'}"/>-->
-<!--            </xpath>-->
-<!--        </field>-->
-<!--    </record>-->
-
-<!--    <record id="tyt_survey_survey_view_tree" model="ir.ui.view">-->
-<!--        <field name="name">survey.survey.view.tree</field>-->
-<!--        <field name="model">survey.survey</field>-->
-<!--        <field name="arch" type="xml">-->
-<!--            <tree>-->
-<!--                <field name="title"/>-->
-<!--            </tree>-->
-<!--        </field>-->
-<!--    </record>-->
+    <record id="survey_survey_view_form" model="ir.ui.view">
+        <field name="name">survey.survey.view.form.inherit</field>
+        <field name="model">survey.survey</field>
+        <field name="inherit_id" ref="survey.survey_survey_view_form"/>
+        <field name="arch" type="xml">
+            <xpath expr="//notebook//page[@name='options']//group[@name='participants']//field[@name='access_mode']" position="after">
+                <field name="authorized_group_id" widget="many2one" attrs="{'invisible': [('access_mode', '!=', 'intranet')]}"/>
+            </xpath>
+            <xpath expr="//field[@name='users_login_required']" position="attributes">
+                <attribute name="attrs">{'invisible': [('access_mode', '=', 'intranet')]}</attribute>
+            </xpath>
+            <xpath expr="//label[@for='is_attempts_limited']" position="attributes">
+                <attribute name="attrs">{'invisible': ['|', ('access_mode', '=', 'intranet'), '&amp;', ('access_mode', '=', 'public'), ('users_login_required', '=', False)]}</attribute>
+            </xpath>
+            <xpath expr="//field[@name='is_attempts_limited']" position="attributes">
+                <attribute name="attrs">{'invisible': ['|', ('access_mode', '=', 'intranet'), '&amp;', ('access_mode', '=', 'public'), ('users_login_required', '=', False)]}</attribute>
+            </xpath>
+        </field>
+    </record>
 
     <record id="tyt_survey_survey_view_search" model="ir.ui.view">
         <field name="name">survey.survey.search</field>
@@ -56,20 +26,24 @@
         <field name="arch" type="xml">
             <search string="Survey">
                 <field string="Survey" name="title"/>
-                <field string="Department" name="department_id"/>
-                <field string="Job Position" name="job_id"/>
                 <filter string="Published Start Date" name="published_start_date" date="published_start_date"/>
                 <filter string="Published End Date" name="published_end_date" date="published_end_date"/>
+                <group expand="0" string="Group By">
+                    <filter string="Department" name="department_id" context="{'group_by':'department_id'}"/>
+                    <filter string="Job Position" name="job_id" context="{'group_by':'job_id'}"/>
+                    <filter string="Site" name="sitio_id" context="{'group_by':'sitio_id'}"/>
+                </group>
                 <searchpanel>
                     <field name="department_id" icon="fa-users" enable_counters="1"/>
                     <field name="job_id" icon="fa-users" enable_counters="1"/>
+                    <field name="sitio_id" icon="fa-bars" enable_counters="1"/>
                 </searchpanel>
             </search>
         </field>
     </record>
 
     <record id="tyt_survey_survey_action" model="ir.actions.act_window">
-        <field name="name">Survey</field>
+        <field name="name">Surveys</field>
         <field name="res_model">survey.survey</field>
         <field name="view_mode">kanban,tree,form</field>
         <field name="search_view_id" ref="tyt_survey_survey_view_search"/>
@@ -100,7 +74,7 @@
     </record>
 
     <record id="tyt_x_area_encuesta_action" model="ir.actions.act_window">
-        <field name="name">Area Encuesta</field>
+        <field name="name">Areas - Typification</field>
         <field name="res_model">x_area_encuesta</field>
         <field name="view_mode">tree,form</field>
         <field name="context">{
@@ -135,7 +109,7 @@
     </record>
 
     <record id="tyt_x_tipo_encuesta_action" model="ir.actions.act_window">
-        <field name="name">Tipo Encuesta</field>
+        <field name="name">Tipos - Typification</field>
         <field name="res_model">x_tipo_encuesta</field>
         <field name="view_mode">tree,form</field>
         <field name="context">{

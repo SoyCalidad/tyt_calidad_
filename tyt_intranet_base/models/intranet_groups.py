@@ -8,6 +8,7 @@ class Groups(models.Model):
 
     name = fields.Char(string='Name')
     department_id = fields.Many2one('hr.department', string='Department')
+    sitio_id = fields.Many2one(related='department_id.x_studio_sitio', string='Site', store=True)
     job_id = fields.Many2one('hr.job', string='Job Position')
     employee_ids = fields.Many2many(
         comodel_name='hr.employee',
@@ -17,18 +18,18 @@ class Groups(models.Model):
         String='Employees',
     )
     employee_count = fields.Integer(compute='_compute_employee_count', string='Employee Count')
-    company_id = fields.Many2one(
-        comodel_name='res.company',
-        string='Company',
-        default=lambda self: self.env.user.company_id.id,
-        domain=lambda self: [('id', 'in', self.env.user.company_ids.ids)],
-    )
     user_ids = fields.Many2many('res.users', string='Users')
     user_count = fields.Integer(compute='_compute_user_count', string='User Count')
     implied_ids = fields.Many2many('intranet.groups', 'intranet_groups_implied_rel', 'gid', 'hid',
         string='Inherits', help='Employees of this group automatically inherit those groups')
     trans_implied_ids = fields.Many2many('intranet.groups', string='Transitively inherits',
         compute='_compute_trans_implied', recursive=True)
+    company_id = fields.Many2one(
+        comodel_name='res.company',
+        string='Company',
+        default=lambda self: self.env.user.company_id.id,
+        domain=lambda self: [('id', 'in', self.env.user.company_ids.ids)],
+    )
 
     @api.depends('implied_ids.trans_implied_ids')
     def _compute_trans_implied(self):
@@ -74,6 +75,7 @@ class Groups(models.Model):
     def _compute_employee_count(self):
         for record in self:
             record.employee_count = len(record.employee_ids)
+            record.user_ids = [(6, 0, record.employee_ids.mapped('x_studio_ususrio').ids)]
 
     @api.depends('user_ids')
     def _compute_user_count(self):
@@ -95,9 +97,7 @@ class Groups(models.Model):
             employees = self.env['hr.employee'].search(domain)
         else:
             employees = self.env['hr.employee'].search([])
-        users = employees.mapped('user_id')
         self.employee_ids = [(6, 0, employees.ids)]
-        self.user_ids = [(6, 0, users.ids)]
 
     def action_show_employees(self):
         self.ensure_one()

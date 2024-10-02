@@ -6,7 +6,11 @@
         <field name="arch" type="xml">
             <form>
                 <header>
-                    <button name="action_filter_employees_by_criteria" string="Filter Employees" type="object" class="btn-primary"/>
+                    <button name="action_filter_employees_by_criteria"
+                            string="Filter Employees"
+                            type="object"
+                            class="btn-primary"
+                            confirm="Are you sure you want to filter employees?"/>
                 </header>
                 <sheet>
                     <div class="oe_button_box" name="button_box">
@@ -30,25 +34,40 @@
                     <div class="oe_title">
 						<label for="name"/>
 						<h1>
-							<field name="name"/>
+							<field name="name" required="1"/>
 						</h1>
 					</div>
                     <group>
                         <group>
                             <field name="department_id"/>
+                            <field name="sitio_id" invisible="1"/>
                             <field name="job_id"/>
                         </group>
                         <group>
                             <field name="company_id"/>
                         </group>
                     </group>
-
                     <notebook>
-                        <page string="Employees">
-                            <field name="employee_ids"/>
+                        <page string="Employees" name="employees">
+                            <field name="employee_ids">
+                                <tree>
+                                    <field name="x_studio_numero"/>
+                                    <field name="name"/>
+                                    <field name="x_studio_ususrio"/>
+                                    <field name="department_id"/>
+                                    <field name="job_id"/>
+                                    <field name="x_studio_sitio"/>
+                                </tree>
+                            </field>
                         </page>
-                        <page string="Inherited">
-                            <field name="implied_ids"/>
+                        <page string="Inherited" name="inherit_groups">
+                            <label for="implied_ids" string="Employees added to this group are automatically added in the following groups."/>
+                            <field name="implied_ids">
+                                <tree>
+                                    <field name="name"/>
+                                    <field name="employee_ids"/>
+                                </tree>
+                            </field>
                         </page>
                     </notebook>
                 </sheet>
@@ -70,7 +89,7 @@
                 <field name="department_id"/>
                 <field name="job_id"/>
                 <field name="implied_ids" widget="many2many_tags"/>
-                <field name="employee_count"/>
+                <field name="employee_ids"/>
             </tree>
         </field>
     </record>

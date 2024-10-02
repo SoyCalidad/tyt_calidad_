@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <template id="survey_fill_form_start" inherit_id="survey.survey_fill_form_start">
+        <xpath expr="//div[@t-field='survey.description']" position="before">
+            <div class="welcome-message">
+                <h2>Bienvenido/a, <t t-esc="request.env.user.name"/></h2>
+            </div>
+        </xpath>
+    </template>
+</odoo>

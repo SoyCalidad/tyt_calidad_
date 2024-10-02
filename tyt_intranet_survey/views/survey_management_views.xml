@@ -8,38 +8,43 @@
                 <header>
                     <field name="state" widget="statusbar"/>
                     <button name="action_publish" string="Publish" type="object" states="draft" class="btn-primary"/>
-                    <button name="action_draft" string="Reset to Draft" type="object" states="published" class="btn-secondary"/>
+                    <button name="action_draft"
+                            string="Reset to Draft"
+                            type="object"
+                            states="published"
+                            class="btn-secondary"
+                            confirm="Are you sure you want to reset to draft?"/>
                 </header>
                 <sheet>
                     <div class="oe_title">
 						<label for="name"/>
 						<h1>
-							<field name="name"/>
+							<field name="name" required="1" attrs="{'readonly': [('state', 'in', ('published'))]}"/>
 						</h1>
 					</div>
                     <group>
                         <group>
-                            <field name="user_id" widget="many2one_avatar_user"/>
+                            <field name="user_id" widget="many2one_avatar_user" attrs="{'readonly': [('state', 'in', ('published'))]}"/>
                         </group>
                         <group>
                             <label for="start_date" string="Published Date"/>
                             <div name="dates" class="o_row">
-                                <field name="start_date" widget="daterange" options='{"related_end_date": "end_date"}'/>
+                                <field name="start_date" widget="daterange" options='{"related_end_date": "end_date"}' attrs="{'readonly': [('state', 'in', ('published'))]}"/>
                                 <i class="fa fa-long-arrow-right mx-2 oe_edit_only" aria-label="Arrow icon" title="Arrow"/>
                                 <i class="fa fa-long-arrow-right mx-2 oe_read_only" aria-label="Arrow icon" title="Arrow" attrs="{'invisible': [('start_date', '=', False), ('end_date', '=', False)]}"/>
-                                <field name="end_date" widget="daterange" options='{"related_start_date": "start_date"}'/>
+                                <field name="end_date" widget="daterange" options='{"related_start_date": "start_date"}' attrs="{'readonly': [('state', 'in', ('published'))]}"/>
                             </div>
                         </group>
                     </group>
                     <notebook>
                         <page string="Surveys">
-                            <field name="survey_ids" domain="[('is_published', '=', False)]">
+                            <field name="survey_ids" attrs="{'readonly': [('state', 'in', ('published'))]}" domain="[('is_published', '=', False)]">
                                 <tree editable="bottom">
                                     <field name="title"/>
                                     <field name="user_id" widget="many2one_avatar_user"/>
                                     <field name="authorized_group_id"/>
-                                    <field name="published_start_date"/>
-                                    <field name="published_end_date"/>
+                                    <field name="published_start_date" invisible="1"/>
+                                    <field name="published_end_date" invisible="1"/>
                                     <field name="is_published" readonly="1"/>
                                 </tree>
                             </field>
@@ -64,8 +69,23 @@
                 <field name="user_id" widget="many2one_avatar_user"/>
                 <field name="start_date"/>
                 <field name="end_date"/>
-                <field name="state" widget="badge" decoration-success="state == 'published'" decoration-info="state == 'draft'"/>
+                <field name="state" widget="badge" decoration-info="state == 'draft'" decoration-success="state == 'published'"/>
             </tree>
+        </field>
+    </record>
+
+    <record id="tyt_survey_management_view_search" model="ir.ui.view">
+        <field name="name">tyt.survey.management.view.search</field>
+        <field name="model">tyt.survey.management</field>
+        <field name="arch" type="xml">
+            <search>
+                <field string="Name" name="name"/>
+                <filter string="Start Date" name="start_date" date="start_date"/>
+                <filter string="End Date" name="end_date" date="end_date"/>
+                <group expand="0" string="Group By">
+                    <filter string="State" name="state" context="{'group_by':'state'}"/>
+                </group>
+            </search>
         </field>
     </record>
 

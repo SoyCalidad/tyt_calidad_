@@ -12,13 +12,11 @@ class SurveyManagement(models.Model):
     authorized_group_id = fields.Many2one('intranet.groups', string='Authorized Group')
     start_date = fields.Date('Start Date', required=True)
     end_date = fields.Date('End Date', required=True)
-
+    survey_ids = fields.Many2many('survey.survey', string='Surveys')
     state = fields.Selection([
         ('draft', 'Draft'),
         ('published', 'Published'),
     ], string='State', default='draft')
-
-    survey_ids = fields.Many2many('survey.survey', string='Surveys')
 
     def action_publish(self):
         self.ensure_one()
@@ -30,7 +28,7 @@ class SurveyManagement(models.Model):
                 'published_end_date': self.end_date,
             })
         else:
-            raise UserError(_('All surveys must be unpublished before publishing the survey management.'))
+            raise UserError(_('All surveys must be unpublished before publishing.'))
 
     def action_draft(self):
         self.ensure_one()

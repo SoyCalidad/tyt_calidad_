@@ -18,13 +18,13 @@
                   sequence="20"/>
 
         <menuitem id="tyt_x_area_encuesta_menu_action"
-                  name="Area Encuesta"
+                  name="Areas - Typification"
                   parent="tyt_survey_configuration_menu"
                   action="tyt_x_area_encuesta_action"
                   sequence="10"/>
 
         <menuitem id="tyt_x_tipo_encuesta_menu_action"
-                  name="Tipo Encuesta"
+                  name="Tipos - Typification"
                   parent="tyt_survey_configuration_menu"
                   action="tyt_x_tipo_encuesta_action"
                   sequence="20"/>
