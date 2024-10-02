@@ -1,0 +1,75 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<odoo>
+     <template id="portal_my_home_survey"
+              name="survey" customize_show="True"
+              inherit_id="portal.portal_my_home" priority="55">
+        <xpath expr="//div[hasclass('o_portal_docs')]" position="inside">
+            <t t-call="portal.portal_docs_entry">
+                <t t-set="title">Survey</t>
+                <t t-set="url" t-value="'/my/surveys'"/>
+                <t t-set="placeholder_count" t-value="'survey_count'"/>
+            </t>
+        </xpath>
+    </template>
+    <!-- Survey portal Breadcrumbs -->
+    <template id="portal_my_home_menu_survey" name="Portal layout : Survey menu"
+              inherit_id="portal.portal_breadcrumbs"
+              priority="20">
+        <xpath expr="//ol[hasclass('o_portal_submenu')]" position="inside">
+            <li t-if="page_name == 'survey'" class="breadcrumb-item active">
+                <a t-if="survey_boolean" t-attf-href="/my/survey/ans">
+                    Encuestas
+                </a>
+                <t t-else="">Encuestas</t>
+            </li>
+            <li t-if="survey_boolean" class="breadcrumb-item active">
+                /
+                <t t-esc="survey"/>
+            </li>
+        </xpath>
+    </template>
+
+    <template id="portal_my_surveys" name="My Surveys">
+        <t t-call="portal.portal_layout">
+            <t t-set="breadcrumbs_searchbar" t-value="True"/>
+            <t t-call="portal.portal_searchbar">
+                <t t-set="title">Encuestas</t>
+            </t>
+            <t t-if="not survey_list">
+                <p>Actualmente, no se han publicado encuestas..</p>
+            </t>
+            <!-- Wrap your cards inside a row -->
+            <div class="container">
+                <div class="row">
+                    <t t-foreach="survey_list" t-as="data">
+                        <!-- Adjust column width for responsive behavior -->
+                        <div class="col-12 col-sm-6 d-flex align-items-stretch mb-4">
+                            <div class="card w-100">
+                                <div class="card-body d-flex flex-column">
+                                    <h5 class="card-title">
+                                        <strong>
+                                            <t t-esc="data['title']"/>
+                                        </strong>
+                                    </h5>
+                                    <p class="card-text mt-2">
+                                        <i class="fa fa-fw fa-clock-o" title="Publication date"/>
+                                        <t t-esc="data['published_start_date']"/>
+                                        <span class="fa fa-long-arrow-right"/>
+                                        <t t-esc="data['published_end_date']"/>
+                                    </p>
+                                    <!-- Spacer to push the button to the bottom -->
+                                    <div class="mt-auto">
+                                        <a t-att-href="'/survey/start/%s' % data['access_token']"
+                                           class="btn btn-primary">
+                                            Participar
+                                        </a>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </t>
+                </div>
+            </div>
+        </t>
+    </template>
+</odoo>

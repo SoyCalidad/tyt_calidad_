@@ -4,7 +4,6 @@
         <xpath expr="//t[@t-call='portal.frontend_layout']" position="replace">
             <t t-call="portal.frontend_layout">
                 <t t-set="is_portal" t-value="True"/>
-
                 <div t-if="not no_breadcrumbs and not my_details and not breadcrumbs_searchbar" class="o_portal container mt-3">
                     <div class="d-flex justify-content-between align-items-center">
                         <t t-call="portal.portal_breadcrumbs"/>

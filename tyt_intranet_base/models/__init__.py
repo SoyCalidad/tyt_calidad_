@@ -1,1 +1,1 @@
-from . import criteria
+from . import intranet_groups

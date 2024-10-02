@@ -3,41 +3,119 @@
     <record id="survey_survey_view_form" model="ir.ui.view">
         <field name="name">survey.survey.view.form.inherit</field>
         <field name="model">survey.survey</field>
-        <field name="inherit_id" ref="enhanced_survey_management.survey_survey_view_form"/>
+        <field name="inherit_id" ref="survey.survey_survey_view_form"/>
         <field name="arch" type="xml">
             <xpath expr="//notebook//page[@name='options']//group[@name='participants']//field[@name='access_mode']" position="after">
-                <field name="criteria_id" attrs="{'invisible': [('access_mode', '!=', 'website')]}"/>
-                <field name="is_published" widget="boolean_toggle" attrs="{'invisible': [('access_mode', '!=', 'website')]}"/>
-                <field name="published_date" attrs="{'invisible': ['|', ('access_mode', '!=', 'website'), ('is_published', '=', False)]}"/>
+                <field name="authorized_group_id" widget="many2one" attrs="{'invisible': [('access_mode', '!=', 'intranet')]}"/>
             </xpath>
             <xpath expr="//field[@name='users_login_required']" position="attributes">
-                <attribute name="attrs">{'invisible': [('access_mode', '=', 'website')]}</attribute>
+                <attribute name="attrs">{'invisible': [('access_mode', '=', 'intranet')]}</attribute>
             </xpath>
             <xpath expr="//label[@for='is_attempts_limited']" position="attributes">
-                <attribute name="attrs">{'invisible': ['|', ('access_mode', '=', 'website'), '&amp;', ('access_mode', '=', 'public'), ('users_login_required', '=', False)]}</attribute>
+                <attribute name="attrs">{'invisible': ['|', ('access_mode', '=', 'intranet'), '&amp;', ('access_mode', '=', 'public'), ('users_login_required', '=', False)]}</attribute>
             </xpath>
             <xpath expr="//field[@name='is_attempts_limited']" position="attributes">
-                <attribute name="attrs">{'invisible': ['|', ('access_mode', '=', 'website'), '&amp;', ('access_mode', '=', 'public'), ('users_login_required', '=', False)]}</attribute>
-            </xpath>
-            <xpath expr="//field[@name='visibility']" position="attributes">
-                <attribute name="invisible">1</attribute>
+                <attribute name="attrs">{'invisible': ['|', ('access_mode', '=', 'intranet'), '&amp;', ('access_mode', '=', 'public'), ('users_login_required', '=', False)]}</attribute>
             </xpath>
         </field>
     </record>
 
-    <record id="survey_survey_view_search" model="ir.ui.view">
-        <field name="name">survey.survey.search.inherit</field>
+    <record id="tyt_survey_survey_view_search" model="ir.ui.view">
+        <field name="name">survey.survey.search</field>
         <field name="model">survey.survey</field>
-        <field name="inherit_id" ref="survey.survey_survey_view_search"/> <!-- Reference to the original view -->
         <field name="arch" type="xml">
-            <xpath expr="//group" position="inside">
-                <!-- Add a new Group By filter for criteria_id -->
-                <filter string="Criterio de visibilidad" name="group_by_criteria" context="{'group_by': 'criteria_id'}"/>
-                <filter string="Departamento" name="group_by_department" context="{'group_by': 'department_id'}"/>
-                <filter string="Puesto de trabajo" name="group_by_job" context="{'group_by': 'job_id'}"/>
-                <filter string="Sitio0" name="group_by_sites" context="{'group_by': 'sites_id'}"/>
-                <filter string="Publicado" name="group_by_is_published" context="{'group_by': 'is_published'}"/>
-            </xpath>
+            <search string="Survey">
+                <field string="Survey" name="title"/>
+                <filter string="Published Start Date" name="published_start_date" date="published_start_date"/>
+                <filter string="Published End Date" name="published_end_date" date="published_end_date"/>
+                <group expand="0" string="Group By">
+                    <filter string="Department" name="department_id" context="{'group_by':'department_id'}"/>
+                    <filter string="Job Position" name="job_id" context="{'group_by':'job_id'}"/>
+                    <filter string="Site" name="sitio_id" context="{'group_by':'sitio_id'}"/>
+                </group>
+                <searchpanel>
+                    <field name="department_id" icon="fa-users" enable_counters="1"/>
+                    <field name="job_id" icon="fa-users" enable_counters="1"/>
+                    <field name="sitio_id" icon="fa-bars" enable_counters="1"/>
+                </searchpanel>
+            </search>
+        </field>
+    </record>
+
+    <record id="tyt_survey_survey_action" model="ir.actions.act_window">
+        <field name="name">Surveys</field>
+        <field name="res_model">survey.survey</field>
+        <field name="view_mode">kanban,tree,form</field>
+        <field name="search_view_id" ref="tyt_survey_survey_view_search"/>
+    </record>
+
+    <record id="tyt_x_area_encuesta_view_form" model="ir.ui.view">
+        <field name="name">x_area_encuesta.view.form</field>
+        <field name="model">x_area_encuesta</field>
+        <field name="arch" type="xml">
+            <form>
+                <sheet>
+                    <group>
+                        <field name="x_name"/>
+                    </group>
+                </sheet>
+            </form>
+        </field>
+    </record>
+
+    <record id="tyt_x_area_encuesta_view_tree" model="ir.ui.view">
+        <field name="name">x_area_encuesta.view.tree</field>
+        <field name="model">x_area_encuesta</field>
+        <field name="arch" type="xml">
+            <tree editable="bottom">
+                <field name="x_name"/>
+            </tree>
+        </field>
+    </record>
+
+    <record id="tyt_x_area_encuesta_action" model="ir.actions.act_window">
+        <field name="name">Areas - Typification</field>
+        <field name="res_model">x_area_encuesta</field>
+        <field name="view_mode">tree,form</field>
+        <field name="context">{
+            'tree_view_ref': 'tyt_intranet_survey.tyt_x_area_encuesta_view_tree',
+            'form_view_ref': 'tyt_intranet_survey.tyt_x_area_encuesta_view_form',
+        }
+        </field>
+    </record>
+
+    <record id="tyt_x_tipo_encuesta_view_form" model="ir.ui.view">
+        <field name="name">x_tipo_encuesta.view.form</field>
+        <field name="model">x_tipo_encuesta</field>
+        <field name="arch" type="xml">
+            <form>
+                <sheet>
+                    <group>
+                        <field name="x_name"/>
+                    </group>
+                </sheet>
+            </form>
+        </field>
+    </record>
+
+    <record id="tyt_x_tipo_encuesta_view_tree" model="ir.ui.view">
+        <field name="name">x_tipo_encuesta.view.tree</field>
+        <field name="model">x_tipo_encuesta</field>
+        <field name="arch" type="xml">
+            <tree editable="bottom">
+                <field name="x_name"/>
+            </tree>
+        </field>
+    </record>
+
+    <record id="tyt_x_tipo_encuesta_action" model="ir.actions.act_window">
+        <field name="name">Tipos - Typification</field>
+        <field name="res_model">x_tipo_encuesta</field>
+        <field name="view_mode">tree,form</field>
+        <field name="context">{
+            'tree_view_ref': 'tyt_intranet_survey.tyt_x_tipo_encuesta_view_tree',
+            'form_view_ref': 'tyt_intranet_survey.tyt_x_tipo_encuesta_view_form',
+        }
         </field>
     </record>
 </odoo>
