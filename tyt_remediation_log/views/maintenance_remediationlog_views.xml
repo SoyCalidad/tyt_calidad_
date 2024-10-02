@@ -50,6 +50,11 @@
         </field>
     </record>
 
+    <record id="model_maintenance_remediationlog" model="ir.model">
+        <field name="name">Maintenance Remediation Log</field>
+        <field name="model">maintenance.remediationlog</field>
+    </record>
+
     <!-- Acción para abrir el menú de Remediation Logs -->
     <record id="action_maintenance_remediationlog" model="ir.actions.act_window">
         <field name="name">Remediation Logs</field>

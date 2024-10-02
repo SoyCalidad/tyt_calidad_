@@ -6,7 +6,7 @@
         <field name="report_type">xlsx</field>
         <field name="report_name">tyt_remediation_log.remediation_report</field>
         <field name="report_file">Report</field>
-        <field name="binding_model_id" ref="model_management_review"/>
+        <field name="binding_model_id" ref="model_maintenance_remediationlog"/>
         <field name="binding_type">report</field>
         <field name="attachment_use" eval="False"/>
         <field name="multi" eval="False"/>
