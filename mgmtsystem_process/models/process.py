@@ -255,7 +255,7 @@ class Process(models.Model):
         sequence = self.env['ir.sequence'].sudo().create({
             'name': 'Secuencia de '+values.get('name'),
             'active': True,
-            'prefix': 'Edición-nro.',
+            'prefix': 'Versión-nro.',
             'padding': 4,
             'number_next': 1,
             'number_increment': 1,

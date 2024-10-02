@@ -15,6 +15,11 @@ class ProcessInherit(models.Model):
 
     #### Change String : Edición to Versión #####
 
+    last_edition = fields.Html(
+        string=u'Versión vigente',
+        compute='_compute_last_edition',
+    )
+
     @api.depends('name')
     def _compute_last_edition(self):
         for record in self:
