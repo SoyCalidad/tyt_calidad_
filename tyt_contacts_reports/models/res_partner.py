@@ -27,6 +27,12 @@ class ResPartner(models.Model):
     property_inadequate_condition = fields.Text(string='Property Inadequate Condition')
     property_response_activity_ids = fields.Many2many('mgmtsystem.action', string='Property Actions')
     property_corrective_action_initiated = fields.Boolean(string='Property Corrective Action Initiated', default=False)
+    evaluation_qualification = fields.Selection([
+        ('a', 'A - Excepcional'),
+        ('b', 'B - Aceptable'),
+        ('c', 'C - Aceptable con prueba adicional'),
+        ('d', 'D - Inaceptable'),
+    ], string='Evaluation Qualification')
 
     @api.depends('customer', 'name')
     def _compute_property_client(self):

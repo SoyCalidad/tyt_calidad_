@@ -27,9 +27,11 @@
 
         'views/supplier_complaints_inventory_views.xml',
         'views/res_partner_views.xml',
+        'views/evaluation_history_views.xml',
         'views/menus.xml',
 
         'data/data.xml',
+        'data/evaluation.xml',
     ],
     'installable': True,
     'auto_install': False,

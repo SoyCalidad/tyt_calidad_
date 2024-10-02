@@ -1,0 +1,125 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+
+    <record id="res_partner_evaluation_history_form" model="ir.ui.view">
+        <field name="name">res.partner.evaluation.history.form.inherit</field>
+        <field name="model">res.partner.evaluation.history</field>
+        <field name="inherit_id" ref="mgmtsystem_partner_qualification.res_partner_evaluation_history_form"/>
+        <field name="arch" type="xml">
+            <xpath expr="//field[@name='evaluation_id']" position="after">
+                <field name="is_tyt_evaluation" invisible="1"/>
+            </xpath>
+            <xpath expr="//field[@name='history_item_ids']" position="replace">
+                <field name="history_item_ids"
+                       context="{
+                            'tree_view_ref': 'tyt_contacts_reports.res_partner_evaluation_history_item_tree2',
+                            'form_view_ref': 'tyt_contacts_reports.res_partner_evaluation_history_item_form2'}"/>
+            </xpath>
+        </field>
+    </record>
+
+    <record id="res_partner_evaluation_history_item_form2" model="ir.ui.view">
+        <field name="name">res.partner.evaluation.history.item.form2</field>
+        <field name="model">res.partner.evaluation.history.item</field>
+        <field name="arch" type="xml">
+            <form>
+                <sheet>
+                    <div class="oe_button_box" name="button_box"></div>
+                    <label for="name" />
+                    <div class="oe_title">
+                        <h2>
+                            <field name="name" />
+                            <field name="is_tyt_evaluation" invisible="1"/>
+                        </h2>
+                    </div>
+                    <group>
+                        <field name="qualification_item" widget="progressbar"
+                               attrs="{'invisible': [('is_tyt_evaluation', '=', True)]}"
+                               options="{'current_value': 'qualification_item', 'max_value': 'weight_total', 'editable': false}" />
+                        <field name="history_id" invisible="1" />
+                        <field name="item_id" invisible="1" />
+                    </group>
+                    <separator string="Calificaciones" />
+                    <field name="history_line_ids" context="{'default_history_item_id':id}">
+                        <tree create="false" delete="false" editable="bottom">
+                            <field name="line_id" />
+                            <field name="evaluation_item_line_weight" attrs="{'column_invisible': [('parent.is_tyt_evaluation', '=', False)]}"/>
+                            <field name="evaluation_item_line_value" attrs="{'column_invisible': [('parent.is_tyt_evaluation', '=', False)]}"/>
+                            <field name="scala" attrs="{'column_invisible': [('parent.is_tyt_evaluation', '=', True)]}"/>
+                            <field name="name" invisible="1" />
+                            <field name="qualification_line" invisible="1" />
+                        </tree>
+                    </field>
+                </sheet>
+            </form>
+        </field>
+    </record>
+
+    <record id="res_partner_evaluation_history_item_tree2" model="ir.ui.view">
+        <field name="name">res.partner.evaluation.history.item.tree2</field>
+        <field name="model">res.partner.evaluation.history.item</field>
+        <field name="arch" type="xml">
+            <tree delete="0">
+                <field name="name"/>
+                <field name="history_line_ids" widget="many2many_tags"/>
+                <field name="qualification_item"/>
+            </tree>
+        </field>
+    </record>
+
+    <record id="res_partner_evaluation_form" model="ir.ui.view">
+        <field name="name">res.partner.evaluation.form.inherit</field>
+        <field name="model">res.partner.evaluation</field>
+        <field name="inherit_id" ref="mgmtsystem_partner_qualification.res_partner_evaluation_form"/>
+        <field name="arch" type="xml">
+            <xpath expr="//field[@name='weight_limit_total']" position="after">
+                <field name='is_tyt_evaluation' invisible="1"/>
+            </xpath>
+            <xpath expr="//page[@name='main']//field[@name='item_ids']" position="replace">
+                <field name="item_ids" attrs="{'readonly': [('is_tyt_evaluation', '=', True)]}"
+                       context="{
+                           'default_evaluation_id':id,
+                           'tree_view_ref': 'tyt_contacts_reports.res_partner_evaluation_item_tree2',
+                           'form_view_ref': 'tyt_contacts_reports.res_partner_evaluation_item_form2',
+                           'is_tyt_evaluation': is_tyt_evaluation}"/>
+            </xpath>
+        </field>
+    </record>
+
+    <record id="res_partner_evaluation_item_form2" model="ir.ui.view">
+        <field name="name">res.partner.evaluation.item.form2</field>
+        <field name="model">res.partner.evaluation.item</field>
+        <field name="arch" type="xml">
+            <form>
+                <sheet>
+                    <group>
+                        <field name="name" string="Nombre" invisible="context.get('is_tyt_evaluation', False)"/>
+                        <field name="name" string="Símbolo" invisible="not context.get('is_tyt_evaluation', False)"/>
+                    </group>
+                    <group>
+                        <field name="weight_total"/>
+                        <field name="line_ids" context="{'default_evaluation_id':id}">
+                            <tree editable='bottom'>
+                                <field name="weight"/>
+                                <field name="name"/>
+                            </tree>
+                        </field>
+                    </group>
+                </sheet>
+            </form>
+        </field>
+    </record>
+
+    <record id="res_partner_evaluation_item_tree2" model="ir.ui.view">
+        <field name="name">res.partner.evaluation.item.tree2</field>
+        <field name="model">res.partner.evaluation.item</field>
+        <field name="arch" type="xml">
+            <tree>
+                <field name="name" string="Nombre" attrs="{'column_invisible': [('parent.is_tyt_evaluation', '=', True)]}"/>
+                <field name="name" string="Símbolo" attrs="{'column_invisible': [('parent.is_tyt_evaluation', '=', False)]}"/>
+                <field name="line_ids" widget="many2many_tags"/>
+                <field name="weight_total"/>
+            </tree>
+        </field>
+    </record>
+</odoo>
