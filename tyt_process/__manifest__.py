@@ -14,6 +14,8 @@
         'security/ir.model.access.csv',
         'views/documentary_control_views.xml',
         'views/procedure_edition.xml',
+        'views/process_edition_views.xml',
+        'views/process_views.xml',
         'reports/report_paperformat.xml',
         'reports/report_layout.xml',
         'reports/procedure_edition.xml',

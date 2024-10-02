@@ -86,3 +86,10 @@ class ProcedureEdition(models.Model):
     tyt_appendices = fields.Html(
         string='Appendices',
     )
+
+    #### Change String : Edición to Versión #####
+
+    @api.depends('version')
+    def _compute_version_as_string(self):
+        for record in self:
+            record.version_as_string = 'Versión N° {}'.format(str(record.version).rjust(3, '0'))
