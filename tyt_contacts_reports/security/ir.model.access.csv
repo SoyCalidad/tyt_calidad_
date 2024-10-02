@@ -5,7 +5,6 @@ access_supplier_complaints_inventory_export,supplier_complaints_inventory.export
 access_customer_directory_export,customer_directory.export,model_customer_directory_export,base.group_user,1,1,1,1
 access_res_partner_customer_campaign,res.partner.customer_campaign,model_res_partner_customer_campaign,base.group_user,1,1,1,1
 
-access_approved_supplier,approved_supplier,model_approved_supplier,base.group_user,1,1,1,1
 access_approved_supplier_export,approved_supplier.export,model_approved_supplier_export,base.group_user,1,1,1,1
 
 access_customer_property_export,customer_property.export,model_customer_property_export,base.group_user,1,1,1,1

@@ -15,6 +15,11 @@
                             'tree_view_ref': 'tyt_contacts_reports.res_partner_evaluation_history_item_tree2',
                             'form_view_ref': 'tyt_contacts_reports.res_partner_evaluation_history_item_form2'}"/>
             </xpath>
+            <xpath expr="//field[@name='history_item_ids']" position="after">
+                <group>
+                    <field name="evaluation_qualification"/>
+                </group>
+            </xpath>
         </field>
     </record>
 

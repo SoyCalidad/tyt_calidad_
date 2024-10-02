@@ -11,6 +11,12 @@ class History(models.Model):
     _inherit = 'res.partner.evaluation.history'
 
     is_tyt_evaluation = fields.Boolean(string='Is TYT Evaluation', related='evaluation_id.is_tyt_evaluation', store=True)
+    evaluation_qualification = fields.Selection([
+        ('a', 'A - Excepcional'),
+        ('b', 'B - Aceptable'),
+        ('c', 'C - Aceptable con prueba adicional'),
+        ('d', 'D - Inaceptable'),
+    ], string='Evaluation Qualification')
 
     def print_evaluation(self):
         if self.is_tyt_evaluation:

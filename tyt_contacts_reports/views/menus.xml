@@ -29,10 +29,9 @@
               parent="tyt_contacts_reports_menu"
               sequence="30"/>
 
-<!--    <menuitem id="approved_supplier_report_menu_action"-->
-<!--              name="Approved Supplier Report"-->
-<!--              action="tyt_contacts_reports.approved_supplier_export_action"-->
-<!--              parent="tyt_contacts_reports_menu"-->
-<!--              sequence="30"/>-->
-
+    <menuitem id="approved_supplier_report_menu_action"
+              name="Approved Supplier Report"
+              action="tyt_contacts_reports.approved_supplier_export_action"
+              parent="tyt_contacts_reports_menu"
+              sequence="40"/>
 </odoo>

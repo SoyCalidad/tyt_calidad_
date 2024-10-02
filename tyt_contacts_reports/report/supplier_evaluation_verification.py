@@ -33,6 +33,9 @@ class SupplierEvaluationVerificationXlsxReport(models.AbstractModel):
 
         format_cell_left = workbook.add_format(
             {'font_size': 12, 'align': 'left', 'valign': 'vcenter', 'bold': False, 'text_wrap': True, 'border': 2, 'border_color': '#808080'})
+        format_cell_right = workbook.add_format(
+            {'font_size': 12, 'align': 'right', 'valign': 'vcenter', 'bold': False, 'text_wrap': True, 'border': 2,
+             'border_color': '#808080'})
 
         format_cell2_left = workbook.add_format(
             {'font_size': 12, 'align': 'left', 'valign': 'vcenter', 'bold': True, 'text_wrap': True, 'border': 2,
@@ -139,10 +142,10 @@ class SupplierEvaluationVerificationXlsxReport(models.AbstractModel):
                 qualification_items = record.history_item_ids.mapped('qualification_item')
                 column_start = 4
                 for qualification_item in qualification_items:
-                    sheet.write(row, column_start, qualification_item, format_cell_left)
+                    sheet.write(row, column_start, qualification_item, format_cell_right)
                     column_start += 1
 
-                sheet.write(row, 9, record.qualification, format_cell_left)
+                sheet.write(row, 9, record.qualification, format_cell_right)
                 evaluation_qualification = dict(record.partner_id._fields['evaluation_qualification']._description_selection(self.env)).get(record.partner_id.evaluation_qualification, '')
                 sheet.write(row, 10, evaluation_qualification, format_cell_left)
                 row += 1
