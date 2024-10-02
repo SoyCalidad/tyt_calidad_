@@ -14,7 +14,6 @@
                             <field name="description"/>
                          </group>
                         <group>
-                            <field name="description"/>
                             <field name="document_reference"/>
                             <field name="resolution_date"/>
                             <field name="register_id"/>

@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <record id="res_partner_form_inherit" model="ir.ui.view">
+        <field name="name">res.partner.view.form.inherit</field>
+        <field name="model">res.partner</field>
+        <field name="inherit_id" ref="mgmtsystem_partner_qualification.res_partner_form_inherit"/>
+        <field name="arch" type="xml">
+            <xpath expr="//field[@name='vip_customer']" position="after">
+                <field name="customer_campaign_ids" attrs="{'invisible': [('customer', '=', False)]}" widget="many2many_tags" options="{'color_field': 'color'}"/>
+            </xpath>
+            <xpath expr="//group//div[hasclass('partner_type')]" position="inside">
+                <group col="2" class="mt-5">
+                    <field name="observations"/>
+                </group>
+            </xpath>
+            <xpath expr="//page[@name='contact_addresses']" position="after">
+                <page string="Customer Property" name="customer_property">
+                    <group>
+                        <group>
+                            <field name="property_date"/>
+                            <field name="property_client"/>
+                            <field name="property_name"/>
+                            <field name="property_activity"/>
+                        </group>
+                        <group>
+                            <field name="property_inadequate_condition"/>
+                            <field name="property_response_activity_ids" widget="many2many_tags"/>
+                            <field name="property_corrective_action_initiated"/>
+                        </group>
+                    </group>
+                </page>
+            </xpath>
+            <xpath expr="//page[@name='evaluation_history']//field[@name='history_ids']" position="after">
+                <group>
+                    <field name="evaluation_qualification"/>
+                </group>
+            </xpath>
+        </field>
+    </record>
+
+    <record id="res_partner_customer_campaign_view_form" model="ir.ui.view">
+        <field name="name">res.partner.customer_campaign.view.form</field>
+        <field name="model">res.partner.customer_campaign</field>
+        <field name="arch" type="xml">
+            <form>
+                <sheet>
+                    <group>
+                        <field name="name"/>
+                    </group>
+                </sheet>
+            </form>
+        </field>
+    </record>
+</odoo>
