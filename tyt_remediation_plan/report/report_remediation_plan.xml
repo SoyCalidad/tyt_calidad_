@@ -1,11 +1,14 @@
 <?xml version="1.0" encoding="utf-8"?>
 <odoo>
-    <!-- <report
-            id="action_report_report_remediation_plan"
-            model="maintenance.remediationplan"
-            string="Remediation Plan"
-            report_type="xlsx"
-            name="tyt_remediation_plan.report_remediation_plan"
-            file="Remediation Plan"
-            /> -->
+    <record id="remediation_plan_report_xlsx" model="ir.actions.report">
+        <field name="name">Remediation Plan Report (Excel)</field>
+        <field name="model">maintenance.remediationplan</field>
+        <field name="report_type">xlsx</field>
+        <field name="report_name">tyt_remediation_plan.remediation_report</field>
+        <field name="report_file">Report</field>
+        <field name="binding_model_id" ref="model_maintenance_remediationplan"/>
+        <field name="binding_type">report</field>
+        <field name="attachment_use" eval="False"/>
+        <field name="multi" eval="False"/>
+    </record>
 </odoo>

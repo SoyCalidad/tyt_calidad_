@@ -67,6 +67,11 @@
         <field name="view_mode">tree,form</field>
     </record>
 
+    <record id="model_maintenance_remediationplan" model="ir.model">
+        <field name="name">Maintenance Remediation Plan</field>
+        <field name="model">maintenance.remediationplan</field>
+    </record>
+
     <!-- Submenú para acceder a los Remediation Logs -->
     <menuitem id="menu_maintenance_remediationplan" name="Remediation Plans"
               parent="tyt_remediation_log.menu_maintenance_remediation_root" action="action_maintenance_remediationplan" sequence="10"/>
