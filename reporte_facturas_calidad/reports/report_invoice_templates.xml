@@ -1,0 +1,283 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <template id="report_invoice_document_frescos" inherit_id="account.report_invoice_document">
+        <xpath expr="//t[@t-call='web.external_layout']" position="replace">
+            <t t-foreach="docs" t-as="o">
+                <div class="article"  t-att-data-oe-model="o and o._name" t-att-data-oe-id="o and o.id" t-att-data-oe-lang="o and o.env.context.get('lang')">
+                    <div class="header">
+                        <table class="table table-sm table-borderless">
+                            <tbody>
+                                <tr>
+                                    <td class="text-start" style="width: 350px;">
+                                        <img t-if="o.company_id.logo" t-att-src="image_data_uri(o.company_id.logo)" alt="Logo" style="width: 100%; height: auto;"/>
+                                    </td>
+                                    <td class="text-start" style="background-color: rgba(107, 142, 34, 1); color:white;">
+                                        <h3 t-esc="o.company_id.name"/>
+                                        <p>
+                                            <strong><span class="text-center">RFC:</span></strong>
+                                            <span t-esc="o.company_id.vat"/> <br/>
+                                            <strong><span>Tipo de Comprobante: </span></strong>
+                                            <span t-if="o.move_type == 'out_invoice' and o.state == 'posted'">Invoice</span>
+                                            <span t-if="o.move_type == 'out_invoice' and o.state == 'draft'">Draft Invoice</span>
+                                            <span t-if="o.move_type == 'out_invoice' and o.state == 'cancel'">Cancelled Invoice</span>
+                                            <span t-if="o.move_type == 'out_refund'">Credit Note</span>
+                                            <span t-if="o.move_type == 'in_refund'">Vendor Credit Note</span>
+                                            <span t-if="o.move_type == 'in_invoice'">Vendor Bill</span>
+                                            <br/>
+                                            <strong><span>Lugar de expedición (C.P.): </span></strong><br/>
+                                            <strong><span>Régimen Fiscal: </span></strong>
+                                        </p>
+                                    </td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                    <div style="width: 100%; height: 40px;">
+                    </div>
+                    <div class="body_dfv">
+                        <table class="table table-borderless" name="invoice_customer">
+                            <tbody>
+                                <tr> 
+                                    <td class="text-start" style="background-color: rgba(245, 245, 245, 0.5); color: rgba(107, 142, 34, 1);"><span>Forma de Pago:</span></td>
+                                    <td name="td_partner" class="text-start">
+                                        <span t-field="o.l10n_mx_edi_payment_method_id"/>
+                                    </td>
+                                    <td class="text-start" style="background-color: rgba(245, 245, 245, 0.5); color: rgba(107, 142, 34, 1);"><span>Folio:</span></td>
+                                    <td name="td_partner" class="text-start">
+                                        <span t-field="o.l10n_mx_edi_cfdi_uuid"/>
+                                    </td>
+                                </tr>
+                                <tr> 
+                                    <td class="text-start" style="background-color: rgba(245, 245, 245, 0.5); color: rgba(107, 142, 34, 1);"><span>Método de Pago:</span></td>
+                                    <td name="td_partner" class="text-start">
+                                        <span t-field="o.l10n_mx_edi_payment_policy"/>
+                                    </td>
+                                    <td class="text-start" style="background-color: rgba(245, 245, 245, 0.5); color: rgba(107, 142, 34, 1);"><span>Fecha:</span></td>
+                                    <td name="td_partner" class="text-start">
+                                        <span t-field="o.invoice_date_due"/>
+                                    </td>
+                                </tr>
+                                <tr> 
+                                    <td class="text-start" style="background-color: rgba(245, 245, 245, 0.5); color: rgba(107, 142, 34, 1);"><span>Moneda:</span></td>
+                                    <td name="td_partner" class="text-start">
+                                        <span t-field="o.currency_id.name"/>
+                                        
+                                    </td>
+                                </tr>
+                                
+                            </tbody>
+                        </table>
+
+                        <table class="table table-borderless" name="invoice_customer">
+                            <thead>
+                                <tr>
+                                    <th colspan="4" class="text-start" style="background-color: rgba(245, 245, 245, 0.5); color: rgba(107, 142, 34, 1);"><span>Datos del Cliente:</span></th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr> 
+                                    <td class="font-weight-bold text-start"><span>Cliente:</span></td>
+                                    <td colspan="3" name="td_partner" class="text-start">
+                                        <span t-field="o.partner_id" t-options='{"widget": "contact", "fields": ["address", "name", "phone"], "no_marker": True, "phone_icons": True}'/>
+                                    </td>
+                                </tr>
+                                <tr> 
+                                    <td class="font-weight-bold text-start"><span>RFC:</span></td>
+                                    <td name="td_partner" class="text-start">
+                                        <span t-field="o.partner_id.vat"/>
+                                    </td>
+
+                                    <td class="font-weight-bold text-start"><span>Uso CFDI:</span></td>
+                                    <td name="td_partner" class="text-start">
+                                        <span t-field="o.l10n_mx_edi_origin"/>
+                                    </td>
+                                </tr>
+                                <tr> 
+                                    <td class="font-weight-bold text-start"><span>Domicilio:</span></td>
+                                    <td colspan="3" name="td_partner" class="text-start">
+                                        <span t-field="o.partner_shipping_id"/>
+                                    </td>
+                                </tr>
+                            </tbody>
+                        </table>
+
+                        <table class="table table-bordered" name="invoice_line_table" style="border: 2px solid rgba(245, 245, 245, 0.7);">
+                            <thead>
+                                <tr>
+                                    <th name="th_quantity" style="background-color: rgba(245, 245, 245, 0.5); color: rgba(107, 142, 34, 1);" class="font-weight-bold text-end"><span>Quantity</span></th>
+                                    <th name="th_uom" style="background-color: rgba(245, 245, 245, 0.5); color: rgba(107, 142, 34, 1);" class="font-weight-bold text-start"><span>Unit of Measure</span></th>
+                                    <th name="th_description" style="background-color: rgba(245, 245, 245, 0.5); color: rgba(107, 142, 34, 1);" class="font-weight-bold text-start"><span>Description</span></th>
+                                    <th name="th_priceunit" style="background-color: rgba(245, 245, 245, 0.5); color: rgba(107, 142, 34, 1);" class="font-weight-bold" t-attf-class="text-end {{ 'd-none d-md-table-cell' if report_type == 'html' else '' }}"><span>Unit Price</span></th>
+                                    <th name="th_price_unit" style="background-color: rgba(245, 245, 245, 0.5); color: rgba(107, 142, 34, 1);"  t-if="display_discount" class="font-weight-bold" t-attf-class="text-end {{ 'd-none d-md-table-cell' if report_type == 'html' else '' }}">
+                                        <span>Disc.%</span>
+                                    </th>
+                                    <th name="th_taxes" style="background-color: rgba(245, 245, 245, 0.5); color: rgba(107, 142, 34, 1);" class="font-weight-bold" t-attf-class="text-start {{ 'd-none d-md-table-cell' if report_type == 'html' else '' }}"><span>Taxes</span></th>
+                                    <th name="th_subtotal" style="background-color: rgba(245, 245, 245, 0.5); color: rgba(107, 142, 34, 1);" class="font-weight-bold text-end">
+                                        <span groups="account.group_show_line_subtotals_tax_excluded">Amount</span>
+                                        <span groups="account.group_show_line_subtotals_tax_included">Total Price</span>
+                                    </th>
+                                </tr>
+                            </thead>
+                            <tbody class="invoice_tbody">
+                                <t t-set="current_subtotal" t-value="0"/>
+                                <t t-set="lines" t-value="o.invoice_line_ids.sorted(key=lambda l: (-l.sequence, l.date, l.move_name, -l.id), reverse=True)"/>
+
+                                <t t-foreach="lines" t-as="line">
+                                    <t t-set="current_subtotal" t-value="current_subtotal + line.price_subtotal" groups="account.group_show_line_subtotals_tax_excluded"/>
+                                    <t t-set="current_subtotal" t-value="current_subtotal + line.price_total" groups="account.group_show_line_subtotals_tax_included"/>
+
+                                    <tr t-att-class="'bg-200 fw-bold o_line_section' if line.display_type == 'line_section' else 'fst-italic o_line_note' if line.display_type == 'line_note' else ''">
+                                        <t t-if="line.display_type == 'product'" name="account_invoice_line_accountable">
+                                            <td class="text-end">
+                                                <span t-field="line.quantity"/>
+                                            </td>
+                                            <td class="text-start">
+                                                <span t-field="line.product_uom_id" groups="uom.group_uom"/>
+                                            </td>
+                                            <td name="account_invoice_line_name"><span t-field="line.name" t-options="{'widget': 'text'}"/></td>
+                                            <td t-attf-class="text-end {{ 'd-none d-md-table-cell' if report_type == 'html' else '' }}">
+                                                <span class="text-nowrap" t-field="line.price_unit"/>
+                                            </td>
+                                            <td t-if="display_discount" t-attf-class="text-end {{ 'd-none d-md-table-cell' if report_type == 'html' else '' }}">
+                                                <span class="text-nowrap" t-field="line.discount"/>
+                                            </td>
+                                            <t t-set="taxes" t-value="', '.join([(tax.description or tax.name) for tax in line.tax_ids])"/>
+                                            <td name="td_taxes" t-attf-class="text-start {{ 'd-none d-md-table-cell' if report_type == 'html' else '' }} {{ 'text-nowrap' if len(taxes) &lt; 10 else '' }}">
+                                                <span t-out="taxes" id="line_tax_ids"/>
+                                            </td>
+                                            <td class="text-end o_price_total">
+                                                <span class="text-nowrap" t-field="line.price_subtotal" groups="account.group_show_line_subtotals_tax_excluded"/>
+                                                <span class="text-nowrap" t-field="line.price_total" groups="account.group_show_line_subtotals_tax_included"/>
+                                            </td>
+                                        </t>
+                                        <t t-if="line.display_type == 'line_section'">
+                                            <td colspan="99">
+                                                <span t-field="line.name" t-options="{'widget': 'text'}"/>
+                                            </td>
+                                            <t t-set="current_section" t-value="line"/>
+                                            <t t-set="current_subtotal" t-value="0"/>
+                                        </t>
+                                        <t t-if="line.display_type == 'line_note'">
+                                            <td colspan="99">
+                                                <span t-field="line.name" t-options="{'widget': 'text'}"/>
+                                            </td>
+                                        </t>
+                                    </tr>
+
+                                    <t t-if="current_section and (line_last or lines[line_index+1].display_type == 'line_section')">
+                                        <tr class="is-subtotal text-end">
+                                            <td colspan="99">
+                                                <strong class="mr16">Subtotal</strong>
+                                                <span
+                                                    t-esc="current_subtotal"
+                                                    t-options='{"widget": "monetary", "display_currency": o.currency_id}'
+                                                />
+                                            </td>
+                                        </tr>
+                                    </t>
+                                </t>
+                            </tbody>
+                        </table>
+                        
+                        <table class="table table-sm table-borderless">
+                            <tbody>
+                                <tr>
+                                    <td class="text-start">
+                                        <strong style="color: rgba(107, 142, 34, 1);">Total con letra:</strong><br/>
+                                        <span>-</span><br/>
+                                        <strong style="color: rgba(107, 142, 34, 1);">Observaciones:</strong><br/>
+                                        <span t-field="o.narration"/><br/>
+                                        <strong style="color: rgba(107, 142, 34, 1);">Tipo Relación:</strong><br/>
+                                        <span>-</span>
+                                    </td>
+                                    <td class="text-end">
+                                        <strong>Subtotal:</strong> <span t-field="o.amount_untaxed"/><br/>
+                                        <strong>IVA:</strong>  <span t-field="o.amount_tax"/><br/>
+                                        <strong>Total:</strong><strong><span t-field="o.amount_total"/></strong>
+                                    </td>
+                                </tr>
+                            </tbody>
+                        </table>
+                        <table class="table table-sm table-borderless">
+                            <tbody>
+                                <tr>
+                                    <td class="text-start"  style="width: 380px;" >QR</td>
+                                    <td class="text-start">
+
+                                    <table class="table table-sm table-borderless">
+                                        <thead>
+                                            <tr>
+                                                <th colspan="2" style="background-color: rgba(245, 245, 245, 0.5); color: red;" class="text-center"><span>Este documento es una representación impresa de un CFDI</span></th>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                            <tr>
+                                                <td class="text-end"><strong>Serie del Certificado del emisor:</strong> </td>
+                                                <td class="text-start"><span t-field="o.l10n_mx_edi_cer_source"/></td>
+                                            </tr>
+                                            <tr>
+                                                <td class="text-end"><strong>Folio Fiscal:</strong> </td>
+                                                <td class="text-start"><span t-field="o.l10n_mx_edi_cfdi_uuid"/></td>
+                                            </tr>
+                                            <tr>
+                                                <td class="text-end"><strong>No. de serie del Certificado del SAT:</strong> </td>
+                                                <td class="text-start">Fila 3, Col 2</td>
+                                            </tr>
+                                            <tr>
+                                                <td class="text-end"><strong>Fecha y hora de certificación:</strong> </td>
+                                                <td class="text-start">Fila 4, Col 2</td>
+                                            </tr>
+                                        </tbody>
+                                    </table>
+                                    </td>
+                                </tr>
+                            </tbody>
+                        </table>
+                        <table class="table table-sm table-borderless">
+                            <thead>
+                                <tr style="background-color: rgba(245, 245, 245, 0.5); color: rgba(107, 142, 34, 1);">
+                                    <th colspan="2">Sello digital del CFDI</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td colspan="2">
+                                        GeB2hP8xobDlnSTA6mpftvM3umD0cvsy5GGqhXyVLACTUznADWzPaSGxSWHcKbb3DWYm6bl+jIeNKFymJ1dAqVvS+HRWG7COAuKHQOSPydur49O0OzsOQUv1Vc+9m/e
+                                    </td>
+                                </tr>
+                            </tbody>
+                        </table>
+                        <table class="table table-sm table-borderless">
+                            <thead>
+                                <tr style="background-color: rgba(245, 245, 245, 0.5); color: rgba(107, 142, 34, 1);">
+                                    <th colspan="2">Sello del SAT</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td colspan="2">
+                                        GeB2hP8xobDlnSTA6mpftvM3umD0cvsy5GGqhXyVLACTUznADWzPaSGxSWHcKbb3DWYm6bl+jIeNKFymJ1dAqVvS+HRWG7COAuKHQOSPydur49O0OzsOQUv1Vc+9m/e
+                                    </td>
+                                </tr>
+                            </tbody>
+                        </table>
+                        <table class="table table-sm table-borderless">
+                            <thead>
+                                <tr style="background-color: rgba(245, 245, 245, 0.5); color: rgba(107, 142, 34, 1);">
+                                    <th colspan="2">Cadena original del complemento del certificación digital del SAT</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td colspan="2">
+                                        GeB2hP8xobDlnSTA6mpftvM3umD0cvsy5GGqhXyVLACTUznADWzPaSGxSWHcKbb3DWYm6bl+jIeNKFymJ1dAqVvS+HRWG7COAuKHQOSPydur49O0OzsOQUv1Vc+9m/e
+                                    </td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </t>
+        </xpath>
+    </template>
+</odoo>
