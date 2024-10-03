@@ -52,7 +52,7 @@
                                         </strong>
                                     </h5>
                                     <p class="card-text mt-2">
-                                        <i class="fa fa-fw fa-clock-o" title="Publication date"/>
+                                        <i class="fa fa-fw fa-clock-o" title="Fecha de publicación"/>
                                         <t t-esc="data['published_start_date']"/>
                                         <span class="fa fa-long-arrow-right"/>
                                         <t t-esc="data['published_end_date']"/>

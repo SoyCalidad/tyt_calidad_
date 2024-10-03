@@ -1,10 +1,22 @@
 from odoo import http
 from odoo.http import request
 from odoo import api, exceptions, fields, models, _
+from datetime import datetime
 
 
 class SurveyController(http.Controller):
     """Inherited http.Controller to add custom route"""
+
+    @api.model
+    def format_date_spanish(self, date_obj):
+        if not date_obj:
+            return ''
+        month_map = {
+            '01': 'ene', '02': 'feb', '03': 'mar', '04': 'abr',
+            '05': 'may', '06': 'jun', '07': 'jul', '08': 'ago',
+            '09': 'sep', '10': 'oct', '11': 'nov', '12': 'dic'
+        }
+        return date_obj.strftime(f"%d {month_map[date_obj.strftime('%m')]} %Y")
 
     @http.route('/my/surveys', type='http', auth="user", website=True)
     def portal_my_survey(self):
@@ -21,8 +33,8 @@ class SurveyController(http.Controller):
                 'title': rec.title,
                 'attempts': rec.attempts_limit,
                 'date': rec.create_date,
-                'published_start_date': rec.published_start_date.strftime('%d/%m/%Y') if rec.published_start_date else '',
-                'published_end_date': rec.published_end_date.strftime('%d/%m/%Y') if rec.published_end_date else '',
+                'published_start_date': self.format_date_spanish(rec.published_start_date) if rec.published_start_date else '',
+                'published_end_date': self.format_date_spanish(rec.published_end_date) if rec.published_end_date else '',
                 'access_token': rec.access_token
             } for rec in surveys],
             'page_name': 'survey',

@@ -14,12 +14,12 @@
                     <div class="container pt-3">
                         <t t-if="my_details">
                             <div class="wrapper col-12 d-flex flex-wrap justify-content-between align-items-center">
-                                <h3 class="my-3">My account</h3>
+                                <h3 class="my-3">Mi perfil</h3>
                                 <button class="btn py-0 d-flex align-items-center gap-2 d-lg-none ms-auto"
                                 data-bs-toggle="offcanvas"
                                 data-bs-target="#accountOffCanvas">
                                     <img class="o_avatar rounded"
-                                    t-att-src="image_data_uri(user_id.partner_id.avatar_1024)" alt="Contact"/>
+                                    t-att-src="image_data_uri(user_id.partner_id.avatar_1024)" alt="Contact" style="width: 27px; height: 27px;"/>
                                 </button>
                             </div>
                             <div class="row justify-content-between">
@@ -103,9 +103,21 @@
                 </div>
             </div>
             <div class="o_portal_my_details">
+                <div t-if="user_id.x_studio_empleado.name">
+                    <i class="fa fa-user fa-fw" title="Nombre de empleado"/>
+                    <span class="m-1" t-field="user_id.x_studio_empleado.name"/>
+                </div>
+                <div t-if="user_id.x_studio_empleado.x_studio_numero">
+                    <i class="fa fa-hashtag fa-fw" title="Número de empleado"/>
+                    <span class="m-1" t-field="user_id.x_studio_empleado.x_studio_numero"/>
+                </div>
+                <div t-if="user_id.x_studio_empleado.department_id.name">
+                    <i class="fa fa-sitemap fa-fw" title="Área"/>
+                    <span class="m-1" t-field="user_id.x_studio_empleado.department_id.name"/>
+                </div>
                 <div t-field="user_id.partner_id" t-options='{"widget": "contact", "fields": ["email", "phone", "address"]}'/>
             </div>
-            <a role="button" href="/my/account" class="btn btn-link p-0 mt-3"><i class="fa fa-pencil"/> Edit information</a>
+            <a role="button" href="/my/account" class="btn btn-link p-0 mt-3"><i class="fa fa-pencil"/> Editar información</a>
             <hr t-if="sales_user"/>
             <div class="o_my_contact" t-if="sales_user">
                 <t t-call="portal.portal_contact"/>
