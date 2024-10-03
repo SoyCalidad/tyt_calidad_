@@ -1,0 +1,15 @@
+<odoo>
+    <record id="view_order_form_inherit_unique_address" model="ir.ui.view">
+        <field name="name">sale.order.form.unique.shipping.address</field>
+        <field name="model">sale.order</field>
+        <field name="inherit_id" ref="frescos_sale.view_order_frescos_form" />
+        <field name="arch" type="xml">
+            <xpath expr="//group[@name='partner_details']" position="after">
+                <group>
+                    <field name="is_unique_shipping_address" />
+                    <field name="unique_shipping_address" attrs="{'invisible': [('is_unique_shipping_address', '=', False)]}" />
+                </group>
+            </xpath>
+        </field>
+    </record>
+</odoo>
