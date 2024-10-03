@@ -56,7 +56,7 @@ class Employee(models.Model):
     def open_process_view(self):
         ids = [x.id for x in self.process_ids]
         result = self.env.ref(
-            'mgmtsystem_process.action_mgmt_procedures').read()[0]
+            'mgmtsystem_process.action_mgmt_procedures').sudo().read()[0]
         result['domain'] = [('id', 'in', ids)]
         return result
 
@@ -70,7 +70,7 @@ class Employee(models.Model):
     def open_meeting_view(self):
         ids = [x.id for x in self.meeting_ids]
         result = self.env.ref(
-            'mgmtsystem_comunication.record_meeting_action').read()[0]
+            'mgmtsystem_comunication.record_meeting_action').sudo().read()[0]
         result['domain'] = [('id', 'in', ids)]
         return result
 

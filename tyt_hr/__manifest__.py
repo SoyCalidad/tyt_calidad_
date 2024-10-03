@@ -9,10 +9,14 @@
     'category': 'soycalidad',
     'depends': [
         'hr',
+        'documents_hr',
+        'hr_job_functions',
+        'mgmtsystem_process_integration',
     ],
     'data': [
         'security/ir.model.access.csv',
         'views/hr_employee_views.xml',
+        'views/menus.xml',
     ],
     'auto_install': False,
     'installable': True,
