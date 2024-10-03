@@ -32,7 +32,7 @@
             </xpath>
             <xpath expr="//page[@name='evaluation_history']//field[@name='history_ids']" position="after">
                 <group>
-                    <field name="evaluation_qualification"/>
+                    <field name="evaluation_qualification" invisible="1"/>
                 </group>
             </xpath>
         </field>
