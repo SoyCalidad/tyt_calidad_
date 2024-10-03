@@ -33,6 +33,9 @@ class SupplierEvaluationVerificationXlsxReport(models.AbstractModel):
 
         format_cell_left = workbook.add_format(
             {'font_size': 12, 'align': 'left', 'valign': 'vcenter', 'bold': False, 'text_wrap': True, 'border': 2, 'border_color': '#808080'})
+        format_cell_center = workbook.add_format(
+            {'font_size': 12, 'align': 'center', 'valign': 'vcenter', 'bold': False, 'text_wrap': True, 'border': 2,
+             'border_color': '#808080'})
         format_cell_right = workbook.add_format(
             {'font_size': 12, 'align': 'right', 'valign': 'vcenter', 'bold': False, 'text_wrap': True, 'border': 2,
              'border_color': '#808080'})
@@ -146,6 +149,6 @@ class SupplierEvaluationVerificationXlsxReport(models.AbstractModel):
                     column_start += 1
 
                 sheet.write(row, 9, record.qualification, format_cell_right)
-                evaluation_qualification = dict(record.partner_id._fields['evaluation_qualification']._description_selection(self.env)).get(record.partner_id.evaluation_qualification, '')
-                sheet.write(row, 10, evaluation_qualification, format_cell_left)
+                evaluation_qualification = dict(record._fields['evaluation_qualification']._description_selection(self.env)).get(record.evaluation_qualification, '')
+                sheet.write(row, 10, evaluation_qualification, format_cell_center)
                 row += 1
