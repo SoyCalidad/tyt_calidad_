@@ -21,6 +21,11 @@
         # 'views/sign_portal_templates.xml',
         'views/survey_portal_templates.xml',
     ],
+    'assets': {
+        'web.assets_frontend': [
+            "/tyt_intranet_portal/static/src/css/main.css",
+        ],
+    },
     'installable': True,
     'auto_install': False,
     'application': False,

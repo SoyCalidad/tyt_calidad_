@@ -3,8 +3,9 @@
     <template id="survey_fill_form_start" inherit_id="survey.survey_fill_form_start">
         <xpath expr="//div[@t-field='survey.description']" position="before">
             <div class="welcome-message">
-                <h2>Bienvenido/a, <t t-esc="request.env.user.name"/></h2>
+                <h3>Bienvenido/a, <t t-esc="request.env.user.name"/></h3>
             </div>
+            <div t-if="not is_html_empty(survey.description)" class="mt-1 pt-1 border-top"/>
         </xpath>
     </template>
 </odoo>

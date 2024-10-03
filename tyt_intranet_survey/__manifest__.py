@@ -15,6 +15,7 @@
         'views/survey_survey_views.xml',
         'views/survey_management_views.xml',
         'views/survey_question_views.xml',
+        'views/survey_user_input_views.xml',
         'views/survey_portal_templates.xml',
         'views/survey_templates.xml',
         'views/menus.xml',
