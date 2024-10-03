@@ -8,6 +8,7 @@
     'license': 'Other proprietary',
     'category': 'soycalidad',
     'depends': [
+        'base',
         'mgmtsystem_process',
     ],
     'data': [

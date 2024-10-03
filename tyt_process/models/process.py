@@ -38,16 +38,22 @@ class ProcessInherit(models.Model):
                 record.real_last_edition = None
                 record.validate_date = None
 
+    '''
     @api.model
     def create(self, values):
-        sequence = self.env['ir.sequence'].sudo().create({
-            'name': 'Secuencia de '+values.get('name'),
-            'active': True,
-            'prefix': 'Versión-nro.',
-            'padding': 4,
-            'number_next': 1,
-            'number_increment': 1,
-        })
-        values['sequence_id'] = sequence.id
-        return super(ProcessInherit, self).create(values)
-    
+        # Verificar si 'name' está en values para evitar errores
+        if 'name' in values:
+            # Crear la secuencia con el nuevo prefijo
+            sequence = self.env['ir.sequence'].sudo().create({
+                'name': 'Secuencia de ' + values.get('name'),
+                'active': True,
+                'prefix': 'Versión-nro.',
+                'padding': 4,
+                'number_next': 1,
+                'number_increment': 1,
+            })
+            values['sequence_id'] = sequence.id
+        # Llamar al método create original
+        result = super(ProcessInherit, self).create(values)
+        return result
+    '''
