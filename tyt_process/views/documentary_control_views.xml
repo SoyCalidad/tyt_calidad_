@@ -4,30 +4,120 @@
         <record id="inherit_mgmt_process_form" model="ir.ui.view">
             <field name="name">inherit_mgmt_process_form</field>
             <field name="model">mgmt.process</field>
-            <field name="inherit_id" ref="mgmtsystem_process.mgmt_process_form"/>  
+            <field name="inherit_id" ref="mgmtsystem_process.mgmt_process_form"/>
             <field name="arch" type="xml">
                 <xpath expr="//sheet/notebook/page[@name='documentarycontrol_ids']" position="attributes">
                     <attribute name="string">Inventario de Registro</attribute>
                 </xpath>
             </field>
         </record>
-        <!--
-        <record id="inherit_view_mgmtsystem_infrastructure_tree" model="ir.ui.view">
-            <field name="name">inherit_documentary.control.tree</field>
+
+        <record id="view_documentary_control_form_inherit_tyt" model="ir.ui.view">
+            <field name="name">documentary.control.view.form.inherit.tyt</field>
             <field name="model">documentary.control</field>
-            <field name="inherit_id" ref="mgmtsystem_process.view_mgmtsystem_infrastructure_tree"/> 
+            <field name="inherit_id" ref="mgmtsystem_documentary_control.view_documentary_control_form_inherit" />
             <field name="arch" type="xml">
-                <xpath expr="//tree" position="attributes">
-                    <attribute name="string">Inventario de Registro</attribute>
-                </xpath>
+                <field name="diffusion" position="after">
+                    <field name="reception_date" attrs="{'invisible': [('type', '!=', 'externa')]}"/>
+                    <field name="sender_id" attrs="{'invisible': [('type', '!=', 'externa')]}"/>
+                    <field name="received_by_id" attrs="{'invisible': [('type', '!=', 'externa')]}"/>
+                </field>
             </field>
         </record>
-        -->
-        <!--
-        <record id="mgmt_process_master_list" model="ir.ui.menu">
-            <field name="name">Inventario de Registro</field>
+
+        <!-- Definición de la vista del wizard para Inventario Externo -->
+        <record id="view_external_inventory_report_wizard" model="ir.ui.view">
+            <field name="name">wizard.external.inventory.report.form</field>
+            <field name="model">wizard.inventory.report</field>
+            <field name="arch" type="xml">
+                <form string="Seleccionar fechas para el reporte de Inventario Externo">
+                    <group>
+                        <field name="date_init" />
+                        <field name="date_fin" />
+                    </group>
+                    <footer>
+                        <button name="export_external_inventory_xls" type="object" string="Exportar Inventario Externo" class="oe_highlight" icon="fa-download" />
+                        <button string="Cancelar" class="btn-secondary" special="cancel" />
+                    </footer>
+                </form>
+            </field>
         </record>
-        -->
+
+        <!-- Definición de la vista del wizard para Inventario Interno -->
+        <record id="view_internal_inventory_report_wizard" model="ir.ui.view">
+            <field name="name">wizard.internal.inventory.report.form</field>
+            <field name="model">wizard.inventory.report</field>
+            <field name="arch" type="xml">
+                <form string="Seleccionar fechas para el reporte de Inventario Interno">
+                    <group>
+                        <field name="date_init" />
+                        <field name="date_fin" />
+                    </group>
+                    <footer>
+                        <button name="export_internal_inventory_xls" type="object" string="Exportar Inventario Interno" class="oe_highlight" icon="fa-download" />
+                        <button string="Cancelar" class="btn-secondary" special="cancel" />
+                    </footer>
+                </form>
+            </field>
+        </record>
+
+        <!-- Acción de ventana para el wizard de Inventario Externo -->
+        <record id="action_external_inventory_wizard" model="ir.actions.act_window">
+            <field name="name">Reporte de Inventario Externo</field>
+            <field name="type">ir.actions.act_window</field>
+            <field name="res_model">wizard.inventory.report</field>
+            <field name="view_mode">form</field>
+            <field name="view_id" ref="view_external_inventory_report_wizard" />
+            <field name="target">new</field>
+            <field name="binding_type">report</field>
+        </record>
+
+        <!-- Acción de ventana para el wizard de Inventario Interno -->
+        <record id="action_internal_inventory_wizard" model="ir.actions.act_window">
+            <field name="name">Reporte de Inventario Interno</field>
+            <field name="type">ir.actions.act_window</field>
+            <field name="res_model">wizard.inventory.report</field>
+            <field name="view_mode">form</field>
+            <field name="view_id" ref="view_internal_inventory_report_wizard" />
+            <field name="target">new</field>
+            <field name="binding_type">report</field>
+        </record>
+
+        <!-- Acciones de reporte para Inventario Externo e Interno -->
+        <record id="action_external_inventory_report" model="ir.actions.report">
+            <field name="name">Inventario Externo (XLSX)</field>
+            <field name="model">documentary.control</field>
+            <field name="report_type">xlsx</field>
+            <field name="report_name">tyt_process.wizard_external_inventory</field>
+            <field name="report_file">Inventario Externo</field>
+            <field name="binding_type">action</field>
+        </record>
+
+        <record id="action_internal_inventory_report" model="ir.actions.report">
+            <field name="name">Inventario Interno (XLSX)</field>
+            <field name="model">documentary.control</field>
+            <field name="report_type">xlsx</field>
+            <field name="report_name">tyt_process.wizard_internal_inventory</field>
+            <field name="report_file">Inventario Interno</field>
+            <field name="binding_type">action</field>
+        </record>
+        
+        <!-- Acciones de reporte para Inventario de Registros -->
+        <record id="action_inventory_report" model="ir.actions.report">
+            <field name="name">Inventario de Registros (XLSX)</field>
+            <field name="model">documentary.control</field>
+            <field name="report_type">xlsx</field>
+            <field name="report_name">tyt_process.general_inventory</field>
+            <field name="report_file">Inventario de Registros</field>
+            <field name="binding_model_id" ref="mgmtsystem_process.model_documentary_control"/>
+            <field name="binding_type">report</field>
+        </record>
+
+        <!-- Submenú para Inventario Externo bajo Reportes -->
+        <menuitem id="menu_external_inventory_report" name="Inventario Externo" parent="mgmtsystem_process.process_report_root_menu" action="action_external_inventory_wizard" sequence="12" />
+
+        <!-- Submenú para Inventario Interno bajo Reportes [SE COMPLETARÁ CUANDO SE IMPLEMENTE EL INVENTARIO INTERNO] -->
+        <!-- <menuitem id="menu_internal_inventory_report" name="Inventario Interno" parent="mgmtsystem_process.process_report_root_menu" action="action_internal_inventory_wizard" sequence="13" /> -->
 
     </data>
 </odoo>

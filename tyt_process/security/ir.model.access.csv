@@ -9,3 +9,7 @@ access_tyt_document_record_onlyread,Solo lectura,model_tyt_document_record,mgmts
 access_tyt_document_record_report,Impresión de reportes,model_tyt_document_record,mgmtsystem_process.group_process_readonly_printreport,1,0,0,0
 access_tyt_document_record_write,Documentos propios,model_tyt_document_record,mgmtsystem_process.group_process_owner,1,1,1,0
 access_tyt_document_record_all,Todos los permisos,model_tyt_document_record,mgmtsystem_process.group_process_all,1,1,1,1
+
+access_wizard_inventory_report_readonly,Solo lectura,model_wizard_inventory_report,mgmtsystem_process.group_process_readonly,1,0,0,0
+access_wizard_inventory_report_owner,Documentos propios,model_wizard_inventory_report,mgmtsystem_process.group_process_owner,1,1,1,0
+access_wizard_inventory_report_all,Todos los permisos,model_wizard_inventory_report,mgmtsystem_process.group_process_all,1,1,1,1
