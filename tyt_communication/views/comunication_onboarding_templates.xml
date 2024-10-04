@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+
+	<template id="inherit2_oonboarding_comunication_plan_step" inherit_id="mgmtsystem_comunication.onboarding_comunication_plan_step">
+		<xpath expr="//t[@t-set='title']" position="replace">
+			<t t-set="title">Programa de comunicación</t>
+		</xpath>
+		<xpath expr="//t[@t-set='description']" position="replace">
+			<t t-set="description">Cree una Programa de comunicación</t>
+		</xpath>
+	</template>
+
+	<template id="inherit2_onboarding_comunication_comunication_step" inherit_id="mgmtsystem_comunication.onboarding_comunication_comunication_step">
+		<xpath expr="//t[@t-set='title']" position="replace">
+			<t t-set="title">Plan de comunicación</t>
+		</xpath>
+		<xpath expr="//t[@t-set='description']" position="replace">
+			<t t-set="description">Cree una Plan de comunicación</t>
+		</xpath>
+	</template>
+</odoo>

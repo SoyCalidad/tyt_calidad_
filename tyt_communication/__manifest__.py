@@ -13,6 +13,9 @@
     'data': [
         'security/ir.model.access.csv',
         'views/comunication_record.xml',
+        'views/menus.xml',
+        'views/plan.xml',
+        'views/comunication_onboarding_templates.xml',
     ],
     'auto_install': False,
     'installable': True,
