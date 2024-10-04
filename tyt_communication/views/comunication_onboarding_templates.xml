@@ -10,6 +10,16 @@
 		</xpath>
 	</template>
 
+    <record id="mgmtsystem_comunication.action_comunication_plan_configurator" model="ir.actions.act_window">
+        <field name="type">ir.actions.act_window</field>
+        <field name="name">Cree un programa de comunicación</field>
+        <field name="view_mode">form</field>
+        <field name="target">new</field>
+        <field name="res_model">comunication.plan</field>
+        <field name="view_id" ref="mgmtsystem_comunication.onboarding_comunication_plan_form"/>
+    </record>
+
+
 	<template id="inherit2_onboarding_comunication_comunication_step" inherit_id="mgmtsystem_comunication.onboarding_comunication_comunication_step">
 		<xpath expr="//t[@t-set='title']" position="replace">
 			<t t-set="title">Plan de comunicación</t>
@@ -18,4 +28,14 @@
 			<t t-set="description">Cree una Plan de comunicación</t>
 		</xpath>
 	</template>
+
+    <record id="mgmtsystem_comunication.action_comunication_comunication_configurator" model="ir.actions.act_window">
+        <field name="type">ir.actions.act_window</field>
+        <field name="name">Cree un plan de comunicación</field>
+        <field name="view_mode">form</field>
+        <field name="target">new</field>
+        <field name="res_model">comunication.plan.line</field>
+        <field name="view_id" ref="mgmtsystem_comunication.onboarding_comunication_comunication_form"/>
+    </record>
+
 </odoo>
