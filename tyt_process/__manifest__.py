@@ -17,6 +17,7 @@
         'views/procedure_edition.xml',
         'views/process_edition_views.xml',
         'views/process_views.xml',
+        'views/process_onboarding_templates.xml',
         'wizards/process_edition.xml',        
         'reports/report_paperformat.xml',
         'reports/report_layout.xml',

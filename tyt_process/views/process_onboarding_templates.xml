@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+
+	<template id="inherit2_onboarding_process_edition_step" inherit_id="mgmtsystem_process.onboarding_process_edition_step">
+		<xpath expr="//t[@t-set='title']" position="replace">
+			<t t-set="title">Versión de procedimiento</t>
+		</xpath>
+		<xpath expr="//t[@t-set='description']" position="replace">
+			<t t-set="description">Cree una Versión de procedimiento.</t>
+		</xpath>
+	</template>
+
+    <record id="mgmtsystem_process.action_process_edition_configurator" model="ir.actions.act_window">
+        <field name="type">ir.actions.act_window</field>
+        <field name="name">Cree una versión de procedimiento</field>
+        <field name="view_mode">form</field>
+        <field name="target">new</field>
+        <field name="res_model">process.edition</field>
+        <field name="view_id" ref="mgmtsystem_process.onboarding_process_edition_form"/>
+    </record>
+
+</odoo>
