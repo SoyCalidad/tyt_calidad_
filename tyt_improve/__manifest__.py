@@ -15,6 +15,7 @@
     'data': [
         'views/menus.xml',
         'report/non_conformity_report.xml',
+        'report/conformity_evaluation_report.xml',
         #'security/ir.model.access.csv',
         'views/change_request.xml',
         'views/mgmtsystem_nonconformity.xml',
