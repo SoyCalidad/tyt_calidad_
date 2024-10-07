@@ -43,6 +43,7 @@
 
         <record model="ir.ui.menu" id="mgmtsystem_audit.hr_item_annual_plan">
             <field name="name">Cronograma de Auditorías</field>
+            <field name="parent_id" ref="tyt_audit.anual_plan_tyt"/>
         </record>
 
         <record model="ir.ui.menu" id="mgmtsystem_audit.audit_plan_wizard_menu1">

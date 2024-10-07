@@ -13,7 +13,8 @@
         
     ],
     'data': [
-        #'security/ir.model.access.csv',
+        'security/ir.model.access.csv',
+        'views/audit_plan_tyt_auditor.xml',
         'views/audit.xml',
         'views/plan.xml',
         'reports/report_paperformat.xml',               
