@@ -64,5 +64,49 @@
 
         <!-- Agregar nuevo elemento de menú en la sección de reportes -->
         <menuitem id="report_tyt_nc_inventory" name="Inventario de no conformidades" parent="mgmtsystem_nonconformity.menu_nonconformity_report" action="action_tyt_report_nc_inventory" sequence="151"/>
+
+
+        <!-- =========================
+        Reporte "Reporte "Registro Evaluacion Conformidad"
+        ========================= -->
+
+        <!-- Definir el modelo para el reporte de evaluacion de conformidad -->
+        <record id="tyt_report_c_evaluation_excel" model="ir.ui.view">
+            <field name="name">wizard.nc.report.excel</field>
+            <field name="model">wizard.nc.report</field>
+            <field name="arch" type="xml">
+                <form string="Wizard">
+                    <group>
+                        <field name="date_init" />
+                        <field name="date_fin" />
+                    </group>
+                    <footer>
+                        <button name="export_c_evaluation_xls" type="object" default_focus="1" string="Exportar Reporte Excel" class="oe_highlight" context="{'xls_export':1}" icon="fa-download" />
+                        <button string="Cancelar" special="cancel" />
+                    </footer>
+                </form>
+            </field>
+        </record>
+
+        <!--Accion de reporte de evaluacion de conformidad-->
+        <report id="tyt_report_c_evaluation_xlsx" model="wizard.nc.report" string="Registro de Evaluación de Conformidad" report_type="xlsx" name="tyt_improve.general_conformity_evaluation_report" file="Reporte de Evaluación de Conformidad" menu="False" attachment_use="False" />
+
+        <!-- Heredar el menú de reportes existente -->
+        <record id="menu_conformity_evaluation_report_inherit" model="ir.ui.menu">
+            <field name="name">Reportes</field>
+            <field name="parent_id" ref="mgmtsystem_nonconformity.menu_nonconformity_root"/>
+        </record>
+
+        <!-- Definir la acción asociada al nuevo menú -->
+        <record id="action_tyt_report_c_evaluation" model="ir.actions.act_window">
+            <field name="name">Reporte de Registro de Evaluación de Conformidad</field>
+            <field name="res_model">wizard.nc.report</field>
+            <field name="view_mode">form</field>
+            <field name="view_id" ref="tyt_improve.tyt_report_c_evaluation_excel" />
+            <field name="target">new</field>
+        </record>
+
+        <!-- Agregar nuevo elemento de menú en la sección de reportes -->
+        <menuitem id="report_tyt_c_evaluation" name="Reporte de Registro de Evaluación de Conformidad" parent="mgmtsystem_nonconformity.menu_nonconformity_report" action="action_tyt_report_c_evaluation" sequence="152"/>
     </data>
 </odoo>
