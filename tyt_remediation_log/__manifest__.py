@@ -1,9 +1,9 @@
 # -*- coding: utf-8 -*-
 {
-    'name': "Remediation log",
+    'name': "Remediation Log",
 
     'summary': """
-        Remediation log""",
+        Remediation Log""",
 
     'description': """
     """,
@@ -13,7 +13,7 @@
     'category': 'Uncategorized',
     'version': '0.1',
 
-    'depends': ['base','maintenance'],
+    'depends': ['base','maintenance','report_xlsx'],
 
     'data': [
         'security/ir.model.access.csv',

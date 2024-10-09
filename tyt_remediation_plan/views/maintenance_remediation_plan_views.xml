@@ -6,19 +6,24 @@
         <field name="arch" type="xml">
             <form string="Remediation Plan">
                 <header>
-                    <button name="action_save" string="Save" type="object" class="oe_highlight"/>
-                    <button name="action_cancel" string="Cancel" type="object" class="oe_link"/>
+                    <button name="action_confirm" string="Save" type="object" class="oe_highlight"
+                            attrs="{'invisible': [('state', '!=', 'draft')]}"/>
+                    <button name="action_cancel" string="Cancel" type="object" class="oe_link"
+                            attrs="{'invisible': [('state', '!=', 'draft')]}"/>
+                    <button name="action_draft" string="Edit" type="object" class="oe_highlight"
+                            attrs="{'invisible': [('state', '!=', 'confirmed')]}"/>
                 </header>
-                <sheet>
+                <sheet attrs="{'readonly': [('state', '=', 'confirmed')]}">
                     <group>
-                        <field name="name"/>
-                        <field name="user_id"/>
-                        <field name="production_date"/>
+                        <field name="name" attrs="{'readonly': [('state', '=', 'confirmed')]}"/>
+                        <field name="user_id" attrs="{'readonly': [('state', '=', 'confirmed')]}"/>
+                        <field name="production_date" attrs="{'readonly': [('state', '=', 'confirmed')]}"/>
+                        <field name="state" invisible="1"/> 
                     </group>
 
                     <notebook>
                         <page string="Remediation Plan">
-                            <field name="remediation_plan_line_ids">
+                            <field name="remediation_plan_line_ids" attrs="{'readonly': [('state', '=', 'confirmed')]}">
                                 <tree>
                                     <field name="remediation_area"/>
                                     <field name="activity"/>

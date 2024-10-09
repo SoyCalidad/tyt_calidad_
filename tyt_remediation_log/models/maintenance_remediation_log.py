@@ -7,6 +7,8 @@ class MaintenanceRemediationLog(models.Model):
     _name = 'maintenance.remediationlog'
     _description = 'Remediation Log'
     
+    company_id = fields.Many2one('res.company', string='Company', required=True, default=lambda self: self.env.company)
+    
     name = fields.Char(string='Name', required=True, copy=False, index=True)
     user_id = fields.Many2one('res.users', string='Created by',required=True, default=lambda self: self.env.user)
     production_date = fields.Date(string='Production Date', required=True, default=fields.Date.today)
@@ -15,23 +17,33 @@ class MaintenanceRemediationLog(models.Model):
     remediation_log_line_ids = fields.One2many(
         'maintenance.remediationlog.line', 'remediation_log_id', string='Remediation Lines',
         default=lambda self: [
-            {'location': 'Reception'},
-            {'location': 'Halls'},
-            {'location': 'Operations'},
-            {'location': 'Administrative Offices'},
-            {'location': 'Bathrooms'},
+            {'location': 'Recepcion'},
+            {'location': 'Salas'},
+            {'location': 'Operaciones'},
+            {'location': 'Oficinas Administrativas'}, 
+            {'location': 'Baños'},
             {'location': 'Loker'}
         ]
     )
     
-    def action_save(self):
-        self.ensure_one()  
+    state = fields.Selection([
+        ('draft', 'Draft'),
+        ('confirmed', 'Confirmed'),
+    ], string="Status", default='draft')
+    
+    def action_confirm(self):
+        self.ensure_one()
+        self.write({'state': 'confirmed'})
         return True
 
     def action_cancel(self):
         self.ensure_one()
+        self.write({'state': 'draft'})
         return {'type': 'ir.actions.act_window_close'}
 
+    def action_draft(self):
+        self.write({'state': 'draft'})
+        
 
 class MaintenanceRemediationLogLine(models.Model):
     """ Línea de la Bitácora de remediaciones """
