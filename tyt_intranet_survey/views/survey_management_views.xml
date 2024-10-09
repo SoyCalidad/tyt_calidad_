@@ -16,6 +16,16 @@
                             confirm="Are you sure you want to reset to draft?"/>
                 </header>
                 <sheet>
+                    <div class="oe_button_box" name="button_box">
+                        <button name="action_show_surveys" type="object" class="oe_stat_button" icon="fa-check-square-o">
+                            <div class="o_form_field o_stat_info">
+                                <span class="o_stat_value">
+                                    <field name="survey_count"/>
+                                </span>
+                                <span class="o_stat_text">Surveys</span>
+                            </div>
+                        </button>
+                    </div>
                     <div class="oe_title">
 						<label for="name"/>
 						<h1>
@@ -38,7 +48,8 @@
                     </group>
                     <notebook>
                         <page string="Surveys">
-                            <field name="survey_ids" attrs="{'readonly': [('state', 'in', ('published'))]}" domain="[('is_published', '=', False)]">
+                            <field name="survey_ids" attrs="{'readonly': [('state', 'in', ('published'))]}"
+                                   domain="[('is_published', '=', False), ('access_mode', '=', 'intranet')]">
                                 <tree editable="bottom">
                                     <field name="title"/>
                                     <field name="user_id" widget="many2one_avatar_user"/>

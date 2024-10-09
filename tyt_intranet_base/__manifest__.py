@@ -14,6 +14,7 @@
         'security/intranet_security.xml',
         'security/ir.model.access.csv',
         'views/intranet_groups_views.xml',
+        'views/hr_employee_views.xml',
         'views/menus.xml',
     ],
     'installable': True,

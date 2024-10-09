@@ -13,10 +13,15 @@ class SurveyManagement(models.Model):
     start_date = fields.Date('Start Date', required=True)
     end_date = fields.Date('End Date', required=True)
     survey_ids = fields.Many2many('survey.survey', string='Surveys')
+    survey_count = fields.Integer(compute='_compute_survey_count', string='Survey Count')
     state = fields.Selection([
         ('draft', 'Draft'),
         ('published', 'Published'),
     ], string='State', default='draft')
+
+    def _compute_survey_count(self):
+        for record in self:
+            record.survey_count = len(record.survey_ids)
 
     def action_publish(self):
         self.ensure_one()
@@ -38,3 +43,15 @@ class SurveyManagement(models.Model):
             'published_start_date': False,
             'published_end_date': False
         })
+
+    def action_show_surveys(self):
+        self.ensure_one()
+        return {
+            'name': _('Surveys'),
+            'view_mode': 'tree,form',
+            'res_model': 'survey.survey',
+            'type': 'ir.actions.act_window',
+            'context': {'create': False, 'delete': False},
+            'domain': [('id', 'in', self.survey_ids.ids)],
+            'target': 'current',
+        }

@@ -8,8 +8,8 @@
             <xpath expr="//page[@name='options']" position="inside">
                 <group>
                     <group string="Typification" name="typification">
-                        <field name="area_encuesta_id"/>
-                        <field name="tipo_encuesta_id"/>
+                        <field name="area_encuesta_id" widget="selection"/>
+                        <field name="tipo_encuesta_id" widget="selection"/>
                     </group>
                     <group>
                     </group>

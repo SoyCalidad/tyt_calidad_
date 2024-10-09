@@ -75,7 +75,7 @@ class Groups(models.Model):
     def _compute_employee_count(self):
         for record in self:
             record.employee_count = len(record.employee_ids)
-            record.user_ids = [(6, 0, record.employee_ids.mapped('x_studio_ususrio').ids)]
+            record.user_ids = [(6, 0, record.employee_ids.mapped('intranet_user_id').ids)]
 
     @api.depends('user_ids')
     def _compute_user_count(self):

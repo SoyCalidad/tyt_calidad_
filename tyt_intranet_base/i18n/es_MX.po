@@ -6,8 +6,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Odoo Server 16.0+e-20240730\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2024-10-02 08:41+0000\n"
-"PO-Revision-Date: 2024-10-02 08:41+0000\n"
+"POT-Creation-Date: 2024-10-09 18:02+0000\n"
+"PO-Revision-Date: 2024-10-09 18:02+0000\n"
 "Last-Translator: \n"
 "Language-Team: \n"
 "MIME-Version: 1.0\n"
@@ -103,9 +103,10 @@ msgid "Display Name"
 msgstr ""
 
 #. module: tyt_intranet_base
+#: model:ir.model,name:tyt_intranet_base.model_hr_employee
 #: model:ir.model.fields,field_description:tyt_intranet_base.field_intranet_groups__employee_ids
 msgid "Employee"
-msgstr "Empleados"
+msgstr "Empleado"
 
 #. module: tyt_intranet_base
 #: model:ir.model.fields,field_description:tyt_intranet_base.field_intranet_groups__employee_count
@@ -125,12 +126,16 @@ msgstr "Empleados"
 msgid ""
 "Employees added to this group are automatically added in the following "
 "groups."
-msgstr "Empleados agregados a este grupo se añaden automáticamente a los siguientes grupos."
+msgstr ""
+"Empleados agregados a este grupo se añaden automáticamente a los siguientes "
+"grupos."
 
 #. module: tyt_intranet_base
 #: model:ir.model.fields,help:tyt_intranet_base.field_intranet_groups__implied_ids
 msgid "Employees of this group automatically inherit those groups"
-msgstr "Empleados agregados a este grupo se añaden automáticamente a los siguientes grupos"
+msgstr ""
+"Empleados agregados a este grupo se añaden automáticamente a los siguientes "
+"grupos"
 
 #. module: tyt_intranet_base
 #: model_terms:ir.ui.view,arch_db:tyt_intranet_base.intranet_groups_view_form
@@ -209,6 +214,17 @@ msgstr "Grupos de acceso"
 #: model:ir.model,name:tyt_intranet_base.model_intranet_groups
 msgid "Intranet Access Groups"
 msgstr "Grupos de acceso"
+
+#. module: tyt_intranet_base
+#: model:ir.model.fields,field_description:tyt_intranet_base.field_hr_employee__intranet_user_id
+msgid "Intranet User"
+msgstr "Usuario Intranet"
+
+#. module: tyt_intranet_base
+#: model:ir.model.fields,field_description:tyt_intranet_base.field_hr_employee__intranet_user_ids
+#: model_terms:ir.ui.view,arch_db:tyt_intranet_base.view_employee_form
+msgid "Intranet Users"
+msgstr "Usuarios Intranet"
 
 #. module: tyt_intranet_base
 #: model:ir.model.fields,field_description:tyt_intranet_base.field_intranet_groups__message_is_follower
