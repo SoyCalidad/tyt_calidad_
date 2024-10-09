@@ -5,8 +5,30 @@
         <field name="model">survey.survey</field>
         <field name="inherit_id" ref="survey.survey_survey_view_form"/>
         <field name="arch" type="xml">
+            <xpath expr="//button[@name='action_survey_user_input']" position="before">
+                <button name="action_show_employees" type="object" class="oe_stat_button" icon="fa-users">
+                    <div class="o_form_field o_stat_info">
+                        <span class="o_stat_value">
+                            <field name="employee_count"/>
+                        </span>
+                        <span class="o_stat_text">Employees</span>
+                    </div>
+                </button>
+            </xpath>
+
             <xpath expr="//notebook//page[@name='options']//group[@name='participants']//field[@name='access_mode']" position="after">
-                <field name="authorized_group_id" widget="many2one" attrs="{'invisible': [('access_mode', '!=', 'intranet')]}"/>
+                <field name="authorized_group_id" widget="many2one" attrs="{'invisible': [('access_mode', '!=', 'intranet')], 'readonly': [('is_published', '=', True)]}"/>
+                <field name="is_published" attrs="{'invisible': [('access_mode', '!=', 'intranet')]}" readonly="1"/>
+                <label for="published_start_date" string="Published Date"/>
+                <div name="dates" class="o_row">
+                    <field name="published_start_date" widget="daterange" options='{"related_published_end_date": "published_end_date"}' readonly="1"/>
+                    <i class="fa fa-long-arrow-right mx-2 oe_edit_only" aria-label="Arrow icon" title="Arrow"/>
+                    <i class="fa fa-long-arrow-right mx-2 oe_read_only" aria-label="Arrow icon" title="Arrow" attrs="{'invisible': [('published_start_date', '=', False), ('published_end_date', '=', False)]}"/>
+                    <field name="published_end_date" widget="daterange" options='{"related_published_start_date": "published_start_date"}' readonly="1"/>
+                </div>
+            </xpath>
+            <xpath expr="//group[@name='participants']//field[@name='access_mode']" position="attributes">
+                <attribute name="attrs">{'readonly': [('is_published', '=', True)]}</attribute>
             </xpath>
             <xpath expr="//field[@name='users_login_required']" position="attributes">
                 <attribute name="attrs">{'invisible': [('access_mode', '=', 'intranet')]}</attribute>
@@ -16,6 +38,18 @@
             </xpath>
             <xpath expr="//field[@name='is_attempts_limited']" position="attributes">
                 <attribute name="attrs">{'invisible': ['|', ('access_mode', '=', 'intranet'), '&amp;', ('access_mode', '=', 'public'), ('users_login_required', '=', False)]}</attribute>
+            </xpath>
+
+            <xpath expr="//field[@name='users_can_go_back']" position="after">
+                <field name="questions_mandatory"/>
+            </xpath>
+            <xpath expr="//field[@name='question_and_page_ids']" position="attributes">
+                <attribute name="context">{
+                        'default_survey_id': active_id,
+                        'default_questions_selection': questions_selection,
+                        'default_constr_mandatory': questions_mandatory,
+                    }
+                </attribute>
             </xpath>
         </field>
     </record>
