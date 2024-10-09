@@ -1,0 +1,19 @@
+<odoo>
+    <data>
+        <record id="hr_job_functions.action_job_report" model="ir.actions.act_window">
+            <field name="name">Descripción de Puestos</field>
+            <field name="type">ir.actions.act_window</field>
+            <field name="res_model">mgmt.job_function.report.wizard</field>
+
+            <field name="view_mode">form</field>
+            <field name="view_id" ref="hr_job_functions.job_report_wizard_view_form"/>
+            <field name="target">new</field>
+            <field name="binding_type">report</field>
+        </record>
+
+        <record model="ir.ui.menu" id="hr_job_functions.job_report_menu">
+            <field name="name">Descripción de Puestos</field>
+        </record>
+
+    </data>
+</odoo>

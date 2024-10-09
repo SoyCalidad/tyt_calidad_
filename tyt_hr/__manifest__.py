@@ -17,6 +17,7 @@
         'security/ir.model.access.csv',
         'views/hr_employee_views.xml',
         'views/menus.xml',
+        'wizards/hr_job_functions.xml',
     ],
     'auto_install': False,
     'installable': True,
