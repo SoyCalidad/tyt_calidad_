@@ -13,7 +13,7 @@
     'category': 'Uncategorized',
     'version': '0.1',
 
-    'depends': ['base','maintenance'],
+    'depends': ['base','maintenance','tyt_remediation_log'],
 
     'data': [
         'security/ir.model.access.csv',
