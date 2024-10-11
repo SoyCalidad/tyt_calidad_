@@ -11,4 +11,44 @@
             </xpath>
         </field>
     </record>
+
+    <record id="mgmt_categ_form_inherit_create_date" model="ir.ui.view">
+        <field name="name">mgmt.categ.form.inherit.create_date</field>
+        <field name="model">mgmt.categ</field>
+        <field name="inherit_id" ref="mgmtsystem_process.mgmt_categ_form"/>
+        <field name="arch" type="xml">
+            <!-- Localiza el campo 'create_date' y modifica su atributo 'string' -->
+            <xpath expr="//field[@name='create_date']" position="attributes">
+                <attribute name="string">Fecha de creación</attribute>
+            </xpath>
+            <xpath expr="//sheet/group[1]/group[2]/field[@name='create_date']" position="before">
+                <field name="tyt_documents" />
+                <field name="tyt_sites_id" />
+            </xpath>
+
+        </field>
+    </record>
+
+    <record id="mgmtsystem_process.mgmt_process_categ_type_action" model="ir.actions.act_window">
+        <field name="name">Áreas</field>
+        <field name="res_model">mgmt.categ.type</field>
+        <field name="view_mode">tree,form</field>
+        <field name="domain" />
+        <field name="context">{}</field>
+    </record>
+
+    <record id="mgmtsystem_process.menu_process_categ_type" model="ir.ui.menu">
+        <field name="name">Áreas</field>
+    </record>
+    <record id="view_mgmtsystem_qualitymanual_form_tyt_inherited" model="ir.ui.view">
+        <field name="name">mgmtsystem.qualitymanual.form.view.inherited</field>
+        <field name="model">mgmtsystem.qualitymanual</field>
+        <field name="inherit_id" ref="mgmtsystem_qualitymanual.view_mgmtsystem_qualitymanual_form"/>
+        <field name="arch" type="xml">
+            <xpath expr="//page[@name='context']//p[@style='font-size:14px;font-weight:bold;'][text()='4.4.2. Tipo de procesos']" position="replace">
+                <p style="font-size:14px;font-weight:bold;">4.4.2. Áreas</p>
+            </xpath>
+        </field>
+    </record>
+
 </odoo>

@@ -10,6 +10,7 @@
     'depends': [
         'base',
         'mgmtsystem_process',
+        'mgmtsystem_qualitymanual',
     ],
     'data': [
         'security/ir.model.access.csv',
