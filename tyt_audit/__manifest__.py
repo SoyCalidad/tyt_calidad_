@@ -21,6 +21,8 @@
         'reports/report_layout.xml',        
         'reports/report_informe.xml',
         'reports/audit_checklist.xml',
+        'data/activities.xml',
+        'data/descriptions.xml',
     ],
     'assets': {
         'web.report_assets_common': [

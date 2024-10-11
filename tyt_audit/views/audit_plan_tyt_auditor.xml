@@ -73,6 +73,7 @@
                             <page string="Cronograma">
                                 <field name="schedule_ids" attrs="{'readonly': [('state','in',('validate_ok', 'cancel'))]}" >
                                     <tree editable="bottom">
+                                        <field name="tyt_sites_id" />
                                         <field name="responsible_auditors_id" widget="many2many_tags" />
                                         <field name="human_resources" />
                                         <field name="quality" />

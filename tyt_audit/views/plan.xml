@@ -1,6 +1,62 @@
 <odoo>    
     <data>
-        <!-- Cronograma de Auditorías -->
+
+        <!-- Cronograma de Auditorías - General -->
+        <record id="view_audit_plan_form_tyt_general_schedule" model="ir.ui.view">
+            <field name="name">audit.plan.form.tyt.general.schedule</field>
+            <field name="model">audit.plan</field>
+            <field name="inherit_id" ref="mgmtsystem_audit.view_audit_plan_form"/>
+            <field name="arch" type="xml">
+                <xpath expr="//header/button[@name='send_elaborate']" position="before">
+                    <field name="is_process_started" invisible="1" />
+                    <button name="start_process"
+                            type="object"
+                            string="Iniciar Proceso"
+                            class="oe_highlight" />
+                    <!--attrs="{'invisible':['|', ('active','=',False), ('state', '!=', 'validate_ok'), ('is_process_started','=',True)]}"-->    
+                </xpath>            
+                <xpath expr="//sheet/div[3]" position="replace">
+                    <div>
+                        <label for="audit_plan_tyt_auditor_id"/>
+                        <div class="o_row">
+                            <field name="audit_plan_tyt_auditor_id" options="{'no_create': True}" colspan="2"/>
+                        </div>    
+                    </div>                    
+                </xpath>
+                <xpath expr="//sheet/div[3]" position="after">
+                    <div style="height: 20px;"></div>
+                    <group cols="3">
+                        <group>
+                            <field name="sites_id" colspan="2" />
+                            <field name="start_date" colspan="1" />
+                            <field name="limit_date" colspan="1" />
+                            <field name="new_frequency_id" colspan="1" />
+                            <field name="available_site_ids" invisible="1" />
+                        </group>
+                    </group>
+                </xpath>
+                <xpath expr="//sheet/notebook/page[1]" position="replace">
+                    <page string="Cronograma">
+                        <field name="schedule_ids">
+                            <tree editable="bottom">
+                                <field name="name"/>
+                                <field name="description_id"/>
+                                <field name="activity_id"/>
+                                <field name="sites_id"/>
+                                <field name="responsible_auditors_id"/>
+                                <field name="total_weeks"/>
+                            </tree>
+                        </field>
+                    </page>                 
+                </xpath>                                
+            </field>
+        </record>
+
+
+
+
+
+        <!-- Wizard Cronograma de Auditorías-->
         <record id="inherit_audit_plan_report_wizard_tyt_view_form" model="ir.ui.view">
             <field name="name">inherit.audit.plan.report.wizard.tyt.view.form</field>
             <field name="model">audit.plan.report.wizard</field>
@@ -14,7 +70,7 @@
         <!-- Window Actions-->
 
         <record id="mgmtsystem_audit.audit_plan_action" model="ir.actions.act_window">
-            <field name="name">Cronograma de Auditorías</field>
+            <field name="name">Cronograma de Auditorías - General</field>
             <field name="type">ir.actions.act_window</field>
             <field name="res_model">audit.plan</field>
             <field name="view_mode">tree,form,kanban,graph,pivot</field>
@@ -42,7 +98,7 @@
         <!-- Menu Items-->
 
         <record model="ir.ui.menu" id="mgmtsystem_audit.hr_item_annual_plan">
-            <field name="name">Cronograma de Auditorías</field>
+            <field name="name">Cronograma de Auditorías - General</field>
             <field name="parent_id" ref="tyt_audit.anual_plan_tyt"/>
         </record>
 

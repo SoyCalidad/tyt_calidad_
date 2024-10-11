@@ -1,0 +1,14 @@
+<odoo>
+    <data noupdate="0">
+        <record id="schedule_plan_description_1" model="audit.plan.schedule.descriptions">
+            <field name="name">CALIDAD</field>
+        </record>
+        <record id="schedule_plan_description_2" model="audit.plan.schedule.descriptions">
+            <field name="name">SISTEMAS</field>
+        </record>    
+        <record id="schedule_plan_description_3" model="audit.plan.schedule.descriptions">
+            <field name="name">OP</field>
+        </record>  
+
+    </data>
+</odoo>

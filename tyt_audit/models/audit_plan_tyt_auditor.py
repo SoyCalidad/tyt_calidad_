@@ -3,15 +3,21 @@
 from odoo import models, fields, api, _
 from odoo.exceptions import UserError, RedirectWarning, ValidationError
 
-class AuditPlanTytAuditor(models.Model):
+class AuditPlanTytAuditorSchedule(models.Model):
     _name = "audit.plan.tyt.auditor.schedule"
     _description = "Cronograma de Auditoría - Auditor / Cronograma"
 
+    audit_plan_tyt_auditor_id = fields.Many2one(
+        'audit.plan.tyt.auditor',string='Sitio'
+    )    
+
+    tyt_sites_id = fields.Many2one(
+        'x_sitios',
+        string='Sitios'
+    )    
     responsible_auditors_id = fields.Many2many('res.partner', string='Auditores Responsables')
     
-    audit_plan_tyt_auditor_id = fields.Many2one(
-        'audit.plan.tyt.auditor'
-    )
+
 
     human_resources = fields.Integer(
         string='Recursos Humanos',

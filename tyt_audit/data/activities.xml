@@ -1,0 +1,29 @@
+<odoo>
+    <data noupdate="0">
+
+        <!--CALIDAD-->
+        <record id="schedule_plan_activity_1" model="audit.plan.schedule.activities">
+            <field name="name">AUDITORÍA PROCEDIMIENTO PARA CAPACITACIÓN EN SITIO</field>
+        </record>
+        <record id="schedule_plan_activity_2" model="audit.plan.schedule.activities">
+            <field name="name">AUDITORÍA PROCEDIMIENTO PARA APLICACIÓN DE SANCIONES</field>
+        </record>    
+
+        <!--SISTEMAS-->
+        <record id="schedule_plan_activity_3" model="audit.plan.schedule.activities">
+            <field name="name">AUDITORÍA PROCEDIMIENTO PARA MANTENIMIENTO EN SITIO</field>
+        </record>
+        <record id="schedule_plan_activity_4" model="audit.plan.schedule.activities">
+            <field name="name">AUDITORÍA PROCEDIMIENTO PARA GESTIÓN DE SEGURIDAD EN SITIO</field>
+        </record> 
+
+        <!--OP-->
+        <record id="schedule_plan_activity_5" model="audit.plan.schedule.activities">
+            <field name="name">AUDITORÍA PROCEDIMIENTO PARA GESTIÓN DE OPERACIONES</field>
+        </record>
+        <record id="schedule_plan_activity_6" model="audit.plan.schedule.activities">
+            <field name="name">AUDITORÍA PROCEDIMIENTO PARA CARGA Y ANÁLISIS DE BASE</field>
+        </record> 
+
+    </data>
+</odoo>
