@@ -1,0 +1,99 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <template id="mailbox_form" name="Mailbox Form">
+        <t t-call="website.layout">
+            <div class="container mt-5">
+                <div class="row justify-content-center">
+                    <div class="col-md-8">
+                        <div class="card p-4">
+                            <div class="text-center">
+                                <h3 class="mb-4">Quejas / Sugerencias / Felicitaciones</h3>
+                                <p class="text-muted">
+                                    En TYT tu opinión es importante para nosotros. Todas las sugerencias y quejas se tratan de manera confidencial para mejorar continuamente nuestro entorno de trabajo. ¡Exprésate con total libertad!
+                                </p>
+                            </div>
+                            <form action="/mailbox_send" method="post" id="msform" enctype="multipart/form-data">
+                                <input type="hidden" name="csrf_token" t-att-value="request.csrf_token()"/>
+
+                                <div class="row">
+                                    <!-- Name Field -->
+                                    <div class="col-md-6 mb-3">
+                                        <label for="name">Nombre</label>
+                                        <input type="text" id="name" class="form-control" name="name" placeholder="Nombre" required=""/>
+                                    </div>
+
+                                    <!-- Email Field -->
+                                    <div class="col-md-6 mb-3">
+                                        <label for="email">Correo</label>
+                                        <input type="email" id="email" class="form-control" name="email" placeholder="Correo" required=""/>
+                                    </div>
+                                </div>
+
+                                <div class="row">
+                                    <!-- Site Field -->
+                                    <div class="col-md-4 mb-3">
+                                        <label for="site">Sitio</label>
+                                        <select id="site" class="form-control" name="site" required="">
+                                            <option>Selecciona una opción</option>
+                                            <!-- Add more options here -->
+                                        </select>
+                                    </div>
+
+                                    <!-- Service Area Field -->
+                                    <div class="col-md-4 mb-3">
+                                        <label for="service_area">Área de servicio</label>
+                                        <select id="service_area" class="form-control" name="service_area" required="">
+                                            <option>Selecciona una opción</option>
+                                            <!-- Add more options here -->
+                                        </select>
+                                    </div>
+
+                                    <!-- Message Type Field -->
+                                    <div class="col-md-4 mb-3">
+                                        <label for="message_type">Tipo de mensaje</label>
+                                        <select id="message_type" class="form-control" name="message_type" required="">
+                                            <option>Selecciona una opción</option>
+                                            <!-- Add more options here -->
+                                        </select>
+                                    </div>
+                                </div>
+
+                                <div class="row">
+                                    <!-- Comment Field -->
+                                    <div class="col-md-12 mb-3">
+                                        <label for="comment">Comentario</label>
+                                        <textarea id="comment" class="form-control" name="comment" rows="4" placeholder="Ingrese su comentario" required=""></textarea>
+                                    </div>
+                                </div>
+
+                                <div class="row justify-content-between align-items-center mb-3">
+                                    <!-- Anonymous Toggle -->
+                                    <div class="col-md-6">
+                                        <div class="form-check">
+                                            <input class="form-check-input" type="checkbox" id="anonymous" name="anonymous"/>
+                                            <label class="form-check-label" for="anonymous">Envío anónimo</label>
+                                        </div>
+                                    </div>
+
+                                    <!-- Submit Button -->
+                                    <div class="col-md-6 text-right">
+                                        <button type="submit" class="btn btn-primary">Enviar</button>
+                                    </div>
+                                </div>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </t>
+    </template>
+
+    <template id="mailbox_form_send" name="Mailbox Form Send">
+        <form>
+            <div class="form-group form-field o_website_form_required_custom" align="center">
+                <h1 style="align:center;padding-top:100px;text-weight:bold;">Gracias! Su Mailbox ha sido enviado</h1>
+                <br/>
+            </div>
+        </form>
+    </template>
+</odoo>

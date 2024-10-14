@@ -1,0 +1,155 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <record id="tyt_intranet_service_area_view_form" model="ir.ui.view">
+        <field name="name">tyt.intranet.service_area.view.form</field>
+        <field name="model">tyt.intranet.service_area</field>
+        <field name="arch" type="xml">
+            <form>
+                <sheet>
+                    <div class="oe_title">
+						<label for="name"/>
+						<h1>
+							<field name="name"/>
+						</h1>
+					</div>
+                </sheet>
+            </form>
+        </field>
+    </record>
+
+    <record id="tyt_intranet_service_area_tree_form" model="ir.ui.view">
+        <field name="name">tyt.intranet.service_area.tree.form</field>
+        <field name="model">tyt.intranet.service_area</field>
+        <field name="arch" type="xml">
+            <tree editable="bottom">
+                <field name="name"/>
+            </tree>
+        </field>
+    </record>
+
+    <record id="tyt_intranet_service_area_action" model="ir.actions.act_window">
+        <field name="name">Service Area</field>
+        <field name="res_model">tyt.intranet.service_area</field>
+        <field name="view_mode">tree,form</field>
+    </record>
+
+    <record id="tyt_intranet_message_type_view_form" model="ir.ui.view">
+        <field name="name">tyt.intranet.message_type.view.form</field>
+        <field name="model">tyt.intranet.message_type</field>
+        <field name="arch" type="xml">
+            <form>
+                <sheet>
+                    <div class="oe_title">
+						<label for="name"/>
+						<h1>
+							<field name="name"/>
+						</h1>
+					</div>
+                </sheet>
+            </form>
+        </field>
+    </record>
+
+    <record id="tyt_intranet_message_type_tree_form" model="ir.ui.view">
+        <field name="name">tyt.intranet.message_type.tree.form</field>
+        <field name="model">tyt.intranet.message_type</field>
+        <field name="arch" type="xml">
+            <tree editable="bottom">
+                <field name="name"/>
+            </tree>
+        </field>
+    </record>
+
+    <record id="tyt_intranet_message_type_action" model="ir.actions.act_window">
+        <field name="name">Message Type</field>
+        <field name="res_model">tyt.intranet.message_type</field>
+        <field name="view_mode">tree,form</field>
+    </record>
+
+    <record id="tyt_intranet_notification_matrix_view_form" model="ir.ui.view">
+        <field name="name">tyt.intranet.notification_matrix.view.form</field>
+        <field name="model">tyt.intranet.notification_matrix</field>
+        <field name="arch" type="xml">
+            <form>
+                <sheet>
+                    <div class="oe_title">
+						<label for="name"/>
+						<h1>
+							<field name="name"/>
+						</h1>
+					</div>
+                    <group>
+                        <field name="site_id"/>
+                    </group>
+                    <notebook>
+                        <page string="Líneas de matriz">
+                            <field name="line_ids"/>
+                        </page>
+                    </notebook>
+                </sheet>
+            </form>
+        </field>
+    </record>
+
+    <record id="tyt_intranet_notification_matrix_view_tree" model="ir.ui.view">
+        <field name="name">tyt.intranet.notification_matrix.view.tree</field>
+        <field name="model">tyt.intranet.notification_matrix</field>
+        <field name="arch" type="xml">
+            <tree>
+                <field name="name"/>
+                <field name="site_id"/>
+            </tree>
+        </field>
+    </record>
+
+    <record id="tyt_intranet_notification_matrix_action" model="ir.actions.act_window">
+        <field name="name">Notification Matrix</field>
+        <field name="res_model">tyt.intranet.notification_matrix</field>
+        <field name="view_mode">tree,form</field>
+    </record>
+
+    <record id="tyt_intranet_notification_matrix_line_view_form" model="ir.ui.view">
+        <field name="name">tyt.intranet.notification_matrix.line.view.form</field>
+        <field name="model">tyt.intranet.notification_matrix.line</field>
+        <field name="arch" type="xml">
+            <form>
+                <sheet>
+                    <group>
+                        <field name="notification_matrix_id"/>
+                        <field name="service_area_id"/>
+                        <field name="responsible_id"/>
+                    </group>
+                    <notebook>
+                        <page string="Message Types">
+                            <field name="message_type_ids">
+                                <tree editable="bottom">
+                                    <field name="notification_matrix_line_id"/>
+                                    <field name="message_type_id"/>
+                                    <field name="user_ids" widget="many2many_tags"/>
+                                </tree>
+                            </field>
+                        </page>
+                    </notebook>
+                </sheet>
+            </form>
+        </field>
+    </record>
+
+    <record id="tyt_intranet_notification_matrix_line_view_tree" model="ir.ui.view">
+        <field name="name">tyt.intranet.notification_matrix.line.view.tree</field>
+        <field name="model">tyt.intranet.notification_matrix.line</field>
+        <field name="arch" type="xml">
+            <tree>
+                <field name="service_area_id"/>
+                <field name="responsible_id"/>
+            </tree>
+        </field>
+    </record>
+
+    <record id="tyt_intranet_notification_line_matrix_action" model="ir.actions.act_window">
+        <field name="name">Notification Matrix Line</field>
+        <field name="res_model">tyt.intranet.notification_matrix.line</field>
+        <field name="view_mode">tree,form</field>
+    </record>
+
+</odoo>
