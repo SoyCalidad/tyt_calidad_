@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data noupdate="1">
+        <record id="tyt_process_report_helper_singleton" model="tyt.process.report.helper">
+            <field name="name">TYT Process Report Helper Singleton</field>
+        </record>
+
+        <record id="tyt_process_report_upload_singleton" model="tyt.process.report.upload">
+            <field name="name">TYT Process Report Upload Singleton</field>
+        </record>
+    </data>
+</odoo>

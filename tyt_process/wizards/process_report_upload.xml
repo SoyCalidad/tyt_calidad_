@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <record id="tyt_process_report_upload_view_form" model="ir.ui.view">
+        <field name="name">tyt.process.report.upload.view.form</field>
+        <field name="model">tyt.process.report.upload</field>
+        <field name="arch" type="xml">
+            <form>
+                <group>
+                    <field name="write_uid"/>
+                    <field name="write_date"/>
+                </group>
+                <group>
+                    <field name="attachment_ids" widget="many2many_binary" string="Attach a file" class="o_sign_attachments"/>
+                </group>
+                <footer>
+                    <button string="Save" special="save" class="btn btn-primary" close="1"/>
+                    <button string="Communicate Process Map" name="action_communicate" type="object" class="btn btn-primary"/>
+                    <button string="Cancel" special="cancel" class="btn btn-secondary" close="1"/>
+                </footer>
+            </form>
+        </field>
+    </record>
+
+    <record id="tyt_process_report_upload_action" model="ir.actions.act_window">
+        <field name="name">TYT Process Report Upload</field>
+        <field name="res_model">tyt.process.report.upload</field>
+        <field name="view_mode">form</field>
+        <field name="binding_view_types">form</field>
+		<field name="target">new</field>
+        <field name="res_id" ref="tyt_process.tyt_process_report_upload_singleton"/>
+    </record>
+</odoo>

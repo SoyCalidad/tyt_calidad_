@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <menuitem id="tyt_process_report_upload_menu_action"
+              name="TYT Process Report Upload"
+              parent="mgmtsystem_process.process_report_root_menu"
+              action="tyt_process_report_upload_action"
+              sequence="20"/>
+</odoo>
