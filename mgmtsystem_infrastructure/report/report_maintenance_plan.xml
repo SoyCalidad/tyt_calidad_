@@ -180,14 +180,18 @@
          id="soycalidad_maintenance_reporting"
          name="Reportes"
          parent="maintenance.menu_maintenance_title"
-         sequence="20"/>
+         sequence="20"
+         groups="base.group_no_one,group_infrastructure_onlyread,group_infrastructure_onlyread_printreport,group_infrastructure_write_printreport,group_infrastructure_all"
+         />
 
       <menuitem
          id="maintenance_plan_wizard_menu"
          name="Programa de mantenimientos"
          action="action_report_maintenance"
          parent="mgmtsystem_infrastructure.soycalidad_maintenance_reporting"
-         sequence="22"/>
+         sequence="22"
+         groups="base.group_no_one,group_infrastructure_onlyread,group_infrastructure_onlyread_printreport,group_infrastructure_write_printreport,group_infrastructure_all"
+         />
 
       <report
          id="infrastructure_xlsx"

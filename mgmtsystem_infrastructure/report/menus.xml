@@ -5,13 +5,17 @@
               name="Planes de mantenimiento"
               action="maintenance_report_wizard_action"
               parent="mgmtsystem_infrastructure.soycalidad_maintenance_reporting"
-              sequence="23" />
+              sequence="23"
+              groups="base.group_no_one,group_infrastructure_onlyread,group_infrastructure_onlyread_printreport,group_infrastructure_write_printreport,group_infrastructure_all"
+               />
 
     <menuitem id="calibration_report_wizard_menu"
               name="Planes de calibración"
               action="calibration_report_wizard_action"
               parent="mgmtsystem_infrastructure.soycalidad_maintenance_reporting"
-              sequence="23" />
+              sequence="23"
+              groups="base.group_no_one,group_infrastructure_onlyread,group_infrastructure_onlyread_printreport,group_infrastructure_write_printreport,group_infrastructure_all"
+               />
 
 
 </odoo>
