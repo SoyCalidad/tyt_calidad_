@@ -40,6 +40,7 @@ class MailboxController(http.Controller):
         values = request.params.copy()
         values['site_ids'] = request.env['x_sitios'].sudo().search([])
         values['service_area_ids'] = request.env['tyt.intranet.service_area'].sudo().search([])
+        values['message_type_ids'] = request.env['tyt.intranet.message_type'].sudo().search([])
 
         return request.render('tyt_intranet_helpdesk.mailbox_form', values)
 

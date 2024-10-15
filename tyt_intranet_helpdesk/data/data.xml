@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data noupdate="0">
+        <record id="tyt_intranet_message_type_1" model="tyt.intranet.message_type">
+            <field name="name">Felicitación</field>
+        </record>
+        <record id="tyt_intranet_message_type_2" model="tyt.intranet.message_type">
+            <field name="name">Queja</field>
+        </record>
+        <record id="tyt_intranet_message_type_3" model="tyt.intranet.message_type">
+            <field name="name">Sugerencia</field>
+        </record>
+    </data>
+</odoo>

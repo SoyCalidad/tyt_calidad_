@@ -18,7 +18,7 @@
               sequence="10"/>
 
     <menuitem id="tyt_intranet_message_type_menu_action"
-              name="Message Type"
+              name="Message Types"
               parent="tyt_intranet_mailbox_configuration_menu"
               action="tyt_intranet_message_type_action"
               sequence="20"/>
@@ -28,5 +28,4 @@
               parent="tyt_intranet_mailbox_configuration_menu"
               action="tyt_intranet_notification_matrix_action"
               sequence="30"/>
-
 </odoo>

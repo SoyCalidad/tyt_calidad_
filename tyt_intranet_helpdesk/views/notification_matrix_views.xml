@@ -82,8 +82,8 @@
                         <field name="site_id"/>
                     </group>
                     <notebook>
-                        <page string="Líneas de matriz">
-                            <field name="line_ids"/>
+                        <page string="Notification Matrix Lines">
+                            <field name="matrix_line_ids"/>
                         </page>
                     </notebook>
                 </sheet>
@@ -120,8 +120,8 @@
                         <field name="responsible_id"/>
                     </group>
                     <notebook>
-                        <page string="Message Types">
-                            <field name="message_type_ids">
+                        <page string="Notification Matrix Line Message Types">
+                            <field name="matrix_line_message_type_ids">
                                 <tree editable="bottom">
                                     <field name="notification_matrix_line_id"/>
                                     <field name="message_type_id"/>
@@ -151,5 +151,4 @@
         <field name="res_model">tyt.intranet.notification_matrix.line</field>
         <field name="view_mode">tree,form</field>
     </record>
-
 </odoo>

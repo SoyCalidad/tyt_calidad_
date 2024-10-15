@@ -12,6 +12,8 @@
     ],
     'data': [
         'security/ir.model.access.csv',
+        'data/mail_template_data.xml',
+        'data/data.xml',
         'views/mailbox_views.xml',
         'views/notification_matrix_views.xml',
         'views/mailbox_templates.xml',
