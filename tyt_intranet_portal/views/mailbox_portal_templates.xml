@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <template id="portal_my_home_mailbox" name="Show Mailbox | Intranet" customize_show="True"
+              inherit_id="tyt_intranet_portal.portal_my_home" priority="130">
+        <xpath expr="//div[hasclass('o_portal_docs')]" position="before">
+
+        </xpath>
+        <div id="portal_common_category" position="inside">
+            <t t-call="portal.portal_docs_entry">
+                <t t-set="icon" t-value="'/tyt_intranet_portal/static/src/img/folder.svg'"/>
+                <t t-set="title">Buzón</t>
+                <t t-set="text">Lleve seguimiento de todas sus quejas, sugerencias y felicitaciones</t>
+                <t t-set="url" t-value="'/my/mailbox'"/>
+            </t>
+        </div>
+    </template>
+</odoo>
