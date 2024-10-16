@@ -10,6 +10,7 @@
     'depends': [
         'base',
         'mgmtsystem_process',
+        'mgmtsystem_process_integration',
         'mgmtsystem_qualitymanual',
     ],
     'data': [

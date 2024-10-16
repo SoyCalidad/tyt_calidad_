@@ -21,6 +21,8 @@ class MgmtCateg(models.Model):
     tyt_sites_id = fields.Many2one(
         'x_sitios', string='Ubicación')
     
+    referencess = fields.Text(string='Referencias')
+
 class ProcessInherit(models.Model):
     _inherit = 'mgmt.process'
 

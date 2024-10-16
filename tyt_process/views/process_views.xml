@@ -8,7 +8,7 @@
             <!-- Reemplazar el texto del botón "Ediciones" por "Versiones" -->
             <xpath expr="//div[@name='button_box']/button[@name='show_process_editions']" position="attributes">
                 <attribute name="string">Versiones</attribute>
-            </xpath>
+            </xpath>           
         </field>
     </record>
 
@@ -25,7 +25,12 @@
                 <field name="tyt_documents" />
                 <field name="tyt_sites_id" />
             </xpath>
-
+            <xpath expr="//sheet/notebook/page[@name='references']" position="replace">
+                <page name="references" string="Referencias">
+                    <separator string="Referencias" />
+                    <field name="referencess" />
+                </page>
+            </xpath> 
         </field>
     </record>
 
