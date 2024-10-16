@@ -10,7 +10,10 @@ class Mailbox(models.Model):
     user_id = fields.Many2one('res.users', string='User')
     partner_id = fields.Many2one('res.partner', string='Partner')
     employee_number = fields.Char(string='Employee Number')
+
+
     email = fields.Char(string='Email')
+
     is_anonymous = fields.Boolean(string='Is Anonymous')
     site_id = fields.Many2one('x_sitios', string='Site')
     service_area_id = fields.Many2one('tyt.intranet.service_area', string='Service Area')
@@ -18,8 +21,11 @@ class Mailbox(models.Model):
     comment = fields.Html(string='Comment')
     users_to_send = fields.Many2many('res.users', string='Users to Send')
     emails_string = fields.Char(string='Email List')
-
     company_id = fields.Many2one('res.company', string='Company', default=lambda self: self.env.company)
+
+    receive_response = fields.Boolean(string='Receive Response')
+    response_message = fields.Text(string='Response Message')
+
 
     def get_emails_to_send(self):
         self.ensure_one()
@@ -67,7 +73,6 @@ class Mailbox(models.Model):
     def send_mail(self):
         self.ensure_one()
         template = self.env.ref('tyt_intranet_helpdesk.mail_template_tyt_intranet_mailbox', raise_if_not_found=False)
-        #template_name = 'tyt_intranet_helpdesk.mail_template_tyt_intranet_mailbox'
         #self.notify_users_by_email(self.id, template_name)
 
         lang = self.env.context.get('lang')
@@ -78,7 +83,7 @@ class Mailbox(models.Model):
             'default_template_id': template.id,
             'default_composition_mode': 'comment',
             'mark_so_as_sent': True,
-            'custom_layout': "mail.mail_notification_light",
+            'custom_layout': 'mail.mail_notification_light',
             'force_email': True,
             'model_description': self.with_context(lang=lang).name,
         }

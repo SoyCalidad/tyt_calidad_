@@ -4,7 +4,7 @@
         <t t-call="website.layout">
             <div class="container mt-5">
                 <div class="row justify-content-center">
-                    <div class="col-md-8">
+                    <div class="col-sm-12 col-md-10 col-lg-8">
                         <div class="card p-4">
                             <div class="text-center">
                                 <h3 class="mb-4">Quejas / Sugerencias / Felicitaciones</h3>
@@ -15,66 +15,71 @@
                             <form action="/mailbox_send" method="post" id="msform" enctype="multipart/form-data">
                                 <input type="hidden" name="csrf_token" t-att-value="request.csrf_token()"/>
 
-                                <div class="row">
-                                    <!-- Name Field -->
-                                    <div class="col-md-6 mb-3">
-                                        <label for="name">Nombre</label>
-                                        <input type="text" id="name" class="form-control" name="name" placeholder="Nombre" required=""/>
+                                <!-- Name and Email Fields -->
+
+                                    <div class="row">
+
+                                            <div class="col-md-5 mb-3 text-start">
+                                                <label for="name">Nombre</label>
+                                                <input type="text" id="name" class="form-control" name="name" required=""/>
+                                            </div>
+
+                                            <div class="col-md-5 mb-3 text-start">
+                                                <label for="email">Correo</label>
+                                                <input type="email" id="email" class="form-control" name="email" required=""/>
+                                            </div>
+
+                                            <div class="col-md-5 mb-3">
+                                                <label>Envío anónimo</label>
+                                                <input type="checkbox" id="is_anonymous" name="is_anonymous"/>
+                                            </div>
+
                                     </div>
 
-                                    <!-- Email Field -->
-                                    <div class="col-md-6 mb-3">
-                                        <label for="email">Correo</label>
-                                        <input type="email" id="email" class="form-control" name="email" placeholder="Correo" required=""/>
-                                    </div>
-                                </div>
+                                    <div class="row">
+                                        <!-- Site Field -->
+                                        <div class="col-md-4 mb-3 text-start">
+                                            <label for="site_id">Sitio</label>
+                                            <select id="site_id" name="site_id" class="mailbox-select" required="">
+                                                <option disabled="" selected="selected" value="">Seleccione una opción</option>
+                                                <t t-foreach="site_ids" t-as="rec">
+                                                    <option t-att-value="rec.id" t-esc="rec.x_name"/>
+                                                </t>
+                                            </select>
+                                        </div>
 
-                                <div class="row">
-                                    <!-- Site Field -->
-                                    <div class="col-md-4 mb-3">
-                                        <label for="site">Sitio</label>
-                                        <select id="site" class="form-control" name="site" required="">
-                                            <option>Selecciona una opción</option>
-                                            <!-- Add more options here -->
-                                        </select>
-                                    </div>
+                                        <!-- Service Area Field -->
+                                        <div class="col-md-4 mb-3 text-start">
+                                            <label for="service_area_id">Área de servicio</label>
+                                            <select id="service_area_id" name="service_area_id" class="mailbox-select" required="">
+                                                <option disabled="" selected="selected" value="">Seleccione una opción</option>
+                                                <t t-foreach="service_area_ids" t-as="rec">
+                                                    <option t-att-value="rec.id" t-esc="rec.name"/>
+                                                </t>
+                                            </select>
+                                        </div>
 
-                                    <!-- Service Area Field -->
-                                    <div class="col-md-4 mb-3">
-                                        <label for="service_area">Área de servicio</label>
-                                        <select id="service_area" class="form-control" name="service_area" required="">
-                                            <option>Selecciona una opción</option>
-                                            <!-- Add more options here -->
-                                        </select>
-                                    </div>
-
-                                    <!-- Message Type Field -->
-                                    <div class="col-md-4 mb-3">
-                                        <label for="message_type">Tipo de mensaje</label>
-                                        <select id="message_type" class="form-control" name="message_type" required="">
-                                            <option>Selecciona una opción</option>
-                                            <!-- Add more options here -->
-                                        </select>
-                                    </div>
-                                </div>
-
-                                <div class="row">
-                                    <!-- Comment Field -->
-                                    <div class="col-md-12 mb-3">
-                                        <label for="comment">Comentario</label>
-                                        <textarea id="comment" class="form-control" name="comment" rows="4" placeholder="Ingrese su comentario" required=""></textarea>
-                                    </div>
-                                </div>
-
-                                <div class="row justify-content-between align-items-center mb-3">
-                                    <!-- Anonymous Toggle -->
-                                    <div class="col-md-6">
-                                        <div class="form-check">
-                                            <input class="form-check-input" type="checkbox" id="anonymous" name="anonymous"/>
-                                            <label class="form-check-label" for="anonymous">Envío anónimo</label>
+                                        <!-- Message Type Field -->
+                                        <div class="col-md-4 mb-3 text-start">
+                                            <label for="message_type_id">Tipo de mensaje</label>
+                                            <select id="message_type_id" name="message_type_id" class="mailbox-select" required="">
+                                                <option disabled="" selected="selected" value="">Seleccione una opción</option>
+                                                <t t-foreach="message_type_ids" t-as="rec">
+                                                    <option t-att-value="rec.id" t-esc="rec.name"/>
+                                                </t>
+                                            </select>
                                         </div>
                                     </div>
 
+                                    <div class="row">
+                                        <!-- Comment Field -->
+                                        <div class="col-md-12 mb-3 text-start">
+                                            <label for="comment">Comentario</label>
+                                            <textarea id="comment" class="form-control" name="comment" rows="6" placeholder="Ingrese su comentario" required=""></textarea>
+                                        </div>
+                                    </div>
+
+                                <div class="row justify-content-between align-items-center mb-3">
                                     <!-- Submit Button -->
                                     <div class="col-md-6 text-right">
                                         <button type="submit" class="btn btn-primary">Enviar</button>

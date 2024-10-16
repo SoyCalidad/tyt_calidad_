@@ -37,10 +37,14 @@ class MailboxController(http.Controller):
 
     @http.route('/mailbox', type='http', auth='public', website=True)
     def mailbox_form(self):
+
+
         values = request.params.copy()
         values['site_ids'] = request.env['x_sitios'].sudo().search([])
         values['service_area_ids'] = request.env['tyt.intranet.service_area'].sudo().search([])
         values['message_type_ids'] = request.env['tyt.intranet.message_type'].sudo().search([])
+
+        values['name'] = request.env['tyt.intranet.message_type'].sudo().search([])
 
         return request.render('tyt_intranet_helpdesk.mailbox_form', values)
 
@@ -50,10 +54,15 @@ class MailboxController(http.Controller):
         mailbox_values = {}
 
         for key, value in kw.items():
-            if key in ['site_id', 'service_area_id']:
+            if key in ['site_id', 'service_area_id', 'message_type_id']:
                 mailbox_values[key] = int(value)
-            else:
+            if key in ['name', 'email', 'comment']:
                 mailbox_values[key] = value
+
+        if 'is_anonymous' in kw:
+            mailbox_values['is_anonymous'] = True
+        else:
+            mailbox_values['is_anonymous'] = False
 
         mailbox = Mailbox.sudo().create(mailbox_values)
         return request.render('tyt_intranet_helpdesk.mailbox_form_send', {})

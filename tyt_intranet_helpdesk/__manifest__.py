@@ -19,7 +19,13 @@
         'views/mailbox_templates.xml',
         'views/menus.xml',
     ],
+    'assets': {
+        'web.assets_frontend': [
+            '/tyt_intranet_helpdesk/static/src/scss/input.scss',
+        ],
+    },
     'installable': True,
     'auto_install': False,
     'application': True,
+
 }
