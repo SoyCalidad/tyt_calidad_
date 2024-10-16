@@ -79,7 +79,7 @@
                             </page>
                             <page name="internal_factor" string="AMOFHIT">
                                 <group string="Factores internos (AMOFHIT)" attrs="{'invisible': [('custom_analysis','=',False)]}">
-                                    <field name="internal_factor_ids" nolabel="1">
+                                    <field name="internal_factor_ids" colspan="2" nolabel="1">
                                         <tree>
                                             <field name="type_id" readonly="1" />
                                             <field name="details" string="Situación actual" style="max-width:200px;" />
@@ -90,7 +90,7 @@
                                 </group>
                                 <group attrs="{'invisible': [('custom_analysis','=',True)]}">
                                     <separator string="Administración" colspan="4" />
-                                    <field name="admin_factor_ids" context="{'default_type_id':%(mgmtsystem_context.admin)d}" nolabel="1">
+                                    <field name="admin_factor_ids" colspan="2" context="{'default_type_id':%(mgmtsystem_context.admin)d}" nolabel="1">
                                         <tree>
                                             <field name="type_id" readonly="1" />
                                             <field name="details" string="Situación actual" style="max-width:200px;" />
@@ -99,7 +99,7 @@
                                         </tree>
                                     </field>
                                     <separator string="Marketing y ventas" colspan="4" />
-                                    <field name="marketing_factor_ids" context="{'default_type_id':%(mgmtsystem_context.marketing)d}" nolabel="1">
+                                    <field name="marketing_factor_ids" colspan="2" context="{'default_type_id':%(mgmtsystem_context.marketing)d}" nolabel="1">
                                         <tree>
                                             <field name="type_id" readonly="1" />
                                             <field name="details" string="Situación actual" style="max-width:200px;" />
@@ -108,7 +108,7 @@
                                         </tree>
                                     </field>
                                     <separator string="Operaciones, productos y logística" colspan="4" />
-                                    <field name="logistic_factor_ids" context="{'default_type_id':%(mgmtsystem_context.logistic)d}" nolabel="1">
+                                    <field name="logistic_factor_ids" colspan="2" context="{'default_type_id':%(mgmtsystem_context.logistic)d}" nolabel="1">
                                         <tree>
                                             <field name="type_id" readonly="1" />
                                             <field name="details" string="Situación actual" style="max-width:200px;" />
@@ -117,7 +117,7 @@
                                         </tree>
                                     </field>
                                     <separator string="Finanzas y contabilidad" colspan="4" />
-                                    <field name="accounting_factor_ids" context="{'default_type_id':%(mgmtsystem_context.accounting)d}" nolabel="1">
+                                    <field name="accounting_factor_ids" colspan="2" context="{'default_type_id':%(mgmtsystem_context.accounting)d}" nolabel="1">
                                         <tree>
                                             <field name="type_id" readonly="1" />
                                             <field name="details" string="Situación actual" style="max-width:200px;" />
@@ -126,7 +126,7 @@
                                         </tree>
                                     </field>
                                     <separator string="Recursos humanos" colspan="4" />
-                                    <field name="rrhh_factor_ids" context="{'default_type_id':%(mgmtsystem_context.rrhh)d}" nolabel="1">
+                                    <field name="rrhh_factor_ids" colspan="2" context="{'default_type_id':%(mgmtsystem_context.rrhh)d}" nolabel="1">
                                         <tree>
                                             <field name="type_id" readonly="1" />
                                             <field name="details" string="Situación actual" style="max-width:200px;" />
@@ -135,7 +135,7 @@
                                         </tree>
                                     </field>
                                     <separator string="Sistemas de información y comunicaciones" colspan="4" />
-                                    <field name="it_factor_ids" context="{'default_type_id':%(mgmtsystem_context.it)d}" nolabel="1">
+                                    <field name="it_factor_ids" colspan="2" context="{'default_type_id':%(mgmtsystem_context.it)d}" nolabel="1">
                                         <tree>
                                             <field name="type_id" readonly="1" />
                                             <field name="details" string="Situación actual" style="max-width:200px;" />
@@ -144,7 +144,7 @@
                                         </tree>
                                     </field>
                                     <separator string="Tecnología, investigación y desarrollo" colspan="4" />
-                                    <field name="internal_tech_factor_ids" context="{'default_type_id':%(mgmtsystem_context.internal_tech)d}" nolabel="1">
+                                    <field name="internal_tech_factor_ids" colspan="2" context="{'default_type_id':%(mgmtsystem_context.internal_tech)d}" nolabel="1">
                                         <tree>
                                             <field name="type_id" readonly="1" />
                                             <field name="details" string="Situación actual" style="max-width:200px;" />
@@ -156,7 +156,7 @@
                             </page>
                             <page name="external_factor" string="PESTEL">
                                 <group string="Factores externos (PESTEL)" attrs="{'invisible': [('custom_analysis','=',False)]}">
-                                    <field name="external_factor_ids" nolabel="1">
+                                    <field name="external_factor_ids" colspan="2" nolabel="1">
                                         <tree>
                                             <field name="type_id" readonly="1" />
                                             <field name="details" string="Situación actual" style="max-width:200px;" />
@@ -167,7 +167,7 @@
                                 </group>
                                 <group attrs="{'invisible': [('custom_analysis','=',True)]}">
                                     <separator string="Factores políticos" colspan="4" />
-                                    <field name="politic_factor_ids" context="{'default_type_id':%(mgmtsystem_context.politic)d}" nolabel="1">
+                                    <field name="politic_factor_ids" colspan="2" context="{'default_type_id':%(mgmtsystem_context.politic)d}" nolabel="1">
                                         <tree>
                                             <field name="type_id" readonly="1" />
                                             <field name="details" string="Situación actual" style="max-width:200px;" />
@@ -176,7 +176,7 @@
                                         </tree>
                                     </field>
                                     <separator string="Factores económicos" colspan="4" />
-                                    <field name="economic_factor_ids" context="{'default_type_id':%(mgmtsystem_context.economic)d}" nolabel="1">
+                                    <field name="economic_factor_ids" colspan="2" context="{'default_type_id':%(mgmtsystem_context.economic)d}" nolabel="1">
                                         <tree>
                                             <field name="type_id" readonly="1" />
                                             <field name="details" string="Situación actual" style="max-width:200px;" />
@@ -185,7 +185,7 @@
                                         </tree>
                                     </field>
                                     <separator string="Factores socioculturales" colspan="4" />
-                                    <field name="sociocult_factor_ids" context="{'default_type_id':%(mgmtsystem_context.soccult)d}" nolabel="1">
+                                    <field name="sociocult_factor_ids" colspan="2" context="{'default_type_id':%(mgmtsystem_context.soccult)d}" nolabel="1">
                                         <tree>
                                             <field name="type_id" readonly="1" />
                                             <field name="details" string="Situación actual" style="max-width:200px;" />
@@ -194,7 +194,7 @@
                                         </tree>
                                     </field>
                                     <separator string="Factores tecnológicos" colspan="4" />
-                                    <field name="tech_factor_ids" context="{'default_type_id':%(mgmtsystem_context.tech)d}" nolabel="1">
+                                    <field name="tech_factor_ids" colspan="2" context="{'default_type_id':%(mgmtsystem_context.tech)d}" nolabel="1">
                                         <tree>
                                             <field name="type_id" readonly="1" />
                                             <field name="details" string="Situación actual" style="max-width:200px;" />
@@ -203,7 +203,7 @@
                                         </tree>
                                     </field>
                                     <separator string="Factores ecológicos" colspan="4" />
-                                    <field name="ecologic_factor_ids" context="{'default_type_id':%(mgmtsystem_context.ecologic)d}" nolabel="1">
+                                    <field name="ecologic_factor_ids" colspan="2" context="{'default_type_id':%(mgmtsystem_context.ecologic)d}" nolabel="1">
                                         <tree>
                                             <field name="type_id" readonly="1" />
                                             <field name="details" string="Situación actual" style="max-width:200px;" />
@@ -212,7 +212,7 @@
                                         </tree>
                                     </field>
                                     <separator string="Factores legales" colspan="4" />
-                                    <field name="legal_factor_ids" context="{'default_type_id':%(mgmtsystem_context.legal)d}" nolabel="1">
+                                    <field name="legal_factor_ids" colspan="2" context="{'default_type_id':%(mgmtsystem_context.legal)d}" nolabel="1">
                                         <tree>
                                             <field name="type_id" readonly="1" />
                                             <field name="details" string="Situación actual" style="max-width:200px;" />
