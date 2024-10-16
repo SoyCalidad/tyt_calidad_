@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <odoo>
-    <data noupdate="0">
+    <data noupdate="1">
         <record id="tyt_intranet_message_type_1" model="tyt.intranet.message_type">
             <field name="name">Felicitación</field>
         </record>
@@ -11,4 +11,11 @@
             <field name="name">Sugerencia</field>
         </record>
     </data>
+
+    <record id="menu_mailbox" model="website.menu">
+        <field name="name">Buzón</field>
+        <field name="url">/mailbox</field>
+        <field name="parent_id" ref="website.main_menu"/>
+        <field name="sequence" type="int">10</field>
+    </record>
 </odoo>

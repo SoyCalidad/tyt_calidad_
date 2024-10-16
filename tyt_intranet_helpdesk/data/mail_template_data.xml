@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <odoo>
-    <data noupdate="0">
+    <data noupdate="1">
         <record id="mail_template_tyt_intranet_mailbox" model="mail.template">
             <field name="name">Mailbox: Notification</field>
             <field name="model_id" ref="tyt_intranet_helpdesk.model_tyt_intranet_mailbox"/>
@@ -10,9 +10,7 @@
             <field name="body_html" type="html">
                 <div style="margin:0px;padding:0px; font-size: 13px;">
                     <p>
-                        Lorem ipsum dolor sit amet, consectetur adipisicing elit. A, ab expedita inventore ipsa
-                        ipsum iste labore laboriosam laudantium maiores nihil praesentium ratione recusandae
-                        repellat vero voluptate. Nihil nulla optio quidem!
+
                     </p>
                 </div>
             </field>

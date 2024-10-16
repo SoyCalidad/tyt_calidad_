@@ -8,7 +8,7 @@
     'license': 'Other proprietary',
     'category': 'soycalidad',
     'depends': [
-        'base', 'mail',
+        'base', 'mail', 'portal', 'website',
     ],
     'data': [
         'security/ir.model.access.csv',
@@ -17,6 +17,7 @@
         'views/mailbox_views.xml',
         'views/notification_matrix_views.xml',
         'views/mailbox_templates.xml',
+        'views/mailbox_portal_templates.xml',
         'views/menus.xml',
     ],
     'assets': {
@@ -27,5 +28,4 @@
     'installable': True,
     'auto_install': False,
     'application': True,
-
 }

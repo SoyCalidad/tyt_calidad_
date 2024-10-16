@@ -47,7 +47,6 @@ class NotificationMatrixLine(models.Model):
 
     @api.onchange('notification_matrix_id')
     def _onchange_create_matrix_line_message_type_ids(self):
-        """Create the One2many lines dynamically based on changes to matrix or service area."""
         for record in self:
             record.matrix_line_message_type_ids = [(5, 0, 0)]
             if record.notification_matrix_id:
