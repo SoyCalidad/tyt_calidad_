@@ -49,7 +49,7 @@
                         <tree create="false" delete="false" editable="bottom">
                             <field name="line_id" />
                             <field name="evaluation_item_line_weight" attrs="{'column_invisible': [('parent.is_tyt_evaluation', '=', False)]}"/>
-                            <field name="evaluation_item_line_value" attrs="{'column_invisible': [('parent.is_tyt_evaluation', '=', False)]}"/>
+                            <field name="evaluation_item_line_value" required="1" attrs="{'column_invisible': [('parent.is_tyt_evaluation', '=', False)]}"/>
                             <field name="scala" attrs="{'column_invisible': [('parent.is_tyt_evaluation', '=', True)]}"/>
                             <field name="name" invisible="1" />
                             <field name="qualification_line" invisible="1" />

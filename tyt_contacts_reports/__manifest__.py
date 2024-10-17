@@ -8,7 +8,7 @@
     'license': 'Other proprietary',
     'category': 'soycalidad',
     'depends': [
-        'mgmtsystem_partner_qualification', 'mgmtsystem_process_integration',
+        'contacts', 'mgmtsystem_partner_qualification', 'mgmtsystem_process_integration',
     ],
     'data': [
         'security/ir.model.access.csv',
