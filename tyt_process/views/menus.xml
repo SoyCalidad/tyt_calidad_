@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
 <odoo>
-    <menuitem id="tyt_process_report_upload_menu_action"
-              name="TYT Process Report Upload"
+    <menuitem id="tyt_mgmt_categ_communicate_menu_action"
+              name="Mapa de procesos - TYT"
               parent="mgmtsystem_process.process_report_root_menu"
-              action="tyt_process_report_upload_action"
+              action="tyt_mgmt_categ_communicate_action"
               sequence="20"/>
 </odoo>

@@ -1,2 +1,2 @@
 from . import process_edition
-from . import process_report_upload
+from . import mgmt_categ_communicate

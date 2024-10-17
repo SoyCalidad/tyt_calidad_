@@ -1,0 +1,2 @@
+id,name,model_id:id,group_id:id,perm_read,perm_write,perm_create,perm_unlink
+access_tyt_product_service_communicate,tyt.product_service.communicate,model_tyt_product_service_communicate,base.group_user,1,1,1,0

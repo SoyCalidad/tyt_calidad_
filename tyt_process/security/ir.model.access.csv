@@ -14,5 +14,4 @@ access_wizard_inventory_report_readonly,Solo lectura,model_wizard_inventory_repo
 access_wizard_inventory_report_owner,Documentos propios,model_wizard_inventory_report,mgmtsystem_process.group_process_owner,1,1,1,0
 access_wizard_inventory_report_all,Todos los permisos,model_wizard_inventory_report,mgmtsystem_process.group_process_all,1,1,1,1
 
-access_tyt_process_report_helper,tyt.process.report.helper,model_tyt_process_report_helper,base.group_user,1,1,1,0
-access_tyt_process_report_upload,tyt.process.report.upload,model_tyt_process_report_upload,base.group_user,1,1,1,0
+access_tyt_mgmt_categ_communicate,tyt.mgmt.categ.communicate,model_tyt_mgmt_categ_communicate,base.group_user,1,1,1,0
