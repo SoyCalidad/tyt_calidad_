@@ -54,7 +54,7 @@ class HistoryItemLine(models.Model):
     _inherit = 'res.partner.evaluation.history.item.line'
 
     evaluation_item_line_weight = fields.Float(string='Puntuación máxima', related='line_id.weight', store=True)
-    evaluation_item_line_value = fields.Integer(string='Valor', required=True)
+    evaluation_item_line_value = fields.Integer(string='Valor')
 
     @api.onchange('evaluation_item_line_value')
     def _onchange_evaluation_item_line_value(self):
