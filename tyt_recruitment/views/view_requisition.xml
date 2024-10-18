@@ -1,7 +1,6 @@
 <odoo>
   <data>
     <!-- list requisition -->
-
     <record model="ir.ui.view" id="tyt_recruitment.list">
       <field name="name">Lista de requisiciones</field>
       <field name="model">tyt_recruitment.requisition</field>
@@ -10,7 +9,6 @@
           <field name="id" />
           <field name="request_date" />
           <field name="closing_date" />
-          <field name="week" />
           <field name="state" />
         </tree>
       </field>
@@ -31,21 +29,41 @@
 
           <sheet>  
             <group>
-              <field name="request_date" attrs="{'readonly': [('state', '=', 'sent')]}"/>
-              <field name="closing_date" attrs="{'readonly': [('state', '=', 'sent')]}"/>
-              <field name="week" attrs="{'readonly': True}"/>
+              <group>
+                <field name="request_date" attrs="{'readonly': [('state', '=', 'sent')]}"/>
+                <field name="closing_date" attrs="{'readonly': [('state', '=', 'sent')]}"/>
+                <field name="periodo_id" widget="many2one" options="{'no_create': True}"/>
+              </group>
+              <group>
+                <field name="site_id" widget="many2one" options="{'no_create': True}"/>
+              </group>
             </group>
 
             <notebook>
               <page string="Campañas">
                 <field name="campaign_ids" nolabel="1" attrs="{'readonly': [('state', '=', 'sent')]}" options="{'no_create': True}">
                   <tree editable="bottom">
-                    <field name="tag_id" width="50px" />
-                    <field name="current_staff" />
-                    <field name="goal_staff" />
-                    <field name="request_staff"/>
-                    <field name="turn" width="25px" />
-                    <field name="priority" width="25px" />
+                    <field name="tag_id" width="200px" />
+                    <field name="current_staff" width="120px" />
+                    <field name="goal_staff" width="120px" />
+                    <field name="request_staff" width="120px"/>
+                    <field name="turn" width="80px" />
+                    <field name="priority" width="80px" />
+                    <button 
+                      name="action_open_job_application" 
+                      string="Cargar candidato" 
+                      type="object" 
+                      class="oe_highlight" 
+                      width="200px" 
+                      attrs="{'invisible': [('id', '=', False)]}" />
+                    <button 
+                      name="action_open_applicant_list" 
+                      string="Lista de candidatos" 
+                      type="object" 
+                      class="oe_highlight" 
+                      width="200px"
+                      context="{'tag_id': id}"
+                      attrs="{'invisible': [('id', '=', False)]}" />
                   </tree>
                 </field>
               </page>
