@@ -1,0 +1,75 @@
+<odoo>
+  <data>
+
+    <!-- Question List -->
+    <record model="ir.ui.view" id="tyt_recruitment_job_application_list">
+      <field name="name">Lista de Solicitudes</field>
+      <field name="model">tyt_recruitment.job_application</field>
+      <field name="arch" type="xml">
+        <tree string="Lista de Preguntas">
+          <field name="id"/>
+          <field name="request_date"/>
+          <field name="requisition"/>
+          <field name="site"/>
+          <field name="campaign_id"/>
+          <field name="applicant_id"/>
+        </tree>
+      </field>
+    </record>
+
+    <!-- Question List -->
+    <record model="ir.ui.view" id="tyt_recruitment_question_list">
+      <field name="name">Lista de preguntas</field>
+      <field name="model">tyt_recruitment.question</field>
+      <field name="arch" type="xml">
+        <tree string="Lista de Preguntas">
+          <field name="text"/>
+          <field name="type"/>
+          <field name="state"/>
+        </tree>
+      </field>
+    </record>
+
+    <!-- Question form -->
+    <record model="ir.ui.view" id="tyt_recruitment_question_form">
+      <field name="name">Formulario de Pregunta</field>
+      <field name="model">tyt_recruitment.question</field>
+      <field name="arch" type="xml">
+        <form string="Formulario de Pregunta">
+          <group>
+            <field name="text" />
+            <field name="type" />
+            <field name="state" />
+          </group>
+        </form>
+      </field>
+    </record>
+
+    <!-- Action opening the question list -->
+    <record model="ir.actions.act_window" id="tyt_recruitment_action_window_question">
+      <field name="name">Lista de Preguntas</field>
+      <field name="res_model">tyt_recruitment.question</field>
+      <field name="view_mode">tree,form</field>
+      <field name="view_id" ref="tyt_recruitment_question_list"/>
+    </record>
+
+    <record model="ir.actions.act_window" id="tyt_recruitment_action_window_job_application">
+      <field name="name">Lista de Solicitudes</field>
+      <field name="res_model">tyt_recruitment.job_application</field>
+      <field name="view_mode">tree,form</field>
+      <field name="view_id" ref="tyt_recruitment_job_application_list"/>
+    </record>
+
+    <!-- Top menu item -->
+    <menuitem id="menu_custom_question"
+      name="Preguntas"
+      parent="menu_custom_recruitment"
+      action="tyt_recruitment_action_window_question" 
+    />
+    <menuitem id="menu_custom_job_application"
+      name="Solicitudes"
+      parent="menu_custom_recruitment"
+      action="tyt_recruitment_action_window_job_application" 
+    />
+  </data>
+</odoo>
