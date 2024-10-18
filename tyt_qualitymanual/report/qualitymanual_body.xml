@@ -1,0 +1,97 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <record id="mgmtsystem_qualitymanual_tyt_body_report_action" model="ir.actions.report">
+        <field name="name">Quality Manual TYT Body</field>
+        <field name="model">mgmtsystem.qualitymanual</field>
+        <field name="report_type">qweb-pdf</field>
+        <field name="report_name">tyt_qualitymanual.mgmtsystem_qualitymanual_tyt_body_report</field>
+        <field name="report_file">tyt_qualitymanual.mgmtsystem_qualitymanual_tyt_body_report</field>
+        <field name="print_report_name">'%s' % object.name</field>
+        <field name="binding_model_id" eval="False" />
+        <field name="binding_type">report</field>
+    </record>
+
+    <template id="mgmtsystem_qualitymanual_tyt_body_report">
+         <t t-call="web.html_container">
+            <t t-foreach="docs" t-as="o">
+                <div t-call="tyt_process.external_layout_tyt_document">
+                    <div class="page">
+                         <style type="text/css">
+                            .tg  {border-collapse:collapse;border-spacing:0;}
+                            .tg td{font-family: Palatino, Palatino Linotype, Palatino LT STD, Book Antiqua, Georgia, serif;font-size:12px;padding:10px 5px;border-style:solid;border-width:1px;overflow:hidden;word-break:normal;border-color:#c0c0c0;}
+                            .tg th{font-family: Palatino, Palatino Linotype, Palatino LT STD, Book Antiqua, Georgia, serif;font-size:12px;font-weight:normal;padding:10px 5px;border-style:solid;border-width:1px;overflow:hidden;word-break:normal;border-color:#c0c0c0;}
+                            .tg .tg-zv36{font-weight:bold;background-color:#ffffff;border-color:#c0c0c0;text-align:left;vertical-align:top;width:33%}
+                            .tg .tg-nrix{text-align:center;vertical-align:middle;font-weight: bold;border-style: none;font-size:16px;}
+                            .tg .tg-rq3n{background-color:#ffffff;text-align:center;vertical-align:middle;border-style: none;font-size:14px;}
+                            .tg .tg-7g6k{font-weight:bold;background-color:#efefef;border-color:#c0c0c0;text-align:center;vertical-align:top;font-size:12px;}
+                            .tg .tg-3xi5{background-color:#ffffff;border-color:#c0c0c0;text-align:center;vertical-align:middle;font-size:12px;}
+                        </style>
+                        <div class="tyt_body">
+                            <div>
+                                <h1>0. Introducción</h1>
+<!--                                <p t-raw="o.introduction" />-->
+                            </div>
+
+                            <div>
+                                <h1>1. Objetivo y campo de aplicación</h1>
+                                <h2>1.1. Objetivo del manual</h2>
+<!--                                <t t-raw="o.objective" />-->
+                                <h2>1.2. Alcance del sistema de gestión de calidad</h2>
+<!--                                    <t t-raw="o.scope" />-->
+                            </div>
+
+<!--                            <div>-->
+<!--                                <h1 class="colored">2. Referencias normativas</h1>-->
+<!--                                <t t-raw="o.references" />-->
+<!--                            </div>-->
+
+<!--                            <div>-->
+<!--                                <h1 class="colored">3. Términos y definiciones</h1>-->
+<!--                                <table class="tg">-->
+<!--                                    <tr>-->
+<!--                                        <td class="tg-d14o" style="width:30%">Nombre</td>-->
+<!--                                        <td class="tg-d14o">Descripción</td>-->
+<!--                                    </tr>-->
+<!--                                    <t t-foreach="o.abbreviation_ids" t-as="abb">-->
+<!--                                        <tr>-->
+<!--                                            <td class="tg-wo31">-->
+<!--                                                <span t-field="abb.name" />-->
+<!--                                            </td>-->
+<!--                                            <td class="tg-wo31">-->
+<!--                                                <span t-field="abb.description" />-->
+<!--                                            </td>-->
+<!--                                        </tr>-->
+<!--                                    </t>-->
+<!--                                </table>-->
+<!--                            </div>-->
+
+                            <div>
+                                <h1 class="colored">4. Contexto de la organización</h1>
+                                <h2 class="colored">4.1. Entendiendo la organización y su contexto</h2>
+<!--                                    <t t-raw="o.context_objective" />-->
+                                <p>
+                                    <strong>Misión:</strong>
+<!--                                    <t t-raw="o.mission" />-->
+                                </p>
+                                <p>
+                                    <strong>Visión:</strong>
+<!--                                    <t t-raw="o.vision" />-->
+                                </p>
+                                <h2 class="colored">4.2. Entendiendo las necesidades y expectativas de las partes interesadas</h2>
+<!--                                <t t-raw="o.context_needs" />-->
+                                <h2 class="colored">4.3. Determinación del alcance del sistema de gestión de calidad</h2>
+<!--                                <t t-raw="o.context_scope" />-->
+                                <h2 class="colored">4.4 Sistema de gestión de calidad y sus procesos</h2>
+<!--                                <span t-field="o.context_processdescription_ids" />-->
+                            </div>
+
+                            <div>
+                                <h1 class="colored">5. Liderazgo</h1>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </t>
+         </t>
+    </template>
+</odoo>
