@@ -19,3 +19,9 @@ class Stakeholder(models.Model):
     _inherit = 'mgmtsystem.stakeholder'
 
     mgmt_process = fields.Many2one('mgmt.process', string="Procedimiento/Proceso/Actividad Relacionado")
+
+
+class InternalIssue(models.Model):
+    _inherit = 'mgmtsystem.context.internal_issue'
+
+    scope_id = fields.Many2one('tyt.context.scope', string='Alcance')

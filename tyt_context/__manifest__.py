@@ -17,6 +17,7 @@
         'data/data.xml',
         'data/mail_template_data.xml',
         'views/context.xml',
+        'views/scope_views.xml',
         'report/stakeholders_report.xml',
         'wizard/product_service_communicate.xml',
         'views/menus.xml',

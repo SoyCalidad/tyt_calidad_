@@ -1,0 +1,106 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <record id="tyt_context_scope_view_form" model="ir.ui.view">
+        <field name="name">tyt.context.scope.view.form</field>
+        <field name="model">tyt.context.scope</field>
+        <field name="arch" type="xml">
+            <form>
+                <header>
+                    <field name="state" widget="statusbar" statusbar_visible="elaborate,review,validate,validate_ok" />
+                    <button string="Enviar a Elaborar"
+                            name="send_elaborate"
+                            type="object"
+                            class="btn-primary"
+                            attrs="{'invisible':[('state','in', ('elaborate','cancel','validate_ok'))]}" />
+                    <button string="Enviar a Revisar"
+                            name="send_review"
+                            type="object"
+                            class="btn-primary"
+                            attrs="{'invisible':[('state','!=', 'elaborate')]}" />
+                    <button string="Enviar a Validar"
+                            name="send_validate"
+                            type="object"
+                            class="btn-primary"
+                            attrs="{'invisible':[('state','in', ('elaborate','validate','cancel','validate_ok'))]}" />
+                    <button string="Validar"
+                            name="send_validate_ok"
+                            type="object"
+                            class="btn-primary"
+                            attrs="{'invisible':[('state','not in', ('validate'))]}" />
+                    <button string="Volver Obsoleto"
+                            confirm="Esto volverá obsoleto el presente registro. ¿Está seguro(a)?"
+                            name="send_cancel"
+                            type="object"
+                            class="btn-second"
+                            attrs="{'invisible': [('state','in',('cancel'))] }" />
+                    <button name="button_new_version"
+                            type="object"
+                            string="Nueva versión"
+                            attrs="{'invisible':[('state', '!=', 'validate_ok')]}"
+                            class="oe_highlight" />
+<!--                    <button string="Comunicar procedimiento" name="send_edition_by_email" type="object" class="oe_highlight" attrs="{'invisible':[('state', '!=', 'validate_ok')]}"/>-->
+                </header>
+                <sheet>
+                    <field name="active" invisible="1" />
+                    <widget name="web_ribbon" title="Archivado" bg_color="bg-danger" attrs="{'invisible': [('active', '=', True)]}" />
+                    <div class="oe_button_box" name="button_box">
+                        <button type="object"
+                                name="action_open_older_versions"
+                                class="oe_stat_button"
+                                icon="fa-archive"
+                                style="white-space: nowrap;"
+                                string="Versiones antiguas" />
+                    </div>
+                    <div class="oe-title">
+                        <label for="code" />
+                        <h1>
+                            <field name="code" class="oe_inline" />
+                        </h1>
+                        <label for="name" />
+                        <h1>
+                            <field name="name" class="oe_inline" attrs="{'readonly': [('state','not in',('elaborate'))] }" />
+                        </h1>
+                    </div>
+                     <group>
+                        <label for="process_id" />
+                        <div class="o_row">
+                            <field name="process_id" options="{'no_create': True}" placeholder="Procedimiento" colspan="3" attrs="{'readonly': [('state','not in',('elaborate'))]}" />
+                        </div>
+                    </group>
+                    <notebook>
+
+                    </notebook>
+                </sheet>
+                <div class="oe_chatter">
+                    <field name="message_follower_ids" widget="mail_followers" />
+                    <field name="activity_ids" widget="mail_activity" />
+                    <field name="message_ids" widget="mail_thread" />
+                </div>
+            </form>
+        </field>
+    </record>
+
+    <record id="tyt_context_scope_view_tree" model="ir.ui.view">
+        <field name="name">tyt.context.scope.view.tree</field>
+        <field name="model">tyt.context.scope</field>
+        <field name="arch" type="xml">
+            <tree>
+                <field name="name" />
+            </tree>
+        </field>
+    </record>
+
+    <record id="tyt_context_scope_action" model="ir.actions.act_window">
+        <field name="name">Alcance</field>
+        <field name="res_model">tyt.context.scope</field>
+        <field name="view_mode">tree,form</field>
+    </record>
+
+    <record id="tyt_context_scope_cancel_action" model="ir.actions.act_window">
+        <field name="name">Alcance</field>
+        <field name="res_model">tyt.context.scope</field>
+        <field name="view_mode">tree,form</field>
+        <field name="domain">[('state', '=', 'cancel')]</field>
+        <field name="context">{}</field>
+    </record>
+</odoo>
