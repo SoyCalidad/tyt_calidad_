@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data noupdate="1">
+        <record id="tyt_mgmt_categ_communicate_singleton" model="tyt.mgmt.categ.communicate">
+            <field name="name">TYT Mgmt Categ Communicate Singleton</field>
+        </record>
+    </data>
+</odoo>

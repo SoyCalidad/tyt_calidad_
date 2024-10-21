@@ -15,6 +15,8 @@
     ],
     'data': [
         'security/ir.model.access.csv',
+        'data/data.xml',
+        'data/mail_template_data.xml',
         'views/documentary_control_views.xml',
         'views/procedure_edition.xml',
         'views/process_edition_views.xml',
@@ -30,6 +32,8 @@
         'reports/procedure_edition_body.xml',
         'reports/procedure_edition_back_cover.xml',
         'reports/documentary_control_views.xml',
+        'wizards/mgmt_categ_communicate.xml',
+        'views/menus.xml',
     ],
     'assets': {
         'web.report_assets_common': [

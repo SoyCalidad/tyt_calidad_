@@ -1,0 +1,246 @@
+<?xml version="1.0" ?>
+<odoo>
+    <template id="record_meeting_report_template_principal_container">
+        <div class="principal" style="margin-top: -50px">
+            <div class="row">
+                <div class="col-6">
+                </div>
+                <div class="col-6">
+                    <strong>Fecha y hora: </strong><span t-field="doc.date_release"/>
+                </div>
+            </div>
+            <div class="row mt-2">
+                <div class="col-12">
+                    <br/>
+                    <strong>Objetivo de la reunión: </strong><span t-field="doc.objective"/>
+                    <br/>
+                    <strong>Lugar: </strong><span t-field="doc.locate"/>
+                    <br/>
+                    <strong>Tiempo de reunión: </strong><span t-field="doc.meeting_time"/>
+                </div>
+            </div>
+            <br />
+            <center>
+                <table class="tg">
+                    <thead>
+                        <tr>
+                            <th class="tg-cly1" colspan="2"><strong>INTERNOS</strong></th>
+                        </tr>
+                        <tr>
+                            <th class="tg-1wig"><strong>NOMBRES Y
+                                <br/>
+                                    APELLIDOS
+                                        </strong></th>
+                            <th class="tg-1wig"><strong>ASISTIÓ</strong></th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <t t-foreach="doc.assistance_emp_ids" t-as="a">
+                            <tr>
+
+                                    <td>
+                                        <center>
+                                            <t t-if="a.assistance != 'F'">
+                                                    <span t-field="a.employee_id.name" />
+                                            </t>
+                                        </center>
+                                    </td>
+
+                                    <td>
+                                        <center>
+                                            <t t-if="a.assistance != 'F'">
+                                                    SI
+                                            </t>
+                                            <t t-else="">
+                                                    NO
+                                            </t>
+                                        </center>
+
+                                    </td>
+
+                            </tr>
+                        </t>
+                    </tbody>
+                </table>
+            </center>
+            <br/>
+            <br/>
+            <center>
+                <table class="tg">
+                    <thead>
+                        <tr>
+                            <th class="tg-cly1" colspan="2"><strong>EXTERNOS</strong></th>
+                        </tr>
+                        <tr>
+                            <th class="tg-1wig"><strong>NOMBRES Y
+                                <br/>
+                                    APELLIDOS
+                                        </strong></th>
+                            <th class="tg-1wig"><strong>ASISTIÓ</strong></th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <t t-foreach="doc.assistance_par_ids" t-as="a">
+                            <tr>
+
+                                    <td>
+                                        <center>
+
+                                                <t t-if="a.assistance != 'F'">
+
+                                                    <span t-field="a.partner_id.name" />
+
+                                                </t>
+
+                                        </center>
+                                    </td>
+
+                                    <td>
+                                        <center>
+                                            <t t-if="a.assistance != 'F'">
+                                                    SI
+                                            </t>
+                                            <t t-else="">
+                                                    NO
+                                            </t>
+                                        </center>
+
+                                    </td>
+
+                            </tr>
+                        </t>
+                    </tbody>
+                </table>
+            </center>
+            <!-- <br/>
+            <ul>
+                <t t-foreach="doc.assistance_emp_ids" t-as="a">
+                    <t t-if="a.assistance != 'F'">
+                        <li>
+                            <span t-field="a.employee_id.name" />
+                        </li>
+                    </t>
+                </t>
+            </ul>
+            <br />
+            <br />
+            Y los siguientes contactos:
+            <br />
+            <br />
+            <ul>
+                <t t-foreach="doc.assistance_par_ids" t-as="a">
+                    <t t-if="a.assistance != 'F'">
+                        <li>
+                            <span t-field="a.partner_id.name" />
+                        </li>
+                    </t>
+                </t>
+            </ul> -->
+            <br />
+            <br />
+            A continuación se detalla los temas y acuerdos coordinados en reunión.
+
+
+            <br />
+            <br />
+            <div class="table">
+                <style type="text/css">
+                    .tg  {border-collapse:collapse;border-spacing:0;border-color:#c0c0c0;width:100%}
+                    .tg td{font-family: Palatino, Palatino Linotype, Palatino LT STD, Book Antiqua, Georgia, serif;font-size:14px;padding:10px 5px;border-style:solid;border-width:0px;overflow:hidden;word-break:normal;border-color:#c0c0c0;}
+                    .tg th{font-family: Palatino, Palatino Linotype, Palatino LT STD, Book Antiqua, Georgia, serif;font-size:14px;font-weight:normal;padding:10px 5px;border-style:solid;border-width:0px;overflow:hidden;word-break:normal;border-color:#c0c0c0;background-color:#efefef;}
+                    .tg .tg-cly1{text-align:center;vertical-align:middle}
+                    .tg .tg-1wig{font-weight:bold;text-align:center;vertical-align:middle}
+                    .tg .tg-yla0{font-weight:bold;text-align:center;vertical-align:middle}
+                    .tg .tg-0lax{text-align:left;vertical-align:top}
+                </style>
+                <table class="tg">
+                    <tr>
+                        <th class="tg-cly1">
+                            <span style="font-weight:bold">TEMA ESPECÍFICO</span>
+                        </th>
+                        <th class="tg-yla0">DETALLE</th>
+                        <th class="tg-yla0">ACUERDOS</th>
+                        <th class="tg-1wig">RESPONSABLE INTERNO</th>
+                        <th class="tg-1wig">RESPONSABLE EXTERNO</th>
+                    </tr>
+                    <t t-foreach="doc.line_ids" t-as="l">
+                        <tr>
+                            <td>
+                                <span t-field="l.name" />
+                            </td>
+                            <td>
+                                <span t-field="l.detail" />
+                            </td>
+                            <td>
+                                <span t-field="l.resume" />
+                            </td>
+                            <td>
+                                <span t-field="l.employee_id" />
+                            </td>
+                            <td>
+                                <span t-field="l.partner_id" />
+                            </td>
+                        </tr>
+                    </t>
+                </table>
+            </div>
+            <br />
+
+            <div style="page-break-before: always;"/>
+            <t t-foreach="doc.line_ids" t-as="line">
+                <table class="tg">
+                    <thead>
+                        <tr>
+                            <th class="tg-cly1" colspan="3"><strong><span t-field="line.name"/></strong></th>
+                        </tr>
+                        <tr>
+                            <th class="tg-cly1" style="width:50%"><strong>TÍTULO</strong></th>
+                            <th class="tg-cly1" style="width:30%"><strong>RESPONSABLE DE EJECUCIÓN</strong></th>
+                            <th class="tg-cly1" style="width:20%"><strong>FECHA LÍMITE</strong></th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <t t-foreach="line.action_ids" t-as="action">
+                            <tr>
+                                <td>
+                                    <span t-field="action.name" />
+                                </td>
+                                <td>
+                                    <span t-field="action.user_id.name" />
+                                </td>
+                                <td>
+                                    <span t-field="action.date_deadline" />
+                                </td>
+                            </tr>
+                        </t>
+                    </tbody>
+                    <tfooter>
+                        <tr>
+                            <th class="tg-cly1" style="text-align: left" colspan="3">
+                                <strong>COMENTARIO: </strong><span t-field="line.comment" />
+                            </th>
+                        </tr>
+                    </tfooter>
+                </table>
+                <br/>
+            </t>
+        </div>
+    </template>
+
+    <template id="record_meeting_report_template" inherit_id="mgmtsystem_comunication.record_meeting_report_template">
+        <xpath expr="//div[hasclass('header')]//table//td[2]" position="replace">
+            <td class="tg-1wig" rowspan="3" width="80%" style="width:65%;">
+                MINUTA DE REUNIÓN
+                <br />
+                <span t-field="doc.name" style="font-size:15px;font-weight:bold;" />
+            </td>
+        </xpath>
+        <xpath expr="//div[hasclass('principal')]" position="replace">
+            <t t-foreach="docs" t-as="doc">
+                <t t-call="tyt_communication.record_meeting_report_template_principal_container">
+                    <t t-set="doc" t-value="doc"/>
+                </t>
+            </t>
+        </xpath>
+    </template>
+</odoo>

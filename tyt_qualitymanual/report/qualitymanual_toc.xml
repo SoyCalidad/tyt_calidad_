@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <record id="mgmtsystem_qualitymanual_tyt_toc_report_action" model="ir.actions.report">
+        <field name="name">Quality Manual TYT Table of Contents</field>
+        <field name="model">mgmtsystem.qualitymanual</field>
+        <field name="report_type">qweb-pdf</field>
+        <field name="report_name">tyt_qualitymanual.mgmtsystem_qualitymanual_tyt_toc_report</field>
+        <field name="report_file">tyt_qualitymanual.mgmtsystem_qualitymanual_tyt_toc_report</field>
+        <field name="print_report_name">'%s' % object.name</field>
+        <field name="binding_model_id" eval="False" />
+        <field name="binding_type">report</field>
+    </record>
+
+    <template id="mgmtsystem_qualitymanual_tyt_toc_report">
+        <t t-call="web.html_container">
+            <t t-foreach="docs" t-as="o">
+                <t t-call="tyt_process.external_layout_tyt_document">
+                    <div class="page">
+                        <div class="tyt_toc">
+                            <span t-out="toc_dict[o.id]" />
+                        </div>
+                    </div>
+                    <div class="footer" />
+                </t>
+            </t>
+        </t>
+    </template>
+</odoo>

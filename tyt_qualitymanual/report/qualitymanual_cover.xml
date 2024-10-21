@@ -1,0 +1,99 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<odoo>
+    <record id="mgmtsystem_qualitymanual_tyt_cover_report_action" model="ir.actions.report">
+        <field name="name">Quality Manual TYT Cover</field>
+        <field name="model">mgmtsystem.qualitymanual</field>
+        <field name="report_type">qweb-pdf</field>
+        <field name="report_name">tyt_qualitymanual.mgmtsystem_qualitymanual_tyt_cover_report</field>
+        <field name="report_file">tyt_qualitymanual.mgmtsystem_qualitymanual_tyt_cover_report</field>
+        <field name="print_report_name">'%s' % object.name</field>
+        <field name="binding_model_id" eval="False" />
+        <field name="paperformat_id" ref="tyt_process.tyt_cover_paperformat" />
+        <field name="binding_type">report</field>
+    </record>
+
+    <template id="mgmtsystem_qualitymanual_tyt_cover_report">
+        <t t-call="web.html_container">
+            <t t-foreach="docs" t-as="o">
+                <t t-if="not company">
+                    <t t-if="company_id">
+                        <t t-set="company" t-value="company_id" />
+                    </t>
+                    <t t-elif="o and 'company_id' in o and o.company_id.sudo()">
+                        <t t-set="company" t-value="o.company_id.sudo()" />
+                    </t>
+                    <t t-else="else">
+                        <t t-set="company" t-value="res_company" />
+                    </t>
+                </t>
+                <t t-call="tyt_process.external_layout_tyt_cover">
+                    <div class="page">
+                        <div class="tyt_cover">
+                            <div>
+                                <img src="/tyt_process/static/src/img/cover_tyt_bg1.png"
+                                    class="background-image" />
+                            </div>
+                            <div class="content">
+                                <img src="/tyt_process/static/src/img/cover_tyt_bg2.png"
+                                    class="top-image" />
+                            </div>
+                            <div class="general_info">
+                                <div class="company_info">
+                                    <p t-esc="company.name" />
+                                </div>
+                                <div class="procedure_name">
+                                    <p t-field="o.name" />
+                                </div>
+                            </div>
+                            <div class="procedure_info">
+                                <p class="procedure_version">
+                                    <img src="/tyt_process/static/src/img/cover_tyt_icon_1.png"> </img>
+                                    Versión <span t-field="o.version" />
+                                </p>
+                                <p
+                                    class="procedure_code">
+                                    <img src="/tyt_process/static/src/img/cover_tyt_icon_2.png"> </img>
+                                    Codigo <span t-field="o.code" />
+                                </p>
+                                <p
+                                    class="procedure_date">
+                                    <img src="/tyt_process/static/src/img/cover_tyt_icon_3.png"> </img>
+                                        <span
+                                        t-if="o.date_validate"
+                                        t-esc="months[o.date_validate.strftime('%m')]" />, 
+                                        <span
+                                        t-if="o.date_validate"
+                                        t-esc="o.date_validate.strftime('%Y')" />. </p>
+                            </div>
+                            <div class="creation_info">
+                                <div class="current_year">
+                                    <p t-esc="datetime.datetime.now().strftime('%Y')" />
+                                </div>
+                                <div
+                                    class="creation_user">
+                                    <p> Por <span
+                                            t-if="o.elaboration_step"
+                                            t-field="o.elaboration_step[0].user_id.name" /> | <t
+                                            t-foreach="o.elaboration_step" t-as="user">
+                                            <t t-foreach="user.user_id.employee_ids" t-as="emp">
+                                                <span t-field="emp.job_id.name" />
+                                            </t>
+                                        </t>
+                                    </p>
+                                </div>
+                            </div>
+                            <div class="validator_info">
+                                <div class="signature">
+                                    <img src="signature.png" />
+                                    <div class="signature_line"></div>
+                                    <p class="validator_name">Nombre</p>
+                                    <p class="validator_job">Cargo</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </t>
+            </t>
+        </t>
+    </template>
+</odoo>
