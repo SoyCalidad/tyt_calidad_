@@ -31,5 +31,88 @@
         </record>
 
 
+        <!-- NEW ACTIONS + NEW MENUS -->
+
+        <record model="ir.actions.act_window" id="tyt_int_claims_action">
+            <field name="name">Quejas internas</field>
+            <field name="res_model">complaint.complaint</field>
+            <field name="view_mode">tree,form</field>
+            <field name="search_view_id" ref="mgmtsystem_complaints.view_complaint_complaint_search" />
+            <field name="domain" eval="[('type', '=', 'customer'), ('categ_id', '=', ref('mgmtsystem_complaints.categ1'))]"/>
+            <field name="context" eval="{'default_type': 'customer', 'default_categ_id': ref('mgmtsystem_complaints.categ1')}"/>
+        </record>
+
+
+        <menuitem name="Quejas internas"
+                id="tyt_int_claims_menu"
+                parent="mgmtsystem_complaints.mitem_complaint"
+                sequence="6"
+                action="tyt_int_claims_action" />
+
+
+        <record model="ir.actions.act_window" id="tyt_ext_claims_action">
+            <field name="name">Quejas externas</field>
+            <field name="res_model">complaint.complaint</field>
+            <field name="view_mode">tree,form</field>
+            <field name="search_view_id" ref="mgmtsystem_complaints.view_complaint_complaint_search" />
+            <field name="domain" eval="[('type', '=', 'supplier'), ('categ_id', '=', ref('mgmtsystem_complaints.categ1'))]"/>
+            <field name="context" eval="{'default_type': 'supplier', 'default_categ_id': ref('mgmtsystem_complaints.categ1')}"/>
+        </record>
+
+
+        <menuitem name="Quejas Externas"
+                id="tyt_ext_claims_menu"
+                parent="mgmtsystem_complaints.mitem_complaint"
+                sequence="7"
+                action="tyt_ext_claims_action" />
+
+
+
+        <record model="ir.actions.act_window" id="tyt_int_complaints_action">
+            <field name="name">Reclamos internos</field>
+            <field name="res_model">complaint.complaint</field>
+            <field name="view_mode">tree,form</field>
+            <field name="search_view_id" ref="mgmtsystem_complaints.view_complaint_complaint_search" />
+            <field name="domain" eval="[('type', '=', 'customer'), ('categ_id', '=', ref('mgmtsystem_complaints.categ2'))]"/>
+            <field name="context" eval="{'default_type': 'customer', 'default_categ_id': ref('mgmtsystem_complaints.categ2')}"/>
+        </record>
+
+        <menuitem name="Reclamos internos"
+                id="tyt_int_complaints_menu"
+                parent="mgmtsystem_complaints.mitem_complaint"
+                sequence="8"
+                action="tyt_int_complaints_action" />
+
+        <record model="ir.actions.act_window" id="tyt_ext_complaints_action">
+            <field name="name">Reclamos externos</field>
+            <field name="res_model">complaint.complaint</field>
+            <field name="view_mode">tree,form</field>
+            <field name="search_view_id" ref="mgmtsystem_complaints.view_complaint_complaint_search" />
+            <field name="domain" eval="[('type', '=', 'supplier'), ('categ_id', '=', ref('mgmtsystem_complaints.categ2'))]"/>
+            <field name="context" eval="{'default_type': 'supplier', 'default_categ_id': ref('mgmtsystem_complaints.categ2')}"/>
+        </record>
+
+        <menuitem name="Reclamos externos"
+                id="tyt_ext_complaints_menu"
+                parent="mgmtsystem_complaints.mitem_complaint"
+                sequence="9"
+                action="tyt_ext_complaints_action" />
+
+
+        <record model="ir.actions.act_window" id="tyt_others_categ_action">
+            <field name="name">Otros</field>
+            <field name="res_model">complaint.complaint</field>
+            <field name="view_mode">tree,form</field>
+            <field name="search_view_id" ref="mgmtsystem_complaints.view_complaint_complaint_search" />
+            <field name="domain" eval="[('categ_id', 'not in', [ref('mgmtsystem_complaints.categ1'), ref('mgmtsystem_complaints.categ2')])]"/>
+            <field name="context">{"default_type":'customer'}</field>
+        </record>
+
+        <menuitem name="Otros"
+                id="tyt_others_categ_menu"
+                parent="mgmtsystem_complaints.mitem_complaint"
+                sequence="10"
+                action="tyt_others_categ_action" />
+
     </data>
 </odoo>
