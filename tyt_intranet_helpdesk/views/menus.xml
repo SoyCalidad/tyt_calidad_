@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <menuitem id="tyt_intranet_mailbox_menu_action"
+              name="Mailbox"
+              parent="tyt_intranet_base.intranet_menu_root"
+              action="tyt_intranet_mailbox_action"
+              sequence="30"/>
+
+    <menuitem id="tyt_intranet_mailbox_configuration_menu"
+              name="Mailbox"
+              parent="tyt_intranet_base.intranet_configuration_menu"
+              sequence="30"/>
+
+    <menuitem id="tyt_intranet_service_area_menu_action"
+              name="Service Areas"
+              parent="tyt_intranet_mailbox_configuration_menu"
+              action="tyt_intranet_service_area_action"
+              sequence="10"/>
+
+    <menuitem id="tyt_intranet_message_type_menu_action"
+              name="Message Types"
+              parent="tyt_intranet_mailbox_configuration_menu"
+              action="tyt_intranet_message_type_action"
+              sequence="20"/>
+
+    <menuitem id="tyt_intranet_notification_matrix_menu_action"
+              name="Notification Matrix"
+              parent="tyt_intranet_mailbox_configuration_menu"
+              action="tyt_intranet_notification_matrix_action"
+              sequence="30"/>
+</odoo>

@@ -1,0 +1,43 @@
+#msform label {
+    font-size: 0.9em;
+}
+
+#msform input:focus, #msform textarea:focus {
+    -moz-box-shadow: none !important;
+    -webkit-box-shadow: none !important;
+    box-shadow: none !important;
+    border: 1px solid #ee0979;
+    outline-width: 0;
+    transition: All 0.5s ease-in;
+    -webkit-transition: All 0.5s ease-in;
+    -moz-transition: All 0.5s ease-in;
+    -o-transition: All 0.5s ease-in;
+}
+
+#msform .mailbox-select:focus {
+    -moz-box-shadow: none !important;
+    -webkit-box-shadow: none !important;
+    box-shadow: none !important;
+    border: 1px solid #ee0979;
+    outline-width: 0;
+    transition: All 0.5s ease-in;
+    -webkit-transition: All 0.5s ease-in;
+    -moz-transition: All 0.5s ease-in;
+    -o-transition: All 0.5s ease-in;
+}
+
+.mailbox-container {
+    background-color: #348e9e;
+
+    h3, label {
+        color: #f8f8f8;
+    }
+
+    p {
+        color: #f8f8f8 !important;
+        line-height: 1.0;
+    }
+    input, textarea, select {
+        border-radius: 0.25rem !important;
+    }
+}

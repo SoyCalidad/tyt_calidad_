@@ -3,6 +3,25 @@
 from odoo import models, fields, api, _
 from odoo.exceptions import UserError, RedirectWarning, ValidationError
 
+class MgmtCategDocs(models.Model):
+    _name = 'mgmt.categ.docs'
+    _description = "Mapa de Procesos - Documentos"
+
+    name = fields.Char(string='Nombre', required=True)
+
+class MgmtCateg(models.Model):
+    _inherit = 'mgmt.categ'
+
+    type = fields.Many2one(
+        'mgmt.categ.type', string='Área', group_expand='_read_group_type', required=True)
+    
+    tyt_documents= fields.Many2one(
+        'mgmt.categ.docs', string='Documentos')
+
+    tyt_sites_id = fields.Many2one(
+        'x_sitios', string='Ubicación')
+    
+    referencess = fields.Text(string='Referencias')
 
 class ProcessInherit(models.Model):
     _inherit = 'mgmt.process'
@@ -19,6 +38,9 @@ class ProcessInherit(models.Model):
         string=u'Versión vigente',
         compute='_compute_last_edition',
     )
+
+    type = fields.Many2one(
+        'mgmt.categ.type', string='Área', group_expand='_read_group_type', required=True,)
 
     @api.depends('name')
     def _compute_last_edition(self):

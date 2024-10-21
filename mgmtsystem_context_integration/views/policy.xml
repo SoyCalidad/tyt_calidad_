@@ -11,12 +11,14 @@
                     <field string="Acciones" name="action_count" widget="statinfo" />
                 </button>
             </div>
+            <!--
             <notebook position="inside">
                 <page name="action_ids" string="Acciones">
                     <separator string="Acciones" />
                     <field name="action_ids" />
                 </page>
             </notebook>
+            -->
         </field>
     </record>
 

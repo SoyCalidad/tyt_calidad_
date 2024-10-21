@@ -18,7 +18,21 @@
                 </field>
             </field>
         </record>
-        -->
+        -->        
+
+        <record id="inherit_employee_form_tyt65" model="ir.ui.view">
+            <field name="name">hr.employee.form.inherit.tyt65</field>
+            <field name="model">hr.employee</field>
+            <field name="inherit_id" ref="hr.view_employee_form"/>
+            <field name="arch" type="xml">
+                <field name="parent_id" position="attributes">
+                    <attribute name="string">Jefe Funcional</attribute>
+                </field>
+                <field name="coach_id" position="attributes">
+                    <attribute name="invisible">1</attribute>
+                </field>
+            </field>
+        </record>
 
         <record id="view_quality_employee_tree" model="ir.ui.view">
             <field name="name">hr.employee.quality.tree</field>
@@ -112,7 +126,7 @@
                                 <field name="department_id"/>
                                 <field name="job_id"/>
                                 <field name="tyt_manager_id"/>
-                                <field name="coach_id"/>
+                                <field name="parent_id" string="Jefe Funcional"/>
                             </group>
                         </group>
                         <notebook>
