@@ -11,5 +11,7 @@ access_admin_job_application,tyt_recruitment.job_application.admin.access,model_
 
 access_applicant_user,access.applicant.user,model_tyt_recruitment_applicant,base.group_user,1,0,0,0
 
+access_tyt_recruitment_job_history_user,access_tyt_recruitment_job_history_user,tyt_recruitment.model_tyt_recruitment_job_history,,1,1,1,1
+access_tyt_recruitment_reference_user,access_tyt_recruitment_reference_user,tyt_recruitment.model_tyt_recruitment_reference,,1,1,1,1
 access_admin_family_data_detail,tyt_recruitment.family_data_detail.admin.access,model_tyt_recruitment_family_data_detail,,1,1,1,1
 access_admin_child,tyt_recruitment.child.admin.access,model_tyt_recruitment_child,,1,1,1,1

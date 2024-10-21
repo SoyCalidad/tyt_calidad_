@@ -66,29 +66,28 @@ class PublicFormController(http.Controller):
 
         # CREATING PARENTS
         data_father = {
-            'typef_2': post.get('typef_2'),
-            'fullnamef_2': post.get('fullnamef_2'),
-            'ocupationf_2': post.get('ocupationf_2'),
-            'phonef_2': post.get('phonef_1'),
+            'type': post.get('typef_1'),
+            'name': post.get('fullnamef_1'),
+            'occupation': post.get('ocupationf_1'),
+            'phone_number': post.get('phonef_1')
         }
+        father = request.env['tyt_recruitment.family_data_detail'].sudo().create(data_father)
 
         data_mother = {
-            'typef_2': post.get('typef_2'),
-            'fullnamef_2': post.get('fullnamef_2'),
-            'ocupationf_2': post.get('ocupationf_2'),
-            'phonef_2': post.get('phonef_1'),
+            'type': post.get('typef_2'),
+            'name': post.get('fullnamef_2'),
+            'occupation': post.get('ocupationf_2'),
+            'phone_number': post.get('phonef_2')
         }
+        mother = request.env['tyt_recruitment.family_data_detail'].sudo().create(data_mother)
 
         data_spouse = {
-            'typef_2': post.get('typef_2'),
-            'fullnamef_2': post.get('fullnamef_2'),
-            'ocupationf_2': post.get('ocupationf_2'),
-            'phonef_2': post.get('phonef_1'),
+            'type': post.get('typef_3'),
+            'name': post.get('fullnamef_3'),
+            'occupation': post.get('ocupationf_3'),
+            'phone_number': post.get('phonef_3')
         }
-
-        # father = request.env['tyt_recruitment.job_application'].sudo().create(data_father)
-        # mohter = request.env['tyt_recruitment.job_application'].sudo().create(data_mother)
-        # spouse = request.env['tyt_recruitment.job_application'].sudo().create(data_spouse)
+        spouse = request.env['tyt_recruitment.family_data_detail'].sudo().create(data_spouse)
 
         # CREATING ACADEMIC DATA
 
@@ -98,15 +97,18 @@ class PublicFormController(http.Controller):
             'specification': post.get('specification'),
         }
 
-        # CREATING CHILDREN
-
-         # CREATING JOB APPLICATION
+        # CREATING JOB APPLICATION
         data_job_application = {
             'request_date': post.get('request_date'),
             'requisition': post.get('requisition'), 
-            'campaign_id': post.get('campaign'),
             'site': post.get('site'), 
+
+            'campaign_id': post.get('campaign'),
             'applicant_id': applicant.id,
+
+            'father_data_id': father.id,
+            'mother_data_id': mother.id,
+            'spouse_data_id': spouse.id
         }
 
         job_application = request.env['tyt_recruitment.job_application'].sudo().create(data_job_application)
@@ -131,17 +133,58 @@ class PublicFormController(http.Controller):
         for answer in study_asnwer_json:
             request.env['tyt_recruitment.answer'].sudo().create(answer)
 
-        data = {
-            'data_applicant': data_applicant,
+        # JOB HISTORY
 
-            'health_asnwer_json': health_asnwer_json,
-            'study_asnwer_json': study_asnwer_json,
-            'job_asnwer_json': job_asnwer_json,
+        company_names = request.httprequest.form.getlist('company_name[]')
+        start_dates = request.httprequest.form.getlist('start_date[]')
+        end_dates = request.httprequest.form.getlist('end_date[]')
+        separation_reasons = request.httprequest.form.getlist('separation_reason[]')
+        weekly_salarys = request.httprequest.form.getlist('weekly_salary[]')
+
+        for index, company_name in enumerate(company_names):
+            new_history = {
+                'company_name': company_name,
+                'start_date': str(start_dates[index]),
+                'end_date': str(end_dates[index]),
+                'separation_reason': separation_reasons[index],
+                'weekly_salary': weekly_salarys[index],
+                'job_application_id': job_application.id,
+            }
+            request.env['tyt_recruitment.job_history'].sudo().create(new_history)
+
+        # JOB HISTORY
+        reference_types = request.httprequest.form.getlist('reference_type[]')
+        reference_names = request.httprequest.form.getlist('reference_name[]')
+        references_occupations = request.httprequest.form.getlist('references_occupation[]')
+        references_phones = request.httprequest.form.getlist('references_phone[]')
+
+        for index, name in enumerate(reference_names):
+            new_reference = {
+                'name': name,
+                'type': reference_types[index],
+                'occupation': references_occupations[index],
+                'phone_number': references_phones[index],
+                'job_application_id': job_application.id,
+            }
+            request.env['tyt_recruitment.reference'].sudo().create(new_reference)
+
+         # CREATING CHILDREN
+
+
+        # data = {
+        #     # 'data_applicant': data_applicant,
+
+        #     # 'health_asnwer_json': health_asnwer_json,
+        #     # 'study_asnwer_json': study_asnwer_json,
+        #     # 'job_asnwer_json': job_asnwer_json,
             
-            'data_academic': data_academic,
+        #     'data_academic': data_academic,
+        #     'data_father': data_father,
+        #     'data_mother': data_mother,
+        #     'data_spouse': data_spouse
 
-            'data_job_application': data_job_application,
-        }
+        #     # 'data_job_application': data_job_application,
+        # }
 
         return request.render('tyt_recruitment.template_job_application_success')
         # return Response(
