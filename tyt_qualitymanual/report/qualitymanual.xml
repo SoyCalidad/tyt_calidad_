@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <odoo>
     <record id="mgmtsystem_qualitymanual_tyt_report_action" model="ir.actions.report">
-        <field name="name">Informe de manual de calidad 2</field>
+        <field name="name">Informe de manual de calidad</field>
         <field name="model">mgmtsystem.qualitymanual</field>
         <field name="report_type">qweb-pdf</field>
         <field name="report_name">tyt_qualitymanual.mgmtsystem_qualitymanual_tyt_report</field>
@@ -19,4 +19,8 @@
             </t>
         </t>
     </template>
+
+    <record id="mgmtsystem_qualitymanual.action_report_qualitymanual" model="ir.actions.report">
+        <field name="binding_model_id" eval="False" />
+    </record>
 </odoo>
