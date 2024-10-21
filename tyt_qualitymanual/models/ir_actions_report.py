@@ -15,6 +15,83 @@ _logger = logging.getLogger(__name__)
 class IrActionsReport(models.Model):
     _inherit = 'ir.actions.report'
 
+    def extract_headings_from_binary_custom(self, pdf_binary):
+        doc = fitz.open(stream=pdf_binary)
+        page_datas = {}
+        headers_datas = []
+        color_to_h = {
+            '#477da1': 'h1',
+            '#477da2': 'h2',
+            '#477da3': 'h3',
+            '#477da4': 'h4',
+            '#477da5': 'h5',
+            '#477da6': 'h6',
+        }
+        for current_page, page in enumerate(doc, 1):
+            text_page = page.get_textpage(flags=fitz.TEXT_MEDIABOX_CLIP)
+            page_data = text_page.extractHTML()
+            soup = BeautifulSoup(page_data, 'html.parser')
+
+            for span in soup.find_all('span'):
+                style = span.get('style', '')
+                color = ''
+                for s in style.split(';'):
+                    if 'color' in s:
+                        color = s.split(':')[1].strip()
+                        break
+                h_tag = color_to_h.get(color)
+                if h_tag:
+                    h_text = span.text.strip()
+                    headers_datas.append((h_tag, h_text, current_page))
+
+        return page_datas, headers_datas
+
+    def get_prefix_levels(self, title):
+        match = re.match(r'^((?:\d+\.)+\d*)', title)
+        if match:
+            prefix = match.group(1)
+            levels = prefix.strip('.').split('.')
+            return [int(lvl) for lvl in levels if lvl.isdigit()]
+        else:
+            return None  # Return None when no numerical prefix
+
+    def build_index_custom(self, titles):
+        index = []
+        nodes_by_levels = {}
+        last_node = None
+
+        for tag, title, page in titles:
+            levels = self.get_prefix_levels(title)
+
+            if levels:
+                node = {'title': title, 'page': page, 'children': []}
+                levels_tuple = tuple(levels)
+                parent_levels = tuple(levels[:-1])
+
+                if parent_levels in nodes_by_levels:
+                    parent_node = nodes_by_levels[parent_levels]
+                    parent_node['children'].append(node)
+                else:
+                    index.append(node)
+
+                nodes_by_levels[levels_tuple] = node
+                last_node = node
+            else:
+                if last_node:
+                    last_node['title'] += ' ' + title
+                else:
+                    node = {'title': title, 'page': page, 'children': []}
+                    index.append(node)
+                    last_node = node
+
+        return index
+
+    def _generate_table_of_contents_custom(self, pdf_binary):
+        titles = self.extract_headings_from_binary_custom(pdf_binary)[1]
+        index = self.build_index_custom(titles)
+        html = self.generate_html(index)
+        return html
+
     def _is_tyt_quality_manual_report(self, report_ref):
         return self._get_report(report_ref).report_name in ('tyt_qualitymanual.mgmtsystem_qualitymanual_tyt_report')
 
@@ -95,7 +172,7 @@ class IrActionsReport(models.Model):
             toc_dict = {}
             for quality_manual_id, stream in body.items():
                 streams_to_append[quality_manual_id].append(stream)
-                toc_dict[quality_manual_id] = markupsafe.Markup(self._generate_table_of_contents(stream['stream']))
+                toc_dict[quality_manual_id] = markupsafe.Markup(self._generate_table_of_contents_custom(stream['stream']))
 
             data['toc_dict'] = toc_dict
 
