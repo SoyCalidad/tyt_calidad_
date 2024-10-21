@@ -12,8 +12,14 @@ class JobApplication(models.Model):
     campaign_id = fields.Many2one('tyt_recruitment.campaign', string="Campaña")
     applicant_id = fields.Many2one('tyt_recruitment.applicant')
 
-    # Respuestas de questionario
+    children_ids = fields.One2many('tyt_recruitment.child', 'job_application_id', string="Hijos")
     answer_ids = fields.One2many('tyt_recruitment.answer', 'job_application_id', string="Respuestas")
+    job_history_ids = fields.One2many('tyt_recruitment.job_history', 'job_application_id', string="Historial laboral")
+    reference_ids = fields.One2many('tyt_recruitment.reference', 'job_application_id', string="Referencia laboral")
+
+    father_data_id = fields.Many2one('tyt_recruitment.family_data_detail', string="Datos del padre")
+    mother_data_id = fields.Many2one('tyt_recruitment.family_data_detail', string="Datos de la madre")
+    spouse_data_id = fields.Many2one('tyt_recruitment.family_data_detail', string="Datos del cónyuge")
 
 class Applicant(models.Model):
     _name = 'tyt_recruitment.applicant'
@@ -57,14 +63,6 @@ class Applicant(models.Model):
     foreign_nationality = fields.Boolean(string="Cuenta con nacionalidad extranjera")
     daily_activities = fields.Text(string="Describa sus actividades diarias")
 
-    # Relación Many2one con los datos familiares
-    father_data_id = fields.Many2one('tyt_recruitment.family_data_detail', string="Datos del padre")
-    mother_data_id = fields.Many2one('tyt_recruitment.family_data_detail', string="Datos de la madre")
-    spouse_data_id = fields.Many2one('tyt_recruitment.family_data_detail', string="Datos del cónyuge")
-
-    # Relación One2many para los hijos
-    children_ids = fields.One2many('tyt_recruitment.child', 'applicant_id', string="Hijos")
-
     # Campaña
     campaign_id = fields.Many2one('tyt_recruitment.campaign', string="Campaña")
 
@@ -75,6 +73,30 @@ class FamilyDataDetail(models.Model):
     type = fields.Char(string="Tipo")
     name = fields.Char(string="Nombre")
     occupation = fields.Char(string="Ocupación")
+    phone_number = fields.Char(string="Teléfono")
+
+class JobHistory(models.Model):
+    _name = 'tyt_recruitment.job_history'
+    _description = 'tyt_recruitment.job_history'
+
+    company_name = fields.Char(string="Nombre de la compañía")
+    start_date = fields.Date(string="Desde")
+    end_date = fields.Date(string="Hasta")
+    separation_reason = fields.Char(string="Motivo de serparación")
+    weekly_salary = fields.Char(string="Salario semanal")
+
+    job_application_id = fields.Many2one('tyt_recruitment.job_application', string="Solicitud")
+
+class JobReference(models.Model):
+    _name = 'tyt_recruitment.reference'
+    _description = 'tyt_recruitment.reference'
+
+    name = fields.Char(string="Nombre completo")
+    type = fields.Char(string="Tipo")
+    occupation = fields.Char(string="Ocupación/Giro")
+    phone_number = fields.Char(string="Teléfono")
+
+    job_application_id = fields.Many2one('tyt_recruitment.job_application', string="Referencias")
 
 class Child(models.Model):
     _name = 'tyt_recruitment.child'
@@ -83,5 +105,4 @@ class Child(models.Model):
     name = fields.Char(string="Nombre")
     age = fields.Char(string="Edad") 
 
-    # Relación Many2one con Applicant
-    applicant_id = fields.Many2one('tyt_recruitment.applicant', string="Aplicante")
+    job_application_id = fields.Many2one('tyt_recruitment.job_application', string="Aplicante")
