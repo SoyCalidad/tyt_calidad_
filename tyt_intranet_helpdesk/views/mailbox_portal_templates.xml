@@ -177,7 +177,7 @@
                             <div t-if="entry.receive_response and not is_html_empty(entry.response_message)" class="row mb-4" name="response_message">
                                 <div class="col-12 col-lg-7 mb-4 mb-md-0 col-lg-12">
                                     <div class="d-flex my-2">
-                                        <strong>Respuesta del soporte</strong>
+                                        <strong>Respuesta del responsable de seguimiento</strong>
                                     </div>
                                     <div class="py-1 px-2 bg-100 small table-responsive">
                                         <p>

@@ -40,14 +40,10 @@ class MailboxController(http.Controller):
 
         if 'is_anonymous' in kw:
             mailbox_values['is_anonymous'] = True
-            mailbox_values['partner_name'] = False
-            mailbox_values['partner_email'] = False
             mailbox_values['user_id'] = False
             mailbox_values['receive_response'] = False
         else:
             mailbox_values['is_anonymous'] = False
-            mailbox_values['partner_name'] = kw.get('name')
-            mailbox_values['partner_email'] = kw.get('email')
             mailbox_values['user_id'] = request.env.user.id
 
         for key, value in kw.items():
@@ -57,6 +53,7 @@ class MailboxController(http.Controller):
                 mailbox_values[key] = value
 
         mailbox = Mailbox.sudo().create(mailbox_values)
+        mailbox.sudo().send_mail()
         return request.render('tyt_intranet_helpdesk.mailbox_form_send', {})
 
     @http.route(['/my/mailbox', '/my/mailbox/page/<int:page>'], type='http', auth="user", website=True)

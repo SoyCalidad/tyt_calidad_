@@ -6,7 +6,14 @@
         <field name="arch" type="xml">
             <form>
                 <header>
-                    <button name="send_mail_modal" string="Send Email" type="object" class="oe_highlight"/>
+                    <field name="state" widget="statusbar"/>
+                    <button name="action_in_progress" string="In Progress" type="object" states="received"
+                            class="btn-primary"/>
+                    <button name="action_resolved" string="Resolved" type="object" states="in_progress"
+                            class="btn-primary" confirm="Are you sure you want to mark this as resolved"/>
+                    <button name="action_escalated" string="Escalated" type="object" states="in_progress"
+                            class="btn-primary" confirm="Are you sure you want to mark this as escalated?"/>
+                    <button name="send_mail_modal" string="Send Email" type="object" class="btn-secondary"/>
                 </header>
                 <sheet>
                     <div class="oe_title">
@@ -17,27 +24,53 @@
 					</div>
                     <group>
                         <group>
-                            <field name="user_id"/>
+                            <field name="user_id" readonly="1"/>
                             <field name="partner_id"/>
-                            <field name="partner_name"/>
-                            <field name="partner_email"/>
+                            <field name="partner_email" widget="email"/>
                             <field name="employee_number"/>
                         </group>
                         <group>
-                            <field name="is_anonymous"/>
-                            <field name="site_id" required="1"/>
-                            <field name="service_area_id" required="1"/>
-                            <field name="message_type_id" required="1"/>
-                            <field name="receive_response"/>
+                            <field name="is_anonymous" readonly="1"/>
+                            <field name="site_id" readonly="1"/>
+                            <field name="service_area_id" readonly="1"/>
+                            <field name="message_type_id" readonly="1"/>
+                            <field name="receive_response" readonly="1"/>
                             <field name="company_id" invisible="1"/>
+                            <field name="matrix_id" invisible="1"/>
                         </group>
                     </group>
                     <notebook>
                         <page string="Comment" name="comment">
-                            <field name="comment"/>
+                            <field name="comment" readonly="1"/>
+                        </page>
+                        <page string="Internal Classification" name="internal_classification">
+                            <group>
+                                <group>
+                                    <field name="responsible_id" widget="many2one_avatar_user"/>
+                                    <field name="priority" widget="priority"/>
+                                </group>
+                                <group>
+                                    <field name="create_date"/>
+                                    <field name="deadline_date"/>
+                                </group>
+                            </group>
+                            <group string="Response to sender" attrs="{'invisible': [('receive_response', '=', False)]}">
+                                <group>
+                                    <field name="close_date"/>
+                                </group>
+                                <group>
+                                    <field name="survey_id"/>
+                                </group>
+                            </group>
+                            <group attrs="{'invisible': [('receive_response', '=', False)]}">>
+                                <field name="response" widget="html"/>
+                            </group>
                         </page>
                         <page string="Response Message" name="response_message" attrs="{'invisible': [('receive_response', '=', False)]}">
                             <field name="response_message"/>
+                        </page>
+                        <page string="Responsibles" name="responsibles">
+                            <field name="responsible_ids"/>
                         </page>
                     </notebook>
                 </sheet>
@@ -55,15 +88,17 @@
         <field name="model">tyt.intranet.mailbox</field>
         <field name="arch" type="xml">
             <tree default_order="create_date desc">
-                <field name="name"/>
                 <field name="user_id"/>
-                <field name="partner_id"/>
-                <field name="employee_number"/>
                 <field name="is_anonymous"/>
                 <field name="site_id"/>
                 <field name="service_area_id"/>
                 <field name="message_type_id"/>
                 <field name="receive_response"/>
+                <field name="priority" widget="priority" readonly="1"/>
+                <field name="deadline_date"/>
+                <field name="state" widget="badge"
+                       decoration-info="state == 'received'" decoration-warning="state == 'in_progress'"
+                       decoration-success="state == 'resolved'" decoration-danger="state == 'escalated'"/>
             </tree>
         </field>
     </record>
