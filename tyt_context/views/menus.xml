@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <menuitem id="tyt_product_service_communicate_menu_action"
+              name="Productos y servicios"
+              parent="mgmtsystem_context.context_report_menu"
+              action="tyt_product_service_communicate_action"
+              sequence="20"/>
+</odoo>

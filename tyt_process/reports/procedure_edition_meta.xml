@@ -31,11 +31,11 @@
                                     <t t-foreach="o.tyt_distribution_list_ids" t-as="dl">
                                         <tr>
                                             <td>
-                                                <span t-field="o.number_of_copy" />
-                                                <span t-field="o.distributed_to" />
-                                                <span t-field="o.job_id" />
-                                                <span t-field="o.distribution_date" />
-                                                <span t-field="o.place" />
+                                                <span t-field="dl.number_of_copy" />
+                                                <span t-field="dl.distributed_to" />
+                                                <span t-field="dl.job_id" />
+                                                <span t-field="dl.distribution_date" />
+                                                <span t-field="dl.place" />
                                             </td>
                                         </tr>
                                     </t>

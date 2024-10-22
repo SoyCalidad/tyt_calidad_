@@ -1,0 +1,92 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <template id="mailbox_form" name="Mailbox Form">
+        <t t-call="website.layout">
+            <div class="container mt-5">
+                <div class="row justify-content-center">
+                    <div class="col-sm-12 col-md-10 col-lg-8">
+                        <div class="mailbox-container card p-4">
+                            <div class="text-center">
+                                <h3 class="mb-5">Quejas / Sugerencias / Felicitaciones</h3>
+                                <p class="text-muted" style="text-align: justify">
+                                    En TYT tu opinión es importante para nosotros. Todas las sugerencias y quejas se tratan de
+                                    manera confidencial para mejorar continuamente nuestro entorno de trabajo. ¡Exprésate con total libertad!
+                                </p>
+                            </div>
+                            <form action="/mailbox_send" method="post" id="msform" enctype="multipart/form-data">
+                                <input type="hidden" name="csrf_token" t-att-value="request.csrf_token()"/>
+                                <div class="row justify-content-between align-items-center mb-3">
+                                    <div class="col-md-12 text-right">
+                                        <label>Envío anónimo</label>
+                                        <input type="checkbox" id="is_anonymous" name="is_anonymous"/>
+                                    </div>
+                                </div>
+
+                                <div class="row">
+                                    <div class="col-md-4 mb-3 text-start">
+                                        <label for="site_id">Sitio</label>
+                                        <select id="site_id" name="site_id" class="mailbox-select" required="">
+                                            <option disabled="" selected="selected" value="">Seleccione una opción</option>
+                                            <t t-foreach="site_ids" t-as="rec">
+                                                <option t-att-value="rec.id" t-esc="rec.x_name"/>
+                                            </t>
+                                        </select>
+                                    </div>
+                                    <div class="col-md-4 mb-3 text-start">
+                                        <label for="service_area_id">Área de servicio</label>
+                                        <select id="service_area_id" name="service_area_id" class="mailbox-select" required="">
+                                            <option disabled="" selected="selected" value="">Seleccione una opción</option>
+                                            <t t-foreach="service_area_ids" t-as="rec">
+                                                <option t-att-value="rec.id" t-esc="rec.name"/>
+                                            </t>
+                                        </select>
+                                    </div>
+                                    <div class="col-md-4 mb-3 text-start">
+                                        <label for="message_type_id">Tipo de mensaje</label>
+                                        <select id="message_type_id" name="message_type_id" class="mailbox-select" required="">
+                                            <option disabled="" selected="selected" value="">Seleccione una opción</option>
+                                            <t t-foreach="message_type_ids" t-as="rec">
+                                                <option t-att-value="rec.id" t-esc="rec.name"/>
+                                            </t>
+                                        </select>
+                                    </div>
+                                </div>
+
+                                <div class="row">
+                                    <div class="col-md-12 mb-3 text-start">
+                                        <label for="comment">Comentario</label>
+                                        <textarea id="comment" class="form-control" name="comment" rows="6" placeholder="Ingrese su comentario"></textarea>
+                                    </div>
+                                </div>
+
+                                <div class="row">
+                                    <div class="col-md-12 mb-3 text-start">
+                                        <input type="checkbox" id="receive_response" name="receive_response" style="width: auto !important"/>
+                                        <label for="comment">¿Desea recibir una respuesta?</label>
+                                    </div>
+                                </div>
+
+                                <div class="row justify-content-between align-items-center mb-3">
+                                    <div class="col-md-12 text-right">
+                                        <button type="submit" class="btn btn-primary">Enviar</button>
+                                    </div>
+                                </div>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </t>
+    </template>
+
+    <template id="mailbox_form_send" name="Mailbox Form Send">
+    <div class="text-center" style="padding-top: 100px; padding-bottom: 100px;">
+        <div class="card shadow-lg p-5" style="max-width: 600px; margin: 0 auto; background-color: #f8f9fa; border-radius: 10px;">
+            <div class="card-body">
+                <h1 class="mb-4" style="font-size: 2.5rem; font-weight: bold; color: #28a745;">¡Gracias!</h1>
+                <p style="font-size: 1.25rem; color: #6c757d;">Su formulario ha sido enviado con éxito.</p>
+            </div>
+        </div>
+    </div>
+</template>
+</odoo>

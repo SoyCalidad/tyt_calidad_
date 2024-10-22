@@ -11,15 +11,18 @@
         'hola_calidad',
         'hr_recruitment',
         'report_xlsx',
+        'website'
     ],
     'data': [
         'security/ir.model.access.csv',
-        'views/views.xml',
+        'views/view_requisition.xml',
         'data/mail_templates.xml',
         'views/share_templates.xml',
         'reports/reports_xls.xml',
-        'reports/reports_pdf.xml',  # Definición del reporte
-        'views/template_report_requisition.xml',  # Plantilla QWeb
+        'reports/reports_pdf.xml',
+        'views/template_report_requisition.xml',
+        'views/view_job_application.xml',
+        'views/job_application_form.xml'
     ],
     'auto_install': False,
     'installable': True,
@@ -37,7 +40,8 @@
             'tyt_recruitment/static/lib/pdfjs/web/locale/**',
         ],
         'web.assets_backend': [
-            '/tyt_recruitment/static/src/img/logo.png',  # Ruta a la imagen
+            '/tyt_recruitment/static/src/img/logo.png',
+            '/tyt_recruitment/static/src/img/logo_large.png',
         ],
     },
     'images': ["static/src/img/logo.png"],

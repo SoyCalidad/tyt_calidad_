@@ -1,0 +1,772 @@
+# Translation of Odoo Server.
+# This file contains the translation of the following modules:
+# 	* tyt_intranet_helpdesk
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: Odoo Server 16.0+e-20240730\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2024-10-22 10:13+0000\n"
+"PO-Revision-Date: 2024-10-22 10:13+0000\n"
+"Last-Translator: \n"
+"Language-Team: \n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: \n"
+"Plural-Forms: \n"
+
+#. module: tyt_intranet_helpdesk
+#: model_terms:ir.ui.view,arch_db:tyt_intranet_helpdesk.tyt_intranet_mailbox_view_form
+msgid "&gt;"
+msgstr ""
+
+#. module: tyt_intranet_helpdesk
+#: model:mail.template,body_html:tyt_intranet_helpdesk.mail_template_tyt_intranet_mailbox
+msgid ""
+"<div style=\"margin:0px;padding:0px; font-size: 13px;\">\n"
+"                    <p>\n"
+"                        Lorem ipsum dolor sit amet, consectetur adipisicing elit. A, ab expedita inventore ipsa\n"
+"                        ipsum iste labore laboriosam laudantium maiores nihil praesentium ratione recusandae\n"
+"                        repellat vero voluptate. Nihil nulla optio quidem!\n"
+"                    </p>\n"
+"                </div>\n"
+"            "
+msgstr ""
+
+#. module: tyt_intranet_helpdesk
+#: model_terms:ir.ui.view,arch_db:tyt_intranet_helpdesk.mailbox_form
+msgid ""
+"<option disabled=\"\" selected=\"selected\" value=\"\">Seleccione una "
+"opción</option>"
+msgstr ""
+
+#. module: tyt_intranet_helpdesk
+#: model_terms:ir.ui.view,arch_db:tyt_intranet_helpdesk.mailbox_followup
+msgid "<strong class=\"col-lg-2\">Message Type: </strong>"
+msgstr "<strong class=\"col-lg-2\">Tipo de mensaje: </strong>"
+
+#. module: tyt_intranet_helpdesk
+#: model_terms:ir.ui.view,arch_db:tyt_intranet_helpdesk.mailbox_followup
+msgid "<strong class=\"col-lg-2\">Reported on: </strong>"
+msgstr "<strong class=\"col-lg-2\">Reportado el: </strong>"
+
+#. module: tyt_intranet_helpdesk
+#: model_terms:ir.ui.view,arch_db:tyt_intranet_helpdesk.mailbox_followup
+msgid "<strong class=\"col-lg-2\">Service Area: </strong>"
+msgstr "<strong class=\"col-lg-2\">Area de servicio: </strong>"
+
+#. module: tyt_intranet_helpdesk
+#: model_terms:ir.ui.view,arch_db:tyt_intranet_helpdesk.mailbox_followup
+msgid "<strong class=\"col-lg-2\">Site: </strong>"
+msgstr "<strong class=\"col-lg-2\">Sitio: </strong>"
+
+#. module: tyt_intranet_helpdesk
+#: model_terms:ir.ui.view,arch_db:tyt_intranet_helpdesk.mailbox_followup
+msgid "<strong>Comment</strong>"
+msgstr "<strong>Comentario</strong>"
+
+#. module: tyt_intranet_helpdesk
+#: model_terms:ir.ui.view,arch_db:tyt_intranet_helpdesk.mailbox_followup
+msgid "<strong>Customer</strong>"
+msgstr "<strong>Contacto</strong>"
+
+#. module: tyt_intranet_helpdesk
+#: model_terms:ir.ui.view,arch_db:tyt_intranet_helpdesk.mailbox_followup
+msgid "<strong>Respuesta del soporte</strong>"
+msgstr ""
+
+#. module: tyt_intranet_helpdesk
+#: model:ir.model.fields,field_description:tyt_intranet_helpdesk.field_tyt_intranet_mailbox__access_warning
+msgid "Access warning"
+msgstr ""
+
+#. module: tyt_intranet_helpdesk
+#: model:ir.model.fields,field_description:tyt_intranet_helpdesk.field_tyt_intranet_mailbox__message_needaction
+#: model:ir.model.fields,field_description:tyt_intranet_helpdesk.field_tyt_intranet_notification_matrix__message_needaction
+msgid "Action Needed"
+msgstr ""
+
+#. module: tyt_intranet_helpdesk
+#: model:ir.model.fields,field_description:tyt_intranet_helpdesk.field_tyt_intranet_message_type__active
+#: model:ir.model.fields,field_description:tyt_intranet_helpdesk.field_tyt_intranet_service_area__active
+msgid "Active"
+msgstr ""
+
+#. module: tyt_intranet_helpdesk
+#: model:ir.model.fields,field_description:tyt_intranet_helpdesk.field_tyt_intranet_mailbox__activity_ids
+#: model:ir.model.fields,field_description:tyt_intranet_helpdesk.field_tyt_intranet_notification_matrix__activity_ids
+msgid "Activities"
+msgstr ""
+
+#. module: tyt_intranet_helpdesk
+#: model:ir.model.fields,field_description:tyt_intranet_helpdesk.field_tyt_intranet_mailbox__activity_exception_decoration
+#: model:ir.model.fields,field_description:tyt_intranet_helpdesk.field_tyt_intranet_notification_matrix__activity_exception_decoration
+msgid "Activity Exception Decoration"
+msgstr ""
+
+#. module: tyt_intranet_helpdesk
+#: model:ir.model.fields,field_description:tyt_intranet_helpdesk.field_tyt_intranet_mailbox__activity_state
+#: model:ir.model.fields,field_description:tyt_intranet_helpdesk.field_tyt_intranet_notification_matrix__activity_state
+msgid "Activity State"
+msgstr ""
+
+#. module: tyt_intranet_helpdesk
+#: model:ir.model.fields,field_description:tyt_intranet_helpdesk.field_tyt_intranet_mailbox__activity_type_icon
+#: model:ir.model.fields,field_description:tyt_intranet_helpdesk.field_tyt_intranet_notification_matrix__activity_type_icon
+msgid "Activity Type Icon"
+msgstr ""
+
+#. module: tyt_intranet_helpdesk
+#: model_terms:ir.ui.view,arch_db:tyt_intranet_helpdesk.tyt_intranet_mailbox_view_form
+msgid "Are you sure you want to mark this as escalated?"
+msgstr "¿Estás seguro de que quieres marcar esto como escalado?"
+
+#. module: tyt_intranet_helpdesk
+#: model_terms:ir.ui.view,arch_db:tyt_intranet_helpdesk.tyt_intranet_mailbox_view_form
+msgid "Are you sure you want to mark this as resolved"
+msgstr "¿Estás seguro de que quieres marcar esto como resuelto?"
+
+#. module: tyt_intranet_helpdesk
+#: model:ir.model.fields,field_description:tyt_intranet_helpdesk.field_tyt_intranet_mailbox__message_attachment_count
+#: model:ir.model.fields,field_description:tyt_intranet_helpdesk.field_tyt_intranet_notification_matrix__message_attachment_count
+msgid "Attachment Count"
+msgstr ""
+
+#. module: tyt_intranet_helpdesk
+#: model:website.menu,name:tyt_intranet_helpdesk.menu_mailbox
+#: model_terms:ir.ui.view,arch_db:tyt_intranet_helpdesk.mailbox_followup
+#: model_terms:ir.ui.view,arch_db:tyt_intranet_helpdesk.portal_my_mailbox
+msgid "Buzón"
+msgstr ""
+
+#. module: tyt_intranet_helpdesk
+#: model:ir.model.fields,field_description:tyt_intranet_helpdesk.field_tyt_intranet_mailbox__close_date
+msgid "Close Date"
+msgstr "Fecha de cierre"
+
+#. module: tyt_intranet_helpdesk
+#: model_terms:ir.ui.view,arch_db:tyt_intranet_helpdesk.mailbox_form
+msgid "Comentario"
+msgstr ""
+
+#. module: tyt_intranet_helpdesk
+#: model:ir.model.fields,field_description:tyt_intranet_helpdesk.field_tyt_intranet_mailbox__comment
+#: model_terms:ir.ui.view,arch_db:tyt_intranet_helpdesk.tyt_intranet_mailbox_view_form
+msgid "Comment"
+msgstr "Comentario"
+
+#. module: tyt_intranet_helpdesk
+#: model:ir.model.fields,field_description:tyt_intranet_helpdesk.field_tyt_intranet_mailbox__company_id
+msgid "Company"
+msgstr "Compañía"
+
+#. module: tyt_intranet_helpdesk
+#: model_terms:ir.ui.view,arch_db:tyt_intranet_helpdesk.mailbox_followup
+msgid "Contact"
+msgstr ""
+
+#. module: tyt_intranet_helpdesk
+#: model_terms:ir.ui.view,arch_db:tyt_intranet_helpdesk.mailbox_form
+msgid "Correo"
+msgstr ""
+
+#. module: tyt_intranet_helpdesk
+#: model:ir.model.fields,field_description:tyt_intranet_helpdesk.field_tyt_intranet_mailbox__create_uid
+#: model:ir.model.fields,field_description:tyt_intranet_helpdesk.field_tyt_intranet_message_type__create_uid
+#: model:ir.model.fields,field_description:tyt_intranet_helpdesk.field_tyt_intranet_notification_matrix__create_uid
+#: model:ir.model.fields,field_description:tyt_intranet_helpdesk.field_tyt_intranet_notification_matrix_line__create_uid
+#: model:ir.model.fields,field_description:tyt_intranet_helpdesk.field_tyt_intranet_notification_matrix_line_message_type__create_uid
+#: model:ir.model.fields,field_description:tyt_intranet_helpdesk.field_tyt_intranet_service_area__create_uid
+msgid "Created by"
+msgstr ""
+
+#. module: tyt_intranet_helpdesk
+#: model:ir.model.fields,field_description:tyt_intranet_helpdesk.field_tyt_intranet_message_type__create_date
+#: model:ir.model.fields,field_description:tyt_intranet_helpdesk.field_tyt_intranet_notification_matrix__create_date
+#: model:ir.model.fields,field_description:tyt_intranet_helpdesk.field_tyt_intranet_notification_matrix_line__create_date
+#: model:ir.model.fields,field_description:tyt_intranet_helpdesk.field_tyt_intranet_notification_matrix_line_message_type__create_date
+#: model:ir.model.fields,field_description:tyt_intranet_helpdesk.field_tyt_intranet_service_area__create_date
+msgid "Created on"
+msgstr "Creado en"
+
+#. module: tyt_intranet_helpdesk
+#: model:ir.model.fields,field_description:tyt_intranet_helpdesk.field_tyt_intranet_mailbox__create_date
+msgid "Created on"
+msgstr "Fecha de recepción"
+
+#. module: tyt_intranet_helpdesk
+#: model:ir.model.fields,help:tyt_intranet_helpdesk.field_tyt_intranet_mailbox__access_url
+msgid "Customer Portal URL"
+msgstr ""
+
+#. module: tyt_intranet_helpdesk
+#: model:ir.model.fields,field_description:tyt_intranet_helpdesk.field_tyt_intranet_mailbox__deadline_date
+msgid "Deadline Date"
+msgstr "Fecha límite de resolución"
+
+#. module: tyt_intranet_helpdesk
+#: model:ir.model.fields,field_description:tyt_intranet_helpdesk.field_tyt_intranet_mailbox__display_name
+#: model:ir.model.fields,field_description:tyt_intranet_helpdesk.field_tyt_intranet_message_type__display_name
+#: model:ir.model.fields,field_description:tyt_intranet_helpdesk.field_tyt_intranet_notification_matrix__display_name
+#: model:ir.model.fields,field_description:tyt_intranet_helpdesk.field_tyt_intranet_notification_matrix_line__display_name
+#: model:ir.model.fields,field_description:tyt_intranet_helpdesk.field_tyt_intranet_notification_matrix_line_message_type__display_name
+#: model:ir.model.fields,field_description:tyt_intranet_helpdesk.field_tyt_intranet_service_area__display_name
+msgid "Display Name"
+msgstr ""
+
+#. module: tyt_intranet_helpdesk
+#: model:ir.model.fields,field_description:tyt_intranet_helpdesk.field_tyt_intranet_mailbox__employee_number
+msgid "Employee Number"
+msgstr "Número de empleado"
+
+#. module: tyt_intranet_helpdesk
+#: model_terms:ir.ui.view,arch_db:tyt_intranet_helpdesk.mailbox_form
+msgid ""
+"En TYT tu opinión es importante para nosotros. Todas las sugerencias y quejas se tratan de\n"
+"                                    manera confidencial para mejorar continuamente nuestro entorno de trabajo. ¡Exprésate con total libertad!"
+msgstr ""
+
+#. module: tyt_intranet_helpdesk
+#: model_terms:ir.ui.view,arch_db:tyt_intranet_helpdesk.mailbox_form
+msgid "Enviar"
+msgstr ""
+
+#. module: tyt_intranet_helpdesk
+#: model_terms:ir.ui.view,arch_db:tyt_intranet_helpdesk.mailbox_form
+msgid "Envío anónimo"
+msgstr ""
+
+#. module: tyt_intranet_helpdesk
+#: model:ir.model.fields.selection,name:tyt_intranet_helpdesk.selection__tyt_intranet_mailbox__state__escalated
+#: model_terms:ir.ui.view,arch_db:tyt_intranet_helpdesk.tyt_intranet_mailbox_view_form
+msgid "Escalated"
+msgstr "Escalada"
+
+#. module: tyt_intranet_helpdesk
+#: model:ir.model.fields,field_description:tyt_intranet_helpdesk.field_tyt_intranet_mailbox__message_follower_ids
+#: model:ir.model.fields,field_description:tyt_intranet_helpdesk.field_tyt_intranet_notification_matrix__message_follower_ids
+msgid "Followers"
+msgstr ""
+
+#. module: tyt_intranet_helpdesk
+#: model:ir.model.fields,field_description:tyt_intranet_helpdesk.field_tyt_intranet_mailbox__message_partner_ids
+#: model:ir.model.fields,field_description:tyt_intranet_helpdesk.field_tyt_intranet_notification_matrix__message_partner_ids
+msgid "Followers (Partners)"
+msgstr ""
+
+#. module: tyt_intranet_helpdesk
+#: model:ir.model.fields,help:tyt_intranet_helpdesk.field_tyt_intranet_mailbox__activity_type_icon
+#: model:ir.model.fields,help:tyt_intranet_helpdesk.field_tyt_intranet_notification_matrix__activity_type_icon
+msgid "Font awesome icon e.g. fa-tasks"
+msgstr ""
+
+#. module: tyt_intranet_helpdesk
+#: model:ir.model.fields,field_description:tyt_intranet_helpdesk.field_tyt_intranet_mailbox__has_message
+#: model:ir.model.fields,field_description:tyt_intranet_helpdesk.field_tyt_intranet_notification_matrix__has_message
+msgid "Has Message"
+msgstr ""
+
+#. module: tyt_intranet_helpdesk
+#: model:ir.model.fields.selection,name:tyt_intranet_helpdesk.selection__tyt_intranet_mailbox__priority__2
+msgid "High"
+msgstr "Alta"
+
+#. module: tyt_intranet_helpdesk
+#: model:ir.model.fields,field_description:tyt_intranet_helpdesk.field_tyt_intranet_mailbox__id
+#: model:ir.model.fields,field_description:tyt_intranet_helpdesk.field_tyt_intranet_message_type__id
+#: model:ir.model.fields,field_description:tyt_intranet_helpdesk.field_tyt_intranet_notification_matrix__id
+#: model:ir.model.fields,field_description:tyt_intranet_helpdesk.field_tyt_intranet_notification_matrix_line__id
+#: model:ir.model.fields,field_description:tyt_intranet_helpdesk.field_tyt_intranet_notification_matrix_line_message_type__id
+#: model:ir.model.fields,field_description:tyt_intranet_helpdesk.field_tyt_intranet_service_area__id
+msgid "ID"
+msgstr ""
+
+#. module: tyt_intranet_helpdesk
+#: model:ir.model.fields,field_description:tyt_intranet_helpdesk.field_tyt_intranet_mailbox__activity_exception_icon
+#: model:ir.model.fields,field_description:tyt_intranet_helpdesk.field_tyt_intranet_notification_matrix__activity_exception_icon
+msgid "Icon"
+msgstr ""
+
+#. module: tyt_intranet_helpdesk
+#: model:ir.model.fields,help:tyt_intranet_helpdesk.field_tyt_intranet_mailbox__activity_exception_icon
+#: model:ir.model.fields,help:tyt_intranet_helpdesk.field_tyt_intranet_notification_matrix__activity_exception_icon
+msgid "Icon to indicate an exception activity."
+msgstr ""
+
+#. module: tyt_intranet_helpdesk
+#: model:ir.model.fields,help:tyt_intranet_helpdesk.field_tyt_intranet_mailbox__message_needaction
+#: model:ir.model.fields,help:tyt_intranet_helpdesk.field_tyt_intranet_notification_matrix__message_needaction
+msgid "If checked, new messages require your attention."
+msgstr ""
+
+#. module: tyt_intranet_helpdesk
+#: model:ir.model.fields,help:tyt_intranet_helpdesk.field_tyt_intranet_mailbox__message_has_error
+#: model:ir.model.fields,help:tyt_intranet_helpdesk.field_tyt_intranet_mailbox__message_has_sms_error
+#: model:ir.model.fields,help:tyt_intranet_helpdesk.field_tyt_intranet_notification_matrix__message_has_error
+#: model:ir.model.fields,help:tyt_intranet_helpdesk.field_tyt_intranet_notification_matrix__message_has_sms_error
+msgid "If checked, some messages have a delivery error."
+msgstr ""
+
+#. module: tyt_intranet_helpdesk
+#: model:ir.model.fields.selection,name:tyt_intranet_helpdesk.selection__tyt_intranet_mailbox__state__in_progress
+#: model_terms:ir.ui.view,arch_db:tyt_intranet_helpdesk.tyt_intranet_mailbox_view_form
+msgid "In Progress"
+msgstr "En Proceso"
+
+#. module: tyt_intranet_helpdesk
+#: model_terms:ir.ui.view,arch_db:tyt_intranet_helpdesk.mailbox_form
+msgid "Ingrese su comentario"
+msgstr ""
+
+#. module: tyt_intranet_helpdesk
+#: model_terms:ir.ui.view,arch_db:tyt_intranet_helpdesk.tyt_intranet_mailbox_view_form
+msgid "Internal Classification"
+msgstr "Clasificación interna"
+
+#. module: tyt_intranet_helpdesk
+#: model:ir.model.fields,field_description:tyt_intranet_helpdesk.field_tyt_intranet_mailbox__is_anonymous
+msgid "Is Anonymous"
+msgstr "Envío anónimo"
+
+#. module: tyt_intranet_helpdesk
+#: model:ir.model.fields,field_description:tyt_intranet_helpdesk.field_tyt_intranet_mailbox__message_is_follower
+#: model:ir.model.fields,field_description:tyt_intranet_helpdesk.field_tyt_intranet_notification_matrix__message_is_follower
+msgid "Is Follower"
+msgstr ""
+
+#. module: tyt_intranet_helpdesk
+#: model:ir.model.fields,field_description:tyt_intranet_helpdesk.field_tyt_intranet_mailbox____last_update
+#: model:ir.model.fields,field_description:tyt_intranet_helpdesk.field_tyt_intranet_message_type____last_update
+#: model:ir.model.fields,field_description:tyt_intranet_helpdesk.field_tyt_intranet_notification_matrix____last_update
+#: model:ir.model.fields,field_description:tyt_intranet_helpdesk.field_tyt_intranet_notification_matrix_line____last_update
+#: model:ir.model.fields,field_description:tyt_intranet_helpdesk.field_tyt_intranet_notification_matrix_line_message_type____last_update
+#: model:ir.model.fields,field_description:tyt_intranet_helpdesk.field_tyt_intranet_service_area____last_update
+msgid "Last Modified on"
+msgstr ""
+
+#. module: tyt_intranet_helpdesk
+#: model:ir.model.fields,field_description:tyt_intranet_helpdesk.field_tyt_intranet_mailbox__write_uid
+#: model:ir.model.fields,field_description:tyt_intranet_helpdesk.field_tyt_intranet_message_type__write_uid
+#: model:ir.model.fields,field_description:tyt_intranet_helpdesk.field_tyt_intranet_notification_matrix__write_uid
+#: model:ir.model.fields,field_description:tyt_intranet_helpdesk.field_tyt_intranet_notification_matrix_line__write_uid
+#: model:ir.model.fields,field_description:tyt_intranet_helpdesk.field_tyt_intranet_notification_matrix_line_message_type__write_uid
+#: model:ir.model.fields,field_description:tyt_intranet_helpdesk.field_tyt_intranet_service_area__write_uid
+msgid "Last Updated by"
+msgstr ""
+
+#. module: tyt_intranet_helpdesk
+#: model:ir.model.fields,field_description:tyt_intranet_helpdesk.field_tyt_intranet_mailbox__write_date
+#: model:ir.model.fields,field_description:tyt_intranet_helpdesk.field_tyt_intranet_message_type__write_date
+#: model:ir.model.fields,field_description:tyt_intranet_helpdesk.field_tyt_intranet_notification_matrix__write_date
+#: model:ir.model.fields,field_description:tyt_intranet_helpdesk.field_tyt_intranet_notification_matrix_line__write_date
+#: model:ir.model.fields,field_description:tyt_intranet_helpdesk.field_tyt_intranet_notification_matrix_line_message_type__write_date
+#: model:ir.model.fields,field_description:tyt_intranet_helpdesk.field_tyt_intranet_service_area__write_date
+msgid "Last Updated on"
+msgstr ""
+
+#. module: tyt_intranet_helpdesk
+#: model:ir.model.fields.selection,name:tyt_intranet_helpdesk.selection__tyt_intranet_mailbox__priority__0
+msgid "Low"
+msgstr "Baja"
+
+#. module: tyt_intranet_helpdesk
+#: model:ir.actions.act_window,name:tyt_intranet_helpdesk.tyt_intranet_mailbox_action
+#: model:ir.model,name:tyt_intranet_helpdesk.model_tyt_intranet_mailbox
+#: model:ir.ui.menu,name:tyt_intranet_helpdesk.tyt_intranet_mailbox_configuration_menu
+#: model:ir.ui.menu,name:tyt_intranet_helpdesk.tyt_intranet_mailbox_menu_action
+#: model_terms:ir.ui.view,arch_db:tyt_intranet_helpdesk.mailbox_followup
+#: model_terms:ir.ui.view,arch_db:tyt_intranet_helpdesk.portal_my_home_mailbox
+#: model_terms:ir.ui.view,arch_db:tyt_intranet_helpdesk.portal_my_home_menu_mailbox
+msgid "Mailbox"
+msgstr "Buzón"
+
+#. module: tyt_intranet_helpdesk
+#: model_terms:ir.ui.view,arch_db:tyt_intranet_helpdesk.portal_my_mailbox
+msgid "Mailbox Date"
+msgstr "Reportado el"
+
+#. module: tyt_intranet_helpdesk
+#: model_terms:ir.ui.view,arch_db:tyt_intranet_helpdesk.portal_my_mailbox
+msgid "Mailbox Message Type"
+msgstr "Tipo de mensaje"
+
+#. module: tyt_intranet_helpdesk
+#: model:mail.template,subject:tyt_intranet_helpdesk.mail_template_tyt_intranet_mailbox
+msgid "Mailbox Notification"
+msgstr "Notificación de buzón"
+
+#. module: tyt_intranet_helpdesk
+#: model_terms:ir.ui.view,arch_db:tyt_intranet_helpdesk.portal_my_mailbox
+msgid "Mailbox Service Area"
+msgstr "Área de servicio"
+
+#. module: tyt_intranet_helpdesk
+#: model_terms:ir.ui.view,arch_db:tyt_intranet_helpdesk.portal_my_mailbox
+msgid "Mailbox Site"
+msgstr "Sitio"
+
+#. module: tyt_intranet_helpdesk
+#: model:mail.template,name:tyt_intranet_helpdesk.mail_template_tyt_intranet_mailbox
+msgid "Mailbox: Notification"
+msgstr "Notificación de buzón"
+
+#. module: tyt_intranet_helpdesk
+#: model:ir.model.fields,field_description:tyt_intranet_helpdesk.field_tyt_intranet_mailbox__message_main_attachment_id
+#: model:ir.model.fields,field_description:tyt_intranet_helpdesk.field_tyt_intranet_notification_matrix__message_main_attachment_id
+msgid "Main Attachment"
+msgstr ""
+
+#. module: tyt_intranet_helpdesk
+#: model:ir.model.fields,field_description:tyt_intranet_helpdesk.field_tyt_intranet_mailbox__matrix_id
+msgid "Matrix"
+msgstr ""
+
+#. module: tyt_intranet_helpdesk
+#: model:ir.model.fields.selection,name:tyt_intranet_helpdesk.selection__tyt_intranet_mailbox__priority__1
+msgid "Medium"
+msgstr "Media"
+
+#. module: tyt_intranet_helpdesk
+#: model:ir.model.fields,field_description:tyt_intranet_helpdesk.field_tyt_intranet_mailbox__message_has_error
+#: model:ir.model.fields,field_description:tyt_intranet_helpdesk.field_tyt_intranet_notification_matrix__message_has_error
+msgid "Message Delivery error"
+msgstr ""
+
+#. module: tyt_intranet_helpdesk
+#: model:ir.model,name:tyt_intranet_helpdesk.model_tyt_intranet_message_type
+#: model:ir.model.fields,field_description:tyt_intranet_helpdesk.field_tyt_intranet_mailbox__message_type_id
+#: model:ir.model.fields,field_description:tyt_intranet_helpdesk.field_tyt_intranet_notification_matrix_line_message_type__message_type_id
+msgid "Message Type"
+msgstr "Tipo de mensaje"
+
+#. module: tyt_intranet_helpdesk
+#: model:ir.actions.act_window,name:tyt_intranet_helpdesk.tyt_intranet_message_type_action
+#: model:ir.ui.menu,name:tyt_intranet_helpdesk.tyt_intranet_message_type_menu_action
+msgid "Message Types"
+msgstr "Tipos de mensaje"
+
+#. module: tyt_intranet_helpdesk
+#: model:ir.model.constraint,message:tyt_intranet_helpdesk.constraint_tyt_intranet_message_type_name_uniq
+msgid "Message type name must be unique!"
+msgstr "¡El nombre del tipo de mensaje debe ser único!"
+
+#. module: tyt_intranet_helpdesk
+#: model:ir.model.fields,field_description:tyt_intranet_helpdesk.field_tyt_intranet_mailbox__message_ids
+#: model:ir.model.fields,field_description:tyt_intranet_helpdesk.field_tyt_intranet_notification_matrix__message_ids
+msgid "Messages"
+msgstr ""
+
+#. module: tyt_intranet_helpdesk
+#: model:ir.model.fields,field_description:tyt_intranet_helpdesk.field_tyt_intranet_mailbox__my_activity_date_deadline
+#: model:ir.model.fields,field_description:tyt_intranet_helpdesk.field_tyt_intranet_notification_matrix__my_activity_date_deadline
+msgid "My Activity Deadline"
+msgstr ""
+
+#. module: tyt_intranet_helpdesk
+#: model:ir.model.fields,field_description:tyt_intranet_helpdesk.field_tyt_intranet_mailbox__name
+#: model:ir.model.fields,field_description:tyt_intranet_helpdesk.field_tyt_intranet_message_type__name
+#: model:ir.model.fields,field_description:tyt_intranet_helpdesk.field_tyt_intranet_notification_matrix__name
+#: model:ir.model.fields,field_description:tyt_intranet_helpdesk.field_tyt_intranet_service_area__name
+msgid "Name"
+msgstr "Nombre"
+
+#. module: tyt_intranet_helpdesk
+#: model:ir.model.fields,field_description:tyt_intranet_helpdesk.field_tyt_intranet_mailbox__activity_calendar_event_id
+#: model:ir.model.fields,field_description:tyt_intranet_helpdesk.field_tyt_intranet_notification_matrix__activity_calendar_event_id
+msgid "Next Activity Calendar Event"
+msgstr ""
+
+#. module: tyt_intranet_helpdesk
+#: model:ir.model.fields,field_description:tyt_intranet_helpdesk.field_tyt_intranet_mailbox__activity_date_deadline
+#: model:ir.model.fields,field_description:tyt_intranet_helpdesk.field_tyt_intranet_notification_matrix__activity_date_deadline
+msgid "Next Activity Deadline"
+msgstr ""
+
+#. module: tyt_intranet_helpdesk
+#: model:ir.model.fields,field_description:tyt_intranet_helpdesk.field_tyt_intranet_mailbox__activity_summary
+#: model:ir.model.fields,field_description:tyt_intranet_helpdesk.field_tyt_intranet_notification_matrix__activity_summary
+msgid "Next Activity Summary"
+msgstr ""
+
+#. module: tyt_intranet_helpdesk
+#: model:ir.model.fields,field_description:tyt_intranet_helpdesk.field_tyt_intranet_mailbox__activity_type_id
+#: model:ir.model.fields,field_description:tyt_intranet_helpdesk.field_tyt_intranet_notification_matrix__activity_type_id
+msgid "Next Activity Type"
+msgstr ""
+
+#. module: tyt_intranet_helpdesk
+#: model_terms:ir.ui.view,arch_db:tyt_intranet_helpdesk.mailbox_form
+msgid "Nombre"
+msgstr ""
+
+#. module: tyt_intranet_helpdesk
+#: model:ir.actions.act_window,name:tyt_intranet_helpdesk.tyt_intranet_notification_matrix_action
+#: model:ir.ui.menu,name:tyt_intranet_helpdesk.tyt_intranet_notification_matrix_menu_action
+msgid "Notification Matrices"
+msgstr "Matrices de notificación"
+
+#. module: tyt_intranet_helpdesk
+#: model:ir.model,name:tyt_intranet_helpdesk.model_tyt_intranet_notification_matrix
+#: model:ir.model.fields,field_description:tyt_intranet_helpdesk.field_tyt_intranet_notification_matrix_line__notification_matrix_id
+msgid "Notification Matrix"
+msgstr "Matriz de notificación"
+
+#. module: tyt_intranet_helpdesk
+#: model:ir.model,name:tyt_intranet_helpdesk.model_tyt_intranet_notification_matrix_line
+#: model:ir.model.fields,field_description:tyt_intranet_helpdesk.field_tyt_intranet_notification_matrix_line_message_type__notification_matrix_line_id
+msgid "Notification Matrix Line"
+msgstr "Líneas de matriz"
+
+#. module: tyt_intranet_helpdesk
+#: model:ir.model,name:tyt_intranet_helpdesk.model_tyt_intranet_notification_matrix_line_message_type
+msgid "Notification Matrix Line Message Type"
+msgstr "Líneas de tipo de mensaje"
+
+#. module: tyt_intranet_helpdesk
+#: model:ir.model.fields,field_description:tyt_intranet_helpdesk.field_tyt_intranet_notification_matrix_line__matrix_line_message_type_ids
+#: model_terms:ir.ui.view,arch_db:tyt_intranet_helpdesk.tyt_intranet_notification_matrix_line_view_form
+msgid "Notification Matrix Line Message Types"
+msgstr "Detalle"
+
+#. module: tyt_intranet_helpdesk
+#: model:ir.actions.act_window,name:tyt_intranet_helpdesk.tyt_intranet_notification_line_matrix_action
+#: model:ir.model.fields,field_description:tyt_intranet_helpdesk.field_tyt_intranet_notification_matrix__matrix_line_ids
+#: model_terms:ir.ui.view,arch_db:tyt_intranet_helpdesk.tyt_intranet_notification_matrix_view_form
+msgid "Notification Matrix Lines"
+msgstr "Líneas de matriz"
+
+#. module: tyt_intranet_helpdesk
+#: model:ir.model.fields,field_description:tyt_intranet_helpdesk.field_tyt_intranet_mailbox__message_needaction_counter
+#: model:ir.model.fields,field_description:tyt_intranet_helpdesk.field_tyt_intranet_notification_matrix__message_needaction_counter
+msgid "Number of Actions"
+msgstr ""
+
+#. module: tyt_intranet_helpdesk
+#: model:ir.model.fields,field_description:tyt_intranet_helpdesk.field_tyt_intranet_mailbox__message_has_error_counter
+#: model:ir.model.fields,field_description:tyt_intranet_helpdesk.field_tyt_intranet_notification_matrix__message_has_error_counter
+msgid "Number of errors"
+msgstr ""
+
+#. module: tyt_intranet_helpdesk
+#: model:ir.model.fields,help:tyt_intranet_helpdesk.field_tyt_intranet_mailbox__message_needaction_counter
+#: model:ir.model.fields,help:tyt_intranet_helpdesk.field_tyt_intranet_notification_matrix__message_needaction_counter
+msgid "Number of messages requiring action"
+msgstr ""
+
+#. module: tyt_intranet_helpdesk
+#: model:ir.model.fields,help:tyt_intranet_helpdesk.field_tyt_intranet_mailbox__message_has_error_counter
+#: model:ir.model.fields,help:tyt_intranet_helpdesk.field_tyt_intranet_notification_matrix__message_has_error_counter
+msgid "Number of messages with delivery error"
+msgstr ""
+
+#. module: tyt_intranet_helpdesk
+#: model_terms:ir.ui.view,arch_db:tyt_intranet_helpdesk.portal_my_mailbox
+msgid "Número"
+msgstr ""
+
+#. module: tyt_intranet_helpdesk
+#: model:ir.model.fields,field_description:tyt_intranet_helpdesk.field_tyt_intranet_mailbox__partner_id
+msgid "Partner"
+msgstr "Contacto"
+
+#. module: tyt_intranet_helpdesk
+#: model:ir.model.fields,field_description:tyt_intranet_helpdesk.field_tyt_intranet_mailbox__partner_email
+msgid "Partner Email"
+msgstr "Correo electrónico"
+
+#. module: tyt_intranet_helpdesk
+#: model:ir.model.fields,help:tyt_intranet_helpdesk.field_tyt_intranet_mailbox__partner_id
+msgid "Partner-related data of the user"
+msgstr ""
+
+#. module: tyt_intranet_helpdesk
+#: model:ir.model.fields,field_description:tyt_intranet_helpdesk.field_tyt_intranet_mailbox__access_url
+msgid "Portal Access URL"
+msgstr ""
+
+#. module: tyt_intranet_helpdesk
+#: model:ir.model.fields,field_description:tyt_intranet_helpdesk.field_tyt_intranet_mailbox__priority
+msgid "Priority"
+msgstr "Nivel de prioridad"
+
+#. module: tyt_intranet_helpdesk
+#: model_terms:ir.ui.view,arch_db:tyt_intranet_helpdesk.mailbox_form
+msgid "Quejas / Sugerencias / Felicitaciones"
+msgstr ""
+
+#. module: tyt_intranet_helpdesk
+#: model:ir.model.fields,field_description:tyt_intranet_helpdesk.field_tyt_intranet_mailbox__receive_response
+msgid "Receive Response"
+msgstr "Recibir respuesta"
+
+#. module: tyt_intranet_helpdesk
+#: model:ir.model.fields.selection,name:tyt_intranet_helpdesk.selection__tyt_intranet_mailbox__state__received
+msgid "Received"
+msgstr "Recibida"
+
+#. module: tyt_intranet_helpdesk
+#: model:ir.model.fields.selection,name:tyt_intranet_helpdesk.selection__tyt_intranet_mailbox__state__resolved
+#: model_terms:ir.ui.view,arch_db:tyt_intranet_helpdesk.tyt_intranet_mailbox_view_form
+msgid "Resolved"
+msgstr "Resuelta"
+
+#. module: tyt_intranet_helpdesk
+#: model:ir.model.fields,field_description:tyt_intranet_helpdesk.field_tyt_intranet_mailbox__response
+msgid "Response"
+msgstr "Respuesta final"
+
+#. module: tyt_intranet_helpdesk
+#: model:ir.model.fields,field_description:tyt_intranet_helpdesk.field_tyt_intranet_mailbox__response_message
+#: model_terms:ir.ui.view,arch_db:tyt_intranet_helpdesk.tyt_intranet_mailbox_view_form
+msgid "Response Message"
+msgstr "Respuesta del responsable de seguimiento"
+
+#. module: tyt_intranet_helpdesk
+#: model_terms:ir.ui.view,arch_db:tyt_intranet_helpdesk.tyt_intranet_mailbox_view_form
+msgid "Response to sender"
+msgstr "Respuesta al remitente"
+
+#. module: tyt_intranet_helpdesk
+#: model:ir.model.fields,field_description:tyt_intranet_helpdesk.field_tyt_intranet_notification_matrix_line__responsible_id
+msgid "Responsible"
+msgstr "Responsable"
+
+#. module: tyt_intranet_helpdesk
+#: model:ir.model.fields,field_description:tyt_intranet_helpdesk.field_tyt_intranet_mailbox__responsible_id
+msgid "Responsible"
+msgstr "Responsable asignado"
+
+#. module: tyt_intranet_helpdesk
+#: model:ir.model.fields,field_description:tyt_intranet_helpdesk.field_tyt_intranet_mailbox__activity_user_id
+#: model:ir.model.fields,field_description:tyt_intranet_helpdesk.field_tyt_intranet_notification_matrix__activity_user_id
+msgid "Responsible User"
+msgstr ""
+
+#. module: tyt_intranet_helpdesk
+#: model:ir.model.fields,field_description:tyt_intranet_helpdesk.field_tyt_intranet_mailbox__responsible_ids
+#: model_terms:ir.ui.view,arch_db:tyt_intranet_helpdesk.tyt_intranet_mailbox_view_form
+msgid "Responsibles"
+msgstr "Responsables"
+
+#. module: tyt_intranet_helpdesk
+#: model:ir.model.fields,field_description:tyt_intranet_helpdesk.field_tyt_intranet_mailbox__message_has_sms_error
+#: model:ir.model.fields,field_description:tyt_intranet_helpdesk.field_tyt_intranet_notification_matrix__message_has_sms_error
+msgid "SMS Delivery error"
+msgstr ""
+
+#. module: tyt_intranet_helpdesk
+#: model:ir.model.fields,field_description:tyt_intranet_helpdesk.field_tyt_intranet_mailbox__access_token
+msgid "Security Token"
+msgstr ""
+
+#. module: tyt_intranet_helpdesk
+#: model_terms:ir.ui.view,arch_db:tyt_intranet_helpdesk.tyt_intranet_mailbox_view_form
+msgid "Send Email"
+msgstr "Envíar correo electrónico"
+
+#. module: tyt_intranet_helpdesk
+#: model:ir.model,name:tyt_intranet_helpdesk.model_tyt_intranet_service_area
+#: model:ir.model.fields,field_description:tyt_intranet_helpdesk.field_tyt_intranet_mailbox__service_area_id
+#: model:ir.model.fields,field_description:tyt_intranet_helpdesk.field_tyt_intranet_notification_matrix_line__service_area_id
+msgid "Service Area"
+msgstr "Área de servicio"
+
+#. module: tyt_intranet_helpdesk
+#: model:ir.actions.act_window,name:tyt_intranet_helpdesk.tyt_intranet_service_area_action
+#: model:ir.ui.menu,name:tyt_intranet_helpdesk.tyt_intranet_service_area_menu_action
+msgid "Service Areas"
+msgstr "Áreas de servicio"
+
+#. module: tyt_intranet_helpdesk
+#: model:ir.model.constraint,message:tyt_intranet_helpdesk.constraint_tyt_intranet_service_area_name_uniq
+msgid "Service area name must be unique!"
+msgstr "¡El nombre de área de servicio debe ser único!"
+
+#. module: tyt_intranet_helpdesk
+#: model:ir.model.fields,field_description:tyt_intranet_helpdesk.field_tyt_intranet_mailbox__site_id
+#: model:ir.model.fields,field_description:tyt_intranet_helpdesk.field_tyt_intranet_notification_matrix__site_id
+msgid "Site"
+msgstr "Sitio"
+
+#. module: tyt_intranet_helpdesk
+#: model_terms:ir.ui.view,arch_db:tyt_intranet_helpdesk.mailbox_form
+msgid "Sitio"
+msgstr ""
+
+#. module: tyt_intranet_helpdesk
+#: model:ir.model.fields,field_description:tyt_intranet_helpdesk.field_tyt_intranet_mailbox__state
+msgid "State"
+msgstr "Estado"
+
+#. module: tyt_intranet_helpdesk
+#: model:ir.model.fields,help:tyt_intranet_helpdesk.field_tyt_intranet_mailbox__activity_state
+#: model:ir.model.fields,help:tyt_intranet_helpdesk.field_tyt_intranet_notification_matrix__activity_state
+msgid ""
+"Status based on activities\n"
+"Overdue: Due date is already passed\n"
+"Today: Activity date is today\n"
+"Planned: Future activities."
+msgstr ""
+
+#. module: tyt_intranet_helpdesk
+#: model_terms:ir.ui.view,arch_db:tyt_intranet_helpdesk.mailbox_form_send
+msgid "Su formulario ha sido enviado con éxito."
+msgstr ""
+
+#. module: tyt_intranet_helpdesk
+#: model:ir.model.fields,field_description:tyt_intranet_helpdesk.field_tyt_intranet_mailbox__survey_id
+msgid "Survey"
+msgstr "Encuesta de satisfacción"
+
+#. module: tyt_intranet_helpdesk
+#: model_terms:ir.ui.view,arch_db:tyt_intranet_helpdesk.mailbox_form
+msgid "Tipo de mensaje"
+msgstr ""
+
+#. module: tyt_intranet_helpdesk
+#: model:ir.model.fields,help:tyt_intranet_helpdesk.field_tyt_intranet_mailbox__activity_exception_decoration
+#: model:ir.model.fields,help:tyt_intranet_helpdesk.field_tyt_intranet_notification_matrix__activity_exception_decoration
+msgid "Type of the exception activity on record."
+msgstr ""
+
+#. module: tyt_intranet_helpdesk
+#: model:ir.model.fields.selection,name:tyt_intranet_helpdesk.selection__tyt_intranet_mailbox__priority__3
+msgid "Urgent"
+msgstr "Urgente"
+
+#. module: tyt_intranet_helpdesk
+#: model:ir.model.fields,field_description:tyt_intranet_helpdesk.field_tyt_intranet_mailbox__user_id
+msgid "User"
+msgstr "Usuario"
+
+#. module: tyt_intranet_helpdesk
+#: model:ir.model.fields,field_description:tyt_intranet_helpdesk.field_tyt_intranet_notification_matrix_line_message_type__user_ids
+msgid "Users"
+msgstr "Usuarios"
+
+#. module: tyt_intranet_helpdesk
+#: model:ir.model.fields,field_description:tyt_intranet_helpdesk.field_tyt_intranet_mailbox__website_message_ids
+#: model:ir.model.fields,field_description:tyt_intranet_helpdesk.field_tyt_intranet_notification_matrix__website_message_ids
+msgid "Website Messages"
+msgstr ""
+
+#. module: tyt_intranet_helpdesk
+#: model:ir.model.fields,help:tyt_intranet_helpdesk.field_tyt_intranet_mailbox__website_message_ids
+#: model:ir.model.fields,help:tyt_intranet_helpdesk.field_tyt_intranet_notification_matrix__website_message_ids
+msgid "Website communication history"
+msgstr ""
+
+#. module: tyt_intranet_helpdesk
+#: model_terms:ir.ui.view,arch_db:tyt_intranet_helpdesk.mailbox_form_send
+msgid "¡Gracias!"
+msgstr ""
+
+#. module: tyt_intranet_helpdesk
+#: model_terms:ir.ui.view,arch_db:tyt_intranet_helpdesk.mailbox_form
+msgid "¿Desea recibir una respuesta?"
+msgstr ""
+
+#. module: tyt_intranet_helpdesk
+#: model_terms:ir.ui.view,arch_db:tyt_intranet_helpdesk.mailbox_form
+msgid "Área de servicio"
+msgstr ""

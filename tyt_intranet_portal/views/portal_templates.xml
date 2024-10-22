@@ -103,17 +103,17 @@
                 </div>
             </div>
             <div class="o_portal_my_details">
-                <div t-if="user_id.x_studio_empleado.name">
+                <div t-if="user_id.x_studio_empleado.sudo().name">
                     <i class="fa fa-user fa-fw" title="Nombre de empleado"/>
-                    <span class="m-1" t-field="user_id.x_studio_empleado.name"/>
+                    <span class="m-1" t-field="user_id.x_studio_empleado.sudo().name"/>
                 </div>
                 <div t-if="user_id.x_studio_numero">
                     <i class="fa fa-hashtag fa-fw" title="Número de empleado"/>
                     <span class="m-1" t-field="user_id.x_studio_numero"/>
                 </div>
-                <div t-if="user_id.x_studio_empleado.department_id.name">
+                <div t-if="user_id.x_studio_empleado.sudo().department_id.name">
                     <i class="fa fa-sitemap fa-fw" title="Área"/>
-                    <span class="m-1" t-field="user_id.x_studio_empleado.department_id.name"/>
+                    <span class="m-1" t-field="user_id.x_studio_empleado.sudo().department_id.name"/>
                 </div>
                 <div t-field="user_id.partner_id" t-options='{"widget": "contact", "fields": ["email", "phone", "address"]}'/>
             </div>

@@ -1,10 +1,14 @@
 # -*- coding: utf-8 -*-
 
-from odoo import api, models, fields, tools
+from odoo import api, models, fields
+from odoo.http import request
 import uuid
 from io import BytesIO
 import base64
 from datetime import datetime
+
+import logging
+_logger = logging.getLogger(__name__)
 
 class Requisition(models.Model):
     _name = 'tyt_recruitment.requisition'
@@ -12,24 +16,69 @@ class Requisition(models.Model):
     _rec_name = 'request_date'
     _inherit = ['mail.thread', 'mail.activity.mixin', 'iso_base.email_basic']
 
-    request_date = fields.Datetime(required=True, string="Fecha de solicitud", tracking=True)
-    closing_date = fields.Datetime(required=True, string="Fecha de cierre", tracking=True)
-    week = fields.Char(string="Semana", default="0", tracking=True)
+    request_date = fields.Date(required=True, string="Fecha de solicitud", tracking=True)
+    closing_date = fields.Date(required=True, string="Fecha de cierre", tracking=True)
     state = fields.Selection([('draft', "En creación"),('sent', "Enviado"),], string="Estado", required=True, tracking=True, default='draft')
 
+    site_id = fields.Many2one("x_sitio", string='Sitio', tracking=True, store=True)
+    periodo_id = fields.Many2one("x_periodo", string='Semana', tracking=True)
     campaign_ids = fields.One2many("tyt_recruitment.campaign", "requisition_id", string="Campaña", tracking=True)
     employee_ids = fields.Many2many('hr.employee', string="Empleados relacionados")
 
     access_token = fields.Char(string="Access Token", default=lambda self: str(uuid.uuid4()), readonly=True, copy=False)
 
-    @api.onchange('request_date')
-    def _onchange_request_date(self):
-        if self.request_date:
-            date_obj = self.request_date.date()
-            week_num = date_obj.isocalendar()[1]
-            self.week = str(week_num)
-        else:
-            self.week = "0"
+    @api.model
+    def default_get(self, fields_list):
+        vals = super(Requisition, self).default_get(fields_list)
+        
+        current_user = self.env.user
+
+        if current_user.x_studio_sitio:
+            vals['site_id'] = current_user.x_studio_sitio.id
+        
+        current_date = datetime.now().date()
+        
+        current_period = request.env['x_periodo'].sudo().search([
+            ('x_studio_f1', '<=', current_date),
+            ('x_studio_f2', '>=', current_date),
+            ('x_studio_tipo_periodo', '>=', 'Semana')
+        ], limit=1)
+
+        _logger.info('periodo_id')
+        _logger.info(current_period.id)
+        _logger.info('Current x_studio_f1')
+        _logger.info(current_period.x_studio_f1)
+        _logger.info('Current x_studio_f1')
+        _logger.info(current_period.x_studio_f2)
+
+        if current_period:
+            vals['periodo_id'] = current_period.id
+            vals['request_date'] = current_period.x_studio_f1
+            vals['closing_date'] = current_period.x_studio_f2
+
+        return vals
+
+    @api.model
+    def create(self, vals):
+        current_user = self.env.user
+
+        if current_user.x_studio_sitio:
+            vals['site_id'] = current_user.x_studio_sitio.id
+        
+        current_date = datetime.now().date()
+        
+        current_period = request.env['x_periodo'].sudo().search([
+            ('x_studio_f1', '<=', current_date),
+            ('x_studio_f2', '>=', current_date),
+            ('x_studio_tipo_periodo', '>=', 'Semana')
+        ], limit=1)
+
+        if current_period:
+            vals['periodo_id'] = current_period.id
+            vals['request_date'] = current_period.x_studio_f1
+            vals['closing_date'] = current_period.x_studio_f2
+
+        return super(Requisition, self).create(vals)
 
     def get_emails(self):
         emails = []
@@ -125,6 +174,7 @@ class Requisition(models.Model):
 class Campaign(models.Model):
     _name = 'tyt_recruitment.campaign'
     _description = 'Campania'
+    # _rec_name = 'tag_id.name'
 
     current_staff = fields.Integer(required=True, string="Personal actual", tracking=True)
     goal_staff = fields.Integer(required=True, string="Personal objetivo", tracking=True)
@@ -135,10 +185,31 @@ class Campaign(models.Model):
 
     requisition_id = fields.Many2one("tyt_recruitment.requisition")
     tag_id = fields.Many2one('hr.department', string='Dept', options={'no_create': True}, required=True)
-    # tag_id = fields.Many2one("tyt_recruitment.tag", string="Campaña")
 
-class Tag(models.Model):
-    _name = 'tyt_recruitment.tag'
-    _description = 'Etiqueta'
+    def action_open_job_application(self):
+        return {
+            'type': 'ir.actions.act_url',
+            'url': '/job_application/'+str(self.requisition_id.id)+'/'+ str(self.requisition_id.site_id.id)+'/'+str(self.id),
+            'target': 'new', 
+        }
 
-    name = fields.Char(required=True, help="Rellene el campo", tracking=True)
+    def action_close_applicant_list(self):
+        return {'type': 'ir.actions.act_window_close'}
+    
+    def action_open_applicant_list(self):
+
+        tag_id = self.env.context.get('tag_id')
+        applicants = request.env['tyt_recruitment.applicant'].sudo().search([('campaign_id', '=', int(tag_id))])
+        _logger.info(len(applicants))
+
+        return {
+            'name': 'Lista de aplicantes',
+            'type': 'ir.actions.act_window',
+            'res_model': 'tyt_recruitment.applicant',
+            'view_mode': 'tree',
+            'target': 'new',
+            'domain': [('id', 'in', applicants.ids)],
+            'context': {
+                'default_message': 'Este es un mensaje personalizado para la lista de candidatos.'
+            }
+        }

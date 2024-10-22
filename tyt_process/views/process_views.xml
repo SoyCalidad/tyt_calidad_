@@ -30,7 +30,21 @@
                     <separator string="Referencias" />
                     <field name="referencess" />
                 </page>
-            </xpath> 
+            </xpath>
+            
+            <xpath expr="//sheet/div[@name='button_box']/button[@name='open_attachment_ids']" position="replace">     
+            </xpath>
+            
+            <xpath expr="//sheet/notebook/page[@name='attachment']" position="replace">
+                <page name="attachment" string="Archivos">
+                    <separator string="Archivos" />
+                    <field name="attachment_ids" widget="many2many_binary" context="{
+                        'default_res_model': 'mgmt.categ',
+                        'default_res_id': id
+                    }"/>
+                </page>
+            </xpath>            
+
         </field>
     </record>
 
