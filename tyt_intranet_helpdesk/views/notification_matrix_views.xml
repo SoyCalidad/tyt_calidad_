@@ -28,7 +28,7 @@
     </record>
 
     <record id="tyt_intranet_service_area_action" model="ir.actions.act_window">
-        <field name="name">Service Area</field>
+        <field name="name">Service Areas</field>
         <field name="res_model">tyt.intranet.service_area</field>
         <field name="view_mode">tree,form</field>
     </record>
@@ -61,7 +61,7 @@
     </record>
 
     <record id="tyt_intranet_message_type_action" model="ir.actions.act_window">
-        <field name="name">Message Type</field>
+        <field name="name">Message Types</field>
         <field name="res_model">tyt.intranet.message_type</field>
         <field name="view_mode">tree,form</field>
     </record>
@@ -107,7 +107,7 @@
     </record>
 
     <record id="tyt_intranet_notification_matrix_action" model="ir.actions.act_window">
-        <field name="name">Notification Matrix</field>
+        <field name="name">Notification Matrices</field>
         <field name="res_model">tyt.intranet.notification_matrix</field>
         <field name="view_mode">tree,form</field>
     </record>
@@ -151,7 +151,7 @@
     </record>
 
     <record id="tyt_intranet_notification_line_matrix_action" model="ir.actions.act_window">
-        <field name="name">Notification Matrix Line</field>
+        <field name="name">Notification Matrix Lines</field>
         <field name="res_model">tyt.intranet.notification_matrix.line</field>
         <field name="view_mode">tree,form</field>
     </record>

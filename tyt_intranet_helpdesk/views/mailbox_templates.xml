@@ -15,16 +15,8 @@
                             </div>
                             <form action="/mailbox_send" method="post" id="msform" enctype="multipart/form-data">
                                 <input type="hidden" name="csrf_token" t-att-value="request.csrf_token()"/>
-                                <div class="row">
-                                    <div class="col-md-5 mb-3 text-start">
-                                        <label for="name">Nombre</label>
-                                        <input type="text" id="name" class="form-control" name="name"/>
-                                    </div>
-                                    <div class="col-md-5 mb-3 text-start">
-                                        <label for="email">Correo</label>
-                                        <input type="email" id="email" class="form-control" name="email"/>
-                                    </div>
-                                    <div class="col-md-2 mb-3">
+                                <div class="row justify-content-between align-items-center mb-3">
+                                    <div class="col-md-12 text-right">
                                         <label>Envío anónimo</label>
                                         <input type="checkbox" id="is_anonymous" name="is_anonymous"/>
                                     </div>

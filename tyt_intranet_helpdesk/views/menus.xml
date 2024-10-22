@@ -24,7 +24,7 @@
               sequence="20"/>
 
     <menuitem id="tyt_intranet_notification_matrix_menu_action"
-              name="Notification Matrix"
+              name="Notification Matrices"
               parent="tyt_intranet_mailbox_configuration_menu"
               action="tyt_intranet_notification_matrix_action"
               sequence="30"/>

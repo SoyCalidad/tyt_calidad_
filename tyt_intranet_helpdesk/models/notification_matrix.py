@@ -31,7 +31,8 @@ class NotificationMatrixLineMessageType(models.Model):
 
     notification_matrix_line_id = fields.Many2one('tyt.intranet.notification_matrix.line', string='Notification Matrix Line')
     message_type_id = fields.Many2one('tyt.intranet.message_type', string='Message Type')
-    user_ids = fields.Many2many('res.users', 'notification_matrix_line_message_type_res_users_rel', string='Users')
+    user_ids = fields.Many2many('res.users', 'notification_matrix_line_message_type_res_users_rel',
+                                string='Users', domain=[('share', '=', False)])
 
 
 class NotificationMatrixLine(models.Model):
@@ -40,7 +41,7 @@ class NotificationMatrixLine(models.Model):
 
     notification_matrix_id = fields.Many2one('tyt.intranet.notification_matrix', string='Notification Matrix')
     service_area_id = fields.Many2one('tyt.intranet.service_area', string='Service Area')
-    responsible_id = fields.Many2one('res.users', string='Responsible')
+    responsible_id = fields.Many2one('res.users', string='Responsible', domain=[('share', '=', False)])
     matrix_line_message_type_ids = fields.One2many(
         'tyt.intranet.notification_matrix.line.message_type', 'notification_matrix_line_id',
         string='Notification Matrix Line Message Types')
@@ -66,6 +67,5 @@ class NotificationMatrix(models.Model):
 
     name = fields.Char(string='Name')
     site_id = fields.Many2one('x_sitios', string='Site')
-    matrix_line_ids = fields.One2many(
-        'tyt.intranet.notification_matrix.line', 'notification_matrix_id',
-        string='Notification Matrix Lines')
+    matrix_line_ids = fields.One2many('tyt.intranet.notification_matrix.line', 'notification_matrix_id',
+                                      string='Notification Matrix Lines')

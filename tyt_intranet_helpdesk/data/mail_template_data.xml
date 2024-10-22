@@ -1,18 +1,79 @@
 <?xml version="1.0" encoding="utf-8"?>
 <odoo>
-    <data noupdate="1">
+    <data noupdate="0">
         <record id="mail_template_tyt_intranet_mailbox" model="mail.template">
             <field name="name">Mailbox: Notification</field>
             <field name="model_id" ref="tyt_intranet_helpdesk.model_tyt_intranet_mailbox"/>
-            <field name="subject">Mailbox Notification</field>
-            <field name="email_from">"${object.company_id.name}" &lt;${object.company_id.email | safe}&gt;</field>
+            <field name="subject">{{ object.message_type_id.name }} - (ID: #{{ object.id }})</field>
+            <field name="email_from">"{{ object.company_id.name }}" &lt;{{ (object.company_id.email) }}&gt;</field>
             <field name="email_to">{{ object.get_emails_to_send() }}</field>
             <field name="body_html" type="html">
-                <div style="margin:0px;padding:0px; font-size: 13px;">
-                    <p>
+                <table width="100%" border="0" cellspacing="0" cellpadding="0"
+                       style="box-sizing:border-box;border-collapse:collapse;caption-side:bottom;">
+                    <tbody style="border-style:solid;box-sizing:border-box;border-left-width:0px;border-bottom-width:0px;border-right-width:0px;border-top-width:0px;border-left-color:inherit;border-bottom-color:inherit;border-right-color:inherit;border-top-color:inherit;">
+                        <tr style="border-style:solid;box-sizing:border-box;border-left-width:0px;border-bottom-width:0px;border-right-width:0px;border-top-width:0px;border-left-color:inherit;border-bottom-color:inherit;border-right-color:inherit;border-top-color:inherit;">
+                            <td align="center"
+                                style="border-style:solid;box-sizing:border-box;border-left-width:0px;border-bottom-width:0px;border-right-width:0px;border-top-width:0px;border-left-color:inherit;border-bottom-color:inherit;border-right-color:inherit;border-top-color:inherit;padding: 20px;">
+                                <table class="content" width="600" border="0" cellspacing="0" cellpadding="0"
+                                       style="border-style:solid;box-sizing:border-box;border-image-width:1;border-image-source:none;border-image-slice:100%;border-image-repeat:stretch;border-image-outset:0;border-left-color:#cccccc;border-left-width:1px;border-bottom-color:#cccccc;border-bottom-width:1px;border-right-color:#cccccc;border-right-width:1px;border-top-color:#cccccc;border-top-width:1px;caption-side:bottom;border-collapse: collapse; border: 1px solid #cccccc;">
+                                    <tbody style="border-style:solid;box-sizing:border-box;border-left-width:0px;border-bottom-width:0px;border-right-width:0px;border-top-width:0px;border-left-color:inherit;border-bottom-color:inherit;border-right-color:inherit;border-top-color:inherit;">
+                                        <tr style="border-style:solid;box-sizing:border-box;border-left-width:0px;border-bottom-width:0px;border-right-width:0px;border-top-width:0px;border-left-color:inherit;border-bottom-color:inherit;border-right-color:inherit;border-top-color:inherit;">
+                                            <td class="header"
+                                                style="border-style:solid;box-sizing:border-box;border-left-width:0px;border-bottom-width:0px;border-right-width:0px;border-top-width:0px;border-left-color:inherit;border-bottom-color:inherit;border-right-color:inherit;border-top-color:inherit;background-color: #1b7486; padding: 40px; text-align: start; color: white; font-size: 24px; vertical-align: middle;">
+                                                <a style="text-decoration:none;box-sizing:border-box;padding: 0px; position: relative;color: white;">
+                                                    <strong style="box-sizing:border-box;font-weight:bolder;">Estimado/a, usted tiene un nuevo seguimiento:
+                                                        <br/>
+                                                        <t t-out="object.message_type_id.name or ''"/>
+                                                        (ID: #<t t-out="object.id or ''"/>)
+                                                    </strong>
+                                                </a>
+                                            </td>
+                                        </tr>
+                                        <tr style="border-style:solid;box-sizing:border-box;border-left-width:0px;border-bottom-width:0px;border-right-width:0px;border-top-width:0px;border-left-color:inherit;border-bottom-color:inherit;border-right-color:inherit;border-top-color:inherit;">
+                                            <td class="body"
+                                                style="border-style:solid;box-sizing:border-box;border-left-width:0px;border-bottom-width:0px;border-right-width:0px;border-top-width:0px;border-left-color:inherit;border-bottom-color:inherit;border-right-color:inherit;border-top-color:inherit;padding: 40px; text-align: left; font-size: 16px; line-height: 1.6;">
+                                                <strong style="box-sizing:border-box;font-weight:bolder;">
+                                                    Datos del remitente
+                                                </strong>
+                                                <br/><br/>
+                                                <strong>Nombre completo: </strong><t t-out="object.user_id.name or ''"/>
+                                                <br/>
+                                                <strong>Correo electrónico: </strong><t t-out="object.partner_email or ''"/>
+                                                <br/>
+                                                <strong>Número de empleado: </strong><t t-out="object.employee_number or ''"/>
+                                                <br/>
+                                                <br/>
+                                                <br/>
 
-                    </p>
-                </div>
+                                                <strong style="box-sizing:border-box;font-weight:bolder;">
+                                                    Información
+                                                </strong>
+                                                <br/><br/>
+                                                <strong>Sitio: </strong><t t-out="object.site_id.x_name or ''"/>
+                                                <br/>
+                                                <strong>Área de servicio: </strong><t t-out="object.service_area_id.name or ''"/>
+                                                <br/>
+                                                <strong>Asunto: </strong><t t-out="object.message_type_id.name or ''"/>
+                                                <br/>
+                                                <strong>Descripción de la situación: </strong>
+                                                <p>
+                                                    <t t-out="object.comment or ''"/>
+                                                </p>
+                                                <br/>
+                                            </td>
+                                        </tr>
+                                        <tr style="border-style:solid;box-sizing:border-box;border-left-width:0px;border-bottom-width:0px;border-right-width:0px;border-top-width:0px;border-left-color:inherit;border-bottom-color:inherit;border-right-color:inherit;border-top-color:inherit;">
+                                            <td class="footer"
+                                                style="border-style:solid;box-sizing:border-box;border-left-width:0px;border-bottom-width:0px;border-right-width:0px;border-top-width:0px;border-left-color:inherit;border-bottom-color:inherit;border-right-color:inherit;border-top-color:inherit;background-color: #114651; padding: 40px; text-align: center; color: white; font-size: 14px;">
+                                                <t t-out="object.company_id.name or ''"/>
+                                            </td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
             </field>
             <field name="auto_delete" eval="True"/>
         </record>
