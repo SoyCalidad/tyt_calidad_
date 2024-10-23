@@ -1,8 +1,11 @@
-from odoo import fields, models, api
+from odoo import fields, models, api, _
 from odoo.exceptions import ValidationError
 
 
+class ContextScopeHistory(models.Model):
+    _inherit = 'process.edition.history'
 
+    scope_id = fields.Many2one('tyt.context.scope', string='Alcance')
 
 
 class ContextScope(models.Model):
@@ -46,6 +49,17 @@ class ContextScope(models.Model):
     version_as_string = fields.Char(string='Version', compute='_compute_version_as_string', store=True)
     change_history = fields.One2many('process.edition.history', 'scope_id',
                                      string='Historial de cambios', copy=True)
+
+    tyt_objective_scope_users = fields.Html(string='Objectivo, alcance and usuarios')
+    tyt_reference_documents = fields.Html(string='Documentos de referencia')
+    tyt_procedure_scope_definition = fields.Html(string='Definicición de alcance del SGC')
+
+    tyt_processes_activities = fields.Html(string='Procesos y actividades')
+    tyt_products_services = fields.Html(string='Productos y servicios')
+    tyt_organizational_units_and_functions = fields.Html(string='Unidades organizativas y funciones')
+    tyt_locations = fields.Html(string='Ubicaciones')
+    tyt_scope_exclusions = fields.Html(string='Exclusiones del alcance')
+    tyt_iso_requirements_exclusions = fields.Html(string='Exclusiones de los requisitos de ISO 9001:2015')
 
     numero = fields.Char(
         string="Numero de secuencia",
@@ -167,8 +181,23 @@ class ContextScope(models.Model):
             return 'Campo %s actualizado\n' % self._fields[field].string
 
 
-class ContextScopeHistory(models.Model):
-    _inherit = 'process.edition.history'
-    _description = 'Historial de alcance'
+    def check_changes(self, values, message):
+        if values.get('state', False):
+            state1 = dict(self._fields['state'].selection).get(
+                self.state)
+            state2 = dict(self._fields['state'].selection).get(
+                values.get('state'))
+            message = message + \
+                _("<li>Estado: %s &rarr; %s</li>") % (state1, state2)
 
-    scope_id = fields.Many2one('tyt.context.scope', string='Alcance')
+        if values.get('purpose', False):
+            message = message + \
+                _("<li><b>Objeto editado:</b></li> %s") % (values.get('purpose', ''))
+        if values.get('scope', False):
+            message = message + \
+                _("<li><b>Alcance editado:</b></li> %s") % (values.get('scope', ''))
+        if values.get('references', False):
+            message = message + \
+                _("<li><b>Referencia editado:</b></li> %s") % (values.get('references', ''))
+
+        return message

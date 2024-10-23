@@ -75,6 +75,27 @@
                     </group>
                     <notebook>
                         <page string="Contenido" name="content">
+                            <h2 class="o_horizontal_separator">1. Objectivo, alcance and usuarios</h2>
+                            <field name="tyt_objective_scope_users"/>
+
+                            <h2 class="o_horizontal_separator">2. Documentos de referencia</h2>
+                            <field name="tyt_reference_documents"/>
+
+                            <h2 class="o_horizontal_separator">3. Definicición de alcance del SGC</h2>
+                            <field name="tyt_procedure_scope_definition"/>
+
+                            <h4>3.1. Procesos y actividades</h4>
+                            <field name="tyt_processes_activities"/>
+                            <h4>3.2. Procesos y actividades</h4>
+                            <field name="tyt_products_services"/>
+                            <h4>3.3. Procesos y actividades</h4>
+                            <field name="tyt_organizational_units_and_functions"/>
+                            <h4>3.4. Procesos y actividades</h4>
+                            <field name="tyt_locations"/>
+                            <h4>3.5. Procesos y actividades</h4>
+                            <field name="tyt_scope_exclusions"/>
+                            <h4>3.6. Procesos y actividades</h4>
+                            <field name="tyt_iso_requirements_exclusions"/>
                         </page>
                         <page string="Validación y versión" name="version_info">
                             <group col="4">

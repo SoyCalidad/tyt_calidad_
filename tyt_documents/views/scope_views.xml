@@ -5,7 +5,7 @@
         <field name="model">tyt.context.scope</field>
         <field name="inherit_id" ref="tyt_context.tyt_context_scope_view_form"/>
         <field name="arch" type="xml">
-            <xpath expr="//button[@name='action_open_older_versions']" position="before">
+            <xpath expr="//button[@name='action_open_older_versions']" position="after">
                 <button name="action_open_documents"
                         class="oe_stat_button"
                         groups="documents.group_documents_user"
