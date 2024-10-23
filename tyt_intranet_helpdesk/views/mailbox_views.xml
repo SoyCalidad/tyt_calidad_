@@ -7,12 +7,13 @@
             <form>
                 <header>
                     <field name="state" widget="statusbar"/>
-                    <button name="action_in_progress" string="In Progress" type="object" states="received"
+
+                    <button name="action_escalated" string="Escalated" type="object" states="received"
+                            class="btn-primary"/>
+                    <button name="action_in_progress" string="In Progress" type="object" states="escalated"
                             class="btn-primary"/>
                     <button name="action_resolved" string="Resolved" type="object" states="in_progress"
                             class="btn-primary" confirm="Are you sure you want to mark this as resolved"/>
-                    <button name="action_escalated" string="Escalated" type="object" states="in_progress"
-                            class="btn-primary" confirm="Are you sure you want to mark this as escalated?"/>
                     <button name="send_mail_modal" string="Send Email" type="object" class="btn-secondary"/>
                 </header>
                 <sheet>
@@ -97,8 +98,9 @@
                 <field name="priority" widget="priority" readonly="1"/>
                 <field name="deadline_date"/>
                 <field name="state" widget="badge"
-                       decoration-info="state == 'received'" decoration-warning="state == 'in_progress'"
-                       decoration-success="state == 'resolved'" decoration-danger="state == 'escalated'"/>
+                       decoration-info="state == 'received'"
+                       decoration-warning="state in ['escalated', 'in_progress']"
+                       decoration-success="state == 'resolved'"/>
             </tree>
         </field>
     </record>
@@ -107,5 +109,6 @@
         <field name="name">Mailbox</field>
         <field name="res_model">tyt.intranet.mailbox</field>
         <field name="view_mode">tree,form</field>
+        <field name="context">{'create': False}</field>
     </record>
 </odoo>

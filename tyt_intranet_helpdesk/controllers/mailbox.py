@@ -25,7 +25,10 @@ class MailboxController(http.Controller):
     @http.route('/mailbox', type='http', auth='user', website=True)
     def mailbox_form(self):
         values = request.params.copy()
-        values['site_ids'] = request.env['x_sitios'].sudo().search([])
+        site_ids = request.env['x_sitios'].sudo().search([])
+        user_site = request.env.user.x_studio_sitio.x_studio_sitios
+        values['user_site_id'] = user_site.id if user_site and user_site.id in site_ids.ids else None
+        values['site_ids'] = site_ids
         values['service_area_ids'] = request.env['tyt.intranet.service_area'].sudo().search([])
         values['message_type_ids'] = request.env['tyt.intranet.message_type'].sudo().search([])
         return request.render('tyt_intranet_helpdesk.mailbox_form', values)
@@ -47,14 +50,23 @@ class MailboxController(http.Controller):
             mailbox_values['user_id'] = request.env.user.id
 
         for key, value in kw.items():
-            if key in ['site_id', 'service_area_id', 'message_type_id']:
+            if key in ['service_area_id', 'message_type_id']:
                 mailbox_values[key] = int(value)
             if key in ['comment']:
                 mailbox_values[key] = value
 
+        if 'is_anonymous' in kw:
+            mailbox_values['site_id'] = kw.get('site_id_select')
+        else:
+            mailbox_values['site_id'] = kw.get('site_id')
+
         mailbox = Mailbox.sudo().create(mailbox_values)
         mailbox.sudo().send_mail()
-        return request.render('tyt_intranet_helpdesk.mailbox_form_send', {})
+        return request.redirect('/mailbox/success')
+
+    @http.route('/mailbox/success', type='http', auth='user', website=True)
+    def mailbox_form_confirmation(self):
+        return request.render('tyt_intranet_helpdesk.mailbox_form_send')
 
     @http.route(['/my/mailbox', '/my/mailbox/page/<int:page>'], type='http', auth="user", website=True)
     def portal_my_mailbox(self, page=1, date_begin=None, date_end=None, sortby=None, filterby=None, **kw):

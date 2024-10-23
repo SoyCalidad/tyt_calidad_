@@ -6,8 +6,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Odoo Server 16.0+e-20240730\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2024-10-22 10:13+0000\n"
-"PO-Revision-Date: 2024-10-22 10:13+0000\n"
+"POT-Creation-Date: 2024-10-23 18:39+0000\n"
+"PO-Revision-Date: 2024-10-23 18:39+0000\n"
 "Last-Translator: \n"
 "Language-Team: \n"
 "MIME-Version: 1.0\n"
@@ -21,16 +21,10 @@ msgid "&gt;"
 msgstr ""
 
 #. module: tyt_intranet_helpdesk
-#: model:mail.template,body_html:tyt_intranet_helpdesk.mail_template_tyt_intranet_mailbox
+#: model_terms:ir.ui.view,arch_db:tyt_intranet_helpdesk.mailbox_form_send
 msgid ""
-"<div style=\"margin:0px;padding:0px; font-size: 13px;\">\n"
-"                    <p>\n"
-"                        Lorem ipsum dolor sit amet, consectetur adipisicing elit. A, ab expedita inventore ipsa\n"
-"                        ipsum iste labore laboriosam laudantium maiores nihil praesentium ratione recusandae\n"
-"                        repellat vero voluptate. Nihil nulla optio quidem!\n"
-"                    </p>\n"
-"                </div>\n"
-"            "
+"<i class=\"fa fa-fw fa-home\" role=\"img\" aria-label=\"Volver a Mi perfil\" title=\"Volver a Mi perfil\"/>\n"
+"                            Volver a Mi perfil"
 msgstr ""
 
 #. module: tyt_intranet_helpdesk
@@ -72,7 +66,73 @@ msgstr "<strong>Contacto</strong>"
 
 #. module: tyt_intranet_helpdesk
 #: model_terms:ir.ui.view,arch_db:tyt_intranet_helpdesk.mailbox_followup
-msgid "<strong>Respuesta del soporte</strong>"
+msgid "<strong>Respuesta del responsable de seguimiento</strong>"
+msgstr ""
+
+#. module: tyt_intranet_helpdesk
+#: model:mail.template,body_html:tyt_intranet_helpdesk.mail_template_tyt_intranet_mailbox
+msgid ""
+"<table width=\"100%\" border=\"0\" cellspacing=\"0\" cellpadding=\"0\" style=\"box-sizing:border-box;border-collapse:collapse;caption-side:bottom;\">\n"
+"                    <tbody style=\"border-style:solid;box-sizing:border-box;border-left-width:0px;border-bottom-width:0px;border-right-width:0px;border-top-width:0px;border-left-color:inherit;border-bottom-color:inherit;border-right-color:inherit;border-top-color:inherit;\">\n"
+"                        <tr style=\"border-style:solid;box-sizing:border-box;border-left-width:0px;border-bottom-width:0px;border-right-width:0px;border-top-width:0px;border-left-color:inherit;border-bottom-color:inherit;border-right-color:inherit;border-top-color:inherit;\">\n"
+"                            <td align=\"center\" style=\"border-style:solid;box-sizing:border-box;border-left-width:0px;border-bottom-width:0px;border-right-width:0px;border-top-width:0px;border-left-color:inherit;border-bottom-color:inherit;border-right-color:inherit;border-top-color:inherit;padding: 20px;\">\n"
+"                                <table class=\"content\" width=\"600\" border=\"0\" cellspacing=\"0\" cellpadding=\"0\" style=\"border-style:solid;box-sizing:border-box;border-image-width:1;border-image-source:none;border-image-slice:100%;border-image-repeat:stretch;border-image-outset:0;border-left-color:#cccccc;border-left-width:1px;border-bottom-color:#cccccc;border-bottom-width:1px;border-right-color:#cccccc;border-right-width:1px;border-top-color:#cccccc;border-top-width:1px;caption-side:bottom;border-collapse: collapse; border: 1px solid #cccccc;\">\n"
+"                                    <tbody style=\"border-style:solid;box-sizing:border-box;border-left-width:0px;border-bottom-width:0px;border-right-width:0px;border-top-width:0px;border-left-color:inherit;border-bottom-color:inherit;border-right-color:inherit;border-top-color:inherit;\">\n"
+"                                        <tr style=\"border-style:solid;box-sizing:border-box;border-left-width:0px;border-bottom-width:0px;border-right-width:0px;border-top-width:0px;border-left-color:inherit;border-bottom-color:inherit;border-right-color:inherit;border-top-color:inherit;\">\n"
+"                                            <td class=\"header\" style=\"border-style:solid;box-sizing:border-box;border-left-width:0px;border-bottom-width:0px;border-right-width:0px;border-top-width:0px;border-left-color:inherit;border-bottom-color:inherit;border-right-color:inherit;border-top-color:inherit;background-color: #1b7486; padding: 40px; text-align: start; color: white; font-size: 24px; vertical-align: middle;\">\n"
+"                                                <a style=\"text-decoration:none;box-sizing:border-box;padding: 0px; position: relative;color: white;\">\n"
+"                                                    <strong style=\"box-sizing:border-box;font-weight:bolder;\">Estimado/a, usted tiene un nuevo seguimiento:\n"
+"                                                        <br>\n"
+"                                                        <t t-out=\"object.message_type_id.name or ''\"></t>\n"
+"                                                        (ID: #<t t-out=\"object.id or ''\"></t>)\n"
+"                                                    </strong>\n"
+"                                                </a>\n"
+"                                            </td>\n"
+"                                        </tr>\n"
+"                                        <tr style=\"border-style:solid;box-sizing:border-box;border-left-width:0px;border-bottom-width:0px;border-right-width:0px;border-top-width:0px;border-left-color:inherit;border-bottom-color:inherit;border-right-color:inherit;border-top-color:inherit;\">\n"
+"                                            <td class=\"body\" style=\"border-style:solid;box-sizing:border-box;border-left-width:0px;border-bottom-width:0px;border-right-width:0px;border-top-width:0px;border-left-color:inherit;border-bottom-color:inherit;border-right-color:inherit;border-top-color:inherit;padding: 40px; text-align: left; font-size: 16px; line-height: 1.6;\">\n"
+"                                                <strong style=\"box-sizing:border-box;font-weight:bolder;\">\n"
+"                                                    Datos del remitente\n"
+"                                                </strong>\n"
+"                                                <br><br>\n"
+"                                                <strong>Nombre completo: </strong><t t-out=\"object.user_id.name or ''\"></t>\n"
+"                                                <br>\n"
+"                                                <strong>Correo electrónico: </strong><t t-out=\"object.partner_email or ''\"></t>\n"
+"                                                <br>\n"
+"                                                <strong>Número de empleado: </strong><t t-out=\"object.employee_number or ''\"></t>\n"
+"                                                <br>\n"
+"                                                <br>\n"
+"                                                <br>\n"
+"\n"
+"                                                <strong style=\"box-sizing:border-box;font-weight:bolder;\">\n"
+"                                                    Información\n"
+"                                                </strong>\n"
+"                                                <br><br>\n"
+"                                                <strong>Sitio: </strong><t t-out=\"object.site_id.x_name or ''\"></t>\n"
+"                                                <br>\n"
+"                                                <strong>Área de servicio: </strong><t t-out=\"object.service_area_id.name or ''\"></t>\n"
+"                                                <br>\n"
+"                                                <strong>Asunto: </strong><t t-out=\"object.message_type_id.name or ''\"></t>\n"
+"                                                <br>\n"
+"                                                <strong>Descripción de la situación: </strong>\n"
+"                                                <p>\n"
+"                                                    <t t-out=\"object.comment or ''\"></t>\n"
+"                                                </p>\n"
+"                                                <br>\n"
+"                                            </td>\n"
+"                                        </tr>\n"
+"                                        <tr style=\"border-style:solid;box-sizing:border-box;border-left-width:0px;border-bottom-width:0px;border-right-width:0px;border-top-width:0px;border-left-color:inherit;border-bottom-color:inherit;border-right-color:inherit;border-top-color:inherit;\">\n"
+"                                            <td class=\"footer\" style=\"border-style:solid;box-sizing:border-box;border-left-width:0px;border-bottom-width:0px;border-right-width:0px;border-top-width:0px;border-left-color:inherit;border-bottom-color:inherit;border-right-color:inherit;border-top-color:inherit;background-color: #114651; padding: 40px; text-align: center; color: white; font-size: 14px;\">\n"
+"                                                <t t-out=\"object.company_id.name or ''\"></t>\n"
+"                                            </td>\n"
+"                                        </tr>\n"
+"                                    </tbody>\n"
+"                                </table>\n"
+"                            </td>\n"
+"                        </tr>\n"
+"                    </tbody>\n"
+"                </table>\n"
+"            "
 msgstr ""
 
 #. module: tyt_intranet_helpdesk
@@ -115,11 +175,6 @@ msgstr ""
 #: model:ir.model.fields,field_description:tyt_intranet_helpdesk.field_tyt_intranet_notification_matrix__activity_type_icon
 msgid "Activity Type Icon"
 msgstr ""
-
-#. module: tyt_intranet_helpdesk
-#: model_terms:ir.ui.view,arch_db:tyt_intranet_helpdesk.tyt_intranet_mailbox_view_form
-msgid "Are you sure you want to mark this as escalated?"
-msgstr "¿Estás seguro de que quieres marcar esto como escalado?"
 
 #. module: tyt_intranet_helpdesk
 #: model_terms:ir.ui.view,arch_db:tyt_intranet_helpdesk.tyt_intranet_mailbox_view_form
@@ -166,11 +221,6 @@ msgid "Contact"
 msgstr ""
 
 #. module: tyt_intranet_helpdesk
-#: model_terms:ir.ui.view,arch_db:tyt_intranet_helpdesk.mailbox_form
-msgid "Correo"
-msgstr ""
-
-#. module: tyt_intranet_helpdesk
 #: model:ir.model.fields,field_description:tyt_intranet_helpdesk.field_tyt_intranet_mailbox__create_uid
 #: model:ir.model.fields,field_description:tyt_intranet_helpdesk.field_tyt_intranet_message_type__create_uid
 #: model:ir.model.fields,field_description:tyt_intranet_helpdesk.field_tyt_intranet_notification_matrix__create_uid
@@ -181,16 +231,12 @@ msgid "Created by"
 msgstr ""
 
 #. module: tyt_intranet_helpdesk
+#: model:ir.model.fields,field_description:tyt_intranet_helpdesk.field_tyt_intranet_mailbox__create_date
 #: model:ir.model.fields,field_description:tyt_intranet_helpdesk.field_tyt_intranet_message_type__create_date
 #: model:ir.model.fields,field_description:tyt_intranet_helpdesk.field_tyt_intranet_notification_matrix__create_date
 #: model:ir.model.fields,field_description:tyt_intranet_helpdesk.field_tyt_intranet_notification_matrix_line__create_date
 #: model:ir.model.fields,field_description:tyt_intranet_helpdesk.field_tyt_intranet_notification_matrix_line_message_type__create_date
 #: model:ir.model.fields,field_description:tyt_intranet_helpdesk.field_tyt_intranet_service_area__create_date
-msgid "Created on"
-msgstr "Creado en"
-
-#. module: tyt_intranet_helpdesk
-#: model:ir.model.fields,field_description:tyt_intranet_helpdesk.field_tyt_intranet_mailbox__create_date
 msgid "Created on"
 msgstr "Fecha de recepción"
 
@@ -391,11 +437,6 @@ msgid "Mailbox Message Type"
 msgstr "Tipo de mensaje"
 
 #. module: tyt_intranet_helpdesk
-#: model:mail.template,subject:tyt_intranet_helpdesk.mail_template_tyt_intranet_mailbox
-msgid "Mailbox Notification"
-msgstr "Notificación de buzón"
-
-#. module: tyt_intranet_helpdesk
 #: model_terms:ir.ui.view,arch_db:tyt_intranet_helpdesk.portal_my_mailbox
 msgid "Mailbox Service Area"
 msgstr "Área de servicio"
@@ -492,11 +533,6 @@ msgstr ""
 #: model:ir.model.fields,field_description:tyt_intranet_helpdesk.field_tyt_intranet_mailbox__activity_type_id
 #: model:ir.model.fields,field_description:tyt_intranet_helpdesk.field_tyt_intranet_notification_matrix__activity_type_id
 msgid "Next Activity Type"
-msgstr ""
-
-#. module: tyt_intranet_helpdesk
-#: model_terms:ir.ui.view,arch_db:tyt_intranet_helpdesk.mailbox_form
-msgid "Nombre"
 msgstr ""
 
 #. module: tyt_intranet_helpdesk
@@ -627,12 +663,8 @@ msgid "Response to sender"
 msgstr "Respuesta al remitente"
 
 #. module: tyt_intranet_helpdesk
-#: model:ir.model.fields,field_description:tyt_intranet_helpdesk.field_tyt_intranet_notification_matrix_line__responsible_id
-msgid "Responsible"
-msgstr "Responsable"
-
-#. module: tyt_intranet_helpdesk
 #: model:ir.model.fields,field_description:tyt_intranet_helpdesk.field_tyt_intranet_mailbox__responsible_id
+#: model:ir.model.fields,field_description:tyt_intranet_helpdesk.field_tyt_intranet_notification_matrix_line__responsible_id
 msgid "Responsible"
 msgstr "Responsable asignado"
 
@@ -755,6 +787,18 @@ msgstr ""
 #: model:ir.model.fields,help:tyt_intranet_helpdesk.field_tyt_intranet_notification_matrix__website_message_ids
 msgid "Website communication history"
 msgstr ""
+
+#. module: tyt_intranet_helpdesk
+#. odoo-python
+#: code:addons/tyt_intranet_helpdesk/models/mailbox.py:0
+#, python-format
+msgid "You must select a responsible"
+msgstr "Debe seleccionar un responsable"
+
+#. module: tyt_intranet_helpdesk
+#: model:mail.template,subject:tyt_intranet_helpdesk.mail_template_tyt_intranet_mailbox
+msgid "{{ object.message_type_id.name }} - (ID: #{{ object.id }})"
+msgstr "Notificación de buzón"
 
 #. module: tyt_intranet_helpdesk
 #: model_terms:ir.ui.view,arch_db:tyt_intranet_helpdesk.mailbox_form_send

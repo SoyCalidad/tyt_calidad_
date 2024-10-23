@@ -1,4 +1,5 @@
 from odoo import api, fields, models, _
+from odoo.exceptions import UserError
 
 
 class Mailbox(models.Model):
@@ -21,9 +22,10 @@ class Mailbox(models.Model):
     company_id = fields.Many2one('res.company', string='Company', default=lambda self: self.env.company)
     state = fields.Selection([
         ('received', 'Received'),
+        ('escalated', 'Escalated'),
         ('in_progress', 'In Progress'),
         ('resolved', 'Resolved'),
-        ('escalated', 'Escalated')], string='State', default='received', tracking=True)
+    ], string='State', default='received', tracking=True)
     priority = fields.Selection([
         ('0', 'Low'),
         ('1', 'Medium'),
@@ -86,11 +88,13 @@ class Mailbox(models.Model):
     def action_in_progress(self):
         self.write({'state': 'in_progress'})
 
+    def action_escalated(self):
+        if not self.responsible_id:
+            raise UserError(_('You must select a responsible'))
+        self.write({'state': 'escalated'})
+
     def action_resolved(self):
         self.write({'state': 'resolved'})
-
-    def action_escalated(self):
-        self.write({'state': 'escalated'})
 
     @api.depends('message_type_id')
     def _compute_name(self):
