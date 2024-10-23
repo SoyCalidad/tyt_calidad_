@@ -20,6 +20,7 @@
         'views/helpdesk_portal_templates.xml',
         # 'views/sign_portal_templates.xml',
         'views/survey_portal_templates.xml',
+        'views/mailbox_portal_templates.xml',
     ],
     'assets': {
         'web.assets_frontend': [

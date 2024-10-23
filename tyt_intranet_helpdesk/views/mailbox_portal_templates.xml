@@ -1,0 +1,196 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<odoo>
+     <template id="portal_my_home_mailbox"
+              name="mailbox" inherit_id="portal.portal_my_home" priority="65">
+        <xpath expr="//div[hasclass('o_portal_docs')]" position="inside">
+            <t t-call="portal.portal_docs_entry">
+                <t t-set="title">Mailbox</t>
+                <t t-set="url" t-value="'/my/mailbox'"/>
+                <t t-set="placeholder_count" t-value="'mailbox_count'"/>
+            </t>
+        </xpath>
+    </template>
+
+    <template id="portal_my_home_menu_mailbox" name="Portal layout : Mailbox menu"
+              inherit_id="portal.portal_breadcrumbs"
+              priority="20">
+        <xpath expr="//ol[hasclass('o_portal_submenu')]" position="inside">
+            <li t-if="page_name == 'mailbox'" class="breadcrumb-item active">
+                <a t-if="survey_boolean" t-attf-href="/my/survey/ans">
+                    Mailbox
+                </a>
+                <t t-else="">Mailbox</t>
+            </li>
+            <li t-if="survey_boolean" class="breadcrumb-item active">
+                /
+                <t t-esc="mailbox"/>
+            </li>
+        </xpath>
+    </template>
+
+    <template id="portal_my_mailbox" name="Buzón">
+        <t t-call="portal.portal_layout">
+            <t t-set="breadcrumbs_searchbar" t-value="True"/>
+            <t t-call="portal.portal_searchbar">
+                <t t-set="title">Buzón</t>
+            </t>
+            <t t-if="mailbox_records" t-call="portal.portal_table">
+                <thead>
+                <tr class="active">
+                    <th>Número</th>
+                    <th>Mailbox Date</th>
+                    <th>Mailbox Site</th>
+                    <th>Mailbox Service Area</th>
+                    <th>Mailbox Message Type</th>
+                </tr>
+            </thead>
+                <tbody>
+                    <t t-foreach="mailbox_records" t-as="record">
+                        <tr>
+                            <td>
+                                <a t-attf-href="/my/mailbox/#{record.id}" t-att-title="record.id">
+                                    #<t t-esc="record.id"/>
+                                </a>
+                            </td>
+                            <td><span t-field="record.create_date"/></td>
+                            <td><span t-field="record.site_id.x_name"/></td>
+                            <td><span t-field="record.service_area_id.name"/></td>
+                            <td><span t-field="record.message_type_id.name"/></td>
+                        </tr>
+                    </t>
+                </tbody>
+            </t>
+        </t>
+    </template>
+
+    <template id="mailbox_followup" name="Buzón">
+        <t t-call="portal.portal_layout">
+
+
+            <t t-set="breadcrumbs_searchbar" t-value="True"/>
+            <t t-call="portal.portal_searchbar">
+                <t t-set="title">Buzón</t>
+            </t>
+
+
+
+            <div class="row mt16 o_project_portal_sidebar">
+                <t t-call="portal.portal_record_sidebar">
+                    <t t-set="classes" t-value="'col-lg-4 d-print-none'"/>
+
+                    <t t-set="entries">
+                        <ul class="list-group list-group-flush flex-wrap flex-row flex-lg-column">
+
+                            <li id="ticket-nav" class="list-group-item ps-0 flex-grow-1" t-ignore="true" role="complementary">
+                                <ul class="nav flex-column">
+                                    <li class="nav-item" id="nav-header">
+                                        <a class="nav-link ps-3" href="#card_header" style="max-width: 200px;">
+                                            Mailbox
+                                        </a>
+                                    </li>
+                                </ul>
+                            </li>
+                            <li id="ticket-links" t-if="ticket_link_section" class="list-group-item flex-grow-1" t-ignore="true" role="complementary" invisible="1">
+                                <ul class="nav flex-column">
+                                    <t t-foreach="sorted(ticket_link_section, key=lambda r: r['sequence'])" t-as="ticket_link">
+                                        <li class="nav-item">
+                                            <a class="nav-link ps-0" t-att-href="ticket_link['access_url']">
+                                                <t t-out="ticket_link['title']"/>
+                                            </a>
+                                        </li>
+                                    </t>
+                                </ul>
+                            </li>
+
+                            <li t-if="entry.user_id or entry.partner_id" class="list-group-item flex-grow-1">
+
+                                <div class="col-12 col-md-12 pb-2" t-if="entry.partner_id">
+                                    <strong>Customer</strong>
+                                    <div class="d-flex ps-3 flex-nowrap mt-1">
+                                        <img class="rounded-circle o_portal_contact_img" t-att-src="image_data_uri(entry.partner_id.avatar_128)" alt="Contact"/>
+                                        <div class="ms-2">
+                                            <div t-field="entry.partner_id" t-options='{"widget": "contact", "fields": ["name"]}'/>
+                                            <a t-attf-href="mailto:{{entry.partner_id.email}}" t-if="entry.partner_id.email"><div t-field="entry.partner_id" t-options='{"widget": "contact", "fields": ["email"]}'/></a>
+                                            <a t-attf-href="tel:{{entry.partner_id.phone}}" t-if="entry.partner_id.phone"><div t-field="entry.partner_id" t-options='{"widget": "contact", "fields": ["phone"]}'/></a>
+                                        </div>
+                                    </div>
+                                </div>
+                            </li>
+                        </ul>
+                    </t>
+                </t>
+
+
+                <div id="ticket_content" class="col-lg-8 justify-content-end">
+                    <div id="card" class="card">
+                        <div id="card_header" class="card-header container" data-anchor="true">
+                            <div class="row gs-0">
+                                <div class="col-md">
+                                    <h5 class="row mx-1 mb-1 mb-md-0">
+                                        <div class="col-9 text-truncate">
+                                            <span t-field="entry.message_type_id.name" t-att-title="entry.message_type_id.name"/>
+                                            <small class="text-muted "> (#<span t-field="entry.id"/>)</small>
+                                        </div>
+                                        <div class="col-3 text-end">
+                                        </div>
+                                    </h5>
+                                </div>
+                            </div>
+                        </div>
+                        <div id="card_body" class="card-body">
+                            <div class="row mb-4 container">
+                                <div class="col-12 col-md-6">
+                                    <div>
+                                        <strong class="col-lg-2">Reported on: </strong>
+                                        <span class="col-lg-10" t-field="entry.create_date" t-options='{"widget": "datetime", "hide_seconds": True}'/>
+                                    </div>
+                                    <div>
+                                        <strong class="col-lg-2">Site: </strong>
+                                        <span class="col-lg-10" t-field="entry.site_id.x_name"/>
+                                    </div>
+                                    <div>
+                                        <strong class="col-lg-2">Service Area: </strong>
+                                        <span class="col-lg-10" t-field="entry.service_area_id.name"/>
+                                    </div>
+                                    <div>
+                                        <strong class="col-lg-2">Message Type: </strong>
+                                        <span class="col-lg-10" t-field="entry.message_type_id.name"/>
+                                    </div>
+                                </div>
+
+                            </div>
+
+                            <div t-if="not is_html_empty(entry.comment)" class="row mb-4" name="comment">
+                                <div class="col-12 col-lg-7 mb-4 mb-md-0 col-lg-12">
+                                    <hr class="mb-1"/>
+                                    <div class="d-flex my-2">
+                                        <strong>Comment</strong>
+                                    </div>
+                                    <div class="py-1 px-2 bg-100 small table-responsive">
+                                        <p>
+                                            <span t-field="entry.comment"/>
+                                        </p>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div t-if="entry.receive_response and not is_html_empty(entry.response_message)" class="row mb-4" name="response_message">
+                                <div class="col-12 col-lg-7 mb-4 mb-md-0 col-lg-12">
+                                    <div class="d-flex my-2">
+                                        <strong>Respuesta del soporte</strong>
+                                    </div>
+                                    <div class="py-1 px-2 bg-100 small table-responsive">
+                                        <p>
+                                            <span t-field="entry.response_message"/>
+                                        </p>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+        </t>
+    </template>
+</odoo>

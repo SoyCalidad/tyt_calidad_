@@ -1,4 +1,15 @@
 id,name,model_id:id,group_id:id,perm_read,perm_write,perm_create,perm_unlink
 access_tyt_recruitment_requisition_user,access_tyt_recruitment_requisition_user,tyt_recruitment.model_tyt_recruitment_requisition,,1,1,1,1
 access_tyt_recruitment_campaign_user,access_tyt_recruitment_campaign_user,tyt_recruitment.model_tyt_recruitment_campaign,,1,1,1,1
-access_tyt_recruitment_tag_user,access_tyt_recruitment_tag_user,tyt_recruitment.model_tyt_recruitment_tag,,1,1,1,1
+
+access_tyt_recruitment_question_user,access_tyt_recruitment_question_user,tyt_recruitment.model_tyt_recruitment_question,,1,1,1,1
+access_tyt_recruitment_answer_user,access_tyt_recruitment_answer_user,tyt_recruitment.model_tyt_recruitment_answer,,1,1,1,1
+
+access_public_job_application_user,tyt_recruitment.job_application.public.access,model_tyt_recruitment_job_application,base.group_public,0,0,1,0
+access_employee_job_application,tyt_recruitment.job_application.employee.access,model_tyt_recruitment_job_application,base.group_user,1,0,1,0
+access_admin_job_application,tyt_recruitment.job_application.admin.access,model_tyt_recruitment_job_application,base.group_system,1,1,1,1
+
+access_applicant_user,access.applicant.user,model_tyt_recruitment_applicant,base.group_user,1,0,0,0
+
+access_admin_family_data_detail,tyt_recruitment.family_data_detail.admin.access,model_tyt_recruitment_family_data_detail,,1,1,1,1
+access_admin_child,tyt_recruitment.child.admin.access,model_tyt_recruitment_child,,1,1,1,1

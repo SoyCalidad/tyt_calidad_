@@ -1,0 +1,634 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <template id="template_job_application_form" name="Public Form">
+        <link rel="stylesheet" href="/web/static/lib/bootstrap/dist/css/bootstrap.css"/>
+        <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons/font/bootstrap-icons.css"/>
+        
+        <div class="container mt-4 mb-4">
+        <form id="job-application-form" action="/job_application/submit" method="post" class="p-4 border rounded bg-light">
+            <h1 class="text-center">SOLICITUD DE EMPLEO</h1>
+            <h5 class="text-center"> Para llenar personalmente por el solicitante. Es indispensable contestar todas las preguntas. </h5>
+            <div id="first-part">
+                <section class="p-3">
+                    <div class="row">
+                        <div class="col-sm-6 col-md-4 col-lg-4 col-xl-4 col-xxl-4 p-4 border">
+                            <img src="/tyt_recruitment/static/src/img/logo_large.png" alt="Logo" style="width: 280px; height: auto; margin: auto; display: block;" />
+                        </div>
+
+                        <div class="col-sm-6 col-md-4 col-lg-4 col-xl-4 col-xxl-4 p-4 border">
+                            <label for="reference" class="form-label">¿Cómo te enteraste de nosotros?</label>
+                            <div class="form-check">
+                                <input class="form-check-input" type="radio" name="reference" id="facebook" value="Facebook" required="required" onclick="toggleOtherReference()"/>
+                                <label class="form-check-label" for="facebook">Facebook</label>
+                            </div>
+                            <div class="form-check">
+                                <input class="form-check-input" type="radio" name="reference" id="periodico" value="Periódico" required="required" onclick="toggleOtherReference()"/>
+                                <label class="form-check-label" for="periodico">Periódico</label>
+                            </div>
+                            <div class="form-check">
+                                <input class="form-check-input" type="radio" name="reference" id="volante" value="Volante" required="required" onclick="toggleOtherReference()"/>
+                                <label class="form-check-label" for="volante">Volante</label>
+                            </div>
+                            <div class="form-check">
+                                <input class="form-check-input" type="radio" name="reference" id="feria_empleo" value="Feria de empleo" required="required" onclick="toggleOtherReference()"/>
+                                <label class="form-check-label" for="feria_empleo">Feria de empleo</label>
+                            </div>
+                            <div class="form-check">
+                                <input class="form-check-input" type="radio" name="reference" id="iniciativa_propia" value="Iniciativa propia" required="required" onclick="toggleOtherReference()"/>
+                                <label class="form-check-label" for="iniciativa_propia">Iniciativa propia</label>
+                            </div>
+                            <div class="form-check">
+                                <input class="form-check-input" type="radio" name="reference" id="referido" value="Referido" required="required" onclick="toggleOtherReference()"/>
+                                <label class="form-check-label" for="referido">Referido</label>
+                            </div>
+                            <div class="form-check">
+                                <input class="form-check-input" type="radio" name="reference" id="otro_medio" value="Otro medio" required="required" onclick="toggleOtherReference()"/>
+                                <label class="form-check-label" for="otro_medio">Otro medio</label>
+                            </div>
+                            <input type="text" class="form-control" id="other_reference" name="other_reference" placeholder="Especifica otro medio (si aplica)" style="display: none;"/>
+                        </div>
+
+                        <div class="col-sm-6 col-md-4 col-lg-4 col-xl-4 col-xxl-4 p-4 border">
+                            <div class="row">
+                                <div class="col-sm-6 col-md-6 col-lg-6 col-xl-6 col-xxl-6 p-4 border">
+                                    <label for="request_date" class="form-label">Fecha</label>
+                                    <input type="date" class="form-control" id="request_date" name="request_date" required="required"/>
+                                </div>
+                                <div class="col-sm-6 col-md-6 col-lg-6 col-xl-6 col-xxl-6 p-4 border">
+                                    <label for="site" class="form-label">Sitio</label>
+                                    <input type="text" class="form-control" id="site" name="site" t-att-value="site_id" required="required" readonly="true"/>
+                                </div>
+                                <div class="col-sm-6 col-md-6 col-lg-6 col-xl-6 col-xxl-6 p-4 border">
+                                    <label for="requisition" class="form-label">Requisición</label>
+                                    <input type="text" class="form-control" id="requisition" name="requisition" t-att-value="requisition_id" required="required" readonly="true"/>
+                                </div>
+                                <div class="col-sm-6 col-md-6 col-lg-6 col-xl-6 col-xxl-6 p-4 border">
+                                    <label for="campaign" class="form-label">Campaña</label>
+                                    <input type="text" class="form-control" id="campaign" name="campaign" t-att-value="campaign_id" required="required" readonly="true"/>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </section>
+
+                <section class="p-3">
+                    <h3>DATOS GENERALES</h3>
+                    <div class="row">
+                        <!-- Nombre -->
+                        <div class="col-sm-6 col-md-4 col-lg-3 col-xl-3 col-xxl-3 p-4 border">
+                            <label for="name" class="form-label">Nombre:</label>
+                            <input type="text" class="form-control" id="name" name="name" required="required"/>
+                        </div>
+
+                        <!-- Apellido Paterno -->
+                        <div class="col-sm-6 col-md-4 col-lg-3 col-xl-3 col-xxl-3 p-4 border">
+                            <label for="last_name_father" class="form-label">Apellido Paterno:</label>
+                            <input type="text" class="form-control" id="last_name_father" name="last_name_father" required="required"/>
+                        </div>
+
+                        <!-- Apellido Materno -->
+                        <div class="col-sm-6 col-md-4 col-lg-3 col-xl-3 col-xxl-3 p-4 border">
+                            <label for="last_name_mother" class="form-label">Apellido Materno:</label>
+                            <input type="text" class="form-control" id="last_name_mother" name="last_name_mother" required="required"/>
+                        </div>
+
+                        <!-- Sexo -->
+                        <div class="col-sm-6 col-md-4 col-lg-3 col-xl-3 col-xxl-3 p-4 border">
+                            <label for="gender" class="form-label">Sexo:</label>
+                            <select class="form-select" id="gender" name="gender" required="required">
+                                <option value="male">Masculino</option>
+                                <option value="female">Femenino</option>
+                                <option value="other">Otro</option>
+                            </select>
+                        </div>
+                    </div>
+
+                    <div class="row">
+                        <!-- Lugar de Nacimiento -->
+                        <div class="col-sm-6 col-md-3 col-lg-3 col-xl-3 col-xxl-3 p-4 border">
+                            <label for="birthplace" class="form-label">Lugar de Nacimiento:</label>
+                            <input type="text" class="form-control" id="birthplace" name="birthplace" required="required"/>
+                        </div>
+
+                        <!-- Fecha de Nacimiento -->
+                        <div class="col-sm-6 col-md-3 col-lg-3 col-xl-3 col-xxl-3 p-4 border">
+                            <label for="birthdate" class="form-label">Fecha de Nacimiento:</label>
+                            <input type="date" class="form-control" id="birthdate" name="birthdate" required="required"/>
+                        </div>
+
+                        <!-- Nacionalidad -->
+                        <div class="col-sm-6 col-md-3 col-lg-2 col-xl-2 col-xxl-2 p-4 border">
+                            <label for="nationality" class="form-label">Nacionalidad:</label>
+                            <input type="text" class="form-control" id="nationality" name="nationality" required="required"/>
+                        </div>
+
+                        <!-- Edad -->
+                        <div class="col-sm-6 col-md-2 col-lg-2 col-xl-2 col-xxl-2 p-4 border">
+                            <label for="age" class="form-label">Edad</label>
+                            <input type="number" class="form-control" id="age" min="18" name="age" required="required"/>
+                        </div>
+
+                        <!-- Estado Civil -->
+                        <div class="col-sm-6 col-md-2 col-lg-2 col-xl-2 col-xxl-2 p-4 border">
+                            <label for="marital_status" class="form-label">Estado Civil:</label>
+                            <select class="form-select" id="marital_status" name="marital_status" required="required">
+                                <option value="single">Soltero/a</option>
+                                <option value="married">Casado/a</option>
+                                <option value="divorced">Divorciado/a</option>
+                                <option value="widowed">Viudo/a</option>
+                            </select>
+                        </div>
+                    </div>
+
+                    <div class="row">
+                        <!-- Número de Seguro Social -->
+                        <div class="col-sm-6 col-md-4 col-lg-4 col-xl-4 col-xxl-4 p-4 border">
+                            <label for="social_security_number" class="form-label">Número de Seguro Social:</label>
+                            <input type="text" class="form-control" id="social_security_number" name="social_security_number" required="required"/>
+                        </div>
+
+                        <!-- RFC -->
+                        <div class="col-sm-6 col-md-4 col-lg-4 col-xl-4 col-xxl-4 p-4 border">
+                            <label for="rfc" class="form-label">RFC:</label>
+                            <input type="text" class="form-control" id="rfc" name="rfc" required="required"/>
+                        </div>
+
+                        <!-- CURP -->
+                        <div class="col-sm-6 col-md-4 col-lg-4 col-xl-4 col-xxl-4 p-4 border">
+                            <label for="curp" class="form-label">CURP:</label>
+                            <input type="text" class="form-control" id="curp" name="curp" required="required"/>
+                        </div>
+                    </div>
+
+                    <div class="row">
+                        <!-- Domicilio -->
+                        <div class="col-sm-6 col-md-3 col-lg-3 col-xl-3 col-xxl-3 p-4 border">
+                            <label for="address_street" class="form-label">Domicilio (Calle y Número):</label>
+                            <input type="text" class="form-control" id="address_street" name="address_street" required="required"/>
+                        </div>
+
+                        <div class="col-sm-6 col-md-3 col-lg-3 col-xl-3 col-xxl-3 p-4 border">
+                            <label for="address_neighborhood" class="form-label">Colonia:</label>
+                            <input type="text" class="form-control" id="address_neighborhood" name="address_neighborhood" required="required"/>
+                        </div>
+
+                        <div class="col-sm-6 col-md-3 col-lg-2 col-xl-2 col-xxl-2 p-4 border">
+                            <label for="address_city" class="form-label">Municipio:</label>
+                            <input type="text" class="form-control" id="address_city" name="address_city" required="required"/>
+                        </div>
+
+                        <div class="col-sm-6 col-md-3 col-lg-2 col-xl-2 col-xxl-2 p-4 border">
+                            <label for="number_phone" class="form-label">Teléfono:</label>
+                            <input type="tel" class="form-control" id="number_phone" name="number_phone" required="required"/>
+                        </div>
+
+                        <div class="col-sm-6 col-md-3 col-lg-2 col-xl-2 col-xxl-2 p-4 border">
+                            <label for="personal_email" class="form-label">Correo electrónico:</label>
+                            <input type="email" class="form-control" id="personal_email" name="personal_email" required="required"/>
+                        </div>
+                    </div>
+            
+                    <div class="row">
+                        <!-- Con quién vive -->
+                        <div class="col-sm-6 col-md-3 col-lg-3 col-xl-3 col-xxl-3 p-4 border">
+                            <label for="live_with" class="form-label">¿Con quién vive?:</label>
+                            <input type="text" class="form-control" id="live_with" name="live_with"/>
+                        </div>
+
+                        <!-- Monto de Renta -->
+                        <div class="col-sm-6 col-md-3 col-lg-3 col-xl-3 col-xxl-3 border">
+                            <div class="row">
+                                <div class="col-sm-6 col-md-6 col-lg-6 col-xl-6 col-xxl-6 p-4 border">
+                                    <label for="rent_amount" class="form-label">Monto semanal de renta:</label>
+                                    <input type="number" class="form-control" id="rent_amount" name="rent_amount"/>
+                                </div>
+                                <div class="col-sm-6 col-md-6 col-lg-6 col-xl-6 col-xxl-6 p-4 border">
+                                    <label for="infonavit_credit_amount" class="form-label">Monto semanal de Infonavit:</label>
+                                    <input type="number" class="form-control" id="infonavit_credit_amount" name="infonavit_credit_amount"/>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Tiempo de traslado -->
+                        <div class="col-sm-6 col-md-6 col-lg-6 col-xl-6 col-xxl-6 p-4 border">
+                            <label for="transports" class="form-label">Tiempo de traslado y cantidad de transportes:</label>
+                            <input type="text" class="form-control" id="transports" name="transports"/>
+                        </div>
+                    </div>
+
+                    <div class="row">
+                        <!-- Puesto que solicita -->
+                        <div class="col-sm-6 col-md-3 col-lg-3 col-xl-3 col-xxl-3 p-4 border">
+                            <label for="requested_job_position" class="form-label">Puesto que solicita:</label>
+                            <input type="text" class="form-control" id="requested_job_position" name="requested_job_position"/>
+                        </div>
+
+                        <!-- Gastos mensuales -->
+                        <div class="col-sm-6 col-md-3 col-lg-3 col-xl-3 col-xxl-3 p-4 border">
+                            <label for="monthly_expenses" class="form-label">Gastos mensuales aproximados:</label>
+                            <input type="number" class="form-control" id="monthly_expenses" name="monthly_expenses"/>
+                        </div>
+
+                        <!-- Gastos mensuales -->
+                        <div class="col-sm-6 col-md-6 col-lg-6 col-xl-6 col-xxl-6 p-4 border">
+                            <label for="availability" class="form-label">Disponibilidad para empezar a trabajar:</label>
+                            <input type="text" class="form-control" id="availability" name="availability"/>
+                        </div>
+                    </div>
+
+                    <div class="row">
+                        <!-- Personas que dependen -->
+                        <div class="col-sm-6 col-md-3 col-lg-3 col-xl-3 col-xxl-3 p-4 border">
+                            <label for="dependents" class="form-label">Personas que dependen de ti:</label>
+                            <input type="text" class="form-control" id="dependents" name="dependents"/>
+                        </div>
+
+                        <!-- Nacionalidad extranjera -->
+                        <div class="col-sm-6 col-md-3 col-lg-3 col-xl-3 col-xxl-3 p-4 border">
+                            <label for="foreign_nationality" class="form-label">¿Cuenta con nacionalidad extranjera?:</label>
+                            <input type="checkbox" id="foreign_nationality" name="foreign_nationality"/>
+                        </div>
+
+                        <!-- Actividades diarias -->
+                        <div class="col-sm-6 col-md-6 col-lg-6 col-xl-6 col-xxl-6 p-4 border">
+                            <label for="daily_activities" class="form-label">Describa sus actividades diarias (Trabajar, estudiar):</label>
+                            <textarea class="form-control" id="daily_activities" name="daily_activities"></textarea>
+                        </div>
+                    </div>
+                </section>
+
+                <section class="p-3">
+                    <h3>CUESTIONARIO</h3>
+                    <div class="row">
+                        <t t-foreach="health_questions_json" t-as="question">
+                            <div class="col-sm-12 col-md-6 col-lg-6 col-xl-6 col-xxl-12 p-4 border">
+                                <label t-att-for="question['id']" class="form-label text-muted">
+                                    <t t-esc="question['text']"/>
+                                </label>
+                                <input type="text" class="form-control"
+                                    t-att-id="question['id']" 
+                                    t-att-name="question['id']" 
+                                    t-att-placeholder="'Ingrese su respuesta'" 
+                                    required="required"/>
+                            </div>
+                        </t>
+                    </div>
+                </section>
+
+                <div class="text-end mt-4">
+                    <button type="button" class="btn btn-primary" id="next-button">Siguiente <i class="bi bi-arrow-right"></i></button>
+                </div>
+            </div>
+
+            <div id="second-part" style="display:none;">
+                <section class="p-3">
+                    <h3>DATOS FAMILIARES</h3>
+                    <div class="row">
+                        <div class="col-sm-6 col-md-3 col-lg-3 col-xl-3 col-xxl-3 p-4 border">
+                            <label for="typef_1" class="form-label">Tipo</label>
+                            <input type="text" class="form-control" id="typef_1" name="typef_1" value="Padre" required="required" readonly="true"/>
+                        </div>
+                        <div class="col-sm-6 col-md-3 col-lg-3 col-xl-3 col-xxl-3 p-4 border">
+                            <label for="fullnamef_1" class="form-label">Nombre completo</label>
+                            <input type="text" class="form-control" id="fullnamef_1" name="fullnamef_1" required="required" />
+                        </div>
+                        <div class="col-sm-6 col-md-3 col-lg-3 col-xl-3 col-xxl-3 p-4 border">
+                            <label for="ocupationf_1" class="form-label">Ocupación</label>
+                            <input type="text" class="form-control" id="ocupationf_1" name="ocupationf_1" required="required"/>
+                        </div>
+                        <div class="col-sm-6 col-md-3 col-lg-3 col-xl-3 col-xxl-3 p-4 border">
+                            <label for="phonef_1" class="form-label">Teléfono</label>
+                            <input type="tel" class="form-control" id="phonef_1" name="phonef_1" required="required"/>
+                        </div>
+                    </div>
+
+                    <div class="row">
+                        <div class="col-sm-6 col-md-3 col-lg-3 col-xl-3 col-xxl-3 p-4 border">
+                            <label for="typef_2" class="form-label">Tipo</label>
+                            <input type="text" class="form-control" id="typef_2" name="typef_2" value="Madre" required="required" readonly="true"/>
+                        </div>
+                        <div class="col-sm-6 col-md-3 col-lg-3 col-xl-3 col-xxl-3 p-4 border">
+                            <label for="fullnamef_2" class="form-label">Nombre completo</label>
+                            <input type="text" class="form-control" id="fullnamef_2" name="fullnamef_2" required="required" />
+                        </div>
+                        <div class="col-sm-6 col-md-3 col-lg-3 col-xl-3 col-xxl-3 p-4 border">
+                            <label for="ocupationf_2" class="form-label">Ocupación</label>
+                            <input type="text" class="form-control" id="ocupationf_2" name="ocupationf_2" required="required"/>
+                        </div>
+                        <div class="col-sm-6 col-md-3 col-lg-3 col-xl-3 col-xxl-3 p-4 border">
+                            <label for="phonef_2" class="form-label">Teléfono</label>
+                            <input type="tel" class="form-control" id="phonef_2" name="phonef_2" required="required"/>
+                        </div>
+                    </div>
+
+                    <div class="row">
+                        <div class="col-sm-6 col-md-3 col-lg-3 col-xl-3 col-xxl-3 p-4 border">
+                            <label for="typef_3" class="form-label">Tipo</label>
+                            <input type="text" class="form-control" id="typef_3" name="typef_3" value="Conyugue" required="required" readonly="true"/>
+                        </div>
+                        <div class="col-sm-6 col-md-3 col-lg-3 col-xl-3 col-xxl-3 p-4 border">
+                            <label for="fullnamef_3" class="form-label">Nombre completo</label>
+                            <input type="text" class="form-control" id="fullnamef_3" name="fullnamef_3" required="required" />
+                        </div>
+                        <div class="col-sm-6 col-md-3 col-lg-3 col-xl-3 col-xxl-3 p-4 border">
+                            <label for="ocupationf_3" class="form-label">Ocupación</label>
+                            <input type="text" class="form-control" id="ocupationf_3" name="ocupationf_3" required="required"/>
+                        </div>
+                        <div class="col-sm-6 col-md-3 col-lg-3 col-xl-3 col-xxl-3 p-4 border">
+                            <label for="phonef_3" class="form-label">Teléfono</label>
+                            <input type="tel" class="form-control" id="phonef_3" name="phonef_3" required="required"/>
+                        </div>
+                    </div>
+                </section>
+
+                <section class="p-3">
+                    <h3>FORMACIÓN ACADÉMICA</h3>
+                    <div class="row">
+                        <div class="col-sm-6 col-md-4 col-lg-4 col-xl-4 col-xxl-4 p-4 border">
+                            <label for="degree" class="form-label">Último grado de estudios</label>
+                            <input type="text" class="form-control" id="degree" name="degree" value="Padre" required="required" readonly="true"/>
+                        </div>
+                        <div class="col-sm-6 col-md-4 col-lg-4 col-xl-4 col-xxl-4 p-4 border">
+                            <label for="institution" class="form-label">Institución académica</label>
+                            <input type="text" class="form-control" id="institution" name="institution" required="required" />
+                        </div>
+                        <div class="col-sm-6 col-md-4 col-lg-4 col-xl-4 col-xxl-4 p-4 border">
+                            <label for="specification" class="form-label">Comprobantes de estudios, especifique (si, , no)</label>
+                            <input type="text" class="form-control" id="specification" name="specification" required="required"/>
+                        </div>
+                    </div>
+
+                    <div class="row">
+                        <div class="row">
+                            <t t-foreach="study_questions_json" t-as="question">
+                                <div class="col-sm-12 col-md-6 col-lg-6 col-xl-6 col-xxl-12 p-4 border">
+                                    <label t-att-for="question['id']" class="form-label text-muted">
+                                        <t t-esc="question['text']"/>
+                                    </label>
+                                    <input type="text" class="form-control"
+                                        t-att-id="question['id']" 
+                                        t-att-name="question['id']" 
+                                        t-att-placeholder="'Ingrese su respuesta'" 
+                                        required="required"/>
+                                </div>
+                            </t>
+                        </div>
+                    </div>                        
+                </section>
+
+                <section class="p-3">
+                    <h3>HISTORIAL LABORAL</h3>
+                    <div id="container">
+                        <div class="row">
+                            <div class="col-sm-6 col-md-3 col-lg-3 col-xl-3 col-xxl-3 p-4 border">
+                                <label for="company_name" class="form-label">Nombre de la empresa</label>
+                                <input type="text" class="form-control" id="company_name" name="company_name[]" required="required" />
+                            </div>
+                            <div class="col-sm-6 col-md-4 col-lg-4 col-xl-4 col-xxl-4">
+                                <div class="row">
+                                    <div class="col-sm-6 col-md-6 col-lg-6 col-xl-6 col-xxl-6 p-4 border">
+                                        <label for="start_date" class="form-label">Desde</label>
+                                        <input type="date" class="form-control" id="start_date" name="start_date[]" required="required" />
+                                    </div>
+                                    <div class="col-sm-6 col-md-6 col-lg-6 col-xl-6 col-xxl-6 p-4 border">
+                                        <label for="end_date" class="form-label">Hasta</label>
+                                        <input type="date" class="form-control" id="end_date" name="end_date[]" required="required" />
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-sm-6 col-md-3 col-lg-3 col-xl-3 col-xxl-3 p-4 border">
+                                <label for="separation_reason" class="form-label">Motivo de separación</label>
+                                <input type="text" class="form-control" id="separation_reason" name="separation_reason[]" required="required" />
+                            </div>
+                            <div class="col-sm-6 col-md-2 col-lg-2 col-xl-2 col-xxl-2 p-4 border">
+                                <label for="weekly_salary" class="form-label">Sueldo semanal</label>
+                                <input type="tel" class="form-control" id="weekly_salary" name="weekly_salary[]" required="required" />
+                            </div>
+                           
+                        </div>
+                    </div>
+                    <div class="text-end mt-3">
+                        <button type="button" class="btn btn-primary" id="add-row">Agregar</button>
+                    </div>
+                </section>
+
+                <section class="p-3">
+                    <h3>REFERENCIAS PERSONALES Y LABORALES</h3>
+                    <div class="row">
+                        <div class="col-sm-6 col-md-3 col-lg-3 col-xl-3 col-xxl-3 p-4 border">
+                            <label for="typef_1" class="form-label">Tipo</label>
+                            <input type="text" class="form-control" id="typef_1" name="typef_1" value="Personal" required="required" readonly="true"/>
+                        </div>
+                        <div class="col-sm-6 col-md-3 col-lg-3 col-xl-3 col-xxl-3 p-4 border">
+                            <label for="fullnamef_2" class="form-label">Nombre completo</label>
+                            <input type="text" class="form-control" id="fullnamef_2" name="fullnamef_2" required="required" />
+                        </div>
+                        <div class="col-sm-6 col-md-3 col-lg-3 col-xl-3 col-xxl-3 p-4 border">
+                            <label for="ocupationf_2" class="form-label">Ocupación/Giro</label>
+                            <input type="text" class="form-control" id="ocupationf_2" name="ocupationf_2" required="required"/>
+                        </div>
+                        <div class="col-sm-6 col-md-3 col-lg-3 col-xl-3 col-xxl-3 p-4 border">
+                            <label for="phonef_2" class="form-label">Teléfono</label>
+                            <input type="tel" class="form-control" id="phonef_2" name="phonef_2" required="required"/>
+                        </div>
+                    </div>
+
+                    <div class="row">
+                        <div class="col-sm-6 col-md-3 col-lg-3 col-xl-3 col-xxl-3 p-4 border">
+                            <label for="typef_1" class="form-label">Tipo</label>
+                            <input type="text" class="form-control" id="typef_1" name="typef_1" value="Laboral" required="required" readonly="true"/>
+                        </div>
+                        <div class="col-sm-6 col-md-3 col-lg-3 col-xl-3 col-xxl-3 p-4 border">
+                            <label for="fullnamef_2" class="form-label">Nombre completo</label>
+                            <input type="text" class="form-control" id="fullnamef_2" name="fullnamef_2" required="required" />
+                        </div>
+                        <div class="col-sm-6 col-md-3 col-lg-3 col-xl-3 col-xxl-3 p-4 border">
+                            <label for="ocupationf_2" class="form-label">Ocupación/Giro</label>
+                            <input type="text" class="form-control" id="ocupationf_2" name="ocupationf_2" required="required"/>
+                        </div>
+                        <div class="col-sm-6 col-md-3 col-lg-3 col-xl-3 col-xxl-3 p-4 border">
+                            <label for="phonef_2" class="form-label">Teléfono</label>
+                            <input type="tel" class="form-control" id="phonef_2" name="phonef_2" required="required"/>
+                        </div>
+                    </div>
+
+                    <div class="row">
+                        <t t-foreach="job_questions_json" t-as="question">
+                            <div class="col-sm-12 col-md-6 col-lg-6 col-xl-6 col-xxl-12 p-4 border">
+                                <label t-att-for="question['id']" class="form-label text-muted">
+                                    <t t-esc="question['text']"/>
+                                </label>
+                                <input type="text" class="form-control"
+                                    t-att-id="question['id']" 
+                                    t-att-name="question['id']" 
+                                    t-att-placeholder="'Ingrese su respuesta'" 
+                                    required="required"/>
+                            </div>
+                        </t>
+                    </div>
+                </section>
+
+                <section class="p-3">
+                    <div class="row">
+                        <div class="col-sm-6 col-md-6 col-lg-6 col-xl-6 col-xxl-6 p-4 border">
+                            <h3>COMENTARIOS DEL RECLUTADOR</h3>
+                            <textarea class="form-control" id="daily_activities" name="daily_activities"></textarea>
+                        </div>
+                        <div class="col-sm-6 col-md-6 col-lg-6 col-xl-6 col-xxl-6 p-4 border">
+                            <label for="signature" class="form-label">Firma del solicitante:</label>
+                            <canvas id="signature-pad" class="signature-pad border" width="400" height="200"></canvas>
+                            <input type="hidden" id="signature" name="signature" />
+                            <button type="button" class="btn btn-secondary mt-2" id="clear-signature">Borrar firma</button>
+                        </div>
+                    </div>
+
+                    <div class="row">
+                        <div class="col p-3 text-center border">
+                            La empresa no se compromete a aceptar al solicitante como empleado por el solo hecho de recibir esta solicitud.
+                        </div>
+                    </div>
+                </section>                
+
+                <div class="row mt-4">
+                    <div class="col text-start">
+                        <button type="button" class="btn btn-primary" id="previous-button">
+                            <i class="bi bi-arrow-left"></i> Anterior 
+                        </button>
+                    </div>
+                    <div class="col text-end">
+                        <button type="submit" class="btn btn-primary btn-lg">
+                            Enviar
+                        </button>
+                    </div>
+                </div>
+            </div>  
+
+            <div class="position-fixed bottom-0 end-0 m-4" >
+                <a href="#" class="btn btn-info btn-lg" id="back-to-top" title="Volver al inicio" style="display:none;">
+                    <i class="bi bi-arrow-up"></i>
+                </a>
+            </div>     
+        </form>
+    </div>
+    <script src="https://cdn.jsdelivr.net/npm/signature_pad@2.3.2/dist/signature_pad.min.js"></script>
+    <script>
+
+        // ACCIONES PARA BOTÓN SIGUIENTE
+        document.addEventListener('DOMContentLoaded', function () {
+            
+            const firstPart = document.getElementById('first-part');
+            const secondPart = document.getElementById('second-part');
+            const nextBtn = document.getElementById('next-button');
+            const previousButton = document.getElementById('previous-button');
+            const multiStepForm = document.getElementById('job-application-form');
+
+            function validateFirstPart() {
+                const inputs = firstPart.querySelectorAll('input, select');
+                for (let input of inputs) {
+                    if (!input.checkValidity()) {
+                        input.reportValidity();
+                        return false;
+                    }
+                }
+                window.scrollTo({ top: 0, behavior: 'smooth' });
+                return true;
+            }
+
+            nextBtn.addEventListener('click', function () {
+                if (validateFirstPart()) {
+                    firstPart.style.display = 'none';
+                    secondPart.style.display = 'block';
+                }
+            });
+
+
+            previousButton.addEventListener('click', function () {
+                firstPart.style.display = 'block';
+                secondPart.style.display = 'none';
+            });
+        });
+
+        // FECHA ACTUAL
+        document.addEventListener("DOMContentLoaded", function() {
+            const today = new Date().toISOString().split('T')[0];
+            document.getElementById("request_date").value = today;
+        });
+
+        // OTRO MEDIO DE REFERENCIA
+        function toggleOtherReference() {
+            const otherRadio = document.getElementById('otro_medio');
+            const otherInput = document.getElementById('other_reference');
+            otherInput.style.display = otherRadio.checked ? 'block' : 'none';
+            if (!otherRadio.checked) {
+                otherInput.value = '';
+            }
+        }
+
+        window.onscroll = function() {
+            var button = document.getElementById("back-to-top");
+            if (document.body.scrollTop > 100 || document.documentElement.scrollTop > 100) {
+                button.style.display = "block";
+            } else {
+                button.style.display = "none";
+            }
+        };
+
+        // FIRMA
+        // Inicializar el Signature Pad
+        var canvas = document.getElementById('signature-pad');
+        var signaturePad = new SignaturePad(canvas);
+
+        // Botón para limpiar la firma
+        document.getElementById('clear-signature').addEventListener('click', function () {
+            signaturePad.clear();
+        });
+
+        // Guardar la firma como una imagen base64 en el campo oculto
+        document.querySelector('form').addEventListener('submit', function (event) {
+            if (!signaturePad.isEmpty()) {
+                var signatureData = signaturePad.toDataURL('image/png');
+                document.getElementById('signature').value = signatureData;
+            } else {
+                alert("Por favor, firme antes de enviar.");
+                event.preventDefault();  // Evita el envío si no hay firma
+            }
+        });
+
+        //  AGREGAR O BORRAR REFERNCIA LABORAL
+        document.getElementById('add-row').addEventListener('click', function () {
+            // Clonar el row existente
+            const newRow = document.querySelector('.row').cloneNode(true);
+    
+            // Limpiar los valores de los inputs
+            newRow.querySelectorAll('input').forEach(input => {
+                input.value = '';
+            });
+    
+            // Agregar el botón "Borrar" solo al nuevo row
+            const removeButton = document.createElement('button');
+            removeButton.type = 'button';
+            removeButton.className = 'btn btn-danger btn-sm remove-row';
+            removeButton.textContent = 'Borrar';
+            removeButton.addEventListener('click', function () {
+                newRow.remove();
+            });
+    
+            // Crear un nuevo div para el botón "Borrar" y agregarlo
+            const buttonDiv = document.createElement('div');
+            buttonDiv.className = 'col-12 text-end mt-2';
+            buttonDiv.appendChild(removeButton);
+    
+            // Agregar el nuevo div del botón al nuevo row
+            newRow.appendChild(buttonDiv);
+    
+            // Insertar el nuevo row en el contenedor
+            document.getElementById('container').appendChild(newRow);
+        });
+    </script>
+
+    </template>
+
+    <template id="template_job_application_success" name="Form Submission Success">
+        <p>¡Gracias por enviar el formulario!</p>
+    </template>
+</odoo>

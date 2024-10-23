@@ -136,13 +136,14 @@ class Plan(models.Model):
     
 
     start_date = fields.Date(
-        string='Fecha de inicio',
-        required=True,
+        string='Fecha de inicio'
     )
+    #required=True,
+
     limit_date = fields.Date(
-        string='Fecha de fin',
-        required=True,
+        string='Fecha de fin'
     )
+    #required=True,
 
     '''
     frequency_id = fields.Many2one(
@@ -154,16 +155,9 @@ class Plan(models.Model):
 
     new_frequency_id = fields.Many2one(
         string='Periodicidad',
-        comodel_name='mgmtsystem.frequency',
-        required=True,
+        comodel_name='mgmtsystem.frequency'
     )
-
-    new_frequency_id = fields.Many2one(
-        string='Periodicidad',
-        comodel_name='mgmtsystem.frequency',
-        required=True,
-    )
-
+    #required=True,
 
 
     # Campo computado que recopila los IDs de los sitios disponibles
