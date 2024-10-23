@@ -11,6 +11,7 @@
         'base',
         'mgmtsystem_context',
         'mgmtsystem_process_integration',
+        'tyt_process',
     ],
     'data': [
         'security/ir.model.access.csv',

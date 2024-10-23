@@ -38,6 +38,11 @@
                             string="Nueva versión"
                             attrs="{'invisible':[('state', '!=', 'validate_ok')]}"
                             class="oe_highlight" />
+                    <button string="Validación rápida"
+                            name="fast_validation"
+                            type="object"
+                            class="oe_highlight"
+                            attrs="{'invisible':[('state','!=', 'elaborate')]}"/>
 <!--                    <button string="Comunicar procedimiento" name="send_edition_by_email" type="object" class="oe_highlight" attrs="{'invisible':[('state', '!=', 'validate_ok')]}"/>-->
                 </header>
                 <sheet>
@@ -65,10 +70,41 @@
                         <label for="process_id" />
                         <div class="o_row">
                             <field name="process_id" options="{'no_create': True}" placeholder="Procedimiento" colspan="3" attrs="{'readonly': [('state','not in',('elaborate'))]}" />
+                            <field name="version_as_string" colspan="1" nolabel="1" class="oe_inline" />
                         </div>
                     </group>
                     <notebook>
-
+                        <page string="Contenido" name="content">
+                        </page>
+                        <page string="Validación y versión" name="version_info">
+                            <group col="4">
+                                <group colspan="4">
+                                    <field name="version" attrs="{'readonly': [('state','in',('validate_ok','cancel'))]}" />
+                                </group>
+                                <group colspan="4">
+                                    <separator string="Elaboración" />
+                                    <field name="elaboration_step" colspan="2" nolabel="1" attrs="{'readonly': [('state','not in',('elaborate'))]}" />
+                                    <separator string="Revisión" />
+                                    <field name="review_step" colspan="2" nolabel="1" attrs="{'readonly': [('state','not in',('elaborate', 'review'))]}" />
+                                    <separator string="Validación" />
+                                    <field name="validation_step" colspan="2" nolabel="1" attrs="{'readonly': [('state','not in',('elaborate', 'review', 'validate'))]}" />
+                                </group>
+                                <group colspan="2">
+                                    <field name="date_elaborate" attrs="{'required': [('state','in',('elaborate'))], 'readonly': True}" />
+                                    <field name="date_review" attrs="{'required': [('state','in',('review'))], 'readonly': True, 'invisible': [('state','in',('elaborate'))] }" />
+                                    <field name="date_validate" groups="base.group_no_one,base.user_admin" attrs="{'invisible': [('state','in',('elaborate','review'))] }" />
+                                </group>
+                            </group>
+                        </page>
+                        <page name="change_history" string="Historial">
+                            <field name="change_history">
+                                <tree>
+                                    <field name="numero" />
+                                    <field name="publish_date" />
+                                    <field name="name" />
+                                </tree>
+                            </field>
+                        </page>
                     </notebook>
                 </sheet>
                 <div class="oe_chatter">
@@ -86,6 +122,7 @@
         <field name="arch" type="xml">
             <tree>
                 <field name="name" />
+                <field name="state" />
             </tree>
         </field>
     </record>
@@ -94,6 +131,7 @@
         <field name="name">Alcance</field>
         <field name="res_model">tyt.context.scope</field>
         <field name="view_mode">tree,form</field>
+        <field name="domain">[('state', '!=', 'cancel')]</field>
     </record>
 
     <record id="tyt_context_scope_cancel_action" model="ir.actions.act_window">
