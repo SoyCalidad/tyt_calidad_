@@ -1,4 +1,5 @@
 from odoo import api, fields, models, _
+from odoo.exceptions import UserError
 
 
 class Mailbox(models.Model):
@@ -21,9 +22,10 @@ class Mailbox(models.Model):
     company_id = fields.Many2one('res.company', string='Company', default=lambda self: self.env.company)
     state = fields.Selection([
         ('received', 'Received'),
+        ('escalated', 'Escalated'),
         ('in_progress', 'In Progress'),
         ('resolved', 'Resolved'),
-        ('escalated', 'Escalated')], string='State', default='received', tracking=True)
+    ], string='State', default='received', tracking=True)
     priority = fields.Selection([
         ('0', 'Low'),
         ('1', 'Medium'),
@@ -86,11 +88,14 @@ class Mailbox(models.Model):
     def action_in_progress(self):
         self.write({'state': 'in_progress'})
 
+    def action_escalated(self):
+        if not self.responsible_id:
+            raise UserError(_('You must select a responsible'))
+        self.write({'state': 'escalated'})
+        self.send_mail()
+
     def action_resolved(self):
         self.write({'state': 'resolved'})
-
-    def action_escalated(self):
-        self.write({'state': 'escalated'})
 
     @api.depends('message_type_id')
     def _compute_name(self):
@@ -102,7 +107,12 @@ class Mailbox(models.Model):
 
     def get_emails_to_send(self):
         self.ensure_one()
-        return ', '.join(self.responsible_ids.mapped('email'))
+        if self.responsible_id:
+            return self.responsible_id.email
+        elif self.state == 'received':
+            return ', '.join(self.responsible_ids.mapped('email'))
+        else:
+            ''
 
     def send_mail_modal(self):
         self.ensure_one()
@@ -132,4 +142,4 @@ class Mailbox(models.Model):
     def send_mail(self):
         self.ensure_one()
         template = self.env.ref('tyt_intranet_helpdesk.mail_template_tyt_intranet_mailbox', raise_if_not_found=False)
-        template.send_mail(self.id, force_send=True)
+        template.sudo().send_mail(self.id, force_send=True)
