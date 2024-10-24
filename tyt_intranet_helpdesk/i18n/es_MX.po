@@ -697,6 +697,11 @@ msgid "Send Email"
 msgstr "Envíar correo electrónico"
 
 #. module: tyt_intranet_helpdesk
+#: model_terms:ir.ui.view,arch_db:tyt_intranet_helpdesk.tyt_intranet_mailbox_view_form
+msgid "Notify Responsible"
+msgstr "Notificar responsable"
+
+#. module: tyt_intranet_helpdesk
 #: model:ir.model,name:tyt_intranet_helpdesk.model_tyt_intranet_service_area
 #: model:ir.model.fields,field_description:tyt_intranet_helpdesk.field_tyt_intranet_mailbox__service_area_id
 #: model:ir.model.fields,field_description:tyt_intranet_helpdesk.field_tyt_intranet_notification_matrix_line__service_area_id

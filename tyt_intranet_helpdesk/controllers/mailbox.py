@@ -56,12 +56,12 @@ class MailboxController(http.Controller):
                 mailbox_values[key] = value
 
         if 'is_anonymous' in kw:
-            mailbox_values['site_id'] = kw.get('site_id_select')
+            mailbox_values['site_id'] = int(kw.get('site_id_select'))
         else:
-            mailbox_values['site_id'] = kw.get('site_id')
+            mailbox_values['site_id'] = int(kw.get('site_id'))
 
         mailbox = Mailbox.sudo().create(mailbox_values)
-        mailbox.sudo().send_mail()
+        mailbox.send_mail()
         return request.redirect('/mailbox/success')
 
     @http.route('/mailbox/success', type='http', auth='user', website=True)

@@ -14,7 +14,8 @@
                             class="btn-primary"/>
                     <button name="action_resolved" string="Resolved" type="object" states="in_progress"
                             class="btn-primary" confirm="Are you sure you want to mark this as resolved"/>
-                    <button name="send_mail_modal" string="Send Email" type="object" class="btn-secondary"/>
+                    <button name="send_mail_modal" string="Notify Responsible" type="object" states="escalated, in_progress"
+                            class="btn-secondary"/>
                 </header>
                 <sheet>
                     <div class="oe_title">

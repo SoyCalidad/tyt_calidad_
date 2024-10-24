@@ -92,6 +92,7 @@ class Mailbox(models.Model):
         if not self.responsible_id:
             raise UserError(_('You must select a responsible'))
         self.write({'state': 'escalated'})
+        self.send_mail()
 
     def action_resolved(self):
         self.write({'state': 'resolved'})
@@ -106,7 +107,12 @@ class Mailbox(models.Model):
 
     def get_emails_to_send(self):
         self.ensure_one()
-        return ', '.join(self.responsible_ids.mapped('email'))
+        if self.responsible_id:
+            return self.responsible_id.email
+        elif self.state == 'received':
+            return ', '.join(self.responsible_ids.mapped('email'))
+        else:
+            ''
 
     def send_mail_modal(self):
         self.ensure_one()
@@ -136,4 +142,4 @@ class Mailbox(models.Model):
     def send_mail(self):
         self.ensure_one()
         template = self.env.ref('tyt_intranet_helpdesk.mail_template_tyt_intranet_mailbox', raise_if_not_found=False)
-        template.send_mail(self.id, force_send=True)
+        template.sudo().send_mail(self.id, force_send=True)
