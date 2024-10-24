@@ -36,26 +36,110 @@ class Plan(models.Model):
             schedule_data = [
                 {
                     'description_id': self.env.ref('tyt_audit.schedule_plan_description_1').id,
-                    'activity_id': self.env.ref('tyt_audit.schedule_plan_activity_1').id,
-                    'sites_id': self.env['x_sitios'].search([('x_name', '=', 'Guadalajara')], limit=1).id,
-                },
-                {
-                    'description_id': self.env.ref('tyt_audit.schedule_plan_description_2').id,
-                    'activity_id': self.env.ref('tyt_audit.schedule_plan_activity_4').id,
+                    'activity_id': self.env.ref('tyt_audit.schedule_plan_activity_101').id,
                     'sites_id': self.env['x_sitios'].search([('x_name', '=', 'Guadalajara')], limit=1).id,
                 },
                 {
                     'description_id': self.env.ref('tyt_audit.schedule_plan_description_1').id,
-                    'activity_id': self.env.ref('tyt_audit.schedule_plan_activity_1').id,
+                    'activity_id': self.env.ref('tyt_audit.schedule_plan_activity_102').id,
+                    'sites_id': self.env['x_sitios'].search([('x_name', '=', 'Guadalajara')], limit=1).id,
+                },
+                {
+                    'description_id': self.env.ref('tyt_audit.schedule_plan_description_1').id,
+                    'activity_id': self.env.ref('tyt_audit.schedule_plan_activity_103').id,
+                    'sites_id': self.env['x_sitios'].search([('x_name', '=', 'Guadalajara')], limit=1).id,
+                },
+                {
+                    'description_id': self.env.ref('tyt_audit.schedule_plan_description_1').id,
+                    'activity_id': self.env.ref('tyt_audit.schedule_plan_activity_104').id,
+                    'sites_id': self.env['x_sitios'].search([('x_name', '=', 'Guadalajara')], limit=1).id,
+                },
+
+                {
+                    'description_id': self.env.ref('tyt_audit.schedule_plan_description_1').id,
+                    'activity_id': self.env.ref('tyt_audit.schedule_plan_activity_201').id,
                     'sites_id': self.env['x_sitios'].search([('x_name', '=', 'Hermosillo')], limit=1).id,
                 },
                 {
                     'description_id': self.env.ref('tyt_audit.schedule_plan_description_2').id,
-                    'activity_id': self.env.ref('tyt_audit.schedule_plan_activity_4').id,
+                    'activity_id': self.env.ref('tyt_audit.schedule_plan_activity_202').id,
                     'sites_id': self.env['x_sitios'].search([('x_name', '=', 'Hermosillo')], limit=1).id,
                 },
-            ]
 
+
+                {
+                    'description_id': self.env.ref('tyt_audit.schedule_plan_description_1').id,
+                    'activity_id': self.env.ref('tyt_audit.schedule_plan_activity_101').id,
+                    'sites_id': self.env['x_sitios'].search([('x_name', '=', 'Puebla Cat')], limit=1).id,
+                },
+                {
+                    'description_id': self.env.ref('tyt_audit.schedule_plan_description_1').id,
+                    'activity_id': self.env.ref('tyt_audit.schedule_plan_activity_102').id,
+                    'sites_id': self.env['x_sitios'].search([('x_name', '=', 'Puebla Cat')], limit=1).id,
+                },
+                {
+                    'description_id': self.env.ref('tyt_audit.schedule_plan_description_1').id,
+                    'activity_id': self.env.ref('tyt_audit.schedule_plan_activity_101').id,
+                    'sites_id': self.env['x_sitios'].search([('x_name', '=', 'Puebla')], limit=1).id,
+                },
+                {
+                    'description_id': self.env.ref('tyt_audit.schedule_plan_description_1').id,
+                    'activity_id': self.env.ref('tyt_audit.schedule_plan_activity_102').id,
+                    'sites_id': self.env['x_sitios'].search([('x_name', '=', 'Puebla')], limit=1).id,
+                },
+
+                {
+                    'description_id': self.env.ref('tyt_audit.schedule_plan_description_1').id,
+                    'activity_id': self.env.ref('tyt_audit.schedule_plan_activity_101').id,
+                    'sites_id': self.env['x_sitios'].search([('x_name', '=', 'Querétaro')], limit=1).id,
+                },
+                {
+                    'description_id': self.env.ref('tyt_audit.schedule_plan_description_1').id,
+                    'activity_id': self.env.ref('tyt_audit.schedule_plan_activity_102').id,
+                    'sites_id': self.env['x_sitios'].search([('x_name', '=', 'Querétaro')], limit=1).id,
+                },                
+            
+                {
+                    'description_id': self.env.ref('tyt_audit.schedule_plan_description_1').id,
+                    'activity_id': self.env.ref('tyt_audit.schedule_plan_activity_101').id,
+                    'sites_id': self.env['x_sitios'].search([('x_name', '=', 'Monterrey Tapia')], limit=1).id,
+                },
+                {
+                    'description_id': self.env.ref('tyt_audit.schedule_plan_description_1').id,
+                    'activity_id': self.env.ref('tyt_audit.schedule_plan_activity_102').id,
+                    'sites_id': self.env['x_sitios'].search([('x_name', '=', 'Monterrey Tapia')], limit=1).id,
+                },          
+
+
+                {
+                    'description_id': self.env.ref('tyt_audit.schedule_plan_description_1').id,
+                    'activity_id': self.env.ref('tyt_audit.schedule_plan_activity_101').id,
+                    'sites_id': self.env['x_sitios'].search([('x_name', '=', 'Monterrey Arteaga')], limit=1).id,
+                },
+                {
+                    'description_id': self.env.ref('tyt_audit.schedule_plan_description_1').id,
+                    'activity_id': self.env.ref('tyt_audit.schedule_plan_activity_102').id,
+                    'sites_id': self.env['x_sitios'].search([('x_name', '=', 'Monterrey Arteaga')], limit=1).id,
+                },    
+
+
+                {
+                    'description_id': self.env.ref('tyt_audit.schedule_plan_description_1').id,
+                    'activity_id': self.env.ref('tyt_audit.schedule_plan_activity_101').id,
+                    'sites_id': self.env['x_sitios'].search([('x_name', '=', 'Mérida')], limit=1).id,
+                },
+                {
+                    'description_id': self.env.ref('tyt_audit.schedule_plan_description_1').id,
+                    'activity_id': self.env.ref('tyt_audit.schedule_plan_activity_102').id,
+                    'sites_id': self.env['x_sitios'].search([('x_name', '=', 'Mérida')], limit=1).id,
+                },                                      
+            ]
+            #####
+            # Mejora PENDIENTE
+            #####
+            # Antes de iniciar la iteración en "schedule_data" vamos a borrar todos los registros de "audit.plan.schedule"(self.schedule_ids) de este registro de audit.plan 
+            # Borrar todos los cronogramas generados nos permitirá sobrescribir los datos generados por el metodo, en caso realicemos modificaciones en "Cronograma de auditoría - Auditores"
+            
             for data in schedule_data:
                 site = self.env['x_sitios'].browse(data['sites_id'])
                 _logger.info(f"Procesando sitio: {site.x_name} (ID: {site.id})")
@@ -107,7 +191,7 @@ class Plan(models.Model):
                     'sites_id': data['sites_id'],
                     'responsible_auditors_id': [(6, 0, auditors.ids)],
                     'total_weeks': total_weeks,
-                    'name': f"{plan.name} - Schedule {site.x_name}",
+                    'name': f"{plan.name} - Sitio: {site.x_name}",
                 })
 
                 _logger.info(f"Nuevo schedule creado: ID {new_schedule.id} para el sitio {site.x_name}")

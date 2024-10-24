@@ -16,6 +16,7 @@
         'security/ir.model.access.csv',
         'views/audit_plan_tyt_auditor.xml',
         'views/audit.xml',
+        'views/audit_plan_schedule_line.xml',        
         'views/plan.xml',
         'reports/report_paperformat.xml',               
         'reports/report_layout.xml',        

@@ -2,28 +2,108 @@
     <data noupdate="0">
 
         <!--CALIDAD-->
-        <record id="schedule_plan_activity_1" model="audit.plan.schedule.activities">
+        <record id="schedule_plan_activity_101" model="audit.plan.schedule.activities">
             <field name="name">AUDITORÍA PROCEDIMIENTO PARA CAPACITACIÓN EN SITIO</field>
         </record>
-        <record id="schedule_plan_activity_2" model="audit.plan.schedule.activities">
+        <record id="schedule_plan_activity_102" model="audit.plan.schedule.activities">
             <field name="name">AUDITORÍA PROCEDIMIENTO PARA APLICACIÓN DE SANCIONES</field>
         </record>    
+        <record id="schedule_plan_activity_103" model="audit.plan.schedule.activities">
+            <field name="name">AUDITORÍA PROCEDIMIENTO PARA CURSO DE REFUERZO</field>
+        </record>
+        <record id="schedule_plan_activity_104" model="audit.plan.schedule.activities">
+            <field name="name">PROCEDIMIENTO PARA MONITOREO DEL SERVICIO</field>
+        </record> 
 
         <!--SISTEMAS-->
-        <record id="schedule_plan_activity_3" model="audit.plan.schedule.activities">
+        <record id="schedule_plan_activity_201" model="audit.plan.schedule.activities">
             <field name="name">AUDITORÍA PROCEDIMIENTO PARA MANTENIMIENTO EN SITIO</field>
         </record>
-        <record id="schedule_plan_activity_4" model="audit.plan.schedule.activities">
+        <record id="schedule_plan_activity_202" model="audit.plan.schedule.activities">
             <field name="name">AUDITORÍA PROCEDIMIENTO PARA GESTIÓN DE SEGURIDAD EN SITIO</field>
         </record> 
+        <record id="schedule_plan_activity_203" model="audit.plan.schedule.activities">
+            <field name="name">AUDITORÍA DE SEGURIDAD INFORMÁTICA   (lector de discos, usb, acceso a otras páginas)</field>
+        </record>
+        <record id="schedule_plan_activity_204" model="audit.plan.schedule.activities">
+            <field name="name">AUDITORÍA PROCEDIMIENTO PARA GESTIÓN DE SOPORTE TÉCNICO</field>
+        </record>
 
         <!--OP-->
-        <record id="schedule_plan_activity_5" model="audit.plan.schedule.activities">
+        <record id="schedule_plan_activity_301" model="audit.plan.schedule.activities">
             <field name="name">AUDITORÍA PROCEDIMIENTO PARA GESTIÓN DE OPERACIONES</field>
         </record>
-        <record id="schedule_plan_activity_6" model="audit.plan.schedule.activities">
+        <record id="schedule_plan_activity_302" model="audit.plan.schedule.activities">
             <field name="name">AUDITORÍA PROCEDIMIENTO PARA CARGA Y ANÁLISIS DE BASE</field>
         </record> 
+        <record id="schedule_plan_activity_303" model="audit.plan.schedule.activities">
+            <field name="name">AUDITORIA PLAN DE DESARROLLO PROFESIONAL</field>
+        </record>
+        <record id="schedule_plan_activity_304" model="audit.plan.schedule.activities">
+            <field name="name">AUDITORÍA PROCEDIMIENTO PARA RECLUTAMIENTO EN SITIO</field>
+        </record> 
 
+        <!--RECURSOS HUMANOS-->
+        <record id="schedule_plan_activity_401" model="audit.plan.schedule.activities">
+            <field name="name">AUDITORÍA PROCEDIMIENTO PARA GESTIÓN DE LIMPIEZA EN SITIO</field>
+        </record>
+        <record id="schedule_plan_activity_402" model="audit.plan.schedule.activities">
+            <field name="name">AUDITORÍA PROCEDIMIENTO PARA ELABORACIÓN DE NÓMINA</field>
+        </record> 
+        <record id="schedule_plan_activity_403" model="audit.plan.schedule.activities">
+            <field name="name">AUDITORÍA PROCEDIMIENTO PARA CONTROL DE BAJAS</field>
+        </record>
+        <record id="schedule_plan_activity_404" model="audit.plan.schedule.activities">
+            <field name="name">AUDITORÍA PROCEDIMIENTO PARA ADMINISTRACIÓN DE CAJA CHICA</field>
+        </record> 
+        <record id="schedule_plan_activity_405" model="audit.plan.schedule.activities">
+            <field name="name">AUDITORÍA PROCEDIMIENTO PARA SELECCIÓN DE PERSONAL ADMINISTRATIVO</field>
+        </record>    
+        <record id="schedule_plan_activity_406" model="audit.plan.schedule.activities">
+            <field name="name">AUDITORÍA DISTRIBUCIÓN EN NOMINA</field>
+        </record>        
+
+        <!--REGLAMENTO INTERNO-->
+        <record id="schedule_plan_activity_501" model="audit.plan.schedule.activities">
+            <field name="name">AUDITORIA GAFETE CON LA NUEVA CULTURA ORGANIZACIONAL A TODO EL PERSONAL EN SITIO</field>
+        </record>
+        <record id="schedule_plan_activity_502" model="audit.plan.schedule.activities">
+            <field name="name">AUDITORÍA A POLÍTICA DE LOCKERS</field>
+        </record> 
+        <record id="schedule_plan_activity_503" model="audit.plan.schedule.activities">
+            <field name="name">AUDITORÍA DE LA ESTANDARIZACIÓN DEL TRABAJO (72 / 48 / 36 HRS) (VALIDAR PUESTOREGISTRADO Y HORARIO DETERMINADO PARA EL MISMO)</field>
+        </record>
+        <record id="schedule_plan_activity_504" model="audit.plan.schedule.activities">
+            <field name="name">AUDITORÍA A  CÓDIGO DE VESTIMENTA</field>
+        </record> 
+        <record id="schedule_plan_activity_505" model="audit.plan.schedule.activities">
+            <field name="name">FILOSOFIA ORGANIZACIONAL (SOLICITAR BASE DE EMPLEADOS A RH PARA SELECCIÓN DEL 30% menor a 1 MES DE ANTIGÜEDAD) (MISIÓN, VISIÓN, VALORES Y POLÍTICA DE CALIDAD)</field>
+        </record>    
+        <record id="schedule_plan_activity_506" model="audit.plan.schedule.activities">
+            <field name="name">AUDITORIA CULTURA ORGANIZACIONAL (ORGANIGRAMA / NOMBRES PUESTOS / JERARQUÍA) (30% ADMIN)</field>
+        </record>
+        <record id="schedule_plan_activity_507" model="audit.plan.schedule.activities">
+            <field name="name">AUDITORÍA A PLACAS DE RESPONSABLES</field>
+        </record> 
+        <record id="schedule_plan_activity_508" model="audit.plan.schedule.activities">
+            <field name="name">AUDITORÍA A FIRMA DE MAIL CON NUEVA CULTURA ORGANIZACIONAL SÓLO A GERENTE DE SITIO, RESPONSABLE DE CALIDAD, TÉCNICO DE CALIDAD, ENTRENADOR DE SITIO, RESPONSABLE RH Y ADM, RECLUTADOR DE SITIO, GUARDIA DE SEGURIDAD, RESPONSABLE DE OPERACIONES, SUPERVISOR DE OPERACIONES, RESPONSABLE DE ANALISTAS, ANALISTA DE OPERACIÓN, SOPORTE TÉCNICO DE SISTEMAS.</field>
+        </record>    
+        <record id="schedule_plan_activity_509" model="audit.plan.schedule.activities">
+            <field name="name">AUDITORÍA SOBRE USO DE ESTACIONAMIENTO</field>
+        </record>      
+
+        <!--ADICIONALES-->
+        <record id="schedule_plan_activity_601" model="audit.plan.schedule.activities">
+            <field name="name">ARQUEO (LUNES TODAS LAS SEMANAS)</field>
+        </record>
+        <record id="schedule_plan_activity_602" model="audit.plan.schedule.activities">
+            <field name="name">AUDITORIA CLIMAS SITE</field>
+        </record> 
+        <record id="schedule_plan_activity_603" model="audit.plan.schedule.activities">
+            <field name="name">AUDITORIA ERRORES DE NOMINA</field>
+        </record>
+        <record id="schedule_plan_activity_604" model="audit.plan.schedule.activities">
+            <field name="name">AUDITORIA ERRORES DE EXPEDIENTES</field>
+        </record>
     </data>
 </odoo>

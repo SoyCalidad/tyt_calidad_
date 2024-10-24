@@ -61,6 +61,11 @@ class PlanGeneralSchedule(models.Model):
         store=True
     )
 
+    line_ids = fields.One2many( 
+        comodel_name='audit.plan.schedule.line',
+        inverse_name='schedule_id',
+        string='Fechas')
+
     description_id = fields.Many2one('audit.plan.schedule.descriptions', string='Descripción')
 
     activity_id = fields.Many2one('audit.plan.schedule.activities', string='Actividades')
@@ -133,7 +138,31 @@ class Plan(models.Model):
         comodel_name='audit.plan.schedule',
         inverse_name='audit_plan_id',
         string='Cronograma')
-    
+
+    # Nuevo campo One2many computado
+    filtered_schedule_ids = fields.One2many(
+        'audit.plan.schedule',
+        'audit_plan_id',
+        string='Cronograma Filtrado',
+        compute='_compute_filtered_schedule_ids',
+        store=False  # No es necesario almacenarlo
+    )
+
+    @api.depends('sites_id', 'schedule_ids')
+    def _compute_filtered_schedule_ids(self):
+        for record in self:
+            if record.sites_id:
+                # Filtra los schedule_ids donde sites_id coincide con el seleccionado
+                record.filtered_schedule_ids = record.schedule_ids.filtered(lambda s: s.sites_id == record.sites_id)
+            else:
+                # Si no hay sites_id seleccionado, no muestra ningún registro
+                record.filtered_schedule_ids = self.env['audit.plan.schedule'].browse([])
+    '''
+    line_ids = fields.One2many( 
+        comodel_name='audit.plan.schedule.line',
+        inverse_name='schedule_id',
+        string='Fechas')
+    '''
 
     start_date = fields.Date(
         string='Fecha de inicio'

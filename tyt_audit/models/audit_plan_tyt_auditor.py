@@ -95,8 +95,30 @@ class AuditPlanTytAuditor(models.Model):
         inverse_name='audit_plan_tyt_auditor_id',
         string='Cronograma')
 
+    ## Cada vez que se cree un registro en el modelo audit.plan.tyt.auditor se generen automáticamente 8 registros vinculados en el modelo audit.plan.tyt.auditor.schedule con los IDs de sitio específicos [1, 2, 10, 9, 8, 7, 5, 3]
 
-    ## OLD VERSION SETTINGS
+    @api.model
+    def create(self, vals):
+        # Crear el registro principal
+        record = super(AuditPlanTytAuditor, self).create(vals)
+        
+        # Lista de IDs de sitios
+        site_ids = [1, 2, 10, 9, 8, 7, 5, 3]
+        
+        # Preparar los valores para los registros de "audit.plan.tyt.auditor.schedule"
+        schedule_vals = []
+        for site_id in site_ids:
+            schedule_vals.append({
+                'audit_plan_tyt_auditor_id': record.id,
+                'tyt_sites_id': site_id,
+            })
+        
+        # Crear los registros en "audit.plan.tyt.auditor.schedule"
+        self.env['audit.plan.tyt.auditor.schedule'].create(schedule_vals)
+        
+        return record
+
+    ## OLD VERSION BUTTON + SETTINGS
 
     parent_edition = fields.Many2one(
         comodel_name='audit.plan.tyt.auditor', string='Padre', copy=False)
@@ -110,3 +132,4 @@ class AuditPlanTytAuditor(models.Model):
         result['domain'] = [('id', 'in', self.old_versions.ids)]
         result['context'] = {'active_version': False}
         return result
+    
