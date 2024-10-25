@@ -99,6 +99,7 @@ class PlanGeneralSchedule(models.Model):
         for record in self:
             if record.total_weeks < 0:
                 raise ValidationError(_("'Semanas por Auditar' debe ser un número positivo."))
+    
     '''
     responsible_auditors_id = fields.Many2many(
         related="audit_plan_tyt_auditor_id.schedule_ids.responsible_auditors_id",
@@ -117,6 +118,23 @@ class PlanGeneralSchedule(models.Model):
     )
     '''
 
+    def action_edit_responsible_auditors(self):
+        self.ensure_one()
+        view_id = self.env.ref('tyt_audit.view_audit_plan_schedule_edit_form').id
+        return {
+            'type': 'ir.actions.act_window',
+            'name': 'Modificación de Auditores Responsables',
+            'res_model': 'audit.plan.schedule',
+            'view_mode': 'form',
+            'res_id': self.id,
+            'views': [(view_id, 'form')],
+            'target': 'new',
+            'context': self.env.context,
+        }
+
+    def action_save_auditors(self):
+        # Este método puede contener lógica adicional si es necesario
+        return {'type': 'ir.actions.act_window_close'}
 
 class Plan(models.Model):
     _inherit = "audit.plan"

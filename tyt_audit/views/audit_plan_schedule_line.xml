@@ -14,23 +14,6 @@
             </field>
         </record>
 
-        <!--
-        <record id="view_audit_plan_schedule_line_form" model="ir.ui.view">
-            <field name="name">audit.plan.schedule.line.form</field>
-            <field name="model">audit.plan.schedule.line</field>
-            <field name="arch" type="xml">
-                <form string="Línea del Cronograma de Auditoría">
-                    <sheet>
-                        <group>
-                            <field name="name" string="Nombre de línea"/>
-                            <field name="scheduled_date" string="Fecha Programada"/>
-                            <field name="done" string="Realizado"/>
-                        </group>
-                    </sheet>
-                </form>
-            </field>
-        </record>
-        -->
 
         <record id="action_audit_plan_schedule_line_ids" model="ir.actions.act_window">
             <field name="name">Fechas</field>
