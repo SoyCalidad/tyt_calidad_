@@ -8,6 +8,7 @@
     'license': '',
     'category': 'soycalidad',
     'depends': [
+        'mgmtsystem_validation',
         'mgmtsystem_nonconformity',
         'mgmtsystem_audit',
         

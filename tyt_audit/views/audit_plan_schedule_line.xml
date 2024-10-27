@@ -6,10 +6,10 @@
             <field name="model">audit.plan.schedule.line</field>
             <field name="arch" type="xml">
                 <tree editable="bottom">
-                    <field name="name" string="Nombre de línea"/>
                     <field name="scheduled_date"/>
-                    <field name="schedule_id"/>
                     <field name="done"/>
+                    <!--<field name="name" string="Nombre de línea"/>-->     
+                    <!--<field name="schedule_id"/>-->
                 </tree>
             </field>
         </record>

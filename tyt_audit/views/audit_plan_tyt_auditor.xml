@@ -1,6 +1,5 @@
 <odoo>
     <data>
-
         <record id="view_audit_plan_form" model="ir.ui.view">
             <field name="name">audit.plan.tyt.auditor.form</field>
             <field name="model">audit.plan.tyt.auditor</field>
@@ -118,6 +117,20 @@
             </field>
         </record>
 
+        <record id="view_audit_plan_tyt_auditor_form_inherit_validation" model="ir.ui.view">
+            <field name="name">audit.plan.tyt.auditor.view.form.inherit</field>
+            <field name="model">audit.plan.tyt.auditor</field>
+            <field name="inherit_id" ref="tyt_audit.view_audit_plan_form"/>
+            <field name="arch" type="xml">
+                <button name="send_validate_ok" position="after">
+                    <button string="Validación rápida"
+                        name="fast_validation"
+                        type="object"
+                        class="oe_highlight"
+                        attrs="{'invisible':[('state','!=', 'elaborate')]}"/>
+                </button>
+            </field>
+        </record>
 
         <record id="audit_plan_tyt_auditor_action" model="ir.actions.act_window">
             <field name="name">Cronograma de Auditoría - Auditor</field>

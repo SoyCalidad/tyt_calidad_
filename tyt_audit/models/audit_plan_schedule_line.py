@@ -17,7 +17,7 @@ class PlanGeneralScheduleLine(models.Model):
         ondelete='cascade',
     )
 
-    name = fields.Char('Subjects', required=True)
+    name = fields.Char('Subjects')
     company_id = fields.Many2one('res.company', string='Company',
         default=lambda self: self.env.company)
     
