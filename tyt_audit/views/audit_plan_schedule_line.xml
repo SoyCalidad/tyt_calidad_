@@ -5,7 +5,7 @@
             <field name="name">audit.plan.schedule.line.tree</field>
             <field name="model">audit.plan.schedule.line</field>
             <field name="arch" type="xml">
-                <tree editable="bottom">
+                <tree editable="bottom" create="false">
                     <field name="scheduled_date"/>
                     <field name="done"/>
                     <!--<field name="name" string="Nombre de línea"/>-->     
