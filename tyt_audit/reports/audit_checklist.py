@@ -27,6 +27,7 @@ class IndividualReport(models.AbstractModel):
                 alt_row_format = workbook.add_format({'bg_color': '#B6DDE8', 'border': 1, 'align': 'center'})
 
                 # Configuración del formato general del archivo
+                # ANCHO DE COLUMNAS
                 sheet.set_column('B:B', 4)  # Columna para numeración
                 sheet.set_column('C:F', 20)  # Columnas para datos
                 sheet.set_column('G:G', 25)

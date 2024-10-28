@@ -24,6 +24,7 @@
         'reports/report_layout.xml',        
         'reports/report_informe.xml',
         'reports/audit_checklist.xml',
+        'reports/audit_schedule.xml',
         'data/activities.xml',
         'data/descriptions.xml',
     ],
