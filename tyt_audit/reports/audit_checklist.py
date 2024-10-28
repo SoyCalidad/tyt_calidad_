@@ -35,24 +35,32 @@ class IndividualReport(models.AbstractModel):
 
                 # Cabecera con los títulos según la imagen proporcionada
                 sheet.merge_range('B2:C2', 'PROCEDIMIENTO:', title_format)
-                sheet.merge_range('D2:F2', '', title_blank_format)
+                sheet.merge_range('D2:F2', matrix.tyt_procedure_description_id.name or '', title_blank_format)
                 sheet.write('G2', 'EVALUACIÓN:', title_format)
                 sheet.write('H2', '0', title_blank_format)
 
                 sheet.merge_range('B3:C3', 'RESPONSABLE:', title_format)
-                sheet.merge_range('D3:F3', '', title_blank_format)
+                sheet.merge_range('D3:F3', matrix.job_id.name or '', title_blank_format)
                 sheet.write('G3', 'NO CONFORMIDADES:', title_format)
                 sheet.write('H3', '0', title_blank_format)
 
                 sheet.merge_range('B4:C4', 'AUDITADO:', title_format)
-                sheet.merge_range('D4:F4', '', title_blank_format)
+                sheet.merge_range('D4:F4', matrix.employee_id.name or '', title_blank_format)
                 sheet.write('G4', 'BUENAS PRÁCTICAS:', title_format)
                 sheet.write('H4', '0', title_blank_format)
 
                 sheet.merge_range('B5:C5', 'GRUPO AUDITOR:', title_format)
-                sheet.merge_range('D5:F5', '', title_blank_format)
-                sheet.merge_range('G5:H5', 'FECHA DE AUDITORIA: ()', title_format2)
-                sheet.merge_range('I5:J5', 'SITIO: ()', title_format2)
+                sheet.merge_range('D5:F5', matrix.team_id.name or '', title_blank_format)
+
+                # Manejo seguro de audit_date dentro de una String en caso el valor sea NULO (Usuario no completó ese valor)
+                if matrix.audit_date:
+                    audit_date_str = matrix.audit_date.strftime('%d/%m/%Y')
+                else:
+                    audit_date_str = ''  # Puedes cambiar esto por '' si prefieres dejarlo vacío
+
+                sheet.merge_range('G5:H5', f'FECHA DE AUDITORIA: ({audit_date_str})', title_format2)
+
+                sheet.merge_range('I5:J5', 'SITIO: ( '+ (matrix.tyt_sites_related_id.x_name or '') +')', title_format2)
 
                 sheet.merge_range(
                     'I2:J4', '', row_format )
@@ -92,6 +100,50 @@ class IndividualReport(models.AbstractModel):
                             sheet.write(row_num, col_num, '', alt_row_format)
 
 
+                # ==================
+                # ====== DATA ======
+                # ==================
+
+
+                row = 6  # Esto corresponde a la fila 7 en Excel (0-indexed)
+                numero_id = 1  # Contador para la columna B                
+
+                # Itera sobre cada planning en planning_ids
+                for planning in matrix.planning_ids:
+                    # Determina el formato a aplicar basado en la fila actual
+                    if numero_id % 2 != 0:
+                        current_format = row_format
+                    else:
+                        current_format = alt_row_format
+
+
+                    # Escribe el número en la columna B
+                    sheet.write(row, 1, numero_id, current_format)
+
+                    # Escribe clause_id.name en la columna D
+                    clause_name = planning.clause_id.name if planning.clause_id else ''
+                    sheet.write(row, 3, clause_name, current_format)
+
+                    # Escribe employee_job_id.name en la columna E
+                    job_name = planning.employee_job_id.name if planning.employee_job_id else ''
+                    sheet.write(row, 4, job_name, current_format)
+
+                    # Escribe verification en la columna F
+                    sheet.write(row, 5, planning.verification or '', current_format)
+
+                    # Escribe evidence_id.name en la columna H
+                    evidence_name = planning.evidence_id.name if planning.evidence_id else ''
+                    sheet.write(row, 7, evidence_name, current_format)
+
+                    # Escribe comment en la columna I
+                    sheet.write(row, 8, planning.comment or '', current_format)
+
+                    # Escribe evaluation en la columna J
+                    sheet.write(row, 9, planning.evaluation or '', current_format)
+
+                    # Incrementa la fila y el número
+                    row += 1
+                    numero_id += 1
 
         except Exception as e:
             print(e)
