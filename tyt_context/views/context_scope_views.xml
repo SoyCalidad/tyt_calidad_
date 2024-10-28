@@ -43,7 +43,7 @@
                             type="object"
                             class="oe_highlight"
                             attrs="{'invisible':[('state','!=', 'elaborate')]}"/>
-<!--                    <button string="Comunicar procedimiento" name="send_edition_by_email" type="object" class="oe_highlight" attrs="{'invisible':[('state', '!=', 'validate_ok')]}"/>-->
+                    <button string="Comunicar alcance" name="send_context_scope_by_email" type="object" class="oe_highlight" attrs="{'invisible':[('state', '!=', 'validate_ok')]}"/>
                 </header>
                 <sheet>
                     <field name="active" invisible="1" />
@@ -124,6 +124,20 @@
                                     <field name="publish_date" />
                                     <field name="name" />
                                 </tree>
+                                <form>
+                                    <sheet>
+                                        <group>
+                                            <group>
+                                                <field name="scope_id" />
+                                                <field name="publish_date" />
+                                                <field name="name" />
+                                            </group>
+                                            <group>
+                                                <field name="numero" />
+                                            </group>
+                                        </group>
+                                    </sheet>
+                                </form>
                             </field>
                         </page>
                     </notebook>
@@ -142,8 +156,12 @@
         <field name="model">tyt.context.scope</field>
         <field name="arch" type="xml">
             <tree>
+                <field name="code" />
                 <field name="name" />
+                <field name="version_as_string" />
                 <field name="state" />
+                <field name="process_id" />
+                <field name="write_date" string="Ultima actualización"/>
             </tree>
         </field>
     </record>

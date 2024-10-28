@@ -69,6 +69,12 @@ class ContextScope(models.Model):
         store=True
     )
 
+    sequence_id = fields.Many2one(
+        string=u'Secuencia de ediciones',
+        comodel_name='ir.sequence',
+        related='process_id.sequence_id',
+    )
+
     def _copy_edition(self):
         new_edition = self.copy({
             'version': self.version,
@@ -201,3 +207,8 @@ class ContextScope(models.Model):
                 _("<li><b>Referencia editado:</b></li> %s") % (values.get('references', ''))
 
         return message
+
+    def send_context_scope_by_email(self):
+        template = 'tyt_context.tyt_context_scope_mail_template'
+        return self.notify_users_by_email(template)
+
