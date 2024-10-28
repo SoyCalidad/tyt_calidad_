@@ -18,7 +18,7 @@
         'security/ir.model.access.csv',
         'data/data.xml',
         'data/mail_template_data.xml',
-        'data/context_scope_mail_template.xml',
+
         'views/context.xml',
         'views/context_scope_views.xml',
         'report/stakeholders_report.xml',
@@ -30,6 +30,8 @@
         'report/context_scope_body.xml',
         'report/context_scope_toc.xml',
         'report/context_scope_back_cover.xml',
+
+        'data/context_scope_mail_template.xml',
     ],
     'assets': {
         'web.report_assets_common': [
