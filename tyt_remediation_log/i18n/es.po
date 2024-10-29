@@ -34,12 +34,14 @@ msgstr "Confirmado"
 #: model:ir.model.fields,field_description:tyt_remediation_log.field_maintenance_remediationlog__create_uid
 #: model:ir.model.fields,field_description:tyt_remediation_log.field_maintenance_remediationlog__user_id
 #: model:ir.model.fields,field_description:tyt_remediation_log.field_maintenance_remediationlog_line__create_uid
+#: model:ir.model.fields,field_description:tyt_remediation_log.field_maintenance_remediationlog_stage__create_uid
 msgid "Created by"
 msgstr "Creado por"
 
 #. module: tyt_remediation_log
 #: model:ir.model.fields,field_description:tyt_remediation_log.field_maintenance_remediationlog__create_date
 #: model:ir.model.fields,field_description:tyt_remediation_log.field_maintenance_remediationlog_line__create_date
+#: model:ir.model.fields,field_description:tyt_remediation_log.field_maintenance_remediationlog_stage__create_date
 msgid "Created on"
 msgstr "Creado el"
 
@@ -56,6 +58,7 @@ msgstr "Desarrollo"
 #. module: tyt_remediation_log
 #: model:ir.model.fields,field_description:tyt_remediation_log.field_maintenance_remediationlog__display_name
 #: model:ir.model.fields,field_description:tyt_remediation_log.field_maintenance_remediationlog_line__display_name
+#: model:ir.model.fields,field_description:tyt_remediation_log.field_maintenance_remediationlog_stage__display_name
 msgid "Display Name"
 msgstr "Nombre a Mostrar"
 
@@ -72,24 +75,28 @@ msgstr "Editar"
 #. module: tyt_remediation_log
 #: model:ir.model.fields,field_description:tyt_remediation_log.field_maintenance_remediationlog__id
 #: model:ir.model.fields,field_description:tyt_remediation_log.field_maintenance_remediationlog_line__id
+#: model:ir.model.fields,field_description:tyt_remediation_log.field_maintenance_remediationlog_stage__id
 msgid "ID"
 msgstr "ID"
 
 #. module: tyt_remediation_log
 #: model:ir.model.fields,field_description:tyt_remediation_log.field_maintenance_remediationlog____last_update
 #: model:ir.model.fields,field_description:tyt_remediation_log.field_maintenance_remediationlog_line____last_update
+#: model:ir.model.fields,field_description:tyt_remediation_log.field_maintenance_remediationlog_stage____last_update
 msgid "Last Modified on"
 msgstr "Última Modificación el"
 
 #. module: tyt_remediation_log
 #: model:ir.model.fields,field_description:tyt_remediation_log.field_maintenance_remediationlog__write_uid
 #: model:ir.model.fields,field_description:tyt_remediation_log.field_maintenance_remediationlog_line__write_uid
+#: model:ir.model.fields,field_description:tyt_remediation_log.field_maintenance_remediationlog_stage__write_uid
 msgid "Last Updated by"
 msgstr "Última Actualización por"
 
 #. module: tyt_remediation_log
 #: model:ir.model.fields,field_description:tyt_remediation_log.field_maintenance_remediationlog__write_date
 #: model:ir.model.fields,field_description:tyt_remediation_log.field_maintenance_remediationlog_line__write_date
+#: model:ir.model.fields,field_description:tyt_remediation_log.field_maintenance_remediationlog_stage__write_date
 msgid "Last Updated on"
 msgstr "Última Actualización el"
 
@@ -136,6 +143,7 @@ msgstr "Líneas de Remediación"
 #. module: tyt_remediation_log
 #: model:ir.model.fields,field_description:tyt_remediation_log.field_maintenance_remediationlog_line__remediation_log_id
 #: model_terms:ir.ui.view,arch_db:tyt_remediation_log.view_maintenance_remediationlog_form
+#: model:ir.model.fields,field_description:tyt_remediation_log.field_maintenance_remediationlog_stage__remediation_log_id
 msgid "Remediation Log"
 msgstr "Bitácora de Remediación"
 
@@ -175,3 +183,24 @@ msgstr "Validación y versión"
 #: model:ir.model.fields,field_description:tyt_remediation_log.field_maintenance_remediationlog_line__remediation
 msgid "What was done?"
 msgstr "¿Qué se hizo?"
+
+
+#. module: tyt_remediation_log
+#: model:ir.model,name:tyt_remediation_log.model_maintenance_remediationlog_stage
+msgid "Remediation Log Stage"
+msgstr ""
+
+#. module: tyt_remediation_log
+#: model:ir.model.fields,field_description:tyt_remediation_log.field_maintenance_remediationlog_stage__stage
+msgid "Stage"
+msgstr "Etapa"
+
+#. module: tyt_remediation_log
+#: model:ir.model.fields,field_description:tyt_remediation_log.field_maintenance_remediationlog_stage__manager_id
+msgid "Manager"
+msgstr "Encargado"
+
+#. module: tyt_remediation_log
+#: model:ir.model.fields,field_description:tyt_remediation_log.field_maintenance_remediationlog__remediation_log_stages_ids
+msgid "Stage Manager"
+msgstr "Encargado de Etapa"
