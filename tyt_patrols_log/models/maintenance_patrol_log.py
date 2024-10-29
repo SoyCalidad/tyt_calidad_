@@ -1,11 +1,11 @@
 from odoo import api, fields, models
 
 
-class MaintenanceRemediationLog(models.Model):
-    """ Modelo para la Bitácora de remediaciones """
+class MaintenancePatrolLog(models.Model):
+    """ Modelo para la Bitácora de rondines """
 
-    _name = 'maintenance.remediationlog'
-    _description = 'Remediation Log'
+    _name = 'maintenance.patrollog'
+    _description = 'Patrol Log'
     
     company_id = fields.Many2one('res.company', string='Company', required=True, default=lambda self: self.env.company)
     
@@ -14,8 +14,8 @@ class MaintenanceRemediationLog(models.Model):
     production_date = fields.Date(string='Production Date', required=True, default=fields.Date.today)
     observations = fields.Text(string='Observations')
     
-    remediation_log_line_ids = fields.One2many(
-        'maintenance.remediationlog.line', 'remediation_log_id', string='Remediation Lines',
+    patrol_log_line_ids = fields.One2many(
+        'maintenance.patrollog.line', 'patrol_log_id', string='Patrol Lines',
         default=lambda self: [
             {'location': 'Recepción'},
             {'location': 'Salas'},
@@ -26,8 +26,8 @@ class MaintenanceRemediationLog(models.Model):
         ]
     )
     
-    remediation_log_stages_ids = fields.One2many(
-        'maintenance.remediationlog.stage', 'remediation_log_id', string='Stage Manager',
+    patrol_log_stages_ids = fields.One2many(
+        'maintenance.patrollog.stage', 'patrol_log_id', string='Stage Manager',
         default=lambda self: [
             {'stage': 'Elaboración'},
             {'stage': 'Revisión'},
@@ -54,28 +54,27 @@ class MaintenanceRemediationLog(models.Model):
         self.write({'state': 'draft'})
         
 
-class MaintenanceRemediationLogLine(models.Model):
-    """ Línea de la Bitácora de remediaciones """
+class MaintenancePatrolLogLine(models.Model):
+    """ Línea de la Bitácora de rondines """
 
-    _name = 'maintenance.remediationlog.line'
-    _description = 'Remediation Log Line'
+    _name = 'maintenance.patrollog.line'
+    _description = 'Patrol Log Line'
     
-    remediation_log_id = fields.Many2one(
-        'maintenance.remediationlog', string='Remediation Log', required=True, ondelete='cascade'
+    patrol_log_id = fields.Many2one(
+        'maintenance.patrollog', string='Patrol Log', required=True, ondelete='cascade'
     )
     
     location = fields.Char(string='Location', required=True)
-    detection = fields.Char(string='Detection')
-    remediation = fields.Char(string='What was done?')
+    description = fields.Text(string='Description')
 
-class MaintenanceRemediationLogStage(models.Model):
-    """ Etapas de la Bitácora de remediaciones """
+class MaintenancePatrolLogStage(models.Model):
+    """ Etapas de la Bitácora de rondines """
 
-    _name = 'maintenance.remediationlog.stage'
-    _description = 'Remediation Log Stage'
+    _name = 'maintenance.patrollog.stage'
+    _description = 'Patrol Log Stage'
     
-    remediation_log_id = fields.Many2one(
-        'maintenance.remediationlog', string='Remediation Log', required=True, ondelete='cascade'
+    patrol_log_id = fields.Many2one(
+        'maintenance.patrollog', string='Patrol Log', required=True, ondelete='cascade'
     )
     
     stage = fields.Char(string='Stage', required=True)

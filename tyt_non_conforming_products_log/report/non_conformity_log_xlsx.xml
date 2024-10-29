@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+
+    <record id="report_ncolog_xlsx" model="ir.actions.report">
+        <field name="name">Log of non-conforming products</field>
+        <field name="model">non.conforming.products.log</field>
+        <field name="report_type">xlsx</field>
+        <field name="report_name">report_excel_ncolog_xlsx</field>
+        <field name="report_file">Log of non-conforming products</field>
+        <field name="print_report_name">'Log of non-conforming products'</field>
+        <field name="binding_model_id" ref="model_non_conforming_products_log"/>
+        <field name="binding_type">report</field>
+    </record>
+
+</odoo>
+

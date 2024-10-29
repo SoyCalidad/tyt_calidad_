@@ -45,7 +45,7 @@ class ReportRemediationlanXlsx(models.AbstractModel):
             'text_wrap': True,
             'border_color': '#757070',
         })
-
+        
         # Formato para fechas (dd/mm/yyyy)
         date_format = workbook.add_format({
             'font_size': 12,
@@ -58,7 +58,7 @@ class ReportRemediationlanXlsx(models.AbstractModel):
         })
 
         remediation_plan = objs[0] 
-        sheet = workbook.add_worksheet('Hoja Costo de Importaciónes')
+        sheet = workbook.add_worksheet('Plan de Remediacion')
         sheet.hide_gridlines(option=2)
 
         # Definir tamaño de las columnas (anchura)
@@ -84,7 +84,7 @@ class ReportRemediationlanXlsx(models.AbstractModel):
         sheet.merge_range('C2:G2', 'PLAN DE REMEDIACIÓN', title_format)
         
         # Cabecera 
-        sheet.set_row(4, 15)
+        sheet.set_row(5, 15)
         sheet.write('B4', 'Área de Remediación', header_format)
         sheet.write('C4', 'Actividad', header_format)
         sheet.write('D4', 'Prioridad de Ejecución', header_format)
@@ -95,7 +95,7 @@ class ReportRemediationlanXlsx(models.AbstractModel):
         row = 4
         
         for plan in remediation_plan.remediation_plan_line_ids:
-            sheet.set_row(row, 15) 
+            sheet.set_row(row-1, 15) 
             sheet.write(row, 1, plan.remediation_area or '', data_format)
             sheet.write(row, 2, plan.activity or '', data_format)
             

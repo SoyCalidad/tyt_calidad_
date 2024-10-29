@@ -1,10 +1,10 @@
 <odoo>
-    <!-- Vista para el modelo Remediation Log -->
-    <record id="view_maintenance_remediationlog_form" model="ir.ui.view">
-        <field name="name">maintenance.remediationlog.form</field>
-        <field name="model">maintenance.remediationlog</field>
+    <!-- Vista para el modelo Patrol Log -->
+    <record id="view_maintenance_patrollog_form" model="ir.ui.view">
+        <field name="name">maintenance.patrollog.form</field>
+        <field name="model">maintenance.patrollog</field>
         <field name="arch" type="xml">
-            <form string="Remediation Log">
+            <form string="Patrol Log">
                 <header>
                     <button name="action_confirm" string="Save" type="object" class="oe_highlight"
                             attrs="{'invisible': [('state', '!=', 'draft')]}"/>
@@ -23,16 +23,15 @@
 
                     <notebook>
                         <page string="Development">
-                            <field name="remediation_log_line_ids" attrs="{'readonly': [('state', '=', 'confirmed')]}">
+                            <field name="patrol_log_line_ids" attrs="{'readonly': [('state', '=', 'confirmed')]}">
                                 <tree editable="bottom" create="false" delete="false">
                                     <field name="location"/>
-                                    <field name="detection"/>
-                                    <field name="remediation"/>
+                                    <field name="description"/>
                                 </tree>
                             </field>
                         </page>
                         <page string="Validation and version">
-                            <field name="remediation_log_stages_ids" attrs="{'readonly': [('state', '=', 'confirmed')]}">
+                            <field name="patrol_log_stages_ids" attrs="{'readonly': [('state', '=', 'confirmed')]}">
                                 <tree editable="bottom" create="false" delete="false">
                                     <field name="stage"/>
                                     <field name="manager_id"/>
@@ -48,12 +47,12 @@
         </field>
     </record>
 
-    <!-- Vista de árbol para la lista de Remediation Logs -->
-    <record id="view_maintenance_remediationlog_tree" model="ir.ui.view">
-        <field name="name">maintenance.remediationlog.tree</field>
-        <field name="model">maintenance.remediationlog</field>
+    <!-- Vista de árbol para la lista de Patrol Logs -->
+    <record id="view_maintenance_patrollog_tree" model="ir.ui.view">
+        <field name="name">maintenance.patrollog.tree</field>
+        <field name="model">maintenance.patrollog</field>
         <field name="arch" type="xml">
-            <tree string="Remediation Logs">
+            <tree string="Patrol Logs">
                 <field name="name"/>
                 <field name="user_id"/>
                 <field name="production_date"/>
@@ -61,22 +60,19 @@
         </field>
     </record>
 
-    <record id="model_maintenance_remediationlog" model="ir.model">
-        <field name="name">Maintenance Remediation Log</field>
-        <field name="model">maintenance.remediationlog</field>
+    <record id="model_maintenance_patrollog" model="ir.model">
+        <field name="name">Maintenance Patrol Log</field>
+        <field name="model">maintenance.patrollog</field>
     </record>
 
-    <!-- Acción para abrir el menú de Remediation Logs -->
-    <record id="action_maintenance_remediationlog" model="ir.actions.act_window">
-        <field name="name">Remediation Logs</field>
-        <field name="res_model">maintenance.remediationlog</field>
+    <!-- Acción para abrir el menú de Patrol Logs -->
+    <record id="action_maintenance_patrollog" model="ir.actions.act_window">
+        <field name="name">Patrol Logs</field>
+        <field name="res_model">maintenance.patrollog</field>
         <field name="view_mode">tree,form</field>
     </record>
 
-    <!-- Submenú para Remediation dentro de Maintenance -->
-    <menuitem id="menu_maintenance_remediation_root" name="Remediation" parent="maintenance.menu_maintenance_title" sequence="5"/>
-
-    <!-- Submenú para acceder a los Remediation Logs -->
-    <menuitem id="menu_maintenance_remediationlog" name="Remediation Logs"
-              parent="menu_maintenance_remediation_root" action="action_maintenance_remediationlog" sequence="10"/>
+    <!-- Submenú para acceder a los Patrol Logs -->
+    <menuitem id="menu_maintenance_patrolplan" name="Patrol Plans"
+              parent="tyt_remediation_log.menu_maintenance_remediation_root" action="action_maintenance_patrollog" sequence="20"/>
 </odoo>

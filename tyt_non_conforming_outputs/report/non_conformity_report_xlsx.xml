@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+
+    <record id="report_nco_xlsx" model="ir.actions.report">
+        <field name="name">Control of non-conforming outputs</field>
+        <field name="model">mgmtsystem.nonconformity</field>
+        <field name="report_type">xlsx</field>
+        <field name="report_name">report_excel_nco_xlsx</field>
+        <field name="report_file">Control of non-conforming outputs</field>
+        <field name="print_report_name">'Control of non-conforming outputs'</field>
+        <field name="binding_model_id" ref="model_mgmtsystem_nonconformity"/>
+        <field name="binding_type">report</field>
+    </record>
+
+</odoo>

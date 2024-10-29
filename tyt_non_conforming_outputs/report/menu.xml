@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <menuitem id="report_excel_nco"
+              name="Control of non-conforming outputs"
+              action="report_nco"
+              sequence="10"
+              parent="mgmtsystem_nonconformity.menu_nonconformity_report" />
+</odoo>
