@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<odoo>
+
+    <record id="folder_view_tree" model="ir.ui.view">
+        <field name="name">folder.view.tree.inherit</field>
+        <field name="model">documents.folder</field>
+        <field name="inherit_id" ref="documents.folder_view_tree"/>
+        <field name="arch" type="xml">
+            <xpath expr="//field[@name='display_name']" position="after">
+                <field name="is_intranet_folder"/>
+            </xpath>
+        </field>
+    </record>
+</odoo>

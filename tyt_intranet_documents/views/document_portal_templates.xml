@@ -1,0 +1,143 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<odoo>
+    <template id="portal_documents_folder_share" name="Espacios de trabajo">
+            <t t-call="portal.portal_layout">
+                <t t-set="breadcrumbs_searchbar" t-value="True"/>
+                <t t-call="portal.portal_searchbar">
+                    <t t-set="title">Espacios de trabajo</t>
+                </t>
+
+                 <t t-if="folders" t-call="portal.portal_table">
+                    <thead>
+                        <tr>
+                            <th>Nombre</th>
+                            <th class="text-start">Departamento</th>
+                            <th class="text-start">Categorías de etiquetas</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr t-foreach="folders" t-as="folder">
+                            <td>
+                                <a t-attf-href="/my/documents/share/#{folder.id}?{{ keep_query() }}">
+                                    <t t-esc="folder.name"/>
+                                </a>
+                            </td>
+                            <td class="text-start">
+                                <span t-field="folder.x_studio_departamento"/>
+                            </td>
+                            <td class="text-start">
+                                <t t-foreach="folder.facet_ids" t-as="facet">
+                                    <span class="badge bg-primary">
+                                        <t t-esc="facet.name"/>
+                                    </span>
+                                </t>
+                            </td>
+                        </tr>
+                    </tbody>
+                 </t>
+            </t>
+    </template>
+
+    <template id="portal_my_documents_share" name="Documentos">
+            <t t-call="portal.portal_layout">
+                <t t-set="breadcrumbs_searchbar" t-value="True"/>
+                <t t-call="portal.portal_searchbar">
+                    <t t-set="title">Documentos</t>
+                </t>
+
+                <t t-if="documents" t-call="portal.portal_table">
+                    <thead>
+                        <tr>
+                            <th>Documento</th>
+                            <th class="text-start">Propietario</th>
+                            <th class="text-start">Etiquetas</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr t-foreach="documents" t-as="document">
+                            <td>
+                                <a t-att-href="'/tyt_intranet_documents/static/lib/pdfjs/web/viewer.html?file=' + '/web/content/' + str(document.attachment_id.id)"
+                                   target="_blank">
+                                    <t t-esc="document.name"/>
+                                </a>
+                            </td>
+                            <td class="text-start">
+                                <span t-field="document.owner_id.name"/>
+                            </td>
+                            <td class="text-start">
+                                <t t-foreach="document.tag_ids" t-as="tag">
+                                    <span class="badge bg-primary">
+                                        <t t-esc="tag.name"/>
+                                    </span>
+                                </t>
+                            </td>
+                        </tr>
+                    </tbody>
+                </t>
+            </t>
+    </template>
+
+    <template id="portal_my_document_share_form" name="Document">
+        <t t-call="portal.portal_layout">
+            <t t-set="breadcrumbs_searchbar" t-value="True"/>
+            <t t-call="portal.portal_searchbar">
+                <t t-set="title">Document</t>
+            </t>
+            <t t-call="portal.portal_record_layout">
+                <t t-set="card_header">
+                    <div class="row g-0">
+                        <div class="col-md">
+                            <h5 class="mb-1 mb-md-0">
+                                <span t-esc="document.name"/>
+                            </h5>
+                        </div>
+                        <div class="col-md text-md-end">
+
+                        </div>
+                    </div>
+                </t>
+                <t t-set="card_body">
+                    <div class="o_sign_portal">
+                        <div class="o_sign_button mb-4 text-center align-items-center">
+                            <div class="text-center mt-4">
+                                <a t-att-href="'/tyt_intranet_documents/static/lib/pdfjs/web/viewer.html?file=' + '/web/content/' + str(document.attachment_id.id)"
+                                   class="btn btn-primary" target="_blank">
+                                    View Document
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+                </t>
+            </t>
+
+        </t>
+    </template>
+
+    <template id="portal_my_document_view" name="Document View">
+        <t t-call="portal.portal_layout">
+            <t t-set="breadcrumbs_searchbar" t-value="True"/>
+            <t t-call="portal.portal_searchbar">
+                <t t-set="title">View Document</t>
+            </t>
+            <div class="container mt-4">
+                <div class="card">
+                    <div class="card-body">
+                        <h4><t t-esc="document.name"/></h4>
+                        <p class="text-muted">Last Modified: <t t-esc="document.write_date"/></p>
+                        <t t-if="document.attachment_id">
+                            <div class="text-center mt-4">
+                                <a t-att-href="'/web/static/lib/pdfjs/web/viewer.html?file=' + '/web/content/' + str(document.attachment_id.id)"
+                               class="btn btn-primary" target="_blank">
+                                View Document
+                            </a>
+                            </div>
+                        </t>
+                        <t t-else="">
+                            <p>No attachment found for this document.</p>
+                        </t>
+                    </div>
+                </div>
+            </div>
+        </t>
+    </template>
+</odoo>
