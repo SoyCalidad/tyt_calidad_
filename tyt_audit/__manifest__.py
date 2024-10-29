@@ -27,6 +27,9 @@
         'reports/audit_schedule.xml',
         'data/activities.xml',
         'data/descriptions.xml',
+        'data/iso9001_standard.xml',
+        'data/iso9001_standard2.xml',
+        'data/iso9001_standard3.xml',
     ],
     'assets': {
         'web.report_assets_common': [

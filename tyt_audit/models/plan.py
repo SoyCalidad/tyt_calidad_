@@ -37,6 +37,11 @@ class PlanGeneralScheduleActivities(models.Model):
         required=True
     )
 
+    description_id = fields.Many2one(
+        'audit.plan.schedule.descriptions',
+        string='Descripción'
+    )
+
 class PlanGeneralScheduleDescriptions(models.Model):
     _name = "audit.plan.schedule.descriptions"
     _description = "Cronograma de Auditoría - General / Cronograma / Descripciones"
