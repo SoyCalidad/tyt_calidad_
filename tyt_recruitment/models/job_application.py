@@ -25,9 +25,23 @@ class JobApplication(models.Model):
     has_complete_survey = fields.Boolean(string='Tiene Encuesta Completada', compute='compute_has_complete_survey')
     
     def action_open_health_survey(self):
+
+        name = self.applicant_id.name
+        last_name_father = self.applicant_id.last_name_father
+        last_name_mother = self.applicant_id.last_name_mother
+        gender = self.applicant_id.gender
+        birthplace = self.applicant_id.birthplace
+        birthdate = self.applicant_id.birthdate
+        nationality = self.applicant_id.nationality
+        age = self.applicant_id.age
+        marital_status = self.applicant_id.marital_status
+        
+        params = f"gender={gender}&birthplace={birthplace}&birthdate={birthdate}&nationality={nationality}&age={age}&marital_status={marital_status}"
+        url = f"/survey/{self.id}/{name}/{last_name_father}/{last_name_mother}?"
+
         return {
             'type': 'ir.actions.act_url',
-            'url': '/survey/'+str(self.id)+'/ asd /f',
+            'url': url + params,
             'target': 'new', 
         }
     

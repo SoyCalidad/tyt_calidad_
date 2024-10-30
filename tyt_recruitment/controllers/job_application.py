@@ -4,9 +4,12 @@ import json
 
 class PublicFormController(http.Controller):
     
-    @http.route('/job_application/<string:requisition_id>/<string:site_id>/<string:campaign_id>', type='http', auth='public', website=True)
-    def public_form(self, requisition_id, site_id, campaign_id):
+    @http.route('/job_application/<string:requisition_id>', type='http', auth='public', website=True)
+    def public_form(self, requisition_id, **post):
         
+        site_id = post.get('site_name')
+        campaign_id = post.get('tag_name')
+
         health_questions = self.get_questions('enable', 'health');
         job_questions = self.get_questions('enable', 'job');
         study_questions = self.get_questions('enable', 'study');

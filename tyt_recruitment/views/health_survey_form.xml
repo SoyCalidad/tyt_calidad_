@@ -35,29 +35,25 @@
                             <!-- Nombre -->
                             <div class="col-sm-6 col-md-4 col-lg-4 col-xl-4 col-xxl-4 p-4 border cell1">
                                 <label for="name" class="form-label">Nombre:</label>
-                                <input type="text" class="form-control" id="name" name="name" required="required"/>
+                                <input type="text" class="form-control" id="name" name="name" t-att-value="name" readonly="true" />
                             </div>
 
                             <!-- Apellido Paterno -->
                             <div class="col-sm-6 col-md-3 col-lg-3 col-xl-3 col-xxl-3 p-4 border cell1">
                                 <label for="last_name_father" class="form-label">Apellido Paterno:</label>
-                                <input type="text" class="form-control" id="last_name_father" name="last_name_father" required="required"/>
+                                <input type="text" class="form-control" id="last_name_father" name="last_name_father" t-att-value="last_name_father" readonly="true"/>
                             </div>
 
                             <!-- Apellido Materno -->
                             <div class="col-sm-6 col-md-3 col-lg-3 col-xl-3 col-xxl-3 p-4 border cell1">
                                 <label for="last_name_mother" class="form-label">Apellido Materno:</label>
-                                <input type="text" class="form-control" id="last_name_mother" name="last_name_mother" required="required"/>
+                                <input type="text" class="form-control" id="last_name_mother" name="last_name_mother" t-att-value="last_name_mother" readonly="true"/>
                             </div>
 
                             <!-- Sexo -->
                             <div class="col-sm-6 col-md-2 col-lg-2 col-xl-2 col-xxl-2 p-4 border cell1">
                                 <label for="gender" class="form-label">Sexo:</label>
-                                <select class="form-select" id="gender" name="gender" required="required">
-                                    <option value="male">Masculino</option>
-                                    <option value="female">Femenino</option>
-                                    <option value="other">Otro</option>
-                                </select>
+                                <input type="text" class="form-control" id="gender" name="gender" t-att-value="gender" readonly="true"/>
                             </div>
                         </div>
 
@@ -65,36 +61,31 @@
                             <!-- Lugar de Nacimiento -->
                             <div class="col-sm-6 col-md-3 col-lg-3 col-xl-3 col-xxl-3 p-4 border cell1">
                                 <label for="birthplace" class="form-label">Lugar de Nacimiento:</label>
-                                <input type="text" class="form-control" id="birthplace" name="birthplace" required="required"/>
+                                <input type="text" class="form-control" id="birthplace" name="birthplace" t-att-value="birthplace" readonly="true"/>
                             </div>
 
                             <!-- Fecha de Nacimiento -->
                             <div class="col-sm-6 col-md-3 col-lg-3 col-xl-3 col-xxl-3 p-4 border cell1">
                                 <label for="birthdate" class="form-label">Fecha de Nacimiento:</label>
-                                <input type="date" class="form-control" id="birthdate" name="birthdate" required="required"/>
+                                <input type="date" class="form-control" id="birthdate" name="birthdate" t-att-value="birthdate" readonly="true"/>
                             </div>
 
                             <!-- Nacionalidad -->
                             <div class="col-sm-6 col-md-2 col-lg-2 col-xl-2 col-xxl-2 p-4 border cell1">
                                 <label for="nationality" class="form-label">Nacionalidad:</label>
-                                <input type="text" class="form-control" id="nationality" name="nationality" required="required"/>
+                                <input type="text" class="form-control" id="nationality" name="nationality" t-att-value="nationality" readonly="true"/>
                             </div>
 
                             <!-- Edad -->
                             <div class="col-sm-6 col-md-2 col-lg-2 col-xl-2 col-xxl-2 p-4 border cell1">
                                 <label for="age" class="form-label">Edad</label>
-                                <input type="number" class="form-control" id="age" min="18" name="age" required="required"/>
+                                <input type="number" class="form-control" id="age" min="18" name="age" t-att-value="age" readonly="true" />
                             </div>
 
                             <!-- Estado Civil -->
                             <div class="col-sm-6 col-md-2 col-lg-2 col-xl-2 col-xxl-2 p-4 border cell1">
                                 <label for="marital_status" class="form-label">Estado Civil:</label>
-                                <select class="form-select" id="marital_status" name="marital_status" required="required">
-                                    <option value="single">Soltero/a</option>
-                                    <option value="married">Casado/a</option>
-                                    <option value="divorced">Divorciado/a</option>
-                                    <option value="widowed">Viudo/a</option>
-                                </select>
+                                <input type="number" class="form-control" id="marital_status" min="18" name="marital_status" t-att-value="marital_status" readonly="true" />
                             </div>
                         </div>
                     </section>
