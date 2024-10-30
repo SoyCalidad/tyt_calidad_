@@ -181,12 +181,12 @@ class Campaign(models.Model):
     tag_id = fields.Many2one('hr.department', string='Dept', options={'no_create': True}, required=True)
 
     def action_open_job_application(self):
-
-        requisition_id = str(self.requisition_id.id)
-        site_name = quote(self.requisition_id.site_id.x_name, safe='')
-        tag_name = quote(self.tag_id.display_name, safe='') 
-
-        url = f"/job_application/{requisition_id}/{site_name}/{tag_name}"
+        requisition_id = self.requisition_id.id
+        site_name = self.requisition_id.site_id.x_name
+        tag_name = self.tag_id.display_name
+        
+        url = f"/job_application/{requisition_id}/?site_name={site_name}&tag_name={tag_name}"
+        
         return {
             'type': 'ir.actions.act_url',
             'url': url,

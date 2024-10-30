@@ -7,9 +7,9 @@ _logger = logging.getLogger(__name__)
 
 class PublicFormController(http.Controller):
     
-    @http.route('/survey/<string:job_application_id>', type='http', auth='public', website=True)
-    def public_form(self, job_application_id):
-        
+    @http.route('/survey/<string:job_application_id>/<string:name>/<string:last_name_father>/<string:last_name_mother>', type='http', auth='public', website=True)
+    def public_form(self, job_application_id, name, last_name_father, last_name_mother, **post):
+    
         health_questions = self.get_questions('EC01')
         health_questions_json = [{
             'id': str(q.id), 
@@ -21,7 +21,16 @@ class PublicFormController(http.Controller):
 
         context = {
             'health_questions_json': health_questions_json,
-            'job_application_id': job_application_id
+            'job_application_id': job_application_id,
+            'name': name,
+            'last_name_father': last_name_father,
+            'last_name_mother': last_name_mother,
+            'gender': post.get('gender'),
+            'birthplace': post.get('birthplace'),
+            'birthdate': post.get('birthdate'),
+            'nationality': post.get('nationality'),
+            'age': post.get('age'),
+            'marital_status': post.get('marital_status'),
         }
 
         return request.render('tyt_recruitment.template_health_survey_form', context)
@@ -38,7 +47,7 @@ class PublicFormController(http.Controller):
         # } for q in health_questions]
 
         complete_survey_data = {
-            'state': 'Enviado',
+            'state': 'sent',
             'job_application_id': job_application_id
         }
 
