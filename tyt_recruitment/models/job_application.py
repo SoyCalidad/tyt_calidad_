@@ -27,7 +27,7 @@ class JobApplication(models.Model):
     def action_open_health_survey(self):
         return {
             'type': 'ir.actions.act_url',
-            'url': '/survey/'+str(self.id),
+            'url': '/survey/'+str(self.id)+'/ asd /f',
             'target': 'new', 
         }
     
