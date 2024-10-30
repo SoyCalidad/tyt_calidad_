@@ -20,6 +20,7 @@
         'views/audit_plan_schedule_line.xml',
         'views/audit_plan_schedule.xml',                
         'views/plan.xml',
+        'views/audit_report.xml',
         'reports/report_paperformat.xml',               
         'reports/report_layout.xml',        
         'reports/report_informe.xml',

@@ -75,6 +75,11 @@ class AuditPlanning(models.Model):
         store=True
     )
 
+    audit_report_id = fields.Many2one(
+        'audit.report',
+        string="Informe de Auditoría",
+        store=True
+    )
 
     iso_9001_standards_ids = fields.Many2many(
         'audit.audit.planning.iso9001_standard',
