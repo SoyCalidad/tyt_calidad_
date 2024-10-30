@@ -22,7 +22,9 @@
         'reports/reports_pdf.xml',
         'views/template_report_requisition.xml',
         'views/view_job_application.xml',
-        'views/job_application_form.xml'
+        'views/job_application_form.xml',
+        'views/view_health_survey.xml',
+        'views/health_survey_form.xml'
     ],
     'auto_install': False,
     'installable': True,

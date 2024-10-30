@@ -186,7 +186,11 @@ class PublicFormController(http.Controller):
         #     # 'data_job_application': data_job_application,
         # }
 
-        return request.render('tyt_recruitment.template_job_application_success')
+        context = {
+            'job_application_id': job_application.id
+        }
+
+        return request.render('tyt_recruitment.template_job_application_success', context)
         # return Response(
         #     json.dumps(data), 
         #     content_type='application/json;charset=utf-8'
@@ -241,3 +245,11 @@ class PublicFormController(http.Controller):
             ('type', '=', type)
         ])
         return questions
+
+    @http.route('/job_applications', type='http', auth='public')
+    def list_fields_applicant(self):
+        
+        context = {
+            'job_application_id': 222
+        }
+        return request.render('tyt_recruitment.template_job_application_success', context)
