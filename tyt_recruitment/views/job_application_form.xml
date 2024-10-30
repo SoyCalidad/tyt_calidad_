@@ -651,6 +651,17 @@
     </template>
 
     <template id="template_job_application_success" name="Form Submission Success">
-        <p>¡Gracias por enviar el formulario!</p>
+        <link rel="stylesheet" href="/web/static/lib/bootstrap/dist/css/bootstrap.css"/>
+        <div class="container text-center mt-5">
+            <h4>¡Gracias por enviar el formulario!</h4>
+            <br/>   
+            <div class="mt-4">
+                <a t-att-href="'/survey/%s' % job_application_id" 
+                class="btn btn-primary btn-lg px-5 py-2" 
+                role="button">
+                    Completar encuesta de salud
+                </a>
+            </div>
+        </div>
     </template>
 </odoo>

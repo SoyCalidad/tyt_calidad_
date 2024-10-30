@@ -1,7 +1,7 @@
 <odoo>
   <data>
 
-    <!-- Question List -->
+    <!-- Job Application List -->
     <record model="ir.ui.view" id="tyt_recruitment_job_application_list">
       <field name="name">Lista de Solicitudes</field>
       <field name="model">tyt_recruitment.job_application</field>
@@ -13,6 +13,14 @@
           <field name="site"/>
           <field name="campaign_id"/>
           <field name="applicant_id"/>
+          <field name="complete_survey_id"/>
+          <field name="has_complete_survey"/>
+          <button 
+            name="action_open_health_survey" 
+            string="Encuesta de salud" 
+            type="object" 
+            class="oe_highlight"
+            attrs="{'invisible': [('has_complete_survey', '=', True)]}" />
         </tree>
       </field>
     </record>
@@ -27,6 +35,82 @@
           <field name="type"/>
           <field name="state"/>
         </tree>
+      </field>
+    </record>
+
+    <!-- Formulario para encuesta completa -->
+    <record model="ir.ui.view" id="tyt_recruitment_complete_survey_form">
+      <field name="name">Formulario Encuesta de Salud completa</field>
+      <field name="model">tyt_recruitment.complete_survey</field>
+      <field name="arch" type="xml">
+        <form string="Encuesta de Salud">
+          <sheet>
+            <group string="Información de la Encuesta">
+              <field name="id" string="Fecha"/>
+              <field name="state" string="Estado"/>
+            </group>
+
+            <group string="Respuestas">
+              <field name="survey_answer_ids" mode="tree,form" string="Respuestas">
+                <tree editable="bottom">
+                  <field name="id" />
+                  <field name="text" />
+                  <field name="question_id" />
+                  <field name="multiple_ids" />
+                </tree>
+              </field>
+            </group>
+          </sheet>
+        </form>
+      </field>
+    </record>
+
+    <!-- Job Application form -->
+    <record model="ir.ui.view" id="tyt_recruitment_job_application_form">
+      <field name="name">Formulario de Solicitud</field>
+      <field name="model">tyt_recruitment.job_application</field>
+      <field name="arch" type="xml">
+        <form string="Formulario de Pregunta">
+          <sheet>
+            <group string="Información General">
+              <field name="request_date"/>
+              <field name="requisition"/>
+              <field name="site"/>
+              <field name="campaign_id"/>
+              <field name="applicant_id"/>
+            </group>
+
+            <group string="Encuesta de Salud" colspan="2">
+              <field name="has_complete_survey"/>
+              <field name="complete_survey_id">
+                <tree>
+                  <field name="id" width="80px"/>
+                  <field name="state" />
+                </tree>
+              </field>
+            </group>
+            
+            <!-- Sección de Detalles adicionales (si los necesitas en el futuro) -->
+            <notebook>
+              <page string="Hijos">
+                <field name="children_ids" mode="tree,kanban,form"/>
+              </page>
+              <page string="Historial Laboral">
+                <field name="job_history_ids" mode="tree,kanban,form"/>
+              </page>
+              <page string="Referencias">
+                <field name="reference_ids" mode="tree,kanban,form"/>
+              </page>
+              <page string="Datos Familiares">
+                <group>
+                  <field name="father_data_id"/>
+                  <field name="mother_data_id"/>
+                  <field name="spouse_data_id"/>
+                </group>
+              </page>
+            </notebook>
+          </sheet>
+        </form>
       </field>
     </record>
 
