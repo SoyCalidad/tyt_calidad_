@@ -9,12 +9,7 @@ from odoo.exceptions import ValidationError, Warning
 class AuditReport(models.Model):
     _inherit = "audit.report"
 
-    '''
-    planning_ids = fields.One2many( 
-        comodel_name='audit.audit.planning',
-        inverse_name='audit_audit_id', #inverse_name='audit_report_id'
-        string='Cronograma')
-    '''
+    scope = fields.Text('Alcance', required=False)    
 
     tyt_line_ids = fields.One2many( 
         comodel_name='audit.audit.planning',

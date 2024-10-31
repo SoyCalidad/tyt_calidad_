@@ -32,7 +32,7 @@
                             <field name="site_manager_email" attrs="{'readonly': [('state','not in',('draft','in_process'))] }" />
                             <field name="training_manager_id" attrs="{'readonly': [('state','not in',('draft','in_process'))] }" />
                             <field name="standard" invisible="1" attrs="{'readonly': [('state','not in',('draft','in_process'))] }"  />
-                            <!-- <field name="auditor_id" attrs="{'readonly': [('state','not in',('draft','in_process'))] }" /> -->
+                            <field name="auditor_id" attrs="{'readonly': [('state','not in',('draft','in_process'))] }" />
                             <field name="audited_ids" widget="many2many_tags" attrs="{'readonly': [('state','not in',('draft','in_process'))] }" />
                             <field name="next_audit" attrs="{'readonly': [('state','not in',('draft','in_process'))] }" />
                             <field name="audit_duration" string = "Duración de la Auditoría (en días)" attrs="{'readonly': [('state','not in',('draft','in_process'))] }" />
