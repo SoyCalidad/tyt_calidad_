@@ -1,6 +1,7 @@
 from odoo import http
 from odoo.http import request, Response
 import json
+import base64
 
 import logging
 _logger = logging.getLogger(__name__)
@@ -30,7 +31,7 @@ class PublicFormController(http.Controller):
             'birthdate': post.get('birthdate'),
             'nationality': post.get('nationality'),
             'age': post.get('age'),
-            'marital_status': post.get('marital_status'),
+            'marital_status': post.get('marital_status')
         }
 
         return request.render('tyt_recruitment.template_health_survey_form', context)
@@ -38,7 +39,7 @@ class PublicFormController(http.Controller):
     @http.route('/health_survey/submit', type='http', auth='public', website=True, csrf=False)
     def submit_form(self, **post):
 
-        job_application_id = request.params.get('custom_value')
+        job_application_id = request.params.get('job_application_id')
         health_questions = self.get_questions('EC01')
 
         # health_asnwer_json = [{
@@ -46,8 +47,17 @@ class PublicFormController(http.Controller):
         #     'question_id': q.id
         # } for q in health_questions]
 
+        image_base64 = post.get('signature')
+        image_data = None
+
+        if image_base64:
+            # Remueve el prefijo "data:image/png;base64," si existe
+            image_base64 = image_base64.split(",")[1]
+            image_data = base64.b64decode(image_base64)
+
         complete_survey_data = {
             'state': 'sent',
+            'signature_image': image_data,
             'job_application_id': job_application_id
         }
 
@@ -83,13 +93,7 @@ class PublicFormController(http.Controller):
                 health_asnwer_json.append(answer_data)
             request.env['tyt_recruitment.survey_answer'].sudo().create(answer_data)
 
-        # for answer in health_asnwer_json:
-        #     request.env['tyt_recruitment.answer'].sudo().create(answer)
-
-        return Response(
-            json.dumps(health_asnwer_json), 
-            content_type='application/json;charset=utf-8'
-        )
+        return request.render('tyt_recruitment.template_health_survey_success')
 
     def get_questions(self, code):
         questions = request.env['survey.question'].sudo().search([
