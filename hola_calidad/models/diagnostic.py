@@ -460,96 +460,96 @@ class Diagnostic(models.Model):
         return [total_na, total_100, total_75, total_50, total_25, total_0]
 
     diagnostic4_ids_100 = fields.Integer(
-        string=u'Total Contexto 100%', compute='_get_diagnostic')
+        string=u'Total Contexto 100%', compute='_get_diagnostic', compute_sudo=True)
     diagnostic4_ids_75 = fields.Integer(
-        string=u'Total Contexto 75%', compute='_get_diagnostic')
+        string=u'Total Contexto 75%', compute='_get_diagnostic', compute_sudo=True)
     diagnostic4_ids_50 = fields.Integer(
-        string=u'Total Contexto 50%', compute='_get_diagnostic')
+        string=u'Total Contexto 50%', compute='_get_diagnostic', compute_sudo=True)
     diagnostic4_ids_25 = fields.Integer(
-        string=u'Total Contexto 25%', compute='_get_diagnostic')
+        string=u'Total Contexto 25%', compute='_get_diagnostic', compute_sudo=True)
     diagnostic4_ids_0 = fields.Integer(
-        string=u'Total Contexto 0%', compute='_get_diagnostic')
+        string=u'Total Contexto 0%', compute='_get_diagnostic', compute_sudo=True)
 
     diagnostic5_ids_100 = fields.Integer(
-        string=u'Total Liderazgo 100%', compute='_get_diagnostic')
+        string=u'Total Liderazgo 100%', compute='_get_diagnostic', compute_sudo=True)
     diagnostic5_ids_75 = fields.Integer(
-        string=u'Total Liderazgo 75%', compute='_get_diagnostic')
+        string=u'Total Liderazgo 75%', compute='_get_diagnostic', compute_sudo=True)
     diagnostic5_ids_50 = fields.Integer(
-        string=u'Total Liderazgo 50%', compute='_get_diagnostic')
+        string=u'Total Liderazgo 50%', compute='_get_diagnostic', compute_sudo=True)
     diagnostic5_ids_25 = fields.Integer(
-        string=u'Total Liderazgo 25%', compute='_get_diagnostic')
+        string=u'Total Liderazgo 25%', compute='_get_diagnostic', compute_sudo=True)
     diagnostic5_ids_0 = fields.Integer(
-        string=u'Total Liderazgo 0%', compute='_get_diagnostic')
+        string=u'Total Liderazgo 0%', compute='_get_diagnostic', compute_sudo=True)
 
     diagnostic6_ids_100 = fields.Integer(
-        string=u'Total Planificacion 100%', compute='_get_diagnostic')
+        string=u'Total Planificacion 100%', compute='_get_diagnostic', compute_sudo=True)
     diagnostic6_ids_75 = fields.Integer(
-        string=u'Total Planificacion 75%', compute='_get_diagnostic')
+        string=u'Total Planificacion 75%', compute='_get_diagnostic', compute_sudo=True)
     diagnostic6_ids_50 = fields.Integer(
-        string=u'Total Planificacion 50%', compute='_get_diagnostic')
+        string=u'Total Planificacion 50%', compute='_get_diagnostic', compute_sudo=True)
     diagnostic6_ids_25 = fields.Integer(
-        string=u'Total Planificacion 25%', compute='_get_diagnostic')
+        string=u'Total Planificacion 25%', compute='_get_diagnostic', compute_sudo=True)
     diagnostic6_ids_0 = fields.Integer(
-        string=u'Total Planificacion 0%', compute='_get_diagnostic')
+        string=u'Total Planificacion 0%', compute='_get_diagnostic', compute_sudo=True)
 
     diagnostic7_ids_100 = fields.Integer(
-        string=u'Total Apoyo 100%', compute='_get_diagnostic')
+        string=u'Total Apoyo 100%', compute='_get_diagnostic', compute_sudo=True)
     diagnostic7_ids_75 = fields.Integer(
-        string=u'Total Apoyo 75%', compute='_get_diagnostic')
+        string=u'Total Apoyo 75%', compute='_get_diagnostic', compute_sudo=True)
     diagnostic7_ids_50 = fields.Integer(
-        string=u'Total Apoyo 50%', compute='_get_diagnostic')
+        string=u'Total Apoyo 50%', compute='_get_diagnostic', compute_sudo=True)
     diagnostic7_ids_25 = fields.Integer(
-        string=u'Total Apoyo 25%', compute='_get_diagnostic')
+        string=u'Total Apoyo 25%', compute='_get_diagnostic', compute_sudo=True)
     diagnostic7_ids_0 = fields.Integer(
-        string=u'Total Apoyo 0%', compute='_get_diagnostic')
+        string=u'Total Apoyo 0%', compute='_get_diagnostic', compute_sudo=True)
 
     diagnostic8_ids_100 = fields.Integer(
-        string=u'Total Operación 100%', compute='_get_diagnostic')
+        string=u'Total Operación 100%', compute='_get_diagnostic', compute_sudo=True)
     diagnostic8_ids_75 = fields.Integer(
-        string=u'Total Operación 75%', compute='_get_diagnostic')
+        string=u'Total Operación 75%', compute='_get_diagnostic', compute_sudo=True)
     diagnostic8_ids_50 = fields.Integer(
-        string=u'Total Operación 50%', compute='_get_diagnostic')
+        string=u'Total Operación 50%', compute='_get_diagnostic', compute_sudo=True)
     diagnostic8_ids_25 = fields.Integer(
-        string=u'Total Operación 25%', compute='_get_diagnostic')
+        string=u'Total Operación 25%', compute='_get_diagnostic', compute_sudo=True)
     diagnostic8_ids_0 = fields.Integer(
-        string=u'Total Operación 0%', compute='_get_diagnostic')
+        string=u'Total Operación 0%', compute='_get_diagnostic', compute_sudo=True)
 
     diagnostic9_ids_100 = fields.Integer(
-        string=u'Total Desempeño 100%', compute='_get_diagnostic')
+        string=u'Total Desempeño 100%', compute='_get_diagnostic', compute_sudo=True)
     diagnostic9_ids_75 = fields.Integer(
-        string=u'Total Desempeño 75%', compute='_get_diagnostic')
+        string=u'Total Desempeño 75%', compute='_get_diagnostic', compute_sudo=True)
     diagnostic9_ids_50 = fields.Integer(
-        string=u'Total Desempeño 50%', compute='_get_diagnostic')
+        string=u'Total Desempeño 50%', compute='_get_diagnostic', compute_sudo=True)
     diagnostic9_ids_25 = fields.Integer(
-        string=u'Total Desempeño 25%', compute='_get_diagnostic')
+        string=u'Total Desempeño 25%', compute='_get_diagnostic', compute_sudo=True)
     diagnostic9_ids_0 = fields.Integer(
-        string=u'Total Desempeño 0%', compute='_get_diagnostic')
+        string=u'Total Desempeño 0%', compute='_get_diagnostic', compute_sudo=True)
 
     diagnostic10_ids_100 = fields.Integer(
-        string=u'Total Mejora 100%', compute='_get_diagnostic')
+        string=u'Total Mejora 100%', compute='_get_diagnostic', compute_sudo=True)
     diagnostic10_ids_75 = fields.Integer(
-        string=u'Total Mejora 75%', compute='_get_diagnostic')
+        string=u'Total Mejora 75%', compute='_get_diagnostic', compute_sudo=True)
     diagnostic10_ids_50 = fields.Integer(
-        string=u'Total Mejora 50%', compute='_get_diagnostic')
+        string=u'Total Mejora 50%', compute='_get_diagnostic', compute_sudo=True)
     diagnostic10_ids_25 = fields.Integer(
-        string=u'Total Mejora 25%', compute='_get_diagnostic')
+        string=u'Total Mejora 25%', compute='_get_diagnostic', compute_sudo=True)
     diagnostic10_ids_0 = fields.Integer(
-        string=u'Total Mejora 0%', compute='_get_diagnostic')
+        string=u'Total Mejora 0%', compute='_get_diagnostic', compute_sudo=True)
 
     diagnostic4_ids_total = fields.Integer(
-        string=u'Total Punto 4', compute='_get_diagnostic', store=True)
+        string=u'Total Punto 4', compute='_get_diagnostic', compute_sudo=True, store=True)
     diagnostic5_ids_total = fields.Integer(
-        string=u'Total Punto 5', compute='_get_diagnostic', store=True)
+        string=u'Total Punto 5', compute='_get_diagnostic', compute_sudo=True, store=True)
     diagnostic6_ids_total = fields.Integer(
-        string=u'Total Punto 6', compute='_get_diagnostic', store=True)
+        string=u'Total Punto 6', compute='_get_diagnostic', compute_sudo=True, store=True)
     diagnostic7_ids_total = fields.Integer(
-        string=u'Total Punto 7', compute='_get_diagnostic', store=True)
+        string=u'Total Punto 7', compute='_get_diagnostic', compute_sudo=True, store=True)
     diagnostic8_ids_total = fields.Integer(
-        string=u'Total Punto 8', compute='_get_diagnostic', store=True)
+        string=u'Total Punto 8', compute='_get_diagnostic', compute_sudo=True, store=True)
     diagnostic9_ids_total = fields.Integer(
-        string=u'Total Punto 9', compute='_get_diagnostic', store=True)
+        string=u'Total Punto 9', compute='_get_diagnostic', compute_sudo=True, store=True)
     diagnostic10_ids_total = fields.Integer(
-        string=u'Total Punto 10', compute='_get_diagnostic', store=True)
+        string=u'Total Punto 10', compute='_get_diagnostic', compute_sudo=True, store=True)
 
     def get_diagnostic_values(self, diagnostic_list):
         total_100 = total_75 = total_50 = total_25 = total_0 = total_na = 0
