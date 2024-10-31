@@ -54,11 +54,14 @@
               <field name="survey_answer_ids" mode="tree,form" string="Respuestas">
                 <tree editable="bottom">
                   <field name="id" />
-                  <field name="text" />
                   <field name="question_id" />
+                  <field name="text" />
                   <field name="multiple_ids" />
                 </tree>
               </field>
+            </group>
+            <group>
+              <field name="signature_image" widget="image" class="oe_avatar" />
             </group>
           </sheet>
         </form>
@@ -84,7 +87,7 @@
               <field name="has_complete_survey"/>
               <field name="complete_survey_id">
                 <tree>
-                  <field name="id" width="80px"/>
+                  <field name="id" width="120px"/>
                   <field name="state" />
                 </tree>
               </field>

@@ -3,12 +3,36 @@
     <template id="template_health_survey_form" name="Public Form">
         <link rel="stylesheet" href="/web/static/lib/bootstrap/dist/css/bootstrap.css"/>
         <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons/font/bootstrap-icons.css"/>
-        
+        <style type="text/css">
+            body {
+                background-image: url(/tyt_recruitment/static/src/img/fondo_form.png);
+            }
+            .row{
+                background: white;
+            }
+            h1 {
+                background-color: #1f8296;
+                padding: 10px;
+                color: white;
+            }
+            h3 {
+                background-color: #1f8296;
+                padding: 10px;
+                color: white;
+                margin-left: -10px;
+            }
+            .cell1{
+                background-color: white;
+            }
+        </style>
+
         <div class="container mt-4 mb-4">
             <form id="health-survey-form" 
                 t-att-action="'/health_survey/submit?job_application_id=' + job_application_id" 
                 method="post" 
                 class="p-4 border cell1 rounded bg-light" >
+
+                <input type="text" name="job_application_id" t-att-value="job_application_id" readonly="true" style="display:none"/>
                 <h1 class="text-center">ENCUESTA DE SALUD</h1>
                 <h6 class="text-center"> Favor de llenar las siguiente encuesta con sinceridad. Es importante para TYT Logistica y Servicios conocer tu estado de salud en que se encuentre todos sus posibles empleado, Cualquier omision o cambio sera responsabilidad de quien llene dicho formato.. </h6>
                 <div id="first-part">
@@ -85,7 +109,7 @@
                             <!-- Estado Civil -->
                             <div class="col-sm-6 col-md-2 col-lg-2 col-xl-2 col-xxl-2 p-4 border cell1">
                                 <label for="marital_status" class="form-label">Estado Civil:</label>
-                                <input type="number" class="form-control" id="marital_status" min="18" name="marital_status" t-att-value="marital_status" readonly="true" />
+                                <input type="text" class="form-control" id="marital_status" min="18" name="marital_status" t-att-value="marital_status" readonly="true" />
                             </div>
                         </div>
                     </section>

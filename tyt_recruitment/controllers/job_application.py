@@ -8,7 +8,8 @@ class PublicFormController(http.Controller):
     def public_form(self, requisition_id, **post):
         
         site_id = post.get('site_name')
-        campaign_id = post.get('tag_name')
+        tag_name = post.get('tag_name')
+        campaign_id = post.get('campaign_id')
 
         health_questions = self.get_questions('enable', 'health');
         job_questions = self.get_questions('enable', 'job');
@@ -20,6 +21,7 @@ class PublicFormController(http.Controller):
 
         context = {
             'requisition_id': requisition_id,
+            'tag_name': tag_name,
             'campaign_id': campaign_id,
             'site_id': site_id,
             'health_questions_json': health_questions_json,
@@ -63,7 +65,7 @@ class PublicFormController(http.Controller):
             'dependents': post.get('dependents'),
             'foreign_nationality': post.get('foreign_nationality'), 
             'daily_activities': post.get('daily_activities'),
-            'campaign_id': post.get('campaign')
+            'campaign_id': post.get('campaign_id')
         }
         applicant = request.env['tyt_recruitment.applicant'].sudo().create(data_applicant)
 
@@ -106,7 +108,7 @@ class PublicFormController(http.Controller):
             'requisition': post.get('requisition'), 
             'site': post.get('site'), 
 
-            'campaign_id': post.get('campaign'),
+            'campaign_id': post.get('campaign_id'),
             'applicant_id': applicant.id,
 
             'father_data_id': father.id,
@@ -190,7 +192,16 @@ class PublicFormController(http.Controller):
         # }
 
         context = {
-            'job_application_id': job_application.id
+            'job_application_id': job_application.id,
+            'name': applicant.name,
+            'last_name_father': applicant.last_name_father,
+            'last_name_mother': applicant.last_name_mother,
+            'gender': 'gender',
+            'birthplace': applicant.birthplace,
+            'birthdate': applicant.birthdate,
+            'nationality': applicant.nationality,
+            'age': applicant.age,
+            'marital_status': applicant.marital_status
         }
 
         return request.render('tyt_recruitment.template_job_application_success', context)
@@ -253,6 +264,15 @@ class PublicFormController(http.Controller):
     def list_fields_applicant(self):
         
         context = {
-            'job_application_id': 222
+            'job_application_id': 222,
+            'name': 'name',
+            'last_name_father': 'last_name_father',
+            'last_name_mother': 'last_name_mother',
+            'gender': 'gender',
+            'birthplace': 'birthplace',
+            'birthdate': 'birthdate',
+            'nationality': 'nationality',
+            'age': 'age',
+            'marital_status': 'marital_status'
         }
         return request.render('tyt_recruitment.template_job_application_success', context)

@@ -185,7 +185,7 @@ class Campaign(models.Model):
         site_name = self.requisition_id.site_id.x_name
         tag_name = self.tag_id.display_name
         
-        url = f"/job_application/{requisition_id}/?site_name={site_name}&tag_name={tag_name}"
+        url = f"/job_application/{requisition_id}/?site_name={site_name}&tag_name={tag_name}&campaign_id={self.id}"
         
         return {
             'type': 'ir.actions.act_url',
