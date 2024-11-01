@@ -40,19 +40,43 @@ class Categ(models.Model):
         if self.sequence_id:
             self.sequence_id.name = 'Secuencia de '+self.name
 
-    @api.model
-    def create(self, values):
-        sequence = self.env['ir.sequence'].sudo().create({
-            'name': 'Secuencia de '+values.get('name'),
-            'active': True,
-            'prefix': 'Edición-nro.',
-            'padding': 4,
-            'number_next': 1,
-            'number_increment': 1,
-        })
-        values['sequence_id'] = sequence.id
-        result = super(Categ, self).create(values)
-        return result
+    # @api.model
+    # def create(self, values):
+    #     sequence = self.env['ir.sequence'].sudo().create({
+    #         'name': 'Secuencia de '+values.get('name'),
+    #         'active': True,
+    #         'prefix': 'Edición-nro.',
+    #         'padding': 4,
+    #         'number_next': 1,
+    #         'number_increment': 1,
+    #     })
+    #     values['sequence_id'] = sequence.id
+    #     result = super(Categ, self).create(values)
+    #     return result
+
+    @api.model_create_multi
+    def create(self, vals_list):
+        # Lista para almacenar los valores actualizados con sequence_id
+        new_vals_list = []
+
+        for vals in vals_list:
+            # Crear una nueva secuencia para cada registro
+            sequence = self.env['ir.sequence'].sudo().create({
+                'name': 'Secuencia de '+vals.get('name'),
+                'active': True,
+                'prefix': 'Edición-nro.',
+                'padding': 4,
+                'number_next': 1,
+                'number_increment': 1,
+            })
+            # Asignar el ID de la secuencia al diccionario de valores
+            vals['sequence_id'] = sequence.id
+            new_vals_list.append(vals)
+
+        # Llamar al método super con la lista de valores actualizados
+        records = super(Categ, self).create(new_vals_list)
+
+        return records
 
     def unlink(self):
         for categ in self:
