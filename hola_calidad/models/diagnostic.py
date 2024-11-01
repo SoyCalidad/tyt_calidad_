@@ -248,14 +248,26 @@ class DiagnosticLine(models.Model):
         ('line_note', 'Note'),
     ], default=False, help="Technical field for UX purpose.")
 
-    @api.model
-    def create(self, values):
-        if not values.get('name'):
-            vcomplete_name = self.env['hola_calidad.requirement'].browse(
-                values.get('requirement_id')).complete_name
-            values['name'] = vcomplete_name
-        result = super(DiagnosticLine, self).create(values)
-        return result
+    # @api.model
+    # def create(self, values):
+    #     if not values.get('name'):
+    #         vcomplete_name = self.env['hola_calidad.requirement'].browse(
+    #             values.get('requirement_id')).complete_name
+    #         values['name'] = vcomplete_name
+    #     result = super(DiagnosticLine, self).create(values)
+    #     return result
+
+    @api.model_create_multi
+    def create(self, vals_list):
+        for vals in vals_list:
+            if not vals.get('name'):
+                requirement = self.env['hola_calidad.requirement'].browse(vals.get('requirement_id'))
+                if requirement:
+                    vals['name'] = requirement.complete_name
+        # Llamar al método super con la lista de valores actualizados
+        records = super(DiagnosticLine, self).create(vals_list)
+
+        return records
 
     @api.onchange('requirement_id')
     def _onchange_requirement_id(self):
