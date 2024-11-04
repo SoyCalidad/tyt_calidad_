@@ -4,13 +4,30 @@ from odoo import api, fields, models
 class ProcessCategExport(models.Model):
     _inherit = 'mgmt.categ'
 
-    @api.model
-    def create(self, values):
-        res = super(ProcessCategExport, self).create(values)
-        self.env['mgmt.categ.dummy'].create({
-            'categ': res.id,
-        })
-        return res
+    # @api.model
+    # def create(self, values):
+    #     res = super(ProcessCategExport, self).create(values)
+    #     self.env['mgmt.categ.dummy'].create({
+    #         'categ': res.id,
+    #     })
+    #     return res
+    
+    @api.model_create_multi
+    def create(self, vals_list):
+        # Crear todos los registros de mgmt.categ utilizando el método super
+        categ_records = super(ProcessCategExport, self).create(vals_list)
+
+        # Preparar los valores para los registros de mgmt.categ.dummy
+        dummy_vals = []
+        for categ in categ_records:
+            dummy_vals.append({
+                'categ': categ.id,
+            })
+
+        # Crear todos los registros de mgmt.categ.dummy de una sola vez
+        self.env['mgmt.categ.dummy'].create(dummy_vals)
+        return categ_records
+
     
     def export_process(self):
         process = self.env['mgmt.categ'].search([])

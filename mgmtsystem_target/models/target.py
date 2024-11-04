@@ -312,11 +312,11 @@ class Indicator(models.Model):
     history_ids = fields.One2many(
         'mgmtsystem.indicator.history', 'indicator_id', string='Indicador')
     goal_value = fields.Float(
-        compute='_compute_current_goal_progress', string='Valor de la meta', store=True)
+        compute='_compute_current_goal_progress', string='Valor de la meta', store=True , compute_sudo=True)
     c_goal_progress = fields.Float(
         compute='_compute_c_goal_progress', string='Progreso actual')
     last_medition = fields.Many2one(
-        'mgmtsystem.indicator.history', compute='_compute_current_goal_progress', string='Última medición')
+        'mgmtsystem.indicator.history', compute='_compute_current_goal_progress', string='Última medición', compute_sudo=True)
     nonconformity_ids = fields.Many2many(
         'mgmtsystem.nonconformity', string='No conformidades', relation='nonconformity_indicator')
 
