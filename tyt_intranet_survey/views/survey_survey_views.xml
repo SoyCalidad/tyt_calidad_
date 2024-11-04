@@ -19,8 +19,8 @@
             <xpath expr="//notebook//page[@name='options']//group[@name='participants']//field[@name='access_mode']" position="after">
                 <field name="authorized_group_id" widget="many2one" attrs="{'invisible': [('access_mode', '!=', 'intranet')], 'readonly': [('is_published', '=', True)]}"/>
                 <field name="is_published" attrs="{'invisible': [('access_mode', '!=', 'intranet')]}" readonly="1"/>
-                <label for="published_start_date" string="Published Date"/>
-                <div name="dates" class="o_row">
+                <label for="published_start_date" string="Published Date" attrs="{'invisible': [('access_mode', '!=', 'intranet')]}"/>
+                <div name="dates" class="o_row" attrs="{'invisible': [('access_mode', '!=', 'intranet')]}" readonly="1">
                     <field name="published_start_date" widget="daterange" options='{"related_published_end_date": "published_end_date"}' readonly="1"/>
                     <i class="fa fa-long-arrow-right mx-2 oe_edit_only" aria-label="Arrow icon" title="Arrow"/>
                     <i class="fa fa-long-arrow-right mx-2 oe_read_only" aria-label="Arrow icon" title="Arrow" attrs="{'invisible': [('published_start_date', '=', False), ('published_end_date', '=', False)]}"/>
