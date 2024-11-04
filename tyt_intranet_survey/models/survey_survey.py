@@ -22,8 +22,14 @@ class Survey(models.Model):
         for survey in self:
             if survey.access_mode == 'intranet':
                 survey.questions_mandatory = True
+                survey.users_can_go_back = True
+                survey.scoring_type = 'scoring_without_answers'
+                survey.scoring_success_min = 0
             else:
                 survey.questions_mandatory = False
+                survey.users_can_go_back = False
+                survey.scoring_type = 'no_scoring'
+                survey.scoring_success_min = 0
 
     def _has_survey_answered(self, partner):
         user_input = self._get_oldest_survey_answer(partner)
