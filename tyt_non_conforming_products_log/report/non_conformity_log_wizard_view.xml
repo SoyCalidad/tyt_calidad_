@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>    
+    <record id="report_ncolog_excel" model="ir.ui.view">
+        <field name="name">non.conformity.log.wizard.form</field>
+        <field name="model">non.conformity.log.wizard</field>
+        <field name="arch" type="xml">
+            <form string="Log of non-conforming products">
+                <group>
+                    <field name="start_date" string="Start Date"/>
+                    <field name="end_date" string="End Date"/>
+                </group>
+                <footer>
+                    <button name="generate_report"
+                            type="object"
+                            string="Print"
+                            class="oe_highlight"
+                            icon="fa-download" />
+                    <button string="Cancel" special="cancel" />
+                </footer>
+            </form>
+        </field>
+    </record>
+
+    <record model="ir.actions.act_window" id="report_ncolog">
+        <field name="name">Log of non-conforming products</field>
+        <field name="res_model">non.conformity.log.wizard</field>
+        <field name="view_mode">form</field>
+        <field name="view_id" ref="report_ncolog_excel" />
+        <field name="target">new</field>
+    </record>
+    
+</odoo>

@@ -32,30 +32,1307 @@ class Plan(models.Model):
             _logger.info(f"Auditor asociado: {plan.audit_plan_tyt_auditor_id.name} (ID: {plan.audit_plan_tyt_auditor_id.id})")
             print(f"Auditor asociado: {plan.audit_plan_tyt_auditor_id.name} (ID: {plan.audit_plan_tyt_auditor_id.id})")
 
+            # IDs de los sitios
+            SITE_GUADALAJARA_ID = 1
+            SITE_HERMOSILLO_ID = 2
+            SITE_PUEBLA_CAT_ID = 10
+            SITE_PUEBLA_ID = 9
+            SITE_QUERETARO_ID = 8
+            SITE_M_TAPIA_ID = 7
+            SITE_M_ARTEAGA_ID = 5
+            SITE_MERIDA_ID = 3
+
+
+
             # Definir los datos de los registros a crear basados en nombres únicos de sitios
             schedule_data = [
                 {
                     'description_id': self.env.ref('tyt_audit.schedule_plan_description_1').id,
-                    'activity_id': self.env.ref('tyt_audit.schedule_plan_activity_1').id,
-                    'sites_id': self.env['x_sitios'].search([('x_name', '=', 'Guadalajara')], limit=1).id,
-                },
-                {
-                    'description_id': self.env.ref('tyt_audit.schedule_plan_description_2').id,
-                    'activity_id': self.env.ref('tyt_audit.schedule_plan_activity_4').id,
-                    'sites_id': self.env['x_sitios'].search([('x_name', '=', 'Guadalajara')], limit=1).id,
+                    'activity_id': self.env.ref('tyt_audit.schedule_plan_activity_101').id,
+                    'sites_id': SITE_GUADALAJARA_ID,
                 },
                 {
                     'description_id': self.env.ref('tyt_audit.schedule_plan_description_1').id,
-                    'activity_id': self.env.ref('tyt_audit.schedule_plan_activity_1').id,
-                    'sites_id': self.env['x_sitios'].search([('x_name', '=', 'Hermosillo')], limit=1).id,
+                    'activity_id': self.env.ref('tyt_audit.schedule_plan_activity_102').id,
+                    'sites_id': SITE_GUADALAJARA_ID,
+                },
+                {
+                    'description_id': self.env.ref('tyt_audit.schedule_plan_description_1').id,
+                    'activity_id': self.env.ref('tyt_audit.schedule_plan_activity_103').id,
+                    'sites_id': SITE_GUADALAJARA_ID,
+                },
+                {
+                    'description_id': self.env.ref('tyt_audit.schedule_plan_description_1').id,
+                    'activity_id': self.env.ref('tyt_audit.schedule_plan_activity_104').id,
+                    'sites_id': SITE_GUADALAJARA_ID,
+                },
+
+
+                {
+                    'description_id': self.env.ref('tyt_audit.schedule_plan_description_2').id,
+                    'activity_id': self.env.ref('tyt_audit.schedule_plan_activity_201').id,
+                    'sites_id': SITE_GUADALAJARA_ID,
                 },
                 {
                     'description_id': self.env.ref('tyt_audit.schedule_plan_description_2').id,
-                    'activity_id': self.env.ref('tyt_audit.schedule_plan_activity_4').id,
-                    'sites_id': self.env['x_sitios'].search([('x_name', '=', 'Hermosillo')], limit=1).id,
+                    'activity_id': self.env.ref('tyt_audit.schedule_plan_activity_202').id,
+                    'sites_id': SITE_GUADALAJARA_ID,
+                },
+                {
+                    'description_id': self.env.ref('tyt_audit.schedule_plan_description_2').id,
+                    'activity_id': self.env.ref('tyt_audit.schedule_plan_activity_203').id,
+                    'sites_id': SITE_GUADALAJARA_ID,
+                },
+                {
+                    'description_id': self.env.ref('tyt_audit.schedule_plan_description_2').id,
+                    'activity_id': self.env.ref('tyt_audit.schedule_plan_activity_204').id,
+                    'sites_id': SITE_GUADALAJARA_ID,
+                },
+
+                {
+                    'description_id': self.env.ref('tyt_audit.schedule_plan_description_3').id,
+                    'activity_id': self.env.ref('tyt_audit.schedule_plan_activity_301').id,
+                    'sites_id': SITE_GUADALAJARA_ID,
+                },
+                {
+                    'description_id': self.env.ref('tyt_audit.schedule_plan_description_3').id,
+                    'activity_id': self.env.ref('tyt_audit.schedule_plan_activity_302').id,
+                    'sites_id': SITE_GUADALAJARA_ID,
+                },
+                {
+                    'description_id': self.env.ref('tyt_audit.schedule_plan_description_3').id,
+                    'activity_id': self.env.ref('tyt_audit.schedule_plan_activity_303').id,
+                    'sites_id': SITE_GUADALAJARA_ID,
+                },
+                {
+                    'description_id': self.env.ref('tyt_audit.schedule_plan_description_3').id,
+                    'activity_id': self.env.ref('tyt_audit.schedule_plan_activity_304').id,
+                    'sites_id': SITE_GUADALAJARA_ID,
+                },
+
+                {
+                    'description_id': self.env.ref('tyt_audit.schedule_plan_description_4').id,
+                    'activity_id': self.env.ref('tyt_audit.schedule_plan_activity_401').id,
+                    'sites_id': SITE_GUADALAJARA_ID,
+                },
+                {
+                    'description_id': self.env.ref('tyt_audit.schedule_plan_description_4').id,
+                    'activity_id': self.env.ref('tyt_audit.schedule_plan_activity_402').id,
+                    'sites_id': SITE_GUADALAJARA_ID,
+                },
+                {
+                    'description_id': self.env.ref('tyt_audit.schedule_plan_description_4').id,
+                    'activity_id': self.env.ref('tyt_audit.schedule_plan_activity_403').id,
+                    'sites_id': SITE_GUADALAJARA_ID,
+                },
+                {
+                    'description_id': self.env.ref('tyt_audit.schedule_plan_description_4').id,
+                    'activity_id': self.env.ref('tyt_audit.schedule_plan_activity_404').id,
+                    'sites_id': SITE_GUADALAJARA_ID,
+                },
+                {
+                    'description_id': self.env.ref('tyt_audit.schedule_plan_description_4').id,
+                    'activity_id': self.env.ref('tyt_audit.schedule_plan_activity_405').id,
+                    'sites_id': SITE_GUADALAJARA_ID,
+                },
+                {
+                    'description_id': self.env.ref('tyt_audit.schedule_plan_description_4').id,
+                    'activity_id': self.env.ref('tyt_audit.schedule_plan_activity_406').id,
+                    'sites_id': SITE_GUADALAJARA_ID,
+                },                
+                {
+                    'description_id': self.env.ref('tyt_audit.schedule_plan_description_5').id,
+                    'activity_id': self.env.ref('tyt_audit.schedule_plan_activity_501').id,
+                    'sites_id': SITE_GUADALAJARA_ID,
+                },
+                {
+                    'description_id': self.env.ref('tyt_audit.schedule_plan_description_5').id,
+                    'activity_id': self.env.ref('tyt_audit.schedule_plan_activity_502').id,
+                    'sites_id': SITE_GUADALAJARA_ID,
+                },
+                {
+                    'description_id': self.env.ref('tyt_audit.schedule_plan_description_5').id,
+                    'activity_id': self.env.ref('tyt_audit.schedule_plan_activity_503').id,
+                    'sites_id': SITE_GUADALAJARA_ID,
+                },
+                {
+                    'description_id': self.env.ref('tyt_audit.schedule_plan_description_5').id,
+                    'activity_id': self.env.ref('tyt_audit.schedule_plan_activity_504').id,
+                    'sites_id': SITE_GUADALAJARA_ID,
+                },
+                {
+                    'description_id': self.env.ref('tyt_audit.schedule_plan_description_5').id,
+                    'activity_id': self.env.ref('tyt_audit.schedule_plan_activity_505').id,
+                    'sites_id': SITE_GUADALAJARA_ID,
+                },
+                {
+                    'description_id': self.env.ref('tyt_audit.schedule_plan_description_5').id,
+                    'activity_id': self.env.ref('tyt_audit.schedule_plan_activity_506').id,
+                    'sites_id': SITE_GUADALAJARA_ID,
+                },
+                {
+                    'description_id': self.env.ref('tyt_audit.schedule_plan_description_5').id,
+                    'activity_id': self.env.ref('tyt_audit.schedule_plan_activity_507').id,
+                    'sites_id': SITE_GUADALAJARA_ID,
+                },
+                {
+                    'description_id': self.env.ref('tyt_audit.schedule_plan_description_5').id,
+                    'activity_id': self.env.ref('tyt_audit.schedule_plan_activity_508').id,
+                    'sites_id': SITE_GUADALAJARA_ID,
+                },
+                {
+                    'description_id': self.env.ref('tyt_audit.schedule_plan_description_5').id,
+                    'activity_id': self.env.ref('tyt_audit.schedule_plan_activity_509').id,
+                    'sites_id': SITE_GUADALAJARA_ID,
+                },
+                {
+                    'description_id': self.env.ref('tyt_audit.schedule_plan_description_6').id,
+                    'activity_id': self.env.ref('tyt_audit.schedule_plan_activity_601').id,
+                    'sites_id': SITE_GUADALAJARA_ID,
+                },
+                {
+                    'description_id': self.env.ref('tyt_audit.schedule_plan_description_6').id,
+                    'activity_id': self.env.ref('tyt_audit.schedule_plan_activity_602').id,
+                    'sites_id': SITE_GUADALAJARA_ID,
+                },
+                {
+                    'description_id': self.env.ref('tyt_audit.schedule_plan_description_6').id,
+                    'activity_id': self.env.ref('tyt_audit.schedule_plan_activity_603').id,
+                    'sites_id': SITE_GUADALAJARA_ID,
+                },
+                {
+                    'description_id': self.env.ref('tyt_audit.schedule_plan_description_6').id,
+                    'activity_id': self.env.ref('tyt_audit.schedule_plan_activity_604').id,
+                    'sites_id': SITE_GUADALAJARA_ID,
+                },
+                {
+                    'description_id': self.env.ref('tyt_audit.schedule_plan_description_1').id,
+                    'activity_id': self.env.ref('tyt_audit.schedule_plan_activity_101').id,
+                    'sites_id':SITE_HERMOSILLO_ID,
+                },
+                {
+                    'description_id': self.env.ref('tyt_audit.schedule_plan_description_1').id,
+                    'activity_id': self.env.ref('tyt_audit.schedule_plan_activity_102').id,
+                    'sites_id':SITE_HERMOSILLO_ID,
+                },
+                {
+                    'description_id': self.env.ref('tyt_audit.schedule_plan_description_1').id,
+                    'activity_id': self.env.ref('tyt_audit.schedule_plan_activity_103').id,
+                    'sites_id':SITE_HERMOSILLO_ID,
+                },
+                {
+                    'description_id': self.env.ref('tyt_audit.schedule_plan_description_1').id,
+                    'activity_id': self.env.ref('tyt_audit.schedule_plan_activity_104').id,
+                    'sites_id':SITE_HERMOSILLO_ID,
+                },
+
+
+                {
+                    'description_id': self.env.ref('tyt_audit.schedule_plan_description_2').id,
+                    'activity_id': self.env.ref('tyt_audit.schedule_plan_activity_201').id,
+                    'sites_id':SITE_HERMOSILLO_ID,
+                },
+                {
+                    'description_id': self.env.ref('tyt_audit.schedule_plan_description_2').id,
+                    'activity_id': self.env.ref('tyt_audit.schedule_plan_activity_202').id,
+                    'sites_id':SITE_HERMOSILLO_ID,
+                },
+                {
+                    'description_id': self.env.ref('tyt_audit.schedule_plan_description_2').id,
+                    'activity_id': self.env.ref('tyt_audit.schedule_plan_activity_203').id,
+                    'sites_id':SITE_HERMOSILLO_ID,
+                },
+                {
+                    'description_id': self.env.ref('tyt_audit.schedule_plan_description_2').id,
+                    'activity_id': self.env.ref('tyt_audit.schedule_plan_activity_204').id,
+                    'sites_id':SITE_HERMOSILLO_ID,
+                },
+
+                {
+                    'description_id': self.env.ref('tyt_audit.schedule_plan_description_3').id,
+                    'activity_id': self.env.ref('tyt_audit.schedule_plan_activity_301').id,
+                    'sites_id':SITE_HERMOSILLO_ID,
+                },
+                {
+                    'description_id': self.env.ref('tyt_audit.schedule_plan_description_3').id,
+                    'activity_id': self.env.ref('tyt_audit.schedule_plan_activity_302').id,
+                    'sites_id':SITE_HERMOSILLO_ID,
+                },
+                {
+                    'description_id': self.env.ref('tyt_audit.schedule_plan_description_3').id,
+                    'activity_id': self.env.ref('tyt_audit.schedule_plan_activity_303').id,
+                    'sites_id':SITE_HERMOSILLO_ID,
+                },
+                {
+                    'description_id': self.env.ref('tyt_audit.schedule_plan_description_3').id,
+                    'activity_id': self.env.ref('tyt_audit.schedule_plan_activity_304').id,
+                    'sites_id':SITE_HERMOSILLO_ID,
+                },
+
+                {
+                    'description_id': self.env.ref('tyt_audit.schedule_plan_description_4').id,
+                    'activity_id': self.env.ref('tyt_audit.schedule_plan_activity_401').id,
+                    'sites_id':SITE_HERMOSILLO_ID,
+                },
+                {
+                    'description_id': self.env.ref('tyt_audit.schedule_plan_description_4').id,
+                    'activity_id': self.env.ref('tyt_audit.schedule_plan_activity_402').id,
+                    'sites_id':SITE_HERMOSILLO_ID,
+                },
+                {
+                    'description_id': self.env.ref('tyt_audit.schedule_plan_description_4').id,
+                    'activity_id': self.env.ref('tyt_audit.schedule_plan_activity_403').id,
+                    'sites_id':SITE_HERMOSILLO_ID,
+                },
+                {
+                    'description_id': self.env.ref('tyt_audit.schedule_plan_description_4').id,
+                    'activity_id': self.env.ref('tyt_audit.schedule_plan_activity_404').id,
+                    'sites_id':SITE_HERMOSILLO_ID,
+                },
+                {
+                    'description_id': self.env.ref('tyt_audit.schedule_plan_description_4').id,
+                    'activity_id': self.env.ref('tyt_audit.schedule_plan_activity_405').id,
+                    'sites_id': SITE_HERMOSILLO_ID,
+                },
+                {
+                    'description_id': self.env.ref('tyt_audit.schedule_plan_description_4').id,
+                    'activity_id': self.env.ref('tyt_audit.schedule_plan_activity_406').id,
+                    'sites_id': SITE_HERMOSILLO_ID,
+                },                 
+                {
+                    'description_id': self.env.ref('tyt_audit.schedule_plan_description_5').id,
+                    'activity_id': self.env.ref('tyt_audit.schedule_plan_activity_501').id,
+                    'sites_id':SITE_HERMOSILLO_ID,
+                },
+                {
+                    'description_id': self.env.ref('tyt_audit.schedule_plan_description_5').id,
+                    'activity_id': self.env.ref('tyt_audit.schedule_plan_activity_502').id,
+                    'sites_id':SITE_HERMOSILLO_ID,
+                },
+                {
+                    'description_id': self.env.ref('tyt_audit.schedule_plan_description_5').id,
+                    'activity_id': self.env.ref('tyt_audit.schedule_plan_activity_503').id,
+                    'sites_id':SITE_HERMOSILLO_ID,
+                },
+                {
+                    'description_id': self.env.ref('tyt_audit.schedule_plan_description_5').id,
+                    'activity_id': self.env.ref('tyt_audit.schedule_plan_activity_504').id,
+                    'sites_id':SITE_HERMOSILLO_ID,
+                },
+                {
+                    'description_id': self.env.ref('tyt_audit.schedule_plan_description_5').id,
+                    'activity_id': self.env.ref('tyt_audit.schedule_plan_activity_505').id,
+                    'sites_id':SITE_HERMOSILLO_ID,
+                },
+                {
+                    'description_id': self.env.ref('tyt_audit.schedule_plan_description_5').id,
+                    'activity_id': self.env.ref('tyt_audit.schedule_plan_activity_506').id,
+                    'sites_id':SITE_HERMOSILLO_ID,
+                },
+                {
+                    'description_id': self.env.ref('tyt_audit.schedule_plan_description_5').id,
+                    'activity_id': self.env.ref('tyt_audit.schedule_plan_activity_507').id,
+                    'sites_id':SITE_HERMOSILLO_ID,
+                },
+                {
+                    'description_id': self.env.ref('tyt_audit.schedule_plan_description_5').id,
+                    'activity_id': self.env.ref('tyt_audit.schedule_plan_activity_508').id,
+                    'sites_id':SITE_HERMOSILLO_ID,
+                },
+                {
+                    'description_id': self.env.ref('tyt_audit.schedule_plan_description_5').id,
+                    'activity_id': self.env.ref('tyt_audit.schedule_plan_activity_509').id,
+                    'sites_id':SITE_HERMOSILLO_ID,
+                },
+                {
+                    'description_id': self.env.ref('tyt_audit.schedule_plan_description_6').id,
+                    'activity_id': self.env.ref('tyt_audit.schedule_plan_activity_601').id,
+                    'sites_id':SITE_HERMOSILLO_ID,
+                },
+                {
+                    'description_id': self.env.ref('tyt_audit.schedule_plan_description_6').id,
+                    'activity_id': self.env.ref('tyt_audit.schedule_plan_activity_602').id,
+                    'sites_id':SITE_HERMOSILLO_ID,
+                },
+                {
+                    'description_id': self.env.ref('tyt_audit.schedule_plan_description_6').id,
+                    'activity_id': self.env.ref('tyt_audit.schedule_plan_activity_603').id,
+                    'sites_id':SITE_HERMOSILLO_ID,
+                },
+                {
+                    'description_id': self.env.ref('tyt_audit.schedule_plan_description_6').id,
+                    'activity_id': self.env.ref('tyt_audit.schedule_plan_activity_604').id,
+                    'sites_id':SITE_HERMOSILLO_ID,
+                },
+
+                {
+                    'description_id': self.env.ref('tyt_audit.schedule_plan_description_1').id,
+                    'activity_id': self.env.ref('tyt_audit.schedule_plan_activity_101').id,
+                    'sites_id':SITE_PUEBLA_CAT_ID,
+                },
+                {
+                    'description_id': self.env.ref('tyt_audit.schedule_plan_description_1').id,
+                    'activity_id': self.env.ref('tyt_audit.schedule_plan_activity_102').id,
+                    'sites_id':SITE_PUEBLA_CAT_ID,
+                },
+                {
+                    'description_id': self.env.ref('tyt_audit.schedule_plan_description_1').id,
+                    'activity_id': self.env.ref('tyt_audit.schedule_plan_activity_103').id,
+                    'sites_id':SITE_PUEBLA_CAT_ID,
+                },
+                {
+                    'description_id': self.env.ref('tyt_audit.schedule_plan_description_1').id,
+                    'activity_id': self.env.ref('tyt_audit.schedule_plan_activity_104').id,
+                    'sites_id':SITE_PUEBLA_CAT_ID,
+                },
+
+
+                {
+                    'description_id': self.env.ref('tyt_audit.schedule_plan_description_2').id,
+                    'activity_id': self.env.ref('tyt_audit.schedule_plan_activity_201').id,
+                    'sites_id':SITE_PUEBLA_CAT_ID,
+                },
+                {
+                    'description_id': self.env.ref('tyt_audit.schedule_plan_description_2').id,
+                    'activity_id': self.env.ref('tyt_audit.schedule_plan_activity_202').id,
+                    'sites_id':SITE_PUEBLA_CAT_ID,
+                },
+                {
+                    'description_id': self.env.ref('tyt_audit.schedule_plan_description_2').id,
+                    'activity_id': self.env.ref('tyt_audit.schedule_plan_activity_203').id,
+                    'sites_id':SITE_PUEBLA_CAT_ID,
+                },
+                {
+                    'description_id': self.env.ref('tyt_audit.schedule_plan_description_2').id,
+                    'activity_id': self.env.ref('tyt_audit.schedule_plan_activity_204').id,
+                    'sites_id':SITE_PUEBLA_CAT_ID,
+                },
+
+                {
+                    'description_id': self.env.ref('tyt_audit.schedule_plan_description_3').id,
+                    'activity_id': self.env.ref('tyt_audit.schedule_plan_activity_301').id,
+                    'sites_id':SITE_PUEBLA_CAT_ID,
+                },
+                {
+                    'description_id': self.env.ref('tyt_audit.schedule_plan_description_3').id,
+                    'activity_id': self.env.ref('tyt_audit.schedule_plan_activity_302').id,
+                    'sites_id':SITE_PUEBLA_CAT_ID,
+                },
+                {
+                    'description_id': self.env.ref('tyt_audit.schedule_plan_description_3').id,
+                    'activity_id': self.env.ref('tyt_audit.schedule_plan_activity_303').id,
+                    'sites_id':SITE_PUEBLA_CAT_ID,
+                },
+                {
+                    'description_id': self.env.ref('tyt_audit.schedule_plan_description_3').id,
+                    'activity_id': self.env.ref('tyt_audit.schedule_plan_activity_304').id,
+                    'sites_id':SITE_PUEBLA_CAT_ID,
+                },
+
+                {
+                    'description_id': self.env.ref('tyt_audit.schedule_plan_description_4').id,
+                    'activity_id': self.env.ref('tyt_audit.schedule_plan_activity_401').id,
+                    'sites_id':SITE_PUEBLA_CAT_ID,
+                },
+                {
+                    'description_id': self.env.ref('tyt_audit.schedule_plan_description_4').id,
+                    'activity_id': self.env.ref('tyt_audit.schedule_plan_activity_402').id,
+                    'sites_id':SITE_PUEBLA_CAT_ID,
+                },
+                {
+                    'description_id': self.env.ref('tyt_audit.schedule_plan_description_4').id,
+                    'activity_id': self.env.ref('tyt_audit.schedule_plan_activity_403').id,
+                    'sites_id':SITE_PUEBLA_CAT_ID,
+                },
+                {
+                    'description_id': self.env.ref('tyt_audit.schedule_plan_description_4').id,
+                    'activity_id': self.env.ref('tyt_audit.schedule_plan_activity_404').id,
+                    'sites_id':SITE_PUEBLA_CAT_ID,
+                },
+                {
+                    'description_id': self.env.ref('tyt_audit.schedule_plan_description_4').id,
+                    'activity_id': self.env.ref('tyt_audit.schedule_plan_activity_405').id,
+                    'sites_id': SITE_PUEBLA_CAT_ID,
+                },
+                {
+                    'description_id': self.env.ref('tyt_audit.schedule_plan_description_4').id,
+                    'activity_id': self.env.ref('tyt_audit.schedule_plan_activity_406').id,
+                    'sites_id': SITE_PUEBLA_CAT_ID,
+                }, 
+                {
+                    'description_id': self.env.ref('tyt_audit.schedule_plan_description_5').id,
+                    'activity_id': self.env.ref('tyt_audit.schedule_plan_activity_501').id,
+                    'sites_id':SITE_PUEBLA_CAT_ID,
+                },
+                {
+                    'description_id': self.env.ref('tyt_audit.schedule_plan_description_5').id,
+                    'activity_id': self.env.ref('tyt_audit.schedule_plan_activity_502').id,
+                    'sites_id':SITE_PUEBLA_CAT_ID,
+                },
+                {
+                    'description_id': self.env.ref('tyt_audit.schedule_plan_description_5').id,
+                    'activity_id': self.env.ref('tyt_audit.schedule_plan_activity_503').id,
+                    'sites_id':SITE_PUEBLA_CAT_ID,
+                },
+                {
+                    'description_id': self.env.ref('tyt_audit.schedule_plan_description_5').id,
+                    'activity_id': self.env.ref('tyt_audit.schedule_plan_activity_504').id,
+                    'sites_id':SITE_PUEBLA_CAT_ID,
+                },
+                {
+                    'description_id': self.env.ref('tyt_audit.schedule_plan_description_5').id,
+                    'activity_id': self.env.ref('tyt_audit.schedule_plan_activity_505').id,
+                    'sites_id':SITE_PUEBLA_CAT_ID,
+                },
+                {
+                    'description_id': self.env.ref('tyt_audit.schedule_plan_description_5').id,
+                    'activity_id': self.env.ref('tyt_audit.schedule_plan_activity_506').id,
+                    'sites_id':SITE_PUEBLA_CAT_ID,
+                },
+                {
+                    'description_id': self.env.ref('tyt_audit.schedule_plan_description_5').id,
+                    'activity_id': self.env.ref('tyt_audit.schedule_plan_activity_507').id,
+                    'sites_id':SITE_PUEBLA_CAT_ID,
+                },
+                {
+                    'description_id': self.env.ref('tyt_audit.schedule_plan_description_5').id,
+                    'activity_id': self.env.ref('tyt_audit.schedule_plan_activity_508').id,
+                    'sites_id':SITE_PUEBLA_CAT_ID,
+                },
+                {
+                    'description_id': self.env.ref('tyt_audit.schedule_plan_description_5').id,
+                    'activity_id': self.env.ref('tyt_audit.schedule_plan_activity_509').id,
+                    'sites_id':SITE_PUEBLA_CAT_ID,
+                },
+                {
+                    'description_id': self.env.ref('tyt_audit.schedule_plan_description_6').id,
+                    'activity_id': self.env.ref('tyt_audit.schedule_plan_activity_601').id,
+                    'sites_id':SITE_PUEBLA_CAT_ID,
+                },
+                {
+                    'description_id': self.env.ref('tyt_audit.schedule_plan_description_6').id,
+                    'activity_id': self.env.ref('tyt_audit.schedule_plan_activity_602').id,
+                    'sites_id':SITE_PUEBLA_CAT_ID,
+                },
+                {
+                    'description_id': self.env.ref('tyt_audit.schedule_plan_description_6').id,
+                    'activity_id': self.env.ref('tyt_audit.schedule_plan_activity_603').id,
+                    'sites_id':SITE_PUEBLA_CAT_ID,
+                },
+                {
+                    'description_id': self.env.ref('tyt_audit.schedule_plan_description_6').id,
+                    'activity_id': self.env.ref('tyt_audit.schedule_plan_activity_604').id,
+                    'sites_id':SITE_PUEBLA_CAT_ID,
+                },
+
+                {
+                    'description_id': self.env.ref('tyt_audit.schedule_plan_description_1').id,
+                    'activity_id': self.env.ref('tyt_audit.schedule_plan_activity_101').id,
+                    'sites_id':SITE_PUEBLA_ID,
+                },
+                {
+                    'description_id': self.env.ref('tyt_audit.schedule_plan_description_1').id,
+                    'activity_id': self.env.ref('tyt_audit.schedule_plan_activity_102').id,
+                    'sites_id':SITE_PUEBLA_ID,
+                },
+                {
+                    'description_id': self.env.ref('tyt_audit.schedule_plan_description_1').id,
+                    'activity_id': self.env.ref('tyt_audit.schedule_plan_activity_103').id,
+                    'sites_id':SITE_PUEBLA_ID,
+                },
+                {
+                    'description_id': self.env.ref('tyt_audit.schedule_plan_description_1').id,
+                    'activity_id': self.env.ref('tyt_audit.schedule_plan_activity_104').id,
+                    'sites_id':SITE_PUEBLA_ID,
+                },
+
+
+                {
+                    'description_id': self.env.ref('tyt_audit.schedule_plan_description_2').id,
+                    'activity_id': self.env.ref('tyt_audit.schedule_plan_activity_201').id,
+                    'sites_id':SITE_PUEBLA_ID,
+                },
+                {
+                    'description_id': self.env.ref('tyt_audit.schedule_plan_description_2').id,
+                    'activity_id': self.env.ref('tyt_audit.schedule_plan_activity_202').id,
+                    'sites_id':SITE_PUEBLA_ID,
+                },
+                {
+                    'description_id': self.env.ref('tyt_audit.schedule_plan_description_2').id,
+                    'activity_id': self.env.ref('tyt_audit.schedule_plan_activity_203').id,
+                    'sites_id':SITE_PUEBLA_ID,
+                },
+                {
+                    'description_id': self.env.ref('tyt_audit.schedule_plan_description_2').id,
+                    'activity_id': self.env.ref('tyt_audit.schedule_plan_activity_204').id,
+                    'sites_id':SITE_PUEBLA_ID,
+                },
+
+                {
+                    'description_id': self.env.ref('tyt_audit.schedule_plan_description_3').id,
+                    'activity_id': self.env.ref('tyt_audit.schedule_plan_activity_301').id,
+                    'sites_id':SITE_PUEBLA_ID,
+                },
+                {
+                    'description_id': self.env.ref('tyt_audit.schedule_plan_description_3').id,
+                    'activity_id': self.env.ref('tyt_audit.schedule_plan_activity_302').id,
+                    'sites_id':SITE_PUEBLA_ID,
+                },
+                {
+                    'description_id': self.env.ref('tyt_audit.schedule_plan_description_3').id,
+                    'activity_id': self.env.ref('tyt_audit.schedule_plan_activity_303').id,
+                    'sites_id':SITE_PUEBLA_ID,
+                },
+                {
+                    'description_id': self.env.ref('tyt_audit.schedule_plan_description_3').id,
+                    'activity_id': self.env.ref('tyt_audit.schedule_plan_activity_304').id,
+                    'sites_id':SITE_PUEBLA_ID,
+                },
+
+                {
+                    'description_id': self.env.ref('tyt_audit.schedule_plan_description_4').id,
+                    'activity_id': self.env.ref('tyt_audit.schedule_plan_activity_401').id,
+                    'sites_id':SITE_PUEBLA_ID,
+                },
+                {
+                    'description_id': self.env.ref('tyt_audit.schedule_plan_description_4').id,
+                    'activity_id': self.env.ref('tyt_audit.schedule_plan_activity_402').id,
+                    'sites_id':SITE_PUEBLA_ID,
+                },
+                {
+                    'description_id': self.env.ref('tyt_audit.schedule_plan_description_4').id,
+                    'activity_id': self.env.ref('tyt_audit.schedule_plan_activity_403').id,
+                    'sites_id':SITE_PUEBLA_ID,
+                },
+                {
+                    'description_id': self.env.ref('tyt_audit.schedule_plan_description_4').id,
+                    'activity_id': self.env.ref('tyt_audit.schedule_plan_activity_404').id,
+                    'sites_id':SITE_PUEBLA_ID,
+                },
+                {
+                    'description_id': self.env.ref('tyt_audit.schedule_plan_description_4').id,
+                    'activity_id': self.env.ref('tyt_audit.schedule_plan_activity_405').id,
+                    'sites_id': SITE_PUEBLA_ID,
+                },
+                {
+                    'description_id': self.env.ref('tyt_audit.schedule_plan_description_4').id,
+                    'activity_id': self.env.ref('tyt_audit.schedule_plan_activity_406').id,
+                    'sites_id': SITE_PUEBLA_ID,
+                }, 
+                {
+                    'description_id': self.env.ref('tyt_audit.schedule_plan_description_5').id,
+                    'activity_id': self.env.ref('tyt_audit.schedule_plan_activity_501').id,
+                    'sites_id':SITE_PUEBLA_ID,
+                },
+                {
+                    'description_id': self.env.ref('tyt_audit.schedule_plan_description_5').id,
+                    'activity_id': self.env.ref('tyt_audit.schedule_plan_activity_502').id,
+                    'sites_id':SITE_PUEBLA_ID,
+                },
+                {
+                    'description_id': self.env.ref('tyt_audit.schedule_plan_description_5').id,
+                    'activity_id': self.env.ref('tyt_audit.schedule_plan_activity_503').id,
+                    'sites_id':SITE_PUEBLA_ID,
+                },
+                {
+                    'description_id': self.env.ref('tyt_audit.schedule_plan_description_5').id,
+                    'activity_id': self.env.ref('tyt_audit.schedule_plan_activity_504').id,
+                    'sites_id':SITE_PUEBLA_ID,
+                },
+                {
+                    'description_id': self.env.ref('tyt_audit.schedule_plan_description_5').id,
+                    'activity_id': self.env.ref('tyt_audit.schedule_plan_activity_505').id,
+                    'sites_id':SITE_PUEBLA_ID,
+                },
+                {
+                    'description_id': self.env.ref('tyt_audit.schedule_plan_description_5').id,
+                    'activity_id': self.env.ref('tyt_audit.schedule_plan_activity_506').id,
+                    'sites_id':SITE_PUEBLA_ID,
+                },
+                {
+                    'description_id': self.env.ref('tyt_audit.schedule_plan_description_5').id,
+                    'activity_id': self.env.ref('tyt_audit.schedule_plan_activity_507').id,
+                    'sites_id':SITE_PUEBLA_ID,
+                },
+                {
+                    'description_id': self.env.ref('tyt_audit.schedule_plan_description_5').id,
+                    'activity_id': self.env.ref('tyt_audit.schedule_plan_activity_508').id,
+                    'sites_id':SITE_PUEBLA_ID,
+                },
+                {
+                    'description_id': self.env.ref('tyt_audit.schedule_plan_description_5').id,
+                    'activity_id': self.env.ref('tyt_audit.schedule_plan_activity_509').id,
+                    'sites_id':SITE_PUEBLA_ID,
+                },
+                {
+                    'description_id': self.env.ref('tyt_audit.schedule_plan_description_6').id,
+                    'activity_id': self.env.ref('tyt_audit.schedule_plan_activity_601').id,
+                    'sites_id':SITE_PUEBLA_ID,
+                },
+                {
+                    'description_id': self.env.ref('tyt_audit.schedule_plan_description_6').id,
+                    'activity_id': self.env.ref('tyt_audit.schedule_plan_activity_602').id,
+                    'sites_id':SITE_PUEBLA_ID,
+                },
+                {
+                    'description_id': self.env.ref('tyt_audit.schedule_plan_description_6').id,
+                    'activity_id': self.env.ref('tyt_audit.schedule_plan_activity_603').id,
+                    'sites_id':SITE_PUEBLA_ID,
+                },
+                {
+                    'description_id': self.env.ref('tyt_audit.schedule_plan_description_6').id,
+                    'activity_id': self.env.ref('tyt_audit.schedule_plan_activity_604').id,
+                    'sites_id':SITE_PUEBLA_ID,
+                },
+
+                {
+                    'description_id': self.env.ref('tyt_audit.schedule_plan_description_1').id,
+                    'activity_id': self.env.ref('tyt_audit.schedule_plan_activity_101').id,
+                    'sites_id':SITE_QUERETARO_ID,
+                },
+                {
+                    'description_id': self.env.ref('tyt_audit.schedule_plan_description_1').id,
+                    'activity_id': self.env.ref('tyt_audit.schedule_plan_activity_102').id,
+                    'sites_id':SITE_QUERETARO_ID,
+                },
+                {
+                    'description_id': self.env.ref('tyt_audit.schedule_plan_description_1').id,
+                    'activity_id': self.env.ref('tyt_audit.schedule_plan_activity_103').id,
+                    'sites_id':SITE_QUERETARO_ID,
+                },
+                {
+                    'description_id': self.env.ref('tyt_audit.schedule_plan_description_1').id,
+                    'activity_id': self.env.ref('tyt_audit.schedule_plan_activity_104').id,
+                    'sites_id':SITE_QUERETARO_ID,
+                },
+
+
+                {
+                    'description_id': self.env.ref('tyt_audit.schedule_plan_description_2').id,
+                    'activity_id': self.env.ref('tyt_audit.schedule_plan_activity_201').id,
+                    'sites_id':SITE_QUERETARO_ID,
+                },
+                {
+                    'description_id': self.env.ref('tyt_audit.schedule_plan_description_2').id,
+                    'activity_id': self.env.ref('tyt_audit.schedule_plan_activity_202').id,
+                    'sites_id':SITE_QUERETARO_ID,
+                },
+                {
+                    'description_id': self.env.ref('tyt_audit.schedule_plan_description_2').id,
+                    'activity_id': self.env.ref('tyt_audit.schedule_plan_activity_203').id,
+                    'sites_id':SITE_QUERETARO_ID,
+                },
+                {
+                    'description_id': self.env.ref('tyt_audit.schedule_plan_description_2').id,
+                    'activity_id': self.env.ref('tyt_audit.schedule_plan_activity_204').id,
+                    'sites_id':SITE_QUERETARO_ID,
+                },
+
+                {
+                    'description_id': self.env.ref('tyt_audit.schedule_plan_description_3').id,
+                    'activity_id': self.env.ref('tyt_audit.schedule_plan_activity_301').id,
+                    'sites_id':SITE_QUERETARO_ID,
+                },
+                {
+                    'description_id': self.env.ref('tyt_audit.schedule_plan_description_3').id,
+                    'activity_id': self.env.ref('tyt_audit.schedule_plan_activity_302').id,
+                    'sites_id':SITE_QUERETARO_ID,
+                },
+                {
+                    'description_id': self.env.ref('tyt_audit.schedule_plan_description_3').id,
+                    'activity_id': self.env.ref('tyt_audit.schedule_plan_activity_303').id,
+                    'sites_id':SITE_QUERETARO_ID,
+                },
+                {
+                    'description_id': self.env.ref('tyt_audit.schedule_plan_description_3').id,
+                    'activity_id': self.env.ref('tyt_audit.schedule_plan_activity_304').id,
+                    'sites_id':SITE_QUERETARO_ID,
+                },
+
+                {
+                    'description_id': self.env.ref('tyt_audit.schedule_plan_description_4').id,
+                    'activity_id': self.env.ref('tyt_audit.schedule_plan_activity_401').id,
+                    'sites_id':SITE_QUERETARO_ID,
+                },
+                {
+                    'description_id': self.env.ref('tyt_audit.schedule_plan_description_4').id,
+                    'activity_id': self.env.ref('tyt_audit.schedule_plan_activity_402').id,
+                    'sites_id':SITE_QUERETARO_ID,
+                },
+                {
+                    'description_id': self.env.ref('tyt_audit.schedule_plan_description_4').id,
+                    'activity_id': self.env.ref('tyt_audit.schedule_plan_activity_403').id,
+                    'sites_id':SITE_QUERETARO_ID,
+                },
+                {
+                    'description_id': self.env.ref('tyt_audit.schedule_plan_description_4').id,
+                    'activity_id': self.env.ref('tyt_audit.schedule_plan_activity_404').id,
+                    'sites_id':SITE_QUERETARO_ID,
+                },
+                {
+                    'description_id': self.env.ref('tyt_audit.schedule_plan_description_4').id,
+                    'activity_id': self.env.ref('tyt_audit.schedule_plan_activity_405').id,
+                    'sites_id': SITE_QUERETARO_ID,
+                },
+                {
+                    'description_id': self.env.ref('tyt_audit.schedule_plan_description_4').id,
+                    'activity_id': self.env.ref('tyt_audit.schedule_plan_activity_406').id,
+                    'sites_id': SITE_QUERETARO_ID,
+                }, 
+                {
+                    'description_id': self.env.ref('tyt_audit.schedule_plan_description_5').id,
+                    'activity_id': self.env.ref('tyt_audit.schedule_plan_activity_501').id,
+                    'sites_id':SITE_QUERETARO_ID,
+                },
+                {
+                    'description_id': self.env.ref('tyt_audit.schedule_plan_description_5').id,
+                    'activity_id': self.env.ref('tyt_audit.schedule_plan_activity_502').id,
+                    'sites_id':SITE_QUERETARO_ID,
+                },
+                {
+                    'description_id': self.env.ref('tyt_audit.schedule_plan_description_5').id,
+                    'activity_id': self.env.ref('tyt_audit.schedule_plan_activity_503').id,
+                    'sites_id':SITE_QUERETARO_ID,
+                },
+                {
+                    'description_id': self.env.ref('tyt_audit.schedule_plan_description_5').id,
+                    'activity_id': self.env.ref('tyt_audit.schedule_plan_activity_504').id,
+                    'sites_id':SITE_QUERETARO_ID,
+                },
+                {
+                    'description_id': self.env.ref('tyt_audit.schedule_plan_description_5').id,
+                    'activity_id': self.env.ref('tyt_audit.schedule_plan_activity_505').id,
+                    'sites_id':SITE_QUERETARO_ID,
+                },
+                {
+                    'description_id': self.env.ref('tyt_audit.schedule_plan_description_5').id,
+                    'activity_id': self.env.ref('tyt_audit.schedule_plan_activity_506').id,
+                    'sites_id':SITE_QUERETARO_ID,
+                },
+                {
+                    'description_id': self.env.ref('tyt_audit.schedule_plan_description_5').id,
+                    'activity_id': self.env.ref('tyt_audit.schedule_plan_activity_507').id,
+                    'sites_id':SITE_QUERETARO_ID,
+                },
+                {
+                    'description_id': self.env.ref('tyt_audit.schedule_plan_description_5').id,
+                    'activity_id': self.env.ref('tyt_audit.schedule_plan_activity_508').id,
+                    'sites_id':SITE_QUERETARO_ID,
+                },
+                {
+                    'description_id': self.env.ref('tyt_audit.schedule_plan_description_5').id,
+                    'activity_id': self.env.ref('tyt_audit.schedule_plan_activity_509').id,
+                    'sites_id':SITE_QUERETARO_ID,
+                },
+                {
+                    'description_id': self.env.ref('tyt_audit.schedule_plan_description_6').id,
+                    'activity_id': self.env.ref('tyt_audit.schedule_plan_activity_601').id,
+                    'sites_id':SITE_QUERETARO_ID,
+                },
+                {
+                    'description_id': self.env.ref('tyt_audit.schedule_plan_description_6').id,
+                    'activity_id': self.env.ref('tyt_audit.schedule_plan_activity_602').id,
+                    'sites_id':SITE_QUERETARO_ID,
+                },
+                {
+                    'description_id': self.env.ref('tyt_audit.schedule_plan_description_6').id,
+                    'activity_id': self.env.ref('tyt_audit.schedule_plan_activity_603').id,
+                    'sites_id':SITE_QUERETARO_ID,
+                },
+                {
+                    'description_id': self.env.ref('tyt_audit.schedule_plan_description_6').id,
+                    'activity_id': self.env.ref('tyt_audit.schedule_plan_activity_604').id,
+                    'sites_id':SITE_QUERETARO_ID,
+                },                
+            
+                {
+                    'description_id': self.env.ref('tyt_audit.schedule_plan_description_1').id,
+                    'activity_id': self.env.ref('tyt_audit.schedule_plan_activity_101').id,
+                    'sites_id':SITE_M_TAPIA_ID,
+                },
+                {
+                    'description_id': self.env.ref('tyt_audit.schedule_plan_description_1').id,
+                    'activity_id': self.env.ref('tyt_audit.schedule_plan_activity_102').id,
+                    'sites_id':SITE_M_TAPIA_ID,
+                },
+                {
+                    'description_id': self.env.ref('tyt_audit.schedule_plan_description_1').id,
+                    'activity_id': self.env.ref('tyt_audit.schedule_plan_activity_103').id,
+                    'sites_id':SITE_M_TAPIA_ID,
+                },
+                {
+                    'description_id': self.env.ref('tyt_audit.schedule_plan_description_1').id,
+                    'activity_id': self.env.ref('tyt_audit.schedule_plan_activity_104').id,
+                    'sites_id':SITE_M_TAPIA_ID,
+                },
+
+
+                {
+                    'description_id': self.env.ref('tyt_audit.schedule_plan_description_2').id,
+                    'activity_id': self.env.ref('tyt_audit.schedule_plan_activity_201').id,
+                    'sites_id':SITE_M_TAPIA_ID,
+                },
+                {
+                    'description_id': self.env.ref('tyt_audit.schedule_plan_description_2').id,
+                    'activity_id': self.env.ref('tyt_audit.schedule_plan_activity_202').id,
+                    'sites_id':SITE_M_TAPIA_ID,
+                },
+                {
+                    'description_id': self.env.ref('tyt_audit.schedule_plan_description_2').id,
+                    'activity_id': self.env.ref('tyt_audit.schedule_plan_activity_203').id,
+                    'sites_id':SITE_M_TAPIA_ID,
+                },
+                {
+                    'description_id': self.env.ref('tyt_audit.schedule_plan_description_2').id,
+                    'activity_id': self.env.ref('tyt_audit.schedule_plan_activity_204').id,
+                    'sites_id':SITE_M_TAPIA_ID,
+                },
+
+                {
+                    'description_id': self.env.ref('tyt_audit.schedule_plan_description_3').id,
+                    'activity_id': self.env.ref('tyt_audit.schedule_plan_activity_301').id,
+                    'sites_id':SITE_M_TAPIA_ID,
+                },
+                {
+                    'description_id': self.env.ref('tyt_audit.schedule_plan_description_3').id,
+                    'activity_id': self.env.ref('tyt_audit.schedule_plan_activity_302').id,
+                    'sites_id':SITE_M_TAPIA_ID,
+                },
+                {
+                    'description_id': self.env.ref('tyt_audit.schedule_plan_description_3').id,
+                    'activity_id': self.env.ref('tyt_audit.schedule_plan_activity_303').id,
+                    'sites_id':SITE_M_TAPIA_ID,
+                },
+                {
+                    'description_id': self.env.ref('tyt_audit.schedule_plan_description_3').id,
+                    'activity_id': self.env.ref('tyt_audit.schedule_plan_activity_304').id,
+                    'sites_id':SITE_M_TAPIA_ID,
+                },
+
+                {
+                    'description_id': self.env.ref('tyt_audit.schedule_plan_description_4').id,
+                    'activity_id': self.env.ref('tyt_audit.schedule_plan_activity_401').id,
+                    'sites_id':SITE_M_TAPIA_ID,
+                },
+                {
+                    'description_id': self.env.ref('tyt_audit.schedule_plan_description_4').id,
+                    'activity_id': self.env.ref('tyt_audit.schedule_plan_activity_402').id,
+                    'sites_id':SITE_M_TAPIA_ID,
+                },
+                {
+                    'description_id': self.env.ref('tyt_audit.schedule_plan_description_4').id,
+                    'activity_id': self.env.ref('tyt_audit.schedule_plan_activity_403').id,
+                    'sites_id':SITE_M_TAPIA_ID,
+                },
+                {
+                    'description_id': self.env.ref('tyt_audit.schedule_plan_description_4').id,
+                    'activity_id': self.env.ref('tyt_audit.schedule_plan_activity_404').id,
+                    'sites_id':SITE_M_TAPIA_ID,
+                },
+                {
+                    'description_id': self.env.ref('tyt_audit.schedule_plan_description_4').id,
+                    'activity_id': self.env.ref('tyt_audit.schedule_plan_activity_405').id,
+                    'sites_id': SITE_M_TAPIA_ID,
+                },
+                {
+                    'description_id': self.env.ref('tyt_audit.schedule_plan_description_4').id,
+                    'activity_id': self.env.ref('tyt_audit.schedule_plan_activity_406').id,
+                    'sites_id': SITE_M_TAPIA_ID,
+                }, 
+                {
+                    'description_id': self.env.ref('tyt_audit.schedule_plan_description_5').id,
+                    'activity_id': self.env.ref('tyt_audit.schedule_plan_activity_501').id,
+                    'sites_id':SITE_M_TAPIA_ID,
+                },
+                {
+                    'description_id': self.env.ref('tyt_audit.schedule_plan_description_5').id,
+                    'activity_id': self.env.ref('tyt_audit.schedule_plan_activity_502').id,
+                    'sites_id':SITE_M_TAPIA_ID,
+                },
+                {
+                    'description_id': self.env.ref('tyt_audit.schedule_plan_description_5').id,
+                    'activity_id': self.env.ref('tyt_audit.schedule_plan_activity_503').id,
+                    'sites_id':SITE_M_TAPIA_ID,
+                },
+                {
+                    'description_id': self.env.ref('tyt_audit.schedule_plan_description_5').id,
+                    'activity_id': self.env.ref('tyt_audit.schedule_plan_activity_504').id,
+                    'sites_id':SITE_M_TAPIA_ID,
+                },
+                {
+                    'description_id': self.env.ref('tyt_audit.schedule_plan_description_5').id,
+                    'activity_id': self.env.ref('tyt_audit.schedule_plan_activity_505').id,
+                    'sites_id':SITE_M_TAPIA_ID,
+                },
+                {
+                    'description_id': self.env.ref('tyt_audit.schedule_plan_description_5').id,
+                    'activity_id': self.env.ref('tyt_audit.schedule_plan_activity_506').id,
+                    'sites_id':SITE_M_TAPIA_ID,
+                },
+                {
+                    'description_id': self.env.ref('tyt_audit.schedule_plan_description_5').id,
+                    'activity_id': self.env.ref('tyt_audit.schedule_plan_activity_507').id,
+                    'sites_id':SITE_M_TAPIA_ID,
+                },
+                {
+                    'description_id': self.env.ref('tyt_audit.schedule_plan_description_5').id,
+                    'activity_id': self.env.ref('tyt_audit.schedule_plan_activity_508').id,
+                    'sites_id':SITE_M_TAPIA_ID,
+                },
+                {
+                    'description_id': self.env.ref('tyt_audit.schedule_plan_description_5').id,
+                    'activity_id': self.env.ref('tyt_audit.schedule_plan_activity_509').id,
+                    'sites_id':SITE_M_TAPIA_ID,
+                },
+                {
+                    'description_id': self.env.ref('tyt_audit.schedule_plan_description_6').id,
+                    'activity_id': self.env.ref('tyt_audit.schedule_plan_activity_601').id,
+                    'sites_id':SITE_M_TAPIA_ID,
+                },
+                {
+                    'description_id': self.env.ref('tyt_audit.schedule_plan_description_6').id,
+                    'activity_id': self.env.ref('tyt_audit.schedule_plan_activity_602').id,
+                    'sites_id':SITE_M_TAPIA_ID,
+                },
+                {
+                    'description_id': self.env.ref('tyt_audit.schedule_plan_description_6').id,
+                    'activity_id': self.env.ref('tyt_audit.schedule_plan_activity_603').id,
+                    'sites_id':SITE_M_TAPIA_ID,
+                },
+                {
+                    'description_id': self.env.ref('tyt_audit.schedule_plan_description_6').id,
+                    'activity_id': self.env.ref('tyt_audit.schedule_plan_activity_604').id,
+                    'sites_id':SITE_M_TAPIA_ID,
+                },          
+
+
+                {
+                    'description_id': self.env.ref('tyt_audit.schedule_plan_description_1').id,
+                    'activity_id': self.env.ref('tyt_audit.schedule_plan_activity_101').id,
+                    'sites_id':SITE_M_ARTEAGA_ID,
+                },
+                {
+                    'description_id': self.env.ref('tyt_audit.schedule_plan_description_1').id,
+                    'activity_id': self.env.ref('tyt_audit.schedule_plan_activity_102').id,
+                    'sites_id':SITE_M_ARTEAGA_ID,
+                },
+                {
+                    'description_id': self.env.ref('tyt_audit.schedule_plan_description_1').id,
+                    'activity_id': self.env.ref('tyt_audit.schedule_plan_activity_103').id,
+                    'sites_id':SITE_M_ARTEAGA_ID,
+                },
+                {
+                    'description_id': self.env.ref('tyt_audit.schedule_plan_description_1').id,
+                    'activity_id': self.env.ref('tyt_audit.schedule_plan_activity_104').id,
+                    'sites_id':SITE_M_ARTEAGA_ID,
+                },
+
+
+                {
+                    'description_id': self.env.ref('tyt_audit.schedule_plan_description_2').id,
+                    'activity_id': self.env.ref('tyt_audit.schedule_plan_activity_201').id,
+                    'sites_id':SITE_M_ARTEAGA_ID,
+                },
+                {
+                    'description_id': self.env.ref('tyt_audit.schedule_plan_description_2').id,
+                    'activity_id': self.env.ref('tyt_audit.schedule_plan_activity_202').id,
+                    'sites_id':SITE_M_ARTEAGA_ID,
+                },
+                {
+                    'description_id': self.env.ref('tyt_audit.schedule_plan_description_2').id,
+                    'activity_id': self.env.ref('tyt_audit.schedule_plan_activity_203').id,
+                    'sites_id':SITE_M_ARTEAGA_ID,
+                },
+                {
+                    'description_id': self.env.ref('tyt_audit.schedule_plan_description_2').id,
+                    'activity_id': self.env.ref('tyt_audit.schedule_plan_activity_204').id,
+                    'sites_id':SITE_M_ARTEAGA_ID,
+                },
+
+                {
+                    'description_id': self.env.ref('tyt_audit.schedule_plan_description_3').id,
+                    'activity_id': self.env.ref('tyt_audit.schedule_plan_activity_301').id,
+                    'sites_id':SITE_M_ARTEAGA_ID,
+                },
+                {
+                    'description_id': self.env.ref('tyt_audit.schedule_plan_description_3').id,
+                    'activity_id': self.env.ref('tyt_audit.schedule_plan_activity_302').id,
+                    'sites_id':SITE_M_ARTEAGA_ID,
+                },
+                {
+                    'description_id': self.env.ref('tyt_audit.schedule_plan_description_3').id,
+                    'activity_id': self.env.ref('tyt_audit.schedule_plan_activity_303').id,
+                    'sites_id':SITE_M_ARTEAGA_ID,
+                },
+                {
+                    'description_id': self.env.ref('tyt_audit.schedule_plan_description_3').id,
+                    'activity_id': self.env.ref('tyt_audit.schedule_plan_activity_304').id,
+                    'sites_id':SITE_M_ARTEAGA_ID,
+                },
+
+                {
+                    'description_id': self.env.ref('tyt_audit.schedule_plan_description_4').id,
+                    'activity_id': self.env.ref('tyt_audit.schedule_plan_activity_401').id,
+                    'sites_id':SITE_M_ARTEAGA_ID,
+                },
+                {
+                    'description_id': self.env.ref('tyt_audit.schedule_plan_description_4').id,
+                    'activity_id': self.env.ref('tyt_audit.schedule_plan_activity_402').id,
+                    'sites_id':SITE_M_ARTEAGA_ID,
+                },
+                {
+                    'description_id': self.env.ref('tyt_audit.schedule_plan_description_4').id,
+                    'activity_id': self.env.ref('tyt_audit.schedule_plan_activity_403').id,
+                    'sites_id':SITE_M_ARTEAGA_ID,
+                },
+                {
+                    'description_id': self.env.ref('tyt_audit.schedule_plan_description_4').id,
+                    'activity_id': self.env.ref('tyt_audit.schedule_plan_activity_404').id,
+                    'sites_id':SITE_M_ARTEAGA_ID,
+                },
+                {
+                    'description_id': self.env.ref('tyt_audit.schedule_plan_description_4').id,
+                    'activity_id': self.env.ref('tyt_audit.schedule_plan_activity_405').id,
+                    'sites_id': SITE_M_ARTEAGA_ID,
+                },
+                {
+                    'description_id': self.env.ref('tyt_audit.schedule_plan_description_4').id,
+                    'activity_id': self.env.ref('tyt_audit.schedule_plan_activity_406').id,
+                    'sites_id': SITE_M_ARTEAGA_ID,
+                }, 
+                {
+                    'description_id': self.env.ref('tyt_audit.schedule_plan_description_5').id,
+                    'activity_id': self.env.ref('tyt_audit.schedule_plan_activity_501').id,
+                    'sites_id':SITE_M_ARTEAGA_ID,
+                },
+                {
+                    'description_id': self.env.ref('tyt_audit.schedule_plan_description_5').id,
+                    'activity_id': self.env.ref('tyt_audit.schedule_plan_activity_502').id,
+                    'sites_id':SITE_M_ARTEAGA_ID,
+                },
+                {
+                    'description_id': self.env.ref('tyt_audit.schedule_plan_description_5').id,
+                    'activity_id': self.env.ref('tyt_audit.schedule_plan_activity_503').id,
+                    'sites_id':SITE_M_ARTEAGA_ID,
+                },
+                {
+                    'description_id': self.env.ref('tyt_audit.schedule_plan_description_5').id,
+                    'activity_id': self.env.ref('tyt_audit.schedule_plan_activity_504').id,
+                    'sites_id':SITE_M_ARTEAGA_ID,
+                },
+                {
+                    'description_id': self.env.ref('tyt_audit.schedule_plan_description_5').id,
+                    'activity_id': self.env.ref('tyt_audit.schedule_plan_activity_505').id,
+                    'sites_id':SITE_M_ARTEAGA_ID,
+                },
+                {
+                    'description_id': self.env.ref('tyt_audit.schedule_plan_description_5').id,
+                    'activity_id': self.env.ref('tyt_audit.schedule_plan_activity_506').id,
+                    'sites_id':SITE_M_ARTEAGA_ID,
+                },
+                {
+                    'description_id': self.env.ref('tyt_audit.schedule_plan_description_5').id,
+                    'activity_id': self.env.ref('tyt_audit.schedule_plan_activity_507').id,
+                    'sites_id':SITE_M_ARTEAGA_ID,
+                },
+                {
+                    'description_id': self.env.ref('tyt_audit.schedule_plan_description_5').id,
+                    'activity_id': self.env.ref('tyt_audit.schedule_plan_activity_508').id,
+                    'sites_id':SITE_M_ARTEAGA_ID,
+                },
+                {
+                    'description_id': self.env.ref('tyt_audit.schedule_plan_description_5').id,
+                    'activity_id': self.env.ref('tyt_audit.schedule_plan_activity_509').id,
+                    'sites_id':SITE_M_ARTEAGA_ID,
+                },
+                {
+                    'description_id': self.env.ref('tyt_audit.schedule_plan_description_6').id,
+                    'activity_id': self.env.ref('tyt_audit.schedule_plan_activity_601').id,
+                    'sites_id':SITE_M_ARTEAGA_ID,
+                },
+                {
+                    'description_id': self.env.ref('tyt_audit.schedule_plan_description_6').id,
+                    'activity_id': self.env.ref('tyt_audit.schedule_plan_activity_602').id,
+                    'sites_id':SITE_M_ARTEAGA_ID,
+                },
+                {
+                    'description_id': self.env.ref('tyt_audit.schedule_plan_description_6').id,
+                    'activity_id': self.env.ref('tyt_audit.schedule_plan_activity_603').id,
+                    'sites_id':SITE_M_ARTEAGA_ID,
+                },
+                {
+                    'description_id': self.env.ref('tyt_audit.schedule_plan_description_6').id,
+                    'activity_id': self.env.ref('tyt_audit.schedule_plan_activity_604').id,
+                    'sites_id':SITE_M_ARTEAGA_ID,
+                },
+
+
+                {
+                    'description_id': self.env.ref('tyt_audit.schedule_plan_description_1').id,
+                    'activity_id': self.env.ref('tyt_audit.schedule_plan_activity_101').id,
+                    'sites_id':SITE_MERIDA_ID,
+                },
+                {
+                    'description_id': self.env.ref('tyt_audit.schedule_plan_description_1').id,
+                    'activity_id': self.env.ref('tyt_audit.schedule_plan_activity_102').id,
+                    'sites_id':SITE_MERIDA_ID,
+                },
+                {
+                    'description_id': self.env.ref('tyt_audit.schedule_plan_description_1').id,
+                    'activity_id': self.env.ref('tyt_audit.schedule_plan_activity_103').id,
+                    'sites_id':SITE_MERIDA_ID,
+                },
+                {
+                    'description_id': self.env.ref('tyt_audit.schedule_plan_description_1').id,
+                    'activity_id': self.env.ref('tyt_audit.schedule_plan_activity_104').id,
+                    'sites_id':SITE_MERIDA_ID,
+                },
+
+
+                {
+                    'description_id': self.env.ref('tyt_audit.schedule_plan_description_2').id,
+                    'activity_id': self.env.ref('tyt_audit.schedule_plan_activity_201').id,
+                    'sites_id':SITE_MERIDA_ID,
+                },
+                {
+                    'description_id': self.env.ref('tyt_audit.schedule_plan_description_2').id,
+                    'activity_id': self.env.ref('tyt_audit.schedule_plan_activity_202').id,
+                    'sites_id':SITE_MERIDA_ID,
+                },
+                {
+                    'description_id': self.env.ref('tyt_audit.schedule_plan_description_2').id,
+                    'activity_id': self.env.ref('tyt_audit.schedule_plan_activity_203').id,
+                    'sites_id':SITE_MERIDA_ID,
+                },
+                {
+                    'description_id': self.env.ref('tyt_audit.schedule_plan_description_2').id,
+                    'activity_id': self.env.ref('tyt_audit.schedule_plan_activity_204').id,
+                    'sites_id':SITE_MERIDA_ID,
+                },
+
+                {
+                    'description_id': self.env.ref('tyt_audit.schedule_plan_description_3').id,
+                    'activity_id': self.env.ref('tyt_audit.schedule_plan_activity_301').id,
+                    'sites_id':SITE_MERIDA_ID,
+                },
+                {
+                    'description_id': self.env.ref('tyt_audit.schedule_plan_description_3').id,
+                    'activity_id': self.env.ref('tyt_audit.schedule_plan_activity_302').id,
+                    'sites_id':SITE_MERIDA_ID,
+                },
+                {
+                    'description_id': self.env.ref('tyt_audit.schedule_plan_description_3').id,
+                    'activity_id': self.env.ref('tyt_audit.schedule_plan_activity_303').id,
+                    'sites_id':SITE_MERIDA_ID,
+                },
+                {
+                    'description_id': self.env.ref('tyt_audit.schedule_plan_description_3').id,
+                    'activity_id': self.env.ref('tyt_audit.schedule_plan_activity_304').id,
+                    'sites_id':SITE_MERIDA_ID,
+                },
+
+                {
+                    'description_id': self.env.ref('tyt_audit.schedule_plan_description_4').id,
+                    'activity_id': self.env.ref('tyt_audit.schedule_plan_activity_401').id,
+                    'sites_id':SITE_MERIDA_ID,
+                },
+                {
+                    'description_id': self.env.ref('tyt_audit.schedule_plan_description_4').id,
+                    'activity_id': self.env.ref('tyt_audit.schedule_plan_activity_402').id,
+                    'sites_id':SITE_MERIDA_ID,
+                },
+                {
+                    'description_id': self.env.ref('tyt_audit.schedule_plan_description_4').id,
+                    'activity_id': self.env.ref('tyt_audit.schedule_plan_activity_403').id,
+                    'sites_id':SITE_MERIDA_ID,
+                },
+                {
+                    'description_id': self.env.ref('tyt_audit.schedule_plan_description_4').id,
+                    'activity_id': self.env.ref('tyt_audit.schedule_plan_activity_404').id,
+                    'sites_id':SITE_MERIDA_ID,
+                },
+                {
+                    'description_id': self.env.ref('tyt_audit.schedule_plan_description_4').id,
+                    'activity_id': self.env.ref('tyt_audit.schedule_plan_activity_405').id,
+                    'sites_id': SITE_MERIDA_ID,
+                },
+                {
+                    'description_id': self.env.ref('tyt_audit.schedule_plan_description_4').id,
+                    'activity_id': self.env.ref('tyt_audit.schedule_plan_activity_406').id,
+                    'sites_id': SITE_MERIDA_ID,
+                }, 
+                {
+                    'description_id': self.env.ref('tyt_audit.schedule_plan_description_5').id,
+                    'activity_id': self.env.ref('tyt_audit.schedule_plan_activity_501').id,
+                    'sites_id':SITE_MERIDA_ID,
+                },
+                {
+                    'description_id': self.env.ref('tyt_audit.schedule_plan_description_5').id,
+                    'activity_id': self.env.ref('tyt_audit.schedule_plan_activity_502').id,
+                    'sites_id':SITE_MERIDA_ID,
+                },
+                {
+                    'description_id': self.env.ref('tyt_audit.schedule_plan_description_5').id,
+                    'activity_id': self.env.ref('tyt_audit.schedule_plan_activity_503').id,
+                    'sites_id':SITE_MERIDA_ID,
+                },
+                {
+                    'description_id': self.env.ref('tyt_audit.schedule_plan_description_5').id,
+                    'activity_id': self.env.ref('tyt_audit.schedule_plan_activity_504').id,
+                    'sites_id':SITE_MERIDA_ID,
+                },
+                {
+                    'description_id': self.env.ref('tyt_audit.schedule_plan_description_5').id,
+                    'activity_id': self.env.ref('tyt_audit.schedule_plan_activity_505').id,
+                    'sites_id':SITE_MERIDA_ID,
+                },
+                {
+                    'description_id': self.env.ref('tyt_audit.schedule_plan_description_5').id,
+                    'activity_id': self.env.ref('tyt_audit.schedule_plan_activity_506').id,
+                    'sites_id':SITE_MERIDA_ID,
+                },
+                {
+                    'description_id': self.env.ref('tyt_audit.schedule_plan_description_5').id,
+                    'activity_id': self.env.ref('tyt_audit.schedule_plan_activity_507').id,
+                    'sites_id':SITE_MERIDA_ID,
+                },
+                {
+                    'description_id': self.env.ref('tyt_audit.schedule_plan_description_5').id,
+                    'activity_id': self.env.ref('tyt_audit.schedule_plan_activity_508').id,
+                    'sites_id':SITE_MERIDA_ID,
+                },
+                {
+                    'description_id': self.env.ref('tyt_audit.schedule_plan_description_5').id,
+                    'activity_id': self.env.ref('tyt_audit.schedule_plan_activity_509').id,
+                    'sites_id':SITE_MERIDA_ID,
+                },
+                {
+                    'description_id': self.env.ref('tyt_audit.schedule_plan_description_6').id,
+                    'activity_id': self.env.ref('tyt_audit.schedule_plan_activity_601').id,
+                    'sites_id':SITE_MERIDA_ID,
+                },
+                {
+                    'description_id': self.env.ref('tyt_audit.schedule_plan_description_6').id,
+                    'activity_id': self.env.ref('tyt_audit.schedule_plan_activity_602').id,
+                    'sites_id':SITE_MERIDA_ID,
+                },
+                {
+                    'description_id': self.env.ref('tyt_audit.schedule_plan_description_6').id,
+                    'activity_id': self.env.ref('tyt_audit.schedule_plan_activity_603').id,
+                    'sites_id':SITE_MERIDA_ID,
+                },
+                {
+                    'description_id': self.env.ref('tyt_audit.schedule_plan_description_6').id,
+                    'activity_id': self.env.ref('tyt_audit.schedule_plan_activity_604').id,
+                    'sites_id':SITE_MERIDA_ID,
                 },
             ]
-
+            #####
+            # Modificación OPCIONAL
+            #####
+            # Antes de iniciar la iteración en "schedule_data" vamos a borrar todos los registros de "audit.plan.schedule"(self.schedule_ids) de este registro de audit.plan 
+            # Borrar todos los cronogramas generados nos permitirá sobrescribir los datos generados por el metodo, en caso realicemos modificaciones en "Cronograma de auditoría - Auditores"
+            
             for data in schedule_data:
                 site = self.env['x_sitios'].browse(data['sites_id'])
                 _logger.info(f"Procesando sitio: {site.x_name} (ID: {site.id})")
@@ -107,7 +1384,7 @@ class Plan(models.Model):
                     'sites_id': data['sites_id'],
                     'responsible_auditors_id': [(6, 0, auditors.ids)],
                     'total_weeks': total_weeks,
-                    'name': f"{plan.name} - Schedule {site.x_name}",
+                    'name': f"{plan.name} - Sitio: {site.x_name}",
                 })
 
                 _logger.info(f"Nuevo schedule creado: ID {new_schedule.id} para el sitio {site.x_name}")

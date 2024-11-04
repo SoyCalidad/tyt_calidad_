@@ -12,7 +12,15 @@
                     <button name="start_process"
                             type="object"
                             string="Iniciar Proceso"
-                            class="oe_highlight" />
+                            class="oe_highlight"
+                            attrs="{'invisible':['|', ('state', '!=', 'validate_ok'), ('is_process_started','=',True)]}" 
+                            />
+                    <button name="generate_schedule_lines"
+                            type="object"
+                            string="Generar Fechas"
+                            class="oe_highlight"
+                            attrs="{'invisible':[('state', '!=', 'validate_ok')]}"
+                            />                            
                     <!--attrs="{'invisible':['|', ('active','=',False), ('state', '!=', 'validate_ok'), ('is_process_started','=',True)]}"-->    
                 </xpath>            
                 <xpath expr="//sheet/div[3]" position="replace">
@@ -28,24 +36,39 @@
                     <group cols="3">
                         <group>
                             <field name="sites_id" colspan="2" />
-                            <field name="start_date" colspan="1" />
-                            <field name="limit_date" colspan="1" />
-                            <field name="new_frequency_id" colspan="1" />
+                            <field name="start_date" colspan="1" required="1" />
+                            <field name="limit_date" colspan="1" required="1" />
+                            <field name="new_frequency_id" colspan="1" required="1" />
                             <field name="available_site_ids" invisible="1" />
                         </group>
                     </group>
                 </xpath>
                 <xpath expr="//sheet/notebook/page[1]" position="replace">
-                    <page string="Cronograma">
-                        <field name="schedule_ids">
-                            <tree editable="bottom">
-                                <field name="name"/>
-                                <field name="description_id"/>
-                                <field name="activity_id"/>
-                                <field name="sites_id"/>
-                                <field name="responsible_auditors_id"/>
-                                <field name="total_weeks"/>
+                    <page string="Cronograma" >
+                        <!--<field name="schedule_ids" domain="[('sites_id', '=', sites_id)]">-->
+                        <field name="filtered_schedule_ids" mode="tree,form" context="{'form_view_ref':'tyt_audit.view_audit_plan_schedule_form'}">
+                        <!--<field name="schedule_ids" domain="[('sites_id', '=', sites_id)]" context="{'default_audit_plan_id': active_id, 'default_sites_id': sites_id}" mode="tree,form">-->
+                            <tree>
+                                <!--<field name="name" readonly="1"/>-->
+                                <field name="description_id" readonly="1"/>
+                                <field name="activity_id" readonly="1"/>
+                                <field name="sites_id" readonly="1"/>
+                                <field name="responsible_auditors_id" widget="many2many_tags"/>
+                                <field name="total_weeks" readonly="1"/>
+                                <button name="%(action_audit_plan_schedule_line_ids)d" type="action" string="Ver Fechas" class="btn-primary"/>
                             </tree>
+                            <!--
+                            <form string="Cronograma de Auditoría">
+                                <sheet>
+                                    <group>
+                                        <field name="description_id"/>
+                                        <field name="activity_id"/>
+                                        <field name="sites_id" />
+                                        <field name="responsible_auditors_id"/>
+                                    </group>
+                                </sheet>
+                            </form>
+                            -->                          
                         </field>
                     </page>                 
                 </xpath>                                

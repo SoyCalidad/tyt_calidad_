@@ -34,14 +34,14 @@
                                 </tree>
                                 <form>
                                     <group>
-                                        <field name="remediation_area"/>
-                                        <field name="activity"/>
-                                        <field name="execution_priority" widget="float_time"/>
+                                        <field name="remediation_area" string="Remediation Area"/>
+                                        <field name="activity" string=""/>
+                                        <field name="execution_priority" string="" widget="float_time"/>
                                     </group>
                                     <group>
-                                        <field name="execution_date"/>
-                                        <field name="evidence"/>
-                                        <field name="resourses"/>
+                                        <field name="execution_date" string="Execution Date"/>
+                                        <field name="evidence" string="Evidence"/>
+                                        <field name="resourses" string="Resourses"/>
                                     </group>
                                 </form>
                             </field>

@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <record id="tyt_context_scope_view_form" model="ir.ui.view">
+        <field name="name">tyt.context.scope.view.form.inherit.documents</field>
+        <field name="model">tyt.context.scope</field>
+        <field name="inherit_id" ref="tyt_context.tyt_context_scope_view_form"/>
+        <field name="arch" type="xml">
+            <xpath expr="//button[@name='action_open_older_versions']" position="after">
+                <button name="action_open_documents"
+                        class="oe_stat_button"
+                        groups="documents.group_documents_user"
+                        icon="fa-file-text"
+                        type="object">
+                    <field name="document_count" widget="statinfo" string="Documents"/>
+                </button>
+            </xpath>
+        </field>
+    </record>
+</odoo>

@@ -37,6 +37,11 @@ class PlanGeneralScheduleActivities(models.Model):
         required=True
     )
 
+    description_id = fields.Many2one(
+        'audit.plan.schedule.descriptions',
+        string='Descripción'
+    )
+
 class PlanGeneralScheduleDescriptions(models.Model):
     _name = "audit.plan.schedule.descriptions"
     _description = "Cronograma de Auditoría - General / Cronograma / Descripciones"
@@ -60,6 +65,11 @@ class PlanGeneralSchedule(models.Model):
         string="Cronograma de Auditoría",
         store=True
     )
+
+    line_ids = fields.One2many( 
+        comodel_name='audit.plan.schedule.line',
+        inverse_name='schedule_id',
+        string='Fechas')
 
     description_id = fields.Many2one('audit.plan.schedule.descriptions', string='Descripción')
 
@@ -94,6 +104,7 @@ class PlanGeneralSchedule(models.Model):
         for record in self:
             if record.total_weeks < 0:
                 raise ValidationError(_("'Semanas por Auditar' debe ser un número positivo."))
+    
     '''
     responsible_auditors_id = fields.Many2many(
         related="audit_plan_tyt_auditor_id.schedule_ids.responsible_auditors_id",
@@ -112,6 +123,23 @@ class PlanGeneralSchedule(models.Model):
     )
     '''
 
+    def action_edit_responsible_auditors(self):
+        self.ensure_one()
+        view_id = self.env.ref('tyt_audit.view_audit_plan_schedule_edit_form').id
+        return {
+            'type': 'ir.actions.act_window',
+            'name': 'Modificación de Auditores Responsables',
+            'res_model': 'audit.plan.schedule',
+            'view_mode': 'form',
+            'res_id': self.id,
+            'views': [(view_id, 'form')],
+            'target': 'new',
+            'context': self.env.context,
+        }
+
+    def action_save_auditors(self):
+        # Este método puede contener lógica adicional si es necesario
+        return {'type': 'ir.actions.act_window_close'}
 
 class Plan(models.Model):
     _inherit = "audit.plan"
@@ -133,7 +161,31 @@ class Plan(models.Model):
         comodel_name='audit.plan.schedule',
         inverse_name='audit_plan_id',
         string='Cronograma')
-    
+
+    # Nuevo campo One2many computado
+    filtered_schedule_ids = fields.One2many(
+        'audit.plan.schedule',
+        'audit_plan_id',
+        string='Cronograma Filtrado',
+        compute='_compute_filtered_schedule_ids',
+        store=False  # No es necesario almacenarlo
+    )
+
+    @api.depends('sites_id', 'schedule_ids')
+    def _compute_filtered_schedule_ids(self):
+        for record in self:
+            if record.sites_id:
+                # Filtra los schedule_ids donde sites_id coincide con el seleccionado
+                record.filtered_schedule_ids = record.schedule_ids.filtered(lambda s: s.sites_id == record.sites_id)
+            else:
+                # Si no hay sites_id seleccionado, no muestra ningún registro
+                record.filtered_schedule_ids = self.env['audit.plan.schedule'].browse([])
+    '''
+    line_ids = fields.One2many( 
+        comodel_name='audit.plan.schedule.line',
+        inverse_name='schedule_id',
+        string='Fechas')
+    '''
 
     start_date = fields.Date(
         string='Fecha de inicio'

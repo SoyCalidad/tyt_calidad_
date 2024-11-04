@@ -6,6 +6,7 @@ import uuid
 from io import BytesIO
 import base64
 from datetime import datetime
+from urllib.parse import quote
 
 import logging
 _logger = logging.getLogger(__name__)
@@ -43,13 +44,6 @@ class Requisition(models.Model):
             ('x_studio_f2', '>=', current_date),
             ('x_studio_tipo_periodo', '>=', 'Semana')
         ], limit=1)
-
-        _logger.info('periodo_id')
-        _logger.info(current_period.id)
-        _logger.info('Current x_studio_f1')
-        _logger.info(current_period.x_studio_f1)
-        _logger.info('Current x_studio_f1')
-        _logger.info(current_period.x_studio_f2)
 
         if current_period:
             vals['periodo_id'] = current_period.id
@@ -187,9 +181,15 @@ class Campaign(models.Model):
     tag_id = fields.Many2one('hr.department', string='Dept', options={'no_create': True}, required=True)
 
     def action_open_job_application(self):
+        requisition_id = self.requisition_id.id
+        site_name = self.requisition_id.site_id.x_name
+        tag_name = self.tag_id.display_name
+        
+        url = f"/job_application/{requisition_id}/?site_name={site_name}&tag_name={tag_name}&campaign_id={self.id}"
+        
         return {
             'type': 'ir.actions.act_url',
-            'url': '/job_application/'+str(self.requisition_id.id)+'/'+ str(self.requisition_id.site_id.id)+'/'+str(self.id),
+            'url': url,
             'target': 'new', 
         }
 

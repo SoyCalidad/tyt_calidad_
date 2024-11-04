@@ -3,5 +3,6 @@
 from . import (
     requisiton,
     job_application,
-    question
+    question,
+    health_survey
 )

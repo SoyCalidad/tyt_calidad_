@@ -60,6 +60,24 @@ class ProcessInherit(models.Model):
                 record.real_last_edition = None
                 record.validate_date = None
 
+    
+    # Avoid "False" in "self.type.code"
+    @api.onchange('categ_id')
+    def _onchange_categ_id(self):
+        if not self.categ_id:
+            return None
+        self.type = self.categ_id.type
+        if self.type and self.categ_id:
+            # type = dict(self._fields['type'].selection).get(self.type)
+            type = self.type.code
+            code = self.categ_id.code if self.categ_id.code else self.categ_id.name[:2]
+            qty = len(self.categ_id.process_ids) + 1
+            if type:
+                self.code = _("%s-%s-%s") % (type, code, '0' + str(qty))
+            else:
+                self.code = _("%s-%s") % (code, '0' + str(qty))
+    
+
     '''
     @api.model
     def create(self, values):

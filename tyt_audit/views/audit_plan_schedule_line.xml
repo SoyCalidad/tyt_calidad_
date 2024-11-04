@@ -1,0 +1,44 @@
+<odoo>
+    <data>
+
+        <record id="view_audit_plan_schedule_line_tree" model="ir.ui.view">
+            <field name="name">audit.plan.schedule.line.tree</field>
+            <field name="model">audit.plan.schedule.line</field>
+            <field name="arch" type="xml">
+                <tree editable="bottom" create="false">
+                    <field name="scheduled_date"/>
+                    <field name="done"/>
+                    <!--<field name="name" string="Nombre de línea"/>-->     
+                    <!--<field name="schedule_id"/>-->
+                </tree>
+            </field>
+        </record>
+
+
+        <record id="action_audit_plan_schedule_line_ids" model="ir.actions.act_window">
+            <field name="name">Fechas</field>
+            <field name="res_model">audit.plan.schedule.line</field>
+            <field name="view_mode">tree,form</field>
+            <field name="view_id" ref="view_audit_plan_schedule_line_tree"/>
+            <field name="context">{'default_schedule_id': active_id}</field>
+            <field name="domain">[('schedule_id', '=', active_id)]</field>
+            <field name="target">new</field> <!-- 'new' para abrir en un pop-up -->
+        </record>
+
+        <!--
+        <record id="action_audit_plan_schedule_line_ids" model="ir.actions.act_window">
+            <field name="name">Fechas</field>
+            <field name="res_model">audit.plan.schedule.line</field>
+            <field name="view_mode">tree,form</field>
+            <field name="view_ids" eval="[
+                (0, 0, {'view_mode': 'tree', 'view_id': ref('view_audit_plan_schedule_line_tree')}),
+                (0, 0, {'view_mode': 'form', 'view_id': ref('view_audit_plan_schedule_line_form')})
+            ]"/>
+            <field name="context">{'default_schedule_id': active_id}</field>
+            <field name="target">new</field>
+        </record>
+        -->
+
+
+    </data>
+</odoo>

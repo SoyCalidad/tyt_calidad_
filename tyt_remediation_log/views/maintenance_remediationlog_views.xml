@@ -32,6 +32,12 @@
                             </field>
                         </page>
                         <page string="Validation and version">
+                            <field name="remediation_log_stages_ids" attrs="{'readonly': [('state', '=', 'confirmed')]}">
+                                <tree editable="bottom" create="false" delete="false">
+                                    <field name="stage"/>
+                                    <field name="manager_id"/>
+                                </tree>
+                            </field>
                         </page>
                     </notebook>
                     <group>

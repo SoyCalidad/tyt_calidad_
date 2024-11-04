@@ -21,6 +21,7 @@
         # 'views/sign_portal_templates.xml',
         'views/survey_portal_templates.xml',
         'views/mailbox_portal_templates.xml',
+        'views/document_portal_templates.xml',
     ],
     'assets': {
         'web.assets_frontend': [

@@ -156,3 +156,4 @@ class AuditPlanTytAuditor(models.Model):
         result['domain'] = [('id', 'in', self.old_versions.ids)]
         result['context'] = {'active_version': False}
         return result
+    

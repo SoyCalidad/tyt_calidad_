@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <odoo>
-    <template id="mailbox_form" name="Mailbox Form">
+    <template id="mailbox_form" name="Buzón">
         <t t-call="website.layout">
             <div class="container mt-5">
                 <div class="row justify-content-center">
@@ -25,12 +25,16 @@
                                 <div class="row">
                                     <div class="col-md-4 mb-3 text-start">
                                         <label for="site_id">Sitio</label>
-                                        <select id="site_id" name="site_id" class="mailbox-select" required="">
-                                            <option disabled="" selected="selected" value="">Seleccione una opción</option>
+                                        <select id="site_id" name="site_id_select" class="mailbox-select" disabled="" required="">
+                                            <option disabled="" t-att-selected="not user_site_id and 'selected' or None" value="">Seleccione una opción</option>
                                             <t t-foreach="site_ids" t-as="rec">
-                                                <option t-att-value="rec.id" t-esc="rec.x_name"/>
+                                                <option t-att-value="rec.id"
+                                                        t-att-selected="rec.id == user_site_id and 'selected' or None">
+                                                    <t t-esc="rec.x_name"/>
+                                                </option>
                                             </t>
                                         </select>
+                                        <input type="hidden" name="site_id" t-att-value="user_site_id"/>
                                     </div>
                                     <div class="col-md-4 mb-3 text-start">
                                         <label for="service_area_id">Área de servicio</label>
@@ -62,7 +66,7 @@
                                 <div class="row">
                                     <div class="col-md-12 mb-3 text-start">
                                         <input type="checkbox" id="receive_response" name="receive_response" style="width: auto !important"/>
-                                        <label for="comment">¿Desea recibir una respuesta?</label>
+                                        <label for="receive_response">¿Desea recibir una respuesta?</label>
                                     </div>
                                 </div>
 
@@ -77,16 +81,65 @@
                 </div>
             </div>
         </t>
+        <script>
+            document.addEventListener('DOMContentLoaded', function() {
+                const checkbox = document.getElementById('is_anonymous');
+                const siteDropdown = document.getElementById('site_id');
+                const hiddenSiteInput = document.querySelector('input[name="site_id"]');
+                const defaultOption = siteDropdown.querySelector('option[value=""]');
+                const submitButton = document.querySelector('button[type="submit"]');
+                const responseCheckbox = document.getElementById('receive_response');
+
+                function toggleDropdown() {
+                    if (checkbox.checked) {
+                        siteDropdown.disabled = false;
+                        siteDropdown.selectedIndex = 0;
+                        defaultOption.textContent = "Seleccione una opción";
+                        submitButton.disabled = false;
+
+                        responseCheckbox.checked = false;
+                        responseCheckbox.disabled = true;
+                    } else {
+                        siteDropdown.disabled = true;
+                        responseCheckbox.disabled = false;
+
+
+                        const hiddenValue = hiddenSiteInput.value;
+
+                        if (hiddenValue) {
+                            for (const option of siteDropdown.options) {
+                                option.selected = option.value === hiddenValue;
+                            }
+                            submitButton.disabled = false;
+                        } else {
+                            siteDropdown.selectedIndex = 0;
+                            defaultOption.textContent = "";
+                            submitButton.disabled = true;
+                        }
+                    }
+                }
+                toggleDropdown();
+                checkbox.addEventListener('change', toggleDropdown);
+            });
+        </script>
     </template>
 
-    <template id="mailbox_form_send" name="Mailbox Form Send">
-    <div class="text-center" style="padding-top: 100px; padding-bottom: 100px;">
-        <div class="card shadow-lg p-5" style="max-width: 600px; margin: 0 auto; background-color: #f8f9fa; border-radius: 10px;">
-            <div class="card-body">
-                <h1 class="mb-4" style="font-size: 2.5rem; font-weight: bold; color: #28a745;">¡Gracias!</h1>
-                <p style="font-size: 1.25rem; color: #6c757d;">Su formulario ha sido enviado con éxito.</p>
+    <template id="mailbox_form_send" name="Buzón">
+        <t t-call="website.layout">
+            <div class="text-center" style="padding-top: 100px; padding-bottom: 100px;">
+                <div class="card shadow-lg p-5" style="max-width: 600px; margin: 0 auto; background-color: #f8f9fa; border-radius: 10px;">
+                    <div class="card-body">
+                        <h1 class="mb-4" style="font-size: 2.5rem; font-weight: bold; color: #28a745;">¡Gracias!</h1>
+                        <p style="font-size: 1.25rem; color: #6c757d;">Su formulario ha sido enviado con éxito.</p>
+                    </div>
+                    <div class="mt-3" style="display: flex; justify-content: center;">
+                        <a role="button" class="btn btn-primary btn-lg" t-att-href="'/my/home'" style="width: 290px; text-align: center;">
+                            <i class="fa fa-fw fa-home" role="img" aria-label="Volver a Mi perfil" title="Volver a Mi perfil"></i>
+                            Volver a Mi perfil
+                        </a>
+                    </div>
+                </div>
             </div>
-        </div>
-    </div>
-</template>
+        </t>
+    </template>
 </odoo>

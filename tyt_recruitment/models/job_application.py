@@ -1,4 +1,4 @@
-from odoo import models, fields
+from odoo import api, models, fields
 
 class JobApplication(models.Model):
     _name = 'tyt_recruitment.job_application'
@@ -20,6 +20,35 @@ class JobApplication(models.Model):
     father_data_id = fields.Many2one('tyt_recruitment.family_data_detail', string="Datos del padre")
     mother_data_id = fields.Many2one('tyt_recruitment.family_data_detail', string="Datos de la madre")
     spouse_data_id = fields.Many2one('tyt_recruitment.family_data_detail', string="Datos del cónyuge")
+
+    complete_survey_id = fields.One2many("tyt_recruitment.complete_survey", 'job_application_id', string="Encuesta de salud")
+    has_complete_survey = fields.Boolean(string='Tiene Encuesta Completada', compute='compute_has_complete_survey')
+    
+    def action_open_health_survey(self):
+
+        name = self.applicant_id.name
+        last_name_father = self.applicant_id.last_name_father
+        last_name_mother = self.applicant_id.last_name_mother
+        gender = self.applicant_id.gender
+        birthplace = self.applicant_id.birthplace
+        birthdate = self.applicant_id.birthdate
+        nationality = self.applicant_id.nationality
+        age = self.applicant_id.age
+        marital_status = self.applicant_id.marital_status
+        
+        params = f"gender={gender}&birthplace={birthplace}&birthdate={birthdate}&nationality={nationality}&age={age}&marital_status={marital_status}"
+        url = f"/survey/{self.id}/{name}/{last_name_father}/{last_name_mother}?"
+
+        return {
+            'type': 'ir.actions.act_url',
+            'url': url + params,
+            'target': 'new', 
+        }
+    
+    @api.depends('complete_survey_id')
+    def compute_has_complete_survey(self):
+        for record in self:
+            record.has_complete_survey = bool(record.complete_survey_id)
 
 class Applicant(models.Model):
     _name = 'tyt_recruitment.applicant'

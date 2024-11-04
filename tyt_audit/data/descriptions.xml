@@ -9,6 +9,14 @@
         <record id="schedule_plan_description_3" model="audit.plan.schedule.descriptions">
             <field name="name">OP</field>
         </record>  
-
+        <record id="schedule_plan_description_4" model="audit.plan.schedule.descriptions">
+            <field name="name">RECURSOS HUMANOS</field>
+        </record>
+        <record id="schedule_plan_description_5" model="audit.plan.schedule.descriptions">
+            <field name="name">REGLAMENTO INTERNO</field>
+        </record>    
+        <record id="schedule_plan_description_6" model="audit.plan.schedule.descriptions">
+            <field name="name">ADICIONALES</field>
+        </record> 
     </data>
 </odoo>

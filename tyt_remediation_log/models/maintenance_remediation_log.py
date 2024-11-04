@@ -17,7 +17,7 @@ class MaintenanceRemediationLog(models.Model):
     remediation_log_line_ids = fields.One2many(
         'maintenance.remediationlog.line', 'remediation_log_id', string='Remediation Lines',
         default=lambda self: [
-            {'location': 'Recepcion'},
+            {'location': 'Recepción'},
             {'location': 'Salas'},
             {'location': 'Operaciones'},
             {'location': 'Oficinas Administrativas'}, 
@@ -26,6 +26,15 @@ class MaintenanceRemediationLog(models.Model):
         ]
     )
     
+    remediation_log_stages_ids = fields.One2many(
+        'maintenance.remediationlog.stage', 'remediation_log_id', string='Stage Manager',
+        default=lambda self: [
+            {'stage': 'Elaboración'},
+            {'stage': 'Revisión'},
+            {'stage': 'Validación'}
+        ]
+    )
+
     state = fields.Selection([
         ('draft', 'Draft'),
         ('confirmed', 'Confirmed'),
@@ -58,3 +67,16 @@ class MaintenanceRemediationLogLine(models.Model):
     location = fields.Char(string='Location', required=True)
     detection = fields.Char(string='Detection')
     remediation = fields.Char(string='What was done?')
+
+class MaintenanceRemediationLogStage(models.Model):
+    """ Etapas de la Bitácora de remediaciones """
+
+    _name = 'maintenance.remediationlog.stage'
+    _description = 'Remediation Log Stage'
+    
+    remediation_log_id = fields.Many2one(
+        'maintenance.remediationlog', string='Remediation Log', required=True, ondelete='cascade'
+    )
+    
+    stage = fields.Char(string='Stage', required=True)
+    manager_id = fields.Many2one('res.users', string='Manager', required=True)
