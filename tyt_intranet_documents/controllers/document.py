@@ -42,12 +42,14 @@ class DocumentController(http.Controller):
         values = request.params.copy()
         folder = request.env['documents.folder'].sudo().browse(folder_id)
         if not folder.exists():
-            return request.render('website.404')
+            return request.redirect('/my')
 
-        documents = self.get_all_documents(folder)
+        documents = folder.document_ids
+        document_count = len(documents)
         values.update({
             'folder': folder,
             'documents': documents,
+            'document_count': document_count,
         })
         return request.render('tyt_intranet_documents.portal_my_documents_share', values)
 

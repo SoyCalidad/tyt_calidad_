@@ -6,35 +6,40 @@
                 <t t-call="portal.portal_searchbar">
                     <t t-set="title">Espacios de trabajo</t>
                 </t>
-
-                 <t t-if="folders" t-call="portal.portal_table">
-                    <thead>
-                        <tr>
-                            <th>Nombre</th>
-                            <th class="text-start">Departamento</th>
-                            <th class="text-start">Categorías de etiquetas</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        <tr t-foreach="folders" t-as="folder">
-                            <td>
-                                <a t-attf-href="/my/documents/share/#{folder.id}?{{ keep_query() }}">
-                                    <t t-esc="folder.name"/>
-                                </a>
-                            </td>
-                            <td class="text-start">
-                                <span t-field="folder.x_studio_departamento"/>
-                            </td>
-                            <td class="text-start">
-                                <t t-foreach="folder.facet_ids" t-as="facet">
-                                    <span class="badge bg-primary">
-                                        <t t-esc="facet.name"/>
-                                    </span>
-                                </t>
-                            </td>
-                        </tr>
-                    </tbody>
-                 </t>
+                <div class="o_docs_cards_container row mb32">
+                    <t t-foreach="folders" t-as="folder">
+                        <div class="col-sm-6 col-lg-4 d-flex align-items-stretch mb-2">
+                            <div class="card d-flex flex-row w-100 p-2 gap-2">
+                                <figure class="o_card_left d-flex position-relative flex-column flex-nowrap justify-content-between m-0">
+                                    <div>
+                                        <img src="/tyt_intranet_documents/static/src/img/folder.svg" alt="Workspace"/>
+                                    </div>
+                                </figure>
+                                <div class="o_card_content d-flex flex-column flex-nowrap flex-grow-1 flex-shrink-1 justify-content-between">
+                                    <header>
+                                        <h6 class="o_card_title mt0 mb4">
+                                            <a t-attf-href="/my/documents/share/#{folder.id}" t-att-title="folder.name">
+                                                <t t-esc="folder.name"/>
+                                            </a>
+                                        </h6>
+                                    </header>
+                                    <div class="o_card_body">
+                                        <t t-foreach="folder.facet_ids" t-as="facet">
+                                            <span class="badge bg-primary">
+                                                <t t-esc="facet.name"/>
+                                            </span>
+                                        </t>
+                                    </div>
+                                    <div class="o_card_footer d-flex justify-content-between align-items-center">
+                                        <time><b t-field="folder.create_date" t-options="{'format':'d MMM yyyy'}"/></time>
+                                        <span class="badge text-bg-secondary rounded-pill d-flex align-items-center justify-content-center"
+                                              t-esc="len(folder.document_ids)"/>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </t>
+                </div>
             </t>
     </template>
 
@@ -56,10 +61,15 @@
                     <tbody>
                         <tr t-foreach="documents" t-as="document">
                             <td>
-                                <a t-att-href="'/tyt_intranet_documents/static/lib/pdfjs/web/viewer.html?file=' + '/web/content/' + str(document.attachment_id.id)"
-                                   target="_blank">
-                                    <t t-esc="document.name"/>
-                                </a>
+                                <div class="d-flex">
+                                    <figure>
+                                       <div class="o_image" t-att-data-mimetype="document.mimetype" t-attf-style="#{document.mimetype and 'image/' in document.mimetype and 'background-image:None;' ''}"/>
+                                    </figure>
+                                    <a t-att-href="'/tyt_intranet_documents/static/lib/pdfjs/web/viewer.html?file=' + '/web/content/' + str(document.attachment_id.id)"
+                                       target="_blank">
+                                        <span t-esc="document.name"/>
+                                    </a>
+                                </div>
                             </td>
                             <td class="text-start">
                                 <span t-field="document.owner_id.name"/>
