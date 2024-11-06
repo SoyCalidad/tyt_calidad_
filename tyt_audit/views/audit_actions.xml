@@ -1,0 +1,11 @@
+<odoo>
+    <data>
+        <record id="action_audit_generation_form_popup" model="ir.actions.act_window">
+            <field name="name">Generar Auditoría</field>
+            <field name="res_model">audit.generation.form</field>
+            <field name="view_mode">form</field>
+            <field name="target">new</field>
+            <field name="context">{'default_clause_id': clause_id, 'default_iso_9001_standards_ids': iso_9001_standards_ids}</field>
+        </record>
+    </data>
+</odoo>

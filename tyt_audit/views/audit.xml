@@ -64,7 +64,7 @@
 
                 <xpath expr="//sheet/notebook/page[1]" position="replace">
                     <page string="Planificación">
-                        <field name="planning_ids" >
+                        <field name="audit_form_ids">
                             <tree editable="bottom">
                                 <field name="iso_9001_standards_ids" widget="many2many_tags" attrs="{'readonly': [('parent.state','not in',('elaborate','validate_ok'))]}" />
                                 <field name="clause_id" attrs="{'readonly': [('parent.state','not in',('elaborate','validate_ok'))]}" />
@@ -72,13 +72,19 @@
                                 <field name="employee_job_id" readonly="1" string="Puesto de Responsable"/>
                                 <field name="verification" attrs="{'readonly': [('parent.state','not in',('elaborate','validate_ok'))]}" />
                                 <field name="finding" attrs="{'readonly': [('parent.state','not in',('elaborate','validate_ok'))]}" />
-                                <field name="evidence_id" attrs="{'readonly': [('parent.state','not in',('elaborate','validate_ok'))]}" />
+                                <field name="evidence_attachment_ids" widget="many2many_tags" attrs="{'readonly': [('parent.state','not in',('elaborate','validate_ok'))]}"/>
+                                <!-- <field name="evidence_attachment_ids" widget="many2many_binary" attrs="{'readonly': [('parent.state', 'not in', ('elaborate', 'validate_ok'))]}"/> -->
                                 <field name="comment" attrs="{'readonly': [('parent.state','in',('cancel'))]}" />
                                 <field name="evaluation" attrs="{'readonly': [('parent.state','in',('cancel'))]}" />
+                                <button name="action_open_audit_application_form"
+                                        string="Generar Auditoría"
+                                        type="object"
+                                        class="btn-primary oe_highlight" />
+                                <!-- Botón para Crear Auditorías -->
                             </tree>
                         </field>
-                    </page>                   
-                </xpath>   
+                    </page>
+                </xpath>
             </field>
         </record>
 
