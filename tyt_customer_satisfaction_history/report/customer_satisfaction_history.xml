@@ -1,0 +1,14 @@
+<odoo>
+    <data>
+
+        <report
+            id="action_report_survey_history"
+            model="survey.survey"
+            string="Customer satisfaction History"
+            report_type="xlsx"
+            name="customer_satisfaction_history"
+            file="Customer satisfaction History"
+            />
+
+    </data>
+</odoo>
