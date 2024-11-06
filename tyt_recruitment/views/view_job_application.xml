@@ -1,6 +1,24 @@
 <odoo>
   <data>
 
+    <record id="view_applicant_tree" model="ir.ui.view">
+      <field name="name">Applicant Tree</field>
+      <field name="model">tyt_recruitment.applicant</field>
+      <field name="arch" type="xml">
+          <tree>
+              <field name="last_name_father"/>
+              <field name="last_name_mother"/>
+              <field name="name"/>
+              <field name="social_security_number"/>
+              <field name="number_phone"/>
+              <field name="birthdate"/>
+              <field name="birthplace"/>
+              <field name="rfc"/>
+              <field name="curp"/>
+          </tree>
+      </field>
+    </record>
+
     <!-- Job Application List -->
     <record model="ir.ui.view" id="tyt_recruitment_job_application_list">
       <field name="name">Lista de Solicitudes</field>
@@ -8,11 +26,13 @@
       <field name="arch" type="xml">
         <tree string="Lista de Preguntas">
           <field name="id"/>
+          <field name="applicant_name" string="Nombre"/>
+          <field name="applicant_last_name_father" string="Apellido paterno"/>
+          <field name="applicant_last_name_mother" string="Apellido materno"/>
           <field name="request_date"/>
           <field name="requisition"/>
           <field name="site"/>
           <field name="campaign_id"/>
-          <field name="applicant_id"/>
           <field name="complete_survey_id"/>
           <field name="has_complete_survey"/>
           <button 
@@ -38,6 +58,19 @@
       </field>
     </record>
 
+    <!-- Question List -->
+    <record model="ir.ui.view" id="tyt_recruitment_parent_list">
+      <field name="name">Lista de parientes</field>
+      <field name="model">tyt_recruitment.family_data_detail</field>
+      <field name="arch" type="xml">
+        <tree string="Lista de Parientes">
+          <field name="name" />
+          <field name="occupation" width="200px" />
+          <field name="phone_number" width="200px" />
+        </tree>
+      </field>
+    </record>
+
     <!-- Formulario para encuesta completa -->
     <record model="ir.ui.view" id="tyt_recruitment_complete_survey_form">
       <field name="name">Formulario Encuesta de Salud completa</field>
@@ -56,12 +89,13 @@
                   <field name="id" />
                   <field name="question_id" />
                   <field name="text" />
+                  <field name="extra_text" />
                   <field name="multiple_ids" />
                 </tree>
               </field>
             </group>
             <group>
-              <field name="signature_image" widget="image" class="oe_avatar" />
+              <field name="signature_image" widget="image" class="oe_avatar" style="width: 300px; height: auto;" />
             </group>
           </sheet>
         </form>
@@ -76,39 +110,74 @@
         <form string="Formulario de Pregunta">
           <sheet>
             <group string="Información General">
-              <field name="request_date"/>
-              <field name="requisition"/>
-              <field name="site"/>
-              <field name="campaign_id"/>
-              <field name="applicant_id"/>
+              <group>
+                <field name="request_date"/>
+                <field name="requisition"/>
+                <field name="site"/>
+                <field name="campaign_id"/>
+                <field name="applicant_id"/>
+              </group>
+              <group>
+                <field name="state" />
+                <field name="signature_image" widget="image" class="oe_avatar" style="width: 300px; height: auto;" />
+              </group>
             </group>
 
             <group string="Encuesta de Salud" colspan="2">
-              <field name="has_complete_survey"/>
-              <field name="complete_survey_id">
+              <field name="has_complete_survey" />
+              <field name="complete_survey_id" readonly="1">
                 <tree>
                   <field name="id" width="120px"/>
+                  <field name="survey_answer_ids" />
                   <field name="state" />
                 </tree>
               </field>
             </group>
             
-            <!-- Sección de Detalles adicionales (si los necesitas en el futuro) -->
             <notebook>
+              <page string="Formación académica">
+                <field name="academics_ids" mode="tree,kanban,form" readonly="1" >
+                  <tree readonly="1">
+                    <field name="degree" width="200px" />
+                    <field name="institution" width="200px" />
+                    <field name="specification" width="200px" />
+                  </tree>
+                </field>
+              </page>
               <page string="Hijos">
-                <field name="children_ids" mode="tree,kanban,form"/>
+                <field name="children_ids" mode="tree,kanban,form" readonly="1" >
+                  <tree readonly="1">
+                    <field name="name" width="200px" />
+                    <field name="age" width="200px" />
+                  </tree>
+                </field>
               </page>
               <page string="Historial Laboral">
-                <field name="job_history_ids" mode="tree,kanban,form"/>
+                <field name="job_history_ids" mode="tree,kanban,form" readonly="1" >
+                  <tree readonly="1">
+                    <field name="company_name" />
+                    <field name="start_date" width="200px" />
+                    <field name="end_date" width="200px" />
+                    <field name="separation_reason" width="200px" />
+                    <field name="weekly_salary" width="200px" />
+                  </tree>
+                </field>
               </page>
               <page string="Referencias">
-                <field name="reference_ids" mode="tree,kanban,form"/>
+                <field name="reference_ids" mode="tree,kanban,form" readonly="1" >
+                  <tree readonly="1">
+                    <field name="name" />
+                    <field name="type" width="200px" />
+                    <field name="occupation" width="200px" />
+                    <field name="phone_number" width="200px" />
+                  </tree>
+                </field>
               </page>
               <page string="Datos Familiares">
                 <group>
-                  <field name="father_data_id"/>
-                  <field name="mother_data_id"/>
-                  <field name="spouse_data_id"/>
+                  <field name="father_data_id" readonly="1" />
+                  <field name="mother_data_id" readonly="1" />
+                  <field name="spouse_data_id" widget="monochrome" readonly="1" />
                 </group>
               </page>
             </notebook>

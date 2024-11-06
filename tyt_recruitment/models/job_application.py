@@ -9,9 +9,18 @@ class JobApplication(models.Model):
     requisition = fields.Char(string='Requisición')
     site = fields.Char(string='Sitio')
 
+    state = fields.Selection([('authorize', "Sí"),('noauthorize', "No"),], string="Autorizado", required=True, tracking=True, default='authorize')
+    signature_image = fields.Binary(string="Firma del solicitante")
+
+    # Campos relacionados para acceder al nombre y apellidos del aplicante
+    applicant_name = fields.Char(related="applicant_id.name", string="Nombre", store=True)
+    applicant_last_name_father = fields.Char(related="applicant_id.last_name_father", string="Apellido Paterno", store=True)
+    applicant_last_name_mother = fields.Char(related="applicant_id.last_name_mother", string="Apellido Materno", store=True)
+
     campaign_id = fields.Many2one('tyt_recruitment.campaign', string="Campaña")
     applicant_id = fields.Many2one('tyt_recruitment.applicant')
 
+    academics_ids = fields.One2many('tyt_recruitment.data_academic', 'job_application_id', string="Formación académica")
     children_ids = fields.One2many('tyt_recruitment.child', 'job_application_id', string="Hijos")
     answer_ids = fields.One2many('tyt_recruitment.answer', 'job_application_id', string="Respuestas")
     job_history_ids = fields.One2many('tyt_recruitment.job_history', 'job_application_id', string="Historial laboral")
@@ -54,8 +63,8 @@ class Applicant(models.Model):
     _name = 'tyt_recruitment.applicant'
     _description = 'tyt_recruitment.applicant'
     
-    reference = fields.Char(string="Medio")
     name = fields.Char(string="Nombre")
+    reference = fields.Char(string="Medio")
     last_name_father = fields.Char(string="Apellido Paterno")
     last_name_mother = fields.Char(string="Apellido Materno")
     birthplace = fields.Char(string="Lugar de Nacimiento")
@@ -94,6 +103,16 @@ class Applicant(models.Model):
 
     # Campaña
     campaign_id = fields.Many2one('tyt_recruitment.campaign', string="Campaña")
+
+class DataAcademic(models.Model):
+    _name = 'tyt_recruitment.data_academic'
+    _description = 'tyt_recruitment.data_academic'
+
+    degree = fields.Char(string="Último grado de estudios")
+    institution = fields.Char(string="Institución académica")
+    specification = fields.Char(string="Comprobante de estudio")
+
+    job_application_id = fields.Many2one('tyt_recruitment.job_application', string="Referencias")
 
 class FamilyDataDetail(models.Model):
     _name = 'tyt_recruitment.family_data_detail'

@@ -31,6 +31,9 @@ class HealthSurvey(models.Model):
 class SurveyQuestion(models.Model):
     _inherit = 'survey.question'
 
+    extra_input = fields.Char(string='Título del campo extra')
+    extra_input_enabled = fields.Boolean(string='Habilitado')
+
     health_survey_id = fields.Many2one('tyt_recruitment.health_survey', string="Pregunta")
 
 class CompleteSurvey(models.Model):
@@ -47,6 +50,7 @@ class SurveyAnswer(models.Model):
     _description = 'Respuesta'
 
     text = fields.Char(string="Respuesta")
+    extra_text = fields.Char(string="Campo extra")
     multiple_ids = fields.One2many("tyt_recruitment.multiple_answer", 'survey_answer_id', string='Respuestas multiples', tracking=True, store=True)
 
     question_id = fields.Many2one("survey.question", string="Pregunta")
