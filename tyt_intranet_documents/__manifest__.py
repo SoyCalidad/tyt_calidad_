@@ -11,6 +11,7 @@
         'base', 'web', 'documents', 'portal', 'website',
     ],
     'data': [
+        'security/ir.model.access.csv',
         'views/document_portal_templates.xml',
         'views/documents_folder_views.xml',
     ],
