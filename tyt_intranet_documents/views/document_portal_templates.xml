@@ -43,47 +43,47 @@
             </t>
     </template>
 
-    <template id="portal_my_documents_share" name="Documentos">
+    <template id="portal_my_documents_share" name="Documents">
             <t t-call="portal.portal_layout">
                 <t t-set="breadcrumbs_searchbar" t-value="True"/>
                 <t t-call="portal.portal_searchbar">
-                    <t t-set="title">Documentos</t>
+                    <t t-set="title">Documents</t>
                 </t>
-
-                <t t-if="documents" t-call="portal.portal_table">
-                    <thead>
-                        <tr>
-                            <th>Documento</th>
-                            <th class="text-start">Propietario</th>
-                            <th class="text-start">Etiquetas</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        <tr t-foreach="documents" t-as="document">
-                            <td>
-                                <div class="d-flex">
-                                    <figure>
-                                       <div class="o_image" t-att-data-mimetype="document.mimetype" t-attf-style="#{document.mimetype and 'image/' in document.mimetype and 'background-image:None;' ''}"/>
-                                    </figure>
-                                    <a t-att-href="'/tyt_intranet_documents/static/lib/pdfjs/web/viewer.html?file=' + '/web/content/' + str(document.attachment_id.id)"
-                                       target="_blank">
-                                        <span t-esc="document.name"/>
+                <section class="s_text_block pt40 pb40 o_colored_level " data-snippet="s_text_block">
+                    <div class="container s_allow_columns">
+                        <div class="row">
+                            <div class="col-lg-12 col-xl-12 mr-lg-auto">
+                                <ul class="list-group">
+                                    <a class="list-group-item list-group-item-action d-flex align-items-center oe_attachments py-1 px-2" t-foreach='documents' t-as='document'
+                                       t-attf-href="/my/document/view/{{ document.id }}" target="_blank" data-no-post-process="">
+                                        <div class='oe_attachment_embedded o_image o_image_small mr-2 mr-lg-3 flex-shrink-0' t-att-title="document.name" t-att-data-mimetype="document.mimetype" t-attf-data-src=""/>
+                                        <div class="d-flex flex-column align-items-start text-wrap">
+                                            <div style="font-family: 'Raleway'; font-size: 1rem" class='oe_attachment_name'><t t-esc='document.name'/></div>
+                                            <div class="d-flex">
+                                                <div>
+                                                    <t t-foreach="document.tag_ids" t-as="tag">
+                                                        <span class="badge rounded-pill bg-secondary">
+                                                            <t t-esc="tag.name"/>
+                                                        </span>
+                                                    </t>
+                                                </div>
+<!--                                                <div>-->
+<!--                                                    <time><b t-field="document.create_date" t-options="{'format':'d MMM yyyy'}"/></time> •-->
+<!--                                                    <small class="mb0">-->
+<!--                                                        <b>-->
+<!--                                                            <t t-if="document.type == 'binary'" t-call="documents.format_file_size"/>-->
+<!--                                                        </b>-->
+<!--                                                    </small>-->
+<!--                                                </div>-->
+                                            </div>
+                                        </div>
                                     </a>
-                                </div>
-                            </td>
-                            <td class="text-start">
-                                <span t-field="document.owner_id.name"/>
-                            </td>
-                            <td class="text-start">
-                                <t t-foreach="document.tag_ids" t-as="tag">
-                                    <span class="badge bg-primary">
-                                        <t t-esc="tag.name"/>
-                                    </span>
-                                </t>
-                            </td>
-                        </tr>
-                    </tbody>
-                </t>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                </section>
+
             </t>
     </template>
 
@@ -124,30 +124,26 @@
     </template>
 
     <template id="portal_my_document_view" name="Document View">
-        <t t-call="portal.portal_layout">
-            <t t-set="breadcrumbs_searchbar" t-value="True"/>
-            <t t-call="portal.portal_searchbar">
-                <t t-set="title">View Document</t>
-            </t>
-            <div class="container mt-4">
-                <div class="card">
-                    <div class="card-body">
-                        <h4><t t-esc="document.name"/></h4>
-                        <p class="text-muted">Last Modified: <t t-esc="document.write_date"/></p>
-                        <t t-if="document.attachment_id">
-                            <div class="text-center mt-4">
-                                <a t-att-href="'/web/static/lib/pdfjs/web/viewer.html?file=' + '/web/content/' + str(document.attachment_id.id)"
-                               class="btn btn-primary" target="_blank">
-                                View Document
-                            </a>
-                            </div>
-                        </t>
-                        <t t-else="">
-                            <p>No attachment found for this document.</p>
-                        </t>
-                    </div>
-                </div>
-            </div>
-        </t>
+        <html>
+            <head>
+                <t t-call-assets="tyt_intranet_documents.assets_pdfjs_viewer"/>
+                <style>
+                    html, body {
+                        height: 100%;
+                        margin: 0;
+                        padding: 0;
+                        overflow: hidden;
+                    }
+                    iframe {
+                        width: 100%;
+                        height: 100vh;
+                        border: none;
+                    }
+                </style>
+            </head>
+            <body>
+                <iframe t-attf-src="/tyt_intranet_documents/static/lib/pdfjs/web/viewer.html?file={{ url }}" type="application/pdf"/>
+            </body>
+        </html>
     </template>
 </odoo>

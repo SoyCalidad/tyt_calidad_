@@ -53,6 +53,18 @@ class DocumentController(http.Controller):
         })
         return request.render('tyt_intranet_documents.portal_my_documents_share', values)
 
+    @http.route('/my/document/view/<int:document_id>', type='http', auth='user', website=True)
+    def my_document_view(self, document_id):
+        values = request.params.copy()
+        document = request.env['documents.document'].sudo().browse(document_id)
+        values = {
+            'page_name': 'document',
+            'document': document,
+            'url': f'/web/content/{document.id}?model%3Ddocuments.document',
+        }
+
+        return request.render('tyt_intranet_documents.portal_my_document_view', values)
+
     @http.route('/my/document/share/<int:document_id>', type='http', auth='user', website=True)
     def mailbox_form_share(self, document_id):
         values = request.params.copy()
