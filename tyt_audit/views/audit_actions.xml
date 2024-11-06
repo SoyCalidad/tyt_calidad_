@@ -1,0 +1,10 @@
+<odoo>
+    <data>
+        <record id="action_audit_generation_form_popup" model="ir.actions.act_window">
+            <field name="name">Generar Auditoría</field>
+            <field name="res_model">audit.generation.form</field>
+            <field name="view_mode">form</field>
+            <field name="target">new</field>
+        </record>
+    </data>
+</odoo>
