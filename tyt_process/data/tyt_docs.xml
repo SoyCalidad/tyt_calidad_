@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data noupdate="0">
+        <record id="dc_tyt_docs_1" model="documentary.control.tyt_docs">
+            <field name="name">Procedimiento</field>
+            <field name="abbreviation">P</field>
+        </record>
+        <record id="dc_tyt_docs_2" model="documentary.control.tyt_docs">
+            <field name="name">Política</field>
+            <field name="abbreviation">O</field>
+        </record>
+        <record id="dc_tyt_docs_3" model="documentary.control.tyt_docs">
+            <field name="name">Apéndice</field>
+            <field name="abbreviation">A</field>
+        </record>
+        <record id="dc_tyt_docs_4" model="documentary.control.tyt_docs">
+            <field name="name">Manual</field>
+            <field name="abbreviation">M</field>
+        </record>
+    </data>
+</odoo>

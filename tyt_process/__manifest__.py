@@ -34,6 +34,7 @@
         'reports/documentary_control_views.xml',
         'wizards/mgmt_categ_communicate.xml',
         'views/menus.xml',
+        'data/tyt_docs.xml',
     ],
     'assets': {
         'web.report_assets_common': [
