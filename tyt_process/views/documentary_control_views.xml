@@ -46,6 +46,8 @@
                         </group>
                     </group>
                     <group>
+                        <field name="job_id"/>
+                        <field name="tyt_sites_id"/>
                         <field name="type_storage"/>
                         <field name="type"/>
                         <field name="diffusion"/>
