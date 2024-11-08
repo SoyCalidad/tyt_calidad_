@@ -13,15 +13,16 @@
                     <div class="oe_button_box" name="button_box">
                         <field name="active" invisible="1" />
                     </div>
-                    <group>
+                    <group colspan = "2">
                         <field name="code" />
                         <field name="name" />
                         <field name="weight" />
                         <field name="description" />
-                        <p>
-                            El peso determinará la posición de la categoría en el mapa de procesos. Mientras mayor sea mas prioridad tendrá.
-                            El peso máximo es 9.
-                        </p>
+                    </group>
+                    <group colspan = "2">
+                        <div class="oe_note" style="padding: 10px 0;">
+                            El peso determinará la posición de la categoría en el mapa de procesos. Mientras mayor sea, más prioridad tendrá. El peso máximo es 9.
+                        </div>
                     </group>
                 </sheet>
             </form>

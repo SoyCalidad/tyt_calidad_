@@ -547,7 +547,7 @@
                                     <field name="additional_info" attrs="{'readonly': [('state','in',('validate_ok','cancel'))]}" />
                                 </group>
                                 <group string="Fuerzas de Porter - Análisis de micro-entorno">
-                                    <field name="forces" nolabel="1" attrs="{'readonly': [('state','in',('validate_ok','cancel'))]}">
+                                    <field name="forces" nolabel="1" colspan="2" attrs="{'readonly': [('state','in',('validate_ok','cancel'))]}">
                                         <tree string="Fuerzas de Porter" class="external_issue" editable="bottom">
                                             <field name="context_force" style="max-width:15vw;overflow-wrap: break-word;" />
                                             <field name="description" style="max-width:20vw;overflow-wrap: break-word;" />
