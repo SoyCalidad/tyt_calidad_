@@ -3,6 +3,9 @@
 from odoo import models, fields, api, _
 from odoo.exceptions import UserError
 import re
+import logging
+
+_logger = logging.getLogger(__name__)
 
 class DocumentaryControl(models.Model):
     _name = 'documentary.control.tyt_docs'
@@ -50,6 +53,12 @@ class DocumentaryControl(models.Model):
         store=True,
     )
 
+    code_number_str = fields.Char(
+        string='Code Number',
+        compute='_compute_code_number_str',
+        store=True,
+    )
+
     @api.depends('area_id', 'tyt_document_id')
     def _compute_next_number_str(self):
         for record in self:
@@ -70,6 +79,37 @@ class DocumentaryControl(models.Model):
             return
         
         self.int_code = f"{self.tyt_document_id.abbreviation}{self.area_id.code}-{self.next_number_str}"
+
+
+
+
+
+    @api.depends('area_id', 'tyt_document_id', 'next_number_str')
+    def _compute_code_number_str(self):
+        for record in self:
+            if not record.next_number_str:
+                record.code_number_str = ""
+                continue
+            
+            try:
+                # Remover el prefijo '0' y convertir a entero
+                next_number = int(record.next_number_str.lstrip('0') or 0)
+                # Asegurarse de que next_number es mayor que 0 para evitar números negativos no deseados
+                if next_number > 1:
+                    code_number = next_number - 1
+                    # Añadir el prefijo '0' nuevamente
+                    record.code_number_str = '0' + str(code_number)
+                elif next_number == 1:
+                    # Si next_number es 1, code_number_str será '00'
+                    record.code_number_str = '00'
+                else:
+                    # Para valores inesperados, dejar el campo vacío
+                    record.code_number_str = ""
+                
+                _logger.info(f"Computed code_number_str for record {record.id}: {record.code_number_str}")
+            except ValueError:
+                record.code_number_str = ""
+                _logger.error(f"Failed to compute code_number_str for record {record.id} due to invalid next_number_str: {record.next_number_str}")
 
 
     # @api.onchange('area_id','tyt_document_id')

@@ -116,10 +116,10 @@ class IndividualReport(models.AbstractModel):
                 headers_g2 = ['Prefijo', 'Nombre', 'Responsable', 'Ubicación', 'Etiquetado Procesos']
                 # Insertar los encabezados en la fila 19
                 for col_num, header1 in enumerate(headers_g1):
-                    sheet2.write(2, col_num + 1, header1, header_format)  # Comienza en la columna C (índice 2)
+                    sheet2.write(2, col_num + 1, header1, header_format)  # Comienza en la columna B (índice 2)
 
                 for col_num, header2 in enumerate(headers_g2):
-                    sheet2.write(2, col_num + 5, header2, header_format)  # Comienza en la columna G (índice 3)
+                    sheet2.write(2, col_num + 5, header2, header_format)  # Comienza en la columna C (índice 3)
 
                 sheet2.write('L3', 'Valores', header_format)
 
@@ -137,6 +137,7 @@ class IndividualReport(models.AbstractModel):
 
                     sheet2.write(row, 1, record.tyt_document_id.abbreviation or '', cell_format)  # Columna B (índice 1)
                     sheet2.write(row, 2, record.area_id.code or '', cell_format)  # Columna C (índice 2)
+                    sheet2.write(row, 3, record.code_number_str or '', cell_format)
 
                     sheet2.write(row, 5, record.int_code or '', cell_format)  # Columna F (índice 5)
                     sheet2.write(row, 6, record.name or '', cell_format)  # Columna G (índice 6)
