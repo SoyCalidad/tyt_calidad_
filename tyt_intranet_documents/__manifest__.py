@@ -14,6 +14,7 @@
         'security/ir.model.access.csv',
         'views/document_portal_templates.xml',
         'views/documents_folder_views.xml',
+        'views/documents_document_views.xml',
     ],
     'assets': {
         'tyt_intranet_documents.assets_pdfjs_viewer': [
@@ -25,6 +26,9 @@
             'tyt_intranet_documents/static/lib/pdfjs/web/cmaps/**',
             'tyt_intranet_documents/static/lib/pdfjs/web/images/**',
             'tyt_intranet_documents/static/lib/pdfjs/web/locale/**',
+        ],
+        'web.assets_backend': [
+            'tyt_intranet_documents/static/src/views/inspector/documents_inspector.xml',
         ],
     },
     'installable': True,

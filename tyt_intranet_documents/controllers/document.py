@@ -52,7 +52,7 @@ class DocumentController(http.Controller):
         folder = request.env['documents.folder'].sudo().browse(folder_id)
         if not folder.exists() or not self._check_folder_access(folder):
             return request.redirect('/my')
-        documents = folder.document_ids
+        documents = folder.document_ids.filtered(lambda d: d.mimetype == 'application/pdf')
         document_count = len(documents)
         values.update({
             'folder': folder,
