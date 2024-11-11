@@ -1,0 +1,28 @@
+<odoo>
+    <data>
+        <record id="mgmtsystem_action__tyt_inherit" model="ir.ui.view">
+            <field name="name">mgmtsystem_action_tyt_inherit</field>
+            <field name="model">mgmtsystem.action</field>
+            <field name="inherit_id" ref="mgmtsystem_action.view_mgmtsystem_action_form"/>
+            <field name="arch" type="xml">
+                <xpath expr="//sheet/notebook/page[4]" position="replace">
+                        <page string="Otra información">
+                          <group>
+                              <field name="company_id" groups="base.group_multi_company"/>
+                          </group>
+                          <div style="height:10px; margin:10px 0;"/> <!-- Separador visual -->
+                          <group col="2">
+                              <field name="create_date" string="Fecha de creación" readonly="1"/>
+                              <field name="create_uid" string="Agregado por" readonly="1"/>
+                          </group>
+                          <div style="height:10px; margin:10px 0;"/> <!-- Separador visual -->
+                          <group col="2">
+                              <field name="write_date" string="Última modificación" readonly="1"/>
+                              <field name="write_uid" string="Modificado por" readonly="1"/>
+                          </group>
+                        </page>
+                </xpath>
+            </field>
+        </record>
+    </data>
+</odoo>
