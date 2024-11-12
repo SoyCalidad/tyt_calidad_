@@ -1,5 +1,7 @@
 id,name,model_id:id,group_id:id,perm_read,perm_write,perm_create,perm_unlink
 
+access_audit_generation_form_user,audit.generation.form user,model_audit_generation_form,base.group_user,1,1,1,1
+
 access_audit_plan_tyt_auditor_readonly,Permisos de solo lectura,model_audit_plan_tyt_auditor,mgmtsystem_audit.group_audit_onlyread,1,0,0,0
 access_audit_plan_tyt_auditor_report,Permisos de reportes,model_audit_plan_tyt_auditor,mgmtsystem_audit.group_audit_onlyread_printreport,1,0,0,0
 access_audit_plan_tyt_auditor_user,Permisos de usuario,model_audit_plan_tyt_auditor,mgmtsystem_audit.group_audit_write_printreport,1,1,1,0

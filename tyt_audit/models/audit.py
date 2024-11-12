@@ -5,6 +5,9 @@ from datetime import datetime
 from odoo import _, api, fields, models, tools
 from odoo.exceptions import ValidationError, Warning
 
+from odoo import http
+from odoo.http import request
+
 
 class AuditProcedure(models.Model):
     _name = "audit.audit.procedure"
@@ -118,6 +121,22 @@ class AuditPlanning(models.Model):
 
     evaluation = fields.Char(string="Evaluación")
 
+    def action_open_audit_application_form(self):
+        # Asigna los parámetros necesarios para la URL.
+        audit_id = self.id
+        audit_name = (
+            self.name
+        )  # Ejemplo de parámetro; puedes usar otros según necesites
+
+        # Construye la URL del formulario, pasando los parámetros requeridos
+        url = f"/audit_application/{audit_id}/?audit_name={audit_name}"
+
+        return {
+            "type": "ir.actions.act_url",
+            "url": url,
+            "target": "new",  # Esto abre el formulario en una nueva pestaña/página
+        }
+
 
 class Audit(models.Model):
     _inherit = "audit.audit"
@@ -230,6 +249,24 @@ class Audit(models.Model):
     )
 
 
+class AuditApplicationController(http.Controller):
+
+    @http.route(
+        "/audit_application/<int:audit_id>", type="http", auth="user", website=True
+    )
+    def audit_application_form(self, audit_id, **kwargs):
+        # Busca la información de la auditoría basada en el ID recibido
+        audit_record = request.env["audit.audit.planning"].sudo().browse(audit_id)
+
+        # Renderiza el formulario con los datos del registro
+        return request.render(
+            "tyt_audit.audit_application_form_template",
+            {
+                "audit": audit_record,
+            },
+        )
+
+
 class AuditGenerationForm(models.TransientModel):
     _name = "audit.generation.form"
     _description = "Formulario de Generación de Auditoría"
@@ -237,11 +274,6 @@ class AuditGenerationForm(models.TransientModel):
     name = fields.Char(string="Nombre")
     date = fields.Date(string="Fecha")
 
-    def action_open_audit_form(self):
-        return {
-            "type": "ir.actions.act_window",
-            "name": "Formulario de Auditoría",
-            "view_mode": "form",
-            "res_model": "audit.generation.form",
-            "target": "new",
-        }
+    def action_generate(self):
+        # Por ahora, simplemente cierra el formulario o agrega una lógica simple
+        return {"type": "ir.actions.act_window_close"}
