@@ -42,6 +42,8 @@ class DocumentController(http.Controller):
         folders = request.env['documents.folder'].sudo().search([('is_intranet_folder', '=', True)])
         accessible_folders = folders.filtered(lambda folder: self._check_folder_access(folder))
         values.update({
+            'page_name': 'documents_folder',
+            'default_url': '/documents/folder/share',
             'folders': accessible_folders,
         })
         return request.render('tyt_intranet_documents.portal_documents_folder_share', values)
@@ -52,9 +54,10 @@ class DocumentController(http.Controller):
         folder = request.env['documents.folder'].sudo().browse(folder_id)
         if not folder.exists() or not self._check_folder_access(folder):
             return request.redirect('/my')
-        documents = folder.document_ids
+        documents = folder.document_ids.filtered(lambda d: d.mimetype == 'application/pdf')
         document_count = len(documents)
         values.update({
+            'page_name': 'documents_folder',
             'folder': folder,
             'documents': documents,
             'document_count': document_count,

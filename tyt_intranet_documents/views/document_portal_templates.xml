@@ -1,96 +1,109 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <odoo>
-    <template id="portal_documents_folder_share" name="Workspaces">
-            <t t-call="portal.portal_layout">
-                <t t-set="breadcrumbs_searchbar" t-value="True"/>
-                <t t-call="portal.portal_searchbar">
-                    <t t-set="title">Espacios de trabajo</t>
-                </t>
-                <div class="o_docs_cards_container row mb32">
-                    <t t-foreach="folders" t-as="folder">
-                        <div class="col-sm-6 col-lg-4 d-flex align-items-stretch mb-2">
-                            <div class="card d-flex flex-row w-100 p-2 gap-2">
-                                <figure class="o_card_left d-flex position-relative flex-column flex-nowrap justify-content-between m-0">
-                                    <div>
-                                        <img src="/tyt_intranet_documents/static/src/img/folder.svg" alt="Workspace"/>
-                                    </div>
-                                </figure>
-                                <div class="o_card_content d-flex flex-column flex-nowrap flex-grow-1 flex-shrink-1 justify-content-between">
-                                    <header>
-                                        <h6 class="o_card_title mt0 mb4">
-                                            <a t-attf-href="/my/documents/share/#{folder.id}" t-att-title="folder.name">
-                                                <t t-esc="folder.name"/>
-                                            </a>
-                                        </h6>
-                                    </header>
-                                    <div class="o_card_body">
-                                        <t t-foreach="folder.facet_ids" t-as="facet">
-                                            <span class="badge bg-primary">
-                                                <t t-esc="facet.name"/>
-                                            </span>
-                                        </t>
-                                    </div>
-                                    <div class="o_card_footer d-flex justify-content-between align-items-center">
-                                        <time><b t-field="folder.create_date" t-options="{'format':'d MMM yyyy'}"/></time>
-                                        <span class="badge text-bg-secondary rounded-pill d-flex align-items-center justify-content-center"
-                                              t-esc="len(folder.document_ids)"/>
-                                    </div>
+    <template id="portal_my_home_menu_folder" inherit_id="portal.portal_breadcrumbs" priority="60">
+    	<xpath expr="//ol[hasclass('o_portal_submenu')]" position="inside">
+            <li t-if="page_name == 'documents_folder'" t-attf-class="breadcrumb-item #{'active ' if not folder else ''}">
+                <a t-if="folder" t-attf-href="/documents/folder/share?{{ keep_query() }}">Espacios de trabajo</a>
+                <t t-else="">Espacios de trabajo</t>
+            </li>
+        	<li t-if="folder" class="breadcrumb-item active">
+                <t t-esc="folder.name"/>
+            </li>
+    	</xpath>
+	</template>
+
+    <template id="portal_documents_folder_share" name="Espacios de trabajo">
+        <t t-call="portal.portal_layout">
+            <t t-set="breadcrumbs_searchbar" t-value="True"/>
+            <t t-call="portal.portal_searchbar">
+                <t t-set="title">Espacios de trabajo</t>
+            </t>
+            <div class="o_docs_cards_container row mb32">
+                <t t-foreach="folders" t-as="folder">
+                    <div class="col-sm-6 col-lg-4 d-flex align-items-stretch mb-2">
+                        <div class="card d-flex flex-row w-100 p-2 gap-2">
+                            <figure class="o_card_left d-flex position-relative flex-column flex-nowrap justify-content-between m-0">
+                                <div>
+                                    <img src="/tyt_intranet_documents/static/src/img/folder.svg" alt="Workspace"/>
+                                </div>
+                            </figure>
+                            <div class="o_card_content d-flex flex-column flex-nowrap flex-grow-1 flex-shrink-1 justify-content-between">
+                                <header>
+                                    <h6 class="o_card_title mt0 mb4">
+                                        <a t-attf-href="/my/documents/share/#{folder.id}" t-att-title="folder.name">
+                                            <t t-esc="folder.name"/>
+                                        </a>
+                                    </h6>
+                                </header>
+                                <div class="o_card_body">
+                                    <t t-foreach="folder.facet_ids" t-as="facet">
+                                        <span class="badge bg-primary">
+                                            <t t-esc="facet.name"/>
+                                        </span>
+                                    </t>
+                                </div>
+                                <div class="o_card_footer d-flex justify-content-between align-items-center">
+                                    <time><b t-field="folder.create_date" t-options="{'format':'d MMM yyyy'}"/></time>
+                                    <span class="badge text-bg-secondary rounded-pill d-flex align-items-center justify-content-center"
+                                          t-esc="len(folder.document_ids.filtered(lambda d: d.mimetype == 'application/pdf'))"/>
                                 </div>
                             </div>
                         </div>
-                    </t>
-                </div>
-            </t>
+                    </div>
+                </t>
+            </div>
+        </t>
     </template>
 
-    <template id="portal_my_documents_share" name="Documents">
-            <t t-call="portal.portal_layout">
-                <t t-set="breadcrumbs_searchbar" t-value="True"/>
-                <t t-call="portal.portal_searchbar">
-                    <t t-set="title">Documentos</t>
-                </t>
-                <section class="s_text_block pb40 o_colored_level " data-snippet="s_text_block">
-                    <div class="container s_allow_columns">
-                        <div class="row">
-                            <div class="col-lg-12 col-xl-12 mr-lg-auto">
-                                <ul class="list-group">
-                                    <a class="list-group-item list-group-item-action d-flex align-items-center oe_attachments py-1 px-2" t-foreach='documents' t-as='document'
-                                       t-attf-href="/my/document/view/{{ document.id }}" target="_blank" data-no-post-process="">
-                                        <div class='oe_attachment_embedded o_image o_image_small mr-2 mr-lg-3 flex-shrink-0' t-att-title="document.name" t-att-data-mimetype="document.mimetype" t-attf-data-src=""/>
-                                        <div class="d-flex flex-column align-items-start text-wrap w-100">
-                                            <div style="font-family: 'Raleway'; font-size: 1rem" class='oe_attachment_name'><t t-esc='document.name'/></div>
-                                            <div class="d-flex justify-content-between w-100">
-                                                <div>
-                                                    <t t-foreach="document.tag_ids" t-as="tag">
-                                                        <span class="badge rounded-pill bg-secondary">
-                                                            <t t-esc="tag.name"/>
-                                                        </span>
-                                                    </t>
-                                                </div>
-                                                <div style="font-family: 'Raleway'; font-size: 0.9rem">
-                                                    <time><b t-field="document.create_date" t-options="{'format':'d MMM yyyy'}"/></time> •
-                                                    <small class="mb0">
-                                                        <b>
-                                                            <t t-if="document.type == 'binary'" t-call="documents.format_file_size"/>
-                                                        </b>
-                                                    </small>
-                                                </div>
+    <template id="portal_my_documents_share" name="Documentos">
+        <t t-call="portal.portal_layout">
+            <t t-set="breadcrumbs_searchbar" t-value="True"/>
+            <t t-call="portal.portal_searchbar">
+                <t t-set="title">Documentos</t>
+            </t>
+            <section class="s_text_block pb40 o_colored_level " data-snippet="s_text_block">
+                <div class="container s_allow_columns">
+                    <div class="row">
+                        <div class="col-lg-12 col-xl-12 mr-lg-auto">
+                            <ul class="list-group">
+                                <a class="list-group-item list-group-item-action d-flex align-items-center oe_attachments py-1 px-2" t-foreach='documents' t-as='document'
+                                   t-attf-href="/my/document/view/{{ document.id }}" target="_blank" data-no-post-process="">
+                                    <div class='oe_attachment_embedded o_image o_image_small mr-2 mr-lg-3 flex-shrink-0' t-att-title="document.short_name or document.name" t-att-data-mimetype="document.mimetype" t-attf-data-src=""/>
+                                    <div class="d-flex flex-column align-items-start text-wrap w-100">
+                                        <div style="font-family: 'Raleway'; font-size: 1rem" class='oe_attachment_name'>
+                                            <span t-esc="document.short_name or document.name"/>
+                                        </div>
+                                        <div class="d-flex justify-content-between w-100">
+                                            <div>
+                                                <t t-foreach="document.tag_ids" t-as="tag">
+                                                    <span class="badge rounded-pill bg-secondary">
+                                                        <t t-esc="tag.name"/>
+                                                    </span>
+                                                </t>
+                                            </div>
+                                            <div style="font-family: 'Raleway'; font-size: 0.9rem">
+                                                <time><b t-field="document.create_date" t-options="{'format':'d MMM yyyy'}"/></time> •
+                                                <small class="mb0">
+                                                    <b>
+                                                        <t t-if="document.type == 'binary'" t-call="documents.format_file_size"/>
+                                                    </b>
+                                                </small>
                                             </div>
                                         </div>
-                                    </a>
-                                </ul>
-                            </div>
+                                    </div>
+                                </a>
+                            </ul>
                         </div>
                     </div>
-                </section>
-
-            </t>
+                </div>
+            </section>
+        </t>
     </template>
 
-    <template id="portal_my_document_view" name="Document View">
+    <template id="portal_my_document_view" name="Documento">
         <html>
             <head>
-                <title><t t-esc="document.name"/></title>
+                <title><t t-esc="document.short_name or document.name"/></title>
                 <t t-call-assets="tyt_intranet_documents.assets_pdfjs_viewer"/>
                 <style>
                     html, body {

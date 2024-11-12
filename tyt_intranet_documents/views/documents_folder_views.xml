@@ -1,6 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <odoo>
-
     <record id="folder_view_tree" model="ir.ui.view">
         <field name="name">folder.view.tree.inherit</field>
         <field name="model">documents.folder</field>
