@@ -25,6 +25,7 @@
                 <field name="name" />
                 <field name="text" />
                 <field name="qualification" />
+                <field name="internal_category" />
             </tree>
         </field>
     </record>
@@ -79,6 +80,7 @@
                         <field name="email" />
                         <field name="partner_company" />
                         <field name="campaign" />
+                        <field name="location" />
                         <field name="line_ids" />
                     </group>
                 </sheet>

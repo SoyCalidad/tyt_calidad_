@@ -44,6 +44,7 @@ class TYTSatisfactionSurvey(http.Controller):
         values['email'] = kw['email']
         values['partner_company'] = kw['partner_company']
         values['campaign'] = kw['campaign']
+        values['location'] = kw['location']
         
         lines = [(5, 0, 0)]
         
@@ -53,10 +54,11 @@ class TYTSatisfactionSurvey(http.Controller):
             if 'cat_' in key:
                 
                 question_id = satisfaction_survey_question_model.search([('code', '=', key)])
-                
+
                 question_values = {
                     'name': question_id.name,
                     'code': question_id.code,
+                    'internal_category': key,
                     'qualification': value if key not in cat_text_fields else False,
                     'text': value if key in cat_text_fields else False,
                 }
