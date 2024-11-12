@@ -1,0 +1,263 @@
+.satisfaction_survey_body {
+    font-family: Arial, sans-serif;
+    background-color: #f4f4f4;
+    margin: 0;
+    padding: 0;
+
+    .category-bar {
+        display: flex;
+        justify-content: center;
+        margin-top: 20px;
+        padding-top: 20px;
+    }
+
+    .category-item {
+        margin: 0 10px;
+        padding: 10px 20px;
+        border: 1px solid #ccc;
+        cursor: pointer;
+    }
+
+    .category-item.active {
+        background-color: #007bff;
+        color: white;
+        border-color: #007bff;
+    }
+
+    .question-container {
+        text-align: center;
+        margin-top: 50px;
+    }
+
+    .question {
+        display: none;
+        font-size: 1.5rem;
+    }
+
+    .navigation-buttons {
+        display: flex;
+        justify-content: center;
+        margin-top: 30px;
+    }
+
+    .button {
+        width: 100px !important;
+        background: #ee0979;
+        font-weight: bold;
+        color: white !important;
+        border: 0 none;
+        border-radius: 25px !important;
+        cursor: pointer;
+        padding: 10px 5px;
+        margin: 10px 5px;
+        white-space: normal;
+        vertical-align: middle;
+    }
+
+    .button:disabled {
+        background-color: #ccc;
+    }
+
+    .tyt_text {
+        display: block;
+        width: 50%;
+        margin: 20px auto;
+        padding: 15px;
+        font-size: 1.5rem;
+        border: 2px solid #ccc;
+        border-radius: 10px;
+        box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+        transition: border-color 0.3s ease, box-shadow 0.3s ease;
+
+        &:focus {
+            border-color: #66afe9;
+            box-shadow: 0 0 10px rgba(102, 175, 233, 0.6);
+            outline: none;
+        }
+
+        &:hover {
+            border-color: #999;
+        }
+
+        @media (max-width: 768px) {
+            width: 80%;
+            font-size: 1.2rem;
+        }
+
+        @media (max-width: 480px) {
+            width: 90%;
+            font-size: 1rem;
+        }
+    }
+
+    #cat_0_1 {
+        &.tyt_data {
+            padding: 20px;
+            background-color: #f9f9f9;
+            border-radius: 8px;
+            max-width: 800px;
+            margin: 0 auto;
+            align-items: center;
+
+            .s_website_form_field {
+                margin-bottom: 1rem;
+
+                .s_col_no_resize {
+                    display: flex;
+                    align-items: center;
+                    flex-wrap: wrap;
+
+                    label {
+                        font-weight: bold;
+                        font-size: 14px;
+                        margin-right: 10px;
+                        width: 100%;
+                        max-width: 200px;
+                        color: #555;
+                    }
+
+                    .form-control {
+                        width: 100%;
+                        max-width: 400px;
+                        border: 1px solid #ccc;
+                        border-radius: 6px;
+                        padding: 0.5rem;
+                        font-size: 14px;
+                        transition: all 0.3s ease;
+
+                        &:hover {
+                            border-color: #999;
+                        }
+
+                        &:focus {
+                            border-color: #66afe9;
+                            box-shadow: 0 0 6px rgba(102, 175, 233, 0.6);
+                            outline: none;
+                        }
+                    }
+                }
+
+                &.col-12 {
+                    padding-top: 10px;
+                    padding-bottom: 10px;
+                }
+            }
+
+            .s_website_form_label {
+                font-size: 14px;
+                color: #333;
+
+                .s_website_form_label_content {
+                    font-weight: 600;
+                }
+            }
+
+            input[type="text"] {
+                background-color: #f8f8f8;
+                transition: background-color 0.3s ease;
+
+                &:hover {
+                    background-color: #f0f0f0;
+                }
+
+                &:focus {
+                    background-color: #fff;
+                }
+            }
+        }
+
+        @media (max-width: 768px) {
+            .s_col_no_resize {
+                flex-direction: column;
+
+                label {
+                    margin-bottom: 10px;
+                    width: 100%;
+                    max-width: 100%;
+                    text-align: left;
+                }
+
+                .form-control {
+                    max-width: 100%;
+                }
+            }
+        }
+    }
+
+    #TYTradioContainer {
+        gap: 15px;
+        align-items: center;
+        margin: 10px 0;
+
+        label {
+            display: inline-flex;
+            align-items: center;
+        }
+
+        input[type="radio"] {
+            margin-right: 5px;
+        }
+
+        @media (max-width: 768px) {
+            flex-direction: column;
+            align-items: flex-start;
+            gap: 10px;
+        }
+    }
+
+    @media (max-width: 1024px) {
+        padding: 15px;
+        .category-item {
+            padding: 8px 15px;
+        }
+
+        .button {
+            width: 120px;
+        }
+    }
+
+    @media (max-width: 768px) {
+        padding: 10px;
+
+        .category-bar {
+            flex-direction: column;
+        }
+
+        .question-container {
+            margin-top: 30px;
+            padding: 0 10px;
+        }
+
+        .navigation-buttons {
+            flex-direction: column;
+            align-items: center;
+        }
+
+        .button {
+            width: 100px;
+            margin: 5px 0;
+        }
+    }
+
+    @media (max-width: 480px) {
+        padding: 5px;
+
+        .category-item {
+            margin: 5px 0;
+            padding: 8px 10px;
+        }
+
+        .question-container {
+            margin-top: 20px;
+        }
+
+        .button {
+            width: 90px;
+        }
+
+        #cat_0_1 {
+            padding: 10px;
+            max-width: 100%;
+        }
+    }
+}

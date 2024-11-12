@@ -257,5 +257,7 @@ class IrActionsReport(models.Model):
                 additional_stream[0]['stream'].close()
                 additional_stream[1]['stream'].close()
                 additional_stream[2]['stream'].close()
+                additional_stream[3]['stream'].close()
+                additional_stream[4]['stream'].close()
             
         return res
