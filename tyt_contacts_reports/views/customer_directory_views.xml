@@ -1,8 +1,0 @@
-<?xml version="1.0" encoding="utf-8"?>
-<odoo>
-    <record id="customer_directory_action" model="ir.actions.act_window">
-        <field name="name">Customer Directory</field>
-        <field name="res_model">customer_directory</field>
-        <field name="view_mode">tree,form</field>
-    </record>
-</odoo>

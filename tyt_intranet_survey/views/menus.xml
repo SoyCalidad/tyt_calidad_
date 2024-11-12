@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+        <menuitem id="survey_survey_menu_action"
+                  name="Surveys"
+                  parent="tyt_intranet_base.intranet_menu_root"
+                  action="tyt_survey_survey_action"
+                  sequence="10"/>
+
+        <menuitem id="tyt_survey_management_menu_action"
+                  name="Survey Management"
+                  parent="tyt_intranet_base.intranet_menu_root"
+                  action="tyt_survey_management_action"
+                  sequence="20"/>
+
+        <menuitem id="tyt_survey_configuration_menu"
+                  name="Surveys"
+                  parent="tyt_intranet_base.intranet_configuration_menu"
+                  sequence="20"/>
+
+        <menuitem id="tyt_x_area_encuesta_menu_action"
+                  name="Areas - Typification"
+                  parent="tyt_survey_configuration_menu"
+                  action="tyt_x_area_encuesta_action"
+                  sequence="10"/>
+
+        <menuitem id="tyt_x_tipo_encuesta_menu_action"
+                  name="Tipos - Typification"
+                  parent="tyt_survey_configuration_menu"
+                  action="tyt_x_tipo_encuesta_action"
+                  sequence="20"/>
+</odoo>

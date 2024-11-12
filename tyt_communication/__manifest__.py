@@ -13,6 +13,11 @@
     'data': [
         'security/ir.model.access.csv',
         'views/comunication_record.xml',
+        'views/menus.xml',
+        'views/plan.xml',
+        'views/comunication_onboarding_templates.xml',
+        'views/record_views.xml',
+        'report/record_meeting.xml',
     ],
     'auto_install': False,
     'installable': True,

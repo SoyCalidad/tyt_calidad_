@@ -2,12 +2,13 @@
 <odoo>
     <record id="supplier_evaluation_verification_xlsx_report_action" model="ir.actions.report">
         <field name="name">Supplier Evaluation Verification XLSX Report</field>
-        <field name="model">supplier_evaluation_verification</field>
+        <field name="model">res.partner.evaluation.history</field>
         <field name="report_type">xlsx</field>
         <field name="report_name">supplier_evaluation_verification_xlsx_report</field>
         <field name="report_file">supplier_evaluation_verification_xlsx_report</field>
-        <field name="print_report_name">'Supplier Evaluation Verification XLSX Report'</field>
-        <field name="binding_model_id" ref="model_supplier_evaluation_verification"/>
+        <field name="print_report_name">'Lista de verificación para evaluación de proveedores'</field>
+        <field name="binding_model_id" ref="model_res_partner_evaluation_history"/>
         <field name="binding_type">report</field>
+        <field name="binding_view_types">list</field>
     </record>
 </odoo>

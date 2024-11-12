@@ -7,14 +7,13 @@
             <form>
                 <sheet>
                     <group>
-
+                        <field name="is_critical"/>
                     </group>
                 </sheet>
                 <footer>
                     <button name="export_xlsx_report" string="Download XLSX" type="object" class="btn-primary" icon="fa-download"/>
                     <button string="Cancel" class="btn-secondary" special="cancel"/>
                 </footer>
-
             </form>
         </field>
     </record>

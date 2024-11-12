@@ -87,9 +87,9 @@
                             </tr>
                             <tr>
                                 <td class="td-font" style="padding: 10px;">
-                                    Gerente de Sitio: ___________________________________________<br/>
-                                    Correo electrónico: __________________________________________<br/>
-                                    Responsable de Capacitación y Calidad: _______________________
+                                    Gerente de Sitio: <t t-esc="o.site_manager_id.name"/><br/>
+                                    Correo electrónico: <t t-esc="o.site_manager_email"/><br/>
+                                    Responsable de Capacitación y Calidad: <t t-esc="o.site_manager_email"/><br/>
                                 </td>
                             </tr>
                         </table>
@@ -100,7 +100,10 @@
                                     La fecha de la próxima auditoría es:
                                 </td>
                                 <td style="padding: 10px; width: 40%;">
-                                    ______________________________________
+                                    <span t-field="o.next_audit" 
+                                        t-options='{"widget": "date", 
+                                            "timezone": context.get("tz") or "UTC",
+                                            "format": "dd/MM/yyyy"}'/> 
                                 </td>
                             </tr>
                         </table>
@@ -117,7 +120,7 @@
                                     Duración de la Auditoría (en días):
                                 </td>
                                 <td style="padding: 10px; width: 40%;">
-                                    ______________________________________
+                                    <t t-esc="o.audit_duration"/>
                                 </td>                                
                             </tr>
                         </table>
@@ -138,8 +141,68 @@
                                     <th style="padding: 5px;">Puesto</th>
                                     <th style="padding: 5px;">Nombre</th>
                                 </tr>
-                            </thead>
+                            </thead>                      
                             <tbody>
+                                <!-- Paso 1: Determinar el número máximo de filas -->
+                                <t t-set="max_len" t-value="max(len(o.team_id.user_ids), len(o.audited_ids))"/>
+
+                                <!-- Paso 2: Crear una lista de índices desde 0 hasta max_len - 1 -->
+                                <t t-foreach="range(max_len)" t-as="i">
+                                    <tr style="text-align: center;">
+                                        <!-- Columnas 1-4: Datos de user_ids -->
+                                        <td style="padding: 10px;">
+                                            <t t-if="i &lt; len(o.team_id.user_ids)">
+                                                <t t-esc="o.team_id.user_ids[i].x_studio_puesto.name"/>
+                                            </t>
+                                        </td>
+                                        <td style="padding: 10px;">
+                                            <t t-if="i &lt; len(o.team_id.user_ids)">
+                                                <t t-esc="o.team_id.user_ids[i].name"/>
+                                            </t>
+                                        </td>
+                                        <td style="padding: 10px;">
+                                            <t t-if="i &lt; len(o.team_id.user_ids)">
+                                                <t t-esc="o.team_id.user_ids[i].x_studio_puesto.name"/>
+                                            </t>
+                                        </td>
+                                        <td style="padding: 10px;">
+                                            <t t-if="i &lt; len(o.team_id.user_ids)">
+                                                <t t-esc="o.team_id.user_ids[i].name"/>
+                                            </t>
+                                        </td>
+
+                                        <!-- Columnas 5-6: Datos de audited_ids -->
+                                        <td style="padding: 10px;">
+                                            <t t-if="i &lt; len(o.audited_ids)">
+                                                <t t-esc="o.audited_ids[i].job_id.name"/>
+                                            </t>
+                                        </td>
+                                        <td style="padding: 10px;">
+                                            <t t-if="i &lt; len(o.audited_ids)">
+                                                <t t-esc="o.audited_ids[i].name"/>
+                                            </t>
+                                        </td>
+                                    </tr>
+                                </t>
+                            </tbody>                            
+                            <!-- <tbody>
+                                <t t-foreach="o.team_id.user_ids" t-as="userr">
+                                    <tr style="text-align: center;">                                                                               
+                                        <td style="padding: 10px;"><t t-esc="userr.x_studio_puesto.name"/></td>
+                                        <td style="padding: 10px;"><t t-esc="userr.name"/></td>
+                                        <td style="padding: 10px;"><t t-esc="userr.x_studio_puesto.name"/></td>
+                                        <td style="padding: 10px;"><t t-esc="userr.name"/></td>
+                                    </tr>
+                                </t> 
+                                <t t-foreach="o.audited_ids" t-as="audited">
+                                    <tr style="text-align: center;">
+                                        <td style="padding: 10px;"><t t-esc="audited.job_id.name"/></td>
+                                        <td style="padding: 10px;"><t t-esc="audited.name"/></td>
+                                    </tr>
+                                </t>
+                            </tbody> -->
+
+                            <!-- <tbody>
                                 <tr style="text-align: center;">
                                     <td style="padding: 10px;">______</td>
                                     <td style="padding: 10px;">______</td>
@@ -148,8 +211,7 @@
                                     <td style="padding: 10px;">______</td>
                                     <td style="padding: 10px;">______</td>
                                 </tr>
-                                <!-- Añade más filas si es necesario -->
-                            </tbody>
+                            </tbody> -->
                         </table>
 
                         <!-- Conclusión de la auditoría -->
@@ -161,9 +223,10 @@
                             </tr>
                             <tr>
                                 <td style="padding: 10px;">
-                                    - Esta visita fue satisfactoria: ( )<br/>
-                                    - Se han identificado ( ) No Conformidades y ( ) Buenas Prácticas.<br/>
-                                    - Cualquier hallazgo se detalla en la(s) siguiente(s) página(s).
+                                    <t t-if="o.conclusions">
+                                        <div t-raw="o.conclusions"/>
+                                    </t>
+                                    <t t-else=""/>
                                 </td>
                             </tr>
                         </table>
@@ -177,7 +240,10 @@
                             </tr>
                             <tr>
                                 <td style="padding: 10px;">
-                                    Recomendable intensificar el seguimiento de las siguientes cláusulas del <strong>Procedimiento para Gestión de Operaciones</strong>:
+                                    <t t-if="o.post_audit_action">
+                                        <div t-raw="o.post_audit_action"/>
+                                    </t>
+                                    <t t-else=""/>
                                 </td>
                             </tr>
                         </table>
@@ -185,21 +251,39 @@
                         <table style="width: 100%; border-collapse: collapse; margin-top: 20px; border: 1px solid black;font-size: 21px;">
                             <tr style="background-color: #31869B; color: white;">
                                 <td style="padding: 10px; font-weight: bold; width: 20%;">Documento:</td>
-                                <td style="padding: 10px; background-color: white; width: 80%;"></td> <!-- Segunda columna con fondo blanco -->
+                                <td style="padding: 10px; color: black; background-color: white; width: 80%;">
+                                    <t t-esc="o.tyt_procedure_activity_id.name"/>
+                                </td> <!-- Segunda columna con fondo blanco -->
                             </tr>
                             <tr style="background-color: #31869B; color: white;">
                                 <td style="padding: 10px; font-weight: bold; width: 20%;">Auditados:</td>
-                                <td style="padding: 10px; background-color: white; width: 80%;"></td> <!-- Segunda columna con fondo blanco -->
+                                <td style="padding: 10px; color: black; background-color: white; width: 80%;">
+                                    <ul>
+                                        <t t-foreach="o.audited_ids" t-as="audited">
+                                            <li><t t-esc="audited.name"/></li>
+                                        </t>
+                                    </ul>
+                                </td> <!-- Segunda columna con fondo blanco -->
                             </tr>
                             <tr style="background-color: #31869B; color: white;">
                                 <td style="padding: 10px; font-weight: bold; width: 20%;">Auditor:</td>
-                                <td style="padding: 10px; background-color: white; width: 80%;"></td> <!-- Segunda columna con fondo blanco -->
+                                <td style="padding: 10px; color: black; background-color: white; width: 80%;">
+                                    <t t-if="o.auditor_id">
+                                        <t t-esc="o.auditor_id.name"/>
+                                    </t>
+                                    <t t-else=""/>
+                                </td> <!-- Segunda columna con fondo blanco -->
                             </tr>
                             <tr style="background-color: #31869B; color: white;">
                                 <td colspan="2" style="padding: 10px; font-weight: bold;">Evaluación:</td>
                             </tr>
                             <tr>
-                                <td colspan="2" style="padding: 10px; background-color: white; height: 100px;">Evaluation ...</td> <!-- Fila de Evaluación con una sola columna que ocupa todo el ancho -->
+                                <td colspan="2" style="padding: 10px; background-color: white; height: 100px;">
+                                    <t t-if="o.description">
+                                        <div t-raw="o.description"/>
+                                    </t>
+                                    <t t-else=""/>
+                                </td> <!-- Fila de Evaluación con una sola columna que ocupa todo el ancho -->
                             </tr>
                         </table>                
                     </div>                    

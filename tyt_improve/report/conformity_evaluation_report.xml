@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <record id="action_report_tyt_conformity_evaluation" model="ir.actions.report">
+        <field name="name">Reporte de Evaluación de Conformidad (XLSX)</field>
+        <field name="model">mgmtsystem.nonconformity</field>
+        <field name="report_type">xlsx</field>
+        <field name="report_name">tyt_improve.individual_conformity_evaluation_report</field>
+        <field name="report_file">Reporte de Evaluación de Conformidad</field>
+        <field name="binding_type">action</field>
+        <field name="print_report_name">'Evaluación de Conformidad - %s' % object.name</field>
+    </record>
+</odoo>

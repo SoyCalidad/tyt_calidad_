@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <template id="survey_fill_form_start" inherit_id="survey.survey_fill_form_start">
+        <xpath expr="//div[@t-field='survey.description']" position="before">
+            <div class="welcome-message">
+                <h2>Bienvenido/a,
+                    <t t-if="request.env.user.x_studio_empleado">
+                        <t t-esc="request.env.user.x_studio_empleado.name"/>
+                    </t>
+                    <t t-else="">
+                        <t t-esc="request.env.user.name"/>
+                    </t>
+                </h2>
+            </div>
+            <div t-if="not is_html_empty(survey.description)" class="mt-2 pt-2 border-top"/>
+        </xpath>
+    </template>
+
+    <template id="survey_fill_form_done" inherit_id="survey.survey_fill_form_done">
+        <xpath expr="//div[@t-if='graph_data']" position="replace">
+            <div t-if="survey.access_mode != 'intranet'">
+                <div class="o_survey_result p-4 col-12 row" t-if="graph_data">
+                    <div t-if="survey.page_ids" class="survey_graph col-lg-6 d-none d-md-block"
+                        data-graph-type="by_section"
+                        t-att-data-graph-data="graph_data">
+                        <canvas id="by_section_chart"></canvas>
+                    </div>
+                    <div t-attf-class="survey_graph col-lg-6 #{'offset-lg-3' if not survey.page_ids else ''}"
+                            data-graph-type="doughnut"
+                            t-att-data-graph-data="graph_data">
+                        <canvas id="doughnut_chart"></canvas>
+                    </div>
+                </div>
+            </div>
+            <xpath expr="//div[@t-field='survey.description_done']" position="after">
+                <div t-if="survey.access_mode == 'intranet'" class="mt16 mb16">
+                    <a role="button" class="btn btn-primary btn-lg" t-att-href="'/my'">
+                        <i class="fa fa-fw fa-home" role="img" aria-label="Volver a Mi perfil" title="Volver a Mi perfil"/>
+                        Volver a Mi perfil
+                    </a>
+                </div>
+            </xpath>
+        </xpath>
+    </template>
+</odoo>

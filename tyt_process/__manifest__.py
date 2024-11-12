@@ -8,12 +8,21 @@
     'license': 'Other proprietary',
     'category': 'soycalidad',
     'depends': [
+        'base',
         'mgmtsystem_process',
+        'mgmtsystem_process_integration',
+        'mgmtsystem_qualitymanual',
     ],
     'data': [
         'security/ir.model.access.csv',
+        'data/data.xml',
+        'data/mail_template_data.xml',
         'views/documentary_control_views.xml',
         'views/procedure_edition.xml',
+        'views/process_edition_views.xml',
+        'views/process_views.xml',
+        'views/process_onboarding_templates.xml',
+        'wizards/process_edition.xml',        
         'reports/report_paperformat.xml',
         'reports/report_layout.xml',
         'reports/procedure_edition.xml',
@@ -23,6 +32,9 @@
         'reports/procedure_edition_body.xml',
         'reports/procedure_edition_back_cover.xml',
         'reports/documentary_control_views.xml',
+        'wizards/mgmt_categ_communicate.xml',
+        'views/menus.xml',
+        'data/tyt_docs.xml',
     ],
     'assets': {
         'web.report_assets_common': [

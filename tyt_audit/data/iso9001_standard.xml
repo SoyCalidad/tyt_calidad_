@@ -1,0 +1,129 @@
+<odoo>
+    <data noupdate="0">
+        <!-- 13 main records-->
+        <record id="planning_iso9001_standard_4_1" model="audit.audit.planning.iso9001_standard">
+            <field name="name">4.1</field>
+            <field name="complete_name">Comprensión de la organización y su contexto</field>
+        </record>
+        <record id="planning_iso9001_standard_4_2" model="audit.audit.planning.iso9001_standard">
+            <field name="name">4.2</field>
+            <field name="complete_name">Comprensión de las necesidades y expectativas de las partes interesadas</field>
+        </record>
+        <record id="planning_iso9001_standard_4_3" model="audit.audit.planning.iso9001_standard">
+            <field name="name">4.3</field>
+            <field name="complete_name">Determinación del alcance del SGC</field>
+        </record>
+        <record id="planning_iso9001_standard_4_4" model="audit.audit.planning.iso9001_standard">
+            <field name="name">4.4</field>
+            <field name="complete_name">SGC y sus procesos</field>
+        </record>
+        <record id="planning_iso9001_standard_5_1" model="audit.audit.planning.iso9001_standard">
+            <field name="name">5.1</field>
+            <field name="complete_name">Liderazgo y compromiso</field>
+        </record>
+        <record id="planning_iso9001_standard_5_1_2" model="audit.audit.planning.iso9001_standard">
+            <field name="name">5.1.2</field>
+            <field name="complete_name">Satisfacción del cliente</field>
+        </record>
+        <record id="planning_iso9001_standard_5_2" model="audit.audit.planning.iso9001_standard">
+            <field name="name">5.2</field>
+            <field name="complete_name">Política</field>
+        </record>
+        <record id="planning_iso9001_standard_5_3" model="audit.audit.planning.iso9001_standard">
+            <field name="name">5.3</field>
+            <field name="complete_name">Roles, responsabilidades y autoridades en la organización</field>
+        </record>
+        <record id="planning_iso9001_standard_6_1" model="audit.audit.planning.iso9001_standard">
+            <field name="name">6.1</field>
+            <field name="complete_name">Acciones para abordar riesgos y oportunidades</field>
+        </record>
+        <record id="planning_iso9001_standard_6_2" model="audit.audit.planning.iso9001_standard">
+            <field name="name">6.2</field>
+            <field name="complete_name">Objetivos de la calidad y planificación para lograrlos</field>
+        </record>
+        <record id="planning_iso9001_standard_6_3" model="audit.audit.planning.iso9001_standard">
+            <field name="name">6.3</field>
+            <field name="complete_name">Planificación de los cambios</field>
+        </record>
+        <record id="planning_iso9001_standard_7_1" model="audit.audit.planning.iso9001_standard">
+            <field name="name">7.1</field>
+            <field name="complete_name">Recurso</field>
+        </record>
+        <record id="planning_iso9001_standard_7_2" model="audit.audit.planning.iso9001_standard">
+            <field name="name">7.2</field>
+            <field name="complete_name">Competencia</field>
+        </record>
+        <record id="planning_iso9001_standard_7_3" model="audit.audit.planning.iso9001_standard">
+            <field name="name">7.3</field>
+            <field name="complete_name">Toma de Conciencia</field>
+        </record>
+        <record id="planning_iso9001_standard_7_4" model="audit.audit.planning.iso9001_standard">
+            <field name="name">7.4</field>
+            <field name="complete_name">Comunicación</field>
+        </record>
+        <record id="planning_iso9001_standard_7_5" model="audit.audit.planning.iso9001_standard">
+            <field name="name">7.5</field>
+            <field name="complete_name">Informacion Documentada</field>
+        </record>
+        <record id="planning_iso9001_standard_7_5_2" model="audit.audit.planning.iso9001_standard">
+            <field name="name">7.5.2</field>
+            <field name="complete_name">Creacion y actualizacion</field>
+        </record>
+        <record id="planning_iso9001_standard_7_5_3" model="audit.audit.planning.iso9001_standard">
+            <field name="name">7.5.3</field>
+            <field name="complete_name">Control de la Informacion Documentada</field>
+        </record>
+        <record id="planning_iso9001_standard_8_1" model="audit.audit.planning.iso9001_standard">
+            <field name="name">8.1</field>
+            <field name="complete_name">Planificación y control operacional</field>
+        </record>
+        <record id="planning_iso9001_standard_8_2" model="audit.audit.planning.iso9001_standard">
+            <field name="name">8.2</field>
+            <field name="complete_name">Requisitos para los productos y servicios</field>
+        </record>
+        <record id="planning_iso9001_standard_8_3" model="audit.audit.planning.iso9001_standard">
+            <field name="name">8.3</field>
+            <field name="complete_name">Diseño y desarrollo de los productos y servicios</field>
+        </record>
+        <record id="planning_iso9001_standard_8_4" model="audit.audit.planning.iso9001_standard">
+            <field name="name">8.4</field>
+            <field name="complete_name">Control de los procesos, productos y servicios suministrados externamente</field>
+        </record>
+        <record id="planning_iso9001_standard_8_5" model="audit.audit.planning.iso9001_standard">
+            <field name="name">8.5</field>
+            <field name="complete_name">Producción y provisión del servicio</field>
+        </record>
+        <record id="planning_iso9001_standard_8_6" model="audit.audit.planning.iso9001_standard">
+            <field name="name">8.6</field>
+            <field name="complete_name">Liberación de los productos y servicios</field>
+        </record>
+        <record id="planning_iso9001_standard_8_7" model="audit.audit.planning.iso9001_standard">
+            <field name="name">8.7</field>
+            <field name="complete_name">Control de las salidas no conformes</field>
+        </record>
+        <record id="planning_iso9001_standard_9_1" model="audit.audit.planning.iso9001_standard">
+            <field name="name">9.1</field>
+            <field name="complete_name">Seguimiento, medición, análisis y evaluación</field>
+        </record>
+        <record id="planning_iso9001_standard_9_2" model="audit.audit.planning.iso9001_standard">
+            <field name="name">9.2</field>
+            <field name="complete_name">Auditoría interna</field>
+        </record>
+        <record id="planning_iso9001_standard_9_3" model="audit.audit.planning.iso9001_standard">
+            <field name="name">9.3</field>
+            <field name="complete_name">Revisión por la dirección</field>
+        </record>
+        <record id="planning_iso9001_standard_10_1" model="audit.audit.planning.iso9001_standard">
+            <field name="name">10.1</field>
+            <field name="complete_name">Generalidades, la organización debe</field>
+        </record>
+        <record id="planning_iso9001_standard_10_2" model="audit.audit.planning.iso9001_standard">
+            <field name="name">10.2</field>
+            <field name="complete_name">No conformidad y acción correctiva</field>
+        </record>
+        <record id="planning_iso9001_standard_10_3" model="audit.audit.planning.iso9001_standard">
+            <field name="name">10.3</field>
+            <field name="complete_name">Revisión por la dirección, salidas</field>
+        </record>
+    </data>
+</odoo>

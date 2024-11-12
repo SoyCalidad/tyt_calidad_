@@ -1,0 +1,421 @@
+<odoo>
+    <data noupdate="0">
+        <!-- 104 records-->
+        <record id="planning_iso9001_standard_8_4_3_1" model="audit.audit.planning.iso9001_standard">
+            <field name="name">8.4.3.1</field>
+            <field name="complete_name">Asegurarse de la adecuación de los requisitos antes de su comunicación al proveedor externo</field>
+        </record>
+        <record id="planning_iso9001_standard_8_4_3_2" model="audit.audit.planning.iso9001_standard">
+            <field name="name">8.4.3.2</field>
+            <field name="complete_name">Comunicar a los proveedores externos sus requisitos para los procesos, productos y servicios a proporcionar</field>
+        </record>
+        <record id="planning_iso9001_standard_8_4_3_3" model="audit.audit.planning.iso9001_standard">
+            <field name="name">8.4.3.3</field>
+            <field name="complete_name">La aprobación de Productos y servicios</field>
+        </record>
+        <record id="planning_iso9001_standard_8_4_3_4" model="audit.audit.planning.iso9001_standard">
+            <field name="name">8.4.3.4</field>
+            <field name="complete_name">La aprobación de Métodos, procesos y equipos</field>
+        </record>
+        <record id="planning_iso9001_standard_8_4_3_5" model="audit.audit.planning.iso9001_standard">
+            <field name="name">8.4.3.5</field>
+            <field name="complete_name">La aprobación de la liberación de productos y servicios</field>
+        </record>
+        <record id="planning_iso9001_standard_8_4_3_6" model="audit.audit.planning.iso9001_standard">
+            <field name="name">8.4.3.6</field>
+            <field name="complete_name">La competencia, incluyendo cualquier calificación requerida de las personas</field>
+        </record>
+        <record id="planning_iso9001_standard_8_4_3_7" model="audit.audit.planning.iso9001_standard">
+            <field name="name">8.4.3.7</field>
+            <field name="complete_name">Las interacciones del proveedor externo con la organización</field>
+        </record>
+        <record id="planning_iso9001_standard_8_4_3_8" model="audit.audit.planning.iso9001_standard">
+            <field name="name">8.4.3.8</field>
+            <field name="complete_name">El control y el seguimiento del desempeño del proveedor externo a aplicar por parte de la organización</field>
+        </record>
+        <record id="planning_iso9001_standard_8_4_3_9" model="audit.audit.planning.iso9001_standard">
+            <field name="name">8.4.3.9</field>
+            <field name="complete_name">Las actividades de verificación o validación que la organización, o su cliente, pretende llevar a cabo en las instalaciones del proveedor externo.</field>
+        </record>
+        <record id="planning_iso9001_standard_8_5_1_1" model="audit.audit.planning.iso9001_standard">
+            <field name="name">8.5.1.1</field>
+            <field name="complete_name">La organización debe implementar la producción y provisión del servicio bajo condiciones controladas</field>
+        </record>
+        <record id="planning_iso9001_standard_8_5_1_2" model="audit.audit.planning.iso9001_standard">
+            <field name="name">8.5.1.2</field>
+            <field name="complete_name">La disponibilidad de información documentada que defina las características de los productos a producir, los servicios a prestar, o las actividades a desempeñar</field>
+        </record>
+        <record id="planning_iso9001_standard_8_5_1_3" model="audit.audit.planning.iso9001_standard">
+            <field name="name">8.5.1.3</field>
+            <field name="complete_name">La disponibilidad de información documentada que defina los resultados a alcanzar</field>
+        </record>
+        <record id="planning_iso9001_standard_8_5_1_4" model="audit.audit.planning.iso9001_standard">
+            <field name="name">8.5.1.4</field>
+            <field name="complete_name">La disponibilidad y el uso de los recursos de seguimiento y medición adecuados</field>
+        </record>
+        <record id="planning_iso9001_standard_8_5_1_5" model="audit.audit.planning.iso9001_standard">
+            <field name="name">8.5.1.5</field>
+            <field name="complete_name">La implementación de actividades de seguimiento y medición en las etapas apropiadas para verificar que se cumplen los criterios para el control de los procesos o sus salidas, y los criterios de aceptación para los productos y servicios</field>
+        </record>
+        <record id="planning_iso9001_standard_8_5_1_6" model="audit.audit.planning.iso9001_standard">
+            <field name="name">8.5.1.6</field>
+            <field name="complete_name">El uso de la infraestructura y el entorno adecuados para la operación de los procesos</field>
+        </record>
+        <record id="planning_iso9001_standard_8_5_1_7" model="audit.audit.planning.iso9001_standard">
+            <field name="name">8.5.1.7</field>
+            <field name="complete_name">La designación de personas competentes incluyendo cualquier calificación requerida</field>
+        </record>
+        <record id="planning_iso9001_standard_8_5_1_8" model="audit.audit.planning.iso9001_standard">
+            <field name="name">8.5.1.8</field>
+            <field name="complete_name">La validación y re validación periódica de la capacidad para alcanzar los resultados planificados de los procesos de producción y de prestación del servicio, cuando las salidas resultantes no puedan verificarse mediante actividades de seguimiento o medición posteriores</field>
+        </record>
+        <record id="planning_iso9001_standard_8_5_1_9" model="audit.audit.planning.iso9001_standard">
+            <field name="name">8.5.1.9</field>
+            <field name="complete_name">La implementación de acciones para prevenir los errores humanos</field>
+        </record>
+        <record id="planning_iso9001_standard_8_5_1_10" model="audit.audit.planning.iso9001_standard">
+            <field name="name">8.5.1.10</field>
+            <field name="complete_name">La implementación de actividades de liberación, entrega y posteriores a la entrega.</field>
+        </record>
+        <record id="planning_iso9001_standard_8_5_2_1" model="audit.audit.planning.iso9001_standard">
+            <field name="name">8.5.2.1</field>
+            <field name="complete_name">Utilizar los medios apropiados para identificar las salidas, cuando sea necesario, para asegurar la conformidad de los productos y servicios.</field>
+        </record>
+        <record id="planning_iso9001_standard_8_5_2_2" model="audit.audit.planning.iso9001_standard">
+            <field name="name">8.5.2.2</field>
+            <field name="complete_name">Identificar el estado de las salidas con respecto a los requisitos de seguimiento y medición a través de la producción y prestación del servicio.</field>
+        </record>
+        <record id="planning_iso9001_standard_8_5_2_3" model="audit.audit.planning.iso9001_standard">
+            <field name="name">8.5.2.3</field>
+            <field name="complete_name">Controlar la identificación única de las salidas cuando la trazabilidad sea un requisito, y debe conservar la información necesaria para permitir la trazabilidad.</field>
+        </record>
+        <record id="planning_iso9001_standard_8_5_3_1" model="audit.audit.planning.iso9001_standard">
+            <field name="name">8.5.3.1</field>
+            <field name="complete_name">Cuidar la propiedad perteneciente a los clientes o a proveedores externos mientras esté bajo el control de la organización o esté siendo utilizado por la misma.</field>
+        </record>
+        <record id="planning_iso9001_standard_8_5_3_2" model="audit.audit.planning.iso9001_standard">
+            <field name="name">8.5.3.2</field>
+            <field name="complete_name">Identificar, verificar, proteger y salvaguardar la propiedad de los clientes o de los proveedores externos suministrada para su utilización o incorporación dentro de los productos y servicios.</field>
+        </record>
+        <record id="planning_iso9001_standard_8_5_3_3" model="audit.audit.planning.iso9001_standard">
+            <field name="name">8.5.3.3</field>
+            <field name="complete_name">Informar de esto al cliente o proveedor externo y conservar la información documentada sobre lo ocurrido.</field>
+        </record>
+        <record id="planning_iso9001_standard_8_5_4_1" model="audit.audit.planning.iso9001_standard">
+            <field name="name">8.5.4.1</field>
+            <field name="complete_name">La organización debe preservar las salidas durante la producción y prestación del servicio, en la medida necesaria para asegurarse de la conformidad con los requisitos.</field>
+        </record>
+        <record id="planning_iso9001_standard_8_5_5_1" model="audit.audit.planning.iso9001_standard">
+            <field name="name">8.5.5.1</field>
+            <field name="complete_name">Cumplir los requisitos para las actividades posteriores a la entrega asociadas con los productos y servicios.</field>
+        </record>
+        <record id="planning_iso9001_standard_8_5_5_2" model="audit.audit.planning.iso9001_standard">
+            <field name="name">8.5.5.2</field>
+            <field name="complete_name">Determinar el alcance de las actividades posteriores a la entrega que se requieren, la organización debe considerar los requisitos legales y reglamentarios</field>
+        </record>
+        <record id="planning_iso9001_standard_8_5_5_3" model="audit.audit.planning.iso9001_standard">
+            <field name="name">8.5.5.3</field>
+            <field name="complete_name">Determinar el alcance de las actividades posteriores a la entrega que se requieren, la organización debe considerar las consecuencias potenciales no deseadas asociadas a sus productos y servicios</field>
+        </record>
+        <record id="planning_iso9001_standard_8_5_5_4" model="audit.audit.planning.iso9001_standard">
+            <field name="name">8.5.5.4</field>
+            <field name="complete_name">Determinar el alcance de las actividades posteriores a la entrega que se requieren, la organización debe considerar los requisitos del cliente</field>
+        </record>
+        <record id="planning_iso9001_standard_8_5_5_5" model="audit.audit.planning.iso9001_standard">
+            <field name="name">8.5.5.5</field>
+            <field name="complete_name">Determinar el alcance de las actividades posteriores a la entrega que se requieren, la organización debe considerar la retroalimentación del cliente</field>
+        </record>
+        <record id="planning_iso9001_standard_8_5_6_1" model="audit.audit.planning.iso9001_standard">
+            <field name="name">8.5.6.1</field>
+            <field name="complete_name">Revisar y controlar los cambios para la producción o la prestación del servicio, en la extensión necesaria para asegurarse de la continuidad en la conformidad con los requisitos.</field>
+        </record>
+        <record id="planning_iso9001_standard_8_5_6_2" model="audit.audit.planning.iso9001_standard">
+            <field name="name">8.5.6.2</field>
+            <field name="complete_name">Conservar información documentada que describa los resultados de la revisión de los cambios, las personas que autorizan el cambio y de cualquier acción necesaria que surja de la revisión.</field>
+        </record>
+        <record id="planning_iso9001_standard_8_6_1" model="audit.audit.planning.iso9001_standard">
+            <field name="name">8.6.1</field>
+            <field name="complete_name">Implementar las disposiciones planificadas, en las etapas adecuadas, para verificar que se cumplen los requisitos de los productos y servicios.</field>
+        </record>
+        <record id="planning_iso9001_standard_8_6_2" model="audit.audit.planning.iso9001_standard">
+            <field name="name">8.6.2</field>
+            <field name="complete_name">No debe llevarse a cabo hasta que se haya completado satisfactoriamente las disposiciones planificadas, a menos que sea aprobado de otra manera por una autoridad pertinente y, cuando sea aplicable por el cliente.</field>
+        </record>
+        <record id="planning_iso9001_standard_8_6_3" model="audit.audit.planning.iso9001_standard">
+            <field name="name">8.6.3</field>
+            <field name="complete_name">Conservar la información documentada sobre la liberación de los productos y servicios</field>
+        </record>
+        <record id="planning_iso9001_standard_8_6_4" model="audit.audit.planning.iso9001_standard">
+            <field name="name">8.6.4</field>
+            <field name="complete_name">Evidencia de la conformidad con los criterios de aceptación</field>
+        </record>
+        <record id="planning_iso9001_standard_8_6_5" model="audit.audit.planning.iso9001_standard">
+            <field name="name">8.6.5</field>
+            <field name="complete_name">Trazabilidad a las personas que autorizan la liberación.</field>
+        </record>
+        <record id="planning_iso9001_standard_8_7_1_1" model="audit.audit.planning.iso9001_standard">
+            <field name="name">8.7.1.1</field>
+            <field name="complete_name">Asegurarse de que las salidas que no sean conformes con sus requisitos se identifican y se controlan para prevenir su uso o entrega no intencionada.</field>
+        </record>
+        <record id="planning_iso9001_standard_8_7_1_2" model="audit.audit.planning.iso9001_standard">
+            <field name="name">8.7.1.2</field>
+            <field name="complete_name">Tomar las acciones adecuadas basándose en la naturaleza de la No conformidad y en su efecto sobre la conformidad de los productos y servicios.</field>
+        </record>
+        <record id="planning_iso9001_standard_8_7_1_3" model="audit.audit.planning.iso9001_standard">
+            <field name="name">8.7.1.3</field>
+            <field name="complete_name">Tratar las salidas no conformes a través de corrección</field>
+        </record>
+        <record id="planning_iso9001_standard_8_7_1_4" model="audit.audit.planning.iso9001_standard">
+            <field name="name">8.7.1.4</field>
+            <field name="complete_name">Tratar las salidas no conformes a través de Separación, contención, devolución o suspensión de provisión de productos y servicios</field>
+        </record>
+        <record id="planning_iso9001_standard_8_7_1_5" model="audit.audit.planning.iso9001_standard">
+            <field name="name">8.7.1.5</field>
+            <field name="complete_name">Tratar las salidas no conformes a través de información al cliente</field>
+        </record>
+        <record id="planning_iso9001_standard_8_7_1_6" model="audit.audit.planning.iso9001_standard">
+            <field name="name">8.7.1.6</field>
+            <field name="complete_name">Tratar las salidas no conformes a través de Obtención de autorización para su aceptación bajo concesión</field>
+        </record>
+        <record id="planning_iso9001_standard_8_7_1_7" model="audit.audit.planning.iso9001_standard">
+            <field name="name">8.7.1.7</field>
+            <field name="complete_name">Verificar la conformidad con los requisitos cuando se corrigen las salidas no conformes.</field>
+        </record>
+        <record id="planning_iso9001_standard_8_7_2_1" model="audit.audit.planning.iso9001_standard">
+            <field name="name">8.7.2.1</field>
+            <field name="complete_name">Describa la No conformidad</field>
+        </record>
+        <record id="planning_iso9001_standard_8_7_2_2" model="audit.audit.planning.iso9001_standard">
+            <field name="name">8.7.2.2</field>
+            <field name="complete_name">Describa las acciones tomadas</field>
+        </record>
+        <record id="planning_iso9001_standard_8_7_2_3" model="audit.audit.planning.iso9001_standard">
+            <field name="name">8.7.2.3</field>
+            <field name="complete_name">Describa todas las concesiones obtenidas</field>
+        </record>
+        <record id="planning_iso9001_standard_8_7_2_4" model="audit.audit.planning.iso9001_standard">
+            <field name="name">8.7.2.4</field>
+            <field name="complete_name">Identifique la autoridad que decide la acción con respecto a la No conformidad.</field>
+        </record>
+        <record id="planning_iso9001_standard_9_1_1_1" model="audit.audit.planning.iso9001_standard">
+            <field name="name">9.1.1.1</field>
+            <field name="complete_name">Qué necesita seguimiento y medición</field>
+        </record>
+        <record id="planning_iso9001_standard_9_1_1_2" model="audit.audit.planning.iso9001_standard">
+            <field name="name">9.1.1.2</field>
+            <field name="complete_name">Los métodos de seguimiento, medición, análisis y evaluación necesarios para asegurar resultados válidos</field>
+        </record>
+        <record id="planning_iso9001_standard_9_1_1_3" model="audit.audit.planning.iso9001_standard">
+            <field name="name">9.1.1.3</field>
+            <field name="complete_name">Llevar a cabo el seguimiento y la medición</field>
+        </record>
+        <record id="planning_iso9001_standard_9_1_1_4" model="audit.audit.planning.iso9001_standard">
+            <field name="name">9.1.1.4</field>
+            <field name="complete_name">Analizar y evaluar los resultados del seguimiento y la medición.</field>
+        </record>
+        <record id="planning_iso9001_standard_9_1_1_5" model="audit.audit.planning.iso9001_standard">
+            <field name="name">9.1.1.5</field>
+            <field name="complete_name">Evaluar el desempeño y la eficacia del SGC.</field>
+        </record>
+        <record id="planning_iso9001_standard_9_1_1_6" model="audit.audit.planning.iso9001_standard">
+            <field name="name">9.1.1.6</field>
+            <field name="complete_name">Conservar información documentada apropiada como evidencia de los resultados.</field>
+        </record>
+        <record id="planning_iso9001_standard_9_1_2_1" model="audit.audit.planning.iso9001_standard">
+            <field name="name">9.1.2.1</field>
+            <field name="complete_name">Realizar el seguimiento de las percepciones de los clientes del grado en que se cumplen sus necesidades y expectativas.</field>
+        </record>
+        <record id="planning_iso9001_standard_9_1_2_2" model="audit.audit.planning.iso9001_standard">
+            <field name="name">9.1.2.2</field>
+            <field name="complete_name">Determinar los métodos para obtener, realizar el seguimiento y revisar esta información.</field>
+        </record>
+        <record id="planning_iso9001_standard_9_1_3_1" model="audit.audit.planning.iso9001_standard">
+            <field name="name">9.1.3.1</field>
+            <field name="complete_name">Analizar y evaluar los datos y la información apropiados que surgen por el seguimiento y la medición.</field>
+        </record>
+        <record id="planning_iso9001_standard_9_1_3_2" model="audit.audit.planning.iso9001_standard">
+            <field name="name">9.1.3.2</field>
+            <field name="complete_name">La conformidad de los productos y servicios</field>
+        </record>
+        <record id="planning_iso9001_standard_9_1_3_3" model="audit.audit.planning.iso9001_standard">
+            <field name="name">9.1.3.3</field>
+            <field name="complete_name">El grado de satisfacción del cliente</field>
+        </record>
+        <record id="planning_iso9001_standard_9_1_3_4" model="audit.audit.planning.iso9001_standard">
+            <field name="name">9.1.3.4</field>
+            <field name="complete_name">El desempeño y la eficacia del SGC</field>
+        </record>
+        <record id="planning_iso9001_standard_9_1_3_5" model="audit.audit.planning.iso9001_standard">
+            <field name="name">9.1.3.5</field>
+            <field name="complete_name">Si lo planificado se ha implementado de forma eficaz</field>
+        </record>
+        <record id="planning_iso9001_standard_9_1_3_6" model="audit.audit.planning.iso9001_standard">
+            <field name="name">9.1.3.6</field>
+            <field name="complete_name">La eficacia de las acciones tomadas para abordar los riesgos y oportunidades</field>
+        </record>
+        <record id="planning_iso9001_standard_9_1_3_7" model="audit.audit.planning.iso9001_standard">
+            <field name="name">9.1.3.7</field>
+            <field name="complete_name">El desempeño de los proveedores externos</field>
+        </record>
+        <record id="planning_iso9001_standard_9_1_3_8" model="audit.audit.planning.iso9001_standard">
+            <field name="name">9.1.3.8</field>
+            <field name="complete_name">La necesidad de mejoras en el SGC</field>
+        </record>
+        <record id="planning_iso9001_standard_9_2_1_1" model="audit.audit.planning.iso9001_standard">
+            <field name="name">9.2.1.1</field>
+            <field name="complete_name">Llevar a cabo auditorías internas a intervalos planificados para proporcionar información acerca de si el SGC</field>
+        </record>
+        <record id="planning_iso9001_standard_9_2_1_2" model="audit.audit.planning.iso9001_standard">
+            <field name="name">9.2.1.2</field>
+            <field name="complete_name">Es conforme con los requisitos propios de la organización para su sistema de gestión de la calidad</field>
+        </record>
+        <record id="planning_iso9001_standard_9_2_1_3" model="audit.audit.planning.iso9001_standard">
+            <field name="name">9.2.1.3</field>
+            <field name="complete_name">Es conforme con los requisitos de esta Norma Internacional</field>
+        </record>
+        <record id="planning_iso9001_standard_9_2_1_4" model="audit.audit.planning.iso9001_standard">
+            <field name="name">9.2.1.4</field>
+            <field name="complete_name">Se implementa y mantiene eficazmente</field>
+        </record>
+        <record id="planning_iso9001_standard_9_2_2_1" model="audit.audit.planning.iso9001_standard">
+            <field name="name">9.2.2.1</field>
+            <field name="complete_name">Planificar, establecer, implementar y mantener uno o varios programas de auditoría que incluyan la frecuencia, los métodos, las responsabilidades, los requisitos de planificación y la elaboración de informes, que deben tener en consideración la importancia de los procesos involucrados, los cambios que afecten a la organización y los resultados de las auditorías previas.</field>
+        </record>
+        <record id="planning_iso9001_standard_9_2_2_2" model="audit.audit.planning.iso9001_standard">
+            <field name="name">9.2.2.2</field>
+            <field name="complete_name">Definir los criterios de la auditoría y el alcance para cada auditoría</field>
+        </record>
+        <record id="planning_iso9001_standard_9_2_2_3" model="audit.audit.planning.iso9001_standard">
+            <field name="name">9.2.2.3</field>
+            <field name="complete_name">Seleccionar los auditores y llevar a cabo auditorías para asegurarse de la objetividad y la imparcialidad del proceso de auditoría</field>
+        </record>
+        <record id="planning_iso9001_standard_9_2_2_4" model="audit.audit.planning.iso9001_standard">
+            <field name="name">9.2.2.4</field>
+            <field name="complete_name">Asegurarse de que los resultados de las auditorías se informen a la dirección pertinente</field>
+        </record>
+        <record id="planning_iso9001_standard_9_2_2_5" model="audit.audit.planning.iso9001_standard">
+            <field name="name">9.2.2.5</field>
+            <field name="complete_name">Realizar las correcciones y tomar las acciones correctivas adecuadas sin demora injustificada</field>
+        </record>
+        <record id="planning_iso9001_standard_9_2_2_6" model="audit.audit.planning.iso9001_standard">
+            <field name="name">9.2.2.6</field>
+            <field name="complete_name">Conservar información documentada como evidencia de la implementación del programa de auditoría y de los resultados de las auditorías</field>
+        </record>
+        <record id="planning_iso9001_standard_9_3_1_1" model="audit.audit.planning.iso9001_standard">
+            <field name="name">9.3.1.1</field>
+            <field name="complete_name">La alta dirección debe revisar el SGC de la organización a intervalos planificados, para asegurarse de su conveniencia, adecuación, eficacia y alineación continuas con la dirección estratégica de la organización</field>
+        </record>
+        <record id="planning_iso9001_standard_9_3_2_1" model="audit.audit.planning.iso9001_standard">
+            <field name="name">9.3.2.1</field>
+            <field name="complete_name">Incluidas las tendencias relativas a los resultados de seguimiento y medición</field>
+        </record>
+        <record id="planning_iso9001_standard_9_3_2_2" model="audit.audit.planning.iso9001_standard">
+            <field name="name">9.3.2.2</field>
+            <field name="complete_name">Incluidas las tendencias relativas a los resultados de las auditorías</field>
+        </record>
+        <record id="planning_iso9001_standard_9_3_2_3" model="audit.audit.planning.iso9001_standard">
+            <field name="name">9.3.2.3</field>
+            <field name="complete_name">Incluidas las tendencias relativas al desempeño de los proveedores externos</field>
+        </record>
+        <record id="planning_iso9001_standard_9_3_2_4" model="audit.audit.planning.iso9001_standard">
+            <field name="name">9.3.2.4</field>
+            <field name="complete_name">La adecuación de los recursos</field>
+        </record>
+        <record id="planning_iso9001_standard_9_3_2_5" model="audit.audit.planning.iso9001_standard">
+            <field name="name">9.3.2.5</field>
+            <field name="complete_name">La eficacia de las acciones tomadas para abordar los riesgos y las oportunidades (Véase 6.1)</field>
+        </record>
+        <record id="planning_iso9001_standard_9_3_2_6" model="audit.audit.planning.iso9001_standard">
+            <field name="name">9.3.2.6</field>
+            <field name="complete_name">Las oportunidades de mejora</field>
+        </record>
+        <record id="planning_iso9001_standard_9_3_3_1" model="audit.audit.planning.iso9001_standard">
+            <field name="name">9.3.3.1</field>
+            <field name="complete_name">Oportunidades de mejora</field>
+        </record>
+        <record id="planning_iso9001_standard_9_3_3_2" model="audit.audit.planning.iso9001_standard">
+            <field name="name">9.3.3.2</field>
+            <field name="complete_name">Necesidad de cambio en el SGC</field>
+        </record>
+        <record id="planning_iso9001_standard_9_3_3_3" model="audit.audit.planning.iso9001_standard">
+            <field name="name">9.3.3.3</field>
+            <field name="complete_name">Necesidades de recursos</field>
+        </record>
+        <record id="planning_iso9001_standard_9_3_3_4" model="audit.audit.planning.iso9001_standard">
+            <field name="name">9.3.3.4</field>
+            <field name="complete_name">Conservar la información documentada como evidencia de los resultados de las revisiones por la dirección</field>
+        </record>
+        <record id="planning_iso9001_standard_10_1_1" model="audit.audit.planning.iso9001_standard">
+            <field name="name">10.1.1</field>
+            <field name="complete_name">Determinar y seleccionar las oportunidades de mejora e implementar cualquier acción para cumplir los requisitos del cliente y aumentar la satisfacción del cliente.</field>
+        </record>
+        <record id="planning_iso9001_standard_10_1_2" model="audit.audit.planning.iso9001_standard">
+            <field name="name">10.1.2</field>
+            <field name="complete_name">Mejorar los productos y servicios para cumplir los requisitos, así como considerar las necesidades y expectativas futuras</field>
+        </record>
+        <record id="planning_iso9001_standard_10_1_3" model="audit.audit.planning.iso9001_standard">
+            <field name="name">10.1.3</field>
+            <field name="complete_name">Corregir, prevenir o reducir los efectos no deseados</field>
+        </record>
+        <record id="planning_iso9001_standard_10_1_4" model="audit.audit.planning.iso9001_standard">
+            <field name="name">10.1.4</field>
+            <field name="complete_name">Mejorar el desempeño y la eficacia del SGC</field>
+        </record>
+        <record id="planning_iso9001_standard_10_2_1_1" model="audit.audit.planning.iso9001_standard">
+            <field name="name">10.2.1.1</field>
+            <field name="complete_name">Reaccionar ante la No conformidad y, cuando sea aplicable Tomar acciones para controlarla y corregirla</field>
+        </record>
+        <record id="planning_iso9001_standard_10_2_1_2" model="audit.audit.planning.iso9001_standard">
+            <field name="name">10.2.1.2</field>
+            <field name="complete_name">Reaccionar ante la No conformidad y, cuando sea aplicable Hacer frente a las consecuencias</field>
+        </record>
+        <record id="planning_iso9001_standard_10_2_1_3" model="audit.audit.planning.iso9001_standard">
+            <field name="name">10.2.1.3</field>
+            <field name="complete_name">Evaluar la necesidad de acciones para eliminar las causas de la No conformidad, con el fin de que no vuelva a ocurrir en otra parte La revisión y el análisis de la No conformidad</field>
+        </record>
+        <record id="planning_iso9001_standard_10_2_1_4" model="audit.audit.planning.iso9001_standard">
+            <field name="name">10.2.1.4</field>
+            <field name="complete_name">Evaluar la necesidad de acciones para eliminar las causas de la No conformidad, con el fin de que no vuelva a ocurrir en otra parte La determinación de las causas de la No conformidad</field>
+        </record>
+        <record id="planning_iso9001_standard_10_2_1_5" model="audit.audit.planning.iso9001_standard">
+            <field name="name">10.2.1.5</field>
+            <field name="complete_name">Evaluar la necesidad de acciones para eliminar las causas de la No conformidad, con el fin de que no vuelva a ocurrir en otra parte La determinación de si existen No conformidades similares, que potencialmente puedan ocurrir</field>
+        </record>
+        <record id="planning_iso9001_standard_10_2_1_6" model="audit.audit.planning.iso9001_standard">
+            <field name="name">10.2.1.6</field>
+            <field name="complete_name">Implementar cualquier acción necesaria</field>
+        </record>
+        <record id="planning_iso9001_standard_10_2_1_7" model="audit.audit.planning.iso9001_standard">
+            <field name="name">10.2.1.7</field>
+            <field name="complete_name">Revisar la eficacia de cualquier acción correctiva tomada</field>
+        </record>
+        <record id="planning_iso9001_standard_10_2_1_8" model="audit.audit.planning.iso9001_standard">
+            <field name="name">10.2.1.8</field>
+            <field name="complete_name">Si fuera necesario, actualizar los riesgos y oportunidades determinados durante la planificación</field>
+        </record>
+        <record id="planning_iso9001_standard_10_2_1_9" model="audit.audit.planning.iso9001_standard">
+            <field name="name">10.2.1.9</field>
+            <field name="complete_name">Si fuera necesario, hacer cambios al SGC</field>
+        </record>
+        <record id="planning_iso9001_standard_10_2_1_10" model="audit.audit.planning.iso9001_standard">
+            <field name="name">10.2.1.10</field>
+            <field name="complete_name">Las acciones correctivas deben ser apropiadas a los efectos de las No conformidades encontradas</field>
+        </record>
+        <record id="planning_iso9001_standard_10_2_2_1" model="audit.audit.planning.iso9001_standard">
+            <field name="name">10.2.2.1</field>
+            <field name="complete_name">La naturaleza de las No conformidades y cualquier acción tomada posteriormente</field>
+        </record>
+        <record id="planning_iso9001_standard_10_2_2_2" model="audit.audit.planning.iso9001_standard">
+            <field name="name">10.2.2.2</field>
+            <field name="complete_name">Los resultados de cualquier acción correctiva</field>
+        </record>
+        <record id="planning_iso9001_standard_10_3_1" model="audit.audit.planning.iso9001_standard">
+            <field name="name">10.3.1</field>
+            <field name="complete_name">La organización debe mejorar continuamente la conveniencia, adecuación y eficacia del SGC</field>
+        </record>
+        <record id="planning_iso9001_standard_10_3_2" model="audit.audit.planning.iso9001_standard">
+            <field name="name">10.3.2</field>
+            <field name="complete_name">Considerar los resultados del análisis y la evaluación, y las salidas de la revisión por la dirección, para determinar si hay necesidades u oportunidades que deben considerarse como parte de la mejora continua</field>
+        </record>
+    </data>
+</odoo>

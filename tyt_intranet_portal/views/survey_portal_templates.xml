@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <odoo>
-    <template id="portal_my_home_survey" inherit_id="enhanced_survey_management.portal_my_home_survey" priority="55">
+    <template id="portal_my_home_survey" name="Show Surveys | Intranet" customize_show="True"
+              inherit_id="tyt_intranet_portal.portal_my_home" priority="120">
         <xpath expr="//div[hasclass('o_portal_docs')]" position="before">
             <t t-set="portal_service_category_enable" t-value="True"/>
         </xpath>
@@ -8,7 +9,7 @@
             <t t-call="portal.portal_docs_entry">
                 <t t-set="icon" t-value="'/tyt_intranet_portal/static/src/img/tasks.svg'"/>
                 <t t-set="title">Encuestas</t>
-                <t t-set="text">Participa en tus encuestas</t>
+                <t t-set="text">Participe en sus encuestas</t>
                 <t t-set="url" t-value="'/my/surveys'"/>
             </t>
         </div>

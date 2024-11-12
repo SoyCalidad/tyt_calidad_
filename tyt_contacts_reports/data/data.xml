@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+        <record id="mgmtsystem_process_integration.customer_report_menu" model="ir.ui.menu">
+            <field name="name">Directorio de clientes</field>
+            <field name="action" ref="tyt_contacts_reports.customer_directory_export_action"/>
+        </record>
+    </data>
+</odoo>

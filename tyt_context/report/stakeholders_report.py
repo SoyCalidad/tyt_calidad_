@@ -131,7 +131,7 @@ class StakeholdersReportMixin(models.AbstractModel):
                 sheet.write(row, 3, req.name, data_format)  # Necesidades y expectativas
                 sheet.write(row, 4, req.legal_id.name if req.is_legal else '', data_format)  # Documento que estipula
                 sheet.write(row, 5, req.target_req if req.target_req else '', data_format) # Objetivo de la Necesidad
-                sheet.write(row, 6, '', data_format) # Procedimiento/proceso relacionado (Aún no se implementa)
+                sheet.write(row, 6, stakeholder.mgmt_process.name if stakeholder.mgmt_process else '', data_format)  # Procedimiento/proceso
                 sheet.write(row, 7, req.job_req.name if req.job_req else '', data_format)  # Puesto responsable
                 sheet.write(row, 8, req.limit_date_req if req.limit_date_req else '', data_format)  # Fecha límite
                 sheet.write(row, 9, 'Menor' if stakeholder.power == '1' else 'Mayor' if stakeholder.power == '2' else '', data_format)  # Poder

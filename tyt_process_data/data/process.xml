@@ -1,0 +1,1251 @@
+<odoo>
+            <data noupdate="1">
+
+<record id="definition_1gxcg" model="edition.abbreviation">
+                    <field name="abbre">NO </field>
+                    <field name="name">No conformidad</field>
+                    <field name="description">Incumplimiento de un requisito.</field>
+                </record>
+
+<record id="definition_2rtru" model="edition.abbreviation">
+                    <field name="abbre">ACC</field>
+                    <field name="name">Acción correctiva</field>
+                    <field name="description">acción tomada para eliminar la causa de una no conformidad detectada u otra situación no deseable.</field>
+                </record>
+
+<record id="definition_3wuno" model="edition.abbreviation">
+                    <field name="abbre">OBS</field>
+                    <field name="name">Observación de auditoría</field>
+                    <field name="description">Comentario escrito del auditor, acerca de una situación que genera riesgo de convertirse en una no conformidad, o que puede ser una oportunidad de mejora.  Puede tratarse como una Acción Preventiva</field>
+                </record>
+
+<record id="responsible_1rorj" model="edition.responsable.line">
+                    <field name="name">Gerente de HSEQ</field>
+                    <field name="description">El Coordinador HSEQ es el responsable por el seguimiento de la correcta implementación de este procedimiento y por la verificación de la eficacia de las acciones tomadas. La implementación de las acciones será responsabilidad de los dueños de cada proceso.</field>
+                </record>
+
+<record id="responsible_2fopz" model="edition.responsable.line">
+                    <field name="name">Responsabilidad General</field>
+                    <field name="description">El dueño de cada proceso o proyecto es responsable por investigar las causas que generaron la no conformidad y proponer los mecanismos para su solución e implementarlas. El cumplimiento de lo anterior debe quedar registrado en el formato Tratamiento No Conformidades.</field>
+                </record>
+
+
+<record id="definition_4nfxw" model="edition.abbreviation">
+                    <field name="abbre">RES</field>
+                    <field name="name">RESPONSABILIDAD</field>
+                    <field name="description">Cumplir o hacer cumplir una determinada actividad o compromiso adquirido.</field>
+                </record>
+
+<record id="definition_5jbcd" model="edition.abbreviation">
+                    <field name="abbre">ROL</field>
+                    <field name="name">ROLES</field>
+                    <field name="description">Actividades o tareas a realizar durante el cumplimiento de una labor o cargo.</field>
+                </record>
+
+
+<record id="definition_6ptoj" model="edition.abbreviation">
+                    <field name="abbre">AUD</field>
+                    <field name="name">Auditoría</field>
+                    <field name="description">Proceso sistemático, independiente y documentado para obtener evidencias de la auditoría y evaluarlas objetivamente a fin de determinar hasta que punto los criterios de auditoría se cumplen.</field>
+                </record>
+
+<record id="definition_7zcqs" model="edition.abbreviation">
+                    <field name="abbre">CRI</field>
+                    <field name="name">Criterios de auditoría</field>
+                    <field name="description">Conjunto de políticas, procedimientos o requisitos utilizados como una referencia.</field>
+                </record>
+
+<record id="definition_8mlbt" model="edition.abbreviation">
+                    <field name="abbre">EVI</field>
+                    <field name="name">Evidencias de la auditoría</field>
+                    <field name="description">Registros, declaraciones de hecho u otra información que son relevantes para los criterios de auditoría y verificables. En el caso de los programas de prevención de riesgos constituyen todos los registros, actas, gráficas que sean verificables y que constituyan prueba de la implementación de alguna actividad del programa.</field>
+                </record>
+
+<record id="definition_9zxfc" model="edition.abbreviation">
+                    <field name="abbre">HAL</field>
+                    <field name="name">Hallazgos de la auditoría</field>
+                    <field name="description">Resultados de la evaluación de las evidencias de la auditoría frente a los criterios de auditoría.  Los resultados de la auditoría pueden indicar la conformidad o no conformidad con los criterios de auditoría u oportunidades para la mejora.</field>
+                </record>
+
+<record id="definition_10byib" model="edition.abbreviation">
+                    <field name="abbre">CON</field>
+                    <field name="name">Conclusiones de la auditoría</field>
+                    <field name="description">Consecuencia de una auditoría, proporcionada por el equipo auditor después de la consideración de los objetivos de la auditoría y de todos los hallazgos de la auditoría</field>
+                </record>
+
+<record id="definition_11nnqg" model="edition.abbreviation">
+                    <field name="abbre">CLI</field>
+                    <field name="name">Cliente de la auditoría</field>
+                    <field name="description">Organización o persona que solicita una auditoría. El cliente puede ser el auditado o cualquier otra organización que tenga derechos contractuales o reglamentarios de poder solicitar una auditoría. Por ejemplo, la Organización propia que solicita una auditoría, o puede ser la ARL, o puede ser una Organización contratante que desea evaluar los resultados de su contratista.</field>
+                </record>
+
+<record id="definition_12tdvu" model="edition.abbreviation">
+                    <field name="abbre">AUD</field>
+                    <field name="name">Auditado</field>
+                    <field name="description">Organización objeto de una auditoría</field>
+                </record>
+
+<record id="definition_13apph" model="edition.abbreviation">
+                    <field name="abbre">AUD</field>
+                    <field name="name">Auditor</field>
+                    <field name="description">Persona con la competencia para realizar una auditoría</field>
+                </record>
+
+<record id="definition_14aebk" model="edition.abbreviation">
+                    <field name="abbre">PRO</field>
+                    <field name="name">Programa de auditoría</field>
+                    <field name="description">Conjunto de una o más auditorías planificadas para un periodo de tiempo específico y dirigido hacia un propósito específico.</field>
+                </record>
+
+<record id="definition_15bsyp" model="edition.abbreviation">
+                    <field name="abbre">PLA</field>
+                    <field name="name">Plan de auditoría</field>
+                    <field name="description">Descripción de las actividades in situ y los preparativos de una auditoría</field>
+                </record>
+
+<record id="definition_16ebbn" model="edition.abbreviation">
+                    <field name="abbre">ALC</field>
+                    <field name="name">Alcance de la auditoría</field>
+                    <field name="description">Extensión y límites de una auditoría; el alcance incluye típicamente una descripción de los emplazamientos físicos, unidades organizativas, actividades y procesos, así como el periodo de tiempo cubierto.</field>
+                </record>
+
+<record id="definition_17riqh" model="edition.abbreviation">
+                    <field name="abbre">COM</field>
+                    <field name="name">Competencia</field>
+                    <field name="description">Capacidad demostrada para aplicar conocimientos y habilidades          No conformidad</field>
+                </record>
+
+<record id="definition_18zwft" model="edition.abbreviation">
+                    <field name="abbre">SOL</field>
+                    <field name="name">Solicitud de Acción Correctiva o Preventiva</field>
+                    <field name="description">formato donde se registra el producto no conforme, las no conformidades o potenciales, las acciones correctivas o preventivas a tomar y la verificación de las acciones a tomadas.</field>
+                </record>
+
+<record id="definition_19pved" model="edition.abbreviation">
+                    <field name="abbre">ACC</field>
+                    <field name="name">Acción Correctiva</field>
+                    <field name="description">Proceso emprendido para eliminar las causas de una No conformidad existente con el propósito de que no se presente nuevamente en el futuro.</field>
+                </record>
+
+<record id="definition_20pben" model="edition.abbreviation">
+                    <field name="abbre">ACC</field>
+                    <field name="name">Acción Preventiva</field>
+                    <field name="description">Proceso emprendido para prevenir las causas de una No conformidad.</field>
+                </record>
+
+<record id="responsible_3xenq" model="edition.responsable.line">
+                    <field name="name">El Gerente General y el representante por la alta dirección ante el SIC HSEQ</field>
+                    <field name="description">son los responsables de planear, implementar, hacer seguimiento, revisar y mejorar el programa de auditorías, e identificar los recursos necesarios para llevar a cabo las auditorías y asegurarse de que se proporcionen en su debido tiempo.</field>
+                </record>
+
+
+
+<record id="definition_21yryw" model="edition.abbreviation">
+                    <field name="abbre">CON</field>
+                    <field name="name">Conformidad potencial</field>
+                    <field name="description">Probable incumplimiento de un requisito, detectado durante las actividades de planificación o re planificación de los procesos, al presentarse cambios, o mediante el análisis de los datos arrojados por los procesos, en cuanto a tendencias y comportamientos; también puede surgir una conformidad potencial, de la comparación de un proceso con experiencias de procesos similares.  La no conformidad potencial es un riesgo para el cumplimiento de los requisitos planificados</field>
+                </record>
+
+<record id="definition_22nbrk" model="edition.abbreviation">
+                    <field name="abbre">ACC</field>
+                    <field name="name">Acción preventiva</field>
+                    <field name="description">Acción tomada para eliminar la causa de una no conformidad potencial u otra situación potencialmente indeseable. En una acción preventiva el problema no se ha presentado aún; precisamente la acción preventiva no permite que el problema se presente.       Una acción preventiva puede surgir de un problema ocurrido en otro proyecto de otra organización.</field>
+                </record>
+
+<record id="definition_23qvom" model="edition.abbreviation">
+                    <field name="abbre">OBS</field>
+                    <field name="name">Observación de auditoría</field>
+                    <field name="description">Comentario escrito del auditor, acerca de una situación que genera riesgo de convertirse en una no conformidad o que puede ser una oportunidad de mejora. Puede tratarse como una Acción Preventiva</field>
+                </record>
+
+<record id="responsible_4wffc" model="edition.responsable.line">
+                    <field name="name">Coordinador de HSEQ</field>
+                    <field name="description">El Coordinador de HSEQ es el responsable por el seguimiento de la correcta implementación de este procedimiento y por la verificación de la eficacia de las acciones tomadas. La implementación de las acciones será responsabilidad de los dueños de cada proceso.                             Responsabilidad General                         El dueño de cada proceso o proyecto es responsable por investigar las causas que generaron la no conformidad y proponer los mecanismos para su solución e implementarlas. El cumplimiento de lo anterior debe quedar registrado en el formato Tratamiento No Conformidades.</field>
+                </record>
+
+
+
+<record id="definition_24bavo" model="edition.abbreviation">
+                    <field name="abbre">ACT</field>
+                    <field name="name">Active Collab</field>
+                    <field name="description">Plataforma de gestión de proyectos y de comunicación empresarial.</field>
+                </record>
+
+<record id="definition_25rwdf" model="edition.abbreviation">
+                    <field name="abbre">MAT</field>
+                    <field name="name">Materiales o Insumos              mantenimiento, limpieza, tratamiento de equipos etc. Estos materiales                           de Consumos fijos</field>
+                    <field name="description">deberán definirse dentro del procedimiento de Logística o Lay Out de Almacén, y allí se definirá un stock mínimo de estos para estar disponibles en el almacén.</field>
+                </record>
+
+<record id="definition_26psbw" model="edition.abbreviation">
+                    <field name="abbre">MAT</field>
+                    <field name="name">Materia Prima para Producción</field>
+                    <field name="description">Corresponde a los materiales determinados necesarios para la producción de un proyecto o producto en específico, estos se compraran según las necesidades de producción, se podrán comprar por requerimientos de proyectos cargados en active collab o por solicitudes de compras según corresponda.</field>
+                </record>
+
+<record id="definition_27xyug" model="edition.abbreviation">
+                    <field name="abbre">PRI</field>
+                    <field name="name">Prioridad de Compras Insumos</field>
+                    <field name="description">Necesidad de compras que por su naturaleza, necesidad o requisitos establecidos por el cliente o compromiso de entrega establecido por la empresa deberá ejecutarse de manera inmediata.</field>
+                </record>
+
+
+<record id="definition_28vjaz" model="edition.abbreviation">
+                    <field name="abbre">SGI</field>
+                    <field name="name">SGI</field>
+                    <field name="description">sistema de gestión integral</field>
+                </record>
+
+<record id="definition_29gmzr" model="edition.abbreviation">
+                    <field name="abbre">HSE</field>
+                    <field name="name">HSEQ</field>
+                    <field name="description">Salud en el Trabajo, Seguridad Industrial, Ambiente y Calidad</field>
+                </record>
+
+<record id="definition_30szdd" model="edition.abbreviation">
+                    <field name="abbre">SG-</field>
+                    <field name="name">SG-SST</field>
+                    <field name="description">Sistema de Gestión de la seguridad, salud en el trabajo</field>
+                </record>
+
+<record id="definition_31yevc" model="edition.abbreviation">
+                    <field name="abbre">VER</field>
+                    <field name="name">Verificación</field>
+                    <field name="description">Confirmar mediante la aportación de evidencia objetiva de que se han cumplido los requisitos especificados.</field>
+                </record>
+
+<record id="definition_32vcul" model="edition.abbreviation">
+                    <field name="abbre">REQ</field>
+                    <field name="name">Requisito</field>
+                    <field name="description">Necesidad o expectativa establecida, generalmente implícita u obligatoria</field>
+                </record>
+
+<record id="definition_33qjvq" model="edition.abbreviation">
+                    <field name="abbre">COM</field>
+                    <field name="name">Competencia</field>
+                    <field name="description">Aptitud demostrada para aplicar los conocimientos y habilidades.</field>
+                </record>
+
+<record id="definition_34zukq" model="edition.abbreviation">
+                    <field name="abbre">CON</field>
+                    <field name="name">Contrato</field>
+                    <field name="description">Acuerdo Vinculante</field>
+                </record>
+
+<record id="definition_35ugte" model="edition.abbreviation">
+                    <field name="abbre">EPP</field>
+                    <field name="name">EPP</field>
+                    <field name="description">Elementos de Protección Personal</field>
+                </record>
+
+<record id="definition_36uzdt" model="edition.abbreviation">
+                    <field name="abbre">CAP</field>
+                    <field name="name">CAPACITACIÓN</field>
+                    <field name="description">Oportunidad de desarrollo de aptitudes y actitudes, conocimientos y habilidades necesarias para que cada empleado agregue valor a su labor cotidiana y contribuya a que los procesos de La ORGANIZACIÓN se realicen con los requerimientos de calidad establecidos por los clientes y partes interesadas.</field>
+                </record>
+
+<record id="definition_37upsu" model="edition.abbreviation">
+                    <field name="abbre">COM</field>
+                    <field name="name">COMPETENCIA</field>
+                    <field name="description">El personal que realice trabajos que afecten a la calidad del producto debe ser competente con base en la educación, formación, habilidades y experiencia apropiadas.</field>
+                </record>
+
+<record id="definition_38xblw" model="edition.abbreviation">
+                    <field name="abbre">CON</field>
+                    <field name="name">CONTRATACIÓN</field>
+                    <field name="description">Ingreso de personal calificado de acuerdo a las normas establecidas para La ORGANIZACIÓN.</field>
+                </record>
+
+<record id="definition_39etif" model="edition.abbreviation">
+                    <field name="abbre">DES</field>
+                    <field name="name">DESCRIPCIÓN DE PERFIL</field>
+                    <field name="description">Es la integración de componentes tales como</field>
+                </record>
+
+<record id="definition_40zidl" model="edition.abbreviation">
+                    <field name="abbre">DES</field>
+                    <field name="name">DESVINCULACIÓN</field>
+                    <field name="description">Retiro del empleado de acuerdo a las causales existentes en la normatividad vigente</field>
+                </record>
+
+<record id="definition_41uqlx" model="edition.abbreviation">
+                    <field name="abbre">EVA</field>
+                    <field name="name">EVALUACIÓN DE DESEMPEÑO</field>
+                    <field name="description">Mide el desempeño de los empleados bajo los criterios establecidos que corresponden a competencias, objetivos organizacionales que den cumplimiento a las metas del plan estratégico.</field>
+                </record>
+
+<record id="definition_42rzil" model="edition.abbreviation">
+                    <field name="abbre">EDU</field>
+                    <field name="name">EDUCACIÒN</field>
+                    <field name="description">Básica Superior, Especialización; Asimílese educación como la formación académica específica.</field>
+                </record>
+
+<record id="definition_43csfp" model="edition.abbreviation">
+                    <field name="abbre">FOR</field>
+                    <field name="name">FORMACIÒN</field>
+                    <field name="description">Hace referencia a otros cursos como seminarios, congresos, entre otros, Asimílese formación como la formación académica relacionada.</field>
+                </record>
+
+<record id="definition_44lmum" model="edition.abbreviation">
+                    <field name="abbre">HAB</field>
+                    <field name="name">HABILIDADES</field>
+                    <field name="description">Capacidad Operativa, Empleo y desarrollo de atributos en la ejecución de una labor.</field>
+                </record>
+
+<record id="definition_45uaww" model="edition.abbreviation">
+                    <field name="abbre">IND</field>
+                    <field name="name">INDUCCIÓN INSTITUCIONAL</field>
+                    <field name="description">Proceso dirigido a proporcionar al nuevo empleado el aprendizaje necesario para su integración a la cultura organizacional de         “           AQUÍ SU EMPRESA”             , suministrándole para el efecto toda la información que requiere para ubicarlo en su nuevo entorno laboral y para facilitar la creación de identidad y sentido de pertenencia con la misma.</field>
+                </record>
+
+<record id="definition_46gsal" model="edition.abbreviation">
+                    <field name="abbre">IND</field>
+                    <field name="name">INDUCCIÓN AL PUESTO DE TRABAJO</field>
+                    <field name="description">Procedimiento necesario para maximizar las potencialidades que el nuevo empleado. Incluye aspectos relacionados con la información específica de la dependencia y del cargo que desempeñará, las rutinas, su ubicación física, manejo de elementos proporcionados y el manejo adecuado de las relaciones interpersonales.</field>
+                </record>
+
+<record id="definition_47clmq" model="edition.abbreviation">
+                    <field name="abbre">EXP</field>
+                    <field name="name">EXPERIENCIA</field>
+                    <field name="description">Práctica que proporciona el conocimiento o habilidad para hacer algo.</field>
+                </record>
+
+<record id="definition_48xaiz" model="edition.abbreviation">
+                    <field name="abbre">FOR</field>
+                    <field name="name">FORMACIÒN ACADÈMICA ESPECÍFICA</field>
+                    <field name="description">Se refiere a los contenidos que están directamente asociados o guardan estrecha relación con los perfiles del cargo.</field>
+                </record>
+
+<record id="definition_49visp" model="edition.abbreviation">
+                    <field name="abbre">FOR</field>
+                    <field name="name">FORMACIÒN ACADÈMIA RELACIONADA</field>
+                    <field name="description">Se refiere a los contenidos que tienen afinidad con las funciones del cargo</field>
+                </record>
+
+<record id="definition_50ianm" model="edition.abbreviation">
+                    <field name="abbre">REI</field>
+                    <field name="name">REINDUCCIÓN</field>
+                    <field name="description">Programa dirigido a reorientar la integración de los empleados en virtud de cambios producidos en cualquiera de los asuntos relacionados con sus objetivos y actualización en normas.</field>
+                </record>
+
+<record id="definition_51tcnz" model="edition.abbreviation">
+                    <field name="abbre">SEL</field>
+                    <field name="name">SELECCIÓN</field>
+                    <field name="description">Procedimiento que consiste en una serie de pasos enfocados a elegir el aspirante apto para ser vinculado según el perfil del cargo requerido dentro del marco legal vigente. Procedimiento que realiza La ORGANIZACIÓN bajo los parámetros establecidos por la normatividad con el propósito de realizar el ingreso de personal calificado.</field>
+                </record>
+
+<record id="responsible_5fydz" model="edition.responsable.line">
+                    <field name="name">GERENTE</field>
+                    <field name="description">Identificar las necesidades de formación y entrenamiento del personal a su cargo          Revisar y aprobar las necesidades de formación y entrenamiento del personal          Aperturas de convocatorias a los cargos que la Organización         “           AQUÍ SU EMPRESA”             , requiera          Determinar y verificar la competencia del personal que realiza actividades operativas.</field>
+                </record>
+
+<record id="responsible_6kwgk" model="edition.responsable.line">
+                    <field name="name">LIDERES DE PROCESOS</field>
+                    <field name="description">Identificar las necesidades de formación y entrenamiento del personal a su cargo con base en los requisitos de competencia técnica, calidad y de Seguridad y salud en el Trabajo, y la evaluación del desempeño, determinar las prioridades y solicitar al Gerente los cursos de formación y entrenamiento.          Coordinar las actividades del programa de inducción del nuevo personal contratado para su área.</field>
+                </record>
+
+<record id="responsible_7mzjo" model="edition.responsable.line">
+                    <field name="name">LÍDER DE RECURSOS HUMANOS</field>
+                    <field name="description">Recepción de las Hojas de vida de los aspirantes al cargo, y verificación del cumplimiento de las competencias y requisitos del mismo.          Mantener actualizadas las hojas de vida de todo el personal de la Organización, junto a los registros que evidencian su competencia técnica, evaluación, formación y entrenamiento.          Coordinar el proceso de afiliaciones y retiros al SGSSS y a la Caja de Compensación Familiar          Participar en la elaboración de las liquidaciones de Nominas, aportes a la seguridad social y prestaciones sociales.          Elaborar el modelo del contrato de trabajo de acuerdo a las condiciones establecidas previamente con el Gerente y darlo a conocer al trabajador antes de su firma.          Gestionar los permisos, vacaciones y otras ausencias justificadas del personal previa autorización del Gerente.          Coordinar con el coordinador de HSEQ la Remisión del personal seleccionado a las I.P.S., médicas respectivas, para la prestación de los servicios de exámenes de ingreso, laboratorio, Para clínicos, periódicos y de retiro, por medio de la orden para la realización de evaluaciones medicas laborales.          Verificar el cumplimiento del criterio médico (Apto para el cargo), y diligenciamiento del FORMATO LISTA DE CHEQUEO DOCUMENTOS HOJA DE VIDA DEL PERSONAL. GRH-F-08.</field>
+                </record>
+
+<record id="responsible_8yjao" model="edition.responsable.line">
+                    <field name="name">COORDINADOR HSEQ</field>
+                    <field name="description">Realizar la inducción general en HSEQ de La ORGANIZACIÓN          Elaborar el Cronograma de actividades y capacitaciones con las actividades aprobadas por el Gerente para cada periodo.          Llevar las estadísticas de ausentismo laboral y por enfermedad general, al personal de La ORGANIZACIÓN.          Coordinar la realización de los exámenes médicos periódicos y de egreso, de acuerdo al contrato efectuado al trabajador.</field>
+                </record>
+
+<record id="responsible_9zyqw" model="edition.responsable.line">
+                    <field name="name">LOS TRABAJADORES</field>
+                    <field name="description">Cumplir con las actividades establecidas en el proceso de selección y contratación del personal          Practicarse los exámenes médicos de ingreso como requisito para su admisión a la ORGANIZACIÓN.          Practicarse los exámenes médicos de retiro dentro de los cinco días hábiles siguientes de haber culminado sus labores en la ORGANIZACIÓN, de acuerdo a la citación dada por la Administradora.          Participar de las capacitaciones, charlas, inducción general y demás actividades programadas para su formación al cargo.          Diligenciar los formatos requeridos por La ORGANIZACIÓN (Lista de chequeo, Contrato, entre otros) y entregar oportunamente los documentos necesarios para su contratación.</field>
+                </record>
+
+
+<record id="responsible_10dqmi" model="edition.responsable.line">
+                    <field name="name">El Área de Recursos Humanos</field>
+                    <field name="description">se encarga del proceso de contratación del personal administrativo y el administrador de obra son los responsables de la contratación del personal administrativo y operativo.</field>
+                </record>
+
+
+<record id="definition_52sasv" model="edition.abbreviation">
+                    <field name="abbre">MAN</field>
+                    <field name="name">MANTENIMIENTO</field>
+                    <field name="description">actividad que se realiza para garantizar el óptimo funcionamiento de un equipo o instalación, evitando su deterioro y reduciendo su desgaste.</field>
+                </record>
+
+<record id="definition_53xmzx" model="edition.abbreviation">
+                    <field name="abbre">MAN</field>
+                    <field name="name">MANTENIMIENTO PROGRAMADO</field>
+                    <field name="description">es el que se realiza dentro de una planeación o programación para evitar interrupciones en la operación por daños.</field>
+                </record>
+
+<record id="definition_54adnl" model="edition.abbreviation">
+                    <field name="abbre">MAN</field>
+                    <field name="name">MANTENIMIENTO NO PROGRAMADO</field>
+                    <field name="description">es el que se realiza al sufrir un desperfecto o cuando se predice que puede quedar fuera de servicio un equipo. Generalmente se realiza en un momento diferente al programado.</field>
+                </record>
+
+
+
+<record id="definition_55eggv" model="edition.abbreviation">
+                    <field name="abbre">ACT</field>
+                    <field name="name">ACTIVIDAD</field>
+                    <field name="description">Acción básica necesaria dentro de un proceso.</field>
+                </record>
+
+<record id="definition_56nvnw" model="edition.abbreviation">
+                    <field name="abbre">ANA</field>
+                    <field name="name">ANALISIS DE RIESGO</field>
+                    <field name="description">proceso para comprender la naturaleza del riesgo y determinar el nivel de riesgo.</field>
+                </record>
+
+<record id="definition_57ilag" model="edition.abbreviation">
+                    <field name="abbre">CON</field>
+                    <field name="name">CONSECUENCIA</field>
+                    <field name="description">Los resultados más probables y esperados del riesgo que se evalúa, incluyendo los daños a los materiales.</field>
+                </record>
+
+<record id="definition_58tvkj" model="edition.abbreviation">
+                    <field name="abbre">CON</field>
+                    <field name="name">CONTEXTO EXTERNO</field>
+                    <field name="description">Ambiente externo en el cual la organización busca alcanzar sus objetivos. Puede incluir el ambiente cultural, social, político, legal, reglamentario, financiero, tecnológico, económico, natural, competitivo, bien sea internacional, nacional, regional o local. Impulsadores clave y tendencias, relaciones con las partes involucradas.</field>
+                </record>
+
+<record id="definition_59qhxv" model="edition.abbreviation">
+                    <field name="abbre">CON</field>
+                    <field name="name">CONTEXTO INTERNO</field>
+                    <field name="description">Ambiente interno en el cual la organización busca alcanzar sus objetivos. Puede incluir gobierno, estructura organizacional, políticas, objetivos y estrategias implementadas para lograrlo, las capacidades entendidas en términos de recursos y conocimiento, sistemas de información y procesos para la toma de decisiones, relación con las partes involucradas internas, cultura organizacional.</field>
+                </record>
+
+<record id="definition_60wczc" model="edition.abbreviation">
+                    <field name="abbre">CON</field>
+                    <field name="name">CONTROL</field>
+                    <field name="description">Medida que modifica al riesgo.</field>
+                </record>
+
+<record id="definition_61gqvn" model="edition.abbreviation">
+                    <field name="abbre">EVA</field>
+                    <field name="name">EVALUACION DEL RIESGO</field>
+                    <field name="description">Proceso de comparación de los resultados del análisis de riesgos con los criterios del riesgo, para determinar si el riesgo, su magnitud o ambos son aceptables o intolerables.</field>
+                </record>
+
+<record id="definition_62oxna" model="edition.abbreviation">
+                    <field name="abbre">EVE</field>
+                    <field name="name">EVENTO</field>
+                    <field name="description">Presencia o cambio de un conjunto particular de circunstancias</field>
+                </record>
+
+<record id="definition_63mmdh" model="edition.abbreviation">
+                    <field name="abbre">FAC</field>
+                    <field name="name">FACTOR DE RIESGO</field>
+                    <field name="description">Elemento que encierra una capacidad potencial de producir daños materiales o al producto.</field>
+                </record>
+
+<record id="definition_64kntj" model="edition.abbreviation">
+                    <field name="abbre">FUE</field>
+                    <field name="name">FUENTE DE RIESGO</field>
+                    <field name="description">Elemento que solo o en combinación tiene el potencial intrínseco de originar un riesgo.</field>
+                </record>
+
+<record id="definition_65tjps" model="edition.abbreviation">
+                    <field name="abbre">GES</field>
+                    <field name="name">GESTION DEL RIESGO</field>
+                    <field name="description">Actividades coordinadas para dirigir y controlar una organización con respecto al riesgo.</field>
+                </record>
+
+<record id="definition_66ujfb" model="edition.abbreviation">
+                    <field name="abbre">IDE</field>
+                    <field name="name">IDENTIFICACION DEL RIESGO</field>
+                    <field name="description">Proceso para encontrar, reconocer y describir el riesgo.</field>
+                </record>
+
+<record id="definition_67dznk" model="edition.abbreviation">
+                    <field name="abbre">NIV</field>
+                    <field name="name">NIVEL DE RIESGO</field>
+                    <field name="description">Magnitud de un riesgo o de una combinación de riesgos, expresada en términos de la combinación de las consecuencias y su probabilidad.</field>
+                </record>
+
+<record id="definition_68ovpy" model="edition.abbreviation">
+                    <field name="abbre">PAR</field>
+                    <field name="name">PARTE INVOLUCRADA</field>
+                    <field name="description">Persona u organización que puede afectar, verse afectada o percibirse a sí misma como afectada por una decisión o una actividad.</field>
+                </record>
+
+<record id="definition_69mhxp" model="edition.abbreviation">
+                    <field name="abbre">PRO</field>
+                    <field name="name">PROBABILIDAD</field>
+                    <field name="description">Oportunidad de que algo suceda.</field>
+                </record>
+
+<record id="definition_70ppyg" model="edition.abbreviation">
+                    <field name="abbre">RIE</field>
+                    <field name="name">RIESGO</field>
+                    <field name="description">Efecto de la incertidumbre sobre los objetivos.</field>
+                </record>
+
+<record id="definition_71utun" model="edition.abbreviation">
+                    <field name="abbre">TRA</field>
+                    <field name="name">TRATAMIENTO DEL RIESGO</field>
+                    <field name="description">Proceso para modificar el riesgo.</field>
+                </record>
+
+<record id="definition_72eema" model="edition.abbreviation">
+                    <field name="abbre">VAL</field>
+                    <field name="name">VALORACION DEL RIESGO</field>
+                    <field name="description">Proceso global de identificación del riesgo, análisis del riesgo y evaluación del riesgo.</field>
+                </record>
+
+<record id="responsible_11fcjw" model="edition.responsable.line">
+                    <field name="name">Jefe de proceso</field>
+                    <field name="description">Cuyas funciones se orientan a              Asegurar la implementación, seguimiento, actualización y evaluación de  los controles establecidos en este procedimiento para la identificación de riesgos y valoración de las oportunidades en la calidad del servicio.          Solicitar a los responsables de la elaboración del producto la identificación y evaluación de  riesgos, teniendo en cuenta los cambios en la elaboración del producto.          Asegurar el control de riesgos que se clasifiquen como más altos, disminuyendo la posibilidad de falta de calidad del  producto generándolo en no conforme.          Promover y apoyar para que el personal participe en la identificación y evaluación de  los riesgos, al igual en la implementación de planes de acción</field>
+                </record>
+
+<record id="responsible_12cwav" model="edition.responsable.line">
+                    <field name="name">Jefe de Calidad</field>
+                    <field name="description">Cuyas funciones se orientan a              Verificación del cumplimiento de los procesos, de acuerdo a la identificación de riesgos y oportunidades de mejora.          Elaboración del informe de desviaciones del producto de acuerdo a la verificación realizada al proceso.</field>
+                </record>
+
+<record id="responsible_13nldk" model="edition.responsable.line">
+                    <field name="name">Operadores</field>
+                    <field name="description">Cuyas funciones se orientan a              Participar en la identificación y evaluación inicial de los riesgos de las actividades, para los servicios que (describir).          Reportar los riesgos que se deriven de los procesos o actividades.</field>
+                </record>
+
+
+<record id="definition_73pbum" model="edition.abbreviation">
+                    <field name="abbre">CAP</field>
+                    <field name="name">Capacitación</field>
+                    <field name="description">La capacitación es un proceso continuo de enseñanza-aprendizaje, mediante el cual se desarrolla las habilidades y destrezas de los servidores, que les permitan un mejor desempeño en sus labores habituales. Puede ser interna o externa, de acuerdo a un programa permanente, aprobado y que pueda brindar aportes a la institución.</field>
+                </record>
+
+<record id="definition_74rdnf" model="edition.abbreviation">
+                    <field name="abbre">IND</field>
+                    <field name="name">Inducción</field>
+                    <field name="description">El proceso de inducción, también denominado de acogida, incorporación o acomodamiento, permite al empleado sociabilizarse de mejor manera con su nuevo entorno. En la inducción se debe explicar temas tales como</field>
+                </record>
+
+<record id="definition_75foiq" model="edition.abbreviation">
+                    <field name="abbre">FOR</field>
+                    <field name="name">Formación</field>
+                    <field name="description">se entiende todos aquellos estudios y aprendizajes encaminados a la inserción, reinserción y actualización laboral, cuyo objetivo principal es aumentar y adecuar el conocimiento y habilidades de los actuales y futuros trabajadores a lo largo de toda la vida</field>
+                </record>
+
+<record id="definition_76gtfh" model="edition.abbreviation">
+                    <field name="abbre">ENT</field>
+                    <field name="name">Entrenamiento</field>
+                    <field name="description">es el acto de proporcionar medios que permitan el aprendizaje en un sentido positivo y beneficioso para que los individuos de una empresa puedan desarrollar de manera más rápida sus conocimientos, aptitudes y habilidades; otorgando beneficios tales como</field>
+                </record>
+
+<record id="definition_77bxya" model="edition.abbreviation">
+                    <field name="abbre">INS</field>
+                    <field name="name">Instrucción</field>
+                    <field name="description">una especificación documentada que define cómo se ejecuta un proceso, y generalmente un proceso que forma parte de la producción o la prestación de servicio, aunque no necesariamente. Este mismo documento se puede encontrar bajo otras denominaciones como</field>
+                </record>
+
+<record id="definition_78tixn" model="edition.abbreviation">
+                    <field name="abbre">CHA</field>
+                    <field name="name">Charla</field>
+                    <field name="description">La charla permite demostrar el grado de compromiso de la empresa con la seguridad y los trabajadores, en ella se permite analizar situaciones que pueden llegar a un accidente. Lo habitual es que en ella el supervisor a cargo de ejecutar el trabajo, analice el trabajo del día, comente los riesgos que en ella existen y sus formas de control.</field>
+                </record>
+
+
+
+<record id="definition_79vllw" model="edition.abbreviation">
+                    <field name="abbre">CAL</field>
+                    <field name="name">CALIDAD</field>
+                    <field name="description">Grado en que un conjunto de características inherentes cumple con sus requisitos.</field>
+                </record>
+
+<record id="definition_80sniu" model="edition.abbreviation">
+                    <field name="abbre">CLI</field>
+                    <field name="name">CLIENTE</field>
+                    <field name="description">Organización o persona que recibe un producto.</field>
+                </record>
+
+<record id="definition_81vrht" model="edition.abbreviation">
+                    <field name="abbre">ESP</field>
+                    <field name="name">ESPECIFICACIÓN</field>
+                    <field name="description">Documento que establece requisitos.</field>
+                </record>
+
+<record id="definition_82xucv" model="edition.abbreviation">
+                    <field name="abbre">GES</field>
+                    <field name="name">GESTIÓN</field>
+                    <field name="description">Actividades coordinadas para dirigir y controlar una organización.</field>
+                </record>
+
+<record id="definition_83lfnw" model="edition.abbreviation">
+                    <field name="abbre">MR </field>
+                    <field name="name">MR (MATERIALS REQUISITION)</field>
+                    <field name="description">Documento en el que el almacenista registra material y/o activo fijo necesarios para la operación, con las respectivas especificaciones técnicas.</field>
+                </record>
+
+<record id="definition_84mlhn" model="edition.abbreviation">
+                    <field name="abbre">ORD</field>
+                    <field name="name">ORDEN DE COMPRA</field>
+                    <field name="description">Documento mediante el cual se oficializa la solicitud de materiales o insumos a un proveedor.</field>
+                </record>
+
+<record id="definition_85yjhj" model="edition.abbreviation">
+                    <field name="abbre">PRO</field>
+                    <field name="name">PROCEDIMIENTO</field>
+                    <field name="description">Forma especificada para llevar a cabo una actividad o un proceso.</field>
+                </record>
+
+<record id="definition_86gbed" model="edition.abbreviation">
+                    <field name="abbre">PRO</field>
+                    <field name="name">PROCESO</field>
+                    <field name="description">Conjunto de actividades mutuamente relacionadas o que interactúan las cuales transforman elementos de entradas en resultados.</field>
+                </record>
+
+<record id="definition_87qlpw" model="edition.abbreviation">
+                    <field name="abbre">PRO</field>
+                    <field name="name">PROVEEDOR</field>
+                    <field name="description">Organización o persona que proporcionan un producto.</field>
+                </record>
+
+<record id="definition_88kago" model="edition.abbreviation">
+                    <field name="abbre">REQ</field>
+                    <field name="name">REQUISITO</field>
+                    <field name="description">Necesidad o expectativa establecida, generalmente implícita u obligatoria</field>
+                </record>
+
+<record id="definition_89xotj" model="edition.abbreviation">
+                    <field name="abbre">STO</field>
+                    <field name="name">STOCK</field>
+                    <field name="description">Cantidades de una referencia disponible en la bodega.</field>
+                </record>
+
+<record id="definition_90wkqr" model="edition.abbreviation">
+                    <field name="abbre">COM</field>
+                    <field name="name">COMPRA</field>
+                    <field name="description">Es el proceso por medio del cual una entidad solicita a un proveedor el suministro de un bien o la prestación de un servicio, a determinado precio y condiciones, utilizando para ello algún medio de pago.</field>
+                </record>
+
+<record id="definition_91gpzc" model="edition.abbreviation">
+                    <field name="abbre">CON</field>
+                    <field name="name">CONFORMIDAD</field>
+                    <field name="description">Cumplimiento de un requisito.</field>
+                </record>
+
+<record id="definition_92vqxe" model="edition.abbreviation">
+                    <field name="abbre">COT</field>
+                    <field name="name">COTIZACIÓN</field>
+                    <field name="description">Propuesta económica de 2 o 3 proveedores para tomar la decisión de una compra teniendo en cuenta aspectos como calidad, precio, garantía, etc.</field>
+                </record>
+
+<record id="definition_93maub" model="edition.abbreviation">
+                    <field name="abbre">DEF</field>
+                    <field name="name">DEFECTO</field>
+                    <field name="description">Incumplimiento de un requisito previsto asociado a uso previsto o especificado.</field>
+                </record>
+
+<record id="definition_94qntd" model="edition.abbreviation">
+                    <field name="abbre">FAC</field>
+                    <field name="name">FACTURA</field>
+                    <field name="description">Documento que soporta la compra de productos discriminando las cantidades, el precio y condiciones de pago.</field>
+                </record>
+
+<record id="definition_95htqt" model="edition.abbreviation">
+                    <field name="abbre">NOT</field>
+                    <field name="name">NOTA DE ENTREGA</field>
+                    <field name="description">Es un formato sobre el cual se anotan los productos comprados y    enviados a cada uno de los solicitantes.</field>
+                </record>
+
+<record id="definition_96eplk" model="edition.abbreviation">
+                    <field name="abbre">PRO</field>
+                    <field name="name">PRODUCTO</field>
+                    <field name="description">Resultado de un proceso.</field>
+                </record>
+
+<record id="definition_97xtnk" model="edition.abbreviation">
+                    <field name="abbre">PRO</field>
+                    <field name="name">PROVEEDOR</field>
+                    <field name="description">Organización o persona que proporciona un producto o servicio, no relacionado directamente con la razón económica de la empresa.</field>
+                </record>
+
+<record id="definition_98evgj" model="edition.abbreviation">
+                    <field name="abbre">REM</field>
+                    <field name="name">REMISIÓN</field>
+                    <field name="description">Documento con el cual el proveedor envía los productos.</field>
+                </record>
+
+<record id="definition_99olyo" model="edition.abbreviation">
+                    <field name="abbre">SOL</field>
+                    <field name="name">SOLICITUD DE PEDIDO</field>
+                    <field name="description">Documento mediante se realiza la solicitud de un bien y/o servicio.</field>
+                </record>
+
+<record id="definition_100gayo" model="edition.abbreviation">
+                    <field name="abbre">SER</field>
+                    <field name="name">SERVICIO</field>
+                    <field name="description">Resultado generado por actividades en la interfaz entre el proveedor y el cliente, y por actividades internas del proveedor, con el fin de responder a las necesidades del cliente.</field>
+                </record>
+
+<record id="definition_101qsna" model="edition.abbreviation">
+                    <field name="abbre">SUM</field>
+                    <field name="name">SUMINISTRO</field>
+                    <field name="description">Todo producto o servicio relacionado con la actividad de la empresa.</field>
+                </record>
+
+<record id="definition_102wbma" model="edition.abbreviation">
+                    <field name="abbre">VER</field>
+                    <field name="name">VERIFICACIÓN</field>
+                    <field name="description">Confirmación mediante la aportación de evidencia objetiva de que se han cumplido los requisitos especificados.</field>
+                </record>
+
+<record id="definition_103rmns" model="edition.abbreviation">
+                    <field name="abbre">KAR</field>
+                    <field name="name">KARDEX</field>
+                    <field name="description">Documento de control en el que se consigna las entradas, salidas y los saldos de materiales, consumibles, dotación.</field>
+                </record>
+
+<record id="definition_104apcp" model="edition.abbreviation">
+                    <field name="abbre">REM</field>
+                    <field name="name">REMISIÓN</field>
+                    <field name="description">Documento de control para el envío de materiales, consumibles, dotaciones, entre otros.</field>
+                </record>
+
+<record id="definition_105ynhu" model="edition.abbreviation">
+                    <field name="abbre">ALQ</field>
+                    <field name="name">ALQUILERES</field>
+                    <field name="description">Se entiende por la toma en arrendamiento de muebles o inmuebles por los cuales se paga un canon en un periodo específico.</field>
+                </record>
+
+<record id="definition_106dlgq" model="edition.abbreviation">
+                    <field name="abbre">TRA</field>
+                    <field name="name">TRANSPORTES</field>
+                    <field name="description">Se entiende por la movilización de herramientas, equipos o materiales en general.</field>
+                </record>
+
+<record id="responsible_14dbkk" model="edition.responsable.line">
+                    <field name="name">Gerente/Rep. Legal</field>
+                    <field name="description">Suministra recursos para la compra de productos y servicios,          Aprobación de compras que generen impacto económico en la organización.</field>
+                </record>
+
+<record id="responsible_15bbsn" model="edition.responsable.line">
+                    <field name="name">Jefe de Compras</field>
+                    <field name="description">Aprueba la selección de todos los proveedores de la organización.          Evalúa y reevalúa los proveedores,          Estructura la base de datos de proveedores habilitados,          Verificar los productos que ingresan a la Empresa,          Verificar el almacenamiento y bodegaje de los productos,          Suministrar la información de las especificaciones de los repuestos para la reparación de los vehículos y otros productos para el desarrollo del proceso,          Analiza precios según proveedores seleccionados.</field>
+                </record>
+
+<record id="responsible_16wsaa" model="edition.responsable.line">
+                    <field name="name">Almacenista</field>
+                    <field name="description">Recibe el suministro en el almacén.          Lleva el control del Kardex del almacén</field>
+                </record>
+
+
+<record id="definition_107qvka" model="edition.abbreviation">
+                    <field name="abbre">ACC</field>
+                    <field name="name">Acción correctiva</field>
+                    <field name="description">Acción tomada para eliminar la causa de una no conformidad detectada u otra situación indeseable.</field>
+                </record>
+
+<record id="definition_108hbpl" model="edition.abbreviation">
+                    <field name="abbre">ACC</field>
+                    <field name="name">Acción preventiva</field>
+                    <field name="description">Acción tomada para eliminar la causa de una no conformidad potencial u otra situación potencialmente no deseable.</field>
+                </record>
+
+<record id="definition_109aiew" model="edition.abbreviation">
+                    <field name="abbre">AUD</field>
+                    <field name="name">Auditoría</field>
+                    <field name="description">Proceso sistemático, independiente y documentado para obtener evidencias de la auditoría y evaluarlas de manera objetiva con el fin de determinar la extensión en que se cumplen los criterios de auditoría.</field>
+                </record>
+
+<record id="definition_110dlra" model="edition.abbreviation">
+                    <field name="abbre">DES</field>
+                    <field name="name">Desempeño</field>
+                    <field name="description">Resultados medibles del Sistema de Gestión Integral HSEQ, seguridad industrial y salud ocupacional relativos al control de los riesgos de seguridad y salud ocupacional de la organización, basados en la política y los objetivos del sistema de seguridad industrial y salud ocupacional.</field>
+                </record>
+
+<record id="definition_111ketz" model="edition.abbreviation">
+                    <field name="abbre">EFI</field>
+                    <field name="name">Eficacia</field>
+                    <field name="description">Cumplimiento de las expectativas del cliente en el producto y/o servicio.</field>
+                </record>
+
+<record id="definition_112azss" model="edition.abbreviation">
+                    <field name="abbre">EFI</field>
+                    <field name="name">Eficiencia</field>
+                    <field name="description">Relación entre el resultado alcanzado y los recursos y procesos utilizados.</field>
+                </record>
+
+<record id="definition_113mdic" model="edition.abbreviation">
+                    <field name="abbre">MEJ</field>
+                    <field name="name">Mejoramiento continuo</field>
+                    <field name="description">Proceso para fortalecer al sistema de gestión en seguridad industrial y salud ocupacional, con el propósito de lograr un mejoramiento en el desempeño de  Calidad, Seguridad Industrial y Salud Ocupacional en concordancia con las políticas de la organización.</field>
+                </record>
+
+<record id="definition_114mzue" model="edition.abbreviation">
+                    <field name="abbre">NO </field>
+                    <field name="name">No conformidad</field>
+                    <field name="description">Incumplimiento de un requisito, cualquier desviación respecto a las normas, prácticas, procedimientos, reglamentos, desempeño del sistema de gestión, etc., que pueda ser causa directa o indirecta de enfermedad, lesión, daño a la propiedad, al ambiente de trabajo o una combinación de éstos.</field>
+                </record>
+
+<record id="definition_115bwlm" model="edition.abbreviation">
+                    <field name="abbre">ORG</field>
+                    <field name="name">Organización</field>
+                    <field name="description">Conjunto de personas e instalaciones con una disposición de responsabilidades, autoridades y relaciones.</field>
+                </record>
+
+<record id="definition_116jywt" model="edition.abbreviation">
+                    <field name="abbre">POL</field>
+                    <field name="name">Política</field>
+                    <field name="description">Intenciones globales y orientación de una organización relativas a la calidad tal como se expresan formalmente por la alta dirección.</field>
+                </record>
+
+<record id="definition_117mpcx" model="edition.abbreviation">
+                    <field name="abbre">QUE</field>
+                    <field name="name">Quejas</field>
+                    <field name="description">Manifestación de la insatisfacción  por parte de las partes interesadas (comunidades, clientes, proveedores).</field>
+                </record>
+
+<record id="definition_118rtyk" model="edition.abbreviation">
+                    <field name="abbre">REC</field>
+                    <field name="name">Quejas y Reclamos</field>
+                    <field name="description">Petición por un incumplimiento de un requisito pactado con la(s) parte(s) interesada(s) con compensación económica.</field>
+                </record>
+
+<record id="definition_119oxoj" model="edition.abbreviation">
+                    <field name="abbre">REG</field>
+                    <field name="name">Registros</field>
+                    <field name="description">Documentos que presenta resultados obtenidos o proporciona evidencia de actividades desempeñadas.</field>
+                </record>
+
+<record id="definition_120mvnc" model="edition.abbreviation">
+                    <field name="abbre">REV</field>
+                    <field name="name">Revisión</field>
+                    <field name="description">Actividad emprendida para asegurar la conveniencia, la adecuación y eficacia del tema objeto de revisión, para alcanzar unos objetivos establecidos. La revisión puede incluir también la determinación de la eficiencia.</field>
+                </record>
+
+
+<record id="definition_121sifw" model="edition.abbreviation">
+                    <field name="abbre">MEJ</field>
+                    <field name="name">Mejora Continua</field>
+                    <field name="description">Actividad recurrente para aumentar la capacidad para cumplir los requisitos.</field>
+                </record>
+
+<record id="definition_122erza" model="edition.abbreviation">
+                    <field name="abbre">MEJ</field>
+                    <field name="name">Mejora de la Calidad</field>
+                    <field name="description">Parte de la gestión de la calidad orientada a aumentar la capacidad de cumplir con los requisitos de la calidad.</field>
+                </record>
+
+<record id="definition_123exmq" model="edition.abbreviation">
+                    <field name="abbre">QUE</field>
+                    <field name="name">Queja</field>
+                    <field name="description">Expresión de insatisfacción hecha a una organización, con respecto a subproductos o al propio proceso de tratamiento de las quejas, donde se espera una respuesta o resolución explícita o implícita.</field>
+                </record>
+
+<record id="definition_124ernw" model="edition.abbreviation">
+                    <field name="abbre">REG</field>
+                    <field name="name">Registro</field>
+                    <field name="description">Documento que presenta resultados obtenidos o proporciona evidencia de actividades desempeñadas.</field>
+                </record>
+
+<record id="definition_125tzbe" model="edition.abbreviation">
+                    <field name="abbre">REQ</field>
+                    <field name="name">Requisito</field>
+                    <field name="description">Necesidad o expectativa establecida, generalmente implícita u obligatoria.</field>
+                </record>
+
+<record id="definition_126xsbh" model="edition.abbreviation">
+                    <field name="abbre">REC</field>
+                    <field name="name">RECLAMO</field>
+                    <field name="description">Manifestación verbal o escrita de insatisfacción hecha por un cliente o usuario sobre el incumplimiento o irregularidad de alguna de las características de los productos o servicios ofrecidos por la organización.</field>
+                </record>
+
+<record id="definition_127mefr" model="edition.abbreviation">
+                    <field name="abbre">SAT</field>
+                    <field name="name">Satisfacción del cliente</field>
+                    <field name="description">Percepción del cliente sobre el grado en que se han cumplido sus requisitos.</field>
+                </record>
+
+<record id="definition_128omgw" model="edition.abbreviation">
+                    <field name="abbre">SEV</field>
+                    <field name="name">Severidad</field>
+                    <field name="description">Rigor o gravedad de un suceso.</field>
+                </record>
+
+<record id="definition_129zugw" model="edition.abbreviation">
+                    <field name="abbre">SIS</field>
+                    <field name="name">Sistema de Gestión de Calidad</field>
+                    <field name="description">Conjunto de elementos mutuamente relacionados o que interactúan para establecer la política, los objetivos y para lograr dichos objetivos que dirigen y controlan una organización con respecto a la calidad.</field>
+                </record>
+
+<record id="definition_130fuzy" model="edition.abbreviation">
+                    <field name="abbre">SUG</field>
+                    <field name="name">Sugerencia</field>
+                    <field name="description">Forma que la parte interesada usa para generar una opinión sobre el mejoramiento de la organización.</field>
+                </record>
+
+
+
+<record id="definition_131ksgi" model="edition.abbreviation">
+                    <field name="abbre">INS</field>
+                    <field name="name">Instructivo</field>
+                    <field name="description">Forma especificada para llevar a cabo una actividad.</field>
+                </record>
+
+<record id="definition_132jrko" model="edition.abbreviation">
+                    <field name="abbre">DOC</field>
+                    <field name="name">Documento</field>
+                    <field name="description">Información y su medio de soporte. El medio de soporte de los documentos puede ser papel, CD, discos duros, memorias USB, fotografía, muestra patrón o una combinación de éstos.</field>
+                </record>
+
+<record id="definition_133ailj" model="edition.abbreviation">
+                    <field name="abbre">DOC</field>
+                    <field name="name">Documentos Externos</field>
+                    <field name="description">Planos, especificaciones, estudios técnicos, memorias de diseños externos, normas, decretos, leyes, resoluciones e informes</field>
+                </record>
+
+<record id="definition_134ejei" model="edition.abbreviation">
+                    <field name="abbre">FOR</field>
+                    <field name="name">Formato</field>
+                    <field name="description">Plantilla prediseñada que facilita la recolección de datos; es un tipo de documento. También recibe nombres como formulario, plantilla, forma, etc.</field>
+                </record>
+
+<record id="definition_135hkso" model="edition.abbreviation">
+                    <field name="abbre">REG</field>
+                    <field name="name">Registros</field>
+                    <field name="description">Documento que presenta resultados obtenidos o proporciona evidencia de actividades desempeñadas.</field>
+                </record>
+
+<record id="definition_136xthi" model="edition.abbreviation">
+                    <field name="abbre">REV</field>
+                    <field name="name">Revisión</field>
+                    <field name="description">Actividad emprendida para asegurar la conveniencia, la adecuación y eficacia del tema objeto de la revisión, para alcanzar unos objetivos establecidos.</field>
+                </record>
+
+<record id="definition_137kaar" model="edition.abbreviation">
+                    <field name="abbre">APR</field>
+                    <field name="name">Aprobación</field>
+                    <field name="description">acción de verificar que indica que lo que ha sido documentado corresponde con las políticas, objetivos y/o requisitos de SGC HSEQ y constituye autorización para continuar o iniciar su aplicación.</field>
+                </record>
+
+<record id="definition_138wvvz" model="edition.abbreviation">
+                    <field name="abbre">PRO</field>
+                    <field name="name">Procedimiento</field>
+                    <field name="description">Es una descripción ordenada para llevar a cabo una actividad o tarea relacionada con el desarrollo de un proceso.  Este compromete y define por qué o para qué se hace, el lugar, el cómo se hace, el cuándo se hace, el dónde se hace y el responsable del proceso.</field>
+                </record>
+
+<record id="definition_139idtn" model="edition.abbreviation">
+                    <field name="abbre">IDE</field>
+                    <field name="name">Identificación</field>
+                    <field name="description">Acción que permite reconocer los registros y relacionarlos con el producto, una actividad o proceso del sistema de gestión de calidad. Nombre y código; en caso de que el registro no tuviere algún código, este campo no aplica.</field>
+                </record>
+
+<record id="definition_140lhrg" model="edition.abbreviation">
+                    <field name="abbre">ALM</field>
+                    <field name="name">Almacenamiento</field>
+                    <field name="description">Localización física o electrónica de un registro, lugar exacto de archivo o colocación del registro.</field>
+                </record>
+
+<record id="definition_141vvwm" model="edition.abbreviation">
+                    <field name="abbre">PRO</field>
+                    <field name="name">Protección</field>
+                    <field name="description">Condiciones que permiten asegurar el buen estado de los registros</field>
+                </record>
+
+<record id="definition_142iawh" model="edition.abbreviation">
+                    <field name="abbre">REC</field>
+                    <field name="name">Recuperación</field>
+                    <field name="description">Es la posibilidad de consultar un registro; el mecanismo por el cual la organización</field>
+                </record>
+
+<record id="definition_143ywwr" model="edition.abbreviation">
+                    <field name="abbre">ORD</field>
+                    <field name="name">ordena y clasifica los registros, generalmente se indican dos aspectos</field>
+                    <field name="description">Clasificación</field>
+                </record>
+
+<record id="definition_144fvau" model="edition.abbreviation">
+                    <field name="abbre">TIE</field>
+                    <field name="name">Tiempo de Retención</field>
+                    <field name="description">Tiempo durante el cual se almacena el registro en el sitio de recuperación, generalmente este tiempo está definido por la duración del proyecto, vigencia de las pólizas, liquidación o entrega del proyecto y en el caso de registros de oficina se determina por vigencias legales de obligatorio cumplimiento.</field>
+                </record>
+
+<record id="definition_145edrc" model="edition.abbreviation">
+                    <field name="abbre">DIS</field>
+                    <field name="name">Disposición Final</field>
+                    <field name="description">Acción a tomar con el registro cuando se ha cumplido el tiempo de retención, usualmente es la de archivarlos en el Archivo muerto o inactivo de la Organización o destruirlos, en el caso de enviarlos al archivo muerto se debe indicar durante cuánto tiempo permanecerán allí.</field>
+                </record>
+
+<record id="definition_146yqbs" model="edition.abbreviation">
+                    <field name="abbre">SGC</field>
+                    <field name="name">SGC</field>
+                    <field name="description">Sistema de Gestión de Calidad</field>
+                </record>
+
+
+<record id="definition_147pzqf" model="edition.abbreviation">
+                    <field name="abbre">RES</field>
+                    <field name="name">RESPONSABILIDAD</field>
+                    <field name="description">Cumplir o hacer cumplir una determinada actividad o compromiso adquirido.</field>
+                </record>
+
+<record id="definition_148rpsk" model="edition.abbreviation">
+                    <field name="abbre">SEG</field>
+                    <field name="name">SEGURIDAD INDUSTRIAL</field>
+                    <field name="description">Una definición sencilla del concepto de seguridad industrial es el conjunto de técnicas tendientes a minimizar los riesgos presentes en toda actividad.  En otras palabras, la seguridad es un estado de riesgo aceptable.</field>
+                </record>
+
+<record id="definition_149vfjj" model="edition.abbreviation">
+                    <field name="abbre">SEG</field>
+                    <field name="name">SEGURIDAD Y SALUD EN EL TRABAJO (SST)</field>
+                    <field name="description">es una actividad multidisciplinaria dirigida a proteger y promover la salud de los trabajadores mediante la prevención y el control de enfermedades y accidentes, y la eliminación de los factores y condiciones que ponen en peligro la salud y la seguridad en el trabajo. Además, procura generar y promover el trabajo sano y seguro, así como buenos ambientes y organizaciones de trabajo; realzar el bienestar físico, mental y social de los trabajadores y respaldar el perfeccionamiento y el mantenimiento de su capacidad de trabajo.</field>
+                </record>
+
+<record id="definition_150vecp" model="edition.abbreviation">
+                    <field name="abbre">MED</field>
+                    <field name="name">MEDIO AMBIENTE</field>
+                    <field name="description">Entorno en el cual una organización opera, incluidos el aire, el agua, el suelo, los recursos naturales, la flora, la fauna, los seres humanos y sus interrelaciones.</field>
+                </record>
+
+<record id="definition_151cybj" model="edition.abbreviation">
+                    <field name="abbre">ROL</field>
+                    <field name="name">ROLES</field>
+                    <field name="description">Actividades o tareas a realizar durante el cumplimiento de una labor o cargo.</field>
+                </record>
+
+<record id="definition_152azow" model="edition.abbreviation">
+                    <field name="abbre">CON</field>
+                    <field name="name">Condiciones sub-estándar</field>
+                    <field name="description">Cualquier cambio o variación introducidas a las características físicas o al funcionamiento de los equipos, los materiales y/o el ambiente de trabajo y que conllevan anormalidad en función de los estándares establecidos o aceptados, constituyen condiciones de riesgo que pueden ser causa directa de accidentes operacionales. Una condición subestandar se detecta con inspecciones.</field>
+                </record>
+
+<record id="definition_153tnej" model="edition.abbreviation">
+                    <field name="abbre">INS</field>
+                    <field name="name">Instalaciones</field>
+                    <field name="description">Colocación en el lugar y la forma adecuados de cosas necesarias para un servicio.</field>
+                </record>
+
+<record id="definition_154xtcr" model="edition.abbreviation">
+                    <field name="abbre">MAN</field>
+                    <field name="name">Mantenimiento preventivo</field>
+                    <field name="description">Es una actividad programada de inspecciones, tanto de funcionamiento como de seguridad, ajustes, reparaciones, análisis, limpieza, lubricación, calibración, que deben llevarse a cabo en forma periódica en base a un plan establecido. El propósito es prever averías o desperfectos en su estado inicial y corregirlas para mantener la instalación en completa operación a los niveles y eficiencia óptimos.</field>
+                </record>
+
+<record id="definition_155vfax" model="edition.abbreviation">
+                    <field name="abbre">MAN</field>
+                    <field name="name">Mantenimiento correctivo</field>
+                    <field name="description">este es el mantenimiento provocado por averías u otros defectos en el funcionamiento. Desde el punto de vista de la calidad, éste no es un mantenimiento aceptable. La ocurrencia de estos fenómenos de falta de calidad, deben ser corregidos de inmediato revisando la aplicación del mantenimiento sobre el elemento afectado.</field>
+                </record>
+
+<record id="definition_156obdz" model="edition.abbreviation">
+                    <field name="abbre">VOL</field>
+                    <field name="name">Volqueta</field>
+                    <field name="description">Son vehículos automóviles que poseen un dispositivo mecánico para volcar la carga que transportan en un cajón que reposa sobre el chasis del vehículo. La composición mecánica de la volqueta depende precisamente del volumen del material que pueda transportar el cajón o volcó, por tal razón este tipo de maquinaria de carga cumple una función netamente de transporte ya sea dentro de la obra o fuera de ella.</field>
+                </record>
+
+<record id="responsible_17nrhn" model="edition.responsable.line">
+                    <field name="name">GERENTE</field>
+                    <field name="description">Revisar, sugerir los ajustes necesarios y aprobar el Programa de Mantenimiento de Vehículos y Maquinaria.          Asegurar los recursos necesarios para cumplimiento del programa.          Verificar el cumplimiento del Programa de Mantenimiento de Vehículos y Maquinaria.          Asegurar el cumplimiento de las opciones de mejora que se puedan encontrar en la ejecución del presente programa.</field>
+                </record>
+
+<record id="responsible_18rktg" model="edition.responsable.line">
+                    <field name="name">COORDINADOR HSEQ</field>
+                    <field name="description">Elaborar y realizar los ajustes de diseño del programa como respuesta a actualizaciones, opciones de mejora, entre otros aspectos.          Asegurar el cumplimiento del cronograma definido en el presente programa.          Realizar seguimiento a los indicadores de gestión y plantear las opciones de mejora del caso.</field>
+                </record>
+
+<record id="responsible_19ujwc" model="edition.responsable.line">
+                    <field name="name">AUXILIAR HSEQ</field>
+                    <field name="description">Apoyar el cumplimiento del cronograma definido en el presente programa.          Divulgar el Programa de Mantenimiento de Vehículos y Maquinaria a todos los trabajadores de la empresa.          Asegurar el registro y trazabilidad de los formatos que se deriven de la aplicación del presente programa.</field>
+                </record>
+
+<record id="responsible_20oynm" model="edition.responsable.line">
+                    <field name="name">OPERADORES DE VEHÍCULOS</field>
+                    <field name="description">Apoyar la ejecución de programa en lo que respecta a vehículos.          Diligenciar los formatos aplicables al programa          Informar y realizar entrega de los soportes de los mantenimientos realizados al vehículo.          Reportar fallas en el funcionamiento del vehículo y sus componentes.</field>
+                </record>
+
+<record id="definition_157edik" model="edition.abbreviation">
+                    <field name="abbre">CON</field>
+                    <field name="name">Control de Cambios</field>
+                    <field name="description">Actividades para controlar las salidas después de la aprobación formal de su información sobre configuración del producto. (NTC ISO 9000</field>
+                </record>
+
+<record id="definition_158ehvl" model="edition.abbreviation">
+                    <field name="abbre">GES</field>
+                    <field name="name">Gestión del cambio</field>
+                    <field name="description">Es la búsqueda fácil de implementar exitosamente los cambios dentro de los procesos de una organización.</field>
+                </record>
+
+<record id="definition_159dzbm" model="edition.abbreviation">
+                    <field name="abbre">ANÁ</field>
+                    <field name="name">Análisis del Cambio</field>
+                    <field name="description">Son las actividades realizadas con el fin de identificar las causa y consecuencia de la implementación de los cambios.</field>
+                </record>
+
+
+<record id="definition_160tnud" model="edition.abbreviation">
+                    <field name="abbre">PRO</field>
+                    <field name="name">Producto</field>
+                    <field name="description">Resultado de un proceso.</field>
+                </record>
+
+<record id="definition_161jqnc" model="edition.abbreviation">
+                    <field name="abbre">PRO</field>
+                    <field name="name">Producto y/o servicio</field>
+                    <field name="description">Resultado de un proceso destinado al cliente o solicitado por el servicio.</field>
+                </record>
+
+<record id="definition_162fcdb" model="edition.abbreviation">
+                    <field name="abbre">NO </field>
+                    <field name="name">No conformidad</field>
+                    <field name="description">Incumplimiento de un requisito.</field>
+                </record>
+
+<record id="definition_163bzsy" model="edition.abbreviation">
+                    <field name="abbre">COR</field>
+                    <field name="name">Corrección</field>
+                    <field name="description">Acción tomada para eliminar una no conformidad detectada.          Nota 1</field>
+                </record>
+
+<record id="definition_164clfl" model="edition.abbreviation">
+                    <field name="abbre">REP</field>
+                    <field name="name">Reproceso</field>
+                    <field name="description">Acción tomada sobre un producto no conforme para que cumpla con los requisitos.          Nota 1</field>
+                </record>
+
+<record id="definition_165ukpy" model="edition.abbreviation">
+                    <field name="abbre">REC</field>
+                    <field name="name">Reclasificación</field>
+                    <field name="description">Variación de la clase de un producto no conforme de tal forma que sea conforme con requisitos, que difieren de los iniciales.</field>
+                </record>
+
+<record id="definition_166pexz" model="edition.abbreviation">
+                    <field name="abbre">REP</field>
+                    <field name="name">Reparación</field>
+                    <field name="description">Acción tomada sobre un producto no conforme para convertirlo en aceptable para su utilización prevista.</field>
+                </record>
+
+<record id="definition_167kfuu" model="edition.abbreviation">
+                    <field name="abbre">CON</field>
+                    <field name="name">Concesión</field>
+                    <field name="description">Autorización para utilizar o liberar un producto que no es conforme con los requisitos especificados.</field>
+                </record>
+
+<record id="definition_168gscf" model="edition.abbreviation">
+                    <field name="abbre">PER</field>
+                    <field name="name">Permiso de desviación</field>
+                    <field name="description">Autorización para apartarse de los requisitos originalmente especificados de un producto antes de su realización.</field>
+                </record>
+
+<record id="definition_169bmpa" model="edition.abbreviation">
+                    <field name="abbre">LIB</field>
+                    <field name="name">Liberación</field>
+                    <field name="description">Autorización para proseguir con la siguiente etapa de un proceso.</field>
+                </record>
+
+<record id="responsible_21myca" model="edition.responsable.line">
+                    <field name="name">RESPONSABILIDAD GENERAL</field>
+                    <field name="description">Cualquier persona relacionada con la realización de los productos o con la prestación de los servicios de la organización puede detectar un producto no conforme, de acuerdo con los requisitos establecidos en cada caso.       La aplicación de este procedimiento es responsabilidad de todas las personas que intervienen en el Sistema de Gestión de la organización       “         AQUÍ SU EMPRESA”          en oficina y en todos los proyectos.</field>
+                </record>
+
+<record id="responsible_22ixzl" model="edition.responsable.line">
+                    <field name="name">RESPONSABLE DEL PROCESO O PROYECTO</field>
+                    <field name="description">Tiene la responsabilidad de           Verificar la identificación de los productos no conformes detectados.          Controlar el producto No Conforme y evitar su uso inadecuado o entrega no intencional.          Autorizar concesiones o permisos de desviaciones para los procesos bajo su responsabilidad, con el consentimiento del Cliente o la parte interesada cuando ello sea pertinente.          Establecer la corrección o el tratamiento del producto no conforme y determinar si posteriormente se genera una acción correctiva.          Nombrar las personas responsables de implementar el tratamiento dado para corregir el producto no conforme.          Liberar el producto no conforme</field>
+                </record>
+
+
+<record id="definition_170ajmh" model="edition.abbreviation">
+                    <field name="abbre">AUT</field>
+                    <field name="name">Autonomía</field>
+                    <field name="description">Hace referencia a la posibilidad que tiene el trabajador de organizar su trabajo, regulando su ritmo, determinando el orden y la forma de realizar las tareas.</field>
+                </record>
+
+<record id="definition_171uonb" model="edition.abbreviation">
+                    <field name="abbre">CAR</field>
+                    <field name="name">Carga de trabajo</field>
+                    <field name="description">Conjunto de requerimientos psicofísicos a los que se obligado el trabajador durante su jornada laboral.</field>
+                </record>
+
+<record id="definition_172rtkp" model="edition.abbreviation">
+                    <field name="abbre">COM</field>
+                    <field name="name">Competencia</field>
+                    <field name="description">Es el conjunto de habilidades, formación, educación y experiencia encaminados a la realización de una tarea o función específica o tratar un tema determinado.</field>
+                </record>
+
+<record id="definition_173jxmd" model="edition.abbreviation">
+                    <field name="abbre">DES</field>
+                    <field name="name">Desarrollo</field>
+                    <field name="description">Es el proceso de evolución, crecimiento y cambio de un objeto, persona o situación específica en determinadas condiciones. El desarrollo es la condición de evolución que siempre tiene una connotación positiva ya que implica un crecimiento o paso hacia etapas o fases superiores. La noción de desarrollo entonces puede servir para hacer referencia tanto a cosas, personas, situaciones o fenómenos de diferentes tipos.</field>
+                </record>
+
+<record id="definition_174gkvt" model="edition.abbreviation">
+                    <field name="abbre">DES</field>
+                    <field name="name">Desempeño de rol</field>
+                    <field name="description">Es el conjunto de expectativas sobre conductas asociadas con el puesto laboral, tanto por parte del trabajador como de los demás. Hay un patrón de comportamiento que se espera de quién desempeña un puesto de trabajo con independencia de la persona que sea.</field>
+                </record>
+
+<record id="definition_175dyvz" model="edition.abbreviation">
+                    <field name="abbre">EMP</field>
+                    <field name="name">Empatía</field>
+                    <field name="description">Es la capacidad de una persona de vivenciar la manera en que siente otra persona y de compartir sus sentimientos, lo cual puede llevar a una mejor comprensión de su comportamiento o de su forma de tomar decisiones.</field>
+                </record>
+
+<record id="definition_176fuzh" model="edition.abbreviation">
+                    <field name="abbre">EST</field>
+                    <field name="name">Estilo de mando</field>
+                    <field name="description">Hace referencia a la forma de dirección y liderazgo de una organización. Influye en el clima laboral y en las relaciones entre los trabajadores y entre éstos y los jefes.</field>
+                </record>
+
+<record id="definition_177lvak" model="edition.abbreviation">
+                    <field name="abbre">PLA</field>
+                    <field name="name">Planeación</field>
+                    <field name="description">Consiste en la formulación del estado futuro deseado para una persona u organización, y con base a esto, plantear cursos alternativos de acción, evaluarlos y así definir los mecanismos adecuados a seguir para alcanzar los objetivos propuestos, además de la determinación de la asignación de los recursos humanos y físicos necesarios para una eficiente utilización.</field>
+                </record>
+
+<record id="definition_178qlyt" model="edition.abbreviation">
+                    <field name="abbre">TAL</field>
+                    <field name="name">Talento</field>
+                    <field name="description">Es la capacidad para ejercer una cierta ocupación o para desempeñar una actividad. El talento suele estar asociado a la habilidad innata y a la creación, aunque también puede desarrollarse con la práctica y el entrenamiento.</field>
+                </record>
+
+
+<record id="definition_179ggej" model="edition.abbreviation">
+                    <field name="abbre">PRO</field>
+                    <field name="name">PROVEEDOR</field>
+                    <field name="description">Quien suministra el producto y/o servicio de acuerdo con los requisitos establecidos en la orden de compra.</field>
+                </record>
+
+<record id="definition_180ozan" model="edition.abbreviation">
+                    <field name="abbre">PRO</field>
+                    <field name="name">PROVEEDOR CRÍTICO</field>
+                    <field name="description">Persona natural o jurídica, que suministra bienes y/o servicios que tienen un alto impacto en nuestra operación.</field>
+                </record>
+
+<record id="definition_181tjoi" model="edition.abbreviation">
+                    <field name="abbre">CON</field>
+                    <field name="name">CONTRATISTA CRÍTICO</field>
+                    <field name="description">Empresa que presta un servicio determinado según contrato, con asignación de recurso humano, por un periodo de tiempo determinado y que tienen un alto impacto en nuestra operación.</field>
+                </record>
+
+<record id="definition_182jftw" model="edition.abbreviation">
+                    <field name="abbre">ORD</field>
+                    <field name="name">ORDEN DE COMPRA</field>
+                    <field name="description">Documento por el cual se formaliza un pedido de productos y/o servicios.</field>
+                </record>
+
+<record id="definition_183wkbk" model="edition.abbreviation">
+                    <field name="abbre">EVA</field>
+                    <field name="name">EVALUAR</field>
+                    <field name="description">Asignar a un proveedor una calificación de 1 a 100 puntos, teniendo en cuenta criterios de calidad, servicio, cumplimiento, salud ocupacional y ambiente.</field>
+                </record>
+
+<record id="definition_184vcen" model="edition.abbreviation">
+                    <field name="abbre">CAL</field>
+                    <field name="name">CALIFICACIÓN</field>
+                    <field name="description">Proceso para demostrar la capacidad de cumplir los requisitos específicos</field>
+                </record>
+
+<record id="responsible_23nryu" model="edition.responsable.line">
+                    <field name="name">JEFE DE COMPRAS</field>
+                    <field name="description">Aprueba la selección de todos los proveedores de la organización, y realiza la evaluación y/o re evaluación de los proveedores y contratistas, en los criterios HSEQ puede contar con el apoyo del Coordinador HSEQ.          Estructura la base de datos de proveedores habilitados, es el responsable de la programación de las evaluaciones y re evaluaciones de los proveedores y contratistas.          Es responsable de mantener actualizada la carpeta de los proveedores (Físico y Medio Magnético) y enviar los resultados de la evaluación y la reevaluación al respectivo proveedor, a través de carta remisoria y copia de la evaluación y/o reevaluación, al correo electrónico de cada uno de ellos.          Es responsable de realizar la reevaluación de sus               proveedores críticos             con una periodicidad máxima de seis (6) meses, para el resto de proveedores la periodicidad será máxima de un (1) año.</field>
+                </record>
+
+<record id="responsible_24desf" model="edition.responsable.line">
+                    <field name="name">Almacenista</field>
+                    <field name="description">Recibe el suministro en el almacén.</field>
+                </record>
+
+    </data>
+    </odoo>

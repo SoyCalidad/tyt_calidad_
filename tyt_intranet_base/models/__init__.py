@@ -1,1 +1,2 @@
-from . import criteria
+from . import intranet_groups
+from . import hr_employee

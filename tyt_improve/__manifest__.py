@@ -15,9 +15,11 @@
     'data': [
         'views/menus.xml',
         'report/non_conformity_report.xml',
+        'report/conformity_evaluation_report.xml',
         #'security/ir.model.access.csv',
         'views/change_request.xml',
         'views/mgmtsystem_nonconformity.xml',
+        'views/mgmtsystem_action.xml',
         'report/change_request.xml',
     ],
     'auto_install': False,

@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <odoo>
-    <template id="portal_my_home_helpdesk_ticket" inherit_id="helpdesk.portal_my_home_helpdesk_ticket" priority="50">
+    <template id="portal_my_home_helpdesk_ticket" name="Show Tickets | Intranet" customize_show="True"
+              inherit_id="tyt_intranet_portal.portal_my_home" priority="110">
         <xpath expr="//div[hasclass('o_portal_docs')]" position="before">
             <t t-set="portal_service_category_enable" t-value="True"/>
         </xpath>

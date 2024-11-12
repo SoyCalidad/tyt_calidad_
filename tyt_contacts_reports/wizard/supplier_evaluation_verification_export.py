@@ -7,5 +7,7 @@ class SupplierEvaluationVerification(models.TransientModel):
     _description = 'Supplier Evaluation Verification Export'
 
     def export_xlsx_report(self):
-        data = {}
+        data = {
+            'is_wizard': True,
+        }
         return self.env.ref('tyt_contacts_reports.supplier_evaluation_verification_xlsx_report_action').report_action(self, data=data)

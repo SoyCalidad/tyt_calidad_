@@ -6,12 +6,6 @@
               parent="studio_customization.contactos_contactos_dbdd023c-ffbb-4e12-988a-ab1ce6f8358e"
               sequence="10"/>
 
-<!--    <menuitem id="customer_directory_menu_action"-->
-<!--              name="Customer Directory"-->
-<!--              action="tyt_contacts_reports.customer_directory_action"-->
-<!--              parent="studio_customization.contactos_contactos_dbdd023c-ffbb-4e12-988a-ab1ce6f8358e"-->
-<!--              sequence="20"/>-->
-
     <menuitem id="tyt_contacts_reports_menu"
               name="Extra Reports"
               parent="mgmtsystem_partner_qualification.reports_contact_menu"
@@ -23,27 +17,21 @@
               parent="tyt_contacts_reports_menu"
               sequence="10"/>
 
-<!--    <menuitem id="customer_directory_report_menu_action"-->
-<!--              name="Customer Directory Report"-->
-<!--              action="tyt_contacts_reports.customer_directory_export_action"-->
-<!--              parent="tyt_contacts_reports_menu"-->
-<!--              sequence="20"/>-->
+    <menuitem id="customer_property_report_menu_action"
+              name="Customer Property Report"
+              action="tyt_contacts_reports.customer_property_export_action"
+              parent="tyt_contacts_reports_menu"
+              sequence="20"/>
 
-<!--    <menuitem id="approved_supplier_report_menu_action"-->
-<!--              name="Approved Supplier Report"-->
-<!--              action="tyt_contacts_reports.approved_supplier_export_action"-->
-<!--              parent="tyt_contacts_reports_menu"-->
-<!--              sequence="30"/>-->
+    <menuitem id="supplier_evaluation_verification_report_menu_action"
+              name="Supplier Evaluation Verification Report"
+              action="tyt_contacts_reports.supplier_evaluation_verification_export_action"
+              parent="tyt_contacts_reports_menu"
+              sequence="30"/>
 
-<!--    <menuitem id="customer_property_report_menu_action"-->
-<!--              name="Customer Property Report"-->
-<!--              action="tyt_contacts_reports.customer_property_export_action"-->
-<!--              parent="tyt_contacts_reports_menu"-->
-<!--              sequence="40"/>-->
-
-<!--    <menuitem id="supplier_evaluation_verification_report_menu_action"-->
-<!--              name="Supplier Evaluation Verification Report"-->
-<!--              action="tyt_contacts_reports.supplier_evaluation_verification_export_action"-->
-<!--              parent="tyt_contacts_reports_menu"-->
-<!--              sequence="40"/>-->
+    <menuitem id="approved_supplier_report_menu_action"
+              name="Approved Supplier Report"
+              action="tyt_contacts_reports.approved_supplier_export_action"
+              parent="tyt_contacts_reports_menu"
+              sequence="40"/>
 </odoo>

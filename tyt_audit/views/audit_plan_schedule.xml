@@ -1,0 +1,50 @@
+<odoo>
+    <data>
+        <record id="view_audit_plan_schedule_edit_form" model="ir.ui.view">
+            <field name="name">audit.plan.schedule.edit.form</field>
+            <field name="model">audit.plan.schedule</field>
+            <field name="arch" type="xml">
+                <form string="Editar Auditores Responsables">
+                    <sheet>
+                        <group>
+                            <field name="responsible_auditors_id">
+                                <tree >
+                                    <field name="name" />
+                                </tree>
+                            </field>
+                        </group>
+                        <footer>
+                            <button name="action_save_auditors" type="object" string="Guardar" class="btn-primary"/>
+                            <button string="Cancelar" class="btn-secondary" special="cancel"/>
+                        </footer>
+                    </sheet>
+                </form>
+            </field>
+        </record>
+
+        <record id="view_audit_plan_schedule_form" model="ir.ui.view">
+            <field name="name">audit.plan.schedule.form</field>
+            <field name="model">audit.plan.schedule</field>
+            <field name="arch" type="xml">
+                <form string="Cronograma de Auditoría">
+                    <header>
+                        <button name="action_edit_responsible_auditors"
+                                type="object"
+                                string="Editar Auditores"
+                                class="btn-primary"/>
+                    </header>                
+                    <sheet>
+                        <group>
+                            <!--<field name="name"/>
+                            <field name="description_id"/>
+                            <field name="activity_id"/>
+                            <field name="sites_id"/>-->
+                            <field name="responsible_auditors_id" widget="many2many_tags"/>
+                            <!--<field name="total_weeks"/>-->
+                        </group>
+                    </sheet>
+                </form>
+            </field>
+        </record>
+    </data>
+</odoo>

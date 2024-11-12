@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <menuitem id="tyt_product_service_communicate_menu_action"
+              name="Productos y servicios"
+              parent="mgmtsystem_context.context_report_menu"
+              action="tyt_product_service_communicate_action"
+              sequence="20"/>
+
+    <menuitem id="mgmtsystem_context.context_context_menu"
+              name="Contexto de la organización"
+              parent="mgmtsystem_context.context_menu"
+              sequence="1" />
+
+    <menuitem id="context_context_menu_action"
+              name="Contexto"
+              action="mgmtsystem_context.context_internal_issue_action"
+              parent="mgmtsystem_context.context_context_menu"
+              sequence="10" />
+
+    <menuitem id="tyt_context_scope_menu_action"
+              name="Alcance"
+              parent="mgmtsystem_context.context_context_menu"
+              action="tyt_context_scope_action"
+              sequence="20"/>
+</odoo>
