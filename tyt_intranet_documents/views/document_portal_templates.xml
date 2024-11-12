@@ -1,5 +1,17 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <odoo>
+    <template id="portal_my_home_menu_folder" inherit_id="portal.portal_breadcrumbs" priority="60">
+    	<xpath expr="//ol[hasclass('o_portal_submenu')]" position="inside">
+            <li t-if="page_name == 'documents_folder'" t-attf-class="breadcrumb-item #{'active ' if not folder else ''}">
+                <a t-if="folder" t-attf-href="/documents/folder/share?{{ keep_query() }}">Espacios de trabajo</a>
+                <t t-else="">Espacios de trabajo</t>
+            </li>
+        	<li t-if="folder" class="breadcrumb-item active">
+                <t t-esc="folder.name"/>
+            </li>
+    	</xpath>
+	</template>
+
     <template id="portal_documents_folder_share" name="Espacios de trabajo">
         <t t-call="portal.portal_layout">
             <t t-set="breadcrumbs_searchbar" t-value="True"/>
