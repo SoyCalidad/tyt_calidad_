@@ -201,18 +201,18 @@ class SurveyReport(models.AbstractModel):
                 
                 national_total += total_average
                   
-                sheet.write(current_row, 2, total_average, format21_left)
+                sheet.write(current_row, 2, f"{total_average:.2f}", format21_left)
                 sheet.write(current_row, 3, total_location_customers, format21_left)
                 sheet.write(current_row, 4, promoters_count, format21_left)
                 sheet.write(current_row, 5, passive_count, format21_left)
                 sheet.write(current_row, 6, detractors_count, format21_left)
-                sheet.write(current_row, 7, category_averages['cat_1'], format21_left)
-                sheet.write(current_row, 8, category_averages['cat_2'], format21_left)
-                sheet.write(current_row, 9, category_averages['cat_3'], format21_left)
-                sheet.write(current_row, 10, category_averages['cat_4'], format21_left)
-                sheet.write(current_row, 11, category_averages['cat_5'], format21_left)
-                sheet.write(current_row, 12, category_averages['cat_6'], format21_left)
-                sheet.write(current_row, 13, category_averages['cat_7'], format21_left)
+                sheet.write(current_row, 7, f"{category_averages['cat_1']:.2f}", format21_left)
+                sheet.write(current_row, 8, f"{category_averages['cat_2']:.2f}", format21_left)
+                sheet.write(current_row, 9, f"{category_averages['cat_3']:.2f}", format21_left)
+                sheet.write(current_row, 10, f"{category_averages['cat_4']:.2f}", format21_left)
+                sheet.write(current_row, 11, f"{category_averages['cat_5']:.2f}", format21_left)
+                sheet.write(current_row, 12, f"{category_averages['cat_6']:.2f}", format21_left)
+                sheet.write(current_row, 13, f"{category_averages['cat_7']:.2f}", format21_left)
                 
                 current_row += 1
 
@@ -225,8 +225,7 @@ class SurveyReport(models.AbstractModel):
         current_row += 3
         
         current_row = 28
-        
-        
+
         sheet.merge_range(current_row, 2, current_row, 4, 'Desempeño', format21_gray_bold)
         
         current_row += 1
@@ -268,9 +267,9 @@ class SurveyReport(models.AbstractModel):
         sheet2.merge_range(
             'D2:L6', 'INFORME SATISFACCIÓN', format26_c_bold)
         
-        sheet2.set_column('A:A', 15)
-        sheet2.set_column('B:N', 20)
-        
+        sheet2.set_column('A:B', 10)
+        sheet2.set_column('C:I', 15)
+        sheet2.set_column('J:AH', 25)
         
         current_row = 8
         
