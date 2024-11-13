@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data noupdate="1">
+        <record id="hr_job_maturity_level_1" model="hr.job.maturity.level">
+            <field name="name">A</field>
+        </record>
+        <record id="hr_job_maturity_level_2" model="hr.job.maturity.level">
+            <field name="name">B</field>
+        </record>
+        <record id="hr_job_maturity_level_3" model="hr.job.maturity.level">
+            <field name="name">C</field>
+        </record>
+        <record id="hr_job_maturity_level_4" model="hr.job.maturity.level">
+            <field name="name">D</field>
+        </record>        
+    </data>
+</odoo>

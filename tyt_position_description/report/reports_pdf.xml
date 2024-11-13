@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <odoo>
     <record id="action_report_requisition_pdf" model="ir.actions.report">
-        <field name="name">Position Description PDF</field>
+        <field name="name">Descripción de Posición (PDF)</field>
         <field name="model">hr.applicant</field>
         <field name="report_type">qweb-pdf</field>
         <field name="report_name">tyt_position_description.position_description_template</field>
