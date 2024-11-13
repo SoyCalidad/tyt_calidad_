@@ -20,7 +20,7 @@ class SurveyReport(models.AbstractModel):
         format21_c_bold = workbook.add_format(
             {'font_size': 10, 'bg_color': '#EFEFEF', 'align': 'center', 'valign': 'vcenter', 'bold': True, 'text_wrap': True})
         format21_left = workbook.add_format(
-            {'font_size': 10, 'align': 'center', 'valign': 'vcenter', 'bold': False, 'text_wrap': True})
+            {'font_size': 10, 'align': 'center', 'valign': 'vcenter', 'bold': False, 'text_wrap': True, 'border': True})
         format21_gray = workbook.add_format(
             {'font_size': 10, 'bg_color': '#EEEEEE', 'align': 'center', 'valign': 'vcenter', 'text_wrap': True})
         format21_gray_bold = workbook.add_format(
