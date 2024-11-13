@@ -96,6 +96,18 @@ class SurveyReport(models.AbstractModel):
             ]
         )
         
+        performance_by_location = {
+            'ARTEAGA': [0, 0, 0, 0],
+            'MERIDA': [0, 0, 0, 0],
+            'GUADALAJARA': [0, 0, 0, 0],
+            'TAPIA': [0, 0, 0, 0],
+            'PUEBLA': [0, 0, 0, 0],
+            'HERMOSILLO': [0, 0, 0, 0],
+            'QUERETARO': [0, 0, 0, 0],
+            'OBISPADO': [0, 0, 0, 0],
+            'TIJUANA': [0, 0, 0, 0],
+        }
+        
         current_row = 12
         
         def create_location_table(sheet, current_row):
@@ -178,6 +190,15 @@ class SurveyReport(models.AbstractModel):
                                 elif 8 <= line.qualification <= 10:
                                     total_promoters_qualification += line.qualification
                                 total_current_customer +=line.qualification
+                                if line.internal_category in ['cat_3_1', 'cat_3_2', 'cat_3_3']:
+                                    if line.internal_category == 'cat_3_1':
+                                        performance_by_location[location][0] += line.qualification
+                                    if line.internal_category == 'cat_3_2':
+                                        performance_by_location[location][1] += line.qualification
+                                    if line.internal_category == 'cat_3_3':
+                                        performance_by_location[location][2] += line.qualification
+                                        performance_by_location[location][3] += 1
+                                category_totals[category] += line.qualification
                     total_current_customer = total_current_customer / 17
                     if 1 <= total_current_customer <= 3:
                         detractors_count += 1
@@ -201,18 +222,18 @@ class SurveyReport(models.AbstractModel):
                 
                 national_total += total_average
                   
-                sheet.write(current_row, 2, total_average, format21_left)
+                sheet.write(current_row, 2, f"{total_average:.2f}", format21_left)
                 sheet.write(current_row, 3, total_location_customers, format21_left)
                 sheet.write(current_row, 4, promoters_count, format21_left)
                 sheet.write(current_row, 5, passive_count, format21_left)
                 sheet.write(current_row, 6, detractors_count, format21_left)
-                sheet.write(current_row, 7, category_averages['cat_1'], format21_left)
-                sheet.write(current_row, 8, category_averages['cat_2'], format21_left)
-                sheet.write(current_row, 9, category_averages['cat_3'], format21_left)
-                sheet.write(current_row, 10, category_averages['cat_4'], format21_left)
-                sheet.write(current_row, 11, category_averages['cat_5'], format21_left)
-                sheet.write(current_row, 12, category_averages['cat_6'], format21_left)
-                sheet.write(current_row, 13, category_averages['cat_7'], format21_left)
+                sheet.write(current_row, 7, f"{category_averages['cat_1']:.2f}", format21_left)
+                sheet.write(current_row, 8, f"{category_averages['cat_2']:.2f}", format21_left)
+                sheet.write(current_row, 9, f"{category_averages['cat_3']:.2f}", format21_left)
+                sheet.write(current_row, 10, f"{category_averages['cat_4']:.2f}", format21_left)
+                sheet.write(current_row, 11, f"{category_averages['cat_5']:.2f}", format21_left)
+                sheet.write(current_row, 12, f"{category_averages['cat_6']:.2f}", format21_left)
+                sheet.write(current_row, 13, f"{category_averages['cat_7']:.2f}", format21_left)
                 
                 current_row += 1
 
@@ -225,8 +246,7 @@ class SurveyReport(models.AbstractModel):
         current_row += 3
         
         current_row = 28
-        
-        
+
         sheet.merge_range(current_row, 2, current_row, 4, 'Desempeño', format21_gray_bold)
         
         current_row += 1
@@ -238,10 +258,13 @@ class SurveyReport(models.AbstractModel):
         current_row += 1
         
         for location in locations:
+            operation_average = performance_by_location[location][0] / performance_by_location[location][3] if performance_by_location[location][3] > 0 else 0
+            quality_average = performance_by_location[location][1] / performance_by_location[location][3] if performance_by_location[location][3] > 0 else 0
+            recruitment_average = performance_by_location[location][2] / performance_by_location[location][3] if performance_by_location[location][3] > 0 else 0
             sheet.write(current_row, 1, location, format21_gray_bold_sb)
-            sheet.write(current_row, 2, '', format21_left)
-            sheet.write(current_row, 3, '', format21_left)
-            sheet.write(current_row, 4, '', format21_left)
+            sheet.write(current_row, 2, f"{operation_average:.2f}", format21_left)
+            sheet.write(current_row, 3, f"{quality_average:.2f}", format21_left)
+            sheet.write(current_row, 4, f"{recruitment_average:.2f}", format21_left)
             current_row += 1
             
         current_row = 29
@@ -268,9 +291,9 @@ class SurveyReport(models.AbstractModel):
         sheet2.merge_range(
             'D2:L6', 'INFORME SATISFACCIÓN', format26_c_bold)
         
-        sheet2.set_column('A:A', 15)
-        sheet2.set_column('B:N', 20)
-        
+        sheet2.set_column('A:B', 10)
+        sheet2.set_column('C:I', 15)
+        sheet2.set_column('J:AH', 25)
         
         current_row = 8
         

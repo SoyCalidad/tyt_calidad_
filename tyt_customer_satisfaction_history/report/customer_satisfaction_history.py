@@ -20,7 +20,7 @@ class SurveyReport(models.AbstractModel):
         format21_c_bold = workbook.add_format(
             {'font_size': 10, 'bg_color': '#EFEFEF', 'align': 'center', 'valign': 'vcenter', 'bold': True, 'text_wrap': True})
         format21_left = workbook.add_format(
-            {'font_size': 10, 'align': 'center', 'valign': 'vcenter', 'bold': False, 'text_wrap': True})
+            {'font_size': 10, 'align': 'center', 'valign': 'vcenter', 'bold': False, 'text_wrap': True, 'border': True})
         format21_gray = workbook.add_format(
             {'font_size': 10, 'bg_color': '#EEEEEE', 'align': 'center', 'valign': 'vcenter', 'text_wrap': True})
         format21_gray_bold = workbook.add_format(
@@ -60,9 +60,6 @@ class SurveyReport(models.AbstractModel):
         format_number = workbook.add_format(
         {'font_size': 10, 'align': 'center', 'valign': 'vcenter', 'bold': False, 'num_format': '#,##0.00'})
 
-
-
-
         sheet = workbook.add_worksheet(
             'General',)
         sheet.hide_gridlines(option=2)
@@ -92,17 +89,7 @@ class SurveyReport(models.AbstractModel):
         months = ["Enero", "Febrero", "Marzo", "Abril", "Mayo", "Junio", "Julio", "Agosto", "Septiembre", "Octubre", "Noviembre", "Diciembre"]
         
         sheet.set_column('P:S', 20)
-        
-        sheet.merge_range('Q2:S2', 'Desempeño', format21_gray_bold)
-        sheet.write('Q3', 'Operaciones', format21_gray_bold_sb)
-        sheet.write('R3', 'Calidad', format21_gray_bold_sb)
-        sheet.write('S3', 'Reclutamiento', format21_gray_bold_sb)
-        row_sitios = 4
-        for sitio in locations:
-            sheet.write(f'P{row_sitios}', sitio, format21_gray_bold_sb)
-            row_sitios += 1
 
-        
         tyt_satisfaction_survey_ids = self.env['tyt.satisfaction.survey'].search(
             [
                 ('create_date', '>=', data['from_date']),
@@ -112,6 +99,18 @@ class SurveyReport(models.AbstractModel):
         )
         
         current_row = 12
+        
+        performance_by_location = {
+            'ARTEAGA': [0, 0, 0, 0],
+            'MERIDA': [0, 0, 0, 0],
+            'GUADALAJARA': [0, 0, 0, 0],
+            'TAPIA': [0, 0, 0, 0],
+            'PUEBLA': [0, 0, 0, 0],
+            'HERMOSILLO': [0, 0, 0, 0],
+            'QUERETARO': [0, 0, 0, 0],
+            'OBISPADO': [0, 0, 0, 0],
+            'TIJUANA': [0, 0, 0, 0],
+        }
         
         def create_location_table(sheet, location, months, current_row):
             
@@ -170,9 +169,7 @@ class SurveyReport(models.AbstractModel):
                 month_customers = tyt_satisfaction_survey_location_ids.filtered(
                     lambda x: x.create_date.strftime('%m') == month_number
                 )
-                
-                print (month_name, month_customers)
-                
+
                 total_month_customers = len(month_customers)
                 
                 # Get the category average of each month based line_ids qualification
@@ -211,6 +208,14 @@ class SurveyReport(models.AbstractModel):
                     for line in customer.line_ids:
                         for category, subcategories in category_mapping.items():
                             if line.internal_category in subcategories:
+                                if line.internal_category in ['cat_3_1', 'cat_3_2', 'cat_3_3']:
+                                    if line.internal_category == 'cat_3_1':
+                                        performance_by_location[location][0] += line.qualification
+                                    if line.internal_category == 'cat_3_2':
+                                        performance_by_location[location][1] += line.qualification
+                                    if line.internal_category == 'cat_3_3':
+                                        performance_by_location[location][2] += line.qualification
+                                        performance_by_location[location][3] += 1
                                 category_totals[category] += line.qualification
                                 if 1 <= line.qualification <= 3:
                                     total_detractors_qualification += line.qualification
@@ -240,18 +245,18 @@ class SurveyReport(models.AbstractModel):
                 
                 total_average = sum(category_averages.values()) / len(category_averages)
   
-                sheet.write(current_row, 2, total_average, format21_left)
+                sheet.write(current_row, 2, f"{total_average:.2f}", format21_left)
                 sheet.write(current_row, 3, total_month_customers, format21_left)
                 sheet.write(current_row, 4, promoters_count, format21_left)
                 sheet.write(current_row, 5, passive_count, format21_left)
                 sheet.write(current_row, 6, detractors_count, format21_left)
-                sheet.write(current_row, 7, category_averages['cat_1'], format21_left)
-                sheet.write(current_row, 8, category_averages['cat_2'], format21_left)
-                sheet.write(current_row, 9, category_averages['cat_3'], format21_left)
-                sheet.write(current_row, 10, category_averages['cat_4'], format21_left)
-                sheet.write(current_row, 11, category_averages['cat_5'], format21_left)
-                sheet.write(current_row, 12, category_averages['cat_6'], format21_left)
-                sheet.write(current_row, 13, category_averages['cat_7'], format21_left)
+                sheet.write(current_row, 7, f"{category_averages['cat_1']:.2f}", format21_left)
+                sheet.write(current_row, 8, f"{category_averages['cat_2']:.2f}", format21_left)
+                sheet.write(current_row, 9, f"{category_averages['cat_3']:.2f}", format21_left)
+                sheet.write(current_row, 10, f"{category_averages['cat_4']:.2f}", format21_left)
+                sheet.write(current_row, 11, f"{category_averages['cat_5']:.2f}", format21_left)
+                sheet.write(current_row, 12, f"{category_averages['cat_6']:.2f}", format21_left)
+                sheet.write(current_row, 13, f"{category_averages['cat_7']:.2f}", format21_left)
                 
                 current_row += 1
 
@@ -260,6 +265,23 @@ class SurveyReport(models.AbstractModel):
         for location in locations:
             create_location_table(sheet, location, months, current_row)
             current_row += 14
+            
+        print ('performance_by_location', performance_by_location)
+            
+        sheet.merge_range('Q2:S2', 'Desempeño', format21_gray_bold)
+        sheet.write('Q3', 'Operaciones', format21_gray_bold_sb)
+        sheet.write('R3', 'Calidad', format21_gray_bold_sb)
+        sheet.write('S3', 'Reclutamiento', format21_gray_bold_sb)
+        row_locations = 4
+        for location in locations:
+            operation_average = performance_by_location[location][0] / performance_by_location[location][3] if performance_by_location[location][3] > 0 else 0
+            quality_average = performance_by_location[location][1] / performance_by_location[location][3] if performance_by_location[location][3] > 0 else 0
+            recruitment_average = performance_by_location[location][2] / performance_by_location[location][3] if performance_by_location[location][3] > 0 else 0
+            sheet.write(f'P{row_locations}', location, format21_gray_bold_sb)
+            sheet.write(f'Q{row_locations}', f"{operation_average:.2f}", format21_left)
+            sheet.write(f'R{row_locations}', f"{quality_average:.2f}", format21_left)
+            sheet.write(f'S{row_locations}', f"{recruitment_average:.2f}", format21_left)
+            row_locations += 1
 
         sheet2 = workbook.add_worksheet("Histórico")
         
@@ -280,10 +302,10 @@ class SurveyReport(models.AbstractModel):
         sheet2.merge_range(
             'D2:L6', 'HISTORICO SATISFACCION DEL CLIENTE', format26_c_bold)
         
-        sheet2.set_column('A:A', 15)
-        sheet2.set_column('B:N', 20)
-        
-        
+        sheet2.set_column('A:B', 10)
+        sheet2.set_column('C:I', 15)
+        sheet2.set_column('J:AH', 25)
+
         current_row = 8
         
         sheet2.merge_range(current_row, 1, current_row, 8, 'DATOS GENERALES', format21_gray_bold_sb)

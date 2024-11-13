@@ -87,7 +87,7 @@
                                             <span class="s_website_form_label_content">Campaign</span>
                                         </label>
                                         <div>
-                                            <select class="tyt_text" name="satisfaction_survey_5">
+                                            <select class="s_website_form_input form-control" id="satisfaction_survey_5" name="location">
                                                 <option t-att-value="ARTEAGA">ARTEAGA</option>
                                                 <option t-att-value="MERIDA">MERIDA</option>
                                                 <option t-att-value="GUADALAJARA">GUADALAJARA</option>
