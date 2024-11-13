@@ -1,0 +1,61 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+        <record id="view_hr_job_form_inherit_2" model="ir.ui.view">
+            <field name="name">hr.job.form.inherit</field>
+            <field name="model">hr.job</field>
+            <field name="inherit_id" ref="hr.view_hr_job_form"/>
+            <field name="arch" type="xml">
+                <xpath expr="/form/sheet/notebook/page[@name='recruitment_page']" position="after">
+                    <page string="Métricos">
+                        <group name="metrics_page">
+                            <group string="Jefes" colspan="2" col="2">
+                                <field name="hr_job_work_day_id" string="Jornada en horas"/>
+                                <field name="functional_head" string="Jefe funcional"/>
+                                <field name="adm_head" string="Jefe administrativo"/>                                
+                            </group>
+                            <group string="OMEM (Balance Scorecard)">
+                                <!-- Finanzas -->
+                                <field name="finanzas_indicador" string="Indicador Finanzas"/>
+                                <field name="finanzas_meta" string="Meta Finanzas (%)"/>
+
+                                <!-- Cliente -->
+                                <field name="cliente_indicador" string="Indicador Cliente"/>
+                                <field name="cliente_meta" string="Meta Cliente (%)"/>
+
+                                <!-- Procesos -->
+                                <field name="procesos_indicador" string="Indicador Procesos"/>
+                                <field name="procesos_meta" string="Meta Procesos (%)"/>
+
+                                <!-- Gente -->
+                                <field name="gente_indicador" string="Indicador Gente"/>
+                                <field name="gente_meta" string="Meta Gente (%)"/>
+                            </group>
+                            <group string="KPI´s">
+                                <!-- Estratégico -->
+                                <field name="estrategico_indicador" string="Indicador Estratégico"/>
+                                <field name="estrategico_meta" string="Meta Estratégico (%)"/>
+
+                                <!-- Costo -->
+                                <field name="costo_indicador" string="Indicador Costo"/>
+                                <field name="costo_meta" string="Meta Costo (%)"/>
+
+                                <!-- Velocidad de Respuesta -->
+                                <field name="velocidad_respuesta_indicador" string="Indicador Velocidad de Respuesta"/>
+                                <field name="velocidad_respuesta_meta" string="Meta Velocidad de Respuesta (%)"/>
+
+                                <!-- Disponibilidad -->
+                                <field name="disponibilidad_indicador" string="Indicador Disponibilidad"/>
+                                <field name="disponibilidad_meta" string="Meta Disponibilidad (%)"/>
+
+                                <!-- Efectividad de Proceso -->
+                                <field name="efectividad_proceso_indicador" string="Indicador Efectividad de Proceso"/>
+                                <field name="efectividad_proceso_meta" string="Meta Efectividad de Proceso (%)"/>
+                            </group>                          
+                        </group>
+                    </page>                
+                </xpath>
+            </field>
+        </record>
+    </data>
+</odoo>

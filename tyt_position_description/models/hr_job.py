@@ -53,7 +53,6 @@ class HrJob(models.Model):
     nivel_organizacional = fields.Char(string="Nivel Organizacional")
     
 
-
 class HrApplicant(models.Model):
     _inherit = 'hr.applicant'  
     
