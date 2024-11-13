@@ -4,15 +4,66 @@
         <div class="container mt-4 mb-4">
             <h1>Formulario de Auditoría</h1>
             <form action="/audit_application/submit" method="post" class="p-4 border rounded bg-light">
-                <!-- Ejemplo de campo con información -->
-                <div class="mb-3">
-                    <label for="audit_name" class="form-label">Nombre de la Auditoría</label>
-                    <input type="text" class="form-control" id="audit_name" name="audit_name" value="t-esc='audit.name'" readonly="readonly"/>
-                </div>
-                <!-- Agrega más campos aquí según sea necesario -->
+                <table class="table">
+                    <tbody>
+                        <tr>
+                            <td><strong>PROCEDIMIENTO:</strong></td>
+                            <td><input type="text" class="form-control" name="procedure" readonly="readonly" t-att-value="audit['procedure']"/></td>
+                            <td><strong>CLÁUSULA:</strong></td>
+                            <td><input type="text" class="form-control" name="clause" readonly="readonly" t-att-value="audit['clause']"/></td>
+                        </tr>
+                        <tr>
+                            <td><strong>RESPONSABLE:</strong></td>
+                            <td><input type="text" class="form-control" name="responsible" readonly="readonly" t-att-value="audit['responsible']"/></td>
+                            <td><strong>VERIFICACIÓN:</strong></td>
+                            <td><input type="text" class="form-control" name="verification" readonly="readonly" t-att-value="audit['verification']"/></td>
+                        </tr>
+                        <tr>
+                            <td><strong>AUDITADO:</strong></td>
+                            <td><input type="text" class="form-control" name="audited" readonly="readonly" t-att-value="audit['audited']"/></td>
+                            <td><strong>REDACCIÓN DE NO CONFORMIDAD:</strong></td>
+                            <td><textarea class="form-control" name="non_conformity" rows="2"><t t-esc="audit['finding']"/></textarea></td>
+                        </tr>
+                        <tr>
+                            <td><strong>GRUPO AUDITOR:</strong></td>
+                            <td><input type="text" class="form-control" name="audit_group" readonly="readonly" t-att-value="audit['audit_group']"/></td>
+                            <td><strong>HALLAZGO:</strong></td>
+                            <td>
+                                <select class="form-control" name="finding">
+                                    <option t-att-selected="'good_practice' == audit.get('finding', 'good_practice')" value="good_practice">Buena Práctica</option>
+                                    <option t-att-selected="'non_conformity' == audit.get('finding', 'non_conformity')" value="non_conformity">No Conformidad</option>
+                                </select>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td><strong>NORMA:</strong></td>
+                            <td><input type="text" class="form-control" name="norm" readonly="readonly" t-att-value="audit['norm']"/></td>
+                            <td><strong>EVIDENCIA:</strong></td>
+                            <td><input type="text" class="form-control" name="evidence" t-att-value="audit['evidence']"/></td>
+                        </tr>
+                        <tr>
+                            <td><strong>SEMANA AUDITADA:</strong></td>
+                            <td><input type="text" class="form-control" name="audit_week" readonly="readonly" t-att-value="audit['audit_week']"/></td>
+                            <td><strong>COMENTARIO:</strong></td>
+                            <td><input type="text" class="form-control" name="comment" /></td>
+                        </tr>
+                        <tr>
+                            <td><strong>FECHA DE AUDITORÍA:</strong></td>
+                            <td><input type="date" class="form-control" name="audit_date" t-att-value="audit['audit_date']"/></td>
+                            <td><strong>EVALUACIÓN:</strong></td>
+                            <td><input type="text" class="form-control" name="evaluation" /></td>
+                        </tr>
+                        <tr>
+                            <td><strong>CENTRO:</strong></td>
+                            <td colspan="3"><input type="text" class="form-control" name="center" readonly="readonly" t-att-value="audit['center']"/></td>
+                        </tr>
+                    </tbody>
+                </table>
 
+                <!-- Botones para enviar o cancelar -->
                 <div class="text-end mt-4">
-                    <button type="submit" class="btn btn-primary">Guardar</button>
+                    <button type="submit" class="btn btn-primary">Evidencia</button>
+                    <button type="button" class="btn btn-secondary" onclick="location.reload();">Siguiente</button>
                 </div>
             </form>
         </div>

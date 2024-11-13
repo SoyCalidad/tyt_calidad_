@@ -75,7 +75,12 @@
                                 <field name="evidence_id" attrs="{'readonly': [('parent.state','not in',('elaborate','validate_ok'))]}" />
                                 <field name="comment" attrs="{'readonly': [('parent.state','in',('cancel'))]}" />
                                 <field name="evaluation" attrs="{'readonly': [('parent.state','in',('cancel'))]}" />
-                                <button name="action_open_audit_application_form" string="Generar Auditoría" type="object" class="btn-primary"/> <!-- Botón para Crear Auditorías -->
+                                <button name="action_open_audit_application_form"
+                                        string="Generar Auditoría"
+                                        type="object"
+                                        class="btn-primary"
+                                        class="oe_highlight" />
+                                <!-- Botón para Crear Auditorías -->
                             </tree>
                         </field>
                     </page>

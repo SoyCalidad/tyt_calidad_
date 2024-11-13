@@ -122,19 +122,15 @@ class AuditPlanning(models.Model):
     evaluation = fields.Char(string="Evaluación")
 
     def action_open_audit_application_form(self):
-        # Asigna los parámetros necesarios para la URL.
-        audit_id = self.id
-        audit_name = (
-            self.name
-        )  # Ejemplo de parámetro; puedes usar otros según necesites
+        planning_id = self.id  # ID de la línea de planificación actual
 
-        # Construye la URL del formulario, pasando los parámetros requeridos
-        url = f"/audit_application/{audit_id}/?audit_name={audit_name}"
+        # Construye la URL pasando el ID de la planificación
+        url = f"/audit_application/{planning_id}/"
 
         return {
             "type": "ir.actions.act_url",
             "url": url,
-            "target": "new",  # Esto abre el formulario en una nueva pestaña/página
+            "target": "new",
         }
 
 
@@ -249,31 +245,93 @@ class Audit(models.Model):
     )
 
 
-class AuditApplicationController(http.Controller):
-
-    @http.route(
-        "/audit_application/<int:audit_id>", type="http", auth="user", website=True
-    )
-    def audit_application_form(self, audit_id, **kwargs):
-        # Busca la información de la auditoría basada en el ID recibido
-        audit_record = request.env["audit.audit.planning"].sudo().browse(audit_id)
-
-        # Renderiza el formulario con los datos del registro
-        return request.render(
-            "tyt_audit.audit_application_form_template",
-            {
-                "audit": audit_record,
-            },
-        )
-
-
 class AuditGenerationForm(models.TransientModel):
     _name = "audit.generation.form"
     _description = "Formulario de Generación de Auditoría"
 
-    name = fields.Char(string="Nombre")
-    date = fields.Date(string="Fecha")
+    clause_id = fields.Many2one(
+        "audit.audit.planning.clause",
+        string="Cláusula",
+        default=lambda self: self.env.context.get("default_clause_id"),
+    )
+    iso_9001_standards_ids = fields.Many2many(
+        "audit.audit.planning.iso9001_standard",
+        string="Norma ISO 9001:2015",
+        default=lambda self: self.env.context.get("default_iso_9001_standards_ids"),
+    )
 
     def action_generate(self):
         # Por ahora, simplemente cierra el formulario o agrega una lógica simple
         return {"type": "ir.actions.act_window_close"}
+
+
+class AuditApplicationController(http.Controller):
+
+    @http.route(
+        "/audit_application/<int:planning_id>/", type="http", auth="user", website=True
+    )
+    def audit_application_form(self, planning_id, **kwargs):
+        planning_record = request.env["audit.audit.planning"].sudo().browse(planning_id)
+
+        if not planning_record.exists():
+            return request.not_found()
+
+        # Extrae los datos necesarios y asegura que `finding` tenga un valor predeterminado
+        procedure = (
+            planning_record.audit_audit_id.tyt_procedure_description_id.name
+            if planning_record.audit_audit_id.tyt_procedure_description_id
+            else ""
+        )
+        clause = planning_record.clause_id.name if planning_record.clause_id else ""
+        responsible = (
+            planning_record.employee_id.name if planning_record.employee_id else ""
+        )
+        verification = planning_record.verification or ""
+        audited = planning_record.audit_audit_id.employee_ids.mapped("name")
+        audited = ", ".join(audited) if audited else ""
+        audit_group = (
+            planning_record.audit_audit_id.team_id.name
+            if planning_record.audit_audit_id.team_id
+            else ""
+        )
+        # Aseguramos que `finding` tenga un valor predeterminado si está vacío
+        finding = (
+            planning_record.finding or "good_practice"
+        )  # Puedes ajustar el valor predeterminado
+        norm = (
+            ", ".join(planning_record.iso_9001_standards_ids.mapped("name"))
+            if planning_record.iso_9001_standards_ids
+            else ""
+        )
+        evidence = (
+            planning_record.evidence_id.name if planning_record.evidence_id else ""
+        )
+        audit_week = planning_record.audit_audit_id.audited_week or ""
+        audit_date = planning_record.audit_audit_id.audit_date or ""
+        center = (
+            planning_record.audit_audit_id.tyt_sites_related_id.name
+            if planning_record.audit_audit_id.tyt_sites_related_id
+            and hasattr(planning_record.audit_audit_id.tyt_sites_related_id, "name")
+            else ""
+        )
+
+        # Encapsula todos los datos en el contexto con `finding` incluido
+        context = {
+            "audit": {
+                "procedure": procedure,
+                "clause": clause,
+                "responsible": responsible,
+                "verification": verification,
+                "audited": audited,
+                "audit_group": audit_group,
+                "finding": finding,  # Asegúrate de incluir `finding` aquí
+                "norm": norm,
+                "evidence": evidence,
+                "audit_week": audit_week,
+                "audit_date": audit_date,
+                "center": center,
+            },
+            "planning_id": planning_id,
+        }
+
+        return request.render("tyt_audit.audit_application_form_template", context)
