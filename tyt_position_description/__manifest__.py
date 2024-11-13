@@ -21,6 +21,7 @@
         'views/hr_job_form_inherit.xml',
         'views/hr_job_form_inherit_2.xml',
         'views/position_description_template.xml',
-        'data/hr_job_work_day.xml',        
+        'data/hr_job_work_day.xml', 
+        'data/hr_job_maturity_level.xml',       
     ],
 }
