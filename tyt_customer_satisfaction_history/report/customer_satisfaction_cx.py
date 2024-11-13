@@ -96,6 +96,18 @@ class SurveyReport(models.AbstractModel):
             ]
         )
         
+        performance_by_location = {
+            'ARTEAGA': [0, 0, 0, 0],
+            'MERIDA': [0, 0, 0, 0],
+            'GUADALAJARA': [0, 0, 0, 0],
+            'TAPIA': [0, 0, 0, 0],
+            'PUEBLA': [0, 0, 0, 0],
+            'HERMOSILLO': [0, 0, 0, 0],
+            'QUERETARO': [0, 0, 0, 0],
+            'OBISPADO': [0, 0, 0, 0],
+            'TIJUANA': [0, 0, 0, 0],
+        }
+        
         current_row = 12
         
         def create_location_table(sheet, current_row):
@@ -178,6 +190,15 @@ class SurveyReport(models.AbstractModel):
                                 elif 8 <= line.qualification <= 10:
                                     total_promoters_qualification += line.qualification
                                 total_current_customer +=line.qualification
+                                if line.internal_category in ['cat_3_1', 'cat_3_2', 'cat_3_3']:
+                                    if line.internal_category == 'cat_3_1':
+                                        performance_by_location[location][0] += line.qualification
+                                    if line.internal_category == 'cat_3_2':
+                                        performance_by_location[location][1] += line.qualification
+                                    if line.internal_category == 'cat_3_3':
+                                        performance_by_location[location][2] += line.qualification
+                                        performance_by_location[location][3] += 1
+                                category_totals[category] += line.qualification
                     total_current_customer = total_current_customer / 17
                     if 1 <= total_current_customer <= 3:
                         detractors_count += 1
@@ -237,10 +258,13 @@ class SurveyReport(models.AbstractModel):
         current_row += 1
         
         for location in locations:
+            operation_average = performance_by_location[location][0] / performance_by_location[location][3] if performance_by_location[location][3] > 0 else 0
+            quality_average = performance_by_location[location][1] / performance_by_location[location][3] if performance_by_location[location][3] > 0 else 0
+            recruitment_average = performance_by_location[location][2] / performance_by_location[location][3] if performance_by_location[location][3] > 0 else 0
             sheet.write(current_row, 1, location, format21_gray_bold_sb)
-            sheet.write(current_row, 2, '', format21_left)
-            sheet.write(current_row, 3, '', format21_left)
-            sheet.write(current_row, 4, '', format21_left)
+            sheet.write(current_row, 2, f"{operation_average:.2f}", format21_left)
+            sheet.write(current_row, 3, f"{quality_average:.2f}", format21_left)
+            sheet.write(current_row, 4, f"{recruitment_average:.2f}", format21_left)
             current_row += 1
             
         current_row = 29
