@@ -11,6 +11,7 @@
         "mgmtsystem_validation",
         "mgmtsystem_nonconformity",
         "mgmtsystem_audit",
+        "website",
     ],
     "data": [
         "security/ir.model.access.csv",
@@ -34,10 +35,19 @@
         "data/iso9001_standard3.xml",
     ],
     "assets": {
+        "web.assets_backend": [
+            "/tyt_audit/static/src/img/logo_large.png",
+            "/tyt_audit/static/src/img/fondo_form.png",
+        ],
+        "web.assets_frontend": [
+            "/tyt_audit/static/src/img/logo_large.png",
+            "/tyt_audit/static/src/img/fondo_form.png",
+        ],
         "web.report_assets_common": [
             "/tyt_audit/static/src/scss/report_informe.scss",
         ],
     },
+    "images": ["/tyt_audit/static/src/img/logo_large.png"],
     "auto_install": False,
     "installable": True,
     "application": False,

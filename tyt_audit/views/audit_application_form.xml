@@ -1,6 +1,41 @@
 <odoo>
     <template id="audit_application_form_template" name="Formulario de Auditoría">
         <link rel="stylesheet" href="/web/static/lib/bootstrap/dist/css/bootstrap.css"/>
+        <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons/font/bootstrap-icons.css"/>
+        <style type="text/css">
+            /* Fondo de la página */
+            body {
+                background-image: url(/tyt_recruitment/static/src/img/fondo_form.png);
+                background-size: cover;
+            }
+            /* Estilo del encabezado */
+            h1 {
+                background-color: #1f8296;
+                padding: 15px;
+                color: white;
+                text-align: center;
+                border-radius: 5px;
+            }
+            /* Contenedor principal del formulario */
+            .container {
+                background: white;
+                padding: 20px;
+                border-radius: 8px;
+                box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1);
+                margin-top: 20px;
+            }
+            /* Footer del formulario */
+            .form-footer {
+                text-align: center;
+                margin-top: 20px;
+            }
+            /* Logo centrado al final */
+            .logo-container {
+                text-align: center;
+                margin-top: 20px;
+            }
+        </style>
+        
         <div class="container mt-4 mb-4">
             <h1>Formulario de Auditoría</h1>
             <form action="/audit_application/submit" method="post" class="p-4 border rounded bg-light">
@@ -66,6 +101,10 @@
                     <button type="button" class="btn btn-secondary" onclick="location.reload();">Siguiente</button>
                 </div>
             </form>
+            <!-- Logo temporalmente al final del formulario -->
+            <div class="text-center mt-4">
+                <img src="/tyt_audit/static/src/img/logo_large.png" alt="Logo" style="width: 150px; height: auto;"/>
+            </div>
         </div>
     </template>
 </odoo>

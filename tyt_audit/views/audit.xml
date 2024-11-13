@@ -78,8 +78,7 @@
                                 <button name="action_open_audit_application_form"
                                         string="Generar Auditoría"
                                         type="object"
-                                        class="btn-primary"
-                                        class="oe_highlight" />
+                                        class="btn-primary oe_highlight" />
                                 <!-- Botón para Crear Auditorías -->
                             </tree>
                         </field>
