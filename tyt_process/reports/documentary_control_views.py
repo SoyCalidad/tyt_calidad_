@@ -36,7 +36,7 @@ class IndividualReport(models.AbstractModel):
                 sheet.write('C9', 'Abreviatura', header_format)
                 sheet.write('E9', 'Área', header_format)
                 sheet.write('F9', 'Abreviatura', header_format)
-                sheet.write('G9', 'Código', header_format)
+                #sheet.write('G9', 'Código', header_format)
 
 
                 # Ajustar el ancho de las columnas
