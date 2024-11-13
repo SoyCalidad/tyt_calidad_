@@ -81,6 +81,7 @@
                         <field name="partner_company" />
                         <field name="campaign" />
                         <field name="location" />
+                        <field name="create_date" />
                         <field name="line_ids" />
                     </group>
                 </sheet>
@@ -97,6 +98,7 @@
                 <field name="job" />
                 <field name="partner_company" />
                 <field name="campaign" />
+                <field name="create_date" />
             </tree>
         </field>
     </record>
