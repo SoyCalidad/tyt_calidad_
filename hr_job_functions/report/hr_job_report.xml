@@ -222,15 +222,39 @@
                                     <tr>
                                         <td class="tg-zv36">
                                             Fecha:
-                                            <span t-field="o.date_elaborate" />
+                                            <t t-if="o.elaboration_step.date and o.elaboration_step.check">
+                                                <span t-field="o.elaboration_step.date" 
+                                                    t-options='{"widget": "datetime", 
+                                                        "timezone": context.get("tz") or "UTC",
+                                                        "format": "dd/MM/yyyy"}'/> 
+                                            </t>
+                                            <t t-else="">
+                                                Sin efectuar
+                                            </t>
                                         </td>
                                         <td class="tg-zv36">
                                             Fecha:
-                                            <span t-field="o.date_review" />
+                                            <t t-if="o.review_step.date and o.review_step.check">
+                                                <span t-field="o.review_step.date" 
+                                                    t-options='{"widget": "datetime", 
+                                                        "timezone": context.get("tz") or "UTC",
+                                                        "format": "dd/MM/yyyy"}'/> 
+                                            </t>
+                                            <t t-else="">
+                                                Sin efectuar
+                                            </t>
                                         </td>
                                         <td class="tg-zv36">
                                             Fecha:
-                                            <span t-field="o.date_validate" />
+                                            <t t-if="o.validation_step.date and o.validation_step.check">
+                                                <span t-field="o.validation_step.date" 
+                                                    t-options='{"widget": "datetime", 
+                                                        "timezone": context.get("tz") or "UTC",
+                                                        "format": "dd/MM/yyyy"}'/> 
+                                            </t>
+                                            <t t-else="">
+                                                Sin efectuar
+                                            </t>
                                         </td>
                                     </tr>
                                 </table>
@@ -653,6 +677,5 @@
                 name="hr_job_functions.reporte_resultados_employees_template"
                 file="Manual de organización y funciones"
                 paperformat="hola_calidad.portrait" />
-
     </data>
 </odoo>

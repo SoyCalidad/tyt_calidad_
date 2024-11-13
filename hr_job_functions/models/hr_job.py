@@ -7,7 +7,7 @@ import tempfile
 
 class Job(models.Model):
     _name = 'hr.job'
-    _inherit = ['hr.job', 'mgmtsystem.validation',
+    _inherit = ['hr.job', 'mgmtsystem.validation.hr.job',
                 'mail.thread', 'mail.activity.mixin']
 
     parent_id = fields.Many2one('hr.job', string='Cargo jefe inmediato')
@@ -24,6 +24,13 @@ class Job(models.Model):
     job_profile = fields.Many2one('hr.job.profile', string='Perfil del puesto')
     generic_skills = fields.One2many(
         'hr.job.generic_skill', 'job_id', string='Competencias Genéricas', copy=True)
+    
+    position_skills = fields.One2many(
+        'hr.job.position_skill', 'job_id', string='Competencias del Puesto', copy=True)
+    
+    client_skills = fields.One2many(
+        'hr.job.client_skill', 'job_id', string='Competencias del Cliente', copy=True)
+    
     workteam_skills = fields.One2many(
         'hr.job.workteam_skill', 'job_id', string='Competencias de Trabajo en Equipo', copy=True)
     personal_skills = fields.One2many(
@@ -32,12 +39,27 @@ class Job(models.Model):
         'hr.job.strategic_skill', 'job_id', string='Competencias Estratégicas', copy=True)
     active = fields.Boolean('Active', default=True)
 
-    '''
+    
     state = fields.Selection([
-        ('recruit', 'Contratación en curso'),
-        ('open', 'No seleccionado'),
+        ('a', 'Contratación en curso'),
+        ('b', 'No seleccionado'),
     ], string='Estado')
-    '''
+    
+    # Remove the uniqueness rule to allow duplicate names
+    _sql_constraints = [
+        ('name_company_uniq', 'unique(company_id, department_id)', 'The name of the job position must not be unique per department in company!'),
+        ('no_of_recruitment_positive', 'CHECK(no_of_recruitment >= 0)', 'The expected number of new employees must be positive.'),
+    ]    
+
+    # Update copy method
+    @api.returns('self', lambda value: value.id)
+    def copy(self, default=None):
+        self.ensure_one()
+        default = dict(default or {})
+        if 'name' not in default:
+            default['name'] = self.name  # Mantener el mismo nombre y Evitar que se agregue "(copy)" al nombre
+        return super(Job, self).copy(default=default)
+
 
     validation_state = fields.Selection(
         string=u'Estado',
@@ -252,8 +274,17 @@ class Skill(models.Model):
 class GenericSkill(models.Model):
     _inherit = 'hr.job.skill'
     _name = 'hr.job.generic_skill'
+    
+    type=fields.Char(string='Tipo')
 
-
+class PositionSkill(models.Model):
+    _inherit = 'hr.job.skill'
+    _name = 'hr.job.position_skill'
+    
+class ClientSkill(models.Model):
+    _inherit = 'hr.job.skill'
+    _name = 'hr.job.client_skill'
+    
 class WorkteamSkill(models.Model):
     _inherit = 'hr.job.skill'
     _name = 'hr.job.workteam_skill'

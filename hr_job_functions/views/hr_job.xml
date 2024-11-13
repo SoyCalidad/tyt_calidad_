@@ -120,50 +120,70 @@
                     <page id="skills" string="Habilidades"
                         groups="mgmtsystem_employees.group_employees_onlyread_printreport,mgmtsystem_employees.group_employees_write_printreport,mgmtsystem_employees.group_employees_all">
                         <group attrs="{'readonly':[('validation_state','in', ('validate_ok'))]}">
-                            <field name="generic_skills" attrs="{'readonly':[('validation_state','in', ('validate_ok'))]}">
+                            <field name="generic_skills" mode="tree,form" attrs="{'readonly': [('validation_state', 'in', ('validate_ok'))]}">
                                 <tree>
-                                    <field name="name" style="max-width:200px;" />
-                                    <field name="relevance" />
+                                    <field name="type"/>
+                                    <field name="name"/>
                                 </tree>
+                                <form>
+                                    <sheet>
+                                        <div class="oe_title" style="font-weight: bold;">
+                                            <t t-esc="'Type'"/>
+                                        </div>
+                                        <field name="type" string="Type" label="true"/>
+                                        <div class="oe_title" style="font-weight: bold;">
+                                            <t t-esc="'Name'"/>
+                                        </div>
+                                        <field name="name" string="Name" label="true"/>
+                                    </sheet>
+                                </form>
                             </field>
-                            <field name="workteam_skills" attrs="{'readonly':[('validation_state','in', ('validate_ok'))]}">
+                            <field name="position_skills" attrs="{'readonly':[('validation_state','in', ('validate_ok'))]}">
                                 <tree>
-                                    <field name="name" style="max-width:200px;" />
-                                    <field name="relevance" />
+                                    <field name="name"/>
                                 </tree>
+                                <form>
+                                    <sheet>
+                                        <div class="oe_title" style="font-weight: bold;">
+                                            <t t-esc="'Name'"/>
+                                        </div>
+                                        <field name="name" string="Name" label="true"/>
+                                    </sheet>
+                                </form>
                             </field>
-                            <field name="personal_skills" attrs="{'readonly':[('validation_state','in', ('validate_ok'))]}">
+                            <field name="client_skills" attrs="{'readonly':[('validation_state','in', ('validate_ok'))]}">
                                 <tree>
-                                    <field name="name" style="max-width:200px;" />
-                                    <field name="relevance" />
+                                    <field name="name"/>
                                 </tree>
-                            </field>
-                            <field name="strategic_skills" attrs="{'readonly':[('validation_state','in', ('validate_ok'))]}">
-                                <tree>
-                                    <field name="name" style="max-width:200px;" />
-                                    <field name="relevance" />
-                                </tree>
+                                <form>
+                                    <sheet>
+                                        <div class="oe_title" style="font-weight: bold;">
+                                            <t t-esc="'Name'"/>
+                                        </div>
+                                        <field name="name" string="Name" label="true"/>
+                                    </sheet>
+                                </form>
                             </field>
                         </group>
                     </page>
                     <page name="version_info" string="Validación y versión"
                         groups="mgmtsystem_employees.group_employees_onlyread_printreport,mgmtsystem_employees.group_employees_write_printreport,mgmtsystem_employees.group_employees_all">
-                        <group col="4" attrs="{'readonly':[('validation_state','in', ('validate_ok'))]}">
-                            <group colspan="4">
+                        <group col="2" attrs="{'readonly':[('validation_state','in', ('validate_ok'))]}">
+                            <group colspan="2">
                                 <field name="version" />
                             </group>
-                            <group colspan="4">
+                            <group colspan="2">
                                 <separator string="" />
-                                <field name="elaboration_step" colspan="4" nolabel="1" attrs="{'readonly': [('validation_state','not in',('elaborate'))]}" />
+                                <field name="elaboration_step" colspan="2" nolabel="1" attrs="{'readonly': [('validation_state','not in',('elaborate'))]}" />
                                 <separator string="Revisión" />
-                                <field name="review_step" colspan="4" nolabel="1" attrs="{'readonly': [('validation_state','not in',('elaborate', 'review'))]}" />
+                                <field name="review_step" colspan="2" nolabel="1" attrs="{'readonly': [('validation_state','not in',('elaborate', 'review'))]}" />
                                 <separator string="Validación" />
-                                <field name="validation_step" colspan="4" nolabel="1" attrs="{'readonly': [('validation_state','not in',('elaborate', 'review', 'validate'))]}" />
+                                <field name="validation_step" colspan="2" nolabel="1" attrs="{'readonly': [('validation_state','not in',('elaborate', 'review', 'validate'))]}" />
                             </group>
                             <group colspan="2">
-                                <field name="date_elaborate" attrs="{'required': [('validation_state','in',('elaborate'))], 'readonly': True}" />
-                                <field name="date_review" attrs="{'required': [('validation_state','in',('review'))], 'readonly': True, 'invisible': [('validation_state','in',('elaborate'))] }" />
-                                <field name="date_validate" groups="base.group_no_one,base.user_admin" attrs="{'invisible': [('validation_state','in',('elaborate','review'))] }" />
+                                <field name="date_elaborate" invisible="1" attrs="{'required': [('validation_state','in',('elaborate'))], 'readonly': True}" />
+                                <field name="date_review" invisible="1" attrs="{'required': [('validation_state','in',('review'))], 'readonly': True, 'invisible': [('validation_state','in',('elaborate'))] }" />
+                                <field name="date_validate" invisible="1" groups="base.group_no_one,base.user_admin" attrs="{'invisible': [('validation_state','in',('elaborate','review'))] }" />
                             </group>
                         </group>
                     </page>
@@ -409,14 +429,46 @@
             <field name="model">hr.job.generic_skill</field>
             <field name="arch" type="xml">
                 <tree string="Habilidad" editable="bottom">
+                    <field name="type" />
                     <field name="name" />
-                    <field name="relevance" />
                 </tree>
             </field>
         </record>
         <record id="hr_job_generic_skill_action" model="ir.actions.act_window">
             <field name="name">hr.job.generic_skill.action</field>
             <field name="res_model">hr.job.generic_skill</field>
+            <field name="view_mode">tree,form</field>
+            <field name="domain">[]</field>
+            <field name="context">{}</field>
+        </record>
+        <record id="hr_job_position_skill_view_tree" model="ir.ui.view">
+            <field name="name">hr.job.position_skill.view.tree</field>
+            <field name="model">hr.job.position_skill</field>
+            <field name="arch" type="xml">
+                <tree string="Habilidad" editable="bottom">
+                    <field name="name" />
+                </tree>
+            </field>
+        </record>
+        <record id="hr_job_position_skill_action" model="ir.actions.act_window">
+            <field name="name">hr.job.position_skill.action</field>
+            <field name="res_model">hr.job.position_skill</field>
+            <field name="view_mode">tree,form</field>
+            <field name="domain">[]</field>
+            <field name="context">{}</field>
+        </record>
+        <record id="hr_job_client_skill_view_tree" model="ir.ui.view">
+            <field name="name">hr.job.client_skill.view.tree</field>
+            <field name="model">hr.job.client_skill</field>
+            <field name="arch" type="xml">
+                <tree string="Habilidad" editable="bottom">
+                    <field name="name" />
+                </tree>
+            </field>
+        </record>
+        <record id="hr_job_client_skill_action" model="ir.actions.act_window">
+            <field name="name">hr.job.client_skill.action</field>
+            <field name="res_model">hr.job.client_skill</field>
             <field name="view_mode">tree,form</field>
             <field name="domain">[]</field>
             <field name="context">{}</field>
