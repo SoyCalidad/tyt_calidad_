@@ -174,12 +174,11 @@ class RecordMeeting(models.Model):
             'name': '%s:%s' % ("Re", self.name),
             'document_id': self.document_id.id,
             'resume': self.resume,
-            'employee_id': self.employee_id.id,
-            'partner_ids': self.partner_id.id,
+            'partner_ids': [(6, 0, self.partner_ids.ids)],
+            'employee_ids': [(6, 0, self.employee_ids.ids)], 
             'date_release': fields.Datetime.now(self)
         })
         other_record.line_ids = cline_ids.ids
-        other_record.employee_ids = self.employee_ids
         ###
         action = self.env.ref(
             'mgmtsystem_comunication.record_meeting_action').read()[0]

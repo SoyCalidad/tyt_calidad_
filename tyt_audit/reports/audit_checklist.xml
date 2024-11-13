@@ -1,0 +1,14 @@
+<odoo>
+    <data>
+        <record id="action_audit_checklist_xlsx" model="ir.actions.report">
+            <field name="name">Lista de Verificación</field>
+            <field name="model">audit.audit</field>
+            <field name="report_type">xlsx</field>
+            <field name="report_name">tyt_audit.audit_checklist_report</field>
+            <field name="report_file">tyt_audit.audit_checklist_report</field>
+            <field name="binding_model_id" ref="mgmtsystem_audit.model_audit_audit"/>
+            <field name="binding_type">report</field>
+            <field name="attachment_use" eval="False"/>
+        </record>
+    </data>
+</odoo>

@@ -1,0 +1,51 @@
+{
+    'name': 'Reclutamiento TYT Contact Center - Soy Calidad',
+    'version': '1.0',
+    'description': 'Añade características al módulo Reclutamiento TYT Contact Center',
+    'summary': 'Añade características al módulo Reclutamiento TYT Contact Center',
+    'author': 'Soy Calidad',
+    'website': 'www.soycalidad.com',
+    'license': '',
+    'category': 'soycalidad',
+    'depends': [
+        'hola_calidad',
+        'hr_recruitment',
+        'report_xlsx',
+        'website'
+    ],
+    'data': [
+        'security/ir.model.access.csv',
+        'views/view_requisition.xml',
+        'data/mail_templates.xml',
+        'views/share_templates.xml',
+        'reports/reports_xls.xml',
+        'reports/reports_pdf.xml',
+        'views/template_report_requisition.xml',
+        'views/view_job_application.xml',
+        'views/job_application_form.xml',
+        'views/view_health_survey.xml',
+        'views/health_survey_form.xml'
+    ],
+    'auto_install': False,
+    'installable': True,
+    'application': False,
+
+    'assets': {
+        'tyt_recruitment.assets_pdfjs_viewer': [
+            'tyt_recruitment/static/lib/pdfjs/build/pdf.js',
+            'tyt_recruitment/static/lib/pdfjs/build/pdf.worker.js',
+            'tyt_recruitment/static/lib/pdfjs/web/viewer.css',
+            'tyt_recruitment/static/lib/pdfjs/web/viewer.js',
+            'tyt_recruitment/static/lib/pdfjs/web/viewer.html',
+            'tyt_recruitment/static/lib/pdfjs/web/cmaps/**',
+            'tyt_recruitment/static/lib/pdfjs/web/images/**',
+            'tyt_recruitment/static/lib/pdfjs/web/locale/**',
+        ],
+        'web.assets_backend': [
+            '/tyt_recruitment/static/src/img/logo.png',
+            '/tyt_recruitment/static/src/img/logo_large.png',
+            '/tyt_recruitment/static/src/img/fondo_form.png',
+        ],
+    },
+    'images': ["static/src/img/logo.png"],
+}

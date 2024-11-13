@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <record id="view_record_meeting_form" model="ir.ui.view">
+        <field name="name">record.meeting.view.form.inherit</field>
+        <field name="model">record.meeting</field>
+        <field name="inherit_id" ref="mgmtsystem_comunication.view_record_meeting_form"/>
+        <field name="arch" type="xml">
+            <xpath expr="//field[@name='date_release']" position="after">
+                <field name="objective"/>
+                <field name="meeting_time" widget="float_time"/>
+            </xpath>
+            <xpath expr="//notebook//field[@name='line_ids']//form//field[@name='check']" position="before">
+                <field name="comment"/>
+            </xpath>
+        </field>
+    </record>
+</odoo>

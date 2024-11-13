@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <template id="portal_my_home_sign" inherit_id="sign.portal_my_home_sign" priority="60">
+        <xpath expr="//div[hasclass('o_portal_docs')]" position="before">
+            <t t-set="portal_client_category_enable" t-value="True"/>
+        </xpath>
+        <div id="portal_client_category" position="inside">
+            <t t-call="portal.portal_docs_entry">
+                <t t-set="icon" t-value="'/tyt_intranet_portal/static/src/img/rfq.svg'"/>
+                <t t-set="title">Documentos</t>
+                <t t-set="text">Acceda a sus documentos firmados</t>
+                <t t-set="url" t-value="'/my/signatures'"/>
+            </t>
+        </div>
+    </template>
+</odoo>

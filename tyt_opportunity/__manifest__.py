@@ -14,6 +14,7 @@
     ],
     'data': [
         'views/block_views.xml',
+        'data/data.xml'
     ],
     'auto_install': False,
     'installable': True,

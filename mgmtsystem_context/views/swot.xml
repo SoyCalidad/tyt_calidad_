@@ -160,8 +160,8 @@
                                         </span>
                                     </div>
                                     <field name="external_weight_sum" colspan="2" style="width:80%; max-width:300px;" />
-                                    <field name="external_weight_sum" colspan="2" style="width:80%; max-width:300px;" />
-                                    <field name="external_weight_sum" colspan="2" style="width:80%; max-width:300px;" attrs="{'readonly': [('state','in',('validate_ok','cancel'))]}"  />
+                                    <field name="external_total" colspan="2" style="width:80%; max-width:300px;" />
+                                    <field name="external_interpretation" colspan="2" style="width:80%; max-width:300px;" attrs="{'readonly': [('state','in',('validate_ok','cancel'))]}"  />
                                 </group>
                                 <span colspan="4">
                                     Cuando el Indice total es mayor o igual a 2.5 se considera que la empresa está en condiciones de afrontar el entorno de

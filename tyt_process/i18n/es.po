@@ -1,0 +1,379 @@
+# Translation of Odoo Server.
+# This file contains the translation of the following modules:
+# 	* tyt_process
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: Odoo Server 16.0-20240711\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2024-09-02 13:17+0000\n"
+"PO-Revision-Date: 2024-09-02 13:17+0000\n"
+"Last-Translator: \n"
+"Language-Team: \n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: \n"
+"Plural-Forms: \n"
+
+#. module: tyt_process
+#: model:ir.actions.report,print_report_name:tyt_process.action_report_procedure_edition_tyt
+#: model:ir.actions.report,print_report_name:tyt_process.action_report_procedure_edition_tyt_back_cover
+#: model:ir.actions.report,print_report_name:tyt_process.action_report_procedure_edition_tyt_body
+#: model:ir.actions.report,print_report_name:tyt_process.action_report_procedure_edition_tyt_cover
+#: model:ir.actions.report,print_report_name:tyt_process.action_report_procedure_edition_tyt_meta
+#: model:ir.actions.report,print_report_name:tyt_process.action_report_procedure_edition_tyt_toc
+msgid "'%s' % object.name"
+msgstr ""
+
+#. module: tyt_process
+#: model_terms:ir.ui.view,arch_db:tyt_process.system_process_edition_form_view_inherit_inherit
+msgid "1. Objective, Scope, and Users"
+msgstr "1. Objetivo, alcance y usuarios"
+
+#. module: tyt_process
+#: model_terms:ir.ui.view,arch_db:tyt_process.report_procedure_edition_tyt_body
+msgid "1. Objetivo, alcance y usuarios"
+msgstr ""
+
+#. module: tyt_process
+#: model_terms:ir.ui.view,arch_db:tyt_process.report_procedure_edition_tyt_body
+msgid "2. Documentos de Referencia"
+msgstr ""
+
+#. module: tyt_process
+#: model_terms:ir.ui.view,arch_db:tyt_process.system_process_edition_form_view_inherit_inherit
+msgid "2. Reference Documents"
+msgstr "2. Documentos de Referencia"
+
+#. module: tyt_process
+#: model_terms:ir.ui.view,arch_db:tyt_process.report_procedure_edition_tyt_body
+msgid "3. Descripción"
+msgstr ""
+
+#. module: tyt_process
+#: model_terms:ir.ui.view,arch_db:tyt_process.system_process_edition_form_view_inherit_inherit
+msgid "3. Description"
+msgstr "3. Descripción"
+
+#. module: tyt_process
+#: model_terms:ir.ui.view,arch_db:tyt_process.report_procedure_edition_tyt_body
+msgid "4. Gestión de registros guardados con base en este documento"
+msgstr ""
+
+#. module: tyt_process
+#: model_terms:ir.ui.view,arch_db:tyt_process.system_process_edition_form_view_inherit_inherit
+msgid "4. Management of Records Kept Based on This Document"
+msgstr "4. Gestión de registros guardados con base en este documento"
+
+#. module: tyt_process
+#: model_terms:ir.ui.view,arch_db:tyt_process.system_process_edition_form_view_inherit_inherit
+msgid "5. Appendices"
+msgstr ""
+
+#. module: tyt_process
+#: model_terms:ir.ui.view,arch_db:tyt_process.report_procedure_edition_tyt_body
+msgid "5. Apéndices"
+msgstr ""
+
+#. module: tyt_process
+#: model_terms:ir.ui.view,arch_db:tyt_process.external_layout_tyt_document
+msgid "<span>Page <span class=\"page\"/></span> of <span class=\"topage\"/>"
+msgstr "<span>Página <span class=\"page\"/></span> de <span class=\"topage\"/>"
+
+#. module: tyt_process
+#: model:ir.model.fields,field_description:tyt_process.field_process_edition__tyt_appendices
+msgid "Appendices"
+msgstr "Apéndices"
+
+#. module: tyt_process
+#: model_terms:ir.ui.view,arch_db:tyt_process.report_procedure_edition_tyt_cover
+msgid "Cargo"
+msgstr ""
+
+#. module: tyt_process
+#: model_terms:ir.ui.view,arch_db:tyt_process.report_procedure_edition_tyt_meta
+msgid "Change History"
+msgstr "Historial de cambios"
+
+#. module: tyt_process
+#: model_terms:ir.ui.view,arch_db:tyt_process.report_procedure_edition_tyt_cover
+msgid "Codigo"
+msgstr ""
+
+#. module: tyt_process
+#: model_terms:ir.ui.view,arch_db:tyt_process.system_process_edition_form_view_inherit_inherit
+msgid "Content"
+msgstr "Contenido"
+
+#. module: tyt_process
+#: model_terms:ir.ui.view,arch_db:tyt_process.report_procedure_edition_tyt_meta
+msgid "Copia N°"
+msgstr ""
+
+#. module: tyt_process
+#: model:ir.model.fields,field_description:tyt_process.field_tyt_distribution_list__create_uid
+#: model:ir.model.fields,field_description:tyt_process.field_tyt_document_record__create_uid
+msgid "Created by"
+msgstr "Creado por"
+
+#. module: tyt_process
+#: model:ir.model.fields,field_description:tyt_process.field_tyt_distribution_list__create_date
+#: model:ir.model.fields,field_description:tyt_process.field_tyt_document_record__create_date
+msgid "Created on"
+msgstr "Creado el"
+
+#. module: tyt_process
+#: model_terms:ir.ui.view,arch_db:tyt_process.report_procedure_edition_tyt_meta
+msgid "Descripción de la modificación"
+msgstr ""
+
+#. module: tyt_process
+#: model:ir.model.fields,field_description:tyt_process.field_tyt_distribution_list__display_name
+#: model:ir.model.fields,field_description:tyt_process.field_tyt_document_record__display_name
+msgid "Display Name"
+msgstr "Nombre a mostrar"
+
+#. module: tyt_process
+#: model_terms:ir.ui.view,arch_db:tyt_process.report_procedure_edition_tyt_meta
+msgid "Distribuida a"
+msgstr ""
+
+#. module: tyt_process
+#: model:ir.model.fields,field_description:tyt_process.field_tyt_distribution_list__distributed_to
+msgid "Distributed to"
+msgstr "Distribuido a"
+
+#. module: tyt_process
+#: model:ir.model.fields,field_description:tyt_process.field_tyt_distribution_list__distribution_date
+msgid "Distribution Date"
+msgstr "Fecha"
+
+#. module: tyt_process
+#: model:ir.actions.act_window,name:tyt_process.tyt_distribution_list_action
+#: model_terms:ir.ui.view,arch_db:tyt_process.report_procedure_edition_tyt_meta
+#: model_terms:ir.ui.view,arch_db:tyt_process.system_process_edition_form_view_inherit_inherit
+#: model_terms:ir.ui.view,arch_db:tyt_process.tyt_distribution_list_view_form
+#: model_terms:ir.ui.view,arch_db:tyt_process.tyt_distribution_list_view_search
+#: model_terms:ir.ui.view,arch_db:tyt_process.tyt_distribution_list_view_tree
+msgid "Distribution List"
+msgstr "Lista de distribución"
+
+#. module: tyt_process
+#: model:ir.model.fields,field_description:tyt_process.field_process_edition__tyt_distribution_list_ids
+msgid "Distribution Lists"
+msgstr "Listas de distribución"
+
+#. module: tyt_process
+#: model:ir.actions.act_window,name:tyt_process.tyt_document_record_action
+#: model_terms:ir.ui.view,arch_db:tyt_process.tyt_document_record_view_form
+#: model_terms:ir.ui.view,arch_db:tyt_process.tyt_document_record_view_search
+#: model_terms:ir.ui.view,arch_db:tyt_process.tyt_document_record_view_tree
+msgid "Document Record"
+msgstr "Registro de documento"
+
+#. module: tyt_process
+#: model:ir.model,name:tyt_process.model_process_edition
+msgid "Edición de procedimiento"
+msgstr ""
+
+#. module: tyt_process
+#: model:ir.model.fields,field_description:tyt_process.field_tyt_distribution_list__edition_id
+#: model:ir.model.fields,field_description:tyt_process.field_tyt_document_record__edition_id
+msgid "Edition"
+msgstr "Edición"
+
+#. module: tyt_process
+#: model_terms:ir.ui.view,arch_db:tyt_process.report_procedure_edition_tyt_meta
+msgid "Elaborado por"
+msgstr ""
+
+#. module: tyt_process
+#: model_terms:ir.ui.view,arch_db:tyt_process.report_procedure_edition_tyt_meta
+msgid "Fecha"
+msgstr ""
+
+#. module: tyt_process
+#: model:ir.model.fields,field_description:tyt_process.field_tyt_distribution_list__id
+#: model:ir.model.fields,field_description:tyt_process.field_tyt_document_record__id
+msgid "ID"
+msgstr ""
+
+#. module: tyt_process
+#: model:ir.model.fields,field_description:tyt_process.field_tyt_distribution_list__job_id
+msgid "Job"
+msgstr "Puesto"
+
+#. module: tyt_process
+#: model:ir.model.fields,field_description:tyt_process.field_tyt_distribution_list____last_update
+#: model:ir.model.fields,field_description:tyt_process.field_tyt_document_record____last_update
+msgid "Last Modified on"
+msgstr "Última modificación el"
+
+#. module: tyt_process
+#: model:ir.model.fields,field_description:tyt_process.field_tyt_distribution_list__write_uid
+#: model:ir.model.fields,field_description:tyt_process.field_tyt_document_record__write_uid
+msgid "Last Updated by"
+msgstr "Última actualización por"
+
+#. module: tyt_process
+#: model:ir.model.fields,field_description:tyt_process.field_tyt_distribution_list__write_date
+#: model:ir.model.fields,field_description:tyt_process.field_tyt_document_record__write_date
+msgid "Last Updated on"
+msgstr "Última actualización el"
+
+#. module: tyt_process
+#: model:ir.model.fields,field_description:tyt_process.field_tyt_document_record__location
+msgid "Location"
+msgstr "Lugar"
+
+#. module: tyt_process
+#: model_terms:ir.ui.view,arch_db:tyt_process.external_layout_tyt_document
+msgid "Logo"
+msgstr ""
+
+#. module: tyt_process
+#: model_terms:ir.ui.view,arch_db:tyt_process.report_procedure_edition_tyt_meta
+msgid "Lugar"
+msgstr ""
+
+#. module: tyt_process
+#: model:ir.model.fields,field_description:tyt_process.field_process_edition__tyt_document_record_ids
+msgid "Management of Records Kept Based on This Document"
+msgstr "Gestión de registros guardados con base en este documento"
+
+#. module: tyt_process
+#: model:ir.model.fields,field_description:tyt_process.field_tyt_document_record__name
+msgid "Name"
+msgstr "Nombre"
+
+#. module: tyt_process
+#: model_terms:ir.ui.view,arch_db:tyt_process.report_procedure_edition_tyt_body
+#: model_terms:ir.ui.view,arch_db:tyt_process.report_procedure_edition_tyt_cover
+msgid "Nombre"
+msgstr ""
+
+#. module: tyt_process
+#: model:ir.model.fields,field_description:tyt_process.field_tyt_distribution_list__number_of_copy
+msgid "Number of copy"
+msgstr ""
+
+#. module: tyt_process
+#: model:ir.model.fields,field_description:tyt_process.field_process_edition__tyt_objective_scope_users
+msgid "Objective, Scope and Users"
+msgstr "Objetivo, alcance y usuarios"
+
+#. module: tyt_process
+#: model:ir.model.fields,field_description:tyt_process.field_tyt_distribution_list__place
+msgid "Place"
+msgstr "Lugar"
+
+#. module: tyt_process
+#: model_terms:ir.ui.view,arch_db:tyt_process.report_procedure_edition_tyt_cover
+msgid "Por"
+msgstr ""
+
+#. module: tyt_process
+#: model_terms:ir.ui.view,arch_db:tyt_process.report_procedure_edition_tyt_body
+msgid "Prefijo"
+msgstr ""
+
+#. module: tyt_process
+#: model:ir.model.fields,field_description:tyt_process.field_tyt_document_record__prefix
+msgid "Prefix"
+msgstr "Prefijo"
+
+#. module: tyt_process
+#: model:ir.model.fields,field_description:tyt_process.field_process_edition__tyt_procedure_description
+msgid "Procedure Description"
+msgstr "Descripción del procedimiento"
+
+#. module: tyt_process
+#: model:ir.actions.report,name:tyt_process.action_report_procedure_edition_tyt
+msgid "Procedure Edition"
+msgstr "Edición de procedimiento"
+
+#. module: tyt_process
+#: model:ir.actions.report,name:tyt_process.action_report_procedure_edition_tyt_back_cover
+msgid "Procedure Edition Back Cover"
+msgstr "Contraportada de la edición de procedimiento"
+
+#. module: tyt_process
+#: model:ir.actions.report,name:tyt_process.action_report_procedure_edition_tyt_cover
+msgid "Procedure Edition Cover"
+msgstr "Portada de la edición de procedimiento"
+
+#. module: tyt_process
+#: model:ir.actions.report,name:tyt_process.action_report_procedure_edition_tyt_meta
+msgid "Procedure Edition Meta"
+msgstr "Meta de la edición de procedimiento"
+
+#. module: tyt_process
+#: model:ir.actions.report,name:tyt_process.action_report_procedure_edition_tyt_toc
+msgid "Procedure Edition Table of Contents"
+msgstr "Índice de la edición de procedimiento"
+
+#. module: tyt_process
+#: model:ir.actions.report,name:tyt_process.action_report_procedure_edition_tyt_body
+msgid "Process Edition TYT Body"
+msgstr "Contenido de la edición de procedimiento"
+
+#. module: tyt_process
+#: model_terms:ir.ui.view,arch_db:tyt_process.report_procedure_edition_tyt_meta
+msgid "Puesto"
+msgstr ""
+
+#. module: tyt_process
+#: model:ir.model.fields,field_description:tyt_process.field_process_edition__tyt_reference_documents
+msgid "Reference Documents"
+msgstr "Documentos de referencia"
+
+#. module: tyt_process
+#: model_terms:ir.ui.view,arch_db:tyt_process.inherit_mgmt_process_form
+msgid "Registro de inventario"
+msgstr ""
+
+#. module: tyt_process
+#: model:ir.model,name:tyt_process.model_ir_actions_report
+msgid "Report Action"
+msgstr "Acción de informe"
+
+#. module: tyt_process
+#: model_terms:ir.ui.view,arch_db:tyt_process.report_procedure_edition_tyt_body
+msgid "Responsable"
+msgstr ""
+
+#. module: tyt_process
+#: model:ir.model.fields,field_description:tyt_process.field_tyt_document_record__responsible
+msgid "Responsible"
+msgstr "Responsable"
+
+#. module: tyt_process
+#: model:ir.model,name:tyt_process.model_tyt_distribution_list
+msgid "TYT Distribution List"
+msgstr "Lista de distribución TYT"
+
+#. module: tyt_process
+#: model:ir.model,name:tyt_process.model_tyt_document_record
+msgid "TYT Document Record"
+msgstr "Registro de documento TYT"
+
+#. module: tyt_process
+#: model:ir.model,name:tyt_process.model_report_tyt_process_report_procedure_edition_tyt
+msgid "TYT Procedure Edition Report"
+msgstr "Report de edición de procedimiento TYT"
+
+#. module: tyt_process
+#: model_terms:ir.ui.view,arch_db:tyt_process.report_procedure_edition_tyt_body
+msgid "Ubicación"
+msgstr ""
+
+#. module: tyt_process
+#: model_terms:ir.ui.view,arch_db:tyt_process.external_layout_tyt_document
+msgid "Ver."
+msgstr ""
+
+#. module: tyt_process
+#: model_terms:ir.ui.view,arch_db:tyt_process.report_procedure_edition_tyt_cover
+#: model_terms:ir.ui.view,arch_db:tyt_process.report_procedure_edition_tyt_meta
+msgid "Versión"
+msgstr ""

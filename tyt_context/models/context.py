@@ -13,3 +13,9 @@ class StakeholderReq(models.Model):
         comodel_name='hr.job', string='Puesto Responsable')
     
     limit_date_req = fields.Char(string='Fecha límite')
+    
+
+class Stakeholder(models.Model):
+    _inherit = 'mgmtsystem.stakeholder'
+
+    mgmt_process = fields.Many2one('mgmt.process', string="Procedimiento/Proceso/Actividad Relacionado")

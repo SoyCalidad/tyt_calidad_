@@ -79,6 +79,30 @@ class Legal(models.Model):
         comodel_name='res.partner',
         ondelete='restrict',
     )
+
+    @api.onchange('is_outsourcing')
+    def _onchange_is_outsourcing(self):
+        """
+        Si se marca el campo `is_outsourcing`, se limpia `user_id` 
+        y se hace obligatorio `partner_id`.
+        """
+        if self.is_outsourcing:
+            # Limpiar el campo user_id
+            self.user_id = False
+        else:
+            # Resetear la obligatoriedad de partner_id si se desmarca el booleano
+            self.partner_id = False
+
+    @api.constrains('is_outsourcing', 'partner_id')
+    def _check_partner_id_required(self):
+        """
+        Validación que hace obligatorio `partner_id` si `is_outsourcing` es verdadero.
+        """
+        for record in self:
+            if record.is_outsourcing and not record.partner_id:
+                raise ValidationError("Atención! cuando se marca '¿Tercerización?', debe seleccionar un 'Responsable' por favor.")
+
+
     resume = fields.Text(
         string=u'Resumen',
     )
@@ -163,15 +187,43 @@ class Article(models.Model):
     )
     resume = fields.Text(
         string=u'Resumen',
+        related='legal_id.resume',
+        store=False,
+        readonly=True,
     )
     stakeholders = fields.Char(
         string=u'Stakeholders',
     )
+    
+    ###
+    article_responsable = fields.Char(
+        string='Article Responsable', 
+        compute='_compute_article_responsable', 
+        store=True
+    )
+
+    @api.depends('legal_id.user_id', 'legal_id.partner_id', 'legal_id.is_outsourcing')
+    def _compute_article_responsable(self):
+        for record in self:
+            if record.legal_id:
+                # Si user_id tiene un valor, muestra el nombre de user_id
+                if record.legal_id.user_id:
+                    record.article_responsable = record.legal_id.user_id.name
+                # Si es outsourcing y partner_id tiene un valor, muestra el nombre de partner_id
+                elif record.legal_id.is_outsourcing and record.legal_id.partner_id:
+                    record.article_responsable = record.legal_id.partner_id.name
+                else:
+                    record.article_responsable = False
+            else:
+                record.article_responsable = False    
+
     partner_id = fields.Many2one(
         string=u'Responsable',
         comodel_name='res.partner',
         ondelete='restrict',
     )
+    ###
+
     type_id = fields.Many2one(
         string=u'Tipo',
         related='legal_id.type_id',

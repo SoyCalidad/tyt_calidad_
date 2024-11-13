@@ -1,0 +1,63 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+        <!--
+        <record id="hr_plan_action" model="ir.actions.act_window">
+            <field name="name">Plans</field>
+            <field name="res_model">hr.plan</field>
+            <field name="view_mode">tree,form</field>
+            <field name="search_view_id" ref="hr_plan_view_search"/>
+            <field name="help" type="html">
+                <p class="o_view_nocontent_smiling_face">
+                    Add a new plan
+                </p>
+            </field>
+        </record>
+        -->
+
+        <record id="open_view_quality_employee_tyt" model="ir.actions.act_window">
+            <field name="name">Empleados Calidad</field>
+            <field name="res_model">hr.employee</field>
+            <field name="view_mode">tree,form</field>
+            <field name="domain">[]</field>
+            <field name="context">{'chat_icon': True}</field>
+            <field name="search_view_id" ref="hr.view_employee_filter"/>
+        </record>
+
+        <record id="open_view_quality_employee_tyt_view_tree" model="ir.actions.act_window.view">
+            <field name="sequence">1</field>
+            <field name="view_mode">tree</field>
+            <field name="act_window_id" ref="open_view_quality_employee_tyt"/>
+            <field name="view_id" ref="view_quality_employee_tree"/>
+        </record>
+
+        <record id="open_view_quality_employee_tyt_view_form" model="ir.actions.act_window.view">
+            <field name="sequence">2</field>
+            <field name="view_mode">form</field>
+            <field name="act_window_id" ref="open_view_quality_employee_tyt"/>
+            <field name="view_id" ref="view_quality_employee_form"/>
+        </record>
+
+        <!--
+        <record id="open_view_quality_employee_tyt" model="ir.actions.act_window">
+            <field name="name">Empleados Calidad</field>
+            <field name="res_model">hr.employee</field>
+            <field name="view_mode">tree,form</field>
+            <field name="domain">[]</field>
+            <field name="context">{'chat_icon': True}</field>
+            <field name="search_view_id" ref="hr.view_employee_filter"/>
+            <field name="view_id" eval="[
+                (ref('tyt_hr.view_quality_employee_tree'), 'tree'),
+                (ref('tyt_hr.view_quality_employee_form'), 'form')
+            ]"/>
+        </record>
+        -->
+            <menuitem
+                id="menu_hr_employee_user"
+                name="Empleados Calidad"
+                action="open_view_quality_employee_tyt"
+                parent="hr.menu_hr_employee_payroll"
+                sequence="2"/>
+
+    </data>
+</odoo>

@@ -17,6 +17,7 @@
             <tree>
                 <field name="name" />
                 <field name="state" />
+                <field name="version" />
             </tree>
         </field>
     </record>
@@ -36,6 +37,11 @@
                     <button name="button_new_version" type="object" string="Nueva versión" attrs="{'invisible':[('state', '!=', 'validate_ok')]}" class="oe_highlight" />
                 </header>
                 <sheet>
+                    <div class="oe_button_box" name="button_box">
+                        <button type="object" name="action_open_older_versions" class="oe_stat_button" icon="fa-archive" style="white-space: nowrap;" string="Versiones antiguas"/>
+                        <!--<widget name="web_ribbon" title="Archived" bg_color="bg-danger" attrs="{'invisible': [('active', '=', True)]}"/>
+                        <field name="active" invisible="1"/>-->
+                    </div>                
                     <label for="name" />
                     <div class="oe_title">
                         <h4>

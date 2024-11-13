@@ -183,7 +183,7 @@
 
         </record>
 
-
+        <!--
         <record id="mgmt_review_process_action" model="ir.actions.act_window">
             <field name="name">Procedimientos de Revisión por la dirección</field>
             <field name="res_model">mgmt.process</field>
@@ -199,7 +199,7 @@
             action="mgmt_review_process_action"
             parent="mgmtsystem_management_review.management_review_report_menu"
             sequence="15"/>
-
+        -->
 
     </data>
 </odoo>

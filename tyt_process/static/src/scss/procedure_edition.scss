@@ -1,0 +1,357 @@
+.o_report_layout_standard_tyt {
+
+    position: relative;
+    margin: 0;
+
+}
+
+.tyt_cover {
+    position: relative;
+    width: 1364px;
+    height: 1895px;
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    overflow: hidden;
+    margin: 0 auto;
+    color: #595959;
+    top: 0px;
+    left: -40px;
+
+    .background-image {
+        position: absolute;
+        top: 100px;
+        left: 0px;
+        width: auto;
+        height: 1850px;
+        overflow: hidden;
+    }
+
+    .content {
+        position: relative;
+        padding: 20px;
+        text-align: center;
+    }
+
+    .top-image {
+        position: absolute;
+        margin: auto;
+        top: 0;
+        left: -600px;
+        text-align: center;
+        z-index: 1;
+        height: 1450px;
+        width: auto;
+        object-fit: contain;
+
+    }
+
+    .general_info {
+
+        position: absolute;
+        left: 120px;
+        top: 1500px;
+        text-align: left;
+
+        .company_info {
+
+            font-size: 60px;
+            font-weight: 600;
+            font-family: 'BebasNeue';
+        }
+
+        .procedure_name {
+
+            font-size: 30px;
+            font-weight: 500;
+            font-family: 'Montserrat';
+        }
+
+    }
+
+    .procedure_info {
+
+        position: absolute;
+        left: 120px;
+        top: 1650px;
+        text-align: left;
+        padding-top: 15px;
+        font-size: 25px;
+        width: 45%;
+        font-weight: 400;
+
+        p {
+
+            vertical-align: middle;
+
+        }
+
+        img {
+            margin-right: 5px;
+            width: 40px;
+            height: 40px;
+        }
+
+    }
+
+    .creation_info {
+
+        position: absolute;
+        left: 850px;
+        top: 1400px;
+        width: 30%;
+        height: 250px;
+        text-align: center;
+
+        .current_year {
+
+            font-family: 'BebasNeue';
+            height: 200px;
+            font-size: 100px;
+            text-align: left;
+            padding-left: 10.5%;
+            background-image: -webkit-linear-gradient(right, #477da5 50%, #595959 50%) !important;
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        .creation_user {
+
+            font-family: 'Montserrat';
+            font-size: 15px;
+        }
+
+    }
+
+    .validator_info {
+
+        position: absolute;
+        left: 850px;
+        top: 1740px;
+        width: 30%;
+        font-size: 20px;
+        text-align: center;
+        font-family: 'Montserrat';
+
+        p {
+
+            margin-top: 0px;
+            line-height: 5px;
+
+        }
+
+        .validator_name {
+
+            font-size: 18px;
+
+        }
+
+        .validator_job {
+
+            font-size: 15px;
+
+        }
+
+        .signature_line {
+
+            width: 100%;
+            height: 2px;
+            background-color: #595959;
+            margin: 13px 0;
+
+        }
+
+
+    }
+
+}
+
+.index-list {
+    list-style: none;
+    padding-left: 0;
+    border: none !important;
+    font-family: Calibri;
+    font-size: 11px;
+
+    tr,
+    td {
+
+        border: none !important;
+
+    }
+
+    .index-item {
+        margin-bottom: 0.5em;
+        border: none !important;
+
+        .index-line {
+            width: 100%;
+            border: none !important;
+        }
+
+        .title {
+            width: 100%;
+            border: none !important;
+            padding-right: 10px;
+            white-space: nowrap;
+            vertical-align: bottom;
+        }
+
+        .dots {
+            width: auto;
+            border-bottom: 2px dotted #000 !important;
+            vertical-align: bottom;
+        }
+
+        .page-number {
+            border: none !important;
+            text-align: right;
+            padding-left: 10px;
+            white-space: nowrap;
+            font-weight: bold;
+            color: #333;
+            vertical-align: bottom;
+        }
+    }
+
+    .sub-index-list {
+        list-style: none;
+        padding-left: 1.5em;
+        margin-top: 0.5em;
+        border: none !important;
+
+        .index-item {
+            width: 100%;
+            .index-line {
+                border: none !important;
+            }
+        }
+    }
+}
+
+// Metainfo
+
+.tyt_meta {
+
+    font-family: 'Calibri', 'Trebuchet MS', sans-serif;
+
+    h1 {
+        color: #477da1;
+        margin-top: 10px;
+        margin-bottom: 10px;
+    }
+
+    table {
+
+        width: 100%;
+        border-collapse: collapse;
+        border: 1px solid #bfbfbf;
+        text-align: center;
+        margin-top: 10px;
+        margin-bottom: 10px;
+
+        th {
+
+            color: #294358;
+
+        }
+
+    }
+
+}
+
+// Body
+
+.tyt_body {
+
+    text-align: justify;
+    text-justify: inter-word;
+    font-family: 'Calibri', 'Trebuchet MS', sans-serif;
+
+    h1 {
+        color: #477da1;
+    }
+
+
+    h2 {
+        color: #477da2;
+    }
+
+
+    h3 {
+        color: #477da3;
+    }
+
+
+    h4 {
+        color: #477da4;
+    }
+
+
+    h5 {
+        color: #477da5;
+    }
+
+
+    h6 {
+        color: #477da6;
+    }
+
+    .tyt_records {
+
+        .records_table {
+
+            width: 100%;
+            border-collapse: collapse;
+            border: 1px solid #000;
+
+            th {
+
+                text-align: center;
+                background-color: #477da6 !important;
+                color: #fff !important;
+                padding: 2px;
+
+            }
+
+            td {
+
+                text-align: left;
+                padding: 2px;
+
+            }
+
+        }
+
+    }
+
+}
+
+// Back Cover
+
+.tyt_back_cover {
+
+    .container {
+        position: relative;
+        width: 1077.6px;
+        height: 1489px;
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+        overflow: hidden;
+        margin: 0 auto;
+        color: #595959;
+        top: 0;
+        left: -40px;
+
+        .background-image {
+            position: absolute;
+            top: 0px;
+            width: 1077px;
+            height: 1489px;
+            overflow: hidden;
+        }
+
+    }
+
+}

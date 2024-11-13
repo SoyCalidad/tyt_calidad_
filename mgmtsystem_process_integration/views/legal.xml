@@ -157,7 +157,7 @@
                 </xpath>
             </field>
         </record>
-
+        <!--
         <record id="mgmt_legal_process_action" model="ir.actions.act_window">
             <field name="name">Procedimientos de Requisitos Legales</field>
             <field name="res_model">mgmt.process</field>
@@ -173,6 +173,6 @@
             action="mgmt_legal_process_action"
             parent="mgmtsystem_legal.legal_report_menu"
             sequence="15"/>
-
+        -->
     </data>
 </odoo>

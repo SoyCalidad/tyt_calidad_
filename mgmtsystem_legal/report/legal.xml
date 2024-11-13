@@ -13,10 +13,10 @@
             />
 
         <record id="legal_wizard_view_form" model="ir.ui.view">
-            <field name="name">legal.plan.report.wizard.view.form</field>
+            <field name="name">Programa de requisitos legales</field>
             <field name="model">legal.plan.report.wizard</field>
             <field name="arch" type="xml">
-                <form string="">
+                <form>
                     <group>
                         <field name="plan_ids"/>
                     </group>
@@ -32,7 +32,6 @@
             <field name="name">Programa de requisitos legales</field>
             <field name="type">ir.actions.act_window</field>
             <field name="res_model">legal.plan.report.wizard</field>
-
             <field name="view_mode">form</field>
             <field name="view_id" ref="legal_wizard_view_form"/>
             <field name="target">new</field>
@@ -47,7 +46,8 @@
             groups="base.group_no_one,mgmtsystem_legal.group_legal_onlyread_printreport,mgmtsystem_legal.group_legal_write_printreport,mgmtsystem_legal.group_legal_all"
             />
 
-        <menuitem id="legal_plan_report_menu"
+        <menuitem 
+            id="legal_plan_report_menu"
             name="Programa de requisitos legales"
             action="action_report_legal"
             parent="legal_report_menu"

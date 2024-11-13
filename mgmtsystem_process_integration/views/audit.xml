@@ -148,6 +148,7 @@
             </field>
         </record>
 
+        <!--
         <record id="mgmt_audit_process_action" model="ir.actions.act_window">
             <field name="name">Procedimientos de Auditoria</field>
             <field name="res_model">mgmt.process</field>
@@ -162,6 +163,6 @@
             action="mgmt_audit_process_action"
             parent="mgmtsystem_audit.audit_report_menu"
             sequence="15"/>
-
+        -->
     </data>
 </odoo>

@@ -189,7 +189,7 @@
                 </notebook>
             </field>
         </record>
-
+        <!--
         <record id="mgmt_comunication_process_action" model="ir.actions.act_window">
             <field name="name">Procedimientos de Auditoria</field>
             <field name="res_model">mgmt.process</field>
@@ -205,6 +205,6 @@
             action="mgmt_comunication_process_action"
             parent="mgmtsystem_comunication.comunication_report_menu"
             sequence="15"/>
-
+        -->
     </data>
 </odoo>

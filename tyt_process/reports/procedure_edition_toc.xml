@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+
+    <record id="action_report_procedure_edition_tyt_toc" model="ir.actions.report">
+        <field name="name">Procedure Edition Table of Contents</field>
+        <field name="model">process.edition</field>
+        <field name="report_type">qweb-pdf</field>
+        <field name="report_name">tyt_process.report_procedure_edition_tyt_toc</field>
+        <field name="report_file">tyt_process.report_procedure_edition_tyt_toc</field>
+        <field name="print_report_name">'%s' % object.name</field>
+        <field name="binding_model_id" eval="False" />
+        <field name="binding_type">report</field>
+    </record>
+
+    <template id="report_procedure_edition_tyt_toc">
+        <t t-call="web.html_container">
+            <t t-foreach="docs" t-as="o">
+                <t t-call="tyt_process.external_layout_tyt_document">
+                    <div class="page">
+                        <div class="tyt_toc">
+                            <span t-out="toc_dict[o.id]" />
+                        </div>
+                    </div>
+                    <div class="footer" />
+                </t>
+            </t>
+        </t>
+    </template>
+
+</odoo>

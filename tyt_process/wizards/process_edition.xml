@@ -1,0 +1,9 @@
+<odoo>
+    <data>
+
+        <record model="ir.ui.menu" id="mgmtsystem_process.process_edition_report_menu">
+            <field name="name">Versión de procedimiento</field>
+        </record>
+
+    </data>
+</odoo>

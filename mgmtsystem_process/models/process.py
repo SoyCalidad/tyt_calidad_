@@ -250,19 +250,27 @@ class Process(models.Model):
                 action['res_id'] = documents.id
             return action
 
-    @api.model
-    def create(self, values):
-        sequence = self.env['ir.sequence'].sudo().create({
-            'name': 'Secuencia de '+values.get('name'),
-            'active': True,
-            'prefix': 'Edición-nro.',
-            'padding': 4,
-            'number_next': 1,
-            'number_increment': 1,
-        })
-        values['sequence_id'] = sequence.id
-        result = super(Process, self).create(values)
-        return result
+    @api.model_create_multi
+    def create(self, vals_list):
+        new_vals_list = []
+        for vals in vals_list:
+            # Crear una nueva secuencia para cada registro
+            sequence = self.env['ir.sequence'].sudo().create({
+                'name': 'Secuencia de ' + vals.get('name', 'Sin Nombre'),
+                'active': True,
+                'prefix': 'Versión-nro.',
+                'padding': 4,
+                'number_next': 1,
+                'number_increment': 1,
+            })
+            # Asignar el ID de la secuencia al diccionario de valores
+            vals['sequence_id'] = sequence.id
+            new_vals_list.append(vals)
+        
+        # Llamar al método super con la lista de valores actualizados
+        records = super(Process, self).create(new_vals_list)
+        
+        return records
 
     @api.onchange('type')
     def _onchange_type(self):

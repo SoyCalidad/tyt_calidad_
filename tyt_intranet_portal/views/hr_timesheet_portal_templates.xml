@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <template id="portal_my_home_timesheet" inherit_id="hr_timesheet.portal_my_home_timesheet" priority="45">
+        <xpath expr="//div[hasclass('o_portal_docs')]" position="before">
+            <t t-set="portal_service_category_enable" t-value="True"/>
+        </xpath>
+        <div id="portal_service_category" position="inside">
+            <t t-call="portal.portal_docs_entry">
+                <t t-set="icon" t-value="'/tyt_intranet_portal/static/src/img/timesheet.svg'"/>
+                <t t-set="title">Hojas de horas</t>
+                <t t-set="url" t-value="'/my/timesheets'"/>
+                <t t-set="text">Revisar todas las hojas de horas relacionadas con sus proyectos</t>
+            </t>
+        </div>
+    </template>
+</odoo>

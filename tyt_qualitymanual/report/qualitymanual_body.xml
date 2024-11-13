@@ -1,0 +1,260 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <record id="mgmtsystem_qualitymanual_tyt_body_report_action" model="ir.actions.report">
+        <field name="name">Quality Manual TYT Body</field>
+        <field name="model">mgmtsystem.qualitymanual</field>
+        <field name="report_type">qweb-pdf</field>
+        <field name="report_name">tyt_qualitymanual.mgmtsystem_qualitymanual_tyt_body_report</field>
+        <field name="report_file">tyt_qualitymanual.mgmtsystem_qualitymanual_tyt_body_report</field>
+        <field name="print_report_name">'%s' % object.name</field>
+        <field name="binding_model_id" eval="False" />
+        <field name="binding_type">report</field>
+    </record>
+
+    <template id="mgmtsystem_qualitymanual_tyt_body_report">
+         <t t-call="web.html_container">
+            <t t-foreach="docs" t-as="o">
+                <div t-call="tyt_process.external_layout_tyt_document">
+                    <div class="page">
+                         <style type="text/css">
+                            .tyt_body_quality_manual { font-family: Arial, sans-serif; }
+                            .tg  {border-collapse:collapse;border-spacing:0;}
+                            .tg td{font-family: Palatino, Palatino Linotype, Palatino LT STD, Book Antiqua, Georgia, serif;font-size:12px;padding:10px 5px;border-style:solid;border-width:1px;overflow:hidden;word-break:normal;border-color:#c0c0c0;}
+                            .tg th{font-family: Palatino, Palatino Linotype, Palatino LT STD, Book Antiqua, Georgia, serif;font-size:12px;font-weight:normal;padding:10px 5px;border-style:solid;border-width:1px;overflow:hidden;word-break:normal;border-color:#c0c0c0;}
+                            .tg .tg-zv36{font-weight:bold;background-color:#ffffff;border-color:#c0c0c0;text-align:left;vertical-align:top;width:33%}
+                            .tg .tg-nrix{text-align:center;vertical-align:middle;font-weight: bold;border-style: none;font-size:16px;}
+                            .tg .tg-rq3n{background-color:#ffffff;text-align:center;vertical-align:middle;border-style: none;font-size:14px;}
+                            .tg .tg-7g6k{font-weight:bold;background-color:#efefef;border-color:#c0c0c0;text-align:center;vertical-align:top;font-size:12px;}
+                            .tg .tg-3xi5{background-color:#ffffff;border-color:#c0c0c0;text-align:center;vertical-align:middle;font-size:12px;}
+                        </style>
+                        <div class="tyt_body_quality_manual">
+                            <div>
+                                <h1 class="colored">0. Introducción</h1>
+                                <p t-raw="o.introduction" />
+                            </div>
+                            <br />
+                            <div>
+                                <h1 class="colored">1. Objetivo y campo de aplicación</h1>
+                                <div class="ms-4">
+                                    <h2 class="colored">1.1. Objetivo del manual</h2>
+                                    <t t-raw="o.objective" />
+                                    <h2 class="colored">1.2. Alcance del sistema de gestión de calidad</h2>
+                                    <t t-raw="o.scope" />
+                                </div>
+                            </div>
+                            <br />
+                            <div>
+                                <h1 class="colored">2. Referencias normativas</h1>
+                                <t t-raw="o.references" />
+                            </div>
+                            <br/>
+                            <div>
+                                <h1 class="colored">3. Términos y definiciones</h1>
+                                <table class="tg">
+                                    <tr>
+                                        <td class="tg-d14o" style="width:30%">Nombre</td>
+                                        <td class="tg-d14o">Descripción</td>
+                                    </tr>
+                                    <t t-foreach="o.abbreviation_ids" t-as="abb">
+                                        <tr>
+                                            <td class="tg-wo31">
+                                                <span t-field="abb.name" />
+                                            </td>
+                                            <td class="tg-wo31">
+                                                <span t-field="abb.description" />
+                                            </td>
+                                        </tr>
+                                    </t>
+                                </table>
+                            </div>
+
+                            <div style="page-break-before:always">
+                                <h1 class="colored">4. Contexto de la organización</h1>
+                                <div class="ms-4">
+                                    <h2 class="colored">4.1. Entendiendo la organización y su contexto</h2>
+                                        <t t-raw="o.context_objective" />
+                                    <p>
+                                        <strong>Misión:</strong>
+                                        <t t-raw="o.mission" />
+                                    </p>
+                                    <p>
+                                        <strong>Visión:</strong>
+                                        <t t-raw="o.vision" />
+                                    </p>
+                                    <h2 class="colored">4.2. Entendiendo las necesidades y expectativas de las partes interesadas</h2>
+                                    <t t-raw="o.context_needs" />
+                                    <h2 class="colored">4.3. Determinación del alcance del sistema de gestión de calidad</h2>
+                                    <t t-raw="o.context_scope" />
+                                    <h2 class="colored">4.4 Sistema de gestión de calidad y sus procesos</h2>
+                                    <span t-field="o.context_processdescription_ids" />
+                                </div>
+                            </div>
+
+                            <div style="page-break-before:always">
+                                <h1 class="colored">5. Liderazgo</h1>
+                                <div class="ms-4">
+                                    <h2 class="colored">5.1. Liderazgo y compromiso</h2>
+                                    <h3 class="colored">5.1.1. Generalidades</h3>
+                                    <t t-raw="o.leader_generalities" />
+                                    <h3 class="colored">5.1.2. Enfoque al cliente</h3>
+                                    <t t-raw="o.leader_clientfocus" />
+
+                                    <h2 class="colored">5.2. Política</h2>
+                                    <h4 class="colored">5.2.1. Establecimiento de la política de la calidad</h4>
+                                    <t t-raw="o.leader_politic" />
+                                    <h4 class="colored">5.2.2. Comunicación de la política de la calidad</h4>
+                                    <t t-raw="o.leader_comunication" />
+
+                                    <h2 class="colored">5.3. Política</h2>
+                                    <t t-raw="o.leader_rol" />
+                                </div>
+                            </div>
+
+                            <div style="page-break-before:always">
+                                <h2 class="colored">6. Planificación</h2>
+                                <t t-raw="o.plan_body" />
+                                <div class="ms-4">
+                                    <h3 class="colored">6.1. Acciones para abordar riesgos y oportunidades</h3>
+                                    <t t-raw="o.plan_riskopp" />
+                                    <h3 class="colored">6.2. Objetivos de la calidad y planificación para lograrlos</h3>
+                                    <t t-raw="o.plan_scope" />
+                                    <h3 class="colored">6.3. Planificación de los cambios</h3>
+                                    <t t-raw="o.plan_changes" />
+                                </div>
+                            </div>
+
+                            <div style="page-break-before:always">
+                                <h2 class="colored">7. Apoyo</h2>
+                                <div class="ms-4">
+                                    <h3 class="colored">7.1. Recursos</h3>
+                                    <h4 class="colored">7.1.1. Generalidades</h4>
+                                    <t t-raw="o.support_regeneralities" />
+                                    <h4 class="colored">7.1.2. Personas</h4>
+                                    <t t-raw="o.support_people" />
+                                    <h4 class="colored">7.1.3. Infraestructura</h4>
+                                    <t t-raw="o.support_infrastructure" />
+                                    <h4 class="colored">7.1.4. Ambiente para la operación de los procesos</h4>
+                                    <t t-raw="o.support_environment" />
+                                    <h4 class="colored">7.1.5. Recursos de seguimiento y medición</h4>
+                                    <t t-raw="o.support_measure" />
+                                    <h4 class="colored">7.1.6. Conocimientos de la organización</h4>
+                                    <t t-raw="o.support_knowledge" />
+
+                                    <h3 class="colored">7.2. Competencias</h3>
+                                    <t t-raw="o.support_competitions" />
+                                    <h3 class="colored">7.3. Toma de conciencia</h3>
+                                    <t t-raw="o.support_awareness" />
+                                    <h3 class="colored">7.4. Comunicación</h3>
+                                    <t t-raw="o.support_comunication" />
+
+                                    <h3 class="colored">7.5. Información documentada</h3>
+                                    <h4 class="colored">7.5.1. Generalidades</h4>
+                                    <t t-raw="o.support_generalities" />
+                                    <h4 class="colored">7.5.2. Creación y actualización</h4>
+                                    <t t-raw="o.support_creation" />
+                                    <h4 class="colored">7.5.3. Control de la información documentada</h4>
+                                    <t t-raw="o.support_control" />
+                                </div>
+                            </div>
+
+                            <div style="page-break-before:always">
+                                <h2 class="colored">8. Operación</h2>
+                                <div class="ms-4">
+                                    <h3 class="colored">8.1. Planificación y control operacional</h3>
+                                    <t t-raw="o.ope_plan" />
+                                    <h3 class="colored">8.2. Requisitos para los productos y servicios</h3>
+                                    <h4 class="colored">8.2.1. Comunicación con el cliente</h4>
+                                    <t t-raw="o.ope_comunication" />
+                                    <h4 class="colored">8.2.2. Determinación de los requisitos para los productos y servicios</h4>
+                                    <t t-raw="o.ope_determination" />
+                                    <h4 class="colored">8.2.3. Revisión de los requisitos para los productos y servicios</h4>
+                                    <t t-raw="o.ope_review" />
+                                    <h4 class="colored">8.2.4. Cambios en los requisitos para los productos y servicios</h4>
+                                    <t t-raw="o.ope_changes" />
+
+                                    <h3 class="colored">8.3. Diseño y desarrollo de productos y servicios</h3>
+                                    <h4 class="colored">8.3.1. Generalidades</h4>
+                                    <t t-raw="o.ope_cgeneral" />
+                                    <h4 class="colored">8.3.2. Planificación del diseño y desarrollo</h4>
+                                    <t t-raw="o.ope_design" />
+                                    <h4 class="colored">8.3.3. Entradas para el diseño y desarrollo</h4>
+                                    <t t-raw="o.ope_entries" />
+                                    <h4 class="colored">8.3.4. Controles del diseño y desarrollo</h4>
+                                    <t t-raw="o.ope_ddcontrols" />
+                                    <h4 class="colored">8.3.5. Salidas del diseño y desarrollo</h4>
+                                    <t t-raw="o.ope_ddoutputs" />
+                                    <h4 class="colored">8.3.6. Cambios del diseño y desarrollo</h4>
+                                    <t t-raw="o.ope_ddchanges" />
+
+                                    <h3 class="colored">8.4. Control de los procesos, productos y servicios suministrados externamente</h3>
+
+                                    <h4 class="colored">8.4.1. Generalidades</h4>
+                                    <t t-raw="o.ope_dchanges" />
+                                    <h4 class="colored">8.4.2. Tipo y alcance del control</h4>
+                                    <t t-raw="o.ope_type" />
+                                    <h4 class="colored">8.4.3. Información para los proveedores externos</h4>
+                                    <t t-raw="o.ope_information" />
+
+                                    <h3 class="colored">8.5. Producción y provisión del servicio</h3>
+                                    <h4 class="colored">8.5.1. Control de la producción y de la provisión del servicio</h4>
+                                    <t t-raw="o.ope_procontrol" />
+                                    <h4 class="colored">8.5.2. Identificación y trazabilidad</h4>
+                                    <t t-raw="o.ope_proide" />
+                                    <h4 class="colored">8.5.3. Propiedad perteneciente a los clientes o proveedores externos</h4>
+                                    <t t-raw="o.ope_property" />
+                                    <h4 class="colored">8.5.4. Preservación</h4>
+                                    <t t-raw="o.ope_preservation" />
+                                    <h4 class="colored">8.5.5. Actividades posteriores a la entrega</h4>
+                                    <t t-raw="o.ope_postdelivery" />
+                                    <h4 class="colored">8.5.6. Control de los cambios</h4>
+                                    <t t-raw="o.ope_changecontrol" />
+
+                                    <h3 class="colored">8.6. Liberación de los productos y servicios</h3>
+                                    <t t-raw="o.ope_realese" />
+                                    <h3 class="colored">8.7. Control de las salidas no conformes</h3>
+                                    <t t-raw="o.ope_control" />
+                                </div>
+                            </div>
+
+                            <div style="page-break-before:always">
+                                <h2 class="colored">9. Evaluación del desempeño</h2>
+                                <div class="ms-4">
+                                    <h3 class="colored">9.1. Seguimiento, medición, análisis y evaluación</h3>
+                                    <h4 class="colored">9.1.1. Generalidades</h4>
+                                    <t t-raw="o.eva_tgeneral" />
+                                    <h4 class="colored">9.1.2. Satisfacción del cliente</h4>
+                                    <t t-raw="o.eva_tcustomer" />
+                                    <h4 class="colored">9.1.3. Análisis y evaluación</h4>
+                                    <t t-raw="o.eva_tana" />
+
+                                    <h3 class="colored">9.2. Auditoría interna</h3>
+                                    <t t-raw="o.eva_taudit" />
+
+                                    <h3 class="colored">9.3. Revisión por la difección</h3>
+                                    <h4 class="colored">9.3.1. Generalidades</h4>
+                                    <t t-raw="o.eva_rgeneral" />
+                                    <h4 class="colored">9.3.2. Entradas de la revisión por la dirección</h4>
+                                    <t t-raw="o.eva_rreview" />
+                                    <h4 class="colored">9.3.3. Salidas de la revisión por la dirección</h4>
+                                    <t t-raw="o.eva_rexist" />
+                                </div>
+                            </div>
+
+                            <div style="page-break-before:always">
+                                <h2 class="colored">10. Mejora</h2>
+                                <div class="ms-4">
+                                    <h3 class="colored">10.1. Generalidades</h3>
+                                    <t t-raw="o.imp_general" />
+                                    <h3 class="colored">10.2. No conformidad y acción correctiva</h3>
+                                    <t t-raw="o.imp_nonconfor" />
+                                    <h3 class="colored">10.3. Mejora continua</h3>
+                                    <t t-raw="o.imp_improvement" />
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </t>
+         </t>
+    </template>
+</odoo>

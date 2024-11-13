@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <menuitem id="report_excel_ncolog"
+              name="Log of non-conforming products"
+              action="report_ncolog"
+              sequence="10"
+              parent="mgmtsystem_nonconformity.menu_nonconformity_report" />
+</odoo>

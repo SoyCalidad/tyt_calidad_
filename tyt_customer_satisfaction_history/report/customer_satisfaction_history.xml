@@ -1,0 +1,18 @@
+<odoo>
+
+    <data>
+
+        <record id="action_report_tyt_ssh" model="ir.actions.report">
+            <field name="name">TYT Satisfaction Survey History</field>
+            <field name="model">tyt.satisfaction.survey.history</field>
+            <field name="report_type">xlsx</field>
+            <field name="report_name">tyt_customer_satisfaction_history.report_tyt_ssh</field>
+            <field name="report_file">tyt_customer_satisfaction_history.report_tyt_ssh</field>
+            <field name="print_report_name">'ACC-54_Histórico de satisfacción del cliente'</field>
+            <field name="binding_model_id" ref="model_tyt_satisfaction_survey_history"/>
+            <field name="binding_type">report</field>
+        </record>
+
+    </data>
+
+</odoo>

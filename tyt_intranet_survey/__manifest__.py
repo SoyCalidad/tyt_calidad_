@@ -1,0 +1,26 @@
+{
+    'name': 'Intranet Survey TYT Contact Center - Soy Calidad',
+    'version': '1.0',
+    'description': 'Intranet Survey TYT Contact Center - Soy Calidad',
+    'summary': 'Intranet Survey TYT Contact Center - Soy Calidad',
+    'author': 'Soy Calidad',
+    'website': 'www.soycalidad.com',
+    'license': 'Other proprietary',
+    'category': 'soycalidad',
+    'depends': [
+        'tyt_intranet_base',
+    ],
+    'data': [
+        'security/ir.model.access.csv',
+        'views/survey_survey_views.xml',
+        'views/survey_management_views.xml',
+        'views/survey_question_views.xml',
+        'views/survey_user_input_views.xml',
+        'views/survey_portal_templates.xml',
+        'views/survey_templates.xml',
+        'views/menus.xml',
+    ],
+    'installable': True,
+    'auto_install': False,
+    'application': False,
+}

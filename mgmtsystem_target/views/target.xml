@@ -566,7 +566,8 @@
                             <page string="No conformidades" name="No conformidades">
                                 <group>
                                     <!-- <field name="model_id"/> -->
-                                    <field name="nonconformity_ids" />
+                                    <separator string="No Conformidades" />
+                                    <field name="nonconformity_ids" colspan="2" nolabel="1" />
                                 </group>
                             </page>
                         </notebook>
@@ -610,6 +611,7 @@
                     <field name="do_state" />
                     <field name="goal_id" />
                     <field name="c_goal_progress" />
+                    <field name="max_goal_progress" invisible="1"/>
                     <templates>
                         <t t-name="kanban-box">
                             <div t-attf-class="oe_kanban_card oe_kanban_global_click">
@@ -623,7 +625,7 @@
                                     </p>
                                     <field name="description" />
                                     <div class="o_goal_state_block" align="center">
-                                        <field name="c_goal_progress" widget="gauge" options="{'max_value': '100', 'style': 'width:160px; height: 120px;'}" />
+                                        <field name="c_goal_progress" widget="gauge" options="{'max_field': 'max_goal_progress'}" style="width:220px;" />
                                     </div>
                                 </div>
                                 <div class="o_kanban_record_bottom">

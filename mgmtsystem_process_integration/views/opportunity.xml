@@ -168,7 +168,7 @@
             </field>
         </record>
 
-
+        <!--
         <record id="mgmt_opp_process_action" model="ir.actions.act_window">
             <field name="name">Procedimientos de Riesgos y Oportunidades</field>
             <field name="res_model">mgmt.process</field>
@@ -184,7 +184,7 @@
             action="mgmt_opp_process_action"
             parent="mgmtsystem_opportunity.menu_report"
             sequence="100"/>
-
+        -->
 
     </data>
 </odoo>

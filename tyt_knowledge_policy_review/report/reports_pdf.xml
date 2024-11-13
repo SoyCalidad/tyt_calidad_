@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <record id="action_report_requisition_pdf" model="ir.actions.report">
+        <field name="name">Knowledge and Policy Review PDF</field>
+        <field name="model">survey.survey</field>
+        <field name="report_type">qweb-pdf</field>
+        <field name="report_name">tyt_knowledge_policy_review.survey_report_template</field>
+        <field name="binding_model_id" ref="model_survey_survey"/>
+        <field name="binding_type">report</field>
+        <field name="print_report_name">'Knowledge and Policy Review'</field>
+    </record>
+</odoo>

@@ -17,7 +17,7 @@ class Result(models.Model):
         string='Criterio',
         comodel_name='evaluation.criterio',
         ondelete='restrict',
-    )
+    ) # ondelete='restrict',
     name = fields.Char(
         string='Nombre',
         related='criterio_id.name',

@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <record id="action_report_requisition_pdf" model="ir.actions.report">
+        <field name="name">Requisición PDF</field>
+        <field name="model">tyt_recruitment.requisition</field>
+        <field name="report_type">qweb-pdf</field>
+        <field name="report_name">tyt_recruitment.template_report_requisition</field>
+        <field name="binding_model_id" ref="model_tyt_recruitment_requisition"/>
+        <field name="binding_type">report</field>
+        <field name="print_report_name">'Requisición_%s (%s)' % (str(object.id), str(object.request_date)[0:10])</field>
+    </record>
+</odoo>

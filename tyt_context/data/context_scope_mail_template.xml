@@ -1,0 +1,28 @@
+<?xml version="1.0"?>
+<odoo>
+    <data noupdate="1">
+        <record id="tyt_context_scope_mail_template" model="mail.template">
+            <field name="name">Alcance: Enviar por email</field>
+            <field name="model_id" ref="tyt_context.model_tyt_context_scope" />
+            <field name="email_from">"{{ object.company_id.name }}" &lt;{{ (object.company_id.email) }}&gt;</field>
+            <field name="email_to"></field>
+            <field name="subject">Alcance (Nombre: {{ object.name or 'n/a' }})</field>
+            <field name="body_html" type="html">
+                <div style="margin: 0px; padding: 0px;">
+                    <p style="margin: 0px; padding: 0px; font-size: 13px;">
+                        Estimado/a
+                        <br />
+                        <br />
+                        Estimados se hace envío del presente documento de alcance del SGC para su conocimiento y uso respectivo.
+                        <br />
+                        <br />
+                        Saludos cordiales
+                    </p>
+                </div>
+            </field>
+            <field name="report_template" ref="tyt_context_scope_report_action"/>
+            <field name="report_name">Alcance {{ object.name or '' }}</field>
+            <field name="auto_delete" eval="True"/>
+        </record>
+    </data>
+</odoo>

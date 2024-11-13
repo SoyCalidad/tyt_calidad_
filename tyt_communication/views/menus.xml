@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+
+	<record model="ir.ui.menu" id="mgmtsystem_comunication.menu_comunication_root">
+		<field name="name">Comunicación</field>
+	</record>
+
+	<record model="ir.ui.menu" id="mgmtsystem_comunication.legal_item_plan">
+		<field name="name">Programa de Comunicación</field>
+	</record>	
+
+	<record model="ir.ui.menu" id="mgmtsystem_comunication.plan_line_item">
+		<field name="name">Plan de Comunicación</field>
+	</record>	
+
+
+	<!--Wizard menus-->
+
+	<record model="ir.ui.menu" id="mgmtsystem_comunication.comunication_plan_report_menu">
+		<field name="name">Programa de Comunicación</field>
+	</record>	
+
+	<record model="ir.ui.menu" id="mgmtsystem_comunication.comunication_plan_line1_report_menu">
+		<field name="name">Plan de Comunicación</field>
+	</record>	
+
+	<!--Wizard Action windows-->
+
+        <record id="mgmtsystem_comunication.comunication_plan_wizard_action" model="ir.actions.act_window">
+            <field name="name">Programa de comunicación</field>
+            <field name="type">ir.actions.act_window</field>
+            <field name="res_model">comunication.plan.wizard</field>
+            <field name="view_mode">form</field>
+            <field name="view_id" ref="mgmtsystem_comunication.comunication_plan_wizard_form_view"/>
+            <field name="target">new</field>
+            <field name="binding_type">report</field>
+        </record>
+
+        <record id="mgmtsystem_comunication.comunication_plan_line_wizard_action" model="ir.actions.act_window">
+            <field name="name">Plan de comunicación</field>
+            <field name="type">ir.actions.act_window</field>
+            <field name="res_model">comunication.plan.line.wizard</field>
+            <field name="view_mode">form</field>
+            <field name="view_id" ref="mgmtsystem_comunication.comunication_plan_line_wizard_form_view"/>
+            <field name="target">new</field>
+            <field name="binding_type">report</field>
+        </record>
+
+</odoo>
