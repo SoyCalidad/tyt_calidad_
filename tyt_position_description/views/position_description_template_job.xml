@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <odoo>
-    <template id="position_description_template">
+    <template id="position_description_template_job">
         <t t-call="web.html_container">
             <t t-call="web.external_layout">
                 <t t-foreach="docs" t-as="doc">
@@ -37,13 +37,13 @@
                                                                                 </tr>
                                                                                 <tr>
                                                                                     <td style="border: 1px solid black;">
-                                                                                        <span style="font-family: Arial; font-size: 10px;"><t t-esc="doc.partner_id.id or ' '"/></span>
+                                                                                        <span style="font-family: Arial; font-size: 10px;">-</span>
                                                                                     </td>
                                                                                     <td style="border: 1px solid black;">
-                                                                                        <span style="font-family: Arial; font-size: 10px;"><t t-esc="doc.partner_id.name or ' '"/></span>
+                                                                                        <span style="font-family: Arial; font-size: 10px;">-</span>
                                                                                     </td>
                                                                                     <td style="border: 1px solid black;">
-                                                                                        <span style="font-family: Arial; font-size: 10px;"><t t-esc="doc.create_date or ' '"/></span>
+                                                                                        <span style="font-family: Arial; font-size: 10px;">-</span>
                                                                                     </td>
                                                                                 </tr>
                                                                             </tbody>
@@ -63,10 +63,10 @@
                                                                         <span style="font-family: Arial; font-size: 10px;">Puesto</span>
                                                                     </td>
                                                                     <td style="width: 130px; border-top: 1px solid black; border-left: 1px solid black; border-bottom: 1px solid black;text-align: center; font-weight: bold;">
-                                                                        <span style="font-family: Arial; font-size: 10px;"><span style="font-family: Arial; font-size: 10px;"><t t-esc="doc.job_id.name or '-'"/></span></span>
+                                                                        <span style="font-family: Arial; font-size: 10px;"><span style="font-family: Arial; font-size: 10px;"><t t-esc="doc.name or '-'"/></span></span>
                                                                     </td>
                                                                     <td style="width: 130px; border-top: 1px solid black; border-right: 1px solid black; border-bottom: 1px solid black; text-align: center;font-weight: bold;">
-                                                                        <span style="font-family: Arial; font-size: 10px;"><t t-esc="doc.job_id.nombre_corto or '-'"/></span>
+                                                                        <span style="font-family: Arial; font-size: 10px;"><t t-esc="doc.nombre_corto or '-'"/></span>
                                                                     </td>
                                                                 </tr>
                                                                 <tr>
@@ -74,7 +74,7 @@
                                                                         <span style="font-family: Arial; font-size: 10px;">Puntos (Valuación)</span>
                                                                     </td>
                                                                     <td style="border-top: 1px solid black; border-left: 1px solid black; border-bottom: 1px solid black ; text-align: center;">
-                                                                        <span style="font-family: Arial; font-size: 10px;"><t t-esc="doc.job_id.puntos_valuacion or ' '"/></span>
+                                                                        <span style="font-family: Arial; font-size: 10px;"><t t-esc="doc.puntos_valuacion or ' '"/></span>
                                                                     </td>
                                                                     <td style="border-top: 1px solid black; border-right: 1px solid black; border-bottom: 1px solid black;  text-align: center;">
                                                                         <span style="font-family: Arial; font-size: 10px;"> </span>
@@ -85,7 +85,7 @@
                                                                         <span style="font-family: Arial; font-size: 10px;">Categoría</span>
                                                                     </td>
                                                                     <td style="border-top: 1px solid black; border-left: 1px solid black; border-bottom: 1px solid black;  text-align: center;">
-                                                                        <span style="font-family: Arial; font-size: 10px;"><t t-esc="doc.job_id.categoria or ' '"/></span>
+                                                                        <span style="font-family: Arial; font-size: 10px;"><t t-esc="doc.categoria or ' '"/></span>
                                                                     </td>
                                                                     <td style="border-top: 1px solid black; border-right: 1px solid black; border-bottom: 1px solid black;  text-align: center;">
                                                                         <span style="font-family: Arial; font-size: 10px;">-</span>
@@ -96,7 +96,7 @@
                                                                         <span style="font-family: Arial; font-size: 10px;">Nivel Organizacional</span>
                                                                     </td>
                                                                     <td style="border-top: 1px solid black; border-left: 1px solid black; border-bottom: 1px solid black;  text-align: center;">
-                                                                        <span style="font-family: Arial; font-size: 10px;"><t t-esc="doc.job_id.nivel_organizacional or ' '"/></span>
+                                                                        <span style="font-family: Arial; font-size: 10px;"><t t-esc="doc.nivel_organizacional or ' '"/></span>
                                                                     </td>
                                                                     <td style="border-top: 1px solid black; border-right: 1px solid black; border-bottom: 1px solid black;  text-align: center;">
                                                                         <span style="font-family: Arial; font-size: 10px;">-</span>
@@ -116,7 +116,7 @@
                                                                     </td>
                                                                     <td style="width: 130px; border: 1px solid black;background-color: #002060; color: white; text-align: center; font-weight: bold;"> 
                                                                         <span style="font-family: Arial; font-size: 10px;">
-                                                                            <t t-set="nivel_detalle" t-value="doc.job_id.nivel_detalle_ids.filtered(lambda n: n.sequence == 1)" />
+                                                                            <t t-set="nivel_detalle" t-value="doc.nivel_detalle_ids.filtered(lambda n: n.sequence == 1)" />
                                                                             <t t-if="nivel_detalle">
                                                                                 <t t-esc="nivel_detalle[0].nivel_id.name"/>
                                                                             </t>
@@ -304,7 +304,7 @@
                                             <tbody>
                                                 <tr>
                                                     <td>
-                                                       <img t-if="doc.job_id.company_id.logo" t-att-src="image_data_uri(doc.job_id.company_id.logo)" alt="Logo" style="width: 100%; height: auto;"/>
+                                                       <img t-if="doc.company_id.logo" t-att-src="image_data_uri(doc.company_id.logo)" alt="Logo" style="width: 100%; height: auto;"/>
                                                     </td>
                                                     <td style="width: 300px;">
                                                         <table class="table table-sm " style="border: 1px solid black; border-collapse: collapse;">
@@ -317,7 +317,7 @@
                                                                         <span style="font-family: Arial; font-size: 10px;">Jornada en horas</span>
                                                                     </td>
                                                                     <td style="width: 148px; border: 1px solid black; background-color: #002060; color: white; text-align: center;"> 
-                                                                        <span style="font-family: Arial; font-size: 10px;"><t t-esc="doc.job_id.hr_job_work_day_id.name or ' '"/></span>
+                                                                        <span style="font-family: Arial; font-size: 10px;"><t t-esc="doc.hr_job_work_day_id.name or ' '"/></span>
                                                                     </td>
                                                                 </tr>
                                                                 <tr>
@@ -325,7 +325,7 @@
                                                                         <span style="font-family: Arial; font-size: 10px;">Jefe Funcional</span>
                                                                     </td>
                                                                     <td style="border: 1px solid black;">
-                                                                        <span style="font-family: Arial; font-size: 10px;"><t t-esc="doc.job_id.functional_head.name or ' '"/></span>
+                                                                        <span style="font-family: Arial; font-size: 10px;"><t t-esc="doc.functional_head.name or ' '"/></span>
                                                                     </td>
                                                                 </tr>
                                                                 <tr>
@@ -333,7 +333,7 @@
                                                                         <span style="font-family: Arial; font-size: 10px;">Jefe Administrativo</span>
                                                                     </td>
                                                                     <td style="border: 1px solid black;">
-                                                                        <span style="font-family: Arial; font-size: 10px;"><t t-esc="doc.job_id.adm_head.name or ' '"/></span>
+                                                                        <span style="font-family: Arial; font-size: 10px;"><t t-esc="doc.adm_head.name or ' '"/></span>
                                                                     </td>
                                                                 </tr>
                                                             </tbody>
@@ -364,29 +364,29 @@
                                                                     <td style="border: 1px solid black; background-color:#b7dee8; color: black; text-align: left;">
                                                                         <span style="font-family: Arial; font-size: 10px;">Finanzas</span>
                                                                     </td>
-                                                                    <td style="border: 1px solid black;"><span style="font-family: Arial; font-size: 10px;"><t t-esc="doc.job_id.finanzas_indicador or '-'"/></span></td>
-                                                                    <td style="border: 1px solid black;"><span style="font-family: Arial; font-size: 10px;"><t t-esc="doc.job_id.finanzas_meta or '-'"/></span></td>
+                                                                    <td style="border: 1px solid black;"><span style="font-family: Arial; font-size: 10px;"><t t-esc="doc.finanzas_indicador or '-'"/></span></td>
+                                                                    <td style="border: 1px solid black;"><span style="font-family: Arial; font-size: 10px;"><t t-esc="doc.finanzas_meta or '-'"/></span></td>
                                                                 </tr>
                                                                 <tr>
                                                                     <td style="border: 1px solid black; background-color:#b7dee8; color: black; text-align: left;">
                                                                         <span style="font-family: Arial; font-size: 10px;">Cliente</span>
                                                                     </td>
-                                                                    <td style="border: 1px solid black;"><span style="font-family: Arial; font-size: 10px;"><t t-esc="doc.job_id.cliente_indicador or '-'"/></span></td>
-                                                                    <td style="border: 1px solid black;"><span style="font-family: Arial; font-size: 10px;"><t t-esc="doc.job_id.cliente_meta or '-'"/></span></td>
+                                                                    <td style="border: 1px solid black;"><span style="font-family: Arial; font-size: 10px;"><t t-esc="doc.cliente_indicador or '-'"/></span></td>
+                                                                    <td style="border: 1px solid black;"><span style="font-family: Arial; font-size: 10px;"><t t-esc="doc.cliente_meta or '-'"/></span></td>
                                                                 </tr>
                                                                 <tr>
                                                                     <td style="border: 1px solid black; background-color:#b7dee8; color: black; text-align: left;">
                                                                         <span style="font-family: Arial; font-size: 10px;">Procesos</span>
                                                                     </td>
-                                                                    <td style="border: 1px solid black;"><span style="font-family: Arial; font-size: 10px;"><t t-esc="doc.job_id.procesos_indicador or '-'"/></span></td>
-                                                                    <td style="border: 1px solid black;"><span style="font-family: Arial; font-size: 10px;"><t t-esc="doc.job_id.procesos_meta or '-'"/></span></td>
+                                                                    <td style="border: 1px solid black;"><span style="font-family: Arial; font-size: 10px;"><t t-esc="doc.procesos_indicador or '-'"/></span></td>
+                                                                    <td style="border: 1px solid black;"><span style="font-family: Arial; font-size: 10px;"><t t-esc="doc.procesos_meta or '-'"/></span></td>
                                                                 </tr>
                                                                 <tr>
                                                                     <td style="border: 1px solid black; background-color:#b7dee8; color: black; text-align: left;">
                                                                         <span style="font-family: Arial; font-size: 10px;">Gente</span>
                                                                     </td>
-                                                                    <td style="border: 1px solid black;"><span style="font-family: Arial; font-size: 10px;"><t t-esc="doc.job_id.gente_indicador or '-'"/></span></td>
-                                                                    <td style="border: 1px solid black;"><span style="font-family: Arial; font-size: 10px;"><t t-esc="doc.job_id.gente_meta or '-'"/></span></td>
+                                                                    <td style="border: 1px solid black;"><span style="font-family: Arial; font-size: 10px;"><t t-esc="doc.gente_indicador or '-'"/></span></td>
+                                                                    <td style="border: 1px solid black;"><span style="font-family: Arial; font-size: 10px;"><t t-esc="doc.gente_meta or '-'"/></span></td>
                                                                 </tr>
                                                             </tbody>
                                                         </table>
@@ -416,37 +416,37 @@
                                                                     <td style="border: 1px solid black; background-color:#8eaadb; color: white; text-align: left;">
                                                                         <span style="font-family: Arial; font-size: 10px;">Estratégico</span>
                                                                     </td>
-                                                                    <td style="border: 1px solid black;"><span style="font-family: Arial; font-size: 10px;"><t t-esc="doc.job_id.estrategico_indicador or '-'"/></span></td>
-                                                                    <td style="border: 1px solid black;"><span style="font-family: Arial; font-size: 10px;"><t t-esc="doc.job_id.estrategico_meta or '-'"/></span></td>
+                                                                    <td style="border: 1px solid black;"><span style="font-family: Arial; font-size: 10px;"><t t-esc="doc.estrategico_indicador or '-'"/></span></td>
+                                                                    <td style="border: 1px solid black;"><span style="font-family: Arial; font-size: 10px;"><t t-esc="doc.estrategico_meta or '-'"/></span></td>
                                                                 </tr>
                                                                 <tr>
                                                                     <td style="border: 1px solid black; background-color:#8eaadb; color: white; text-align: left;">
                                                                         <span style="font-family: Arial; font-size: 10px;">Costo</span>
                                                                     </td>
                                                                     
-                                                                    <td style="border: 1px solid black;"><span style="font-family: Arial; font-size: 10px;"><t t-esc="doc.job_id.costo_indicador or '-'"/></span></td>
-                                                                    <td style="border: 1px solid black;"><span style="font-family: Arial; font-size: 10px;"><t t-esc="doc.job_id.costo_meta or '-'"/></span></td>
+                                                                    <td style="border: 1px solid black;"><span style="font-family: Arial; font-size: 10px;"><t t-esc="doc.costo_indicador or '-'"/></span></td>
+                                                                    <td style="border: 1px solid black;"><span style="font-family: Arial; font-size: 10px;"><t t-esc="doc.costo_meta or '-'"/></span></td>
                                                                 </tr>
                                                                 <tr>
                                                                     <td style="border: 1px solid black; background-color:#b7dee8; color: black; text-align: left;">
                                                                         <span style="font-family: Arial; font-size: 10px;">Velocidad de respuesta</span>
                                                                     </td>
-                                                                    <td style="border: 1px solid black;"><span style="font-family: Arial; font-size: 10px;"><t t-esc="doc.job_id.velocidad_respuesta_indicador or '-'"/></span></td>
-                                                                    <td style="border: 1px solid black;"><span style="font-family: Arial; font-size: 10px;"><t t-esc="doc.job_id.velocidad_respuesta_meta or '-'"/></span></td>
+                                                                    <td style="border: 1px solid black;"><span style="font-family: Arial; font-size: 10px;"><t t-esc="doc.velocidad_respuesta_indicador or '-'"/></span></td>
+                                                                    <td style="border: 1px solid black;"><span style="font-family: Arial; font-size: 10px;"><t t-esc="doc.velocidad_respuesta_meta or '-'"/></span></td>
                                                                 </tr>
                                                                 <tr>
                                                                     <td style="border: 1px solid black; background-color:#b7dee8; color: black; text-align: left;">
                                                                         <span style="font-family: Arial; font-size: 10px;">Disponibilidad</span>
                                                                     </td>
-                                                                    <td style="border: 1px solid black;"><span style="font-family: Arial; font-size: 10px;"><t t-esc="doc.job_id.disponibilidad_indicador or '-'"/></span></td>
-                                                                    <td style="border: 1px solid black;"><span style="font-family: Arial; font-size: 10px;"><t t-esc="doc.job_id.disponibilidad_meta or '-'"/></span></td>
+                                                                    <td style="border: 1px solid black;"><span style="font-family: Arial; font-size: 10px;"><t t-esc="doc.disponibilidad_indicador or '-'"/></span></td>
+                                                                    <td style="border: 1px solid black;"><span style="font-family: Arial; font-size: 10px;"><t t-esc="doc.disponibilidad_meta or '-'"/></span></td>
                                                                 </tr>
                                                                 <tr>
                                                                     <td style="border: 1px solid black; background-color:#b7dee8; color: black; text-align: left;">
                                                                         <span style="font-family: Arial; font-size: 10px;">Efectividad de proceso</span>
                                                                     </td>
-                                                                    <td style="border: 1px solid black;"><span style="font-family: Arial; font-size: 10px;"><t t-esc="doc.job_id.efectividad_proceso_indicador or '-'"/></span></td>
-                                                                    <td style="border: 1px solid black;"><span style="font-family: Arial; font-size: 10px;"><t t-esc="doc.job_id.efectividad_proceso_meta or '-'"/></span></td>
+                                                                    <td style="border: 1px solid black;"><span style="font-family: Arial; font-size: 10px;"><t t-esc="doc.efectividad_proceso_indicador or '-'"/></span></td>
+                                                                    <td style="border: 1px solid black;"><span style="font-family: Arial; font-size: 10px;"><t t-esc="doc.efectividad_proceso_meta or '-'"/></span></td>
                                                                 </tr>
                                                             </tbody>
                                                         </table>
@@ -492,37 +492,37 @@
                                                 <tr>
                                                     <td style="border: 1px solid black; text-align: center;">
                                                         <span style="font-family: Arial; font-size: 10px; text-align: center;">
-                                                            <t t-esc="doc.job_id.fondo_ahorro or '-'"/>
+                                                            <t t-esc="doc.fondo_ahorro or '-'"/>
                                                         </span>
                                                     </td>
                                                     <td style="border: 1px solid black; text-align: center;">
                                                         <span style="font-family: Arial; font-size: 10px; text-align: center;">
-                                                            <t t-esc="doc.job_id.beca_estudiantil or '-'"/>
+                                                            <t t-esc="doc.beca_estudiantil or '-'"/>
                                                         </span>
                                                     </td>
                                                     <td style="border: 1px solid black; text-align: center;">
                                                         <span style="font-family: Arial; font-size: 10px; text-align: center;">
-                                                            <t t-esc="doc.job_id.r_casa or '-'"/>
+                                                            <t t-esc="doc.r_casa or '-'"/>
                                                         </span>
                                                     </td>
                                                     <td style="border: 1px solid black; text-align: center;">
                                                         <span style="font-family: Arial; font-size: 10px; text-align: center;">
-                                                            <t t-esc="doc.job_id.v_despensa or '-'"/>
+                                                            <t t-esc="doc.v_despensa or '-'"/>
                                                         </span>
                                                     </td>
                                                     <td style="border: 1px solid black; text-align: center;">
                                                         <span style="font-family: Arial; font-size: 10px; text-align: center;">
-                                                            <t t-esc="doc.job_id.v_gasolina or '-'"/>
+                                                            <t t-esc="doc.v_gasolina or '-'"/>
                                                         </span>
                                                     </td>
                                                     <td style="border: 1px solid black; text-align: center;">
                                                         <span style="font-family: Arial; font-size: 10px; text-align: center;">
-                                                            <t t-esc="doc.job_id.seguro_medico_mayor or '-'"/>
+                                                            <t t-esc="doc.seguro_medico_mayor or '-'"/>
                                                         </span>
                                                     </td>
                                                     <td style="border: 1px solid black; text-align: center;">
                                                         <span style="font-family: Arial; font-size: 10px;">
-                                                            <t t-esc="doc.job_id.auto or '-'"/>
+                                                            <t t-esc="doc.auto or '-'"/>
                                                         </span>
                                                     </td>
                                                 </tr>
@@ -551,7 +551,7 @@
                                                 <tr style="height: 300px;">
                                                     <td style="border: 1px solid black; height: 100px;">
                                                         <span style="font-family: Arial; font-size: 8px;">
-                                                            <t t-esc="doc.job_id.objetivo_general or '-'"/>
+                                                            <t t-esc="doc.objetivo_general or '-'"/>
                                                         </span>
                                                     </td>
                                                 </tr>
@@ -575,7 +575,7 @@
                                                 <tr style="height: 300px;">
                                                     <td style="border: 1px solid black; height: 100px;">
                                                         <span style="font-family: Arial; font-size: 8px;">
-                                                            <t t-esc="doc.job_id.objetivo_puesto or '-'"/>
+                                                            <t t-esc="doc.objetivo_puesto or '-'"/>
                                                         </span>
                                                     </td>
                                                 </tr>
@@ -626,10 +626,10 @@
                                                                 </tr>
                                                                 <tr>
                                                                     <td style="width: 192px; border: 1px solid black;">
-                                                                        <span style="font-family: Arial; font-size: 10px; text-align: center;"><t t-esc="doc.job_id.relacion_interna or '-'"/></span>
+                                                                        <span style="font-family: Arial; font-size: 10px; text-align: center;"><t t-esc="doc.relacion_interna or '-'"/></span>
                                                                     </td>
                                                                     <td style="width: 192px; border: 1px solid black;">
-                                                                        <span style="font-family: Arial; font-size: 10px; text-align: center;"><t t-esc="doc.job_id.relacion_externa or '-'"/></span>
+                                                                        <span style="font-family: Arial; font-size: 10px; text-align: center;"><t t-esc="doc.relacion_externa or '-'"/></span>
                                                                     </td>
                                                                 </tr>
                                                             </tbody>
@@ -650,10 +650,10 @@
                                                                 </tr>
                                                                 <tr>
                                                                     <td style="width: 192px; border: 1px solid black;">
-                                                                        <span style="font-family: Arial; font-size: 10px; text-align: center;"><t t-esc="doc.job_id.valores or '-'"/></span>
+                                                                        <span style="font-family: Arial; font-size: 10px; text-align: center;"><t t-esc="doc.valores or '-'"/></span>
                                                                     </td>
                                                                     <td style="width: 192px; border: 1px solid black;">
-                                                                        <span style="font-family: Arial; font-size: 10px; text-align: center;"><t t-esc="doc.job_id.plan_estrategico or '-'"/></span>
+                                                                        <span style="font-family: Arial; font-size: 10px; text-align: center;"><t t-esc="doc.plan_estrategico or '-'"/></span>
                                                                     </td>
                                                                 </tr>
                                                             </tbody>
@@ -684,7 +684,7 @@
                                                     </td>
                                                 </tr>
                                                 
-                                                <t t-foreach="doc.job_id.related_process_ids" t-as="related_process">
+                                                <t t-foreach="doc.related_process_ids" t-as="related_process">
                                                     <tr>
                                                         <td style="border: 1px solid black;">
                                                             <span style="font-family: Arial; font-size: 10px;">
@@ -700,7 +700,7 @@
                                                     </tr>
                                                 </t>
 
-                                                <t t-foreach="doc.job_id.responsible_process_ids" t-as="responsible_process">
+                                                <t t-foreach="doc.responsible_process_ids" t-as="responsible_process">
                                                     <tr>
                                                         <td style="border: 1px solid black;">
                                                             <span style="font-family: Arial; font-size: 10px;">
@@ -740,12 +740,12 @@
                                                             <tr>
                                                                 <td style="border: 1px solid black; background-color: #b7dee8; color: black; text-align: center; font-weight: bold;">
                                                                     <span style="font-size: 10px;">NOMBRE DE PUESTO: </span>
-                                                                    <span style="font-size: 10px;"><t t-esc="doc.job_id.name or '-'"/></span>
+                                                                    <span style="font-size: 10px;"><t t-esc="doc.name or '-'"/></span>
                                                                 </td>
                                                             </tr>
                                                             <tr>
                                                                 <td rowspan="11" style="border: 1px solid black; background-color: white; text-align: center; vertical-align: bottom;">
-                                                                   <img t-if="doc.job_id.company_id.logo" t-att-src="image_data_uri(doc.job_id.company_id.logo)" alt="Logo" style="width: 100%; height: auto;"/>
+                                                                   <img t-if="doc.company_id.logo" t-att-src="image_data_uri(doc.company_id.logo)" alt="Logo" style="width: 100%; height: auto;"/>
                                                                 </td>
                                                             </tr>
                                                         </table>
@@ -759,12 +759,12 @@
                                                                 </td>
                                                             </tr>
 
-                                                            <t t-if="doc.job_id.functions">
+                                                            <t t-if="doc.functions">
                                                                 <t t-foreach="range(10)" t-as="i">
                                                                     <tr>
                                                                         <td style="width: 538px; border: 1px solid black;">
                                                                             <span style="font-family: Arial; font-size: 10px;">
-                                                                                <t t-esc="doc.job_id.functions[i].name if i &lt; len(doc.job_id.functions) else '-'"/>
+                                                                                <t t-esc="doc.functions[i].name if i &lt; len(doc.functions) else '-'"/>
                                                                             </span>
                                                                         </td>
                                                                     </tr>
@@ -1231,12 +1231,12 @@
                                                             <tr>
                                                                 <td style="border: 1px solid black; background-color: #b7dee8; color: black; text-align: center; font-weight: bold;">
                                                                     <span style="font-size: 10px;">NOMBRE DE PUESTO: </span>
-                                                                    <span style="font-size: 10px;"><t t-esc="doc.job_id.name or '-'"/></span>
+                                                                    <span style="font-size: 10px;"><t t-esc="doc.name or '-'"/></span>
                                                                 </td>
                                                             </tr>
                                                             <tr>
                                                                 <td  rowspan="11" style="border: 1px solid black; background-color: white; text-align: center; vertical-align: bottom; ">
-                                                                   <img t-if="doc.job_id.company_id.logo" t-att-src="image_data_uri(doc.job_id.company_id.logo)" alt="Logo" style="width: 100%; height: auto;"/>
+                                                                   <img t-if="doc.company_id.logo" t-att-src="image_data_uri(doc.company_id.logo)" alt="Logo" style="width: 100%; height: auto;"/>
                                                                 </td>
                                                             </tr>
                                                         </table>
@@ -1257,20 +1257,20 @@
                                                                     <span style="font-family: Arial; font-size: 10px;">Del Cliente</span>
                                                                 </td>
                                                             </tr>
-                                                            <t t-if="doc.job_id.position_skills or doc.job_id.client_skills">
+                                                            <t t-if="doc.position_skills or doc.client_skills">
                                                                 <t t-foreach="range(10)" t-as="i">
                                                                     <tr>
                                                                         <!-- Columna de habilidades del puesto -->
                                                                         <td style="width: 266px; border: 1px solid black;">
                                                                             <span style="font-family: Arial; font-size: 10px;">
-                                                                                <t t-esc="doc.job_id.position_skills[i].name if i &lt; len(doc.job_id.position_skills) else '-'"/>
+                                                                                <t t-esc="doc.position_skills[i].name if i &lt; len(doc.position_skills) else '-'"/>
                                                                             </span>
                                                                         </td>
                                                                         
                                                                         <!-- Columna de habilidades del cliente -->
                                                                         <td style="width: 266px; border: 1px solid black;">
                                                                             <span style="font-family: Arial; font-size: 10px;">
-                                                                                <t t-esc="doc.job_id.client_skills[i].name if i &lt; len(doc.job_id.client_skills) else '-'"/>
+                                                                                <t t-esc="doc.client_skills[i].name if i &lt; len(doc.client_skills) else '-'"/>
                                                                             </span>
                                                                         </td>
                                                                     </tr>
@@ -1308,7 +1308,7 @@
                                                         <span style="font-family: Arial; font-size: 10px;">Definición</span>
                                                     </td>
                                                 </tr>
-                                                <t t-foreach="doc.job_id.generic_skills" t-as="skill">
+                                                <t t-foreach="doc.generic_skills" t-as="skill">
                                                     <tr>
                                                         <td style=" border: 1px solid black; text-align: center;">
                                                             <span style="font-family: Arial; font-size: 10px;">
@@ -1361,16 +1361,16 @@
                                                 </tr>
                                                 <tr>
                                                     <td style="border: 1px solid black; text-align: center;">
-                                                        <span style="font-family: Arial; font-size: 10px;"><t t-esc="doc.job_id.name or '-'"/></span>
+                                                        <span style="font-family: Arial; font-size: 10px;"><t t-esc="doc.name or '-'"/></span>
                                                     </td>
                                                     <td  style="border: 1px solid black; text-align: center;">
-                                                        <span style="font-family: Arial; font-size: 10px;"><t t-esc="doc.job_id.first_option.name or '-'"/></span>
+                                                        <span style="font-family: Arial; font-size: 10px;"><t t-esc="doc.first_option.name or '-'"/></span>
                                                     </td>
                                                     <td  style="border: 1px solid black; text-align: center;">
-                                                        <span style="font-family: Arial; font-size: 10px;"><t t-esc="doc.job_id.second_option.name or '-'"/></span>
+                                                        <span style="font-family: Arial; font-size: 10px;"><t t-esc="doc.second_option.name or '-'"/></span>
                                                     </td>
                                                     <td  style="border: 1px solid black;text-align: center;">
-                                                        <span style="font-family: Arial; font-size: 10px;"><t t-esc="doc.job_id.third_option.name or '-'"/></span>
+                                                        <span style="font-family: Arial; font-size: 10px;"><t t-esc="doc.third_option.name or '-'"/></span>
                                                     </td>
                                                 </tr>
                                             </tbody>
