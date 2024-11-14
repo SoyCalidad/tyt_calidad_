@@ -1,5 +1,8 @@
 from odoo import api, models, fields
 
+import logging
+_logger = logging.getLogger(__name__)
+
 class JobApplication(models.Model):
     _name = 'tyt_recruitment.job_application'
     _description = 'tyt_recruitment.job_application'
@@ -9,13 +12,20 @@ class JobApplication(models.Model):
     requisition = fields.Char(string='Requisición')
     site = fields.Char(string='Sitio')
 
-    state = fields.Selection([('authorize', "Sí"),('noauthorize', "No"),], string="Autorizado", required=True, tracking=True, default='authorize')
+    state = fields.Selection([('authorize', "Sí"),('noauthorize', "No"),], string="Autorizado", required=True, tracking=True, default='noauthorize')
     signature_image = fields.Binary(string="Firma del solicitante")
 
     # Campos relacionados para acceder al nombre y apellidos del aplicante
     applicant_name = fields.Char(related="applicant_id.name", string="Nombre", store=True)
     applicant_last_name_father = fields.Char(related="applicant_id.last_name_father", string="Apellido Paterno", store=True)
     applicant_last_name_mother = fields.Char(related="applicant_id.last_name_mother", string="Apellido Materno", store=True)
+    applicant_employee_number = fields.Char(related="applicant_id.employee_number", string="Número de empleado", store=True)
+    applicant_number_phone = fields.Char(related="applicant_id.number_phone", string="Teléfono", store=True)
+    applicant_birthdate = fields.Date(related="applicant_id.birthdate", string="Fecha de nacimiento", store=True)
+    applicant_birthplace = fields.Char(related="applicant_id.birthplace", string="Lugar de nacimiento", store=True)
+    applicant_rfc = fields.Char(related="applicant_id.rfc", string="RFC", store=True)
+    applicant_curp = fields.Char(related="applicant_id.curp", string="CURP", store=True)
+    applicant_social_security_number = fields.Char(related="applicant_id.social_security_number", string="SSN", store=True)       
 
     campaign_id = fields.Many2one('tyt_recruitment.campaign', string="Campaña")
     applicant_id = fields.Many2one('tyt_recruitment.applicant')
@@ -32,7 +42,154 @@ class JobApplication(models.Model):
 
     complete_survey_id = fields.One2many("tyt_recruitment.complete_survey", 'job_application_id', string="Encuesta de salud")
     has_complete_survey = fields.Boolean(string='Tiene Encuesta Completada', compute='compute_has_complete_survey')
+
+    birth_certificate = fields.Binary(string="Acta de nacimiento")
+    birth_certificate_filename = fields.Char(string="Nombre del Archivo")
+    birth_certificate_state = fields.Boolean(string="Estado", default=False)
+    birth_certificate_approved = fields.Boolean(string="Estado", default=False)
+
+    rfc = fields.Binary(string="RFC")
+    rfc_filename = fields.Char(string="Nombre del Archivo")
+    rfc_state = fields.Boolean(string="Estado", default=False)
+    rfc_approved = fields.Boolean(string="Estado", default=False)
+
+    curp = fields.Binary(string="CURP")
+    curp_filename = fields.Char(string="Nombre del Archivo")
+    curp_state = fields.Boolean(string="Estado", default=False)
+    curp_approved = fields.Boolean(string="Estado", default=False)
+
+    study_certificate = fields.Binary(string="Comprobante de estudio")
+    study_certificate_filename = fields.Char(string="Nombre del Archivo")
+    study_certificate_state = fields.Boolean(string="Estado", default=False)
+    study_certificate_approved = fields.Boolean(string="Estado", default=False)
+
+    proposed_letter = fields.Binary(string="Carta propuesta")
+    proposed_letter_filename = fields.Char(string="Nombre del Archivo")
+    proposed_letter_state = fields.Boolean(string="Estado", default=False)
+    proposed_letter_approved = fields.Boolean(string="Estado", default=False)
+
+    ine = fields.Binary(string="INE")
+    ine_filename = fields.Char(string="Nombre del Archivo")
+    ine_state = fields.Boolean(string="Estado", default=False)
+    ine_approved = fields.Boolean(string="Estado", default=False)
+
+    reference_validation = fields.Binary(string="Validación de referencias")
+    reference_validation_filename = fields.Char(string="Nombre del Archivo")
+    reference_validation_state = fields.Boolean(string="Estado", default=False)
+    reference_validation_approved = fields.Boolean(string="Estado", default=False)
+
+    health_survey = fields.Binary(string="Encuesta de salud")
+    health_survey_filename = fields.Char(string="Nombre del Archivo")
+    health_survey_state = fields.Boolean(string="Estado", default=False)
+    health_survey_approved = fields.Boolean(string="Estado", default=False)
+
+    job_application = fields.Binary(string="Solicitud de empleo")
+    job_application_filename = fields.Char(string="Nombre del Archivo")
+    job_application_state = fields.Boolean(string="Estado", default=False)
+    job_application_approved = fields.Boolean(string="Estado", default=False)
     
+    utility_bill = fields.Binary(string="Comprobante de domicilio")
+    utility_bill_filename = fields.Char(string="Nombre del Archivo")
+    utility_bill_state = fields.Boolean(string="Estado", default=False)
+    utility_bill_approved = fields.Boolean(string="Estado", default=False)
+
+    psychometric = fields.Binary(string="Psicométrico")
+    psychometric_filename = fields.Char(string="Nombre del Archivo")
+    psychometric_state = fields.Boolean(string="Estado", default=False)
+    psychometric_approved = fields.Boolean(string="Estado", default=False)
+
+    snn = fields.Binary(string="SNN")
+    snn_filename = fields.Char(string="Nombre del Archivo")
+    snn_state = fields.Boolean(string="Estado", default=False)
+    snn_approved = fields.Boolean(string="Estado", default=False)
+
+    interbank_key = fields.Binary(string="Clave interbancaria")
+    interbank_key_filename = fields.Char(string="Nombre del Archivo")
+    interbank_key_state = fields.Boolean(string="Estado", default=False)
+    interbank_key_approved = fields.Boolean(string="Estado", default=False)
+
+    value_proposition = fields.Binary(string="Propuesta de valor")
+    value_proposition_filename = fields.Char(string="Nombre del Archivo")
+    value_proposition_state = fields.Boolean(string="Estado", default=False)
+    value_proposition_approved = fields.Boolean(string="Estado", default=False)
+
+    expedient_status = fields.Boolean(string="Estado de carga", default=False)
+
+    @api.onchange(
+        'birth_certificate', 
+        'rfc', 
+        'curp', 
+        'study_certificate',
+        'proposed_letter',
+        'ine',
+        'reference_validation',
+        'health_survey',
+        'job_application',
+        'utility_bill',
+        'psychometric',
+        'snn',
+        'interbank_key',
+        'value_proposition'
+    )
+    def _onchange_check_all_files(self):
+        
+        all_fields_filled = all([
+            self.birth_certificate, 
+            self.rfc, 
+            self.curp, 
+            self.study_certificate,
+            self.proposed_letter,
+            self.ine,
+            self.reference_validation,
+            self.health_survey,
+            self.job_application,
+            self.utility_bill,
+            self.psychometric,
+            self.snn,
+            self.interbank_key,
+            self.value_proposition
+        ])
+        
+        self.expedient_status = all_fields_filled
+
+    @api.onchange(
+        'birth_certificate_approved', 
+        'rfc_approved', 
+        'curp_approved', 
+        'study_certificate_approved',
+        'proposed_letter_approved',
+        'ine_approved',
+        'reference_validation_approved',
+        'health_survey_approved',
+        'job_application_approved',
+        'utility_bill_approved',
+        'psychometric_approved',
+        'snn_approved',
+        'interbank_key_approved',
+        'value_proposition_approved'
+    )
+    def _onchange_check_all_files_approved(self):
+        
+        all_fields_approved = all([
+            self.birth_certificate_approved, 
+            self.rfc_approved, 
+            self.curp_approved, 
+            self.study_certificate_approved,
+            self.proposed_letter_approved,
+            self.ine_approved,
+            self.reference_validation_approved,
+            self.health_survey_approved,
+            self.job_application_approved,
+            self.utility_bill_approved,
+            self.psychometric_approved,
+            self.snn_approved,
+            self.interbank_key_approved,
+            self.value_proposition_approved
+        ])
+        if all_fields_approved:
+            self.state = 'authorize'
+            self.applicant_id.status = True
+
     def action_open_health_survey(self):
 
         name = self.applicant_id.name
@@ -53,7 +210,20 @@ class JobApplication(models.Model):
             'url': url + params,
             'target': 'new', 
         }
-    
+
+    def action_view_binary_file(self, field_name, field_f):
+        attachment_name = getattr(self, field_name)
+        attachment = getattr(self, field_f)
+
+        url = f'/web/content/{self._name}/{self.id}/{field_f}/{attachment_name}'
+
+        if attachment:
+            return {
+                'type': 'ir.actions.act_url',
+                'url': url,
+                'target': 'new',
+            }
+
     @api.depends('complete_survey_id')
     def compute_has_complete_survey(self):
         for record in self:
@@ -85,6 +255,7 @@ class Applicant(models.Model):
     social_security_number = fields.Char(string="Número de Seguro Social")
     rfc = fields.Char(string="RFC")
     curp = fields.Char(string="CURP")
+    employee_number = fields.Char(string="Número de empleado")
     address_street = fields.Char(string="Calle y Número")
     address_neighborhood = fields.Char(string="Colonia")
     address_city = fields.Char(string="Municipio")
@@ -101,9 +272,28 @@ class Applicant(models.Model):
     foreign_nationality = fields.Boolean(string="Cuenta con nacionalidad extranjera")
     daily_activities = fields.Text(string="Describa sus actividades diarias")
 
+    status = fields.Boolean(string="Status")
+
     # Campaña
     campaign_id = fields.Many2one('tyt_recruitment.campaign', string="Campaña")
 
+    def show_job_application(self):
+
+        job_application = self.env['tyt_recruitment.job_application'].search([('applicant_id', '=', self.id)], limit=1)
+        if job_application:
+            return {
+                'name': 'Vista Form del Registro',
+                'type': 'ir.actions.act_window',
+                'res_model': 'tyt_recruitment.job_application',
+                'view_mode': 'form',
+                'res_id': job_application.id,
+                'views': [(False, 'form')], 
+                'target': 'current',
+            }
+        else:
+            return {
+                'type': 'ir.actions.act_window_close'
+            }
 class DataAcademic(models.Model):
     _name = 'tyt_recruitment.data_academic'
     _description = 'tyt_recruitment.data_academic'
