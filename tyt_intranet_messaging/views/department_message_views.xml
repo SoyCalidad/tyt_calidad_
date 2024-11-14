@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <record id="tyt_intranet_department_message_view_form" model="ir.ui.view">
+        <field name="name">tyt.intranet.department_message.view.form</field>
+        <field name="model">tyt.intranet.department_message</field>
+        <field name="arch" type="xml">
+            <form>
+                <sheet>
+                    <div class="oe_title">
+						<label for="subject" class="oe_edit_only"/>
+						<h1>
+							<field name="subject"/>
+						</h1>
+					</div>
+                    <group>
+                        <group>
+                            <field name="sender_id"/>
+
+                        </group>
+                    </group>
+                    <notebook>
+                        <page string="Message Content" name="message_content">
+                            <group>
+                                <label for="body" string="Body"/>
+                                <br/>
+                                <field nolabel="1" colspan="2" name="body" placeholder="Enter the main message content (e.g., welcome note, congratulations, preventive guidelines, etc.)"/>
+                                <label for="footer" string="Footer"/>
+                                <br/>
+                                <field nolabel="1" colspan="2" name="footer" placeholder="Provide additional details (e.g., contact info, event schedule, disclaimers, etc.)"/>
+                            </group>
+                        </page>
+                    </notebook>
+                </sheet>
+                <div class="oe_chatter">
+                    <field name="message_follower_ids" widget="mail_followers"/>
+                    <field name="activity_ids" widget="mail_activity"/>
+                    <field name="message_ids" widget="mail_thread"/>
+                </div>
+            </form>
+        </field>
+    </record>
+
+    <record id="tyt_intranet_department_message_action" model="ir.actions.act_window">
+        <field name="name">Department Messages</field>
+        <field name="res_model">tyt.intranet.department_message</field>
+        <field name="view_mode">tree,form</field>
+    </record>
+</odoo>

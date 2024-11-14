@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <menuitem id="tyt_intranet_department_message_menu_action"
+              name="Department Messages"
+              parent="tyt_intranet_base.intranet_menu_root"
+              action="tyt_intranet_department_message_action"
+              sequence="35"/>
+</odoo>
