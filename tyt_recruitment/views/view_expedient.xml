@@ -1,0 +1,54 @@
+<odoo>
+  <data>
+
+    <!-- list requisition -->
+    <record model="ir.ui.view" id="tyt_recruitment_expedient_list">
+      <field name="name">Lista de expediente</field>
+      <field name="model">tyt_recruitment.expedient</field>
+      <field name="arch" type="xml">
+        <tree>
+          <field name="success_rate" />
+          <field name="birth_certificate" />
+          <field name="rfc" />
+        </tree>
+      </field>
+    </record>
+
+    <!-- Formulario de expediente -->
+    <record model="ir.ui.view" id="tyt_recruitment_expedient_form">
+      <field name="name">Formulario de expediente</field>
+      <field name="model">tyt_recruitment.expedient</field>
+      <field name="arch" type="xml">
+        <form string="Archivo">
+          <sheet>
+            <group>
+              <field name="success_rate" />
+              <field name="birth_certificate" />
+              <field name="rfc" />
+              <field name="curp" />
+            </group>
+          </sheet>
+        </form>
+      </field>
+    </record>
+
+    <!-- Formulario para un archivo de expediente -->
+    <record model="ir.ui.view" id="tyt_recruitment_expedient_file_form">
+      <field name="name">Formulario archivo de expediente</field>
+      <field name="model">tyt_recruitment.expedient_file</field>
+      <field name="arch" type="xml">
+        <form string="Archivo">
+          <sheet>
+            <group>
+              <field name="title" />
+              <field name="file" />
+              <field name="state" />
+              <field name="approved" />
+            </group>
+          </sheet>
+        </form>
+      </field>
+    </record>
+
+  </data>
+</odoo>

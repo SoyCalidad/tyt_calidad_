@@ -4,5 +4,6 @@ from . import (
     requisiton,
     job_application,
     question,
-    health_survey
+    health_survey,
+    expedient
 )

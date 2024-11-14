@@ -200,13 +200,13 @@ class Campaign(models.Model):
 
         tag_id = self.env.context.get('tag_id')
         applicants = request.env['tyt_recruitment.applicant'].sudo().search([('campaign_id', '=', int(tag_id))])
-        _logger.info(len(applicants))
 
         return {
             'name': 'Lista de aplicantes',
             'type': 'ir.actions.act_window',
             'res_model': 'tyt_recruitment.applicant',
             'view_mode': 'tree',
+            'views': [(self.env.ref('tyt_recruitment.template_applicants').id, 'tree')],
             'target': 'new',
             'domain': [('id', 'in', applicants.ids)],
             'context': {

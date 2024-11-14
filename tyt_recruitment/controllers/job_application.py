@@ -34,10 +34,14 @@ class PublicFormController(http.Controller):
     @http.route('/job_application/submit', type='http', auth='public', website=True, csrf=False)
     def submit_form(self, **post):
         
-        # CREATING APPLICANT
+        # MEDIA REFERENCE
+        ref = post.get('reference')
+        if not ref:
+            ref = post.get('other_reference')
+
+        # CREATING APPLICANT DATA
         data_applicant = {
-            'reference': post.get('reference'),
-            # 'other_reference': post.get('other_reference'),
+            'reference': ref,
             'name': post.get('name'),
             'last_name_father': post.get('last_name_father'),
             'last_name_mother': post.get('last_name_mother'),
@@ -94,13 +98,14 @@ class PublicFormController(http.Controller):
         }
         spouse = request.env['tyt_recruitment.family_data_detail'].sudo().create(data_spouse)
 
-        # CREATING ACADEMIC DATA
+        # IMAGE SIGNATURE
 
-        data_academic = {
-            'degree': post.get('degree'),
-            'institution': post.get('institution'),
-            'specification': post.get('specification'),
-        }
+        image_base64 = post.get('signature')
+        image_data = None
+
+        if image_base64:
+            # Remueve el prefijo "data:image/png;base64," si existe
+            image_data = image_base64.split(",")[1]
 
         # CREATING JOB APPLICATION
         data_job_application = {
@@ -113,12 +118,24 @@ class PublicFormController(http.Controller):
 
             'father_data_id': father.id,
             'mother_data_id': mother.id,
-            'spouse_data_id': spouse.id
+            'spouse_data_id': spouse.id,
+
+            'signature_image': image_data
         }
 
         job_application = request.env['tyt_recruitment.job_application'].sudo().create(data_job_application)
 
-         # CREATING Answers
+        # CREATING ACADEMIC DATA
+
+        data_academic = {
+            'degree': post.get('degree'),
+            'institution': post.get('institution'),
+            'specification': post.get('specification'),
+            'job_application_id': job_application.id
+        }
+        request.env['tyt_recruitment.data_academic'].sudo().create(data_academic)
+
+        # CREATING ANWERS
         health_questions = self.get_questions('enable', 'health');
         job_questions = self.get_questions('enable', 'job');
         study_questions = self.get_questions('enable', 'study');
@@ -157,7 +174,7 @@ class PublicFormController(http.Controller):
             }
             request.env['tyt_recruitment.job_history'].sudo().create(new_history)
 
-        # JOB HISTORY
+        # JOB REFERENCES
         reference_types = request.httprequest.form.getlist('reference_type[]')
         reference_names = request.httprequest.form.getlist('reference_name[]')
         references_occupations = request.httprequest.form.getlist('references_occupation[]')
@@ -205,10 +222,6 @@ class PublicFormController(http.Controller):
         }
 
         return request.render('tyt_recruitment.template_job_application_success', context)
-        # return Response(
-        #     json.dumps(data), 
-        #     content_type='application/json;charset=utf-8'
-        # )
     
     @http.route('/fields/<string:model_name>', type='http', auth='public')
     def list_fields_generic(self, model_name):
