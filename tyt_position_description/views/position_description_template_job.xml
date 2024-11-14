@@ -8,30 +8,34 @@
                         <table class="table table-sm " style="width: 800px; border: 11px solid black; padding: 3px;">
                             <tbody>
                                 <tr>
-                                    <td style="width: 400px; vertical-align: top;">
-                                        <table>
+                                    <td style="width: 47%; vertical-align: top; border: none !important; border-right: none; ">
+                                        <table  class="table table-borderless" style="border: none; border-collapse: collapse;">
                                             <tbody>
                                                 <tr>
                                                     <td>
-                                                        <table class="table table-sm" style="padding: 3px;">
+                                                        <table class="table table-sm table-borderless">
                                                             <tbody>
                                                                 <tr>
-                                                                    <td style="border: 1px solid black; background-color: #31869b; color: white; text-align: center; font-weight: bold;">
+                                                                    <td style=" width: 100%; border: 1px solid black; background-color: #31869b; color: white; text-align: center; font-weight: bold;">
                                                                         <span style="font-family: Arial; font-size: 14px;">TYT PERFIL LABORAL 2024</span>
                                                                     </td>
                                                                 </tr>
+                                                            </tbody>
+                                                        </table>
+                                                        <table class="table table-sm table-borderless" style="border: none !important; border-collapse: collapse;" >
+                                                            <tbody>
                                                                 <tr>
-                                                                    <td>
+                                                                    <td style="width: 100%;">
                                                                         <table class="table table-sm " style="border: 1px solid black; border-collapse: collapse;">
                                                                             <tbody>
                                                                                 <tr>
-                                                                                    <td style="width: 130px; border: 1px solid black; background-color:#215967; color: white; text-align: center; font-weight: bold;">
+                                                                                    <td style="width: 33%; border: 1px solid black; background-color:#215967; color: white; text-align: center; font-weight: bold;">
                                                                                         <span style="font-family: Arial; font-size: 10px;">No. de empleado</span>
                                                                                     </td>
-                                                                                    <td style="width: 130px; border: 1px solid black; background-color:#215967; color: white; text-align: center; font-weight: bold;">
+                                                                                    <td style="width: 33%; border: 1px solid black; background-color:#215967; color: white; text-align: center; font-weight: bold;">
                                                                                         <span style="font-family: Arial; font-size: 10px;">Nombre completo</span>
                                                                                     </td>
-                                                                                    <td style="width: 130px; border: 1px solid black; background-color:#215967; color: white; text-align: center; font-weight: bold;">
+                                                                                    <td style="width: 33%; border: 1px solid black; background-color:#215967; color: white; text-align: center; font-weight: bold;">
                                                                                         <span style="font-family: Arial; font-size: 10px;">Fecha de aplicación</span>
                                                                                     </td>
                                                                                 </tr>
@@ -56,16 +60,16 @@
                                                 </tr>
                                                 <tr>
                                                     <td>
-                                                        <table class="table table-sm " style="border: 1px solid black; border-collapse: collapse; padding: 3px;">
+                                                        <table class="table table-sm " style="border: 1px solid black; border-collapse: collapse;">
                                                             <tbody>
                                                                 <tr>
-                                                                    <td style="width: 130px; border: 1px solid black; background-color:#215967; color: white; text-align: center; font-weight: bold;">
+                                                                    <td style="width: 128px; border: 1px solid black; background-color:#215967; color: white; text-align: center; font-weight: bold;">
                                                                         <span style="font-family: Arial; font-size: 10px;">Puesto</span>
                                                                     </td>
-                                                                    <td style="width: 130px; border-top: 1px solid black; border-left: 1px solid black; border-bottom: 1px solid black;text-align: center; font-weight: bold;">
+                                                                    <td style="width: 128px; border-top: 1px solid black; border-left: 1px solid black; border-bottom: 1px solid black;text-align: center; font-weight: bold;">
                                                                         <span style="font-family: Arial; font-size: 10px;"><span style="font-family: Arial; font-size: 10px;"><t t-esc="doc.name or '-'"/></span></span>
                                                                     </td>
-                                                                    <td style="width: 130px; border-top: 1px solid black; border-right: 1px solid black; border-bottom: 1px solid black; text-align: center;font-weight: bold;">
+                                                                    <td style="width: 128px; border-top: 1px solid black; border-right: 1px solid black; border-bottom: 1px solid black; text-align: center;font-weight: bold;">
                                                                         <span style="font-family: Arial; font-size: 10px;"><t t-esc="doc.nombre_corto or '-'"/></span>
                                                                     </td>
                                                                 </tr>
@@ -111,10 +115,10 @@
                                                         <table class="table table-sm " style="border: 1px solid black; border-collapse: collapse;">
                                                             <tbody>
                                                                 <tr>
-                                                                    <td style="width: 130px; border: 1px solid black;background-color: #31869b; color: white; text-align: left; font-weight: bold;"> 
+                                                                    <td style="width: 128px; border: 1px solid black;background-color: #31869b; color: white; text-align: left; font-weight: bold;"> 
                                                                         <span style="font-family: Arial; font-size: 10px;">Nivel de Madurez</span>
                                                                     </td>
-                                                                    <td style="width: 130px; border: 1px solid black;background-color: #002060; color: white; text-align: center; font-weight: bold;"> 
+                                                                    <td style="width: 128px; border: 1px solid black;background-color: #002060; color: white; text-align: center; font-weight: bold;"> 
                                                                         <span style="font-family: Arial; font-size: 10px;">
                                                                             <t t-set="nivel_detalle" t-value="doc.nivel_detalle_ids.filtered(lambda n: n.sequence == 1)" />
                                                                             <t t-if="nivel_detalle">
@@ -125,7 +129,7 @@
                                                                             </t>
                                                                         </span>
                                                                     </td>
-                                                                    <td style="width: 130px; border: 1px solid black; background-color:#215967; color: white; text-align: center; font-weight: bold;">
+                                                                    <td style="width: 128px; border: 1px solid black; background-color:#215967; color: white; text-align: center; font-weight: bold;">
                                                                         <span style="font-family: Arial; font-size: 10px;">Curso (S)</span>
                                                                     </td>
                                                                 </tr>
@@ -297,26 +301,25 @@
                                             </tbody>
                                         </table>
                                     </td>
-                                        
 
-                                    <td style="width: 400px; vertical-align: top;">
-                                        <table class="table table-sm ">
+                                    <td style="width: 47%; vertical-align: top; border: none; border-right: none;">
+                                        <table  class="table table-borderless" style="border: none; border-collapse: collapse;">
                                             <tbody>
                                                 <tr>
-                                                    <td>
+                                                    <td style=" width: 33%; border: none;">
                                                        <img t-if="doc.company_id.logo" t-att-src="image_data_uri(doc.company_id.logo)" alt="Logo" style="width: 100%; height: auto;"/>
                                                     </td>
-                                                    <td style="width: 300px;">
+                                                    <td style="width: 66%;">
                                                         <table class="table table-sm " style="border: 1px solid black; border-collapse: collapse;">
                                                             <tbody>
                                                                 <tr> 
                                                                     <td colspan="2" style="border: 1px solid black; background-color: #31869b; color: white; text-align: center; font-weight: bold;"><span style="font-family: Arial; font-size: 14px;">MÉTRICOS</span></td>
                                                                 </tr>
                                                                 <tr>
-                                                                    <td style="width: 148px; border: 1px solid black;background-color:#215967; color: white; text-align: center; font-weight: bold;">
+                                                                    <td style="width: 50%; border: 1px solid black;background-color:#215967; color: white; text-align: center; font-weight: bold;">
                                                                         <span style="font-family: Arial; font-size: 10px;">Jornada en horas</span>
                                                                     </td>
-                                                                    <td style="width: 148px; border: 1px solid black; background-color: #002060; color: white; text-align: center;"> 
+                                                                    <td style="width: 50%; border: 1px solid black; background-color: #002060; color: white; text-align: center;"> 
                                                                         <span style="font-family: Arial; font-size: 10px;"><t t-esc="doc.hr_job_work_day_id.name or ' '"/></span>
                                                                     </td>
                                                                 </tr>
@@ -341,7 +344,7 @@
                                                     </td>
                                                 </tr>
                                                 <tr>
-                                                    <td colspan="2">
+                                                    <td style="width: 100%;" colspan="2">
                                                         <table class="table table-sm " style="border: 1px solid black; border-collapse: collapse;">
                                                             <tbody>
                                                                 <tr>
@@ -350,13 +353,13 @@
                                                                     </td>
                                                                 </tr>
                                                                 <tr>
-                                                                    <td style="width: 130px; border: 1px solid black;background-color:#215967; color: white; text-align: center;font-weight: bold;">
+                                                                    <td style="width: 33%; border: 1px solid black;background-color:#215967; color: white; text-align: center;font-weight: bold;">
                                                                         <span style="font-family: Arial; font-size: 10px;">Tipo</span>
                                                                     </td>
-                                                                    <td style="width: 130px; border: 1px solid black;background-color:#215967; color: white; text-align: center;font-weight: bold;"> 
+                                                                    <td style="width: 33%; border: 1px solid black;background-color:#215967; color: white; text-align: center;font-weight: bold;"> 
                                                                         <span style="font-family: Arial; font-size: 10px;">Indicador</span>
                                                                     </td>
-                                                                    <td style="width: 130px; border: 1px solid black;background-color:#215967; color: white; text-align: center;font-weight: bold;">
+                                                                    <td style="width: 33%; border: 1px solid black;background-color:#215967; color: white; text-align: center;font-weight: bold;">
                                                                         <span style="font-family: Arial; font-size: 10px;">Meta</span>
                                                                     </td>
                                                                 </tr>
@@ -393,7 +396,7 @@
                                                     </td>
                                                 </tr>
                                                 <tr>
-                                                    <td colspan="2">
+                                                    <td style="width: 100%;" colspan="2">
                                                         <table class="table table-sm " style="border: 1px solid black; border-collapse: collapse;">
                                                             <tbody>
                                                                 <tr>
@@ -402,13 +405,13 @@
                                                                     </td>
                                                                 </tr>
                                                                 <tr>
-                                                                    <td style="width: 130px; border: 1px solid black;background-color:#215967; color: white; text-align: center; font-weight: bold;">
+                                                                    <td style="width: 33%; border: 1px solid black;background-color:#215967; color: white; text-align: center; font-weight: bold;">
                                                                         <span style="font-family: Arial; font-size: 10px;">Tipo</span>
                                                                     </td>
-                                                                    <td style="width: 130px; border: 1px solid black;background-color:#215967; color: white; text-align: center; font-weight: bold;">
+                                                                    <td style="width: 33%; border: 1px solid black;background-color:#215967; color: white; text-align: center; font-weight: bold;">
                                                                         <span style="font-family: Arial; font-size: 10px;">Indicador</span>
                                                                     </td>
-                                                                    <td style="width: 130px; border: 1px solid black;background-color:#215967; color: white; text-align: center; font-weight: bold;">
+                                                                    <td style="width: 33%; border: 1px solid black;background-color:#215967; color: white; text-align: center; font-weight: bold;">
                                                                         <span style="font-family: Arial; font-size: 10px;">Meta</span>
                                                                     </td>
                                                                 </tr>
@@ -455,10 +458,9 @@
                                             </tbody>
                                         </table>
                                     </td>
-                                    
                                 </tr>
                                 <tr>
-                                    <td colspan="3">
+                                    <td colspan="2" style="border-top: none;">
                                         <div style="border: 1px solid black; background-color: #215967; color: white; text-align: center; font-weight: bold;">
                                             <span style="font-family: Arial; font-size: 14px;">BENEFICIOS</span>
                                         </div>
@@ -537,7 +539,7 @@
                             <tbody>
                                 <tr>
                                     <td>
-                                        <table class="table table-sm " style="width: 382px; border-collapse: collapse;">
+                                        <table class="table table-borderless" style="border: none !important; width: 382px; border-collapse: collapse;">
                                             <tbody>
                                                 <tr>
                                                     <td style="border: 1px solid black; background-color: #215967; color: white; text-align: center; font-weight: bold;">
@@ -545,7 +547,7 @@
                                                     </td>
                                                 </tr>
                                                 <tr>
-                                                    <td style="height: 10px;">
+                                                    <td style="height: 10px; border: none;">
                                                     </td>
                                                 </tr>
                                                 <tr style="height: 300px;">
@@ -558,18 +560,18 @@
                                             </tbody>
                                         </table>
                                     </td>
-                                    <td style="width: 5px;">
+                                    <td style="width: 5px; border: none !important;">
                                     </td>
                                     <td style="vertical-align: top;">
-                                        <table class="table table-sm " style="width: 382px;  border-collapse: collapse;">
+                                        <table class="table table-borderless" style="border: none !important; width: 382px;  border-collapse: collapse;">
                                             <tbody>
                                                 <tr>
                                                     <td style="border: 1px solid black; background-color: #215967; color: white; text-align: center; font-weight: bold;">
                                                         <span style="font-family: Arial; font-size: 12px;">Objetivo del Puesto</span> 
                                                     </td>
                                                 </tr>
-                                                <tr>
-                                                    <td style="height: 10px;">
+                                                <tr style="border: none;">
+                                                    <td style="height: 10px; border: none;">
                                                     </td>
                                                 </tr>
                                                 <tr style="height: 300px;">
@@ -588,7 +590,7 @@
                         <table class="table table-sm " style="width: 800px; border: 11px solid black; padding: 3px; ">
                             <tbody>
                                 <tr>
-                                    <td style="width: 375px;">
+                                    <td style="width: 375px; border: none !important;">
                                         <table style="border-collapse: collapse;">
                                             <tbody>
                                                 <tr>
@@ -607,10 +609,10 @@
                                             </tbody>
                                         </table>
                                     </td>
-                                    <td style="width: 5px; ">
+                                    <td style="width: 5px; border:none !important;">
                                     </td>
-                                    <td style="width: 375px;">
-                                        <table class="table table-sm ">
+                                    <td style="width: 375px; border:none !important;">
+                                        <table class="table table-borderless" style="border: none;">
                                             <tbody>
                                                 <tr>
                                                     <td style="width: 375px; ">
@@ -678,7 +680,7 @@
                                                     <td style="width: 395px; border: 1px solid black;  background-color:#b7dee8; color: black; text-align: center;font-weight: bold;">
                                                         <span style="font-family: Arial; font-size: 10px;">Código</span>
                                                     </td>
-                                                    <td style="width: 10px;"></td>
+                                                     <td style="width: 10px; border: none !important;"></td>
                                                     <td style="width: 395px; border: 1px solid black; background-color:#b7dee8; color: black; text-align: center; font-weight: bold;">
                                                         <span style="font-family: Arial; font-size: 10px;">Nombre</span>
                                                     </td>
@@ -691,7 +693,7 @@
                                                                 <t t-esc="related_process.code"/>
                                                             </span>
                                                         </td>
-                                                        <td style="width: 10px;"></td>
+                                                         <td style="width: 10px; border: none !important;"></td>
                                                         <td style="border: 1px solid black;">
                                                             <span style="font-family: Arial; font-size: 10px;">
                                                                 <t t-esc="related_process.name"/>
@@ -707,7 +709,7 @@
                                                                 <t t-esc="responsible_process.code"/>
                                                             </span>
                                                         </td>
-                                                        <td style="width: 10px;"></td>
+                                                         <td style="width: 10px; border: none !important;"></td>
                                                         <td style="border: 1px solid black;">
                                                             <span style="font-family: Arial; font-size: 10px;">
                                                                 <t t-esc="responsible_process.name"/>
@@ -726,8 +728,8 @@
                         <table class="table table-sm " style="width: 800px; border: 11px solid black; padding: 3px; ">
                             <tbody>
                                 <tr>
-                                    <td>
-                                        <table class="table table-sm">
+                                    <td style=" border: none;">
+                                        <table class="table table-borderless" style="border: none !important; ">
                                             <tbody>
                                                 <tr>
                                                     <td style="width: 267px; vertical-align: top;">
@@ -1217,8 +1219,8 @@
                         <table class="table table-sm " style="width: 800px; border: 11px solid black; padding: 3px; ">
                             <tbody>
                                 <tr>
-                                    <td>
-                                        <table class="table table-sm">
+                                    <td style="border: none; !important">
+                                        <table class="table table-borderless" style="border: none; !important">
                                             <tbody>
                                                 <tr>
                                                     <td style="width: 267px; vertical-align: top;">
@@ -1333,7 +1335,7 @@
                             <tbody>
                                 <tr>
                                     <td>
-                                        <table lass="table table-sm " style ="border-collapse: collapse;">
+                                        <table lass="table table-sm " style =" width: 100%; border-collapse: collapse;">
                                             <tbody>
                                                 <tr>
                                                     <td colspan="4" style="border: 1px solid black; background-color: #215967; color: white; text-align: center; font-weight: bold;">
@@ -1346,16 +1348,16 @@
                                                     </td>
                                                 </tr>
                                                 <tr>
-                                                    <td style="width: 188px; border: 1px solid black; background-color:#b7dee8; color: black; text-align: center; font-weight: bold;">
+                                                    <td style="width: 190px; border: 1px solid black; background-color:#b7dee8; color: black; text-align: center; font-weight: bold;">
                                                         <span style="font-family: Arial; font-size: 10px;">Puesto actual</span>
                                                     </td>
-                                                    <td style="width: 188px; border: 1px solid black; background-color:#b7dee8; color: black; text-align: center; font-weight: bold;">
+                                                    <td style="width: 190px; border: 1px solid black; background-color:#b7dee8; color: black; text-align: center; font-weight: bold;">
                                                         <span style="font-family: Arial; font-size: 10px;">Primera opción</span>
                                                     </td>
-                                                    <td style="width: 188px; border: 1px solid black; background-color:#b7dee8; color: black; text-align: center; font-weight: bold;">
+                                                    <td style="width: 190px; border: 1px solid black; background-color:#b7dee8; color: black; text-align: center; font-weight: bold;">
                                                         <span style="font-family: Arial; font-size: 10px;">Segunda opción</span>
                                                     </td>
-                                                    <td style="width: 188px; border: 1px solid black; background-color:#b7dee8; color: black; text-align: center; font-weight: bold;">
+                                                    <td style="width: 190px; border: 1px solid black; background-color:#b7dee8; color: black; text-align: center; font-weight: bold;">
                                                         <span style="font-family: Arial; font-size: 10px;">Tercera opción</span>
                                                     </td>
                                                 </tr>
