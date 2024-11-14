@@ -1,8 +1,6 @@
 id,name,model_id:id,group_id:id,perm_read,perm_write,perm_create,perm_unlink
 access_hr_job_work_day,hr.job.work_day,model_hr_job_work_day,,1,1,1,1
-
 access_hr_job_maturity_level,hr.job.maturity.level,model_hr_job_maturity_level,,1,1,1,1
 access_hr_job_maturity_schooling,hr.job.maturity.schooling,model_hr_job_maturity_schooling,,1,1,1,1
-
 access_hr_job_maturity_courses,hr.job.maturity.courses,model_hr_job_maturity_courses,,1,1,1,1
 access_hr_job_maturity,hr.job.maturity,model_hr_job_maturity,,1,1,1,1

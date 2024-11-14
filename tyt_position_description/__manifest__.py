@@ -13,15 +13,14 @@
     'category': 'Uncategorized',
     'version': '0.1',
 
-    'depends': ['base','hr','hr_recruitment','report_xlsx'],
+    'depends': ['base','hr','hr_recruitment','hr_job_functions','mgmtsystem_process','report_xlsx'],
 
     'data': [
         'security/ir.model.access.csv',        
         'report/reports_pdf.xml',
         'views/hr_job_form_inherit.xml',
-        'views/hr_job_form_inherit_2.xml',
         'views/position_description_template.xml',
-        'data/hr_job_work_day.xml', 
-        'data/hr_job_maturity_level.xml',       
+        'views/position_description_template_job.xml',
+        'data/hr_job_work_day.xml',        
     ],
 }
