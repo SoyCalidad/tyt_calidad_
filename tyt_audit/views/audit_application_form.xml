@@ -35,7 +35,7 @@
                 margin-top: 20px;
             }
         </style>
-        
+
         <div class="container mt-4 mb-4">
             <h1>Formulario de Auditoría</h1>
             <form t-att-action="'/audit_application/' + str(planning_id) + '/'" method="post" enctype="multipart/form-data" class="p-4 border rounded bg-light">
@@ -65,7 +65,7 @@
                             <td><strong>HALLAZGO:</strong></td>
                             <td>
                                 <select class="form-control" name="finding">
-                                    <option t-att-selected="'good_practice' == audit.get('finding', 'good_practice')" value="good_practice">Buena Práctica</option>
+                                    <option t-att-selected="'good_practice' == audit.get('finding', 'good_practice')" value="good_practice">Buenas Prácticas</option>
                                     <option t-att-selected="'non_conformity' == audit.get('finding', 'non_conformity')" value="non_conformity">No Conformidad</option>
                                 </select>
                             </td>
@@ -74,8 +74,8 @@
                             <td><strong>NORMA:</strong></td>
                             <td><input type="text" class="form-control" name="norm" readonly="readonly" t-att-value="audit['norm']"/></td>
                             <td><strong>EVIDENCIA:</strong></td>
-                            <td colspan="3">
-                                <input type="file" class="form-control" name="attachment" multiple="multiple" />
+                            <td>
+                                <input type="text" class="form-control" name="evidence_display" readonly="readonly" t-att-value="audit['evidence']"/>
                             </td>
                         </tr>
                         <tr>
@@ -97,14 +97,37 @@
                     </tbody>
                 </table>
 
-                <!-- Botones para enviar o cancelar -->
+                <!-- Botones para adjuntar evidencia y pasar al siguiente registro -->
                 <div class="text-end mt-4">
-                    <button type="submit" class="btn btn-primary" name="attachment_ids">Evidencia</button>
+                    <!-- Botón Evidencia -->
+                    <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#evidenceModal">Evidencia</button>
+                    <!-- Botón Siguiente -->
                     <button type="button" class="btn btn-secondary" 
                             t-att-href="'/audit_application/' + str(planning_id + 1) + '/'" 
                             onclick="window.location.href = this.getAttribute('href');">Siguiente</button>
                 </div>
             </form>
+
+            <!-- Modal para adjuntar evidencia -->
+            <div class="modal fade" id="evidenceModal" tabindex="-1" aria-labelledby="evidenceModalLabel" aria-hidden="true">
+                <div class="modal-dialog">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <h5 class="modal-title" id="evidenceModalLabel">Adjuntar Evidencia</h5>
+                            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                        </div>
+                        <div class="modal-body">
+                            <form t-att-action="'/audit_application/' + str(planning_id) + '/'" method="post" enctype="multipart/form-data">
+                                <input type="file" class="form-control" name="attachment" multiple="multiple" />
+                                <div class="text-end mt-3">
+                                    <button type="submit" class="btn btn-primary">Guardar Evidencia</button>
+                                </div>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
             <!-- Logo temporalmente al final del formulario -->
             <div class="text-center mt-4">
                 <img src="/tyt_audit/static/src/img/logo_large.png" alt="Logo" style="width: 150px; height: auto;"/>
