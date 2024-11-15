@@ -38,7 +38,7 @@
         
         <div class="container mt-4 mb-4">
             <h1>Formulario de Auditoría</h1>
-            <form action="/audit_application/submit" method="post" class="p-4 border rounded bg-light">
+            <form t-att-action="'/audit_application/' + str(planning_id) + '/'" method="post" enctype="multipart/form-data" class="p-4 border rounded bg-light">
                 <table class="table">
                     <tbody>
                         <tr>
@@ -74,7 +74,9 @@
                             <td><strong>NORMA:</strong></td>
                             <td><input type="text" class="form-control" name="norm" readonly="readonly" t-att-value="audit['norm']"/></td>
                             <td><strong>EVIDENCIA:</strong></td>
-                            <td><input type="text" class="form-control" name="evidence" t-att-value="audit['evidence']"/></td>
+                            <td colspan="3">
+                                <input type="file" class="form-control" name="attachment" multiple="multiple" />
+                            </td>
                         </tr>
                         <tr>
                             <td><strong>SEMANA AUDITADA:</strong></td>
@@ -97,8 +99,10 @@
 
                 <!-- Botones para enviar o cancelar -->
                 <div class="text-end mt-4">
-                    <button type="submit" class="btn btn-primary">Evidencia</button>
-                    <button type="button" class="btn btn-secondary" onclick="location.reload();">Siguiente</button>
+                    <button type="submit" class="btn btn-primary" name="attachment_ids">Evidencia</button>
+                    <button type="button" class="btn btn-secondary" 
+                            t-att-href="'/audit_application/' + str(planning_id + 1) + '/'" 
+                            onclick="window.location.href = this.getAttribute('href');">Siguiente</button>
                 </div>
             </form>
             <!-- Logo temporalmente al final del formulario -->
@@ -107,4 +111,4 @@
             </div>
         </div>
     </template>
-</odoo>
+</odoo

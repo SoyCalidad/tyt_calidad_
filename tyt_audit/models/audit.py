@@ -7,6 +7,7 @@ from odoo.exceptions import ValidationError, Warning
 
 from odoo import http
 from odoo.http import request
+import base64
 
 
 class AuditProcedure(models.Model):
@@ -132,6 +133,39 @@ class AuditPlanning(models.Model):
             "url": url,
             "target": "new",
         }
+
+    attachment_ids = fields.Many2many(
+        "ir.attachment",
+        string="Evidencia",
+        help="Archivos adjuntos relacionados con esta planificación.",
+    )
+
+    def action_next_record(self):
+        # Guardar el registro actual
+        self.ensure_one()
+        self.write({"state": "completed"})  # Cambiar el estado si es necesario
+
+        # Lógica para avanzar al siguiente registro
+        next_record = self.search([("id", ">", self.id)], limit=1)
+        if next_record:
+            # Redirigir al siguiente registro
+            return {
+                "type": "ir.actions.act_url",
+                "url": f"/audit_application/{next_record.id}/",
+                "target": "self",
+            }
+        else:
+            # Mensaje si no hay más registros
+            return {
+                "type": "ir.actions.client",
+                "tag": "display_notification",
+                "params": {
+                    "title": "Fin de las secciones",
+                    "message": "No hay más registros para revisar.",
+                    "type": "info",
+                    "sticky": False,
+                },
+            }
 
 
 class Audit(models.Model):
@@ -268,15 +302,38 @@ class AuditGenerationForm(models.TransientModel):
 class AuditApplicationController(http.Controller):
 
     @http.route(
-        "/audit_application/<int:planning_id>/", type="http", auth="user", website=True
+        "/audit_application/<int:planning_id>/",
+        type="http",
+        auth="user",
+        website=True,
+        csrf=False,
+        methods=["GET", "POST"],
     )
     def audit_application_form(self, planning_id, **kwargs):
         planning_record = request.env["audit.audit.planning"].sudo().browse(planning_id)
 
-        if not planning_record.exists():
-            return request.not_found()
+        if (
+            request.httprequest.method == "POST"
+            and "attachment" in request.httprequest.files
+        ):
+            file_storage = request.httprequest.files.getlist("attachment")
+            for file in file_storage:
+                file_content = file.read()
+                attachment = (
+                    request.env["ir.attachment"]
+                    .sudo()
+                    .create(
+                        {
+                            "name": file.filename,
+                            "type": "binary",
+                            "datas": base64.b64encode(file_content),
+                            "res_model": "audit.audit.planning",
+                            "res_id": planning_record.id,
+                        }
+                    )
+                )
 
-        # Extrae los datos necesarios y asegura que `finding` tenga un valor predeterminado
+        # Resto del código para extraer datos y renderizar el formulario
         procedure = (
             planning_record.audit_audit_id.tyt_procedure_description_id.name
             if planning_record.audit_audit_id.tyt_procedure_description_id
@@ -294,10 +351,7 @@ class AuditApplicationController(http.Controller):
             if planning_record.audit_audit_id.team_id
             else ""
         )
-        # Aseguramos que `finding` tenga un valor predeterminado si está vacío
-        finding = (
-            planning_record.finding or "good_practice"
-        )  # Puedes ajustar el valor predeterminado
+        finding = planning_record.finding or "good_practice"
         norm = (
             ", ".join(planning_record.iso_9001_standards_ids.mapped("name"))
             if planning_record.iso_9001_standards_ids
@@ -315,7 +369,6 @@ class AuditApplicationController(http.Controller):
             else ""
         )
 
-        # Encapsula todos los datos en el contexto con `finding` incluido
         context = {
             "audit": {
                 "procedure": procedure,
@@ -324,7 +377,7 @@ class AuditApplicationController(http.Controller):
                 "verification": verification,
                 "audited": audited,
                 "audit_group": audit_group,
-                "finding": finding,  # Asegúrate de incluir `finding` aquí
+                "finding": finding,
                 "norm": norm,
                 "evidence": evidence,
                 "audit_week": audit_week,
