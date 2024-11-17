@@ -92,7 +92,12 @@
                         </tr>
                         <tr>
                             <td><strong>FECHA DE AUDITORÍA:</strong></td>
-                            <td><input type="date" class="form-control" name="audit_date" t-att-value="audit['audit_date']"/></td>
+                            <td>
+                                <input type="date" class="form-control" 
+                                    name="audit_date" 
+                                    t-att-value="audit['audit_date']" 
+                                    readonly="readonly"/>
+                            </td>
                             <td><strong>EVALUACIÓN:</strong></td>
                             <td><input type="text" class="form-control" name="evaluation" /></td>
                         </tr>
