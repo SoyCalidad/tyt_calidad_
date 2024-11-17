@@ -118,10 +118,12 @@
 
                 <!-- Botones para adjuntar evidencia y pasar al siguiente registro -->
                 <div class="text-end mt-4">
+                    <!-- Botón Guardar -->
+                    <button type="submit" class="btn btn-success">Guardar</button>
                     <!-- Botón Evidencia -->
                     <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#evidenceModal">Evidencia</button>
                     <!-- Botón Siguiente -->
-                    <button type="submit" class="btn btn-secondary"
+                    <button type="button" class="btn btn-secondary" 
                             t-att-href="'/audit_application/' + str(planning_id + 1) + '/'" 
                             onclick="window.location.href = this.getAttribute('href');">Siguiente</button>
                 </div>
