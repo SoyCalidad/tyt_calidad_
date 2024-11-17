@@ -312,26 +312,36 @@ class AuditApplicationController(http.Controller):
     def audit_application_form(self, planning_id, **kwargs):
         planning_record = request.env["audit.audit.planning"].sudo().browse(planning_id)
 
-        if (
-            request.httprequest.method == "POST"
-            and "attachment" in request.httprequest.files
-        ):
-            file_storage = request.httprequest.files.getlist("attachment")
-            for file in file_storage:
-                file_content = file.read()
-                attachment = (
-                    request.env["ir.attachment"]
-                    .sudo()
-                    .create(
-                        {
-                            "name": file.filename,
-                            "type": "binary",
-                            "datas": base64.b64encode(file_content),
-                            "res_model": "audit.audit.planning",
-                            "res_id": planning_record.id,
-                        }
+        if request.httprequest.method == "POST":
+            # Guardar los datos ingresados en el formulario
+            planning_record.write(
+                {
+                    "comment": kwargs.get("comment", ""),  # Actualiza el campo comment
+                    "evaluation": kwargs.get(
+                        "evaluation", ""
+                    ),  # Actualiza el campo evaluation
+                    "finding": kwargs.get("finding", ""),  # Actualiza el campo finding
+                }
+            )
+
+            # Manejo de adjuntos
+            if "attachment" in request.httprequest.files:
+                file_storage = request.httprequest.files.getlist("attachment")
+                for file in file_storage:
+                    file_content = file.read()
+                    attachment = (
+                        request.env["ir.attachment"]
+                        .sudo()
+                        .create(
+                            {
+                                "name": file.filename,
+                                "type": "binary",
+                                "datas": base64.b64encode(file_content),
+                                "res_model": "audit.audit.planning",
+                                "res_id": planning_record.id,
+                            }
+                        )
                     )
-                )
 
         # Resto del código para extraer datos y renderizar el formulario
         procedure = (
