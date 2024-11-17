@@ -80,7 +80,13 @@
                         </tr>
                         <tr>
                             <td><strong>SEMANA AUDITADA:</strong></td>
-                            <td><input type="text" class="form-control" name="audit_week" readonly="readonly" t-att-value="audit['audit_week']"/></td>
+                            <td>
+                                <input type="text" 
+                                    class="form-control" 
+                                    name="audit_week" 
+                                    t-att-value="audit['audit_week'] if audit['audit_week'] else '0'" 
+                                    readonly="readonly" />
+                            </td>
                             <td><strong>COMENTARIO:</strong></td>
                             <td><input type="text" class="form-control" name="comment" /></td>
                         </tr>
@@ -102,7 +108,7 @@
                     <!-- Botón Evidencia -->
                     <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#evidenceModal">Evidencia</button>
                     <!-- Botón Siguiente -->
-                    <button type="button" class="btn btn-secondary" 
+                    <button type="submit" class="btn btn-secondary"
                             t-att-href="'/audit_application/' + str(planning_id + 1) + '/'" 
                             onclick="window.location.href = this.getAttribute('href');">Siguiente</button>
                 </div>
