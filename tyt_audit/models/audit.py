@@ -369,6 +369,9 @@ class AuditApplicationController(http.Controller):
             else ""
         )
 
+        comment = planning_record.comment or ""
+        evaluation = planning_record.evaluation or ""
+
         context = {
             "audit": {
                 "procedure": procedure,
@@ -383,6 +386,8 @@ class AuditApplicationController(http.Controller):
                 "audit_week": audit_week,
                 "audit_date": audit_date,
                 "center": center,
+                "comment": comment,  # Agregado aquí
+                "evaluation": evaluation,  # Agregado aquí
             },
             "planning_id": planning_id,
         }

@@ -88,19 +88,27 @@
                                     readonly="readonly" />
                             </td>
                             <td><strong>COMENTARIO:</strong></td>
-                            <td><input type="text" class="form-control" name="comment" /></td>
-                        </tr>
-                        <tr>
-                            <td><strong>FECHA DE AUDITORÍA:</strong></td>
                             <td>
-                                <input type="date" class="form-control" 
-                                    name="audit_date" 
-                                    t-att-value="audit['audit_date']" 
-                                    readonly="readonly"/>
+                                <input type="text" class="form-control" 
+                                    name="comment" 
+                                    t-att-value="audit['comment']"/>
                             </td>
-                            <td><strong>EVALUACIÓN:</strong></td>
-                            <td><input type="text" class="form-control" name="evaluation" /></td>
-                        </tr>
+                            </tr>
+                            <tr>
+                                <td><strong>FECHA DE AUDITORÍA:</strong></td>
+                                <td>
+                                    <input type="date" class="form-control" 
+                                        name="audit_date" 
+                                        t-att-value="audit['audit_date']" 
+                                        readonly="readonly"/>
+                                </td>
+                                <td><strong>EVALUACIÓN:</strong></td>
+                                <td>
+                                    <input type="text" class="form-control" 
+                                        name="evaluation" 
+                                        t-att-value="audit['evaluation']"/>
+                                </td>
+                            </tr>
                         <tr>
                             <td><strong>CENTRO:</strong></td>
                             <td colspan="3"><input type="text" class="form-control" name="center" readonly="readonly" t-att-value="audit['center']"/></td>
