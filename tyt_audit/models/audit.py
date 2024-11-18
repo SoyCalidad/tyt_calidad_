@@ -387,10 +387,9 @@ class AuditApplicationController(http.Controller):
         audit_week = planning_record.audit_audit_id.audited_week or ""
         audit_date = planning_record.audit_audit_id.audit_date or ""
         center = (
-            planning_record.audit_audit_id.tyt_sites_related_id.name
-            if planning_record.audit_audit_id.tyt_sites_related_id
-            and hasattr(planning_record.audit_audit_id.tyt_sites_related_id, "name")
-            else ""
+            planning_record.audit_audit_id.tyt_sites_related_id.display_name
+            if planning_record.audit_audit_id and planning_record.audit_audit_id.tyt_sites_related_id
+            else "Sin Sitio"
         )
 
         comment = planning_record.comment or ""

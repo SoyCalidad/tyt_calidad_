@@ -24,112 +24,112 @@
                 box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1);
                 margin-top: 20px;
             }
-            /* Footer del formulario */
-            .form-footer {
-                text-align: center;
-                margin-top: 20px;
+            /* Bordes entre filas */
+            .table-custom tr {
+                border-bottom: 1px solid #d3d3d3;
             }
-            /* Logo centrado al final */
-            .logo-container {
-                text-align: center;
-                margin-top: 20px;
+            /* Asegurar igual distribución de columnas */
+            .col-md-6 {
+                flex: 0 0 50%;
+                max-width: 50%;
             }
         </style>
 
         <div class="container mt-4 mb-4">
             <h1>Formulario de Auditoría</h1>
             <form t-att-action="'/audit_application/' + str(planning_id) + '/'" method="post" enctype="multipart/form-data" class="p-4 border rounded bg-light">
-                <table class="table">
-                    <tbody>
-                        <tr>
-                            <td><strong>PROCEDIMIENTO:</strong></td>
-                            <td><input type="text" class="form-control" name="procedure" readonly="readonly" t-att-value="audit['procedure']"/></td>
-                            <td><strong>CLÁUSULA:</strong></td>
-                            <td><input type="text" class="form-control" name="clause" readonly="readonly" t-att-value="audit['clause']"/></td>
-                        </tr>
-                        <tr>
-                            <td><strong>RESPONSABLE:</strong></td>
-                            <td><input type="text" class="form-control" name="responsible" readonly="readonly" t-att-value="audit['responsible']"/></td>
-                            <td><strong>VERIFICACIÓN:</strong></td>
-                            <td><input type="text" class="form-control" name="verification" readonly="readonly" t-att-value="audit['verification']"/></td>
-                        </tr>
-                        <tr>
-                            <td><strong>AUDITADO:</strong></td>
-                            <td><input type="text" class="form-control" name="audited" readonly="readonly" t-att-value="audit['audited']"/></td>
-                            <td><strong>REDACCIÓN DE NO CONFORMIDAD:</strong></td>
-                            <td><textarea class="form-control" name="non_conformity" rows="2"><t t-esc="audit['finding']"/></textarea></td>
-                        </tr>
-                        <tr>
-                            <td><strong>GRUPO AUDITOR:</strong></td>
-                            <td><input type="text" class="form-control" name="audit_group" readonly="readonly" t-att-value="audit['audit_group']"/></td>
-                            <td><strong>HALLAZGO:</strong></td>
-                            <td>
-                                <select class="form-control" name="finding">
-                                    <option t-att-selected="'good_practices' == audit.get('finding', 'good_practices')" value="good_practices">Buenas Prácticas</option>
-                                    <option t-att-selected="'non_conformity' == audit.get('finding', 'non_conformity')" value="non_conformity">No Conformidad</option>
-                                </select>
-                            </td>
-                        </tr>
-                        <tr>
-                            <td><strong>NORMA:</strong></td>
-                            <td><input type="text" class="form-control" name="norm" readonly="readonly" t-att-value="audit['norm']"/></td>
-                            <td><strong>EVIDENCIA:</strong></td>
-                            <td>
-                                <input type="text" class="form-control" name="evidence_display" readonly="readonly" t-att-value="audit['evidence']"/>
-                            </td>
-                        </tr>
-                        <tr>
-                            <td><strong>SEMANA AUDITADA:</strong></td>
-                            <td>
-                                <input type="text" 
-                                    class="form-control" 
-                                    name="audit_week" 
-                                    t-att-value="audit['audit_week'] if audit['audit_week'] else '0'" 
-                                    readonly="readonly" />
-                            </td>
-                            <td><strong>COMENTARIO:</strong></td>
-                            <td>
-                                <input type="text" class="form-control" 
-                                    name="comment" 
-                                    t-att-value="audit['comment']"/>
-                            </td>
-                            </tr>
-                            <tr>
-                                <td><strong>FECHA DE AUDITORÍA:</strong></td>
-                                <td>
-                                    <input type="date" class="form-control" 
-                                        name="audit_date" 
-                                        t-att-value="audit['audit_date']" 
-                                        readonly="readonly"/>
-                                </td>
-                                <td><strong>EVALUACIÓN:</strong></td>
-                                <td>
-                                    <input type="text" class="form-control" 
-                                        name="evaluation" 
-                                        t-att-value="audit['evaluation']"/>
-                                </td>
-                            </tr>
-                        <tr>
-                            <td><strong>CENTRO:</strong></td>
-                            <td colspan="3"><input type="text" class="form-control" name="center" readonly="readonly" t-att-value="audit['center']"/></td>
-                        </tr>
-                    </tbody>
-                </table>
+                <div class="row">
+                    <!-- Primera columna -->
+                    <div class="col-md-6">
+                        <table class="table table-borderless table-custom">
+                            <tbody>
+                                <tr>
+                                    <td><strong>PROCEDIMIENTO:</strong></td>
+                                    <td><input type="text" class="form-control" name="procedure" readonly="readonly" t-att-value="audit['procedure']"/></td>
+                                </tr>
+                                <tr>
+                                    <td><strong>RESPONSABLE:</strong></td>
+                                    <td><input type="text" class="form-control" name="responsible" readonly="readonly" t-att-value="audit['responsible']"/></td>
+                                </tr>
+                                <tr>
+                                    <td><strong>AUDITADO:</strong></td>
+                                    <td><input type="text" class="form-control" name="audited" readonly="readonly" t-att-value="audit['audited']"/></td>
+                                </tr>
+                                <tr>
+                                    <td><strong>GRUPO AUDITOR:</strong></td>
+                                    <td><input type="text" class="form-control" name="audit_group" readonly="readonly" t-att-value="audit['audit_group']"/></td>
+                                </tr>
+                                <tr>
+                                    <td><strong>NORMA:</strong></td>
+                                    <td><input type="text" class="form-control" name="norm" readonly="readonly" t-att-value="audit['norm']"/></td>
+                                </tr>
+                                <tr>
+                                    <td><strong>SEMANA AUDITADA:</strong></td>
+                                    <td><input type="text" class="form-control" name="audit_week" readonly="readonly" t-att-value="audit['audit_week']"/></td>
+                                </tr>
+                                <tr>
+                                    <td><strong>FECHA DE AUDITORÍA:</strong></td>
+                                    <td><input type="date" class="form-control" name="audit_date" readonly="readonly" t-att-value="audit['audit_date']"/></td>
+                                </tr>
+                                <tr>
+                                    <td><strong>CENTRO:</strong></td>
+                                    <td><input type="text" class="form-control" name="center" readonly="readonly" t-att-value="audit['center']"/></td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
 
-                <!-- Botones para adjuntar evidencia y pasar al siguiente registro -->
+                    <!-- Segunda columna -->
+                    <div class="col-md-6">
+                        <table class="table table-borderless table-custom">
+                            <tbody>
+                                <tr>
+                                    <td><strong>CLÁUSULA:</strong></td>
+                                    <td><input type="text" class="form-control" name="clause" readonly="readonly" t-att-value="audit['clause']"/></td>
+                                </tr>
+                                <tr>
+                                    <td><strong>VERIFICACIÓN:</strong></td>
+                                    <td><input type="text" class="form-control" name="verification" readonly="readonly" t-att-value="audit['verification']"/></td>
+                                </tr>
+                                <tr>
+                                    <td><strong>REDACCIÓN DE NO CONFORMIDAD:</strong></td>
+                                    <td><textarea class="form-control" name="non_conformity" rows="2"><t t-esc="audit['finding']"/></textarea></td>
+                                </tr>
+                                <tr>
+                                    <td><strong>HALLAZGO:</strong></td>
+                                    <td>
+                                        <select class="form-control" name="finding">
+                                            <option t-att-selected="'good_practices' == audit.get('finding', 'good_practices')" value="good_practices">Buenas Prácticas</option>
+                                            <option t-att-selected="'non_conformity' == audit.get('finding', 'non_conformity')" value="non_conformity">No Conformidad</option>
+                                        </select>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td><strong>EVIDENCIA:</strong></td>
+                                    <td><input type="text" class="form-control" name="evidence_display" readonly="readonly" t-att-value="audit['evidence']"/></td>
+                                </tr>
+                                <tr>
+                                    <td><strong>COMENTARIO:</strong></td>
+                                    <td><input type="text" class="form-control" name="comment" t-att-value="audit['comment']"/></td>
+                                </tr>
+                                <tr>
+                                    <td><strong>EVALUACIÓN:</strong></td>
+                                    <td><input type="text" class="form-control" name="evaluation" t-att-value="audit['evaluation']"/></td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+
+                <!-- Botones -->
                 <div class="text-end mt-4">
-                    <!-- Botón Guardar -->
                     <button type="submit" class="btn btn-success">Guardar</button>
-                    <!-- Botón Evidencia -->
                     <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#evidenceModal">Evidencia</button>
-                    <!-- Botón Siguiente -->
-                    <button type="button" class="btn btn-secondary" 
-                            t-att-href="'/audit_application/' + str(planning_id + 1) + '/'" 
-                            onclick="window.location.href = this.getAttribute('href');">Siguiente</button>
+                    <button type="button" class="btn btn-secondary" t-att-href="'/audit_application/' + str(planning_id + 1) + '/'" onclick="window.location.href = this.getAttribute('href');">Siguiente</button>
                 </div>
             </form>
 
-            <!-- Modal para adjuntar evidencia -->
+            <!-- Modal -->
             <div class="modal fade" id="evidenceModal" tabindex="-1" aria-labelledby="evidenceModalLabel" aria-hidden="true">
                 <div class="modal-dialog">
                     <div class="modal-content">
@@ -149,7 +149,6 @@
                 </div>
             </div>
 
-            <!-- Logo temporalmente al final del formulario -->
             <div class="text-center mt-4">
                 <img src="/tyt_audit/static/src/img/logo_large.png" alt="Logo" style="width: 150px; height: auto;"/>
             </div>
