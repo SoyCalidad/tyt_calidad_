@@ -149,9 +149,9 @@ class IndividualReport(models.AbstractModel):
                     finding_value = dict(planning._fields['finding'].selection).get(planning.finding, '')
                     sheet.write(row, 6, finding_value, current_format)              
 
-                    # Escribe evidence_id.name en la columna H
-                    evidence_name = planning.evidence_id.name if planning.evidence_id else ''
-                    sheet.write(row, 7, evidence_name, current_format)
+                    # Escribe nombres de archivos adjuntos en la columna H
+                    evidence_names = ', '.join(evidence.name for evidence in planning.evidence_attachment_ids) or ''
+                    sheet.write(row, 7, evidence_names, current_format)
 
                     # Escribe comment en la columna I
                     sheet.write(row, 8, planning.comment or '', current_format)

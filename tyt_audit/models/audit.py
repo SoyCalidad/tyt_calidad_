@@ -119,10 +119,13 @@ class AuditPlanning(models.Model):
         string="Hallazgo"       
     )
 
-    evidence_id = fields.Many2one(
-            string='Evidencia',
-            comodel_name='audit.audit.planning.evidence'
-        )
+    evidence_attachment_ids = fields.Many2many(
+        'ir.attachment',
+        string='Evidencia',
+        help='Archivos adjuntos relacionados con esta planificación.',
+        domain="[('res_model', '=', 'audit.audit.planning'), ('res_id', '=', id)]"
+    )
+
     
     comment = fields.Char(
         string='Comentario'
@@ -143,12 +146,6 @@ class AuditPlanning(models.Model):
             "url": url,
             "target": "new",
         }
-
-    attachment_ids = fields.Many2many(
-        "ir.attachment",
-        string="Evidencia",
-        help="Archivos adjuntos relacionados con esta planificación.",
-    )
 
     def action_next_record(self):
         # Guardar el registro actual
@@ -251,6 +248,7 @@ class Audit(models.Model):
         comodel_name='audit.plan.schedule.activities',
         domain="[('description_id', '=', tyt_procedure_description_id)]",
     )
+
     '''
     @api.onchange('tyt_procedure_description_id')
     def _onchange_tyt_procedure_description_id(self):
@@ -332,24 +330,34 @@ class AuditApplicationController(http.Controller):
                 }
             )
 
-            # Manejo de adjuntos
-            if "attachment" in request.httprequest.files:
-                file_storage = request.httprequest.files.getlist("attachment")
-                for file in file_storage:
-                    file_content = file.read()
-                    attachment = (
-                        request.env["ir.attachment"]
-                        .sudo()
-                        .create(
-                            {
-                                "name": file.filename,
-                                "type": "binary",
-                                "datas": base64.b64encode(file_content),
-                                "res_model": "audit.audit.planning",
-                                "res_id": planning_record.id,
-                            }
-                        )
-                    )
+            # Manejar los archivos adjuntos
+            attachments = request.httprequest.files.getlist('attachment')
+            attachment_ids = []
+            for attachment in attachments:
+                if attachment.content_type not in ['application/pdf', 'image/jpeg', 'image/png']:
+                    raise ValidationError("Solo se permiten archivos PDF, JPEG o PNG.")
+
+                if len(attachment.read()) > 10 * 1024 * 1024:  # 10 MB
+                    raise ValidationError("El archivo adjunto no debe exceder los 10 MB.")
+                    
+                attached_file = request.env['ir.attachment'].create({
+                    'name': attachment.filename,
+                    'datas': base64.b64encode(attachment.read()),
+                    'res_model': 'audit.audit.planning',
+                    'res_id': planning_id,
+                })
+                attachment_ids.append(attached_file.id)
+
+
+            # Actualizar el registro con los archivos adjuntos
+            planning_record.write({
+                'evidence_attachment_ids': [(4, attachment_id) for attachment_id in attachment_ids]
+            })
+
+
+            # Redirigir sin enviar un diccionario como segundo argumento
+            return request.redirect('/audit_application/%d/' % planning_id)
+
 
         # Resto del código para extraer datos y renderizar el formulario
         procedure = (
@@ -375,9 +383,7 @@ class AuditApplicationController(http.Controller):
             if planning_record.iso_9001_standards_ids
             else ""
         )
-        evidence = (
-            planning_record.evidence_id.name if planning_record.evidence_id else ""
-        )
+        evidence = ", ".join(planning_record.evidence_attachment_ids.mapped('name'))
         audit_week = planning_record.audit_audit_id.audited_week or ""
         audit_date = planning_record.audit_audit_id.audit_date or ""
         center = (
@@ -392,20 +398,20 @@ class AuditApplicationController(http.Controller):
 
         context = {
             "audit": {
-                "procedure": procedure,
-                "clause": clause,
-                "responsible": responsible,
-                "verification": verification,
-                "audited": audited,
-                "audit_group": audit_group,
-                "finding": finding,
-                "norm": norm,
-                "evidence": evidence,
-                "audit_week": audit_week,
-                "audit_date": audit_date,
-                "center": center,
-                "comment": comment,  # Agregado aquí
-                "evaluation": evaluation,  # Agregado aquí
+                "procedure": procedure or "",
+                "clause": clause or "",
+                "responsible": responsible or "",
+                "verification": verification or "",
+                "audited": audited or "",
+                "audit_group": audit_group or "",
+                "finding": finding or "",
+                "norm": norm or "",
+                "evidence": evidence or "",
+                "audit_week": audit_week or "",
+                "audit_date": audit_date or "",
+                "center": center or "",
+                "comment": comment or "",
+                "evaluation": evaluation or "",
             },
             "planning_id": planning_id,
         }
