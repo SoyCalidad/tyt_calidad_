@@ -179,112 +179,112 @@ class AuditPlanning(models.Model):
 
 
 class Audit(models.Model):
-    _inherit = "audit.audit"
+    _inherit = 'audit.audit'
 
-    # plan_id = many2one "audit.plan"
+    # plan_id = many2one 'audit.plan'
     # Creo que debería quitar el ondelete cascade, porque se podrían borrar actividades y datos de otros modelos independientes, SON MODELOS INDEPENDIENTES
 
-    """
+    '''
     audit_plan_id = fields.Many2one(
         string='Programa',
         comodel_name='audit.plan',
     )
-    """
+    '''
     planning_ids = fields.One2many(
-        comodel_name="audit.audit.planning",
-        inverse_name="audit_audit_id",
-        string="Cronograma",
+        comodel_name='audit.audit.planning',
+        inverse_name='audit_audit_id',
+        string='Cronograma',
     )
 
     month_training = fields.Selection(
         [
-            ("1", "Enero"),
-            ("2", "Febrero"),
-            ("3", "Marzo"),
-            ("4", "Abril"),
-            ("5", "Mayo"),
-            ("6", "Junio"),
-            ("7", "Julio"),
-            ("8", "Agosto"),
-            ("9", "Septiembre"),
-            ("10", "Octubre"),
-            ("11", "Noviembre"),
-            ("12", "Diciembre"),
+            ('1', 'Enero'),
+            ('2', 'Febrero'),
+            ('3', 'Marzo'),
+            ('4', 'Abril'),
+            ('5', 'Mayo'),
+            ('6', 'Junio'),
+            ('7', 'Julio'),
+            ('8', 'Agosto'),
+            ('9', 'Septiembre'),
+            ('10', 'Octubre'),
+            ('11', 'Noviembre'),
+            ('12', 'Diciembre'),
         ],
-        string="Mes elegido",
+        string='Mes elegido',
         required=False,
     )
 
     observations = fields.Text(
-        string="Observaciones/Alcance",
+        string='Observaciones/Alcance',
         required=False,
     )
 
     tyt_sites_related_id = fields.Many2one(
-        "x_sitios",
-        string="Sitio",
-        related="plan_id.sites_id",
+        'x_sitios',
+        string='Sitio',
+        related='plan_id.sites_id',
         store=True,
         readonly=True,
     )
 
     employee_id = fields.Many2one(
-        string="Auditor",
-        comodel_name="hr.employee",
+        string='Auditor',
+        comodel_name='hr.employee',
     )
 
     employee_ids = fields.Many2many(
-        string="Auditados",
-        comodel_name="hr.employee",
+        string='Auditados',
+        comodel_name='hr.employee',
     )
 
     tyt_procedure_id = fields.Many2one(
-        string="Procedimiento",
-        comodel_name="audit.audit.procedure",
+        string='Procedimiento',
+        comodel_name='audit.audit.procedure',
     )
 
     tyt_procedure_description_id = fields.Many2one(
-        string="Procedimiento",
-        comodel_name="audit.plan.schedule.descriptions",
+        string='Procedimiento',
+        comodel_name='audit.plan.schedule.descriptions',
     )
 
     tyt_procedure_activity_id = fields.Many2one(
-        string="Actividad",
-        comodel_name="audit.plan.schedule.activities",
+        string='Actividad',
+        comodel_name='audit.plan.schedule.activities',
         domain="[('description_id', '=', tyt_procedure_description_id)]",
     )
-    """
+    '''
     @api.onchange('tyt_procedure_description_id')
     def _onchange_tyt_procedure_description_id(self):
         if self.tyt_procedure_description_id:
             return {'domain': {'tyt_procedure_activity_id': [('description_id', '=', self.tyt_procedure_description_id.id)]}}
         else:
             return {'domain': {'tyt_procedure_activity_id': []}}
-    """
+    '''
 
-    @api.onchange("tyt_procedure_description_id")
+    @api.onchange('tyt_procedure_description_id')
     def _onchange_tyt_procedure_description_id(self):
         if not self.tyt_procedure_description_id:
             self.tyt_procedure_activity_id = False  # Restablece el campo
         return {
-            "domain": {
-                "tyt_procedure_activity_id": [
-                    ("description_id", "=", self.tyt_procedure_description_id.id)
+            'domain': {
+                'tyt_procedure_activity_id': [
+                    ('description_id', '=', self.tyt_procedure_description_id.id)
                 ]
             }
         }
 
     job_id = fields.Many2one(
-        string="Responsable",
-        comodel_name="hr.job",
+        string='Responsable',
+        comodel_name='hr.job',
     )
 
     audit_date = fields.Date(
-        string="Fecha de Auditoría",
+        string='Fecha de Auditoría',
     )
 
     audited_week = fields.Integer(
-        string="Semana Auditada",
+        string='Semana Auditada',
         default=0,
     )
 
