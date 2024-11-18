@@ -15,32 +15,31 @@ class AuditProcedure(models.Model):
     _description = "Procedimiento de Lista de Verificación"
 
     name = fields.Char(
-        string="Nombre",
+        string='Nombre',
         required=True,
     )
-
 
 class AuditPlanningClause(models.Model):
     _name = "audit.audit.planning.iso9001_standard"
     _description = "Lista de Verificación / Planificación / Cláusula"
 
     name = fields.Char(
-        string="Nombre",
+        string='Nombre',
         required=True,
     )
 
     complete_name = fields.Char(
-        string="Nombre",
+        string='Nombre',
         required=True,
     )
 
     combined_name = fields.Char(
-        string="Nombre Combinado",
-        compute="_compute_combined_name",
+        string='Nombre Combinado',
+        compute='_compute_combined_name',
         store=True,  # Opcional: almacena el valor en la base de datos
-    )
+    )    
 
-    @api.depends("name", "complete_name")
+    @api.depends('name', 'complete_name')
     def _compute_combined_name(self):
         for record in self:
             if record.name and record.complete_name:
@@ -48,23 +47,21 @@ class AuditPlanningClause(models.Model):
             else:
                 record.combined_name = record.name or record.complete_name
 
-
 class AuditPlanningClause(models.Model):
     _name = "audit.audit.planning.clause"
     _description = "Lista de Verificación / Planificación / Cláusula"
 
     name = fields.Char(
-        string="Nombre",
+        string='Nombre',
         required=True,
     )
-
 
 class AuditPlanningEvidence(models.Model):
     _name = "audit.audit.planning.evidence"
     _description = "Lista de Verificación / Planificación / Evidencia"
 
     name = fields.Char(
-        string="Nombre",
+        string='Nombre',
         required=True,
     )
 
@@ -73,54 +70,67 @@ class AuditPlanning(models.Model):
     _name = "audit.audit.planning"
     _description = "Lista de Verificación / Planificación"
 
-    name = fields.Char(string="Nombre")
+    name = fields.Char(
+        string='Nombre'
+    )
 
     audit_audit_id = fields.Many2one(
-        "audit.audit", string="Lista de verificación", store=True
+        'audit.audit',
+        string="Lista de verificación",
+        store=True
     )
 
     audit_report_id = fields.Many2one(
-        "audit.report", string="Informe de Auditoría", store=True
+        'audit.report',
+        string="Informe de Auditoría",
+        store=True
     )
 
     iso_9001_standards_ids = fields.Many2many(
-        "audit.audit.planning.iso9001_standard", string="Norma ISO 9001:2015"
+        'audit.audit.planning.iso9001_standard',
+        string='Norma ISO 9001:2015'
     )
 
     clause_id = fields.Many2one(
-        string="Cláusula", comodel_name="audit.audit.planning.clause"
+        string='Cláusula',
+        comodel_name='audit.audit.planning.clause'
     )
 
     employee_id = fields.Many2one(
-        string="Responsable",
-        comodel_name="hr.employee",
+        string='Responsable',
+        comodel_name='hr.employee',
     )
 
     employee_job_id = fields.Many2one(
-        comodel_name="hr.job",
-        string="Puesto de Responsable",
-        related="employee_id.job_id",
+        comodel_name='hr.job',
+        string='Puesto de Responsable',
+        related='employee_id.job_id',
         store=True,
         readonly=True,
     )
 
-    verification = fields.Char(string="Verificación")
+    verification = fields.Char(string='Verificación')
 
     finding = fields.Selection(
         selection=[
             ("non_conformity", "No Conformidad"),
-            ("good_practices", "Buenas Prácticas"),
+            ("good_practices", "Buenas Prácticas")
         ],
-        string="Hallazgo",
+        string="Hallazgo"       
     )
 
     evidence_id = fields.Many2one(
-        string="Evidencia", comodel_name="audit.audit.planning.evidence"
-    )
+            string='Evidencia',
+            comodel_name='audit.audit.planning.evidence'
+        )
+    
+    comment = fields.Char(
+        string='Comentario'
+        )
 
-    comment = fields.Char(string="Comentario")
-
-    evaluation = fields.Char(string="Evaluación")
+    evaluation = fields.Char(
+        string='Evaluación'
+        )
 
     def action_open_audit_application_form(self):
         planning_id = self.id  # ID de la línea de planificación actual
@@ -361,7 +371,7 @@ class AuditApplicationController(http.Controller):
             if planning_record.audit_audit_id.team_id
             else ""
         )
-        finding = planning_record.finding or "good_practice"
+        finding = planning_record.finding or "good_practices"
         norm = (
             ", ".join(planning_record.iso_9001_standards_ids.mapped("name"))
             if planning_record.iso_9001_standards_ids

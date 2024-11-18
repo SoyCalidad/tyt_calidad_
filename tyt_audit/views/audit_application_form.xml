@@ -65,7 +65,7 @@
                             <td><strong>HALLAZGO:</strong></td>
                             <td>
                                 <select class="form-control" name="finding">
-                                    <option t-att-selected="'good_practice' == audit.get('finding', 'good_practice')" value="good_practice">Buenas Prácticas</option>
+                                    <option t-att-selected="'good_practices' == audit.get('finding', 'good_practices')" value="good_practices">Buenas Prácticas</option>
                                     <option t-att-selected="'non_conformity' == audit.get('finding', 'non_conformity')" value="non_conformity">No Conformidad</option>
                                 </select>
                             </td>
