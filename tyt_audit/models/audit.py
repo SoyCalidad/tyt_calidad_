@@ -179,9 +179,9 @@ class AuditPlanning(models.Model):
 
 
 class Audit(models.Model):
-    _inherit = 'audit.audit'
+    _inherit = "audit.audit"
 
-    # plan_id = many2one 'audit.plan'
+    #plan_id = many2one "audit.plan"
     # Creo que debería quitar el ondelete cascade, porque se podrían borrar actividades y datos de otros modelos independientes, SON MODELOS INDEPENDIENTES
 
     '''
@@ -190,34 +190,32 @@ class Audit(models.Model):
         comodel_name='audit.plan',
     )
     '''
-    planning_ids = fields.One2many(
+    planning_ids = fields.One2many( 
         comodel_name='audit.audit.planning',
         inverse_name='audit_audit_id',
-        string='Cronograma',
-    )
+        string='Cronograma')
 
-    month_training = fields.Selection(
-        [
-            ('1', 'Enero'),
-            ('2', 'Febrero'),
-            ('3', 'Marzo'),
-            ('4', 'Abril'),
-            ('5', 'Mayo'),
-            ('6', 'Junio'),
-            ('7', 'Julio'),
-            ('8', 'Agosto'),
-            ('9', 'Septiembre'),
-            ('10', 'Octubre'),
-            ('11', 'Noviembre'),
-            ('12', 'Diciembre'),
-        ],
+    month_training = fields.Selection([
+        ('1', 'Enero'),
+        ('2', 'Febrero'),
+        ('3', 'Marzo'),
+        ('4', 'Abril'),
+        ('5', 'Mayo'),
+        ('6', 'Junio'),
+        ('7', 'Julio'),
+        ('8', 'Agosto'),
+        ('9', 'Septiembre'),
+        ('10', 'Octubre'),
+        ('11', 'Noviembre'),
+        ('12', 'Diciembre'),
+    ],
         string='Mes elegido',
-        required=False,
+        required=False
     )
 
     observations = fields.Text(
-        string='Observaciones/Alcance',
-        required=False,
+    string=u'Observaciones/Alcance',
+    required=False,
     )
 
     tyt_sites_related_id = fields.Many2one(
