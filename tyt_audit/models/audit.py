@@ -136,6 +136,10 @@ class AuditPlanning(models.Model):
         string='Evaluación'
         )
 
+    non_conformity_wording = fields.Text(
+        string='Non-Conformity Wording'
+        )
+
     def action_open_audit_application_form(self):
         planning_id = self.id  # ID de la línea de planificación actual
 
@@ -328,6 +332,7 @@ class AuditApplicationController(http.Controller):
                         "evaluation", ""
                     ),  # Actualiza el campo evaluation
                     "finding": kwargs.get("finding", ""),  # Actualiza el campo finding
+                    "non_conformity_wording": kwargs.get("non_conformity_wording", ""),
                 }
             )
 
@@ -392,6 +397,7 @@ class AuditApplicationController(http.Controller):
             if planning_record.audit_audit_id and planning_record.audit_audit_id.tyt_sites_related_id
             else "Sin Sitio"
         )
+        non_conformity_wording = planning_record.non_conformity_wording or ""
 
         context = {
             "audit": {
@@ -401,12 +407,12 @@ class AuditApplicationController(http.Controller):
                 "verification": verification or "",
                 "audited": audited or "",
                 "audit_group": audit_group or "",
-                "finding": finding or "",
                 "norm": norm or "",
                 "evidence": evidence or "",
                 "audit_week": audit_week or "",
                 "audit_date": audit_date or "",
                 "center": center or "",
+                "non_conformity_wording": non_conformity_wording or "",
             },
             "planning_id": planning_id,
         }
