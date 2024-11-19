@@ -117,7 +117,9 @@
                                 </tr>
                                 <tr>
                                     <td><strong>EVIDENCIA:</strong></td>
-                                    <td><input type="text" class="form-control" name="evidence_display" readonly="readonly" t-att-value="audit['evidence']"/></td>
+                                    <td>
+                                        <textarea class="form-control" name="evidence_display" readonly="readonly" rows="3"><t t-esc="audit['evidence']"/></textarea>
+                                    </td>
                                 </tr>
                             </tbody>
                         </table>
