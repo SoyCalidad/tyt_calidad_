@@ -97,9 +97,13 @@
                                     <td><strong>VERIFICACIÓN:</strong></td>
                                     <td><input type="text" class="form-control" name="verification" readonly="readonly" t-att-value="audit['verification']"/></td>
                                 </tr>
+                                <tr style="border-bottom: none;">
+                                    <td colspan="2"><strong>REDACCIÓN DE NO CONFORMIDAD:</strong></td>
+                                </tr>
                                 <tr>
-                                    <td><strong>REDACCIÓN DE NO CONFORMIDAD:</strong></td>
-                                    <td><textarea class="form-control" name="non_conformity" rows="2"><t t-esc="audit['finding']"/></textarea></td>
+                                    <td colspan="2">
+                                        <textarea class="form-control" name="non_conformity" rows="4"><t t-esc="audit['finding']"/></textarea>
+                                    </td>
                                 </tr>
                                 <tr>
                                     <td><strong>HALLAZGO:</strong></td>
