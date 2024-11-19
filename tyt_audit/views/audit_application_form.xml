@@ -102,7 +102,7 @@
                                 </tr>
                                 <tr>
                                     <td colspan="2">
-                                        <textarea class="form-control" name="non_conformity_wording" rows="4"><t t-esc="audit['non_conformity_wording']"/></textarea>
+                                        <textarea class="form-control" name="non_conformity_wording" rows="6" maxlength="500" style="resize: none;"><t t-esc="audit['non_conformity_wording']"/></textarea>
                                     </td>
                                 </tr>
                                 <tr>
@@ -118,7 +118,7 @@
                                 <tr>
                                     <td><strong>EVIDENCIA:</strong></td>
                                     <td>
-                                        <textarea class="form-control" name="evidence_display" readonly="readonly" rows="3"><t t-esc="audit['evidence']"/></textarea>
+                                        <textarea class="form-control" name="evidence_display" readonly="readonly" rows="3" style="resize: none;"><t t-esc="audit['evidence']"/></textarea>
                                     </td>
                                 </tr>
                             </tbody>
