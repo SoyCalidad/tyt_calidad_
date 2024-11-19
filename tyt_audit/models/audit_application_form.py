@@ -54,11 +54,12 @@ class AuditApplicationController(http.Controller):
                         status=400
                     )
 
-                if len(attachment.read()) > 100 * 1024:  # 100 KB
-                    return request.render('tyt_audit.error_template', {
-                        'error_message': "El archivo adjunto no debe exceder los 100 KB."
-                    })
-
+                if len(attachment.read()) > 20 * 1024 * 1024:  # 20 MB
+                    return request.make_response(
+                        "El archivo adjunto no debe exceder los 20 MB.",
+                        status=400
+                    )
+                    
                 attached_file = request.env['ir.attachment'].create({
                     'name': attachment.filename,
                     'datas': base64.b64encode(attachment.read()),
