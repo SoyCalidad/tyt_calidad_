@@ -380,7 +380,7 @@ class AuditApplicationController(http.Controller):
         )
         finding = planning_record.finding or ""
         norm = (
-            ", ".join(planning_record.iso_9001_standards_ids.mapped("name"))
+            ", ".join(planning_record.iso_9001_standards_ids.mapped("combined_name"))
             if planning_record.iso_9001_standards_ids
             else ""
         )
