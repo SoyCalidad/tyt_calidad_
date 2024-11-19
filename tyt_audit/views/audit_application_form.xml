@@ -119,14 +119,6 @@
                                     <td><strong>EVIDENCIA:</strong></td>
                                     <td><input type="text" class="form-control" name="evidence_display" readonly="readonly" t-att-value="audit['evidence']"/></td>
                                 </tr>
-                                <tr>
-                                    <td><strong>COMENTARIO:</strong></td>
-                                    <td><input type="text" class="form-control" name="comment" t-att-value="audit['comment']"/></td>
-                                </tr>
-                                <tr>
-                                    <td><strong>EVALUACIÓN:</strong></td>
-                                    <td><input type="text" class="form-control" name="evaluation" t-att-value="audit['evaluation']"/></td>
-                                </tr>
                             </tbody>
                         </table>
                     </div>
