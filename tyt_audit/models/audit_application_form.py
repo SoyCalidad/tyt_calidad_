@@ -4,6 +4,7 @@ from odoo import fields, models, api, http
 from odoo.http import request
 from odoo.exceptions import ValidationError
 import base64
+from odoo.exceptions import UserError, ValidationError
 
 class AuditGenerationForm(models.TransientModel):
     _name = "audit.generation.form"
@@ -47,19 +48,15 @@ class AuditApplicationController(http.Controller):
             # Manejar los archivos adjuntos
             attachments = request.httprequest.files.getlist('attachment')
             attachment_ids = []
-            for attachment in attachments:
+            for attachment in attachments:    
+                # Validar el tipo de archivo
                 if attachment.content_type not in ['application/pdf', 'image/jpeg', 'image/png']:
-                    return request.make_response(
-                        "Solo se permiten archivos PDF, JPEG o PNG.",
-                        status=400
-                    )
+                    raise UserError("Solo se permiten archivos en formato PDF, JPEG o PNG, o Por favor adjunte un archivo si aún no lo ha hecho.")
 
+                # Validar el tamaño del archivo
                 if len(attachment.read()) > 20 * 1024 * 1024:  # 20 MB
-                    return request.make_response(
-                        "El archivo adjunto no debe exceder los 20 MB.",
-                        status=400
-                    )
-                    
+                    raise UserError("El archivo adjunto no debe exceder los 20 MB.")
+
                 attached_file = request.env['ir.attachment'].create({
                     'name': attachment.filename,
                     'datas': base64.b64encode(attachment.read()),
