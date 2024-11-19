@@ -384,7 +384,7 @@ class AuditApplicationController(http.Controller):
             if planning_record.iso_9001_standards_ids
             else ""
         )
-        evidence = ", ".join(planning_record.evidence_attachment_ids.mapped('name'))
+        evidence = "\n".join(planning_record.evidence_attachment_ids.mapped('name')) if planning_record.evidence_attachment_ids else ""
         audit_week = planning_record.audit_audit_id.audited_week or ""
         audit_date = planning_record.audit_audit_id.audit_date or ""
         center = (
