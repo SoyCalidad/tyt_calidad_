@@ -113,10 +113,11 @@ class AuditPlanning(models.Model):
 
     finding = fields.Selection(
         selection=[
+            ("", "Sin Seleccionar"),
             ("non_conformity", "No Conformidad"),
-            ("good_practices", "Buenas Prácticas")
+            ("good_practices", "Buenas Prácticas"),
         ],
-        string="Hallazgo"       
+        string="Hallazgo",
     )
 
     evidence_attachment_ids = fields.Many2many(
@@ -377,7 +378,7 @@ class AuditApplicationController(http.Controller):
             if planning_record.audit_audit_id.team_id
             else ""
         )
-        finding = planning_record.finding or "good_practices"
+        finding = planning_record.finding or ""
         norm = (
             ", ".join(planning_record.iso_9001_standards_ids.mapped("name"))
             if planning_record.iso_9001_standards_ids
