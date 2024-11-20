@@ -213,7 +213,7 @@ class PublicFormController(http.Controller):
             'name': applicant.name,
             'last_name_father': applicant.last_name_father,
             'last_name_mother': applicant.last_name_mother,
-            'gender': 'gender',
+            'gender': applicant.gender,
             'birthplace': applicant.birthplace,
             'birthdate': applicant.birthdate,
             'nationality': applicant.nationality,
@@ -272,20 +272,3 @@ class PublicFormController(http.Controller):
             ('type', '=', type)
         ])
         return questions
-
-    @http.route('/job_applications', type='http', auth='public')
-    def list_fields_applicant(self):
-        
-        context = {
-            'job_application_id': 222,
-            'name': 'name',
-            'last_name_father': 'last_name_father',
-            'last_name_mother': 'last_name_mother',
-            'gender': 'gender',
-            'birthplace': 'birthplace',
-            'birthdate': 'birthdate',
-            'nationality': 'nationality',
-            'age': 'age',
-            'marital_status': 'marital_status'
-        }
-        return request.render('tyt_recruitment.template_job_application_success', context)

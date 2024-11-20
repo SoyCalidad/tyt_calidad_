@@ -6,7 +6,7 @@ access_tyt_recruitment_question_user,access_tyt_recruitment_question_user,tyt_re
 access_tyt_recruitment_answer_user,access_tyt_recruitment_answer_user,tyt_recruitment.model_tyt_recruitment_answer,,1,1,1,1
 
 access_public_job_application_user,tyt_recruitment.job_application.public.access,model_tyt_recruitment_job_application,base.group_public,0,0,1,0
-access_employee_job_application,tyt_recruitment.job_application.employee.access,model_tyt_recruitment_job_application,base.group_user,1,0,1,0
+access_employee_job_application,tyt_recruitment.job_application.employee.access,model_tyt_recruitment_job_application,base.group_user,1,1,1,0
 access_admin_job_application,tyt_recruitment.job_application.admin.access,model_tyt_recruitment_job_application,base.group_system,1,1,1,1
 
 access_applicant_user,access.applicant.user,model_tyt_recruitment_applicant,base.group_user,1,1,1,1

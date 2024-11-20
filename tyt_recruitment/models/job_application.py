@@ -1,5 +1,8 @@
 from odoo import api, models, fields
 
+from ..utils.constants import MARITAL_STATUS_SELECTION, GENDER_SELECTION
+from ..utils.helpers import get_label_from_marital_status_list, get_label_from_gender_list
+
 import logging
 _logger = logging.getLogger(__name__)
 
@@ -201,7 +204,7 @@ class JobApplication(models.Model):
         nationality = self.applicant_id.nationality
         age = self.applicant_id.age
         marital_status = self.applicant_id.marital_status
-        
+
         params = f"gender={gender}&birthplace={birthplace}&birthdate={birthdate}&nationality={nationality}&age={age}&marital_status={marital_status}"
         url = f"/survey/{self.id}/{name}/{last_name_father}/{last_name_mother}?"
 
@@ -240,18 +243,9 @@ class Applicant(models.Model):
     birthplace = fields.Char(string="Lugar de Nacimiento")
     birthdate = fields.Date(string="Fecha de Nacimiento")
     nationality = fields.Char(string="Nacionalidad")
-    gender = fields.Selection([
-        ('male', 'Masculino'),
-        ('female', 'Femenino'),
-        ('other', 'Otro'),
-    ], string="Género")
+    gender = fields.Selection(GENDER_SELECTION, string="Género")
     age = fields.Integer(string="Edad")
-    marital_status = fields.Selection([
-        ('single', 'Soltero/a'),
-        ('married', 'Casado/a'),
-        ('divorced', 'Divorciado/a'),
-        ('widowed', 'Viudo/a'),
-    ], string="Estado Civil")
+    marital_status = fields.Selection(MARITAL_STATUS_SELECTION, string="Estado Civil")
     social_security_number = fields.Char(string="Número de Seguro Social")
     rfc = fields.Char(string="RFC")
     curp = fields.Char(string="CURP")
