@@ -5,4 +5,15 @@
               parent="tyt_intranet_base.intranet_menu_root"
               action="tyt_intranet_department_message_action"
               sequence="35"/>
+
+    <menuitem id="tyt_intranet_department_message_configuration_menu"
+              name="Department Messages"
+              parent="tyt_intranet_base.intranet_configuration_menu"
+              sequence="35"/>
+
+    <menuitem id="tyt_intranet_department_message_tag_menu_action"
+              name="Department Message Tags"
+              parent="tyt_intranet_department_message_configuration_menu"
+              action="tyt_intranet_department_message_tag_action"
+              sequence="10"/>
 </odoo>

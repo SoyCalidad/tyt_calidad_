@@ -60,6 +60,9 @@
                         <div class="o_portal_category row g-2 mt-3" id="portal_common_category">
 
                         </div>
+                        <div class="o_portal_category row g-2 mt-3" id="portal_common_category2">
+
+                        </div>
                     </div>
                 </div>
                 <div class="oe_structure" id="oe_structure_portal_my_home_2"/>
