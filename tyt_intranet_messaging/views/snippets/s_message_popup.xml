@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <template id="s_tyt_message_popup" name="TYT Message Popup">
+        <div class="s_popup o_snippet_invisible" data-name="European Popup" data-vcss="001" data-invisible="1">
+            <div id="tyt-message-popup" class="modal fade s_popup_middle o_newsletter_modal"
+                 style="background-color: var(--black-50) !important;"
+                 data-show-after="5000"
+                 data-display="afterDelay"
+                 data-focus="false" data-backdrop="false" tabindex="-1" role="dialog">
+                <div class="modal-dialog d-flex">
+                    <div class="modal-content oe_structure">
+                        <div class="s_popup_close js_close_popup o_we_no_overlay o_not_editable" aria-label="Close">&#215;</div>
+                        <section class="s_text_block oe_img_bg o_bg_img_center pt88 pb64" data-snippet="s_text_block" data-name="Text"
+                                 style="background-image: url('/web/image/website.s_cover_default_image'); background-position: 0 100%;">
+                            <div class="container s_allow_columns">
+                                <h1 style="text-align: center;">Always <b>First</b>.</h1>
+                                <p style="text-align: center;">Be the first to find out all the latest news,<br/> products, and trends.</p>
+                            </div>
+                        </section>
+                        <section class="s_text_block" data-snippet="s_text_block" data-name="Text">
+                            <div class="container">
+                                <div class="row s_nb_column_fixed no-gutters">
+                                    <div class="col-lg-10 offset-lg-1 pt32 pb32">
+                                        <t t-snippet-call="website.s_website_form"/>
+                                    </div>
+                                </div>
+                            </div>
+                        </section>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </template>
+</odoo>
