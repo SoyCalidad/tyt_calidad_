@@ -108,16 +108,20 @@ class AuditPlanning(models.Model):
 
     finding = fields.Selection(
         selection=[
+            ("", "Sin Seleccionar"),
             ("non_conformity", "No Conformidad"),
-            ("good_practices", "Buenas Prácticas")
+            ("good_practices", "Buenas Prácticas"),
         ],
-        string="Hallazgo"       
+        string="Hallazgo",
     )
 
-    evidence_id = fields.Many2one(
-            string='Evidencia',
-            comodel_name='audit.audit.planning.evidence'
-        )
+    evidence_attachment_ids = fields.Many2many(
+        'ir.attachment',
+        string='Evidencia',
+        help='Archivos adjuntos relacionados con esta planificación.',
+        domain="[('res_model', '=', 'audit.audit.planning'), ('res_id', '=', id)]"
+    )
+
     
     comment = fields.Char(
         string='Comentario'
@@ -127,14 +131,32 @@ class AuditPlanning(models.Model):
         string='Evaluación'
         )
 
+    non_conformity_wording = fields.Text(
+        string='Non-Conformity Wording'
+        )
 
+    def action_open_audit_application_form(self):
+        self.ensure_one()
 
+        # ID de la actividad principal
+        audit_audit_id = self.audit_audit_id.id  # Relación con la lista de verificación principal
+        # ID del formulario actual
+        audit_form_id = self.id  # ID de la línea de planificación actual
+
+        # Construye la URL incluyendo ambos IDs
+        url = f"/audit_application/{audit_audit_id}/{audit_form_id}/"
+
+        return {
+            "type": "ir.actions.act_url",
+            "url": url,
+            "target": "new",
+        }
 
 class Audit(models.Model):
     _inherit = "audit.audit"
 
     #plan_id = many2one "audit.plan"
-        # Creo que debería quitar el ondelete cascade, porque se podrían borrar actividades y datos de otros modelos independientes, SON MODELOS INDEPENDIENTES
+    # Creo que debería quitar el ondelete cascade, porque se podrían borrar actividades y datos de otros modelos independientes, SON MODELOS INDEPENDIENTES
 
     '''
     audit_plan_id = fields.Many2one(
@@ -142,7 +164,7 @@ class Audit(models.Model):
         comodel_name='audit.plan',
     )
     '''
-    planning_ids = fields.One2many( 
+    planning_ids = fields.One2many(  
         comodel_name='audit.audit.planning',
         inverse_name='audit_audit_id',
         string='Cronograma')
@@ -196,13 +218,14 @@ class Audit(models.Model):
     tyt_procedure_description_id = fields.Many2one(
         string='Procedimiento',
         comodel_name='audit.plan.schedule.descriptions',
-    )  
+    )
 
     tyt_procedure_activity_id = fields.Many2one(
         string='Actividad',
         comodel_name='audit.plan.schedule.activities',
         domain="[('description_id', '=', tyt_procedure_description_id)]",
-    )           
+    )
+
     '''
     @api.onchange('tyt_procedure_description_id')
     def _onchange_tyt_procedure_description_id(self):
