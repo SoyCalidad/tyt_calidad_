@@ -3,6 +3,8 @@ from odoo.http import request, Response
 import json
 import base64
 
+from ..utils.helpers import get_label_from_gender_list, get_label_from_marital_status_list
+
 import logging
 _logger = logging.getLogger(__name__)
 
@@ -22,18 +24,21 @@ class PublicFormController(http.Controller):
             'extra_input_enabled': q.extra_input_enabled
         } for q in health_questions]
 
+        gender_label = get_label_from_gender_list(post.get('gender'))
+        marital_status_label = get_label_from_marital_status_list(post.get('marital_status'))
+
         context = {
             'health_questions_json': health_questions_json,
             'job_application_id': job_application_id,
             'name': name,
             'last_name_father': last_name_father,
             'last_name_mother': last_name_mother,
-            'gender': post.get('gender'),
+            'gender': gender_label,
             'birthplace': post.get('birthplace'),
             'birthdate': post.get('birthdate'),
             'nationality': post.get('nationality'),
             'age': post.get('age'),
-            'marital_status': post.get('marital_status')
+            'marital_status': marital_status_label
         }
 
         return request.render('tyt_recruitment.template_health_survey_form', context)

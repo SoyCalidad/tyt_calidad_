@@ -119,7 +119,7 @@
                         <div class="row">
                             <!-- Lista de preguntas -->
                             <t t-foreach="health_questions_json" t-as="question">
-                                <div class="col-sm-12 col-md-6 col-lg-6 col-xl-6 col-xxl-12 p-4 border cell1">
+                                <div class="col-sm-12 col-md-12 col-lg-12 col-xl-12 col-xxl-12 p-4 border cell1">
                                     <label t-att-for="question['id']" class="form-label text-muted">
                                         <t t-esc="question['title']"/>
                                     </label>
