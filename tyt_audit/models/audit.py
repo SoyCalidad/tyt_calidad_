@@ -164,7 +164,7 @@ class Audit(models.Model):
         comodel_name='audit.plan',
     )
     '''
-    audit_form_ids = fields.One2many( 
+    planning_ids = fields.One2many(  
         comodel_name='audit.audit.planning',
         inverse_name='audit_audit_id',
         string='Cronograma')

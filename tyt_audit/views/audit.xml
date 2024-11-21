@@ -64,7 +64,7 @@
 
                 <xpath expr="//sheet/notebook/page[1]" position="replace">
                     <page string="Planificación">
-                        <field name="audit_form_ids">
+                        <field name="planning_ids" >
                             <tree editable="bottom">
                                 <field name="iso_9001_standards_ids" widget="many2many_tags" attrs="{'readonly': [('parent.state','not in',('elaborate','validate_ok'))]}" />
                                 <field name="clause_id" attrs="{'readonly': [('parent.state','not in',('elaborate','validate_ok'))]}" />
