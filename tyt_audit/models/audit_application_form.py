@@ -61,8 +61,8 @@ class AuditApplicationController(http.Controller):
             attachment_ids = []
             for attachment in attachments:    
                 # Validar el tipo de archivo
-                if attachment.content_type not in ['application/pdf', 'image/jpeg', 'image/png']:
-                    raise UserError("Solo se permiten archivos en formato PDF, JPEG o PNG, o Por favor adjunte un archivo si aún no lo ha hecho.")
+                # if attachment.content_type not in ['application/pdf', 'image/jpeg', 'image/png']:
+                #     raise UserError("Solo se permiten archivos en formato PDF, JPEG o PNG, o Por favor adjunte un archivo si aún no lo ha hecho.")
 
                 # Validar el tamaño del archivo
                 if len(attachment.read()) > 20 * 1024 * 1024:  # 20 MB
