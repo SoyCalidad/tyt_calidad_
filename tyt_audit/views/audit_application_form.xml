@@ -109,7 +109,8 @@
                                 <tr>
                                     <td><strong>HALLAZGO:</strong></td>
                                     <td>
-                                        <select class="form-control" name="finding">
+                                        <!--disabled="true" (equivalente a "readonly")-->
+                                        <select class="form-control" name="finding" disabled="true">
                                             <option t-att-selected="not audit.get('finding')" value="">Sin Seleccionar</option>
                                             <option t-att-selected="'good_practices' == audit.get('finding', 'good_practices')" value="good_practices">Buenas Prácticas</option>
                                             <option t-att-selected="'non_conformity' == audit.get('finding', 'non_conformity')" value="non_conformity">No Conformidad</option>
@@ -118,6 +119,10 @@
                                 </tr>
                                 <tr>
                                     <td><strong>EVIDENCIA:</strong></td>
+                                    <td><input type="text" class="form-control" name="evidence_char" readonly="readonly" t-att-value="audit['evidence_char']"/></td>
+                                </tr>                               
+                                <tr>
+                                    <td><strong>ADJUNTOS:</strong></td>
                                     <td>
                                         <textarea class="form-control" name="evidence_display" readonly="readonly" rows="3" style="resize: none;"><t t-esc="audit['evidence']"/></textarea>
                                     </td>

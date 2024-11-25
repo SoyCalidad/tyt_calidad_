@@ -61,8 +61,8 @@ class AuditApplicationController(http.Controller):
             attachment_ids = []
             for attachment in attachments:    
                 # Validar el tipo de archivo
-                if attachment.content_type not in ['application/pdf', 'image/jpeg', 'image/png']:
-                    raise UserError("Solo se permiten archivos en formato PDF, JPEG o PNG, o Por favor adjunte un archivo si aún no lo ha hecho.")
+                # if attachment.content_type not in ['application/pdf', 'image/jpeg', 'image/png']:
+                #     raise UserError("Solo se permiten archivos en formato PDF, JPEG o PNG, o Por favor adjunte un archivo si aún no lo ha hecho.")
 
                 # Validar el tamaño del archivo
                 if len(attachment.read()) > 20 * 1024 * 1024:  # 20 MB
@@ -93,6 +93,7 @@ class AuditApplicationController(http.Controller):
         audit_group = planning_record.audit_audit_id.team_id.name or ""
         finding = planning_record.finding or ""
         norm = ", ".join(planning_record.iso_9001_standards_ids.mapped("combined_name")) or ""
+        evidence_char = planning_record.evidence_char or ""
         evidence = "\n".join(planning_record.evidence_attachment_ids.mapped("name")) or ""
         audit_week = planning_record.audit_audit_id.audited_week or "0"
         audit_date = planning_record.audit_audit_id.audit_date or "Sin Fecha"
@@ -120,6 +121,7 @@ class AuditApplicationController(http.Controller):
                 "audit_group": audit_group or "",
                 "finding": finding or "",
                 "norm": norm or "",
+                "evidence_char": evidence_char or "",
                 "evidence": evidence or "",
                 "audit_week": audit_week or "",
                 "audit_date": audit_date or "",

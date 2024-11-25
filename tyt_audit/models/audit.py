@@ -115,9 +115,13 @@ class AuditPlanning(models.Model):
         string="Hallazgo",
     )
 
+    evidence_char = fields.Char(
+        string='Evidencia'
+        )
+    
     evidence_attachment_ids = fields.Many2many(
         'ir.attachment',
-        string='Evidencia',
+        string='Adjuntos',
         help='Archivos adjuntos relacionados con esta planificación.',
         domain="[('res_model', '=', 'audit.audit.planning'), ('res_id', '=', id)]"
     )
