@@ -59,18 +59,26 @@ class AuditApplicationController(http.Controller):
             # Manejar los archivos adjuntos
             attachments = request.httprequest.files.getlist('attachment')
             attachment_ids = []
-            for attachment in attachments:    
-                # Validar el tipo de archivo
-                # if attachment.content_type not in ['application/pdf', 'image/jpeg', 'image/png']:
-                #     raise UserError("Solo se permiten archivos en formato PDF, JPEG o PNG, o Por favor adjunte un archivo si aún no lo ha hecho.")
+            for attachment in attachments:
+                file_content = attachment.read()  # Leer el contenido del archivo solo una vez
+
+                # Validar si el archivo contiene datos
+                # if not file_content:
+                #     raise UserError(f"El archivo {attachment.filename} está vacío.")
 
                 # Validar el tamaño del archivo
-                if len(attachment.read()) > 20 * 1024 * 1024:  # 20 MB
-                    raise UserError("El archivo adjunto no debe exceder los 20 MB.")
+                if len(file_content) > 20 * 1024 * 1024:  # 20 MB
+                    raise UserError(f"El archivo {attachment.filename} excede los 20 MB.")
 
+                # Validar el tipo de archivo
+                # if attachment.content_type not in ['application/pdf', 'image/jpeg', 'image/png']:
+                #     raise UserError(f"El tipo de archivo {attachment.content_type} no está permitido.")
+
+                # Crear el adjunto en `ir.attachment` usando `datas`
                 attached_file = request.env['ir.attachment'].create({
                     'name': attachment.filename,
-                    'datas': base64.b64encode(attachment.read()),
+                    'datas': base64.b64encode(file_content),  # Codificar el contenido en Base64
+                    'mimetype': attachment.content_type,  # Guardar el tipo MIME
                     'res_model': 'audit.audit.planning',
                     'res_id': audit_form_id,
                 })

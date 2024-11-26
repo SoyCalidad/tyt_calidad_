@@ -108,7 +108,6 @@ class AuditPlanning(models.Model):
 
     finding = fields.Selection(
         selection=[
-            ("", "Sin Seleccionar"),
             ("non_conformity", "No Conformidad"),
             ("good_practices", "Buenas Prácticas"),
         ],

@@ -285,7 +285,33 @@
                                     <t t-else=""/>
                                 </td> <!-- Fila de Evaluación con una sola columna que ocupa todo el ancho -->
                             </tr>
-                        </table>                
+                        </table>
+                        <!-- Sección de Evidencias -->
+                        <table style="width: 100%; border-collapse: collapse; margin-top: 20px; font-size: 21px;">
+                            <tr>
+                                <td colspan="2" style="background-color: #31869B; color: white; padding: 10px; font-weight: bold; font-size: 28px; text-align: center;">
+                                    Evidencias
+                                </td>
+                            </tr>
+                            <t t-foreach="o.tyt_line_ids" t-as="line">
+                                <tr>
+                                    <!-- Nombre de la cláusula -->
+                                    <td style="padding: 10px; font-weight: bold; background-color: #E7F5E5; width: 30%;">
+                                        <t t-esc="line.clause_id.name"/>
+                                    </td>
+                                    <!-- Lista de adjuntos -->
+                                    <td style="padding: 10px; background-color: white; width: 70%;">
+                                        <ul>
+                                            <t t-foreach="line.evidence_attachment_ids" t-as="attachment">
+                                                <li>
+                                                    <a t-att-href="'/web/content/%s?download=true' % attachment.id" t-esc="attachment.name" style="text-decoration: none; color: #215967;"/>
+                                                </li>
+                                            </t>
+                                        </ul>
+                                    </td>
+                                </tr>
+                            </t>
+                        </table>          
                     </div>                    
                 </t>
             </t>
