@@ -99,6 +99,6 @@
         <field name="name">Birthday Publication</field>
         <field name="res_model">tyt.intranet.birthday_publication</field>
         <field name="view_mode">form</field>
-        <field name="view_id" ref="tyt_intranet_birthday_publication_view_form"/>
+        <field name="res_id" ref="tyt_intranet_birthday.tyt_intranet_birthday_publication_singleton"/>
     </record>
 </odoo>

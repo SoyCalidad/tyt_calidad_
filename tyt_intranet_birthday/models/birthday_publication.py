@@ -7,29 +7,15 @@ import random
 SUPPORTED_IMAGE_MIMETYPES = ['image/gif', 'image/jpe', 'image/jpeg', 'image/jpg', 'image/png', 'image/svg+xml']
 SUPPORTED_IMAGE_EXTENSIONS = ['.gif', '.jpe', '.jpeg', '.jpg', '.png', '.svg']
 
-class BirthdayDaily(models.Model):
-    _name = 'tyt.intranet.birthday_daily'
-    _description = 'Birthday Daily'
-
-    birthday_publication_id = fields.Many2one('tyt.intranet.birthday_publication', string='Birthday Publication')
-    employee_id = fields.Many2one('hr.employee', string='Employee')
-    birthday = fields.Date(relate='employee_id.birthday', string='Birthday')
-    birthday_card = fields.Binary(string='Birthday Card')
-    birthday_card_filename = fields.Char(string='Birthday Card Filename')
-
 
 class BirthdayPublication(models.Model):
     _name = 'tyt.intranet.birthday_publication'
     _inherit = ['portal.mixin', 'mail.thread', 'mail.activity.mixin']
     _description = 'Birthday Publication'
 
-    birthday_daily_ids = fields.One2many('tyt.intranet.birthday_daily', 'birthday_publication_id',
-                                         string='Birthday Daily')
-    employee_ids = fields.Many2many('hr.employee', string='Employees')
-
-    name = fields.Char(string='Title')
+    name = fields.Char(string='Title', tracking=True)
     responsible_id = fields.Many2one('res.users', string='Responsible', domain="[('share', '=', False)]",
-                                     default=lambda self: self.env.user)
+                                     default=lambda self: self.env.user, tracking=True)
     attachment_ids = fields.Many2many('ir.attachment', string='Attachments', compute='_compute_attachments', store=False)
     birthday_employee_ids = fields.Many2many('hr.employee', relation='birthday_publication_employee_rel',
                                              column1='publication_id', column2='employee_id', string='Birthday Employees')
