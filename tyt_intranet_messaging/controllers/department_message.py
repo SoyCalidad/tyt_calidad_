@@ -35,12 +35,26 @@ _logger = logging.getLogger(__name__)
 
 class DepartmentMessagePortal(portal.CustomerPortal):
 
+    def _prepare_department_messages_count_domain(self):
+        user_groups = request.env.user.groups_id.ids
+        return [
+            ('published_date', '=', fields.Date.today()),
+            ('state', '=', 'published'),
+            ('group_ids', 'in', user_groups),
+        ]
+
+    def _prepare_home_portal_values(self, counters):
+        values = super()._prepare_home_portal_values(counters)
+        domain = self._prepare_department_messages_count_domain()
+        if 'department_message_count' in counters:
+            values['department_message_count'] = request.env['tyt.intranet.department_message'].sudo().search_count(domain)
+        return values
+
     def _prepare_portal_layout_values(self):
         values = super()._prepare_portal_layout_values()
         return values
 
     def _prepare_department_messages_domain(self):
-
         user_groups = request.env.user.groups_id.ids
         return [
             '|',
@@ -120,13 +134,7 @@ class DepartmentMessagePortal(portal.CustomerPortal):
 
     @http.route('/mark_as_read', type='json', auth='user')
     def mark_as_read(self, message_id):
-        print('################# mark_as_read #################')
-        print('message_id', message_id)
         department_message = request.env['tyt.intranet.department_message'].sudo().browse(message_id)
-        print('message', department_message)
         if department_message.exists() and not department_message.is_read_by_current_user():
-
-            print('message.exists() and not message.is_read')
             department_message.mark_as_read_by_current_user()
-
         return {'success': True}

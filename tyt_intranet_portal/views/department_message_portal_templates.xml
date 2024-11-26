@@ -1,7 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <odoo>
-    <template id="portal_my_home_department_message" name="Show Messages | Intranet" customize_show="True"
-              inherit_id="tyt_intranet_portal.portal_my_home" priority="160">
+    <template id="portal_my_home_department_message" name="Show Messages | Intranet" customize_show="True" inherit_id="tyt_intranet_portal.portal_my_home" priority="160">
         <xpath expr="//div[hasclass('o_portal_docs')]" position="before">
 
         </xpath>
@@ -11,7 +10,10 @@
                 <t t-set="title">Mensajes a departamentos</t>
                 <t t-set="text">Acceda a sus mensajes</t>
                 <t t-set="url" t-value="'/my/department_messages'"/>
+                <t t-set="placeholder_count" t-value="'department_message_count'"/>
+                <t t-set="show_count" t-value="True"/>
             </t>
         </div>
     </template>
+
 </odoo>
