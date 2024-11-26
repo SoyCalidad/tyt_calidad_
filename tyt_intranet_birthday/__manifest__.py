@@ -1,0 +1,31 @@
+{
+    'name': 'Intranet Birthday Publication TYT Contact Center - Soy Calidad',
+    'version': '1.0',
+    'description': 'Intranet Birthday Publication TYT Contact Center - Soy Calidad',
+    'summary': 'Intranet Birthday Publication TYT Contact Center - Soy Calidad',
+    'author': 'Soy Calidad',
+    'website': 'www.soycalidad.com',
+    'license': 'Other proprietary',
+    'category': 'soycalidad',
+    'depends': [
+        'base', 'mail', 'portal', 'website', 'tyt_intranet_base',
+    ],
+    'data': [
+        'security/ir.model.access.csv',
+        'data/data.xml',
+        'data/ir_cron_data.xml',
+        'views/birthday_publication_views.xml',
+        'views/birthday_publication_portal_templates.xml',
+        'views/portal_templates.xml',
+        'views/menus.xml',
+
+    ],
+    'assets': {
+        'web.assets_frontend': [
+
+        ],
+    },
+    'installable': True,
+    'auto_install': False,
+    'application': True,
+}
