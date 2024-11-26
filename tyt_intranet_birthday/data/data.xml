@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data noupdate="1">
+        <record id="tyt_intranet_birthday_publication_singleton" model="tyt.intranet.birthday_publication">
+            <field name="name">Happy Birthday</field>
+        </record>
+    </data>
+</odoo>
