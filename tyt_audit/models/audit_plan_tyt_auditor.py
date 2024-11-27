@@ -127,18 +127,42 @@ class AuditPlanTytAuditor(models.Model):
         # Lista de IDs de sitios
         # site_ids = [1, 2, 10, 9, 8, 7, 5, 3]
         
-        # Preparar los valores para los registros de "audit.plan.tyt.auditor.schedule"
+    #     # Preparar los valores para los registros de "audit.plan.tyt.auditor.schedule"
+    #     schedule_vals = []
+    #     for site_id in site_ids:
+    #         schedule_vals.append({
+    #             'audit_plan_tyt_auditor_id': record.id,
+    #             'tyt_sites_id': site_id,
+    #         })
+        
+    #     # Crear los registros en "audit.plan.tyt.auditor.schedule"
+    #     self.env['audit.plan.tyt.auditor.schedule'].create(schedule_vals)
+        
+    #     return record
+
+    @api.model_create_multi
+    def create(self, vals_list):
+        # Crear todos los registros principales de AuditPlanTytAuditor de una sola vez
+        records = super(AuditPlanTytAuditor, self).create(vals_list)
+
+        # Lista de IDs de sitios
+        site_ids = [1, 2, 10, 9, 8, 7, 5, 3]
+
+        # Preparar los valores para los registros de audit.plan.tyt.auditor.schedule
         schedule_vals = []
-        for site_id in site_ids:
-            schedule_vals.append({
-                'audit_plan_tyt_auditor_id': record.id,
-                'tyt_sites_id': site_id,
-            })
-        
-        # Crear los registros en "audit.plan.tyt.auditor.schedule"
-        self.env['audit.plan.tyt.auditor.schedule'].create(schedule_vals)
-        
-        return record
+        for record in records:
+            for site_id in site_ids:
+                schedule_vals.append({
+                    'audit_plan_tyt_auditor_id': record.id,
+                    'tyt_sites_id': site_id,
+                })
+
+        # Crear todos los registros en audit.plan.tyt.auditor.schedule de una sola vez
+        if schedule_vals:
+            self.env['audit.plan.tyt.auditor.schedule'].create(schedule_vals)
+
+        return records
+
 
     ## OLD VERSION BUTTON + SETTINGS
 

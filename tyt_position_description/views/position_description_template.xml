@@ -1,0 +1,1395 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <template id="position_description_template">
+        <t t-call="web.html_container">
+            <t t-call="web.external_layout">
+                <t t-foreach="docs" t-as="doc">
+                    <div>
+                        <table class="table table-sm " style="width: 800px; border: 11px solid black; padding: 3px;">
+                            <tbody>
+                                <tr>
+                                    <td style="width: 47%; vertical-align: top; border: none !important; border-right: none; ">
+                                        <table  class="table table-borderless" style="border: none; border-collapse: collapse;">
+                                            <tbody>
+                                                <tr>
+                                                    <td>
+                                                        <table class="table table-sm table-borderless">
+                                                            <tbody>
+                                                                <tr>
+                                                                    <td style=" width: 100%; border: 1px solid black; background-color: #31869b; color: white; text-align: center; font-weight: bold;">
+                                                                        <span style="font-family: Arial; font-size: 14px;">TYT PERFIL LABORAL 2024</span>
+                                                                    </td>
+                                                                </tr>
+                                                            </tbody>
+                                                        </table>
+                                                        <table class="table table-sm table-borderless" style="border: none !important; border-collapse: collapse;" >
+                                                            <tbody>
+                                                                <tr>
+                                                                    <td style="width: 100%;">
+                                                                        <table class="table table-sm " style="border: 1px solid black; border-collapse: collapse;">
+                                                                            <tbody>
+                                                                                <tr>
+                                                                                    <td style="width: 33%; border: 1px solid black; background-color:#215967; color: white; text-align: center; font-weight: bold;">
+                                                                                        <span style="font-family: Arial; font-size: 10px;">No. de empleado</span>
+                                                                                    </td>
+                                                                                    <td style="width: 33%; border: 1px solid black; background-color:#215967; color: white; text-align: center; font-weight: bold;">
+                                                                                        <span style="font-family: Arial; font-size: 10px;">Nombre completo</span>
+                                                                                    </td>
+                                                                                    <td style="width: 33%; border: 1px solid black; background-color:#215967; color: white; text-align: center; font-weight: bold;">
+                                                                                        <span style="font-family: Arial; font-size: 10px;">Fecha de aplicación</span>
+                                                                                    </td>
+                                                                                </tr>
+                                                                                <tr>
+                                                                                    <td style="border: 1px solid black;">
+                                                                                        <span style="font-family: Arial; font-size: 10px;"><t t-esc="doc.partner_id.id or ' '"/></span>
+                                                                                    </td>
+                                                                                    <td style="border: 1px solid black;">
+                                                                                        <span style="font-family: Arial; font-size: 10px;"><t t-esc="doc.partner_id.name or ' '"/></span>
+                                                                                    </td>
+                                                                                    <td style="border: 1px solid black;">
+                                                                                        <span style="font-family: Arial; font-size: 10px;"><t t-esc="doc.create_date or ' '"/></span>
+                                                                                    </td>
+                                                                                </tr>
+                                                                            </tbody>
+                                                                        </table>
+                                                                    </td>
+                                                                </tr>
+                                                            </tbody>
+                                                        </table>
+                                                    </td>
+                                                </tr>
+                                                <tr>
+                                                    <td>
+                                                        <table class="table table-sm " style="border: 1px solid black; border-collapse: collapse;">
+                                                            <tbody>
+                                                                <tr>
+                                                                    <td style="width: 128px; border: 1px solid black; background-color:#215967; color: white; text-align: center; font-weight: bold;">
+                                                                        <span style="font-family: Arial; font-size: 10px;">Puesto</span>
+                                                                    </td>
+                                                                    <td style="width: 128px; border-top: 1px solid black; border-left: 1px solid black; border-bottom: 1px solid black;text-align: center; font-weight: bold;">
+                                                                        <span style="font-family: Arial; font-size: 10px;"><span style="font-family: Arial; font-size: 10px;"><t t-esc="doc.job_id.name or '-'"/></span></span>
+                                                                    </td>
+                                                                    <td style="width: 128px; border-top: 1px solid black; border-right: 1px solid black; border-bottom: 1px solid black; text-align: center;font-weight: bold;">
+                                                                        <span style="font-family: Arial; font-size: 10px;"><t t-esc="doc.job_id.nombre_corto or '-'"/></span>
+                                                                    </td>
+                                                                </tr>
+                                                                <tr>
+                                                                    <td style="border: 1px solid black; background-color:#b7dee8; color: black; text-align: left;">
+                                                                        <span style="font-family: Arial; font-size: 10px;">Puntos (Valuación)</span>
+                                                                    </td>
+                                                                    <td style="border-top: 1px solid black; border-left: 1px solid black; border-bottom: 1px solid black ; text-align: center;">
+                                                                        <span style="font-family: Arial; font-size: 10px;"><t t-esc="doc.job_id.puntos_valuacion or ' '"/></span>
+                                                                    </td>
+                                                                    <td style="border-top: 1px solid black; border-right: 1px solid black; border-bottom: 1px solid black;  text-align: center;">
+                                                                        <span style="font-family: Arial; font-size: 10px;"> </span>
+                                                                    </td>
+                                                                </tr>
+                                                                <tr>
+                                                                    <td style="border: 1px solid black;background-color:#b7dee8; color: black; text-align: left;">
+                                                                        <span style="font-family: Arial; font-size: 10px;">Categoría</span>
+                                                                    </td>
+                                                                    <td style="border-top: 1px solid black; border-left: 1px solid black; border-bottom: 1px solid black;  text-align: center;">
+                                                                        <span style="font-family: Arial; font-size: 10px;"><t t-esc="doc.job_id.categoria or ' '"/></span>
+                                                                    </td>
+                                                                    <td style="border-top: 1px solid black; border-right: 1px solid black; border-bottom: 1px solid black;  text-align: center;">
+                                                                        <span style="font-family: Arial; font-size: 10px;">-</span>
+                                                                    </td>
+                                                                </tr>
+                                                                <tr>
+                                                                    <td style="border: 1px solid black;background-color:#b7dee8; color: black; text-align: left;">
+                                                                        <span style="font-family: Arial; font-size: 10px;">Nivel Organizacional</span>
+                                                                    </td>
+                                                                    <td style="border-top: 1px solid black; border-left: 1px solid black; border-bottom: 1px solid black;  text-align: center;">
+                                                                        <span style="font-family: Arial; font-size: 10px;"><t t-esc="doc.job_id.nivel_organizacional or ' '"/></span>
+                                                                    </td>
+                                                                    <td style="border-top: 1px solid black; border-right: 1px solid black; border-bottom: 1px solid black;  text-align: center;">
+                                                                        <span style="font-family: Arial; font-size: 10px;">-</span>
+                                                                    </td>
+                                                                </tr>
+                                                            </tbody>
+                                                        </table>
+                                                    </td>
+                                                </tr>
+                                                <tr>
+                                                    <td>
+                                                        <table class="table table-sm " style="border: 1px solid black; border-collapse: collapse;">
+                                                            <tbody>
+                                                                <tr>
+                                                                    <td style="width: 128px; border: 1px solid black;background-color: #31869b; color: white; text-align: left; font-weight: bold;"> 
+                                                                        <span style="font-family: Arial; font-size: 10px;">Nivel de Madurez</span>
+                                                                    </td>
+                                                                    <td style="width: 128px; border: 1px solid black;background-color: #002060; color: white; text-align: center; font-weight: bold;"> 
+                                                                        <span style="font-family: Arial; font-size: 10px;">
+                                                                            <t t-set="nivel_detalle" t-value="doc.job_id.nivel_detalle_ids.filtered(lambda n: n.sequence == 1)" />
+                                                                            <t t-if="nivel_detalle">
+                                                                                <t t-esc="nivel_detalle[0].nivel_id.name"/>
+                                                                            </t>
+                                                                            <t t-else="">
+                                                                                <span> </span>
+                                                                            </t>
+                                                                        </span>
+                                                                    </td>
+                                                                    <td style="width: 128px; border: 1px solid black; background-color:#215967; color: white; text-align: center; font-weight: bold;">
+                                                                        <span style="font-family: Arial; font-size: 10px;">Curso (S)</span>
+                                                                    </td>
+                                                                </tr>
+                                                                <tr>
+                                                                    <td style="border: 1px solid black; background-color:#b7dee8; color: black; text-align: left;">
+                                                                        <span style="font-family: Arial; font-size: 10px;">Tiempo de Graduación</span>
+                                                                    </td>
+                                                                    <td style="border: 1px solid black; font-size: 10px;  text-align: center;">
+                                                                        <t t-if="nivel_detalle">
+                                                                            <t t-esc="nivel_detalle[0].tiempo_graduacion"/>
+                                                                        </t>
+                                                                        <t t-else="">
+                                                                            <span> </span>
+                                                                        </t>
+                                                                    </td>
+                                                                    <td rowspan= "11" style="border: 1px solid black; font-size: 10px;  text-align: center;">
+                                                                        <t t-if="nivel_detalle">
+                                                                            <t t-esc="nivel_detalle[0].curso_id.name"/>
+                                                                        </t>
+                                                                        <t t-else="">
+                                                                            <span> </span>
+                                                                        </t>
+                                                                    </td>
+                                                                </tr>
+                                                                <tr>
+                                                                    <td style="border: 1px solid black; background-color:#b7dee8; color: black; text-align: left;">
+                                                                        <span style="font-family: Arial; font-size: 10px;">Salario Fijo</span>
+                                                                    </td>
+                                                                    <td style="border: 1px solid black; font-size: 10px; text-align: center;">
+                                                                        <t t-if="nivel_detalle">
+                                                                            <span style="font-family: Arial; font-size: 10px; margin-right: 1px;">$</span>
+                                                                                
+                                                                            <span style="font-family: Arial; font-size: 10px;  text-align: left; display: inline-block;">
+                                                                                <t t-esc="nivel_detalle[0].salario_fijo"/>
+                                                                            </span>
+                                                                        </t>
+                                                                        <t t-else="">
+                                                                            <span style="font-family: Arial; font-size: 10px;"> </span>
+                                                                        </t>
+                                                                    </td>
+                                                                </tr>
+                                                                <tr>
+                                                                    <td style="border: 1px solid black; background-color:#b7dee8; color: black; text-align: left;">
+                                                                        <span style="font-family: Arial; font-size: 10px;">Salario Variable</span>
+                                                                    </td>
+                                                                    <td style="border: 1px solid black; font-size: 10px; text-align: center;">
+                                                                        <t t-if="nivel_detalle">
+                                                                            <span style="font-family: Arial; font-size: 10px;  text-align: center;">
+                                                                                <t t-esc="nivel_detalle[0].salario_variable"/>
+                                                                            </span>
+                                                                        </t>
+                                                                        <t t-else="">
+                                                                            <span style="font-family: Arial; font-size: 10px;"> </span>
+                                                                        </t>
+                                                                    </td>
+                                                                </tr>
+                                                                <tr>
+                                                                    <td style="border: 1px solid black; background-color:#b7dee8; color: black; text-align: left;">
+                                                                        <span style="font-family: Arial; font-size: 10px;">Salario Integral</span>
+                                                                    </td>
+                                                                    <td style="border: 1px solid black; font-size: 10px; text-align: center;">
+                                                                        <t t-if="nivel_detalle">
+                                                                            <span style="font-family: Arial; font-size: 10px; margin-right: 1px;">$</span>
+                                                                                
+                                                                            <span style="font-family: Arial; font-size: 10px;  text-align: left; display: inline-block;">
+                                                                                <t t-esc="nivel_detalle[0].salario_integral"/>
+                                                                            </span>
+                                                                        </t>
+                                                                        <t t-else="">
+                                                                            <span style="font-family: Arial; font-size: 10px;"> </span>
+                                                                        </t>
+                                                                    </td>
+                                                                </tr>
+                                                                <tr>
+                                                                    <td style="border: 1px solid black; background-color:#b7dee8; color: black; text-align: left;">
+                                                                        <span style="font-family: Arial; font-size: 10px;">Ratio p/ Vacante</span>
+                                                                    </td>
+                                                                    <td style="border: 1px solid black; font-size: 10px; text-align: center;">
+                                                                        <t t-if="nivel_detalle">
+                                                                            <span style="font-family: Arial; font-size: 10px;  text-align: center;">
+                                                                                <t t-esc="nivel_detalle[0].ratio_vacante"/>
+                                                                            </span>
+                                                                        </t>
+                                                                        <t t-else="">
+                                                                            <span style="font-family: Arial; font-size: 10px;"> </span>
+                                                                        </t>
+                                                                    </td>
+                                                                </tr>
+                                                                <tr>
+                                                                    <td style="border: 1px solid black; background-color:#b7dee8; color: black; text-align: left;">
+                                                                        <span style="font-family: Arial; font-size: 10px;">Personal Directo</span>
+                                                                    </td>
+                                                                    <td style="border: 1px solid black; font-size: 10px; text-align: center;">
+                                                                        <t t-if="nivel_detalle">
+                                                                            <span style="font-family: Arial; font-size: 10px;  text-align: center;">
+                                                                                <t t-esc="nivel_detalle[0].personal_directo"/>
+                                                                            </span>
+                                                                        </t>
+                                                                        <t t-else="">
+                                                                            <span style="font-family: Arial; font-size: 10px;"> </span>
+                                                                        </t>
+                                                                    </td>
+                                                                </tr>
+                                                                <tr>
+                                                                    <td style="border: 1px solid black; background-color:#b7dee8; color: black; text-align: left;">
+                                                                        <span style="font-family: Arial; font-size: 10px;">Personal Indirecto</span>
+                                                                    </td>
+                                                                    <td style="border: 1px solid black; font-size: 10px; text-align: center;">
+                                                                        <t t-if="nivel_detalle">
+                                                                            <span style="font-family: Arial; font-size: 10px;  text-align: center;">
+                                                                                <t t-esc="nivel_detalle[0].personal_indirecto"/>
+                                                                            </span>
+                                                                        </t>
+                                                                        <t t-else="">
+                                                                            <span style="font-family: Arial; font-size: 10px;"> </span>
+                                                                        </t>
+                                                                    </td>
+                                                                </tr>
+                                                                <tr>
+                                                                    <td style="border: 1px solid black; background-color:#b7dee8; color: black; text-align: left;">
+                                                                        <span style="font-family: Arial; font-size: 10px;">Escolaridad</span>
+                                                                    </td>
+                                                                    <td style="border: 1px solid black; font-size: 10px; text-align: center;">
+                                                                        <t t-if="nivel_detalle">
+                                                                            <span style="font-family: Arial; font-size: 10px;  text-align: center;">
+                                                                                <t t-esc="nivel_detalle[0].escolaridad_id.name"/>
+                                                                            </span>
+                                                                        </t>
+                                                                        <t t-else="">
+                                                                            <span style="font-family: Arial; font-size: 10px;"> </span>
+                                                                        </t>
+                                                                    </td>
+                                                                </tr>
+                                                                <tr>
+                                                                    <td style="border: 1px solid black; background-color:#b7dee8; color: black; text-align: left;">
+                                                                        <span style="font-family: Arial; font-size: 10px;">Edad Mínima</span>
+                                                                    </td>
+                                                                    <td style="border: 1px solid black; font-size: 10px; text-align: center;">
+                                                                        <t t-if="nivel_detalle">
+                                                                            <span style="font-family: Arial; font-size: 10px;  text-align: center;">
+                                                                                <t t-esc="nivel_detalle[0].edad_minima"/>
+                                                                            </span>
+                                                                        </t>
+                                                                        <t t-else="">
+                                                                            <span style="font-family: Arial; font-size: 10px;"> </span>
+                                                                        </t>
+                                                                    </td>
+                                                                </tr>
+                                                                <tr>
+                                                                    <td style="border: 1px solid black; background-color:#b7dee8; color: black; text-align: left;">
+                                                                        <span style="font-family: Arial; font-size: 10px;">Idiomas</span>
+                                                                    </td>
+                                                                    <td style="border: 1px solid black; font-size: 10px; text-align: center;">
+                                                                        <t t-if="nivel_detalle">
+                                                                            <span style="font-family: Arial; font-size: 10px;  text-align: center;">
+                                                                                <t t-esc="nivel_detalle[0].idiomas"/>
+                                                                            </span>
+                                                                        </t>
+                                                                        <t t-else="">
+                                                                            <span style="font-family: Arial; font-size: 10px;"> </span>
+                                                                        </t>
+                                                                    </td>
+                                                                </tr>
+
+                                                            </tbody>
+                                                        </table>
+                                                    </td>
+                                                </tr>
+                                            </tbody>
+                                        </table>
+                                    </td>
+
+                                    <td style="width: 47%; vertical-align: top; border: none; border-right: none;">
+                                        <table  class="table table-borderless" style="border: none; border-collapse: collapse;">
+                                            <tbody>
+                                                <tr>
+                                                    <td style=" width: 33%; border: none;">
+                                                       <img t-if="doc.job_id.company_id.logo" t-att-src="image_data_uri(doc.job_id.company_id.logo)" alt="Logo" style="width: 100%; height: auto;"/>
+                                                    </td>
+                                                    <td style="width: 66%;">
+                                                        <table class="table table-sm " style="border: 1px solid black; border-collapse: collapse;">
+                                                            <tbody>
+                                                                <tr> 
+                                                                    <td colspan="2" style="border: 1px solid black; background-color: #31869b; color: white; text-align: center; font-weight: bold;"><span style="font-family: Arial; font-size: 14px;">MÉTRICOS</span></td>
+                                                                </tr>
+                                                                <tr>
+                                                                    <td style="width: 50%; border: 1px solid black;background-color:#215967; color: white; text-align: center; font-weight: bold;">
+                                                                        <span style="font-family: Arial; font-size: 10px;">Jornada en horas</span>
+                                                                    </td>
+                                                                    <td style="width: 50%; border: 1px solid black; background-color: #002060; color: white; text-align: center;"> 
+                                                                        <span style="font-family: Arial; font-size: 10px;"><t t-esc="doc.job_id.hr_job_work_day_id.name or ' '"/></span>
+                                                                    </td>
+                                                                </tr>
+                                                                <tr>
+                                                                    <td style="border: 1px solid black;  background-color:#b7dee8; color: black; text-align: center;">
+                                                                        <span style="font-family: Arial; font-size: 10px;">Jefe Funcional</span>
+                                                                    </td>
+                                                                    <td style="border: 1px solid black;">
+                                                                        <span style="font-family: Arial; font-size: 10px;"><t t-esc="doc.job_id.functional_head.name or ' '"/></span>
+                                                                    </td>
+                                                                </tr>
+                                                                <tr>
+                                                                    <td style="border: 1px solid black; background-color:#b7dee8; color: black; text-align: center;">
+                                                                        <span style="font-family: Arial; font-size: 10px;">Jefe Administrativo</span>
+                                                                    </td>
+                                                                    <td style="border: 1px solid black;">
+                                                                        <span style="font-family: Arial; font-size: 10px;"><t t-esc="doc.job_id.adm_head.name or ' '"/></span>
+                                                                    </td>
+                                                                </tr>
+                                                            </tbody>
+                                                        </table>
+                                                    </td>
+                                                </tr>
+                                                <tr>
+                                                    <td style="width: 100%;" colspan="2">
+                                                        <table class="table table-sm " style="border: 1px solid black; border-collapse: collapse;">
+                                                            <tbody>
+                                                                <tr>
+                                                                    <td colspan="3" style="border: 1px solid black; background-color: #31869b; color: white; text-align: center; font-weight: bold;"> 
+                                                                        <span style="font-family: Arial; font-size: 10px;">OMEM (Balance Scorecard)</span>
+                                                                    </td>
+                                                                </tr>
+                                                                <tr>
+                                                                    <td style="width: 33%; border: 1px solid black;background-color:#215967; color: white; text-align: center;font-weight: bold;">
+                                                                        <span style="font-family: Arial; font-size: 10px;">Tipo</span>
+                                                                    </td>
+                                                                    <td style="width: 33%; border: 1px solid black;background-color:#215967; color: white; text-align: center;font-weight: bold;"> 
+                                                                        <span style="font-family: Arial; font-size: 10px;">Indicador</span>
+                                                                    </td>
+                                                                    <td style="width: 33%; border: 1px solid black;background-color:#215967; color: white; text-align: center;font-weight: bold;">
+                                                                        <span style="font-family: Arial; font-size: 10px;">Meta</span>
+                                                                    </td>
+                                                                </tr>
+                                                                <tr>
+                                                                    <td style="border: 1px solid black; background-color:#b7dee8; color: black; text-align: left;">
+                                                                        <span style="font-family: Arial; font-size: 10px;">Finanzas</span>
+                                                                    </td>
+                                                                    <td style="border: 1px solid black;"><span style="font-family: Arial; font-size: 10px;"><t t-esc="doc.job_id.finanzas_indicador or '-'"/></span></td>
+                                                                    <td style="border: 1px solid black;"><span style="font-family: Arial; font-size: 10px;"><t t-esc="doc.job_id.finanzas_meta or '-'"/></span></td>
+                                                                </tr>
+                                                                <tr>
+                                                                    <td style="border: 1px solid black; background-color:#b7dee8; color: black; text-align: left;">
+                                                                        <span style="font-family: Arial; font-size: 10px;">Cliente</span>
+                                                                    </td>
+                                                                    <td style="border: 1px solid black;"><span style="font-family: Arial; font-size: 10px;"><t t-esc="doc.job_id.cliente_indicador or '-'"/></span></td>
+                                                                    <td style="border: 1px solid black;"><span style="font-family: Arial; font-size: 10px;"><t t-esc="doc.job_id.cliente_meta or '-'"/></span></td>
+                                                                </tr>
+                                                                <tr>
+                                                                    <td style="border: 1px solid black; background-color:#b7dee8; color: black; text-align: left;">
+                                                                        <span style="font-family: Arial; font-size: 10px;">Procesos</span>
+                                                                    </td>
+                                                                    <td style="border: 1px solid black;"><span style="font-family: Arial; font-size: 10px;"><t t-esc="doc.job_id.procesos_indicador or '-'"/></span></td>
+                                                                    <td style="border: 1px solid black;"><span style="font-family: Arial; font-size: 10px;"><t t-esc="doc.job_id.procesos_meta or '-'"/></span></td>
+                                                                </tr>
+                                                                <tr>
+                                                                    <td style="border: 1px solid black; background-color:#b7dee8; color: black; text-align: left;">
+                                                                        <span style="font-family: Arial; font-size: 10px;">Gente</span>
+                                                                    </td>
+                                                                    <td style="border: 1px solid black;"><span style="font-family: Arial; font-size: 10px;"><t t-esc="doc.job_id.gente_indicador or '-'"/></span></td>
+                                                                    <td style="border: 1px solid black;"><span style="font-family: Arial; font-size: 10px;"><t t-esc="doc.job_id.gente_meta or '-'"/></span></td>
+                                                                </tr>
+                                                            </tbody>
+                                                        </table>
+                                                    </td>
+                                                </tr>
+                                                <tr>
+                                                    <td style="width: 100%;" colspan="2">
+                                                        <table class="table table-sm " style="border: 1px solid black; border-collapse: collapse;">
+                                                            <tbody>
+                                                                <tr>
+                                                                    <td colspan="3" style="border: 1px solid black; background-color: #31869b; color: white; text-align: center; font-weight: bold;"> 
+                                                                        <span style="font-family: Arial; font-size: 10px;">KPI´s</span>
+                                                                    </td>
+                                                                </tr>
+                                                                <tr>
+                                                                    <td style="width: 33%; border: 1px solid black;background-color:#215967; color: white; text-align: center; font-weight: bold;">
+                                                                        <span style="font-family: Arial; font-size: 10px;">Tipo</span>
+                                                                    </td>
+                                                                    <td style="width: 33%; border: 1px solid black;background-color:#215967; color: white; text-align: center; font-weight: bold;">
+                                                                        <span style="font-family: Arial; font-size: 10px;">Indicador</span>
+                                                                    </td>
+                                                                    <td style="width: 33%; border: 1px solid black;background-color:#215967; color: white; text-align: center; font-weight: bold;">
+                                                                        <span style="font-family: Arial; font-size: 10px;">Meta</span>
+                                                                    </td>
+                                                                </tr>
+                                                                <tr>
+                                                                    <td style="border: 1px solid black; background-color:#8eaadb; color: white; text-align: left;">
+                                                                        <span style="font-family: Arial; font-size: 10px;">Estratégico</span>
+                                                                    </td>
+                                                                    <td style="border: 1px solid black;"><span style="font-family: Arial; font-size: 10px;"><t t-esc="doc.job_id.estrategico_indicador or '-'"/></span></td>
+                                                                    <td style="border: 1px solid black;"><span style="font-family: Arial; font-size: 10px;"><t t-esc="doc.job_id.estrategico_meta or '-'"/></span></td>
+                                                                </tr>
+                                                                <tr>
+                                                                    <td style="border: 1px solid black; background-color:#8eaadb; color: white; text-align: left;">
+                                                                        <span style="font-family: Arial; font-size: 10px;">Costo</span>
+                                                                    </td>
+                                                                    
+                                                                    <td style="border: 1px solid black;"><span style="font-family: Arial; font-size: 10px;"><t t-esc="doc.job_id.costo_indicador or '-'"/></span></td>
+                                                                    <td style="border: 1px solid black;"><span style="font-family: Arial; font-size: 10px;"><t t-esc="doc.job_id.costo_meta or '-'"/></span></td>
+                                                                </tr>
+                                                                <tr>
+                                                                    <td style="border: 1px solid black; background-color:#b7dee8; color: black; text-align: left;">
+                                                                        <span style="font-family: Arial; font-size: 10px;">Velocidad de respuesta</span>
+                                                                    </td>
+                                                                    <td style="border: 1px solid black;"><span style="font-family: Arial; font-size: 10px;"><t t-esc="doc.job_id.velocidad_respuesta_indicador or '-'"/></span></td>
+                                                                    <td style="border: 1px solid black;"><span style="font-family: Arial; font-size: 10px;"><t t-esc="doc.job_id.velocidad_respuesta_meta or '-'"/></span></td>
+                                                                </tr>
+                                                                <tr>
+                                                                    <td style="border: 1px solid black; background-color:#b7dee8; color: black; text-align: left;">
+                                                                        <span style="font-family: Arial; font-size: 10px;">Disponibilidad</span>
+                                                                    </td>
+                                                                    <td style="border: 1px solid black;"><span style="font-family: Arial; font-size: 10px;"><t t-esc="doc.job_id.disponibilidad_indicador or '-'"/></span></td>
+                                                                    <td style="border: 1px solid black;"><span style="font-family: Arial; font-size: 10px;"><t t-esc="doc.job_id.disponibilidad_meta or '-'"/></span></td>
+                                                                </tr>
+                                                                <tr>
+                                                                    <td style="border: 1px solid black; background-color:#b7dee8; color: black; text-align: left;">
+                                                                        <span style="font-family: Arial; font-size: 10px;">Efectividad de proceso</span>
+                                                                    </td>
+                                                                    <td style="border: 1px solid black;"><span style="font-family: Arial; font-size: 10px;"><t t-esc="doc.job_id.efectividad_proceso_indicador or '-'"/></span></td>
+                                                                    <td style="border: 1px solid black;"><span style="font-family: Arial; font-size: 10px;"><t t-esc="doc.job_id.efectividad_proceso_meta or '-'"/></span></td>
+                                                                </tr>
+                                                            </tbody>
+                                                        </table>
+                                                    </td>
+                                                </tr>
+                                            </tbody>
+                                        </table>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td colspan="2" style="border-top: none;">
+                                        <div style="border: 1px solid black; background-color: #215967; color: white; text-align: center; font-weight: bold;">
+                                            <span style="font-family: Arial; font-size: 14px;">BENEFICIOS</span>
+                                        </div>
+                                        <div style="height: 10px;">
+                                        </div>
+                                        <table class="table table-sm " style="border: 1px solid black; border-collapse: collapse;">
+                                            <tbody>
+                                                <tr>
+                                                    <td style="width: 113px; border: 1px solid black; background-color:#b7dee8; color: black; text-align: center; font-weight: bold;">
+                                                        <span style="font-family: Arial; font-size: 10px;">Fondo de ahorro</span>
+                                                    </td>
+                                                    <td style="width: 113px; border: 1px solid black; background-color:#b7dee8; color: black; text-align: center; font-weight: bold;">
+                                                        <span style="font-family: Arial; font-size: 10px;">Beca estudiantil</span>
+                                                    </td>
+                                                    <td style="width: 113px; border: 1px solid black; background-color:#b7dee8; color: black; text-align: center; font-weight: bold;">
+                                                        <span style="font-family: Arial; font-size: 10px;">R. Casa</span>
+                                                    </td>
+                                                    <td style="width: 113px; border: 1px solid black; background-color:#b7dee8; color: black; text-align: center; font-weight: bold;">
+                                                        <span style="font-family: Arial; font-size: 10px;">V. de despensa</span>
+                                                    </td>
+                                                    <td style="width: 113px; border: 1px solid black; background-color:#b7dee8; color: black; text-align: center; font-weight: bold;">
+                                                        <span style="font-family: Arial; font-size: 10px;">V. de gasolina</span>
+                                                    </td>
+                                                    <td style="width: 113px; border: 1px solid black; background-color:#b7dee8; color: black; text-align: center; font-weight: bold;">
+                                                        <span style="font-family: Arial; font-size: 10px;">Seguro de gastos médicos mayores</span>
+                                                    </td>
+                                                    <td style="width: 113px; border: 1px solid black; background-color:#b7dee8; color: black; text-align: center; font-weight: bold;">
+                                                        <span style="font-family: Arial; font-size: 10px;">Auto</span>
+                                                    </td>
+                                                </tr>
+                                                <tr>
+                                                    <td style="border: 1px solid black; text-align: center;">
+                                                        <span style="font-family: Arial; font-size: 10px; text-align: center;">
+                                                            <t t-esc="doc.job_id.fondo_ahorro or '-'"/>
+                                                        </span>
+                                                    </td>
+                                                    <td style="border: 1px solid black; text-align: center;">
+                                                        <span style="font-family: Arial; font-size: 10px; text-align: center;">
+                                                            <t t-esc="doc.job_id.beca_estudiantil or '-'"/>
+                                                        </span>
+                                                    </td>
+                                                    <td style="border: 1px solid black; text-align: center;">
+                                                        <span style="font-family: Arial; font-size: 10px; text-align: center;">
+                                                            <t t-esc="doc.job_id.r_casa or '-'"/>
+                                                        </span>
+                                                    </td>
+                                                    <td style="border: 1px solid black; text-align: center;">
+                                                        <span style="font-family: Arial; font-size: 10px; text-align: center;">
+                                                            <t t-esc="doc.job_id.v_despensa or '-'"/>
+                                                        </span>
+                                                    </td>
+                                                    <td style="border: 1px solid black; text-align: center;">
+                                                        <span style="font-family: Arial; font-size: 10px; text-align: center;">
+                                                            <t t-esc="doc.job_id.v_gasolina or '-'"/>
+                                                        </span>
+                                                    </td>
+                                                    <td style="border: 1px solid black; text-align: center;">
+                                                        <span style="font-family: Arial; font-size: 10px; text-align: center;">
+                                                            <t t-esc="doc.job_id.seguro_medico_mayor or '-'"/>
+                                                        </span>
+                                                    </td>
+                                                    <td style="border: 1px solid black; text-align: center;">
+                                                        <span style="font-family: Arial; font-size: 10px;">
+                                                            <t t-esc="doc.job_id.auto or '-'"/>
+                                                        </span>
+                                                    </td>
+                                                </tr>
+
+                                            </tbody>
+                                        </table>
+                                    </td>
+                                </tr>
+                            </tbody>
+                        </table>
+                        <table class="table table-sm " style="width: 800px; border: 11px solid black; padding: 3px; table-layout: fixed;  vertical-align: top;">
+                            <tbody>
+                                <tr>
+                                    <td>
+                                        <table class="table table-borderless" style="border: none !important; width: 382px; border-collapse: collapse;">
+                                            <tbody>
+                                                <tr>
+                                                    <td style="border: 1px solid black; background-color: #215967; color: white; text-align: center; font-weight: bold;">
+                                                        <span style="font-family: Arial; font-size: 12px;">Objetivo General</span> 
+                                                    </td>
+                                                </tr>
+                                                <tr>
+                                                    <td style="height: 10px; border: none;">
+                                                    </td>
+                                                </tr>
+                                                <tr style="height: 300px;">
+                                                    <td style="border: 1px solid black; height: 100px;">
+                                                        <span style="font-family: Arial; font-size: 8px;">
+                                                            <t t-esc="doc.job_id.objetivo_general or '-'"/>
+                                                        </span>
+                                                    </td>
+                                                </tr>
+                                            </tbody>
+                                        </table>
+                                    </td>
+                                    <td style="width: 5px; border: none !important;">
+                                    </td>
+                                    <td style="vertical-align: top;">
+                                        <table class="table table-borderless" style="border: none !important; width: 382px;  border-collapse: collapse;">
+                                            <tbody>
+                                                <tr>
+                                                    <td style="border: 1px solid black; background-color: #215967; color: white; text-align: center; font-weight: bold;">
+                                                        <span style="font-family: Arial; font-size: 12px;">Objetivo del Puesto</span> 
+                                                    </td>
+                                                </tr>
+                                                <tr style="border: none;">
+                                                    <td style="height: 10px; border: none;">
+                                                    </td>
+                                                </tr>
+                                                <tr style="height: 300px;">
+                                                    <td style="border: 1px solid black; height: 100px;">
+                                                        <span style="font-family: Arial; font-size: 8px;">
+                                                            <t t-esc="doc.job_id.objetivo_puesto or '-'"/>
+                                                        </span>
+                                                    </td>
+                                                </tr>
+                                            </tbody>
+                                        </table>
+                                    </td>
+                                </tr>
+                            </tbody>
+                        </table>
+                        <table class="table table-sm " style="width: 800px; border: 11px solid black; padding: 3px; ">
+                            <tbody>
+                                <tr>
+                                    <td style="width: 375px; border: none !important;">
+                                        <table style="border-collapse: collapse;">
+                                            <tbody>
+                                                <tr>
+                                                    <td style="border: 1px solid black; background-color: #215967; color: white; text-align: center; font-size: 12px; font-weight: bold;">
+                                                        Filosofía Organizacional
+                                                    </td>
+                                                </tr>
+                                                <tr>
+                                                    <td rowspan="5" style="border: 1px solid black; padding: 5px;">
+                                                        <span style="font-family: Arial; font-size: 11px; font-weight: bold;">Propósito:</span>
+                                                        <span style="font-family: Arial; font-size: 10px;">
+                                                            Ser un centro de formación de talento que entrega servicios profesionales de estándares institucionales y globales, con un compromiso auténtico hacia el bienestar de nuestros clientes y colaboradores.
+                                                        </span>
+                                                    </td>
+                                                </tr>
+                                            </tbody>
+                                        </table>
+                                    </td>
+                                    <td style="width: 5px; border:none !important;">
+                                    </td>
+                                    <td style="width: 375px; border:none !important;">
+                                        <table class="table table-borderless" style="border: none;">
+                                            <tbody>
+                                                <tr>
+                                                    <td style="width: 375px; ">
+                                                        <table class="table table-sm " style="border-collapse: collapse;">
+                                                            <tbody>
+                                                                <tr>
+                                                                    <td style="width: 192px; border: 1px solid black; background-color: #215967; color: white; text-align: center; font-weight: bold;">
+                                                                        <span style="font-family: Arial; font-size: 12px;">Relación Interna</span>
+                                                                    </td>
+                                                                    <td style="width: 192px; border: 1px solid black; background-color: #215967; color: white; text-align: center; font-weight: bold;">
+                                                                        <span style="font-family: Arial; font-size: 12px;">Relación Externa</span>
+                                                                    </td>
+                                                                </tr>
+                                                                <tr>
+                                                                    <td style="width: 192px; border: 1px solid black;">
+                                                                        <span style="font-family: Arial; font-size: 10px; text-align: center;"><t t-esc="doc.job_id.relacion_interna or '-'"/></span>
+                                                                    </td>
+                                                                    <td style="width: 192px; border: 1px solid black;">
+                                                                        <span style="font-family: Arial; font-size: 10px; text-align: center;"><t t-esc="doc.job_id.relacion_externa or '-'"/></span>
+                                                                    </td>
+                                                                </tr>
+                                                            </tbody>
+                                                        </table>
+                                                    </td>
+                                                </tr>
+                                                <tr>
+                                                    <td style="width: 375px; ">
+                                                        <table class="table table-sm " style="border: 1px solid black; border-collapse: collapse;">
+                                                            <tbody>
+                                                                <tr>
+                                                                    <td style="width: 192px; border: 1px solid black; background-color: #215967; color: white; text-align: center; font-weight: bold;">
+                                                                        <span style="font-family: Arial; font-size: 12px;">Valores</span>
+                                                                    </td>
+                                                                    <td style="width: 192px; border: 1px solid black; background-color: #215967; color: white; text-align: center; font-weight: bold;">
+                                                                        <span style="font-family: Arial; font-size: 12px;">Plan estratégico</span>
+                                                                    </td>
+                                                                </tr>
+                                                                <tr>
+                                                                    <td style="width: 192px; border: 1px solid black;">
+                                                                        <span style="font-family: Arial; font-size: 10px; text-align: center;"><t t-esc="doc.job_id.valores or '-'"/></span>
+                                                                    </td>
+                                                                    <td style="width: 192px; border: 1px solid black;">
+                                                                        <span style="font-family: Arial; font-size: 10px; text-align: center;"><t t-esc="doc.job_id.plan_estrategico or '-'"/></span>
+                                                                    </td>
+                                                                </tr>
+                                                            </tbody>
+                                                        </table>
+                                                    </td>
+                                                </tr>
+                                            </tbody>
+                                        </table>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td colspan="3" style="width: 800px;">
+                                        
+                                        <table class="table table-sm" style="border-collapse: collapse;">
+                                            <tbody>
+                                                <tr>
+                                                    <td colspan="3" style="border: 1px solid black; background-color: #215967; color: white; text-align: center; font-weight: bold; padding: 1px;">
+                                                        <span style="font-family: Arial; font-size: 14px;">Procedimientos y políticas relacionados con el puesto</span>
+                                                    </td>
+                                                </tr>
+                                                <tr>
+                                                    <td style="width: 395px; border: 1px solid black;  background-color:#b7dee8; color: black; text-align: center;font-weight: bold;">
+                                                        <span style="font-family: Arial; font-size: 10px;">Código</span>
+                                                    </td>
+                                                     <td style="width: 10px; border: none !important;"></td>
+                                                    <td style="width: 395px; border: 1px solid black; background-color:#b7dee8; color: black; text-align: center; font-weight: bold;">
+                                                        <span style="font-family: Arial; font-size: 10px;">Nombre</span>
+                                                    </td>
+                                                </tr>
+                                                
+                                                <t t-foreach="doc.job_id.related_process_ids" t-as="related_process">
+                                                    <tr>
+                                                        <td style="border: 1px solid black;">
+                                                            <span style="font-family: Arial; font-size: 10px;">
+                                                                <t t-esc="related_process.code"/>
+                                                            </span>
+                                                        </td>
+                                                         <td style="width: 10px; border: none !important;"></td>
+                                                        <td style="border: 1px solid black;">
+                                                            <span style="font-family: Arial; font-size: 10px;">
+                                                                <t t-esc="related_process.name"/>
+                                                            </span>
+                                                        </td>
+                                                    </tr>
+                                                </t>
+
+                                                <t t-foreach="doc.job_id.responsible_process_ids" t-as="responsible_process">
+                                                    <tr>
+                                                        <td style="border: 1px solid black;">
+                                                            <span style="font-family: Arial; font-size: 10px;">
+                                                                <t t-esc="responsible_process.code"/>
+                                                            </span>
+                                                        </td>
+                                                         <td style="width: 10px; border: none !important;"></td>
+                                                        <td style="border: 1px solid black;">
+                                                            <span style="font-family: Arial; font-size: 10px;">
+                                                                <t t-esc="responsible_process.name"/>
+                                                            </span>
+                                                        </td>
+                                                    </tr>
+                                                </t>
+
+                                            </tbody>
+                                        </table>
+                                    </td>
+                                </tr>
+                            </tbody>
+                        </table>
+
+                        <table class="table table-sm " style="width: 800px; border: 11px solid black; padding: 3px; ">
+                            <tbody>
+                                <tr>
+                                    <td style=" border: none;">
+                                        <table class="table table-borderless" style="border: none !important; ">
+                                            <tbody>
+                                                <tr>
+                                                    <td style="width: 267px; vertical-align: top;">
+                                                        <table style="border-collapse: collapse; width: 100%; font-family: Arial; table-layout: fixed;">
+                                                            <tr>
+                                                                <td style="border: 1px solid black; background-color: #215967; color: white; text-align: center; font-weight: bold;">
+                                                                    <span style="font-size: 14px;">Descripción de puesto</span>
+                                                                </td>
+                                                            </tr>
+                                                            <tr>
+                                                                <td style="border: 1px solid black; background-color: #b7dee8; color: black; text-align: center; font-weight: bold;">
+                                                                    <span style="font-size: 10px;">NOMBRE DE PUESTO: </span>
+                                                                    <span style="font-size: 10px;"><t t-esc="doc.job_id.name or '-'"/></span>
+                                                                </td>
+                                                            </tr>
+                                                            <tr>
+                                                                <td rowspan="11" style="border: 1px solid black; background-color: white; text-align: center; vertical-align: bottom;">
+                                                                   <img t-if="doc.job_id.company_id.logo" t-att-src="image_data_uri(doc.job_id.company_id.logo)" alt="Logo" style="width: 100%; height: auto;"/>
+                                                                </td>
+                                                            </tr>
+                                                        </table>
+
+                                                    </td>
+                                                    <td style="width: 538px; vertical-align: top;">
+                                                        <table style="border-collapse: collapse; width: 100%; font-family: Arial;">
+                                                            <tr>
+                                                                <td style="width: 538px; border: 1px solid black; background-color: #215967; color: white; text-align: center; font-weight: bold;">
+                                                                    <span style="font-family: Arial; font-size: 14px;">Funciones básicas del puesto</span>
+                                                                </td>
+                                                            </tr>
+
+                                                            <t t-if="doc.job_id.functions">
+                                                                <t t-foreach="range(10)" t-as="i">
+                                                                    <tr>
+                                                                        <td style="width: 538px; border: 1px solid black;">
+                                                                            <span style="font-family: Arial; font-size: 10px;">
+                                                                                <t t-esc="doc.job_id.functions[i].name if i &lt; len(doc.job_id.functions) else '-'"/>
+                                                                            </span>
+                                                                        </td>
+                                                                    </tr>
+                                                                </t>
+                                                            </t>
+
+                                                            
+                                                        </table>
+                                                    </td>
+                                                </tr>
+                                            </tbody>
+                                        </table>
+                                    </td>
+                                </tr>
+                            </tbody>
+                        </table>
+
+                        <table class="table table-sm " style="width: 800px; border: 11px solid black;padding: 3px; ">
+                            <tbody>
+                                <tr>
+                                    <td>
+                                        <table lass="table table-sm " style = "border-collapse: collapse;">
+                                            <tbody>
+                                                <tr>
+                                                    <td colspan="7" style="width: 530px; border: 1px solid black; background-color: #215967; color: white; text-align: center; font-weight: bold;">
+                                                        <span style="font-family: Arial; font-size: 14px;">Principios de empresa esbelta</span>
+                                                    </td>
+                                                </tr>
+                                                <tr>
+                                                    <td style="width: 131px;  border: 1px solid black; background-color:#b7dee8; color: black; text-align: center;">
+                                                        <span style="font-family: Arial; font-size: 10px;"> </span>
+                                                    </td>
+                                                    <td style="width: 131px;  border: 1px solid black; background-color:#b7dee8; color: black; text-align: center; font-weight: bold;">
+                                                        <span style="font-family: Arial; font-size: 10px;">No lean</span>
+                                                    </td>
+                                                    <td style="width: 131px;  border: 1px solid black; background-color:#b7dee8; color: black; text-align: center; font-weight: bold;">
+                                                        <span style="font-family: Arial; font-size: 10px;">Planear</span>
+                                                    </td>
+                                                    <td style="width: 5px;"> 
+                                                        <span style="font-family: Arial; font-size: 10px;"> </span>
+                                                    </td>
+                                                    <td style="width: 131px;  border: 1px solid black; background-color:#b7dee8; color: black; text-align: center; font-weight: bold;">
+                                                        <span style="font-family: Arial; font-size: 10px;">Hacer</span>
+                                                    </td>
+                                                    <td style="width: 131px;  border: 1px solid black; background-color:#b7dee8; color: black; text-align: center; font-weight: bold;">
+                                                        <span style="font-family: Arial; font-size: 10px;">Checar</span>
+                                                    </td>
+                                                    <td style="width: 131px;  border: 1px solid black; background-color:#b7dee8; color: black; text-align: center; font-weight: bold; ">
+                                                        <span style="font-family: Arial; font-size: 10px;">Actuar</span>
+                                                    </td>
+                                                </tr>
+
+                                                <tr>
+                                                    <td style="width: 131px;  border: 1px solid black; background-color:#d9e2f3; color: black; text-align: left;">
+                                                        <span style="font-family: Arial; font-size: 10px;">Estandarizar el trabajo</span>
+                                                    </td>
+                                                    <td style="width: 131px;  border: 1px solid black;"> 
+                                                        <span style="font-family: Arial; font-size: 10px;">  •Estándares no documentados.<br/>
+                                                                Dos personas no podrían hacer el mismo trabajo dos veces de la misma manera si quisieran.
+                                                        </span>
+                                                    </td>
+                                                    <td style="width: 131px;  border: 1px solid black;"> 
+                                                        <span style="font-family: Arial; font-size: 10px;">  •Algunos estándares documentados.v
+                                                                Entrenamiento esporádico.<br />
+                                                                La adherencia a los estándares es muy pobre.
+                                                        </span>
+                                                    </td>
+                                                    <td style="width: 5px;"> 
+                                                        <span style="font-family: Arial; font-size: 10px;"> </span>
+                                                    </td>
+                                                    <td style="width: 131px;  border: 1px solid black;"> 
+                                                        <span style="font-family: Arial; font-size: 10px;">  Todos se capacitaron en cómo crear y mantener un trabajo estandarizado.<br />
+                                                                La adhesión a los estándares es pobre
+                                                        </span>
+                                                    </td>
+                                                    <td style="width: 131px;  border: 1px solid black;"> 
+                                                        <span style="font-family: Arial; font-size: 10px;">  Todos se capacitaron en cómo crear y mantener un trabajo estandarizado.<br />
+                                                                La adhesión a los estándares es pobre
+                                                        </span>
+                                                    </td>
+                                                    <td style="width: 131px;  border: 1px solid black;"> 
+                                                        <span style="font-family: Arial; font-size: 10px;">  Todos se capacitaron en cómo crear y mantener un trabajo estandarizado.<br />
+                                                                La adhesión a los estándares es pobre
+                                                        </span>
+                                                    </td>
+                                                </tr>
+
+                                                <tr>
+                                                    <td style="width: 131px;  border: 1px solid black; background-color:#d9e2f3; color: black; text-align: left;"> 
+                                                        <span style="font-family: Arial; font-size: 10px;">Fluir el proceso</span>
+                                                    </td>
+                                                    <td style="width: 131px;  border: 1px solid black;"> 
+                                                        <span style="font-family: Arial; font-size: 10px;">  
+                                                            Desperdicio y no  valor agregado chocan contra el flujo del proceso.<br />
+
+                                                            Relación de valor añadido menor del 5%.<br />
+
+                                                            El flujo no es una consideración primaria del diseño.<br />
+
+                                                            El flujo del proceso se parece a un plato de espagueti.
+                                                        </span>
+                                                    </td>
+                                                    <td style="width: 131px;  border: 1px solid black;"> 
+                                                        <span style="font-family: Arial; font-size: 10px;">  
+                                                        La estrategia individual de eliminación de desperdicio y la reducción de la variabilidad es vista como un impulso de la empresa Lean. <br />
+
+                                                        El mapeo de la cadena de valor  comienza.
+                                                        </span>
+                                                    </td>
+                                                    <td style="width: 5px;"> 
+                                                        <span style="font-family: Arial; font-size: 10px;"> </span>
+                                                    </td>
+                                                    <td style="width: 131px;  border: 1px solid black;"> 
+                                                        <span style="font-family: Arial; font-size: 10px;">  
+                                                        "Técnicas de mapeo de flujo de valor enseñadas a todos. <br />
+
+                                                        El flujo de productos y servicios mejora a medida que se identifican y eliminan los desperdicios del proceso."
+                                                        </span>
+                                                    </td>
+                                                    <td style="width: 131px;  border: 1px solid black;"> 
+                                                        <span style="font-family: Arial; font-size: 10px;">  
+                                                        "Técnicas de mapeo de flujo de valor enseñadas a todos. <br />
+
+                                                        El flujo de productos y servicios mejora a medida que se identifican y eliminan los desperdicios del proceso."
+                                                        </span>
+                                                    </td>
+                                                    <td style="width: 131px;  border: 1px solid black;"> 
+                                                        <span style="font-family: Arial; font-size: 10px;">  
+                                                        "Técnicas de mapeo de flujo de valor enseñadas a todos. <br />
+
+                                                        El flujo de productos y servicios mejora a medida que se identifican y eliminan los desperdicios del proceso."
+                                                        </span>
+                                                    </td>
+                                                </tr>
+
+
+                                                <tr>
+                                                    <td style="width: 131px;  border: 1px solid black; background-color:#d9e2f3; color: black; text-align: left;">
+                                                        <span style="font-family: Arial; font-size: 10px;">Ambigüedad cero</span>
+                                                    </td>
+                                                    <td style="width: 131px;  border: 1px solid black;"> 
+                                                        <span style="font-family: Arial; font-size: 10px;">  
+                                                            "•Los requisitos del cliente no están claros en el trabajo diario.<br />
+
+                                                            Los comentarios deficientes y el avance dificultan la gestión de la cadena de suministro." 
+                                                        </span>
+                                                    </td>
+                                                    <td style="width: 131px;  border: 1px solid black;"> 
+                                                        <span style="font-family: Arial; font-size: 10px;">  
+                                                        •Los requisitos del cliente y del proveedor son claros y los datos se utilizan para evaluar y mejorar el rendimiento.
+                                                        </span>
+                                                    </td>
+                                                    <td style="width: 5px;"> 
+                                                        <span style="font-family: Arial; font-size: 10px;"> </span>
+                                                    </td>
+                                                    <td style="width: 131px;  border: 1px solid black;"> 
+                                                        <span style="font-family: Arial; font-size: 10px;">  
+                                                        "Controles visuales como kanban introducidos en todas las funciones de la empresa para aclarar los requisitos del cliente. <br />
+
+                                                        Retroalimentación / retroalimentación mejorada."
+                                                        </span>
+                                                    </td>
+                                                    <td style="width: 131px;  border: 1px solid black;"> 
+                                                        <span style="font-family: Arial; font-size: 10px;">  
+                                                        "Controles visuales como kanban introducidos en todas las funciones de la empresa para aclarar los requisitos del cliente. <br />
+
+                                                        Retroalimentación / retroalimentación mejorada."
+                                                        </span>
+                                                    </td>
+                                                    <td style="width: 131px;  border: 1px solid black;"> 
+                                                        <span style="font-family: Arial; font-size: 10px;">  
+                                                        Controles visuales como kanban introducidos en todas las funciones de la empresa para aclarar los requisitos del cliente. <br />
+
+                                                        Retroalimentación / retroalimentación mejorada.
+                                                        </span>
+                                                    </td>
+                                                </tr>
+
+
+                                                <tr>
+                                                    <td style="width: 131px;  border: 1px solid black; background-color:#d9e2f3; color: black; text-align: left;">
+                                                        <span style="font-family: Arial; font-size: 10px;">Hablar con datos (PDCA)</span>
+                                                    </td>
+                                                    <td style="width: 131px;  border: 1px solid black;"> 
+                                                        <span style="font-family: Arial; font-size: 10px;">  
+                                                            •No plan-do-check system. <br />
+                                                            Problems go unaddressed for years.
+                                                        </span>
+                                                    </td>
+                                                    <td style="width: 131px;  border: 1px solid black;"> 
+                                                        <span style="font-family: Arial; font-size: 10px;">  
+                                                        La compañía comprende firmemente el concepto de PDCA y su papel central en la empresa Lean.<br />
+                                                        Nuevo sistema PDCA diseñado.
+                                                        </span>
+                                                    </td>
+                                                    <td style="width: 5px;"> 
+                                                        <span style="font-family: Arial; font-size: 10px;"> </span>
+                                                    </td>
+                                                    <td style="width: 131px;  border: 1px solid black;"> 
+                                                        <span style="font-family: Arial; font-size: 10px;">  
+                                                        Nuevo sistema plan-do-check formalmente introducido. <br />
+
+                                                        Gerentes y asociados entrenados sistemáticamente en métodos PDCA. <br />
+
+                                                        Los viejos problemas se abordan pero surgen nuevos rápidamente.<br />
+
+                                                        </span>
+                                                    </td>
+                                                    <td style="width: 131px;  border: 1px solid black;"> 
+                                                        <span style="font-family: Arial; font-size: 10px;">  
+                                                        Nuevo sistema plan-do-check formalmente introducido. <br />
+
+                                                        Gerentes y asociados entrenados sistemáticamente en métodos PDCA. <br />
+
+                                                        Los viejos problemas se abordan pero surgen nuevos rápidamente.<br />
+
+                                                        </span>
+                                                    </td>
+                                                    <td style="width: 131px;  border: 1px solid black;"> 
+                                                        <span style="font-family: Arial; font-size: 10px;">  
+                                                        Nuevo sistema plan-do-check formalmente introducido. <br />
+
+                                                        Gerentes y asociados entrenados sistemáticamente en métodos PDCA. <br />
+
+                                                        Los viejos problemas se abordan pero surgen nuevos rápidamente.<br />
+
+                                                        </span>
+                                                    </td>
+                                                </tr>
+
+
+                                                <tr>
+                                                    <td style="width: 131px;  border: 1px solid black; background-color:#d9e2f3; color: black; text-align: left;"> 
+                                                        <span style="font-family: Arial; font-size: 10px;">Desarrollar líderes que son maestros</span>
+                                                    </td>
+                                                    <td style="width: 131px;  border: 1px solid black;"> 
+                                                        <span style="font-family: Arial; font-size: 10px;">  
+                                                            •Los líderes son jefes. <br />
+
+                                                            La gente espera hacer lo que dice el jefe. Los mensajeros que llevan malas noticias son frecuentemente ""fusilados"".
+                                                        </span>
+                                                    </td>
+                                                    <td style="width: 131px;  border: 1px solid black;"> 
+                                                        <span style="font-family: Arial; font-size: 10px;">  
+                                                        Los líderes ven potencial en su gente, pero la mayoría de los dólares de capacitación aún se gastan en gerentes.
+                                                        </span>
+                                                    </td>
+                                                    <td style="width: 5px;"> 
+                                                        <span style="font-family: Arial; font-size: 10px;"> </span>
+                                                    </td>
+                                                    <td style="width: 131px;  border: 1px solid black;"> 
+                                                        <span style="font-family: Arial; font-size: 10px;">  
+                                                        El desarrollo de líderes que son maestros comienza a medida que los gerentes se capacitan en metodologías lean y aprenden cómo enseñar y capacitar a la fuerza de trabajo.
+
+                                                        </span>
+                                                    </td>
+                                                    <td style="width: 131px;  border: 1px solid black;"> 
+                                                        <span style="font-family: Arial; font-size: 10px;">  
+                                                        La toma de decisiones a niveles cercanos a los procesos reales.
+
+                                                        </span>
+                                                    </td>
+                                                    <td style="width: 131px;  border: 1px solid black;"> 
+                                                        <span style="font-family: Arial; font-size: 10px;">  
+                                                        Los gerentes reaccionan rápidamente cuando el personal hace señas para que se les ayude a resolver problemas.
+                                                        </span>
+                                                    </td>
+                                                </tr>
+
+                                                <tr>
+                                                    <td style="width: 131px;  border: 1px solid black; background-color:#d9e2f3; color: black; text-align: left;"> 
+                                                        <span style="font-family: Arial; font-size: 10px;">Diseño de estrategia</span>
+                                                    </td>
+                                                    <td style="width: 131px;  border: 1px solid black;"> 
+                                                        <span style="font-family: Arial; font-size: 10px;">  
+                                                            Sin misión clara, sin visión o estrategia a largo plazo.
+                                                        </span>
+                                                    </td>
+                                                    <td style="width: 131px;  border: 1px solid black;"> 
+                                                        <span style="font-family: Arial; font-size: 10px;">  
+                                                            Iniciativas de mejora no vinculadas a la estrategia o basadas en diagnósticos regulares de toda la empresa. Planes enfocados en resultados, no en procesos.
+                                                        </span>
+                                                    </td>
+                                                    <td style="width: 5px;"> 
+                                                        <span style="font-family: Arial; font-size: 10px;"> </span>
+                                                    </td>
+                                                    <td style="width: 131px;  border: 1px solid black;"> 
+                                                        <span style="font-family: Arial; font-size: 10px;">  
+                                                        Algunas políticas claras de mejora surgen del diagnóstico y análisis de los resultados del año pasado, pero el análisis de problemas y factores críticos es débil. Comienza el entrenamiento sistemático en hoshin kanri.
+                                                        </span>
+                                                    </td>
+                                                    <td style="width: 131px;  border: 1px solid black;"> 
+                                                        <span style="font-family: Arial; font-size: 10px;">  
+                                                        El diagnóstico anual se centra en problemas críticos, pero la planificación aún se centra en el control del presupuesto. Plan de ganancias fuerte pero hoshin kanri todavía se ve como una formalidad.
+                                                        </span>
+                                                    </td>
+                                                    <td style="width: 131px;  border: 1px solid black;"> 
+                                                        <span style="font-family: Arial; font-size: 10px;">  
+                                                        Hoshin kanri es cómo manejas el negocio. Planes de mejora y avance vinculados a un plan de ganancias enfocado. Enlaces y acciones claras en todos los niveles de la empresa.
+                                                        </span>
+                                                    </td>
+                                                </tr>
+
+                                                <tr>
+                                                    <td style="width: 131px;  border: 1px solid black; background-color:#d9e2f3; color: black; text-align: left;"> 
+                                                        <span style="font-family: Arial; font-size: 10px;">Métrica</span>
+                                                    </td>
+                                                    <td style="width: 131px;  border: 1px solid black;"> 
+                                                        <span style="font-family: Arial; font-size: 10px;">  
+                                                        Sin visión ni sistema de medición vinculado a la visión.<br/>
+                                                        Gestión por resultados, no por medios .
+                                                        </span>
+                                                    </td>
+                                                    <td style="width: 131px;  border: 1px solid black;"> 
+                                                        <span style="font-family: Arial; font-size: 10px;">  Logro de objetivos departamentales medidos pero no atado a la visión. La empresa crea un cuadro de mando integral" de medidas de mejora de procesos ".
+                                                        </span>
+                                                    </td>
+                                                    <td style="width: 5px;"> 
+                                                        <span style="font-family: Arial; font-size: 10px;"> </span>
+                                                    </td>
+                                                    <td style="width: 131px;  border: 1px solid black;"> 
+                                                        <span style="font-family: Arial; font-size: 10px;">  
+                                                        La gestión por medios comienza. Algunos comunes los objetivos entre departamentos se midieron en toda la empresa, pero la implementación aún no es muy sólida .
+                                                        </span>
+                                                    </td>
+                                                    <td style="width: 131px;  border: 1px solid black;"> 
+                                                        <span style="font-family: Arial; font-size: 10px;">  
+                                                        Todos los equipos de trabajo han definido finanzas y procesos. <br/>
+                                                        Estos objetivos de mejora están relacionados con el logro de la visión .
+                                                        </span>
+                                                    </td>
+                                                    <td style="width: 131px;  border: 1px solid black;"> 
+                                                        <span style="font-family: Arial; font-size: 10px;">  Metas de mejora visualmente mostradas en cada área de trabajo para que todos los asociados conozcan el estado de los proyectos. Métricas clave revisadas en tiempo real" para una acción rápida "
+                                                        </span>
+                                                    </td>
+                                                </tr>
+
+                                                <tr>
+                                                    <td style="width: 131px;  border: 1px solid black; background-color:#d9e2f3; color: black; text-align: left;">
+                                                        <span style="font-family: Arial; font-size: 10px;">Despliegue de estrategia</span>
+                                                    </td>
+                                                    <td style="width: 131px;  border: 1px solid black;"> 
+                                                        <span style="font-family: Arial; font-size: 10px;">  
+                                                        No hay una organización clara, líneas de autoridad inexistentes, conexiones incorrectas y desconecta normal. No la coordinación de las actividades de mejora se produce entre diferentes niveles de organización .
+                                                        </span>
+                                                    </td>
+                                                    <td style="width: 131px;  border: 1px solid black;"> 
+                                                        <span style="font-family: Arial; font-size: 10px;">  
+                                                        Líneas de autoridad.  <br/>
+                                                        Se iniciaron equipos interfuncionales para abordar problemas crónicos. Esfuerzos preliminares en despliegue vertical y horizontal y coordinación de planes .
+                                                        </span>
+                                                    </td>
+                                                    <td style="width: 5px;"> 
+                                                        <span style="font-family: Arial; font-size: 10px;"> </span>
+                                                    </td>
+                                                    <td style="width: 131px;  border: 1px solid black;"> 
+                                                        <span style="font-family: Arial; font-size: 10px;">  
+                                                        Primer despliegue completo terminado. Los planes de políticas y medidas útiles se extienden hasta el nivel del piso pero la coordinación horizontal es débil. Organización racional y división de responsabilidades, equipos interfuncionales en la mayoría de las áreas principales 
+                                                        </span>
+                                                    </td>
+                                                    <td style="width: 131px;  border: 1px solid black;"> 
+                                                        <span style="font-family: Arial; font-size: 10px;">  
+                                                        Buena horizontal y vertical, coordinación cal con objetivos del equipo vinculados a los objetivos de la empresa. Buena alineación de la empresa. Saldos de políticas equipos y departamentos interfuncionales 
+                                                        </span>
+                                                    </td>
+                                                    <td style="width: 131px;  border: 1px solid black;"> 
+                                                        <span style="font-family: Arial; font-size: 10px;">  
+                                                        Departamento, equipo e. <br/>
+                                                        Los objetivos individuales reflejan una comprensión clara de los objetivos de la empresa. Una organización para todo clima que puede responder a los mercados y tecnologías cambiantes. Las estrategias corporativas integradas cruzan los límites de la organización ."
+                                                        </span>
+                                                    </td>
+                                                </tr>
+
+                                                <tr>
+                                                    <td style="width: 131px;  border: 1px solid black; background-color:#d9e2f3; color: black; text-align: left;">
+                                                        <span style="font-family: Arial; font-size: 10px;">Implementación de la estrategia</span>
+                                                    </td>
+                                                    <td style="width: 131px;  border: 1px solid black;"> 
+                                                        <span style="font-family: Arial; font-size: 10px;">  
+                                                        La compañía no tiene un sensei. Mala definición de roles y responsabilidades y no se ha desarrollado ningún programa de capacitación para educar a la fuerza laboral en trabajo standarizado, flujo de procesos, vínculos con clientes o PDCA .
+                                                        </span>
+                                                    </td>
+                                                    <td style="width: 131px;  border: 1px solid black;"> 
+                                                        <span style="font-family: Arial; font-size: 10px;">  
+                                                        Encuentras a tu sensei. Los roles y responsabilidades de la organización se redefinieron y un programa de capacitación de varios años desarrollado y lanzado para educar a la fuerza laboral total .                                 
+                                                        </span>
+                                                    </td>
+                                                    <td style="width: 5px;"> 
+                                                        <span style="font-family: Arial; font-size: 10px;"> </span>
+                                                    </td>
+                                                    <td style="width: 131px;  border: 1px solid black;"> 
+                                                        <span style="font-family: Arial; font-size: 10px;">  
+                                                        Un equipo de campeones delgados Y Six Sigma Champions ha sido certificado. y apoyar a la gerencia en la implementación de los asociados anuales de hoshin y train según sea necesario en los nuevos métodos PDCA .
+                                                        </span>
+                                                    </td>
+                                                    <td style="width: 131px;  border: 1px solid black;"> 
+                                                        <span style="font-family: Arial; font-size: 10px;">  
+                                                            Programa de transformación extendido a todas las áreas principales de marketing, diseño y fabricación y a sus proveedores. Líderes certificados en todos los niveles en métodos lean y six sigma y herramientas.
+                                                        </span>
+                                                    </td>
+                                                    <td style="width: 131px;  border: 1px solid black;"> 
+                                                        <span style="font-family: Arial; font-size: 10px;">  
+                                                        Todos en todos los niveles se adhieren al trabajo y las prácticas estandarizadas PDCA todos los días. El sensei puede pensar en encontrar otro trabajo .
+                                                        </span>
+                                                    </td>
+                                                </tr>
+
+
+                                                <tr>
+                                                    <td style="width: 131px;  border: 1px solid black; background-color:#d9e2f3; color: black; text-align: left;">
+                                                        <span style="font-family: Arial; font-size: 10px;">Diagnóstico del presidente</span>
+                                                    </td>
+                                                    <td style="width: 131px;  border: 1px solid black;"> 
+                                                        <span style="font-family: Arial; font-size: 10px;">  
+                                                            La gerencia practica los cinco que son ", no los" cinco
+                                                        </span>
+                                                    </td>
+                                                    <td style="width: 131px;  border: 1px solid black;"> 
+                                                        <span style="font-family: Arial; font-size: 10px;">  
+                                                            Las visitas a la línea son más frecuentes, pero esporádicas. Criterios para el desarrollo organizacional establecido y desplegado                                       
+                                                        </span>
+                                                    </td>
+                                                    <td style="width: 5px;"> 
+                                                        <span style="font-family: Arial; font-size: 10px;"> </span>
+                                                    </td>
+                                                    <td style="width: 131px;  border: 1px solid black;"> 
+                                                        <span style="font-family: Arial; font-size: 10px;">  
+                                                        Diagnóstico del primer presidente completado, pero revisión sigue siendo fundamentalmente crítico, no diagnóstico .
+                                                        </span>
+                                                    </td>
+                                                    <td style="width: 131px;  border: 1px solid black;"> 
+                                                        <span style="font-family: Arial; font-size: 10px;">  
+                                                        Los gerentes del sitio visitan la línea regularmente. Los gerentes no entender sus sistemas y puede identificar los residuos. La alta gerencia visita todos los sitios anualmente. Revisión diagnóstica, no crítica .
+                                                        </span>
+                                                    </td>
+                                                    <td style="width: 131px;  border: 1px solid black;"> 
+                                                        <span style="font-family: Arial; font-size: 10px;">  
+                                                        Las visitas a la línea ocurren diariamente. Los gerentes pueden identificar desperdiciar y explicar las herramientas y los cambios del sistema necesarios para eliminarlo. Los asociados por hora y el personal esperan la visita de la alta gerencia ."
+                                                        </span>
+                                                    </td>
+                                                </tr>
+
+                                            </tbody>
+                                        </table>
+                                    </td>
+                                </tr>
+                            </tbody>
+                        </table>
+
+                        <table class="table table-sm " style="width: 800px; border: 11px solid black; padding: 3px; ">
+                            <tbody>
+                                <tr>
+                                    <td style="border: none; !important">
+                                        <table class="table table-borderless" style="border: none; !important">
+                                            <tbody>
+                                                <tr>
+                                                    <td style="width: 267px; vertical-align: top;">
+                                                        <table style="border-collapse: collapse; width: 100%; font-family: Arial; table-layout: fixed;">
+                                                            <tr>
+                                                                <td style="border: 1px solid black; background-color: #215967; color: white; text-align: center; font-weight: bold;">
+                                                                    <span style="font-size: 14px;">Descripción de puesto</span>
+                                                                </td>
+                                                            </tr>
+                                                            <tr>
+                                                                <td style="border: 1px solid black; background-color: #b7dee8; color: black; text-align: center; font-weight: bold;">
+                                                                    <span style="font-size: 10px;">NOMBRE DE PUESTO: </span>
+                                                                    <span style="font-size: 10px;"><t t-esc="doc.job_id.name or '-'"/></span>
+                                                                </td>
+                                                            </tr>
+                                                            <tr>
+                                                                <td  rowspan="11" style="border: 1px solid black; background-color: white; text-align: center; vertical-align: bottom; ">
+                                                                   <img t-if="doc.job_id.company_id.logo" t-att-src="image_data_uri(doc.job_id.company_id.logo)" alt="Logo" style="width: 100%; height: auto;"/>
+                                                                </td>
+                                                            </tr>
+                                                        </table>
+
+                                                    </td>
+                                                    <td style="width: 538px; vertical-align: top;">
+                                                        <table style="border-collapse: collapse; width: 100%; font-family: Arial;">
+                                                            <tr>
+                                                                <td colspan="2" style="width: 538px; border: 1px solid black; background-color: #215967; color: white; text-align: center; font-weight: bold;">
+                                                                    <span style="font-family: Arial; font-size: 14px;">Conocimientos</span>
+                                                                </td>
+                                                            </tr>
+                                                            <tr>
+                                                                <td style="width: 266px;border: 1px solid black; background-color:#b7dee8; color: black; text-align: center; font-weight: bold;">
+                                                                    <span style="font-family: Arial; font-size: 10px;">Del Puesto</span>
+                                                                </td>
+                                                                <td style="width: 266px; border: 1px solid black; background-color:#b7dee8; color: black; text-align: center;font-weight: bold;">
+                                                                    <span style="font-family: Arial; font-size: 10px;">Del Cliente</span>
+                                                                </td>
+                                                            </tr>
+                                                            <t t-if="doc.job_id.position_skills or doc.job_id.client_skills">
+                                                                <t t-foreach="range(10)" t-as="i">
+                                                                    <tr>
+                                                                        <!-- Columna de habilidades del puesto -->
+                                                                        <td style="width: 266px; border: 1px solid black;">
+                                                                            <span style="font-family: Arial; font-size: 10px;">
+                                                                                <t t-esc="doc.job_id.position_skills[i].name if i &lt; len(doc.job_id.position_skills) else '-'"/>
+                                                                            </span>
+                                                                        </td>
+                                                                        
+                                                                        <!-- Columna de habilidades del cliente -->
+                                                                        <td style="width: 266px; border: 1px solid black;">
+                                                                            <span style="font-family: Arial; font-size: 10px;">
+                                                                                <t t-esc="doc.job_id.client_skills[i].name if i &lt; len(doc.job_id.client_skills) else '-'"/>
+                                                                            </span>
+                                                                        </td>
+                                                                    </tr>
+                                                                </t>
+                                                            </t>
+
+
+
+                                                        </table>
+                                                    </td>
+                                                </tr>
+                                            </tbody>
+                                        </table>
+                                    </td>
+                                </tr>
+                            </tbody>
+                        </table>
+
+                        <table class="table table-sm " style="width: 800px; border: 11px solid black; padding: 3px;">
+                            <tbody>
+                                <tr>
+                                    <td>
+                                        <table lass="table table-sm " style ="border-collapse: collapse;">
+                                            <tbody>
+                                                <tr>
+                                                    <td colspan="2" style="border: 1px solid black; background-color: #215967; color: white; text-align: center; font-weight: bold;">
+                                                        <span style="font-family: Arial; font-size: 14px;">Competencias</span>
+                                                    </td>
+                                                </tr>
+                                                <tr>
+                                                    <td style="width: 90px; border: 1px solid black; background-color:#b7dee8; color: black; text-align: center;font-weight: bold;">
+                                                        <span style="font-family: Arial; font-size: 10px;">Tipo</span>
+                                                    </td>
+                                                    <td style="width: 685px; border: 1px solid black; background-color:#b7dee8; color: black; text-align: center; font-weight: bold;">
+                                                        <span style="font-family: Arial; font-size: 10px;">Definición</span>
+                                                    </td>
+                                                </tr>
+                                                <t t-foreach="doc.job_id.generic_skills" t-as="skill">
+                                                    <tr>
+                                                        <td style=" border: 1px solid black; text-align: center;">
+                                                            <span style="font-family: Arial; font-size: 10px;">
+                                                                <t t-esc="skill.type or '-'"/>
+                                                            </span>
+                                                        </td>
+                                                        <td style="border: 1px solid black; text-align: center;">
+                                                            <span style="font-family: Arial; font-size: 10px;">
+                                                                <t t-esc="skill.name or '-'"/>
+                                                            </span>
+                                                        </td>
+                                                    </tr>
+                                                </t>
+                                            </tbody>
+                                        </table>
+                                    </td>
+                                </tr>
+                            </tbody>
+                        </table>
+
+                        <table class="table table-sm " style="width: 800px; border: 11px solid black; padding: 3px;">
+                            <tbody>
+                                <tr>
+                                    <td>
+                                        <table lass="table table-sm " style =" width: 100%; border-collapse: collapse;">
+                                            <tbody>
+                                                <tr>
+                                                    <td colspan="4" style="border: 1px solid black; background-color: #215967; color: white; text-align: center; font-weight: bold;">
+                                                        <span style="font-family: Arial; font-size: 14px;">Movilidad del Puesto</span>
+                                                    </td>
+                                                </tr>
+                                                <tr>
+                                                    <td colspan="4" >
+                                                        <span style="font-family: Arial; font-size: 24px;"> </span>
+                                                    </td>
+                                                </tr>
+                                                <tr>
+                                                    <td style="width: 190px; border: 1px solid black; background-color:#b7dee8; color: black; text-align: center; font-weight: bold;">
+                                                        <span style="font-family: Arial; font-size: 10px;">Puesto actual</span>
+                                                    </td>
+                                                    <td style="width: 190px; border: 1px solid black; background-color:#b7dee8; color: black; text-align: center; font-weight: bold;">
+                                                        <span style="font-family: Arial; font-size: 10px;">Primera opción</span>
+                                                    </td>
+                                                    <td style="width: 190px; border: 1px solid black; background-color:#b7dee8; color: black; text-align: center; font-weight: bold;">
+                                                        <span style="font-family: Arial; font-size: 10px;">Segunda opción</span>
+                                                    </td>
+                                                    <td style="width: 190px; border: 1px solid black; background-color:#b7dee8; color: black; text-align: center; font-weight: bold;">
+                                                        <span style="font-family: Arial; font-size: 10px;">Tercera opción</span>
+                                                    </td>
+                                                </tr>
+                                                <tr>
+                                                    <td style="border: 1px solid black; text-align: center;">
+                                                        <span style="font-family: Arial; font-size: 10px;"><t t-esc="doc.job_id.name or '-'"/></span>
+                                                    </td>
+                                                    <td  style="border: 1px solid black; text-align: center;">
+                                                        <span style="font-family: Arial; font-size: 10px;"><t t-esc="doc.job_id.first_option.name or '-'"/></span>
+                                                    </td>
+                                                    <td  style="border: 1px solid black; text-align: center;">
+                                                        <span style="font-family: Arial; font-size: 10px;"><t t-esc="doc.job_id.second_option.name or '-'"/></span>
+                                                    </td>
+                                                    <td  style="border: 1px solid black;text-align: center;">
+                                                        <span style="font-family: Arial; font-size: 10px;"><t t-esc="doc.job_id.third_option.name or '-'"/></span>
+                                                    </td>
+                                                </tr>
+                                            </tbody>
+                                        </table>
+                                    </td>
+                                </tr>
+                            </tbody>
+                        </table>
+                        <div style="height: 100px;">
+                            <h1> </h1>
+                        </div>
+                        <div style="width: 350px; border-top: 1px solid black;">
+                            <span style="font-family: Arial; font-size: 10px;">Nombre y firma del empleado</span>
+                        </div>
+                    </div>
+                </t>
+            </t>
+        </t>
+    </template>
+</odoo>

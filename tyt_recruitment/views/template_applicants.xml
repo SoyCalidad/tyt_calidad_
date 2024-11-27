@@ -1,0 +1,26 @@
+<odoo>
+    <record id="template_applicants" model="ir.ui.view">
+        <field name="name">tyt_recruitment.model.applicants.form</field>
+        <field name="model">tyt_recruitment.applicant</field>
+        <field name="arch" type="xml">
+            <tree string="Popup de Ejemplo">
+                <field name="last_name_father"/>
+                <field name="last_name_mother"/>
+                <field name="name"/>
+                <field name="employee_number"/>
+                <field name="number_phone"/>
+                <field name="birthdate"/>
+                <field name="birthplace"/>
+                <field name="rfc"/>
+                <field name="curp"/>
+                <field name="social_security_number"/>
+                <field name="status"/>
+                <button 
+                    name="show_job_application" 
+                    string="Ver aplicación" 
+                    type="object" 
+                    class="oe_highlight" />
+            </tree>
+        </field>
+    </record>
+</odoo>

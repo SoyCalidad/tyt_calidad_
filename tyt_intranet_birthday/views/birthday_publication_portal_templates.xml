@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<odoo>
+    <template id="portal_my_home_menu_birthday_publication" name="Portal layout : birthday publication menu entries" inherit_id="portal.portal_breadcrumbs" priority="70">
+        <xpath expr="//ol[hasclass('o_portal_submenu')]" position="inside">
+            <li t-if="page_name == 'birthday_publication'" class="breadcrumb-item active">
+                Publicación de cumpleaños
+            </li>
+        </xpath>
+    </template>
+
+    <template id="portal_birthday_publication" name="Publicación de cumpleaños">
+        <t t-call="portal.portal_layout">
+            <t t-set="breadcrumbs_searchbar" t-value="True"/>
+            <t t-call="portal.portal_searchbar">
+                <t t-set="title">Publicación de cumpleaños</t>
+            </t>
+            <t t-call="portal.portal_table">
+                <thead>
+                    <tr>
+                        <th class="col-5">Employee</th>
+                        <th class="col-3">Job Position</th>
+                        <th class="col-3">Department</th>
+                        <th class="col-3 text-end">Birthday</th>
+                    </tr>
+                </thead>
+                <t t-foreach="employees" t-as="employee">
+                    <tr>
+                        <td>
+                            <img t-attf-src="/web/image/hr.employee/{{employee.id}}/avatar_128" alt="Employee" style="height:35px;" class="ml8 rounded-circle"/>
+                            <span class="ml8"><t t-esc="employee.name"/></span>
+                        </td>
+                        <td><span t-field="employee.job_id.name"/></td>
+                        <td><span t-field="employee.department_id.name"/></td>
+                        <td><span t-field="employee.birthday"/></td>
+                    </tr>
+                </t>
+            </t>
+        </t>
+    </template>
+</odoo>

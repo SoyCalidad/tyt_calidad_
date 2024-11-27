@@ -1,0 +1,146 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <record id="tyt_intranet_department_message_view_form" model="ir.ui.view">
+        <field name="name">tyt.intranet.department_message.view.form</field>
+        <field name="model">tyt.intranet.department_message</field>
+        <field name="arch" type="xml">
+            <form>
+                <header>
+                    <field name="state" widget="statusbar"/>
+                    <button name="action_publish" string="Publish" type="object" states="draft" class="btn-primary"/>
+                    <button name="action_draft" string="Reset to Draft"
+                            type="object" states="published" class="btn-secondary"
+                            confirm="Are you sure you want to reset to draft?"/>
+                </header>
+                <sheet>
+                    <group>
+                        <group>
+                            <field name="sender_id" widget="many2one_avatar_user" required="1"/>
+                            <field name="sender_char"/>
+                            <field name="sender_portal" invisible="1"/>
+                        </group>
+                        <group>
+                            <field name="published_date" required="1"/>
+                            <field name="deadline_date"/>
+                            <field name="tag_ids" widget="many2many_tags" options="{'color_field': 'color'}"/>
+                            <field name="website_id" invisible="1"/>
+                            <field name="company_id" invisible="1"/>
+                        </group>
+                    </group>
+                    <group name="Attachments">
+                        <label for="attachment_ids" string="Attachments"/>
+                        <br/>
+                        <field name="attachment_ids" attrs="{'readonly': [('state', 'not in', ('draft'))]}"
+                               nolabel="1" colspan="2" widget="many2many_binary" class="o_sign_attachments"/>
+                    </group>
+                    <notebook>
+                        <page string="Message Content" name="message_content">
+                            <group>
+                                <label for="subject" string="Subject"/>
+                                <br/>
+                                <field nolabel="1" colspan="2" name="subject" required="1"/>
+                                <label for="body" string="Body"/>
+                                <br/>
+                                <field nolabel="1" colspan="2" name="body"/>
+                                <label for="footer" string="Footer"/>
+                                <br/>
+                                <field nolabel="1" colspan="2" name="footer"/>
+                            </group>
+                        </page>
+                        <page string="Configuration" name="configuration">
+                            <group>
+                                <group>
+                                    <field name="job_id"/>
+                                    <field name="department_id"/>
+                                    <field name="gps" widget="boolean_toggle"/>
+                                    <field name="group_ids" widget="many2many_tags"/>
+                                </group>
+                            </group>
+                        </page>
+                        <page string="Read Status" name="read_status">
+                            <field name="read_status_ids">
+                                <tree create="false" delete="false" edit="false" no_open="1">
+                                    <field name="department_message_id" invisible="1"/>
+                                    <field name="user_id"/>
+                                    <field name="is_read"/>
+                                </tree>
+                            </field>
+                        </page>
+                    </notebook>
+                </sheet>
+                <div class="oe_chatter">
+                    <field name="message_follower_ids" widget="mail_followers"/>
+                    <field name="activity_ids" widget="mail_activity"/>
+                    <field name="message_ids" widget="mail_thread"/>
+                </div>
+            </form>
+        </field>
+    </record>
+
+    <record id="tyt_intranet_department_message_view_tree" model="ir.ui.view">
+        <field name="name">tyt.intranet.department_message.view.tree</field>
+        <field name="model">tyt.intranet.department_message</field>
+        <field name="arch" type="xml">
+            <tree default_order="published_date desc">
+                <field name="sender_portal"/>
+                <field name="subject"/>
+                <field name="tag_ids" widget="many2many_tags" options=" {'color_field': 'color'}"/>
+                <field name="published_date"/>
+                <field name="deadline_date"/>
+                <field name="state" widget="badge" decoration-info="state == 'draft'" decoration-success="state == 'published'"/>
+            </tree>
+        </field>
+    </record>
+
+    <record id="tyt_intranet_department_message_view_search" model="ir.ui.view">
+        <field name="name">tyt.intranet.department_message.view.search</field>
+        <field name="model">tyt.intranet.department_message</field>
+        <field name="arch" type="xml">
+            <search>
+                <field string="Sender Portal" name="sender_portal"/>
+                <group expand="0" string="Group By">
+                    <filter string="State" name="state" context="{'group_by':'state'}"/>
+                </group>
+            </search>
+        </field>
+    </record>
+
+    <record id="tyt_intranet_department_message_action" model="ir.actions.act_window">
+        <field name="name">Department Messages</field>
+        <field name="res_model">tyt.intranet.department_message</field>
+        <field name="view_mode">tree,form</field>
+    </record>
+
+    <record id="tyt_intranet_department_message_tag_view_form" model="ir.ui.view">
+        <field name="name">tyt.intranet.department_message.tag.view.form</field>
+        <field name="model">tyt.intranet.department_message.tag</field>
+        <field name="arch" type="xml">
+            <form>
+                <sheet>
+                    <div class="oe_title">
+                        <label for="name"/>
+                        <h1>
+                            <field name="name"/>
+                        </h1>
+                    </div>
+                </sheet>
+            </form>
+        </field>
+    </record>
+
+    <record id="tyt_intranet_department_message_tag_view_tree" model="ir.ui.view">
+        <field name="name">tyt.intranet.department_message.tag.view.tree</field>
+        <field name="model">tyt.intranet.department_message.tag</field>
+        <field name="arch" type="xml">
+            <tree editable="bottom">
+                <field name="name"/>
+            </tree>
+        </field>
+    </record>
+
+    <record id="tyt_intranet_department_message_tag_action" model="ir.actions.act_window">
+        <field name="name">Department Message Tags</field>
+        <field name="res_model">tyt.intranet.department_message.tag</field>
+        <field name="view_mode">tree,form</field>
+    </record>
+</odoo>

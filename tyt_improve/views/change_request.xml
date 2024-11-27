@@ -62,6 +62,7 @@
                     <group>
                         <field name="approval" colspan="2" readonly="1" />
                         <field name="response_date" colspan="2" attrs="{'readonly':[('current_user_can_validate','=', False)]}" />
+                        <field name="release_date" attrs="{'readonly':[('current_user_can_validate','=', False)]}" />
                     </group>            
                 </xpath>              
             </field>

@@ -28,7 +28,7 @@
                                     data-name="Field">
                                     <div>
                                         <label
-                                            for="sale1">
+                                            for="satisfaction_survey_1">
                                             <span class="s_website_form_label_content">Name</span>
                                         </label>
                                         <div>
@@ -42,7 +42,7 @@
                                     data-name="Field">
                                     <div>
                                         <label
-                                            for="satisfaction_survey_1">
+                                            for="satisfaction_survey_2">
                                             <span class="s_website_form_label_content">Job</span>
                                         </label>
                                         <div>
@@ -55,7 +55,7 @@
                                     data-name="Field">
                                     <div>
                                         <label
-                                            for="satisfaction_survey_2">
+                                            for="satisfaction_survey_3">
                                             <span class="s_website_form_label_content">E-mail</span>
                                         </label>
                                         <div>
@@ -69,7 +69,7 @@
                                     data-name="Field">
                                     <div>
                                         <label
-                                            for="satisfaction_survey_3">
+                                            for="satisfaction_survey_4">
                                             <span class="s_website_form_label_content">Company</span>
                                         </label>
                                         <div>
@@ -83,11 +83,33 @@
                                     data-name="Field">
                                     <div>
                                         <label
-                                            for="satisfaction_survey_4">
+                                            for="satisfaction_survey_5">
                                             <span class="s_website_form_label_content">Campaign</span>
                                         </label>
                                         <div>
-                                            <input id="satisfaction_survey_5" type="text"
+                                            <select class="s_website_form_input form-control" id="satisfaction_survey_5" name="location">
+                                                <option t-att-value="ARTEAGA">ARTEAGA</option>
+                                                <option t-att-value="MERIDA">MERIDA</option>
+                                                <option t-att-value="GUADALAJARA">GUADALAJARA</option>
+                                                <option t-att-value="TAPIA">TAPIA</option>
+                                                <option t-att-value="PUEBLA">PUEBLA</option>
+                                                <option t-att-value="HERMOSILLO">HERMOSILLO</option>
+                                                <option t-att-value="QUERETARO">QUERETARO</option>
+                                                <option t-att-value="OBISPADO">OBISPADO</option>
+                                                <option t-att-value="TIJUANA">TIJUANA</option>
+                                            </select>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div data-type="char"
+                                    data-name="Field">
+                                    <div>
+                                        <label
+                                            for="satisfaction_survey_6">
+                                            <span class="s_website_form_label_content">Campaign</span>
+                                        </label>
+                                        <div>
+                                            <input id="satisfaction_survey_6" type="text"
                                                 class="s_website_form_input form-control"
                                                 name="campaign" />
                                         </div>
@@ -276,7 +298,13 @@
                                 <div id="question_cat_7_4" class="question">Podría hacer algún
                                     comentario sobre
                                     nuestros servicios con el fin de mejorar</div>
-                                <input type="text" class="tyt_text" name="cat_7_4" />
+                                <select class="tyt_text" name="cat_7_4">
+                                    <option t-att-value="excellent">Excellent</option>
+                                    <option t-att-value="very_good">Very Good</option>
+                                    <option t-att-value="good">Good</option>
+                                    <option t-att-value="average">Average</option>
+                                    <option t-att-value="bad">Bad</option>
+                                </select>
                             </div>
                         </div>
 

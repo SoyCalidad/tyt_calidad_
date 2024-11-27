@@ -170,20 +170,50 @@ class Opportunity(models.Model):
         for record in self:
             record.count_origin_ids = len(record.origin_ids)
 
-    @api.model
-    def create(self, values):
-        # Asignación de valores para crear el origen
-        origin_model_id = values.get('origin_model_id', False)
-        origin_int_id = values.get('origin_int_id', False)
-        values['origin_model_id'] = False
-        values['origin_int_id'] = None
+    # @api.model
+    # def create(self, values):
+    #     # Asignación de valores para crear el origen
+    #     origin_model_id = values.get('origin_model_id', False)
+    #     origin_int_id = values.get('origin_int_id', False)
+    #     values['origin_model_id'] = False
+    #     values['origin_int_id'] = None
 
-        line = super(Opportunity, self).create(values)
+    #     line = super(Opportunity, self).create(values)
 
-        if origin_model_id and origin_int_id:
-            line.create_origin(origin_model_id, origin_int_id)
+    #     if origin_model_id and origin_int_id:
+    #         line.create_origin(origin_model_id, origin_int_id)
 
-        return line
+    #     return line
+    
+    @api.model_create_multi
+    def create(self, vals_list):
+        # Lista para almacenar la información de origen de cada registro
+        origins = []
+
+        # Iterar sobre cada diccionario de valores en vals_list
+        for vals in vals_list:
+            # Extraer los valores de origen
+            origin_model_id = vals.get('origin_model_id', False)
+            origin_int_id = vals.get('origin_int_id', False)
+
+            # Restablecer los campos de origen en los valores
+            vals['origin_model_id'] = False
+            vals['origin_int_id'] = None
+
+            # Almacenar la información de origen para su uso posterior
+            origins.append((origin_model_id, origin_int_id))
+
+        # Crear todos los registros de una vez utilizando super()
+        records = super(Opportunity, self).create(vals_list)
+
+        # Iterar sobre los registros creados y sus correspondientes datos de origen
+        for record, (origin_model_id, origin_int_id) in zip(records, origins):
+            if origin_model_id and origin_int_id:
+                # Llamar al método create_origin para cada registro que lo requiera
+                record.create_origin(origin_model_id, origin_int_id)
+
+        return records
+
 
     def write(self, values):
         if values.get('origin_model_id', False) and values.get('origin_int_id', False):
@@ -250,20 +280,49 @@ class MgmtsystemAction(models.Model):
         for record in self:
             record.count_origin_ids = len(record.origin_ids)
 
-    @api.model
-    def create(self, values):
-        # Asignación de valores para crear el origen
-        origin_model_id = values.get('origin_model_id', False)
-        origin_int_id = values.get('origin_int_id', False)
-        values['origin_model_id'] = False
-        values['origin_int_id'] = None
+    # @api.model
+    # def create(self, values):
+    #     # Asignación de valores para crear el origen
+    #     origin_model_id = values.get('origin_model_id', False)
+    #     origin_int_id = values.get('origin_int_id', False)
+    #     values['origin_model_id'] = False
+    #     values['origin_int_id'] = None
 
-        action = super(MgmtsystemAction, self).create(values)
+    #     action = super(MgmtsystemAction, self).create(values)
 
-        if origin_model_id and origin_int_id:
-            action.create_origin(origin_model_id, origin_int_id)
+    #     if origin_model_id and origin_int_id:
+    #         action.create_origin(origin_model_id, origin_int_id)
 
-        return action
+    #     return action
+
+    @api.model_create_multi
+    def create(self, vals_list):
+        # Lista para almacenar la información de origen de cada registro
+        origins = []
+
+        # Iterar sobre cada diccionario de valores en vals_list
+        for vals in vals_list:
+            # Extraer los valores de origen
+            origin_model_id = vals.get('origin_model_id', False)
+            origin_int_id = vals.get('origin_int_id', False)
+
+            # Restablecer los campos de origen en los valores
+            vals['origin_model_id'] = False
+            vals['origin_int_id'] = None
+
+            # Almacenar la información de origen para su uso posterior
+            origins.append((origin_model_id, origin_int_id))
+
+        # Crear todos los registros de una vez utilizando super()
+        records = super(MgmtsystemAction, self).create(vals_list)
+
+        # Iterar sobre los registros creados y sus correspondientes datos de origen
+        for record, (origin_model_id, origin_int_id) in zip(records, origins):
+            if origin_model_id and origin_int_id:
+                # Llamar al método create_origin para cada registro que lo requiera
+                record.create_origin(origin_model_id, origin_int_id)
+
+        return records
 
     def write(self, values):
         if values.get('origin_model_id', False) and values.get('origin_int_id', False):
@@ -330,17 +389,46 @@ class MgmtsystemNonconformity(models.Model):
         for record in self:
             record.count_origin_ids = len(record.origin_ids)
 
-    @api.model
-    def create(self, values):
-        # Asignación de valores para crear el origen
-        origin_model_id = values.get('origin_model_id', False)
-        origin_int_id = values.get('origin_int_id', False)
-        values['origin_model_id'] = False
-        values['origin_int_id'] = None
-        nc = super(MgmtsystemNonconformity, self).create(values)
-        if origin_model_id and origin_int_id:
-            nc.create_origin(origin_model_id, origin_int_id)
-        return nc
+    # @api.model
+    # def create(self, values):
+    #     # Asignación de valores para crear el origen
+    #     origin_model_id = values.get('origin_model_id', False)
+    #     origin_int_id = values.get('origin_int_id', False)
+    #     values['origin_model_id'] = False
+    #     values['origin_int_id'] = None
+    #     nc = super(MgmtsystemNonconformity, self).create(values)
+    #     if origin_model_id and origin_int_id:
+    #         nc.create_origin(origin_model_id, origin_int_id)
+    #     return nc
+
+    @api.model_create_multi
+    def create(self, vals_list):
+        # Lista para almacenar la información de origen de cada registro
+        origins = []
+
+        # Iterar sobre cada diccionario de valores en vals_list
+        for vals in vals_list:
+            # Extraer los valores de origen
+            origin_model_id = vals.get('origin_model_id', False)
+            origin_int_id = vals.get('origin_int_id', False)
+
+            # Restablecer los campos de origen en los valores
+            vals['origin_model_id'] = False
+            vals['origin_int_id'] = None
+
+            # Almacenar la información de origen para su uso posterior
+            origins.append((origin_model_id, origin_int_id))
+
+        # Crear todos los registros de una vez utilizando super()
+        records = super(MgmtsystemNonconformity, self).create(vals_list)
+
+        # Iterar sobre los registros creados y sus correspondientes datos de origen
+        for record, (origin_model_id, origin_int_id) in zip(records, origins):
+            if origin_model_id and origin_int_id:
+                # Llamar al método create_origin para cada registro que lo requiera
+                record.create_origin(origin_model_id, origin_int_id)
+
+        return records
 
     def write(self, values):
         if values.get('origin_model_id', False) and values.get('origin_int_id', False):
@@ -407,17 +495,48 @@ class Target(models.Model):
         for record in self:
             record.count_origin_ids = len(record.origin_ids)
 
-    @api.model
-    def create(self, values):
-        # Asignación de valores para crear el origen
-        origin_model_id = values.get('origin_model_id', False)
-        origin_int_id = values.get('origin_int_id', False)
-        values['origin_model_id'] = False
-        values['origin_int_id'] = None
-        res = super().create(values)
-        if origin_model_id and origin_int_id:
-            res.create_origin(origin_model_id, origin_int_id)
-        return res
+    # @api.model
+    # def create(self, values):
+    #     # Asignación de valores para crear el origen
+    #     origin_model_id = values.get('origin_model_id', False)
+    #     origin_int_id = values.get('origin_int_id', False)
+    #     values['origin_model_id'] = False
+    #     values['origin_int_id'] = None
+    #     res = super().create(values)
+    #     if origin_model_id and origin_int_id:
+    #         res.create_origin(origin_model_id, origin_int_id)
+    #     return res
+
+    @api.model_create_multi
+    def create(self, vals_list):
+        # Lista para almacenar la información de origen de cada registro
+        origins = []
+
+        # Iterar sobre cada diccionario de valores en vals_list
+        for vals in vals_list:
+            # Extraer los valores de origen
+            origin_model_id = vals.get('origin_model_id', False)
+            origin_int_id = vals.get('origin_int_id', False)
+
+            # Restablecer los campos de origen en los valores
+            vals['origin_model_id'] = False
+            vals['origin_int_id'] = None
+
+            # Almacenar la información de origen para su uso posterior
+            origins.append((origin_model_id, origin_int_id))
+
+        # Crear todos los registros de una vez utilizando super()
+        records = super(Target, self).create(vals_list)
+
+        # Iterar sobre los registros creados y sus correspondientes datos de origen
+        for record, (origin_model_id, origin_int_id) in zip(records, origins):
+            if origin_model_id and origin_int_id:
+                # Llamar al método create_origin para cada registro que lo requiera
+                record.create_origin(origin_model_id, origin_int_id)
+
+        return records
+
+
 
     def write(self, values):
         if values.get('origin_model_id', False) and values.get('origin_int_id', False):

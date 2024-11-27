@@ -3,6 +3,8 @@ from odoo.http import request, Response
 import json
 import base64
 
+from ..utils.helpers import get_label_from_gender_list, get_label_from_marital_status_list
+
 import logging
 _logger = logging.getLogger(__name__)
 
@@ -17,8 +19,13 @@ class PublicFormController(http.Controller):
             'title': q.title, 
             'question_type': q.question_type, 
             'options': [{'value':o.value, 'id': o.id} for o in q.suggested_answer_ids], 
-            'option_values': [ov.value for ov in q.matrix_row_ids]
+            'option_values': [ov.value for ov in q.matrix_row_ids],
+            'extra_input': q.extra_input,
+            'extra_input_enabled': q.extra_input_enabled
         } for q in health_questions]
+
+        gender_label = get_label_from_gender_list(post.get('gender'))
+        marital_status_label = get_label_from_marital_status_list(post.get('marital_status'))
 
         context = {
             'health_questions_json': health_questions_json,
@@ -26,12 +33,12 @@ class PublicFormController(http.Controller):
             'name': name,
             'last_name_father': last_name_father,
             'last_name_mother': last_name_mother,
-            'gender': post.get('gender'),
+            'gender': gender_label,
             'birthplace': post.get('birthplace'),
             'birthdate': post.get('birthdate'),
             'nationality': post.get('nationality'),
             'age': post.get('age'),
-            'marital_status': post.get('marital_status')
+            'marital_status': marital_status_label
         }
 
         return request.render('tyt_recruitment.template_health_survey_form', context)
@@ -52,8 +59,7 @@ class PublicFormController(http.Controller):
 
         if image_base64:
             # Remueve el prefijo "data:image/png;base64," si existe
-            image_base64 = image_base64.split(",")[1]
-            image_data = base64.b64decode(image_base64)
+            image_data = image_base64.split(",")[1]
 
         complete_survey_data = {
             'state': 'sent',
@@ -62,15 +68,22 @@ class PublicFormController(http.Controller):
         }
 
         complete_survey = request.env['tyt_recruitment.complete_survey'].sudo().create(complete_survey_data)
-
+        _logger.info("----------------------------complete_survey")
+        _logger.info(complete_survey)
+        _logger.info(complete_survey.signature_image)
         health_asnwer_json = []
         answer_data = {}
         for question in health_questions:
             if question.question_type == 'multiple_choice':
+                _logger.info("----------------------------aaaaaaaaaaaa")
+                _logger.info(post.get("extra_"+str(question.id)))
+                _logger.info(post.get("extra_"+str(question.id)))
+                _logger.info(question.id)
                 answer_data = {
                     'text': post.get(str(question.id)), 
                     'question_id': question.id,
-                    'complete_survey_id': complete_survey.id
+                    'complete_survey_id': complete_survey.id,
+                    'extra_text': post.get("extra_"+str(question.id))
                 }
                 for answer in question.suggested_answer_ids:
                     _logger.info("----------------------------ans")
@@ -79,7 +92,8 @@ class PublicFormController(http.Controller):
                     answer_data = {
                         'text': answer.value, 
                         'question_id': question.id,
-                        'complete_survey_id': complete_survey.id
+                        'complete_survey_id': complete_survey.id,
+                        'extra_text': post.get("extra_"+str(question.id))
                     }
                     health_asnwer_json.append(answer_data)
             elif question.question_type == 'matrix':
@@ -88,7 +102,8 @@ class PublicFormController(http.Controller):
                 answer_data = {
                     'text': post.get(str(question.id)), 
                     'question_id': question.id,
-                    'complete_survey_id': complete_survey.id
+                    'complete_survey_id': complete_survey.id,
+                    'extra_text': post.get("extra_"+str(question.id))
                 }
                 health_asnwer_json.append(answer_data)
             request.env['tyt_recruitment.survey_answer'].sudo().create(answer_data)

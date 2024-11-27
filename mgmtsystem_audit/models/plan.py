@@ -18,19 +18,39 @@ class PlanCateg(models.Model):
         ondelete='restrict',
     )
 
-    @api.model
-    def create(self, values):
-        sequence = self.env['ir.sequence'].sudo().create({
-            'name': 'Secuencia de '+values.get('name'),
-            'active': True,
-            'prefix': 'Edición-nro.',
-            'padding': 4,
-            'number_next': 1,
-            'number_increment': 1,
-        })
-        values['sequence_id'] = sequence.id
-        result = super(PlanCateg, self).create(values)
-        return result
+    @api.model_create_multi
+    def create(self, vals_list):
+        for values in vals_list:
+            # Crear una nueva secuencia para cada registro
+            sequence = self.env['ir.sequence'].sudo().create({
+                'name': 'Secuencia de ' + values.get('name', 'Sin Nombre'),
+                'active': True,
+                'prefix': 'Edición-nro.',
+                'padding': 4,
+                'number_next': 1,
+                'number_increment': 1,
+            })
+            # Asignar el ID de la secuencia al registro
+            values['sequence_id'] = sequence.id
+
+        # Llamar al método `create` del modelo padre con la lista completa de valores
+        records = super(PlanCateg, self).create(vals_list)
+        return records
+
+
+    # @api.model
+    # def create(self, values):
+    #     sequence = self.env['ir.sequence'].sudo().create({
+    #         'name': 'Secuencia de '+values.get('name'),
+    #         'active': True,
+    #         'prefix': 'Edición-nro.',
+    #         'padding': 4,
+    #         'number_next': 1,
+    #         'number_increment': 1,
+    #     })
+    #     values['sequence_id'] = sequence.id
+    #     result = super(PlanCateg, self).create(values)
+    #     return result
 
     plan_ids = fields.One2many(
         string=u'Ediciones',

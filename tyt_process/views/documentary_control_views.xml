@@ -22,8 +22,56 @@
                     <field name="sender_id" attrs="{'invisible': [('type', '!=', 'externa')]}"/>
                     <field name="received_by_id" attrs="{'invisible': [('type', '!=', 'externa')]}"/>
                 </field>
+                <xpath expr="//sheet/div[1]" position="replace">
+                    <div class="oe_title">
+                        <label for="int_code"/>
+                        <h1>
+                            <field name="int_code"/>
+                        </h1>
+                    </div>
+                </xpath>                
+                <xpath expr="//sheet/group[1]" position="replace">
+                    <group colspan = "2">
+                        <field name="process_id" />
+                        <field name="name"/>
+                    </group>
+                </xpath>
+                <xpath expr="//sheet/group[1]" position="after">
+                    <group>
+                        <group>
+                            <field name="area_id"/>
+                        </group>
+                        <group>
+                            <field name="tyt_document_id"/>
+                        </group>
+                    </group>
+                    <group>
+                        <field name="job_id"/>
+                        <field name="tyt_sites_id"/>
+                        <field name="type_storage"/>
+                        <field name="type"/>
+                        <field name="diffusion"/>
+                    </group>                
+                
+                </xpath>
+
             </field>
         </record>
+
+
+        <record id="view_documentary_control_tree_inherit_tyt" model="ir.ui.view">
+            <field name="name">documentary.control.view.tree.inherit.tyt</field>
+            <field name="model">documentary.control</field>
+            <field name="inherit_id" ref="mgmtsystem_process.view_mgmtsystem_infrastructure_tree" />
+            <field name="arch" type="xml">
+                <xpath expr="//field[@name='process_code']" position="replace">
+                </xpath>
+                <xpath expr="//field[@name='process_last_edition']" position="replace">
+                    <field name="int_code"/>
+                </xpath>                
+            </field>
+        </record>
+
 
         <!-- Definición de la vista del wizard para Inventario Externo -->
         <record id="view_external_inventory_report_wizard" model="ir.ui.view">

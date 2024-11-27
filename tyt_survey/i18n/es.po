@@ -6,8 +6,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Odoo Server 16.0+e-20240912\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2024-10-01 15:25+0000\n"
-"PO-Revision-Date: 2024-10-01 15:25+0000\n"
+"POT-Creation-Date: 2024-11-12 05:01+0000\n"
+"PO-Revision-Date: 2024-11-12 05:01+0000\n"
 "Last-Translator: \n"
 "Language-Team: \n"
 "MIME-Version: 1.0\n"
@@ -30,7 +30,7 @@ msgstr "<span class=\"s_website_form_label_content\">Empresa</span>"
 #. module: tyt_survey
 #: model_terms:ir.ui.view,arch_db:tyt_survey.satisfaction_survey
 #: model_terms:ir.ui.view,arch_db:tyt_survey.satisfaction_survey_main
-msgid "<span class=\"s_website_form_label_content\">Correo electrónico</span>"
+msgid "<span class=\"s_website_form_label_content\">E-mail</span>"
 msgstr ""
 
 #. module: tyt_survey
@@ -44,6 +44,14 @@ msgstr "<span class=\"s_website_form_label_content\">Puesto</span>"
 #: model_terms:ir.ui.view,arch_db:tyt_survey.satisfaction_survey_main
 msgid "<span class=\"s_website_form_label_content\">Name</span>"
 msgstr "<span class=\"s_website_form_label_content\">Nombre</span>"
+
+#. module: tyt_survey
+#. odoo-javascript
+#: code:addons/tyt_survey/static/src/xml/satisfaction_survey.xml:0
+#: model_terms:ir.ui.view,arch_db:tyt_survey.satisfaction_survey
+#, python-format
+msgid "ARTEAGA"
+msgstr ""
 
 #. module: tyt_survey
 #. odoo-javascript
@@ -65,6 +73,22 @@ msgstr ""
 #: code:addons/tyt_survey/static/src/xml/satisfaction_survey.xml:0
 #: model_terms:ir.ui.view,arch_db:tyt_survey.satisfaction_survey
 #, python-format
+msgid "Average"
+msgstr "Promedio"
+
+#. module: tyt_survey
+#. odoo-javascript
+#: code:addons/tyt_survey/static/src/xml/satisfaction_survey.xml:0
+#: model_terms:ir.ui.view,arch_db:tyt_survey.satisfaction_survey
+#, python-format
+msgid "Bad"
+msgstr "Mala"
+
+#. module: tyt_survey
+#. odoo-javascript
+#: code:addons/tyt_survey/static/src/xml/satisfaction_survey.xml:0
+#: model_terms:ir.ui.view,arch_db:tyt_survey.satisfaction_survey
+#, python-format
 msgid ""
 "Califique la calidad\n"
 "                                    general de\n"
@@ -73,6 +97,7 @@ msgstr ""
 
 #. module: tyt_survey
 #. odoo-javascript
+#: code:addons/tyt_survey/static/src/xml/satisfaction_survey.xml:0
 #: code:addons/tyt_survey/static/src/xml/satisfaction_survey.xml:0
 #: code:addons/tyt_survey/static/src/xml/satisfaction_survey_main.xml:0
 #: model:ir.model.fields,field_description:tyt_survey.field_tyt_satisfaction_survey__campaign
@@ -170,6 +195,22 @@ msgstr ""
 
 #. module: tyt_survey
 #. odoo-javascript
+#: code:addons/tyt_survey/static/src/xml/satisfaction_survey.xml:0
+#: model_terms:ir.ui.view,arch_db:tyt_survey.satisfaction_survey
+#, python-format
+msgid "Excellent"
+msgstr "Excelente"
+
+#. module: tyt_survey
+#. odoo-javascript
+#: code:addons/tyt_survey/static/src/xml/satisfaction_survey.xml:0
+#: model_terms:ir.ui.view,arch_db:tyt_survey.satisfaction_survey
+#, python-format
+msgid "GUADALAJARA"
+msgstr ""
+
+#. module: tyt_survey
+#. odoo-javascript
 #: code:addons/tyt_survey/static/src/xml/satisfaction_survey_main.xml:0
 #, python-format
 msgid "Go to survey"
@@ -181,6 +222,16 @@ msgid ""
 "Go to survey\n"
 "                                <i class=\"fa fa-angle-right ms-2 fw-light\"/>"
 msgstr ""
+"Ir a la encuesta\n"
+"                                <i class=\"fa fa-angle-right ms-2 fw-light\"/>"
+
+#. module: tyt_survey
+#. odoo-javascript
+#: code:addons/tyt_survey/static/src/xml/satisfaction_survey.xml:0
+#: model_terms:ir.ui.view,arch_db:tyt_survey.satisfaction_survey
+#, python-format
+msgid "Good"
+msgstr "Buena"
 
 #. module: tyt_survey
 #. odoo-javascript
@@ -193,11 +244,24 @@ msgid ""
 msgstr ""
 
 #. module: tyt_survey
+#. odoo-javascript
+#: code:addons/tyt_survey/static/src/xml/satisfaction_survey.xml:0
+#: model_terms:ir.ui.view,arch_db:tyt_survey.satisfaction_survey
+#, python-format
+msgid "HERMOSILLO"
+msgstr ""
+
+#. module: tyt_survey
 #: model:ir.model.fields,field_description:tyt_survey.field_tyt_satisfaction_survey__id
 #: model:ir.model.fields,field_description:tyt_survey.field_tyt_satisfaction_survey_line__id
 #: model:ir.model.fields,field_description:tyt_survey.field_tyt_satisfaction_survey_question__id
 msgid "ID"
 msgstr ""
+
+#. module: tyt_survey
+#: model:ir.model.fields,field_description:tyt_survey.field_tyt_satisfaction_survey_line__internal_category
+msgid "Internal Category"
+msgstr "Categoría interna"
 
 #. module: tyt_survey
 #. odoo-javascript
@@ -230,6 +294,19 @@ msgid "Last Updated on"
 msgstr "Última actualización el"
 
 #. module: tyt_survey
+#: model:ir.model.fields,field_description:tyt_survey.field_tyt_satisfaction_survey__location
+msgid "Location"
+msgstr "Sitio"
+
+#. module: tyt_survey
+#. odoo-javascript
+#: code:addons/tyt_survey/static/src/xml/satisfaction_survey.xml:0
+#: model_terms:ir.ui.view,arch_db:tyt_survey.satisfaction_survey
+#, python-format
+msgid "MERIDA"
+msgstr ""
+
+#. module: tyt_survey
 #. odoo-javascript
 #: code:addons/tyt_survey/static/src/xml/satisfaction_survey.xml:0
 #: model_terms:ir.ui.view,arch_db:tyt_survey.satisfaction_survey
@@ -255,6 +332,22 @@ msgstr ""
 #, python-format
 msgid "Name"
 msgstr "Nombre"
+
+#. module: tyt_survey
+#. odoo-javascript
+#: code:addons/tyt_survey/static/src/xml/satisfaction_survey.xml:0
+#: model_terms:ir.ui.view,arch_db:tyt_survey.satisfaction_survey
+#, python-format
+msgid "OBISPADO"
+msgstr ""
+
+#. module: tyt_survey
+#. odoo-javascript
+#: code:addons/tyt_survey/static/src/xml/satisfaction_survey.xml:0
+#: model_terms:ir.ui.view,arch_db:tyt_survey.satisfaction_survey
+#, python-format
+msgid "PUEBLA"
+msgstr ""
 
 #. module: tyt_survey
 #: model:ir.model.fields,field_description:tyt_survey.field_tyt_satisfaction_survey__partner_company
@@ -382,6 +475,14 @@ msgid ""
 msgstr ""
 
 #. module: tyt_survey
+#. odoo-javascript
+#: code:addons/tyt_survey/static/src/xml/satisfaction_survey.xml:0
+#: model_terms:ir.ui.view,arch_db:tyt_survey.satisfaction_survey
+#, python-format
+msgid "QUERETARO"
+msgstr ""
+
+#. module: tyt_survey
 #: model:ir.model.fields,field_description:tyt_survey.field_tyt_satisfaction_survey_line__qualification
 msgid "Qualification"
 msgstr "Calificación"
@@ -432,6 +533,22 @@ msgid "Survey"
 msgstr "Encuesta"
 
 #. module: tyt_survey
+#. odoo-javascript
+#: code:addons/tyt_survey/static/src/xml/satisfaction_survey.xml:0
+#: model_terms:ir.ui.view,arch_db:tyt_survey.satisfaction_survey
+#, python-format
+msgid "TAPIA"
+msgstr ""
+
+#. module: tyt_survey
+#. odoo-javascript
+#: code:addons/tyt_survey/static/src/xml/satisfaction_survey.xml:0
+#: model_terms:ir.ui.view,arch_db:tyt_survey.satisfaction_survey
+#, python-format
+msgid "TIJUANA"
+msgstr ""
+
+#. module: tyt_survey
 #: model:ir.actions.act_window,name:tyt_survey.tyt_satisfaction_survey_action
 #: model_terms:ir.ui.view,arch_db:tyt_survey.tyt_satisfaction_survey_view_form
 #: model_terms:ir.ui.view,arch_db:tyt_survey.tyt_satisfaction_survey_view_search
@@ -451,6 +568,19 @@ msgstr "Linea de encuesta de satisfacción TYT"
 #: model_terms:ir.ui.view,arch_db:tyt_survey.tyt_satisfaction_survey_question_view_tree
 msgid "TYT Satisfaction Survey Question"
 msgstr "Pregunt de encuesta de satisfacción TYT"
+
+#. module: tyt_survey
+#: model:ir.model.fields,field_description:tyt_survey.field_tyt_satisfaction_survey_line__text
+msgid "Text"
+msgstr "Contenido"
+
+#. module: tyt_survey
+#. odoo-javascript
+#: code:addons/tyt_survey/static/src/xml/satisfaction_survey.xml:0
+#: model_terms:ir.ui.view,arch_db:tyt_survey.satisfaction_survey
+#, python-format
+msgid "Very Good"
+msgstr "Muy buena"
 
 #. module: tyt_survey
 #. odoo-javascript

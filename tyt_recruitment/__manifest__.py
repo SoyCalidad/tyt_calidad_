@@ -24,7 +24,9 @@
         'views/view_job_application.xml',
         'views/job_application_form.xml',
         'views/view_health_survey.xml',
-        'views/health_survey_form.xml'
+        'views/health_survey_form.xml',
+        'views/view_expedient.xml',
+        'views/template_applicants.xml'
     ],
     'auto_install': False,
     'installable': True,

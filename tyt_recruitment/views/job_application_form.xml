@@ -63,7 +63,7 @@
                                     <label class="form-check-label" for="referido">Referido</label>
                                 </div>
                                 <div class="form-check">
-                                    <input class="form-check-input" type="radio" name="reference" id="otro_medio" value="Otro medio" required="required" onclick="toggleOtherReference()"/>
+                                    <input class="form-check-input" type="radio" name="reference" id="otro_medio" value="" required="required" onclick="toggleOtherReference()"/>
                                     <label class="form-check-label" for="otro_medio">Otro medio</label>
                                 </div>
                                 <input type="text" class="form-control" id="other_reference" name="other_reference" placeholder="Especifica otro medio (si aplica)" style="display: none;"/>
@@ -100,25 +100,25 @@
                         <h3>DATOS GENERALES</h3>
                         <div class="row">
                             <!-- Nombre -->
-                            <div class="col-sm-6 col-md-4 col-lg-3 col-xl-3 col-xxl-3 p-4 border">
+                            <div class="col-sm-6 col-md-3 col-lg-3 col-xl-3 col-xxl-3 p-4 border">
                                 <label for="name" class="form-label">Nombre:</label>
                                 <input type="text" class="form-control" id="name" name="name" required="required"/>
                             </div>
 
                             <!-- Apellido Paterno -->
-                            <div class="col-sm-6 col-md-4 col-lg-3 col-xl-3 col-xxl-3 p-4 border">
+                            <div class="col-sm-6 col-md-3 col-lg-3 col-xl-3 col-xxl-3 p-4 border">
                                 <label for="last_name_father" class="form-label">Apellido Paterno:</label>
                                 <input type="text" class="form-control" id="last_name_father" name="last_name_father" required="required"/>
                             </div>
 
                             <!-- Apellido Materno -->
-                            <div class="col-sm-6 col-md-4 col-lg-3 col-xl-3 col-xxl-3 p-4 border">
+                            <div class="col-sm-6 col-md-3 col-lg-3 col-xl-3 col-xxl-3 p-4 border">
                                 <label for="last_name_mother" class="form-label">Apellido Materno:</label>
                                 <input type="text" class="form-control" id="last_name_mother" name="last_name_mother" required="required"/>
                             </div>
 
                             <!-- Sexo -->
-                            <div class="col-sm-6 col-md-4 col-lg-3 col-xl-3 col-xxl-3 p-4 border">
+                            <div class="col-sm-6 col-md-3 col-lg-3 col-xl-3 col-xxl-3 p-4 border">
                                 <label for="gender" class="form-label">Sexo:</label>
                                 <select class="form-select" id="gender" name="gender" required="required">
                                     <option value="male">Masculino</option>
@@ -142,7 +142,7 @@
                             </div>
 
                             <!-- Nacionalidad -->
-                            <div class="col-sm-6 col-md-3 col-lg-2 col-xl-2 col-xxl-2 p-4 border">
+                            <div class="col-sm-6 col-md-2 col-lg-2 col-xl-2 col-xxl-2 p-4 border">
                                 <label for="nationality" class="form-label">Nacionalidad:</label>
                                 <input type="text" class="form-control" id="nationality" name="nationality" required="required"/>
                             </div>
@@ -197,17 +197,17 @@
                                 <input type="text" class="form-control" id="address_neighborhood" name="address_neighborhood" required="required"/>
                             </div>
 
-                            <div class="col-sm-6 col-md-3 col-lg-2 col-xl-2 col-xxl-2 p-4 border">
+                            <div class="col-sm-6 col-md-2 col-lg-2 col-xl-2 col-xxl-2 p-4 border">
                                 <label for="address_city" class="form-label">Municipio:</label>
                                 <input type="text" class="form-control" id="address_city" name="address_city" required="required"/>
                             </div>
 
-                            <div class="col-sm-6 col-md-3 col-lg-2 col-xl-2 col-xxl-2 p-4 border">
+                            <div class="col-sm-6 col-md-2 col-lg-2 col-xl-2 col-xxl-2 p-4 border">
                                 <label for="number_phone" class="form-label">Teléfono:</label>
                                 <input type="number" class="form-control" id="number_phone" name="number_phone" required="required"/>
                             </div>
 
-                            <div class="col-sm-6 col-md-3 col-lg-2 col-xl-2 col-xxl-2 p-4 border">
+                            <div class="col-sm-6 col-md-2 col-lg-2 col-xl-2 col-xxl-2 p-4 border">
                                 <label for="personal_email" class="form-label">Correo electrónico:</label>
                                 <input type="email" class="form-control" id="personal_email" name="personal_email" required="required"/>
                             </div>
@@ -286,7 +286,7 @@
                         <h3>CUESTIONARIO</h3>
                         <div class="row">
                             <t t-foreach="health_questions_json" t-as="question">
-                                <div class="col-sm-12 col-md-6 col-lg-6 col-xl-6 col-xxl-12 p-4 border">
+                                <div class="col-sm-12 col-md-12 col-lg-12 col-xl-12 col-xxl-12 p-4 border">
                                     <label t-att-for="question['id']" class="form-label text-muted">
                                         <t t-esc="question['text']"/>
                                     </label>
@@ -386,7 +386,7 @@
                         <div class="row">
                             <div class="row">
                                 <t t-foreach="study_questions_json" t-as="question">
-                                    <div class="col-sm-12 col-md-6 col-lg-6 col-xl-6 col-xxl-12 p-4 border">
+                                    <div class="col-sm-12 col-md-12 col-lg-12 col-xl-12 col-xxl-12 p-4 border">
                                         <label t-att-for="question['id']" class="form-label text-muted">
                                             <t t-esc="question['text']"/>
                                         </label>
@@ -470,7 +470,7 @@
                     <section class="p-3">
                         <div class="row">
                             <t t-foreach="job_questions_json" t-as="question">
-                                <div class="col-sm-12 col-md-6 col-lg-6 col-xl-6 col-xxl-12 p-4 border">
+                                <div class="col-sm-12 col-md-12 col-lg-12 col-xl-12 col-xxl-12 p-4 border">
                                     <label t-att-for="question['id']" class="form-label text-muted">
                                         <t t-esc="question['text']"/>
                                     </label>

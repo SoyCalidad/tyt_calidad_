@@ -600,11 +600,17 @@ class QualityManual(models.Model):
                 values[str(field)] = self.change_string(value)
         return values
 
-    @api.model
-    def create(self, values):
-        result = super(QualityManual, self).create(
-            self._get_new_values(values))
-        return result
+
+    @api.model_create_multi
+    def create(self, vals_list):
+        # Procesar cada diccionario de valores utilizando _get_new_values
+        new_vals_list = [self._get_new_values(vals) for vals in vals_list]
+        
+        # Llamar al método super con la lista de valores procesados
+        records = super(QualityManual, self).create(new_vals_list)
+        
+        return records
+    
 
     def write(self, values):
         result = super(QualityManual, self).write(self._get_new_values(values))

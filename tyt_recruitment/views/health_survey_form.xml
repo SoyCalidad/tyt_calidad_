@@ -119,39 +119,75 @@
                         <div class="row">
                             <!-- Lista de preguntas -->
                             <t t-foreach="health_questions_json" t-as="question">
-                                <div class="col-sm-12 col-md-6 col-lg-6 col-xl-6 col-xxl-12 p-4 border cell1">
+                                <div class="col-sm-12 col-md-12 col-lg-12 col-xl-12 col-xxl-12 p-4 border cell1">
                                     <label t-att-for="question['id']" class="form-label text-muted">
                                         <t t-esc="question['title']"/>
                                     </label>
                                     <t t-if="question['question_type'] == 'simple_choice'">
-                                        <select class="form-select" t-att-name="question['id']" required="required">
-                                            <option value="">Seleccione una opción</option>
-                                            <t t-foreach="question['options']" t-as="option">
-                                                <option t-att-value="option['value']">
-                                                    <t t-esc="option['value']"/>
-                                                </option>
+                                        <div class="row">
+                                            <div class="col-8">
+                                                <select class="form-select" t-att-name="question['id']" required="required">
+                                                    <option value="">Seleccione una opción</option>
+                                                    <t t-foreach="question['options']" t-as="option">
+                                                        <option t-att-value="option['value']">
+                                                            <t t-esc="option['value']"/>
+                                                        </option>
+                                                    </t>
+                                                </select>
+                                            </div>
+                                            <t t-if="question['extra_input_enabled']">
+                                                <div class="col-4">
+                                                    <textarea class="form-control"
+                                                        t-att-name="'extra_' + str(question['id'])"
+                                                        t-att-placeholder="question['extra_input']"
+                                                        style="height: 100%;"></textarea>
+                                                </div>
                                             </t>
-                                        </select>
+                                        </div>
                                     </t>
 
                                     <t t-elif="question['question_type'] == 'multiple_choice'">
-                                        <t t-foreach="question['options']" t-as="option">
-                                            <div class="form-check">
-                                                <input type="checkbox" class="form-check-input" 
-                                                    t-att-name="option['id']"
-                                                    t-att-value="option['value']"/>
-                                                <label t-att-for="option['value']" class="form-check-label">
-                                                    <t t-esc="option['value']"/>
-                                                </label>
+                                        <div class="row">
+                                            <div class="col-4">
+                                                <t t-foreach="question['options'][:len(question['options'])//2+1]" t-as="option">
+                                                    <div class="form-check">
+                                                        <input type="checkbox" class="form-check-input" 
+                                                            t-att-name="option['id']"
+                                                            t-att-value="option['value']"/>
+                                                        <label t-att-for="option['value']" class="form-check-label">
+                                                            <t t-esc="option['value']"/>
+                                                        </label>
+                                                    </div>
+                                                </t>
                                             </div>
-                                        </t>
+                                            <div class="col-4">
+                                                <t t-foreach="question['options'][len(question['options'])//2+1:]" t-as="option">
+                                                    <div class="form-check">
+                                                        <input type="checkbox" class="form-check-input" 
+                                                            t-att-name="option['id']"
+                                                            t-att-value="option['value']"/>
+                                                        <label t-att-for="option['value']" class="form-check-label">
+                                                            <t t-esc="option['value']"/>
+                                                        </label>
+                                                    </div>
+                                                </t>
+                                            </div>
+                                            <t t-if="question['extra_input_enabled']">
+                                                <div class="col-4">
+                                                    <textarea class="form-control"
+                                                        t-att-name="'extra_' + str(question['id'])"
+                                                        t-att-placeholder="question['extra_input']"
+                                                        style="height: 100%;"></textarea>
+                                                </div>
+                                            </t>
+                                        </div>
                                     </t>
 
                                     <t t-if="question['question_type'] == 'text_box'">
                                         <textarea class="form-control"
                                             t-att-name="question['id']"
-                                            t-att-placeholder="'Ingrese su respuesta'">
-                                        </textarea>
+                                            t-att-placeholder="'Ingrese su respuesta'"
+                                            style="height: 100%;"></textarea>
                                     </t>
 
                                     <t t-if="question['question_type'] == 'char_box'">
@@ -275,6 +311,8 @@
     </template>
 
     <template id="template_health_survey_success" name="Form Submission Success">
-        <p>¡Gracias por enviar el formulario!</p>
+        <div class="container text-center mt-5">
+            <h4>¡Gracias por enviar el formulario!</h4>
+        </div>
     </template>
 </odoo>

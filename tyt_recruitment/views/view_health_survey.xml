@@ -52,6 +52,21 @@
       </field>
     </record>
 
+    <!-- Extra fields on Question Form -->
+    <record model="ir.ui.view" id="survey_question_form_inherit">
+      <field name="name">Form view for survey question - extended</field>
+      <field name="model">survey.question</field>
+      <field name="inherit_id" ref="survey.survey_question_form"/>
+      <field name="arch" type="xml">
+          <xpath expr="//field[@name='title']" position="after">
+            <group>
+              <field name="extra_input" string="Título del campo extra"/>
+              <field name="extra_input_enabled" string="¿Habilitar campo extra?" widget="boolean"/>
+            </group>
+          </xpath>
+      </field>
+    </record> 
+
     <record model="ir.actions.act_window" id="tyt_recruitment_action_window_health_survey">
       <field name="name">Lista de encuestas</field>
       <field name="res_model">tyt_recruitment.health_survey</field>

@@ -1,0 +1,4 @@
+id,name,model_id:id,group_id:id,perm_read,perm_write,perm_create,perm_unlink
+
+access_tyt_intranet_birthday_publication_user,tyt.intranet.birthday_publication.user,model_tyt_intranet_birthday_publication,tyt_intranet_base.group_intranet_user,1,1,1,0
+access_tyt_intranet_birthday_publication_manager,tyt.intranet.birthday_publication.manager,model_tyt_intranet_birthday_publication,tyt_intranet_base.group_intranet_manager,1,1,1,1
