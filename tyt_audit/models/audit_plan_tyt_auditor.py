@@ -101,9 +101,31 @@ class AuditPlanTytAuditor(models.Model):
     def create(self, vals):
         # Crear el registro principal
         record = super(AuditPlanTytAuditor, self).create(vals)
+
+        # IDs de los sitios
+        SITE_GUADALAJARA_ID = 1
+        SITE_HERMOSILLO_ID = 2
+        SITE_PUEBLA_CAT_ID = 10
+        SITE_PUEBLA_ID = 9
+        SITE_QUERETARO_ID = 8
+        SITE_M_TAPIA_ID = 7
+        SITE_M_ARTEAGA_ID = 5
+        SITE_MERIDA_ID = 3
+
+        # Usar las variables en lugar de los números directamente
+        site_ids = [
+            SITE_GUADALAJARA_ID,
+            SITE_HERMOSILLO_ID,
+            SITE_PUEBLA_CAT_ID,
+            SITE_PUEBLA_ID,
+            SITE_QUERETARO_ID,
+            SITE_M_TAPIA_ID,
+            SITE_M_ARTEAGA_ID,
+            SITE_MERIDA_ID,
+        ]
         
         # Lista de IDs de sitios
-        site_ids = [1, 2, 10, 9, 8, 7, 5, 3]
+        # site_ids = [1, 2, 10, 9, 8, 7, 5, 3]
         
         # Preparar los valores para los registros de "audit.plan.tyt.auditor.schedule"
         schedule_vals = []
