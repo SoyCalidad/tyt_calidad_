@@ -35,7 +35,6 @@ class DepartmentMessage(models.Model):
     _rec_name = 'sender_portal'
 
     is_read = fields.Boolean(string='Is Read', default=False)
-
     sender_id = fields.Many2one('res.users', string='Responsible', default=lambda self: self.env.user, domain="[('share', '=', False)]")
     sender_char = fields.Char(string='Sender')
     sender_portal = fields.Char(string='Sender Portal', compute='_compute_sender_portal', store=True)
@@ -72,27 +71,17 @@ class DepartmentMessage(models.Model):
             self.gps = False
 
     def is_read_by_current_user(self):
-        """Check if the current user has read this message."""
-        self.ensure_one()  # Ensure we're working with a single record
+        self.ensure_one()
         current_user = self.env.user
-        # Find the user's read status record
         read_record = self.read_status_ids.filtered(lambda r: r.user_id == current_user)
-        print('#################')
-        print(read_record.is_read)
         return read_record.is_read if read_record else False
 
     def mark_as_read_by_current_user(self):
-        print('#################')
         self.ensure_one()
         current_user = self.env.user
-        print(current_user)
-        department_message = self.read_status_ids.filtered(lambda r: r.user_id == current_user)
-        print(department_message)
-        if department_message:
-            print('################# If')
-            print(department_message)
-            department_message.is_read = True
-
+        read_record = self.read_status_ids.filtered(lambda r: r.user_id == current_user)
+        if read_record:
+            read_record.is_read = True
 
     state = fields.Selection([
         ('draft', 'Draft'),

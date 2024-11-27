@@ -17,14 +17,9 @@
         'views/birthday_publication_views.xml',
         'views/birthday_publication_portal_templates.xml',
         'views/portal_templates.xml',
+        'views/hr_employee_views.xml',
         'views/menus.xml',
-
     ],
-    'assets': {
-        'web.assets_frontend': [
-
-        ],
-    },
     'installable': True,
     'auto_install': False,
     'application': True,

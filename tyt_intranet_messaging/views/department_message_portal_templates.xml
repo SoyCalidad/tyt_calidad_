@@ -34,6 +34,10 @@
                                 <span t-if="department_messages[0].sender_portal" t-out="department_messages[0].sender_portal"/>
                                 <span t-else="">Unspecified</span>
                             </th>
+                            <th t-if="groupby == 'is_read'" colspan="3">
+                                <span t-if="department_messages[0].is_read">Leído</span>
+                                <span t-else="">No Leído</span>
+                            </th>
                             <th class="text-end">
                                 Total: <span class="text-muted" t-out="len(department_messages)"/>
                             </th>
