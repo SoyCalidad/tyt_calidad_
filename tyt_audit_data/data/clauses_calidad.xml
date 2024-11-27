@@ -1,0 +1,203 @@
+<odoo>
+    <data noupdate="0">
+        <!-- CLAUSULAS DE CALIDAD -->
+        <!-- C1 -->
+        <record id="audit_audit_planning_clause_ca_1_3_2" model="audit.audit.planning.clause">
+            <field name="name">3.2. Recepción de correo de solicitud</field>
+        </record>
+        <record id="audit_audit_planning_clause_ca_1_3_3" model="audit.audit.planning.clause">
+            <field name="name">3.3. Resultados de Calidad</field>
+        </record>    
+        <record id="audit_audit_planning_clause_ca_1_3_4" model="audit.audit.planning.clause">
+            <field name="name">3.4. Registro de agenda</field>
+        </record>  
+        <record id="audit_audit_planning_clause_ca_1_3_5" model="audit.audit.planning.clause">
+            <field name="name">3.5. Elaboración de contenido</field>
+        </record>
+        <record id="audit_audit_planning_clause_ca_1_3_6" model="audit.audit.planning.clause">
+            <field name="name">3.6. Elaboración y ponderación de examen</field>
+        </record>    
+        <record id="audit_audit_planning_clause_ca_1_3_9" model="audit.audit.planning.clause">
+            <field name="name">3.9. Ejecución de curso</field>
+        </record>
+        <record id="audit_audit_planning_clause_ca_1_3_10" model="audit.audit.planning.clause">
+            <field name="name">3.10. Aplicación y evaluación de examen</field>
+        </record>
+        <record id="audit_audit_planning_clause_ca_1_3_11" model="audit.audit.planning.clause">
+            <field name="name">3.11. Envío de lista de asistencia</field>
+        </record>    
+        <record id="audit_audit_planning_clause_ca_1_3_12" model="audit.audit.planning.clause">
+            <field name="name">3.12. Envío de resultados de curso</field>
+        </record>
+
+        <!-- C2 -->
+        <record id="audit_audit_planning_clause_ca_2_3_2" model="audit.audit.planning.clause">
+            <field name="name">3.2. Planificación de la auditoría interna</field>
+        </record>
+        <record id="audit_audit_planning_clause_ca_2_3_3" model="audit.audit.planning.clause">
+            <field name="name">3.3. Designación de auditores internos</field>
+        </record>    
+        <record id="audit_audit_planning_clause_ca_2_3_4" model="audit.audit.planning.clause">
+            <field name="name">3.4. Realización de auditorías internas individuales</field>
+        </record>  
+        <record id="audit_audit_planning_clause_ca_2_3_5" model="audit.audit.planning.clause">
+            <field name="name">3.5. Informe de auditoría interna</field>
+        </record>
+        <record id="audit_audit_planning_clause_ca_2_3_6" model="audit.audit.planning.clause">
+            <field name="name">3.6. Actividades de seguimiento</field>
+        </record>    
+
+        <!-- C3 -->
+        <record id="audit_audit_planning_clause_ca_3_3_2" model="audit.audit.planning.clause">
+            <field name="name">3.2. Requerimiento del cambio</field>
+        </record>
+        <record id="audit_audit_planning_clause_ca_3_3_3" model="audit.audit.planning.clause">
+            <field name="name">3.3. Notificación de cambio</field>
+        </record>    
+        <record id="audit_audit_planning_clause_ca_3_3_4" model="audit.audit.planning.clause">
+            <field name="name">3.4. Versionamiento del proceso</field>
+        </record>  
+        <record id="audit_audit_planning_clause_ca_3_3_5" model="audit.audit.planning.clause">
+            <field name="name">3.5. Liberación de versionamiento</field>
+        </record>
+        <record id="audit_audit_planning_clause_ca_3_3_6" model="audit.audit.planning.clause">
+            <field name="name">3.6. Aseguramiento del Cambio</field>
+        </record>    
+        <record id="audit_audit_planning_clause_ca_3_3_7" model="audit.audit.planning.clause">
+            <field name="name">3.7. Envío de evidencia de Auditoría</field>
+        </record>
+
+        <!-- C4 -->
+        <record id="audit_audit_planning_clause_ca_4_0_0" model="audit.audit.planning.clause">
+            <field name="name">Detección por parte de (Agregar Puesto)</field>
+        </record> 
+        <record id="audit_audit_planning_clause_ca_4_3_4" model="audit.audit.planning.clause">
+            <field name="name">3.4. Concesión de aplicación</field>
+        </record>  
+        <record id="audit_audit_planning_clause_ca_4_3_5" model="audit.audit.planning.clause">
+            <field name="name">3.5. Recepción de Solicitud de Sanción</field>
+        </record>
+        <record id="audit_audit_planning_clause_ca_4_3_6" model="audit.audit.planning.clause">
+            <field name="name">3.6. Retroalimentación y Aplicación de Sanción</field>
+        </record>    
+        <record id="audit_audit_planning_clause_ca_4_3_7" model="audit.audit.planning.clause">
+            <field name="name">3.7. Resguardo de Documento</field>
+        </record>
+        <record id="audit_audit_planning_clause_ca_4_3_8" model="audit.audit.planning.clause">
+            <field name="name">3.8. Registro de Sanción</field>
+        </record>
+
+
+        <!-- C5 -->
+        <record id="audit_audit_planning_clause_ca_5_3_3_1" model="audit.audit.planning.clause">
+            <field name="name">3.3.1.Reunión de coordinación</field>
+        </record> 
+        <record id="audit_audit_planning_clause_ca_5_3_4" model="audit.audit.planning.clause">
+            <field name="name">3.4. Registro de asistencia </field>
+        </record>  
+        <record id="audit_audit_planning_clause_ca_5_3_8" model="audit.audit.planning.clause">
+            <field name="name">3.8. Plática de RH</field>
+        </record>
+        <record id="audit_audit_planning_clause_ca_5_3_9" model="audit.audit.planning.clause">
+            <field name="name">3.9. Inducción</field>
+        </record>    
+        <record id="audit_audit_planning_clause_ca_5_3_10" model="audit.audit.planning.clause">
+            <field name="name">3.10. Impartición de temas de campaña</field>
+        </record>
+        <record id="audit_audit_planning_clause_ca_5_3_10_1" model="audit.audit.planning.clause">
+            <field name="name">3.10.1. Evaluación al Expositor</field>
+        </record> 
+        <record id="audit_audit_planning_clause_ca_5_3_11" model="audit.audit.planning.clause">
+            <field name="name">3.11. Aplicación de exámenes de conocimiento</field>
+        </record>    
+        <record id="audit_audit_planning_clause_ca_5_3_14" model="audit.audit.planning.clause">
+            <field name="name">3.14. Certificación</field>
+        </record>     
+        <record id="audit_audit_planning_clause_ca_5_3_15" model="audit.audit.planning.clause">
+            <field name="name">3.15. Cierre de Curso</field>
+        </record>    
+        <record id="audit_audit_planning_clause_ca_5_3_16" model="audit.audit.planning.clause">
+            <field name="name">3.16. Graduación</field>
+        </record>
+
+        <!-- C6 -->
+        <record id="audit_audit_planning_clause_ca_6_3_3" model="audit.audit.planning.clause">
+            <field name="name">3.3. Informes y consideraciones de las no conformidades</field>
+        </record> 
+        <record id="audit_audit_planning_clause_ca_6_3_4" model="audit.audit.planning.clause">
+            <field name="name">3.4. Separación, marcado y almacenamiento de servicios no conformes</field>
+        </record>  
+        <record id="audit_audit_planning_clause_ca_6_3_5_1" model="audit.audit.planning.clause">
+            <field name="name">3.5.1. Servicio no conforme</field>
+        </record>
+        <record id="audit_audit_planning_clause_ca_6_3_6" model="audit.audit.planning.clause">
+            <field name="name">3.6. Cierre de salidas no conformes</field>
+        </record>    
+        <record id="audit_audit_planning_clause_ca_6_3_7" model="audit.audit.planning.clause">
+            <field name="name">3.7. Acciones correctivas</field>
+        </record>
+        <record id="audit_audit_planning_clause_ca_6_3_8" model="audit.audit.planning.clause">
+            <field name="name">3.8. Implementación de medidas correctivas</field>
+        </record>
+
+
+        <!-- C7 -->
+        <record id="audit_audit_planning_clause_ca_7_3_4" model="audit.audit.planning.clause">
+            <field name="name">3.4. Definición de criterios a evaluar</field>
+        </record>  
+        <record id="audit_audit_planning_clause_ca_7_3_5" model="audit.audit.planning.clause">
+            <field name="name">3.5. Recepción de staff actualizado</field>
+        </record>
+        <record id="audit_audit_planning_clause_ca_7_3_7" model="audit.audit.planning.clause">
+            <field name="name">3.7. Definición de periodicidad de evaluación</field>
+        </record>    
+        <record id="audit_audit_planning_clause_ca_7_3_8_1" model="audit.audit.planning.clause">
+            <field name="name">3.8.1. Monitoreo de llamadas</field>
+        </record>
+        <record id="audit_audit_planning_clause_ca_7_3_8_2" model="audit.audit.planning.clause">
+            <field name="name">3.8.2. Seguimiento de Tickets</field>
+        </record>
+        <record id="audit_audit_planning_clause_ca_7_3_8_3" model="audit.audit.planning.clause">
+            <field name="name">3.8.3. Plataformas Externas</field>
+        </record>
+        <record id="audit_audit_planning_clause_ca_7_3_8_4" model="audit.audit.planning.clause">
+            <field name="name">3.8.4. Carga en las Plataformas Internas </field>
+        </record>
+        <record id="audit_audit_planning_clause_ca_7_3_8_5" model="audit.audit.planning.clause">
+            <field name="name">3.8.5. Inspección por pantalla </field>
+        </record>
+        <record id="audit_audit_planning_clause_ca_7_3_9" model="audit.audit.planning.clause">
+            <field name="name">3.9. Monitoreo y evaluación en paralelo</field>
+        </record>
+        <record id="audit_audit_planning_clause_ca_7_3_10" model="audit.audit.planning.clause">
+            <field name="name">3.10. Ejecución de retroalimentación</field>
+        </record>
+        <record id="audit_audit_planning_clause_ca_7_3_11" model="audit.audit.planning.clause">
+            <field name="name">3.11. Homologación de criterios</field>
+        </record>
+        <record id="audit_audit_planning_clause_ca_7_3_12" model="audit.audit.planning.clause">
+            <field name="name">3.12. Clínica de escucha </field>
+        </record>
+        <record id="audit_audit_planning_clause_ca_7_3_13" model="audit.audit.planning.clause">
+            <field name="name">3.13. Plan de coaching </field>
+        </record>
+        <record id="audit_audit_planning_clause_ca_7_3_14" model="audit.audit.planning.clause">
+            <field name="name">3.14. Mystery shopper</field>
+        </record>
+        <record id="audit_audit_planning_clause_ca_7_3_15" model="audit.audit.planning.clause">
+            <field name="name">3.15. Intervención en línea</field>
+        </record>
+        <record id="audit_audit_planning_clause_ca_7_3_16" model="audit.audit.planning.clause">
+            <field name="name">3.16. Generación de informes </field>
+        </record>
+        <record id="audit_audit_planning_clause_ca_7_3_16_2" model="audit.audit.planning.clause">
+            <field name="name">3.16.2. Envío de resultados semanal a Calidad </field>
+        </record>
+        <record id="audit_audit_planning_clause_ca_7_3_16_3" model="audit.audit.planning.clause">
+            <field name="name">3.16.3. Envío de resultados mensuales a Operaciones </field>
+        </record>
+        <record id="audit_audit_planning_clause_ca_7_3_16_4" model="audit.audit.planning.clause">
+            <field name="name">3.16.4. Envío de resultados mensuales a Calidad </field>
+        </record>
+    </data>
+</odoo>

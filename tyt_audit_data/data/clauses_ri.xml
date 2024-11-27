@@ -1,0 +1,66 @@
+<odoo>
+    <data noupdate="0">
+        <!-- CLAUSULAS DE OPERACIONES -->
+        <!-- RI1 -->
+        <record id="audit_audit_planning_clause_ri_1_63_b" model="audit.audit.planning.clause">
+            <field name="name">Artículo 63 de Reglamento Interno b)</field>
+        </record>
+        <record id="audit_audit_planning_clause_ri_1_63_c" model="audit.audit.planning.clause">
+            <field name="name">Artículo 63 de Reglamento Interno c)</field>
+        </record>  
+        <record id="audit_audit_planning_clause_ri_1_63_d" model="audit.audit.planning.clause">
+            <field name="name">Artículo 63 de Reglamento Interno d)</field>
+        </record>
+        <record id="audit_audit_planning_clause_ri_1_63_e" model="audit.audit.planning.clause">
+            <field name="name">Artículo 63 de Reglamento Interno e)</field>
+        </record>  
+        <record id="audit_audit_planning_clause_ri_1_63_f" model="audit.audit.planning.clause">
+            <field name="name">Artículo 63 de Reglamento Interno f)</field>
+        </record>
+        <record id="audit_audit_planning_clause_ri_1_63_g" model="audit.audit.planning.clause">
+            <field name="name">Artículo 63 de Reglamento Interno g)</field>
+        </record>  
+
+
+        <record id="audit_audit_planning_clause_ri_1_63_h" model="audit.audit.planning.clause">
+            <field name="name">Artículo 63 de Reglamento Interno h)</field>
+        </record>  
+        <record id="audit_audit_planning_clause_ri_1_63_i" model="audit.audit.planning.clause">
+            <field name="name">Artículo 63 de Reglamento Interno i)</field>
+        </record>
+        <record id="audit_audit_planning_clause_ri_1_64_a" model="audit.audit.planning.clause">
+            <field name="name">Artículo 64 de Reglamento Interno a)</field>
+        </record>  
+
+
+        <!-- RI7 -->
+        <record id="audit_audit_planning_clause_ri_57" model="audit.audit.planning.clause">
+            <field name="name">Artículo 57 de Reglamento Interno</field>
+        </record>
+        <record id="audit_audit_planning_clause_ri_58" model="audit.audit.planning.clause">
+            <field name="name">Artículo 58 de Reglamento Interno</field>
+        </record>
+        <record id="audit_audit_planning_clause_ri_59" model="audit.audit.planning.clause">
+            <field name="name">Artículo 59 de Reglamento Interno</field>
+        </record>
+        <record id="audit_audit_planning_clause_ri_60" model="audit.audit.planning.clause">
+            <field name="name">Artículo 60 de Reglamento Interno</field>
+        </record>
+
+        <!-- RI8 -->
+        <record id="audit_audit_planning_clause_ri_57" model="audit.audit.planning.clause">
+            <field name="name">Artículo 53 de Reglamento Interno</field>
+        </record>
+        <record id="audit_audit_planning_clause_ri_58" model="audit.audit.planning.clause">
+            <field name="name">Artículo 54 de Reglamento Interno</field>
+        </record>
+        <record id="audit_audit_planning_clause_ri_59" model="audit.audit.planning.clause">
+            <field name="name">Artículo 55 de Reglamento Interno</field>
+        </record>
+        <record id="audit_audit_planning_clause_ri_60" model="audit.audit.planning.clause">
+            <field name="name">Artículo 56 de Reglamento Interno</field>
+        </record>
+
+
+    </data>
+</odoo>

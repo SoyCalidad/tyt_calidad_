@@ -1,0 +1,67 @@
+<odoo>
+    <data noupdate="0">
+        <!-- CLAUSULAS DE OPERACIONES -->
+        <!-- SYS-2 -->
+        <record id="audit_audit_planning_clause_sys_2_3_4" model="audit.audit.planning.clause">
+            <field name="name">3.4 Generación de concentrado de Control Interno.</field>
+        </record>
+        <record id="audit_audit_planning_clause_sys_2_3_6" model="audit.audit.planning.clause">
+            <field name="name">3.6. Ejecución de soporte para atención a fallas</field>
+        </record>  
+        <record id="audit_audit_planning_clause_sys_2_3_7_1" model="audit.audit.planning.clause">
+            <field name="name">3.7.1. Rondín para validación de estatus físico</field>
+        </record>
+        <record id="audit_audit_planning_clause_sys_2_3_7_2" model="audit.audit.planning.clause">
+            <field name="name">3.7.2. Auditoría de seguridad informática</field>
+        </record>  
+        <record id="audit_audit_planning_clause_sys_2_3_8" model="audit.audit.planning.clause">
+            <field name="name">3.8. Entrega de resultados</field>
+        </record>
+
+        <!-- SYS-3 -->
+        <record id="audit_audit_planning_clause_sys_3_3_4" model="audit.audit.planning.clause">
+            <field name="name">3.4. Recepción de lista de prospectos en capacitación</field>
+        </record>
+        <record id="audit_audit_planning_clause_sys_3_3_6" model="audit.audit.planning.clause">
+            <field name="name">3.6. Rondín de validación de anomalías (inicio)</field>
+        </record>  
+        <record id="audit_audit_planning_clause_sys_3_3_10_1" model="audit.audit.planning.clause">
+            <field name="name">3.10.1. Notificación a los visitantes</field>
+        </record>
+        <record id="audit_audit_planning_clause_sys_3_3_10_4" model="audit.audit.planning.clause">
+            <field name="name">3.10.4. Elaboración de Coffee break.</field>
+        </record>   
+        <record id="audit_audit_planning_clause_sys_3_3_11" model="audit.audit.planning.clause">
+            <field name="name">3.11. Rondín de validación de anomalías (final)</field>
+        </record>  
+        <record id="audit_audit_planning_clause_sys_3_3_13" model="audit.audit.planning.clause">
+            <field name="name">3.13. Entrega de bitácora de visitantes</field>
+        </record>
+        <record id="audit_audit_planning_clause_sys_3_3_14" model="audit.audit.planning.clause">
+            <field name="name">3.14. Entrega de bitácora de incidencias de empleados</field>
+        </record>
+
+        <!-- SYS-4 -->
+        <record id="audit_audit_planning_clause_sys_4_3_2" model="audit.audit.planning.clause">
+            <field name="name">3.2. Recepción de bitácora de rondines</field>
+        </record>
+        <record id="audit_audit_planning_clause_sys_4_3_3" model="audit.audit.planning.clause">
+            <field name="name">3.3. Desarrollo de plan para remediación</field>
+        </record>  
+        <record id="audit_audit_planning_clause_sys_4_3_4" model="audit.audit.planning.clause">
+            <field name="name">3.4. Definición de recursos</field>
+        </record>
+        <record id="audit_audit_planning_clause_sys_4_3_6" model="audit.audit.planning.clause">
+            <field name="name">3.6. Realización de remediación</field>
+        </record> 
+        <record id="audit_audit_planning_clause_sys_4_3_7" model="audit.audit.planning.clause">
+            <field name="name">3.7. Medición y monitoreo</field>
+        </record>  
+        <record id="audit_audit_planning_clause_sys_4_3_7_1" model="audit.audit.planning.clause">
+            <field name="name">3.7.1. Control de cambios</field>
+        </record>
+        <record id="audit_audit_planning_clause_sys_4_3_9" model="audit.audit.planning.clause">
+            <field name="name">3.9. Registro en bitácora de remediaciones</field>
+        </record>
+    </data>
+</odoo>

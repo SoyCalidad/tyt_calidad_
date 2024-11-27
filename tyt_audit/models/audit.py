@@ -108,7 +108,6 @@ class AuditPlanning(models.Model):
 
     finding = fields.Selection(
         selection=[
-            ("", "Sin Seleccionar"),
             ("non_conformity", "No Conformidad"),
             ("good_practices", "Buenas Prácticas"),
         ],
@@ -138,6 +137,18 @@ class AuditPlanning(models.Model):
     non_conformity_wording = fields.Text(
         string='Non-Conformity Wording'
         )
+
+
+    tyt_procedure_description_id = fields.Many2one(
+        string='Procedimiento',
+        comodel_name='audit.plan.schedule.descriptions',
+    )
+
+    tyt_procedure_activity_id = fields.Many2one(
+        string='Actividad',
+        comodel_name='audit.plan.schedule.activities',
+        domain="[('description_id', '=', tyt_procedure_description_id)]",
+    )
 
     def action_open_audit_application_form(self):
         self.ensure_one()
@@ -264,3 +275,16 @@ class Audit(models.Model):
         string='Semana Auditada',
         default=0,
     )
+
+
+    @api.onchange('tyt_procedure_description_id', 'tyt_procedure_activity_id')
+    def _onchange_filter_planning_ids(self):
+        for record in self:
+            if record.tyt_procedure_description_id and record.tyt_procedure_activity_id:
+                planning_records = self.env['audit.audit.planning'].search([
+                    ('tyt_procedure_description_id', '=', record.tyt_procedure_description_id.id),
+                    ('tyt_procedure_activity_id', '=', record.tyt_procedure_activity_id.id),
+                ])
+                record.planning_ids = planning_records
+            else:
+                record.planning_ids = False
