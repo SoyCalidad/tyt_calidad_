@@ -7,6 +7,7 @@
 
             <field name="iso_9001_standards_ids" eval="[(6, 0, [ref('tyt_audit.planning_iso9001_standard_8_5_2')])]"/>
             <field name="clause_id" ref="audit_audit_planning_clause_op_1_3_2"/>
+            <field name="new_job_id" eval="75"/>
             <field name="verification">Muestre evidencia del correo enviado para reunion mensual</field>
             <field name="finding">good_practices</field>
             <field name="evidence_char">Correo Electrónico</field>
@@ -19,6 +20,7 @@
 
             <field name="iso_9001_standards_ids" eval="[(6, 0, [ref('tyt_audit.planning_iso9001_standard_8_5_2')])]"/>
             <field name="clause_id" ref="audit_audit_planning_clause_op_1_3_3"/>
+            <!-- <field name="new_job_id" ref=""/> -->
             <field name="verification">Muestre evidencia del envío de resultados obtenidos en el mes al gerente de sitio</field>
             <field name="finding"></field>
             <field name="evidence_char">Correo Electrónico</field>
@@ -31,6 +33,7 @@
 
             <field name="iso_9001_standards_ids" eval="[(6, 0, [ref('tyt_audit.planning_iso9001_standard_8_5_2')])]"/>
             <field name="clause_id" ref="audit_audit_planning_clause_op_1_3_4"/>
+            <!-- <field name="new_job_id" ref=""/> -->
             <field name="verification">Muestre evidencia de la presentación de los resultados</field>
             <field name="finding">good_practices</field>
             <field name="evidence_char">AO-11_Presentación de resultados</field>
@@ -43,6 +46,7 @@
 
             <field name="iso_9001_standards_ids" eval="[(6, 0, [ref('tyt_audit.planning_iso9001_standard_8_5_2')])]"/>
             <field name="clause_id" ref="audit_audit_planning_clause_op_1_3_5"/>
+            <field name="new_job_id" eval="75"/>
             <field name="verification">Muestre presentación de resultados</field>
             <field name="finding">good_practices</field>
             <field name="evidence_char">AO-11_Presentación de resultados</field>
@@ -55,6 +59,7 @@
 
             <field name="iso_9001_standards_ids" eval="[(6, 0, [ref('tyt_audit.planning_iso9001_standard_8_5_2')])]"/>
             <field name="clause_id" ref="audit_audit_planning_clause_op_1_3_4"/>
+            <!-- <field name="new_job_id" ref=""/> -->
             <field name="verification">Muestre evidencia de la minuta realizada y envío de la misma</field>
             <field name="finding">good_practices</field>
             <field name="evidence_char">AO-07_Minuta / Correo</field>
@@ -67,6 +72,7 @@
 
             <field name="iso_9001_standards_ids" eval="[(6, 0, [ref('tyt_audit.planning_iso9001_standard_8_5_2')])]"/>
             <field name="clause_id" ref="audit_audit_planning_clause_op_1_3_5"/>
+            <!-- <field name="new_job_id" ref=""/> -->
             <field name="verification">Muestre evidencia de los planes de trabajo por parte de los responsables de área</field>
             <field name="finding">good_practices</field>
             <field name="evidence_char">AO-06_Formato de plan de trabajo</field>
@@ -80,6 +86,7 @@
 
             <field name="iso_9001_standards_ids" eval="[(6, 0, [ref('tyt_audit.planning_iso9001_standard_8_5_3')])]"/>
             <field name="clause_id" ref="audit_audit_planning_clause_op_2_3_2"/>
+            <field name="new_job_id" eval="80"/>
             <field name="verification">Muestre evidencia del seguimiento de base de datos enviada por el cliente (purificación, segmentación, marcación, análisis de resultados)</field>
             <field name="finding">good_practices</field>
             <field name="evidence_char">Correo electrónico</field>
@@ -92,6 +99,7 @@
 
             <field name="iso_9001_standards_ids" eval="[(6, 0, [ref('tyt_audit.planning_iso9001_standard_8_5_4')])]"/>
             <field name="clause_id" ref="audit_audit_planning_clause_op_2_3_4"/>
+            <field name="new_job_id" eval="80"/>
             <field name="verification">Muestre evidencia de que recibió radiografía de la base de datos así como el análisis detectado por Responsable de Analistas</field>
             <field name="finding"></field>
             <field name="evidence_char">Correo electrónico / Radiografía</field>
@@ -104,6 +112,7 @@
 
             <field name="iso_9001_standards_ids" eval="[(6, 0, [ref('tyt_audit.planning_iso9001_standard_7_5'), ref('tyt_audit.planning_iso9001_standard_8_5_3'), ref('tyt_audit.planning_iso9001_standard_8_1')])]"/>
             <field name="clause_id" ref="audit_audit_planning_clause_op_2_3_5"/>
+            <field name="new_job_id" eval="76"/>
             <field name="verification">Muestre evidencia de envío de documento de la estrategia de base para el toque de la misma (acordada en reunión por Resp Op y de Analistas) por el Responsable de Operaciones.</field>
             <field name="finding">good_practices</field>
             <field name="evidence_char">AO-10_Formato para estrategia de base de datos / AO-07_Minuta / Correo</field>
@@ -116,6 +125,7 @@
 
             <field name="iso_9001_standards_ids" eval="[(6, 0, [ref('tyt_audit.planning_iso9001_standard_8_5_1'), ref('tyt_audit.planning_iso9001_standard_8_5_3'), ref('tyt_audit.planning_iso9001_standard_8_5_4')])]"/>
             <field name="clause_id" ref="audit_audit_planning_clause_op_2_3_6"/>
+            <field name="new_job_id" eval="80"/>
             <field name="verification">Muestre evidencia de que lleva el registro de la carga de las bases en el PBX en el documento de histórico de cargas.</field>
             <field name="finding">good_practices</field>
             <field name="evidence_char">AO-09_Bitácora de histórico de carga</field>
@@ -128,6 +138,7 @@
 
             <field name="iso_9001_standards_ids" eval="[(6, 0, [ref('tyt_audit.planning_iso9001_standard_8_5_1'), ref('tyt_audit.planning_iso9001_standard_8_5_3'), ref('tyt_audit.planning_iso9001_standard_8_5_4')])]"/>
             <field name="clause_id" ref="audit_audit_planning_clause_op_2_3_7"/>
+            <field name="new_job_id" eval="80"/>
             <field name="verification">Muestre evidencia de la verificación de los tiempos de marcación en base a la estrategia por campaña</field>
             <field name="finding">good_practices</field>
             <field name="evidence_char">Efectividad de llamada % Talk</field>
@@ -140,6 +151,7 @@
 
             <field name="iso_9001_standards_ids" eval="[(6, 0, [ref('tyt_audit.planning_iso9001_standard_8_5_2'), ref('tyt_audit.planning_iso9001_standard_8_6')])]"/>
             <field name="clause_id" ref="audit_audit_planning_clause_op_2_3_9"/>
+            <field name="new_job_id" eval="81"/>
             <field name="verification">Muestre documento de evidencia sobre el análisis completo de la ejecución que realizó la operación</field>
             <field name="finding">good_practices</field>
             <field name="evidence_char">Reporte con colores institucionales</field>
@@ -152,6 +164,7 @@
 
             <field name="iso_9001_standards_ids" eval="[(6, 0, [ref('tyt_audit.planning_iso9001_standard_7_1_6')])]"/>
             <field name="clause_id" ref="audit_audit_planning_clause_op_2_3_10"/>
+            <field name="new_job_id" eval="80"/>
             <field name="verification">Muestre evidencia del envío del documento Análisis Operativo</field>
             <field name="finding">good_practices</field>
             <field name="evidence_char">Correo electrónico / AO-25_Análisis Operativo</field>
@@ -164,6 +177,7 @@
 
             <field name="iso_9001_standards_ids" eval="[(6, 0, [ref('tyt_audit.planning_iso9001_standard_7_1_6')])]"/>
             <field name="clause_id" ref="audit_audit_planning_clause_op_2_3_11"/>
+            <field name="new_job_id" eval="80"/>
             <field name="verification">Muestre evidencia de que se respeta la Matriz de requerimientos de reportes</field>
             <field name="finding">good_practices</field>
             <field name="evidence_char">Correo electrónico (validar que se respete la matriz que viene en proceso)</field>
@@ -178,6 +192,7 @@
         
             <field name="iso_9001_standards_ids" eval="[(6, 0, [ref('tyt_audit.planning_iso9001_standard_6_1'), ref('tyt_audit.planning_iso9001_standard_8_1'), ref('tyt_audit.planning_iso9001_standard_8_5_5')])]"/>
             <field name="clause_id" ref="audit_audit_planning_clause_op_3_3_5"/>
+            <field name="new_job_id" eval="76"/>
             <field name="verification">El Responsable de Operaciones debe mostrar la evidencia del formato del plan de trabajo los dias 09 de del mes</field>
             <field name="finding">good_practices</field>
             <field name="evidence_char">AO-06_Formato de plan de trabajo (Validar que las actividades plasmadas sean acorde a la necesidad de sus indicadores)</field>
@@ -190,6 +205,7 @@
 
             <field name="iso_9001_standards_ids" eval="[(6, 0, [ref('tyt_audit.planning_iso9001_standard_7_5_3')])]"/>
             <field name="clause_id" ref="audit_audit_planning_clause_op_3_3_6_2"/>
+            <field name="new_job_id" eval="112"/>
             <field name="verification">Muestre evidencia que se realizo el registro de los incentivos antes de su entrenga en el formato de inventario</field>
             <field name="finding"></field>
             <field name="evidence_char">AF-14_Inventario de Incentivos (Verificar que el inventario esten capturados los incentivos que son compartidos mediante correo electronico por el coordinador de experiencia y foto de insumos)</field>
@@ -202,6 +218,7 @@
 
             <field name="iso_9001_standards_ids" eval="[(6, 0, [ref('tyt_audit.planning_iso9001_standard_7_5_3')])]"/>
             <field name="clause_id" ref="audit_audit_planning_clause_op_3_3_6_3"/>
+            <field name="new_job_id" eval="112"/>
             <field name="verification">Muestre evidencia de la entrega de 05 insumos con una copia del gafete del empleado al que se entregó dicho incentivo, colocando firma, fecha e incentivo entregado.</field>
             <field name="finding">good_practices</field>
             <field name="evidence_char">AF-15_Bitácora De Entrega De Incentivos (Auditar documento de gafete contenga la firma del agente comparar con la firma de su INE)</field>
@@ -214,6 +231,7 @@
 
             <field name="iso_9001_standards_ids" eval="[(6, 0, [ref('tyt_audit.planning_iso9001_standard_7_5_3')])]"/>
             <field name="clause_id" ref="audit_audit_planning_clause_op_3_3_8"/>
+            <field name="new_job_id" eval="77"/>
             <field name="verification">Supervisor de Operaciones iniciar una entrevista con el Agente, del primer al segundo día de ingreso, Aprendizaje que haya desarrollado en el curso de nuevo ingreso.Responsabilidad de la campaña. Ubicación del lócker Respaldar mediante la firma de una huddle</field>
             <field name="finding">good_practices</field>
             <field name="evidence_char">AO-02_Huddle (Auditar que el personal capturado en el archivo si sean del grupo de nuevo ingreso)  / ACC-22_Kardex</field>
@@ -226,6 +244,7 @@
 
             <field name="iso_9001_standards_ids" eval="[(6, 0, [ref('tyt_audit.planning_iso9001_standard_7_5'), ref('tyt_audit.planning_iso9001_standard_8_5_5'), ref('tyt_audit.planning_iso9001_standard_9_1_3')])]"/>
             <field name="clause_id" ref="audit_audit_planning_clause_op_3_3_10"/>
+            <field name="new_job_id" eval="77"/>
             <field name="verification">Muestran evidencia en digital de la monitorizacion del nuevo ingreso durante los primeros 2 dias de ingreso a operaciones</field>
             <field name="finding">good_practices</field>
             <field name="evidence_char">AO-04_Monitorizaciones de operación (Validar que sea en los primeros dos dias y sean del personal de nuevo ingreso) / AO-03_Retroalimentación de gestión / ACC-22_Kardex</field>
@@ -238,6 +257,7 @@
 
             <field name="iso_9001_standards_ids" eval="[(6, 0, [ref('tyt_audit.planning_iso9001_standard_7_5'), ref('tyt_audit.planning_iso9001_standard_8_1'), ref('tyt_audit.planning_iso9001_standard_9_1_3')])]"/>
             <field name="clause_id" ref="audit_audit_planning_clause_op_3_3_12"/>
+            <field name="new_job_id" eval="77"/>
             <field name="verification">Debe mostrar evidencia de 1 escucha diaria de 3 agentes del staff, así como el formato de retroalimentación</field>
             <field name="finding">good_practices</field>
             <field name="evidence_char">AO-04_Monitorizaciones de operación (validar que el personal monitoreado sean los bajos performance de acuerdo al ranking)</field>
@@ -250,6 +270,7 @@
 
             <field name="iso_9001_standards_ids" eval="[(6, 0, [ref('tyt_audit.planning_iso9001_standard_7_4'), ref('tyt_audit.planning_iso9001_standard_7_1_4'), ref('tyt_audit.planning_iso9001_standard_7_5_3'), ref('tyt_audit.planning_iso9001_standard_10_3')])]"/>
             <field name="clause_id" ref="audit_audit_planning_clause_op_3_3_13"/>
+            <field name="new_job_id" eval="77"/>
             <field name="verification">Responsable de Operaciones debe mostrar formatos huddle al corte semanal (mínimo 3 huddle por semana)</field>
             <field name="finding">good_practices</field>
             <field name="evidence_char">AO-02_Huddle (Huddle de seguridad de la información auditar con lista de asistencia que el personal capturado en dicho archivo es activo y cuente con las firmas de los asistentes, este huddle se auditaran los dos ha mes vencido) / ARH-06_Lista Operativa</field>
@@ -262,6 +283,7 @@
 
             <field name="iso_9001_standards_ids" eval="[(6, 0, [ref('tyt_audit.planning_iso9001_standard_8_6'), ref('tyt_audit.planning_iso9001_standard_9_1')])]"/>
             <field name="clause_id" ref="audit_audit_planning_clause_op_3_3_16"/>
+            <field name="new_job_id" eval="77"/>
             <field name="verification">Debe mostrar envio del ranking de resultados al responsable de operaciones (Campañas de Ventas diario/ campañas de Atencion Semanal)</field>
             <field name="finding">good_practices</field>
             <field name="evidence_char">Formato de ranking (validar que el personal capturado cuenta con los indicadores que indica el proceso)</field>
@@ -274,6 +296,7 @@
 
             <field name="iso_9001_standards_ids" eval="[(6, 0, [ref('tyt_audit.planning_iso9001_standard_7_5')])]"/>
             <field name="clause_id" ref="audit_audit_planning_clause_op_3_3_17"/>
+            <field name="new_job_id" eval="77"/>
             <field name="verification">Responsable de operaciones debe mostrar correo de envio diario de monitorizaciones de operación y retroalimentación de gestión fisica</field>
             <field name="finding">good_practices</field>
             <field name="evidence_char">AO-03_Retroalimentación de gestión (validar que cuenta con las firmas de los monitoreados en esa semana) / Correo Electronico</field>
@@ -288,6 +311,7 @@
 
             <field name="iso_9001_standards_ids" eval="[(6, 0, [ref('tyt_audit.planning_iso9001_standard_5_1_2'), ref('tyt_audit.planning_iso9001_standard_8_2_2'), ref('tyt_audit.planning_iso9001_standard_7_5')])]"/>
             <field name="clause_id" ref="audit_audit_planning_clause_op_4_3_2"/>
+            <field name="new_job_id" eval="75"/>
             <field name="verification">Mostrar evidencia de la solicitud por correo los días martes de la requisicion solicitada para el proximo curso.</field>
             <field name="finding">good_practices</field>
             <field name="evidence_char">AP-OPE-ST-PLA-0001_Requisición de personal / Correo Electronico</field>
@@ -300,6 +324,7 @@
 
             <field name="iso_9001_standards_ids" eval="[(6, 0, [ref('tyt_audit.planning_iso9001_standard_6_1'), ref('tyt_audit.planning_iso9001_standard_8_2_3'), ref('tyt_audit.planning_iso9001_standard_6_2'), ref('tyt_audit.planning_iso9001_standard_7_4'), ref('tyt_audit.planning_iso9001_standard_7_5_2'), ref('tyt_audit.planning_iso9001_standard_7_5_3')])]"/>
             <field name="clause_id" ref="audit_audit_planning_clause_op_4_3_3"/>
+            <field name="new_job_id" eval="102"/>
             <field name="verification">Mostrar evidencia del envio del plan de trabajo y minuta despues de recibir la requisición.</field>
             <field name="finding">good_practices</field>
             <field name="evidence_char">AO-06_Formato de plan de trabajo / Minuta / Correo Electronico</field>
@@ -312,6 +337,7 @@
 
             <field name="iso_9001_standards_ids" eval="[(6, 0, [ref('tyt_audit.planning_iso9001_standard_7_2'), ref('tyt_audit.planning_iso9001_standard_7_5'), ref('tyt_audit.planning_iso9001_standard_7_3'), ref('tyt_audit.planning_iso9001_standard_9_1')])]"/>
             <field name="clause_id" ref="audit_audit_planning_clause_op_4_3_7"/>
+            <field name="new_job_id" eval="83"/>
             <field name="verification">Mostrar evidencia del 10% de expedientes.</field>
             <field name="finding">good_practices</field>
             <field name="evidence_char">Solicitud de empleo interna / Base Maestra / ARH-18_Examen psicométrico / Encuesta de Salud / Carta Propuesta /Carta propuesta valor /Infonavit</field>
@@ -324,6 +350,7 @@
 
             <field name="iso_9001_standards_ids" eval="[(6, 0, [ref('tyt_audit.planning_iso9001_standard_7_5'), ref('tyt_audit.planning_iso9001_standard_7_2')])]"/>
             <field name="clause_id" ref="audit_audit_planning_clause_op_4_3_9_1"/>
+            <field name="new_job_id" eval="83"/>
             <field name="verification">Mostrar evidencia de la documentacion completa, auditar el 10% de expedientes</field>
             <field name="finding">good_practices</field>
             <field name="evidence_char">Expediente fisico o digital</field>
@@ -336,6 +363,7 @@
 
             <field name="iso_9001_standards_ids" eval="[(6, 0, [ref('tyt_audit.planning_iso9001_standard_7_5'), ref('tyt_audit.planning_iso9001_standard_8_6'), ref('tyt_audit.planning_iso9001_standard_9_1')])]"/>
             <field name="clause_id" ref="audit_audit_planning_clause_op_4_3_10"/>
+            <field name="new_job_id" eval="102"/>
             <field name="verification">Mostrar evidencia del envio de lista un día antes de la apertura del curso a las 17:00 hrs</field>
             <field name="finding">good_practices</field>
             <field name="evidence_char">AO-12_Lista de prospectos / Correo Electronico</field>
@@ -348,6 +376,7 @@
 
             <field name="iso_9001_standards_ids" eval="[(6, 0, [ref('tyt_audit.planning_iso9001_standard_7_5'), ref('tyt_audit.planning_iso9001_standard_9_1')])]"/>
             <field name="clause_id" ref="audit_audit_planning_clause_op_4_3_12"/>
+            <field name="new_job_id" eval="83"/>
             <field name="verification">Mostrar evidencia de los correos de reingresos 24 horas antes del nuevo corte nominal</field>
             <field name="finding"></field>
             <field name="evidence_char">Correos con la solicitud del reingreso</field>
@@ -360,6 +389,7 @@
 
             <field name="iso_9001_standards_ids" eval="[(6, 0, [ref('tyt_audit.planning_iso9001_standard_7_5'), ref('tyt_audit.planning_iso9001_standard_8_5_1'), ref('tyt_audit.planning_iso9001_standard_7_3')])]"/>
             <field name="clause_id" ref="audit_audit_planning_clause_op_4_3_13"/>
+            <field name="new_job_id" eval="82"/>
             <field name="verification">Mostrar evidencia del 10% de expedientes, validacion de los datos correctos en contratos, con huellas dactilares</field>
             <field name="finding">good_practices</field>
             <field name="evidence_char">Validacion de expediente (Contrato)</field>
@@ -372,6 +402,7 @@
 
             <field name="iso_9001_standards_ids" eval="[(6, 0, [ref('tyt_audit.planning_iso9001_standard_7_5')])]"/>
             <field name="clause_id" ref="audit_audit_planning_clause_op_4_3_15"/>
+            <field name="new_job_id" eval="82"/>
             <field name="verification">Mostrar evidencia que el Responsable de RyS comparte la lista de prospectos actualizada para que el Responsable RH y ADM realice la asignacion de los numeros de empleado el segundo dia de capacitacion.</field>
             <field name="finding">good_practices</field>
             <field name="evidence_char">ARH-01_Lista de prospectos a capacitacion / Correo Electronico validar fechas</field>
@@ -384,6 +415,7 @@
 
             <field name="iso_9001_standards_ids" eval="[(6, 0, [ref('tyt_audit.planning_iso9001_standard_7_5'), ref('tyt_audit.planning_iso9001_standard_7_1_1'), ref('tyt_audit.planning_iso9001_standard_8_5_5')])]"/>
             <field name="clause_id" ref="audit_audit_planning_clause_op_4_3_17"/>
+            <field name="new_job_id" eval="82"/>
             <field name="verification">Mostrar evidencia del envio del documento del ultimo mes.</field>
             <field name="finding">good_practices</field>
             <field name="evidence_char">AO-16_Asignación de Cuenta</field>
@@ -396,6 +428,7 @@
 
             <field name="iso_9001_standards_ids" eval="[(6, 0, [ref('tyt_audit.planning_iso9001_standard_7_5'), ref('tyt_audit.planning_iso9001_standard_7_3')])]"/>
             <field name="clause_id" ref="audit_audit_planning_clause_op_4_3_18"/>
+            <field name="new_job_id" eval="112"/>
             <field name="verification">Muestreo del 10% de fotografias de gafetes entregados medidas establecidas.</field>
             <field name="finding">good_practices</field>
             <field name="evidence_char">Base de fotografias / Gafete</field>
@@ -408,6 +441,7 @@
 
             <field name="iso_9001_standards_ids" eval="[(6, 0, [ref('tyt_audit.planning_iso9001_standard_7_5')])]"/>
             <field name="clause_id" ref="audit_audit_planning_clause_op_4_3_18_1"/>
+            <field name="new_job_id" eval="82"/>
             <field name="verification">Muestra folio de tarjetas de acceso y validar que se cuenta con la tarjeta maestra</field>
             <field name="finding">good_practices</field>
             <field name="evidence_char">ARH-30_Inventario de accesos y Tarjeta Maestra</field>
@@ -422,6 +456,7 @@
 
             <field name="iso_9001_standards_ids" eval="[(6, 0, [ref('tyt_audit.planning_iso9001_standard_7_1_2'), ref('tyt_audit.planning_iso9001_standard_7_5_3'), ref('tyt_audit.planning_iso9001_standard_7_2')])]"/>
             <field name="clause_id" ref="audit_audit_planning_clause_op_5_3_2"/>
+            <!-- <field name="new_job_id" ref=""/> -->
             <field name="verification">Muestra de evidencia de correo de vacante</field>
             <field name="finding">good_practices</field>
             <field name="evidence_char">ARH-19_Solicitud de vacante administrativa / Correo Electronico (validar que se cuente con el Vo.Bo. De gerencia)</field>
@@ -434,6 +469,7 @@
 
             <field name="iso_9001_standards_ids" eval="[(6, 0, [ref('tyt_audit.planning_iso9001_standard_7_5'), ref('tyt_audit.planning_iso9001_standard_7_2')])]"/>
             <field name="clause_id" ref="audit_audit_planning_clause_op_5_3_5_1"/>
+            <field name="new_job_id" eval="102"/>
             <field name="verification">Se verificará que se haya recabado la documentación requerida para su aceptación y generado / archivado el expediente.</field>
             <field name="finding">good_practices</field>
             <field name="evidence_char">Expediente Completo</field>
@@ -446,6 +482,7 @@
 
             <field name="iso_9001_standards_ids" eval="[(6, 0, [ref('tyt_audit.planning_iso9001_standard_7_2'), ref('tyt_audit.planning_iso9001_standard_7_1_5_1'), ref('tyt_audit.planning_iso9001_standard_7_5_3'), ref('tyt_audit.planning_iso9001_standard_7_1_6'), ref('tyt_audit.planning_iso9001_standard_9_1_3')])]"/>
             <field name="clause_id" ref="audit_audit_planning_clause_op_5_3_11"/>
+            <!-- <field name="new_job_id" ref=""/> -->
             <field name="verification">Elaborar examen de conocimiento y mandarlo al responsable de RyS</field>
             <field name="finding">good_practices</field>
             <field name="evidence_char">Correo electrónico (solicitar el correo donde se comparte la guia y solicitar el correo donde se comparten los resultados) / ARH-20_Examen de conocimiento</field>
@@ -458,6 +495,7 @@
 
             <field name="iso_9001_standards_ids" eval="[(6, 0, [ref('tyt_audit.planning_iso9001_standard_7_2'), ref('tyt_audit.planning_iso9001_standard_7_1_5_1'), ref('tyt_audit.planning_iso9001_standard_7_5_3'), ref('tyt_audit.planning_iso9001_standard_7_1_6'), ref('tyt_audit.planning_iso9001_standard_9_1_3')])]"/>
             <field name="clause_id" ref="audit_audit_planning_clause_op_5_3_12"/>
+            <field name="new_job_id" eval="110"/>
             <field name="verification">Elaborar examen de políticas y mandarlo al responsable de RyS</field>
             <field name="finding">good_practices</field>
             <field name="evidence_char">Correo electrónico (solicitar el correo donde se comparte la guia y solicitar el correo donde se comparten los resultados) / ARH-21_Examen de políticas</field>
@@ -470,6 +508,7 @@
 
             <field name="iso_9001_standards_ids" eval="[(6, 0, [ref('tyt_audit.planning_iso9001_standard_7_5_3'), ref('tyt_audit.planning_iso9001_standard_7_2'), ref('tyt_audit.planning_iso9001_standard_7_1_6')])]"/>
             <field name="clause_id" ref="audit_audit_planning_clause_op_5_3_13"/>
+            <!-- <field name="new_job_id" ref=""/> -->
             <field name="verification">Presentar un plan de Propuestas para mejoramiento del área</field>
             <field name="finding">good_practices</field>
             <field name="evidence_char">Presentación con propuesta de plan de mejora</field>
@@ -482,6 +521,7 @@
 
             <field name="iso_9001_standards_ids" eval="[(6, 0, [ref('tyt_audit.planning_iso9001_standard_7_1_2'), ref('tyt_audit.planning_iso9001_standard_7_4'), ref('tyt_audit.planning_iso9001_standard_7_1_4')])]"/>
             <field name="clause_id" ref="audit_audit_planning_clause_op_5_3_16"/>
+            <field name="new_job_id" eval="82"/>
             <field name="verification">La convocatoria la debe realizar vía correo electrónico a todos los involucrados</field>
             <field name="finding">good_practices</field>
             <field name="evidence_char">Correo electrónico / PDP en caso de aplicar / En caso de externos solicitar gafete y contrato</field>
