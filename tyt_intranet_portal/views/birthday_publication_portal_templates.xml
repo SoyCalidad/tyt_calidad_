@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <template id="portal_my_home_birthday_publication" name="Show Birthday | Intranet" customize_show="True" inherit_id="tyt_intranet_portal.portal_my_home" priority="165">
+        <xpath expr="//div[hasclass('o_portal_docs')]" position="before">
+        </xpath>
+        <div id="portal_common_category2" position="inside">
+            <t t-call="portal.portal_docs_entry">
+                <t t-set="icon" t-value="'/tyt_intranet_portal/static/src/img/rfq.svg'"/>
+                <t t-set="title">Publicación de cumpleaños</t>
+                <t t-set="text">Cumpleaños del día</t>
+                <t t-set="url" t-value="'/birthday_publication'"/>
+                <t t-set="placeholder_count" t-value="'birthday_publication_count'"/>
+                <t t-set="show_count" t-value="True"/>
+            </t>
+        </div>
+    </template>
+</odoo>

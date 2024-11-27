@@ -1,34 +1,14 @@
-from odoo import http
-from odoo.http import request
-from odoo import api, exceptions, fields, models, _
-from datetime import datetime
-
-import json
 import logging
-import werkzeug
-
-from datetime import datetime, timedelta
-from dateutil.relativedelta import relativedelta
-
-from odoo import fields, http, SUPERUSER_ID, _
-from odoo.exceptions import UserError
-from odoo.http import request, content_disposition
-from odoo.osv import expression
-from odoo.tools import format_datetime, format_date, is_html_empty
-from odoo.addons.base.models.ir_qweb import keep_query
-
 from operator import itemgetter
 
-from markupsafe import Markup
-
+from odoo import fields
 from odoo import http
-from odoo.exceptions import AccessError, MissingError, UserError
-from odoo.http import request
-from odoo.tools.translate import _
-from odoo.tools import groupby as groupbyelem
 from odoo.addons.portal.controllers import portal
 from odoo.addons.portal.controllers.portal import pager as portal_pager
+from odoo.http import request
 from odoo.osv.expression import OR, AND
+from odoo.tools import groupby as groupbyelem
+from odoo.tools.translate import _
 
 _logger = logging.getLogger(__name__)
 
@@ -42,7 +22,6 @@ class DepartmentMessagePortal(portal.CustomerPortal):
             ('state', '=', 'published'),
             ('group_ids', 'in', user_groups),
         ]
-
     def _prepare_home_portal_values(self, counters):
         values = super()._prepare_home_portal_values(counters)
         domain = self._prepare_department_messages_count_domain()
@@ -70,12 +49,9 @@ class DepartmentMessagePortal(portal.CustomerPortal):
         return request.render('tyt_intranet_messaging.portal_my_department_messages', values)
 
     def _prepare_my_department_messages_values(self, page=1, date_begin=None, date_end=None, sortby=None, filterby='all', search=None, groupby='none', search_in='subject'):
-
         values = self._prepare_portal_layout_values()
         domain = self._prepare_department_messages_domain()
-
         _items_per_page = 50
-
         searchbar_sortings = {
             'date': {'label': _('Newest'), 'order': 'published_date desc'},
             'sender': {'label': _('Sender'), 'order': 'sender_portal'},
@@ -88,6 +64,7 @@ class DepartmentMessagePortal(portal.CustomerPortal):
         searchbar_groupby = {
             'none': {'input': 'none', 'label': _('None')},
             'sender': {'input': 'sender_portal', 'label': _('Sender')},
+            'is_read': {'input': 'is_read', 'label': _('Read Status')},
         }
 
         if not sortby:
@@ -111,6 +88,8 @@ class DepartmentMessagePortal(portal.CustomerPortal):
             step=_items_per_page,
         )
         department_messages = request.env['tyt.intranet.department_message'].sudo().search(domain, order=order, limit=_items_per_page, offset=pager['offset'])
+        for message in department_messages:
+            message.is_read = message.is_read_by_current_user()
 
         if groupby != 'none':
             grouped_department_messages = [request.env['tyt.intranet.department_message'].sudo().concat(*g) for k, g in groupbyelem(department_messages, itemgetter(searchbar_groupby[groupby]['input']))]

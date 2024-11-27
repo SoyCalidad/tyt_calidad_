@@ -14,25 +14,32 @@
             <t t-call="portal.portal_searchbar">
                 <t t-set="title">Publicación de cumpleaños</t>
             </t>
-            <t t-call="portal.portal_table">
-                <thead>
-                    <tr>
-                        <th class="col-5">Employee</th>
-                        <th class="col-3">Job Position</th>
-                        <th class="col-3">Department</th>
-                        <th class="col-3 text-end">Birthday</th>
-                    </tr>
-                </thead>
-                <t t-foreach="employees" t-as="employee">
-                    <tr>
-                        <td>
-                            <img t-attf-src="/web/image/hr.employee/{{employee.id}}/avatar_128" alt="Employee" style="height:35px;" class="ml8 rounded-circle"/>
-                            <span class="ml8"><t t-esc="employee.name"/></span>
-                        </td>
-                        <td><span t-field="employee.job_id.name"/></td>
-                        <td><span t-field="employee.department_id.name"/></td>
-                        <td><span t-field="employee.birthday"/></td>
-                    </tr>
+            <div t-if="not employees" class="alert alert-info">
+                There is no Birthday Publications for This Period.
+            </div>
+            <t t-else="">
+                <t t-call="portal.portal_table">
+                    <thead>
+                        <tr>
+                            <th class="col-4">Employee</th>
+                            <th class="col-2">Job Position</th>
+                            <th class="col-2">Department</th>
+                            <th class="col-2">Site</th>
+                            <th class="col-2 text-end">Birthday</th>
+                        </tr>
+                    </thead>
+                    <t t-foreach="employees" t-as="employee">
+                        <tr>
+                            <td>
+                                <img class="rounded-circle o_portal_contact_img" t-att-src="image_data_uri(employee.avatar_128)" alt="Employee"/>
+                                <span class="ml8"><t t-esc="employee.name"/></span>
+                            </td>
+                            <td><span t-esc="employee.job_id.x_studio_nesp or employee.job_id.name"/></td>
+                            <td><span t-field="employee.department_id.display_name"/></td>
+                            <td><span t-field="employee.x_studio_sitios0"/></td>
+                            <td class="text-end"><span t-field="employee.birthday"/></td>
+                        </tr>
+                    </t>
                 </t>
             </t>
         </t>

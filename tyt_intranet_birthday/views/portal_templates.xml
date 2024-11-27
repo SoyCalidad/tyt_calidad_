@@ -1,19 +1,16 @@
 <?xml version="1.0" encoding="utf-8"?>
 <odoo>
-    <template id="portal_my_home" inherit_id="portal.portal_my_home">
+    <template id="portal_my_home" name="My Portal" inherit_id="portal.portal_my_home">
         <xpath expr="//div[hasclass('o_portal_my_home')]" position="inside">
             <div>
-                Hello World
-                <a role="button" data-bs-toggle="modal" data-bs-target="#modal_birthday_card" href="#">
-                    <span>Button</span>
+                <a role="button" class="d-none" data-bs-toggle="modal" data-bs-target="#modal_birthday_card" href="#">
+                    <span>Show Modal</span>
                 </a>
                 <t t-if="show_birthday_card_modal">
                     <t t-call="tyt_intranet_birthday.modal_birthday_card"/>
                 </t>
-
                 <div>
                     <script type="text/javascript">
-
                         document.addEventListener('DOMContentLoaded', function() {
                             const modal = document.getElementById('modal_birthday_card');
                             if (modal) {
@@ -21,26 +18,48 @@
                                 anchor.click();
                             }
                         });
-
                     </script>
                 </div>
             </div>
         </xpath>
     </template>
 
-    <template id="modal_birthday_card">
+    <template id="modal_birthday_card" name="Modal Birthday Card">
         <div class="modal fade" id="modal_birthday_card" data-bs-backdrop="static"
              data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
             <div class="modal-dialog">
+                <t t-set="employee" t-value="request.env.user.sudo().x_studio_empleado"/>
                 <div class="modal-content">
                     <div class="modal-header">
-                        <h5 class="modal-title">Modal Title</h5>
-                        <button type="button" class="close" data-bs-dismiss="modal" aria-label="Close">
-                            <span aria-hidden="true"></span>
-                        </button>
+                        <div class="o_wevent_registration_title modal-title fs-5" id="staticBackdropLabel">
+                            <t t-if="employee.birthday_publication_ids">
+                                <t t-out="employee.birthday_publication_ids[0].name"/>
+                            </t>
+                        </div>
+                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                     </div>
                     <div class="modal-body">
-                        <p>This is a modal dialog.</p>
+                        <div class="d-flex flex-column align-items-center">
+                            <div class="d-flex mb-3 align-items-center justify-content-center">
+                                <dvi>
+                                    <img class="rounded-circle me-3" t-att-src="image_data_uri(employee.avatar_128)" alt="Employee"/>
+                                </dvi>
+                                <div class="align-self-center text-wrap text-break w-50">
+                                    <h3><t t-out="employee.name"/></h3>
+                                </div>
+                            </div>
+                            <div>
+                                <t t-if="employee.birthday_card">
+                                    <img t-att-src="image_data_uri(employee.sudo().birthday_card)"
+                                         alt="Birthday Card"
+                                         style="max-width:100%; height:auto;"
+                                         class="rounded"/>
+                                    </t>
+                                <t t-else="">
+                                    <p>No Birthday Card Available</p>
+                                </t>
+                            </div>
+                        </div>
                     </div>
                 </div>
             </div>

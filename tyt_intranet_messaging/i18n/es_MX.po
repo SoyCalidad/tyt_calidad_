@@ -533,3 +533,10 @@ msgstr ""
 #: model:ir.model.fields,field_description:tyt_intranet_messaging.field_tyt_intranet_department_message__gps
 msgid "gps"
 msgstr "Actualizar"
+
+#. module: tyt_intranet_messaging
+#. odoo-python
+#: code:addons/tyt_intranet_messaging/controllers/department_message.py:0
+#, python-format
+msgid "Read Status"
+msgstr "Estado de lectura"
