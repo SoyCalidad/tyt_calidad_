@@ -1,0 +1,89 @@
+<odoo>
+    <data noupdate="0">
+        <record id="planning_iso9001_standard_9_1_3" model="audit.audit.planning.iso9001_standard">
+            <field name="name">9.1.3.1</field>
+            <field name="complete_name">Analizar y evaluar los datos y la información apropiados que surgen por el seguimiento y la medición.</field>
+        </record>   
+        <record id="planning_iso9001_standard_7_1_5_2" model="audit.audit.planning.iso9001_standard">
+            <field name="name">7.1.5.2</field>
+            <field name="complete_name">Trazabilidad de las mediciones</field>
+        </record>   
+        <record id="planning_iso9001_standard_7_1_5" model="audit.audit.planning.iso9001_standard">
+            <field name="name">7.1.5</field>
+            <field name="complete_name">Recursos de seguimiento y medición</field>
+        </record>
+
+        <record id="planning_iso9001_standard_8_5_1" model="audit.audit.planning.iso9001_standard">
+            <field name="name">8.5.1</field>
+            <field name="complete_name">Control de la producción y de la provisión del servicio</field>
+        </record>
+        <record id="planning_iso9001_standard_8_5_3" model="audit.audit.planning.iso9001_standard">
+            <field name="name">8.5.3</field>
+            <field name="complete_name">Propiedad perteneciente a los clientes o proveedores externos</field>
+        </record>
+        <record id="planning_iso9001_standard_8_5_4" model="audit.audit.planning.iso9001_standard">
+            <field name="name">8.5.4</field>
+            <field name="complete_name">Preservación</field>
+        </record>
+        <record id="planning_iso9001_standard_7_1_5_1" model="audit.audit.planning.iso9001_standard">
+            <field name="name">7.1.5.1</field>
+            <field name="complete_name">Generalidades</field>
+        </record>
+        <record id="planning_iso9001_standard_8_5_2" model="audit.audit.planning.iso9001_standard">
+            <field name="name">8.5.2</field>
+            <field name="complete_name">Identificación y trazabilidad</field>
+        </record>        
+        <record id="planning_iso9001_standard_9" model="audit.audit.planning.iso9001_standard">
+            <field name="name">9.</field>
+            <field name="complete_name">Evaluación del desempeño</field>
+        </record>      
+        <record id="planning_iso9001_standard_7_1_3" model="audit.audit.planning.iso9001_standard">
+            <field name="name">7.1.3</field>
+            <field name="complete_name">Infraestructura</field>
+        </record>      
+        <record id="planning_iso9001_standard_10_2_1" model="audit.audit.planning.iso9001_standard">
+            <field name="name">10.2.1</field>
+            <field name="complete_name">No conformidad y acción correctiva.</field>
+        </record>
+        <record id="planning_iso9001_standard_10_2_2" model="audit.audit.planning.iso9001_standard">
+            <field name="name">10.2.2</field>
+            <field name="complete_name">No conformidad y acción correctiva.</field>
+        </record>
+        <record id="planning_iso9001_standard_7_1_4" model="audit.audit.planning.iso9001_standard">
+            <field name="name">7.1.4</field>
+            <field name="complete_name">Ambiente para la operación de los procesos</field>
+        </record>
+        <record id="planning_iso9001_standard_7_1_2" model="audit.audit.planning.iso9001_standard">
+            <field name="name">7.1.2</field>
+            <field name="complete_name">Personas</field>
+        </record>   
+        <record id="planning_iso9001_standard_9_1_1" model="audit.audit.planning.iso9001_standard">
+            <field name="name">9.1.1.</field>
+            <field name="complete_name">Generalidades</field>
+        </record>       
+        <record id="planning_iso9001_standard_9_2_2" model="audit.audit.planning.iso9001_standard">
+            <field name="name">9.2.2.</field>
+            <field name="complete_name">Auditoría Interna</field>
+        </record>   
+        <record id="planning_iso9001_standard_8_5_5" model="audit.audit.planning.iso9001_standard">
+            <field name="name">8.5.5</field>
+            <field name="complete_name">Actividades posteriores a la entrega</field>
+        </record>   
+        <record id="planning_iso9001_standard_8_2_2" model="audit.audit.planning.iso9001_standard">
+            <field name="name">8.2.2</field>
+            <field name="complete_name">Determinación de los requisitos para los productos y servicios</field>
+        </record>  
+        <record id="planning_iso9001_standard_8_2_3" model="audit.audit.planning.iso9001_standard">
+            <field name="name">8.2.3</field>
+            <field name="complete_name">Revisión de los requisitos para los productos y servicios</field>
+        </record> 
+        <record id="planning_iso9001_standard_7_1_1" model="audit.audit.planning.iso9001_standard">
+            <field name="name">7.1.1.</field>
+            <field name="complete_name">Generalidades</field>
+        </record>   
+        <record id="planning_iso9001_standard_7_5_1" model="audit.audit.planning.iso9001_standard">
+            <field name="name">7.5.1.</field>
+            <field name="complete_name">Generalidades</field>
+        </record>
+    </data>
+</odoo>

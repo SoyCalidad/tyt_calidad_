@@ -1,0 +1,135 @@
+<odoo>
+    <data noupdate="0">
+        <!-- CLAUSULAS DE hrERACIONES -->
+        <!-- HR3 -->
+        <record id="audit_audit_planning_clause_hr_3_3_2" model="audit.audit.planning.clause">
+            <field name="name">3.2. Validación de frecuencia de áreas</field>
+        </record>
+        <record id="audit_audit_planning_clause_hr_3_3_4" model="audit.audit.planning.clause">
+            <field name="name">3.4. Frecuencia de limpieza</field>
+        </record>
+        <record id="audit_audit_planning_clause_hr_3_3_4" model="audit.audit.planning.clause">
+            <field name="name">3.8. Entregar e informar resultados al personal de limpieza</field>
+        </record>
+
+        <!-- HR4 -->
+        <record id="audit_audit_planning_clause_hr_4_3_2" model="audit.audit.planning.clause">
+            <field name="name">3.2. Apertura de caja chica</field>
+        </record>
+        <record id="audit_audit_planning_clause_hr_4_3_2_1" model="audit.audit.planning.clause">
+            <field name="name">3.2.1. Anexo Carta Responsiva de Caja Chica</field>
+        </record>
+        <record id="audit_audit_planning_clause_hr_4_3_3" model="audit.audit.planning.clause">
+            <field name="name">3.3. Confirmación del depósito</field>
+        </record>
+        <record id="audit_audit_planning_clause_hr_4_3_6" model="audit.audit.planning.clause">
+            <field name="name">3.6.Arqueo de caja chica</field>
+        </record>
+        <record id="audit_audit_planning_clause_hr_4_3_7" model="audit.audit.planning.clause">
+            <field name="name">3.7. Envío de solicitud de reembolso</field>
+        </record>
+
+        <!-- HR5 -->
+        <record id="audit_audit_planning_clause_hr_5_3_2" model="audit.audit.planning.clause">
+            <field name="name">3.2. Recepción de solicitud de baja por requerimiento de la empresa</field>
+        </record>
+        <record id="audit_audit_planning_clause_hr_5_3_3_3" model="audit.audit.planning.clause">
+            <field name="name">3.3.3. Envío de finiquito por parte de central</field>
+        </record>
+        <record id="audit_audit_planning_clause_hr_5_3_4_1" model="audit.audit.planning.clause">
+            <field name="name">3.4.1. Aviso a jefe directo</field>
+        </record>
+        <record id="audit_audit_planning_clause_hr_5_3_5" model="audit.audit.planning.clause">
+            <field name="name">3.5. Firma de renuncia y entrega de finiquito</field>
+        </record>
+        <record id="audit_audit_planning_clause_hr_5_3_6" model="audit.audit.planning.clause">
+            <field name="name">3.6. Recepción de gafete</field>
+        </record>
+        <record id="audit_audit_planning_clause_hr_5_3_8" model="audit.audit.planning.clause">
+            <field name="name">3.8. Captura de baja en base</field>
+        </record>
+        <record id="audit_audit_planning_clause_hr_5_3_9" model="audit.audit.planning.clause">
+            <field name="name">3.9. Pago de finiquito realizado</field>
+        </record>
+
+
+        <!-- HR6 -->
+        <record id="audit_audit_planning_clause_hr_6_3_3" model="audit.audit.planning.clause">
+            <field name="name">3.3.3. Envío de finiquito por parte de central</field>
+        </record>
+        <record id="audit_audit_planning_clause_hr_6_3_4_1" model="audit.audit.planning.clause">
+            <field name="name">3.4.1. Aviso a jefe directo</field>
+        </record>
+        <record id="audit_audit_planning_clause_hr_6_3_4_2" model="audit.audit.planning.clause">
+            <field name="name">3.4.2. Realización de encuesta de salida</field>
+        </record>
+        <record id="audit_audit_planning_clause_hr_6_3_5" model="audit.audit.planning.clause">
+            <field name="name">3.5. Firma de renuncia y entrega de finiquito</field>
+        </record>
+        <record id="audit_audit_planning_clause_hr_6_3_6" model="audit.audit.planning.clause">
+            <field name="name">3.6. Recepción de gafete</field>
+        </record>
+        <record id="audit_audit_planning_clause_hr_6_3_8" model="audit.audit.planning.clause">
+            <field name="name">3.8. Captura de baja en base</field>
+        </record>
+        <record id="audit_audit_planning_clause_hr_6_3_9" model="audit.audit.planning.clause">
+            <field name="name">3.9. Pago de finiquito realizado</field>
+        </record>
+
+        <!-- HR7 -->
+        <record id="audit_audit_planning_clause_hr_7_3_2_1" model="audit.audit.planning.clause">
+            <field name="name">3.2.1. Elaboración de concentrado operativo</field>
+        </record>
+        <record id="audit_audit_planning_clause_hr_7_3_3_1" model="audit.audit.planning.clause">
+            <field name="name">3.3.1. Descarga de reporte Biométrico</field>
+        </record>
+        <record id="audit_audit_planning_clause_hr_7_ps" model="audit.audit.planning.clause">
+            <field name="name">Permiso sin goce de sueldo (PS) para Agentes o Administrativo</field>
+        </record>
+        <record id="audit_audit_planning_clause_hr_7_3_4_3" model="audit.audit.planning.clause">
+            <field name="name">3.4.3. Permiso con pago de Horas (PH) para agentes</field>
+        </record>
+        <record id="audit_audit_planning_clause_hr_7_pcg" model="audit.audit.planning.clause">
+            <field name="name">Permiso con goce de sueldo (PCG) para Agentes o Administrativos</field>
+        </record>
+        <record id="audit_audit_planning_clause_hr_7_v" model="audit.audit.planning.clause">
+            <field name="name">Vacaciones (V) para Agentes o Administrativos</field>
+        </record>
+        <record id="audit_audit_planning_clause_hr_7_3_4_8" model="audit.audit.planning.clause">
+            <field name="name">3.4.8. Incapacidad (I)</field>
+        </record>
+        <record id="audit_audit_planning_clause_hr_7_3_4_9" model="audit.audit.planning.clause">
+            <field name="name">3.4.9. Falta justificada (FJ)</field>
+        </record>
+        <record id="audit_audit_planning_clause_hr_7_3_4_10" model="audit.audit.planning.clause">
+            <field name="name">3.4.10. Retardo "R"</field>
+        </record>
+        <record id="audit_audit_planning_clause_hr_7_3_4_11" model="audit.audit.planning.clause">
+            <field name="name">3.4.11. Cambios de turno (CT) para Agentes</field>
+        </record>
+
+
+        <record id="audit_audit_planning_clause_hr_7_3_4_12" model="audit.audit.planning.clause">
+            <field name="name">3.4.12. Descanso (D)</field>
+        </record>
+        <record id="audit_audit_planning_clause_hr_7_3_5" model="audit.audit.planning.clause">
+            <field name="name">3.5 Cierre de nómina</field>
+        </record>
+        <record id="audit_audit_planning_clause_hr_7_3_5_2" model="audit.audit.planning.clause">
+            <field name="name">3.5.2. Bono de antigüedad Agente</field>
+        </record>
+        <record id="audit_audit_planning_clause_hr_7_3_5_3" model="audit.audit.planning.clause">
+            <field name="name">3.5.3. Horas felices y horas convencionales</field>
+        </record>
+        <record id="audit_audit_planning_clause_hr_7_3_5_4" model="audit.audit.planning.clause">
+            <field name="name">3.5.4. Envío de nómina preliminar</field>
+        </record>
+        <record id="audit_audit_planning_clause_hr_7_3_5_6" model="audit.audit.planning.clause">
+            <field name="name">3.5.6. Liberación de recibos de nómina</field>
+        </record>
+        <record id="audit_audit_planning_clause_hr_7_3_6" model="audit.audit.planning.clause">
+            <field name="name">3.6. Resguardo de recibo</field>
+        </record>
+
+    </data>
+</odoo>

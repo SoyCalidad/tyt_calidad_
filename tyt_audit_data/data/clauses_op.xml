@@ -1,0 +1,137 @@
+<odoo>
+    <data noupdate="0">
+        <!-- CLAUSULAS DE OPERACIONES -->
+        <!-- OP1 -->
+        <record id="audit_audit_planning_clause_op_1_3_2" model="audit.audit.planning.clause">
+            <field name="name">3.2. Envío de correo de reunión</field>
+        </record>
+        <record id="audit_audit_planning_clause_op_1_3_3" model="audit.audit.planning.clause">
+            <field name="name">3.3. Recepción de Resultados</field>
+        </record>  
+        <record id="audit_audit_planning_clause_op_1_3_4" model="audit.audit.planning.clause">
+            <field name="name">3.4. Exposición de resultados</field>
+        </record>
+        <record id="audit_audit_planning_clause_op_1_3_5" model="audit.audit.planning.clause">
+            <field name="name">3.5. Evaluación de Análisis de Resultados</field>
+        </record>  
+        <record id="audit_audit_planning_clause_op_1_3_4" model="audit.audit.planning.clause">
+            <field name="name">3.7. Elaboración de Minuta</field>
+        </record>
+        <record id="audit_audit_planning_clause_op_1_3_5" model="audit.audit.planning.clause">
+            <field name="name">3.9. Recepción de plan de trabajo</field>
+        </record>  
+
+
+        <!-- OP2 -->
+        <record id="audit_audit_planning_clause_op_2_3_2" model="audit.audit.planning.clause">
+            <field name="name">3.2. Recepción de base</field>
+        </record>
+        <record id="audit_audit_planning_clause_op_2_3_4" model="audit.audit.planning.clause">
+            <field name="name">3.4. Envío de radiografía</field>
+        </record>  
+        <record id="audit_audit_planning_clause_op_2_3_5" model="audit.audit.planning.clause">
+            <field name="name">3.5. Envío de estrategia de base de datos</field>
+        </record>
+        <record id="audit_audit_planning_clause_op_2_3_6" model="audit.audit.planning.clause">
+            <field name="name">3.6. Ejecución de carga de base</field>
+        </record>  
+        <record id="audit_audit_planning_clause_op_2_3_7" model="audit.audit.planning.clause">
+            <field name="name">3.7. Verificación de tiempos de marcación</field>
+        </record>
+        <record id="audit_audit_planning_clause_op_2_3_9" model="audit.audit.planning.clause">
+            <field name="name">3.9. Exporte de Interacciones</field>
+        </record> 
+        <record id="audit_audit_planning_clause_op_2_3_10" model="audit.audit.planning.clause">
+            <field name="name">3.10. Análisis operativo</field>
+        </record>
+        <record id="audit_audit_planning_clause_op_2_3_11" model="audit.audit.planning.clause">
+            <field name="name">3.11. Requerimiento operativo</field>
+        </record> 
+
+        <!-- OP3 -->
+        <record id="audit_audit_planning_clause_op_3_3_5" model="audit.audit.planning.clause">
+            <field name="name">3.5. Recepción de plan de trabajo por campaña</field>
+        </record>
+        <record id="audit_audit_planning_clause_op_3_3_6_2" model="audit.audit.planning.clause">
+            <field name="name">3.6.2. Compra de Incentivos</field>
+        </record>  
+        <record id="audit_audit_planning_clause_op_3_3_6_3" model="audit.audit.planning.clause">
+            <field name="name">3.6.3. Comprobación de Entrega de Incentivos</field>
+        </record>
+        <record id="audit_audit_planning_clause_op_3_3_8" model="audit.audit.planning.clause">
+            <field name="name">3.8 Entrevista de conocimiento del personal</field>
+        </record>  
+        <record id="audit_audit_planning_clause_op_3_3_10" model="audit.audit.planning.clause">
+            <field name="name">3.10. Monitorización de primera evaluación</field>
+        </record>
+        <record id="audit_audit_planning_clause_op_3_3_12" model="audit.audit.planning.clause">
+            <field name="name">3.12. Monitorización de Operaciones</field>
+        </record> 
+        <record id="audit_audit_planning_clause_op_3_3_13" model="audit.audit.planning.clause">
+            <field name="name">3.13. Elaboración de junta de gestión</field>
+        </record>
+        <record id="audit_audit_planning_clause_op_3_3_16" model="audit.audit.planning.clause">
+            <field name="name">3.16. Envío de ranking de resultados</field>
+        </record>       
+        <record id="audit_audit_planning_clause_op_3_3_17" model="audit.audit.planning.clause">
+            <field name="name">3.17. Entrega de evidencia de monitoreo</field>
+        </record>
+
+        <!-- OP4 -->
+        <record id="audit_audit_planning_clause_op_4_3_2" model="audit.audit.planning.clause">
+            <field name="name">3.2 Requisición</field>
+        </record>
+        <record id="audit_audit_planning_clause_op_4_3_3" model="audit.audit.planning.clause">
+            <field name="name">3.3. Realización de plan de trabajo y Reunión de coaching</field>
+        </record>  
+        <record id="audit_audit_planning_clause_op_4_3_7" model="audit.audit.planning.clause">
+            <field name="name">3.7. Cita a entrevista</field>
+        </record>
+        <record id="audit_audit_planning_clause_op_4_3_9_1" model="audit.audit.planning.clause">
+            <field name="name">3.9.1. Documentación para personal de nuevo ingreso</field>
+        </record>  
+        <record id="audit_audit_planning_clause_op_4_3_10" model="audit.audit.planning.clause">
+            <field name="name">3.10. Envió de lista de prospectos para auditoria</field>
+        </record>
+        <record id="audit_audit_planning_clause_op_4_3_12" model="audit.audit.planning.clause">
+            <field name="name">3.12. Aceptación de reingresos</field>
+        </record>  
+        <record id="audit_audit_planning_clause_op_4_3_13" model="audit.audit.planning.clause">
+            <field name="name">3.13. Impresión de contratos y Entrega de contratos</field>
+        </record>
+        <record id="audit_audit_planning_clause_op_4_3_15" model="audit.audit.planning.clause">
+            <field name="name">3.15. Envío de números de empleado</field>
+        </record>  
+        <record id="audit_audit_planning_clause_op_4_3_17" model="audit.audit.planning.clause">
+            <field name="name">3.17. Tarjeta de nómina y Asignación de cuenta</field>
+        </record>
+        <record id="audit_audit_planning_clause_op_4_3_18" model="audit.audit.planning.clause">
+            <field name="name">3.18. Impresión y entrega de gafetes</field>
+        </record>  
+        <record id="audit_audit_planning_clause_op_4_3_18_1" model="audit.audit.planning.clause">
+            <field name="name">3.18.1. Tarjeta electrónica de acceso</field>
+        </record>
+
+
+        <!-- OP5 -->
+        <record id="audit_audit_planning_clause_op_5_3_2" model="audit.audit.planning.clause">
+            <field name="name">3.2.Recepción de solicitud de vacante</field>
+        </record>
+        <record id="audit_audit_planning_clause_op_5_3_5_1" model="audit.audit.planning.clause">
+            <field name="name">3.5.1 Documentación para personal administrativo externo</field>
+        </record>  
+        <record id="audit_audit_planning_clause_op_5_3_11" model="audit.audit.planning.clause">
+            <field name="name">3.11.Examen de conocimiento</field>
+        </record>
+        <record id="audit_audit_planning_clause_op_5_3_12" model="audit.audit.planning.clause">
+            <field name="name">3.12.Examen de politicas</field>
+        </record>  
+        <record id="audit_audit_planning_clause_op_5_3_13" model="audit.audit.planning.clause">
+            <field name="name">3.13.Presentación de plan de mejora</field>
+        </record>
+        <record id="audit_audit_planning_clause_op_5_3_16" model="audit.audit.planning.clause">
+            <field name="name">3.16.Nombramiento</field>
+        </record>  
+
+    </data>
+</odoo>

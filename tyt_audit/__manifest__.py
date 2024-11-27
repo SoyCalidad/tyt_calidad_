@@ -33,6 +33,7 @@
         'data/iso9001_standard.xml',
         'data/iso9001_standard2.xml',
         'data/iso9001_standard3.xml',
+        'data/iso9001_standard_complement.xml',
     ],
     'assets': {
         'web.assets_backend': [

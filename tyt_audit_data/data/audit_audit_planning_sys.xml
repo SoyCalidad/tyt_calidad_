@@ -1,0 +1,219 @@
+<odoo>
+    <data noupdate="0">
+        <!-- SYS-2 -->
+        <record id="audit_audit_planning_sys_201" model="audit.audit.planning">
+            <field name="tyt_procedure_description_id" ref="tyt_audit.schedule_plan_description_2"/>
+            <field name="tyt_procedure_activity_id" ref="tyt_audit.schedule_plan_activity_202"/>
+
+            <field name="iso_9001_standards_ids" eval="[(6, 0, [ref('tyt_audit.planning_iso9001_standard_7_1_3'), ref('tyt_audit.planning_iso9001_standard_8_7')])]"/>
+            <field name="clause_id" ref="audit_audit_planning_clause_sys_2_3_4"/>
+            <field name="verification">Mostrar formato de control interno, para realizar auditoria de la captura de las incidencias</field>
+            <field name="finding">good_practices</field>
+            <field name="evidence_char">ATI-04_Concentrado de control interno/ Validar que el concentrado cuenta con todo capturado</field>
+        </record>
+
+        <record id="audit_audit_planning_sys_202" model="audit.audit.planning">
+            <field name="tyt_procedure_description_id" ref="tyt_audit.schedule_plan_description_2"/>
+            <field name="tyt_procedure_activity_id" ref="tyt_audit.schedule_plan_activity_202"/>
+
+            <field name="iso_9001_standards_ids" eval="[(6, 0, [ref('tyt_audit.planning_iso9001_standard_8_7'), ref('tyt_audit.planning_iso9001_standard_7_5_3')])]"/>
+            <field name="clause_id" ref="audit_audit_planning_clause_sys_2_3_6"/>
+            <field name="verification">Mostrar formato de control interno para seguimiento de fallas, debe contar con el tiempo estimado de las mismas respetando la matriz</field>
+            <field name="finding">good_practices</field>
+            <field name="evidence_char">ATI-04_Concentrado de control interno / Auditar cinco fallas y que este todo el seguimiento de la misma (validar que se respeta la matriz y solicitar los correos)</field>
+        </record>
+
+        <record id="audit_audit_planning_sys_203" model="audit.audit.planning">
+            <field name="tyt_procedure_description_id" ref="tyt_audit.schedule_plan_description_2"/>
+            <field name="tyt_procedure_activity_id" ref="tyt_audit.schedule_plan_activity_202"/>
+
+            <field name="iso_9001_standards_ids" eval="[(6, 0, [ref('tyt_audit.planning_iso9001_standard_7_1_3')])]"/>
+            <field name="clause_id" ref="audit_audit_planning_clause_sys_2_3_7_1"/>
+            <field name="verification">Mostrar seguimiento de validacion de estatus fisico de los equipos 10% por semana/ Auditar 15 Maquinas para identificar que esten los datos de manera correcta y cuadre con el codigo indicado</field>
+            <field name="finding">good_practices</field>
+            <field name="evidence_char">ATI-01_Inventario de Componentes  y perifericos / Auditar maquinas identificando que cuadren los codigos / Bitácora De Estatus Físico</field>
+        </record>
+
+        <record id="audit_audit_planning_sys_204" model="audit.audit.planning">
+            <field name="tyt_procedure_description_id" ref="tyt_audit.schedule_plan_description_2"/>
+            <field name="tyt_procedure_activity_id" ref="tyt_audit.schedule_plan_activity_202"/>        
+
+            <field name="iso_9001_standards_ids" eval="[(6, 0, [ref('tyt_audit.planning_iso9001_standard_7_1_3')])]"/>
+            <field name="clause_id" ref="audit_audit_planning_clause_sys_2_3_7_2"/>
+            <field name="verification">Mostrar seguimiento de seguridad informatica del 10% auditado mediante el correcto funcionamiento del Firewall, así como pruebas en equipos al azar, uso del navegador web y/o PING a páginas web externas.</field>
+            <field name="finding">good_practices</field>
+            <field name="evidence_char">ATI-02_Control de seguridad de información</field>
+        </record>
+
+        <record id="audit_audit_planning_sys_205" model="audit.audit.planning">
+            <field name="tyt_procedure_description_id" ref="tyt_audit.schedule_plan_description_2"/>
+            <field name="tyt_procedure_activity_id" ref="tyt_audit.schedule_plan_activity_202"/>
+
+            <field name="iso_9001_standards_ids" eval="[(6, 0, [ref('tyt_audit.planning_iso9001_standard_7_1_3'), ref('tyt_audit.planning_iso9001_standard_8_2'), ref('tyt_audit.planning_iso9001_standard_5_1_2')])]"/>
+            <field name="clause_id" ref="audit_audit_planning_clause_sys_2_3_8"/>
+            <field name="verification">Mostrar entrega de resultados a Gerente de sistemas y Coordinador de TI a los 3 días posteriores al termino el corte nominal</field>
+            <field name="finding">good_practices</field>
+            <field name="evidence_char">Correo Electronico Validando que se envie en la fecha indicada / ATI-04_Concentrado de control interno / ATI-01_Inventario de activos y componentes</field>
+        </record>
+
+        <!-- SYS-3 -->
+        <record id="audit_audit_planning_sys_301" model="audit.audit.planning">
+            <field name="tyt_procedure_description_id" ref="tyt_audit.schedule_plan_description_2"/>
+            <field name="tyt_procedure_activity_id" ref="tyt_audit.schedule_plan_activity_203"/>
+
+            <field name="iso_9001_standards_ids" eval="[(6, 0, [ref('tyt_audit.planning_iso9001_standard_7_5_3')])]"/>
+            <field name="clause_id" ref="audit_audit_planning_clause_sys_3_3_4"/>
+            <field name="verification">Muestre evidencia de que se comparte documento lista de asistencia.</field>
+            <field name="finding"></field>
+            <field name="evidence_char">AO-12_Lista de prospectos / Correo Electronico</field>
+            <field name="comment">N/A</field>
+        </record>
+
+        <record id="audit_audit_planning_sys_302" model="audit.audit.planning">
+            <field name="tyt_procedure_description_id" ref="tyt_audit.schedule_plan_description_2"/>
+            <field name="tyt_procedure_activity_id" ref="tyt_audit.schedule_plan_activity_203"/>
+
+            <field name="iso_9001_standards_ids" eval="[(6, 0, [ref('tyt_audit.planning_iso9001_standard_7_5'), ref('tyt_audit.planning_iso9001_standard_7_1_3')])]"/>
+            <field name="clause_id" ref="audit_audit_planning_clause_sys_3_3_6"/>
+            <field name="verification">Muestre evidencia de que se genera y registra el rondín de acuerdo a lo solicitado en el proceso.</field>
+            <field name="finding">good_practices</field>
+            <field name="evidence_char">ATI-12_Bitácora de rondines</field>
+        </record>
+
+        <record id="audit_audit_planning_sys_303" model="audit.audit.planning">
+            <field name="tyt_procedure_description_id" ref="tyt_audit.schedule_plan_description_2"/>
+            <field name="tyt_procedure_activity_id" ref="tyt_audit.schedule_plan_activity_203"/>
+
+            <field name="iso_9001_standards_ids" eval="[(6, 0, [ref('tyt_audit.planning_iso9001_standard_6_1'), ref('tyt_audit.planning_iso9001_standard_7_4')])]"/>
+            <field name="clause_id" ref="audit_audit_planning_clause_sys_3_3_10_1"/>
+            <field name="verification">Muestre evidencia del correo electrónico enviado por Gerente de Sitio.</field>
+            <field name="finding">good_practices</field>
+            <field name="evidence_char">Correo Electrónico (validar que el correo se compartan los datos de las visitas y a que áreas tendrá acceso)</field>
+        </record>
+
+        <record id="audit_audit_planning_sys_304" model="audit.audit.planning">
+            <field name="tyt_procedure_description_id" ref="tyt_audit.schedule_plan_description_2"/>
+            <field name="tyt_procedure_activity_id" ref="tyt_audit.schedule_plan_activity_203"/>
+
+            <field name="iso_9001_standards_ids" eval="[(6, 0, [ref('tyt_audit.planning_iso9001_standard_7_1_4')])]"/>
+            <field name="clause_id" ref="audit_audit_planning_clause_sys_3_3_10_4"/>
+            <field name="verification">Muestre evidencia que se elaboró el coffee break.</field>
+            <field name="finding">good_practices</field>
+            <field name="evidence_char">Fotos</field>
+        </record>
+
+        <record id="audit_audit_planning_sys_305" model="audit.audit.planning">
+            <field name="tyt_procedure_description_id" ref="tyt_audit.schedule_plan_description_2"/>
+            <field name="tyt_procedure_activity_id" ref="tyt_audit.schedule_plan_activity_203"/>
+
+            <field name="iso_9001_standards_ids" eval="[(6, 0, [ref('tyt_audit.planning_iso9001_standard_7_5'), ref('tyt_audit.planning_iso9001_standard_7_1_3')])]"/>
+            <field name="clause_id" ref="audit_audit_planning_clause_sys_3_3_11"/>
+            <field name="verification">Muestre evidencia de que se genera y registra el rondín.</field>
+            <field name="finding">good_practices</field>
+            <field name="evidence_char">ATI-12_Bitácora de rondines</field>
+        </record>
+
+        <record id="audit_audit_planning_sys_306" model="audit.audit.planning">
+            <field name="tyt_procedure_description_id" ref="tyt_audit.schedule_plan_description_2"/>
+            <field name="tyt_procedure_activity_id" ref="tyt_audit.schedule_plan_activity_203"/>
+
+            <field name="iso_9001_standards_ids" eval="[(6, 0, [ref('tyt_audit.planning_iso9001_standard_7_5_3')])]"/>
+            <field name="clause_id" ref="audit_audit_planning_clause_sys_3_3_13"/>
+            <field name="verification">Muestre evidencia del envío de la bitácora de visitantes</field>
+            <field name="finding">good_practices</field>
+            <field name="evidence_char">ATI-14_Bitácora de visitantes / Correo Electronico</field>
+        </record>
+
+        <record id="audit_audit_planning_sys_307" model="audit.audit.planning">
+            <field name="tyt_procedure_description_id" ref="tyt_audit.schedule_plan_description_2"/>
+            <field name="tyt_procedure_activity_id" ref="tyt_audit.schedule_plan_activity_203"/>
+
+            <field name="iso_9001_standards_ids" eval="[(6, 0, [ref('tyt_audit.planning_iso9001_standard_7_5_3')])]"/>
+            <field name="clause_id" ref="audit_audit_planning_clause_sys_3_3_14"/>
+            <field name="verification">Muestre evidencia de que se entrega la bitácora Física y Digital.</field>
+            <field name="finding">good_practices</field>
+            <field name="evidence_char">ATI-13_Bitácora de incidencias de empleados (validar que el formato se encuentre de manera física y digital) / Correo Electrónico (validar que se le reporta la incidencia al responsable de capacitación y calidad para el seguimiento correspondiente)</field>
+        </record>
+
+
+        <!-- SYS-4 -->
+        <record id="audit_audit_planning_sys_401" model="audit.audit.planning">
+            <field name="tyt_procedure_description_id" ref="tyt_audit.schedule_plan_description_2"/>
+            <field name="tyt_procedure_activity_id" ref="tyt_audit.schedule_plan_activity_204"/>
+
+            <field name="iso_9001_standards_ids" eval="[(6, 0, [ref('tyt_audit.planning_iso9001_standard_7_5_1'), ref('tyt_audit.planning_iso9001_standard_7_5_3'), ref('tyt_audit.planning_iso9001_standard_7_1_3')])]"/>
+            <field name="clause_id" ref="audit_audit_planning_clause_sys_4_3_2"/>
+            <field name="verification">Muestre evidencia de que se entrego la bitacora de rondines</field>
+            <field name="finding">good_practices</field>
+            <field name="evidence_char">ATI-12_Bitácora de rondines</field>
+        </record>
+
+        <record id="audit_audit_planning_sys_402" model="audit.audit.planning">
+            <field name="tyt_procedure_description_id" ref="tyt_audit.schedule_plan_description_2"/>
+            <field name="tyt_procedure_activity_id" ref="tyt_audit.schedule_plan_activity_204"/>
+
+            <field name="iso_9001_standards_ids" eval="[(6, 0, [ref('tyt_audit.planning_iso9001_standard_7_1_3'), ref('tyt_audit.planning_iso9001_standard_7_5')])]"/>
+            <field name="clause_id" ref="audit_audit_planning_clause_sys_4_3_3"/>
+            <field name="verification">Muestre evidencia del formato de plan de remediacion</field>
+            <field name="finding">good_practices</field>
+            <field name="evidence_char">ATI-16_Plan de remediación</field>
+        </record>
+
+        <record id="audit_audit_planning_sys_403" model="audit.audit.planning">
+            <field name="tyt_procedure_description_id" ref="tyt_audit.schedule_plan_description_2"/>
+            <field name="tyt_procedure_activity_id" ref="tyt_audit.schedule_plan_activity_204"/>
+
+            <field name="iso_9001_standards_ids" eval="[(6, 0, [ref('tyt_audit.planning_iso9001_standard_5_3'), ref('tyt_audit.planning_iso9001_standard_7_1_1'), ref('tyt_audit.planning_iso9001_standard_7_4')])]"/>
+            <field name="clause_id" ref="audit_audit_planning_clause_sys_4_3_4"/>
+            <field name="verification">Muestre evidencia del formato solicitud de efectivo</field>
+            <field name="finding">good_practices</field>
+            <field name="evidence_char">ATI-18_Solicitud de efectivo</field>
+        </record>
+
+        <record id="audit_audit_planning_sys_404" model="audit.audit.planning">
+            <field name="tyt_procedure_description_id" ref="tyt_audit.schedule_plan_description_2"/>
+            <field name="tyt_procedure_activity_id" ref="tyt_audit.schedule_plan_activity_204"/>
+
+            <field name="iso_9001_standards_ids" eval="[(6, 0, [ref('tyt_audit.planning_iso9001_standard_7_1_3'), ref('tyt_audit.planning_iso9001_standard_7_1_4')])]"/>
+            <field name="clause_id" ref="audit_audit_planning_clause_sys_4_3_6"/>
+            <field name="verification">Muestre evidencia de imágenes digitales</field>
+            <field name="finding">good_practices</field>
+            <field name="evidence_char">Fotos</field>
+        </record>
+
+        <record id="audit_audit_planning_sys_405" model="audit.audit.planning">
+            <field name="tyt_procedure_description_id" ref="tyt_audit.schedule_plan_description_2"/>
+            <field name="tyt_procedure_activity_id" ref="tyt_audit.schedule_plan_activity_204"/>
+
+            <field name="iso_9001_standards_ids" eval="[(6, 0, [ref('tyt_audit.planning_iso9001_standard_9_1'), ref('tyt_audit.planning_iso9001_standard_7_5')])]"/>
+            <field name="clause_id" ref="audit_audit_planning_clause_sys_4_3_7"/>
+            <field name="verification">Muestre evidencia del formato de plan de calidad</field>
+            <field name="finding">good_practices</field>
+            <field name="evidence_char">ATI-15_Plan de calidad</field>
+        </record>
+
+        <record id="audit_audit_planning_sys_406" model="audit.audit.planning">
+            <field name="tyt_procedure_description_id" ref="tyt_audit.schedule_plan_description_2"/>
+            <field name="tyt_procedure_activity_id" ref="tyt_audit.schedule_plan_activity_204"/>
+
+            <field name="iso_9001_standards_ids" eval="[(6, 0, [ref('tyt_audit.planning_iso9001_standard_7_5'), ref('tyt_audit.planning_iso9001_standard_6_3')])]"/>
+            <field name="clause_id" ref="audit_audit_planning_clause_sys_4_3_7_1"/>
+            <field name="verification">Muestre evidencia del formato de plan de remediacion</field>
+            <field name="finding">good_practices</field>
+            <field name="evidence_char">ATI-16_Plan de remediación</field>
+        </record>
+
+        <record id="audit_audit_planning_sys_407" model="audit.audit.planning">
+            <field name="tyt_procedure_description_id" ref="tyt_audit.schedule_plan_description_2"/>
+            <field name="tyt_procedure_activity_id" ref="tyt_audit.schedule_plan_activity_204"/>
+
+            <field name="iso_9001_standards_ids" eval="[(6, 0, [ref('tyt_audit.planning_iso9001_standard_7_4'), ref('tyt_audit.planning_iso9001_standard_7_5')])]"/>
+            <field name="clause_id" ref="audit_audit_planning_clause_sys_4_3_9"/>
+            <field name="verification">Muestre evidencia de la bitacora de remediaciones</field>
+            <field name="finding">good_practices</field>
+            <field name="evidence_char">ATI-17_Bitácora de remediaciones</field>
+        </record>
+
+
+    </data>
+</odoo>
