@@ -95,7 +95,7 @@ class AuditApplicationController(http.Controller):
         # Resto del código para extraer datos y renderizar el formulario
         procedure = planning_record.audit_audit_id.tyt_procedure_description_id.name or ""
         clause = planning_record.clause_id.name or ""
-        responsible = planning_record.employee_id.name or ""
+        responsible = planning_record.new_job_id.name or ""
         verification = planning_record.verification or ""
         audited = ", ".join(planning_record.audit_audit_id.employee_ids.mapped("name")) or ""
         audit_group = planning_record.audit_audit_id.team_id.name or ""
