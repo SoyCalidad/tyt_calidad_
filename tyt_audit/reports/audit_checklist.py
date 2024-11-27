@@ -138,8 +138,8 @@ class IndividualReport(models.AbstractModel):
                     clause_name = planning.clause_id.name if planning.clause_id else ''
                     sheet.write(row, 3, clause_name, current_format)
 
-                    # Escribe employee_job_id.name en la columna E
-                    job_name = planning.employee_job_id.name if planning.employee_job_id else ''
+                    # Escribe new_job_id.name en la columna E
+                    job_name = planning.new_job_id.name if planning.new_job_id else ''
                     sheet.write(row, 4, job_name, current_format)
 
                     # Escribe verification en la columna F

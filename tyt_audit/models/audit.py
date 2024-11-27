@@ -92,16 +92,16 @@ class AuditPlanning(models.Model):
     )
 
     employee_id = fields.Many2one(
-        string='Responsable',
+        string='Auditor Responsable',
         comodel_name='hr.employee',
     )
 
-    employee_job_id = fields.Many2one(
+    new_job_id = fields.Many2one(
+        string='Responsable',
         comodel_name='hr.job',
-        string='Puesto de Responsable',
-        related='employee_id.job_id',
-        store=True,
-        readonly=True,
+        # related='employee_id.job_id',
+        # store=True,
+        # readonly=True,
     )
 
     verification = fields.Char(string='Verificación')
