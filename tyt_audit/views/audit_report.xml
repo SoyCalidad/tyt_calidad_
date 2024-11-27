@@ -60,7 +60,7 @@
                                 <field name="iso_9001_standards_ids" widget="many2many_tags" attrs="{'readonly': [('parent.state','not in',('elaborate','validate_ok'))]}" />
                                 <field name="clause_id" attrs="{'readonly': [('parent.state','not in',('elaborate','validate_ok'))]}" />
                                 <!-- <field name="employee_id" attrs="{'readonly': [('parent.state','not in',('elaborate','validate_ok'))]}" /> -->
-                                <field name="new_job_id" readonly="1" string="Responsable"/>
+                                <field name="new_job_id" attrs="{'readonly': [('parent.state','not in',('elaborate','validate_ok'))]}" string="Responsable"/>
                                 <field name="verification" attrs="{'readonly': [('parent.state','not in',('elaborate','validate_ok'))]}" />
                                 <field name="finding" attrs="{'readonly': [('parent.state','not in',('elaborate','validate_ok'))]}" />
                                 <field name="evidence_attachment_ids" widget="many2many_tags" attrs="{'readonly': [('parent.state','not in',('elaborate','validate_ok'))]}"/>
