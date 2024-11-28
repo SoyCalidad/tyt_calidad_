@@ -50,12 +50,6 @@ class AuditApplicationController(http.Controller):
             return request.not_found()
 
         if request.httprequest.method == "POST":
-            # Guardar los datos ingresados en el formulario
-            planning_record.write({
-                "finding": kwargs.get("finding", ""),
-                "non_conformity_wording": kwargs.get("non_conformity_wording", "").strip(),
-            })
-
             # Manejar los archivos adjuntos
             attachments = request.httprequest.files.getlist('attachment')
             attachment_ids = []
@@ -84,10 +78,16 @@ class AuditApplicationController(http.Controller):
                 })
                 attachment_ids.append(attached_file.id)
 
-            # Actualizar el registro con los archivos adjuntos
-            planning_record.write({
-                'evidence_attachment_ids': [(4, attachment_id) for attachment_id in attachment_ids]
-            })
+            # Actualizar el registro con los archivos adjuntos y guardar el comentario de no conformidad solo si se envió
+            update_values = {
+                'evidence_attachment_ids': [(4, attachment_id) for attachment_id in attachment_ids],
+            }
+
+            # Actualizar 'non_conformity_wording' solo si existe en los datos POST
+            if "non_conformity_wording" in kwargs:
+                update_values["non_conformity_wording"] = kwargs.get("non_conformity_wording", "").strip()
+
+            planning_record.write(update_values)
 
             # Redirigir a la misma página actualizada
             return request.redirect('/audit_application/%d/%d/' % (audit_audit_id, audit_form_id))

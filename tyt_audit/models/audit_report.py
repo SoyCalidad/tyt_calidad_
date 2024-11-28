@@ -71,6 +71,7 @@ class AuditReport(models.Model):
 
     post_audit_action = fields.Html(string="Post Audit Action", sanitize=True)
     description = fields.Html(string="Descripción", sanitize=True)
+    conclusions = fields.Html(string="Conclusions", sanitize=True)
 
 
     @api.onchange('audit_id')
