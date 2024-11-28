@@ -288,3 +288,30 @@ class Audit(models.Model):
                 record.planning_ids = planning_records
             else:
                 record.planning_ids = False
+
+class AuditLine(models.Model):
+    _inherit = "audit.line"
+
+    audit_id = fields.Many2one(
+        string=u'Auditoría',
+        comodel_name='audit.audit',
+        ondelete='set null',
+    )
+
+class AuditReport(models.Model):
+    _inherit = "audit.report"
+
+    audit_id = fields.Many2one(
+        string=u'Auditoría',
+        comodel_name='audit.audit',
+        ondelete='set null',
+    )
+
+class ReportLine(models.Model):
+    _inherit = "report.line"
+
+    report_id = fields.Many2one(
+        string=u'Reporte',
+        comodel_name="audit.report",
+        ondelete="set null",
+    )
