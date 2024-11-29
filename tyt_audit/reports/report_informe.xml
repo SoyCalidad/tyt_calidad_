@@ -274,17 +274,23 @@
                                     <t t-else=""/>
                                 </td> <!-- Segunda columna con fondo blanco -->
                             </tr>
-                            <tr style="background-color: #31869B; color: white;">
-                                <td colspan="2" style="padding: 10px; font-weight: bold;">Evaluación:</td>
-                            </tr>
                             <tr>
-                                <td colspan="2" style="padding: 10px; background-color: white; height: 100px;">
-                                    <t t-if="o.description">
-                                        <div t-raw="o.description"/>
-                                    </t>
-                                    <t t-else=""/>
-                                </td> <!-- Fila de Evaluación con una sola columna que ocupa todo el ancho -->
+                                <td colspan="2" style="background-color: #31869B; color: white; padding: 10px; font-weight: bold; font-size: 28px; text-align: center;">
+                                    Evaluación
+                                </td>
                             </tr>
+                            <t t-foreach="o.tyt_line_ids" t-as="line">
+                                <tr>
+                                    <!-- Nombre de la cláusula -->
+                                    <td style="padding: 10px; font-weight: bold; background-color: #E7F5E5; width: 30%;">
+                                        <t t-esc="line.clause_id.name"/>
+                                    </td>
+                                    <!-- Comentario -->
+                                    <td style="padding: 10px; background-color: white; width: 70%;">
+                                        <t t-esc="line.comment"/>
+                                    </td>
+                                </tr>
+                            </t>
                         </table>
                         <!-- Sección de Evidencias -->
                         <table style="width: 100%; border-collapse: collapse; margin-top: 20px; font-size: 21px;">
