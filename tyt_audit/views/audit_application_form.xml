@@ -110,7 +110,7 @@
                                     <td><strong>HALLAZGO:</strong></td>
                                     <td>
                                         <!--disabled="true" (equivalente a "readonly")-->
-                                        <select class="form-control" name="finding" disabled="true">
+                                        <select class="form-control" name="finding">
                                             <option t-att-selected="not audit.get('finding')" value="">Sin Seleccionar</option>
                                             <option t-att-selected="'good_practices' == audit.get('finding', 'good_practices')" value="good_practices">Buenas Prácticas</option>
                                             <option t-att-selected="'non_conformity' == audit.get('finding', 'non_conformity')" value="non_conformity">No Conformidad</option>

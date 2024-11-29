@@ -86,6 +86,9 @@ class AuditApplicationController(http.Controller):
             # Actualizar 'non_conformity_wording' solo si existe en los datos POST
             if "non_conformity_wording" in kwargs:
                 update_values["non_conformity_wording"] = kwargs.get("non_conformity_wording", "").strip()
+            # Capturar y guardar `finding`
+            if "finding" in kwargs:
+                update_values["finding"] = kwargs.get("finding", "").strip()
 
             planning_record.write(update_values)
 
