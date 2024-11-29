@@ -103,7 +103,7 @@
                                 </tr>
                                 <tr>
                                     <td colspan="2">
-                                        <textarea class="form-control" name="non_conformity_wording" rows="6" maxlength="500" style="resize: none;"><t t-esc="audit['non_conformity_wording']"/></textarea>
+                                        <textarea class="form-control" name="comment" rows="6" maxlength="500" style="resize: none;"><t t-esc="audit['comment']"/></textarea>
                                     </td>
                                 </tr>
                                 <tr>
