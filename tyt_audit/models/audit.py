@@ -86,6 +86,19 @@ class AuditPlanning(models.Model):
         string='Norma ISO 9001:2015'
     )
 
+    iso_9001_combined_names = fields.Text(
+        string='Norma ISO 9001:2015 (Denominación completa)',
+        compute='_compute_iso_9001_combined_names',
+        store=True
+    )
+
+    @api.depends('iso_9001_standards_ids')
+    def _compute_iso_9001_combined_names(self):
+        for record in self:
+            # Combina los nombres de todas las normas seleccionadas
+            combined_names = ', '.join(record.iso_9001_standards_ids.mapped('combined_name'))
+            record.iso_9001_combined_names = combined_names
+
     clause_id = fields.Many2one(
         string='Cláusula',
         comodel_name='audit.audit.planning.clause'
