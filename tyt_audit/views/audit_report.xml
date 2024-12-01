@@ -76,11 +76,6 @@
                             <field name="post_audit_action" widget="html" />
                         </group>
                     </page>
-                    <page name="conclusions" string="Descripción">
-                        <group>
-                            <field name="description" widget="html" />
-                        </group>
-                    </page>
                 </xpath>               
             </field>
         </record>

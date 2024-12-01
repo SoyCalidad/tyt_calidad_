@@ -83,9 +83,12 @@ class AuditApplicationController(http.Controller):
                 'evidence_attachment_ids': [(4, attachment_id) for attachment_id in attachment_ids],
             }
 
-            # Actualizar 'non_conformity_wording' solo si existe en los datos POST
-            if "non_conformity_wording" in kwargs:
-                update_values["non_conformity_wording"] = kwargs.get("non_conformity_wording", "").strip()
+            # Actualizar 'comment' solo si existe en los datos POST
+            if "comment" in kwargs:
+                update_values["comment"] = kwargs.get("comment", "").strip()
+            # Capturar y guardar `finding`
+            if "finding" in kwargs:
+                update_values["finding"] = kwargs.get("finding", "").strip()
 
             planning_record.write(update_values)
 
@@ -106,7 +109,7 @@ class AuditApplicationController(http.Controller):
         audit_week = planning_record.audit_audit_id.audited_week or "0"
         audit_date = planning_record.audit_audit_id.audit_date or "Sin Fecha"
         center = planning_record.audit_audit_id.tyt_sites_related_id.display_name or "Sin Sitio"
-        non_conformity_wording = planning_record.non_conformity_wording or ""
+        comment = planning_record.comment or ""
 
         # Obtener todas las URLs válidas desde los botones "Generar Auditoría"
         valid_urls = self.get_valid_urls(audit_audit_id)
@@ -134,7 +137,7 @@ class AuditApplicationController(http.Controller):
                 "audit_week": audit_week or "",
                 "audit_date": audit_date or "",
                 "center": center or "",
-                "non_conformity_wording": non_conformity_wording or "",
+                "comment": comment or "",
             },
             "audit_form_id": audit_form_id,
             "audit_audit_id": audit_audit_id,

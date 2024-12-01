@@ -225,58 +225,72 @@ class IndividualReport(models.AbstractModel):
                 sheet2.write('E13', 'Semanas * Auditar', title_format)
                 sheet2.write('F13', 'AUDITORIAS A COMPARTIR POR PROCESO', title_format)
 
-                # ACTIVIDADES Columna "C"
-                datos = [
-                    "AUDITORÍA PROCEDIMIENTO PARA CAPACITACIÓN EN SITIO",
-                    "AUDITORÍA PROCEDIMIENTO PARA APLICACIÓN DE SANCIONES",
-                    "AUDITORÍA PROCEDIMIENTO PARA CURSO DE REFUERZO",
-                    "PROCEDIMIENTO PARA MONITOREO DEL SERVICIO",
-                    "AUDITORÍA PROCEDIMIENTO PARA MANTENIMIENTO EN SITIO",
-                    "AUDITORÍA PROCEDIMIENTO PARA GESTIÓN DE SEGURIDAD EN SITIO",
-                    "AUDITORÍA DE SEGURIDAD INFORMÁTICA   (lector de discos, usb, acceso a otras páginas)",
-                    "AUDITORÍA PROCEDIMIENTO PARA GESTIÓN DE SOPORTE TÉCNICO",
-                    "AUDITORÍA PROCEDIMIENTO PARA GESTIÓN DE OPERACIONES",
-                    "AUDITORÍA PROCEDIMIENTO PARA CARGA Y ANÁLISIS DE BASE",
-                    "AUDITORIA PLAN DE DESARROLLO PROFESIONAL",
-                    "AUDITORÍA PROCEDIMIENTO PARA RECLUTAMIENTO EN SITIO",
-                    "AUDITORÍA PROCEDIMIENTO PARA GESTIÓN DE LIMPIEZA EN SITIO",
-                    "AUDITORÍA PROCEDIMIENTO PARA ELABORACIÓN DE NÓMINA",
-                    "AUDITORÍA PROCEDIMIENTO PARA CONTROL DE BAJAS",
-                    "AUDITORÍA PROCEDIMIENTO PARA ADMINISTRACIÓN DE CAJA CHICA",
-                    "AUDITORÍA PROCEDIMIENTO PARA SELECCIÓN DE PERSONAL ADMINISTRATIVO",
-                    "AUDITORÍA DISTRIBUCIÓN EN NOMINA",
-                    "AUDITORIA GAFETE CON LA NUEVA CULTURA ORGANIZACIONAL A TODO EL PERSONAL EN SITIO",
-                    "AUDITORÍA A POLÍTICA DE LOCKERS",
-                    "AUDITORÍA DE LA ESTANDARIZACIÓN DEL TRABAJO (72 / 48 / 36 HRS) (VALIDAR PUESTO REGISTRADO Y HORARIO DETERMINADO PARA EL MISMO)",
-                    "AUDITORÍA A  CÓDIGO DE VESTIMENTA",
-                    "FILOSOFIA ORGANIZACIONAL (SOLICITAR BASE DE EMPLEADOS A RH PARA SELECCIÓN DEL 30% > 1 MES DE ANTIGÜEDAD) (MISIÓN, VISIÓN, VALORES Y POLÍTICA DE CALIDAD)",
-                    "AUDITORIA CULTURA ORGANIZACIONAL (ORGANIGRAMA / NOMBRES PUESTOS / JERARQUÍA) (30% ADMIN)",
-                    "AUDITORÍA A PLACAS DE RESPONSABLES",
-                    "AUDITORÍA A FIRMA DE MAIL CON NUEVA CULTURA ORGANIZACIONAL SÓLO A GERENTE DE SITIO, RESPONSABLE DE CALIDAD, TÉCNICO DE CALIDAD, ENTRENADOR DE SITIO, RESPONSABLE RH Y ADM, RECLUTADOR DE SITIO, GUARDIA DE SEGURIDAD, RESPONSABLE DE OPERACIONES, SUPERVISOR DE OPERACIONES, RESPONSABLE DE ANALISTAS, ANALISTA DE OPERACIÓN, SOPORTE TÉCNICO DE SISTEMAS.",
-                    "AUDITORÍA SOBRE USO DE ESTACIONAMIENTO",
-                    "ARQUEO (LUNES TODAS LAS SEMANAS)",
-                    "AUDITORIA CLIMAS SITE",
-                    "AUDITORIA ERRORES DE NOMINA",
-                    "AUDITORIA ERRORES DE EXPEDIENTES",
+                # Fila inicial para las descripciones y actividades
+                fila_inicial = 13  # Fila 13
+                columna_actividad = 2  # Columna C
+
+                # Obtener las descripciones y actividades dinámicamente
+                descriptions = self.env['audit.plan.schedule.descriptions'].search([])
+
+                # Colores cíclicos para descripciones
+                color_formats = [
+                    vertical_description_1,
+                    vertical_description_2,
+                    vertical_description_3,
+                    vertical_description_4,
+                    vertical_description_5,
+                    vertical_description_6,
                 ]
 
-                # Fila y columna inicial (0-indexado). C14 corresponde a fila 13, columna 2
-                fila_inicial = 13  # Fila 14
-                columna = 2        # Columna C
+                # Recorrer las descripciones y asociarlas con actividades
+                for idx, description in enumerate(descriptions):
+                    # Obtener actividades asociadas a la descripción
+                    activities = self.env['audit.plan.schedule.activities'].search([
+                        ('description_id', '=', description.id)
+                    ])
+                    
+                    if not activities:
+                        continue  # Si no hay actividades, pasa a la siguiente descripción
 
-                # Insertar cada Actividad en cada celda correspondiente
-                for index, texto in enumerate(datos):
-                    fila = fila_inicial + index
-                    sheet2.write(fila, columna, texto, row_format)
+                    # Asignar color cíclico para la descripción
+                    color_format = color_formats[idx % len(color_formats)]
+
+                    # Determinar la fila final para esta descripción
+                    fila_final = fila_inicial + len(activities) - 1
+
+                    # Escribir la descripción en la columna B (ajustada a las actividades)
+                    sheet2.merge_range(f'B{fila_inicial + 1}:B{fila_final + 1}', description.name, color_format)
+
+                    # Función para calcular altura adaptable
+                    def calculate_row_height(text, column_width, base_height=22.5):
+                        # Estimar cuántas líneas se necesitarán
+                        lines = ceil(len(text) / (column_width * 1.2))  # Ajuste empírico (1.2 para márgenes y espacios)
+                        return base_height * lines  # Multiplicar por el número de líneas
+
+                    # Escribir actividades en la columna C y ajustar el alto de fila
+                    for index, activity in enumerate(activities):
+                        fila = fila_inicial + index
+                        sheet2.write(fila, columna_actividad, activity.name, row_format)
+                        
+                        # Calcular la altura de la fila según el contenido
+                        text_length = len(activity.name or "")  # Longitud del texto
+                        column_width = 56  # Ancho de la columna configurado
+                        row_height = calculate_row_height(activity.name, column_width)
+                        
+                        # Ajustar la altura de la fila
+                        sheet2.set_row(fila, row_height)
+
+                    # Avanzar la fila inicial para la próxima descripción
+                    fila_inicial = fila_final + 1  # Continúa desde la siguiente fila
 
 
                 # "DESCRIPCIONES" columna B
-                sheet2.merge_range('B14:B17', 'CALIDAD', vertical_description_1)
-                sheet2.merge_range('B18:B21', 'SISTEMAS', vertical_description_2)
-                sheet2.merge_range('B22:B25', 'OP', vertical_description_3)
-                sheet2.merge_range('B26:B31', 'RECURSOS HUMANOS', vertical_description_4)
-                sheet2.merge_range('B32:B40', 'REGLAMENTO INTERNO', vertical_description_5)
-                sheet2.merge_range('B41:B44', 'ADICIONALES', vertical_description_6)
+                # sheet2.merge_range('B14:B17', 'CALIDAD', vertical_description_1)
+                # sheet2.merge_range('B18:B21', 'SISTEMAS', vertical_description_2)
+                # sheet2.merge_range('B22:B25', 'OP', vertical_description_3)
+                # sheet2.merge_range('B26:B31', 'RECURSOS HUMANOS', vertical_description_4)
+                # sheet2.merge_range('B32:B40', 'REGLAMENTO INTERNO', vertical_description_5)
+                # sheet2.merge_range('B41:B44', 'ADICIONALES', vertical_description_6)
 
 
             # ======= IMPRIMIR HEADER :FECHAS PROGRAMADAS (audit.plan.schedule.line)=======

@@ -134,11 +134,6 @@ class AuditPlanning(models.Model):
         string='Evaluación'
         )
 
-    non_conformity_wording = fields.Text(
-        string='Non-Conformity Wording'
-        )
-
-
     tyt_procedure_description_id = fields.Many2one(
         string='Procedimiento',
         comodel_name='audit.plan.schedule.descriptions',

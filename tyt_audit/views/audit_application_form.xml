@@ -103,14 +103,14 @@
                                 </tr>
                                 <tr>
                                     <td colspan="2">
-                                        <textarea class="form-control" name="non_conformity_wording" rows="6" maxlength="500" style="resize: none;"><t t-esc="audit['non_conformity_wording']"/></textarea>
+                                        <textarea class="form-control" name="comment" rows="6" maxlength="500" style="resize: none;"><t t-esc="audit['comment']"/></textarea>
                                     </td>
                                 </tr>
                                 <tr>
                                     <td><strong>HALLAZGO:</strong></td>
                                     <td>
                                         <!--disabled="true" (equivalente a "readonly")-->
-                                        <select class="form-control" name="finding" disabled="true">
+                                        <select class="form-control" name="finding">
                                             <option t-att-selected="not audit.get('finding')" value="">Sin Seleccionar</option>
                                             <option t-att-selected="'good_practices' == audit.get('finding', 'good_practices')" value="good_practices">Buenas Prácticas</option>
                                             <option t-att-selected="'non_conformity' == audit.get('finding', 'non_conformity')" value="non_conformity">No Conformidad</option>
