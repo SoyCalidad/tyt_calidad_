@@ -5,7 +5,8 @@
             <field name="model">audit.audit.planning</field>
             <field name="arch" type="xml">
                 <tree editable="top">
-                    <field name="iso_9001_standards_ids"  />
+                    <field name="iso_9001_standards_ids" widget="many2many_tags"/>
+                    <field name="iso_9001_combined_names" widget="text" optional="hide" />
                     <field name="clause_id" />
                     <field name="new_job_id" string="Responsable"/>
                     <field name="verification" />
@@ -14,6 +15,10 @@
                     <field name="evidence_attachment_ids" widget="many2many_tags"/>
                     <field name="comment" />
                     <field name="evaluation" />
+                    <button name="action_open_audit_application_form"
+                        string="Generar Auditoría"
+                        type="object"
+                        class="btn-primary oe_highlight" />
                 </tree>
             </field>
         </record>
