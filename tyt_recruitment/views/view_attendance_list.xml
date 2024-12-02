@@ -1,0 +1,139 @@
+<odoo>
+  <data>
+    <!-- list attendance -->
+    <record model="ir.ui.view" id="tyt_recruitment.attendance_list">
+      <field name="name">Lista de asistencia</field>
+      <field name="model">tyt_recruitment.attendance</field>
+      <field name="arch" type="xml">
+        <tree>
+          <field name="id"/>
+          <field name="campaign_id"/>
+          <field name="requisition_id"/>
+          <field name="trainer"/>
+          <field name="recruiter"/>
+          <field name="turn"/>
+        </tree>
+      </field>
+    </record>
+
+    <!-- form attendance -->
+    <record id="view_attendance_form" model="ir.ui.view">
+      <field name="name">Formulario de Asistencia</field>
+      <field name="model">tyt_recruitment.attendance</field>
+      <field name="arch" type="xml">
+        <form string="Asistencia">
+        
+            <group col="6">
+              <group >
+                <field name="trainer"/>
+                <field name="center"/>
+                <field name="campaign"/>
+                <field name="week"/>
+                <field name="turn"/>
+                <field name="days"/>
+              </group>
+              <group >
+                <field name="income"/>
+                <field name="certificates"/>
+                <field name="returns"/>
+                <field name="effectiveness"/>
+              </group>
+              <group >
+                <separator string="Custom Data"/>
+                <div style="display: flex; flex-wrap: wrap; gap: 10px;">
+                  <div class="o_form_label" style="flex: 0 0 50%;"><span>A</span></div>
+                  <div class="o_form_label" style="flex: 0 0 50%;"><span>B</span></div>
+                  <div class="o_form_label" style="flex: 0 0 50%;"><span>C</span></div>
+                  <div class="o_form_label" style="flex: 0 0 50%;"><span>D</span></div>
+                </div>
+              </group>
+            </group>
+            <notebook>
+            <page string="Lista de asistencia">
+              <field name="attendance_days_of_week_ids" nolabel="1" options="{'no_create': True}">
+                  <tree editable="bottom">
+                    <field name="applicant_name" width="30px" />
+                    <field name="day1" width="30px" attrs="{'column_invisible': [('parent.days', '&lt;', 1)]}"/>
+                    <field name="day2" width="30px" attrs="{'column_invisible': [('parent.days', '&lt;', 2)]}"/>
+                    <field name="day3" width="30px" attrs="{'column_invisible': [('parent.days', '&lt;', 3)]}"/>
+                    <field name="day4" width="30px" attrs="{'column_invisible': [('parent.days', '&lt;', 4)]}"/>
+                    <field name="day5" width="30px" attrs="{'column_invisible': [('parent.days', '&lt;', 5)]}"/>
+                    <field name="day6" width="30px" attrs="{'column_invisible': [('parent.days', '&lt;', 6)]}"/>
+                    <field name="day7" width="30px" attrs="{'column_invisible': [('parent.days', '&lt;', 7)]}"/>
+                    <field name="day8" width="30px" attrs="{'column_invisible': [('parent.days', '&lt;', 8)]}" />
+                    <field name="day9" width="30px" attrs="{'column_invisible': [('parent.days', '&lt;', 9)]}" />
+                    <field name="day10" width="30px" attrs="{'column_invisible': [('parent.days', '&lt;', 10)]}" />
+                    <field name="day11" width="30px" attrs="{'column_invisible': [('parent.days', '&lt;', 11)]}" />
+                    <field name="day12" width="30px" attrs="{'column_invisible': [('parent.days', '&lt;', 12)]}" />
+                    <field name="day13" width="30px" attrs="{'column_invisible': [('parent.days', '&lt;', 13)]}" />
+                    <field name="day14" width="30px" attrs="{'column_invisible': [('parent.days', '&lt;', 14)]}" />
+                    <field name="day15" width="30px" attrs="{'column_invisible': [('parent.days', '&lt;', 15)]}" />
+                    <field name="day16" width="30px" attrs="{'column_invisible': [('parent.days', '&lt;', 16)]}" />
+                    <field name="day17" width="30px" attrs="{'column_invisible': [('parent.days', '&lt;', 17)]}" />
+                    <field name="day18" width="30px" attrs="{'column_invisible': [('parent.days', '&lt;', 18)]}" />
+                    <field name="day19" width="30px" attrs="{'column_invisible': [('parent.days', '&lt;', 19)]}" />
+                    <field name="day20" width="30px" attrs="{'column_invisible': [('parent.days', '&lt;', 20)]}" />
+                  </tree>
+                </field>                  
+            </page>
+            <page string="Exámenes">
+              <group>
+                <field name="examen1" string="Primer examen" />
+                <field name="examen2" string="Segudno examen" />
+                <field name="examen3" string="Tercero examen" />
+                <field name="examen4" string="Cuarto examen" />
+              </group>
+            </page>
+            </notebook>
+        </form>
+      </field>
+    </record>
+    
+    <!-- list tag attendance -->
+    <record model="ir.ui.view" id="tyt_recruitment.tag_attendance_list">
+      <field name="name">Lista de estados de asistencia</field>
+      <field name="model">tyt_recruitment.tag_attendance</field>
+      <field name="arch" type="xml">
+        <tree>
+          <field name="id"/>
+          <field name="name"/>
+          <field name="tag"/>
+        </tree>
+      </field>
+    </record>
+
+    <!-- actions opening views on models -->
+
+    <record model="ir.actions.act_window" id="tyt_recruitment_action_window_attendance">
+      <field name="name">Asistencias</field>
+      <field name="res_model">tyt_recruitment.attendance</field>
+      <field name="view_mode">tree,form</field>
+    </record>
+
+    <record model="ir.actions.act_window" id="tyt_recruitment_action_window_tag_attendance">
+      <field name="name">Etiqueta de asistencia </field>
+      <field name="res_model">tyt_recruitment.tag_attendance</field>
+      <field name="view_mode">tree,form</field>
+    </record>
+
+    <!-- Top menu item -->
+
+    <menuitem id="menu_custom_attendance"
+      name="Capacitación"
+      parent="hr_recruitment.menu_hr_recruitment_root"
+      sequence="22"
+    />
+
+    <menuitem id="menu_custom_attendance_lista"
+      name="Lista de asistencia"
+      parent="menu_custom_attendance"
+      action="tyt_recruitment_action_window_attendance"
+    />
+
+    <menuitem id="menu_custom_attendance_tag"
+      name="Etiqueta de asistencia"
+      parent="menu_custom_attendance"
+      action="tyt_recruitment_action_window_tag_attendance"
+    />
+  </data>
+</odoo>

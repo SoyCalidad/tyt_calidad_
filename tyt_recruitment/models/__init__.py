@@ -5,5 +5,7 @@ from . import (
     job_application,
     question,
     health_survey,
-    expedient
+    expedient,
+    attendance,
+    wizard_attendance
 )

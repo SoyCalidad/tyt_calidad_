@@ -20,27 +20,20 @@ class HealthSurvey(models.Model):
     code = fields.Char(string='Código', tracking=True)
     question_ids = fields.One2many("survey.question", 'health_survey_id', string='Preguntass', tracking=True, store=True)
 
-    # @api.model
-    # def default_get(self, fields_list):
-    #     pass
-
-    # @api.model
-    # def create(self, vals):
-    #     pass
-
 class SurveyQuestion(models.Model):
     _inherit = 'survey.question'
 
     extra_input = fields.Char(string='Título del campo extra')
     extra_input_enabled = fields.Boolean(string='Habilitado')
 
-    health_survey_id = fields.Many2one('tyt_recruitment.health_survey', string="Pregunta")
+    health_survey_id = fields.Many2one('tyt_recruitment.health_survey', string="Pregunta", ondelete='cascade')
 
 class CompleteSurvey(models.Model):
     _name = 'tyt_recruitment.complete_survey'
     _description = 'Encuesta completa'
 
     state = fields.Selection([('draft', "PorEnviar"),('sent', "Enviado"),], string="Estado", default='draft')
+    recruiter_comments = fields.Char(string="Comentarios del reclutador")
     signature_image = fields.Binary(string="Firma del solicitante")
     job_application_id = fields.Many2one("tyt_recruitment.job_application", string="Aplicaicón de trabajo")
     survey_answer_ids = fields.One2many('tyt_recruitment.survey_answer', 'complete_survey_id', string="Respuestas")
@@ -54,11 +47,11 @@ class SurveyAnswer(models.Model):
     multiple_ids = fields.One2many("tyt_recruitment.multiple_answer", 'survey_answer_id', string='Respuestas multiples', tracking=True, store=True)
 
     question_id = fields.Many2one("survey.question", string="Pregunta")
-    complete_survey_id = fields.Many2one("tyt_recruitment.complete_survey", string="Encuesta completa")
+    complete_survey_id = fields.Many2one("tyt_recruitment.complete_survey", string="Encuesta completa", ondelete='cascade')
 
 class MultipleAnswer(models.Model):
     _name = 'tyt_recruitment.multiple_answer'
     _description = 'Multiple respuesta'
 
     text = fields.Char(string="Respuesta detalle")
-    survey_answer_id = fields.Many2one('tyt_recruitment.survey_answer', string='Respuesta')
+    survey_answer_id = fields.Many2one('tyt_recruitment.survey_answer', string='Respuesta', ondelete='cascade')

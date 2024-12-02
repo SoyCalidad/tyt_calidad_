@@ -488,7 +488,7 @@
                         <div class="row">
                             <div class="col-sm-6 col-md-6 col-lg-6 col-xl-6 col-xxl-6 p-4 border">
                                 <h3>COMENTARIOS DEL RECLUTADOR</h3>
-                                <textarea class="form-control" id="daily_activities" name="daily_activities"></textarea>
+                                <textarea class="form-control" id="recruiter_comments" name="recruiter_comments"></textarea>
                             </div>
                             <div class="col-sm-6 col-md-6 col-lg-6 col-xl-6 col-xxl-6 p-4 border">
                                 <label for="signature" class="form-label">Firma del solicitante:</label>
