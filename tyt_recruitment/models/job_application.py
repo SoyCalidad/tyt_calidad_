@@ -9,13 +9,13 @@ _logger = logging.getLogger(__name__)
 class JobApplication(models.Model):
     _name = 'tyt_recruitment.job_application'
     _description = 'tyt_recruitment.job_application'
+    _inherit = ['mail.thread']
     _rec_name = 'id'
 
     request_date = fields.Date(string='Fecha')
     requisition = fields.Char(string='Requisición')
     site = fields.Char(string='Sitio')
 
-    state = fields.Selection([('authorize', "Sí"),('noauthorize', "No"),], string="Autorizado", required=True, tracking=True, default='noauthorize')
     signature_image = fields.Binary(string="Firma del solicitante")
 
     # Campos relacionados para acceder al nombre y apellidos del aplicante
@@ -32,6 +32,7 @@ class JobApplication(models.Model):
 
     campaign_id = fields.Many2one('tyt_recruitment.campaign', string="Campaña")
     applicant_id = fields.Many2one('tyt_recruitment.applicant')
+    applicant_status = fields.Boolean( related="applicant_id.status", string="Aprobado", required=True, tracking=True)
 
     academics_ids = fields.One2many('tyt_recruitment.data_academic', 'job_application_id', string="Formación académica")
     children_ids = fields.One2many('tyt_recruitment.child', 'job_application_id', string="Hijos")
@@ -106,7 +107,7 @@ class JobApplication(models.Model):
     snn_state = fields.Boolean(string="Estado", default=False)
     snn_approved = fields.Boolean(string="Estado", default=False)
 
-    interbank_key = fields.Binary(string="Clave interbancaria")
+    interbank_key = fields.Binary(string="Clabe interbancaria")
     interbank_key_filename = fields.Char(string="Nombre del Archivo")
     interbank_key_state = fields.Boolean(string="Estado", default=False)
     interbank_key_approved = fields.Boolean(string="Estado", default=False)
@@ -117,6 +118,8 @@ class JobApplication(models.Model):
     value_proposition_approved = fields.Boolean(string="Estado", default=False)
 
     expedient_status = fields.Boolean(string="Estado de carga", default=False)
+    status_approved = fields.Float(string="Estado testing", default=0)
+    status_loaded = fields.Float(string="Estado testing", default=0)
 
     @api.onchange(
         'birth_certificate', 
@@ -136,24 +139,28 @@ class JobApplication(models.Model):
     )
     def _onchange_check_all_files(self):
         
-        all_fields_filled = all([
-            self.birth_certificate, 
-            self.rfc, 
-            self.curp, 
-            self.study_certificate,
-            self.proposed_letter,
-            self.ine,
-            self.reference_validation,
-            self.health_survey,
-            self.job_application,
-            self.utility_bill,
-            self.psychometric,
-            self.snn,
-            self.interbank_key,
-            self.value_proposition
+        all_fields_filled = sum([
+            bool(self.birth_certificate), 
+            bool(self.rfc), 
+            bool(self.curp), 
+            bool(self.study_certificate),
+            bool(self.proposed_letter),
+            bool(self.ine),
+            bool(self.reference_validation),
+            bool(self.health_survey),
+            bool(self.job_application),
+            bool(self.utility_bill),
+            bool(self.psychometric),
+            bool(self.snn),
+            bool(self.interbank_key),
+            bool(self.value_proposition)
         ])
         
-        self.expedient_status = all_fields_filled
+        self.status_loaded = (all_fields_filled/14)*100
+        if all_fields_filled == 14:
+            self.expedient_status = True
+        else:
+            self.expedient_status = False
 
     @api.onchange(
         'birth_certificate_approved', 
@@ -173,7 +180,7 @@ class JobApplication(models.Model):
     )
     def _onchange_check_all_files_approved(self):
         
-        all_fields_approved = all([
+        all_fields_approved = sum([
             self.birth_certificate_approved, 
             self.rfc_approved, 
             self.curp_approved, 
@@ -189,9 +196,11 @@ class JobApplication(models.Model):
             self.interbank_key_approved,
             self.value_proposition_approved
         ])
-        if all_fields_approved:
-            self.state = 'authorize'
+        self.status_approved = (all_fields_approved/14)*100
+        if all_fields_approved == 14:
             self.applicant_id.status = True
+        else:
+            self.applicant_id.status = False
 
     def action_open_health_survey(self):
 
@@ -266,10 +275,14 @@ class Applicant(models.Model):
     foreign_nationality = fields.Boolean(string="Cuenta con nacionalidad extranjera")
     daily_activities = fields.Text(string="Describa sus actividades diarias")
 
+    recruiter_comments = fields.Char(string="Comentarios del reclutador")
+
     status = fields.Boolean(string="Status")
 
     # Campaña
     campaign_id = fields.Many2one('tyt_recruitment.campaign', string="Campaña")
+    campaign_turn = fields.Selection(related="campaign_id.turn", string="Turno")
+    campaign_recruiter = fields.Many2one(related="campaign_id.recruiter_id", string="Reclutador")
 
     def show_job_application(self):
 
@@ -296,7 +309,7 @@ class DataAcademic(models.Model):
     institution = fields.Char(string="Institución académica")
     specification = fields.Char(string="Comprobante de estudio")
 
-    job_application_id = fields.Many2one('tyt_recruitment.job_application', string="Referencias")
+    job_application_id = fields.Many2one('tyt_recruitment.job_application', string="Referencias", ondelete='cascade')
 
 class FamilyDataDetail(models.Model):
     _name = 'tyt_recruitment.family_data_detail'
@@ -317,7 +330,7 @@ class JobHistory(models.Model):
     separation_reason = fields.Char(string="Motivo de serparación")
     weekly_salary = fields.Char(string="Salario semanal")
 
-    job_application_id = fields.Many2one('tyt_recruitment.job_application', string="Solicitud")
+    job_application_id = fields.Many2one('tyt_recruitment.job_application', string="Solicitud", ondelete='cascade')
 
 class JobReference(models.Model):
     _name = 'tyt_recruitment.reference'
@@ -328,7 +341,7 @@ class JobReference(models.Model):
     occupation = fields.Char(string="Ocupación/Giro")
     phone_number = fields.Char(string="Teléfono")
 
-    job_application_id = fields.Many2one('tyt_recruitment.job_application', string="Referencias")
+    job_application_id = fields.Many2one('tyt_recruitment.job_application', string="Referencias", ondelete='cascade')
 
 class Child(models.Model):
     _name = 'tyt_recruitment.child'
@@ -337,4 +350,4 @@ class Child(models.Model):
     name = fields.Char(string="Nombre")
     age = fields.Char(string="Edad") 
 
-    job_application_id = fields.Many2one('tyt_recruitment.job_application', string="Aplicante")
+    job_application_id = fields.Many2one('tyt_recruitment.job_application', string="Aplicante", ondelete='cascade')

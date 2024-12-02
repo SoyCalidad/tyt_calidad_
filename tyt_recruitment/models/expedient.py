@@ -19,7 +19,7 @@ class Expedient(models.Model):
     utility_bill = fields.Many2one('tyt_recruitment.expedient_file', string="Comprobante de domicilio")
     psychometric = fields.Many2one('tyt_recruitment.expedient_file', string="Psicométrico")
     snn = fields.Many2one('tyt_recruitment.expedient_file', string="SNN")
-    interbank_key = fields.Many2one('tyt_recruitment.expedient_file', string="Clave interbancaria")
+    interbank_key = fields.Many2one('tyt_recruitment.expedient_file', string="Clabe interbancaria")
     value_proposition = fields.Many2one('tyt_recruitment.expedient_file', string="Propuesta de valor")
 
 class ExpedientFile(models.Model):

@@ -1,6 +1,7 @@
 <odoo>
   <data>
 
+    <!-- Applicant List -->
     <record id="view_applicant_tree" model="ir.ui.view">
       <field name="name">Applicant Tree</field>
       <field name="model">tyt_recruitment.applicant</field>
@@ -16,6 +17,35 @@
               <field name="rfc"/>
               <field name="curp"/>
           </tree>
+      </field>
+    </record>
+
+    <!-- Applicant Form -->
+    <record id="template_applicants" model="ir.ui.view">
+      <field name="name">tyt_recruitment.model.applicants.form</field>
+      <field name="model">tyt_recruitment.applicant</field>
+      <field name="arch" type="xml">
+        <tree string="Lista">
+          <field name="last_name_father"/>
+          <field name="last_name_mother"/>
+          <field name="name"/>
+          <field name="campaign_id"/>
+          <field name="campaign_turn"/>
+          <field name="campaign_recruiter"/>
+          <field name="employee_number"/>
+          <field name="number_phone"/>
+          <field name="birthdate"/>
+          <field name="birthplace"/>
+          <field name="rfc"/>
+          <field name="curp"/>
+          <field name="social_security_number"/>
+          <field name="status"/>
+          <button 
+            name="show_job_application" 
+            string="Ver aplicación" 
+            type="object" 
+            class="oe_highlight" />
+        </tree>
       </field>
     </record>
 
@@ -40,8 +70,8 @@
           <field name="requisition"/>
           <field name="site"/>
           <field name="campaign_id"/>
-          <field name="complete_survey_id"/>
           <field name="has_complete_survey"/>
+          <field name="applicant_status"/>
           <button 
             name="action_open_health_survey" 
             string="Encuesta de salud" 
@@ -78,7 +108,7 @@
       </field>
     </record>
 
-    <!-- Formulario para encuesta completa -->
+    <!-- Encuesta completa -->
     <record model="ir.ui.view" id="tyt_recruitment_complete_survey_form">
       <field name="name">Formulario Encuesta de Salud completa</field>
       <field name="model">tyt_recruitment.complete_survey</field>
@@ -87,7 +117,7 @@
           <sheet>
             <group string="Información de la Encuesta">
               <field name="id" string="Fecha"/>
-              <field name="state" string="Estado"/>
+              <field name="state" string="Estado" />
             </group>
 
             <group string="Respuestas">
@@ -100,6 +130,9 @@
                   <field name="multiple_ids" />
                 </tree>
               </field>
+            </group>
+            <group string="Comentarios del reclutador">
+              <field name="recruiter_comments" />
             </group>
             <group>
               <field name="signature_image" widget="image" class="oe_avatar" style="width: 300px; height: auto;" />
@@ -125,13 +158,13 @@
                 <field name="applicant_id"/>
               </group>
               <group>
-                <field name="state" />
+                <field name="applicant_status" widget="toggle" />
                 <field name="signature_image" widget="image" class="oe_avatar" style="width: 300px; height: auto;" />
               </group>
             </group>
 
             <group string="Encuesta de Salud" colspan="2">
-              <field name="has_complete_survey" />
+              <field name="has_complete_survey" widget="toggle" />
               <field name="complete_survey_id" readonly="1">
                 <tree>
                   <field name="id" width="120px"/>
@@ -189,10 +222,15 @@
               </page>
               <page string="Expediente">
                 <div class="oe_title">
-                  <h3>Bienvenido al módulo de reclutamiento</h3>
+                  <h3>Estatus de carga</h3>
                   <field name="expedient_status" invisible="1" />
                   <span attrs="{'invisible': [('expedient_status', '=', False)]}"> Completo </span>
                   <span attrs="{'invisible': [('expedient_status', '=', True)]}"> En proceso </span>
+                  <field name="status_loaded" widget="progressbar" />
+                  <h3>Estatus de aprobación</h3>
+                  <span attrs="{'invisible': [('applicant_status', '=', False)]}"> Completo </span>
+                  <span attrs="{'invisible': [('applicant_status', '=', True)]}"> En proceso </span>
+                  <field name="status_approved" widget="progressbar" />
                 </div>
                 <div class="oe_text">
                   <p>Por favor, revisa todos los documentos antes de continuar con el proceso.</p>
@@ -393,7 +431,7 @@
                       </tr>
                       <tr>
                         <td> 13 </td>
-                        <td> CLAVE INTERBANCARIA </td>
+                        <td> CLABE INTERBANCARIA </td>
                         <td> 
                           <field name="interbank_key_state" invisible="1" />
                           <span attrs="{'invisible': [('interbank_key', '=', False)]}">Ok</span>
@@ -427,6 +465,9 @@
               </page>
             </notebook>
           </sheet>
+          <div class="oe_chatter">
+            <field name="message_ids" widget="mail_thread" />
+          </div>
         </form>
       </field>
     </record>

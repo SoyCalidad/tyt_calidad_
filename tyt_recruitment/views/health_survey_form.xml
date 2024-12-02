@@ -234,7 +234,7 @@
                         <div class="row">
                             <div class="col-sm-6 col-md-6 col-lg-6 col-xl-6 col-xxl-6 p-4 border cell1">
                                 
-                                <textarea class="form-control" id="daily_activities" name="daily_activities" style="height: 100%;"></textarea>
+                                <textarea class="form-control" id="recruiter_comments" name="recruiter_comments" style="height: 100%;"></textarea>
                             </div>
                             <div class="col-sm-6 col-md-6 col-lg-6 col-xl-6 col-xxl-6 p-4 border cell1">
                                 <label for="signature" class="form-label">Firma del solicitante:</label>

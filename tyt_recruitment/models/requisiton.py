@@ -18,9 +18,10 @@ class Requisition(models.Model):
     _inherit = ['mail.thread', 'mail.activity.mixin', 'iso_base.email_basic']
 
     request_date = fields.Date(required=True, string="Fecha de solicitud", tracking=True)
-    closing_date = fields.Date(required=True, string="Fecha de cierre", tracking=True)
+    closing_date = fields.Date(required=True, string="Fecha de cierre", readonly=True, tracking=True)
     state = fields.Selection([('draft', "En creación"),('sent', "Enviado"),], string="Estado", required=True, tracking=True, default='draft')
 
+    recruiter_id = fields.Many2one('hr.employee', string="Reclutador")
     site_id = fields.Many2one("x_sitio", string='Sitio', tracking=True, store=True)
     periodo_id = fields.Many2one("x_periodo", string='Semana', tracking=True)
     campaign_ids = fields.One2many("tyt_recruitment.campaign", "requisition_id", string="Campaña", tracking=True)
@@ -38,7 +39,6 @@ class Requisition(models.Model):
             vals['site_id'] = current_user.x_studio_sitio.id
         
         current_date = datetime.now().date()
-        
         current_period = request.env['x_periodo'].sudo().search([
             ('x_studio_f1', '<=', current_date),
             ('x_studio_f2', '>=', current_date),
@@ -59,7 +59,7 @@ class Requisition(models.Model):
         if current_user.x_studio_sitio:
             vals['site_id'] = current_user.x_studio_sitio.id
         
-        current_date = datetime.now().date()
+        current_date = vals['request_date']
         
         current_period = request.env['x_periodo'].sudo().search([
             ('x_studio_f1', '<=', current_date),
@@ -81,6 +81,22 @@ class Requisition(models.Model):
                 if employee.work_email:
                     emails.append(employee.work_email)
         return ','.join(emails)
+
+    @api.onchange('request_date')
+    def onchange_request_date(self):
+        
+        selected_date = self.request_date
+
+        current_period = request.env['x_periodo'].sudo().search([
+            ('x_studio_f1', '<=', selected_date),
+            ('x_studio_f2', '>=', selected_date),
+            ('x_studio_tipo_periodo', '>=', 'Semana')
+        ], limit=1)
+
+        if current_period:
+            self['periodo_id'] = current_period.id
+            self['request_date'] = current_period.x_studio_f1
+            self['closing_date'] = current_period.x_studio_f2
 
     def get_share_url(self):
         self.ensure_one()
@@ -168,17 +184,22 @@ class Requisition(models.Model):
 class Campaign(models.Model):
     _name = 'tyt_recruitment.campaign'
     _description = 'Campania'
-    # _rec_name = 'tag_id.name'
+    _inherit = ['mail.thread']
+    _rec_name = 'tag_display_name'
 
     current_staff = fields.Integer(required=True, string="Personal actual", tracking=True)
     goal_staff = fields.Integer(required=True, string="Personal objetivo", tracking=True)
     request_staff = fields.Integer(required=True, string="Personal requerido", tracking=True)
     turn = fields.Selection([('T/M', 'T/M'), ('T/V', 'T/V'), ('T/N', 'T/N')], string="Turno", tracking=True)
     priority = fields.Selection([('1', '1'), ('2', '2'), ('3', '3'), ('4', '4')], string="Prioridad", tracking=True)
+    tag_display_name = fields.Char(related='tag_id.display_name', string='Nombre del Departamento', store=True)
+    recruiter_id = fields.Many2one(related='requisition_id.recruiter_id', string='Reclutador', store=True)
 
+    trainner_id = fields.Many2one('hr.employee', string="Entrenador")
+    days = fields.Integer(required=True, string="Días", store=True)
 
-    requisition_id = fields.Many2one("tyt_recruitment.requisition")
-    tag_id = fields.Many2one('hr.department', string='Dept', options={'no_create': True}, required=True)
+    requisition_id = fields.Many2one("tyt_recruitment.requisition", ondelete='cascade')
+    tag_id = fields.Many2one('hr.department', string='Dept', options={'no_create': True}, required=True, ondelete='cascade')
 
     def action_open_job_application(self):
         requisition_id = self.requisition_id.id
@@ -211,5 +232,25 @@ class Campaign(models.Model):
             'domain': [('id', 'in', applicants.ids)],
             'context': {
                 'default_message': 'Este es un mensaje personalizado para la lista de candidatos.'
+            }
+        }
+
+    def action_open_generate_attendance(self):
+
+        attendance_list = self.env['tyt_recruitment.attendance'].search([
+            ('requisition_id', '=', self.requisition_id.id),
+            ('campaign_id', '=', self.id)
+        ], limit=1)
+
+        return {
+            'name': 'Confirmación',
+            'type': 'ir.actions.act_window',
+            'res_model': 'tyt_recruitment.attendance_confirmation_wizard',
+            'view_mode': 'form',
+            'target': 'new',
+            'context': {
+                'default_campaign_id': self.id,
+                'default_requisition_id': self.requisition_id.id,
+                'default_attendance_id': attendance_list.id
             }
         }

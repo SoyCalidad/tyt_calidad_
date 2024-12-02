@@ -1,7 +1,7 @@
 <odoo>
   <data>
 
-    <!-- Health Survey List -->
+    <!-- Config Health Survey List -->
     <record model="ir.ui.view" id="tyt_recruitment_health_survey_list">
       <field name="name">Lista de encuestas</field>
       <field name="model">tyt_recruitment.health_survey</field>
@@ -14,7 +14,7 @@
       </field>
     </record>
 
-    <!-- Health Survey form -->
+    <!-- Config Health Survey form -->
     <record model="ir.ui.view" id="tyt_recruitment_health_survey_form">
       <field name="name">Formulario de encuestas</field>
       <field name="model">tyt_recruitment.health_survey</field>
@@ -65,8 +65,20 @@
             </group>
           </xpath>
       </field>
-    </record> 
+    </record>
 
+    <!-- Multiple answers list -->
+    <record id="survey_multiple_answers" model="ir.ui.view">
+      <field name="name">Lista de respuestas multiples</field>
+      <field name="model">tyt_recruitment.multiple_answer</field>
+      <field name="arch" type="xml">
+          <tree string="Lista de respuestas multiples" create="0" edit="0">
+              <field name="text" readonly="1"/>
+          </tree>
+      </field>
+    </record>
+
+    <!-- Actions -->
     <record model="ir.actions.act_window" id="tyt_recruitment_action_window_health_survey">
       <field name="name">Lista de encuestas</field>
       <field name="res_model">tyt_recruitment.health_survey</field>

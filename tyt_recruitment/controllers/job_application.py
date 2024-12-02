@@ -69,7 +69,8 @@ class PublicFormController(http.Controller):
             'dependents': post.get('dependents'),
             'foreign_nationality': post.get('foreign_nationality'), 
             'daily_activities': post.get('daily_activities'),
-            'campaign_id': post.get('campaign_id')
+            'campaign_id': post.get('campaign_id'),
+            'recruiter_comments': post.get('recruiter_comments')
         }
         applicant = request.env['tyt_recruitment.applicant'].sudo().create(data_applicant)
 

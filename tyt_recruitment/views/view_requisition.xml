@@ -31,11 +31,12 @@
             <group>
               <group>
                 <field name="request_date" attrs="{'readonly': [('state', '=', 'sent')]}"/>
-                <field name="closing_date" attrs="{'readonly': [('state', '=', 'sent')]}"/>
+                <field name="closing_date" readonly="1"/>
                 <field name="periodo_id" widget="many2one" options="{'no_create': True}"/>
               </group>
               <group>
                 <field name="site_id" widget="many2one" options="{'no_create': True}"/>
+                <field name="recruiter_id" />
               </group>
             </group>
 
@@ -49,6 +50,8 @@
                     <field name="request_staff" width="120px"/>
                     <field name="turn" width="80px" />
                     <field name="priority" width="80px" />
+                    <field name="trainner_id" width="80px" />
+                    <field name="days" width="80px" />
                     <button 
                       name="action_open_job_application" 
                       string="Cargar candidato" 
@@ -64,6 +67,12 @@
                       width="200px"
                       context="{'tag_id': id}"
                       attrs="{'invisible': [('id', '=', False)]}" />
+                    <button 
+                      name="action_open_generate_attendance" 
+                      type="object" 
+                      string="Asistencia" 
+                      class="btn-primary"
+                      attrs="{'invisible': [('id', '=', False)]}" />
                   </tree>
                 </field>
               </page>
@@ -78,6 +87,13 @@
       </field>
     </record>
     
+    <record id="action_confirmation_wizard" model="ir.actions.act_window">
+      <field name="name">Confirmación</field>
+      <field name="res_model">tyt_recruitment.attendance_confirmation_wizard</field>
+      <field name="view_mode">form</field>
+      <field name="target">new</field>
+    </record>
+
     <!-- actions opening views on models -->
 
     <record model="ir.actions.act_window" id="tyt_recruitment.action_window">

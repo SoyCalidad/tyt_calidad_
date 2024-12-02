@@ -64,38 +64,34 @@ class PublicFormController(http.Controller):
         complete_survey_data = {
             'state': 'sent',
             'signature_image': image_data,
-            'job_application_id': job_application_id
+            'job_application_id': job_application_id,
+            'recruiter_comments': post.get('recruiter_comments')
         }
 
         complete_survey = request.env['tyt_recruitment.complete_survey'].sudo().create(complete_survey_data)
-        _logger.info("----------------------------complete_survey")
-        _logger.info(complete_survey)
-        _logger.info(complete_survey.signature_image)
+
         health_asnwer_json = []
         answer_data = {}
+
         for question in health_questions:
             if question.question_type == 'multiple_choice':
-                _logger.info("----------------------------aaaaaaaaaaaa")
-                _logger.info(post.get("extra_"+str(question.id)))
-                _logger.info(post.get("extra_"+str(question.id)))
-                _logger.info(question.id)
                 answer_data = {
                     'text': post.get(str(question.id)), 
                     'question_id': question.id,
                     'complete_survey_id': complete_survey.id,
                     'extra_text': post.get("extra_"+str(question.id))
                 }
+
+                new_response = request.env['tyt_recruitment.survey_answer'].sudo().create(answer_data)
+
                 for answer in question.suggested_answer_ids:
-                    _logger.info("----------------------------ans")
-                    _logger.info(answer.id)
-                    _logger.info(post.get(str(answer.id)))
-                    answer_data = {
-                        'text': answer.value, 
-                        'question_id': question.id,
-                        'complete_survey_id': complete_survey.id,
-                        'extra_text': post.get("extra_"+str(question.id))
-                    }
-                    health_asnwer_json.append(answer_data)
+                    if post.get(str(answer.id)):
+                        new_multiple_data = {
+                            'text': answer.value, 
+                            'survey_answer_id': new_response.id,
+                        }
+                    
+                        request.env['tyt_recruitment.multiple_answer'].sudo().create(new_multiple_data)
             elif question.question_type == 'matrix':
                 pass
             else:
@@ -106,7 +102,7 @@ class PublicFormController(http.Controller):
                     'extra_text': post.get("extra_"+str(question.id))
                 }
                 health_asnwer_json.append(answer_data)
-            request.env['tyt_recruitment.survey_answer'].sudo().create(answer_data)
+                request.env['tyt_recruitment.survey_answer'].sudo().create(answer_data)
 
         return request.render('tyt_recruitment.template_health_survey_success')
 
