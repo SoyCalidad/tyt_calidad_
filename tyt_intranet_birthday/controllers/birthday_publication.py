@@ -20,6 +20,7 @@ class BirthdayPublicationPortal(portal.CustomerPortal):
             else:
                 request.session['birthday_card_modal_shown'] = True
         else:
+            request.session.pop('birthday_card_modal_shown', None)
             show_birthday_card_modal = False
         values.update({
             'show_birthday_card_modal': show_birthday_card_modal,
