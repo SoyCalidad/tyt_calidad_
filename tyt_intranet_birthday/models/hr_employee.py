@@ -13,6 +13,7 @@ class HrEmployee(models.Model):
     include_in_all_birthday_publications = fields.Boolean(string='Include in All Birthday Publications', default=False)
     birthday_card = fields.Binary(string='Birthday Card')
     birthday_card_filename = fields.Char(string='Birthday Card Filename')
+    has_uploaded_custom_card = fields.Boolean(string='Has Uploaded Custom Card')
     birthday_publication_ids = fields.Many2many('tyt.intranet.birthday_publication', 'birthday_publication_employee_rel',
                                                 'employee_id', 'publication_id', string='Birthday Publications')
 
