@@ -9,7 +9,7 @@ from odoo.osv.expression import OR, AND
 
 class BirthdayPublicationPortal(portal.CustomerPortal):
 
-    @route(['/my', '/my/home'], type='http', auth="user", website=True)
+    @route(['/my', '/my/home'], type='http', auth='user', website=True)
     def home(self, **kw):
         values = self._prepare_portal_layout_values()
         show_birthday_card_modal = True

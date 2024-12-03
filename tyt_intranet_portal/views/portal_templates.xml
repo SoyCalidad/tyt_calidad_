@@ -45,7 +45,7 @@
         </xpath>
     </template>
 
-    <template id="portal_my_home" inherit_id="portal.portal_my_home">
+    <template id="portal_my_home" name="My Portal" inherit_id="portal.portal_my_home">
         <xpath expr="//t[@t-call='portal.portal_layout']" position="replace">
             <t t-call="portal.portal_layout">
                 <t t-set="my_details" t-value="True"/>

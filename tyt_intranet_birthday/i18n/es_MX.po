@@ -6,8 +6,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Odoo Server 16.0+e-20240730\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2024-11-27 19:50+0000\n"
-"PO-Revision-Date: 2024-11-27 19:50+0000\n"
+"POT-Creation-Date: 2024-12-03 07:21+0000\n"
+"PO-Revision-Date: 2024-12-03 07:21+0000\n"
 "Last-Translator: \n"
 "Language-Team: \n"
 "MIME-Version: 1.0\n"
@@ -73,8 +73,8 @@ msgstr "Fecha de nacimiento"
 
 #. module: tyt_intranet_birthday
 #: model:ir.model.fields,field_description:tyt_intranet_birthday.field_hr_employee__birthday_card
+#: model_terms:ir.ui.view,arch_db:tyt_intranet_birthday.hr_employee_view_form_simple
 #: model_terms:ir.ui.view,arch_db:tyt_intranet_birthday.modal_birthday_card
-#: model_terms:ir.ui.view,arch_db:tyt_intranet_birthday.tyt_intranet_birthday_publication_view_form
 #: model_terms:ir.ui.view,arch_db:tyt_intranet_birthday.view_employee_form
 msgid "Birthday Card"
 msgstr "Tarjeta de cumpleaños"
@@ -151,9 +151,7 @@ msgid "Employee Count"
 msgstr "Número de empleados"
 
 #. module: tyt_intranet_birthday
-#. odoo-python
-#: code:addons/tyt_intranet_birthday/models/birthday_publication.py:0
-#, python-format
+#: model:ir.actions.act_window,name:tyt_intranet_birthday.hr_employee_simple_action
 msgid "Employees"
 msgstr "Empleados"
 
@@ -176,6 +174,11 @@ msgstr ""
 #: model:ir.model.fields,field_description:tyt_intranet_birthday.field_tyt_intranet_birthday_publication__has_message
 msgid "Has Message"
 msgstr ""
+
+#. module: tyt_intranet_birthday
+#: model:ir.model.fields,field_description:tyt_intranet_birthday.field_hr_employee__has_uploaded_custom_card
+msgid "Has Uploaded Custom Card"
+msgstr "Tarjeta personalizada"
 
 #. module: tyt_intranet_birthday
 #: model:ir.model.fields,field_description:tyt_intranet_birthday.field_tyt_intranet_birthday_publication__id
@@ -333,7 +336,7 @@ msgstr ""
 #: model_terms:ir.ui.view,arch_db:tyt_intranet_birthday.portal_birthday_publication
 #: model_terms:ir.ui.view,arch_db:tyt_intranet_birthday.portal_my_home_menu_birthday_publication
 msgid "Publicación de cumpleaños"
-msgstr ""
+msgstr "Publicación de cumpleaños"
 
 #. module: tyt_intranet_birthday
 #: model:ir.model.fields,field_description:tyt_intranet_birthday.field_tyt_intranet_birthday_publication__responsible_id

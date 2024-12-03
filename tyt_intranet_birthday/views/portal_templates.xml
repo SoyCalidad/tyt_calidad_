@@ -1,26 +1,15 @@
 <?xml version="1.0" encoding="utf-8"?>
 <odoo>
-    <template id="portal_my_home" name="My Portal" inherit_id="portal.portal_my_home">
+    <template id="portal_my_home" name="My Portal" inherit_id="portal.portal_my_home" priority="25">
         <xpath expr="//div[hasclass('o_portal_my_home')]" position="inside">
             <div>
                 <a role="button" class="d-none" data-bs-toggle="modal" data-bs-target="#modal_birthday_card" href="#">
                     <span>Show Modal</span>
                 </a>
-                <t t-if="show_birthday_card_modal">
-                    <t t-call="tyt_intranet_birthday.modal_birthday_card"/>
-                </t>
-                <div>
-                    <script type="text/javascript">
-                        document.addEventListener('DOMContentLoaded', function() {
-                            const modal = document.getElementById('modal_birthday_card');
-                            if (modal) {
-                                const anchor = document.querySelector('a[data-bs-toggle="modal"]');
-                                anchor.click();
-                            }
-                        });
-                    </script>
-                </div>
             </div>
+            <t t-if="show_birthday_card_modal">
+                <t t-call="tyt_intranet_birthday.modal_birthday_card"/>
+            </t>
         </xpath>
     </template>
 
@@ -64,5 +53,33 @@
                 </div>
             </div>
         </div>
+        <script type="text/javascript">
+            document.addEventListener('DOMContentLoaded', function () {
+                const modal = document.getElementById('modal_birthday_card');
+                if (modal) {
+                    const anchor = document.querySelector('a[data-bs-toggle="modal"]');
+                    if (anchor) {
+                        anchor.click();
+                    }
+                    let isOverflowApplied = false;
+                    const resizeHandler = () => {
+                        if (modal.classList.contains('show')) {
+                            if (!isOverflowApplied) {
+                                document.body.style.overflowY = 'auto';
+                                document.body.style.setProperty('overflow-y', 'auto', 'important');
+                                isOverflowApplied = true;
+                                console.log('Body style updated with overflow-y: auto !important on resize');
+                            }
+                        } else {
+                            if (isOverflowApplied) {
+                                document.body.style.removeProperty('overflow-y');
+                                isOverflowApplied = false;
+                            }
+                        }
+                    };
+                    window.addEventListener('resize', resizeHandler);
+                }
+            });
+        </script>
     </template>
 </odoo>

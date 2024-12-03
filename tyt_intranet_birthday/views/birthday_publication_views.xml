@@ -7,7 +7,7 @@
             <form>
                 <sheet>
                     <div class="oe_button_box" name="button_box">
-                        <button name="action_show_employees" type="object" class="oe_stat_button" icon="fa-users">
+                        <button name="%(tyt_intranet_birthday.hr_employee_simple_action)d" type="action" class="oe_stat_button" icon="fa-users">
                             <div class="o_form_field o_stat_info">
                                 <span class="o_stat_value">
                                     <field name="employee_count"/>
@@ -38,50 +38,10 @@
                     </group>
                     <notebook>
                         <page string="Birthday Employees" name="birthday_employees">
-                            <field name="birthday_employee_ids">
-                                <tree>
-                                    <field name="name"/>
-                                    <field name="x_studio_sitios0"/>
-                                    <field name="birthday"/>
-                                    <field name="is_birthday" invisible="1"/>
-                                    <field name="include_in_birthday_publication"/>
-                                    <field name="include_in_all_birthday_publications"/>
-                                    <field name="birthday_card_filename" invisible="1"/>
-                                    <field name="birthday_card" filename="birthday_card_filename" widget="binary"/>
-                                </tree>
-                                <form>
-                                    <sheet>
-                                        <field name="company_id" invisible="1"/>
-                                        <field name="avatar_128" invisible="1"/>
-                                        <field name="image_1920" widget="image" class="oe_avatar" options="{&quot;preview_image&quot;: &quot;avatar_128&quot;}"/>
-                                        <div class="oe_title">
-                                            <h1 class="d-flex flex-row">
-                                                <field name="name"/>
-                                            </h1>
-                                            <h2>
-                                                <field name="job_title"/>
-                                            </h2>
-                                        </div>
-                                        <group>
-                                            <group>
-                                                <field name="birthday"/>
-                                                <field name="is_birthday" invisible="1"/>
-                                                <field name="include_in_birthday_publication"/>
-                                                <field name="include_in_all_birthday_publications"/>
-                                            </group>
-                                            <group>
-                                                <field name="department_id"/>
-                                                <field name="job_id"/>
-                                                <field name="x_studio_sitios0"/>
-                                            </group>
-                                        </group>
-                                        <group string="Birthday Card">
-                                            <field name="birthday_card_filename" invisible="1"/>
-                                            <field name="birthday_card" nolabel="1" readonly="1" widget="image"
-                                                   filename="birthday_card_filename" style="width: 300px;"/>
-                                        </group>
-                                    </sheet>
-                                </form>
+                            <field name="birthday_employee_ids"
+                                   context="{
+                                        'tree_view_ref': 'tyt_intranet_birthday.hr_employee_view_tree_simple',
+                                        'form_view_ref': 'tyt_intranet_birthday.hr_employee_view_form_simple'}">
                             </field>
                         </page>
                     </notebook>
