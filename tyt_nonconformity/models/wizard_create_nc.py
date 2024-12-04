@@ -18,17 +18,16 @@ class TYTNC(models.TransientModel):
 
         # Validar si hay líneas encontradas
         if not lines:
-            self.wline_ids = [(5, 0, 0)]  # Limpiar las líneas existentes
             raise UserError(
                 _("No se encontró ninguna 'No conformidad' en este informe de auditoría. "
-                "Por favor, asegúrese de que la lista de verificación esté completa y que los datos sean correctos.")
+                  "Por favor, asegúrese de que la lista de verificación esté completa y que los datos sean correctos.")
             )
 
-        # Crear la lista de líneas nuevas
-        datas = [(5, 0, 0)]  # Limpia las líneas existentes
+        # Crear las líneas nuevas sin limpiar manualmente
+        line_vals = []
         for line in lines:
-            datas.append((0, 0, {
-                'name': line.comment or 'Sin comentario',  # Usar el valor de `comment` en lugar de otros valores
+            line_vals.append((0, 0, {
+                'name': line.comment or '-',  # Usar el valor de `comment` en lugar de otros valores
                 'type_id': line.clause_id.id if line.clause_id else False,
                 'auditor_id': line.employee_id.id if line.employee_id else False,
                 'team_id': False,  # Si no tienes un campo relacionado, deja esto en `False`
@@ -36,8 +35,8 @@ class TYTNC(models.TransientModel):
                 'details': line.comment or '',  # Descripción del hallazgo
             }))
 
-        # Asignar los datos al campo One2many
-        self.wline_ids = datas
+        # Reemplazar directamente las líneas existentes con las nuevas
+        self.update({'wline_ids': line_vals})
 
     def create_nonconformity(self):
         """Crear registros en el módulo de mejora"""
@@ -52,9 +51,9 @@ class TYTNC(models.TransientModel):
                 'date_found': line.date_found,
                 'description': line.details or '',
                 'process_id': line.process_id.id if line.process_id else None,
+                'finding': 'non_conformity',
             }
             self.env['mgmtsystem.nonconformity'].create(data)
-
 
         # Cambiar el estado del informe de auditoría
         self.report_id.write({'state': 'in_process'})
