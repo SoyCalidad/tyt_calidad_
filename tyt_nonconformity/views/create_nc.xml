@@ -1,0 +1,14 @@
+<odoo>
+    <!-- Heredamos la vista del asistente -->
+    <record id="view_create_nc_wizard_form_tyt" model="ir.ui.view">
+        <field name="name">wizard.nc.transient.form.tyt</field>
+        <field name="model">wizard.create.nc</field>
+        <field name="inherit_id" ref="mgmtsystem_nonconformity.view_create_nc_wizard_form" />
+        <field name="arch" type="xml">
+            <xpath expr="//field[@name='wline_ids']/tree" position="inside">
+                <!-- Agregamos columnas personalizadas -->
+                <!-- <field name="custom_field" /> -->
+            </xpath>
+        </field>
+    </record>
+</odoo>
