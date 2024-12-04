@@ -19,12 +19,12 @@ class AuditPlanningClause(models.Model):
     _description = "Lista de Verificación / Planificación / Cláusula"
 
     name = fields.Char(
-        string='Nombre',
+        string='Código',
         required=True,
     )
 
     complete_name = fields.Char(
-        string='Nombre',
+        string='Descripción',
         required=True,
     )
 

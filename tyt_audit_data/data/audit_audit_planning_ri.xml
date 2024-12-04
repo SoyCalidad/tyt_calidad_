@@ -1,7 +1,7 @@
 <odoo>
     <data noupdate="0">
         <!-- RI1 -->
-        <record id="audit_audit_planning_ri_101" model="audit.audit.planning">
+        <record id="audit_audit_planning_ri_101" model="audit.audit.planning.template">
             <field name="tyt_procedure_description_id" ref="tyt_audit.schedule_plan_description_5"/>
             <field name="tyt_procedure_activity_id" ref="tyt_audit.schedule_plan_activity_501"/>
 
@@ -12,7 +12,7 @@
             <field name="evidence_char">Evidencia Presencial</field>
         </record>
         
-        <record id="audit_audit_planning_ri_102" model="audit.audit.planning">
+        <record id="audit_audit_planning_ri_102" model="audit.audit.planning.template">
             <field name="tyt_procedure_description_id" ref="tyt_audit.schedule_plan_description_5"/>
             <field name="tyt_procedure_activity_id" ref="tyt_audit.schedule_plan_activity_501"/>
 
@@ -23,7 +23,7 @@
             <field name="evidence_char">Evidencia Presencial</field>
         </record>
         
-        <record id="audit_audit_planning_ri_103" model="audit.audit.planning">
+        <record id="audit_audit_planning_ri_103" model="audit.audit.planning.template">
             <field name="tyt_procedure_description_id" ref="tyt_audit.schedule_plan_description_5"/>
             <field name="tyt_procedure_activity_id" ref="tyt_audit.schedule_plan_activity_501"/>
 
@@ -34,7 +34,7 @@
             <field name="evidence_char">Evidencia Presencial</field>
         </record>
 
-        <record id="audit_audit_planning_ri_104" model="audit.audit.planning">
+        <record id="audit_audit_planning_ri_104" model="audit.audit.planning.template">
             <field name="tyt_procedure_description_id" ref="tyt_audit.schedule_plan_description_5"/>
             <field name="tyt_procedure_activity_id" ref="tyt_audit.schedule_plan_activity_501"/>
 
@@ -45,7 +45,7 @@
             <field name="evidence_char">Evidencia Presencial</field>
         </record>
 
-        <record id="audit_audit_planning_ri_105" model="audit.audit.planning">
+        <record id="audit_audit_planning_ri_105" model="audit.audit.planning.template">
             <field name="tyt_procedure_description_id" ref="tyt_audit.schedule_plan_description_5"/>
             <field name="tyt_procedure_activity_id" ref="tyt_audit.schedule_plan_activity_501"/>
 
@@ -56,7 +56,7 @@
             <field name="evidence_char">Evidencia Presencial</field>
         </record>
 
-        <record id="audit_audit_planning_ri_106" model="audit.audit.planning">
+        <record id="audit_audit_planning_ri_106" model="audit.audit.planning.template">
             <field name="tyt_procedure_description_id" ref="tyt_audit.schedule_plan_description_5"/>
             <field name="tyt_procedure_activity_id" ref="tyt_audit.schedule_plan_activity_501"/>
 
@@ -67,7 +67,7 @@
             <field name="evidence_char">Evidencia Presencial</field>
         </record>
 
-        <record id="audit_audit_planning_ri_107" model="audit.audit.planning">
+        <record id="audit_audit_planning_ri_107" model="audit.audit.planning.template">
             <field name="tyt_procedure_description_id" ref="tyt_audit.schedule_plan_description_5"/>
             <field name="tyt_procedure_activity_id" ref="tyt_audit.schedule_plan_activity_501"/>
 
@@ -78,7 +78,7 @@
             <field name="evidence_char">Evidencia Presencial</field>
         </record>
 
-        <record id="audit_audit_planning_ri_108" model="audit.audit.planning">
+        <record id="audit_audit_planning_ri_108" model="audit.audit.planning.template">
             <field name="tyt_procedure_description_id" ref="tyt_audit.schedule_plan_description_5"/>
             <field name="tyt_procedure_activity_id" ref="tyt_audit.schedule_plan_activity_501"/>
 
@@ -89,7 +89,7 @@
             <field name="evidence_char">Evidencia Presencial</field>
         </record>
 
-        <record id="audit_audit_planning_ri_109" model="audit.audit.planning">
+        <record id="audit_audit_planning_ri_109" model="audit.audit.planning.template">
             <field name="tyt_procedure_description_id" ref="tyt_audit.schedule_plan_description_5"/>
             <field name="tyt_procedure_activity_id" ref="tyt_audit.schedule_plan_activity_501"/>
 
@@ -102,7 +102,7 @@
 
 
         <!-- RI7 -->
-        <record id="audit_audit_planning_ri_701" model="audit.audit.planning">
+        <record id="audit_audit_planning_ri_701" model="audit.audit.planning.template">
             <field name="tyt_procedure_description_id" ref="tyt_audit.schedule_plan_description_5"/>
             <field name="tyt_procedure_activity_id" ref="tyt_audit.schedule_plan_activity_507"/>
 
@@ -114,7 +114,7 @@
             <field name="evidence_char">AO-05_Logística de locker</field>
         </record>
 
-        <record id="audit_audit_planning_ri_702" model="audit.audit.planning">
+        <record id="audit_audit_planning_ri_702" model="audit.audit.planning.template">
             <field name="tyt_procedure_description_id" ref="tyt_audit.schedule_plan_description_5"/>
             <field name="tyt_procedure_activity_id" ref="tyt_audit.schedule_plan_activity_507"/>
 
@@ -126,7 +126,7 @@
             <field name="evidence_char">Fotografias</field>
         </record>
 
-        <record id="audit_audit_planning_ri_703" model="audit.audit.planning">
+        <record id="audit_audit_planning_ri_703" model="audit.audit.planning.template">
             <field name="tyt_procedure_description_id" ref="tyt_audit.schedule_plan_description_5"/>
             <field name="tyt_procedure_activity_id" ref="tyt_audit.schedule_plan_activity_507"/>
         
@@ -138,7 +138,7 @@
             <field name="evidence_char">Fotografias</field>
         </record>
 
-        <record id="audit_audit_planning_ri_704" model="audit.audit.planning">
+        <record id="audit_audit_planning_ri_704" model="audit.audit.planning.template">
             <field name="tyt_procedure_description_id" ref="tyt_audit.schedule_plan_description_5"/>
             <field name="tyt_procedure_activity_id" ref="tyt_audit.schedule_plan_activity_507"/>
         
@@ -152,7 +152,7 @@
 
 
         <!-- RI8 -->
-        <record id="audit_audit_planning_ri_801" model="audit.audit.planning">
+        <record id="audit_audit_planning_ri_801" model="audit.audit.planning.template">
             <field name="tyt_procedure_description_id" ref="tyt_audit.schedule_plan_description_5"/>
             <field name="tyt_procedure_activity_id" ref="tyt_audit.schedule_plan_activity_508"/>
 
@@ -164,7 +164,7 @@
             <field name="evidence_char">Fotos</field>
         </record>
 
-        <record id="audit_audit_planning_ri_802" model="audit.audit.planning">
+        <record id="audit_audit_planning_ri_802" model="audit.audit.planning.template">
             <field name="tyt_procedure_description_id" ref="tyt_audit.schedule_plan_description_5"/>
             <field name="tyt_procedure_activity_id" ref="tyt_audit.schedule_plan_activity_508"/>
 
@@ -176,7 +176,7 @@
             <field name="evidence_char">Fotos</field>
         </record>
 
-        <record id="audit_audit_planning_ri_803" model="audit.audit.planning">
+        <record id="audit_audit_planning_ri_803" model="audit.audit.planning.template">
             <field name="tyt_procedure_description_id" ref="tyt_audit.schedule_plan_description_5"/>
             <field name="tyt_procedure_activity_id" ref="tyt_audit.schedule_plan_activity_508"/>
 
@@ -188,7 +188,7 @@
             <field name="evidence_char">Evidencia Presencial</field>
         </record>
 
-        <record id="audit_audit_planning_ri_804" model="audit.audit.planning">
+        <record id="audit_audit_planning_ri_804" model="audit.audit.planning.template">
             <field name="tyt_procedure_description_id" ref="tyt_audit.schedule_plan_description_5"/>
             <field name="tyt_procedure_activity_id" ref="tyt_audit.schedule_plan_activity_508"/>
 
