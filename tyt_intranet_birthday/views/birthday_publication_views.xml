@@ -38,7 +38,7 @@
                     </group>
                     <notebook>
                         <page string="Birthday Employees" name="birthday_employees">
-                            <field name="birthday_employee_ids"
+                            <field name="birthday_employee_ids" readonly="1"
                                    context="{
                                         'tree_view_ref': 'tyt_intranet_birthday.hr_employee_view_tree_simple',
                                         'form_view_ref': 'tyt_intranet_birthday.hr_employee_view_form_simple'}">
