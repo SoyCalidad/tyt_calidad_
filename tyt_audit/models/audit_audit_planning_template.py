@@ -51,10 +51,10 @@ class AuditPlanning(models.Model):
         comodel_name='audit.audit.planning.clause'
     )
 
-    employee_id = fields.Many2one(
-        string='Auditor Responsable',
-        comodel_name='hr.employee',
-    )
+    # employee_id = fields.Many2one(
+    #     string='Auditor Responsable',
+    #     comodel_name='hr.employee',
+    # )
 
     new_job_id = fields.Many2one(
         string='Responsable',

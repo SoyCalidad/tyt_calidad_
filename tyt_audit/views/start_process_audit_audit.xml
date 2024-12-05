@@ -1,0 +1,23 @@
+<odoo>    
+    <data>
+
+        <record id="view_audit_audit_method_form_tyt" model="ir.ui.view">
+            <field name="name">audit.audit.method.form.tyt</field>
+            <field name="model">audit.audit</field>
+            <field name="inherit_id" ref="mgmtsystem_audit.view_audit_audit_form"/>
+            <field name="arch" type="xml">
+                <xpath expr="//header/button[@name='send_review']" position="before">
+                    <field name="is_process_started" invisible="1" />
+                    <button name="start_process_audit_audit"
+                            type="object"
+                            string="Iniciar Proceso"
+                            class="oe_highlight"
+                            attrs="{'invisible':['|', ('state', '!=', 'validate_ok'), ('is_process_started','=',True)]}"
+                            />                          
+                    <!--attrs="{'invisible':['|', ('state', '!=', 'validate_ok'), ('is_process_started','=',True)]}"-->    
+                </xpath>   
+            </field>
+        </record>
+
+    </data>
+</odoo>

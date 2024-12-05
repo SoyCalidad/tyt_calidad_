@@ -249,14 +249,6 @@ class Audit(models.Model):
         domain="[('description_id', '=', tyt_procedure_description_id)]",
     )
 
-    '''
-    @api.onchange('tyt_procedure_description_id')
-    def _onchange_tyt_procedure_description_id(self):
-        if self.tyt_procedure_description_id:
-            return {'domain': {'tyt_procedure_activity_id': [('description_id', '=', self.tyt_procedure_description_id.id)]}}
-        else:
-            return {'domain': {'tyt_procedure_activity_id': []}}
-    '''
 
     @api.onchange('tyt_procedure_description_id')
     def _onchange_tyt_procedure_description_id(self):
@@ -285,17 +277,17 @@ class Audit(models.Model):
     )
 
 
-    @api.onchange('tyt_procedure_description_id', 'tyt_procedure_activity_id')
-    def _onchange_filter_planning_ids(self):
-        for record in self:
-            if record.tyt_procedure_description_id and record.tyt_procedure_activity_id:
-                planning_records = self.env['audit.audit.planning'].search([
-                    ('tyt_procedure_description_id', '=', record.tyt_procedure_description_id.id),
-                    ('tyt_procedure_activity_id', '=', record.tyt_procedure_activity_id.id),
-                ])
-                record.planning_ids = planning_records
-            else:
-                record.planning_ids = False
+    # @api.onchange('tyt_procedure_description_id', 'tyt_procedure_activity_id')
+    # def _onchange_filter_planning_ids(self):
+    #     for record in self:
+    #         if record.tyt_procedure_description_id and record.tyt_procedure_activity_id:
+    #             planning_records = self.env['audit.audit.planning'].search([
+    #                 ('tyt_procedure_description_id', '=', record.tyt_procedure_description_id.id),
+    #                 ('tyt_procedure_activity_id', '=', record.tyt_procedure_activity_id.id),
+    #             ])
+    #             record.planning_ids = planning_records
+    #         else:
+    #             record.planning_ids = False
 
 class AuditLine(models.Model):
     _inherit = "audit.line"
