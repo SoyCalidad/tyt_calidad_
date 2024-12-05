@@ -1,0 +1,78 @@
+<odoo>
+    <data>     
+        <record id="view_audit_audit_planning_template_tree" model="ir.ui.view">
+            <field name="name">audit.audit.planning.template.tree</field>
+            <field name="model">audit.audit.planning.template</field>
+            <field name="arch" type="xml">
+                <!-- <tree editable="top"> -->
+                <tree >
+                    <field name="iso_9001_standards_ids" widget="many2many_tags"/>
+                    <field name="iso_9001_combined_names" widget="text" optional="hide" />
+                    <field name="clause_id" />
+                    <field name="new_job_id" string="Responsable"/>
+                    <field name="verification" />
+                    <field name="finding" />
+                    <field name="evidence_char"/>
+                    <!-- <field name="evidence_attachment_ids" widget="many2many_tags"/> -->
+                </tree>
+            </field>
+        </record>
+        
+        <record id="view_audit_audit_planning_template_form" model="ir.ui.view">
+            <field name="name">audit.audit.planning.template.form</field>
+            <field name="model">audit.audit.planning.template</field>
+            <field name="arch" type="xml">
+                <form>
+                    <sheet>
+                        <group>
+                            <group>
+                                <field name="tyt_procedure_description_id" />
+                            </group>                            
+                            <group>
+                                <field name="tyt_procedure_activity_id" />
+                            </group>
+                        </group>               
+                        <div style="height: 20px;"></div> 
+                        <group>
+                            <separator string="Normas ISO 9001:2015" />
+                            <field name="iso_9001_standards_ids" nolabel="1" colspan= "2"/>
+                            <field name="clause_id" />
+                        </group>
+                        <div style="height: 20px;"></div>                  
+                        <group>
+                            <group>
+                                <field name="new_job_id" string="Responsable"/>
+                                <field name="verification" />
+                            </group>                            
+                            <group>
+                                <field name="finding" />
+                                <field name="evidence_char"/>
+                            </group>         
+                        </group>
+                    </sheet>
+                </form>
+            </field>
+        </record>
+
+
+        <menuitem id="audit_configuration_menu"
+          name="Configuración"
+          parent="mgmtsystem_audit.menu_audit_root"
+          sequence="101"/>
+
+        <record id="action_audit_audit_planning_template_list" model="ir.actions.act_window">
+            <field name="name">Templates de Lista de verificación</field>
+            <field name="res_model">audit.audit.planning.template</field>
+            <field name="view_mode">tree,form</field>
+            <field name="domain">[]</field>
+            <field name="context">{}</field>
+        </record>
+
+        <menuitem id="audit_audit_planning_template_menu"
+                name="Templates de Lista de Verificación"
+                parent="audit_configuration_menu"
+                action="action_audit_audit_planning_template_list"
+                sequence="1"/>
+    </data>
+</odoo>
+

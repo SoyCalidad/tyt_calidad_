@@ -1,147 +1,131 @@
 <odoo>
     <data noupdate="0">
         <!-- ADD 3 -->
-        <record id="audit_audit_planning_add_301" model="audit.audit.planning">
+        <record id="audit_audit_planning_add_301" model="audit.audit.planning.template">
             <field name="tyt_procedure_description_id" ref="tyt_audit.schedule_plan_description_6"/>
             <field name="tyt_procedure_activity_id" ref="tyt_audit.schedule_plan_activity_602"/>
             <field name="verification">Validar que los climas cuenten con la temperatura autorizada de 23° a 24°</field>
             <field name="finding">good_practices</field>
             <field name="evidence_char">Evidencia Presencial / Foto</field>
-            <field name="comment"></field>
         </record>
 
-        <record id="audit_audit_planning_add_302" model="audit.audit.planning">
+        <record id="audit_audit_planning_add_302" model="audit.audit.planning.template">
             <field name="tyt_procedure_description_id" ref="tyt_audit.schedule_plan_description_6"/>
             <field name="tyt_procedure_activity_id" ref="tyt_audit.schedule_plan_activity_602"/>
             <field name="verification">Validar que los climas cuenten con la temperatura autorizada de 23° a 24°</field>
             <field name="finding">good_practices</field>
             <field name="evidence_char">Evidencia Presencial / Foto</field>
-            <field name="comment"></field>
         </record>
 
-        <record id="audit_audit_planning_add_303" model="audit.audit.planning">
+        <record id="audit_audit_planning_add_303" model="audit.audit.planning.template">
             <field name="tyt_procedure_description_id" ref="tyt_audit.schedule_plan_description_6"/>
             <field name="tyt_procedure_activity_id" ref="tyt_audit.schedule_plan_activity_602"/>
             <field name="verification">Validar que los climas cuenten con la temperatura autorizada de 23° a 24°</field>
             <field name="finding">good_practices</field>
             <field name="evidence_char">Evidencia Presencial / Foto</field>
-            <field name="comment"></field>
         </record>
 
-        <record id="audit_audit_planning_add_304" model="audit.audit.planning">
+        <record id="audit_audit_planning_add_304" model="audit.audit.planning.template">
             <field name="tyt_procedure_description_id" ref="tyt_audit.schedule_plan_description_6"/>
             <field name="tyt_procedure_activity_id" ref="tyt_audit.schedule_plan_activity_602"/>
             <field name="verification">Validar que los climas cuenten con la temperatura autorizada de 23° a 24°</field>
             <field name="finding">good_practices</field>
             <field name="evidence_char">Evidencia Presencial / Foto</field>
-            <field name="comment"></field>
         </record>
 
-        <record id="audit_audit_planning_add_305" model="audit.audit.planning">
+        <record id="audit_audit_planning_add_305" model="audit.audit.planning.template">
             <field name="tyt_procedure_description_id" ref="tyt_audit.schedule_plan_description_6"/>
             <field name="tyt_procedure_activity_id" ref="tyt_audit.schedule_plan_activity_602"/>
             <field name="verification">Validar que los climas cuenten con la temperatura autorizada de 23° a 24°</field>
             <field name="finding">good_practices</field>
             <field name="evidence_char">Evidencia Presencial / Foto</field>
-            <field name="comment"></field>
         </record>
 
-        <record id="audit_audit_planning_add_306" model="audit.audit.planning">
+        <record id="audit_audit_planning_add_306" model="audit.audit.planning.template">
             <field name="tyt_procedure_description_id" ref="tyt_audit.schedule_plan_description_6"/>
             <field name="tyt_procedure_activity_id" ref="tyt_audit.schedule_plan_activity_602"/>
             <field name="verification">Validar que los climas cuenten con la temperatura autorizada de 23° a 24°</field>
             <field name="finding">good_practices</field>
             <field name="evidence_char">Evidencia Presencial / Foto</field>
-            <field name="comment"></field>
         </record>
 
-        <record id="audit_audit_planning_add_307" model="audit.audit.planning">
+        <record id="audit_audit_planning_add_307" model="audit.audit.planning.template">
             <field name="tyt_procedure_description_id" ref="tyt_audit.schedule_plan_description_6"/>
             <field name="tyt_procedure_activity_id" ref="tyt_audit.schedule_plan_activity_602"/>
             <field name="verification">Validar que los climas cuenten con la temperatura autorizada de 23° a 24°</field>
             <field name="finding">good_practices</field>
             <field name="evidence_char">Evidencia Presencial / Foto</field>
-            <field name="comment"></field>
         </record>
 
-        <record id="audit_audit_planning_add_308" model="audit.audit.planning">
+        <record id="audit_audit_planning_add_308" model="audit.audit.planning.template">
             <field name="tyt_procedure_description_id" ref="tyt_audit.schedule_plan_description_6"/>
             <field name="tyt_procedure_activity_id" ref="tyt_audit.schedule_plan_activity_602"/>
             <field name="verification">Validar que los climas cuenten con la temperatura autorizada de 23° a 24°</field>
             <field name="finding">good_practices</field>
             <field name="evidence_char">Evidencia Presencial / Foto</field>
-            <field name="comment"></field>
         </record>
 
-        <record id="audit_audit_planning_add_309" model="audit.audit.planning">
+        <record id="audit_audit_planning_add_309" model="audit.audit.planning.template">
             <field name="tyt_procedure_description_id" ref="tyt_audit.schedule_plan_description_6"/>
             <field name="tyt_procedure_activity_id" ref="tyt_audit.schedule_plan_activity_602"/>
             <field name="verification">Validar que los climas cuenten con la temperatura autorizada de 23° a 24°</field>
             <field name="finding">good_practices</field>
             <field name="evidence_char">Evidencia Presencial / Foto</field>
-            <field name="comment"></field>
         </record>
-        <record id="audit_audit_planning_add_310" model="audit.audit.planning">
+        <record id="audit_audit_planning_add_310" model="audit.audit.planning.template">
             <field name="tyt_procedure_description_id" ref="tyt_audit.schedule_plan_description_6"/>
             <field name="tyt_procedure_activity_id" ref="tyt_audit.schedule_plan_activity_602"/>
             <field name="verification">Validar que los climas cuenten con la temperatura autorizada de 23° a 24°</field>
             <field name="finding">good_practices</field>
             <field name="evidence_char">Evidencia Presencial / Foto</field>
-            <field name="comment"></field>
         </record>
 
-        <record id="audit_audit_planning_add_311" model="audit.audit.planning">
+        <record id="audit_audit_planning_add_311" model="audit.audit.planning.template">
             <field name="tyt_procedure_description_id" ref="tyt_audit.schedule_plan_description_6"/>
             <field name="tyt_procedure_activity_id" ref="tyt_audit.schedule_plan_activity_602"/>
             <field name="verification">Validar que los climas cuenten con la temperatura autorizada de 23° a 24°</field>
             <field name="finding">good_practices</field>
             <field name="evidence_char">Evidencia Presencial / Foto</field>
-            <field name="comment"></field>
         </record>
 
-        <record id="audit_audit_planning_add_312" model="audit.audit.planning">
+        <record id="audit_audit_planning_add_312" model="audit.audit.planning.template">
             <field name="tyt_procedure_description_id" ref="tyt_audit.schedule_plan_description_6"/>
             <field name="tyt_procedure_activity_id" ref="tyt_audit.schedule_plan_activity_602"/>
             <field name="verification">Validar que los climas cuenten con la temperatura autorizada de 23° a 24°</field>
             <field name="finding">good_practices</field>
             <field name="evidence_char">Evidencia Presencial / Foto</field>
-            <field name="comment"></field>
         </record>
 
-        <record id="audit_audit_planning_add_313" model="audit.audit.planning">
+        <record id="audit_audit_planning_add_313" model="audit.audit.planning.template">
             <field name="tyt_procedure_description_id" ref="tyt_audit.schedule_plan_description_6"/>
             <field name="tyt_procedure_activity_id" ref="tyt_audit.schedule_plan_activity_602"/>
             <field name="verification">Validar que los climas cuenten con la temperatura autorizada de 23° a 24°</field>
             <field name="finding">good_practices</field>
             <field name="evidence_char">Evidencia Presencial / Foto</field>
-            <field name="comment"></field>
         </record>
 
-        <record id="audit_audit_planning_add_314" model="audit.audit.planning">
+        <record id="audit_audit_planning_add_314" model="audit.audit.planning.template">
             <field name="tyt_procedure_description_id" ref="tyt_audit.schedule_plan_description_6"/>
             <field name="tyt_procedure_activity_id" ref="tyt_audit.schedule_plan_activity_602"/>
             <field name="verification">Validar que los climas cuenten con la temperatura autorizada de 23° a 24°</field>
             <field name="finding">good_practices</field>
             <field name="evidence_char">Evidencia Presencial / Foto</field>
-            <field name="comment"></field>
         </record>
 
-        <record id="audit_audit_planning_add_315" model="audit.audit.planning">
+        <record id="audit_audit_planning_add_315" model="audit.audit.planning.template">
             <field name="tyt_procedure_description_id" ref="tyt_audit.schedule_plan_description_6"/>
             <field name="tyt_procedure_activity_id" ref="tyt_audit.schedule_plan_activity_602"/>
             <field name="verification">Validar que los climas cuenten con la temperatura autorizada de 23° a 24°</field>
             <field name="finding">good_practices</field>
             <field name="evidence_char">Evidencia Presencial / Foto</field>
-            <field name="comment"></field>
         </record>
 
-        <record id="audit_audit_planning_add_316" model="audit.audit.planning">
+        <record id="audit_audit_planning_add_316" model="audit.audit.planning.template">
             <field name="tyt_procedure_description_id" ref="tyt_audit.schedule_plan_description_6"/>
             <field name="tyt_procedure_activity_id" ref="tyt_audit.schedule_plan_activity_602"/>
             <field name="verification">Validar que los climas cuenten con la temperatura autorizada de 23° a 24°</field>
             <field name="finding">good_practices</field>
             <field name="evidence_char">Evidencia Presencial / Foto</field>
-            <field name="comment"></field>
         </record>
 
     </data>

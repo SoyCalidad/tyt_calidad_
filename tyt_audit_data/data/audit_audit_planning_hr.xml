@@ -1,7 +1,7 @@
 <odoo>
     <data noupdate="0">
         <!-- HR3 -->
-        <record id="audit_audit_planning_hr_301" model="audit.audit.planning">
+        <record id="audit_audit_planning_hr_301" model="audit.audit.planning.template">
             <field name="tyt_procedure_description_id" ref="tyt_audit.schedule_plan_description_4"/>
             <field name="tyt_procedure_activity_id" ref="tyt_audit.schedule_plan_activity_403"/>
 
@@ -11,10 +11,9 @@
             <field name="verification">Muestre evidencia de que se asignan áreas de limpieza</field>
             <field name="finding">good_practices</field>
             <field name="evidence_char">ARH-14_Semáforo de la semana</field>
-            <field name="comment"></field>
         </record>
 
-        <record id="audit_audit_planning_hr_302" model="audit.audit.planning">
+        <record id="audit_audit_planning_hr_302" model="audit.audit.planning.template">
             <field name="tyt_procedure_description_id" ref="tyt_audit.schedule_plan_description_4"/>
             <field name="tyt_procedure_activity_id" ref="tyt_audit.schedule_plan_activity_403"/>
         
@@ -24,10 +23,9 @@
             <field name="verification">Muestre evidencia de que se asigna colores por área, limpieza de acuerdo a prioridades. Validación física de la limpieza de áreas.</field>
             <field name="finding">good_practices</field>
             <field name="evidence_char">ARH-12_Colores de insumos por área / Evidencia física de insumos y limpieza por áreas</field>
-            <field name="comment"></field>
         </record>
 
-        <record id="audit_audit_planning_hr_303" model="audit.audit.planning">
+        <record id="audit_audit_planning_hr_303" model="audit.audit.planning.template">
             <field name="tyt_procedure_description_id" ref="tyt_audit.schedule_plan_description_4"/>
             <field name="tyt_procedure_activity_id" ref="tyt_audit.schedule_plan_activity_403"/>
         
@@ -37,12 +35,11 @@
             <field name="verification">Muestre evidencia de que se firma el formato de retroalimentación</field>
             <field name="finding">good_practices</field>
             <field name="evidence_char">ARH-13_Retroalimentación de limpieza (sondear al auxiliar de limpieza cuando fue la última vez que se le brindó retroalimentación y agregarlo en comentarios)</field>
-            <field name="comment">Agregar la información del sondeo al auxiliar de limpieza.</field>
         </record>
 
 
         <!-- HR4 -->
-        <record id="audit_audit_planning_hr_401" model="audit.audit.planning">
+        <record id="audit_audit_planning_hr_401" model="audit.audit.planning.template">
             <field name="tyt_procedure_description_id" ref="tyt_audit.schedule_plan_description_4"/>
             <field name="tyt_procedure_activity_id" ref="tyt_audit.schedule_plan_activity_404"/>
 
@@ -52,10 +49,9 @@
             <field name="verification">Muestre evidencia de que se firmó y se envió la carta responsiva de fondo fijo de caja</field>
             <field name="finding">good_practices</field>
             <field name="evidence_char">AF-13_Carta responsiva de fondo fijo de caja / Correo Electrónico</field>
-            <field name="comment"></field>
         </record>
 
-        <record id="audit_audit_planning_hr_402" model="audit.audit.planning">
+        <record id="audit_audit_planning_hr_402" model="audit.audit.planning.template">
             <field name="tyt_procedure_description_id" ref="tyt_audit.schedule_plan_description_4"/>
             <field name="tyt_procedure_activity_id" ref="tyt_audit.schedule_plan_activity_404"/>
 
@@ -65,10 +61,9 @@
             <field name="verification">Muestre evidencia de que se firmó y se envió el anexo carta responsiva de caja chica</field>
             <field name="finding"></field>
             <field name="evidence_char">AF-22_Anexo carta responsiva de caja chica / Correo Electrónico</field>
-            <field name="comment"></field>
         </record>
 
-        <record id="audit_audit_planning_hr_403" model="audit.audit.planning">
+        <record id="audit_audit_planning_hr_403" model="audit.audit.planning.template">
             <field name="tyt_procedure_description_id" ref="tyt_audit.schedule_plan_description_4"/>
             <field name="tyt_procedure_activity_id" ref="tyt_audit.schedule_plan_activity_404"/>
 
@@ -78,10 +73,9 @@
             <field name="verification">Muestre evidencia de la confirmación del depósito para la ejecución de la administración de caja chica en sitio miércoles, máximo a las 23:59 hrs.</field>
             <field name="finding">good_practices</field>
             <field name="evidence_char">Correo electrónico (validar fechas)</field>
-            <field name="comment"></field>
         </record>
 
-        <record id="audit_audit_planning_hr_404" model="audit.audit.planning">
+        <record id="audit_audit_planning_hr_404" model="audit.audit.planning.template">
             <field name="tyt_procedure_description_id" ref="tyt_audit.schedule_plan_description_4"/>
             <field name="tyt_procedure_activity_id" ref="tyt_audit.schedule_plan_activity_404"/>
 
@@ -91,10 +85,9 @@
             <field name="verification">Muestre evidencia que se realiza arqueo el MARTES</field>
             <field name="finding">good_practices</field>
             <field name="evidence_char">AF-11_Arqueo / Correo electrónico (validar que el envío se realice el día Martes)</field>
-            <field name="comment"></field>
         </record>
 
-        <record id="audit_audit_planning_hr_405" model="audit.audit.planning">
+        <record id="audit_audit_planning_hr_405" model="audit.audit.planning.template">
             <field name="tyt_procedure_description_id" ref="tyt_audit.schedule_plan_description_4"/>
             <field name="tyt_procedure_activity_id" ref="tyt_audit.schedule_plan_activity_404"/>
 
@@ -104,12 +97,11 @@
             <field name="verification">Muestre evidencia del llenado de formato de reembolso y del envío de correo los lunes máximo a las 23:59 hrs. (hora centro)</field>
             <field name="finding">good_practices</field>
             <field name="evidence_char">Correo electrónico (validar que sea en el día y hora) / AF-12_Reembolso (revisar factura por factura para confirmar que coincida la información capturada)</field>
-            <field name="comment"></field>
         </record>
 
 
         <!-- HR5 -->
-        <record id="audit_audit_planning_hr_501" model="audit.audit.planning">
+        <record id="audit_audit_planning_hr_501" model="audit.audit.planning.template">
             <field name="tyt_procedure_description_id" ref="tyt_audit.schedule_plan_description_4"/>
             <field name="tyt_procedure_activity_id" ref="tyt_audit.schedule_plan_activity_405"/>
 
@@ -119,10 +111,9 @@
             <field name="verification">Muestre evidencia del envío de la solicitud correspondiente</field>
             <field name="finding">good_practices</field>
             <field name="evidence_char">Correo electrónico (validar que se cuente con las evidencias y el Vo.Bo de gerencia)</field>
-            <field name="comment"></field>
         </record>
 
-        <record id="audit_audit_planning_hr_502" model="audit.audit.planning">
+        <record id="audit_audit_planning_hr_502" model="audit.audit.planning.template">
             <field name="tyt_procedure_description_id" ref="tyt_audit.schedule_plan_description_4"/>
             <field name="tyt_procedure_activity_id" ref="tyt_audit.schedule_plan_activity_405"/>
 
@@ -132,10 +123,9 @@
             <field name="verification">Muestre evidencia de haber recibido el finiquito con las fechas correspondientes dependiendo la baja</field>
             <field name="finding">good_practices</field>
             <field name="evidence_char">ARH-03_Finiquito / Correo Electrónico (validar que el responsable de RH y ADM solicite el finiquito y que el coordinador de nómina responde sobre el mismo correo)</field>
-            <field name="comment"></field>
         </record>
 
-        <record id="audit_audit_planning_hr_503" model="audit.audit.planning">
+        <record id="audit_audit_planning_hr_503" model="audit.audit.planning.template">
             <field name="tyt_procedure_description_id" ref="tyt_audit.schedule_plan_description_4"/>
             <field name="tyt_procedure_activity_id" ref="tyt_audit.schedule_plan_activity_405"/>
 
@@ -145,10 +135,9 @@
             <field name="verification">Muestre evidencia de que se avisaron a los jefes directos</field>
             <field name="finding">good_practices</field>
             <field name="evidence_char">Correo electrónico (sea baja voluntaria o inducida, se debe notificar la baja por medio de correo)</field>
-            <field name="comment"></field>
         </record>
 
-        <record id="audit_audit_planning_hr_504" model="audit.audit.planning">
+        <record id="audit_audit_planning_hr_504" model="audit.audit.planning.template">
             <field name="tyt_procedure_description_id" ref="tyt_audit.schedule_plan_description_4"/>
             <field name="tyt_procedure_activity_id" ref="tyt_audit.schedule_plan_activity_405"/>
 
@@ -158,10 +147,9 @@
             <field name="verification">Muestre formato de renuncia con las firmas correspondientes y que incluya "la leyenda"</field>
             <field name="finding">good_practices</field>
             <field name="evidence_char">ARH-02_Renuncia / Correo Electrónico</field>
-            <field name="comment"></field>
         </record>
 
-        <record id="audit_audit_planning_hr_505" model="audit.audit.planning">
+        <record id="audit_audit_planning_hr_505" model="audit.audit.planning.template">
             <field name="tyt_procedure_description_id" ref="tyt_audit.schedule_plan_description_4"/>
             <field name="tyt_procedure_activity_id" ref="tyt_audit.schedule_plan_activity_405"/>
 
@@ -171,10 +159,9 @@
             <field name="verification">Muestre evidencia de la entrega</field>
             <field name="finding">good_practices</field>
             <field name="evidence_char">Gafete Físico</field>
-            <field name="comment"></field>
         </record>
 
-        <record id="audit_audit_planning_hr_506" model="audit.audit.planning">
+        <record id="audit_audit_planning_hr_506" model="audit.audit.planning.template">
             <field name="tyt_procedure_description_id" ref="tyt_audit.schedule_plan_description_4"/>
             <field name="tyt_procedure_activity_id" ref="tyt_audit.schedule_plan_activity_405"/>
 
@@ -184,10 +171,9 @@
             <field name="verification">Muestre evidencia del reporte de bajas con colores institucionales y correo electrónico solicitando si la persona es recontratable</field>
             <field name="finding">good_practices</field>
             <field name="evidence_char">ARH-01_Reporte de bajas / Correo Electrónico / Si en el correo se comenta que la persona no es recontratable solicitar la "Lista de Negra"</field>
-            <field name="comment"></field>
         </record>
 
-        <record id="audit_audit_planning_hr_507" model="audit.audit.planning">
+        <record id="audit_audit_planning_hr_507" model="audit.audit.planning.template">
             <field name="tyt_procedure_description_id" ref="tyt_audit.schedule_plan_description_4"/>
             <field name="tyt_procedure_activity_id" ref="tyt_audit.schedule_plan_activity_405"/>
 
@@ -197,12 +183,11 @@
             <field name="verification">Muestre correo o respaldo con la confirmación del pago</field>
             <field name="finding"></field>
             <field name="evidence_char">Correo electrónico o Prenómina en donde se indica el pago pendiente (validar los comentarios de la prenomina)</field>
-            <field name="comment"></field>
         </record>
 
 
         <!-- HR6 -->
-        <record id="audit_audit_planning_hr_601" model="audit.audit.planning">
+        <record id="audit_audit_planning_hr_601" model="audit.audit.planning.template">
             <field name="tyt_procedure_description_id" ref="tyt_audit.schedule_plan_description_4"/>
             <field name="tyt_procedure_activity_id" ref="tyt_audit.schedule_plan_activity_406"/>
 
@@ -212,10 +197,9 @@
             <field name="verification">Muestre evidencia de haber recibido el finiquito con las fechas correspondientes dependiendo la baja</field>
             <field name="finding">good_practices</field>
             <field name="evidence_char">ARH-03_Finiquito / Correo Electronico (validar que el responsable de RH y ADM solicite el finiquito y que el coordinador de nómina responde sobre el mismo correo)</field>
-            <field name="comment"></field>
         </record>
 
-        <record id="audit_audit_planning_hr_602" model="audit.audit.planning">
+        <record id="audit_audit_planning_hr_602" model="audit.audit.planning.template">
             <field name="tyt_procedure_description_id" ref="tyt_audit.schedule_plan_description_4"/>
             <field name="tyt_procedure_activity_id" ref="tyt_audit.schedule_plan_activity_406"/>
 
@@ -225,10 +209,9 @@
             <field name="verification">Muestre evidencia de que se avisaron a los jefes directos</field>
             <field name="finding">good_practices</field>
             <field name="evidence_char">Correo electrónico (sea baja voluntaria o inducida, se debe notificar la baja por medio de correo)</field>
-            <field name="comment"></field>
         </record>
 
-        <record id="audit_audit_planning_hr_603" model="audit.audit.planning">
+        <record id="audit_audit_planning_hr_603" model="audit.audit.planning.template">
             <field name="tyt_procedure_description_id" ref="tyt_audit.schedule_plan_description_4"/>
             <field name="tyt_procedure_activity_id" ref="tyt_audit.schedule_plan_activity_406"/>
 
@@ -238,10 +221,9 @@
             <field name="verification">Muestre formato de encuesta de salida y reporte de estadisticas Semanal enviado mas tardar Martes del siguiente corte nominal a las 10:00 hora centro</field>
             <field name="finding">good_practices</field>
             <field name="evidence_char">ARH-28_Encuesta de Salida / Reporte Semanal de Estadisticas / Correo Electronico</field>
-            <field name="comment"></field>
         </record>
 
-        <record id="audit_audit_planning_hr_604" model="audit.audit.planning">
+        <record id="audit_audit_planning_hr_604" model="audit.audit.planning.template">
             <field name="tyt_procedure_description_id" ref="tyt_audit.schedule_plan_description_4"/>
             <field name="tyt_procedure_activity_id" ref="tyt_audit.schedule_plan_activity_406"/>
 
@@ -251,10 +233,9 @@
             <field name="verification">Muestre formato de renuncia con las firmas correspondientes y que incluya "la leyenda"</field>
             <field name="finding">good_practices</field>
             <field name="evidence_char">ARH-02_Renuncia/ Correo Electronico</field>
-            <field name="comment"></field>
         </record>
 
-        <record id="audit_audit_planning_hr_605" model="audit.audit.planning">
+        <record id="audit_audit_planning_hr_605" model="audit.audit.planning.template">
             <field name="tyt_procedure_description_id" ref="tyt_audit.schedule_plan_description_4"/>
             <field name="tyt_procedure_activity_id" ref="tyt_audit.schedule_plan_activity_406"/>
 
@@ -264,10 +245,9 @@
             <field name="verification">Muestre evidencia de la entrega</field>
             <field name="finding">good_practices</field>
             <field name="evidence_char">Gafete Físico</field>
-            <field name="comment"></field>
         </record>
 
-        <record id="audit_audit_planning_hr_606" model="audit.audit.planning">
+        <record id="audit_audit_planning_hr_606" model="audit.audit.planning.template">
             <field name="tyt_procedure_description_id" ref="tyt_audit.schedule_plan_description_4"/>
             <field name="tyt_procedure_activity_id" ref="tyt_audit.schedule_plan_activity_406"/>
 
@@ -277,10 +257,9 @@
             <field name="verification">Muestre evidencia del reporte de bajas con colores institucionales y correo electrónico solicitando si la persona es recontratable</field>
             <field name="finding">good_practices</field>
             <field name="evidence_char">ARH-01_Reporte de bajas / Correo Electrónico / Si en el correo se comenta que la persona no es recontratable solicitar la "Lista de Negra"</field>
-            <field name="comment"></field>
         </record>
 
-        <record id="audit_audit_planning_hr_607" model="audit.audit.planning">
+        <record id="audit_audit_planning_hr_607" model="audit.audit.planning.template">
             <field name="tyt_procedure_description_id" ref="tyt_audit.schedule_plan_description_4"/>
             <field name="tyt_procedure_activity_id" ref="tyt_audit.schedule_plan_activity_406"/>
 
@@ -290,12 +269,11 @@
             <field name="verification">Muestre correo o respaldo con la confirmación del pago</field>
             <field name="finding"></field>
             <field name="evidence_char">Correo electrónico o Prenómina en donde se indica el pago pendiente (validar los comentarios de la prenomina)</field>
-            <field name="comment"></field>
         </record>
 
 
         <!-- HR7 -->
-        <record id="audit_audit_planning_hr_701" model="audit.audit.planning">
+        <record id="audit_audit_planning_hr_701" model="audit.audit.planning.template">
             <field name="tyt_procedure_description_id" ref="tyt_audit.schedule_plan_description_4"/>
             <field name="tyt_procedure_activity_id" ref="tyt_audit.schedule_plan_activity_407"/>
 
@@ -305,10 +283,9 @@
             <field name="verification">Muestra evidencia de envío de lista de asistencia</field>
             <field name="finding">good_practices</field>
             <field name="evidence_char">ARH-06_Lista operativa Concentrado Actualizado / Correo Electrónico</field>
-            <field name="comment"></field>
         </record>
 
-        <record id="audit_audit_planning_hr_702" model="audit.audit.planning">
+        <record id="audit_audit_planning_hr_702" model="audit.audit.planning.template">
             <field name="tyt_procedure_description_id" ref="tyt_audit.schedule_plan_description_4"/>
             <field name="tyt_procedure_activity_id" ref="tyt_audit.schedule_plan_activity_407"/>
 
@@ -318,10 +295,9 @@
             <field name="verification">Muestra evidencia de la descarga de la información</field>
             <field name="finding">good_practices</field>
             <field name="evidence_char">Archivo de descarga / Lista Nominal</field>
-            <field name="comment"></field>
         </record>
 
-        <record id="audit_audit_planning_hr_703" model="audit.audit.planning">
+        <record id="audit_audit_planning_hr_703" model="audit.audit.planning.template">
             <field name="tyt_procedure_description_id" ref="tyt_audit.schedule_plan_description_4"/>
             <field name="tyt_procedure_activity_id" ref="tyt_audit.schedule_plan_activity_407"/>
 
@@ -331,10 +307,9 @@
             <field name="verification">Muestra evidencia de correo de solicitud y autorización en el tiempo establecido 24 hrs</field>
             <field name="finding">good_practices</field>
             <field name="evidence_char">Correo electrónico (validar que se realice el proceso de manera correcta, que se solicite en tiempo y que se comparta por medio de correo)</field>
-            <field name="comment"></field>
         </record>
 
-        <record id="audit_audit_planning_hr_704" model="audit.audit.planning">
+        <record id="audit_audit_planning_hr_704" model="audit.audit.planning.template">
             <field name="tyt_procedure_description_id" ref="tyt_audit.schedule_plan_description_4"/>
             <field name="tyt_procedure_activity_id" ref="tyt_audit.schedule_plan_activity_407"/>
 
@@ -344,10 +319,9 @@
             <field name="verification">Muestra evidencia de envío y autorización de solicitud y cómo se realizará la recuperación en 48 hrs</field>
             <field name="finding">good_practices</field>
             <field name="evidence_char">Correo electrónico (validar que se realice el proceso de manera correcta, que se solicite en tiempo y que se comparta por medio de correo) / ARH-05_Pase de salida</field>
-            <field name="comment"></field>
         </record>
 
-        <record id="audit_audit_planning_hr_705" model="audit.audit.planning">
+        <record id="audit_audit_planning_hr_705" model="audit.audit.planning.template">
             <field name="tyt_procedure_description_id" ref="tyt_audit.schedule_plan_description_4"/>
             <field name="tyt_procedure_activity_id" ref="tyt_audit.schedule_plan_activity_407"/>
 
@@ -357,10 +331,9 @@
             <field name="verification">Muestra evidencia de correo de solicitud (métricas obtenidas) y autorización en el tiempo establecido</field>
             <field name="finding">good_practices</field>
             <field name="evidence_char">Correo electrónico (validar que se realice el proceso de manera correcta, que se solicite en tiempo y que se comparta por medio de correo)</field>
-            <field name="comment"></field>
         </record>
 
-        <record id="audit_audit_planning_hr_706" model="audit.audit.planning">
+        <record id="audit_audit_planning_hr_706" model="audit.audit.planning.template">
             <field name="tyt_procedure_description_id" ref="tyt_audit.schedule_plan_description_4"/>
             <field name="tyt_procedure_activity_id" ref="tyt_audit.schedule_plan_activity_407"/>
 
@@ -370,10 +343,9 @@
             <field name="verification">Muestra evidencia de envío y autorización de solicitud 3 días antes</field>
             <field name="finding">good_practices</field>
             <field name="evidence_char">Correo electrónico (validar que se realice el proceso de manera correcta, que se solicite en tiempo y que se comparta por medio de correo) / ARH-07_Vacaciones (validar la fecha de aplicación y que el formato esté firmado)</field>
-            <field name="comment"></field>
         </record>
 
-        <record id="audit_audit_planning_hr_707" model="audit.audit.planning">
+        <record id="audit_audit_planning_hr_707" model="audit.audit.planning.template">
             <field name="tyt_procedure_description_id" ref="tyt_audit.schedule_plan_description_4"/>
             <field name="tyt_procedure_activity_id" ref="tyt_audit.schedule_plan_activity_407"/>
 
@@ -383,10 +355,9 @@
             <field name="verification">Muestre evidencia del formato enviado en las 72 hrs</field>
             <field name="finding"></field>
             <field name="evidence_char">Correo electrónico 72 hrs y formato de Incapacidad (incapacidades del IMSS escanearlas y validar el documento)</field>
-            <field name="comment"></field>
         </record>        
 
-        <record id="audit_audit_planning_hr_708" model="audit.audit.planning">
+        <record id="audit_audit_planning_hr_708" model="audit.audit.planning.template">
             <field name="tyt_procedure_description_id" ref="tyt_audit.schedule_plan_description_4"/>
             <field name="tyt_procedure_activity_id" ref="tyt_audit.schedule_plan_activity_407"/>
 
@@ -396,10 +367,9 @@
             <field name="verification">Muestra evidencia de envío y autorización de solicitud (Si agente cuenta con seguro social deberá ser solo documento oficial).</field>
             <field name="finding">good_practices</field>
             <field name="evidence_char">Correo electrónico y documento oficial</field>
-            <field name="comment"></field>
         </record>
 
-        <record id="audit_audit_planning_hr_709" model="audit.audit.planning">
+        <record id="audit_audit_planning_hr_709" model="audit.audit.planning.template">
             <field name="tyt_procedure_description_id" ref="tyt_audit.schedule_plan_description_4"/>
             <field name="tyt_procedure_activity_id" ref="tyt_audit.schedule_plan_activity_407"/>
 
@@ -409,10 +379,9 @@
             <field name="verification">Muestra evidencia que se comparten los correos de retardos del personal administrativo los días lunes.</field>
             <field name="finding">good_practices</field>
             <field name="evidence_char">Correo electrónico verificando la fecha de envío</field>
-            <field name="comment"></field>
         </record>
 
-        <record id="audit_audit_planning_hr_710" model="audit.audit.planning">
+        <record id="audit_audit_planning_hr_710" model="audit.audit.planning.template">
             <field name="tyt_procedure_description_id" ref="tyt_audit.schedule_plan_description_4"/>
             <field name="tyt_procedure_activity_id" ref="tyt_audit.schedule_plan_activity_407"/>
 
@@ -422,10 +391,9 @@
             <field name="verification">Muestra evidencia de envío un día antes de la incidencia y autorización de solicitud.</field>
             <field name="finding">good_practices</field>
             <field name="evidence_char">Correo electrónico</field>
-            <field name="comment"></field>
         </record>
 
-        <record id="audit_audit_planning_hr_711" model="audit.audit.planning">
+        <record id="audit_audit_planning_hr_711" model="audit.audit.planning.template">
             <field name="tyt_procedure_description_id" ref="tyt_audit.schedule_plan_description_4"/>
             <field name="tyt_procedure_activity_id" ref="tyt_audit.schedule_plan_activity_407"/>
 
@@ -435,10 +403,9 @@
             <field name="verification">Muestra evidencia de envío de la asignación de los descansos entre semana un día antes del nuevo corte nominal.</field>
             <field name="finding">good_practices</field>
             <field name="evidence_char">Correo electrónico / Reporte de Asignación</field>
-            <field name="comment"></field>
         </record>
 
-        <record id="audit_audit_planning_hr_712" model="audit.audit.planning">
+        <record id="audit_audit_planning_hr_712" model="audit.audit.planning.template">
             <field name="tyt_procedure_description_id" ref="tyt_audit.schedule_plan_description_4"/>
             <field name="tyt_procedure_activity_id" ref="tyt_audit.schedule_plan_activity_407"/>
 
@@ -448,10 +415,9 @@
             <field name="verification">Muestra evidencia del envío de nómina.</field>
             <field name="finding">good_practices</field>
             <field name="evidence_char">AO-20_Comisiones / ARH-11_Dinámica de horas / Correo Electrónico / Lista Nominal</field>
-            <field name="comment"></field>
         </record>
 
-        <record id="audit_audit_planning_hr_713" model="audit.audit.planning">
+        <record id="audit_audit_planning_hr_713" model="audit.audit.planning.template">
             <field name="tyt_procedure_description_id" ref="tyt_audit.schedule_plan_description_4"/>
             <field name="tyt_procedure_activity_id" ref="tyt_audit.schedule_plan_activity_407"/>
 
@@ -461,10 +427,9 @@
             <field name="verification">Muestra evidencia de envío y autorización de solicitud día autorizado jueves.</field>
             <field name="finding">good_practices</field>
             <field name="evidence_char">Correo electrónico / ARH-27_Validación de bonos</field>
-            <field name="comment"></field>
         </record>
 
-        <record id="audit_audit_planning_hr_714" model="audit.audit.planning">
+        <record id="audit_audit_planning_hr_714" model="audit.audit.planning.template">
             <field name="tyt_procedure_description_id" ref="tyt_audit.schedule_plan_description_4"/>
             <field name="tyt_procedure_activity_id" ref="tyt_audit.schedule_plan_activity_407"/>
 
@@ -474,10 +439,9 @@
             <field name="verification">Muestra evidencia de envío y autorización del comité.</field>
             <field name="finding">good_practices</field>
             <field name="evidence_char">ARH-11_Dinámica de horas / Correo Electrónico</field>
-            <field name="comment"></field>
         </record>
 
-        <record id="audit_audit_planning_hr_715" model="audit.audit.planning">
+        <record id="audit_audit_planning_hr_715" model="audit.audit.planning.template">
             <field name="tyt_procedure_description_id" ref="tyt_audit.schedule_plan_description_4"/>
             <field name="tyt_procedure_activity_id" ref="tyt_audit.schedule_plan_activity_407"/>
 
@@ -487,10 +451,9 @@
             <field name="verification">Muestra evidencia del envío de nómina por parte de área central y el correo con la nómina firmada por los responsables de área.</field>
             <field name="finding">good_practices</field>
             <field name="evidence_char">Correo Electrónico / Nómina Preliminar Firmada</field>
-            <field name="comment"></field>
         </record>
 
-        <record id="audit_audit_planning_hr_716" model="audit.audit.planning">
+        <record id="audit_audit_planning_hr_716" model="audit.audit.planning.template">
             <field name="tyt_procedure_description_id" ref="tyt_audit.schedule_plan_description_4"/>
             <field name="tyt_procedure_activity_id" ref="tyt_audit.schedule_plan_activity_407"/>
 
@@ -500,10 +463,9 @@
             <field name="verification">Muestra evidencia que se enviaron los recibos de nómina.</field>
             <field name="finding">good_practices</field>
             <field name="evidence_char">Formato de nómina / Correo Electrónico</field>
-            <field name="comment"></field>
         </record>
 
-        <record id="audit_audit_planning_hr_717" model="audit.audit.planning">
+        <record id="audit_audit_planning_hr_717" model="audit.audit.planning.template">
             <field name="tyt_procedure_description_id" ref="tyt_audit.schedule_plan_description_4"/>
             <field name="tyt_procedure_activity_id" ref="tyt_audit.schedule_plan_activity_407"/>
 
@@ -513,7 +475,6 @@
             <field name="verification">Cuenta con los formatos pero no los archiva de forma digital.</field>
             <field name="finding">good_practices</field>
             <field name="evidence_char">Nóminas de empleados firmadas digitales archivadas por semana</field>
-            <field name="comment"></field>
         </record>
     </data>
 </odoo>

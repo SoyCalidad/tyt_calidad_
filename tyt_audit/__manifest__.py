@@ -24,6 +24,8 @@
         'views/plan.xml',
         'views/audit_report.xml',
         'views/audit_audit_planning.xml',
+        'views/audit_audit_planning_template.xml',
+        'views/start_process_audit_audit.xml',
         'reports/report_paperformat.xml',
         'reports/report_layout.xml',
         'reports/report_informe.xml',

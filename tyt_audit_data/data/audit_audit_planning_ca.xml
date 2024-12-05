@@ -1,7 +1,7 @@
 <odoo>
     <data noupdate="0">
         <!-- C1 -->
-        <record id="audit_audit_planning_ca_101" model="audit.audit.planning">
+        <record id="audit_audit_planning_ca_101" model="audit.audit.planning.template">
             <field name="tyt_procedure_description_id" ref="tyt_audit.schedule_plan_description_1"/>
             <field name="tyt_procedure_activity_id" ref="tyt_audit.schedule_plan_activity_101"/>
 
@@ -11,9 +11,8 @@
             <field name="verification">Muestra evidencia de la solicitud de curso de refuerzo</field>
             <field name="finding">good_practices</field>
             <field name="evidence_char">ACC-38_Solicitud de refuerzo / Correo electronico</field>
-            <field name="comment"></field>
         </record>
-        <record id="audit_audit_planning_ca_102" model="audit.audit.planning">
+        <record id="audit_audit_planning_ca_102" model="audit.audit.planning.template">
             <field name="tyt_procedure_description_id" ref="tyt_audit.schedule_plan_description_1"/>
             <field name="tyt_procedure_activity_id" ref="tyt_audit.schedule_plan_activity_101"/>
 
@@ -23,9 +22,8 @@
             <field name="verification">Muestra evidencia de la solicitud de curso de refuerzo</field>
             <field name="finding"></field>
             <field name="evidence_char">ACC-34_Concentrado semanal de operaciones</field>
-            <field name="comment">N/A</field>
         </record>
-        <record id="audit_audit_planning_ca_103" model="audit.audit.planning">
+        <record id="audit_audit_planning_ca_103" model="audit.audit.planning.template">
             <field name="tyt_procedure_description_id" ref="tyt_audit.schedule_plan_description_1"/>
             <field name="tyt_procedure_activity_id" ref="tyt_audit.schedule_plan_activity_101"/>
 
@@ -35,10 +33,9 @@
             <field name="verification">Muestra evidencia de la agenda del curso</field>
             <field name="finding">good_practices</field>
             <field name="evidence_char">ACC-39_Agenda de curso de refuerzo</field>
-            <field name="comment"></field>
         </record>
 
-        <record id="audit_audit_planning_ca_104" model="audit.audit.planning">
+        <record id="audit_audit_planning_ca_104" model="audit.audit.planning.template">
             <field name="tyt_procedure_description_id" ref="tyt_audit.schedule_plan_description_1"/>
             <field name="tyt_procedure_activity_id" ref="tyt_audit.schedule_plan_activity_101"/>
 
@@ -48,10 +45,9 @@
             <field name="verification">Muestra evidencia del contenico a impartir en el curso, validar que se envio 24 hrs antes</field>
             <field name="finding">good_practices</field>
             <field name="evidence_char">ACC-24_Presentacion de cursos / ACC-27_Carta descriptiva</field>
-            <field name="comment"></field>
         </record>
 
-        <record id="audit_audit_planning_ca_105" model="audit.audit.planning">
+        <record id="audit_audit_planning_ca_105" model="audit.audit.planning.template">
             <field name="tyt_procedure_description_id" ref="tyt_audit.schedule_plan_description_1"/>
             <field name="tyt_procedure_activity_id" ref="tyt_audit.schedule_plan_activity_101"/>
             
@@ -61,10 +57,9 @@
             <field name="verification">Muestra evidencia de las ponderaciones de exámenes</field>
             <field name="finding"></field>
             <field name="evidence_char">ACC-43_Evaluación de refuerzo / ACC-23_Examen de capacitación</field>
-            <field name="comment"></field>
         </record>
 
-        <record id="audit_audit_planning_ca_107" model="audit.audit.planning">
+        <record id="audit_audit_planning_ca_107" model="audit.audit.planning.template">
             <field name="tyt_procedure_description_id" ref="tyt_audit.schedule_plan_description_1"/>
             <field name="tyt_procedure_activity_id" ref="tyt_audit.schedule_plan_activity_101"/>
 
@@ -74,10 +69,9 @@
             <field name="verification">Muestra evidencia de la ejecución del curso</field>
             <field name="finding">good_practices</field>
             <field name="evidence_char">ACC-27_Carta descriptiva</field>
-            <field name="comment"></field>
         </record>
 
-        <record id="audit_audit_planning_ca_108" model="audit.audit.planning">
+        <record id="audit_audit_planning_ca_108" model="audit.audit.planning.template">
             <field name="tyt_procedure_description_id" ref="tyt_audit.schedule_plan_description_1"/>
             <field name="tyt_procedure_activity_id" ref="tyt_audit.schedule_plan_activity_101"/>
 
@@ -87,10 +81,9 @@
             <field name="verification">Muestra evidencia de la aplicación de exámenes</field>
             <field name="finding">good_practices</field>
             <field name="evidence_char">ACC-43_Evaluación de refuerzo / ACC-23_Examen de capacitación</field>
-            <field name="comment"></field>
         </record>
 
-        <record id="audit_audit_planning_ca_109" model="audit.audit.planning">
+        <record id="audit_audit_planning_ca_109" model="audit.audit.planning.template">
             <field name="tyt_procedure_description_id" ref="tyt_audit.schedule_plan_description_1"/>
             <field name="tyt_procedure_activity_id" ref="tyt_audit.schedule_plan_activity_101"/>
 
@@ -100,10 +93,9 @@
             <field name="verification">Muestra evidencia del envío de lista de asistencia</field>
             <field name="finding">good_practices</field>
             <field name="evidence_char">ACC-44_Lista de Asistencia de refuerzo / Correo Electrónico</field>
-            <field name="comment"></field>
         </record>
 
-        <record id="audit_audit_planning_ca_110" model="audit.audit.planning">
+        <record id="audit_audit_planning_ca_110" model="audit.audit.planning.template">
             <field name="tyt_procedure_description_id" ref="tyt_audit.schedule_plan_description_1"/>
             <field name="tyt_procedure_activity_id" ref="tyt_audit.schedule_plan_activity_101"/>
 
@@ -113,12 +105,11 @@
             <field name="verification">El Entrenador de Sitio es el responsable de enviar el Kardex de refuerzo.</field>
             <field name="finding">good_practices</field>
             <field name="evidence_char">ACC-41_Kardex de refuerzo / Correo Electrónico</field>
-            <field name="comment"></field>
         </record>
 
 
         <!-- C2 -->
-        <record id="audit_audit_planning_ca_201" model="audit.audit.planning">
+        <record id="audit_audit_planning_ca_201" model="audit.audit.planning.template">
             <field name="tyt_procedure_description_id" ref="tyt_audit.schedule_plan_description_1"/>
             <field name="tyt_procedure_activity_id" ref="tyt_audit.schedule_plan_activity_102"/>
 
@@ -128,10 +119,9 @@
             <field name="verification">Muestre evidencia del envío de cronograma mensual</field>
             <field name="finding">good_practices</field>
             <field name="evidence_char">ACC-57_Cronograma de auditoría Interna / Correo</field>
-            <field name="comment"></field>
         </record>
 
-        <record id="audit_audit_planning_ca_202" model="audit.audit.planning">
+        <record id="audit_audit_planning_ca_202" model="audit.audit.planning.template">
             <field name="tyt_procedure_description_id" ref="tyt_audit.schedule_plan_description_1"/>
             <field name="tyt_procedure_activity_id" ref="tyt_audit.schedule_plan_activity_102"/>
 
@@ -141,10 +131,9 @@
             <field name="verification">Muestre correo de notificación del auditor interno</field>
             <field name="finding">good_practices</field>
             <field name="evidence_char">Correo electrónico</field>
-            <field name="comment"></field>
         </record>
 
-        <record id="audit_audit_planning_ca_203" model="audit.audit.planning">
+        <record id="audit_audit_planning_ca_203" model="audit.audit.planning.template">
             <field name="tyt_procedure_description_id" ref="tyt_audit.schedule_plan_description_1"/>
             <field name="tyt_procedure_activity_id" ref="tyt_audit.schedule_plan_activity_102"/>
 
@@ -154,10 +143,9 @@
             <field name="verification">Muestre evidencia de la asignación de auditorías a realizar</field>
             <field name="finding">good_practices</field>
             <field name="evidence_char">ACC-56_Lista de verificación para auditoría interna</field>
-            <field name="comment"></field>
         </record>
 
-        <record id="audit_audit_planning_ca_204" model="audit.audit.planning">
+        <record id="audit_audit_planning_ca_204" model="audit.audit.planning.template">
             <field name="tyt_procedure_description_id" ref="tyt_audit.schedule_plan_description_1"/>
             <field name="tyt_procedure_activity_id" ref="tyt_audit.schedule_plan_activity_102"/>
 
@@ -167,10 +155,9 @@
             <field name="verification">Muestre evidencia de informes completos y correctos</field>
             <field name="finding"></field>
             <field name="evidence_char">ACC-50_Informe de auditoría interna</field>
-            <field name="comment">N/A</field>
         </record>
 
-        <record id="audit_audit_planning_ca_205" model="audit.audit.planning">
+        <record id="audit_audit_planning_ca_205" model="audit.audit.planning.template">
             <field name="tyt_procedure_description_id" ref="tyt_audit.schedule_plan_description_1"/>
             <field name="tyt_procedure_activity_id" ref="tyt_audit.schedule_plan_activity_102"/>
 
@@ -180,11 +167,10 @@
             <field name="verification">Muestre evidencia de la captura y seguimiento de las no conformidades</field>
             <field name="finding"></field>
             <field name="evidence_char">ACC-59_Inventario y estado de no conformidades y acciones correctivas / ACC-58_Registro de no conformidad / ACC-46_Concentrado de Sanciones</field>
-            <field name="comment">N/A</field>
         </record>
 
         <!-- C3 -->
-        <record id="audit_audit_planning_ca_301" model="audit.audit.planning">
+        <record id="audit_audit_planning_ca_301" model="audit.audit.planning.template">
             <field name="tyt_procedure_description_id" ref="tyt_audit.schedule_plan_description_1"/>
             <field name="tyt_procedure_activity_id" ref="tyt_audit.schedule_plan_activity_103"/>
 
@@ -194,10 +180,9 @@
             <field name="verification">Muestre correo sobre la solicitud de cambios a validar en los procesos</field>
             <field name="finding"></field>
             <field name="evidence_char">Correo Electrónico / ACC-50_Informe de auditoría interna</field>
-            <field name="comment">N/A</field>
         </record>
 
-        <record id="audit_audit_planning_ca_302" model="audit.audit.planning">
+        <record id="audit_audit_planning_ca_302" model="audit.audit.planning.template">
             <field name="tyt_procedure_description_id" ref="tyt_audit.schedule_plan_description_1"/>
             <field name="tyt_procedure_activity_id" ref="tyt_audit.schedule_plan_activity_103"/>
 
@@ -207,10 +192,9 @@
             <field name="verification">Mostrar Correo de la notificación de cambios en los procedimientos</field>
             <field name="finding">good_practices</field>
             <field name="evidence_char">Correo Electrónico / ACC-45_Notificación de actualización</field>
-            <field name="comment"></field>
         </record>
 
-        <record id="audit_audit_planning_ca_303" model="audit.audit.planning">
+        <record id="audit_audit_planning_ca_303" model="audit.audit.planning.template">
             <field name="tyt_procedure_description_id" ref="tyt_audit.schedule_plan_description_1"/>
             <field name="tyt_procedure_activity_id" ref="tyt_audit.schedule_plan_activity_103"/>
 
@@ -220,10 +204,9 @@
             <field name="verification">Muestre presentación de los resultados de las auditorías realizadas</field>
             <field name="finding">good_practices</field>
             <field name="evidence_char">AO-11_Presentación de resultados / AO-07_Minuta</field>
-            <field name="comment"></field>
         </record>
 
-        <record id="audit_audit_planning_ca_304" model="audit.audit.planning">
+        <record id="audit_audit_planning_ca_304" model="audit.audit.planning.template">
             <field name="tyt_procedure_description_id" ref="tyt_audit.schedule_plan_description_1"/>
             <field name="tyt_procedure_activity_id" ref="tyt_audit.schedule_plan_activity_103"/>
 
@@ -233,10 +216,9 @@
             <field name="verification">Mostrar evidencia de que se compartieron los cambios a realizar en los procedimientos</field>
             <field name="finding">good_practices</field>
             <field name="evidence_char">Correo Electrónico / AO-07_Minuta</field>
-            <field name="comment"></field>
         </record>
 
-        <record id="audit_audit_planning_ca_305" model="audit.audit.planning">
+        <record id="audit_audit_planning_ca_305" model="audit.audit.planning.template">
             <field name="tyt_procedure_description_id" ref="tyt_audit.schedule_plan_description_1"/>
             <field name="tyt_procedure_activity_id" ref="tyt_audit.schedule_plan_activity_103"/>
 
@@ -246,10 +228,9 @@
             <field name="verification">Validar que se auditen los procesos con cambios</field>
             <field name="finding">good_practices</field>
             <field name="evidence_char">ACC-56_Lista de verificación para auditoría interna / ACC-50_Informe de auditoría interna</field>
-            <field name="comment"></field>
         </record>
 
-        <record id="audit_audit_planning_ca_306" model="audit.audit.planning">
+        <record id="audit_audit_planning_ca_306" model="audit.audit.planning.template">
             <field name="tyt_procedure_description_id" ref="tyt_audit.schedule_plan_description_1"/>
             <field name="tyt_procedure_activity_id" ref="tyt_audit.schedule_plan_activity_103"/>
 
@@ -259,11 +240,10 @@
             <field name="verification">Envio de resultados obtenidos en las auditorías</field>
             <field name="finding">good_practices</field>
             <field name="evidence_char">Correo Electrónico / ACC-61_Análisis de Auditorías</field>
-            <field name="comment"></field>
         </record>
    
         <!-- C4 -->
-        <record id="audit_audit_planning_ca_401" model="audit.audit.planning">
+        <record id="audit_audit_planning_ca_401" model="audit.audit.planning.template">
             <field name="tyt_procedure_description_id" ref="tyt_audit.schedule_plan_description_1"/>
             <field name="tyt_procedure_activity_id" ref="tyt_audit.schedule_plan_activity_104"/>
 
@@ -273,10 +253,9 @@
             <field name="verification">Muestra evidencia de que se envió correo de la incidencia al Responsable de Capacitación y calidad</field>
             <field name="finding">good_practices</field>
             <field name="evidence_char">Correo electrónico</field>
-            <field name="comment"></field>
         </record>
 
-        <record id="audit_audit_planning_ca_402" model="audit.audit.planning">
+        <record id="audit_audit_planning_ca_402" model="audit.audit.planning.template">
             <field name="tyt_procedure_description_id" ref="tyt_audit.schedule_plan_description_1"/>
             <field name="tyt_procedure_activity_id" ref="tyt_audit.schedule_plan_activity_104"/>
 
@@ -286,10 +265,9 @@
             <field name="verification">Muestra evidencia de que se solicitó y aplicó la Concesión</field>
             <field name="finding"></field>
             <field name="evidence_char">ACC-18_Concesión y correo electrónico</field>
-            <field name="comment">N/A</field>
         </record>
 
-        <record id="audit_audit_planning_ca_403" model="audit.audit.planning">
+        <record id="audit_audit_planning_ca_403" model="audit.audit.planning.template">
             <field name="tyt_procedure_description_id" ref="tyt_audit.schedule_plan_description_1"/>
             <field name="tyt_procedure_activity_id" ref="tyt_audit.schedule_plan_activity_104"/>
     
@@ -299,10 +277,9 @@
             <field name="verification">Muestra evidencia de que se recibió correo electrónico de la solicitud de sanción</field>
             <field name="finding">good_practices</field>
             <field name="evidence_char">Correo electrónico (validar que el correo sea dirigido al responsable de capacitación y calidad)</field>
-            <field name="comment"></field>
         </record>
 
-        <record id="audit_audit_planning_ca_404" model="audit.audit.planning">
+        <record id="audit_audit_planning_ca_404" model="audit.audit.planning.template">
             <field name="tyt_procedure_description_id" ref="tyt_audit.schedule_plan_description_1"/>
             <field name="tyt_procedure_activity_id" ref="tyt_audit.schedule_plan_activity_104"/>
 
@@ -312,10 +289,9 @@
             <field name="verification">Muestra evidencia de que se aplicó la sanción correspondiente, validar que se aplique en tiempo</field>
             <field name="finding">good_practices</field>
             <field name="evidence_char">ACC-11_Carta compromiso condición / ACC-12_Amonestación A / ACC-13_Amonestación B / ACC-14_Acta Administrativa A / ACC-15_Acta Administrativa B / ACC-16_Acta Administrativa C / ACC-17_Constancia de hechos / ACC-18_Concesión</field>
-            <field name="comment"></field>
         </record>
 
-        <record id="audit_audit_planning_ca_405" model="audit.audit.planning">
+        <record id="audit_audit_planning_ca_405" model="audit.audit.planning.template">
             <field name="tyt_procedure_description_id" ref="tyt_audit.schedule_plan_description_1"/>
             <field name="tyt_procedure_activity_id" ref="tyt_audit.schedule_plan_activity_104"/>
 
@@ -325,10 +301,9 @@
             <field name="verification">Muestra evidencia de sanciones en expediente</field>
             <field name="finding">good_practices</field>
             <field name="evidence_char">Archivo Área Calidad (auditar donde se cuenta el resguardo digital)</field>
-            <field name="comment"></field>
         </record>
 
-        <record id="audit_audit_planning_ca_406" model="audit.audit.planning">
+        <record id="audit_audit_planning_ca_406" model="audit.audit.planning.template">
             <field name="tyt_procedure_description_id" ref="tyt_audit.schedule_plan_description_1"/>
             <field name="tyt_procedure_activity_id" ref="tyt_audit.schedule_plan_activity_104"/>
 
@@ -338,11 +313,10 @@
             <field name="verification">Muestra evidencia de registro correcto de la sanción aplicada</field>
             <field name="finding">good_practices</field>
             <field name="evidence_char">ACC-46_Concentrado de Sanciones</field>
-            <field name="comment"></field>
         </record>
 
         <!-- C5 -->
-        <record id="audit_audit_planning_ca_501" model="audit.audit.planning">
+        <record id="audit_audit_planning_ca_501" model="audit.audit.planning.template">
             <field name="tyt_procedure_description_id" ref="tyt_audit.schedule_plan_description_1"/>
             <field name="tyt_procedure_activity_id" ref="tyt_audit.schedule_plan_activity_105"/>
 
@@ -352,10 +326,9 @@
             <field name="verification">Muestra evidencia de minuta enviada por correo electrónico 24 hrs antes</field>
             <field name="finding">good_practices</field>
             <field name="evidence_char">Correo electrónico (validar la fecha sea como indica el proceso) / AO-07_Minuta (validar que en la minuta indique qué campaña se le asignó a cada entrenador)</field>
-            <field name="comment"></field>
         </record>
 
-        <record id="audit_audit_planning_ca_502" model="audit.audit.planning">
+        <record id="audit_audit_planning_ca_502" model="audit.audit.planning.template">
             <field name="tyt_procedure_description_id" ref="tyt_audit.schedule_plan_description_1"/>
             <field name="tyt_procedure_activity_id" ref="tyt_audit.schedule_plan_activity_105"/>
 
@@ -365,10 +338,9 @@
             <field name="verification">Muestra evidencia de la lista de asistencia</field>
             <field name="finding">good_practices</field>
             <field name="evidence_char">ACC-21_Lista de asistencia de capacitación (validar que el formato de lista de asistencia esté llenado de manera correcta, que se agreguen motivos de bajas, comentarios, etc. y que se comparta de manera diaria) / Correo Electrónico</field>
-            <field name="comment"></field>
         </record>
 
-        <record id="audit_audit_planning_ca_503" model="audit.audit.planning">
+        <record id="audit_audit_planning_ca_503" model="audit.audit.planning.template">
             <field name="tyt_procedure_description_id" ref="tyt_audit.schedule_plan_description_1"/>
             <field name="tyt_procedure_activity_id" ref="tyt_audit.schedule_plan_activity_105"/>
 
@@ -378,10 +350,9 @@
             <field name="verification">Muestra evidencia del envío por correo electrónico con huddle firmado por todos los candidatos</field>
             <field name="finding">good_practices</field>
             <field name="evidence_char">ACC-29_Huddle para candidatos / Correo Electrónico</field>
-            <field name="comment"></field>
         </record>
 
-        <record id="audit_audit_planning_ca_504" model="audit.audit.planning">
+        <record id="audit_audit_planning_ca_504" model="audit.audit.planning.template">
             <field name="tyt_procedure_description_id" ref="tyt_audit.schedule_plan_description_1"/>
             <field name="tyt_procedure_activity_id" ref="tyt_audit.schedule_plan_activity_105"/>
 
@@ -391,10 +362,9 @@
             <field name="verification">Muestra evidencia carta descriptiva actualizada y presentación de inducción estándar sin modificaciones no autorizadas</field>
             <field name="finding">good_practices</field>
             <field name="evidence_char">ACC-27_Carta descriptiva / ACC-31_Inducción (validar que no se realizaron modificaciones en la presentación)</field>
-            <field name="comment"></field>
         </record>
 
-        <record id="audit_audit_planning_ca_505" model="audit.audit.planning">
+        <record id="audit_audit_planning_ca_505" model="audit.audit.planning.template">
             <field name="tyt_procedure_description_id" ref="tyt_audit.schedule_plan_description_1"/>
             <field name="tyt_procedure_activity_id" ref="tyt_audit.schedule_plan_activity_105"/>
 
@@ -404,10 +374,9 @@
             <field name="verification">Muestra evidencia de la presentación de temas de campaña</field>
             <field name="finding">good_practices</field>
             <field name="evidence_char">ACC-27_Carta descriptiva / ACC-24_Presentación de cursos</field>
-            <field name="comment"></field>
         </record>
 
-        <record id="audit_audit_planning_ca_506" model="audit.audit.planning">
+        <record id="audit_audit_planning_ca_506" model="audit.audit.planning.template">
             <field name="tyt_procedure_description_id" ref="tyt_audit.schedule_plan_description_1"/>
             <field name="tyt_procedure_activity_id" ref="tyt_audit.schedule_plan_activity_105"/>
 
@@ -417,10 +386,9 @@
             <field name="verification">Muestra evidencia de la evaluación al expositor y que sea compartido al Coordinador de Formación, Coordinador de Calidad y Gerente de Sitio</field>
             <field name="finding"></field>
             <field name="evidence_char">ACC-47_Rúbrica De Evaluación A Expositor / Correo Electrónico (validar que se envíe en la semana del curso evaluado)</field>
-            <field name="comment">N/A</field>
         </record>
 
-        <record id="audit_audit_planning_ca_507" model="audit.audit.planning">
+        <record id="audit_audit_planning_ca_507" model="audit.audit.planning.template">
             <field name="tyt_procedure_description_id" ref="tyt_audit.schedule_plan_description_1"/>
             <field name="tyt_procedure_activity_id" ref="tyt_audit.schedule_plan_activity_105"/>
 
@@ -430,10 +398,9 @@
             <field name="verification">Muestra evidencia de la aplicación de exámenes digitales</field>
             <field name="finding">good_practices</field>
             <field name="evidence_char">ACC-23_Examen de capacitación (validar dónde se realiza el resguardo de manera digital de los exámenes)</field>
-            <field name="comment"></field>
         </record>
 
-        <record id="audit_audit_planning_ca_508" model="audit.audit.planning">
+        <record id="audit_audit_planning_ca_508" model="audit.audit.planning.template">
             <field name="tyt_procedure_description_id" ref="tyt_audit.schedule_plan_description_1"/>
             <field name="tyt_procedure_activity_id" ref="tyt_audit.schedule_plan_activity_105"/>
 
@@ -443,10 +410,9 @@
             <field name="verification">Técnico de Calidad muestra evidencia del envío del Kardex por parte del Entrenador de Sitio y las retroalimentaciones realizadas por el Técnico de Calidad</field>
             <field name="finding">good_practices</field>
             <field name="evidence_char">Formato de monitoreo con el que se evalúa al prospecto / ACC-22_Kardex / ACC-64_Retroalimentación de certificación / Correo Electrónico</field>
-            <field name="comment"></field>
         </record>
 
-        <record id="audit_audit_planning_ca_509" model="audit.audit.planning">
+        <record id="audit_audit_planning_ca_509" model="audit.audit.planning.template">
             <field name="tyt_procedure_description_id" ref="tyt_audit.schedule_plan_description_1"/>
             <field name="tyt_procedure_activity_id" ref="tyt_audit.schedule_plan_activity_105"/>
 
@@ -456,10 +422,9 @@
             <field name="verification">Muestra evidencia del correo donde se comparte la información del cierre del curso</field>
             <field name="finding">good_practices</field>
             <field name="evidence_char">Correo Electrónico / ACC-21_Lista de asistencia de capacitación / ACC-22_Kardex / ACC-25_Evaluaciones / ACC-26_Claves</field>
-            <field name="comment"></field>
         </record>
 
-        <record id="audit_audit_planning_ca_510" model="audit.audit.planning">
+        <record id="audit_audit_planning_ca_510" model="audit.audit.planning.template">
             <field name="tyt_procedure_description_id" ref="tyt_audit.schedule_plan_description_1"/>
             <field name="tyt_procedure_activity_id" ref="tyt_audit.schedule_plan_activity_105"/>
 
@@ -469,11 +434,10 @@
             <field name="verification">Muestra evidencia de la entrega de Gafete, tarjeta de acceso, Reconocimiento y Encuesta de Satisfacción</field>
             <field name="finding">good_practices</field>
             <field name="evidence_char">ACC-30_Reconocimiento / ACC-48_Encuesta Capacitación / ACC-49_Encuesta de Satisfacción validar fecha de envío / tarjeta de acceso y Gafete</field>
-            <field name="comment"></field>
         </record>        
 
         <!-- C6 -->
-        <record id="audit_audit_planning_ca_601" model="audit.audit.planning">
+        <record id="audit_audit_planning_ca_601" model="audit.audit.planning.template">
             <field name="tyt_procedure_description_id" ref="tyt_audit.schedule_plan_description_1"/>
             <field name="tyt_procedure_activity_id" ref="tyt_audit.schedule_plan_activity_106"/>
 
@@ -483,10 +447,9 @@
             <field name="verification">Muestre evidencia de las no conformidades identificadas</field>
             <field name="finding">good_practices</field>
             <field name="evidence_char">ACC-58_Registro de no conformidad</field>
-            <field name="comment"></field>
         </record>
 
-        <record id="audit_audit_planning_ca_602" model="audit.audit.planning">
+        <record id="audit_audit_planning_ca_602" model="audit.audit.planning.template">
             <field name="tyt_procedure_description_id" ref="tyt_audit.schedule_plan_description_1"/>
             <field name="tyt_procedure_activity_id" ref="tyt_audit.schedule_plan_activity_106"/>
 
@@ -496,10 +459,9 @@
             <field name="verification">Muestre evidencia de los productos No Conformes</field>
             <field name="finding">good_practices</field>
             <field name="evidence_char">ACC-59_Inventario y estado de no conformidades y acciones correctivas / ACC-62_Bitácora de Productos No Conformes / ACC-58_Registro de no conformidad</field>
-            <field name="comment"></field>
         </record>
 
-        <record id="audit_audit_planning_ca_603" model="audit.audit.planning">
+        <record id="audit_audit_planning_ca_603" model="audit.audit.planning.template">
             <field name="tyt_procedure_description_id" ref="tyt_audit.schedule_plan_description_1"/>
             <field name="tyt_procedure_activity_id" ref="tyt_audit.schedule_plan_activity_106"/>
 
@@ -509,10 +471,9 @@
             <field name="verification">Muestre evidencia del control de los PNC</field>
             <field name="finding"></field>
             <field name="evidence_char">ACC-62_Bitácora de Productos No Conformes</field>
-            <field name="comment">N/A</field>
         </record>
 
-        <record id="audit_audit_planning_ca_604" model="audit.audit.planning">
+        <record id="audit_audit_planning_ca_604" model="audit.audit.planning.template">
             <field name="tyt_procedure_description_id" ref="tyt_audit.schedule_plan_description_1"/>
             <field name="tyt_procedure_activity_id" ref="tyt_audit.schedule_plan_activity_106"/>
 
@@ -522,10 +483,9 @@
             <field name="verification">Muestre evidencia del registro de no conformidad en informe</field>
             <field name="finding"></field>
             <field name="evidence_char">ACC-58_Registro de no conformidad</field>
-            <field name="comment">N/A</field>
         </record>
 
-        <record id="audit_audit_planning_ca_605" model="audit.audit.planning">
+        <record id="audit_audit_planning_ca_605" model="audit.audit.planning.template">
             <field name="tyt_procedure_description_id" ref="tyt_audit.schedule_plan_description_1"/>
             <field name="tyt_procedure_activity_id" ref="tyt_audit.schedule_plan_activity_106"/>
 
@@ -535,10 +495,9 @@
             <field name="verification">Muestre evidencia del seguimiento del PNC</field>
             <field name="finding">good_practices</field>
             <field name="evidence_char">ACC-62_Bitácora de Productos No Conformes</field>
-            <field name="comment"></field>
         </record>
 
-        <record id="audit_audit_planning_ca_606" model="audit.audit.planning">
+        <record id="audit_audit_planning_ca_606" model="audit.audit.planning.template">
             <field name="tyt_procedure_description_id" ref="tyt_audit.schedule_plan_description_1"/>
             <field name="tyt_procedure_activity_id" ref="tyt_audit.schedule_plan_activity_106"/>
 
@@ -548,10 +507,9 @@
             <field name="verification">Muestre evidencia de la acción correctiva</field>
             <field name="finding">good_practices</field>
             <field name="evidence_char">ACC-46_Concentrado de Sanciones / ACC-59_Inventario y estado de no conformidades y acciones correctivas</field>
-            <field name="comment"></field>
         </record>
 
-        <record id="audit_audit_planning_ca_607" model="audit.audit.planning">
+        <record id="audit_audit_planning_ca_607" model="audit.audit.planning.template">
             <field name="tyt_procedure_description_id" ref="tyt_audit.schedule_plan_description_1"/>
             <field name="tyt_procedure_activity_id" ref="tyt_audit.schedule_plan_activity_106"/>
 
@@ -561,12 +519,11 @@
             <field name="verification">Muestre evidencia del catálogo de acuerdo a la matriz</field>
             <field name="finding">good_practices</field>
             <field name="evidence_char">ACC-20_Catálogo de Sanciones / ACC-19_Matriz de riesgos</field>
-            <field name="comment"></field>
         </record>
 
 
         <!-- C7 -->
-        <record id="audit_audit_planning_ca_701" model="audit.audit.planning">
+        <record id="audit_audit_planning_ca_701" model="audit.audit.planning.template">
             <field name="tyt_procedure_description_id" ref="tyt_audit.schedule_plan_description_1"/>
             <field name="tyt_procedure_activity_id" ref="tyt_audit.schedule_plan_activity_107"/>
 
@@ -576,10 +533,9 @@
             <field name="verification">Muestra evidencia del diccionario de definiciones</field>
             <field name="finding">good_practices</field>
             <field name="evidence_char">Diccionario de definiciones</field>
-            <field name="comment"></field>
         </record>
 
-        <record id="audit_audit_planning_ca_702" model="audit.audit.planning">
+        <record id="audit_audit_planning_ca_702" model="audit.audit.planning.template">
             <field name="tyt_procedure_description_id" ref="tyt_audit.schedule_plan_description_1"/>
             <field name="tyt_procedure_activity_id" ref="tyt_audit.schedule_plan_activity_107"/>
 
@@ -589,10 +545,9 @@
             <field name="verification">Muestra evidencia del correo con la población actual los días martes a las 10:00 am</field>
             <field name="finding"></field>
             <field name="evidence_char">ARH-06_Lista operativa / Correo Electrónico</field>
-            <field name="comment">N/A</field>
         </record>
 
-        <record id="audit_audit_planning_ca_703" model="audit.audit.planning">
+        <record id="audit_audit_planning_ca_703" model="audit.audit.planning.template">
             <field name="tyt_procedure_description_id" ref="tyt_audit.schedule_plan_description_1"/>
             <field name="tyt_procedure_activity_id" ref="tyt_audit.schedule_plan_activity_107"/>
 
@@ -602,10 +557,9 @@
             <field name="verification">Muestra evidencia del envío de la asignación los días Martes al técnico de calidad y Coordinador de Calidad</field>
             <field name="finding">good_practices</field>
             <field name="evidence_char">Correo de Asignación / Formato de Asignación</field>
-            <field name="comment"></field>
         </record>
 
-        <record id="audit_audit_planning_ca_704" model="audit.audit.planning">
+        <record id="audit_audit_planning_ca_704" model="audit.audit.planning.template">
             <field name="tyt_procedure_description_id" ref="tyt_audit.schedule_plan_description_1"/>
             <field name="tyt_procedure_activity_id" ref="tyt_audit.schedule_plan_activity_107"/>
 
@@ -615,10 +569,9 @@
             <field name="verification">Demostrar que el técnico cuenta con perfil de administrador, con privilegios de calidad, en el PBX</field>
             <field name="finding">good_practices</field>
             <field name="evidence_char">Evidencia presencial acerca del acceso a herramientas / ACC-32_Formato para monitoreo</field>
-            <field name="comment"></field>
         </record>
 
-        <record id="audit_audit_planning_ca_705" model="audit.audit.planning">
+        <record id="audit_audit_planning_ca_705" model="audit.audit.planning.template">
             <field name="tyt_procedure_description_id" ref="tyt_audit.schedule_plan_description_1"/>
             <field name="tyt_procedure_activity_id" ref="tyt_audit.schedule_plan_activity_107"/>
 
@@ -628,10 +581,9 @@
             <field name="verification">Demostrar que el técnico cuenta con perfil de Técnico de calidad en plataformas internas de acuerdo a la campaña</field>
             <field name="finding">good_practices</field>
             <field name="evidence_char">Evidencia presencial acerca del acceso a herramientas / ACC-32_Formato para monitoreo</field>
-            <field name="comment"></field>
         </record>
 
-        <record id="audit_audit_planning_ca_706" model="audit.audit.planning">
+        <record id="audit_audit_planning_ca_706" model="audit.audit.planning.template">
             <field name="tyt_procedure_description_id" ref="tyt_audit.schedule_plan_description_1"/>
             <field name="tyt_procedure_activity_id" ref="tyt_audit.schedule_plan_activity_107"/>
 
@@ -641,10 +593,9 @@
             <field name="verification">Demostrar que el técnico cuenta con acceso a las herramientas del cliente</field>
             <field name="finding">good_practices</field>
             <field name="evidence_char">Evidencia presencial</field>
-            <field name="comment"></field>
         </record>
 
-        <record id="audit_audit_planning_ca_707" model="audit.audit.planning">
+        <record id="audit_audit_planning_ca_707" model="audit.audit.planning.template">
             <field name="tyt_procedure_description_id" ref="tyt_audit.schedule_plan_description_1"/>
             <field name="tyt_procedure_activity_id" ref="tyt_audit.schedule_plan_activity_107"/>
 
@@ -654,10 +605,9 @@
             <field name="verification">Demostrar que el técnico cuenta con perfil de Técnico de calidad en plataformas internas</field>
             <field name="finding">good_practices</field>
             <field name="evidence_char">Evidencia presencial</field>
-            <field name="comment"></field>
         </record>
 
-        <record id="audit_audit_planning_ca_708" model="audit.audit.planning">
+        <record id="audit_audit_planning_ca_708" model="audit.audit.planning.template">
             <field name="tyt_procedure_description_id" ref="tyt_audit.schedule_plan_description_1"/>
             <field name="tyt_procedure_activity_id" ref="tyt_audit.schedule_plan_activity_107"/>
 
@@ -667,10 +617,9 @@
             <field name="verification">Demostrar que el técnico cuenta con accesos a plataformas de inspección mediante pantalla remota</field>
             <field name="finding">good_practices</field>
             <field name="evidence_char">Evidencia presencial</field>
-            <field name="comment"></field>
         </record>
 
-        <record id="audit_audit_planning_ca_709" model="audit.audit.planning">
+        <record id="audit_audit_planning_ca_709" model="audit.audit.planning.template">
             <field name="tyt_procedure_description_id" ref="tyt_audit.schedule_plan_description_1"/>
             <field name="tyt_procedure_activity_id" ref="tyt_audit.schedule_plan_activity_107"/>
 
@@ -680,10 +629,9 @@
             <field name="verification">Muestre evidencia de los monitoreos en paralelo y retroalimentación inmediata a los agentes.</field>
             <field name="finding">good_practices</field>
             <field name="evidence_char">ACC-32_Formato para monitoreo / ACC-33_Formato para retroalimentación / ACC-35_Concentrado semanal de calidad</field>
-            <field name="comment"></field>
         </record>
 
-        <record id="audit_audit_planning_ca_710" model="audit.audit.planning">
+        <record id="audit_audit_planning_ca_710" model="audit.audit.planning.template">
             <field name="tyt_procedure_description_id" ref="tyt_audit.schedule_plan_description_1"/>
             <field name="tyt_procedure_activity_id" ref="tyt_audit.schedule_plan_activity_107"/>
 
@@ -693,10 +641,9 @@
             <field name="verification">Muestra evidencia de correos de solicitud, retroalimentación física y digital, y formato firmado por agente y supervisor.</field>
             <field name="finding">good_practices</field>
             <field name="evidence_char">ACC-33_Formato para retroalimentación firmado / Correos electrónicos</field>
-            <field name="comment"></field>
         </record>
 
-        <record id="audit_audit_planning_ca_711" model="audit.audit.planning">
+        <record id="audit_audit_planning_ca_711" model="audit.audit.planning.template">
             <field name="tyt_procedure_description_id" ref="tyt_audit.schedule_plan_description_1"/>
             <field name="tyt_procedure_activity_id" ref="tyt_audit.schedule_plan_activity_107"/>
 
@@ -706,10 +653,9 @@
             <field name="verification">Muestra evidencia de correo con convocatoria y minuta de la homologación</field>
             <field name="finding">good_practices</field>
             <field name="evidence_char">Correo electrónico / AO-07_Minuta</field>
-            <field name="comment"></field>
         </record>
 
-        <record id="audit_audit_planning_ca_712" model="audit.audit.planning">
+        <record id="audit_audit_planning_ca_712" model="audit.audit.planning.template">
             <field name="tyt_procedure_description_id" ref="tyt_audit.schedule_plan_description_1"/>
             <field name="tyt_procedure_activity_id" ref="tyt_audit.schedule_plan_activity_107"/>
 
@@ -719,10 +665,9 @@
             <field name="verification">Muestra evidencia de la sesión (correo con convocatoria, formato de monitoreo y/o minuta)</field>
             <field name="finding">good_practices</field>
             <field name="evidence_char">Correo electrónico / AO-07_Minuta</field>
-            <field name="comment"></field>
         </record>
 
-        <record id="audit_audit_planning_ca_713" model="audit.audit.planning">
+        <record id="audit_audit_planning_ca_713" model="audit.audit.planning.template">
             <field name="tyt_procedure_description_id" ref="tyt_audit.schedule_plan_description_1"/>
             <field name="tyt_procedure_activity_id" ref="tyt_audit.schedule_plan_activity_107"/>
 
@@ -732,10 +677,9 @@
             <field name="verification">Muestra evidencia de concentrado mensual de calidad, acta administrativa y plan de coaching firmado.</field>
             <field name="finding">good_practices</field>
             <field name="evidence_char">ACC-37_Concentrado mensual de calidad / ACC-16_Acta Administrativa C / ACC-28_Coaching</field>
-            <field name="comment"></field>
         </record>
 
-        <record id="audit_audit_planning_ca_714" model="audit.audit.planning">
+        <record id="audit_audit_planning_ca_714" model="audit.audit.planning.template">
             <field name="tyt_procedure_description_id" ref="tyt_audit.schedule_plan_description_1"/>
             <field name="tyt_procedure_activity_id" ref="tyt_audit.schedule_plan_activity_107"/>
 
@@ -745,10 +689,9 @@
             <field name="verification">Muestre evidencia de los monitoreos y retroalimentación inmediata a los agentes.</field>
             <field name="finding">good_practices</field>
             <field name="evidence_char">ACC-32_Formato para monitoreo / ACC-33_Formato para retroalimentación</field>
-            <field name="comment"></field>
         </record>
 
-        <record id="audit_audit_planning_ca_715" model="audit.audit.planning">
+        <record id="audit_audit_planning_ca_715" model="audit.audit.planning.template">
             <field name="tyt_procedure_description_id" ref="tyt_audit.schedule_plan_description_1"/>
             <field name="tyt_procedure_activity_id" ref="tyt_audit.schedule_plan_activity_107"/>
 
@@ -758,10 +701,9 @@
             <field name="verification">Muestre evidencia de los monitoreos y retroalimentación inmediata a los agentes.</field>
             <field name="finding">good_practices</field>
             <field name="evidence_char">ACC-32_Formato para monitoreo / ACC-33_Formato para retroalimentación / ACC-35_Concentrado semanal de calidad</field>
-            <field name="comment"></field>
         </record>
 
-        <record id="audit_audit_planning_ca_716" model="audit.audit.planning">
+        <record id="audit_audit_planning_ca_716" model="audit.audit.planning.template">
             <field name="tyt_procedure_description_id" ref="tyt_audit.schedule_plan_description_1"/>
             <field name="tyt_procedure_activity_id" ref="tyt_audit.schedule_plan_activity_107"/>
 
@@ -771,10 +713,9 @@
             <field name="verification">Muestre evidencia de correo y formato (en lunes) con los datos requeridos.</field>
             <field name="finding">good_practices</field>
             <field name="evidence_char">Correo electrónico / ACC-34_Concentrado semanal de operaciones</field>
-            <field name="comment">Validar que los datos incluyan nombre y supervisor en mayúsculas, empezando por el apellido.</field>
         </record>
 
-        <record id="audit_audit_planning_ca_717" model="audit.audit.planning">
+        <record id="audit_audit_planning_ca_717" model="audit.audit.planning.template">
             <field name="tyt_procedure_description_id" ref="tyt_audit.schedule_plan_description_1"/>
             <field name="tyt_procedure_activity_id" ref="tyt_audit.schedule_plan_activity_107"/>
 
@@ -784,10 +725,9 @@
             <field name="verification">Muestre evidencia de correo y formato (en lunes) con los datos requeridos.</field>
             <field name="finding">good_practices</field>
             <field name="evidence_char">Correo electrónico / ACC-35_Concentrado semanal de calidad</field>
-            <field name="comment">Validar que los datos incluyan nombre y supervisor en mayúsculas, empezando por el apellido.</field>
         </record>
 
-        <record id="audit_audit_planning_ca_718" model="audit.audit.planning">
+        <record id="audit_audit_planning_ca_718" model="audit.audit.planning.template">
             <field name="tyt_procedure_description_id" ref="tyt_audit.schedule_plan_description_1"/>
             <field name="tyt_procedure_activity_id" ref="tyt_audit.schedule_plan_activity_107"/>
 
@@ -797,10 +737,9 @@
             <field name="verification">Muestre evidencia de correo y formato (una semana después del cierre nominal) con los datos requeridos.</field>
             <field name="finding">good_practices</field>
             <field name="evidence_char">Correo electrónico / ACC-36_Concentrado mensual de operaciones</field>
-            <field name="comment">Validar que los datos incluyan nombre y supervisor en mayúsculas, empezando por el apellido.</field>
         </record>
 
-        <record id="audit_audit_planning_ca_719" model="audit.audit.planning">
+        <record id="audit_audit_planning_ca_719" model="audit.audit.planning.template">
             <field name="tyt_procedure_description_id" ref="tyt_audit.schedule_plan_description_1"/>
             <field name="tyt_procedure_activity_id" ref="tyt_audit.schedule_plan_activity_107"/>
 
@@ -810,7 +749,6 @@
             <field name="verification">Muestre evidencia de correo y formato (una semana después del cierre nominal) con los datos requeridos.</field>
             <field name="finding">good_practices</field>
             <field name="evidence_char">Correo electrónico / ACC-37_Concentrado mensual de calidad</field>
-            <field name="comment">Validar que los datos incluyan nombre y supervisor en mayúsculas, empezando por el apellido.</field>
         </record>
     </data>
 </odoo>
