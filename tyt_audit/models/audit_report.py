@@ -121,4 +121,4 @@ class AuditReport(models.Model):
 
             # Calcular el porcentaje de Buenas Prácticas
             total = non_conformity_count + good_practices_count
-            record.good_practices_percentage = (good_practices_count / total * 100) if total > 0 else 0
+            record.good_practices_percentage = round((good_practices_count / total * 100), 2) if total > 0 else 0
