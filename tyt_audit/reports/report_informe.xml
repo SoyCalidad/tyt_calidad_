@@ -299,18 +299,15 @@
                                     Evaluación
                                 </td>
                             </tr>
-                            <t t-foreach="o.tyt_line_ids" t-as="line">
-                                <tr>
-                                    <!-- Nombre de la cláusula -->
-                                    <td style="padding: 10px; font-weight: bold; background-color: #E7F5E5; width: 30%;">
-                                        <t t-esc="line.clause_id.name"/>
-                                    </td>
-                                    <!-- Evaluación -->
-                                    <td style="padding: 10px; background-color: white;">
-                                        <t t-esc="line.evaluation"/>
-                                    </td>
-                                </tr>
-                            </t>
+                            <tr>
+                                <td style="padding: 10px; font-weight: bold; background-color: #E7F5E5; width: 30%;">
+                                    Promedio ponderado de Evaluación
+                                </td>
+                                <!-- Porcentaje de Buenas Prácticas -->
+                                <td style="padding: 10px; background-color: white; text-align: center;">
+                                    <t t-esc="o.good_practices_percentage"/>%
+                                </td>
+                            </tr>
                         </table>
                         <!-- Sección de Evidencias -->
                         <table style="width: 100%; border-collapse: collapse; margin-top: 20px; border: 1px solid black; font-size: 21px;">

@@ -104,3 +104,21 @@ class AuditReport(models.Model):
 
     def send_final(self):
         self.write({'state': 'close'})
+
+    # Manejar el porcentaje de good_practices por medio de tyt_line_ids
+    good_practices_percentage = fields.Float(
+        string="Promedio General de Buenas Prácticas",
+        compute="_compute_good_practices_percentage",
+        store=True,
+    )
+
+    @api.depends('tyt_line_ids.finding')
+    def _compute_good_practices_percentage(self):
+        for record in self:
+            # Contar ocurrencias de "non_conformity" y "good_practices"
+            non_conformity_count = len(record.tyt_line_ids.filtered(lambda p: p.finding == 'non_conformity'))
+            good_practices_count = len(record.tyt_line_ids.filtered(lambda p: p.finding == 'good_practices'))
+
+            # Calcular el porcentaje de Buenas Prácticas
+            total = non_conformity_count + good_practices_count
+            record.good_practices_percentage = (good_practices_count / total * 100) if total > 0 else 0
