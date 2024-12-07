@@ -27,31 +27,24 @@
               <group >
                 <field name="trainer"/>
                 <field name="center"/>
-                <field name="campaign"/>
+                <field name="campaign_id"/>
                 <field name="week"/>
                 <field name="turn"/>
                 <field name="days"/>
               </group>
               <group >
                 <field name="income"/>
-                <field name="certificates"/>
-                <field name="returns"/>
-                <field name="effectiveness"/>
               </group>
               <group >
-                <separator string="Custom Data"/>
-                <div style="display: flex; flex-wrap: wrap; gap: 10px;">
-                  <div class="o_form_label" style="flex: 0 0 50%;"><span>A</span></div>
-                  <div class="o_form_label" style="flex: 0 0 50%;"><span>B</span></div>
-                  <div class="o_form_label" style="flex: 0 0 50%;"><span>C</span></div>
-                  <div class="o_form_label" style="flex: 0 0 50%;"><span>D</span></div>
-                </div>
+                <field name="returns"/>
               </group>
             </group>
             <notebook>
             <page string="Lista de asistencia">
               <field name="attendance_days_of_week_ids" nolabel="1" options="{'no_create': True}">
                   <tree editable="bottom">
+                    <field name="id" width="30px" />
+                    <field name="login" width="30px" />
                     <field name="applicant_name" width="30px" />
                     <field name="day1" width="30px" attrs="{'column_invisible': [('parent.days', '&lt;', 1)]}"/>
                     <field name="day2" width="30px" attrs="{'column_invisible': [('parent.days', '&lt;', 2)]}"/>
@@ -73,6 +66,16 @@
                     <field name="day18" width="30px" attrs="{'column_invisible': [('parent.days', '&lt;', 18)]}" />
                     <field name="day19" width="30px" attrs="{'column_invisible': [('parent.days', '&lt;', 19)]}" />
                     <field name="day20" width="30px" attrs="{'column_invisible': [('parent.days', '&lt;', 20)]}" />
+
+                    <field name="opday1" width="30px" />
+                    <field name="opday2" width="30px" />
+
+                    <field name="recruiter" width="30px" />
+                    <field name="prospect_turn" width="30px" />
+                    <field name="right_turn" width="30px" />
+                    <field name="observations" width="30px" />
+                    <field name="experience" width="30px" />
+                    <field name="reason_for_withdrawal" width="30px" />
                   </tree>
                 </field>                  
             </page>

@@ -91,6 +91,14 @@
                                         <label for="tag_name" class="form-label">Campaña</label>
                                         <input type="text" class="form-control" id="tag_name" name="tag_name" t-att-value="tag_name" readonly="true"/>
                                     </div>
+                                    <div class="col-sm-12 col-md-12 col-lg-12 col-xl-12 col-xxl-12 p-4 border">
+                                        <label for="recruiter" class="form-label">Reclutador:</label>
+                                        <select class="form-select" id="recruiter" name="recruiter" required="required">
+                                            <t t-foreach="employees_json" t-as="employee">
+                                                <option t-att-value="employee['id']" t-esc="employee['name']"></option>
+                                            </t>
+                                        </select>
+                                    </div>
                                 </div>
                             </div>
                         </div>

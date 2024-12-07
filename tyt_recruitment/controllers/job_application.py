@@ -18,6 +18,10 @@ class PublicFormController(http.Controller):
         health_questions_json = [{'id': str(q.id), 'text': q.text} for q in health_questions]
         job_questions_json = [{'id': str(q.id), 'text': q.text} for q in job_questions]
         study_questions_json = [{'id': str(q.id), 'text': q.text} for q in study_questions]
+        
+        employees = request.env['hr.employee'].sudo().search([('job_id.name', '=', 'Site Recruiter')])
+
+        employees_json = [{'id': str(e.id), 'name': e.name} for e in employees]
 
         context = {
             'requisition_id': requisition_id,
@@ -26,7 +30,8 @@ class PublicFormController(http.Controller):
             'site_id': site_id,
             'health_questions_json': health_questions_json,
             'job_questions_json': job_questions_json,         
-            'study_questions_json': study_questions_json
+            'study_questions_json': study_questions_json,
+            'employees_json': employees_json
         }
 
         return request.render('tyt_recruitment.template_job_application_form', context)
@@ -70,6 +75,7 @@ class PublicFormController(http.Controller):
             'foreign_nationality': post.get('foreign_nationality'), 
             'daily_activities': post.get('daily_activities'),
             'campaign_id': post.get('campaign_id'),
+            'recruiter_id': post.get('recruiter'),
             'recruiter_comments': post.get('recruiter_comments')
         }
         applicant = request.env['tyt_recruitment.applicant'].sudo().create(data_applicant)
