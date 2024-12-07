@@ -31,3 +31,4 @@ access_tag_attendance_user,access.tag_attendance.user,model_tyt_recruitment_tag_
 access_attendance_days_of_week_user,access.attendance_days_of_week.user,model_tyt_recruitment_attendance_days_of_week,base.group_user,1,1,1,1
 
 access_attendance_confirmation_wizard_user,access.attendance_confirmation_wizard.user,model_tyt_recruitment_attendance_confirmation_wizard,base.group_user,1,1,1,1
+access_reason_for_withdrawal_user,access.reason_for_withdrawal.user,model_tyt_recruitment_reason_for_withdrawal,base.group_user,1,1,1,1

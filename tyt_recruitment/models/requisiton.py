@@ -20,8 +20,7 @@ class Requisition(models.Model):
     request_date = fields.Date(required=True, string="Fecha de solicitud", tracking=True)
     closing_date = fields.Date(required=True, string="Fecha de cierre", readonly=True, tracking=True)
     state = fields.Selection([('draft', "En creación"),('sent', "Enviado"),], string="Estado", required=True, tracking=True, default='draft')
-
-    recruiter_id = fields.Many2one('hr.employee', string="Reclutador")
+ 
     site_id = fields.Many2one("x_sitio", string='Sitio', tracking=True, store=True)
     periodo_id = fields.Many2one("x_periodo", string='Semana', tracking=True)
     campaign_ids = fields.One2many("tyt_recruitment.campaign", "requisition_id", string="Campaña", tracking=True)
@@ -193,9 +192,6 @@ class Campaign(models.Model):
     turn = fields.Selection([('T/M', 'T/M'), ('T/V', 'T/V'), ('T/N', 'T/N')], string="Turno", tracking=True)
     priority = fields.Selection([('1', '1'), ('2', '2'), ('3', '3'), ('4', '4')], string="Prioridad", tracking=True)
     tag_display_name = fields.Char(related='tag_id.display_name', string='Nombre del Departamento', store=True)
-    recruiter_id = fields.Many2one(related='requisition_id.recruiter_id', string='Reclutador', store=True)
-
-    trainner_id = fields.Many2one('hr.employee', string="Entrenador")
     days = fields.Integer(required=True, string="Días", store=True)
 
     requisition_id = fields.Many2one("tyt_recruitment.requisition", ondelete='cascade')

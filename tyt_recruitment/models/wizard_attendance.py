@@ -24,7 +24,9 @@ class ConfirmationWizard(models.TransientModel):
             attendance_date = {
                 "campaign_id": self.campaign_id.id,
                 "requisition_id": self.requisition_id.id,
-                "days": self.campaign_id.days
+                "center": self.requisition_id.site_id.display_name,
+                "days": self.campaign_id.days,
+                "week": self.requisition_id.periodo_id.x_name
             }
             spouse = self.env['tyt_recruitment.attendance'].sudo().create(attendance_date)
             current_attendance_id = spouse.id
@@ -46,6 +48,7 @@ class ConfirmationWizard(models.TransientModel):
                 new_prospect = {
                     "applicant_id": applicant.id,
                     "attendance_id": current_attendance_id,
+                    "right_turn": self.campaign_id.turn
                 }
                 self.env['tyt_recruitment.attendance_days_of_week'].sudo().create(new_prospect)
 

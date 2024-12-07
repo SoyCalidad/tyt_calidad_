@@ -31,6 +31,9 @@ class JobApplication(models.Model):
     applicant_social_security_number = fields.Char(related="applicant_id.social_security_number", string="SSN", store=True)       
 
     campaign_id = fields.Many2one('tyt_recruitment.campaign', string="Campaña")
+    campaign_turn = fields.Selection(related="campaign_id.turn", string="Turno")
+    recruiter_id = fields.Many2one(related='applicant_id.recruiter_id', string="Reclutador")
+
     applicant_id = fields.Many2one('tyt_recruitment.applicant')
     applicant_status = fields.Boolean( related="applicant_id.status", string="Aprobado", required=True, tracking=True)
 
@@ -159,8 +162,10 @@ class JobApplication(models.Model):
         self.status_loaded = (all_fields_filled/14)*100
         if all_fields_filled == 14:
             self.expedient_status = True
+            self.applicant_id.expedient_status = True
         else:
             self.expedient_status = False
+            self.applicant_id.expedient_status = False
 
     @api.onchange(
         'birth_certificate_approved', 
@@ -240,6 +245,7 @@ class JobApplication(models.Model):
     def compute_has_complete_survey(self):
         for record in self:
             record.has_complete_survey = bool(record.complete_survey_id)
+            record.applicant_id.has_complete_survey = bool(record.complete_survey_id)
 
 class Applicant(models.Model):
     _name = 'tyt_recruitment.applicant'
@@ -276,13 +282,16 @@ class Applicant(models.Model):
     daily_activities = fields.Text(string="Describa sus actividades diarias")
 
     recruiter_comments = fields.Char(string="Comentarios del reclutador")
+    recruiter_id = fields.Many2one('hr.employee', string="Reclutador")
 
+    expedient_status = fields.Boolean(string="Estado de carga", default=False)
+    has_complete_survey = fields.Boolean(string='Tiene Encuesta Completada')
     status = fields.Boolean(string="Status")
 
     # Campaña
     campaign_id = fields.Many2one('tyt_recruitment.campaign', string="Campaña")
     campaign_turn = fields.Selection(related="campaign_id.turn", string="Turno")
-    campaign_recruiter = fields.Many2one(related="campaign_id.recruiter_id", string="Reclutador")
+    campaign_requsition = fields.Many2one(related="campaign_id.requisition_id", string="Requisición")
 
     def show_job_application(self):
 
@@ -301,6 +310,7 @@ class Applicant(models.Model):
             return {
                 'type': 'ir.actions.act_window_close'
             }
+        
 class DataAcademic(models.Model):
     _name = 'tyt_recruitment.data_academic'
     _description = 'tyt_recruitment.data_academic'

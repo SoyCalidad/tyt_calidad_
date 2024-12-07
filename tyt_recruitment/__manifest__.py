@@ -15,6 +15,7 @@
     ],
     'data': [
         'security/ir.model.access.csv',
+        'security/groups.xml',
         'views/view_requisition.xml',
         'data/mail_templates.xml',
         'views/share_templates.xml',
@@ -27,7 +28,8 @@
         'views/health_survey_form.xml',
         'views/view_expedient.xml',
         'views/view_attendance_list.xml',
-        'wizards/generate_attendance.xml'
+        'wizards/generate_attendance.xml',
+        'data/data_reason_of_withdrawal.xml'
     ],
     'auto_install': False,
     'installable': True,

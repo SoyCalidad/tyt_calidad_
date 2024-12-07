@@ -16,17 +16,13 @@ class Attendance(models.Model):
     _description = 'Asistencia'
     _rec_name = 'id'
 
-    trainer = fields.Char(string="Entrenador", tracking=True)
+    trainer = fields.Many2one('hr.employee', string="Entrenador", tracking=True)
     center = fields.Char( string="Centro", tracking=True)
-    campaign = fields.Char( string="Campaña", tracking=True)
     week = fields.Char( string="Semana", tracking=True)
-    turn = fields.Char( string="Turno", tracking=True)
+    turn = fields.Selection([('T/M', 'T/M'), ('T/V', 'T/V'), ('T/N', 'T/N')], string="Turno lista de prospectos", tracking=True)
 
     income = fields.Char( string="Ingresos", tracking=True)
-    certificates = fields.Char( string="Certificados", tracking=True)
     returns = fields.Char( string="Regresos", tracking=True)
-    effectiveness = fields.Char( string="Efectividad", tracking=True)
-    rotation = fields.Char( string="Rotación", tracking=True)
 
     days = fields.Integer(string="Días", store=True)
 
@@ -80,9 +76,27 @@ class DaysOfWeek(models.Model):
     day19 = fields.Many2one('tyt_recruitment.tag_attendance', string="19")
     day20 = fields.Many2one('tyt_recruitment.tag_attendance', string="20")
 
+    opday1 = fields.Many2one('tyt_recruitment.tag_attendance', string="OPE día 01")
+    opday2 = fields.Many2one('tyt_recruitment.tag_attendance', string="OPE día 02")
+
+    login = fields.Char(string="Login")
+    recruiter = fields.Char(string="Reclutador")
+    prospect_turn = fields.Selection(related="attendance_id.turn", string="Turno lista de prospectos", tracking=True)
+    right_turn = fields.Char(string="Turno correcto")
+    observations = fields.Char(string="Observaciones")
+    experience = fields.Char(string="Experiencia")
+    reason_for_withdrawal = fields.Many2one("tyt_recruitment.reason_for_withdrawal", string="Motivo de la baja")
+
     
     applicant_id = fields.Many2one("tyt_recruitment.applicant", string="Aplicante", ondelete='cascade')
     applicant_name = fields.Char(related="applicant_id.name", string="Nombre", store=True)
     applicant_nss = fields.Char(related="applicant_id.social_security_number", string="Número de Seguro Social")
 
     attendance_id = fields.Many2one('tyt_recruitment.attendance', string="Lista de asistencia", ondelete='cascade')
+
+class ReasonForWithdrawal(models.Model):
+    _name = 'tyt_recruitment.reason_for_withdrawal'
+    _description = 'Motivo de la baja'
+    _rec_name = 'text'
+
+    text = fields.Char(required=True, string="Motivo", tracking=True)
