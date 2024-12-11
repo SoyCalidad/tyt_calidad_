@@ -5,14 +5,16 @@ class SurveySatisfactionQuestion(models.Model):
     _description = "Satisfaction Survey Question"
     
     name = fields.Char(string="Name", required=True)
-    code = fields.Char(string="Code", required=True)
+    # code = fields.Char(string="Code", required=True)
+    code = fields.Char(string="Code", required=False)
 
 class SurveySatisfactionQuestion(models.Model):
     _name = "tyt.satisfaction.survey.line"
     _description = "Satisfaction Survey Line"
     
     name = fields.Char(string="Name", required=True)
-    code = fields.Char(string="Code", required=True)
+    # code = fields.Char(string="Code", required=True)
+    code = fields.Char(string="Code", required=False)
     text = fields.Text(string="Text")
     internal_category = fields.Char(string="Internal Category")
     qualification = fields.Integer(string="Qualification")
