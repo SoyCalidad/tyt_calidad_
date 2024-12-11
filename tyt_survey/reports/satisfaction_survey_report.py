@@ -1,5 +1,6 @@
 from odoo import models
 from odoo.exceptions import UserError
+import string
 
 class SatisfactionSurveyXlsxReport(models.AbstractModel):
     _name = 'report.tyt_survey.satisfaction_survey_report'
@@ -45,9 +46,11 @@ class SatisfactionSurveyXlsxReport(models.AbstractModel):
             for col_num, width in enumerate(column_widths):
                 sheet.set_column(col_num, col_num, width)
 
-            # Ajustar el título dinámicamente
-            last_col = len(headers) - 1  # Última columna generada
-            last_col_letter = chr(65 + last_col)  # Convertir índice a letra de columna (A, B, C...)
+            # Determina la última columna (A, B, ..., Z, AA, AB, ...)
+            total_columns = len(headers)  # headers es tu lista de cabeceras
+            last_col_letter = string.ascii_uppercase[(total_columns - 1) % 26]
+            if total_columns > 26:
+                last_col_letter = string.ascii_uppercase[(total_columns // 26) - 1] + last_col_letter
             sheet.merge_range(f'A2:{last_col_letter}2', 'TYT', title_format)
 
             # Escribir cabeceras
