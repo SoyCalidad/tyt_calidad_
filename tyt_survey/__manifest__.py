@@ -14,6 +14,7 @@
     'data': [
         'data/tyt.satisfaction.survey.question.csv',
         'security/ir.model.access.csv',
+        'reports/satisfaction_survey_report.xml',
         'views/satisfaction_survey.xml',
         'views/menus.xml',
         'static/src/xml/satisfaction_survey_main.xml',

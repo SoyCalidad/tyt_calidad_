@@ -99,6 +99,9 @@
                 <field name="partner_company" />
                 <field name="campaign" />
                 <field name="create_date" />
+                <header>
+                    <button name="%(action_print_satisfaction_survey)d" string="Imprimir" type="action" class="oe_highlight"/>
+                </header>
             </tree>
         </field>
     </record>
