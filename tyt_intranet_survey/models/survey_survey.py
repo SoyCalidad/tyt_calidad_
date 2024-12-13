@@ -15,7 +15,8 @@ class Survey(models.Model):
     published_end_date = fields.Date('Published End Date', copy=False)
     is_published = fields.Boolean('Published', default=False, copy=False)
     access_mode = fields.Selection(selection_add=[('intranet', 'Intranet')], ondelete={'intranet': 'cascade'})
-    questions_mandatory = fields.Boolean('Mandatory Questions', compute='_compute_questions_mandatory', readonly=False)
+    questions_mandatory = fields.Boolean('Mandatory Questions', compute='_compute_questions_mandatory',
+                                         store=True, readonly=False, default=False)
 
     @api.depends('access_mode')
     def _compute_questions_mandatory(self):
@@ -24,11 +25,6 @@ class Survey(models.Model):
                 survey.questions_mandatory = True
                 survey.users_can_go_back = True
                 survey.scoring_type = 'scoring_without_answers'
-                survey.scoring_success_min = 0
-            else:
-                survey.questions_mandatory = False
-                survey.users_can_go_back = False
-                survey.scoring_type = 'no_scoring'
                 survey.scoring_success_min = 0
 
     def _has_survey_answered(self, partner):

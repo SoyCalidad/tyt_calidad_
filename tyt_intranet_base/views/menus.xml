@@ -5,6 +5,11 @@
               web_icon="tyt_intranet_base,static/description/icon.png"
               sequence="1"/>
 
+    <menuitem id="intranet_menu_report"
+              name="Reportes"
+              parent="tyt_intranet_base.intranet_menu_root"
+              sequence="90"/>
+
     <menuitem id="intranet_configuration_menu"
               name="Configuration"
               parent="tyt_intranet_base.intranet_menu_root"

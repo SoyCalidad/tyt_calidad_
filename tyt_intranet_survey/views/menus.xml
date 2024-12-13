@@ -1,16 +1,53 @@
 <?xml version="1.0" encoding="utf-8"?>
 <odoo>
-        <menuitem id="survey_survey_menu_action"
+        <menuitem id="survey_survey_menu"
                   name="Surveys"
                   parent="tyt_intranet_base.intranet_menu_root"
+                  sequence="10"/>
+
+        <menuitem id="survey_survey_menu_action"
+                  name="Surveys"
+                  parent="survey_survey_menu"
                   action="tyt_survey_survey_action"
                   sequence="10"/>
+
+        <menuitem id="survey_user_input_menu_action"
+                  name="Participations"
+                  parent="survey_survey_menu"
+                  action="survey_user_input_action"
+                  sequence="20"/>
+
+        <menuitem id="survey_user_input_line_menu_action"
+                  name="Detailed Answers"
+                  parent="survey_survey_menu"
+                  action="survey_user_input_line_action"
+                  sequence="25"/>
 
         <menuitem id="tyt_survey_management_menu_action"
                   name="Survey Management"
                   parent="tyt_intranet_base.intranet_menu_root"
                   action="tyt_survey_management_action"
                   sequence="20"/>
+
+
+        <menuitem id="survey_report_menu"
+                  name="Encuestas"
+                  parent="tyt_intranet_base.intranet_menu_report"
+                  sequence="10"/>
+
+        <menuitem id="survey_user_input_menu_action"
+                  name="Participaciones"
+                  parent="survey_report_menu"
+                  action="survey_user_input_action"
+                  sequence="10"/>
+
+        <menuitem id="survey_user_input_line_menu_action"
+                  name="Tipificación de Respuestas"
+                  parent="survey_report_menu"
+                  action="survey_user_input_line_action"
+                  sequence="20"/>
+
+
 
         <menuitem id="tyt_survey_configuration_menu"
                   name="Surveys"
@@ -28,4 +65,5 @@
                   parent="tyt_survey_configuration_menu"
                   action="tyt_x_tipo_encuesta_action"
                   sequence="20"/>
+
 </odoo>
