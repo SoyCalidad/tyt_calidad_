@@ -6,9 +6,12 @@
             <field name="inherit_id" ref="mgmtsystem_management_review.management_review_form_view"/>
             <field name="arch" type="xml">
                 <xpath expr="//sheet/group[1]/group[1]/field[@name='date_management_review']" position="after">
-                    <field name="location_id" />
+                    <field name="location_id" required="True" />
                 </xpath>
-
+                <xpath expr="//sheet/group[1]/group[1]/field[@name='plan_id']" position="attributes">
+                    <!-- Remover el atributo `invisible` de plan_id -->
+                    <attribute name="attrs">{}</attribute>
+                </xpath>
                 <xpath expr="//sheet/notebook/page[2]" position="after">
                     <page string="Informe">
                         <group>

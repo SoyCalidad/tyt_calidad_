@@ -100,11 +100,21 @@ class Employee(models.Model):
     attachment_number = fields.Integer(
         compute='_get_attachment_number', string="Number of Attachments")
 
-    @api.model
-    def create(self, vals):
-        vals['code'] = self.env['ir.sequence'].next_by_code(
-            'employee.sequence')
-        return super().create(vals)
+    # @api.model
+    # def create(self, vals):
+    #     vals['code'] = self.env['ir.sequence'].next_by_code(
+    #         'employee.sequence')
+    #     return super().create(vals)
+
+    @api.model_create_multi
+    def create(self, vals_list):
+        for vals in vals_list:
+            vals['code'] = self.env['ir.sequence'].next_by_code('employee.sequence')
+
+        # Crear todos los registros utilizando el método super
+        records = super(Employee, self).create(vals_list)
+
+        return records
 
     def _get_attachment_number(self):
         """

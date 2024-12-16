@@ -24,6 +24,13 @@ class Job(models.Model):
     job_profile = fields.Many2one('hr.job.profile', string='Perfil del puesto')
     generic_skills = fields.One2many(
         'hr.job.generic_skill', 'job_id', string='Competencias Genéricas', copy=True)
+    
+    position_skills = fields.One2many(
+        'hr.job.position_skill', 'job_id', string='Competencias del Puesto', copy=True)
+    
+    client_skills = fields.One2many(
+        'hr.job.client_skill', 'job_id', string='Competencias del Cliente', copy=True)
+    
     workteam_skills = fields.One2many(
         'hr.job.workteam_skill', 'job_id', string='Competencias de Trabajo en Equipo', copy=True)
     personal_skills = fields.One2many(
@@ -267,8 +274,17 @@ class Skill(models.Model):
 class GenericSkill(models.Model):
     _inherit = 'hr.job.skill'
     _name = 'hr.job.generic_skill'
+    
+    type=fields.Char(string='Tipo')
 
-
+class PositionSkill(models.Model):
+    _inherit = 'hr.job.skill'
+    _name = 'hr.job.position_skill'
+    
+class ClientSkill(models.Model):
+    _inherit = 'hr.job.skill'
+    _name = 'hr.job.client_skill'
+    
 class WorkteamSkill(models.Model):
     _inherit = 'hr.job.skill'
     _name = 'hr.job.workteam_skill'

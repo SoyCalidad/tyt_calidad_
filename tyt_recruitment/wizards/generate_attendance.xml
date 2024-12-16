@@ -1,0 +1,30 @@
+<odoo>
+    <record id="view_confirmation_wizard_form" model="ir.ui.view">
+        <field name="name">tyt_recruitment.attendance_confirmation_wizard.form</field>
+        <field name="model">tyt_recruitment.attendance_confirmation_wizard</field>
+        <field name="arch" type="xml">
+            <form string="Confirmación">
+                
+                <field name="attendance_id" invisible="1"/>
+                <h3 attrs="{'invisible': [('attendance_id', '!=', False)]}">
+                    Aún no tiene una lista de asistencia para esta campaña.
+                </h3>
+                <div attrs="{'invisible': [('attendance_id', '=', False)]}">
+                    <h3 >
+                        Ya tiene una lista de asistencia generada para esta campaña.
+                    </h3>
+                    <button 
+                        name="action_open_generate_attendance" 
+                        type="object" 
+                        string="Ver lista de asistencia" 
+                        class="btn-primary" />
+                </div>
+                <footer>
+                    <h3>Se generará una nueva lista de asistencia. ¿Está seguro de realizar esta acción?</h3>
+                    <button name="action_accept" string="Sí" type="object" class="btn-primary"/>
+                    <button name="action_decline" string="No" type="object" class="btn-secondary"/>
+                </footer>
+            </form>
+        </field>
+    </record>
+</odoo>

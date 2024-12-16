@@ -367,11 +367,11 @@
                         <field name="action_ids" context="{'default_origin_model_id': model_id, 'default_origin_int_id': id}" />
                     </page>
                     <page name="risk_ids" string="Riesgos y oportunidades">
-                        <group string="Riesgos">
-                            <field name="risk_ids" nolabel="1" context="{'default_origin_model_id': model_id, 'default_origin_int_id': id, 'default_type': 'risk'}" />
+                        <group string="Riesgos" colspan="2">
+                            <field name="risk_ids" colspan="2" nolabel="1" context="{'default_origin_model_id': model_id, 'default_origin_int_id': id, 'default_type': 'risk'}" />
                         </group>
-                        <group string="Oportunidades">
-                            <field name="opp_ids" nolabel="1" context="{'default_origin_model_id': model_id, 'default_origin_int_id': id, 'default_type': 'opportunity'}" />
+                        <group string="Oportunidades" colspan="2">
+                            <field name="opp_ids" colspan="2" nolabel="1" context="{'default_origin_model_id': model_id, 'default_origin_int_id': id, 'default_type': 'opportunity'}" />
                         </group>
                     </page>
                 </xpath>

@@ -46,7 +46,7 @@
                     <tr>
                         <td class="tg-0lax">
                             <span>Fecha de impresión:</span>
-                            <span t-esc="context_timestamp(datetime.datetime.now()).strftime('%d/%m/%Y %H:%M')" />
+                            <span t-esc="datetime.datetime.now().strftime('%d/%m/%Y %H:%M')" />
                         </td>
                     </tr>
                 </tbody>

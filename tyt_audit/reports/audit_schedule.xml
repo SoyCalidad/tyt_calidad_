@@ -1,0 +1,14 @@
+<odoo>
+    <data>
+        <record id="action_audit_schedule_xlsx" model="ir.actions.report">
+            <field name="name">Cronograma de Auditoría</field>
+            <field name="model">audit.plan</field>
+            <field name="report_type">xlsx</field>
+            <field name="report_name">tyt_audit.audit_schedule_report</field>
+            <field name="report_file">tyt_audit.audit_schedule_report</field>
+            <field name="binding_model_id" ref="mgmtsystem_audit.model_audit_plan"/>
+            <field name="binding_type">report</field>
+            <field name="attachment_use" eval="False"/>
+        </record>
+    </data>
+</odoo>

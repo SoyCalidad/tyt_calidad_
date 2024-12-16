@@ -1,0 +1,230 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+        <record id="view_hr_job_form_inherit" model="ir.ui.view">
+            <field name="name">hr.job.form.inherit</field>
+            <field name="model">hr.job</field>
+            <field name="inherit_id" ref="hr.view_hr_job_form"/>
+            <field name="arch" type="xml">
+                <xpath expr="/form/sheet/notebook/page[@name='recruitment_page']" position="before">
+                    <page string="Información">
+                        <group string="Datos">
+                            <field name="nombre_corto" string="Nombre Corto"/>
+                            <field name="puntos_valuacion" string="Puntos (Valuación)" />
+                            <field name="categoria" string="Categoría" />
+                            <field name="nivel_organizacional" string="Nivel Organizacional" />
+                        </group>
+                        <group string="Nivel de Madurez">
+                            <field name="nivel_detalle_ids" widget="one2many_list" context="{'default_parent_id': active_id}">
+                                <tree>
+                                    <field name="sequence" widget="handle"/>
+                                    <field name="nivel_id"/>
+                                    <field name="tiempo_graduacion"/>
+                                    <field name="salario_fijo"/>
+                                    <field name="salario_variable"/>
+                                    <field name="salario_integral"/>
+                                    <field name="ratio_vacante"/>
+                                    <field name="personal_directo"/>
+                                    <field name="personal_indirecto"/>
+                                    <field name="escolaridad_id"/>
+                                    <field name="edad_minima"/>
+                                    <field name="idiomas"/>
+                                    <field name="curso_id"/>  
+                                </tree>
+                            </field>
+                        </group>
+                        
+                        <group string="Movilidad del Puesto">
+                            <field name="first_option"/>
+                            <field name="second_option"/>
+                            <field name="third_option"/>
+                        </group>
+                    </page>
+                    
+                    <page string="Métricos">
+                        <group name="metrics_page">
+                            <group string="Jefes" colspan="2" col="2">
+                                <field name="hr_job_work_day_id" string="Jornada en horas"/>
+                                <field name="functional_head" string="Jefe funcional"/>
+                                <field name="adm_head" string="Jefe administrativo"/>                                
+                            </group>
+                            <group string="OMEM (Balance Scorecard)">
+                                <!-- Finanzas -->
+                                <field name="finanzas_indicador" string="Indicador Finanzas"/>
+                                <field name="finanzas_meta" string="Meta Finanzas (%)"/>
+
+                                <!-- Cliente -->
+                                <field name="cliente_indicador" string="Indicador Cliente"/>
+                                <field name="cliente_meta" string="Meta Cliente (%)"/>
+
+                                <!-- Procesos -->
+                                <field name="procesos_indicador" string="Indicador Procesos"/>
+                                <field name="procesos_meta" string="Meta Procesos (%)"/>
+
+                                <!-- Gente -->
+                                <field name="gente_indicador" string="Indicador Gente"/>
+                                <field name="gente_meta" string="Meta Gente (%)"/>
+                            </group>
+                            <group string="KPI´s">
+                                <!-- Estratégico -->
+                                <field name="estrategico_indicador" string="Indicador Estratégico"/>
+                                <field name="estrategico_meta" string="Meta Estratégico (%)"/>
+
+                                <!-- Costo -->
+                                <field name="costo_indicador" string="Indicador Costo"/>
+                                <field name="costo_meta" string="Meta Costo (%)"/>
+
+                                <!-- Velocidad de Respuesta -->
+                                <field name="velocidad_respuesta_indicador" string="Indicador Velocidad de Respuesta"/>
+                                <field name="velocidad_respuesta_meta" string="Meta Velocidad de Respuesta (%)"/>
+
+                                <!-- Disponibilidad -->
+                                <field name="disponibilidad_indicador" string="Indicador Disponibilidad"/>
+                                <field name="disponibilidad_meta" string="Meta Disponibilidad (%)"/>
+
+                                <!-- Efectividad de Proceso -->
+                                <field name="efectividad_proceso_indicador" string="Indicador Efectividad de Proceso"/>
+                                <field name="efectividad_proceso_meta" string="Meta Efectividad de Proceso (%)"/>
+                            </group>                          
+                        </group>
+                    </page>  
+
+                    <page string="Beneficios">
+                        <group>
+                            <field name="fondo_ahorro"/>
+                            <field name="beca_estudiantil"/>
+                            <field name="r_casa"/>
+                            <field name="v_despensa"/>
+                            <field name="v_gasolina"/>
+                            <field name="seguro_medico_mayor"/>
+                            <field name="auto"/>
+                        </group>
+                    </page>
+
+                    <page string="Objetivos">
+                        <group>
+                            <field name="objetivo_general"/>
+                            <field name="objetivo_puesto"/>
+                        </group>
+                    </page>
+
+                    <page string="Filo y Proc">
+                        <group>
+                            <field name="relacion_interna"/>
+                            <field name="relacion_externa"/>
+                            <field name="valores"/>
+                            <field name="plan_estrategico"/>
+                        </group>
+                        <group groups="mgmtsystem_process.group_process_readonly_printreport,mgmtsystem_process.group_process_owner,mgmtsystem_process.group_process_all">
+                            <field name="related_process_ids" string="Procedimientos">
+                                <tree>
+                                    <field name="code" />
+                                    <field name="name" style="max-width:200px;" />
+                                    <field name="categ_id" />
+                                </tree>
+                            </field>
+                            <field name="responsible_process_ids" string="Políticas">
+                                <tree>
+                                    <field name="code" />
+                                    <field name="name" style="max-width:200px;" />
+                                    <field name="categ_id" />
+                                </tree>
+                            </field>
+                        </group>
+                    </page>
+
+                    <page id="info" string="Funciones" 
+                        groups="mgmtsystem_employees.group_employees_onlyread_printreport,mgmtsystem_employees.group_employees_write_printreport,mgmtsystem_employees.group_employees_all">
+                        <group attrs="{'readonly':[('validation_state','in', ('validate_ok'))]}">
+                            <field name="job_profile" attrs="{'readonly':[('validation_state','in', ('validate_ok'))]}" />
+                            <field name="functions" attrs="{'readonly':[('validation_state','in', ('validate_ok'))]}">
+                                <tree>
+                                    <field name="name" style="max-width:200px;" />
+                                </tree>
+                            </field>
+                            <field name="evaluation_factors" attrs="{'readonly':[('validation_state','in', ('validate_ok'))]}">
+                                <tree>
+                                    <field name="name" style="max-width:200px;" />
+                                </tree>
+                            </field>
+                        </group>
+                    </page>
+
+                    <page id="skills" string="Competencias"
+                        groups="mgmtsystem_employees.group_employees_onlyread_printreport,mgmtsystem_employees.group_employees_write_printreport,mgmtsystem_employees.group_employees_all">
+                        <group attrs="{'readonly':[('validation_state','in', ('validate_ok'))]}">
+                            <field name="generic_skills" mode="tree,form" attrs="{'readonly': [('validation_state', 'in', ('validate_ok'))]}">
+                                <tree>
+                                    <field name="type"/>
+                                    <field name="name"/>
+                                </tree>
+                                <form>
+                                    <sheet>
+                                        <div class="oe_title" style="font-weight: bold;">
+                                            <t t-esc="'Type'"/>
+                                        </div>
+                                        <field name="type" string="Type" label="true"/>
+                                        <div class="oe_title" style="font-weight: bold;">
+                                            <t t-esc="'Name'"/>
+                                        </div>
+                                        <field name="name" string="Name" label="true"/>
+                                    </sheet>
+                                </form>
+                            </field>
+                            <field name="position_skills" attrs="{'readonly':[('validation_state','in', ('validate_ok'))]}">
+                                <tree>
+                                    <field name="name"/>
+                                </tree>
+                                <form>
+                                    <sheet>
+                                        <div class="oe_title" style="font-weight: bold;">
+                                            <t t-esc="'Name'"/>
+                                        </div>
+                                        <field name="name" string="Name" label="true"/>
+                                    </sheet>
+                                </form>
+                            </field>
+                            <field name="client_skills" attrs="{'readonly':[('validation_state','in', ('validate_ok'))]}">
+                                <tree>
+                                    <field name="name"/>
+                                </tree>
+                                <form>
+                                    <sheet>
+                                        <div class="oe_title" style="font-weight: bold;">
+                                            <t t-esc="'Name'"/>
+                                        </div>
+                                        <field name="name" string="Name" label="true"/>
+                                    </sheet>
+                                </form>
+                            </field>
+                        </group>
+                    </page>
+
+                    <page name="version_info" string="Validación y versión"
+                        groups="mgmtsystem_employees.group_employees_onlyread_printreport,mgmtsystem_employees.group_employees_write_printreport,mgmtsystem_employees.group_employees_all">
+                        <group col="2" attrs="{'readonly':[('validation_state','in', ('validate_ok'))]}">
+                            <group colspan="2">
+                                <field name="version" />
+                            </group>
+                            <group colspan="2">
+                                <separator string="" />
+                                <field name="elaboration_step" colspan="2" nolabel="1" attrs="{'readonly': [('validation_state','not in',('elaborate'))]}" />
+                                <separator string="Revisión" />
+                                <field name="review_step" colspan="2" nolabel="1" attrs="{'readonly': [('validation_state','not in',('elaborate', 'review'))]}" />
+                                <separator string="Validación" />
+                                <field name="validation_step" colspan="2" nolabel="1" attrs="{'readonly': [('validation_state','not in',('elaborate', 'review', 'validate'))]}" />
+                            </group>
+                            <group colspan="2">
+                                <field name="date_elaborate" invisible="1" attrs="{'required': [('validation_state','in',('elaborate'))], 'readonly': True}" />
+                                <field name="date_review" invisible="1" attrs="{'required': [('validation_state','in',('review'))], 'readonly': True, 'invisible': [('validation_state','in',('elaborate'))] }" />
+                                <field name="date_validate" invisible="1" groups="base.group_no_one,base.user_admin" attrs="{'invisible': [('validation_state','in',('elaborate','review'))] }" />
+                            </group>
+                        </group>
+                    </page>
+                </xpath>
+
+            </field>
+        </record>
+    </data>
+</odoo>
+

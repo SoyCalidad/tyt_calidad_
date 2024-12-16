@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <record model="ir.actions.act_window" id="mgmtsystem_process.action_mgmt_process_edition">
+        <field name="name">Versión</field>
+        <field name="res_model">process.edition</field>
+        <field name="view_mode">tree,form</field>
+        <field name="domain">[('state', '!=', 'cancel')]</field>
+        <field name="help">Versiones de procedimientos</field>
+    </record>
+
+	<record model="ir.ui.menu" id="mgmtsystem_process.menu_process_edition">
+		<field name="name">Versión</field>
+	</record>
+
+    <record id="group_invisible_1_menu" model="res.groups">
+        <field name="name">Invisible Menu Group</field>
+        <field name="category_id" ref="base.module_category_hidden"/>
+    </record>
+
+    <record id="mgmtsystem_process.menu_process_edition_template" model="ir.ui.menu">
+        <field name="groups_id" eval="[(4, ref('tyt_process.group_invisible_1_menu'))]"/>
+    </record>
+
+    <record id="system_process_edition_form_view_tyt_inherit_inherit" model="ir.ui.view">
+        <field name="name">process.edition.form.view.inherit.change_string</field>
+        <field name="model">process.edition</field>
+        <field name="inherit_id" ref="mgmtsystem_process.system_process_edition_form_view_inherit"/>
+        <field name="arch" type="xml">
+            <!-- Localizar la página y cambiar el atributo 'string' -->
+            <xpath expr="//page[@name='info']" position="attributes">
+                <attribute name="string">Validación y edición</attribute>
+            </xpath>
+        </field>
+    </record>
+
+</odoo>

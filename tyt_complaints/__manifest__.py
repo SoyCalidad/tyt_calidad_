@@ -13,6 +13,7 @@
     'data': [
         #'security/ir.model.access.csv',
         'views/complaints.xml',
+        'views/menus.xml',
     ],
     'auto_install': False,
     'installable': True,

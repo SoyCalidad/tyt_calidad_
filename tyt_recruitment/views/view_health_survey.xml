@@ -1,0 +1,95 @@
+<odoo>
+  <data>
+
+    <!-- Config Health Survey List -->
+    <record model="ir.ui.view" id="tyt_recruitment_health_survey_list">
+      <field name="name">Lista de encuestas</field>
+      <field name="model">tyt_recruitment.health_survey</field>
+      <field name="arch" type="xml">
+        <tree string="Lista de encuestas de salud">
+          <field name="id" width="100px"/>
+          <field name="name"/>
+          <field name="code"/>
+        </tree>
+      </field>
+    </record>
+
+    <!-- Config Health Survey form -->
+    <record model="ir.ui.view" id="tyt_recruitment_health_survey_form">
+      <field name="name">Formulario de encuestas</field>
+      <field name="model">tyt_recruitment.health_survey</field>
+      <field name="arch" type="xml">
+        <form string="Encuesta de salud">
+          <sheet>
+            <group>
+              <field name="id"/>
+              <field name="name"/>
+              <field name="code"/>
+            </group>
+            <notebook>
+              <page string="Preguntas">
+                <field name="question_ids" nolabel="1" widget="question_page_one2many" >
+                  <tree editable="bottom">
+                    <field name="sequence" widget="handle"/>
+                    <field name="title" widget="survey_description_page"/>
+                    <field name="background_image" invisible="1"/>
+                    <field name="question_type"/>
+                    <field name="is_page" invisible="1"/>
+                    <control>
+                      <create name="add_question_control" string="Agregar pregunta"/>
+                    </control>
+                  </tree>
+                </field>
+              </page>
+            </notebook>
+          </sheet>
+          <div class="oe_chatter">
+            <field name="message_follower_ids" widget="mail_followers" />
+            <field name="activity_ids" widget="mail_activity" />
+            <field name="message_ids" widget="mail_thread" />
+          </div>
+        </form>
+      </field>
+    </record>
+
+    <!-- Extra fields on Question Form -->
+    <record model="ir.ui.view" id="survey_question_form_inherit">
+      <field name="name">Form view for survey question - extended</field>
+      <field name="model">survey.question</field>
+      <field name="inherit_id" ref="survey.survey_question_form"/>
+      <field name="arch" type="xml">
+          <xpath expr="//field[@name='title']" position="after">
+            <group>
+              <field name="extra_input" string="Título del campo extra"/>
+              <field name="extra_input_enabled" string="¿Habilitar campo extra?" widget="boolean"/>
+            </group>
+          </xpath>
+      </field>
+    </record>
+
+    <!-- Multiple answers list -->
+    <record id="survey_multiple_answers" model="ir.ui.view">
+      <field name="name">Lista de respuestas multiples</field>
+      <field name="model">tyt_recruitment.multiple_answer</field>
+      <field name="arch" type="xml">
+          <tree string="Lista de respuestas multiples" create="0" edit="0">
+              <field name="text" readonly="1"/>
+          </tree>
+      </field>
+    </record>
+
+    <!-- Actions -->
+    <record model="ir.actions.act_window" id="tyt_recruitment_action_window_health_survey">
+      <field name="name">Lista de encuestas</field>
+      <field name="res_model">tyt_recruitment.health_survey</field>
+      <field name="view_mode">tree,form</field>
+      <field name="view_id" ref="tyt_recruitment_health_survey_list"/>
+    </record>
+
+    <menuitem id="menu_custom_health_survey"
+      name="Configuración de encuestas"
+      parent="menu_custom_recruitment"
+      action="tyt_recruitment_action_window_health_survey" 
+    />
+  </data>
+</odoo>

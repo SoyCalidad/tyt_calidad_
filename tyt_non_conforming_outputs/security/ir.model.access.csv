@@ -1,0 +1,3 @@
+id,name,model_id:id,group_id:id,perm_read,perm_write,perm_create,perm_unlink
+access_penalty_tag,access_penalty_tag,model_penalty_tag,,1,1,1,1
+access_non_conformity_output_wizard,access_non_conformity_output_wizard,model_non_conformity_output_wizard,,1,1,1,1

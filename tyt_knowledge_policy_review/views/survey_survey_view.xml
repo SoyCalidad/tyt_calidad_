@@ -1,0 +1,36 @@
+<odoo>
+    <record id="view_survey_survey_form_inherit" model="ir.ui.view">
+        <field name="name">survey.survey.form.inherit.custom.description</field>
+        <field name="model">survey.survey</field>
+        <field name="inherit_id" ref="survey.survey_survey_view_form"/>
+        <field name="arch" type="xml">
+            <xpath expr="//page[@name='description']" position="inside">
+                <group>
+                    <field name="custom_description_enabled"/>
+                </group>
+                <group attrs="{'invisible': [('custom_description_enabled', '=', False)]}">
+                    <field name="custom_description_line_ids" editable="bottom" string="">
+                        <tree>
+                            <field name="date"/>
+                            <field name="login"/>
+                            <field name="agent"/>
+                            <field name="supervisor"/>
+                            <field name="campaign"/>
+                            <field name="turn"/>
+                        </tree>
+                        <form>
+                            <group>
+                                <field name="date"/>
+                                <field name="login"/>
+                                <field name="agent"/>
+                                <field name="supervisor"/>
+                                <field name="campaign"/>
+                                <field name="turn"/>
+                            </group>
+                        </form>
+                    </field>
+                </group>
+            </xpath>
+        </field>
+    </record>
+</odoo>

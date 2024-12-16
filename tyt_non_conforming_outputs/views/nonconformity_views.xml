@@ -1,0 +1,23 @@
+<odoo>
+    <data>
+        <record id="view_mgmtsystem_nonconformity_form_inherit" model="ir.ui.view">
+            <field name="name">mgmtsystem.nonconformity.form.inherit.cliente</field>
+            <field name="model">mgmtsystem.nonconformity</field>
+            <field name="inherit_id" ref="mgmtsystem_nonconformity.view_mgmtsystem_nonconformity_form"/>
+            <field name="arch" type="xml">
+                <field name="company_id" position="after">
+                    <field name="client_id" attrs="{'invisible': [('nc_output', '=', False)]}"/>
+                </field>
+                
+                <xpath expr="//notebook" position="inside">
+                    <page string="Non-conforming Output">
+                        <group>
+                            <field name="penalty_ids" widget="many2many_tags"/>
+                            <field name="penalty_negotiation_clients" string="Penalty Negotiation with Clients"/>
+                        </group>
+                    </page>
+                </xpath>
+            </field>
+        </record>
+    </data>
+</odoo>

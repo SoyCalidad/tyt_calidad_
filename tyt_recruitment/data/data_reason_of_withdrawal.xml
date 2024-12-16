@@ -1,0 +1,27 @@
+<?xml version="1.0"?>
+<odoo>
+    <record id="record_1" model="tyt_recruitment.reason_for_withdrawal">
+        <field name="text">ABANDONO</field>
+    </record>
+    <record id="record_2" model="tyt_recruitment.reason_for_withdrawal">
+        <field name="text">ENFERMEDAD</field>
+    </record>
+    <record id="record_3" model="tyt_recruitment.reason_for_withdrawal">
+        <field name="text">PROBLEMAS PERSONALES</field>
+    </record>
+    <record id="record_4" model="tyt_recruitment.reason_for_withdrawal">
+        <field name="text">NO CERTIFICA</field>
+    </record>
+    <record id="record_5" model="tyt_recruitment.reason_for_withdrawal">
+        <field name="text">ACTITUD</field>
+    </record>
+    <record id="record_6" model="tyt_recruitment.reason_for_withdrawal">
+        <field name="text">NO CUMPLE CON POLITICAS DE CONTRATACION</field>
+    </record>
+    <record id="record_7" model="tyt_recruitment.reason_for_withdrawal">
+        <field name="text">PROBLEMAS ECONÓMICOS</field>
+    </record>
+    <record id="record_8" model="tyt_recruitment.reason_for_withdrawal">
+        <field name="text">INFORMACIÓN ERRONEA BRINDADA</field>
+    </record>
+</odoo>

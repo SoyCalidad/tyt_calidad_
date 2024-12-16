@@ -103,7 +103,7 @@ class ReportCustomerRequisitionXlsx(models.AbstractModel):
 
             sheet.write(4, 4, request_date or '', data_format)
             sheet.write(5, 4, closing_date or '', data_format)
-            sheet.write(6, 4, partner.weeks or '', data_format)
+            sheet.write(6, 4, partner.week or '', data_format)
 
             for campaign in partner.campaign_ids:
                 sheet.write(row, 3, campaign.tag_id.name or '', data_format)

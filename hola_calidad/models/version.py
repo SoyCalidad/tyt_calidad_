@@ -69,15 +69,32 @@ class Version(models.Model):
 
     #####################################################################
 
-    @api.model
-    def create(self, values):
-        res = super(Version, self).create(values)
-        try:
-            if 'unrevisioned_name' not in values:
-                values['unrevisioned_name'] = values['name']
-        except:
-            pass
-        return res
+    # @api.model
+    # def create(self, values):
+    #     res = super(Version, self).create(values)
+    #     try:
+    #         if 'unrevisioned_name' not in values:
+    #             values['unrevisioned_name'] = values['name']
+    #     except:
+    #         pass
+    #     return res
+    
+    @api.model_create_multi
+    def create(self, vals_list):
+        for vals in vals_list:
+            # Asignar 'unrevisioned_name' si no está presente
+            if 'unrevisioned_name' not in vals:
+                # Asegurarse de que 'name' esté presente antes de asignar
+                if 'name' in vals and vals['name']:
+                    vals['unrevisioned_name'] = vals['name']
+                else:
+                    # Manejar el caso donde 'name' no está presente o está vacío
+                    vals['unrevisioned_name'] = ''  # O cualquier lógica alternativa
+
+        # Crear todos los registros utilizando el método super
+        records = super(Version, self).create(vals_list)
+
+        return records
 
     def write(self, values):
         try:

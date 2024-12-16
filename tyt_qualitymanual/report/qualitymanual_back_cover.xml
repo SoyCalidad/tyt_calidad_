@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <record id="mgmtsystem_qualitymanual_tyt_back_cover_report_action" model="ir.actions.report">
+        <field name="name">Quality Manual TYT Back Cover</field>
+        <field name="model">mgmtsystem.qualitymanual</field>
+        <field name="report_type">qweb-pdf</field>
+        <field name="report_name">tyt_qualitymanual.mgmtsystem_qualitymanual_tyt_back_cover_report</field>
+        <field name="report_file">tyt_qualitymanual.mgmtsystem_qualitymanual_tyt_back_cover_report</field>
+        <field name="print_report_name">'%s' % object.name</field>
+        <field name="binding_model_id" eval="False" />
+        <field name="paperformat_id" ref="tyt_process.tyt_cover_paperformat" />
+        <field name="binding_type">report</field>
+    </record>
+
+    <template id="mgmtsystem_qualitymanual_tyt_back_cover_report">
+        <t t-call="web.html_container">
+            <t t-foreach="docs" t-as="o">
+                <t t-if="not company">
+                    <t t-if="company_id">
+                        <t t-set="company" t-value="company_id" />
+                    </t>
+                    <t t-elif="o and 'company_id' in o and o.company_id.sudo()">
+                        <t t-set="company" t-value="o.company_id.sudo()" />
+                    </t>
+                    <t t-else="else">
+                        <t t-set="company" t-value="res_company" />
+                    </t>
+                </t>
+                <t t-call="tyt_process.external_layout_tyt_cover">
+                    <div class="page">
+                        <div class="tyt_back_cover">
+                            <div class="container">
+                                <img src="/tyt_process/static/src/img/back_cover_tyt_bg.jpg"
+                                    class="background-image" />
+                            </div>
+                        </div>
+                    </div>
+                </t>
+            </t>
+        </t>
+    </template>
+</odoo>

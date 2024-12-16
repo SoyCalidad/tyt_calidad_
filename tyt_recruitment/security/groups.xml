@@ -1,0 +1,18 @@
+<odoo>
+    <!-- Crear el grupo Auditor -->
+    <record id="group_auditor_user" model="res.groups">
+        <field name="name">Auditor  expedientes</field>
+        <field name="category_id" ref="base.module_category_accounting"/>
+    </record>
+
+    <!-- Crear permisos básicos para el grupo -->
+    <record id="access_job_application_auditor" model="ir.model.access">
+        <field name="name">Access Job Application Auditor</field>
+        <field name="model_id" ref="model_tyt_recruitment_job_application"/>
+        <field name="group_id" ref="tyt_recruitment.group_auditor_user"/>
+        <field name="perm_read" eval="1"/>
+        <field name="perm_write" eval="1"/>
+        <field name="perm_create" eval="0"/>
+        <field name="perm_unlink" eval="0"/>
+    </record>
+</odoo>

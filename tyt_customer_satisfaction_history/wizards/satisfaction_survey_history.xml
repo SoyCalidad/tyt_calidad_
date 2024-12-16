@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+
+    <record id="tyt_satisfaction_survey_history_view_form" model="ir.ui.view">
+            <field name="name">tyt.satisfaction.survey.history.view.form</field>
+            <field name="model">tyt.satisfaction.survey.history</field>
+            <field name="arch" type="xml">
+                <form string="Satisfaction Survey History">
+                    <sheet>
+                        <group>
+                            <field name="from_date"/>
+                            <field name="to_date"/>
+                        </group>
+                    </sheet>
+                    <footer>
+                        <button string="Print Report" name="action_print_report" type="object" class="btn-primary"/>
+                        <button string="Print Report 2" name="action_print_report_cx" type="object" class="btn-primary"/>
+                        <button string="Cancel" special="cancel" />
+                    </footer>
+                </form>
+            </field>
+        </record>
+
+        <record id="tyt_satisfaction_survey_history_action" model="ir.actions.act_window">
+            <field name="name">Satisfaction Survey History</field>
+            <field name="res_model">tyt.satisfaction.survey.history</field>
+            <field name="view_mode">form</field>
+            <field name="view_id" ref="tyt_satisfaction_survey_history_view_form"/>
+            <field name="target">new</field>
+        </record>
+
+        <menuitem
+            id="tyt_satisfaction_survey_history_menu"
+            name="Satisfaction Survey History"
+            action="tyt_satisfaction_survey_history_action"
+            parent="tyt_survey.tyt_satisfaction_survey_main_menu"
+            sequence="40"/>
+
+</odoo>

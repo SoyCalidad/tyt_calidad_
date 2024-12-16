@@ -1,13 +1,34 @@
-<odoo>    
+<odoo>
     <data>
         <record id="mgmtsystem_nonconformity__tyt_inherit" model="ir.ui.view">
             <field name="name">mgmtsystem_nonconformity_tyt_inherit</field>
             <field name="model">mgmtsystem.nonconformity</field>
             <field name="inherit_id" ref="mgmtsystem_nonconformity.view_mgmtsystem_nonconformity_form"/>
             <field name="arch" type="xml">
+                <xpath expr="//sheet/field[@name='kanban_state']" position="attributes">
+                    <attribute name="invisible">1</attribute>
+                </xpath>
+                <xpath expr="//sheet/group[1]/group[1]/field[@name='iso_9001_requeriments_ids']" position="attributes">
+                    <attribute name="string">Cláusula de la norma (ISO 9001)</attribute>
+                </xpath>                        
+                <xpath expr="//sheet/notebook/page[@name='description']/group[1]/field[@name='description']" position="attributes">
+                    <attribute name="string">Retroalimentación</attribute>
+                    <attribute name="placeholder">Añadir Retroalimentación...</attribute>
+                </xpath>                                      
+                <xpath expr="//sheet/notebook" position="inside">
+                    <page string="Partes interesadas">
+                        <group>
+                            <field name="stakeholder_requirement" string="Requerimiento de la parte interesada"/>
+                            <field name="compliance" string="Conforme (Sí/No)" widget="boolean_toggle"/>
+                        </group>
+                    </page>
+                </xpath>
                 <xpath expr="//sheet/group[1]/group[1]/field[@name='nc_output']" position="after">
                     <field name="found_description" />
-                </xpath>              
+                </xpath>
+                <xpath expr="//sheet/group[1]/group[1]/field[@name='nc_output']" position="after">
+                    <field name="finding" />
+                </xpath>                   
             </field>
         </record>
     </data>

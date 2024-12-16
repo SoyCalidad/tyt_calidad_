@@ -62,6 +62,9 @@ class TYTDocumentRecord(models.Model):
 class ProcedureEdition(models.Model):
     _inherit = 'process.edition'
     
+    type_id = fields.Many2one(
+        related='process_id.type', string='Área')
+
     tyt_distribution_list_ids = fields.One2many(
         comodel_name='tyt.distribution.list',
         inverse_name='edition_id',
@@ -86,3 +89,10 @@ class ProcedureEdition(models.Model):
     tyt_appendices = fields.Html(
         string='Appendices',
     )
+
+    #### Change String : Edición to Versión #####
+
+    @api.depends('version')
+    def _compute_version_as_string(self):
+        for record in self:
+            record.version_as_string = 'Versión N° {}'.format(str(record.version).rjust(3, '0'))

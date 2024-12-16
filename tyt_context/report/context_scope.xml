@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <record id="tyt_context_scope_report_action" model="ir.actions.report">
+        <field name="name">Alcance del SGC</field>
+        <field name="model">tyt.context.scope</field>
+        <field name="report_type">qweb-pdf</field>
+        <field name="report_name">tyt_context.tyt_context_scope_report</field>
+        <field name="report_file">tyt_context.tyt_context_scope_report</field>
+        <field name="print_report_name">'%s' % object.name</field>
+        <field name="binding_model_id" ref="tyt_context.model_tyt_context_scope"/>
+        <field name="binding_type">report</field>
+    </record>
+
+    <template id="tyt_context_scope_report">
+        <t t-call="web.html_container">
+            <t t-foreach="docs" t-as="o">
+                <t t-call="web.external_layout">
+                </t>
+            </t>
+        </t>
+    </template>
+</odoo>

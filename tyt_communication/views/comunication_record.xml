@@ -30,5 +30,15 @@
                 </xpath>
             </field>
         </record>
+
+        <!-- Actions-->
+        <record id="mgmtsystem_comunication.plan_line_action" model="ir.actions.act_window">
+            <field name="name">Plan de Comunicación</field>
+            <field name="type">ir.actions.act_window</field>
+            <field name="res_model">comunication.plan.line</field>
+            <field name="view_mode">tree,form,kanban,graph,pivot</field>
+        </record>
+
+
     </data>
 </odoo>

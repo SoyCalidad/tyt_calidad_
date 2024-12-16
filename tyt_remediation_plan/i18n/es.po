@@ -1,0 +1,218 @@
+# Translation of Odoo Server.
+# This file contains the translation of the following modules:
+# 	* tyt_remediation_plan
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: Odoo Server 16.0-20240819\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2024-10-09 16:49+0000\n"
+"PO-Revision-Date: 2024-10-09 16:49+0000\n"
+"Last-Translator: \n"
+"Language-Team: \n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: \n"
+"Plural-Forms: \n"
+
+#. module: tyt_remediation_plan
+#: model:ir.model.fields,field_description:tyt_remediation_plan.field_maintenance_remediationplan_line__activity
+msgid "Activity"
+msgstr "Actividad"
+
+#. module: tyt_remediation_plan
+#: model_terms:ir.ui.view,arch_db:tyt_remediation_plan.view_maintenance_remediationplan_form
+msgid "Cancel"
+msgstr "Cancelar"
+
+#. module: tyt_remediation_plan
+#: model:ir.model.fields,field_description:tyt_remediation_plan.field_maintenance_remediationplan__company_id
+msgid "Company"
+msgstr "Compañia"
+
+#. module: tyt_remediation_plan
+#: model:ir.model.fields.selection,name:tyt_remediation_plan.selection__maintenance_remediationplan__state__confirmed
+msgid "Confirmed"
+msgstr "Confirmado"
+
+#. module: tyt_remediation_plan
+#: model:ir.model.fields,field_description:tyt_remediation_plan.field_maintenance_remediationplan__create_uid
+#: model:ir.model.fields,field_description:tyt_remediation_plan.field_maintenance_remediationplan__user_id
+#: model:ir.model.fields,field_description:tyt_remediation_plan.field_maintenance_remediationplan_line__create_uid
+msgid "Created by"
+msgstr "Creado por"
+
+#. module: tyt_remediation_plan
+#: model:ir.model.fields,field_description:tyt_remediation_plan.field_maintenance_remediationplan__create_date
+#: model:ir.model.fields,field_description:tyt_remediation_plan.field_maintenance_remediationplan_line__create_date
+msgid "Created on"
+msgstr "Creado el"
+
+#. module: tyt_remediation_plan
+#: model:ir.model.fields,field_description:tyt_remediation_plan.field_maintenance_remediationplan__display_name
+#: model:ir.model.fields,field_description:tyt_remediation_plan.field_maintenance_remediationplan_line__display_name
+msgid "Display Name"
+msgstr "Nombre de Visualización"
+
+#. module: tyt_remediation_plan
+#: model:ir.model.fields.selection,name:tyt_remediation_plan.selection__maintenance_remediationplan__state__draft
+msgid "Draft"
+msgstr "Borrador"
+
+#. module: tyt_remediation_plan
+#: model_terms:ir.ui.view,arch_db:tyt_remediation_plan.view_maintenance_remediationplan_form
+msgid "Edit"
+msgstr "Editar"
+
+#. module: tyt_remediation_plan
+#: model:ir.model.fields,field_description:tyt_remediation_plan.field_maintenance_remediationplan_line__evidence
+msgid "Evidence"
+msgstr "Evidencia"
+
+#. module: tyt_remediation_plan
+#: model:ir.model.fields,field_description:tyt_remediation_plan.field_maintenance_remediationplan_line__resourses
+msgid "Resourses"
+msgstr "Recursos"
+
+#. module: tyt_remediation_plan
+#: model:ir.model.fields,field_description:tyt_remediation_plan.field_maintenance_remediationplan_line__execution_date
+msgid "Execution Date"
+msgstr "Fecha de Ejecución"
+
+#. module: tyt_remediation_plan
+#: model:ir.model.fields,field_description:tyt_remediation_plan.field_maintenance_remediationplan_line__execution_priority
+msgid "Execution Priority"
+msgstr "Prioridad de Ejecución"
+
+#. module: tyt_remediation_plan
+#: model:ir.model.fields,field_description:tyt_remediation_plan.field_maintenance_remediationplan__id
+#: model:ir.model.fields,field_description:tyt_remediation_plan.field_maintenance_remediationplan_line__id
+msgid "ID"
+msgstr "ID"
+
+#. module: tyt_remediation_plan
+#: model:ir.model.fields,field_description:tyt_remediation_plan.field_maintenance_remediationplan____last_update
+#: model:ir.model.fields,field_description:tyt_remediation_plan.field_maintenance_remediationplan_line____last_update
+msgid "Last Modified on"
+msgstr "Última Modificación el"
+
+#. module: tyt_remediation_plan
+#: model:ir.model.fields,field_description:tyt_remediation_plan.field_maintenance_remediationplan__write_uid
+#: model:ir.model.fields,field_description:tyt_remediation_plan.field_maintenance_remediationplan_line__write_uid
+msgid "Last Updated by"
+msgstr "Última Actualización por"
+
+#. module: tyt_remediation_plan
+#: model:ir.model.fields,field_description:tyt_remediation_plan.field_maintenance_remediationplan__write_date
+#: model:ir.model.fields,field_description:tyt_remediation_plan.field_maintenance_remediationplan_line__write_date
+msgid "Last Updated on"
+msgstr "Última Actualización el"
+
+#. module: tyt_remediation_plan
+#: model:ir.model,name:tyt_remediation_plan.model_maintenance_remediationplan
+msgid "Maintenance Remediation Plan"
+msgstr "Plan de Remediación de Mantenimiento"
+
+#. module: tyt_remediation_plan
+#: model:ir.model.fields,field_description:tyt_remediation_plan.field_maintenance_remediationplan__name
+msgid "Name"
+msgstr "Nombre"
+
+#. module: tyt_remediation_plan
+#: model:ir.model.fields,field_description:tyt_remediation_plan.field_maintenance_remediationplan__observations
+msgid "Observations"
+msgstr "Observaciones"
+
+#. module: tyt_remediation_plan
+#: model:ir.model.fields,field_description:tyt_remediation_plan.field_maintenance_remediationplan__production_date
+msgid "Production Date"
+msgstr "Fecha de Producción"
+
+#. module: tyt_remediation_plan
+#: model:ir.model,name:tyt_remediation_plan.model_report_tyt_remediation_plan_remediation_report
+msgid "Remediacion Plan Report"
+msgstr "Informe del Plan de Remediación"
+
+#. module: tyt_remediation_plan
+#: model:ir.model.fields,field_description:tyt_remediation_plan.field_maintenance_remediationplan_line__remediation_area
+msgid "Remediation Area"
+msgstr "Área de Remediación"
+
+#. module: tyt_remediation_plan
+#: model:ir.model.fields,field_description:tyt_remediation_plan.field_maintenance_remediationplan_line__remediation_plan_id
+#: model_terms:ir.ui.view,arch_db:tyt_remediation_plan.view_maintenance_remediationlog_tree
+#: model_terms:ir.ui.view,arch_db:tyt_remediation_plan.view_maintenance_remediationplan_form
+msgid "Remediation Plan"
+msgstr "Plan de Remediación"
+
+#. module: tyt_remediation_plan
+#: model:ir.model,name:tyt_remediation_plan.model_maintenance_remediationplan_line
+msgid "Remediation Plan Line"
+msgstr "Línea del Plan de Remediación"
+
+#. module: tyt_remediation_plan
+#: model:ir.model.fields,field_description:tyt_remediation_plan.field_maintenance_remediationplan__remediation_plan_line_ids
+msgid "Remediation Plan Lines"
+msgstr "Líneas del Plan de Remediación"
+
+#. module: tyt_remediation_plan
+#: model:ir.actions.report,name:tyt_remediation_plan.remediation_plan_report_xlsx
+msgid "Remediation Plan Report (Excel)"
+msgstr "Informe del Plan de Remediación (Excel)"
+
+#. module: tyt_remediation_plan
+#: model:ir.actions.act_window,name:tyt_remediation_plan.action_maintenance_remediationplan
+#: model:ir.ui.menu,name:tyt_remediation_plan.menu_maintenance_remediationplan
+msgid "Remediation Plans"
+msgstr "Planes de Remediación"
+
+#. module: tyt_remediation_plan
+#: model:ir.model.fields,field_description:tyt_remediation_plan.field_maintenance_remediationplan_line__responsible
+msgid "Responsible"
+msgstr "Responsable"
+
+#. module: tyt_remediation_plan
+#: model:ir.model.fields,field_description:tyt_remediation_plan.field_maintenance_remediationplan_line__remediation_plan_id
+#: model:ir.model.fields,field_description:tyt_remediation_plan.field_maintenance_remediationplan__remediation_plan_line_ids
+msgid "Remediation Plans"
+msgstr "Planes de Remediación"
+
+#. module: tyt_remediation_plan
+#: model:ir.model.fields,field_description:tyt_remediation_plan.field_maintenance_remediationplan_line__responsible_id
+msgid "Responsible"
+msgstr "Responsable"
+
+#. module: tyt_remediation_plan
+#: model:ir.model.fields,field_description:tyt_remediation_plan.field_maintenance_remediationplan_line__reviewed
+msgid "Reviewed"
+msgstr "Revisado"
+
+#. module: tyt_remediation_plan
+#: model:ir.model.fields,field_description:tyt_remediation_plan.field_maintenance_remediationplan_line__state
+msgid "State"
+msgstr "Estado"
+
+#. module: tyt_remediation_plan
+#: model:ir.model.fields,field_description:tyt_remediation_plan.field_maintenance_remediationplan__state
+msgid "State"
+msgstr "Estado"
+
+#. module: tyt_remediation_plan
+#: model:ir.actions.act_window,name:tyt_remediation_plan.action_maintenance_remediationlog
+msgid "Remediation Logs"
+msgstr "Bitácora de Remediación"
+
+#. module: tyt_remediation_plan
+#: model:ir.ui.view,arch_db:tyt_remediation_plan.view_maintenance_remediationlog_tree
+msgid "Remediation Log"
+msgstr "Bitácora de Remediación"
+
+#. module: tyt_remediation_plan
+#: model:ir.ui.view,arch_db:tyt_remediation_plan.view_maintenance_remediationlog_tree
+msgid "Remediation Logs"
+msgstr "Bitácoras de Remediación"
+
+#. module: tyt_remediation_plan
+#: model:ir.actions.act_window,name:tyt_remediation_plan.action_maintenance_remediationlog
+msgid "Remediation Log"
+msgstr "Bitácora de Remediación"

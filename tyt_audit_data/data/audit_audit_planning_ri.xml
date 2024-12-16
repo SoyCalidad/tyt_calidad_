@@ -1,0 +1,204 @@
+<odoo>
+    <data noupdate="0">
+        <!-- RI1 -->
+        <record id="audit_audit_planning_ri_101" model="audit.audit.planning.template">
+            <field name="tyt_procedure_description_id" ref="tyt_audit.schedule_plan_description_5"/>
+            <field name="tyt_procedure_activity_id" ref="tyt_audit.schedule_plan_activity_501"/>
+
+            <field name="clause_id" ref="audit_audit_planning_clause_ri_1_63_b"/>
+            <!-- <field name="new_job_id" ref=""/> -->
+            <field name="verification">Validar que el empleado NO utiliza prendas de bajo decoro, transparencias o con mensajes y/o imágenes ofensivas</field>
+            <field name="finding">good_practices</field>
+            <field name="evidence_char">Evidencia Presencial</field>
+        </record>
+        
+        <record id="audit_audit_planning_ri_102" model="audit.audit.planning.template">
+            <field name="tyt_procedure_description_id" ref="tyt_audit.schedule_plan_description_5"/>
+            <field name="tyt_procedure_activity_id" ref="tyt_audit.schedule_plan_activity_501"/>
+
+            <field name="clause_id" ref="audit_audit_planning_clause_ri_1_63_c"/>
+            <!-- <field name="new_job_id" ref=""/> -->
+            <field name="verification">Validar que el empleado NO utilice ombligueras y blusas transparentes (a menos que se utilice una prenda debajo)</field>
+            <field name="finding">good_practices</field>
+            <field name="evidence_char">Evidencia Presencial</field>
+        </record>
+        
+        <record id="audit_audit_planning_ri_103" model="audit.audit.planning.template">
+            <field name="tyt_procedure_description_id" ref="tyt_audit.schedule_plan_description_5"/>
+            <field name="tyt_procedure_activity_id" ref="tyt_audit.schedule_plan_activity_501"/>
+
+            <field name="clause_id" ref="audit_audit_planning_clause_ri_1_63_d"/>
+            <!-- <field name="new_job_id" ref=""/> -->
+            <field name="verification">Validar que el empleado NO utilice sandalias de baño o chancla</field>
+            <field name="finding">good_practices</field>
+            <field name="evidence_char">Evidencia Presencial</field>
+        </record>
+
+        <record id="audit_audit_planning_ri_104" model="audit.audit.planning.template">
+            <field name="tyt_procedure_description_id" ref="tyt_audit.schedule_plan_description_5"/>
+            <field name="tyt_procedure_activity_id" ref="tyt_audit.schedule_plan_activity_501"/>
+
+            <field name="clause_id" ref="audit_audit_planning_clause_ri_1_63_e"/>
+            <!-- <field name="new_job_id" ref=""/> -->
+            <field name="verification">Validar que el empleado NO utilice shorts/bermudas; con excepción de los fines de semana (sábado y domingo) o por alguna dinámica previamente autorizada (para el caso de short deberá ser a la altura de la rodilla en caso contrario deberán portar mallas o media debajo)</field>
+            <field name="finding">good_practices</field>
+            <field name="evidence_char">Evidencia Presencial</field>
+        </record>
+
+        <record id="audit_audit_planning_ri_105" model="audit.audit.planning.template">
+            <field name="tyt_procedure_description_id" ref="tyt_audit.schedule_plan_description_5"/>
+            <field name="tyt_procedure_activity_id" ref="tyt_audit.schedule_plan_activity_501"/>
+
+            <field name="clause_id" ref="audit_audit_planning_clause_ri_1_63_f"/>
+            <!-- <field name="new_job_id" ref=""/> -->
+            <field name="verification">Validar que el empleado NO utilice lentes para sol dentro del área operativa, a menos que se cuente con una prescripción médica.</field>
+            <field name="finding">good_practices</field>
+            <field name="evidence_char">Evidencia Presencial</field>
+        </record>
+
+        <record id="audit_audit_planning_ri_106" model="audit.audit.planning.template">
+            <field name="tyt_procedure_description_id" ref="tyt_audit.schedule_plan_description_5"/>
+            <field name="tyt_procedure_activity_id" ref="tyt_audit.schedule_plan_activity_501"/>
+
+            <field name="clause_id" ref="audit_audit_planning_clause_ri_1_63_g"/>
+            <!-- <field name="new_job_id" ref=""/> -->
+            <field name="verification">Validar que el empleado NO utilice gorras y/o gorros dentro del área operativa (su uso será justificado siempre y cuando se presenten bajas temperaturas, lluvias o con previa autorización por cuestiones médicas)</field>
+            <field name="finding">good_practices</field>
+            <field name="evidence_char">Evidencia Presencial</field>
+        </record>
+
+        <record id="audit_audit_planning_ri_107" model="audit.audit.planning.template">
+            <field name="tyt_procedure_description_id" ref="tyt_audit.schedule_plan_description_5"/>
+            <field name="tyt_procedure_activity_id" ref="tyt_audit.schedule_plan_activity_501"/>
+
+            <field name="clause_id" ref="audit_audit_planning_clause_ri_1_63_h"/>
+            <!-- <field name="new_job_id" ref=""/> -->
+            <field name="verification">Validar que el personal administrativo NO utilice pants, playeras y/o Jerseys deportivos a excepción del sábado y domingo</field>
+            <field name="finding">good_practices</field>
+            <field name="evidence_char">Evidencia Presencial</field>
+        </record>
+
+        <record id="audit_audit_planning_ri_108" model="audit.audit.planning.template">
+            <field name="tyt_procedure_description_id" ref="tyt_audit.schedule_plan_description_5"/>
+            <field name="tyt_procedure_activity_id" ref="tyt_audit.schedule_plan_activity_501"/>
+
+            <field name="clause_id" ref="audit_audit_planning_clause_ri_1_63_i"/>
+            <!-- <field name="new_job_id" ref=""/> -->
+            <field name="verification">Validar que se utilice la vestimenta permitida de lunes a jueves (formal), viernes (casual-mezclilla)</field>
+            <field name="finding">good_practices</field>
+            <field name="evidence_char">Evidencia Presencial</field>
+        </record>
+
+        <record id="audit_audit_planning_ri_109" model="audit.audit.planning.template">
+            <field name="tyt_procedure_description_id" ref="tyt_audit.schedule_plan_description_5"/>
+            <field name="tyt_procedure_activity_id" ref="tyt_audit.schedule_plan_activity_501"/>
+
+            <field name="clause_id" ref="audit_audit_planning_clause_ri_1_64_a"/>
+            <!-- <field name="new_job_id" ref=""/> -->
+            <field name="verification">Validar que se respeta el uso de tenis en los días permitidos.</field>
+            <field name="finding">good_practices</field>
+            <field name="evidence_char">Evidencia Presencial</field>
+        </record>
+
+
+        <!-- RI7 -->
+        <record id="audit_audit_planning_ri_701" model="audit.audit.planning.template">
+            <field name="tyt_procedure_description_id" ref="tyt_audit.schedule_plan_description_5"/>
+            <field name="tyt_procedure_activity_id" ref="tyt_audit.schedule_plan_activity_507"/>
+
+            <field name="iso_9001_standards_ids" eval="[(6, 0, [ref('tyt_audit.planning_iso9001_standard_7_1_3'), ref('tyt_audit.planning_iso9001_standard_7_5_3')])]"/>
+            <field name="clause_id" ref="audit_audit_planning_clause_ri_57"/>
+            <field name="new_job_id" eval="77"/>
+            <field name="verification">Validar que se lleve el control de los locker asignados en el sitio</field>
+            <field name="finding">good_practices</field>
+            <field name="evidence_char">AO-05_Logística de locker</field>
+        </record>
+
+        <record id="audit_audit_planning_ri_702" model="audit.audit.planning.template">
+            <field name="tyt_procedure_description_id" ref="tyt_audit.schedule_plan_description_5"/>
+            <field name="tyt_procedure_activity_id" ref="tyt_audit.schedule_plan_activity_507"/>
+
+            <field name="iso_9001_standards_ids" eval="[(6, 0, [ref('tyt_audit.planning_iso9001_standard_7_1_3')])]"/>
+            <field name="clause_id" ref="audit_audit_planning_clause_ri_58"/>
+            <!-- <field name="new_job_id" ref=""/> -->
+            <field name="verification">Validar que cada empleado cuente con candado</field>
+            <field name="finding">good_practices</field>
+            <field name="evidence_char">Fotografias</field>
+        </record>
+
+        <record id="audit_audit_planning_ri_703" model="audit.audit.planning.template">
+            <field name="tyt_procedure_description_id" ref="tyt_audit.schedule_plan_description_5"/>
+            <field name="tyt_procedure_activity_id" ref="tyt_audit.schedule_plan_activity_507"/>
+        
+            <field name="iso_9001_standards_ids" eval="[(6, 0, [ref('tyt_audit.planning_iso9001_standard_7_1_3')])]"/>
+            <field name="clause_id" ref="audit_audit_planning_clause_ri_59"/>
+            <field name="new_job_id" eval="77"/>
+            <field name="verification">Validar que el empleado utilice el locker asignado</field>
+            <field name="finding">good_practices</field>
+            <field name="evidence_char">Fotografias</field>
+        </record>
+
+        <record id="audit_audit_planning_ri_704" model="audit.audit.planning.template">
+            <field name="tyt_procedure_description_id" ref="tyt_audit.schedule_plan_description_5"/>
+            <field name="tyt_procedure_activity_id" ref="tyt_audit.schedule_plan_activity_507"/>
+        
+            <field name="iso_9001_standards_ids" eval="[(6, 0, [ref('tyt_audit.planning_iso9001_standard_7_1_3')])]"/>
+            <field name="clause_id" ref="audit_audit_planning_clause_ri_60"/>
+            <!-- <field name="new_job_id" ref=""/> -->
+            <field name="verification">Validar que retiran candados al final de turno</field>
+            <field name="finding">good_practices</field>
+            <field name="evidence_char">Fotografias</field>
+        </record>
+
+
+        <!-- RI8 -->
+        <record id="audit_audit_planning_ri_801" model="audit.audit.planning.template">
+            <field name="tyt_procedure_description_id" ref="tyt_audit.schedule_plan_description_5"/>
+            <field name="tyt_procedure_activity_id" ref="tyt_audit.schedule_plan_activity_508"/>
+
+            <field name="iso_9001_standards_ids" eval="[(6, 0, [ref('tyt_audit.planning_iso9001_standard_7_1_3')])]"/>
+            <field name="clause_id" ref="audit_audit_planning_clause_ri_57"/>
+            <field name="new_job_id" eval="82"/>
+            <field name="verification">Muestre evidencia que se cuenta con lugares de estacionamiento</field>
+            <field name="finding">good_practices</field>
+            <field name="evidence_char">Fotos</field>
+        </record>
+
+        <record id="audit_audit_planning_ri_802" model="audit.audit.planning.template">
+            <field name="tyt_procedure_description_id" ref="tyt_audit.schedule_plan_description_5"/>
+            <field name="tyt_procedure_activity_id" ref="tyt_audit.schedule_plan_activity_508"/>
+
+            <field name="iso_9001_standards_ids" eval="[(6, 0, [ref('tyt_audit.planning_iso9001_standard_7_1_3')])]"/>
+            <field name="clause_id" ref="audit_audit_planning_clause_ri_58"/>
+            <field name="new_job_id" eval="82"/>
+            <field name="verification">Muestre evidencia de la asignación de lugares de estacionamiento de acuerdo al nivel Jerárquico</field>
+            <field name="finding">good_practices</field>
+            <field name="evidence_char">Fotos</field>
+        </record>
+
+        <record id="audit_audit_planning_ri_803" model="audit.audit.planning.template">
+            <field name="tyt_procedure_description_id" ref="tyt_audit.schedule_plan_description_5"/>
+            <field name="tyt_procedure_activity_id" ref="tyt_audit.schedule_plan_activity_508"/>
+
+            <field name="iso_9001_standards_ids" eval="[(6, 0, [ref('tyt_audit.planning_iso9001_standard_7_1_3')])]"/>
+            <field name="clause_id" ref="audit_audit_planning_clause_ri_59"/>
+            <field name="new_job_id" eval="82"/>
+            <field name="verification">Muestre evidencia de que el estacionamiento no este en uso fuera del horario de servicio</field>
+            <field name="finding">good_practices</field>
+            <field name="evidence_char">Evidencia Presencial</field>
+        </record>
+
+        <record id="audit_audit_planning_ri_804" model="audit.audit.planning.template">
+            <field name="tyt_procedure_description_id" ref="tyt_audit.schedule_plan_description_5"/>
+            <field name="tyt_procedure_activity_id" ref="tyt_audit.schedule_plan_activity_508"/>
+
+            <field name="iso_9001_standards_ids" eval="[(6, 0, [ref('tyt_audit.planning_iso9001_standard_7_1_3')])]"/>
+            <field name="clause_id" ref="audit_audit_planning_clause_ri_60"/>
+            <field name="new_job_id" eval="82"/>
+            <field name="verification">Muestre evidencia se respeta el ingreso de bicicletas y/o motocicletas, de acuerdo a los lineamientos de cada sitio</field>
+            <field name="finding">good_practices</field>
+            <field name="evidence_char">Fotos</field>
+        </record>
+
+    </data>
+</odoo>

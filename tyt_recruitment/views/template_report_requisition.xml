@@ -13,7 +13,7 @@
                         <h1 style="background-color: #31869B; color: #FFFFFF; text-align: center; padding-top: 15px; padding-bottom: 10px;">REQUISICIÓN DE PERSONAL</h1>
                         <p>Fecha de Solicitud: <t t-esc="doc.request_date"/></p>
                         <p>Fecha de cierre: <t t-esc="doc.closing_date"/></p>
-                        <p>Semana: <t t-esc="doc.weeks"/></p>
+                        <p>Semana: <t t-esc="doc.week"/></p>
                     </div>
                     <div>
                         <table class="table table-condensed" style="border-collapse: collapse; width: 100%;">

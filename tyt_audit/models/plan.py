@@ -1,0 +1,247 @@
+# -*- coding: utf-8 -*-
+
+from odoo import models, fields, api, _
+from odoo.exceptions import UserError, RedirectWarning, ValidationError
+
+
+from datetime import tzinfo, date, datetime, timedelta
+import pandas as pd
+
+'''
+class Frequency(models.Model):
+    _name = 'audit.plan.tyt.frequency'
+    _description = "Frecuencia de mantenimiento de plan"
+
+    name = fields.Char(
+        string='Nombre',
+        required=True
+    )
+    number = fields.Integer(
+        string='Cantidad',
+        index=True,
+        default=15,
+        help="Numero de veces que se va a repetir"
+    )
+    type = fields.Selection(
+        string='Periodo',
+        selection=[('day', 'Días'), ('week', 'Semana')],
+        default='day',
+    )
+'''
+class PlanGeneralScheduleActivities(models.Model):
+    _name = "audit.plan.schedule.activities"
+    _description = "Cronograma de Auditoría - General / Cronograma / Actividades"
+
+    name = fields.Char(
+        string='Nombre',
+        required=True
+    )
+
+    description_id = fields.Many2one(
+        'audit.plan.schedule.descriptions',
+        string='Descripción'
+    )
+
+class PlanGeneralScheduleDescriptions(models.Model):
+    _name = "audit.plan.schedule.descriptions"
+    _description = "Cronograma de Auditoría - General / Cronograma / Descripciones"
+
+    name = fields.Char(
+        string='Nombre',
+        required=True
+    )
+
+class PlanGeneralSchedule(models.Model):
+    _name = "audit.plan.schedule"
+    _description = "Cronograma de Auditoría - General / Cronograma"
+
+    name = fields.Char(
+        string='Nombre',
+        required=True
+    )
+
+    audit_plan_id = fields.Many2one(
+        'audit.plan',
+        string="Cronograma de Auditoría",
+        store=True
+    )
+
+    line_ids = fields.One2many( 
+        comodel_name='audit.plan.schedule.line',
+        inverse_name='schedule_id',
+        string='Fechas')
+
+    description_id = fields.Many2one('audit.plan.schedule.descriptions', string='Descripción')
+
+    activity_id = fields.Many2one('audit.plan.schedule.activities', string='Actividades')
+
+
+
+    #audit.plan.tyt.auditor
+    '''
+    audit_plan_schedule_id = fields.Many2one(
+        comodel_name="audit.plan",
+        string="Cronograma de auditoría - General Vinculado",
+        readonly=True,
+        store=True,
+    )
+    '''
+    sites_id = fields.Many2one(
+        'x_sitios',
+        string='Sitio',
+    )
+
+    responsible_auditors_id = fields.Many2many(
+        'res.partner', string='Auditores Responsables'
+    )
+
+    total_weeks = fields.Integer(
+        string="Semanas por Auditar",
+    )
+
+    @api.constrains('total_weeks')
+    def _check_total_weeks_positive(self):
+        for record in self:
+            if record.total_weeks < 0:
+                raise ValidationError(_("'Semanas por Auditar' debe ser un número positivo."))
+    
+    '''
+    responsible_auditors_id = fields.Many2many(
+        related="audit_plan_tyt_auditor_id.schedule_ids.responsible_auditors_id",
+        comodel_name="audit.plan",
+        string="Auditores Responsables",
+        readonly=True,
+        store=True,
+    )
+    
+    total_weeks = fields.Many2one(
+        related="audit_plan_tyt_auditor_id.schedule_ids.total_sum",
+        comodel_name="audit.plan",
+        string="Semanas por Auditar",
+        readonly=True,
+        store=True,
+    )
+    '''
+
+    def action_edit_responsible_auditors(self):
+        self.ensure_one()
+        view_id = self.env.ref('tyt_audit.view_audit_plan_schedule_edit_form').id
+        return {
+            'type': 'ir.actions.act_window',
+            'name': 'Modificación de Auditores Responsables',
+            'res_model': 'audit.plan.schedule',
+            'view_mode': 'form',
+            'res_id': self.id,
+            'views': [(view_id, 'form')],
+            'target': 'new',
+            'context': self.env.context,
+        }
+
+    def action_save_auditors(self):
+        # Este método puede contener lógica adicional si es necesario
+        return {'type': 'ir.actions.act_window_close'}
+
+class Plan(models.Model):
+    _inherit = "audit.plan"
+
+    name = fields.Char(
+        string='Nombre',
+        required=True,
+        default="CRONOGRAMA DE AUDITORIA"
+    )
+
+    ### CRONOGRAMA DE AUDITORIA - GENERAL
+
+    audit_plan_tyt_auditor_id = fields.Many2one(
+        'audit.plan.tyt.auditor',
+        string='Nombre de Cronograma - Auditores'
+    )
+
+    schedule_ids = fields.One2many( 
+        comodel_name='audit.plan.schedule',
+        inverse_name='audit_plan_id',
+        string='Cronograma')
+
+    # Nuevo campo One2many computado
+    filtered_schedule_ids = fields.One2many(
+        'audit.plan.schedule',
+        'audit_plan_id',
+        string='Cronograma Filtrado',
+        compute='_compute_filtered_schedule_ids',
+        store=False  # No es necesario almacenarlo
+    )
+
+    @api.depends('sites_id', 'schedule_ids')
+    def _compute_filtered_schedule_ids(self):
+        for record in self:
+            if record.sites_id:
+                # Filtra los schedule_ids donde sites_id coincide con el seleccionado
+                record.filtered_schedule_ids = record.schedule_ids.filtered(lambda s: s.sites_id == record.sites_id)
+            else:
+                # Si no hay sites_id seleccionado, no muestra ningún registro
+                record.filtered_schedule_ids = self.env['audit.plan.schedule'].browse([])
+    '''
+    line_ids = fields.One2many( 
+        comodel_name='audit.plan.schedule.line',
+        inverse_name='schedule_id',
+        string='Fechas')
+    '''
+
+    start_date = fields.Date(
+        string='Fecha de inicio'
+    )
+    #required=True,
+
+    limit_date = fields.Date(
+        string='Fecha de fin'
+    )
+    #required=True,
+
+    '''
+    frequency_id = fields.Many2one(
+        string='Frecuencia',
+        comodel_name='audit.plan.tyt.frequency',
+        copy=True,
+    )
+    '''
+
+    new_frequency_id = fields.Many2one(
+        string='Periodicidad',
+        comodel_name='mgmtsystem.frequency'
+    )
+    #required=True,
+
+
+    # Campo computado que recopila los IDs de los sitios disponibles
+    available_site_ids = fields.Many2many(
+        'x_sitios',
+        compute='_compute_available_site_ids',
+        string='Sitios Disponibles'
+    )
+
+    # Campo Many2one para seleccionar un único sitio, restringido por el dominio
+    sites_id = fields.Many2one(
+        'x_sitios',
+        string='Sitio',
+        domain="[('id', 'in', available_site_ids)]",
+    )
+
+    @api.depends('audit_plan_tyt_auditor_id.schedule_ids.tyt_sites_id')
+    def _compute_available_site_ids(self):
+        for record in self:
+            if record.audit_plan_tyt_auditor_id:
+                # Recopila todos los registros de x_sitios vinculados a través de schedule_ids
+                sitios = record.audit_plan_tyt_auditor_id.schedule_ids.mapped('tyt_sites_id')
+                record.available_site_ids = sitios
+            else:
+                # Si no hay un auditor asociado, no hay sitios disponibles
+                # Asigna un recordset vacío de x_sitios para que el dominio no muestre ningún sitio
+                record.available_site_ids = self.env['x_sitios'].browse([])
+
+    @api.onchange('audit_plan_tyt_auditor_id')
+    def _onchange_audit_plan_tyt_auditor_id(self):
+        if self.audit_plan_tyt_auditor_id:
+            # Opcional: Limpiar el campo sites_id si el auditor cambia
+            self.sites_id = False
+        else:
+            self.sites_id = False
