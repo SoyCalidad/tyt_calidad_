@@ -1,0 +1,71 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <record id="survey_user_input_view_tree" model="ir.ui.view">
+        <field name="name">survey_user_input.view.tree.inherit</field>
+        <field name="model">survey.user_input</field>
+        <field name="inherit_id" ref="survey.survey_user_input_view_tree"/>
+        <field name="arch" type="xml">
+            <xpath expr="//field[@name='survey_id']" position="after">
+                <field name="employee_number"/>
+                <field name="state_percentage" invisible="1"/>
+            </xpath>
+        </field>
+    </record>
+
+    <record id="survey_user_input_view_graph" model="ir.ui.view">
+        <field name="name">survey.user_input.view.graph</field>
+        <field name="model">survey.user_input</field>
+        <field name="arch" type="xml">
+            <graph type="bar" stacked="0">
+                <field name="survey_id"/>
+                <field name="state"/>
+            </graph>
+        </field>
+    </record>
+
+    <record id="survey_user_input_view_pivot" model="ir.ui.view">
+        <field name="name">survey.user_input.view.pívot</field>
+        <field name="model">survey.user_input</field>
+        <field name="arch" type="xml">
+            <pivot>
+                <field name="survey_id" type="row"/>
+                <field name="state" type="col"/>
+            </pivot>
+        </field>
+    </record>
+
+    <record id="survey_user_input_action" model="ir.actions.act_window">
+        <field name="name">Participaciones</field>
+        <field name="res_model">survey.user_input</field>
+        <field name="view_mode">tree,form,graph,pivot</field>
+        <field name="domain">[('survey_id.access_mode', '=', 'intranet')]</field>
+    </record>
+
+    <record id="survey_user_input_line_view_graph" model="ir.ui.view">
+        <field name="name">survey.user_input.line.view.graph</field>
+        <field name="model">survey.user_input.line</field>
+        <field name="arch" type="xml">
+            <graph type="bar" stacked="0">
+                <field name="survey_id"/>
+                <field name="tipo_encuesta_id"/>
+            </graph>
+        </field>
+    </record>
+
+    <record id="survey_user_input_line_view_pivot" model="ir.ui.view">
+        <field name="name">survey.user_input.line.view.pivot</field>
+        <field name="model">survey.user_input.line</field>
+        <field name="arch" type="xml">
+            <pivot>
+                <field name="survey_id" type="row"/>
+                <field name="tipo_encuesta_id" type="col"/>
+            </pivot>
+        </field>
+    </record>
+
+    <record id="survey_user_input_line_action" model="ir.actions.act_window">
+        <field name="name">Detailed Answers</field>
+        <field name="res_model">survey.user_input.line</field>
+        <field name="view_mode">tree,form,graph,pivot</field>
+    </record>
+</odoo>
