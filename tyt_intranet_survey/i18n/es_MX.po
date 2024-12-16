@@ -6,8 +6,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Odoo Server 16.0+e-20240730\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2024-10-09 18:05+0000\n"
-"PO-Revision-Date: 2024-10-09 18:05+0000\n"
+"POT-Creation-Date: 2024-12-16 20:35+0000\n"
+"PO-Revision-Date: 2024-12-16 20:35+0000\n"
 "Last-Translator: \n"
 "Language-Team: \n"
 "MIME-Version: 1.0\n"
@@ -17,32 +17,22 @@ msgstr ""
 
 #. module: tyt_intranet_survey
 #: model_terms:ir.ui.view,arch_db:tyt_intranet_survey.portal_my_surveys
-msgid "<i class=\"fa fa-fw fa-clock-o\" title=\"Fecha de publicación\"/>"
+msgid "<i class=\"fa fa-fw fa-clock-o\" title=\"Published Date\" alt=\"Published Date\"/>"
 msgstr ""
 
 #. module: tyt_intranet_survey
-#: model_terms:ir.ui.view,arch_db:tyt_intranet_survey.tyt_survey_management_view_form
+#: model_terms:ir.ui.view,arch_db:tyt_intranet_survey.survey_fill_form_done
+msgid ""
+"<i class=\"fa fa-fw fa-home\" role=\"img\" aria-label=\"Volver a Mi perfil\" title=\"Volver a Mi perfil\"/>\n"
+"                        Volver a Mi perfil"
+msgstr ""
+
+#. module: tyt_intranet_survey
+#: model_terms:ir.ui.view,arch_db:tyt_intranet_survey.survey_publish_view_form
 msgid ""
 "<i class=\"fa fa-long-arrow-right mx-2 oe_edit_only\" aria-label=\"Arrow icon\" title=\"Arrow\"/>\n"
-"                                <i class=\"fa fa-long-arrow-right mx-2 oe_read_only\" aria-label=\"Arrow icon\" title=\"Arrow\" attrs=\"{'invisible': [('start_date', '=', False), ('end_date', '=', False)]}\"/>"
+"                            <i class=\"fa fa-long-arrow-right mx-2 oe_read_only\" aria-label=\"Arrow icon\" title=\"Arrow\" attrs=\"{'invisible': [('start_date', '=', False), ('end_date', '=', False)]}\"/>"
 msgstr ""
-
-#. module: tyt_intranet_survey
-#: model_terms:ir.ui.view,arch_db:tyt_intranet_survey.survey_survey_view_form
-msgid ""
-"<i class=\"fa fa-long-arrow-right mx-2 oe_edit_only\" aria-label=\"Arrow icon\" title=\"Arrow\"/>\n"
-"                    <i class=\"fa fa-long-arrow-right mx-2 oe_read_only\" aria-label=\"Arrow icon\" title=\"Arrow\" attrs=\"{'invisible': [('published_start_date', '=', False), ('published_end_date', '=', False)]}\"/>"
-msgstr ""
-
-#. module: tyt_intranet_survey
-#: model_terms:ir.ui.view,arch_db:tyt_intranet_survey.survey_survey_view_form
-msgid "<span class=\"o_stat_text\">Employees</span>"
-msgstr "<span class=\"o_stat_text\">Empleados</span>"
-
-#. module: tyt_intranet_survey
-#: model_terms:ir.ui.view,arch_db:tyt_intranet_survey.tyt_survey_management_view_form
-msgid "<span class=\"o_stat_text\">Surveys</span>"
-msgstr "<span class=\"o_stat_text\">Encuestas</span>"
 
 #. module: tyt_intranet_survey
 #: model:ir.model.fields,field_description:tyt_intranet_survey.field_survey_survey__access_mode
@@ -50,45 +40,22 @@ msgid "Access Mode"
 msgstr "Modo de acceso"
 
 #. module: tyt_intranet_survey
-#: model:ir.model.fields,field_description:tyt_intranet_survey.field_tyt_survey_management__message_needaction
-msgid "Action Needed"
-msgstr ""
-
-#. module: tyt_intranet_survey
-#: model:ir.model.fields,field_description:tyt_intranet_survey.field_tyt_survey_management__activity_ids
-msgid "Activities"
-msgstr ""
-
-#. module: tyt_intranet_survey
-#: model:ir.model.fields,field_description:tyt_intranet_survey.field_tyt_survey_management__activity_exception_decoration
-msgid "Activity Exception Decoration"
-msgstr ""
-
-#. module: tyt_intranet_survey
-#: model:ir.model.fields,field_description:tyt_intranet_survey.field_tyt_survey_management__activity_state
-msgid "Activity State"
-msgstr ""
-
-#. module: tyt_intranet_survey
-#: model:ir.model.fields,field_description:tyt_intranet_survey.field_tyt_survey_management__activity_type_icon
-msgid "Activity Type Icon"
-msgstr ""
-
-#. module: tyt_intranet_survey
-#: model_terms:ir.ui.view,arch_db:tyt_intranet_survey.portal_my_surveys
-msgid "Actualmente, no se han publicado encuestas."
-msgstr ""
+#. odoo-python
+#: code:addons/tyt_intranet_survey/wizard/survey_publish.py:0
+#, python-format
+msgid "All surveys must be published before unpublishing."
+msgstr "Todas las encuestas deben estar publicadas antes de despublicar."
 
 #. module: tyt_intranet_survey
 #. odoo-python
-#: code:addons/tyt_intranet_survey/models/survey_management.py:0
+#: code:addons/tyt_intranet_survey/wizard/survey_publish.py:0
 #, python-format
 msgid "All surveys must be unpublished before publishing."
 msgstr "Todos las encuestas deben estar sin publicar antes de publicar."
 
 #. module: tyt_intranet_survey
-#: model_terms:ir.ui.view,arch_db:tyt_intranet_survey.tyt_survey_management_view_form
-msgid "Are you sure you want to reset to draft?"
+#: model_terms:ir.ui.view,arch_db:tyt_intranet_survey.survey_publish_view_form
+msgid "Are you sure you want to reset to draft."
 msgstr "¿Está seguro de que desea restablecer a borrador?"
 
 #. module: tyt_intranet_survey
@@ -103,137 +70,75 @@ msgid "Areas - Typification"
 msgstr "Áreas"
 
 #. module: tyt_intranet_survey
-#: model:ir.model.fields,field_description:tyt_intranet_survey.field_tyt_survey_management__message_attachment_count
-msgid "Attachment Count"
-msgstr ""
-
-#. module: tyt_intranet_survey
-#: model:ir.model.fields,field_description:tyt_intranet_survey.field_survey_survey__authorized_group_id
-#: model:ir.model.fields,field_description:tyt_intranet_survey.field_tyt_survey_management__authorized_group_id
-msgid "Authorized Group"
-msgstr "Grupo autorizado"
-
-#. module: tyt_intranet_survey
 #: model_terms:ir.ui.view,arch_db:tyt_intranet_survey.survey_fill_form_start
 msgid "Bienvenido/a,"
 msgstr ""
 
 #. module: tyt_intranet_survey
-#. odoo-python
-#: code:addons/tyt_intranet_survey/controllers/survey.py:0
-#, python-format
-msgid "Completed"
-msgstr "Completado"
+#: model_terms:ir.ui.view,arch_db:tyt_intranet_survey.survey_publish_view_form
+msgid "Cancel"
+msgstr "Cancelar"
 
 #. module: tyt_intranet_survey
-#: model:ir.model.fields,field_description:tyt_intranet_survey.field_tyt_survey_management__create_uid
+#: model:ir.model.fields,field_description:tyt_intranet_survey.field_survey_publish__create_uid
 msgid "Created by"
 msgstr ""
 
 #. module: tyt_intranet_survey
-#: model:ir.model.fields,field_description:tyt_intranet_survey.field_tyt_survey_management__create_date
+#: model:ir.model.fields,field_description:tyt_intranet_survey.field_survey_publish__create_date
 msgid "Created on"
 msgstr ""
 
 #. module: tyt_intranet_survey
+#: model:ir.model.fields,field_description:tyt_intranet_survey.field_survey_publish__deadline
+msgid "Deadline"
+msgstr "Fecha límite"
+
+#. module: tyt_intranet_survey
 #: model:ir.model.fields,field_description:tyt_intranet_survey.field_survey_survey__department_id
-#: model_terms:ir.ui.view,arch_db:tyt_intranet_survey.tyt_survey_survey_view_search
+#: model_terms:ir.ui.view,arch_db:tyt_intranet_survey.survey_survey_view_search
 msgid "Department"
 msgstr "Departamento"
 
 #. module: tyt_intranet_survey
-#: model:ir.model.fields,field_description:tyt_intranet_survey.field_tyt_survey_management__display_name
+#: model:ir.actions.act_window,name:tyt_intranet_survey.survey_user_input_line_action
+msgid "Detailed Answers"
+msgstr ""
+
+#. module: tyt_intranet_survey
+#: model:ir.model.fields,field_description:tyt_intranet_survey.field_survey_publish__display_name
 msgid "Display Name"
 msgstr ""
 
 #. module: tyt_intranet_survey
-#: model:ir.model.fields.selection,name:tyt_intranet_survey.selection__tyt_survey_management__state__draft
+#: model:ir.model.fields.selection,name:tyt_intranet_survey.selection__survey_survey__publish_state__draft
 msgid "Draft"
 msgstr "Borrador"
 
 #. module: tyt_intranet_survey
-#: model:ir.model.fields,field_description:tyt_intranet_survey.field_survey_survey__employee_count
-msgid "Employee Count"
-msgstr ""
-
-#. module: tyt_intranet_survey
-#. odoo-python
-#: code:addons/tyt_intranet_survey/models/survey_survey.py:0
-#: model:ir.model.fields,field_description:tyt_intranet_survey.field_survey_survey__employee_ids
-#, python-format
-msgid "Employees"
-msgstr ""
-
-#. module: tyt_intranet_survey
-#: model_terms:ir.ui.view,arch_db:tyt_intranet_survey.portal_my_home_menu_survey
-#: model_terms:ir.ui.view,arch_db:tyt_intranet_survey.portal_my_surveys
+#: model:ir.ui.menu,name:tyt_intranet_survey.survey_report_menu
 msgid "Encuestas"
 msgstr ""
 
 #. module: tyt_intranet_survey
-#: model:ir.model.fields,field_description:tyt_intranet_survey.field_tyt_survey_management__end_date
-#: model_terms:ir.ui.view,arch_db:tyt_intranet_survey.tyt_survey_management_view_search
+#: model:ir.model.fields,field_description:tyt_intranet_survey.field_survey_publish__end_date
 msgid "End Date"
 msgstr "Fecha de finalización"
 
 #. module: tyt_intranet_survey
-#: model:ir.model.fields,field_description:tyt_intranet_survey.field_tyt_survey_management__message_follower_ids
-msgid "Followers"
-msgstr ""
-
-#. module: tyt_intranet_survey
-#: model:ir.model.fields,field_description:tyt_intranet_survey.field_tyt_survey_management__message_partner_ids
-msgid "Followers (Partners)"
-msgstr ""
-
-#. module: tyt_intranet_survey
-#: model:ir.model.fields,help:tyt_intranet_survey.field_tyt_survey_management__activity_type_icon
-msgid "Font awesome icon e.g. fa-tasks"
-msgstr ""
-
-#. module: tyt_intranet_survey
-#: model_terms:ir.ui.view,arch_db:tyt_intranet_survey.tyt_survey_management_view_search
-#: model_terms:ir.ui.view,arch_db:tyt_intranet_survey.tyt_survey_survey_view_search
+#: model_terms:ir.ui.view,arch_db:tyt_intranet_survey.survey_survey_view_search
 msgid "Group By"
 msgstr ""
 
 #. module: tyt_intranet_survey
-#: model:ir.model.fields,field_description:tyt_intranet_survey.field_tyt_survey_management__has_message
-msgid "Has Message"
-msgstr ""
+#: model:ir.model.fields,field_description:tyt_intranet_survey.field_survey_survey__group_ids
+msgid "Groups"
+msgstr "Grupos"
 
 #. module: tyt_intranet_survey
-#: model:ir.model.fields,field_description:tyt_intranet_survey.field_tyt_survey_management__id
+#: model:ir.model.fields,field_description:tyt_intranet_survey.field_survey_publish__id
 msgid "ID"
 msgstr ""
-
-#. module: tyt_intranet_survey
-#: model:ir.model.fields,field_description:tyt_intranet_survey.field_tyt_survey_management__activity_exception_icon
-msgid "Icon"
-msgstr ""
-
-#. module: tyt_intranet_survey
-#: model:ir.model.fields,help:tyt_intranet_survey.field_tyt_survey_management__activity_exception_icon
-msgid "Icon to indicate an exception activity."
-msgstr ""
-
-#. module: tyt_intranet_survey
-#: model:ir.model.fields,help:tyt_intranet_survey.field_tyt_survey_management__message_needaction
-msgid "If checked, new messages require your attention."
-msgstr ""
-
-#. module: tyt_intranet_survey
-#: model:ir.model.fields,help:tyt_intranet_survey.field_tyt_survey_management__message_has_error
-#: model:ir.model.fields,help:tyt_intranet_survey.field_tyt_survey_management__message_has_sms_error
-msgid "If checked, some messages have a delivery error."
-msgstr ""
-
-#. module: tyt_intranet_survey
-#. odoo-python
-#: code:addons/tyt_intranet_survey/controllers/survey.py:0
-#, python-format
-msgid "In Progress"
-msgstr "En progreso"
 
 #. module: tyt_intranet_survey
 #: model:ir.model.fields.selection,name:tyt_intranet_survey.selection__survey_survey__access_mode__intranet
@@ -241,108 +146,30 @@ msgid "Intranet"
 msgstr ""
 
 #. module: tyt_intranet_survey
-#: model:ir.model.fields,field_description:tyt_intranet_survey.field_tyt_survey_management__message_is_follower
-msgid "Is Follower"
-msgstr ""
-
-#. module: tyt_intranet_survey
 #: model:ir.model.fields,field_description:tyt_intranet_survey.field_survey_survey__job_id
-#: model_terms:ir.ui.view,arch_db:tyt_intranet_survey.tyt_survey_survey_view_search
+#: model_terms:ir.ui.view,arch_db:tyt_intranet_survey.survey_survey_view_search
 msgid "Job Position"
 msgstr "Puesto de trabajo"
 
 #. module: tyt_intranet_survey
-#: model:ir.model.fields,field_description:tyt_intranet_survey.field_tyt_survey_management____last_update
+#: model:ir.model.fields,field_description:tyt_intranet_survey.field_survey_publish____last_update
 msgid "Last Modified on"
 msgstr ""
 
 #. module: tyt_intranet_survey
-#: model:ir.model.fields,field_description:tyt_intranet_survey.field_tyt_survey_management__write_uid
+#: model:ir.model.fields,field_description:tyt_intranet_survey.field_survey_publish__write_uid
 msgid "Last Updated by"
 msgstr ""
 
 #. module: tyt_intranet_survey
-#: model:ir.model.fields,field_description:tyt_intranet_survey.field_tyt_survey_management__write_date
+#: model:ir.model.fields,field_description:tyt_intranet_survey.field_survey_publish__write_date
 msgid "Last Updated on"
-msgstr ""
-
-#. module: tyt_intranet_survey
-#: model:ir.model.fields,field_description:tyt_intranet_survey.field_tyt_survey_management__message_main_attachment_id
-msgid "Main Attachment"
 msgstr ""
 
 #. module: tyt_intranet_survey
 #: model:ir.model.fields,field_description:tyt_intranet_survey.field_survey_survey__questions_mandatory
 msgid "Mandatory Questions"
-msgstr "Respuestas obligatorias"
-
-#. module: tyt_intranet_survey
-#: model:ir.model.fields,field_description:tyt_intranet_survey.field_tyt_survey_management__message_has_error
-msgid "Message Delivery error"
-msgstr ""
-
-#. module: tyt_intranet_survey
-#: model:ir.model.fields,field_description:tyt_intranet_survey.field_tyt_survey_management__message_ids
-msgid "Messages"
-msgstr ""
-
-#. module: tyt_intranet_survey
-#: model:ir.model.fields,field_description:tyt_intranet_survey.field_tyt_survey_management__my_activity_date_deadline
-msgid "My Activity Deadline"
-msgstr ""
-
-#. module: tyt_intranet_survey
-#: model:ir.model.fields,field_description:tyt_intranet_survey.field_tyt_survey_management__name
-#: model_terms:ir.ui.view,arch_db:tyt_intranet_survey.tyt_survey_management_view_search
-msgid "Name"
-msgstr "Nombre"
-
-#. module: tyt_intranet_survey
-#: model:ir.model.fields,field_description:tyt_intranet_survey.field_tyt_survey_management__activity_calendar_event_id
-msgid "Next Activity Calendar Event"
-msgstr ""
-
-#. module: tyt_intranet_survey
-#: model:ir.model.fields,field_description:tyt_intranet_survey.field_tyt_survey_management__activity_date_deadline
-msgid "Next Activity Deadline"
-msgstr ""
-
-#. module: tyt_intranet_survey
-#: model:ir.model.fields,field_description:tyt_intranet_survey.field_tyt_survey_management__activity_summary
-msgid "Next Activity Summary"
-msgstr ""
-
-#. module: tyt_intranet_survey
-#: model:ir.model.fields,field_description:tyt_intranet_survey.field_tyt_survey_management__activity_type_id
-msgid "Next Activity Type"
-msgstr ""
-
-#. module: tyt_intranet_survey
-#. odoo-python
-#: code:addons/tyt_intranet_survey/controllers/survey.py:0
-#, python-format
-msgid "Not started yet"
-msgstr "Todavía no empieza"
-
-#. module: tyt_intranet_survey
-#: model:ir.model.fields,field_description:tyt_intranet_survey.field_tyt_survey_management__message_needaction_counter
-msgid "Number of Actions"
-msgstr ""
-
-#. module: tyt_intranet_survey
-#: model:ir.model.fields,field_description:tyt_intranet_survey.field_tyt_survey_management__message_has_error_counter
-msgid "Number of errors"
-msgstr ""
-
-#. module: tyt_intranet_survey
-#: model:ir.model.fields,help:tyt_intranet_survey.field_tyt_survey_management__message_needaction_counter
-msgid "Number of messages requiring action"
-msgstr ""
-
-#. module: tyt_intranet_survey
-#: model:ir.model.fields,help:tyt_intranet_survey.field_tyt_survey_management__message_has_error_counter
-msgid "Number of messages with delivery error"
-msgstr ""
+msgstr "Preguntas obligatorias"
 
 #. module: tyt_intranet_survey
 #: model:ir.model.fields,field_description:tyt_intranet_survey.field_survey_user_input__employee_number
@@ -350,101 +177,90 @@ msgid "Número de empleado"
 msgstr ""
 
 #. module: tyt_intranet_survey
-#: model_terms:ir.ui.view,arch_db:tyt_intranet_survey.portal_my_surveys
-msgid "Participar"
+#: model:ir.actions.act_window,name:tyt_intranet_survey.survey_user_input_action
+#: model:ir.ui.menu,name:tyt_intranet_survey.survey_user_input_menu_action
+msgid "Participaciones"
 msgstr ""
 
 #. module: tyt_intranet_survey
-#: model_terms:ir.ui.view,arch_db:tyt_intranet_survey.tyt_survey_management_view_form
+#: model_terms:ir.ui.view,arch_db:tyt_intranet_survey.portal_my_surveys
+msgid "Participate"
+msgstr "Participar"
+
+#. module: tyt_intranet_survey
+#: model_terms:ir.ui.view,arch_db:tyt_intranet_survey.survey_publish_view_form
 msgid "Publish"
 msgstr "Publicar"
 
 #. module: tyt_intranet_survey
-#: model:ir.model.fields,field_description:tyt_intranet_survey.field_survey_survey__is_published
-#: model:ir.model.fields.selection,name:tyt_intranet_survey.selection__tyt_survey_management__state__published
+#: model_terms:ir.ui.view,arch_db:tyt_intranet_survey.survey_publish_view_form
+msgid "Publish Date"
+msgstr "Fecha de publicación"
+
+#. module: tyt_intranet_survey
+#: model:ir.model.fields,field_description:tyt_intranet_survey.field_survey_survey__publish_state
+msgid "Publish State"
+msgstr "Estado"
+
+#. module: tyt_intranet_survey
+#: model:ir.model,name:tyt_intranet_survey.model_survey_publish
+msgid "Publish Survey"
+msgstr "Publicar encuestas"
+
+#. module: tyt_intranet_survey
+#: model:ir.actions.act_window,name:tyt_intranet_survey.survey_publish_action
+msgid "Publish/Unpublish Surveys"
+msgstr "Publicar / Despublicar"
+
+#. module: tyt_intranet_survey
+#: model:ir.model.fields.selection,name:tyt_intranet_survey.selection__survey_survey__publish_state__published
 msgid "Published"
 msgstr "Publicado"
 
 #. module: tyt_intranet_survey
-#: model_terms:ir.ui.view,arch_db:tyt_intranet_survey.survey_survey_view_form
-#: model_terms:ir.ui.view,arch_db:tyt_intranet_survey.tyt_survey_management_view_form
-msgid "Published Date"
-msgstr "Fecha de publicación"
-
-#. module: tyt_intranet_survey
 #: model:ir.model.fields,field_description:tyt_intranet_survey.field_survey_survey__published_end_date
-#: model_terms:ir.ui.view,arch_db:tyt_intranet_survey.tyt_survey_survey_view_search
+#: model_terms:ir.ui.view,arch_db:tyt_intranet_survey.survey_survey_view_search
 msgid "Published End Date"
 msgstr "Fecha de finalización"
 
 #. module: tyt_intranet_survey
 #: model:ir.model.fields,field_description:tyt_intranet_survey.field_survey_survey__published_start_date
-#: model_terms:ir.ui.view,arch_db:tyt_intranet_survey.tyt_survey_survey_view_search
+#: model_terms:ir.ui.view,arch_db:tyt_intranet_survey.survey_survey_view_search
 msgid "Published Start Date"
 msgstr "Fecha de inicio"
 
 #. module: tyt_intranet_survey
-#: model_terms:ir.ui.view,arch_db:tyt_intranet_survey.tyt_survey_management_view_form
-msgid "Reset to Draft"
-msgstr "Restablecer a borrador"
-
-#. module: tyt_intranet_survey
-#: model:ir.model.fields,field_description:tyt_intranet_survey.field_tyt_survey_management__user_id
-msgid "Responsible"
-msgstr "Responsable"
-
-#. module: tyt_intranet_survey
-#: model:ir.model.fields,field_description:tyt_intranet_survey.field_tyt_survey_management__activity_user_id
-msgid "Responsible User"
+#: model:ir.model.fields,field_description:tyt_intranet_survey.field_survey_user_input__answer_count
+msgid "Registrados"
 msgstr ""
 
 #. module: tyt_intranet_survey
-#: model:ir.model.fields,field_description:tyt_intranet_survey.field_tyt_survey_management__message_has_sms_error
-msgid "SMS Delivery error"
-msgstr ""
-
-#. module: tyt_intranet_survey
-#: model:ir.model.fields,field_description:tyt_intranet_survey.field_survey_survey__sitio_id
-#: model_terms:ir.ui.view,arch_db:tyt_intranet_survey.tyt_survey_survey_view_search
-msgid "Site"
-msgstr "Sitio"
-
-#. module: tyt_intranet_survey
-#: model:ir.model.fields,field_description:tyt_intranet_survey.field_tyt_survey_management__start_date
-#: model_terms:ir.ui.view,arch_db:tyt_intranet_survey.tyt_survey_management_view_search
+#: model:ir.model.fields,field_description:tyt_intranet_survey.field_survey_publish__start_date
 msgid "Start Date"
 msgstr "Fecha de inicio"
 
 #. module: tyt_intranet_survey
-#: model:ir.model.fields,field_description:tyt_intranet_survey.field_tyt_survey_management__state
-#: model_terms:ir.ui.view,arch_db:tyt_intranet_survey.tyt_survey_management_view_search
-msgid "State"
-msgstr "Estado"
+#. odoo-python
+#: code:addons/tyt_intranet_survey/wizard/survey_publish.py:0
+#, python-format
+msgid "Start Date and End Date are required."
+msgstr "La fecha de inicio y fecha de finalización son requeridas."
 
 #. module: tyt_intranet_survey
-#: model:ir.model.fields,help:tyt_intranet_survey.field_tyt_survey_management__activity_state
-msgid ""
-"Status based on activities\n"
-"Overdue: Due date is already passed\n"
-"Today: Activity date is today\n"
-"Planned: Future activities."
+#: model:ir.model.fields,field_description:tyt_intranet_survey.field_survey_user_input__state_percentage
+msgid "State Percentage"
 msgstr ""
 
 #. module: tyt_intranet_survey
 #: model:ir.model,name:tyt_intranet_survey.model_survey_survey
 #: model_terms:ir.ui.view,arch_db:tyt_intranet_survey.portal_my_home_survey
-#: model_terms:ir.ui.view,arch_db:tyt_intranet_survey.tyt_survey_survey_view_search
+#: model_terms:ir.ui.view,arch_db:tyt_intranet_survey.survey_survey_view_search
 msgid "Survey"
 msgstr "Encuesta"
 
 #. module: tyt_intranet_survey
-#: model:ir.model.fields,field_description:tyt_intranet_survey.field_tyt_survey_management__survey_count
-msgid "Survey Count"
-msgstr ""
-
-#. module: tyt_intranet_survey
-#: model:ir.actions.act_window,name:tyt_intranet_survey.tyt_survey_management_action
-#: model:ir.ui.menu,name:tyt_intranet_survey.tyt_survey_management_menu_action
+#: model:ir.actions.act_window,name:tyt_intranet_survey.survey_survey_action_management
+#: model:ir.ui.menu,name:tyt_intranet_survey.survey_survey_menu_action_management
 msgid "Survey Management"
 msgstr "Publicación de encuestas"
 
@@ -459,21 +275,30 @@ msgid "Survey User Input"
 msgstr "Encuesta de opinión de los usuarios"
 
 #. module: tyt_intranet_survey
-#. odoo-python
-#: code:addons/tyt_intranet_survey/models/survey_management.py:0
-#: model:ir.actions.act_window,name:tyt_intranet_survey.tyt_survey_survey_action
-#: model:ir.model.fields,field_description:tyt_intranet_survey.field_tyt_survey_management__survey_ids
+#: model:ir.model,name:tyt_intranet_survey.model_survey_user_input_line
+msgid "Survey User Input Line"
+msgstr "Línea de entrada del usuario de la encuesta"
+
+#. module: tyt_intranet_survey
+#: model:ir.actions.act_window,name:tyt_intranet_survey.survey_survey_action
+#: model:ir.model.fields,field_description:tyt_intranet_survey.field_survey_publish__survey_ids
 #: model:ir.ui.menu,name:tyt_intranet_survey.survey_survey_menu_action
 #: model:ir.ui.menu,name:tyt_intranet_survey.tyt_survey_configuration_menu
-#: model_terms:ir.ui.view,arch_db:tyt_intranet_survey.tyt_survey_management_view_form
-#, python-format
+#: model_terms:ir.ui.view,arch_db:tyt_intranet_survey.portal_my_home_menu_survey
+#: model_terms:ir.ui.view,arch_db:tyt_intranet_survey.portal_my_surveys
+#: model_terms:ir.ui.view,arch_db:tyt_intranet_survey.survey_publish_view_form
 msgid "Surveys"
 msgstr "Encuestas"
 
 #. module: tyt_intranet_survey
-#: model:ir.model,name:tyt_intranet_survey.model_tyt_survey_management
-msgid "TYT Survey Management"
-msgstr "Publicación de encuestas"
+#: model_terms:ir.ui.view,arch_db:tyt_intranet_survey.portal_my_surveys
+msgid "There are currently no surveys for your account."
+msgstr "Actualmente no existen encuestas para su cuenta."
+
+#. module: tyt_intranet_survey
+#: model:ir.model.fields,field_description:tyt_intranet_survey.field_survey_user_input_line__tipo_encuesta_id
+msgid "Tipo - TYT"
+msgstr ""
 
 #. module: tyt_intranet_survey
 #: model:ir.model.fields,field_description:tyt_intranet_survey.field_survey_question__tipo_encuesta_id
@@ -487,26 +312,16 @@ msgid "Tipos - Typification"
 msgstr "Tipos"
 
 #. module: tyt_intranet_survey
-#: model:ir.model.fields,help:tyt_intranet_survey.field_tyt_survey_management__activity_exception_decoration
-msgid "Type of the exception activity on record."
-msgstr ""
-
-#. module: tyt_intranet_survey
 #: model_terms:ir.ui.view,arch_db:tyt_intranet_survey.survey_question_form
 msgid "Typification"
 msgstr "Tipificación"
 
 #. module: tyt_intranet_survey
-#: model:ir.model.fields,field_description:tyt_intranet_survey.field_survey_survey__user_ids
-msgid "Users"
-msgstr "Usuarios"
+#: model_terms:ir.ui.view,arch_db:tyt_intranet_survey.survey_publish_view_form
+msgid "Unpublish"
+msgstr "Despublicar"
 
 #. module: tyt_intranet_survey
-#: model:ir.model.fields,field_description:tyt_intranet_survey.field_tyt_survey_management__website_message_ids
-msgid "Website Messages"
-msgstr ""
-
-#. module: tyt_intranet_survey
-#: model:ir.model.fields,help:tyt_intranet_survey.field_tyt_survey_management__website_message_ids
-msgid "Website communication history"
-msgstr ""
+#: model:ir.model.fields,field_description:tyt_intranet_survey.field_survey_survey__gps
+msgid "gps"
+msgstr "Actualizar"

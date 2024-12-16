@@ -5,14 +5,12 @@
         <field name="model">survey.survey</field>
         <field name="inherit_id" ref="survey.survey_survey_view_form"/>
         <field name="arch" type="xml">
-            <xpath expr="//notebook//page[@name='options']//group[@name='participants']//field[@name='access_mode']" position="after">
-                <field name="group_ids"/>
-
-                <field name="is_published" attrs="{'invisible': [('access_mode', '!=', 'intranet')]}" readonly="1"/>
-
+            <xpath expr="//field[@name='users_can_go_back']" position="after">
+                <field name="questions_mandatory"/>
+                <field name="publish_state" invisible="1"/>
             </xpath>
             <xpath expr="//group[@name='participants']//field[@name='access_mode']" position="attributes">
-                <attribute name="attrs">{'readonly': [('is_published', '=', True)]}</attribute>
+                <attribute name="attrs">{'readonly': [('publish_state', '=', 'published')]}</attribute>
             </xpath>
             <xpath expr="//field[@name='users_login_required']" position="attributes">
                 <attribute name="attrs">{'invisible': [('access_mode', '=', 'intranet')]}</attribute>
@@ -23,14 +21,18 @@
             <xpath expr="//field[@name='is_attempts_limited']" position="attributes">
                 <attribute name="attrs">{'invisible': ['|', ('access_mode', '=', 'intranet'), '&amp;', ('access_mode', '=', 'public'), ('users_login_required', '=', False)]}</attribute>
             </xpath>
-
-            <xpath expr="//field[@name='users_can_go_back']" position="after">
-                <field name="questions_mandatory"/>
+            <xpath expr="//field[@name='question_and_page_ids']" position="attributes">
+                <attribute name="context">{
+                        'default_survey_id': active_id,
+                        'default_questions_selection': questions_selection,
+                        'default_constr_mandatory': questions_mandatory,
+                    }
+                </attribute>
             </xpath>
         </field>
     </record>
 
-    <record id="tyt_survey_survey_view_search" model="ir.ui.view">
+    <record id="survey_survey_view_search" model="ir.ui.view">
         <field name="name">survey.survey.search</field>
         <field name="model">survey.survey</field>
         <field name="arch" type="xml">
@@ -41,12 +43,10 @@
                 <group expand="0" string="Group By">
                     <filter string="Job Position" name="job_id" context="{'group_by':'job_id'}"/>
                     <filter string="Department" name="department_id" context="{'group_by':'department_id'}"/>
-
                 </group>
                 <searchpanel>
                     <field name="job_id" icon="fa-users" enable_counters="1"/>
                     <field name="department_id" icon="fa-users" enable_counters="1"/>
-
                 </searchpanel>
             </search>
         </field>
@@ -86,16 +86,43 @@
         <field name="name">Surveys</field>
         <field name="res_model">survey.survey</field>
         <field name="view_mode">kanban,tree,form,graph,pivot</field>
-        <field name="search_view_id" ref="tyt_survey_survey_view_search"/>
         <field name="context">{
                 'default_access_mode': 'intranet',
                 'default_questions_mandatory': True,
                 'default_scoring_type': 'scoring_without_answers',
                 'default_scoring_success_min': 0.0,
+                'default_users_login_required': True,
             }
         </field>
-
     </record>
+
+    <record id="survey_survey_view_tree_management" model="ir.ui.view">
+        <field name="name">survey.survey.view.tree.management</field>
+        <field name="model">survey.survey</field>
+        <field name="arch" type="xml">
+            <tree editable="bottom" create="false" delete="false">
+                <field name="title" attrs="{'readonly': [('publish_state', '=', 'published')]}"/>
+                <field name="user_id" widget="many2one_avatar_user" attrs="{'readonly': [('publish_state', '=', 'published')]}"/>
+                <field name="job_id" attrs="{'readonly': [('publish_state', '=', 'published')]}"/>
+                <field name="department_id" attrs="{'readonly': [('publish_state', '=', 'published')]}"/>
+                <field name="gps" widget="boolean_toggle" attrs="{'readonly': [('publish_state', '=', 'published')]}"/>
+                <field name="group_ids" widget="many2many_tags" attrs="{'readonly': [('publish_state', '=', 'published')]}"/>
+                <field name="published_start_date" readonly="1"/>
+                <field name="published_end_date" readonly="1"/>
+                <field name="publish_state" widget="badge" decoration-info="publish_state == 'draft'" decoration-success="publish_state == 'published'"/>
+            </tree>
+        </field>
+    </record>
+
+    <record id="survey_survey_action_management" model="ir.actions.act_window">
+        <field name="name">Survey Management</field>
+        <field name="res_model">survey.survey</field>
+        <field name="view_mode">tree</field>
+        <field name="search_view_id" ref="survey_survey_view_search"/>
+        <field name="context">{'tree_view_ref': 'tyt_intranet_survey.survey_survey_view_tree_management'}</field>
+        <field name="domain">[('access_mode', '=', 'intranet')]</field>
+    </record>
+
 
     <record id="tyt_x_area_encuesta_view_form" model="ir.ui.view">
         <field name="name">x_area_encuesta.view.form</field>

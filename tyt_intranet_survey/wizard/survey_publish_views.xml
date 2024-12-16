@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <record id="survey_publish_view_form" model="ir.ui.view">
+        <field name='name'>survey.publish.view.form</field>
+        <field name='model'>survey.publish</field>
+        <field name='arch' type='xml'>
+            <form>
+                <sheet>
+                    <group>
+                        <label for="start_date" string="Publish Date"/>
+                        <div name="dates" class="o_row">
+                            <field name="start_date" widget="daterange" options='{"related_end_date": "end_date"}'/>
+                            <i class="fa fa-long-arrow-right mx-2 oe_edit_only" aria-label="Arrow icon" title="Arrow"/>
+                            <i class="fa fa-long-arrow-right mx-2 oe_read_only" aria-label="Arrow icon" title="Arrow" attrs="{'invisible': [('start_date', '=', False), ('end_date', '=', False)]}"/>
+                            <field name="end_date" widget="daterange" options='{"related_start_date": "start_date"}'/>
+                        </div>
+                    </group>
+                    <notebook>
+                        <page string="Surveys">
+                            <field name="survey_ids" readonly="1">
+                                <tree no_open="1">
+                                    <field name="title"/>
+                                    <field name="user_id" widget="many2one_avatar_user"/>
+                                    <field name="group_ids" widget="many2many_tags"/>
+                                    <field name="publish_state" widget="badge" decoration-info="publish_state == 'draft'" decoration-success="publish_state == 'published'"/>
+                                </tree>
+                            </field>
+                        </page>
+                    </notebook>
+                </sheet>
+                <footer>
+                    <button string='Publish' name='action_publish' class='btn-primary' type='object'/>
+                    <button string='Unpublish' name='action_unpublish' class='btn-secondary' type='object'
+                            confirm="Are you sure you want to reset to draft."/>
+                    <button string='Cancel' class='btn-default' special='cancel'/>
+                </footer>
+            </form>
+        </field>
+    </record>
+
+    <record id="survey_publish_action" model="ir.actions.act_window">
+        <field name="name">Publish/Unpublish Surveys</field>
+        <field name="res_model">survey.publish</field>
+        <field name="view_mode">form</field>
+        <field name="binding_model_id" ref="model_survey_survey"/>
+        <field name="binding_view_types">list</field>
+        <field name="target">new</field>
+    </record>
+</odoo>

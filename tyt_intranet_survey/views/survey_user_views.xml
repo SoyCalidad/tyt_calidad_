@@ -38,6 +38,7 @@
         <field name="name">Participaciones</field>
         <field name="res_model">survey.user_input</field>
         <field name="view_mode">tree,form,graph,pivot</field>
+        <field name="domain">[('survey_id.access_mode', '=', 'intranet')]</field>
     </record>
 
     <record id="survey_user_input_line_view_graph" model="ir.ui.view">
