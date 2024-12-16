@@ -9,15 +9,17 @@ class SurveyManagement(models.Model):
 
     name = fields.Char(string='Name')
     user_id = fields.Many2one('res.users', string='Responsible', domain=[('share', '=', False)], tracking=True, default=lambda self: self.env.user)
-    authorized_group_id = fields.Many2one('intranet.groups', string='Authorized Group')
+
     start_date = fields.Date('Start Date', required=True)
     end_date = fields.Date('End Date', required=True)
     survey_ids = fields.Many2many('survey.survey', string='Surveys')
     survey_count = fields.Integer(compute='_compute_survey_count', string='Survey Count')
+
     state = fields.Selection([
         ('draft', 'Draft'),
         ('published', 'Published'),
     ], string='State', default='draft')
+    active = fields.Boolean(default=True)
 
     def _compute_survey_count(self):
         for record in self:

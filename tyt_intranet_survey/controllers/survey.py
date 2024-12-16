@@ -20,6 +20,20 @@ from odoo.addons.base.models.ir_qweb import keep_query
 
 _logger = logging.getLogger(__name__)
 
+import logging
+from operator import itemgetter
+
+from odoo import fields
+from odoo import http
+from odoo.addons.portal.controllers import portal
+from odoo.addons.portal.controllers.portal import pager as portal_pager
+from odoo.http import request
+from odoo.osv.expression import OR, AND
+from odoo.tools import groupby as groupbyelem
+from odoo.tools.translate import _
+
+_logger = logging.getLogger(__name__)
+
 
 ANSWER_STATES = {
     'new': 'Todavía no empieza',
@@ -34,8 +48,21 @@ COLOR_STATES = {
 }
 
 
-class SurveyController(http.Controller):
-    """Inherited http.Controller to add custom route"""
+class SurveyPortal(portal.CustomerPortal):
+
+    def _prepare_portal_layout_values(self):
+        values = super()._prepare_portal_layout_values()
+        return values
+
+    def _prepare_survey_domain(self):
+        user_groups = request.env.user.groups_id
+        return [
+            ('access_mode', '=', 'intranet'),
+            ('is_published', '=', True),
+            ('published_start_date', '<=', fields.Date.context_today(request.env.user)),
+            ('published_end_date', '>=', fields.Date.context_today(request.env.user)),
+            ('group_ids', 'in', user_groups.ids),
+        ]
 
     @api.model
     def format_date_spanish(self, date_obj):
@@ -48,36 +75,25 @@ class SurveyController(http.Controller):
         }
         return date_obj.strftime(f"%d {month_map[date_obj.strftime('%m')]} %Y")
 
-    @http.route('/my/surveys', type='http', auth="user", website=True)
+    @http.route('/my/surveys', type='http', auth='user', website=True)
     def portal_my_survey(self):
 
         print('############################################')
         print('/my/surveys')
         print('############################################')
 
-        partner = request.env.user.partner_id
-        domain = [
-            ('access_mode', '=', 'intranet'),
-            ('is_published', '=', True),
-            ('published_start_date', '<=', fields.Date.context_today(request.env.user)),
-            ('published_end_date', '>=', fields.Date.context_today(request.env.user)),
-            ('user_ids', 'in', [request.env.user.id])
-        ]
+        values = self._prepare_portal_layout_values()
+        domain = self._prepare_survey_domain()
+
         surveys = request.env['survey.survey'].sudo().search(domain, order='published_start_date desc')
-        values = {
-            'survey_list': [{
-                'title': rec.title,
-                'attempts': rec.attempts_limit,
-                'date': rec.create_date,
-                'published_start_date': self.format_date_spanish(rec.published_start_date) if rec.published_start_date else '',
-                'published_end_date': self.format_date_spanish(rec.published_end_date) if rec.published_end_date else '',
-                'access_token': rec.access_token,
-                'has_answered': rec._has_survey_answered(partner),
-                'answer_state': ANSWER_STATES.get(rec._get_survey_answer_state(partner)),
-                'color_state': COLOR_STATES.get(rec._get_survey_answer_state(partner)),
-            } for rec in surveys],
+
+        print(surveys)
+
+        values.update({
             'page_name': 'survey',
-        }
+            'default_url': '/my/surveys',
+            'surveys': surveys,
+        })
         response = request.render('tyt_intranet_survey.portal_my_surveys', values)
         return response
 

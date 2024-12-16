@@ -14,7 +14,7 @@
         'security/ir.model.access.csv',
         'views/survey_survey_views.xml',
         'views/survey_management_views.xml',
-        'views/survey_question_views.xml',
+        # 'views/survey_question_views.xml',
         'views/survey_user_views.xml',
         'views/survey_portal_templates.xml',
         'views/survey_templates.xml',
