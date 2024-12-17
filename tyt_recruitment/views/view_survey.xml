@@ -1,0 +1,18 @@
+<odoo>
+  <data>
+    <!-- Extra fields on Question Form -->
+    <record model="ir.ui.view" id="survey_fields_form_inherit">
+      <field name="name">Form view for survey question - extended</field>
+      <field name="model">survey.survey</field>
+      <field name="inherit_id" ref="survey.survey_survey_view_form"/>
+      <field name="arch" type="xml">
+          <xpath expr="//field[@name='user_id']" position="after">
+            <group>
+              <field name="success_options" string="Elegir mensaje de aprobado" />
+              <field name="failure_options" string="Elegir mensaje de desaprobado" />
+            </group>
+          </xpath>
+      </field>
+    </record>
+  </data>
+</odoo>

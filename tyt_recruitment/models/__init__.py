@@ -7,5 +7,6 @@ from . import (
     health_survey,
     expedient,
     attendance,
-    wizard_attendance
+    wizard_attendance,
+    survey
 )

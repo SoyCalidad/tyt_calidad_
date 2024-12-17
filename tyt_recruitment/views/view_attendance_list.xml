@@ -76,6 +76,11 @@
                     <field name="observations" width="30px" />
                     <field name="experience" width="30px" />
                     <field name="reason_for_withdrawal" width="30px" />
+                    <button 
+                      name="show_applicant_details" 
+                      string="Ver" 
+                      type="object" 
+                      class="oe_highlight" />
                   </tree>
                 </field>                  
             </page>

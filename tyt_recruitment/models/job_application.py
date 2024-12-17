@@ -250,6 +250,7 @@ class JobApplication(models.Model):
 class Applicant(models.Model):
     _name = 'tyt_recruitment.applicant'
     _description = 'tyt_recruitment.applicant'
+    _inherit = ['mail.thread', 'mail.activity.mixin']
     
     name = fields.Char(string="Nombre")
     reference = fields.Char(string="Medio")
@@ -310,6 +311,21 @@ class Applicant(models.Model):
             return {
                 'type': 'ir.actions.act_window_close'
             }
+        
+    def action_open_documents(self):
+        pass
+
+    def open_process_view(self):
+        pass
+
+    def open_meeting_view(self):
+        pass
+
+    def web_ribbon(self):
+        pass
+
+    def action_related_contacts(self):
+        pass
         
 class DataAcademic(models.Model):
     _name = 'tyt_recruitment.data_academic'

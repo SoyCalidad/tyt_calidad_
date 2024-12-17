@@ -28,8 +28,11 @@
         'views/health_survey_form.xml',
         'views/view_expedient.xml',
         'views/view_attendance_list.xml',
+        'views/view_applicant.xml',
+        'views/view_survey.xml',
         'wizards/generate_attendance.xml',
-        'data/data_reason_of_withdrawal.xml'
+        'data/data_reason_of_withdrawal.xml',
+        'data/data_survey_messages.xml'
     ],
     'auto_install': False,
     'installable': True,
