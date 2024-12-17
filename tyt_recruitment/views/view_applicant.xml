@@ -1,0 +1,65 @@
+<odoo>
+    <data>
+
+        <!-- Applicant List -->
+        <record model="ir.ui.view" id="tyt_recruitment_prospect_view_form">
+            <field name="name">Formulario Encuesta de Salud completa</field>
+            <field name="model">tyt_recruitment.applicant</field>
+            <field name="arch" type="xml">
+                <form string="Aplicante">
+                    <field name="name" modifiers="{&quot;invisible&quot;: true, &quot;readonly&quot;: true}"/>
+                    <field name="last_name_father" string="Papapa" modifiers="{&quot;invisible&quot;: true, &quot;readonly&quot;: true}"/>
+                    <field name="social_security_number" string="mamama" modifiers="{&quot;invisible&quot;: true, &quot;readonly&quot;: true}"/>
+                    <!-- <header>
+                        <button name="388" string="Launch Plan" type="action" modifiers="{&quot;invisible&quot;: [[&quot;active&quot;, &quot;=&quot;, false]]}"/>
+                    </header> -->
+                    <sheet>
+                        <div name="button_box" class="oe_button_box">
+                            <button name="open_process_view" type="object" class="oe_stat_button" icon="fa-check-square-o">
+                                Asistencia
+                            </button>
+                            <button name="open_meeting_view" type="object" class="oe_stat_button" icon="fa-check-square-o">
+                                Exámenes
+                            </button>
+                            <field name="age" modifiers="{&quot;invisible&quot;: true, &quot;readonly&quot;: true}"/>
+                        </div>
+                        <field name="rfc" modifiers="{&quot;invisible&quot;: true, &quot;readonly&quot;: true}"/>
+                        <div class="o_employee_avatar">
+                            <div id="hr_presence_status" class="d-flex align-items-end fs-6 o_employee_availability">
+                                <!-- Employee is present/connected and it is normal according to his work schedule  -->
+                                <small role="img" class="fa fa-fw fa-circle text-success o_button_icon hr_presence align-middle" aria-label="Present" title="Present" modifiers="{&quot;invisible&quot;: [[&quot;hr_icon_display&quot;, &quot;!=&quot;, &quot;presence_present&quot;]]}"/>
+                                <!-- Employee is not present and it is normal according to his work schedule -->
+                                <small role="img" class="fa fa-fw fa-circle-o text-muted o_button_icon hr_presence align-middle" aria-label="Absent" title="Absent" name="presence_absent" modifiers="{&quot;invisible&quot;: [[&quot;hr_icon_display&quot;, &quot;!=&quot;, &quot;presence_absent&quot;]]}"/>
+                                <!-- Employee is connected but according to his work schedule, he should not work for now  -->
+                                <small role="img" class="fa fa-fw fa-circle-o text-success o_button_icon hr_presence align-middle" aria-label="Present but not active" title="Present but not active" name="presence_absent_active" modifiers="{&quot;invisible&quot;: [[&quot;hr_icon_display&quot;, &quot;!=&quot;, &quot;presence_absent_active&quot;]]}"/>
+                                <!-- Employee is not here but according to his work schedule, he should be connected -->
+                                <small role="img" class="fa fa-fw fa-circle text-warning o_button_icon hr_presence align-middle" aria-label="To define" title="To define" name="presence_to_define" modifiers="{&quot;invisible&quot;: [[&quot;hr_icon_display&quot;, &quot;!=&quot;, &quot;presence_to_define&quot;]]}"/>
+                            </div>
+                        </div>
+                        <div class="oe_title">
+                            <h1 class="d-flex flex-row">
+                                <field name="name" placeholder="Employee's Name" style="font-size: min(4vw, 2.6rem);" on_change="1" modifiers="{&quot;required&quot;: true}"/>
+                                <field name="last_name_father" placeholder="Employee's Name" style="font-size: min(4vw, 2.6rem);" on_change="1" modifiers="{&quot;required&quot;: true}"/>
+                                <field name="last_name_mother" placeholder="Employee's Name" style="font-size: min(4vw, 2.6rem);" on_change="1" modifiers="{&quot;required&quot;: true}"/>
+                                <field name="birthplace" placeholder="Employee's Name" style="font-size: min(4vw, 2.6rem);" on_change="1" modifiers="{&quot;required&quot;: true}"/>
+                                <field name="social_security_number" placeholder="Employee's Name" style="font-size: min(4vw, 2.6rem);" on_change="1" modifiers="{&quot;required&quot;: true}"/>
+                                <field name="rfc" placeholder="Employee's Name" style="font-size: min(4vw, 2.6rem);" on_change="1" modifiers="{&quot;required&quot;: true}"/>
+                                <field name="curp" placeholder="Employee's Name" style="font-size: min(4vw, 2.6rem);" on_change="1" modifiers="{&quot;required&quot;: true}"/>
+                            </h1>
+                            <h2>
+                                <!--<field name="job_title" placeholder="Job Position" />-->
+                            </h2>
+                            <!--<field name="category_ids" widget="many2many_tags" options="{'color_field': 'color', 'no_create_edit': True}" placeholder="Tags"  groups="hr.group_hr_user"/>-->
+                        </div>
+
+                    </sheet>
+                    <div class="oe_chatter">
+                        <field name="message_follower_ids" options="{'post_refresh': 'recipients'}"/>
+                        <field name="activity_ids"/>
+                        <field name="message_ids"/>
+                    </div>
+                </form>
+            </field>
+        </record>   
+    </data>
+</odoo>

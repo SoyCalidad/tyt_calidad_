@@ -1,0 +1,38 @@
+<?xml version="1.0"?>
+<odoo>
+    <!-- Mensajes de éxito -->
+    <record id="survey_message_1" model="tyt_recruitment.success_option_message">
+        <field name="approved">True</field>
+        <field name="message">¡Excelente trabajo! ¡A seguir así!</field>
+    </record>
+    <record id="survey_message_2" model="tyt_recruitment.success_option_message">
+        <field name="approved">True</field>
+        <field name="message">¡Qué gran logro, felicidades!</field>
+    </record>
+    <record id="survey_message_3" model="tyt_recruitment.success_option_message">
+        <field name="approved">True</field>
+        <field name="message">¡Muy bien hecho, sigue brillando!</field>
+    </record>
+    <record id="survey_message_4" model="tyt_recruitment.success_option_message">
+        <field name="approved">True</field>
+        <field name="message">¡Felicidades, qué gran esfuerzo!</field>
+    </record>
+
+    <!-- Mensajes de fracaso -->
+    <record id="failure_message_1" model="tyt_recruitment.failure_option_message">
+        <field name="approved">False</field>
+        <field name="message">¡No te rindas!</field>
+    </record>
+    <record id="failure_message_2" model="tyt_recruitment.failure_option_message">
+        <field name="approved">False</field>
+        <field name="message">¡No te des por vencido!</field>
+    </record>
+    <record id="failure_message_3" model="tyt_recruitment.failure_option_message">
+        <field name="approved">False</field>
+        <field name="message">¡Estoy seguro de que la próxima vez lo lograrás!</field>
+    </record>
+    <record id="failure_message_4" model="tyt_recruitment.failure_option_message">
+        <field name="approved">False</field>
+        <field name="message">¡La próxima vez será mejor!</field>
+    </record>
+</odoo>

@@ -32,10 +32,10 @@ class Attendance(models.Model):
     campaign_id = fields.Many2one("tyt_recruitment.campaign", ondelete='cascade')
     requisition_id = fields.Many2one("tyt_recruitment.requisition", ondelete='cascade')
 
-    examen1 = fields.Many2one('tyt_recruitment.health_survey', string="Examen 1")
-    examen2 = fields.Many2one('tyt_recruitment.health_survey', string="Examen 2")
-    examen3 = fields.Many2one('tyt_recruitment.health_survey', string="Examen 3")
-    examen4 = fields.Many2one('tyt_recruitment.health_survey', string="Examen 4")
+    examen1 = fields.Many2one('survey.survey', string="Examen 1")
+    examen2 = fields.Many2one('survey.survey', string="Examen 2")
+    examen3 = fields.Many2one('survey.survey', string="Examen 3")
+    examen4 = fields.Many2one('survey.survey', string="Examen 4")
     
 class AttendanceState(models.Model):
     _name = 'tyt_recruitment.tag_attendance'
@@ -93,6 +93,24 @@ class DaysOfWeek(models.Model):
     applicant_nss = fields.Char(related="applicant_id.social_security_number", string="Número de Seguro Social")
 
     attendance_id = fields.Many2one('tyt_recruitment.attendance', string="Lista de asistencia", ondelete='cascade')
+
+    def show_applicant_details(self):
+
+        if self.applicant_id:
+            return {
+                'name': 'Vista Form de los detalles del aplicante',
+                'type': 'ir.actions.act_window',
+                'res_model': 'tyt_recruitment.applicant',
+                'view_mode': 'form',
+                'res_id': self.applicant_id.id,
+                'views': [(False, 'form')], 
+                'view_id': self.env.ref('tyt_recruitment.tyt_recruitment_prospect_view_form').id,
+                'target': 'current',
+            }
+        else:
+            return {
+                'type': 'ir.actions.act_window_close'
+            }
 
 class ReasonForWithdrawal(models.Model):
     _name = 'tyt_recruitment.reason_for_withdrawal'
