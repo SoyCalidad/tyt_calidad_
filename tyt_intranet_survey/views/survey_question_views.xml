@@ -8,13 +8,46 @@
             <xpath expr="//page[@name='options']" position="inside">
                 <group>
                     <group string="Typification" name="typification">
-                        <field name="area_encuesta_id" widget="selection"/>
-                        <field name="tipo_encuesta_id" widget="selection"/>
+                        <field name="survey_publish_state" invisible="1"/>
+                        <field name="area_encuesta_id" widget="selection" attrs="{'readonly': [('survey_publish_state', '=', 'published')]}"/>
+                        <field name="tipo_encuesta_id" widget="selection" attrs="{'readonly': [('survey_publish_state', '=', 'published')]}"/>
                     </group>
                     <group>
                     </group>
                 </group>
             </xpath>
         </field>
+    </record>
+
+    <record id="tyt_survey_question_answer_view_form" model="ir.ui.view">
+        <field name="name">tyt.survey.question.answer.view.form</field>
+        <field name="model">tyt.survey.question.answer</field>
+        <field name="arch" type="xml">
+            <form>
+                <sheet>
+                    <group>
+                        <field name="value"/>
+                        <field name="answer_score"/>
+                    </group>
+                </sheet>
+            </form>
+        </field>
+    </record>
+
+    <record id="tyt_survey_question_answer_view_tree" model="ir.ui.view">
+        <field name="name">tyt.survey.question.answer.view.tree</field>
+        <field name="model">tyt.survey.question.answer</field>
+        <field name="arch" type="xml">
+            <tree editable="bottom">
+                <field name="value"/>
+                <field name="answer_score"/>
+            </tree>
+        </field>
+    </record>
+
+    <record id="tyt_survey_question_answer_action" model="ir.actions.act_window">
+        <field name="name">Suggested Answers</field>
+        <field name="res_model">tyt.survey.question.answer</field>
+        <field name="view_mode">tree,form</field>
     </record>
 </odoo>
