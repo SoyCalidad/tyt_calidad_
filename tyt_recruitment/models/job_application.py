@@ -294,6 +294,16 @@ class Applicant(models.Model):
     campaign_turn = fields.Selection(related="campaign_id.turn", string="Turno")
     campaign_requsition = fields.Many2one(related="campaign_id.requisition_id", string="Requisición")
 
+    computed_name = fields.Char(
+        string="Nombre completo",
+        compute="_compute_full_name"
+    )
+
+    @api.depends('name', 'last_name_father', 'last_name_mother')
+    def _compute_full_name(self):
+        for rec in self:
+            rec.computed_name = f"{rec.name or ''} {rec.last_name_father or ''} {rec.last_name_mother or ''}".strip()
+
     def show_job_application(self):
 
         job_application = self.env['tyt_recruitment.job_application'].search([('applicant_id', '=', self.id)], limit=1)
@@ -311,21 +321,42 @@ class Applicant(models.Model):
             return {
                 'type': 'ir.actions.act_window_close'
             }
+
+    def open_requisition_view(self):
         
-    def action_open_documents(self):
-        pass
+        if self.campaign_id.requisition_id:
+            return {
+                'name': 'Vista Form del Registro',
+                'type': 'ir.actions.act_window',
+                'res_model': 'tyt_recruitment.requisition',
+                'view_mode': 'form',
+                'res_id': self.campaign_id.requisition_id.id,
+                'views': [(False, 'form')], 
+                'target': 'current',
+            }
+        else:
+            return {
+                'type': 'ir.actions.act_window_close'
+            }
 
-    def open_process_view(self):
-        pass
+    def open_user_input_view(self):
+        
+        inputs = self.env['survey.user_input'].sudo().search([])
 
-    def open_meeting_view(self):
-        pass
+        if inputs:
+            return {
+                'name': 'Lista de encuestas realizadas por el aplicante',
+                'type': 'ir.actions.act_window',
+                'res_model': 'survey.user_input',
+                'view_mode': 'tree',
+                'target': 'current',
+                'domain': [('id', 'in', inputs.ids)]
+            }
+        else:
+            return {
+                'type': 'ir.actions.act_window_close'
+            }
 
-    def web_ribbon(self):
-        pass
-
-    def action_related_contacts(self):
-        pass
         
 class DataAcademic(models.Model):
     _name = 'tyt_recruitment.data_academic'

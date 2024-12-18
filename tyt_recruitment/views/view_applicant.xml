@@ -1,27 +1,152 @@
 <odoo>
     <data>
-
         <!-- Applicant List -->
-        <record model="ir.ui.view" id="tyt_recruitment_prospect_view_form">
-            <field name="name">Formulario Encuesta de Salud completa</field>
+        <record id="view_applicant_tree" model="ir.ui.view">
+        <field name="name">Applicant Tree</field>
+        <field name="model">tyt_recruitment.applicant</field>
+        <field name="arch" type="xml">
+            <tree>
+                <field name="last_name_father"/>
+                <field name="last_name_mother"/>
+                <field name="name"/>
+                <field name="social_security_number"/>
+                <field name="number_phone"/>
+                <field name="birthdate"/>
+                <field name="birthplace"/>
+                <field name="rfc"/>
+                <field name="curp"/>
+            </tree>
+        </field>
+        </record>
+
+        <!-- Applicant template view -->
+        <record id="template_applicants" model="ir.ui.view">
+            <field name="name">tyt_recruitment.model.applicants.form</field>
             <field name="model">tyt_recruitment.applicant</field>
             <field name="arch" type="xml">
+                <tree string="Lista">
+                <field name="last_name_father"/>
+                <field name="last_name_mother"/>
+                <field name="name"/>
+                <field name="employee_number"/>
+                <field name="number_phone"/>
+                <field name="birthdate"/>
+                <field name="birthplace"/>
+                <field name="rfc"/>
+                <field name="curp"/>
+                <field name="social_security_number"/>
+
+                <field name="campaign_id"/>
+                <field name="campaign_turn"/>
+                <field name="recruiter_id"/>
+
+                <field name="campaign_requsition"/>
+
+                <field name="expedient_status" />
+                <field name="has_complete_survey"/>
+                <field name="status"/>
+                <button 
+                    name="show_job_application" 
+                    string="Ver aplicación" 
+                    type="object" 
+                    class="oe_highlight" />
+                </tree>
+            </field>
+        </record>
+
+        <!-- Applicant form -->
+        <record model="ir.ui.view" id="tyt_recruitment_applicant_form">
+            <field name="name">Formulario  de aplicante</field>
+            <field name="model">tyt_recruitment.applicant</field>
+            <field name="priority" eval="10"/>
+            <field name="arch" type="xml">
+                <form string="Archivo">
+                <sheet>
+                    <separator string="Información general" />
+                    <group>
+                        <group>
+                            <field name="name" />
+                            <field name="last_name_father" />
+                            <field name="last_name_mother" />
+                        </group>
+                        <group>
+                            <field name="nationality" />
+                            <field name="birthdate" />
+                            <field name="birthplace" />
+                        </group>
+                    </group>
+                    <separator string="Información social" />
+                    <group>
+                        <group>
+                            <field name="reference" />
+                            <field name="gender" />
+                            <field name="age" />
+                            <field name="marital_status" />
+                        </group>
+                        <group>
+                            <field name="social_security_number" />
+                            <field name="rfc" />
+                            <field name="curp" />
+                            <field name="employee_number" />
+                        </group>
+                    </group>
+                    <separator string="Información de dirección" />
+                    <group>
+                        <group>
+                            <field name="address_street" />
+                            <field name="address_neighborhood" />
+                            <field name="address_city" />
+                        </group>
+                        <group>
+                            <field name="number_phone" />
+                            <field name="personal_email" />
+                            <field name="live_with" />
+                        </group>
+                    </group>
+                    <separator string="Información adicional" />
+                    <group>
+                        <group>
+                            <field name="rent_amount" />
+                            <field name="infonavit_credit_amount" />
+                            <field name="transports" />
+                            <field name="requested_job_position" />
+                            <field name="monthly_expenses" />
+                        </group>
+                        <group>
+                            <field name="availability" />
+                            <field name="dependents" />
+                            <field name="live_with" />
+                            <field name="foreign_nationality" />
+                            <field name="daily_activities" />
+                        </group>
+                    </group>
+                    <separator string="Reclutador" />
+                    <group>
+                        <field name="recruiter_comments" />
+                    </group>
+                </sheet>
+                </form>
+            </field>
+        </record>
+
+        <!-- Applicant Form -->
+        <record model="ir.ui.view" id="tyt_recruitment_prospect_view_form">
+            <field name="name">Formulario aplicante en asistencia</field>
+            <field name="model">tyt_recruitment.applicant</field>
+            <field name="priority" eval="20"/>
+            <field name="arch" type="xml">
                 <form string="Aplicante">
-                    <field name="name" modifiers="{&quot;invisible&quot;: true, &quot;readonly&quot;: true}"/>
-                    <field name="last_name_father" string="Papapa" modifiers="{&quot;invisible&quot;: true, &quot;readonly&quot;: true}"/>
-                    <field name="social_security_number" string="mamama" modifiers="{&quot;invisible&quot;: true, &quot;readonly&quot;: true}"/>
                     <!-- <header>
                         <button name="388" string="Launch Plan" type="action" modifiers="{&quot;invisible&quot;: [[&quot;active&quot;, &quot;=&quot;, false]]}"/>
                     </header> -->
                     <sheet>
                         <div name="button_box" class="oe_button_box">
-                            <button name="open_process_view" type="object" class="oe_stat_button" icon="fa-check-square-o">
-                                Asistencia
+                            <button name="open_requisition_view" type="object" class="oe_stat_button" icon="fa-check-square-o">
+                                Requisición
                             </button>
-                            <button name="open_meeting_view" type="object" class="oe_stat_button" icon="fa-check-square-o">
+                            <button name="open_user_input_view" type="object" class="oe_stat_button" icon="fa-check-square-o">
                                 Exámenes
                             </button>
-                            <field name="age" modifiers="{&quot;invisible&quot;: true, &quot;readonly&quot;: true}"/>
                         </div>
                         <field name="rfc" modifiers="{&quot;invisible&quot;: true, &quot;readonly&quot;: true}"/>
                         <div class="o_employee_avatar">
@@ -37,19 +162,19 @@
                             </div>
                         </div>
                         <div class="oe_title">
-                            <h1 class="d-flex flex-row">
-                                <field name="name" placeholder="Employee's Name" style="font-size: min(4vw, 2.6rem);" on_change="1" modifiers="{&quot;required&quot;: true}"/>
-                                <field name="last_name_father" placeholder="Employee's Name" style="font-size: min(4vw, 2.6rem);" on_change="1" modifiers="{&quot;required&quot;: true}"/>
-                                <field name="last_name_mother" placeholder="Employee's Name" style="font-size: min(4vw, 2.6rem);" on_change="1" modifiers="{&quot;required&quot;: true}"/>
-                                <field name="birthplace" placeholder="Employee's Name" style="font-size: min(4vw, 2.6rem);" on_change="1" modifiers="{&quot;required&quot;: true}"/>
-                                <field name="social_security_number" placeholder="Employee's Name" style="font-size: min(4vw, 2.6rem);" on_change="1" modifiers="{&quot;required&quot;: true}"/>
-                                <field name="rfc" placeholder="Employee's Name" style="font-size: min(4vw, 2.6rem);" on_change="1" modifiers="{&quot;required&quot;: true}"/>
-                                <field name="curp" placeholder="Employee's Name" style="font-size: min(4vw, 2.6rem);" on_change="1" modifiers="{&quot;required&quot;: true}"/>
-                            </h1>
-                            <h2>
-                                <!--<field name="job_title" placeholder="Job Position" />-->
-                            </h2>
-                            <!--<field name="category_ids" widget="many2many_tags" options="{'color_field': 'color', 'no_create_edit': True}" placeholder="Tags"  groups="hr.group_hr_user"/>-->
+                            <separator string="Información personal" />
+                            <h3>
+                                <div>
+                                    <field name="computed_name" />
+                                </div>
+                            </h3>
+                            <separator string="Información adicional" />
+                            <group>
+                                <field name="social_security_number" />
+                                <field name="rfc" />
+                                <field name="curp" />
+                                <field name="employee_number" />
+                            </group>
                         </div>
 
                     </sheet>
