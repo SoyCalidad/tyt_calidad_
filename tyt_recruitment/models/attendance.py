@@ -103,7 +103,6 @@ class DaysOfWeek(models.Model):
                 'res_model': 'tyt_recruitment.applicant',
                 'view_mode': 'form',
                 'res_id': self.applicant_id.id,
-                'views': [(False, 'form')], 
                 'view_id': self.env.ref('tyt_recruitment.tyt_recruitment_prospect_view_form').id,
                 'target': 'current',
             }

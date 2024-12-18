@@ -494,13 +494,11 @@
 
                     <section class="p-3">
                         <div class="row">
-                            <div class="col-sm-6 col-md-6 col-lg-6 col-xl-6 col-xxl-6 p-4 border">
-                                <h3>COMENTARIOS DEL RECLUTADOR</h3>
-                                <textarea class="form-control" id="recruiter_comments" name="recruiter_comments"></textarea>
+                            <div class="col-sm-5 col-md-5 col-lg-5 col-xl-5 col-xxl-5 p-4 border">
+                                <h3>FIRMA DEL SOLICITANTE</h3>
                             </div>
-                            <div class="col-sm-6 col-md-6 col-lg-6 col-xl-6 col-xxl-6 p-4 border">
-                                <label for="signature" class="form-label">Firma del solicitante:</label>
-                                <canvas id="signature-pad" class="signature-pad border" width="400" height="200"></canvas>
+                            <div class="col-sm-7 col-md-7 col-lg-7 col-xl-7 col-xxl-7 p-4 border">
+                                <canvas id="signature-pad" class="signature-pad border" width="500" height="200"></canvas>
                                 <input type="hidden" id="signature" name="signature" />
                                 <button type="button" class="btn btn-secondary mt-2" id="clear-signature">Borrar firma</button>
                             </div>
