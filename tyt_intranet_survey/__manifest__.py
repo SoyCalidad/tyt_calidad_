@@ -12,6 +12,7 @@
     ],
     'data': [
         'security/ir.model.access.csv',
+        'data/survey_data.xml',
         'views/survey_survey_views.xml',
         'views/survey_question_views.xml',
         'views/survey_user_views.xml',

@@ -18,18 +18,27 @@ ANSWER_COLOR_STATES = {
 
 class SurveyPortal(portal.CustomerPortal):
 
+    def _prepare_home_portal_values(self, counters):
+        values = super()._prepare_home_portal_values(counters)
+        if 'survey_count' in counters:
+            domain = self._prepare_survey_domain()
+            values['survey_count'] = request.env['survey.survey'].sudo().search_count(domain)
+        return values
+
     def _prepare_portal_layout_values(self):
         values = super()._prepare_portal_layout_values()
         return values
 
     def _prepare_survey_domain(self):
         user_groups = request.env.user.groups_id
+        partner = request.env.user.partner_id
         return [
             ('access_mode', '=', 'intranet'),
             ('publish_state', '=', 'published'),
             ('published_start_date', '<=', fields.Date.context_today(request.env.user)),
             ('published_end_date', '>=', fields.Date.context_today(request.env.user)),
             ('group_ids', 'in', user_groups.ids),
+            ('user_input_ids.partner_id', '=', partner.id),
         ]
 
     @http.route('/my/surveys', type='http', auth='user', website=True)

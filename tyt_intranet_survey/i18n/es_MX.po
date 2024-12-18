@@ -6,8 +6,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Odoo Server 16.0+e-20240730\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2024-12-16 20:35+0000\n"
-"PO-Revision-Date: 2024-12-16 20:35+0000\n"
+"POT-Creation-Date: 2024-12-18 17:49+0000\n"
+"PO-Revision-Date: 2024-12-18 17:49+0000\n"
 "Last-Translator: \n"
 "Language-Team: \n"
 "MIME-Version: 1.0\n"
@@ -40,6 +40,11 @@ msgid "Access Mode"
 msgstr "Modo de acceso"
 
 #. module: tyt_intranet_survey
+#: model:ir.model.fields,field_description:tyt_intranet_survey.field_tyt_survey_question_answer__active
+msgid "Active"
+msgstr ""
+
+#. module: tyt_intranet_survey
 #. odoo-python
 #: code:addons/tyt_intranet_survey/wizard/survey_publish.py:0
 #, python-format
@@ -60,7 +65,7 @@ msgstr "¿Está seguro de que desea restablecer a borrador?"
 
 #. module: tyt_intranet_survey
 #: model:ir.model.fields,field_description:tyt_intranet_survey.field_survey_question__area_encuesta_id
-msgid "Area - Typification"
+msgid "Area encuesta"
 msgstr "Área"
 
 #. module: tyt_intranet_survey
@@ -81,11 +86,13 @@ msgstr "Cancelar"
 
 #. module: tyt_intranet_survey
 #: model:ir.model.fields,field_description:tyt_intranet_survey.field_survey_publish__create_uid
+#: model:ir.model.fields,field_description:tyt_intranet_survey.field_tyt_survey_question_answer__create_uid
 msgid "Created by"
 msgstr ""
 
 #. module: tyt_intranet_survey
 #: model:ir.model.fields,field_description:tyt_intranet_survey.field_survey_publish__create_date
+#: model:ir.model.fields,field_description:tyt_intranet_survey.field_tyt_survey_question_answer__create_date
 msgid "Created on"
 msgstr ""
 
@@ -102,11 +109,13 @@ msgstr "Departamento"
 
 #. module: tyt_intranet_survey
 #: model:ir.actions.act_window,name:tyt_intranet_survey.survey_user_input_line_action
+#: model:ir.ui.menu,name:tyt_intranet_survey.survey_user_input_line_menu_action
 msgid "Detailed Answers"
-msgstr ""
+msgstr "Respuestas detalladas"
 
 #. module: tyt_intranet_survey
 #: model:ir.model.fields,field_description:tyt_intranet_survey.field_survey_publish__display_name
+#: model:ir.model.fields,field_description:tyt_intranet_survey.field_tyt_survey_question_answer__display_name
 msgid "Display Name"
 msgstr ""
 
@@ -137,6 +146,7 @@ msgstr "Grupos"
 
 #. module: tyt_intranet_survey
 #: model:ir.model.fields,field_description:tyt_intranet_survey.field_survey_publish__id
+#: model:ir.model.fields,field_description:tyt_intranet_survey.field_tyt_survey_question_answer__id
 msgid "ID"
 msgstr ""
 
@@ -153,26 +163,30 @@ msgstr "Puesto de trabajo"
 
 #. module: tyt_intranet_survey
 #: model:ir.model.fields,field_description:tyt_intranet_survey.field_survey_publish____last_update
+#: model:ir.model.fields,field_description:tyt_intranet_survey.field_tyt_survey_question_answer____last_update
 msgid "Last Modified on"
 msgstr ""
 
 #. module: tyt_intranet_survey
 #: model:ir.model.fields,field_description:tyt_intranet_survey.field_survey_publish__write_uid
+#: model:ir.model.fields,field_description:tyt_intranet_survey.field_tyt_survey_question_answer__write_uid
 msgid "Last Updated by"
 msgstr ""
 
 #. module: tyt_intranet_survey
 #: model:ir.model.fields,field_description:tyt_intranet_survey.field_survey_publish__write_date
+#: model:ir.model.fields,field_description:tyt_intranet_survey.field_tyt_survey_question_answer__write_date
 msgid "Last Updated on"
 msgstr ""
 
 #. module: tyt_intranet_survey
 #: model:ir.model.fields,field_description:tyt_intranet_survey.field_survey_survey__questions_mandatory
 msgid "Mandatory Questions"
-msgstr "Preguntas obligatorias"
+msgstr "Respuestas obligatorias"
 
 #. module: tyt_intranet_survey
 #: model:ir.model.fields,field_description:tyt_intranet_survey.field_survey_user_input__employee_number
+#: model:ir.model.fields,field_description:tyt_intranet_survey.field_survey_user_input_line__employee_number
 msgid "Número de empleado"
 msgstr ""
 
@@ -186,6 +200,11 @@ msgstr ""
 #: model_terms:ir.ui.view,arch_db:tyt_intranet_survey.portal_my_surveys
 msgid "Participate"
 msgstr "Participar"
+
+#. module: tyt_intranet_survey
+#: model:ir.model.fields,field_description:tyt_intranet_survey.field_survey_user_input_line__partner_id
+msgid "Partner"
+msgstr "Contacto"
 
 #. module: tyt_intranet_survey
 #: model_terms:ir.ui.view,arch_db:tyt_intranet_survey.survey_publish_view_form
@@ -235,6 +254,11 @@ msgid "Registrados"
 msgstr ""
 
 #. module: tyt_intranet_survey
+#: model:ir.model.fields,field_description:tyt_intranet_survey.field_tyt_survey_question_answer__answer_score
+msgid "Score"
+msgstr "Puntaje"
+
+#. module: tyt_intranet_survey
 #: model:ir.model.fields,field_description:tyt_intranet_survey.field_survey_publish__start_date
 msgid "Start Date"
 msgstr "Fecha de inicio"
@@ -252,8 +276,22 @@ msgid "State Percentage"
 msgstr ""
 
 #. module: tyt_intranet_survey
+#: model:ir.model.fields,field_description:tyt_intranet_survey.field_survey_user_input_line__suggested_answer_value
+msgid "Suggested Answer Value"
+msgstr "Valor"
+
+#. module: tyt_intranet_survey
+#: model:ir.actions.act_window,name:tyt_intranet_survey.tyt_survey_question_answer_action
+msgid "Suggested Answers"
+msgstr "Respuestas de encuesta"
+
+#. module: tyt_intranet_survey
+#: model:ir.model.fields,field_description:tyt_intranet_survey.field_tyt_survey_question_answer__value
+msgid "Suggested Value"
+msgstr "Valor"
+
+#. module: tyt_intranet_survey
 #: model:ir.model,name:tyt_intranet_survey.model_survey_survey
-#: model_terms:ir.ui.view,arch_db:tyt_intranet_survey.portal_my_home_survey
 #: model_terms:ir.ui.view,arch_db:tyt_intranet_survey.survey_survey_view_search
 msgid "Survey"
 msgstr "Encuesta"
@@ -263,6 +301,11 @@ msgstr "Encuesta"
 #: model:ir.ui.menu,name:tyt_intranet_survey.survey_survey_menu_action_management
 msgid "Survey Management"
 msgstr "Publicación de encuestas"
+
+#. module: tyt_intranet_survey
+#: model:ir.model.fields,field_description:tyt_intranet_survey.field_survey_question__survey_publish_state
+msgid "Survey Publish State"
+msgstr ""
 
 #. module: tyt_intranet_survey
 #: model:ir.model,name:tyt_intranet_survey.model_survey_question
@@ -291,18 +334,19 @@ msgid "Surveys"
 msgstr "Encuestas"
 
 #. module: tyt_intranet_survey
+#: model:ir.model,name:tyt_intranet_survey.model_tyt_survey_question_answer
+msgid "TYT Survey Question Answer"
+msgstr ""
+
+#. module: tyt_intranet_survey
 #: model_terms:ir.ui.view,arch_db:tyt_intranet_survey.portal_my_surveys
 msgid "There are currently no surveys for your account."
 msgstr "Actualmente no existen encuestas para su cuenta."
 
 #. module: tyt_intranet_survey
-#: model:ir.model.fields,field_description:tyt_intranet_survey.field_survey_user_input_line__tipo_encuesta_id
-msgid "Tipo - TYT"
-msgstr ""
-
-#. module: tyt_intranet_survey
 #: model:ir.model.fields,field_description:tyt_intranet_survey.field_survey_question__tipo_encuesta_id
-msgid "Tipo - Typification"
+#: model:ir.model.fields,field_description:tyt_intranet_survey.field_survey_user_input_line__tipo_encuesta_id
+msgid "Tipo encuesta"
 msgstr "Tipo"
 
 #. module: tyt_intranet_survey
