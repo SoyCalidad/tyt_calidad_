@@ -361,7 +361,7 @@
                       </tr>
                       <tr>
                         <td> 12 </td>
-                        <td> SNN </td>
+                        <td> NNS </td>
                         <td> 
                           <field name="snn_state" invisible="1" />
                           <span attrs="{'invisible': [('snn', '=', False)]}">Ok</span>
@@ -556,7 +556,7 @@
                       </tr>
                       <tr>
                         <td> 12 </td>
-                        <td> SNN </td>
+                        <td> NNS </td>
                         <td> 
                           <field name="snn_state" invisible="1" />
                           <span attrs="{'invisible': [('snn', '=', False)]}">Ok</span>

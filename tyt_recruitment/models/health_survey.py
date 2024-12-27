@@ -25,6 +25,7 @@ class SurveyQuestion(models.Model):
 
     extra_input = fields.Char(string='Título del campo extra')
     extra_input_enabled = fields.Boolean(string='Habilitado')
+    is_a_guest_question = fields.Boolean(string='¿Es prospecto?')
 
     health_survey_id = fields.Many2one('tyt_recruitment.health_survey', string="Pregunta", ondelete='cascade')
 

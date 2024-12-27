@@ -1,10 +1,12 @@
 # -*- coding: utf-8 -*-
 
-from odoo import api, models, fields
+from odoo import api, models, fields, http
 from odoo.http import request
+from odoo.addons.survey.controllers.main import Survey
 from urllib.parse import quote
 
 import logging
+_logger = logging.getLogger(__name__)
 
 class ProspectSurvey(models.Model):
     _inherit = 'survey.survey'
@@ -14,7 +16,7 @@ class ProspectSurvey(models.Model):
 
     end_message_type = fields.Selection(
         [
-            ('default', 'Elegir mensaje por defe to'),
+            ('default', 'Elegir mensaje por defecto'),
             ('custom', 'Mensaje final personalizado'),
         ],
         string="Tipo de mensaje final",

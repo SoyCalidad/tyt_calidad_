@@ -28,7 +28,7 @@ class JobApplication(models.Model):
     applicant_birthplace = fields.Char(related="applicant_id.birthplace", string="Lugar de nacimiento", store=True)
     applicant_rfc = fields.Char(related="applicant_id.rfc", string="RFC", store=True)
     applicant_curp = fields.Char(related="applicant_id.curp", string="CURP", store=True)
-    applicant_social_security_number = fields.Char(related="applicant_id.social_security_number", string="SSN", store=True)       
+    applicant_social_security_number = fields.Char(related="applicant_id.social_security_number", string="NNS", store=True)       
 
     campaign_id = fields.Many2one('tyt_recruitment.campaign', string="Campaña")
     campaign_turn = fields.Selection(related="campaign_id.turn", string="Turno")
@@ -341,7 +341,11 @@ class Applicant(models.Model):
 
     def open_user_input_view(self):
         
-        inputs = self.env['survey.user_input'].sudo().search([])
+        question = self.env['survey.question'].sudo().search([('is_a_guest_question', '=', True)])
+        answer = self.env['survey.user_input.line'].sudo().search([('question_id', '=', question.id)])
+        _logger.info("answer.user_input_id")
+        _logger.info(answer.user_input_id)
+        inputs = self.env['survey.user_input'].sudo().search([('id', '=', answer.user_input_id.id)])
 
         if inputs:
             return {

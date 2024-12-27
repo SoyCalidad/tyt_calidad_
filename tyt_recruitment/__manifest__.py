@@ -11,7 +11,8 @@
         'hola_calidad',
         'hr_recruitment',
         'report_xlsx',
-        'website'
+        'website',
+        'survey'
     ],
     'data': [
         'security/ir.model.access.csv',
