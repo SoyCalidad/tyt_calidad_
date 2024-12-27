@@ -62,6 +62,7 @@
             <group>
               <field name="extra_input" string="Título del campo extra"/>
               <field name="extra_input_enabled" string="¿Habilitar campo extra?" widget="boolean"/>
+              <field name="is_a_guest_question" string="¿Pregunta de NNS?" widget="boolean"/>
             </group>
           </xpath>
       </field>
