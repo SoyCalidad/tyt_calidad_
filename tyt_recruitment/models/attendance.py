@@ -79,7 +79,6 @@ class DaysOfWeek(models.Model):
     opday1 = fields.Many2one('tyt_recruitment.tag_attendance', string="OPE día 01")
     opday2 = fields.Many2one('tyt_recruitment.tag_attendance', string="OPE día 02")
 
-    login = fields.Char(string="Login")
     recruiter = fields.Char(string="Reclutador")
     prospect_turn = fields.Selection(related="attendance_id.turn", string="Turno lista de prospectos", tracking=True)
     right_turn = fields.Char(string="Turno correcto")
@@ -89,10 +88,22 @@ class DaysOfWeek(models.Model):
 
     
     applicant_id = fields.Many2one("tyt_recruitment.applicant", string="Aplicante", ondelete='cascade')
+    login = fields.Char(related="applicant_id.employee_number", string="Login")
+
     applicant_name = fields.Char(related="applicant_id.name", string="Nombre", store=True)
     applicant_nss = fields.Char(related="applicant_id.social_security_number", string="Número de Seguro Social")
 
     attendance_id = fields.Many2one('tyt_recruitment.attendance', string="Lista de asistencia", ondelete='cascade')
+
+    @api.onchange('day1', 'day2', 'day3', 'day4', 'day5', 'day6', 'day7', 'day8', 'day9', 'day10', 'day11', 'day12', 'day13', 'day14', 'day15', 'day16', 'day17', 'day18', 'day19', 'day20')
+    def _onchange_days(self):
+        if not self.applicant_id.employee_id:
+            for field_name in ['day1', 'day2', 'day3', 'day4', 'day5', 'day6', 'day7', 'day8', 'day9', 'day10', 'day11', 'day12', 'day13', 'day14', 'day15', 'day16', 'day17', 'day18', 'day19', 'day20']:
+                _logger.info(field_name)
+                _logger.info(self.applicant_id.name)
+                if self[field_name].tag == 'A':
+                    employee = self.env['hr.employee'].search([('l10n_mx_nss', '=', self.applicant_id.social_security_number)], limit=1)
+                    self.applicant_id.write({'employee_id': employee.id})
 
     def show_applicant_details(self):
 
