@@ -344,9 +344,7 @@ class Applicant(models.Model):
     def open_user_input_view(self):
         
         question = self.env['survey.question'].sudo().search([('is_a_guest_question', '=', True)])
-        answer = self.env['survey.user_input.line'].sudo().search([('question_id', '=', question.id)])
-        _logger.info("answer.user_input_id")
-        _logger.info(answer.user_input_id)
+        answer = self.env['survey.user_input.line'].sudo().search([('question_id', 'in', question.ids)])
         inputs = self.env['survey.user_input'].sudo().search([('id', 'in', answer.user_input_id.ids)])
 
         if inputs:
