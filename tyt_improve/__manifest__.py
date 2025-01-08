@@ -5,7 +5,7 @@
     'summary': 'Añade características al módulo Mejora Continua TYT Contact Center',
     'author': 'Soy Calidad',
     'website': 'www.soycalidad.com',
-    'license': '',
+    'license': 'Other proprietary',
     'category': 'soycalidad',
     'depends': [
         'mgmtsystem_nonconformity',

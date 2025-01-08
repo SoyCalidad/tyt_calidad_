@@ -5,7 +5,7 @@
     'summary': 'Añade características al módulo Documentos (Enterprise)',
     'author': 'Soy Calidad',
     'website': 'www.soycalidad.com',
-    'license': '',
+    'license': 'Other proprietary',
     'category': 'soycalidad',
     'depends': [
         'base',
