@@ -236,6 +236,8 @@ class IndividualReport(models.AbstractModel):
 class MatrixReportXls(models.AbstractModel):
     _name = 'report.matrix_report_xls.xlsx'
     _inherit = ['report.report_xlsx.abstract', 'report.matrix.mixin']
+    _description = "report.matrix_report_xls.xlsx"
+
 
     def generate_xlsx_report(self, workbook, data, lines):
         try:

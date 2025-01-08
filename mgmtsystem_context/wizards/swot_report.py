@@ -10,6 +10,8 @@ from odoo.exceptions import Warning
 
 class SwotWizard(models.TransientModel):
     _name = "wizard.swot.report"
+    _description = "wizard.swot.report"
+
 
     swot_id = fields.Many2one(
         'mgmtsystem.context.swot', 

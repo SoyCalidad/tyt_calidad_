@@ -8,6 +8,8 @@ import logging
 
 class PESTELWizard(models.TransientModel):
     _name = "wizard.pest.report"
+    _description = "wizard.pest.report"
+
 
     pestel_id = fields.Many2one(
         'mgmtsystem.context.pest',
