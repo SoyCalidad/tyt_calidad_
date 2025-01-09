@@ -19,6 +19,8 @@ class SurveyDatabase(models.TransientModel):
 
 class SurveyDatabaseReport(models.AbstractModel):
     _name = 'report.mgmtsystem_survey.report_survey_database'
+    _description = "report.mgmtsystem_survey.report_survey_database"
+
 
     @api.model
     def _get_report_values(self, docids, data=None):

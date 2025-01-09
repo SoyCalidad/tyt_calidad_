@@ -8,6 +8,8 @@ from PIL import Image
 
 class ReportMixin(models.AbstractModel):
     _name = 'report.matrix.mixin'
+    _description = "report.matrix.mixin"
+
 
     def _get_workbook_formats(self, workbook):
         return {

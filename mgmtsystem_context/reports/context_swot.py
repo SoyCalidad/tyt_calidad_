@@ -3,6 +3,8 @@ from odoo import _, api, fields, models
 
 class SWOTReport(models.AbstractModel):
     _name = 'report.mgmtsystem_context.report_swot_template'
+    _description = "report.mgmtsystem_context.report_swot_template"
+
 
     @api.model
     def _get_report_values(self, docids, data=None):

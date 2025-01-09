@@ -12,6 +12,8 @@ from PIL import Image
 class IndividualReport(models.AbstractModel):
     _name = 'report.tyt_audit.audit_schedule_report'
     _inherit = 'report.report_xlsx.abstract'
+    _description = "report.tyt_audit.audit_schedule_report"
+
 
     def generate_xlsx_report(self, workbook, data, matrixes):
         try:
