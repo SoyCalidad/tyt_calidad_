@@ -38,7 +38,7 @@ class ValidationStep(models.Model):
 class Validation(models.Model):
     _name = 'mgmtsystem.validation'
     _description = 'Validación del sistema de gestión'
-    _inherit = ['mgmtsystem.version', 'mail.thread']  # Añadir mail.thread "FIX: unknown parameter 'tracking'"
+    _inherit = ['mgmtsystem.version', 'mail.thread', 'mail.activity.mixin'] # Añadir mail.thread "FIX: unknown parameter 'tracking'"
 
     state = fields.Selection(
         string=u'Estado',
