@@ -17,9 +17,7 @@ class ContextScope(models.Model):
     active = fields.Boolean('Active', default=True)
     name = fields.Char(
         string=u'Nombre',
-        compute='_compute_name_code',
         search='_search_name',
-        store=True
     )
     code = fields.Char(
         string='Referencia',
@@ -40,7 +38,7 @@ class ContextScope(models.Model):
         return [('code', operator, value)]
 
     sequence = fields.Integer('Secuencia', default=1, help='Se usa para ordenar.')
-    process_id = fields.Many2one('mgmt.process', string='Proceso', domain=[('active', '=', True)])
+    process_id = fields.Many2one('mgmt.process', string='Procedimiento', domain=[('active', '=', True)])
     attachment_ids = fields.Many2many('ir.attachment', string='Archivos')
     attachments_count = fields.Integer(compute='_compute_attachments_count', string='Archivos')
     parent_edition = fields.Many2one(comodel_name='tyt.context.scope', string='Padre', copy=False)
@@ -50,7 +48,7 @@ class ContextScope(models.Model):
     change_history = fields.One2many('process.edition.history', 'scope_id',
                                      string='Historial de cambios', copy=True)
 
-    tyt_objective_scope_users = fields.Html(string='Objectivo, alcance and usuarios')
+    tyt_objective_scope_users = fields.Html(string='Objetivo, alcance y usuarios')
     tyt_reference_documents = fields.Html(string='Documentos de referencia')
     tyt_procedure_scope_definition = fields.Html(string='Definicición de alcance del SGC')
 
@@ -99,15 +97,13 @@ class ContextScope(models.Model):
     def _compute_name_code(self):
         for record in self:
             if not record.process_id:
-                record.name = ''
                 record.code = ''
-            record.name = record.process_id.name
             record.code = record.process_id.code
 
     def write(self, values):
         if values.get('numero', 'Sin definir') == 'Sin definir' and values.get('state', False) == 'validate_ok':
             values['numero'] = self.sequence_id.next_by_id() or 'Sin definir'
-            values['name'] = self.process_id.name + ' ' + values.get('version_as_string', 'Sin definir')
+            # values['name'] = self.process_id.name + ' ' + values.get('version_as_string', 'Sin definir')
 
         result = super().write(values)
 
@@ -150,8 +146,9 @@ class ContextScope(models.Model):
         self.write({})
         change_message = ''
         diff = ''
-        related_fields = ['purpose', 'scope', 'references', 'body', 'flowchart',
-                          'abbreviation_ids', 'responsable_ids', 'documentarycontrol_ids']
+        related_fields = ['tyt_objective_scope_users', 'tyt_reference_documents', 'tyt_procedure_scope_definition',
+                          'tyt_processes_activities', 'tyt_products_services', 'tyt_organizational_units_and_functions',
+                          'tyt_locations', 'tyt_scope_exclusions', 'tyt_iso_requirements_exclusions']
         if not self.old_versions:
             change_message += 'Versión Inicial'
             self.env['process.edition.history'].create({
