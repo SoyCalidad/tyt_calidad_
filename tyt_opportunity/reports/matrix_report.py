@@ -224,6 +224,7 @@ class ReportMixin(models.AbstractModel):
 class IndividualReport(models.AbstractModel):
     _name = 'report.mgmtsystem_opprisk.report'
     _inherit = ['report.report_xlsx.abstract', 'report.matrix.mixin']
+    _description = "report.mgmtsystem_opprisk.report2"
 
     def generate_xlsx_report(self, workbook, data, matrixes):
         try:

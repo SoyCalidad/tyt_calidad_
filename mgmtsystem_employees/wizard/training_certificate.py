@@ -32,6 +32,8 @@ class CertificateWizard(models.TransientModel):
 
 class TrainingCertificateReport(models.AbstractModel):
     _name = 'report.mgmtsystem_employees.report_training_certificate'
+    _description = "report.mgmtsystem_employees.report_training_certificate"
+
 
     @api.model
     def _get_report_values(self, docids, data=None):

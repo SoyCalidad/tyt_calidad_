@@ -128,6 +128,7 @@ class InventoryReportMixin(models.AbstractModel):
 
 class WizardExternalInventoryReport(models.AbstractModel):
     _name = 'report.tyt_process.wizard_external_inventory'
+    _description = "report.tyt_process.wizard_external_inventory"
     _inherit = 'report.tyt_process.inventory_report_mixin'
 
     def generate_xlsx_report(self, workbook, data, records):
@@ -145,6 +146,7 @@ class WizardExternalInventoryReport(models.AbstractModel):
 
 class WizardlInternalInventoryReport(models.AbstractModel):
     _name = 'report.tyt_process.wizard_internal_inventory'
+    _description = "report.tyt_process.wizard_internal_inventory"
     _inherit = 'report.tyt_process.inventory_report_mixin'
 
     def generate_xlsx_report(self, workbook, data, records):
@@ -162,6 +164,7 @@ class WizardlInternalInventoryReport(models.AbstractModel):
 
 class GeneralInventoryReport(models.AbstractModel):
     _name = 'report.tyt_process.general_inventory'
+    _description = "report.tyt_process.general_inventory"
     _inherit = 'report.tyt_process.inventory_report_mixin'
 
     def generate_xlsx_report(self, workbook, data, records):

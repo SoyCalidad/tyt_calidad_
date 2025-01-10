@@ -60,6 +60,7 @@ class TrainingDatabaseWizard(models.TransientModel):
 
 class TrainingDatabaseLineWizard(models.TransientModel):
     _name = 'training_database.line.wizard'
+    _description = "training_database.line.wizard"
 
     comunication_plan_line_id = fields.Many2one(
         'training_database.line', string='Comunicación')

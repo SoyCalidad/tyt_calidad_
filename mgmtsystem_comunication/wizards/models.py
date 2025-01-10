@@ -28,6 +28,7 @@ class ComunicationPlanWizard(models.TransientModel):
 
 class ComunicationPlanLineWizard(models.TransientModel):
     _name = 'comunication.plan.line.wizard'
+    _description = "comunication.plan.line.wizard"
 
     comunication_plan_line_id = fields.Many2one(
         'comunication.plan.line', string='Plan de comunicación', required=True)

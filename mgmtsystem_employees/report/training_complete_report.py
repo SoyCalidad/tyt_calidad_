@@ -9,6 +9,8 @@ from PIL import Image
 
 class ReportTrainingComplete(models.AbstractModel):
     _name = 'report.mgmtsystem_employees.training_complete'
+    _description = "report.mgmtsystem_employees.training_complete"
+    
     _inherit = 'report.report_xlsx.abstract'
 
     def generate_xlsx_report(self, workbook, data, trainings):
