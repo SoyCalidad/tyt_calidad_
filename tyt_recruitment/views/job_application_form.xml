@@ -372,6 +372,24 @@
                                 <input type="tel" class="form-control" id="phonef_3" name="phonef_3" required="required"/>
                             </div>
                         </div>
+
+                        <div class="row">
+                            <div id="container3">
+                                <div id="children" class="row">
+                                    <div class="col-sm-9 col-md-9 col-lg-9 col-xl-9 col-xxl-9 p-4 border">
+                                        <label for="child_name" class="form-label">Nombre</label>
+                                        <input type="text" class="form-control" name="child_name[]" required="required" />
+                                    </div>
+                                    <div class="col-sm-3 col-md-3 col-lg-3 col-xl-3 col-xxl-3 p-4 border">
+                                        <label for="child_age" class="form-label">Edad</label>
+                                        <input type="text" class="form-control" name="child_age[]" required="required" />
+                                    </div>                            
+                                </div>
+                            </div>
+                        </div>
+                        <div class="text-end mt-3">
+                            <button type="button" class="btn btn-primary" id="add-row3">Agregar</button>
+                        </div>
                     </section>
 
                     <section class="p-3">
@@ -676,6 +694,37 @@
         
                 // Insertar el nuevo row en el contenedor
                 document.getElementById('container2').appendChild(newRow);
+            });
+
+            //  AGREGAR O BORRAR REFERENCIAS LABORAL
+            document.getElementById('add-row3').addEventListener('click', function () {
+                // Clonar el row existente
+                const newRow = document.querySelector('#children').cloneNode(true);
+        
+                // Limpiar los valores de los inputs
+                newRow.querySelectorAll('input').forEach(input => {
+                    input.value = '';
+                });
+        
+                // Agregar el botón "Borrar" solo al nuevo row
+                const removeButton = document.createElement('button');
+                removeButton.type = 'button';
+                removeButton.className = 'btn btn-danger btn-sm remove-row';
+                removeButton.textContent = 'Borrar';
+                removeButton.addEventListener('click', function () {
+                    newRow.remove();
+                }); 
+        
+                // Crear un nuevo div para el botón "Borrar" y agregarlo
+                const buttonDiv = document.createElement('div');
+                buttonDiv.className = 'col-12 text-end mt-2';
+                buttonDiv.appendChild(removeButton);
+        
+                // Agregar el nuevo div del botón al nuevo row
+                newRow.appendChild(buttonDiv);
+        
+                // Insertar el nuevo row en el contenedor
+                document.getElementById('container3').appendChild(newRow);
             });
         </script>
 

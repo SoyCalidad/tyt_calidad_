@@ -29,14 +29,17 @@ class Attendance(models.Model):
     attendance_days_of_week_ids = fields.One2many("tyt_recruitment.attendance_days_of_week", "attendance_id", string="Días de asistencia")
 
     recruiter = fields.Char(string="Reclutador", tracking=True)
-    campaign_id = fields.Many2one("tyt_recruitment.campaign", ondelete='cascade')
+    campaign_id = fields.Many2one("tyt_recruitment.campaign", string="Campaña", ondelete='cascade')
     requisition_id = fields.Many2one("tyt_recruitment.requisition", ondelete='cascade')
 
-    examen1 = fields.Many2one('survey.survey', string="Examen 1")
-    examen2 = fields.Many2one('survey.survey', string="Examen 2")
-    examen3 = fields.Many2one('survey.survey', string="Examen 3")
-    examen4 = fields.Many2one('survey.survey', string="Examen 4")
+    surveys_ids = fields.One2many('tyt_recruitment.survey_attendance', 'attendance_id', string="Exámenes")
     
+    def action_view_notes():
+        pass
+    
+    def action_view_abc():
+        pass
+
 class AttendanceState(models.Model):
     _name = 'tyt_recruitment.tag_attendance'
     _description = 'Estado'
@@ -79,15 +82,15 @@ class DaysOfWeek(models.Model):
     opday1 = fields.Many2one('tyt_recruitment.tag_attendance', string="OPE día 01")
     opday2 = fields.Many2one('tyt_recruitment.tag_attendance', string="OPE día 02")
 
-    recruiter = fields.Char(string="Reclutador")
     prospect_turn = fields.Selection(related="attendance_id.turn", string="Turno lista de prospectos", tracking=True)
     right_turn = fields.Char(string="Turno correcto")
     observations = fields.Char(string="Observaciones")
     experience = fields.Char(string="Experiencia")
-    reason_for_withdrawal = fields.Many2one("tyt_recruitment.reason_for_withdrawal", string="Motivo de la baja")
+    reason_for_withdrawal = fields.Many2one("hr.applicant.refuse.reason", string="Motivo de rechazo")
 
     
     applicant_id = fields.Many2one("tyt_recruitment.applicant", string="Aplicante", ondelete='cascade')
+    recruiter = fields.Many2one(related="applicant_id.recruiter_id", string="Reclutador")
     login = fields.Char(related="applicant_id.employee_number", string="Login")
 
     applicant_name = fields.Char(related="applicant_id.name", string="Nombre", store=True)
@@ -122,9 +125,32 @@ class DaysOfWeek(models.Model):
                 'type': 'ir.actions.act_window_close'
             }
 
-class ReasonForWithdrawal(models.Model):
-    _name = 'tyt_recruitment.reason_for_withdrawal'
-    _description = 'Motivo de la baja'
-    _rec_name = 'text'
 
-    text = fields.Char(required=True, string="Motivo", tracking=True)
+class SurveyAttendance(models.Model):
+    _name = 'tyt_recruitment.survey_attendance'
+    _description = 'Encuesta de capacitación'
+
+    survey_id = fields.Many2one('survey.survey', string="Examen")
+    attendance_id = fields.Many2one('tyt_recruitment.attendance', string="Lista de asistencia")
+
+class KardexAttendance(models.Model):
+    _name = 'tyt_recruitment.kardex_by_applicant'
+    _description = 'Kardex de capacitación'
+
+    login = fields.Char(string="#")
+    applicant_name = fields.Char(string="Nombre del aplicante")
+
+    experience = fields.Char(string="Experiencia")
+    time = fields.Char(string="Tiempo")
+    marital_status = fields.Char(string="Turno Estado civil")
+
+    exam1 = fields.Char(string="Examen 1")
+    exam2 = fields.Char(string="Examen 2")
+    exam3 = fields.Char(string="Examen 3")
+    exam4 = fields.Char(string="Examen 4")
+
+    average = fields.Char(string="Promedio")
+
+    comments = fields.Char(string="Comentarios")
+
+    attendance_id = fields.Many2one('tyt_recruitment.attendance', string="Lista de asistencia", ondelete='cascade')

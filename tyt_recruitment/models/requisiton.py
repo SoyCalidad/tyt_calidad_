@@ -250,3 +250,8 @@ class Campaign(models.Model):
                 'default_attendance_id': attendance_list.id
             }
         }
+    
+class DeparmentDays(models.Model):
+    _inherit = 'hr.department'
+
+    days = fields.Integer( String="Días de capacitación")

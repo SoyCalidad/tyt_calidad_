@@ -197,23 +197,18 @@ class PublicFormController(http.Controller):
             }
             request.env['tyt_recruitment.reference'].sudo().create(new_reference)
 
-         # CREATING CHILDREN
+        # CREATING CHILDREN
 
+        children_names = request.httprequest.form.getlist('child_name[]')
+        children_ages = request.httprequest.form.getlist('child_age[]')
 
-        # data = {
-        #     # 'data_applicant': data_applicant,
-
-        #     # 'health_asnwer_json': health_asnwer_json,
-        #     # 'study_asnwer_json': study_asnwer_json,
-        #     # 'job_asnwer_json': job_asnwer_json,
-            
-        #     'data_academic': data_academic,
-        #     'data_father': data_father,
-        #     'data_mother': data_mother,
-        #     'data_spouse': data_spouse
-
-        #     # 'data_job_application': data_job_application,
-        # }
+        for index, child_name in enumerate(children_names):
+            new_child = {
+                'name': child_name,
+                'age': str(children_ages[index]),
+                'job_application_id': job_application.id
+            }
+            request.env['tyt_recruitment.child'].sudo().create(new_child)
 
         context = {
             'job_application_id': job_application.id,
@@ -267,6 +262,22 @@ class PublicFormController(http.Controller):
             'birthplace': str(a.birthplace),
             'applicant': a.campaign_id.id
             } for a in applicants]
+        
+        return Response(
+            json.dumps(json_data), 
+            content_type='application/json;charset=utf-8'
+        )
+    
+    @http.route('/departments/list', type='http', auth='public')
+    def list_fields_departments(self):
+        departments = request.env['hr.department'].sudo().search([])
+
+        json_data = [{
+            'display_name': str(a.id) + str(a.display_name),
+            'display_name': str(a.id) + str(a.display_name),
+            'display_name': str(a.id) + str(a.display_name),
+            'parent_id.id': str(a.x_studio_sitio),
+            } for a in departments]
         
         return Response(
             json.dumps(json_data), 
