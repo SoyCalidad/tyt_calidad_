@@ -2,7 +2,7 @@
     <!-- Crear el grupo Auditor -->
     <record id="group_auditor_user" model="res.groups">
         <field name="name">Reclutamiento Auditor  expedientes</field>
-        <field name="category_id" ref="hr_recruitment.module_category_recruitment"/>
+        <field name="category_id" ref="base.module_category_accounting"/>
     </record>
 
     <!-- Crear permisos básicos para el grupo Auditor-->
@@ -19,7 +19,7 @@
     <!-- Crear el grupo Calidad -->
     <record id="group_quality_user" model="res.groups">
         <field name="name">Reclutamiento técnico de Calidad</field>
-        <field name="category_id" ref="hr_recruitment.module_category_recruitment"/>
+        <field name="category_id" ref="base.module_category_accounting"/>
     </record>
 
     <!-- Crear permisos básicos para el grupo Calidad-->
