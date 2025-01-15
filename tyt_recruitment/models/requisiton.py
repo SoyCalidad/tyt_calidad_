@@ -191,11 +191,12 @@ class Campaign(models.Model):
     request_staff = fields.Integer(required=True, string="Personal requerido", tracking=True)
     turn = fields.Selection([('T/M', 'T/M'), ('T/V', 'T/V'), ('T/N', 'T/N')], string="Turno", tracking=True)
     priority = fields.Selection([('1', '1'), ('2', '2'), ('3', '3'), ('4', '4')], string="Prioridad", tracking=True)
-    tag_display_name = fields.Char(related='tag_id.display_name', string='Nombre del Departamento', store=True)
-    days = fields.Integer(required=True, string="Días", store=True)
 
     requisition_id = fields.Many2one("tyt_recruitment.requisition", ondelete='cascade')
+    
     tag_id = fields.Many2one('hr.department', string='Dept', options={'no_create': True}, required=True, ondelete='cascade')
+    tag_display_name = fields.Char(related='tag_id.display_name', string='Nombre del Departamento', store=True)
+    days = fields.Integer(related='tag_id.days', string="Días", store=True)
 
     def action_open_job_application(self):
         requisition_id = self.requisition_id.id

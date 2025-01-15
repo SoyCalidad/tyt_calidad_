@@ -2,6 +2,10 @@ from odoo import http
 from odoo.http import request, Response
 import json
 
+import logging
+_logger = logging.getLogger(__name__)
+
+
 class PublicFormController(http.Controller):
     
     @http.route('/job_application/<string:requisition_id>', type='http', auth='public', website=True)
@@ -239,7 +243,7 @@ class PublicFormController(http.Controller):
             'id': a.id, 
             'request_date': str(a.request_date), 
             'requisition': a.requisition, 
-            'campaign': a.campaign_id.id, 
+            'campaign': a.campaign_id.id,
             'site': a.site,
             'applicant': a.applicant_id.id
             } for a in applications]
@@ -268,15 +272,42 @@ class PublicFormController(http.Controller):
             content_type='application/json;charset=utf-8'
         )
     
-    @http.route('/departments/list', type='http', auth='public')
+    @http.route('/departments/update_days', type='http', auth='public')
     def list_fields_departments(self):
+
+        departments_temp = request.env['hr.department'].sudo().search([])
+
+        for department in departments_temp:
+
+            if str(department.master_department_id.name) == 'Mtya':
+                department.days = 12
+            elif str(department.master_department_id.name) == 'Mtyt':
+                department.days = 3
+            elif str(department.master_department_id.name) == 'Qro':
+                department.days = 12
+            elif str(department.master_department_id.name) == 'Gdl':
+                department.days = 6
+            elif str(department.master_department_id.name) == 'Hmo':
+                department.days = 3
+            elif str(department.master_department_id.name) == 'Mty5':
+                department.days = 2
+            elif str(department.master_department_id.name) == 'Mid':
+                department.days = 12
+            elif str(department.master_department_id.name) == 'Pbl':
+                department.days = 18
+            elif str(department.master_department_id.name) == 'Pblcat':
+                department.days = 12
+            else:
+                department.days = 5
+
         departments = request.env['hr.department'].sudo().search([])
 
         json_data = [{
-            'display_name': str(a.id) + str(a.display_name),
-            'display_name': str(a.id) + str(a.display_name),
-            'display_name': str(a.id) + str(a.display_name),
-            'parent_id.id': str(a.x_studio_sitio),
+            'id': str(a.id),
+            'name': str(a.name),
+            'display_name': str(a.display_name),
+            'master_department_id': str(a.master_department_id.name),
+            'days': str(a.days), 
             } for a in departments]
         
         return Response(
@@ -290,3 +321,4 @@ class PublicFormController(http.Controller):
             ('type', '=', type)
         ])
         return questions
+    

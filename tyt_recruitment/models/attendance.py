@@ -21,24 +21,59 @@ class Attendance(models.Model):
     week = fields.Char( string="Semana", tracking=True)
     turn = fields.Selection([('T/M', 'T/M'), ('T/V', 'T/V'), ('T/N', 'T/N')], string="Turno lista de prospectos", tracking=True)
 
-    income = fields.Char( string="Ingresos", tracking=True)
+    income = fields.Char( string="Ingresos", compute="_compute_income", store=True, tracking=True)
     returns = fields.Char( string="Regresos", tracking=True)
+    desertion = fields.Char( string="Deserción", tracking=True)
 
-    days = fields.Integer(string="Días", store=True)
+    days = fields.Integer(string="Días de capacitación", store=True)
 
     attendance_days_of_week_ids = fields.One2many("tyt_recruitment.attendance_days_of_week", "attendance_id", string="Días de asistencia")
+    kardex_by_applicant_ids = fields.One2many("tyt_recruitment.kardex_by_applicant", "attendance_id", string="Kardex de asistencia")
+    kardex_by_applicant_two_ids = fields.One2many("tyt_recruitment.kardex_by_applicant", "attendance_id", string="Kardex de asistencia")
+
+    view_kardex = fields.Boolean(string="Ver kardex", default=False)
+    view_kardex_certificate = fields.Boolean(string="Ver kardex certificación", default=False)
 
     recruiter = fields.Char(string="Reclutador", tracking=True)
     campaign_id = fields.Many2one("tyt_recruitment.campaign", string="Campaña", ondelete='cascade')
     requisition_id = fields.Many2one("tyt_recruitment.requisition", ondelete='cascade')
 
+    survey_counter = fields.Integer(string="Cantidad de exámenes", compute="_compute_survey_counter", store=True)
     surveys_ids = fields.One2many('tyt_recruitment.survey_attendance', 'attendance_id', string="Exámenes")
-    
-    def action_view_notes():
-        pass
-    
-    def action_view_abc():
-        pass
+
+    @api.depends('kardex_by_applicant_ids.login')
+    def _compute_income(self):
+        for record in self:
+            record.income = sum(1 for kardex in record.kardex_by_applicant_ids if kardex.login)
+
+    @api.depends('surveys_ids')
+    def _compute_survey_counter(self):
+        for record in self:
+            record.survey_counter = len(record.surveys_ids)
+
+    def action_view_kardex(self):
+        
+        self.view_kardex = True
+
+        for kardex_applicant in self.kardex_by_applicant_ids:
+            for index, survey in enumerate(self.surveys_ids):
+                
+                answer = self.env['survey.user_input.line'].sudo().search([
+                    ('survey_id', '=', survey.survey_id.id),
+                    ('value_char_box', '=', kardex_applicant.attendance_days_of_week_id.applicant_id.social_security_number)
+                ], limit=1)
+
+                field_name = f"exam{index+1}"
+                value = "0.0"
+
+                if answer: 
+                    value = str(answer.user_input_id.scoring_percentage)
+
+                if hasattr(kardex_applicant, field_name):
+                    setattr(kardex_applicant, field_name, value)
+            
+    def action_view_kardex_certificate(self):
+        self.view_kardex_certificate = True
 
 class AttendanceState(models.Model):
     _name = 'tyt_recruitment.tag_attendance'
@@ -125,12 +160,13 @@ class DaysOfWeek(models.Model):
                 'type': 'ir.actions.act_window_close'
             }
 
-
 class SurveyAttendance(models.Model):
     _name = 'tyt_recruitment.survey_attendance'
     _description = 'Encuesta de capacitación'
 
     survey_id = fields.Many2one('survey.survey', string="Examen")
+    title = fields.Char(related='survey_id.title', string='Título')
+    
     attendance_id = fields.Many2one('tyt_recruitment.attendance', string="Lista de asistencia")
 
 class KardexAttendance(models.Model):
@@ -138,19 +174,78 @@ class KardexAttendance(models.Model):
     _description = 'Kardex de capacitación'
 
     login = fields.Char(string="#")
-    applicant_name = fields.Char(string="Nombre del aplicante")
 
     experience = fields.Char(string="Experiencia")
     time = fields.Char(string="Tiempo")
-    marital_status = fields.Char(string="Turno Estado civil")
 
     exam1 = fields.Char(string="Examen 1")
     exam2 = fields.Char(string="Examen 2")
     exam3 = fields.Char(string="Examen 3")
     exam4 = fields.Char(string="Examen 4")
-
-    average = fields.Char(string="Promedio")
+    exam5 = fields.Char(string="Examen 5")
+    exam6 = fields.Char(string="Examen 6")
+    exam7 = fields.Char(string="Examen 7")
+    exam8 = fields.Char(string="Examen 8")
+    exam9 = fields.Char(string="Examen 9")
+    exam10 = fields.Char(string="Examen 10")
+    exam11 = fields.Char(string="Examen 11")
+    exam12 = fields.Char(string="Examen 12")
+    exam13 = fields.Char(string="Examen 13")
+    exam14 = fields.Char(string="Examen 14")
+    exam15 = fields.Char(string="Examen 15")
 
     comments = fields.Char(string="Comentarios")
 
+    certification1 = fields.Char(string="Certificado 1")
+    certification2 = fields.Char(string="Certificado 2")
+    certification3 = fields.Char(string="Certificado 3")
+    comments_quality = fields.Char(string="Comentario - técnico de calidad")
+
+    accreditation_status = fields.Char(string="Estatus de certificación")
+    concession = fields.Char(string="Concesión")
+    observation = fields.Char(string="Observaciones")
+
+    attendance_days_of_week_id = fields.Many2one('tyt_recruitment.attendance_days_of_week', string="Kardex de asistencia", ondelete='cascade')
+    applicant_id = fields.Many2one(related="attendance_days_of_week_id.applicant_id", string="Aplicante", ondelete='cascade')
+    marital_status = fields.Selection(related="applicant_id.marital_status", string="Estado civil")
+    applicant_name = fields.Char(related="applicant_id.computed_name", string="Nombre completo")
+
     attendance_id = fields.Many2one('tyt_recruitment.attendance', string="Lista de asistencia", ondelete='cascade')
+    survey_counter = fields.Integer(related="attendance_id.survey_counter", string="Contandor de exámenes")
+
+    average = fields.Float(string="Promedio", compute="_compute_average_score", store=True)
+    highest_score = fields.Float(string="Promedio", compute="_compute_highest_score", store=True)
+
+    @api.depends('survey_counter', 'exam1', 'exam2', 'exam3', 'exam4', 'exam5',
+                 'exam6', 'exam7', 'exam8', 'exam9', 'exam10', 'exam11',
+                 'exam12', 'exam13', 'exam14', 'exam15')
+    def _compute_average_score(self):
+        for record in self:
+            total = 0
+            count = 0
+            for i in range(1, record.survey_counter + 1):
+                exam_field = f"exam{i}"
+                score = getattr(record, exam_field, None)
+                try:
+                    total += float(score)
+                    count += 1
+                except ValueError:
+                    continue
+            record.average = total / count if count > 0 else 0
+
+    @api.depends('survey_counter', 'exam1', 'exam2', 'exam3', 'exam4', 'exam5',
+             'exam6', 'exam7', 'exam8', 'exam9', 'exam10', 'exam11',
+             'exam12', 'exam13', 'exam14', 'exam15')
+    def _compute_highest_score(self):
+        for record in self:
+            highest_score = 0
+            for i in range(1, record.survey_counter + 1):
+                exam_field = f"exam{i}"
+                score = getattr(record, exam_field, None)
+                if score:
+                    try:
+                        score_value = float(score)
+                        highest_score = max(highest_score, score_value)
+                    except ValueError:
+                        continue
+            record.highest_score = highest_score

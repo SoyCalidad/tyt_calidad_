@@ -22,10 +22,12 @@
       <field name="model">tyt_recruitment.attendance</field>
       <field name="arch" type="xml">
         <form string="Asistencia">
+            <field name="view_kardex" invisible="1" />
+            <field name="view_kardex_certificate" invisible="1" />
 
             <header>
-              <button name="action_view_notes" string="Ver Kardex" class="oe_highlight"/>
-              <button name="action_view_abc" string="Ver abc" class="oe_highlight"/>
+              <button name="action_view_kardex" string="Ver Kardex" type="object" class="oe_highlight" />
+              <button name="action_view_kardex_certificate" string="Ver Certificación Kardex" type="object" class="oe_highlight" />
             </header>
 
             <group col="6">
@@ -36,12 +38,16 @@
                 <field name="week"/>
                 <field name="turn"/>
                 <field name="days"/>
+                <field name="survey_counter"/>
               </group>
               <group >
                 <field name="income"/>
               </group>
               <group >
                 <field name="returns"/>
+              </group>
+              <group >
+                <field name="desertion"/>
               </group>
             </group>
             <notebook>
@@ -90,12 +96,84 @@
               </field>                  
             </page>
             <page string="Exámenes">
-              <group>
-                <field name="surveys_ids" />
-              </group>
+              <field name="surveys_ids" nolabel="1"> 
+                <tree editable="bottom">
+                  <field name="id" width="30px" />
+                  <field name="survey_id" />
+                </tree>
+              </field>
             </page>
-            <page string="Kardex">
-              <field name="id" string="asdf" />
+            <page string="Kardex" attrs="{'invisible': [('view_kardex', '=', False)]}" >
+              <field name="kardex_by_applicant_ids" nolabel="1" options="{'no_create': True}">
+                <tree editable="bottom">
+
+                  <field name="id" width="30px" />
+                  <field name="login" width="30px" />
+                  <field name="applicant_name" width="30px" />
+
+                  <field name="experience" width="30px" />
+                  <field name="time" width="30px" />
+                  <field name="marital_status" width="30px" />
+                  <field name="exam1" width="30px" attrs="{'column_invisible': [('parent.survey_counter', '&lt;', 1)]}"/>
+                  <field name="exam2" width="30px" attrs="{'column_invisible': [('parent.survey_counter', '&lt;', 2)]}"/>
+                  <field name="exam3" width="30px" attrs="{'column_invisible': [('parent.survey_counter', '&lt;', 3)]}"/>
+                  <field name="exam4" width="30px" attrs="{'column_invisible': [('parent.survey_counter', '&lt;', 4)]}"/>
+                  <field name="exam5" width="30px" attrs="{'column_invisible': [('parent.survey_counter', '&lt;', 5)]}"/>
+                  <field name="exam6" width="30px" attrs="{'column_invisible': [('parent.survey_counter', '&lt;', 6)]}"/>
+                  <field name="exam7" width="30px" attrs="{'column_invisible': [('parent.survey_counter', '&lt;', 7)]}"/>
+                  <field name="exam8" width="30px" attrs="{'column_invisible': [('parent.survey_counter', '&lt;', 8)]}" />
+                  <field name="exam9" width="30px" attrs="{'column_invisible': [('parent.survey_counter', '&lt;', 9)]}" />
+                  <field name="exam10" width="30px" attrs="{'column_invisible': [('parent.survey_counter', '&lt;', 10)]}" />
+                  <field name="exam11" width="30px" attrs="{'column_invisible': [('parent.survey_counter', '&lt;', 11)]}" />
+                  <field name="exam12" width="30px" attrs="{'column_invisible': [('parent.survey_counter', '&lt;', 12)]}" />
+                  <field name="exam13" width="30px" attrs="{'column_invisible': [('parent.survey_counter', '&lt;', 13)]}" />
+                  <field name="exam14" width="30px" attrs="{'column_invisible': [('parent.survey_counter', '&lt;', 14)]}" />
+                  <field name="exam15" width="30px" attrs="{'column_invisible': [('parent.survey_counter', '&lt;', 15)]}" />
+
+                  <field name="average" width="30px" />
+                  <field name="comments" width="30px" />
+                </tree>
+              </field>
+            </page>
+            <page string="Kardex - Certificación" groups="tyt_recruitment.group_quality_user" attrs="{'invisible': [('view_kardex_certificate', '=', False)]}">
+              <field name="kardex_by_applicant_two_ids" nolabel="1" options="{'no_create': True}">
+                <tree editable="bottom">
+                  <field name="id" width="30px" readonly="1"/>
+                  <field name="applicant_name" width="30px" readonly="1"/>
+                  <field name="experience" width="30px" readonly="1"/>
+                  <field name="time" width="30px" readonly="1"/>
+                  <field name="marital_status" width="30px" readonly="1"/>
+
+                  <field name="exam1" width="30px" readonly="1" attrs="{'column_invisible': [('parent.survey_counter', '&lt;', 1)]}"/>
+                  <field name="exam2" width="30px" readonly="1" attrs="{'column_invisible': [('parent.survey_counter', '&lt;', 2)]}"/>
+                  <field name="exam3" width="30px" readonly="1" attrs="{'column_invisible': [('parent.survey_counter', '&lt;', 3)]}"/>
+                  <field name="exam4" width="30px" readonly="1" attrs="{'column_invisible': [('parent.survey_counter', '&lt;', 4)]}"/>
+                  <field name="exam5" width="30px" readonly="1" attrs="{'column_invisible': [('parent.survey_counter', '&lt;', 5)]}"/>
+                  <field name="exam6" width="30px" readonly="1" attrs="{'column_invisible': [('parent.survey_counter', '&lt;', 6)]}"/>
+                  <field name="exam7" width="30px" readonly="1" attrs="{'column_invisible': [('parent.survey_counter', '&lt;', 7)]}"/>
+                  <field name="exam8" width="30px" readonly="1" attrs="{'column_invisible': [('parent.survey_counter', '&lt;', 8)]}"/>
+                  <field name="exam9" width="30px" readonly="1" attrs="{'column_invisible': [('parent.survey_counter', '&lt;', 9)]}"/>
+                  <field name="exam10" width="30px" readonly="1" attrs="{'column_invisible': [('parent.survey_counter', '&lt;', 10)]}"/>
+                  <field name="exam11" width="30px" readonly="1" attrs="{'column_invisible': [('parent.survey_counter', '&lt;', 11)]}"/>
+                  <field name="exam12" width="30px" readonly="1" attrs="{'column_invisible': [('parent.survey_counter', '&lt;', 12)]}"/>
+                  <field name="exam13" width="30px" readonly="1" attrs="{'column_invisible': [('parent.survey_counter', '&lt;', 13)]}"/>
+                  <field name="exam14" width="30px" readonly="1" attrs="{'column_invisible': [('parent.survey_counter', '&lt;', 14)]}"/>
+                  <field name="exam15" width="30px" readonly="1" attrs="{'column_invisible': [('parent.survey_counter', '&lt;', 15)]}"/>
+
+                  <field name="average" width="30px" readonly="1"/>
+                  <field name="comments" width="30px" readonly="1"/>
+
+                  <field name="certification1" width="30px" />
+                  <field name="certification2" width="30px" />
+                  <field name="certification3" width="30px" />
+                  <field name="highest_score" width="30px" />
+                  <field name="comments_quality" width="30px" />
+                  
+                  <field name="accreditation_status" width="30px" />
+                  <field name="concession" width="30px" />
+                  <field name="observation" width="30px" />
+                </tree>
+              </field>
             </page>
           </notebook>
         </form>

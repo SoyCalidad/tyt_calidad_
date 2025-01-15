@@ -158,7 +158,7 @@ class JobApplication(models.Model):
             bool(self.interbank_key),
             bool(self.value_proposition)
         ])
-        
+
         self.status_loaded = (all_fields_filled/14)*100
         if all_fields_filled == 14:
             self.expedient_status = True
@@ -206,6 +206,15 @@ class JobApplication(models.Model):
             self.applicant_id.status = True
         else:
             self.applicant_id.status = False
+
+    @api.model
+    def unlink(self):
+        for record in self:
+            # Aquí puedes agregar la lógica personalizada
+            if record.some_field == 'value':
+                _logger.info("removedddddddddddddddddddddddd")
+                _logger.info(record.some_field)
+        return super(JobApplication, self).unlink()
 
     def action_open_health_survey(self):
 
