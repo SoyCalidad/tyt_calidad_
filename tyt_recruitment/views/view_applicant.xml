@@ -144,7 +144,11 @@
                             <button name="open_requisition_view" type="object" class="oe_stat_button" icon="fa-check-square-o">
                                 Requisición
                             </button>
-                            <button name="open_user_input_view" type="object" class="oe_stat_button" icon="fa-check-square-o">
+                            <button 
+                                name="open_user_input_view" 
+                                type="object"
+                                class="oe_stat_button" 
+                                icon="fa-check-square-o">
                                 Exámenes
                             </button>
                         </div>
