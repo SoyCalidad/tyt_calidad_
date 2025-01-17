@@ -8,6 +8,7 @@ from datetime import datetime
 
 class InventoryReportMixin(models.AbstractModel):
     _name = 'report.tyt_process.inventory_report_mixin'
+    _description = "report.tyt_process.inventory_report_mixin"
     _inherit = 'report.report_xlsx.abstract'
 
     def generate_inventory_report(self, workbook, data, records, report_type):

@@ -3,6 +3,7 @@ from odoo.exceptions import UserError
 
 class TrainingDatabaseWizard(models.TransientModel):
     _name = 'training_database.wizard'
+    _description = "training_database.wizard"
 
     training_filter = fields.Boolean(string='Filtrar por capacitaciones', default=True)
     training_ids = fields.Many2many(
