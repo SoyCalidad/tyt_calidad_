@@ -8,6 +8,7 @@
     'website': "http://www.soycalidad.com",
 
     'category': 'Uncategorized',
+    'license': 'Other proprietary',
     'version': '1.1',
 
     'depends': ['base','contacts', 'report_xlsx', 'hola_calidad', 'mgmtsystem_process'],

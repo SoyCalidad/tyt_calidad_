@@ -11,7 +11,7 @@
     """,
 
     'author': "6",
-
+    'license': 'Other proprietary',
     'category': 'Uncategorized',
     'version': '0.1',
 
