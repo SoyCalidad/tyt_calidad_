@@ -3,6 +3,7 @@ from odoo import api, fields, models
 
 class AnnouncementWizard(models.TransientModel):
     _name = 'announcement.wizard'
+    _description = "announcement.wizard"
 
     company_id = fields.Many2one(
         string=u'Compañia',
@@ -46,6 +47,7 @@ class AnnouncementWizard(models.TransientModel):
 
 class AnnouncementReport(models.AbstractModel):
     _name = 'report.mgmtsystem_employees.report_announcement_template'
+    _description = "report.mgmtsystem_employees.report_announcement_template"
 
     @api.model
     def _get_report_values(self, docids, data=None):

@@ -4,6 +4,7 @@ from collections import defaultdict
 
 class ComplaintReport(models.AbstractModel):
     _name = 'report.mgmtsystem_qualitymanual.report_qualitymanual'
+    _description = "report.mgmtsystem_qualitymanual.report_qualitymanual"
 
     @api.model
     def _get_report_values(self, docids, data=None):

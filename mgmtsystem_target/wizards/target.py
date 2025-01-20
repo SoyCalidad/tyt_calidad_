@@ -4,6 +4,7 @@ from odoo.exceptions import UserError
 
 class Measurement(models.TransientModel):
     _name = 'mgmtsystem.measurement.wizard'
+    _description = "mgmtsystem.measurement.wizard"
 
     name = fields.Char(string='Nombre', required=True)
     date = fields.Datetime(string='Fecha', required=True)

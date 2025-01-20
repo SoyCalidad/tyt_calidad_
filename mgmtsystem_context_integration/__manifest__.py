@@ -5,7 +5,7 @@
     'summary': 'Integra los módulos de objetivos',
     'author': 'Soy Calidad',
     'website': 'www.soycalidad.com',
-    'license': '',
+    'license': 'Other proprietary',
     'category': 'soycalidad',
     'depends': [
         'mgmtsystem_context',

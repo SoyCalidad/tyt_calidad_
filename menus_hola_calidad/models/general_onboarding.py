@@ -198,6 +198,7 @@ class ResCompany(models.Model):
 
 class GeneralCheck(models.Model):
     _name = 'general.check'
+    _description = "general.check"
 
     def action_save_onboarding_general_plan_step(self):
         """ Set the onboarding step as done """

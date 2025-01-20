@@ -19,6 +19,8 @@ from PIL import Image
 class ComunicationPlanXLS(models.AbstractModel):
     _name = 'report.mgmtsystem_comunication.report_comunication_plan'
     _inherit = 'report.report_xlsx.abstract'
+    _description = "report.mgmtsystem_comunication.report_comunication_plan"
+
 
     def generate_xlsx_report(self, workbook, data, partners):
         """Generate a xls report with the data

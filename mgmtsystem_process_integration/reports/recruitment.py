@@ -4,6 +4,7 @@ from collections import defaultdict
 
 class RecruitmentReport(models.AbstractModel):
     _name = 'report.mgmtsystem_employees.report_applicant'
+    _description = "report.mgmtsystem_employees.report_applicant"
 
     @api.model
     def _get_report_values(self, docids, data=None):
@@ -22,6 +23,7 @@ class RecruitmentReport(models.AbstractModel):
 
 class RecruitmentReportWizard(models.TransientModel):
     _name = 'hr.applicant.report.wizard'
+    _description = "hr.applicant.report.wizard"
 
     applicant_id = fields.Many2one(
         'hr.applicant', string='Solicitudes', required=True)
@@ -42,6 +44,7 @@ class RecruitmentReportWizard(models.TransientModel):
 
 class GeneralRecruitmentReport(models.AbstractModel):
     _name = 'report.mgmtsystem_employees.report_general_applicant'
+    _description = "report.mgmtsystem_employees.report_general_applicant"
 
     @api.model
     def _get_report_values(self, docids, data=None):
@@ -57,6 +60,7 @@ class GeneralRecruitmentReport(models.AbstractModel):
 
 class GeneralRecruitmentReportWizard(models.TransientModel):
     _name = 'hr.general.applicant.report.wizard'
+    _description = "hr.general.applicant.report.wizard"
 
     applicant_ids = fields.Many2many('hr.applicant', string='Solicitudes')
 
@@ -75,6 +79,7 @@ class GeneralRecruitmentReportWizard(models.TransientModel):
 
 class PorterForcesReportXLS(models.AbstractModel):
     _name = 'report.mgmtsystem_process_integration.general_applicant_report'
+    _description = "report.mgmtsystem_process_integration.general_applicant_report"
     _inherit = 'report.report_xlsx.abstract'
 
     def generate_xlsx_report(self, workbook, data, partners):

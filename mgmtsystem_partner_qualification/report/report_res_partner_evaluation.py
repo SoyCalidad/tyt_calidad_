@@ -11,6 +11,8 @@ from datetime import date
 class PartnerEvaluationReport(models.AbstractModel):
     _name = 'report.mgmtsystem_partner_qualification.partner_evaluation'
     _inherit = 'report.report_xlsx.abstract'
+    _description = "report.mgmtsystem_partner_qualification.partner_evaluation"
+
 
     def generate_xlsx_report(self, workbook, data, evaluations):
         format21_c_bold = workbook.add_format(

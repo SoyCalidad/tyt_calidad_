@@ -8,7 +8,8 @@ import logging
 
 class wizard_stakeholder(models.TransientModel):
     _name = "wizard.stakeholder.report"
-    
+    _description = "wizard.stakeholder.report"    
+
     stakeholder_matrix_id = fields.Many2one('mgmtsystem.stakeholders', string='Matriz de interesados')
 
     def action_print(self):

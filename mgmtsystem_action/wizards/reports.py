@@ -5,6 +5,8 @@ from datetime import datetime
 
 class ActionActionReportWizard(models.TransientModel):
     _name = 'action.action_report.wizard'
+    _description = "action.action_report.wizard"
+
 
     action_ids = fields.Many2many(
         'mgmtsystem.action',

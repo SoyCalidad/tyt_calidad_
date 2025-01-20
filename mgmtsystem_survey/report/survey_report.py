@@ -4,6 +4,8 @@ from odoo.exceptions import UserError
 
 class SurveyReportWizard(models.TransientModel):
     _name = 'survey_report.wizard'
+    _description = "survey_report.wizard"
+
 
     survey_id = fields.Many2one(
         'survey.survey', string='Encuesta', required=True)

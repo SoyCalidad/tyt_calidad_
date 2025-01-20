@@ -6,6 +6,8 @@ from odoo.exceptions import UserError, RedirectWarning, ValidationError
 
 class PlanInfrastructureLine(models.Model):
     _name = 'mgmtsystem.infrastructure.line'
+    _description = "mgmtsystem.infrastructure.line"
+
 
     plani_id = fields.Many2one(
         string=u'Programa de infraestructura',

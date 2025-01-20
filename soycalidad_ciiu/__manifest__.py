@@ -5,7 +5,7 @@
     'summary': 'Añade el tipo de actividad económica a los contactos',
     'author': 'Soy Calidad',
     'website': 'www.soycalidad.com',
-    'license': '',
+    'license': 'Other proprietary',
     'category': 'soycalidad',
     'depends': [
         'base'

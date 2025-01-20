@@ -3,6 +3,8 @@ from odoo import _, api, fields, models
 
 class AuditWizard(models.Model):
     _name = 'audit.report.wizard'
+    _description = "audit.report.wizard"
+
 
     # start_date = fields.Date(string='Fecha inicial')
     # end_date = fields.Date(string='Fecha final')
@@ -25,6 +27,8 @@ class AuditWizard(models.Model):
 
 class AuditReport(models.AbstractModel):
     _name = 'report.mgmtsystem_audit.audit_report'
+    _description = "report.mgmtsystem_audit.audit_report"
+
 
     @api.model
     def _get_report_values(self, docids, data=None):
@@ -43,6 +47,8 @@ class AuditReport(models.AbstractModel):
 
 class AuditPlanWizard(models.Model):
     _name = 'audit.plan.report.wizard'
+    _description = "audit.plan.report.wizard"
+
 
     audit_plan_id = fields.Many2one(
         comodel_name='audit.plan', string='Programa de auditorías', required=True)
@@ -68,6 +74,8 @@ class AuditPlanWizard(models.Model):
 
 class AuditPlanReport(models.AbstractModel):
     _name = 'report.mgmtsystem_audit.reporte_plananual02_auditorias_template'
+    _description = "report.mgmtsystem_audit.reporte_plananual02_auditorias_template"
+
 
     @api.model
     def _get_report_values(self, docids, data=None):
@@ -86,6 +94,8 @@ class AuditPlanReport(models.AbstractModel):
 
 class AuditReportWizard(models.Model):
     _name = 'audit.report.report.wizard'
+    _description = "audit.report.wizard"
+
 
     audit_report_id = fields.Many2one(
         comodel_name='audit.report', string='Informe de auditoría', required=True)
@@ -101,6 +111,8 @@ class AuditReportWizard(models.Model):
 
 class AuditReportReport(models.AbstractModel):
     _name = 'report.mgmtsystem_audit.report_informe_auditorias_template'
+    _description = "report.mgmtsystem_audit.report_informe_auditorias_template"
+
 
     @api.model
     def _get_report_values(self, docids, data=None):

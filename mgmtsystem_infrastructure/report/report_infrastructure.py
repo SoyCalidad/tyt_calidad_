@@ -9,6 +9,8 @@ from odoo.http import request
 
 class infrastructureWizard(models.TransientModel):
     _name = 'mgmtsystem.infrastructure.wizard'
+    _description = "mgmtsystem.infrastructure.wizard"
+
 
     infrastructure_id = fields.Many2one(
         'mgmtsystem.infrastructure', string='Inventariado', required=True)
@@ -26,6 +28,8 @@ class infrastructureWizard(models.TransientModel):
 
 class EquipmentWizard(models.TransientModel):
     _name = 'maintenance.equipment.wizard'
+    _description = "maintenance.equipment.wizard"
+
 
     equipment_ids = fields.Many2many('maintenance.equipment', string='Equipos')
 
@@ -40,6 +44,8 @@ class EquipmentWizard(models.TransientModel):
 class EquipmentReport(models.AbstractModel):
     _name = 'report.equipment_xls'
     _inherit = 'report.report_xlsx.abstract'
+    _description = "report.equipment_xls"
+
 
     def generate_xlsx_report(self, workbook, data, items):
         format21_c_bold = workbook.add_format(
@@ -128,6 +134,8 @@ class EquipmentReport(models.AbstractModel):
 class InfrastructureReport(models.AbstractModel):
     _name = 'report.mgmtsystem_infrastructure_report_xls'
     _inherit = 'report.report_xlsx.abstract'
+    _description = "report.mgmtsystem_infrastructure_report_xls"
+
 
     def generate_xlsx_report(self, workbook, data, items):
         format21_c_bold = workbook.add_format(

@@ -8,6 +8,7 @@ import logging
 
 class InternalIssueWizard(models.TransientModel):
     _name = "wizard.internal_issue.report"
+    _description = "wizard.internal_issue.report"
 
     internal_issue_id = fields.Many2one(
         'mgmtsystem.context.internal_issue',
@@ -29,6 +30,8 @@ class InternalIssueWizard(models.TransientModel):
 
 class InternalIssueReport(models.AbstractModel):
     _name = 'report.mgmtsystem_context.report_internal_issue_template'
+    _description = "report.mgmtsystem_context.report_internal_issue_template"
+
 
     @api.model
     def _get_report_values(self, docids, data=None):

@@ -2,6 +2,7 @@ from odoo import api, fields, models
 
 class SupplierWizard(models.TransientModel):
     _name = 'supplier.wizard.report'
+    _description = "supplier.wizard.report"
 
     is_critical = fields.Boolean(string='Solo proveedores críticos')
     
@@ -18,6 +19,7 @@ class SupplierWizard(models.TransientModel):
     
 class CustomerWizard(models.TransientModel):
     _name = 'customer.wizard.report'
+    _description = "customer.wizard.report"
 
     is_critical = fields.Boolean(string='Solo clientes críticos')
     

@@ -7,6 +7,7 @@ from PIL import Image
 
 class StakeholdersReportMixin(models.AbstractModel):
     _name = 'report.tyt_context.stakeholders_report_mixin'
+    _description = "report.tyt_context.stakeholders_report_mixin"
     _inherit = 'report.report_xlsx.abstract'
 
     def generate_stakeholders_report(self, workbook, data, stakeholders):
@@ -143,6 +144,7 @@ class StakeholdersReportMixin(models.AbstractModel):
 
 class IndividualStakeholdersReport(models.AbstractModel):
     _name = 'report.tyt_context.individual_stakeholders_report'
+    _description = "report.tyt_context.individual_stakeholders_report"
     _inherit = 'report.tyt_context.stakeholders_report_mixin'
 
     def generate_xlsx_report(self, workbook, data, stakeholders):
@@ -152,6 +154,7 @@ class IndividualStakeholdersReport(models.AbstractModel):
 
 class GeneralStakeholdersReport(models.AbstractModel):
     _name = 'report.tyt_context.general_stakeholders_report'
+    _description = "report.tyt_context.general_stakeholders_report"
     _inherit = 'report.tyt_context.stakeholders_report_mixin'
 
     def generate_xlsx_report(self, workbook, data, partners):

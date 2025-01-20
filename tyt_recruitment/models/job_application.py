@@ -265,7 +265,6 @@ class Applicant(models.Model):
     social_security_number = fields.Char(string="Número de Seguro Social")
     rfc = fields.Char(string="RFC")
     curp = fields.Char(string="CURP")
-    employee_number = fields.Char(string="Número de empleado")
     address_street = fields.Char(string="Calle y Número")
     address_neighborhood = fields.Char(string="Colonia")
     address_city = fields.Char(string="Municipio")
@@ -284,6 +283,9 @@ class Applicant(models.Model):
 
     recruiter_comments = fields.Char(string="Comentarios del reclutador")
     recruiter_id = fields.Many2one('hr.employee', string="Reclutador")
+
+    employee_id = fields.Many2one('hr.employee', string="Empleado relacionado")
+    employee_number = fields.Char(related="employee_id.x_studio_numero", string="Número de empleado")
 
     expedient_status = fields.Boolean(string="Estado de carga", default=False)
     has_complete_survey = fields.Boolean(string='Tiene Encuesta Completada')
@@ -342,10 +344,8 @@ class Applicant(models.Model):
     def open_user_input_view(self):
         
         question = self.env['survey.question'].sudo().search([('is_a_guest_question', '=', True)])
-        answer = self.env['survey.user_input.line'].sudo().search([('question_id', '=', question.id)])
-        _logger.info("answer.user_input_id")
-        _logger.info(answer.user_input_id)
-        inputs = self.env['survey.user_input'].sudo().search([('id', '=', answer.user_input_id.id)])
+        answer = self.env['survey.user_input.line'].sudo().search([('question_id', 'in', question.ids)])
+        inputs = self.env['survey.user_input'].sudo().search([('id', 'in', answer.user_input_id.ids)])
 
         if inputs:
             return {
@@ -360,7 +360,6 @@ class Applicant(models.Model):
             return {
                 'type': 'ir.actions.act_window_close'
             }
-
         
 class DataAcademic(models.Model):
     _name = 'tyt_recruitment.data_academic'

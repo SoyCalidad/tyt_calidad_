@@ -3,6 +3,7 @@ from odoo import models, fields
 
 class HrJobWorkday(models.Model):
     _name = 'hr.job.work_day'
+    _description = "hr.job.work_day"
 
     name = fields.Integer()
 

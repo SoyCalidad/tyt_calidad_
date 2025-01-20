@@ -28,6 +28,7 @@ def cleanhtml(raw_html):
 
 class PorterForcesReportXLS(models.AbstractModel):
     _name = 'report.mgmtsystem_process_integration.process_file_xls'
+    _description = "report.mgmtsystem_process_integration.process_file_xls"
     _inherit = 'report.report_xlsx.abstract'
 
     def generate_xlsx_report(self, workbook, data, process):

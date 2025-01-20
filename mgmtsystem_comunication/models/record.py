@@ -365,6 +365,8 @@ class RecordMeetingLine(models.Model):
 
 class AssistanceMeeting(models.Model):
     _name = "assistance.meeting"
+    _description = "assistance.meeting"
+
 
     record_id = fields.Many2one(
         string=u'Acta de reunión',

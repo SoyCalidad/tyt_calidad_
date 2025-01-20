@@ -3,6 +3,8 @@ from odoo import models, fields, api
 
 class ExternalIssueCreate(models.TransientModel):
     _name = 'mgmtsystem.context.external_issue.create_wizard'
+    _description = "mgmtsystem.context.external_issue.create_wizard"
+
 
     f1_name = fields.Char(string='Nombre')
     f1_desc = fields.Text(string='Descripción')

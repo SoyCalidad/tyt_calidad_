@@ -15,6 +15,7 @@ class EmployeeCertificate(models.Model):
 
 class TrainingCertificate(models.TransientModel):
     _name = 'mgmtsystem.plan.training.certificate.wizard'
+    _description = "mgmtsystem.plan.training.certificate.wizard"
 
     employee_ids = fields.Many2many('hr.employee', string='Empleados')
 

@@ -2,6 +2,7 @@ from odoo import api, fields, models
 
 class TrainingPlanWizard(models.TransientModel):
     _name = 'training.plan.wizard'
+    _description = "training.plan.wizard"
     
     training_plan_id = fields.Many2one('mgmtsystem.plan', string='Programa de capacitaciones')
     
@@ -20,6 +21,7 @@ class TrainingPlanWizard(models.TransientModel):
 
 class TrainingPlanReport(models.AbstractModel):
     _name = 'report.mgmtsystem_employees.training_plan_report'
+    _description = "report.mgmtsystem_employees.training_plan_report"
 
     @api.model
     def _get_report_values(self, docids, data=None):
