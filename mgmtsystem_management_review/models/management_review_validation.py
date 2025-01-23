@@ -75,14 +75,9 @@ class ManagementeReview(models.Model):
 
     state = fields.Selection(
         string=u'Estado',
-        selection=[
-            ('elaborate', 'En elaboración'),
-            ('review', 'En revisión'),
-            ('validate', 'En validación'),
-            ('validate_ok', 'Validado'),
+        selection_add=[
             ('tracked', 'En proceso'),
-            ('closed', 'Terminado'),
-            ('cancel', 'Obsoleto')
+            ('closed', 'Terminado')
         ],
         default='elaborate',
         copy=False,

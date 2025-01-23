@@ -87,14 +87,9 @@ class ComunicationPlanLine(models.Model):
 
     state = fields.Selection(
         string=u'Estado',
-        selection=[
-            ('elaborate', 'En elaboración'),
-            ('review', 'En revisión'),
-            ('validate', 'En validación'),
-            ('validate_ok', 'Validado'),
+        selection_add=[
             ('on_track', 'En seguimiento'),
-            ('closed', 'Terminado'),
-            ('cancel', 'Obsoleto'),
+            ('closed', 'Terminado')
         ],
         default='elaborate',
         copy=False,
