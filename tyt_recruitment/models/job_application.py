@@ -158,7 +158,7 @@ class JobApplication(models.Model):
             bool(self.interbank_key),
             bool(self.value_proposition)
         ])
-        
+
         self.status_loaded = (all_fields_filled/14)*100
         if all_fields_filled == 14:
             self.expedient_status = True
@@ -206,6 +206,15 @@ class JobApplication(models.Model):
             self.applicant_id.status = True
         else:
             self.applicant_id.status = False
+
+    @api.model
+    def unlink(self):
+        for record in self:
+            # Aquí puedes agregar la lógica personalizada
+            if record.some_field == 'value':
+                _logger.info("removedddddddddddddddddddddddd")
+                _logger.info(record.some_field)
+        return super(JobApplication, self).unlink()
 
     def action_open_health_survey(self):
 
@@ -265,7 +274,6 @@ class Applicant(models.Model):
     social_security_number = fields.Char(string="Número de Seguro Social")
     rfc = fields.Char(string="RFC")
     curp = fields.Char(string="CURP")
-    employee_number = fields.Char(string="Número de empleado")
     address_street = fields.Char(string="Calle y Número")
     address_neighborhood = fields.Char(string="Colonia")
     address_city = fields.Char(string="Municipio")
@@ -285,6 +293,9 @@ class Applicant(models.Model):
     recruiter_comments = fields.Char(string="Comentarios del reclutador")
     recruiter_id = fields.Many2one('hr.employee', string="Reclutador")
 
+    employee_id = fields.Many2one('hr.employee', string="Empleado relacionado")
+    employee_number = fields.Char(related="employee_id.x_studio_numero", string="Número de empleado")
+
     expedient_status = fields.Boolean(string="Estado de carga", default=False)
     has_complete_survey = fields.Boolean(string='Tiene Encuesta Completada')
     status = fields.Boolean(string="Status")
@@ -293,6 +304,8 @@ class Applicant(models.Model):
     campaign_id = fields.Many2one('tyt_recruitment.campaign', string="Campaña")
     campaign_turn = fields.Selection(related="campaign_id.turn", string="Turno")
     campaign_requsition = fields.Many2one(related="campaign_id.requisition_id", string="Requisición")
+
+    days_of_week_ids = fields.One2many("tyt_recruitment.attendance_days_of_week", 'applicant_id', string="Asistencia detalle")
 
     computed_name = fields.Char(
         string="Nombre completo",
@@ -341,26 +354,35 @@ class Applicant(models.Model):
 
     def open_user_input_view(self):
         
-        question = self.env['survey.question'].sudo().search([('is_a_guest_question', '=', True)])
-        answer = self.env['survey.user_input.line'].sudo().search([('question_id', '=', question.id)])
-        _logger.info("answer.user_input_id")
-        _logger.info(answer.user_input_id)
-        inputs = self.env['survey.user_input'].sudo().search([('id', '=', answer.user_input_id.id)])
+        if len(self.days_of_week_ids) == 1:
 
-        if inputs:
-            return {
-                'name': 'Lista de encuestas realizadas por el aplicante',
-                'type': 'ir.actions.act_window',
-                'res_model': 'survey.user_input',
-                'view_mode': 'tree',
-                'target': 'current',
-                'domain': [('id', 'in', inputs.ids)]
-            }
-        else:
-            return {
-                'type': 'ir.actions.act_window_close'
-            }
+            survey_ids = self.days_of_week_ids.attendance_id.surveys_ids.survey_id.ids
 
+            question = self.env['survey.question'].sudo().search([
+                ('is_a_guest_question', '=', True),
+                ('survey_id', 'in', survey_ids)
+            ])
+
+            answer = self.env['survey.user_input.line'].sudo().search([
+                ('question_id', 'in', question.ids),
+                ('value_char_box', '=', self.social_security_number)
+            ])
+
+            inputs = self.env['survey.user_input'].sudo().search([('id', 'in', answer.user_input_id.ids)])
+
+            if inputs:
+                return {
+                    'name': 'Lista de encuestas realizadas por el aplicante',
+                    'type': 'ir.actions.act_window',
+                    'res_model': 'survey.user_input',
+                    'view_mode': 'tree',
+                    'target': 'current',
+                    'domain': [('id', 'in', inputs.ids)]
+                }
+            else:
+                return {
+                    'type': 'ir.actions.act_window_close'
+                }
         
 class DataAcademic(models.Model):
     _name = 'tyt_recruitment.data_academic'

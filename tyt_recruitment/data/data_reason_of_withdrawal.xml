@@ -1,27 +1,27 @@
 <?xml version="1.0"?>
 <odoo>
-    <record id="record_1" model="tyt_recruitment.reason_for_withdrawal">
-        <field name="text">ABANDONO</field>
+    <record id="refuse_1" model="hr.applicant.refuse.reason">
+        <field name="name">ABANDONO</field>
     </record>
-    <record id="record_2" model="tyt_recruitment.reason_for_withdrawal">
-        <field name="text">ENFERMEDAD</field>
+    <record id="refuse_2" model="hr.applicant.refuse.reason">
+        <field name="name">ENFERMEDAD</field>
     </record>
-    <record id="record_3" model="tyt_recruitment.reason_for_withdrawal">
-        <field name="text">PROBLEMAS PERSONALES</field>
+    <record id="refuse_3" model="hr.applicant.refuse.reason">
+        <field name="name">PROBLEMAS PERSONALES</field>
     </record>
-    <record id="record_4" model="tyt_recruitment.reason_for_withdrawal">
-        <field name="text">NO CERTIFICA</field>
+    <record id="refuse_4" model="hr.applicant.refuse.reason">
+        <field name="name">NO CERTIFICA</field>
     </record>
-    <record id="record_5" model="tyt_recruitment.reason_for_withdrawal">
-        <field name="text">ACTITUD</field>
+    <record id="refuse_5" model="hr.applicant.refuse.reason">
+        <field name="name">ACTITUD</field>
     </record>
-    <record id="record_6" model="tyt_recruitment.reason_for_withdrawal">
-        <field name="text">NO CUMPLE CON POLITICAS DE CONTRATACION</field>
+    <record id="refuse_6" model="hr.applicant.refuse.reason">
+        <field name="name">NO CUMPLE CON POLITICAS DE CONTRATACION</field>
     </record>
-    <record id="record_7" model="tyt_recruitment.reason_for_withdrawal">
-        <field name="text">PROBLEMAS ECONÓMICOS</field>
+    <record id="refuse_7" model="hr.applicant.refuse.reason">
+        <field name="name">PROBLEMAS ECONÓMICOS</field>
     </record>
-    <record id="record_8" model="tyt_recruitment.reason_for_withdrawal">
-        <field name="text">INFORMACIÓN ERRONEA BRINDADA</field>
+    <record id="refuse_8" model="hr.applicant.refuse.reason">
+        <field name="name">INFORMACIÓN ERRONEA BRINDADA</field>
     </record>
 </odoo>

@@ -17,7 +17,7 @@ class HrEmployee(models.Model):
     birthday_publication_ids = fields.Many2many('tyt.intranet.birthday_publication', 'birthday_publication_employee_rel',
                                                 'employee_id', 'publication_id', string='Birthday Publications')
 
-    @api.depends('birthday', 'birthday_publication_ids')
+    @api.depends('birthday')
     def _compute_is_birthday(self):
         today = date.today()
         start_of_week = today - relativedelta(days=today.weekday())
@@ -32,3 +32,24 @@ class HrEmployee(models.Model):
                 employee.is_birthday = False
                 employee.is_birthday_this_week = False
                 employee.is_birthday_this_month = False
+
+    @api.model
+    def _cron_update_birthday_status(self):
+        employees = self.env['hr.employee'].search([('birthday', '!=', False)])
+        employees._compute_is_birthday()
+        group_map = {}
+        for emp in employees:
+            combo_key = (
+                emp.is_birthday,
+                emp.is_birthday_this_week,
+                emp.is_birthday_this_month
+            )
+            group_map.setdefault(combo_key, self.env['hr.employee'])
+            group_map[combo_key] += emp
+
+        for combo_key, emp_group in group_map.items():
+            emp_group.write({
+                'is_birthday': combo_key[0],
+                'is_birthday_this_week': combo_key[1],
+                'is_birthday_this_month': combo_key[2],
+            })

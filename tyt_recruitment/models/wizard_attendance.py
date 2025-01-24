@@ -45,12 +45,18 @@ class ConfirmationWizard(models.TransientModel):
             ], limit=1)
 
             if not exist_applicant:
-                new_prospect = {
+                new_data_prospect = {
                     "applicant_id": applicant.id,
                     "attendance_id": current_attendance_id,
                     "right_turn": self.campaign_id.turn
                 }
-                self.env['tyt_recruitment.attendance_days_of_week'].sudo().create(new_prospect)
+                new_prospect = self.env['tyt_recruitment.attendance_days_of_week'].sudo().create(new_data_prospect)
+
+                new_kardex = {
+                    "attendance_days_of_week_id": new_prospect.id,
+                    "attendance_id": current_attendance_id
+                }
+                self.env['tyt_recruitment.kardex_by_applicant'].sudo().create(new_kardex)
 
         return {'type': 'ir.actions.act_window_close'}
 
