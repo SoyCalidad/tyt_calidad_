@@ -75,6 +75,23 @@ class Attendance(models.Model):
     def action_view_kardex_certificate(self):
         self.view_kardex_certificate = True
 
+    def action_view_evaluation_rubric(self):
+
+        # Creating a new evaluation rubric
+        rubric_data = {
+            'attendance_id': self.id
+        }
+        new_rubric = self.env['tyt_recruitment.evaluation_rubric'].sudo().create(rubric_data)
+
+        # Creating a new input evaluation
+        details = request.env['tyt_recruitment.detail_evaluation_rubric'].search([])
+        for detail in details:
+            new_input_evaluation_data = {
+                'evaluation_rubric_id': new_rubric.id,
+                'detail_evaluation_rubric_id': detail.id
+            }
+            self.env['tyt_recruitment.input_evaluation_rubric'].sudo().create(new_input_evaluation_data)
+
 class AttendanceState(models.Model):
     _name = 'tyt_recruitment.tag_attendance'
     _description = 'Estado'

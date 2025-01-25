@@ -37,3 +37,7 @@ access_failure_option_message,access_failure_option_message,model_tyt_recruitmen
 
 access_survey_attendance_user,access.survey_attendance.user,model_tyt_recruitment_survey_attendance,base.group_user,1,1,1,1
 access_kardex_by_applicant_user,access.kardex_by_applicant.user,model_tyt_recruitment_kardex_by_applicant,base.group_user,1,1,1,1
+
+access_evaluation_rubric,access.evaluation_rubric,model_tyt_recruitment_evaluation_rubric,base.group_user,1,1,1,1
+access_detail_evaluation_rubric,access.detail_evaluation_rubric,model_tyt_recruitment_detail_evaluation_rubric,base.group_user,1,1,1,1
+access_input_evaluation_rubric,access.input_evaluation_rubric,model_tyt_recruitment_input_evaluation_rubric,base.group_user,1,1,1,1

@@ -12,6 +12,12 @@
           <field name="trainer"/>
           <field name="recruiter"/>
           <field name="turn"/>
+          <button 
+            name="action_view_evaluation_rubric" 
+            string="Ver rúbrica de evaluación" 
+            type="object" class="oe_highlight" 
+            groups="tyt_recruitment.group_quality_user"
+          />
         </tree>
       </field>
     </record>

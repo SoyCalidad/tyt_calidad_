@@ -1,0 +1,59 @@
+<?xml version="1.0"?>
+<odoo>
+    <!-- Rúbrica de evaluación al expositor -->
+    <record id="evaluation_rubric_1" model="tyt_recruitment.detail_evaluation_rubric">
+        <field name="weighing">5</field>
+        <field name="concept">Entonación, volumen y movimientos</field>
+        <field name="description">Se escucha fuerte y claro, da intenciones acorde a lo que se está diciendo. El manejo corporal apoya a la intención del texto. No mantiene ambas manos en el bolsillo. No tiene los brazos cruzados en ningún momento. No tiene los dedos entrelazados. No tiene los brazos hacia atrás. No genera ademanes ofensivos, ni de religión o algún tema de interés personal.</field>
+    </record>
+    <record id="evaluation_rubric_2" model="tyt_recruitment.detail_evaluation_rubric">
+        <field name="weighing">10</field>
+        <field name="concept">Calidad de exposición</field>
+        <field name="description">El expositor mantiene contacto visual con su público. Lee 3 palabras máximo de cada párrafo o enunciado sobre lo escrito en la proyección. No habla hacia la pantalla en nungún momento.</field>
+    </record>
+    <record id="evaluation_rubric_3" model="tyt_recruitment.detail_evaluation_rubric">
+        <field name="weighing">12</field>
+        <field name="concept">Control de sala y utilización de escenario</field>
+        <field name="description">El escucha se mantiene atento a lo que menciona el expositor, no muestra desinterés, no se distrae con nungún otro punto que no sea del tema, y en caso contrario el expositor utiliza el espacio para atraer su atención.</field>
+    </record>
+    <record id="evaluation_rubric_4" model="tyt_recruitment.detail_evaluation_rubric">
+        <field name="weighing">5</field>
+        <field name="concept">Contenido de la proyección</field>
+        <field name="description">La presentación maneja de forma clara y consisa el tema impartido; Respeta la estructura de 7 x 7 en cada párrafo. Se respeta el formato insitucional estándar de presentaciones. No se cuenta con una sola falta de ortografía. La sintaxis es perfecta y sin ambigüedades o paradojas. Se mantiene al menos una imagen acorde en cada dos diapositivas. Falta tamaño de letra, color y fuente</field>
+    </record>
+    <record id="evaluation_rubric_5" model="tyt_recruitment.detail_evaluation_rubric">
+        <field name="weighing">8</field>
+        <field name="concept">Ejemplificación,  fuidez y seguridad</field>
+        <field name="description">El expositor menciona por lo menos dos ejemplos lógicos sobre cualquier enunciado o párrafo. No se cuenta con un solo titubeo o voz temblorosa.</field>
+    </record>
+    <record id="evaluation_rubric_6" model="tyt_recruitment.detail_evaluation_rubric">
+        <field name="weighing">10</field>
+        <field name="concept">Participación del auditorio</field>
+        <field name="description">Hace participar al auditorio, por lo menos a dos personas en cada diapositiva, ya sea apoyo en lectura o pregunta lógica con base en su explicación.</field>
+    </record>
+    <record id="evaluation_rubric_7" model="tyt_recruitment.detail_evaluation_rubric">
+        <field name="weighing">22</field>
+        <field name="concept">Conocimiento del tema</field>
+        <field name="description">El expositor no tergiversa la información. No miente. No redunda. El expositor no crea ambigüedades.</field>
+    </record>
+    <record id="evaluation_rubric_8" model="tyt_recruitment.detail_evaluation_rubric">
+        <field name="weighing">3</field>
+        <field name="concept">Manejo de escenario</field>
+        <field name="description">Se mueve por todo el salón (entre pasillos, si es posible). No se mantiene estático por más de 60 segundos</field>
+    </record>
+    <record id="evaluation_rubric_9" model="tyt_recruitment.detail_evaluation_rubric">
+        <field name="weighing">16</field>
+        <field name="concept">Tranmisión de información</field>
+        <field name="description">El expositor no deja tiempos muertos por más de 5 segundos mientras brinda la información. No utiliza los apoyos verbales ej: ehhh, aahhh, esteeee. No es redundante al utilizar contraposiciones, ej: pero, sin embargo, mas, no obstante. Utiliza correctamente las locusiones preposisionales "Con base en" y "A base de". No repite más de tres veces una palabra o una frase en cada diapositiva (muletilla), en su caso, busca sinónimos. No pronunca mal una sola palabra. No inventa palabras.</field>
+    </record>
+    <record id="evaluation_rubric_10" model="tyt_recruitment.detail_evaluation_rubric">
+        <field name="weighing">4</field>
+        <field name="concept">Imagen</field>
+        <field name="description">El expositor se presenta de manera limpia y formal con base en el código de vestimenta</field>
+    </record>
+    <record id="evaluation_rubric_11" model="tyt_recruitment.detail_evaluation_rubric">
+        <field name="weighing">5</field>
+        <field name="concept">Seguimiento de carta descriptiva</field>
+        <field name="description">El expositor respeta los temas, así como los tiempos de la carta descriptiva, manteniendo un margen de exceso de tiempo no mayor a los 2 minutos.</field>
+    </record>
+</odoo>

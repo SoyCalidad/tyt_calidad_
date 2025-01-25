@@ -11,10 +11,7 @@ from urllib.parse import quote
 import logging
 _logger = logging.getLogger(__name__)
 
-class DeparmentDays(models.Model):
-    _inherit = 'hr.department'
 
-    days = fields.Integer( String="Días de capacitación")
 
 class Requisition(models.Model):
     _name = 'tyt_recruitment.requisition'
