@@ -39,19 +39,24 @@ class BirthdayPublication(models.Model):
 
     @api.model
     def _cron_update_birthday_publication(self):
+        self.env['hr.employee'].update_birthday_status()
+
         birthday_publication_singleton = self.env.ref(
             'tyt_intranet_birthday.tyt_intranet_birthday_publication_singleton', raise_if_not_found=False)
         attachment_pool = birthday_publication_singleton.attachment_ids
 
         Employee = self.env['hr.employee']
-        Employee._cron_update_birthday_status()
-        employees = self.env['hr.employee'].search([('include_in_birthday_publication', '=', True), ('is_birthday', '=', True)])
+        employees_with_birthday_today = Employee.search([
+            ('is_birthday', '=', True),
+            ('include_in_birthday_publication', '=', True)
+        ])
         birthday_publication_singleton.write({
-            'birthday_employee_ids': [(6, 0, employees.ids)],
+            'birthday_employee_ids': [(6, 0, employees_with_birthday_today.ids)],
         })
 
-        no_custom_card_employees = employees.filtered(lambda employee: not employee.has_uploaded_custom_card)
-        for employee in no_custom_card_employees:
+        employees_with_no_custom_card = employees_with_birthday_today.filtered(
+            lambda employee: not employee.has_uploaded_custom_card)
+        for employee in employees_with_no_custom_card:
             selected_attachment = random.choice(attachment_pool) if attachment_pool else None
             birthday_card_data = selected_attachment.datas if selected_attachment else None
             birthday_card_filename = selected_attachment.name if selected_attachment else None
