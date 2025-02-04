@@ -1,33 +1,5 @@
 <odoo>
   <data>
     <!-- Extra fields on Question Form -->
-    <record model="ir.ui.view" id="survey_fields_form_inherit">
-      <field name="name">Form view for survey question - extended</field>
-      <field name="model">survey.survey</field>
-      <field name="inherit_id" ref="survey.survey_survey_view_form"/>
-      <field name="arch" type="xml">
-          <xpath expr="//page[@name='description_done']" position="replace">
-            <page string="Mensaje final" name="description_done">
-              <group>
-                    <field name="end_message_type" widget="radio" />
-                </group>
-                <!-- Campos Dependientes de la Selección -->
-                <group>
-                  <!-- Mensajes por defecto -->
-                  <field name="success_options" 
-                          string="Elegir mensaje de aprobado" 
-                          attrs="{'invisible': [('end_message_type', '!=', 'custom')]}" />
-                  <field name="failure_options" 
-                          string="Elegir mensaje de desaprobado" 
-                          attrs="{'invisible': [('end_message_type', '!=', 'custom')]}" />
-                  <!-- Mensaje personalizado -->
-                  <field name="description_done" 
-                          string="Mensaje final personalizado" 
-                          attrs="{'invisible': [('end_message_type', '!=', 'default')]}" />
-              </group>
-            </page>
-          </xpath>
-      </field>
-    </record>
   </data>
 </odoo>

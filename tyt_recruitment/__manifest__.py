@@ -32,8 +32,10 @@
         'views/view_applicant.xml',
         'views/view_survey.xml',
         'wizards/generate_attendance.xml',
+        'views/view_evaluation_rubric.xml',
         'data/data_reason_of_withdrawal.xml',
-        'data/data_survey_messages.xml'
+        'data/data_survey_messages.xml',
+        'data/evaluation_rubric.xml'
     ],
     'auto_install': False,
     'installable': True,

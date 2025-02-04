@@ -84,16 +84,6 @@ class JobApplication(models.Model):
     reference_validation_filename = fields.Char(string="Nombre del Archivo")
     reference_validation_state = fields.Boolean(string="Estado", default=False)
     reference_validation_approved = fields.Boolean(string="Estado", default=False)
-
-    health_survey = fields.Binary(string="Encuesta de salud")
-    health_survey_filename = fields.Char(string="Nombre del Archivo")
-    health_survey_state = fields.Boolean(string="Estado", default=False)
-    health_survey_approved = fields.Boolean(string="Estado", default=False)
-
-    job_application = fields.Binary(string="Solicitud de empleo")
-    job_application_filename = fields.Char(string="Nombre del Archivo")
-    job_application_state = fields.Boolean(string="Estado", default=False)
-    job_application_approved = fields.Boolean(string="Estado", default=False)
     
     utility_bill = fields.Binary(string="Comprobante de domicilio")
     utility_bill_filename = fields.Char(string="Nombre del Archivo")
@@ -132,8 +122,6 @@ class JobApplication(models.Model):
         'proposed_letter',
         'ine',
         'reference_validation',
-        'health_survey',
-        'job_application',
         'utility_bill',
         'psychometric',
         'snn',
@@ -150,8 +138,6 @@ class JobApplication(models.Model):
             bool(self.proposed_letter),
             bool(self.ine),
             bool(self.reference_validation),
-            bool(self.health_survey),
-            bool(self.job_application),
             bool(self.utility_bill),
             bool(self.psychometric),
             bool(self.snn),
@@ -175,8 +161,6 @@ class JobApplication(models.Model):
         'proposed_letter_approved',
         'ine_approved',
         'reference_validation_approved',
-        'health_survey_approved',
-        'job_application_approved',
         'utility_bill_approved',
         'psychometric_approved',
         'snn_approved',
@@ -193,8 +177,6 @@ class JobApplication(models.Model):
             self.proposed_letter_approved,
             self.ine_approved,
             self.reference_validation_approved,
-            self.health_survey_approved,
-            self.job_application_approved,
             self.utility_bill_approved,
             self.psychometric_approved,
             self.snn_approved,

@@ -12,6 +12,13 @@
           <field name="trainer"/>
           <field name="recruiter"/>
           <field name="turn"/>
+          <button 
+            name="action_view_evaluation_rubric" 
+            string="Ver rúbrica de evaluación" 
+            type="object" class="oe_highlight" 
+            groups="tyt_recruitment.group_quality_user"
+            attrs="{'invisible': [('trainer', '=', False)]}"
+          />
         </tree>
       </field>
     </record>
@@ -22,12 +29,14 @@
       <field name="model">tyt_recruitment.attendance</field>
       <field name="arch" type="xml">
         <form string="Asistencia">
+
             <field name="view_kardex" invisible="1" />
             <field name="view_kardex_certificate" invisible="1" />
 
             <header>
               <button name="action_view_kardex" string="Ver Kardex" type="object" class="oe_highlight" />
               <button name="action_view_kardex_certificate" string="Ver Certificación Kardex" type="object" class="oe_highlight" />
+              <field name="state" widget="statusbar"/>
             </header>
 
             <group col="6">

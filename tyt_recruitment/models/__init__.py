@@ -1,6 +1,7 @@
 # -*- coding: utf-8 -*-
 
 from . import (
+    department,
     requisiton,
     job_application,
     question,
@@ -8,5 +9,6 @@ from . import (
     expedient,
     attendance,
     wizard_attendance,
-    survey
+    survey,
+    evaluation_rubric
 )

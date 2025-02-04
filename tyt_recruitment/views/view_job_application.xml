@@ -305,34 +305,6 @@
                       </tr>
                       <tr>
                         <td> 08 </td>
-                        <td> ENCUESTA DE SALUD </td>
-                        <td> 
-                          <field name="health_survey_state" invisible="1" />
-                          <span attrs="{'invisible': [('health_survey', '=', False)]}">Ok</span>
-                          <span attrs="{'invisible': [('health_survey', '!=', False)]}">X</span>
-                        </td>
-                        <td> 
-                          <field name="health_survey" filename="health_survey_filename" /> 
-                          <field name="health_survey_filename" invisible="1" />
-                        </td>
-                        <td> <button name="action_view_binary_file" type="object" args="['health_survey_filename','health_survey']" string="Ver Documento" attrs="{'invisible': [('health_survey', '=', False)]}"/> </td>
-                      </tr>
-                      <tr>
-                        <td> 09 </td>
-                        <td> SOLICITUD DE EMPLEO </td>
-                        <td> 
-                          <field name="job_application_state" invisible="1" />
-                          <span attrs="{'invisible': [('job_application', '=', False)]}">Ok</span>
-                          <span attrs="{'invisible': [('job_application', '!=', False)]}">X</span>
-                        </td>
-                        <td> 
-                          <field name="job_application" filename="job_application_filename" /> 
-                          <field name="job_application_filename" invisible="1" />
-                        </td>
-                        <td> <button name="action_view_binary_file" type="object" args="['job_application_filename','job_application']" string="Ver Documento" attrs="{'invisible': [('job_application', '=', False)]}"/> </td>
-                      </tr>
-                      <tr>
-                        <td> 10 </td>
                         <td> COMPROBANTE DE DOMICILIO </td>
                         <td> 
                           <field name="utility_bill_state" invisible="1" />
@@ -346,7 +318,7 @@
                         <td> <button name="action_view_binary_file" type="object" args="['utility_bill_filename','utility_bill']" string="Ver Documento" attrs="{'invisible': [('utility_bill', '=', False)]}"/> </td>
                       </tr>
                       <tr>
-                        <td> 11 </td>
+                        <td> 09 </td>
                         <td> PSICOMETRICO </td>
                         <td> 
                           <field name="psychometric_state" invisible="1" />
@@ -360,7 +332,7 @@
                         <td> <button name="action_view_binary_file" type="object" args="['psychometric_filename','psychometric']" string="Ver Documento" attrs="{'invisible': [('psychometric', '=', False)]}"/> </td>
                       </tr>
                       <tr>
-                        <td> 12 </td>
+                        <td> 10 </td>
                         <td> NNS </td>
                         <td> 
                           <field name="snn_state" invisible="1" />
@@ -374,7 +346,7 @@
                         <td> <button name="action_view_binary_file" type="object" args="['snn_filename','snn']" string="Ver Documento" attrs="{'invisible': [('snn', '=', False)]}"/> </td>
                       </tr>
                       <tr>
-                        <td> 13 </td>
+                        <td> 11 </td>
                         <td> CLABE INTERBANCARIA </td>
                         <td> 
                           <field name="interbank_key_state" invisible="1" />
@@ -388,7 +360,7 @@
                         <td> <button name="action_view_binary_file" type="object" args="['interbank_key_filename','interbank_key']" string="Ver Documento" attrs="{'invisible': [('interbank_key', '=', False)]}"/> </td>
                       </tr>
                       <tr>
-                        <td> 14 </td>
+                        <td> 12 </td>
                         <td> PROPUESTA DE VALOR </td>
                         <td> 
                           <field name="value_proposition_state" invisible="1" />
@@ -512,28 +484,6 @@
                       </tr>
                       <tr>
                         <td> 08 </td>
-                        <td> ENCUESTA DE SALUD </td>
-                        <td> 
-                          <field name="health_survey_state" invisible="1" />
-                          <span attrs="{'invisible': [('health_survey', '=', False)]}">Ok</span>
-                          <span attrs="{'invisible': [('health_survey', '!=', False)]}">X</span>
-                        </td>
-                        <td> <field name="health_survey_approved" attrs="{'invisible': [('health_survey', '=', False)]}"/> </td>
-                        <td> <button name="action_view_binary_file" type="object" args="['health_survey_filename','health_survey']" string="Ver Documento" attrs="{'invisible': [('health_survey', '=', False)]}"/> </td>
-                      </tr>
-                      <tr>
-                        <td> 09 </td>
-                        <td> SOLICITUD DE EMPLEO </td>
-                        <td> 
-                          <field name="job_application_state" invisible="1" />
-                          <span attrs="{'invisible': [('job_application', '=', False)]}">Ok</span>
-                          <span attrs="{'invisible': [('job_application', '!=', False)]}">X</span>
-                        </td>
-                        <td> <field name="job_application_approved" attrs="{'invisible': [('job_application', '=', False)]}"/> </td>
-                        <td> <button name="action_view_binary_file" type="object" args="['job_application_filename','job_application']" string="Ver Documento" attrs="{'invisible': [('job_application', '=', False)]}"/> </td>
-                      </tr>
-                      <tr>
-                        <td> 10 </td>
                         <td> COMPROBANTE DE DOMICILIO </td>
                         <td> 
                           <field name="utility_bill_state" invisible="1" />
@@ -544,7 +494,7 @@
                         <td> <button name="action_view_binary_file" type="object" args="['utility_bill_filename','utility_bill']" string="Ver Documento" attrs="{'invisible': [('utility_bill', '=', False)]}"/> </td>
                       </tr>
                       <tr>
-                        <td> 11 </td>
+                        <td> 09 </td>
                         <td> PSICOMETRICO </td>
                         <td> 
                           <field name="psychometric_state" invisible="1" />
@@ -555,7 +505,7 @@
                         <td> <button name="action_view_binary_file" type="object" args="['psychometric_filename','psychometric']" string="Ver Documento" attrs="{'invisible': [('psychometric', '=', False)]}"/> </td>
                       </tr>
                       <tr>
-                        <td> 12 </td>
+                        <td> 10 </td>
                         <td> NNS </td>
                         <td> 
                           <field name="snn_state" invisible="1" />
@@ -566,7 +516,7 @@
                         <td> <button name="action_view_binary_file" type="object" args="['snn_filename','snn']" string="Ver Documento" attrs="{'invisible': [('snn', '=', False)]}"/> </td>
                       </tr>
                       <tr>
-                        <td> 13 </td>
+                        <td> 11 </td>
                         <td> CLABE INTERBANCARIA </td>
                         <td> 
                           <field name="interbank_key_state" invisible="1" />
@@ -577,7 +527,7 @@
                         <td> <button name="action_view_binary_file" type="object" args="['interbank_key_filename','interbank_key']" string="Ver Documento" attrs="{'invisible': [('interbank_key', '=', False)]}"/> </td>
                       </tr>
                       <tr>
-                        <td> 14 </td>
+                        <td> 12 </td>
                         <td> PROPUESTA DE VALOR </td>
                         <td> 
                           <field name="value_proposition_state" invisible="1" />

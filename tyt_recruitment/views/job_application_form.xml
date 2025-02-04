@@ -73,7 +73,7 @@
                                 <div class="row">
                                     <div class="col-sm-6 col-md-6 col-lg-6 col-xl-6 col-xxl-6 p-4 border">
                                         <label for="request_date" class="form-label">Fecha</label>
-                                        <input type="date" class="form-control" id="request_date" name="request_date" required="required"/>
+                                        <input type="date" class="form-control" id="request_date" name="request_date" required="required" min="2020-01-01"/>
                                     </div>
                                     <div class="col-sm-6 col-md-6 col-lg-6 col-xl-6 col-xxl-6 p-4 border">
                                         <label for="site" class="form-label">Sitio</label>
@@ -146,7 +146,7 @@
                             <!-- Fecha de Nacimiento -->
                             <div class="col-sm-6 col-md-3 col-lg-3 col-xl-3 col-xxl-3 p-4 border">
                                 <label for="birthdate" class="form-label">Fecha de Nacimiento:</label>
-                                <input type="date" class="form-control" id="birthdate" name="birthdate" required="required"/>
+                                <input type="date" class="form-control" id="birthdate" name="birthdate" required="required" min="1925-01-01" max="2025-01-01"/>
                             </div>
 
                             <!-- Nacionalidad -->
@@ -158,7 +158,7 @@
                             <!-- Edad -->
                             <div class="col-sm-6 col-md-2 col-lg-2 col-xl-2 col-xxl-2 p-4 border">
                                 <label for="age" class="form-label">Edad</label>
-                                <input type="number" class="form-control" id="age" min="18" name="age" required="required"/>
+                                <input type="number" class="form-control" id="age" min="18" max="100" name="age" required="required"/>
                             </div>
 
                             <!-- Estado Civil -->
@@ -237,7 +237,7 @@
                                     </div>
                                     <div class="col-sm-6 col-md-6 col-lg-6 col-xl-6 col-xxl-6 p-4 border">
                                         <label for="infonavit_credit_amount" class="form-label">Monto semanal de Infonavit:</label>
-                                        <input type="number" class="form-control" id="infonavit_credit_amount" name="infonavit_credit_amount"/>
+                                        <input type="number" class="form-control" id="infonavit_credit_amount" name="infonavit_credit_amount" step="0.01"/>
                                     </div>
                                 </div>
                             </div>
@@ -439,11 +439,11 @@
                                     <div class="row">
                                         <div class="col-sm-6 col-md-6 col-lg-6 col-xl-6 col-xxl-6 p-4 border">
                                             <label for="start_date" class="form-label">Desde</label>
-                                            <input type="date" class="form-control" name="start_date[]" required="required" />
+                                            <input type="date" class="form-control" name="start_date[]" required="required" min="1950-01-01"/>
                                         </div>
                                         <div class="col-sm-6 col-md-6 col-lg-6 col-xl-6 col-xxl-6 p-4 border">
                                             <label for="end_date" class="form-label">Hasta</label>
-                                            <input type="date" class="form-control" name="end_date[]" required="required" />
+                                            <input type="date" class="form-control" name="end_date[]" required="required" min="1950-01-01"/>
                                         </div>
                                     </div>
                                 </div>

@@ -11,6 +11,8 @@ from urllib.parse import quote
 import logging
 _logger = logging.getLogger(__name__)
 
+
+
 class Requisition(models.Model):
     _name = 'tyt_recruitment.requisition'
     _description = 'Requisición'
@@ -251,8 +253,3 @@ class Campaign(models.Model):
                 'default_attendance_id': attendance_list.id
             }
         }
-    
-class DeparmentDays(models.Model):
-    _inherit = 'hr.department'
-
-    days = fields.Integer( String="Días de capacitación")

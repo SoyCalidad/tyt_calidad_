@@ -8,6 +8,8 @@ import base64
 from datetime import datetime
 from urllib.parse import quote
 
+from ..utils.constants import ATTENDANCE_STATE
+
 import logging
 _logger = logging.getLogger(__name__)
 
@@ -26,6 +28,8 @@ class Attendance(models.Model):
     desertion = fields.Char( string="Deserción", tracking=True)
 
     days = fields.Integer(string="Días de capacitación", store=True)
+
+    state = fields.Selection(ATTENDANCE_STATE, string='Estado', default='doing')
 
     attendance_days_of_week_ids = fields.One2many("tyt_recruitment.attendance_days_of_week", "attendance_id", string="Días de asistencia")
     kardex_by_applicant_ids = fields.One2many("tyt_recruitment.kardex_by_applicant", "attendance_id", string="Kardex de asistencia")
@@ -74,6 +78,40 @@ class Attendance(models.Model):
             
     def action_view_kardex_certificate(self):
         self.view_kardex_certificate = True
+
+    def rubric_view_json(self, rubric_id):
+        return {
+            'name': 'Vista Form del Registro',
+            'type': 'ir.actions.act_window',
+            'res_model': 'tyt_recruitment.evaluation_rubric',
+            'view_mode': 'form',
+            'res_id': rubric_id,
+            'views': [(False, 'form')], 
+            'target': 'current',
+        }
+
+    def action_view_evaluation_rubric(self):
+        current_rubric = self.env['tyt_recruitment.evaluation_rubric'].search([('attendance_id', '=', self.id)], limit=1)
+        if current_rubric:
+            # Redirect to evaluation rubric
+            return self.rubric_view_json(current_rubric.id)
+        else:
+            # Creating a new evaluation rubric
+            rubric_data = {
+                'attendance_id': self.id
+            }
+            new_rubric = self.env['tyt_recruitment.evaluation_rubric'].sudo().create(rubric_data)
+
+            # Creating new input evaluations
+            details = request.env['tyt_recruitment.detail_evaluation_rubric'].search([])
+            for detail in details:
+                new_input_evaluation_data = {
+                    'evaluation_rubric_id': new_rubric.id,
+                    'detail_evaluation_rubric_id': detail.id
+                }
+                self.env['tyt_recruitment.input_evaluation_rubric'].sudo().create(new_input_evaluation_data)
+
+            return self.rubric_view_json(new_rubric.id)
 
 class AttendanceState(models.Model):
     _name = 'tyt_recruitment.tag_attendance'
