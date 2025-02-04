@@ -1,19 +1,34 @@
 <odoo>
     <data>
         <!-- list evaluation_rubric -->
-        <record model="ir.ui.view" id="tyt_recruitment.list">
+        <record model="ir.ui.view" id="tyt_recruitment_evalutation_rubric_list">
             <field name="name">Lista de rúbricas</field>
             <field name="model">tyt_recruitment.evaluation_rubric</field>
             <field name="arch" type="xml">
                 <tree>
-                <field name="id" />
-                <field name="week" />
-                <field name="date" />
-                <field name="auditor" />
-                <field name="coach" />
-                <field name="campaign" />
-                <field name="evaluation" />
+                    <field name="id" />
+                    <field name="week" />
+                    <field name="date" />
+                    <field name="auditor" />
+                    <field name="coach" />
+                    <field name="campaign" />
                 </tree>
+            </field>
+        </record>
+
+        <record id="evaluation_signature_wizard_form" model="ir.ui.view">
+            <field name="name">Wizard Firma Evaluación</field>
+            <field name="model">tyt_recruitment.evaluation_signature_wizard</field>
+            <field name="arch" type="xml">
+                <form string="Capturar Firma">
+                    <group>
+                        <field name="signature" widget="signature"/>
+                    </group>
+                    <footer>
+                        <button name="action_save_signature" string="Guardar" type="object" class="btn-primary"/>
+                        <button string="Cancelar" class="btn-secondary" special="cancel"/>
+                    </footer>
+                </form>
             </field>
         </record>
 
@@ -25,8 +40,21 @@
                 <form string="Requisición">
                 <header>
                     <field name="state" invisible="1"/>
-                    <button name="action_view_signature" string="Firmar" type="object" class="oe_highlight"/>
-                    <!-- <field name="state" widget="statusbar" statusbar_visible="draft,sent"/> -->
+                    <button 
+                        name="action_view_validate_and_notify" 
+                        string="Validar y notificar" 
+                        type="object" 
+                        class="oe_highlight"
+                        attrs="{'invisible': [('state', '!=', 'doing')]}"    
+                    />   
+                    <button 
+                        name="action_view_signature" 
+                        string="Firmar" 
+                        type="object" 
+                        class="oe_highlight"
+                        attrs="{'invisible': [('state', '!=', 'validated_notified')]}"
+                    />
+                    <field name="state" widget="statusbar"/>
                 </header>
 
                 <sheet>  
@@ -36,10 +64,10 @@
                         <field name="auditor" />
                         <field name="coach" />
                         <field name="campaign" />
-                        <field name="evaluation" />
                     </group>
                     <notebook>
                         <page string="Detalles de la rúbrica">
+                            <field name="status_approved" widget="progressbar" />
                             <field name="input_evaluation_rubric_ids" nolabel="1"> 
                                 <tree editable="bottom">
                                     <field name="weighing" width="10px"/>
@@ -50,11 +78,11 @@
                                 </tree>
                             </field>
                         </page>
+                        <page string="Firma" >
+                            <field name="signature" widget="signature" readonly="1"/>
+                        </page>
                     </notebook>
                 </sheet>
-                <div class="oe_chatter">
-                    <field name="activity_ids" widget="mail_activity" />
-                </div>
                 </form>
             </field>
         </record>
@@ -73,7 +101,7 @@
                 </tree>
             </field>
         </record>
-        
+
         <!-- actions opening views on models -->
 
         <record model="ir.actions.act_window" id="tyt_recruitment.action_window_rubric">

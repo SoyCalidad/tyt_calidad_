@@ -11,3 +11,15 @@ GENDER_SELECTION = [
     ('other', 'Otro'),
 ]
 
+RUBRIC_STATE = [
+    ('doing', 'En elaboración'),
+    ('validated_notified', 'Validado y notificado'),
+    ('signed', 'Firmado')
+]
+
+ATTENDANCE_STATE = [
+    ('doing', 'En elaboración'),
+    ('in_progress', 'En proceso'),
+    ('closing', 'Cierre'),
+    ('finalized', 'Finaliazdo')
+]

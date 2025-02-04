@@ -8,6 +8,8 @@ import base64
 from datetime import datetime
 from urllib.parse import quote
 
+from ..utils.constants import RUBRIC_STATE
+
 import logging
 _logger = logging.getLogger(__name__)
 
@@ -17,16 +19,29 @@ class EvaluationRubric(models.Model):
     _inherit = ['mail.thread', 'mail.activity.mixin']
     _rec_name = 'id'
 
-    week = fields.Char(string="Semana", tracking=True)
-    date = fields.Char(string="Fecha", tracking=True)
-    auditor = fields.Char(string="Auditor", tracking=True)
-    coach = fields.Char(string="Entrenador", tracking=True)
-    campaign = fields.Char(string="Campaña", tracking=True)
-    evaluation = fields.Char(string="Evaluación", tracking=True)
-    state = fields.Char(string="Estado", tracking=True)
+    status_approved = fields.Float(string="Estado de aprobación", default=0)
+
+    date = fields.Date(string="Fecha", tracking=True)
+    auditor = fields.Many2one('hr.employee', string="Auditor", tracking=True)
 
     attendance_id = fields.Many2one('tyt_recruitment.attendance', string="Capacitación")
+    week = fields.Char(related="attendance_id.week", string="Semana", tracking=True)
+    coach = fields.Many2one(related="attendance_id.trainer", string="Entrenador", tracking=True)
+    campaign = fields.Many2one(related="attendance_id.campaign_id", string="Campaña", tracking=True)
+    
+    signature = fields.Binary(string="Firma", widget="signature", store=True)
+    state = fields.Selection(RUBRIC_STATE, string='Estado', default='doing')
+
     input_evaluation_rubric_ids = fields.One2many('tyt_recruitment.input_evaluation_rubric', 'evaluation_rubric_id', string="Detalles")
+
+    @api.onchange('input_evaluation_rubric_ids')
+    def _onchange_check_approved(self):
+        
+        if self.input_evaluation_rubric_ids:
+            all_yes = sum(1 for input in self.input_evaluation_rubric_ids if input.compliance == 'yes')
+            self.status_approved = (all_yes / len(self.input_evaluation_rubric_ids)) * 100
+        else:
+            self.status_approved = 0
 
     @api.depends('kardex_by_applicant_ids.login')
     def _compute_income(self):
@@ -37,9 +52,42 @@ class EvaluationRubric(models.Model):
     def _compute_survey_counter(self):
         for record in self:
             record.survey_counter = len(record.surveys_ids)
+
+    @api.onchange('signature')
+    def _compute_state(self):
+
+        if self.signature:
+            self.state = 'signed'
+        else:
+            self.state = 'doing'
+
+    def action_save_signature(self):
+        if self.signature:
+            # Guardar el valor del campo signature
+            self.sudo().write({'signature': self.signature})
             
+            # Mostrar un mensaje de éxito
+            return {
+                'type': 'ir.actions.act_window_close',
+            }
+     
     def action_view_signature(self):
-        self.view_kardex_certificate = True
+        default_signature = False
+        if self.signature:
+            default_signature = self.signature
+        
+        return {
+            'type': 'ir.actions.act_window',
+            'name': 'Firma de Rúbrica',
+            'res_model': 'tyt_recruitment.evaluation_signature_wizard',
+            'view_mode': 'form',
+            'target': 'new',
+            'view_id': self.env.ref('tyt_recruitment.evaluation_signature_wizard_form').id,
+            'context': { 'default_evaluation_rubric_id': self.id}
+        }
+    
+    def action_view_validate_and_notify(self):
+        self.state = 'validated_notified'
 
 class EvaluationRubric(models.Model):
     _name = 'tyt_recruitment.detail_evaluation_rubric'
@@ -66,3 +114,18 @@ class EvaluationRubric(models.Model):
     description = fields.Text(related='detail_evaluation_rubric_id.description', string="Ponderación")
     
     evalutation_rubric_id = fields.Many2one('tyt_recruitment.evaluation_rubric', string="Componente de rúbrica")
+
+class EvaluationSignatureWizard(models.TransientModel):
+    _name = 'tyt_recruitment.evaluation_signature_wizard'
+    _description = 'Wizard para capturar la firma en la rúbrica de evaluación'
+
+    evaluation_rubric_id = fields.Many2one('tyt_recruitment.evaluation_rubric', string="Evaluación", required=True)
+    signature = fields.Binary(string="Firma", widget="signature")
+
+    def action_save_signature(self):
+        if self.signature:
+            self.evaluation_rubric_id.write({
+                'signature': self.signature,
+                'state': 'signed'
+            })
+        return {'type': 'ir.actions.act_window_close'}
