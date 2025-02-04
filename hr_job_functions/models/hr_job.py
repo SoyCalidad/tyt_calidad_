@@ -226,6 +226,7 @@ class JobSupervisor(models.Model):
 
 class JobSupervised(models.Model):
     _name = 'hr.job.supervised'
+    _description = "hr.job.supervised"
 
     related_job = fields.Many2one('hr.job', string='Posición')
     job_id = fields.Many2one('hr.job', string='Posición')
@@ -233,6 +234,7 @@ class JobSupervised(models.Model):
 
 class JobProfile(models.Model):
     _name = 'hr.job.profile'
+    _description = "hr.job.profile"
 
     name = fields.Char(string='Nombre', required=True)
     degree = fields.Selection([
