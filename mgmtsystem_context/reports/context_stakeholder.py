@@ -7,6 +7,8 @@ from odoo.exceptions import UserError
 
 class StakeholderReport(models.AbstractModel):
         _name = 'report.mgmtsystem_context.report_stakeholder_2'
+        _description = "report.mgmtsystem_context.report_stakeholder_2"
+
 
         @api.model
         def _get_report_values(self, docids, data=None):

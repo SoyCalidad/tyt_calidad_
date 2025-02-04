@@ -1,6 +1,7 @@
 {
     "name": "Customer satisfaction report",
     "author": "soycalidad",
+    'license': 'Other proprietary',
     "category": "Management System",
     "depends": [
         'survey',

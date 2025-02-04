@@ -2,6 +2,7 @@ from odoo import api, fields, models
 
 class QualityManualReportWizard(models.TransientModel):
     _name = 'mgmt.quality_manual.report.wizard'
+    _description = "mgmt.quality_manual.report.wizard"
     
     
     quality_manual_id = fields.Many2one('mgmtsystem.qualitymanual', string='Manual de calidad', domain="[('state', '=', 'validate_ok')]", required=True)

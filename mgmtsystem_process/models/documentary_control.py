@@ -6,6 +6,7 @@ from odoo.exceptions import UserError
 
 class DocumentaryControl(models.Model):
     _name = 'documentary.control'
+    _description = "documentary.control"
 
     name = fields.Char(
         string='Nombre',
@@ -196,6 +197,7 @@ class AuditPlanValidation(models.Model):
 
 class AttachmentClasification(models.Model):
     _name = 'ir.attachment.clasification'
+    _description = "ir.attachment.clasification"
 
     name = fields.Char(string='Nombre')
     description = fields.Text(string='Descripción')

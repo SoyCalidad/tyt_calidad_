@@ -18,6 +18,8 @@ from PIL import Image
 class ActionReportXLS(models.AbstractModel):
     _name = 'report.mgmtsystem_action.report_action_xlsx'
     _inherit = 'report.report_xlsx.abstract'
+    _description = "report.mgmtsystem_action.report_action_xlsx"
+
 
     def generate_xlsx_report(self, workbook, data, actions):
         # estilos

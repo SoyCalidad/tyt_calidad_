@@ -11,6 +11,8 @@ from odoo.exceptions import ValidationError, Warning
 
 class MaintananceRequestWizard(models.TransientModel):
     _name = 'maintenance.request.wizard'
+    _description = "maintenance.request.wizard"
+
 
     maintenance_request_id = fields.Many2one(
         'maintenance.request', string='Petición de mantenimiento', required=True, domain="[('type_line','=','maintenance')]")
@@ -28,6 +30,8 @@ class MaintananceRequestWizard(models.TransientModel):
     
 class CalibrationRequestWizard(models.TransientModel):
     _name = 'calibration.request.wizard'
+    _description = "calibration.request.wizard"
+
 
     calibration_request_id = fields.Many2one(
         'maintenance.request', string='Petición de mantenimiento', required=True, domain="[('type_line','=','calibration')]")
@@ -47,6 +51,8 @@ class CalibrationRequestWizard(models.TransientModel):
 class ReportRequestReport(models.AbstractModel):
     _name = 'report.mgmtsystem_infrastructure.report_request'
     _inherit = 'report.report_xlsx.abstract'
+    _description = "report.mgmtsystem_infrastructure.report_request"
+
 
     def generate_xlsx_report(self, workbook, data, maintenance_plan_id):
         try:

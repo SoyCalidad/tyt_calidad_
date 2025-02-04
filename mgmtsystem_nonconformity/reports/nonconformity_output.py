@@ -11,6 +11,8 @@ from math import ceil
 class NonconformityOutputReport(models.AbstractModel):
     _name = 'report.report_nonconformity_output'
     _inherit = 'report.report_xlsx.abstract'
+    _description = "report.report_nonconformity_output"
+
 
     def generate_xlsx_report(self, workbook, data, nonconformities):
         """Generate a xls report with the data

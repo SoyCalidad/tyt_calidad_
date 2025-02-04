@@ -27,6 +27,8 @@ _CALI = {
 
 class AMOFITHPESTXLSReport(models.AbstractModel):
     _name = 'report.mgmtsystem_context.report_xls_pest'
+    _description = "report.mgmtsystem_context.report_xls_pest"
+
 
     _inherit = 'report.report_xlsx.abstract'
 
@@ -168,6 +170,8 @@ class AMOFITHPESTXLSReport(models.AbstractModel):
 
 class AMOFITHPESTReport(models.AbstractModel):
     _name = 'report.mgmtsystem_context.report_pest'
+    _description = "report.mgmtsystem_context.report_pest"
+
 
     @api.model
     def _get_report_values(self, docids, data=None):

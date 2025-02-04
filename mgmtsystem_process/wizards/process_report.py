@@ -50,6 +50,8 @@ class ProcessCategDummy(models.Model):
 
 class ProcessReportWizard(models.TransientModel):
     _name = 'mgmt.process.report.wizard'
+    _description = "mgmt.process.report.wizard"
+
 
     categ = fields.Many2many('mgmt.categ.dummy', string='Categorías')
 

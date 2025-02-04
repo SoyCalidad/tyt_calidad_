@@ -5,6 +5,8 @@ from lxml import etree
 
 class Context(models.Model):
     _name = 'mgmtsystem.context'
+    _description = "mgmtsystem.context"
+
 
     name = fields.Char(string='Nombre')
     date = fields.Date(string='Fecha de Creación')
@@ -461,6 +463,7 @@ class StakeHolder(models.Model):
 
 class StakeholderReq(models.Model):
     _name = 'mgmtsystem.stakeholder.req'
+    _description = "mgmtsystem.stakeholder.req"
 
     name = fields.Char(string='Descripción')
     type = fields.Selection([
@@ -473,6 +476,8 @@ class StakeholderReq(models.Model):
 
 class StakeholderOpportunity(models.Model):
     _name = 'mgmtsystem.stakeholder.opp'
+    _description = "mgmtsystem.stakeholder.opp"
+
 
     name = fields.Char(string='Descripción')
     stakeholder_id = fields.Many2one(

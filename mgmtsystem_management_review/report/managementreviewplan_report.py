@@ -3,6 +3,8 @@ from odoo import api, fields, models
 
 class MangnamentReviewPlanReport(models.AbstractModel):
     _name = 'report.mgmtsystem_management_review.review_plan_report'
+    _description = "report.mgmtsystem_management_review.review_plan_report"
+
 
     @api.model
     def _get_report_values(self, docids, data=None):
@@ -22,6 +24,8 @@ class MangnamentReviewPlanReport(models.AbstractModel):
 
 class MangnamentReviewPlanReportWizard(models.TransientModel):
     _name = "wizard.mgmtsystem_management_reviewplan.report"
+    _description = "wizard.mgmtsystem_management_reviewplan.report"
+
 
     management_review_plan = fields.Many2one('management.review.plan', string='Programa de revisiones por la dirección', required=True)
 

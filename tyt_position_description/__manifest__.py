@@ -9,7 +9,7 @@
     """,
 
     'author': "soycalidad",
-
+    'license': 'Other proprietary',
     'category': 'Uncategorized',
     'version': '0.1',
 

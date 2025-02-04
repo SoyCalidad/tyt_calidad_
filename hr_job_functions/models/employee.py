@@ -4,6 +4,7 @@ from datetime import datetime
 
 class Workplace(models.Model):
     _name = 'hr.workplace'
+    _description = "hr.workplace"
     
     name = fields.Char(string='Nombre')
 

@@ -7,6 +7,8 @@ from odoo.exceptions import UserError
 
 class PolicyReport(models.AbstractModel):
         _name = 'report.mgmtsystem_context.politica_de_calidad'
+        _description = "report.mgmtsystem_context.politica_de_calidad"
+
 
         @api.model
         def _get_report_values(self, docids, data=None):

@@ -5,7 +5,7 @@
     'summary': 'Botón de reporte de bugs',
     'author': 'Soy Calidad',
     'website': 'www.soycalidad.com',
-    'license': '',
+    'license': 'Other proprietary',
     'category': 'bugs',
     'depends': [
         'base'

@@ -174,6 +174,7 @@ class Legal(models.Model):
 
 class Article(models.Model):
     _name = "legal.article"
+    _description = "legal.article"
 
     legal_id = fields.Many2one(
         string=u'Requisito legal',

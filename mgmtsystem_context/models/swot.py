@@ -328,6 +328,8 @@ class CrossSWOT(models.Model):
 
 class CrossSWOTItem(models.Model):
     _name = 'mgmtsystem.context.cross.swot.item'
+    _description = "mgmtsystem.context.cross.swot.item"
+
 
     code = fields.Char(string='Código',)
     cross_swot_id = fields.Many2one(

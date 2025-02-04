@@ -5,6 +5,8 @@ from odoo.exceptions import UserError
 
 class Result(models.Model):
     _name = 'evaluation.result'
+    _description = "evaluation.result"
+
 
     # new Many2one field
     matrix_block_line_id = fields.Many2one(
@@ -62,6 +64,8 @@ class Result(models.Model):
 
 class Eval(models.Model):
     _name = 'evaluation.evaluation'
+    _description = "evaluation.evaluation"
+
 
     name = fields.Char(
         string='Nombre',
@@ -87,6 +91,8 @@ class Eval(models.Model):
 
 class Criterio(models.Model):
     _name = 'evaluation.criterio'
+    _description = "evaluation.criterio"
+
 
     name = fields.Char(
         string='Nombre',
@@ -112,6 +118,8 @@ class Criterio(models.Model):
 
 class CriterioLine(models.Model):
     _name = 'evaluation.criterio.line'
+    _description = "evaluation.criterio.line"
+
 
     name = fields.Char(
         string='Nombre',

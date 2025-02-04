@@ -32,7 +32,7 @@
         # post menus_hola_calidad
         'soycalidad_risk',
         'hr_job_functions',
-        'partner_from_employee',
+        # 'partner_from_employee',
         'report_requirements',
         'mgmtsystem_context_integration',
 

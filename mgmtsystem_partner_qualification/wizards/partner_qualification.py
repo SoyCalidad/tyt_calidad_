@@ -4,6 +4,8 @@ from odoo.exceptions import ValidationError
 
 class PartnerQualificationWizard(models.Model):
     _name = 'partner.qualification.wizard'
+    _description = "partner.qualification.wizard"
+
 
     filter_by = fields.Selection([
         ('date', 'Fecha'),

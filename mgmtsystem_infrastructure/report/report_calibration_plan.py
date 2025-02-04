@@ -2,7 +2,8 @@ from odoo import models, api, fields
 
 class MaintanancePlanWizard(models.TransientModel):
     _name = 'calibration.plan.wizard'
-    
+    _description = "calibration.plan.wizard"
+
     calibration_plan_id = fields.Many2one('mgmtsystem.calibration.plan', string='Programa de calibraciones')
     
     def action_print(self):
@@ -21,6 +22,8 @@ class MaintanancePlanWizard(models.TransientModel):
     
 class MaintanancePlanReport(models.AbstractModel):
     _name = 'report.mgmtsystem_infrastructure.calibration_plan_report'
+    _description = "report.mgmtsystem_infrastructure.calibration_plan_report"
+
 
     @api.model
     def _get_report_values(self, docids, data=None):

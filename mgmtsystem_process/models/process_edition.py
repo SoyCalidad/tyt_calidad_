@@ -7,6 +7,7 @@ import difflib
 
 class EconomicActiviy(models.Model):
     _name = 'res.economy.activity'
+    _description = "res.economy.activity"
 
     name = fields.Char(string='Nombre')
     description = fields.Text(string='Descripción')
@@ -397,6 +398,7 @@ class ProcessEdition(models.Model):
 
 class ProcessEditionHistory(models.Model):
     _name = 'process.edition.history'
+    _description = "process.edition.history"
 
     process_edition_id = fields.Many2one('process.edition', string='Edición')
     numero = fields.Char(string='Número')

@@ -261,6 +261,7 @@ class ProcessResourceType(models.Model):
 
 class ProcessResource(models.Model):
     _name = 'mgmt.process.resource'
+    _description = "mgmt.process.resource"
 
     process_id = fields.Many2one('mgmt.process', domain=[('active','=',True)], string='Procedimiento')
     categ_id = fields.Many2one('mgmt.categ', string='Proceso')
@@ -328,6 +329,7 @@ class ProcessLine(models.Model):
 
 class ProcessLineInput(models.Model):
     _name = 'mgmt.process.line.input'
+    _description = "mgmt.process.line.input"
 
     name = fields.Char(string='Nombre')
     description = fields.Text(string='Descripción')
@@ -337,6 +339,7 @@ class ProcessLineInput(models.Model):
 
 class ProcessLineOutput(models.Model):
     _name = 'mgmt.process.line.output'
+    _description = "mgmt.process.line.output"
 
     name = fields.Char(string='Nombre')
     description = fields.Text(string='Descripción')
