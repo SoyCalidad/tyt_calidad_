@@ -87,7 +87,30 @@ class EvaluationRubric(models.Model):
         }
     
     def action_view_validate_and_notify(self):
+        self.ensure_one()
+
         self.state = 'validated_notified'
+
+        user = self.env.user
+        _logger.info("**************************************")
+        _logger.info("Email to: %s", self.auditor.work_email)
+        _logger.info("Email from: %s", user.email)
+        _logger.info("**************************************")
+
+        return {
+            'name': 'Enviar informe',
+            'type': 'ir.actions.act_window',
+            'res_model': 'mail.compose.message',
+            'view_mode': 'form',
+            'target': 'new',
+            'context': {
+                'default_model': 'tyt_recruitment.evaluation_rubric',
+                'default_template_id': self.env.ref('tyt_recruitment.email_template_rubric_signature').id,
+                'default_email_from': user.email,
+                'default_email_to': self.auditor.work_email,
+                'default_res_ids': [self.id],
+            }
+        }
 
 class EvaluationRubric(models.Model):
     _name = 'tyt_recruitment.detail_evaluation_rubric'
