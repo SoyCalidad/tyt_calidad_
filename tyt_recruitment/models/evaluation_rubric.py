@@ -92,10 +92,6 @@ class EvaluationRubric(models.Model):
         self.state = 'validated_notified'
 
         user = self.env.user
-        _logger.info("**************************************")
-        _logger.info("Email to: %s", self.auditor.work_email)
-        _logger.info("Email from: %s", user.email)
-        _logger.info("**************************************")
 
         return {
             'name': 'Enviar informe',
