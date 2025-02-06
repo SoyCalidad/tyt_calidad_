@@ -49,7 +49,7 @@
                     <field name="request_staff" width="120px"/>
                     <field name="turn" width="80px" />
                     <field name="priority" width="80px" />
-                    <field name="days" width="80px" />
+                    <field name="days" width="80px" readonly="0"/>
                     <button 
                       name="action_open_job_application" 
                       string="Cargar candidato" 

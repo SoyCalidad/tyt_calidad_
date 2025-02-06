@@ -197,6 +197,21 @@ class DaysOfWeek(models.Model):
             return {
                 'type': 'ir.actions.act_window_close'
             }
+        
+    def action_open_certification_feedback(self):
+        group = str(self.attendance_id.id)
+
+        applicant_name = self.applicant_id.name
+        campaign = self.attendance_id.campaign_id.display_name
+        trainer = self.attendance_id.trainer.name
+        
+        url = f"/certification_feedback/{self.id}/?applicant_name={applicant_name}&campaign={campaign}&trainer={trainer}&group={group}"
+        
+        return {
+            'type': 'ir.actions.act_url',
+            'url': url,
+            'target': 'new', 
+        }
 
 class SurveyAttendance(models.Model):
     _name = 'tyt_recruitment.survey_attendance'

@@ -1,0 +1,66 @@
+<odoo>
+  <data>
+    <!-- list attendance -->
+    <!-- <record model="ir.ui.view" id="tyt_recruitment.component_feeback_list">
+      <field name="name">Lista de retroalimentaciones</field>
+      <field name="model">tyt_recruitment.certification_feedback</field>
+      <field name="arch" type="xml">
+        <tree>
+          <field name="id"/>
+          <field name="campaign_id"/>
+          <field name="requisition_id"/>
+          <field name="trainer"/>
+          <field name="recruiter"/>
+          <field name="turn"/>
+          <button 
+            name="action_view_evaluation_rubric" 
+            string="Ver rúbrica de evaluación" 
+            type="object" class="oe_highlight" 
+            groups="tyt_recruitment.group_quality_user"
+            attrs="{'invisible': [('trainer', '=', False)]}"
+          />
+        </tree>
+      </field>
+    </record> -->
+    
+    <!-- list tag attendance -->
+    <record model="ir.ui.view" id="tyt_recruitment.component_feeback_form">
+      <field name="name">Lista de componentes para ficha de retroalimentación</field>
+      <field name="model">tyt_recruitment.component_feeback</field>
+      <field name="arch" type="xml">
+        <tree>
+          <field name="id"/>
+          <field name="text"/>
+        </tree>
+      </field>
+    </record>
+
+    <!-- actions opening views on models -->
+
+    <record model="ir.actions.act_window" id="tyt_recruitment_action_window_feedback">
+      <field name="name">Lista de retroalimentaciones</field>
+      <field name="res_model">tyt_recruitment.certification_feedback</field>
+      <field name="view_mode">tree,form</field>
+    </record>
+
+    <record model="ir.actions.act_window" id="tyt_recruitment_action_window_feedback_components">
+      <field name="name">Lista de componentes </field>
+      <field name="res_model">tyt_recruitment.component_feeback</field>
+      <field name="view_mode">tree,form</field>
+    </record>
+
+    <!-- Top menu item -->
+
+    <menuitem id="menu_custom_feeback_list"
+      name="Lista de retroalimentaciones"
+      parent="menu_custom_attendance"
+      action="tyt_recruitment_action_window_feedback"
+    />
+
+    <menuitem id="menu_custom_feedback_components"
+      name="Componentes de ficha de retroalimentación"
+      parent="menu_custom_attendance"
+      action="tyt_recruitment_action_window_feedback_components"
+    />
+  </data>
+</odoo>

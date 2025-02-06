@@ -145,8 +145,8 @@ class JobApplication(models.Model):
             bool(self.value_proposition)
         ])
 
-        self.status_loaded = (all_fields_filled/14)*100
-        if all_fields_filled == 14:
+        self.status_loaded = (all_fields_filled/12)*100
+        if all_fields_filled == 12:
             self.expedient_status = True
             self.applicant_id.expedient_status = True
         else:
@@ -183,8 +183,8 @@ class JobApplication(models.Model):
             self.interbank_key_approved,
             self.value_proposition_approved
         ])
-        self.status_approved = (all_fields_approved/14)*100
-        if all_fields_approved == 14:
+        self.status_approved = (all_fields_approved/12)*100
+        if all_fields_approved == 12:
             self.applicant_id.status = True
         else:
             self.applicant_id.status = False

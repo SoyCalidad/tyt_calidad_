@@ -1,0 +1,180 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <template id="template_certification_feedback_form" name="Public Form">
+        <link rel="stylesheet" href="/web/static/lib/bootstrap/dist/css/bootstrap.css"/>
+        <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons/font/bootstrap-icons.css"/>
+        <style type="text/css">
+            body {
+                background-image: url(/tyt_recruitment/static/src/img/fondo_form.png);
+            }
+            .row{
+                background: white;
+            }
+            h1 {
+                background-color: #1f8296;
+                padding: 10px;
+                color: white;
+            }
+            h3 {
+                background-color: #1f8296;
+                padding: 10px;
+                color: white;
+                margin-left: -10px;
+            }
+            .cell1{
+                background-color: white;
+            }
+        </style>
+        <div class="container mt-4 mb-4">
+            <form id="job-application-form" action="/job_application/submit" method="post" class="p-4 border rounded bg-light">
+                <h1 class="text-center">RETROALIMENTACIÓN DE CERTIFICACIÓN</h1>
+                <h5 class="text-center"> Para llenar personalmente por el solicitante. Es indispensable contestar todas las preguntas. </h5>
+                <div id="first-part">
+                    <section class="p-3">
+                        <div class="row">
+                            <div class="col-sm-6 col-md-4 col-lg-4 col-xl-4 col-xxl-4 p-4 border">
+                                <img src="/tyt_recruitment/static/src/img/logo_large.png" alt="Logo" style="width: 280px; height: auto; margin: auto; display: block;" />
+                            </div>
+
+                            <div class="col-sm-6 col-md-8 col-lg-8 col-xl-8 col-xxl-8 p-4 border">
+                                <div class="row">
+                                    <div class="col-sm-6 col-md-6 col-lg-6 col-xl-6 col-xxl-6 p-4 border" style="block:None">
+                                    </div>
+                                    <div class="col-sm-6 col-md-6 col-lg-6 col-xl-6 col-xxl-6 p-4 border">
+                                        <label for="current_date" class="form-label">Fecha</label>
+                                        <input type="text" class="form-control" id="current_date" name="current_date" readonly="true" required="required" />
+                                    </div>
+                                </div>
+
+                                <div class="row">
+                                    <div class="col-sm-8 col-md-8 col-lg-8 col-xl-8 col-xxl-8 p-4 border">
+                                        <label for="name" class="form-label">Nombre</label>
+                                        <input type="text" class="form-control" id="name" name="name" required="required" readonly="true"/>
+                                    </div>
+                                    <div class="col-sm-4 col-md-4 col-lg-4 col-xl-4 col-xxl-4 p-4 border">
+                                        <label for="site" class="form-label">Promedio de evaluación</label>
+                                        <input type="text" class="form-control" id="site" name="site" t-att-value="site_id" required="required" readonly="true"/>
+                                    </div>
+                                </div>
+                                
+                                <div class="row">
+                                    <div class="col-sm-2 col-md-2 col-lg-2 col-xl-2 col-xxl-2 p-4 border">
+                                        <label for="group" class="form-label">Grupo</label>
+                                        <input type="text" class="form-control" id="group" name="group" t-att-value="site_id" required="required" readonly="true"/>
+                                    </div>
+                                    <div class="col-sm-5 col-md-5 col-lg-5 col-xl-5 col-xxl-5 p-4 border">
+                                        <label for="campaign" class="form-label">Campaña</label>
+                                        <input type="text" class="form-control" id="campaign" name="campaign" t-att-value="campaign" required="required" readonly="true"/>
+                                    </div>
+                                    <div class="col-sm-5 col-md-5 col-lg-5 col-xl-5 col-xxl-5 p-4 border">
+                                        <label for="trainer" class="form-label">Entrenador</label>
+                                        <input type="text" class="form-control" id="trainer" name="trainer" t-att-value="trainer" required="required" readonly="true"/>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </section>
+
+                    
+
+                    <section class="p-3">
+                        <h3>CUESTIONARIO</h3>
+                        <div class="row">
+                            <t t-foreach="components_json" t-as="question">
+                                <div class="col-sm-12 col-md-12 col-lg-12 col-xl-12 col-xxl-12 p-4 border">
+                                    <label t-att-for="question['id']" class="form-label text-muted">
+                                        <t t-esc="question['text']"/>
+                                    </label>
+                                    <input type="text" class="form-control"
+                                        t-att-id="question['id']" 
+                                        t-att-name="question['id']" 
+                                        t-att-placeholder="'Ingrese su respuesta'" 
+                                        required="required"/>
+                                </div>
+                            </t>
+                        </div>
+                    </section>
+
+                    <section class="p-3">
+                        <div class="row">
+                            <div class="col-sm-5 col-md-5 col-lg-5 col-xl-5 col-xxl-5 p-4 border">
+                                <h3>FIRMA DEL APLICANTE</h3>
+                            </div>
+                            <div class="col-sm-7 col-md-7 col-lg-7 col-xl-7 col-xxl-7 p-4 border">
+                                <canvas id="signature-pad" class="signature-pad border" width="500" height="200"></canvas>
+                                <input type="hidden" id="signature" name="signature" />
+                                <button type="button" class="btn btn-secondary mt-2" id="clear-signature">Borrar firma</button>
+                            </div>
+                        </div>
+
+                        <div class="row">
+                            <div class="col p-3 text-center border">
+                                La empresa no se compromete a aceptar al solicitante como empleado por el solo hecho de recibir esta solicitud.
+                            </div>
+                        </div>
+                    </section>   
+                </div>
+
+                 
+            </form>
+        </div>
+        <script src="https://cdn.jsdelivr.net/npm/signature_pad@2.3.2/dist/signature_pad.min.js"></script>
+        <script>
+
+            // FECHA ACTUAL
+            document.addEventListener("DOMContentLoaded", function() {
+                const today = new Date().toISOString().split('T')[0];
+                document.getElementById("request_date").value = today;
+            });
+
+            window.onscroll = function() {
+                var button = document.getElementById("back-to-top");
+                if (document.body.scrollTop > 100 || document.documentElement.scrollTop > 100) {
+                    button.style.display = "block";
+                } else {
+                    button.style.display = "none";
+                }
+            };
+
+            // FIRMA
+            // Inicializar el Signature Pad
+            var canvas = document.getElementById('signature-pad');
+            var signaturePad = new SignaturePad(canvas);
+
+            // Botón para limpiar la firma
+            document.getElementById('clear-signature').addEventListener('click', function () {
+                signaturePad.clear();
+            });
+
+            // Guardar la firma como una imagen base64 en el campo oculto
+            document.querySelector('form').addEventListener('submit', function (event) {
+                if (!signaturePad.isEmpty()) {
+                    var signatureData = signaturePad.toDataURL('image/png');
+                    document.getElementById('signature').value = signatureData;
+                } else {
+                    alert("Por favor, firme antes de enviar.");
+                    event.preventDefault();  // Evita el envío si no hay firma
+                }
+            });
+        </script>
+
+    </template>
+
+    <template id="template_job_application_success" name="Form Submission Success">
+        <link rel="stylesheet" href="/web/static/lib/bootstrap/dist/css/bootstrap.css"/>
+        <div class="container text-center mt-5">
+            <h4>¡Gracias por enviar el formulario!</h4>
+            <br/>   
+            <div class="mt-4">
+                <a t-att-href="'/survey/%s/%s/%s/%s?%s' % (
+                    job_application_id, name, last_name_father, last_name_mother,
+                    'gender=%s&amp;birthplace=%s&amp;birthdate=%s&amp;nationality=%s&amp;age=%s&amp;marital_status=%s' % (
+                    gender, birthplace, birthdate, nationality, age, marital_status))" 
+                class="btn btn-primary btn-lg px-5 py-2" 
+                role="button">
+                    Completar encuesta de salud
+                </a>
+            </div>
+        </div>
+    </template>
+</odoo>

@@ -10,5 +10,6 @@ from . import (
     attendance,
     wizard_attendance,
     survey,
-    evaluation_rubric
+    evaluation_rubric,
+    certification_feedback
 )
