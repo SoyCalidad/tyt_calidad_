@@ -101,6 +101,11 @@
                     string="Ver" 
                     type="object" 
                     class="oe_highlight" />
+                  <button 
+                    name="action_open_certification_feedback" 
+                    string="Retroalimentación" 
+                    type="object" 
+                    class="oe_highlight" />
                 </tree>
               </field>                  
             </page>

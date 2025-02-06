@@ -198,7 +198,14 @@ class Campaign(models.Model):
     
     tag_id = fields.Many2one('hr.department', string='Dept', options={'no_create': True}, required=True, ondelete='cascade')
     tag_display_name = fields.Char(related='tag_id.display_name', string='Nombre del Departamento', store=True)
-    days = fields.Integer(related='tag_id.days', string="Días", store=True)
+    days = fields.Integer(string="Días", store=True, readonly=False)
+
+    @api.onchange('tag_id')
+    def _onchange_tag_id(self):
+        if self.tag_id:
+            self.days = self.tag_id.days
+        else:
+            self.days = 0
 
     def action_open_job_application(self):
         requisition_id = self.requisition_id.id

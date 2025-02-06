@@ -36,7 +36,9 @@
         'data/data_reason_of_withdrawal.xml',
         'data/data_survey_messages.xml',
         'data/evaluation_rubric.xml',
-        'wizards/rubric_signature.xml'
+        'wizards/rubric_signature.xml',
+        'views/view_certification_feedback.xml',
+        'views/certification_feedback_form.xml'
     ],
     'auto_install': False,
     'installable': True,

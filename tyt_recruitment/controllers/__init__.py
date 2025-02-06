@@ -1,5 +1,6 @@
 from . import (
     requisition,
     job_application,
-    health_survey
+    health_survey,
+    certification_feedback
 )
