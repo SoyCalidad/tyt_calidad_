@@ -89,7 +89,7 @@ class HrJob(models.Model):
         """ Set the onboarding step as done """
         pass
 
-    @api.onchange('employee_id')
+    # @api.onchange('employee_id')
     def send_final(self):
         super().send_final()
         self.env.company.sudo().set_onboarding_step_done(

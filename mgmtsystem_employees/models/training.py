@@ -337,7 +337,7 @@ class TrainingLine(models.Model):
         ondelete='cascade',
     )
     efresponse_id = fields.Many2one(
-        'survey.user_input', "Respuesta eficiencia", ondelete="set null", oldname="response")
+        'survey.user_input', "Respuesta eficiencia", ondelete="set null")
 
     confirm = fields.Boolean(string='Confirmación')
 
