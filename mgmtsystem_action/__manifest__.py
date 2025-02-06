@@ -13,6 +13,7 @@
     'website': "http://www.soycalidad.com",
 
     "category": "Management System",
+    'license': 'Other proprietary',
     'version': '1.1',
 
     'depends': ['hola_calidad', 'mail','report_xlsx', 'mgmtsystem_process', 'mgmtsystem_documentary_control'],

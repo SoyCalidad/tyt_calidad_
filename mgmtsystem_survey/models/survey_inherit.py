@@ -271,15 +271,6 @@ class Survey(models.Model):
             res.update({'line_ids': vals})
         return res
 
-    state = fields.Selection(
-        string="Survey Stage",
-        selection=[
-            ('draft', 'Draft'),
-            ('open', 'In Progress'),
-            ('closed', 'Closed'),
-        ], default='draft', required=True,
-        group_expand='_read_group_states'
-    )
 
     def action_survey_views(self):
         type_action = self._context.get('type_action', '')

@@ -7,6 +7,7 @@
     'author': "Soy Calidad",
     'website': "http://www.soycalidad.com",
 
+    'license': 'Other proprietary',
     'category': 'Management System',
     'version': '1.1',
 

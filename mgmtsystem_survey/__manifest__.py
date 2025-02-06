@@ -4,6 +4,7 @@
 {
     "name": "Management System Encuestas",
     "author": "HC",
+    'license': 'Other proprietary',
     "category": "Management System",
     "depends": [
         'survey',

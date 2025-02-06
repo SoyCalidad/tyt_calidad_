@@ -80,7 +80,7 @@
                             <page name="internal_factor" string="AMOFHIT">
                                 <group string="Factores internos (AMOFHIT)" attrs="{'invisible': [('custom_analysis','=',False)]}">
                                     <field name="internal_factor_ids" colspan="2" nolabel="1">
-                                        <tree>
+                                        <tree default_order="type desc">
                                             <field name="type_id" readonly="1" />
                                             <field name="details" string="Situación actual" style="max-width:200px;" />
                                             <field name="term" />
@@ -157,7 +157,7 @@
                             <page name="external_factor" string="PESTEL">
                                 <group string="Factores externos (PESTEL)" attrs="{'invisible': [('custom_analysis','=',False)]}">
                                     <field name="external_factor_ids" colspan="2" nolabel="1">
-                                        <tree>
+                                        <tree default_order="type desc">
                                             <field name="type_id" readonly="1" />
                                             <field name="details" string="Situación actual" style="max-width:200px;" />
                                             <field name="term" />

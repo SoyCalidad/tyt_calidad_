@@ -29,10 +29,7 @@ class WizardMatrix(models.TransientModel):
 
     matrix_ids = fields.Many2one(
         string='Matriz',
-        comodel_name='matrix.matrix',
-        relation='matrix_wizard_report_rel',
-        column1='matrix_id',
-        column2='wizard_id',
+        comodel_name='matrix.matrix'
     )
 
     @api.onchange('type')
