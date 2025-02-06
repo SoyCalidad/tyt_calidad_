@@ -91,19 +91,16 @@ class Training(models.Model):
         string=u'Observaciones',
     )
 
-    # state = fields.Selection(
-    #     string=u'Estado',
-    #     selection=[
-    #         ('elaborate', 'En elaboración'),
-    #         ('validate_ok', 'Validado'),
-    #         ('in_process', 'En proceso'),  # incluye etapa de evaluación
-    #         ('final', 'Finalizado'),
-    #         ('caducated', 'Caducado'),
-    #         ('cancel', 'Obsoleto'),
-    #     ],
-    #     default='elaborate',
-    #     copy=False,
-    # )
+    state = fields.Selection(
+        string=u'Estado',
+        selection_add=[
+            ('in_process', 'En proceso'),  # incluye etapa de evaluación
+            ('final', 'Finalizado'),
+            ('caducated', 'Caducado')
+        ],
+        default='elaborate',
+        copy=False,
+    )
 
     line_ids = fields.One2many(
         string=u'Asistentes',

@@ -96,18 +96,18 @@ class Plan(models.Model):
         required=True,
     )
 
-    state = fields.Selection(
-        string=u'Estado',
-        selection=[
-            ('elaborate', 'En elaboración'),
-            ('review', 'En revisión'),
-            ('validate', 'En validación'),
-            ('validate_ok', 'Validado'),
-            ('cancel', 'Obsoleto')
-        ],
-        default='elaborate',
-        copy=False,
-    )
+    # state = fields.Selection(
+    #     string=u'Estado',
+    #     selection=[
+    #         ('elaborate', 'En elaboración'),
+    #         ('review', 'En revisión'),
+    #         ('validate', 'En validación'),
+    #         ('validate_ok', 'Validado'),
+    #         ('cancel', 'Obsoleto')
+    #     ],
+    #     default='elaborate',
+    #     copy=False,
+    # )
 
     def unlink(self):
         for plan in self:
