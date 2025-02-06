@@ -78,7 +78,6 @@ class Plan(models.Model):
         comodel_name='mgmtsystem.plan.training',
         inverse_name='plan_id',
         copy=True,
-        ondelete='cascade',
     )
 
     categ_id = fields.Many2one(

@@ -37,9 +37,6 @@ class LegalPlanReportWizard(models.TransientModel):
     plan_ids = fields.Many2one(
         string='Planes legales',
         comodel_name='legal.plan',
-        relation='plan_legal_wizard_report_rel',
-        column1='plan_id',
-        column2='wizard_id',
         required=True,
     )
 
