@@ -15,7 +15,7 @@ class Groups(models.Model):
         relation='intranet_groups_employees_rel',
         column1='gid',
         column2='uid',
-        String='Employees',
+        string='Employees',
     )
     employee_count = fields.Integer(compute='_compute_employee_count', string='Employee Count')
     user_ids = fields.Many2many('res.users', string='Users')
