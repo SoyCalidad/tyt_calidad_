@@ -5,7 +5,7 @@
     'summary': 'Añade características al módulo Reclutamiento TYT Contact Center',
     'author': 'Soy Calidad',
     'website': 'www.soycalidad.com',
-    'license': '',
+    'license': 'other license',
     'category': 'soycalidad',
     'depends': [
         'hola_calidad',
