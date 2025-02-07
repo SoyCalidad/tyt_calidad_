@@ -45,7 +45,7 @@ class SurveyAnswer(models.Model):
 
     text = fields.Char(string="Respuesta")
     extra_text = fields.Char(string="Campo extra")
-    multiple_ids = fields.One2many("tyt_recruitment.multiple_answer", 'survey_answer_id', string='Respuestas multiples', tracking=True, store=True)
+    multiple_ids = fields.One2many("tyt_recruitment.multiple_answer", 'survey_answer_id', string='Respuestas multiples', store=True)
 
     question_id = fields.Many2one("survey.question", string="Pregunta")
     complete_survey_id = fields.Many2one("tyt_recruitment.complete_survey", string="Encuesta completa", ondelete='cascade')

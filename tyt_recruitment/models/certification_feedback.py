@@ -18,14 +18,14 @@ class CertificationFeeback(models.Model):
     _description = 'Rúbrica de evaluación al expositor'
     _rec_name = 'id'
 
-    date = fields.Date(string="Fecha", tracking=True)
+    date = fields.Date(string="Fecha")
 
-    name = fields.Char(string="Nombre", tracking=True)
+    name = fields.Char(string="Nombre")
     evaluation_average = fields.Float(string="Promedio de Evaluación")
 
-    group = fields.Char(string="Grupo", tracking=True)
-    campaign = fields.Char(string="Campaña", tracking=True)
-    trainner = fields.Char(string="Entrenador", tracking=True)
+    group = fields.Char(string="Grupo")
+    campaign = fields.Char(string="Campaña")
+    trainner = fields.Char(string="Entrenador")
 
     state = fields.Selection(RUBRIC_STATE, string='Estado', default='doing')
    
@@ -36,4 +36,4 @@ class ComponentFeedback(models.Model):
     _description = 'Pregunta de rúbrica de evaluación al expositor'
     _rec_name = 'id'
 
-    text = fields.Char(string="Título", tracking=True)
+    text = fields.Char(string="Título")

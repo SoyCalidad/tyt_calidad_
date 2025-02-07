@@ -18,14 +18,14 @@ class Attendance(models.Model):
     _description = 'Asistencia'
     _rec_name = 'id'
 
-    trainer = fields.Many2one('hr.employee', string="Entrenador", tracking=True)
-    center = fields.Char( string="Centro", tracking=True)
-    week = fields.Char( string="Semana", tracking=True)
-    turn = fields.Selection([('T/M', 'T/M'), ('T/V', 'T/V'), ('T/N', 'T/N')], string="Turno lista de prospectos", tracking=True)
+    trainer = fields.Many2one('hr.employee', string="Entrenador")
+    center = fields.Char( string="Centro")
+    week = fields.Char( string="Semana")
+    turn = fields.Selection([('T/M', 'T/M'), ('T/V', 'T/V'), ('T/N', 'T/N')], string="Turno lista de prospectos")
 
-    income = fields.Char( string="Ingresos", compute="_compute_income", store=True, tracking=True)
-    returns = fields.Char( string="Regresos", tracking=True)
-    desertion = fields.Char( string="Deserción", tracking=True)
+    income = fields.Char( string="Ingresos", compute="_compute_income", store=True)
+    returns = fields.Char( string="Regresos")
+    desertion = fields.Char( string="Deserción")
 
     days = fields.Integer(string="Días de capacitación", store=True)
 
@@ -33,12 +33,12 @@ class Attendance(models.Model):
 
     attendance_days_of_week_ids = fields.One2many("tyt_recruitment.attendance_days_of_week", "attendance_id", string="Días de asistencia")
     kardex_by_applicant_ids = fields.One2many("tyt_recruitment.kardex_by_applicant", "attendance_id", string="Kardex de asistencia")
-    kardex_by_applicant_two_ids = fields.One2many("tyt_recruitment.kardex_by_applicant", "attendance_id", string="Kardex de asistencia")
+    kardex_by_applicant_two_ids = fields.One2many("tyt_recruitment.kardex_by_applicant", "attendance_id", string="Kardex de asistencia 2")
 
     view_kardex = fields.Boolean(string="Ver kardex", default=False)
     view_kardex_certificate = fields.Boolean(string="Ver kardex certificación", default=False)
 
-    recruiter = fields.Char(string="Reclutador", tracking=True)
+    recruiter = fields.Char(string="Reclutador")
     campaign_id = fields.Many2one("tyt_recruitment.campaign", string="Campaña", ondelete='cascade')
     requisition_id = fields.Many2one("tyt_recruitment.requisition", ondelete='cascade')
 
@@ -118,8 +118,8 @@ class AttendanceState(models.Model):
     _description = 'Estado'
     _rec_name = 'tag'
 
-    tag = fields.Char(required=True, string="Etiqueta", tracking=True)
-    name = fields.Char(required=True, string="Nombre", tracking=True)
+    tag = fields.Char(required=True, string="Etiqueta")
+    name = fields.Char(required=True, string="Nombre")
 
 class TagNameController(http.Controller):
     @http.route('/tag_name_list', auth='public', website=True)
@@ -155,7 +155,7 @@ class DaysOfWeek(models.Model):
     opday1 = fields.Many2one('tyt_recruitment.tag_attendance', string="OPE día 01")
     opday2 = fields.Many2one('tyt_recruitment.tag_attendance', string="OPE día 02")
 
-    prospect_turn = fields.Selection(related="attendance_id.turn", string="Turno lista de prospectos", tracking=True)
+    prospect_turn = fields.Selection(related="attendance_id.turn", string="Turno lista de prospectos")
     right_turn = fields.Char(string="Turno correcto")
     observations = fields.Char(string="Observaciones")
     experience = fields.Char(string="Experiencia")
@@ -267,7 +267,7 @@ class KardexAttendance(models.Model):
     survey_counter = fields.Integer(related="attendance_id.survey_counter", string="Contandor de exámenes")
 
     average = fields.Float(string="Promedio", compute="_compute_average_score", store=True)
-    highest_score = fields.Float(string="Promedio", compute="_compute_highest_score", store=True)
+    highest_score = fields.Float(string="Promedio alto", compute="_compute_highest_score", store=True)
 
     @api.depends('survey_counter', 'exam1', 'exam2', 'exam3', 'exam4', 'exam5',
                  'exam6', 'exam7', 'exam8', 'exam9', 'exam10', 'exam11',

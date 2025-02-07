@@ -196,7 +196,7 @@ class Campaign(models.Model):
 
     requisition_id = fields.Many2one("tyt_recruitment.requisition", ondelete='cascade')
     
-    tag_id = fields.Many2one('hr.department', string='Dept', options={'no_create': True}, required=True, ondelete='cascade')
+    tag_id = fields.Many2one('hr.department', string='Dept', required=True, ondelete='cascade')
     tag_display_name = fields.Char(related='tag_id.display_name', string='Nombre del Departamento', store=True)
     days = fields.Integer(string="Días", store=True, readonly=False)
 
