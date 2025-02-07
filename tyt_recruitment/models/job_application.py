@@ -26,9 +26,9 @@ class JobApplication(models.Model):
     applicant_number_phone = fields.Char(related="applicant_id.number_phone", string="Teléfono", store=True)
     applicant_birthdate = fields.Date(related="applicant_id.birthdate", string="Fecha de nacimiento", store=True)
     applicant_birthplace = fields.Char(related="applicant_id.birthplace", string="Lugar de nacimiento", store=True)
-    applicant_rfc = fields.Char(related="applicant_id.rfc", string="RFC", store=True)
-    applicant_curp = fields.Char(related="applicant_id.curp", string="CURP", store=True)
-    applicant_social_security_number = fields.Char(related="applicant_id.social_security_number", string="NNS", store=True)       
+    applicant_rfc = fields.Char(related="applicant_id.rfc", string="Aplicante RFC", store=True)
+    applicant_curp = fields.Char(related="applicant_id.curp", string="Aplicante CURP", store=True)
+    applicant_social_security_number = fields.Char(related="applicant_id.social_security_number", string="Aplicante NNS", store=True)       
 
     campaign_id = fields.Many2one('tyt_recruitment.campaign', string="Campaña")
     campaign_turn = fields.Selection(related="campaign_id.turn", string="Turno")
@@ -51,68 +51,68 @@ class JobApplication(models.Model):
     has_complete_survey = fields.Boolean(string='Tiene Encuesta Completada', compute='compute_has_complete_survey')
 
     birth_certificate = fields.Binary(string="Acta de nacimiento")
-    birth_certificate_filename = fields.Char(string="Nombre del Archivo")
-    birth_certificate_state = fields.Boolean(string="Estado", default=False)
-    birth_certificate_approved = fields.Boolean(string="Estado", default=False)
+    birth_certificate_filename = fields.Char(string="Nombre del Archivo - ")
+    birth_certificate_state = fields.Boolean(string="Estado - Acta de nacimiento", default=False)
+    birth_certificate_approved = fields.Boolean(string="Estado de aprobación - Acta de nacimiento", default=False)
 
     rfc = fields.Binary(string="RFC")
-    rfc_filename = fields.Char(string="Nombre del Archivo")
-    rfc_state = fields.Boolean(string="Estado", default=False)
-    rfc_approved = fields.Boolean(string="Estado", default=False)
+    rfc_filename = fields.Char(string="Nombre del Archivo - RFC")
+    rfc_state = fields.Boolean(string="Estado - RFC", default=False)
+    rfc_approved = fields.Boolean(string="Estado de aprobación - RFC", default=False)
 
     curp = fields.Binary(string="CURP")
-    curp_filename = fields.Char(string="Nombre del Archivo")
-    curp_state = fields.Boolean(string="Estado", default=False)
-    curp_approved = fields.Boolean(string="Estado", default=False)
+    curp_filename = fields.Char(string="Nombre del Archivo - CURP")
+    curp_state = fields.Boolean(string="Estado - CURP", default=False)
+    curp_approved = fields.Boolean(string="Estado de aprobación - CURP", default=False)
 
     study_certificate = fields.Binary(string="Comprobante de estudio")
-    study_certificate_filename = fields.Char(string="Nombre del Archivo")
-    study_certificate_state = fields.Boolean(string="Estado", default=False)
-    study_certificate_approved = fields.Boolean(string="Estado", default=False)
+    study_certificate_filename = fields.Char(string="Nombre del Archivo - Comprobante de estudio")
+    study_certificate_state = fields.Boolean(string="Estado - Comprobante de estudio", default=False)
+    study_certificate_approved = fields.Boolean(string="Estado de aprobación - Comprobante de estudio", default=False)
 
     proposed_letter = fields.Binary(string="Carta propuesta")
-    proposed_letter_filename = fields.Char(string="Nombre del Archivo")
-    proposed_letter_state = fields.Boolean(string="Estado", default=False)
-    proposed_letter_approved = fields.Boolean(string="Estado", default=False)
+    proposed_letter_filename = fields.Char(string="Nombre del Archivo - Carta propuesta")
+    proposed_letter_state = fields.Boolean(string="Estado - Carta propuesta", default=False)
+    proposed_letter_approved = fields.Boolean(string="Estado de aprobación - Carta propuesta", default=False)
 
     ine = fields.Binary(string="INE")
-    ine_filename = fields.Char(string="Nombre del Archivo")
-    ine_state = fields.Boolean(string="Estado", default=False)
-    ine_approved = fields.Boolean(string="Estado", default=False)
+    ine_filename = fields.Char(string="Nombre del Archivo - INE")
+    ine_state = fields.Boolean(string="Estado - INE", default=False)
+    ine_approved = fields.Boolean(string="Estado de aprobación - INE", default=False)
 
     reference_validation = fields.Binary(string="Validación de referencias")
-    reference_validation_filename = fields.Char(string="Nombre del Archivo")
-    reference_validation_state = fields.Boolean(string="Estado", default=False)
-    reference_validation_approved = fields.Boolean(string="Estado", default=False)
+    reference_validation_filename = fields.Char(string="Nombre del Archivo - Validación de referencias")
+    reference_validation_state = fields.Boolean(string="Estado - Validación de referencias", default=False)
+    reference_validation_approved = fields.Boolean(string="Estado de aprobación - Validación de referencias", default=False)
     
     utility_bill = fields.Binary(string="Comprobante de domicilio")
-    utility_bill_filename = fields.Char(string="Nombre del Archivo")
-    utility_bill_state = fields.Boolean(string="Estado", default=False)
-    utility_bill_approved = fields.Boolean(string="Estado", default=False)
+    utility_bill_filename = fields.Char(string="Nombre del Archivo - Comprobante de domicilio")
+    utility_bill_state = fields.Boolean(string="Estado - Comprobante de domicilio", default=False)
+    utility_bill_approved = fields.Boolean(string="Estado de aprobación - Comprobante de domicilio", default=False)
 
     psychometric = fields.Binary(string="Psicométrico")
-    psychometric_filename = fields.Char(string="Nombre del Archivo")
-    psychometric_state = fields.Boolean(string="Estado", default=False)
-    psychometric_approved = fields.Boolean(string="Estado", default=False)
+    psychometric_filename = fields.Char(string="Nombre del Archivo - Psicométrico")
+    psychometric_state = fields.Boolean(string="Estado - Psicométrico", default=False)
+    psychometric_approved = fields.Boolean(string="Estado de aprobación - Psicométrico", default=False)
 
     snn = fields.Binary(string="SNN")
-    snn_filename = fields.Char(string="Nombre del Archivo")
-    snn_state = fields.Boolean(string="Estado", default=False)
-    snn_approved = fields.Boolean(string="Estado", default=False)
+    snn_filename = fields.Char(string="Nombre del Archivo - SNN")
+    snn_state = fields.Boolean(string="Estado - SNN", default=False)
+    snn_approved = fields.Boolean(string="Estado de aprobación - SNN", default=False)
 
     interbank_key = fields.Binary(string="Clabe interbancaria")
-    interbank_key_filename = fields.Char(string="Nombre del Archivo")
-    interbank_key_state = fields.Boolean(string="Estado", default=False)
-    interbank_key_approved = fields.Boolean(string="Estado", default=False)
+    interbank_key_filename = fields.Char(string="Nombre del Archivo - Clabe interbancaria")
+    interbank_key_state = fields.Boolean(string="Estado - Clabe interbancaria", default=False)
+    interbank_key_approved = fields.Boolean(string="Estado de aprobación - Clabe interbancaria", default=False)
 
     value_proposition = fields.Binary(string="Propuesta de valor")
-    value_proposition_filename = fields.Char(string="Nombre del Archivo")
-    value_proposition_state = fields.Boolean(string="Estado", default=False)
-    value_proposition_approved = fields.Boolean(string="Estado", default=False)
+    value_proposition_filename = fields.Char(string="Nombre del Archivo - Propuesta de valor")
+    value_proposition_state = fields.Boolean(string="Estado - Propuesta de valor", default=False)
+    value_proposition_approved = fields.Boolean(string="Estado de aprobación - Propuesta de valor", default=False)
 
-    expedient_status = fields.Boolean(string="Estado de carga", default=False)
-    status_approved = fields.Float(string="Estado testing", default=0)
-    status_loaded = fields.Float(string="Estado testing", default=0)
+    expedient_status = fields.Boolean(string="Estado 01", default=False)
+    status_approved = fields.Float(string="Estado 02", default=0)
+    status_loaded = fields.Float(string="Estado 03", default=0)
 
     @api.onchange(
         'birth_certificate', 
@@ -219,9 +219,16 @@ class JobApplication(models.Model):
             'target': 'new', 
         }
 
-    def action_view_binary_file(self, field_name, field_f):
-        attachment_name = getattr(self, field_name)
-        attachment = getattr(self, field_f)
+    def action_view_binary_file(self):
+
+        field_name = self.env.context.get('field_name')
+        field_f = self.env.context.get('field_f')
+
+        if not field_name or not field_f:
+            return
+    
+        attachment_name = getattr(self, field_name, '')
+        attachment = getattr(self, field_f, None)
 
         url = f'/web/content/{self._name}/{self.id}/{field_f}/{attachment_name}'
 

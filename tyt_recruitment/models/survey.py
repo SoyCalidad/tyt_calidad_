@@ -11,8 +11,8 @@ _logger = logging.getLogger(__name__)
 class ProspectSurvey(models.Model):
     _inherit = 'survey.survey'
 
-    success_options = fields.Many2one('tyt_recruitment.success_option_message', String="Opciones de mensaje aprobación")
-    failure_options = fields.Many2one('tyt_recruitment.failure_option_message', String="Opciones de mensaje desaprobación")
+    success_options = fields.Many2one('tyt_recruitment.success_option_message', string="Opciones de mensaje aprobación")
+    failure_options = fields.Many2one('tyt_recruitment.failure_option_message', string="Opciones de mensaje desaprobación")
 
     end_message_type = fields.Selection(
         [

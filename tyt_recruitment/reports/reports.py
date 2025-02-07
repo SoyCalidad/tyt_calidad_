@@ -6,6 +6,7 @@ import xlsxwriter
 
 class ReportCustomerRequisitionXlsx(models.AbstractModel):
     _name = 'report.tyt_recruitment.report_requisition'
+    _description = 'Reporte de requisiciones'
     _inherit = 'report.report_xlsx.abstract'
 
     def generate_xlsx_report(self, workbook, data, partners):
