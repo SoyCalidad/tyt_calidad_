@@ -107,7 +107,6 @@ class PlanInfrastructure(models.Model):
     _description = "Programa de infraestructura"
 
     lines_ids = fields.One2many(
-        string=u'Lineas',
         comodel_name='mgmtsystem.infrastructure.line',
         inverse_name='plani_id',
         copy=True,

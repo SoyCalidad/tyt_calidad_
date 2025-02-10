@@ -73,11 +73,11 @@ class AuditPlanValidation(models.Model):
     _inherit = 'mgmtsystem.validation.step'
 
     audit_plan_elaboration_id = fields.Many2one(
-        'audit.plan', string='Padre (Elaboración)')
+        'audit.plan')
     audit_plan_review_id = fields.Many2one(
-        'audit.plan', string='Padre (Revisión)')
+        'audit.plan')
     audit_plan_validation_id = fields.Many2one(
-        'audit.plan', string='Padre (Validación)')
+        'audit.plan')
 
 
 class AuditAudit(models.Model):
@@ -127,8 +127,8 @@ class AudiAuditValidation(models.Model):
     _inherit = 'mgmtsystem.validation.step'
 
     audit_audit_elaboration_id = fields.Many2one(
-        'audit.audit', string='Padre (Elaboración)')
+        'audit.audit')
     audit_audit_review_id = fields.Many2one(
-        'audit.audit', string='Padre (Revisión)')
+        'audit.audit')
     audit_audit_validation_id = fields.Many2one(
-        'audit.audit', string='Padre (Validación)')
+        'audit.audit')

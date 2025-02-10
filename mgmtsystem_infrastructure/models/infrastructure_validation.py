@@ -83,11 +83,11 @@ class MaintenancePlanValidation(models.Model):
     _inherit = 'mgmtsystem.validation.step'
 
     maintenance_plan_elaboration_id = fields.Many2one(
-        'mgmtsystem.maintenance.plan', string='Padre')
+        'mgmtsystem.maintenance.plan')
     maintenance_plan_review_id = fields.Many2one(
-        'mgmtsystem.maintenance.plan', string='Padre')
+        'mgmtsystem.maintenance.plan')
     maintenance_plan_validation_id = fields.Many2one(
-        'mgmtsystem.maintenance.plan', string='Padre')
+        'mgmtsystem.maintenance.plan')
 
 
 class MaintenanceMaintenance(models.Model):
@@ -108,11 +108,11 @@ class MaintenanceMaintenanceValidation(models.Model):
     _inherit = 'mgmtsystem.validation.step'
 
     maintenance_elaboration_id = fields.Many2one(
-        'mgmtsystem.maintenance', string='Padre')
+        'mgmtsystem.maintenance')
     maintenance_review_id = fields.Many2one(
-        'mgmtsystem.maintenance', string='Padre')
+        'mgmtsystem.maintenance')
     maintenance_validation_id = fields.Many2one(
-        'mgmtsystem.maintenance', string='Padre')
+        'mgmtsystem.maintenance')
 
 
 class CalibrationPlan(models.Model):
@@ -133,11 +133,11 @@ class CalibrationPlanValidation(models.Model):
     _inherit = 'mgmtsystem.validation.step'
 
     calibration_plan_elaboration_id = fields.Many2one(
-        'mgmtsystem.calibration.plan', string='Padre')
+        'mgmtsystem.calibration.plan')
     calibration_plan_review_id = fields.Many2one(
-        'mgmtsystem.calibration.plan', string='Padre')
+        'mgmtsystem.calibration.plan')
     calibration_plan_validation_id = fields.Many2one(
-        'mgmtsystem.calibration.plan', string='Padre')
+        'mgmtsystem.calibration.plan')
 
 
 class Calibration(models.Model):
@@ -158,8 +158,8 @@ class CalibrationValidation(models.Model):
     _inherit = 'mgmtsystem.validation.step'
 
     calibration_elaboration_id = fields.Many2one(
-        'mgmtsystem.calibration', string='Padre')
+        'mgmtsystem.calibration')
     calibration_review_id = fields.Many2one(
-        'mgmtsystem.calibration', string='Padre')
+        'mgmtsystem.calibration')
     calibration_validation_id = fields.Many2one(
-        'mgmtsystem.calibration', string='Padre')
+        'mgmtsystem.calibration')

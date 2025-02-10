@@ -166,15 +166,15 @@ class ComunicationPlanValidation(models.Model):
     _inherit = 'mgmtsystem.validation.step'
 
     comunication_plan_elaboration_id = fields.Many2one(
-        'comunication.plan', string='Padre (Elaboración de programa de comunicación)')
+        'comunication.plan')
     comunication_plan_review_id = fields.Many2one(
-        'comunication.plan', string='Padre (Revisión de programa de comunicación)')
+        'comunication.plan')
     comunication_plan_validation_id = fields.Many2one(
-        'comunication.plan', string='Padre (Validación de programa de comunicación)')
+        'comunication.plan')
 
     comunication_plan_line_elaboration_id = fields.Many2one(
-        'comunication.plan.line', string='Padre (Elaboración de plan de comunicación)')
+        'comunication.plan.line')
     comunication_plan_line_review_id = fields.Many2one(
-        'comunication.plan.line', string='Padre (Revisión de plan de comunicación)')
+        'comunication.plan.line')
     comunication_plan_line_validation_id = fields.Many2one(
-        'comunication.plan.line', string='Padre (Validación de plan de comunicación)')
+        'comunication.plan.line')

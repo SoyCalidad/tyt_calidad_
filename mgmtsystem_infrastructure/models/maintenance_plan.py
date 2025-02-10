@@ -199,7 +199,6 @@ class Maintenance(models.Model):
         column2='maintenance_id',
     )
     line_ids = fields.One2many(
-        string='Lineas',
         comodel_name='mgmtsystem.maintenance.line',
         inverse_name='maintenance_id',
     )

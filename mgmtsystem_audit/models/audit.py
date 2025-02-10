@@ -113,9 +113,7 @@ class Audit(models.Model):
         string=u'Observaciones/Alcance',
         required=True,
     )
-    golds = fields.Text(
-        string=u'Objetivos',
-    )
+    golds = fields.Text()
 
     report_count = fields.Integer(
         string=u'Informes',
@@ -135,7 +133,6 @@ class Audit(models.Model):
     )
 
     line_ids = fields.One2many(
-        string=u'Lineas',
         comodel_name='audit.line',
         inverse_name='audit_id',
     )
@@ -272,7 +269,6 @@ class AuditReport(models.Model):
     )
 
     line_ids = fields.One2many(
-        string=u'Lineas',
         comodel_name='report.line',
         inverse_name='report_id',
         copy=True,
@@ -288,9 +284,7 @@ class AuditReport(models.Model):
         string=u'Requisito de la norma',
     )
     scope = fields.Text(u'Alcance', required=True)
-    golds = fields.Text(
-        string=u'Objetivos',
-    )
+    golds = fields.Text()
     auditor_id = fields.Reference(selection=[('res.partner', 'Auditor externo'), (
         'hr.employee', 'Auditor interno'), ], string="Auditor")
     team_id = fields.Many2one(

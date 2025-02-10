@@ -19,8 +19,8 @@ class LegalPlanValidation(models.Model):
     _inherit = 'mgmtsystem.validation.step'
 
     legal_plan_elaboration_id = fields.Many2one(
-        'legal.plan', string='Padre')
+        'legal.plan')
     legal_plan_review_id = fields.Many2one(
-        'legal.plan', string='Padre')
+        'legal.plan')
     legal_plan_validation_id = fields.Many2one(
-        'legal.plan', string='Padre')
+        'legal.plan')

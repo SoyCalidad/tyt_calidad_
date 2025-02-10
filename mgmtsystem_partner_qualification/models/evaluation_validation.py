@@ -32,8 +32,8 @@ class AudievaluationValidation(models.Model):
     _inherit = 'mgmtsystem.validation.step'
 
     evaluation_elaboration_id = fields.Many2one(
-        'res.partner.evaluation', string='Padre')
+        'res.partner.evaluation')
     evaluation_review_id = fields.Many2one(
-        'res.partner.evaluation', string='Padre')
+        'res.partner.evaluation')
     evaluation_validation_id = fields.Many2one(
-        'res.partner.evaluation', string='Padre')
+        'res.partner.evaluation')

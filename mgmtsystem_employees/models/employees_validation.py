@@ -87,15 +87,10 @@ class PlanTraining(models.Model):
 
     state = fields.Selection(
         string=u'Estado',
-        selection=[
-            ('elaborate', 'En elaboración'),
-            ('review', 'En revisión'),
-            ('validate', 'En validación'),
-            ('validate_ok', 'Validado'),
+        selection_add=[
             ('in_process', 'En proceso'),
             ('final', 'Finalizado'),
-            ('caducated', 'Caducado'),
-            ('cancel', 'Obsoleto'),
+            ('caducated', 'Caducado')
         ],
         default='elaborate',
         copy=False,
@@ -119,15 +114,15 @@ class TrainingPlanValidation(models.Model):
     _inherit = 'mgmtsystem.validation.step'
 
     training_plan_elaboration_id = fields.Many2one(
-        'mgmtsystem.plan', string='Padre')
+        'mgmtsystem.plan')
     training_plan_review_id = fields.Many2one(
-        'mgmtsystem.plan', string='Padre')
+        'mgmtsystem.plan')
     training_plan_validation_id = fields.Many2one(
-        'mgmtsystem.plan', string='Padre')
+        'mgmtsystem.plan')
 
     training_plan_tra_elaboration_id = fields.Many2one(
-        'mgmtsystem.plan.training', string='Padre')
+        'mgmtsystem.plan.training')
     training_plan_tra_review_id = fields.Many2one(
-        'mgmtsystem.plan.training', string='Padre')
+        'mgmtsystem.plan.training')
     training_plan_tra_validation_id = fields.Many2one(
-        'mgmtsystem.plan.training', string='Padre')
+        'mgmtsystem.plan.training')

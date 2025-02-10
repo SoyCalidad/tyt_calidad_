@@ -20,11 +20,11 @@ class InternalIssueValidation(models.Model):
     _inherit = 'mgmtsystem.validation.step'
 
     internal_issue_elaboration_id = fields.Many2one(
-        'mgmtsystem.context.internal_issue', string='Padre (Elaboración)')
+        'mgmtsystem.context.internal_issue')
     internal_issue_review_id = fields.Many2one(
-        'mgmtsystem.context.internal_issue', string='Padre (Revisión)')
+        'mgmtsystem.context.internal_issue')
     internal_issue_validation_id = fields.Many2one(
-        'mgmtsystem.context.internal_issue', string='Padre (Validación)')
+        'mgmtsystem.context.internal_issue')
 
 
 class Policy(models.Model):
@@ -45,11 +45,11 @@ class PolicyValidation(models.Model):
     _inherit = 'mgmtsystem.validation.step'
 
     policy_elaboration_id = fields.Many2one(
-        'mgmtsystem.context.policy', string='Padre (Elaboración)')
+        'mgmtsystem.context.policy')
     policy_review_id = fields.Many2one(
-        'mgmtsystem.context.policy', string='Padre (Revisión)')
+        'mgmtsystem.context.policy')
     policy_validation_id = fields.Many2one(
-        'mgmtsystem.context.policy', string='Padre (Validación)')
+        'mgmtsystem.context.policy')
 
 
 class ExternalIssue(models.Model):
@@ -70,11 +70,11 @@ class ExternalIssueValidation(models.Model):
     _inherit = 'mgmtsystem.validation.step'
 
     external_issue_elaboration_id = fields.Many2one(
-        'mgmtsystem.context.external_issue', string='Padre (Elaboración)')
+        'mgmtsystem.context.external_issue')
     external_issue_review_id = fields.Many2one(
-        'mgmtsystem.context.external_issue', string='Padre (Revisión)')
+        'mgmtsystem.context.external_issue')
     external_issue_validation_id = fields.Many2one(
-        'mgmtsystem.context.external_issue', string='Padre (Validación)')
+        'mgmtsystem.context.external_issue')
     
     
 
@@ -97,11 +97,11 @@ class StakeholdersValidation(models.Model):
     _inherit = 'mgmtsystem.validation.step'
 
     stakeholders_elaboration_id = fields.Many2one(
-        'mgmtsystem.stakeholders', string='Padre (Elaboración)')
+        'mgmtsystem.stakeholders')
     stakeholders_review_id = fields.Many2one(
-        'mgmtsystem.stakeholders', string='Padre (Revisión)')
+        'mgmtsystem.stakeholders')
     stakeholders_validation_id = fields.Many2one(
-        'mgmtsystem.stakeholders', string='Padre (Validación)')
+        'mgmtsystem.stakeholders')
 
 
 class OrganizationChart(models.Model):
@@ -122,11 +122,11 @@ class OrganizationChartValidation(models.Model):
     _inherit = 'mgmtsystem.validation.step'
 
     organization_chart_elaboration_id = fields.Many2one(
-        'mgmtsystem.context.organization_chart', string='Padre (Elaboración)')
+        'mgmtsystem.context.organization_chart')
     organization_chart_review_id = fields.Many2one(
-        'mgmtsystem.context.organization_chart', string='Padre (Revisión)')
+        'mgmtsystem.context.organization_chart')
     organization_chart_validation_id = fields.Many2one(
-        'mgmtsystem.context.organization_chart', string='Padre (Validación)')
+        'mgmtsystem.context.organization_chart')
 
 class PEST(models.Model):
     _inherit = 'mgmtsystem.context.pest'
@@ -146,11 +146,11 @@ class PESTValidation(models.Model):
     _inherit = 'mgmtsystem.validation.step'
 
     pest_elaboration_id = fields.Many2one(
-        'mgmtsystem.context.pest', string='Padre (Elaboración)')
+        'mgmtsystem.context.pest')
     pest_review_id = fields.Many2one(
-        'mgmtsystem.context.pest', string='Padre (Revisión)')
+        'mgmtsystem.context.pest')
     pest_validation_id = fields.Many2one(
-        'mgmtsystem.context.pest', string='Padre (Validación)')
+        'mgmtsystem.context.pest')
 
 class SWOT(models.Model):
     _inherit = 'mgmtsystem.context.swot'
@@ -170,11 +170,11 @@ class SWOTValidation(models.Model):
     _inherit = 'mgmtsystem.validation.step'
 
     swot_elaboration_id = fields.Many2one(
-        'mgmtsystem.context.swot', string='Padre (Elaboración)')
+        'mgmtsystem.context.swot')
     swot_review_id = fields.Many2one(
-        'mgmtsystem.context.swot', string='Padre (Revisión)')
+        'mgmtsystem.context.swot')
     swot_validation_id = fields.Many2one(
-        'mgmtsystem.context.swot', string='Padre (Validación)')
+        'mgmtsystem.context.swot')
 
 class CrossSWOT(models.Model):
     _inherit = 'mgmtsystem.context.cross.swot'
@@ -194,8 +194,8 @@ class CrossSWOTValidation(models.Model):
     _inherit = 'mgmtsystem.validation.step'
 
     cross_swot_elaboration_id = fields.Many2one(
-        'mgmtsystem.context.cross.swot', string='Padre (Elaboración)')
+        'mgmtsystem.context.cross.swot')
     cross_swot_review_id = fields.Many2one(
-        'mgmtsystem.context.cross.swot', string='Padre (Revisión)')
+        'mgmtsystem.context.cross.swot')
     cross_swot_validation_id = fields.Many2one(
-        'mgmtsystem.context.cross.swot', string='Padre (Validación)')
+        'mgmtsystem.context.cross.swot')

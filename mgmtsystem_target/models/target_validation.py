@@ -20,8 +20,8 @@ class TargetValidation(models.Model):
     _inherit = 'mgmtsystem.validation.step'
 
     target_elaboration_id = fields.Many2one(
-        'mgmtsystem.target', string='Padre')
+        'mgmtsystem.target')
     target_review_id = fields.Many2one(
-        'mgmtsystem.target', string='Padre')
+        'mgmtsystem.target')
     target_validation_id = fields.Many2one(
-        'mgmtsystem.target', string='Padre')
+        'mgmtsystem.target')
