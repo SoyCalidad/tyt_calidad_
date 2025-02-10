@@ -20,15 +20,10 @@ class SurveySurvey(models.Model):
 
     state = fields.Selection(
         string="Survey Stage",
-        selection=[
-            ('elaborate', 'En elaboración'),
-            ('review', 'En revisión'),
-            ('validate', 'En validación'),
-            ('validate_ok', 'Validado'),
+        selection_add=[
             ('draft', 'Draft'),
             ('open', 'In Progress'),
-            ('closed', 'Closed'),
-            ('cancel', 'Obsoleto')
+            ('closed', 'Closed')
         ], default='elaborate', required=True,
         group_expand='_read_group_states'
     )

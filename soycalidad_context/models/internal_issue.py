@@ -23,7 +23,7 @@ class MgmtsystemContextPolicy(models.Model):
     _inherit = 'mgmtsystem.context.policy'
 
     target_ids = fields.One2many(
-        'mgmtsystem.target', 'policy_id', string='Objetivos')
+        'mgmtsystem.target', 'policy_id')
 
     def get_content_by_type(self):
         super().get_content_by_type()

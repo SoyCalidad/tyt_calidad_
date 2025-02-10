@@ -113,9 +113,7 @@ class Audit(models.Model):
         string=u'Observaciones/Alcance',
         required=True,
     )
-    golds = fields.Text(
-        string=u'Objetivos',
-    )
+    golds = fields.Text()
 
     report_count = fields.Integer(
         string=u'Informes',
@@ -286,9 +284,7 @@ class AuditReport(models.Model):
         string=u'Requisito de la norma',
     )
     scope = fields.Text(u'Alcance', required=True)
-    golds = fields.Text(
-        string=u'Objetivos',
-    )
+    golds = fields.Text()
     auditor_id = fields.Reference(selection=[('res.partner', 'Auditor externo'), (
         'hr.employee', 'Auditor interno'), ], string="Auditor")
     team_id = fields.Many2one(

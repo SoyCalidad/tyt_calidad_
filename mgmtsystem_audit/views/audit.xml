@@ -174,7 +174,7 @@
                             <field name="scope" string="Alcance" attrs="{'readonly': [('state','not in',('draft','in_process'))] }" />
                         </group>
                         <group>
-                            <field name="golds" attrs="{'readonly': [('state','not in',('draft','in_process'))] }" />
+                            <field name="golds" string="Objetivos" attrs="{'readonly': [('state','not in',('draft','in_process'))] }" />
                         </group>
                         <notebook>
                             <page string="Lineas">
@@ -359,7 +359,7 @@
                                 <field name="observations" string="Alcance"  />
                             </group>
                             <group>
-                                <field name="golds"  />
+                                <field name="golds" string="Objetivos"/>
                             </group>
                         </group>
                         <notebook>
