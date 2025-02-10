@@ -24,8 +24,7 @@ class SurveySurvey(models.Model):
             ('draft', 'Draft'),
             ('open', 'In Progress'),
             ('closed', 'Closed')
-        ], default='elaborate', required=True,
-        group_expand='_read_group_states'
+        ], group_expand='_read_group_states'
     )
 
     process_id = fields.Many2one(
