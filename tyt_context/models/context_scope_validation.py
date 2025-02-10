@@ -12,6 +12,6 @@ class ContextScope(models.Model):
 class ContextScopeValidation(models.Model):
     _inherit = 'mgmtsystem.validation.step'
 
-    scope_elaboration_id = fields.Many2one('tyt.context.scope', string='Padre (Elaboración)')
-    scope_review_id = fields.Many2one('tyt.context.scope', string='Padre (Revisión)')
-    scope_validation_id = fields.Many2one('tyt.context.scope', string='Padre (Validación)')
+    scope_elaboration_id = fields.Many2one('tyt.context.scope')
+    scope_review_id = fields.Many2one('tyt.context.scope')
+    scope_validation_id = fields.Many2one('tyt.context.scope')
