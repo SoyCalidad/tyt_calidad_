@@ -53,7 +53,7 @@ class MgmtsystemNonconformityCause(models.Model):
     name = fields.Char('Causa', required=True, translate=True)
     description = fields.Text('Descripción')
     parent_id = fields.Many2one(
-        'mgmtsystem.nonconformity.cause', string='Padre')
+        'mgmtsystem.nonconformity.cause')
     subcause_ids = fields.One2many('mgmtsystem.nonconformity.cause',
                                    'parent_id', string='Subcausas', domain="[('parent_id','=',parent_id)]")
     sequence = fields.Integer(

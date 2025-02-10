@@ -32,8 +32,8 @@ class ImprovePlanMatrixValidation(models.Model):
     _inherit = 'mgmtsystem.validation.step'
 
     improve_plan_matrix_elaboration_id = fields.Many2one(
-        'soycalidad.improve_plan.matrix', string='Padre')
+        'soycalidad.improve_plan.matrix')
     improve_plan_matrix_review_id = fields.Many2one(
-        'soycalidad.improve_plan.matrix', string='Padre')
+        'soycalidad.improve_plan.matrix')
     improve_plan_matrix_validation_id = fields.Many2one(
-        'soycalidad.improve_plan.matrix', string='Padre')
+        'soycalidad.improve_plan.matrix')

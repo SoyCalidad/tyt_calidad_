@@ -119,15 +119,15 @@ class ManagementeReviewValidation(models.Model):
     _inherit = 'mgmtsystem.validation.step'
 
     mgmt_review_plan_elaboration_id = fields.Many2one(
-        'management.review.plan', string='Padre')
+        'management.review.plan')
     mgmt_review_plan_review_id = fields.Many2one(
-        'management.review.plan', string='Padre')
+        'management.review.plan')
     mgmt_review_plan_validation_id = fields.Many2one(
-        'management.review.plan', string='Padre')
+        'management.review.plan')
 
     mgmt_review_elaboration_id = fields.Many2one(
-        'management.review', string='Padre')
+        'management.review')
     mgmt_review_review_id = fields.Many2one(
-        'management.review', string='Padre')
+        'management.review')
     mgmt_review_validation_id = fields.Many2one(
-        'management.review', string='Padre')
+        'management.review')

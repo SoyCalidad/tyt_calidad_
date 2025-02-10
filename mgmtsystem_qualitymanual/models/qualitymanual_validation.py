@@ -34,8 +34,8 @@ class QualityManualValidation(models.Model):
     _inherit = 'mgmtsystem.validation.step'
 
     qualitymanual_elaboration_id = fields.Many2one(
-        'mgmtsystem.qualitymanual', string='Padre')
+        'mgmtsystem.qualitymanual')
     qualitymanual_review_id = fields.Many2one(
-        'mgmtsystem.qualitymanual', string='Padre')
+        'mgmtsystem.qualitymanual')
     qualitymanual_validation_id = fields.Many2one(
-        'mgmtsystem.qualitymanual', string='Padre')
+        'mgmtsystem.qualitymanual')

@@ -119,15 +119,15 @@ class TrainingPlanValidation(models.Model):
     _inherit = 'mgmtsystem.validation.step'
 
     training_plan_elaboration_id = fields.Many2one(
-        'mgmtsystem.plan', string='Padre')
+        'mgmtsystem.plan')
     training_plan_review_id = fields.Many2one(
-        'mgmtsystem.plan', string='Padre')
+        'mgmtsystem.plan')
     training_plan_validation_id = fields.Many2one(
-        'mgmtsystem.plan', string='Padre')
+        'mgmtsystem.plan')
 
     training_plan_tra_elaboration_id = fields.Many2one(
-        'mgmtsystem.plan.training', string='Padre')
+        'mgmtsystem.plan.training')
     training_plan_tra_review_id = fields.Many2one(
-        'mgmtsystem.plan.training', string='Padre')
+        'mgmtsystem.plan.training')
     training_plan_tra_validation_id = fields.Many2one(
-        'mgmtsystem.plan.training', string='Padre')
+        'mgmtsystem.plan.training')

@@ -29,8 +29,8 @@ class TrainingPlanValidation(models.Model):
     _inherit = 'mgmtsystem.validation.step'
 
     training_elaboration_id = fields.Many2one(
-        'mgmtsystem.plan', string='Padre')
+        'mgmtsystem.plan')
     training_review_id = fields.Many2one(
-        'mgmtsystem.plan', string='Padre')
+        'mgmtsystem.plan')
     training_validation_id = fields.Many2one(
-        'mgmtsystem.plan', string='Padre')
+        'mgmtsystem.plan')

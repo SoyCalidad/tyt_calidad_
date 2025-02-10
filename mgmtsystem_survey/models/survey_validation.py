@@ -77,8 +77,8 @@ class SurveySurveyValidation(models.Model):
     _inherit = 'mgmtsystem.validation.step'
 
     survey_elaboration_id = fields.Many2one(
-        'survey.survey', string='Padre')
+        'survey.survey')
     survey_review_id = fields.Many2one(
-        'survey.survey', string='Padre')
+        'survey.survey')
     survey_validation_id = fields.Many2one(
-        'survey.survey', string='Padre')
+        'survey.survey')
