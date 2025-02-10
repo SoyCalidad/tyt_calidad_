@@ -83,141 +83,141 @@ class DiagnosticLine(models.Model):
     requirement_name = fields.Char(related='requirement_id.name')
     # FIX
     diagnostic4_id = fields.Many2one(
-        string=u'Diagnostico', comodel_name='hola_calidad.diagnostic', ondelete='cascade')
+        comodel_name='hola_calidad.diagnostic', ondelete='cascade')
     diagnostic4_1_id = fields.Many2one(
-        string=u'Diagnostico', comodel_name='hola_calidad.diagnostic', ondelete='cascade')
+        comodel_name='hola_calidad.diagnostic', ondelete='cascade')
     diagnostic4_2_id = fields.Many2one(
-        string=u'Diagnostico', comodel_name='hola_calidad.diagnostic', ondelete='cascade')
+        comodel_name='hola_calidad.diagnostic', ondelete='cascade')
     diagnostic4_3_1_id = fields.Many2one(
-        string=u'Diagnostico', comodel_name='hola_calidad.diagnostic', ondelete='cascade')
+        comodel_name='hola_calidad.diagnostic', ondelete='cascade')
     diagnostic4_3_2_id = fields.Many2one(
-        string=u'Diagnostico', comodel_name='hola_calidad.diagnostic', ondelete='cascade')
+        comodel_name='hola_calidad.diagnostic', ondelete='cascade')
 
     diagnostic5_1_id = fields.Many2one(
-        string=u'Diagnostico', comodel_name='hola_calidad.diagnostic', ondelete='cascade')
+        comodel_name='hola_calidad.diagnostic', ondelete='cascade')
     diagnostic5_2_id = fields.Many2one(
-        string=u'Diagnostico', comodel_name='hola_calidad.diagnostic', ondelete='cascade')
+        comodel_name='hola_calidad.diagnostic', ondelete='cascade')
     diagnostic5_1_1_id = fields.Many2one(
-        string=u'Diagnostico', comodel_name='hola_calidad.diagnostic', ondelete='cascade')
+        comodel_name='hola_calidad.diagnostic', ondelete='cascade')
     diagnostic5_1_2_id = fields.Many2one(
-        string=u'Diagnostico', comodel_name='hola_calidad.diagnostic', ondelete='cascade')
+        comodel_name='hola_calidad.diagnostic', ondelete='cascade')
     diagnostic5_2_1_id = fields.Many2one(
-        string=u'Diagnostico', comodel_name='hola_calidad.diagnostic', ondelete='cascade')
+        comodel_name='hola_calidad.diagnostic', ondelete='cascade')
 
     diagnostic6_1_id = fields.Many2one(
-        string=u'Diagnostico', comodel_name='hola_calidad.diagnostic', ondelete='cascade')
+        comodel_name='hola_calidad.diagnostic', ondelete='cascade')
     diagnostic6_2_id = fields.Many2one(
-        string=u'Diagnostico', comodel_name='hola_calidad.diagnostic', ondelete='cascade')
+        comodel_name='hola_calidad.diagnostic', ondelete='cascade')
     diagnostic6_1_1_id = fields.Many2one(
-        string=u'Diagnostico', comodel_name='hola_calidad.diagnostic', ondelete='cascade')
+        comodel_name='hola_calidad.diagnostic', ondelete='cascade')
     diagnostic6_1_2_id = fields.Many2one(
-        string=u'Diagnostico', comodel_name='hola_calidad.diagnostic', ondelete='cascade')
+        comodel_name='hola_calidad.diagnostic', ondelete='cascade')
     diagnostic6_2_1_id = fields.Many2one(
-        string=u'Diagnostico', comodel_name='hola_calidad.diagnostic', ondelete='cascade')
+        comodel_name='hola_calidad.diagnostic', ondelete='cascade')
 
     diagnostic7_1_1_id = fields.Many2one(
-        string=u'Diagnostico', comodel_name='hola_calidad.diagnostic', ondelete='cascade')
+        comodel_name='hola_calidad.diagnostic', ondelete='cascade')
     diagnostic7_1_2_id = fields.Many2one(
-        string=u'Diagnostico', comodel_name='hola_calidad.diagnostic', ondelete='cascade')
+        comodel_name='hola_calidad.diagnostic', ondelete='cascade')
     diagnostic7_1_3_id = fields.Many2one(
-        string=u'Diagnostico', comodel_name='hola_calidad.diagnostic', ondelete='cascade')
+        comodel_name='hola_calidad.diagnostic', ondelete='cascade')
     diagnostic7_1_4_id = fields.Many2one(
-        string=u'Diagnostico', comodel_name='hola_calidad.diagnostic', ondelete='cascade')
+        comodel_name='hola_calidad.diagnostic', ondelete='cascade')
     diagnostic7_1_5_1_id = fields.Many2one(
-        string=u'Diagnostico', comodel_name='hola_calidad.diagnostic', ondelete='cascade')
+        comodel_name='hola_calidad.diagnostic', ondelete='cascade')
     diagnostic7_1_5_2_id = fields.Many2one(
-        string=u'Diagnostico', comodel_name='hola_calidad.diagnostic', ondelete='cascade')
+        comodel_name='hola_calidad.diagnostic', ondelete='cascade')
     diagnostic7_1_6_id = fields.Many2one(
-        string=u'Diagnostico', comodel_name='hola_calidad.diagnostic', ondelete='cascade')
+        comodel_name='hola_calidad.diagnostic', ondelete='cascade')
     diagnostic7_2_1_id = fields.Many2one(
-        string=u'Diagnostico', comodel_name='hola_calidad.diagnostic', ondelete='cascade')
+        comodel_name='hola_calidad.diagnostic', ondelete='cascade')
     diagnostic7_3_1_id = fields.Many2one(
-        string=u'Diagnostico', comodel_name='hola_calidad.diagnostic', ondelete='cascade')
+        comodel_name='hola_calidad.diagnostic', ondelete='cascade')
     diagnostic7_4_1_id = fields.Many2one(
-        string=u'Diagnostico', comodel_name='hola_calidad.diagnostic', ondelete='cascade')
+        comodel_name='hola_calidad.diagnostic', ondelete='cascade')
     diagnostic7_5_1_id = fields.Many2one(
-        string=u'Diagnostico', comodel_name='hola_calidad.diagnostic', ondelete='cascade')
+        comodel_name='hola_calidad.diagnostic', ondelete='cascade')
     diagnostic7_5_2_id = fields.Many2one(
-        string=u'Diagnostico', comodel_name='hola_calidad.diagnostic', ondelete='cascade')
+        comodel_name='hola_calidad.diagnostic', ondelete='cascade')
     diagnostic7_5_3_1_id = fields.Many2one(
-        string=u'Diagnostico', comodel_name='hola_calidad.diagnostic', ondelete='cascade')
+        comodel_name='hola_calidad.diagnostic', ondelete='cascade')
     diagnostic7_5_3_2_id = fields.Many2one(
-        string=u'Diagnostico', comodel_name='hola_calidad.diagnostic', ondelete='cascade')
+        comodel_name='hola_calidad.diagnostic', ondelete='cascade')
 
     diagnostic8_1_1_id = fields.Many2one(
-        string=u'Diagnostico', comodel_name='hola_calidad.diagnostic', ondelete='cascade')
+        comodel_name='hola_calidad.diagnostic', ondelete='cascade')
     diagnostic8_2_1_id = fields.Many2one(
-        string=u'Diagnostico', comodel_name='hola_calidad.diagnostic', ondelete='cascade')
+        comodel_name='hola_calidad.diagnostic', ondelete='cascade')
     diagnostic8_2_2_id = fields.Many2one(
-        string=u'Diagnostico', comodel_name='hola_calidad.diagnostic', ondelete='cascade')
+        comodel_name='hola_calidad.diagnostic', ondelete='cascade')
     diagnostic8_2_2_3_1_id = fields.Many2one(
-        string=u'Diagnostico', comodel_name='hola_calidad.diagnostic', ondelete='cascade')
+        comodel_name='hola_calidad.diagnostic', ondelete='cascade')
     diagnostic8_2_2_3_2_id = fields.Many2one(
-        string=u'Diagnostico', comodel_name='hola_calidad.diagnostic', ondelete='cascade')
+        comodel_name='hola_calidad.diagnostic', ondelete='cascade')
     diagnostic8_2_4_id = fields.Many2one(
-        string=u'Diagnostico', comodel_name='hola_calidad.diagnostic', ondelete='cascade')
+        comodel_name='hola_calidad.diagnostic', ondelete='cascade')
     diagnostic8_3_1_id = fields.Many2one(
-        string=u'Diagnostico', comodel_name='hola_calidad.diagnostic', ondelete='cascade')
+        comodel_name='hola_calidad.diagnostic', ondelete='cascade')
     diagnostic8_3_2_id = fields.Many2one(
-        string=u'Diagnostico', comodel_name='hola_calidad.diagnostic', ondelete='cascade')
+        comodel_name='hola_calidad.diagnostic', ondelete='cascade')
     diagnostic8_3_3_id = fields.Many2one(
-        string=u'Diagnostico', comodel_name='hola_calidad.diagnostic', ondelete='cascade')
+        comodel_name='hola_calidad.diagnostic', ondelete='cascade')
     diagnostic8_3_4_id = fields.Many2one(
-        string=u'Diagnostico', comodel_name='hola_calidad.diagnostic', ondelete='cascade')
+        comodel_name='hola_calidad.diagnostic', ondelete='cascade')
     diagnostic8_3_5_id = fields.Many2one(
-        string=u'Diagnostico', comodel_name='hola_calidad.diagnostic', ondelete='cascade')
+        comodel_name='hola_calidad.diagnostic', ondelete='cascade')
     diagnostic8_3_6_id = fields.Many2one(
-        string=u'Diagnostico', comodel_name='hola_calidad.diagnostic', ondelete='cascade')
+        comodel_name='hola_calidad.diagnostic', ondelete='cascade')
     diagnostic8_4_1_id = fields.Many2one(
-        string=u'Diagnostico', comodel_name='hola_calidad.diagnostic', ondelete='cascade')
+        comodel_name='hola_calidad.diagnostic', ondelete='cascade')
     diagnostic8_4_2_id = fields.Many2one(
-        string=u'Diagnostico', comodel_name='hola_calidad.diagnostic', ondelete='cascade')
+        comodel_name='hola_calidad.diagnostic', ondelete='cascade')
     diagnostic8_4_3_id = fields.Many2one(
-        string=u'Diagnostico', comodel_name='hola_calidad.diagnostic', ondelete='cascade')
+        comodel_name='hola_calidad.diagnostic', ondelete='cascade')
     diagnostic8_5_1_id = fields.Many2one(
-        string=u'Diagnostico', comodel_name='hola_calidad.diagnostic', ondelete='cascade')
+        comodel_name='hola_calidad.diagnostic', ondelete='cascade')
     diagnostic8_5_2_id = fields.Many2one(
-        string=u'Diagnostico', comodel_name='hola_calidad.diagnostic', ondelete='cascade')
+        comodel_name='hola_calidad.diagnostic', ondelete='cascade')
     diagnostic8_5_3_id = fields.Many2one(
-        string=u'Diagnostico', comodel_name='hola_calidad.diagnostic', ondelete='cascade')
+        comodel_name='hola_calidad.diagnostic', ondelete='cascade')
     diagnostic8_5_4_id = fields.Many2one(
-        string=u'Diagnostico', comodel_name='hola_calidad.diagnostic', ondelete='cascade')
+        comodel_name='hola_calidad.diagnostic', ondelete='cascade')
     diagnostic8_5_5_id = fields.Many2one(
-        string=u'Diagnostico', comodel_name='hola_calidad.diagnostic', ondelete='cascade')
+        comodel_name='hola_calidad.diagnostic', ondelete='cascade')
     diagnostic8_5_6_id = fields.Many2one(
-        string=u'Diagnostico', comodel_name='hola_calidad.diagnostic', ondelete='cascade')
+        comodel_name='hola_calidad.diagnostic', ondelete='cascade')
     diagnostic8_6_1_id = fields.Many2one(
-        string=u'Diagnostico', comodel_name='hola_calidad.diagnostic', ondelete='cascade')
+        comodel_name='hola_calidad.diagnostic', ondelete='cascade')
     diagnostic8_7_1_id = fields.Many2one(
-        string=u'Diagnostico', comodel_name='hola_calidad.diagnostic', ondelete='cascade')
+        comodel_name='hola_calidad.diagnostic', ondelete='cascade')
     diagnostic8_7_2_id = fields.Many2one(
-        string=u'Diagnostico', comodel_name='hola_calidad.diagnostic', ondelete='cascade')
+        comodel_name='hola_calidad.diagnostic', ondelete='cascade')
 
     diagnostic9_1_1_id = fields.Many2one(
-        string=u'Diagnostico', comodel_name='hola_calidad.diagnostic', ondelete='cascade')
+        comodel_name='hola_calidad.diagnostic', ondelete='cascade')
     diagnostic9_1_2_id = fields.Many2one(
-        string=u'Diagnostico', comodel_name='hola_calidad.diagnostic', ondelete='cascade')
+        comodel_name='hola_calidad.diagnostic', ondelete='cascade')
     diagnostic9_1_3_id = fields.Many2one(
-        string=u'Diagnostico', comodel_name='hola_calidad.diagnostic', ondelete='cascade')
+        comodel_name='hola_calidad.diagnostic', ondelete='cascade')
     diagnostic9_2_1_id = fields.Many2one(
-        string=u'Diagnostico', comodel_name='hola_calidad.diagnostic', ondelete='cascade')
+        comodel_name='hola_calidad.diagnostic', ondelete='cascade')
     diagnostic9_2_2_id = fields.Many2one(
-        string=u'Diagnostico', comodel_name='hola_calidad.diagnostic', ondelete='cascade')
+        comodel_name='hola_calidad.diagnostic', ondelete='cascade')
     diagnostic9_3_1_id = fields.Many2one(
-        string=u'Diagnostico', comodel_name='hola_calidad.diagnostic', ondelete='cascade')
+        comodel_name='hola_calidad.diagnostic', ondelete='cascade')
     diagnostic9_3_2_id = fields.Many2one(
-        string=u'Diagnostico', comodel_name='hola_calidad.diagnostic', ondelete='cascade')
+        comodel_name='hola_calidad.diagnostic', ondelete='cascade')
     diagnostic9_3_3_id = fields.Many2one(
-        string=u'Diagnostico', comodel_name='hola_calidad.diagnostic', ondelete='cascade')
+        comodel_name='hola_calidad.diagnostic', ondelete='cascade')
 
     diagnostic10_1_1_id = fields.Many2one(
-        string=u'Diagnostico', comodel_name='hola_calidad.diagnostic', ondelete='cascade')
+        comodel_name='hola_calidad.diagnostic', ondelete='cascade')
     diagnostic10_2_1_id = fields.Many2one(
-        string=u'Diagnostico', comodel_name='hola_calidad.diagnostic', ondelete='cascade')
+        comodel_name='hola_calidad.diagnostic', ondelete='cascade')
     diagnostic10_2_2_id = fields.Many2one(
-        string=u'Diagnostico', comodel_name='hola_calidad.diagnostic', ondelete='cascade')
+        comodel_name='hola_calidad.diagnostic', ondelete='cascade')
     diagnostic10_3_1_id = fields.Many2one(
-        string=u'Diagnostico', comodel_name='hola_calidad.diagnostic', ondelete='cascade')
+        comodel_name='hola_calidad.diagnostic', ondelete='cascade')
 
     requirement_id = fields.Many2one(
         string=u'Requisito', comodel_name='hola_calidad.requirement',)
