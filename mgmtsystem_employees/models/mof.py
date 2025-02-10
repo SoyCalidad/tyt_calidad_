@@ -52,7 +52,7 @@ class MOF(models.Model):
     )
 
     parent_edition = fields.Many2one(
-        comodel_name='mgmtsystem.mof', string='Padre', copy=False)
+        comodel_name='mgmtsystem.mof', copy=False)
     old_versions = fields.One2many(
         comodel_name='mgmtsystem.mof', string='Versiones antiguas',
         inverse_name='parent_edition', context={'active_version': False})

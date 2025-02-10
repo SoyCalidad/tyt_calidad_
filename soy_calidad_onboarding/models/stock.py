@@ -5,11 +5,11 @@ class CompanyStockOnboarding(models.Model):
 
      # employee dashboard onboarding
     stock_onboarding_state = fields.Selection([('not_done', "Not done"), ('just_done', "Just done"), (
-        'done', "Done"), ('closed', "Closed")], string="State of the stock onboarding panel", default='not_done')
+        'done', "Done"), ('closed', "Closed")], default='not_done')
     stock_in_onboarding_state = fields.Selection([('not_done', "Not done"), ('just_done', "Just done"), (
-        'done', "Done"), ('closed', "Closed")], string="State of the stock in onboarding panel", default='not_done')
+        'done', "Done"), ('closed', "Closed")], default='not_done')
     stock_out_onboarding_state = fields.Selection([('not_done', "Not done"), ('just_done', "Just done"), (
-        'done', "Done"), ('closed', "Closed")], string="State of the stock out onboarding panel", default='not_done')
+        'done', "Done"), ('closed', "Closed")], default='not_done')
 
     @api.model
     def action_open_stock_in(self, action_ref=None):

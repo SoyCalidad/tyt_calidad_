@@ -17,9 +17,9 @@ class ResCompanyEmployeeOnboarding(models.Model):
 
     # employee dashboard onboarding
     survey_onboarding_state = fields.Selection([('not_done', "Not done"), ('just_done', "Just done"), (
-        'done', "Done"), ('closed', "Closed")], string="State of the survey onboarding panel", default='not_done')
+        'done', "Done"), ('closed', "Closed")], default='not_done')
     survey_survey_onboarding_state = fields.Selection([('not_done', "Not done"), ('just_done', "Just done"), (
-        'done', "Done"), ('closed', "Closed")], string="State of the survey onboarding panel", default='not_done')
+        'done', "Done"), ('closed', "Closed")], default='not_done')
 
     @api.model
     def action_open_survey_survey(self, action_ref=None):

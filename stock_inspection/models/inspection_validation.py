@@ -12,7 +12,7 @@ class StockInspection(models.Model):
         'mgmtsystem.validation.step', 'stock_inspection_validation_id', string='Validación')
 
     parent_edition = fields.Many2one(
-        comodel_name='stock.inspection', string='Padre', copy=False)
+        comodel_name='stock.inspection', copy=False)
     old_versions = fields.One2many(
         comodel_name='stock.inspection', string='Versiones antiguas',
         inverse_name='parent_edition', context={'active_version': False})

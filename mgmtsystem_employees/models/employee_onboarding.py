@@ -17,15 +17,15 @@ class ResCompanyEmployeeOnboarding(models.Model):
 
     # employee dashboard onboarding
     hr_onboarding_state = fields.Selection([('not_done', "Not done"), ('just_done', "Just done"), (
-        'done', "Done"), ('closed', "Closed")], string="State of the account invoice onboarding panel", default='not_done')
+        'done', "Done"), ('closed', "Closed")], default='not_done')
     hr_department_onboarding_state = fields.Selection([('not_done', "Not done"), ('just_done', "Just done"), (
-        'done', "Done"), ('closed', "Closed")], string="State of the hr department onboarding panel", default='not_done')
+        'done', "Done"), ('closed', "Closed")], default='not_done')
     hr_job_onboarding_state = fields.Selection([('not_done', "Not done"), ('just_done', "Just done"), (
-        'done', "Done"), ('closed', "Closed")], string="State of the hr job onboarding panel", default='not_done')
+        'done', "Done"), ('closed', "Closed")], default='not_done')
     hr_employee_onboarding_state = fields.Selection([('not_done', "Not done"), ('just_done', "Just done"), (
-        'done', "Done"), ('closed', "Closed")], string="State of the hr employee onboarding panel", default='not_done')
+        'done', "Done"), ('closed', "Closed")], default='not_done')
     # hr_orgchart_onboarding_state = fields.Selection([('not_done', "Not done"), ('just_done', "Just done"), (
-    #     'done', "Done"), ('closed', "Closed")], string="State of the hr organization chart onboarding panel", default='not_done')
+    #     'done', "Done"), ('closed', "Closed")], default='not_done')
 
     @api.model
     def action_open_hr_department(self, action_ref=None):

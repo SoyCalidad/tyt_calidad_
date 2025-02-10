@@ -15,7 +15,7 @@ class EvaluationValidation(models.Model):
         'process.edition', string='Procedimiento', domain=[('active','=',True)])
 
     parent_edition = fields.Many2one(
-        comodel_name='res.partner.evaluation', string='Padre', copy=False)
+        comodel_name='res.partner.evaluation', copy=False)
     old_versions = fields.One2many(
         comodel_name='res.partner.evaluation', string='Versiones antiguas',
         inverse_name='parent_edition', context={'active_version': False})

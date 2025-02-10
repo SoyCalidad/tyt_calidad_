@@ -38,7 +38,7 @@ class Version(models.Model):
     # Overwrite this in the inherited class with comodel_name = class_name
 
     parent_edition = fields.Many2one(
-        comodel_name='mgmtsystem.version', string='Padre', copy=False)
+        comodel_name='mgmtsystem.version', copy=False)
     old_versions = fields.One2many(
         comodel_name='mgmtsystem.version', string='Versiones antiguas',
         inverse_name='parent_edition', context={'active_version': False})

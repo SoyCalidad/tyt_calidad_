@@ -76,7 +76,7 @@ class Job(models.Model):
     process_id = fields.Many2one(
         'mgmt.process', string='Proceso', required=False, domain=[('active','=',True)])
     parent_edition = fields.Many2one(
-        comodel_name='hr.job', string='Padre', copy=False)
+        comodel_name='hr.job', copy=False)
     old_versions = fields.One2many(
         comodel_name='hr.job', string='Versiones antiguas',
         inverse_name='parent_edition', context={'active_version': False})

@@ -16,7 +16,7 @@ class ManagementReviewPlan(models.Model):
         'process.edition', string='Procedimiento', domain=[('active','=',True)])
 
     parent_edition = fields.Many2one(
-        comodel_name='management.review.plan', string='Padre', copy=False)
+        comodel_name='management.review.plan', copy=False)
     old_versions = fields.One2many(
         comodel_name='management.review.plan', string='Versiones antiguas',
         inverse_name='parent_edition', context={'active_version': False})
@@ -94,7 +94,7 @@ class ManagementeReview(models.Model):
         'process.edition', string='Procedimiento', domain=[('active','=',True)])
 
     parent_edition = fields.Many2one(
-        comodel_name='management.review', string='Padre', copy=False)
+        comodel_name='management.review', copy=False)
     old_versions = fields.One2many(
         comodel_name='management.review', string='Versiones antiguas',
         inverse_name='parent_edition', context={'active_version': False})

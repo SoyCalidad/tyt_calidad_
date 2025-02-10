@@ -10,7 +10,7 @@ class OrganizationChart(models.Model):
 
     name = fields.Char(string='Nombre')
     parent_edition = fields.Many2one(
-        comodel_name='mgmtsystem.context.organization_chart', string='Padre', copy=False)
+        comodel_name='mgmtsystem.context.organization_chart', copy=False)
     old_versions = fields.One2many(
         comodel_name='mgmtsystem.context.organization_chart', string='Versiones antiguas',
         inverse_name='parent_edition', context={'active_version': False})

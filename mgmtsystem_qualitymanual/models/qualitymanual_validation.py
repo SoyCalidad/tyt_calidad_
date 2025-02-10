@@ -15,7 +15,7 @@ class QualityManual(models.Model):
         'process.edition', string='Procedimiento', domain=[('active','=',True)])
 
     parent_edition = fields.Many2one(
-        comodel_name='mgmtsystem.qualitymanual', string='Padre', copy=False)
+        comodel_name='mgmtsystem.qualitymanual', copy=False)
     old_versions = fields.One2many(
         comodel_name='mgmtsystem.qualitymanual', string='Versiones antiguas',
         inverse_name='parent_edition', context={'active_version': False})

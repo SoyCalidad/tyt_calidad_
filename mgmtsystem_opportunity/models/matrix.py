@@ -90,7 +90,7 @@ class Matrix(models.Model):
     _description = "Matriz"
 
     parent_edition = fields.Many2one(
-        comodel_name='matrix.matrix', string='Padre', copy=False)
+        comodel_name='matrix.matrix', copy=False)
     old_versions = fields.One2many(
         comodel_name='matrix.matrix', string='Versiones antiguas',
         inverse_name='parent_edition', context={'active_version': False})
@@ -385,7 +385,7 @@ class Line(models.Model):
     _description = "Riesgo/Oportunidad"
 
     parent_edition = fields.Many2one(
-        comodel_name='matrix.block.line', string='Padre', copy=False)
+        comodel_name='matrix.block.line', copy=False)
     old_versions = fields.One2many(
         comodel_name='matrix.block.line', string='Versiones antiguas',
         inverse_name='parent_edition', context={'active_version': False})

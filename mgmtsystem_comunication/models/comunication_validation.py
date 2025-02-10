@@ -18,7 +18,7 @@ class ComunicationPlan(models.Model):
         'process.edition', string='Procedimiento', domain=[('active','=',True)])
 
     parent_edition = fields.Many2one(
-        comodel_name='comunication.plan', string='Padre', copy=False)
+        comodel_name='comunication.plan', copy=False)
     old_versions = fields.One2many(
         comodel_name='comunication.plan', string='Versiones antiguas',
         inverse_name='parent_edition', context={'active_version': False})
@@ -106,7 +106,7 @@ class ComunicationPlanLine(models.Model):
         'process.edition', string='Procedimiento', domain=[('active','=',True)])
 
     parent_edition = fields.Many2one(
-        comodel_name='comunication.plan.line', string='Padre', copy=False)
+        comodel_name='comunication.plan.line', copy=False)
     old_versions = fields.One2many(
         comodel_name='comunication.plan.line', string='Versiones antiguas',
         inverse_name='parent_edition', context={'active_version': False})

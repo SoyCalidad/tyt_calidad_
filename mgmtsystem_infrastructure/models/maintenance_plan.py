@@ -33,7 +33,7 @@ class MaintenancePlan(models.Model):
     _description = "Programa de mantenimientos"
 
     parent_edition = fields.Many2one(
-        comodel_name='mgmtsystem.maintenance.plan', string='Padre', copy=False)
+        comodel_name='mgmtsystem.maintenance.plan', copy=False)
     old_versions = fields.One2many(
         comodel_name='mgmtsystem.maintenance.plan', string='Versiones antiguas',
         inverse_name='parent_edition', context={'active_version': False})
@@ -87,7 +87,7 @@ class MaintenancePlan(models.Model):
         copy=True,
     )
     parent_edition = fields.Many2one(
-        comodel_name='mgmtsystem.maintenance.plan', string='Padre', copy=False)
+        comodel_name='mgmtsystem.maintenance.plan', copy=False)
     old_versions = fields.One2many(
         comodel_name='mgmtsystem.maintenance.plan', string='Versiones antiguas',
         inverse_name='parent_edition', context={'active_version': False})
@@ -205,7 +205,7 @@ class Maintenance(models.Model):
     )
 
     parent_edition = fields.Many2one(
-        comodel_name='mgmtsystem.maintenance', string='Padre', copy=False)
+        comodel_name='mgmtsystem.maintenance', copy=False)
     old_versions = fields.One2many(
         comodel_name='mgmtsystem.maintenance', string='Versiones antiguas',
         inverse_name='parent_edition', context={'active_version': False})
