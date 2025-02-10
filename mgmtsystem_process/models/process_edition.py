@@ -119,7 +119,7 @@ class ProcessEdition(models.Model):
     _order = 'numero desc'
 
     parent_edition = fields.Many2one(
-        comodel_name='process.edition', string='Padre', copy=False)
+        comodel_name='process.edition', copy=False)
     old_versions = fields.One2many(
         comodel_name='process.edition', string='Versiones antiguas',
         inverse_name='parent_edition', context={'active_version': False})

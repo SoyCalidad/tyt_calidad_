@@ -13,7 +13,7 @@ class SurveySurvey(models.Model):
         'mgmtsystem.validation.step', 'survey_validation_id', string='Validación')
 
     parent_edition = fields.Many2one(
-        comodel_name='survey.survey', string='Padre', copy=False)
+        comodel_name='survey.survey', copy=False)
     old_versions = fields.One2many(
         comodel_name='survey.survey', string='Versiones antiguas',
         inverse_name='parent_edition', context={'active_version': False})

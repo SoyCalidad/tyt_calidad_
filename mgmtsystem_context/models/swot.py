@@ -54,7 +54,7 @@ class SWOT(models.Model):
     cross_swot_id = fields.Many2one(
         'mgmtsystem.context.cross.swot', string='FODA Cruzado')
     parent_edition = fields.Many2one(
-        comodel_name='mgmtsystem.context.swot', string='Padre', copy=False)
+        comodel_name='mgmtsystem.context.swot', copy=False)
     old_versions = fields.One2many(
         comodel_name='mgmtsystem.context.swot', string='Versiones antiguas',
         inverse_name='parent_edition', context={'active_version': False})
@@ -292,7 +292,7 @@ class CrossSWOT(models.Model):
     da = fields.One2many('mgmtsystem.context.cross.swot.da',
                          'cross_swot_id', string='DA')
     parent_edition = fields.Many2one(
-        comodel_name='mgmtsystem.context.cross.swot', string='Padre', copy=False)
+        comodel_name='mgmtsystem.context.cross.swot', copy=False)
     old_versions = fields.One2many(
         comodel_name='mgmtsystem.context.cross.swot', string='Versiones antiguas',
         inverse_name='parent_edition', context={'active_version': False})

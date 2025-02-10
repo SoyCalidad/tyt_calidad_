@@ -66,7 +66,7 @@ class InternalIssue(models.Model):
         'product.product', string='Productos y servicios')
     
     parent_edition = fields.Many2one(
-        comodel_name='mgmtsystem.context.internal_issue', string='Padre', copy=False)
+        comodel_name='mgmtsystem.context.internal_issue', copy=False)
     old_versions = fields.One2many(
         comodel_name='mgmtsystem.context.internal_issue', string='Versiones antiguas',
         inverse_name='parent_edition', context={'active_version': False})
@@ -137,7 +137,7 @@ class ContextPolicy(models.Model):
     template_ = fields.Many2one(
         'mgmtsystem.context.policy.template', string='Plantilla')
     parent_edition = fields.Many2one(
-        comodel_name='mgmtsystem.context.policy', string='Padre', copy=False)
+        comodel_name='mgmtsystem.context.policy', copy=False)
     old_versions = fields.One2many(
         comodel_name='mgmtsystem.context.policy', string='Versiones antiguas',
         inverse_name='parent_edition', context={'active_version': False})
@@ -258,7 +258,7 @@ class ExternalIssue(models.Model):
     additional_info = fields.Text(
         string='Información adicional')
     parent_edition = fields.Many2one(
-        comodel_name='mgmtsystem.context.external_issue', string='Padre', copy=False)
+        comodel_name='mgmtsystem.context.external_issue', copy=False)
     old_versions = fields.One2many(
         comodel_name='mgmtsystem.context.external_issue', string='Versiones antiguas',
         inverse_name='parent_edition', context={'active_version': False})
@@ -367,7 +367,7 @@ class StakeHolderList(models.Model):
     #stakeholder_out_ids = fields.One2many(
         #'mgmtsystem.stakeholder', string='Interesados', inverse_name='list_id', domain=[('type', '=', 'out')], )
     parent_edition = fields.Many2one(
-        comodel_name='mgmtsystem.stakeholders', string='Padre', copy=False)
+        comodel_name='mgmtsystem.stakeholders', copy=False)
     old_versions = fields.One2many(
         comodel_name='mgmtsystem.stakeholders', string='Versiones antiguas',
         inverse_name='parent_edition', context={'active_version': False})

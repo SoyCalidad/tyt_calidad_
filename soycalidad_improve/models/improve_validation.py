@@ -15,7 +15,7 @@ class ImprovePlanMatrix(models.Model):
         'process.edition', string='Procedimiento', domain=[('active','=',True)])
 
     parent_edition = fields.Many2one(
-        comodel_name='soycalidad.improve_plan.matrix', string='Padre', copy=False)
+        comodel_name='soycalidad.improve_plan.matrix', copy=False)
     old_versions = fields.One2many(
         comodel_name='soycalidad.improve_plan.matrix', string='Versiones antiguas',
         inverse_name='parent_edition', context={'active_version': False})

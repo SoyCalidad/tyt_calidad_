@@ -43,7 +43,7 @@ class ContextScope(models.Model):
     process_id = fields.Many2one('mgmt.process', string='Proceso', domain=[('active', '=', True)])
     attachment_ids = fields.Many2many('ir.attachment', string='Archivos')
     attachments_count = fields.Integer(compute='_compute_attachments_count', string='Archivos')
-    parent_edition = fields.Many2one(comodel_name='tyt.context.scope', string='Padre', copy=False)
+    parent_edition = fields.Many2one(comodel_name='tyt.context.scope', copy=False)
     old_versions = fields.One2many(comodel_name='tyt.context.scope', string='Versiones antiguas',
                                    inverse_name='parent_edition', context={'active_version': False})
     version_as_string = fields.Char(string='Version', compute='_compute_version_as_string', store=True)

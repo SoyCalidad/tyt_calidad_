@@ -109,7 +109,7 @@ class PEST(models.Model):
         relation='factor_pest_rel', domain=[('type_id_type', '=', 'internal')])
 
     parent_edition = fields.Many2one(
-        comodel_name='mgmtsystem.context.pest', string='Padre', copy=False)
+        comodel_name='mgmtsystem.context.pest', copy=False)
     old_versions = fields.One2many(
         comodel_name='mgmtsystem.context.pest', string='Versiones antiguas',
         inverse_name='parent_edition', context={'active_version': False})

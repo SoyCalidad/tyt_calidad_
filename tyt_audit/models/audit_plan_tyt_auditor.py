@@ -152,7 +152,7 @@ class AuditPlanTytAuditor(models.Model):
     ## OLD VERSION BUTTON + SETTINGS
 
     parent_edition = fields.Many2one(
-        comodel_name='audit.plan.tyt.auditor', string='Padre', copy=False)
+        comodel_name='audit.plan.tyt.auditor', copy=False)
     old_versions = fields.One2many(
         comodel_name='audit.plan.tyt.auditor', string='Versiones antiguas',
         inverse_name='parent_edition', context={'active_version': False})
