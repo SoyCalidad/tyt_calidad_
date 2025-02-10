@@ -87,15 +87,10 @@ class PlanTraining(models.Model):
 
     state = fields.Selection(
         string=u'Estado',
-        selection=[
-            ('elaborate', 'En elaboración'),
-            ('review', 'En revisión'),
-            ('validate', 'En validación'),
-            ('validate_ok', 'Validado'),
+        selection_add=[
             ('in_process', 'En proceso'),
             ('final', 'Finalizado'),
-            ('caducated', 'Caducado'),
-            ('cancel', 'Obsoleto'),
+            ('caducated', 'Caducado')
         ],
         default='elaborate',
         copy=False,
