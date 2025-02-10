@@ -53,27 +53,28 @@ class Requisition(models.Model):
 
         return vals
 
-    @api.model
-    def create(self, vals):
-        current_user = self.env.user
+    @api.model_create_multi
+    def create(self, vals_list):
+        for vals in vals_list:
+            current_user = self.env.user
 
-        if current_user.x_studio_sitio:
-            vals['site_id'] = current_user.x_studio_sitio.id
-        
-        current_date = vals['request_date']
-        
-        current_period = request.env['x_periodo'].sudo().search([
-            ('x_studio_f1', '<=', current_date),
-            ('x_studio_f2', '>=', current_date),
-            ('x_studio_tipo_periodo', '>=', 'Semana')
-        ], limit=1)
+            if current_user.x_studio_sitio:
+                vals['site_id'] = current_user.x_studio_sitio.id
 
-        if current_period:
-            vals['periodo_id'] = current_period.id
-            vals['request_date'] = current_period.x_studio_f1
-            vals['closing_date'] = current_period.x_studio_f2
+            current_date = vals.get('request_date', fields.Date.today())
 
-        return super(Requisition, self).create(vals)
+            current_period = self.env['x_periodo'].sudo().search([
+                ('x_studio_f1', '<=', current_date),
+                ('x_studio_f2', '>=', current_date),
+                ('x_studio_tipo_periodo', '=', 'Semana')
+            ], limit=1)
+
+            if current_period:
+                vals['periodo_id'] = current_period.id
+                vals['request_date'] = current_period.x_studio_f1
+                vals['closing_date'] = current_period.x_studio_f2
+
+        return super(Requisition, self).create(vals_list)
 
     def get_emails(self):
         emails = []
