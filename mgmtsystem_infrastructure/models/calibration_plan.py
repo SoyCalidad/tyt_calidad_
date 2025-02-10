@@ -56,7 +56,6 @@ class Calibration(models.Model):
         ondelete='cascade',
     )
     line_ids = fields.One2many(
-        string='Lineas',
         comodel_name='mgmtsystem.calibration.line',
         inverse_name='maintenance_id',
     )

@@ -55,13 +55,11 @@ class RecordMeeting(models.Model):
         default=fields.Datetime.now,
     )
     pre_line_ids = fields.One2many(
-        string=u'Agenda Lineas',
         comodel_name='record.meeting.preline',
         inverse_name='record_id',
         copy=True,
     )
     line_ids = fields.One2many(
-        string=u'Acuerdos Lineas',
         comodel_name='record.meeting.line',
         inverse_name='record_id',
         copy=True,

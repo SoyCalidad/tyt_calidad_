@@ -73,14 +73,12 @@ class Plan(models.Model):
     _description = "Programa de comunicaciones"
 
     line_ids = fields.One2many(
-        string=u'Lineas',
         comodel_name='comunication.plan.line',
         inverse_name='plan_id',
         copy=True,
     )
 
     linetrack_ids = fields.One2many(
-        string=u'Lineas',
         comodel_name='comunication.plan.line',
         inverse_name='plan_id',
         domain=[('state', 'in', ('on_track', 'closed'))],

@@ -135,7 +135,6 @@ class Audit(models.Model):
     )
 
     line_ids = fields.One2many(
-        string=u'Lineas',
         comodel_name='audit.line',
         inverse_name='audit_id',
     )
@@ -272,7 +271,6 @@ class AuditReport(models.Model):
     )
 
     line_ids = fields.One2many(
-        string=u'Lineas',
         comodel_name='report.line',
         inverse_name='report_id',
         copy=True,

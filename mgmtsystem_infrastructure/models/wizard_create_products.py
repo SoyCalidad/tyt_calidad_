@@ -9,7 +9,6 @@ class WizardCreateProducts(models.TransientModel):
     _description = u'Creación de productos'
 
     lines_ids = fields.One2many(
-        string=u'Lineas',
         comodel_name='wizard.create.products.line',
         inverse_name='wizard_create_id',
     )

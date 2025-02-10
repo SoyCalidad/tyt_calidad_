@@ -318,7 +318,6 @@ class Block(models.Model):
     )
 
     line_ids = fields.One2many(
-        string='Lineas',
         comodel_name='matrix.block.line',
         inverse_name='block_id',
     )
