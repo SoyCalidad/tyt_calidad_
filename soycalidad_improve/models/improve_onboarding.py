@@ -17,13 +17,13 @@ class ResCompany(models.Model):
 
     # improve dashboard onboarding
     improve_onboarding_state = fields.Selection([('not_done', "Not done"), ('just_done', "Just done"), (
-        'done', "Done"), ('closed', "Closed")], string="State of the account invoice onboarding panel", default='not_done')
+        'done', "Done"), ('closed', "Closed")], default='not_done')
     improve_plan_change_request = fields.Selection([('not_done', "Not done"), ('just_done', "Just done"), (
         'done', "Done"), ('closed', "Closed")], string="State of the change request invoice onboarding ", default='not_done')
     improve_plan_onboarding_state = fields.Selection([('not_done', "Not done"), ('just_done', "Just done"), (
-        'done', "Done"), ('closed', "Closed")], string="State of the account invoice onboarding panel", default='not_done')
+        'done', "Done"), ('closed', "Closed")], default='not_done')
     improve_improve_onboarding_state = fields.Selection([('not_done', "Not done"), ('just_done', "Just done"), (
-        'done', "Done"), ('closed', "Closed")], string="State of the account invoice onboarding panel", default='not_done')
+        'done', "Done"), ('closed', "Closed")], default='not_done')
 
     @api.model
     def action_open_change_request(self, action_ref=None):
