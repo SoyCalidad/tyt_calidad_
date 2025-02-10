@@ -48,6 +48,7 @@ class Applicant(models.Model):
 
 class ApplicantTurn(models.Model):
     _name = 'hr.applicant.turn'
+    _description = "hr.applicant.turn"
     
     name = fields.Char(string='Nombre')
     description = fields.Text(string='Descripción')

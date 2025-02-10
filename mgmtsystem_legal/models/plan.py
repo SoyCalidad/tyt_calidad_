@@ -176,16 +176,11 @@ class Plan(models.Model):
 
     state = fields.Selection(
         string=u'Estado',
-        selection=[
+        selection_add=[
             ('draft', 'Borrador'),
             ('plan', 'Plan'),
-            ('elaborate', 'En elaboración'),
-            ('review', 'En revisión'),
-            ('validate', 'En validación'),
-            ('validate_ok', 'Validado'),
             ('on_track', 'En seguimiento'),
-            ('closed', 'Terminado'),
-            ('cancel', 'Obsoleto')
+            ('closed', 'Terminado')
         ],
         default='draft',
         copy=False,

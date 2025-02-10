@@ -214,6 +214,8 @@ class Audit(models.Model):
 class AuditLine(models.Model):
     _name = 'audit.line'
     _order = 'sequence, name, datetime'
+    _description = "audit.line"
+
 
     audit_id = fields.Many2one(
         string=u'Auditoría',
@@ -260,6 +262,8 @@ class AuditLine(models.Model):
 class AuditReport(models.Model):
     _name = "audit.report"
     _inherit = ['mail.thread', 'mail.activity.mixin', 'mgmtsystem.code']
+    _description = "audit.report"
+
 
     audit_id = fields.Many2one(
         string=u'Auditoría',
@@ -333,6 +337,8 @@ class AuditReport(models.Model):
 
 class img_adjunt(models.Model):
     _name = "img.adjunt"
+    _description = "img.adjunt"
+
 
     name = fields.Char(
         string=u'Nombre',
@@ -356,6 +362,8 @@ class img_adjunt(models.Model):
 
 class ReportLine(models.Model):
     _name = "report.line"
+    _description = "report.line"
+
 
     report_id = fields.Many2one(
         string=u'Reporte',

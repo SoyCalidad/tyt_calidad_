@@ -16,6 +16,8 @@ from odoo.exceptions import UserError
 class Report_excel_ac(models.AbstractModel):
     _name = 'report.report_excel_ac.xlsx'
     _inherit = 'report.report_xlsx.abstract'
+    _description = "report.report_excel_ac.xlsx"
+
 
     def generate_xlsx_report(self, workbook, data, lines):
         # estilos

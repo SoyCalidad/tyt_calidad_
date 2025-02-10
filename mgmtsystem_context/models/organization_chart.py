@@ -5,6 +5,8 @@ from odoo.exceptions import UserError, RedirectWarning, ValidationError
 class OrganizationChart(models.Model):
     _name = 'mgmtsystem.context.organization_chart'
     _inherit = 'mgmtsystem.validation.mail'
+    _description = "mgmtsystem.context.organization_chart"
+
 
     name = fields.Char(string='Nombre')
     parent_edition = fields.Many2one(
@@ -13,8 +15,8 @@ class OrganizationChart(models.Model):
         comodel_name='mgmtsystem.context.organization_chart', string='Versiones antiguas',
         inverse_name='parent_edition', context={'active_version': False})
     active = fields.Boolean('Active', default=True)
-    organization_chart_id = fields.Many2one(
-        'org.chart.employee', string='Organigrama')
+    # organization_chart_id = fields.Many2one(
+    #     'org.chart.employee', string='Organigrama')
 
     
 

@@ -7,6 +7,8 @@ from odoo.exceptions import UserError, RedirectWarning, ValidationError
 class ComplaintCateg(models.Model):
     _name = 'complaint.categ'
     _order = 'sequence asc'
+    _description = "complaint.categ"
+
 
     elaborate_ids = fields.Many2one(
         string=u'Abierto por',

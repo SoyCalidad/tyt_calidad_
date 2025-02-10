@@ -93,13 +93,10 @@ class Training(models.Model):
 
     state = fields.Selection(
         string=u'Estado',
-        selection=[
-            ('elaborate', 'En elaboración'),
-            ('validate_ok', 'Validado'),
+        selection_add=[
             ('in_process', 'En proceso'),  # incluye etapa de evaluación
             ('final', 'Finalizado'),
-            ('caducated', 'Caducado'),
-            ('cancel', 'Obsoleto'),
+            ('caducated', 'Caducado')
         ],
         default='elaborate',
         copy=False,
@@ -340,7 +337,7 @@ class TrainingLine(models.Model):
         ondelete='cascade',
     )
     efresponse_id = fields.Many2one(
-        'survey.user_input', "Respuesta eficiencia", ondelete="set null", oldname="response")
+        'survey.user_input', "Respuesta eficiencia", ondelete="set null")
 
     confirm = fields.Boolean(string='Confirmación')
 

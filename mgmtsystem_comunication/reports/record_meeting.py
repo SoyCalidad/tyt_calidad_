@@ -2,6 +2,8 @@ from odoo import api, fields, models
 
 class RecordMeetingConvReport(models.AbstractModel):
     _name = 'report.mgmtsystem_comunication.record_meeting_con'
+    _description = "report.mgmtsystem_comunication.record_meeting_con"
+
 
     @api.model
     def _get_report_values(self, docids, data=None):
@@ -19,6 +21,8 @@ class RecordMeetingConvReport(models.AbstractModel):
 
 class RecordMeetingAssReport(models.AbstractModel):
     _name = 'report.mgmtsystem_comunication.record_meeting_assist'
+    _description = "report.mgmtsystem_comunication.record_meeting_assist"
+
 
     @api.model
     def _get_report_values(self, docids, data=None):

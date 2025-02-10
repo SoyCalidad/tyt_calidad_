@@ -70,7 +70,7 @@ class TrainingTraining(models.Model):
         """ Set the onboarding step as done """
         pass
 
-    @api.onchange('training_id')
+    #@api.onchange('training_id')
     def send_final(self):
         super().send_final()
         self.env.company.sudo().set_onboarding_step_done(

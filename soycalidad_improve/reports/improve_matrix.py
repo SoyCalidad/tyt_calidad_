@@ -25,6 +25,7 @@ class MgmtsystemImprovePlanMatrixReportWizard(models.TransientModel):
 
 class MatrixReportXls(models.AbstractModel):
     _name = 'report.report_improve_plan_matrix'
+    _description = "report.report_improve_plan_matrix"
     _inherit = 'report.report_xlsx.abstract'
 
     def generate_xlsx_report(self, workbook, data, matrixes):

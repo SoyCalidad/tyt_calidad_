@@ -9,6 +9,7 @@ _logger = logging.getLogger(__name__)
 
 class DocumentaryControl(models.Model):
     _name = 'documentary.control.tyt_docs'
+    _description = "documentary.control.tyt_docs"
 
     name = fields.Char()
     abbreviation = fields.Char(string="Abreviatura")

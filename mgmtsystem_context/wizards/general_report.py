@@ -8,6 +8,8 @@ import logging
 
 class GeneralWizard(models.TransientModel):
     _name = "wizard.general.report"
+    _description = "wizard.general.report"
+
 
     def action_print(self):
         data = self.read()[0]
@@ -23,6 +25,8 @@ class GeneralWizard(models.TransientModel):
 
 class GeneralReport(models.AbstractModel):
         _name = 'report.mgmtsystem_context.report_general_template_pdf'
+        _description = "report.mgmtsystem_context.report_general_template_pdf"
+
 
         @api.model
         def _get_report_values(self, docids, data=None):

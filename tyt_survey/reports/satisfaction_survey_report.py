@@ -5,6 +5,7 @@ import string
 class SatisfactionSurveyXlsxReport(models.AbstractModel):
     _name = 'report.tyt_survey.satisfaction_survey_report'
     _inherit = 'report.report_xlsx.abstract'
+    _description = "report.tyt_survey.satisfaction_survey_report"
 
     def generate_xlsx_report(self, workbook, data, surveys):
         try:

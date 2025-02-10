@@ -3,6 +3,7 @@ from odoo import api, fields, models
 
 class AnnouncementWizard(models.TransientModel):
     _name = 'announcement.wizard'
+    _description = "announcement.wizard"
 
     company_id = fields.Many2one(
         string=u'Compañia',
@@ -14,9 +15,6 @@ class AnnouncementWizard(models.TransientModel):
     training_ids = fields.Many2one(
         string='Plan de Capacitación',
         comodel_name='mgmtsystem.plan.training',
-        relation='training_wizard_report_rel',
-        column1='training_id',
-        column2='wizard_id',
     )
 
     def action_print(self):
@@ -46,6 +44,7 @@ class AnnouncementWizard(models.TransientModel):
 
 class AnnouncementReport(models.AbstractModel):
     _name = 'report.mgmtsystem_employees.report_announcement_template'
+    _description = "report.mgmtsystem_employees.report_announcement_template"
 
     @api.model
     def _get_report_values(self, docids, data=None):

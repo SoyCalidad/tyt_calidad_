@@ -5,7 +5,7 @@
     'summary': 'Procesos predeterminados para Soy Calidad',
     'author': 'Soy Calidad',
     'website': 'www.soycalidad.com',
-    'license': '',
+    'license': 'Other proprietary',
     'category': 'mgmt',
     'depends': [
         'mgmtsystem_process',

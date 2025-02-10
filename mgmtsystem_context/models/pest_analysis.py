@@ -99,14 +99,14 @@ class PEST(models.Model):
     description = fields.Text(string='Comentarios')
     external_factor_ids = fields.Many2many(
         string='Factores externos (PESTEL)', comodel_name='pest.factor',
-        relation='external_pest_rel', order='type desc', domain=[('type_id_type', '=', 'external')])
+        relation='external_pest_rel', domain=[('type_id_type', '=', 'external')])
     internal_factor_ids = fields.Many2many(
         string='Factores internos (AMOFHIT)', comodel_name='pest.factor',
-        relation='internal_pest_rel', order='type desc', domain=[('type_id_type', '=', 'internal')])
+        relation='internal_pest_rel', domain=[('type_id_type', '=', 'internal')])
 
     factor_ids = fields.Many2many(
         string='Factores internos (AMOFHIT)', comodel_name='pest.factor',
-        relation='factor_pest_rel', order='type desc', domain=[('type_id_type', '=', 'internal')])
+        relation='factor_pest_rel', domain=[('type_id_type', '=', 'internal')])
 
     parent_edition = fields.Many2one(
         comodel_name='mgmtsystem.context.pest', string='Padre', copy=False)

@@ -5,7 +5,7 @@
     'summary': 'Las etapas de evaluación por defecto son validado, revisado y validado',
     'author': 'Soy Calidad',
     'website': 'www.soycalidad.com',
-    'license': '',
+    'license': 'Other proprietary',
     'category': 'tools',
     'depends': [
         'hola_calidad',

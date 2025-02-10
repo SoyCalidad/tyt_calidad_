@@ -3,6 +3,7 @@ from odoo import api, fields, models
 
 class ApplicantsWizard(models.TransientModel):
     _name = 'applicants.wizard'
+    _description = "applicants.wizard"
     
     closed_included = fields.Boolean(string='Incluir procesos de selección finalizados', )
     
@@ -21,6 +22,8 @@ class ApplicantsWizard(models.TransientModel):
 
 class ApplicantsReport(models.AbstractModel):
     _name = 'report.mgmtsystem_employees.applicants_database_report'
+    _description = "report.mgmtsystem_employees.applicants_database_report"
+
 
     @api.model
     def _get_report_values(self, docids, data=None):
