@@ -304,147 +304,147 @@ class Diagnostic(models.Model):
         comodel_name='hola_calidad.clause', string=u'Clausulas')
 
     diagnostic4_ids = fields.One2many(
-        string=u'Lineas', comodel_name='hola_calidad.diagnostic.line', inverse_name='diagnostic4_id',)
+        comodel_name='hola_calidad.diagnostic.line', inverse_name='diagnostic4_id',)
     diagnostic4_1_ids = fields.One2many(
-        string=u'Lineas', comodel_name='hola_calidad.diagnostic.line', inverse_name='diagnostic4_1_id',)
+        comodel_name='hola_calidad.diagnostic.line', inverse_name='diagnostic4_1_id',)
     diagnostic4_2_ids = fields.One2many(
-        string=u'Lineas', comodel_name='hola_calidad.diagnostic.line', inverse_name='diagnostic4_2_id',)
+        comodel_name='hola_calidad.diagnostic.line', inverse_name='diagnostic4_2_id',)
     diagnostic4_3_1_ids = fields.One2many(
-        string=u'Lineas', comodel_name='hola_calidad.diagnostic.line', inverse_name='diagnostic4_3_1_id',)
+        comodel_name='hola_calidad.diagnostic.line', inverse_name='diagnostic4_3_1_id',)
     diagnostic4_3_2_ids = fields.One2many(
-        string=u'Lineas', comodel_name='hola_calidad.diagnostic.line', inverse_name='diagnostic4_3_2_id',)
+        comodel_name='hola_calidad.diagnostic.line', inverse_name='diagnostic4_3_2_id',)
 
     diagnostic5_1_ids = fields.One2many(
-        string=u'Lineas', comodel_name='hola_calidad.diagnostic.line', inverse_name='diagnostic5_1_id',)
+        comodel_name='hola_calidad.diagnostic.line', inverse_name='diagnostic5_1_id',)
     diagnostic5_2_ids = fields.One2many(
-        string=u'Lineas', comodel_name='hola_calidad.diagnostic.line', inverse_name='diagnostic5_2_id',)
+        comodel_name='hola_calidad.diagnostic.line', inverse_name='diagnostic5_2_id',)
     diagnostic5_1_1_ids = fields.One2many(
-        string=u'Lineas', comodel_name='hola_calidad.diagnostic.line', inverse_name='diagnostic5_1_1_id',)
+        comodel_name='hola_calidad.diagnostic.line', inverse_name='diagnostic5_1_1_id',)
     diagnostic5_1_2_ids = fields.One2many(
-        string=u'Lineas', comodel_name='hola_calidad.diagnostic.line', inverse_name='diagnostic5_1_2_id',)
+        comodel_name='hola_calidad.diagnostic.line', inverse_name='diagnostic5_1_2_id',)
     diagnostic5_2_1_ids = fields.One2many(
-        string=u'Lineas', comodel_name='hola_calidad.diagnostic.line', inverse_name='diagnostic5_2_1_id',)
+        comodel_name='hola_calidad.diagnostic.line', inverse_name='diagnostic5_2_1_id',)
 
     diagnostic6_1_ids = fields.One2many(
-        string=u'Lineas', comodel_name='hola_calidad.diagnostic.line', inverse_name='diagnostic6_1_id',)
+        comodel_name='hola_calidad.diagnostic.line', inverse_name='diagnostic6_1_id',)
     diagnostic6_2_ids = fields.One2many(
-        string=u'Lineas', comodel_name='hola_calidad.diagnostic.line', inverse_name='diagnostic6_2_id',)
+        comodel_name='hola_calidad.diagnostic.line', inverse_name='diagnostic6_2_id',)
     diagnostic6_1_1_ids = fields.One2many(
-        string=u'Lineas', comodel_name='hola_calidad.diagnostic.line', inverse_name='diagnostic6_1_1_id',)
+        comodel_name='hola_calidad.diagnostic.line', inverse_name='diagnostic6_1_1_id',)
     diagnostic6_1_2_ids = fields.One2many(
-        string=u'Lineas', comodel_name='hola_calidad.diagnostic.line', inverse_name='diagnostic6_1_2_id',)
+        comodel_name='hola_calidad.diagnostic.line', inverse_name='diagnostic6_1_2_id',)
     diagnostic6_2_1_ids = fields.One2many(
-        string=u'Lineas', comodel_name='hola_calidad.diagnostic.line', inverse_name='diagnostic6_2_1_id',)
+        comodel_name='hola_calidad.diagnostic.line', inverse_name='diagnostic6_2_1_id',)
 
     diagnostic7_1_1_ids = fields.One2many(
-        string=u'Lineas', comodel_name='hola_calidad.diagnostic.line', inverse_name='diagnostic7_1_1_id',)
+        comodel_name='hola_calidad.diagnostic.line', inverse_name='diagnostic7_1_1_id',)
     diagnostic7_1_2_ids = fields.One2many(
-        string=u'Lineas', comodel_name='hola_calidad.diagnostic.line', inverse_name='diagnostic7_1_2_id',)
+        comodel_name='hola_calidad.diagnostic.line', inverse_name='diagnostic7_1_2_id',)
     diagnostic7_1_3_ids = fields.One2many(
-        string=u'Lineas', comodel_name='hola_calidad.diagnostic.line', inverse_name='diagnostic7_1_3_id',)
+        comodel_name='hola_calidad.diagnostic.line', inverse_name='diagnostic7_1_3_id',)
     diagnostic7_1_4_ids = fields.One2many(
-        string=u'Lineas', comodel_name='hola_calidad.diagnostic.line', inverse_name='diagnostic7_1_4_id',)
+        comodel_name='hola_calidad.diagnostic.line', inverse_name='diagnostic7_1_4_id',)
     diagnostic7_1_5_1_ids = fields.One2many(
-        string=u'Lineas', comodel_name='hola_calidad.diagnostic.line', inverse_name='diagnostic7_1_5_1_id',)
+        comodel_name='hola_calidad.diagnostic.line', inverse_name='diagnostic7_1_5_1_id',)
     diagnostic7_1_5_2_ids = fields.One2many(
-        string=u'Lineas', comodel_name='hola_calidad.diagnostic.line', inverse_name='diagnostic7_1_5_2_id',)
+        comodel_name='hola_calidad.diagnostic.line', inverse_name='diagnostic7_1_5_2_id',)
     diagnostic7_1_6_ids = fields.One2many(
-        string=u'Lineas', comodel_name='hola_calidad.diagnostic.line', inverse_name='diagnostic7_1_6_id',)
+        comodel_name='hola_calidad.diagnostic.line', inverse_name='diagnostic7_1_6_id',)
 
     diagnostic7_2_1_ids = fields.One2many(
-        string=u'Lineas', comodel_name='hola_calidad.diagnostic.line', inverse_name='diagnostic7_2_1_id',)
+        comodel_name='hola_calidad.diagnostic.line', inverse_name='diagnostic7_2_1_id',)
 
     diagnostic7_3_1_ids = fields.One2many(
-        string=u'Lineas', comodel_name='hola_calidad.diagnostic.line', inverse_name='diagnostic7_3_1_id',)
+        comodel_name='hola_calidad.diagnostic.line', inverse_name='diagnostic7_3_1_id',)
 
     diagnostic7_4_1_ids = fields.One2many(
-        string=u'Lineas', comodel_name='hola_calidad.diagnostic.line', inverse_name='diagnostic7_4_1_id',)
+        comodel_name='hola_calidad.diagnostic.line', inverse_name='diagnostic7_4_1_id',)
 
     diagnostic7_5_1_ids = fields.One2many(
-        string=u'Lineas', comodel_name='hola_calidad.diagnostic.line', inverse_name='diagnostic7_5_1_id',)
+        comodel_name='hola_calidad.diagnostic.line', inverse_name='diagnostic7_5_1_id',)
 
     diagnostic7_5_2_ids = fields.One2many(
-        string=u'Lineas', comodel_name='hola_calidad.diagnostic.line', inverse_name='diagnostic7_5_2_id',)
+        comodel_name='hola_calidad.diagnostic.line', inverse_name='diagnostic7_5_2_id',)
 
     diagnostic7_5_3_1_ids = fields.One2many(
-        string=u'Lineas', comodel_name='hola_calidad.diagnostic.line', inverse_name='diagnostic7_5_3_1_id',)
+        comodel_name='hola_calidad.diagnostic.line', inverse_name='diagnostic7_5_3_1_id',)
     diagnostic7_5_3_2_ids = fields.One2many(
-        string=u'Lineas', comodel_name='hola_calidad.diagnostic.line', inverse_name='diagnostic7_5_3_2_id',)
+        comodel_name='hola_calidad.diagnostic.line', inverse_name='diagnostic7_5_3_2_id',)
 
     diagnostic8_1_1_ids = fields.One2many(
-        string=u'Lineas', comodel_name='hola_calidad.diagnostic.line', inverse_name='diagnostic8_1_1_id', )
+        comodel_name='hola_calidad.diagnostic.line', inverse_name='diagnostic8_1_1_id', )
     diagnostic8_2_1_ids = fields.One2many(
-        string=u'Lineas', comodel_name='hola_calidad.diagnostic.line', inverse_name='diagnostic8_2_1_id', )
+        comodel_name='hola_calidad.diagnostic.line', inverse_name='diagnostic8_2_1_id', )
     diagnostic8_2_2_ids = fields.One2many(
-        string=u'Lineas', comodel_name='hola_calidad.diagnostic.line', inverse_name='diagnostic8_2_2_id', )
+        comodel_name='hola_calidad.diagnostic.line', inverse_name='diagnostic8_2_2_id', )
     diagnostic8_2_2_3_1_ids = fields.One2many(
-        string=u'Lineas', comodel_name='hola_calidad.diagnostic.line', inverse_name='diagnostic8_2_2_3_1_id', )
+        comodel_name='hola_calidad.diagnostic.line', inverse_name='diagnostic8_2_2_3_1_id', )
     diagnostic8_2_2_3_2_ids = fields.One2many(
-        string=u'Lineas', comodel_name='hola_calidad.diagnostic.line', inverse_name='diagnostic8_2_2_3_2_id', )
+        comodel_name='hola_calidad.diagnostic.line', inverse_name='diagnostic8_2_2_3_2_id', )
     diagnostic8_2_4_ids = fields.One2many(
-        string=u'Lineas', comodel_name='hola_calidad.diagnostic.line', inverse_name='diagnostic8_2_4_id', )
+        comodel_name='hola_calidad.diagnostic.line', inverse_name='diagnostic8_2_4_id', )
     diagnostic8_3_1_ids = fields.One2many(
-        string=u'Lineas', comodel_name='hola_calidad.diagnostic.line', inverse_name='diagnostic8_3_1_id', )
+        comodel_name='hola_calidad.diagnostic.line', inverse_name='diagnostic8_3_1_id', )
     diagnostic8_3_2_ids = fields.One2many(
-        string=u'Lineas', comodel_name='hola_calidad.diagnostic.line', inverse_name='diagnostic8_3_2_id', )
+        comodel_name='hola_calidad.diagnostic.line', inverse_name='diagnostic8_3_2_id', )
     diagnostic8_3_3_ids = fields.One2many(
-        string=u'Lineas', comodel_name='hola_calidad.diagnostic.line', inverse_name='diagnostic8_3_3_id', )
+        comodel_name='hola_calidad.diagnostic.line', inverse_name='diagnostic8_3_3_id', )
     diagnostic8_3_4_ids = fields.One2many(
-        string=u'Lineas', comodel_name='hola_calidad.diagnostic.line', inverse_name='diagnostic8_3_4_id', )
+        comodel_name='hola_calidad.diagnostic.line', inverse_name='diagnostic8_3_4_id', )
     diagnostic8_3_5_ids = fields.One2many(
-        string=u'Lineas', comodel_name='hola_calidad.diagnostic.line', inverse_name='diagnostic8_3_5_id', )
+        comodel_name='hola_calidad.diagnostic.line', inverse_name='diagnostic8_3_5_id', )
     diagnostic8_3_6_ids = fields.One2many(
-        string=u'Lineas', comodel_name='hola_calidad.diagnostic.line', inverse_name='diagnostic8_3_6_id', )
+        comodel_name='hola_calidad.diagnostic.line', inverse_name='diagnostic8_3_6_id', )
     diagnostic8_4_1_ids = fields.One2many(
-        string=u'Lineas', comodel_name='hola_calidad.diagnostic.line', inverse_name='diagnostic8_4_1_id', )
+        comodel_name='hola_calidad.diagnostic.line', inverse_name='diagnostic8_4_1_id', )
     diagnostic8_4_2_ids = fields.One2many(
-        string=u'Lineas', comodel_name='hola_calidad.diagnostic.line', inverse_name='diagnostic8_4_2_id', )
+        comodel_name='hola_calidad.diagnostic.line', inverse_name='diagnostic8_4_2_id', )
     diagnostic8_4_3_ids = fields.One2many(
-        string=u'Lineas', comodel_name='hola_calidad.diagnostic.line', inverse_name='diagnostic8_4_3_id', )
+        comodel_name='hola_calidad.diagnostic.line', inverse_name='diagnostic8_4_3_id', )
     diagnostic8_5_1_ids = fields.One2many(
-        string=u'Lineas', comodel_name='hola_calidad.diagnostic.line', inverse_name='diagnostic8_5_1_id', )
+        comodel_name='hola_calidad.diagnostic.line', inverse_name='diagnostic8_5_1_id', )
     diagnostic8_5_2_ids = fields.One2many(
-        string=u'Lineas', comodel_name='hola_calidad.diagnostic.line', inverse_name='diagnostic8_5_2_id', )
+        comodel_name='hola_calidad.diagnostic.line', inverse_name='diagnostic8_5_2_id', )
     diagnostic8_5_3_ids = fields.One2many(
         string=u'Lneas', comodel_name='hola_calidad.diagnostic.line', inverse_name='diagnostic8_5_3_id', )
     diagnostic8_5_4_ids = fields.One2many(
-        string=u'Lineas', comodel_name='hola_calidad.diagnostic.line', inverse_name='diagnostic8_5_4_id', )
+        comodel_name='hola_calidad.diagnostic.line', inverse_name='diagnostic8_5_4_id', )
     diagnostic8_5_5_ids = fields.One2many(
-        string=u'Lineas', comodel_name='hola_calidad.diagnostic.line', inverse_name='diagnostic8_5_5_id', )
+        comodel_name='hola_calidad.diagnostic.line', inverse_name='diagnostic8_5_5_id', )
     diagnostic8_5_6_ids = fields.One2many(
-        string=u'Lineas', comodel_name='hola_calidad.diagnostic.line', inverse_name='diagnostic8_5_6_id', )
+        comodel_name='hola_calidad.diagnostic.line', inverse_name='diagnostic8_5_6_id', )
     diagnostic8_6_1_ids = fields.One2many(
-        string=u'Lineas', comodel_name='hola_calidad.diagnostic.line', inverse_name='diagnostic8_6_1_id', )
+        comodel_name='hola_calidad.diagnostic.line', inverse_name='diagnostic8_6_1_id', )
     diagnostic8_7_1_ids = fields.One2many(
-        string=u'Lineas', comodel_name='hola_calidad.diagnostic.line', inverse_name='diagnostic8_7_1_id', )
+        comodel_name='hola_calidad.diagnostic.line', inverse_name='diagnostic8_7_1_id', )
     diagnostic8_7_2_ids = fields.One2many(
-        string=u'Lineas', comodel_name='hola_calidad.diagnostic.line', inverse_name='diagnostic8_7_2_id', )
+        comodel_name='hola_calidad.diagnostic.line', inverse_name='diagnostic8_7_2_id', )
 
     diagnostic9_1_1_ids = fields.One2many(
-        string=u'Lineas', comodel_name='hola_calidad.diagnostic.line', inverse_name='diagnostic9_1_1_id', )
+        comodel_name='hola_calidad.diagnostic.line', inverse_name='diagnostic9_1_1_id', )
     diagnostic9_1_2_ids = fields.One2many(
-        string=u'Lineas', comodel_name='hola_calidad.diagnostic.line', inverse_name='diagnostic9_1_2_id', )
+        comodel_name='hola_calidad.diagnostic.line', inverse_name='diagnostic9_1_2_id', )
     diagnostic9_1_3_ids = fields.One2many(
-        string=u'Lineas', comodel_name='hola_calidad.diagnostic.line', inverse_name='diagnostic9_1_3_id', )
+        comodel_name='hola_calidad.diagnostic.line', inverse_name='diagnostic9_1_3_id', )
     diagnostic9_2_1_ids = fields.One2many(
-        string=u'Lineas', comodel_name='hola_calidad.diagnostic.line', inverse_name='diagnostic9_2_1_id', )
+        comodel_name='hola_calidad.diagnostic.line', inverse_name='diagnostic9_2_1_id', )
     diagnostic9_2_2_ids = fields.One2many(
-        string=u'Lineas', comodel_name='hola_calidad.diagnostic.line', inverse_name='diagnostic9_2_2_id', )
+        comodel_name='hola_calidad.diagnostic.line', inverse_name='diagnostic9_2_2_id', )
     diagnostic9_3_1_ids = fields.One2many(
-        string=u'Lineas', comodel_name='hola_calidad.diagnostic.line', inverse_name='diagnostic9_3_1_id', )
+        comodel_name='hola_calidad.diagnostic.line', inverse_name='diagnostic9_3_1_id', )
     diagnostic9_3_2_ids = fields.One2many(
-        string=u'Lineas', comodel_name='hola_calidad.diagnostic.line', inverse_name='diagnostic9_3_2_id', )
+        comodel_name='hola_calidad.diagnostic.line', inverse_name='diagnostic9_3_2_id', )
     diagnostic9_3_3_ids = fields.One2many(
-        string=u'Lineas', comodel_name='hola_calidad.diagnostic.line', inverse_name='diagnostic9_3_3_id', )
+        comodel_name='hola_calidad.diagnostic.line', inverse_name='diagnostic9_3_3_id', )
 
     diagnostic10_1_1_ids = fields.One2many(
-        string=u'Lineas', comodel_name='hola_calidad.diagnostic.line', inverse_name='diagnostic10_1_1_id', )
+        comodel_name='hola_calidad.diagnostic.line', inverse_name='diagnostic10_1_1_id', )
     diagnostic10_2_1_ids = fields.One2many(
-        string=u'Lineas', comodel_name='hola_calidad.diagnostic.line', inverse_name='diagnostic10_2_1_id', )
+        comodel_name='hola_calidad.diagnostic.line', inverse_name='diagnostic10_2_1_id', )
     diagnostic10_2_2_ids = fields.One2many(
-        string=u'Lineas', comodel_name='hola_calidad.diagnostic.line', inverse_name='diagnostic10_2_2_id', )
+        comodel_name='hola_calidad.diagnostic.line', inverse_name='diagnostic10_2_2_id', )
     diagnostic10_3_1_ids = fields.One2many(
-        string=u'Lineas', comodel_name='hola_calidad.diagnostic.line', inverse_name='diagnostic10_3_1_id', )
+        comodel_name='hola_calidad.diagnostic.line', inverse_name='diagnostic10_3_1_id', )
 
     state = fields.Selection(
         string=u'Estado',
