@@ -91,8 +91,11 @@ class JobApplication(models.Model):
     utility_bill_approved = fields.Boolean(string="Estado de aprobación - Comprobante de domicilio", default=False)
     
     # health_survey fields fix
+    
     health_survey = fields.Binary(string="Encuesta de salud")
+    health_survey_filename = fields.Char(string="Nombre del Archivo")
     health_survey_state = fields.Boolean(string="Estado", default=False)
+    health_survey_approved = fields.Boolean(string="Estado", default=False)
 
     ###########################
     psychometric = fields.Binary(string="Psicométrico")
