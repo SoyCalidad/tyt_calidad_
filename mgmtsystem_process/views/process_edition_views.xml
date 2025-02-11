@@ -92,7 +92,7 @@
                             string="Nueva versión"
                             attrs="{'invisible':[('state', '!=', 'validate_ok')]}"
                             class="oe_highlight" />
-                    <button string="Comunicar procedimiento" name="send_edition_by_email" type="object" class="oe_highlight" attrs="{'invisible':[('state', '!=', 'validate_ok')]}"/>
+                    <!-- <button string="Comunicar procedimiento" name="send_edition_by_email" type="object" class="oe_highlight" attrs="{'invisible':[('state', '!=', 'validate_ok')]}"/> -->
                 </header>
                 <sheet>
                     <field name="active" invisible="1" />
