@@ -8,7 +8,7 @@ import base64
 from datetime import datetime
 from urllib.parse import quote
 
-from ..utils.constants import RUBRIC_STATE
+from ..utils.constants import FEEDBACK_STATE
 
 import logging
 _logger = logging.getLogger(__name__)
@@ -27,13 +27,62 @@ class CertificationFeeback(models.Model):
     campaign = fields.Char(string="Campaña")
     trainner = fields.Char(string="Entrenador")
 
-    state = fields.Selection(RUBRIC_STATE, string='Estado', default='doing')
-   
-    attendance_days_of_week_id = fields.Many2one('tyt_recruitment.attendance_days_of_week', string="Detalle de capacitación individual")   
+    applicant_signature = fields.Binary(string="Firma del aplicante")
+    quality_signature = fields.Binary(string="Firma del Técnico de calidad")
+    manager_signature = fields.Binary(string="Firma del responsable de capacitación y calidad")
 
-class ComponentFeedback(models.Model):
-    _name = 'tyt_recruitment.component_feeback'
-    _description = 'Pregunta de rúbrica de evaluación al expositor'
-    _rec_name = 'id'
+    strengths = fields.Text(string="Fortalezas")
+    opportunity_areas = fields.Text(string="Areas de Oportunidad")
+    suggestions_quality_technician = fields.Text(string="Sugerencias del Técnico de Calidad")
+    prospectus_commitments = fields.Text(string="Compromisos Prospecto")
 
-    text = fields.Char(string="Título")
+    state = fields.Selection(FEEDBACK_STATE, string='Estado', default='doing')
+
+    quality_technician = fields.Many2one('hr.employee', string="Tecnico de Calidad")
+    training_and_quality_manager = fields.Many2one('hr.employee', string="Responsable de Capacitación y Calidad")
+    kardex_id = fields.Many2one('tyt_recruitment.kardex_by_applicant', string="Kardex del aplicante")
+
+    @api.model
+    def create(self, vals):
+        registro = super(CertificationFeeback, self).create(vals)
+
+        if registro.kardex_id and registro.kardex_id.attendance_id:
+            group = str(registro.kardex_id.attendance_id.id) or ""
+            trainer = registro.kardex_id.attendance_id.trainer.name or ""
+            campaign = registro.kardex_id.attendance_id.campaign_id.display_name or ""
+            applicant_name = registro.kardex_id.applicant_name or ""
+            evaluation_average = registro.kardex_id.average or 0.0
+        
+            registro.write({
+                'group': group,
+                'campaign': campaign,
+                'trainner': trainer,
+                'name': applicant_name,
+                'evaluation_average': evaluation_average
+            })
+        
+        return registro
+
+    @api.onchange('quality_signature', 'manager_signature')
+    def _compute_state(self):
+
+        if self.quality_signature and self.manager_signature:
+            self.state = 'finalized'
+        else:
+            self.state = 'doing'
+    
+    def action_view_notify(self):
+        self.ensure_one()
+        
+        # Actualizar estado
+        self.state = 'notified'
+
+        # Obtener correos
+        emails = filter(None, [self.quality_technician.work_email, self.training_and_quality_manager.work_email])
+        email_to = ", ".join(emails)
+
+        # Obtener plantilla de correo
+        template = self.env.ref('tyt_recruitment.email_template_certification_feedback', raise_if_not_found=False)
+        
+        if template and email_to:
+            template.with_context(email_to=email_to).send_mail(self.id, force_send=True)

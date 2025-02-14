@@ -23,3 +23,9 @@ ATTENDANCE_STATE = [
     ('closing', 'Cierre'),
     ('finalized', 'Finaliazdo')
 ]
+
+FEEDBACK_STATE = [
+    ('doing', 'En elaboración'),
+    ('notified', 'Notificado'),
+    ('finalized', 'Finaliazdo')
+]

@@ -26,7 +26,7 @@
             }
         </style>
         <div class="container mt-4 mb-4">
-            <form id="job-application-form" action="/job_application/submit" method="post" class="p-4 border rounded bg-light">
+            <form id="certification-feedback-form" action="/certification_feedback/submit" method="post" class="p-4 border rounded bg-light">
                 <h1 class="text-center">RETROALIMENTACIÓN DE CERTIFICACIÓN</h1>
                 <h5 class="text-center"> Para llenar personalmente por el solicitante. Es indispensable contestar todas las preguntas. </h5>
                 <div id="first-part">
@@ -42,14 +42,14 @@
                                     </div>
                                     <div class="col-sm-6 col-md-6 col-lg-6 col-xl-6 col-xxl-6 p-4 border">
                                         <label for="current_date" class="form-label">Fecha</label>
-                                        <input type="text" class="form-control" id="current_date" name="current_date" readonly="true" required="required" />
+                                        <input type="text" class="form-control" id="current_date" name="current_date" t-att-value="current_date" readonly="true" required="required" />
                                     </div>
                                 </div>
 
                                 <div class="row">
                                     <div class="col-sm-8 col-md-8 col-lg-8 col-xl-8 col-xxl-8 p-4 border">
-                                        <label for="name" class="form-label">Nombre</label>
-                                        <input type="text" class="form-control" id="name" name="name" required="required" readonly="true"/>
+                                        <label for="applicant_name" class="form-label">Nombre</label>
+                                        <input type="text" class="form-control" id="applicant_name" name="applicant_name" t-att-value="applicant_name" valuerequired="required" readonly="true"/>
                                     </div>
                                     <div class="col-sm-4 col-md-4 col-lg-4 col-xl-4 col-xxl-4 p-4 border">
                                         <label for="site" class="form-label">Promedio de evaluación</label>
@@ -60,7 +60,7 @@
                                 <div class="row">
                                     <div class="col-sm-2 col-md-2 col-lg-2 col-xl-2 col-xxl-2 p-4 border">
                                         <label for="group" class="form-label">Grupo</label>
-                                        <input type="text" class="form-control" id="group" name="group" t-att-value="site_id" required="required" readonly="true"/>
+                                        <input type="text" class="form-control" id="group" name="group" t-att-value="group" required="required" readonly="true"/>
                                     </div>
                                     <div class="col-sm-5 col-md-5 col-lg-5 col-xl-5 col-xxl-5 p-4 border">
                                         <label for="campaign" class="form-label">Campaña</label>
@@ -75,24 +75,64 @@
                         </div>
                     </section>
 
-                    
-
                     <section class="p-3">
                         <h3>CUESTIONARIO</h3>
                         <div class="row">
-                            <t t-foreach="components_json" t-as="question">
-                                <div class="col-sm-12 col-md-12 col-lg-12 col-xl-12 col-xxl-12 p-4 border">
-                                    <label t-att-for="question['id']" class="form-label text-muted">
-                                        <t t-esc="question['text']"/>
-                                    </label>
-                                    <input type="text" class="form-control"
-                                        t-att-id="question['id']" 
-                                        t-att-name="question['id']" 
-                                        t-att-placeholder="'Ingrese su respuesta'" 
-                                        required="required"/>
-                                </div>
-                            </t>
+                            <div class="col-sm-12 col-md-12 col-lg-12 col-xl-12 col-xxl-12 p-4 border">
+                                <label for="strengths" class="form-label text-muted">
+                                    Fortaleza
+                                </label>
+                                <textarea 
+                                    class="form-control"
+                                    id="strengths" 
+                                    name="strengths" 
+                                    placeholder="Ingrese su respuesta"|
+                                    readonly="true"
+                                    required="required"><t t-esc="strengths"/></textarea>
+                            </div>
                         </div>
+                        <div class="row">
+                            <div class="col-sm-12 col-md-12 col-lg-12 col-xl-12 col-xxl-12 p-4 border">
+                                <label for="opportunity_areas" class="form-label text-muted">
+                                    Areas de Oportunidad
+                                </label>
+                                <textarea 
+                                    class="form-control"
+                                    id="opportunity_areas" 
+                                    name="opportunity_areas" 
+                                    placeholder="Ingrese su respuesta" 
+                                    readonly="true"
+                                    required="required"><t t-esc="opportunity_areas"/></textarea>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-sm-12 col-md-12 col-lg-12 col-xl-12 col-xxl-12 p-4 border">
+                                <label for="suggestions_quality_technician" class="form-label text-muted">
+                                    Sugerencias del Técnico de Calidad
+                                </label>
+                                <textarea 
+                                    class="form-control"
+                                    id="suggestions_quality_technician" 
+                                    name="suggestions_quality_technician" 
+                                    placeholder="Ingrese su respuesta" 
+                                    readonly="true"
+                                    required="required"><t t-esc="suggestions_quality_technician"/></textarea>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-sm-12 col-md-12 col-lg-12 col-xl-12 col-xxl-12 p-4 border">
+                                <label for="prospectus_commitments" class="form-label text-muted">
+                                    Compromisos Prospecto
+                                </label>
+                                <textarea 
+                                    class="form-control"
+                                    id="prospectus_commitments" 
+                                    name="prospectus_commitments" 
+                                    placeholder="Ingrese su respuesta" 
+                                    required="required"><t t-esc="prospectus_commitments"/></textarea>
+                            </div>
+                        </div>
+                        <input id="kardex_by_applicant_id" name="kardex_by_applicant_id" t-att-value="kardex_by_applicant_id" type="hidden"/>
                     </section>
 
                     <section class="p-3">
@@ -113,6 +153,16 @@
                             </div>
                         </div>
                     </section>   
+
+                    <section>
+                        <div class="row mt-4">
+                            <div class="col text-end">
+                                <button type="submit" class="btn btn-primary btn-lg">
+                                    Enviar
+                                </button>
+                            </div>
+                        </div>
+                    </section>
                 </div>
 
                  
@@ -160,21 +210,11 @@
 
     </template>
 
-    <template id="template_job_application_success" name="Form Submission Success">
+    <template id="template_certification_feedback_success" name="Form Submission Success">
         <link rel="stylesheet" href="/web/static/lib/bootstrap/dist/css/bootstrap.css"/>
         <div class="container text-center mt-5">
             <h4>¡Gracias por enviar el formulario!</h4>
             <br/>   
-            <div class="mt-4">
-                <a t-att-href="'/survey/%s/%s/%s/%s?%s' % (
-                    job_application_id, name, last_name_father, last_name_mother,
-                    'gender=%s&amp;birthplace=%s&amp;birthdate=%s&amp;nationality=%s&amp;age=%s&amp;marital_status=%s' % (
-                    gender, birthplace, birthdate, nationality, age, marital_status))" 
-                class="btn btn-primary btn-lg px-5 py-2" 
-                role="button">
-                    Completar encuesta de salud
-                </a>
-            </div>
         </div>
     </template>
 </odoo>
