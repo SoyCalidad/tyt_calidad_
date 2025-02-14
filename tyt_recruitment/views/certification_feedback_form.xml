@@ -52,8 +52,8 @@
                                         <input type="text" class="form-control" id="applicant_name" name="applicant_name" t-att-value="applicant_name" valuerequired="required" readonly="true"/>
                                     </div>
                                     <div class="col-sm-4 col-md-4 col-lg-4 col-xl-4 col-xxl-4 p-4 border">
-                                        <label for="site" class="form-label">Promedio de evaluación</label>
-                                        <input type="text" class="form-control" id="site" name="site" t-att-value="site_id" required="required" readonly="true"/>
+                                        <label for="evaluation_average" class="form-label">Promedio de evaluación</label>
+                                        <input type="text" class="form-control" id="evaluation_average" name="evaluation_average" t-att-value="evaluation_average" required="required" readonly="true"/>
                                     </div>
                                 </div>
                                 
@@ -86,7 +86,7 @@
                                     class="form-control"
                                     id="strengths" 
                                     name="strengths" 
-                                    placeholder="Ingrese su respuesta"|
+                                    placeholder="Ingrese su respuesta"
                                     readonly="true"
                                     required="required"><t t-esc="strengths"/></textarea>
                             </div>
@@ -129,7 +129,7 @@
                                     id="prospectus_commitments" 
                                     name="prospectus_commitments" 
                                     placeholder="Ingrese su respuesta" 
-                                    required="required"><t t-esc="prospectus_commitments"/></textarea>
+                                    required="required"></textarea>
                             </div>
                         </div>
                         <input id="kardex_by_applicant_id" name="kardex_by_applicant_id" t-att-value="kardex_by_applicant_id" type="hidden"/>

@@ -41,7 +41,7 @@ class PublicFormController(http.Controller):
 
                 certification_feedback_json = {
                     'strengths': kardex.certification_feedback_ids[0].strengths,
-                    'opportunity_areas ': kardex.certification_feedback_ids[0].opportunity_areas,
+                    'opportunity_areas': kardex.certification_feedback_ids[0].opportunity_areas,
                     'suggestions_quality_technician': kardex.certification_feedback_ids[0].suggestions_quality_technician
                 }
 

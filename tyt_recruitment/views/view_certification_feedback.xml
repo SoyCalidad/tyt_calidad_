@@ -66,6 +66,7 @@
                   <field name="strengths" readonly="1"  />
                   <field name="opportunity_areas" readonly="1"  />
                   <field name="suggestions_quality_technician" readonly="1"  />
+                  <field name="prospectus_commitments" readonly="1"  />
                 </page>
                 <page string="Firma del aplicante" >
                   <field name="applicant_signature" widget="signature" readonly="1"/>
