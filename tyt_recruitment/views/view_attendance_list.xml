@@ -101,11 +101,6 @@
                     string="Ver" 
                     type="object" 
                     class="oe_highlight" />
-                  <button 
-                    name="action_open_certification_feedback" 
-                    string="Retroalimentación" 
-                    type="object" 
-                    class="oe_highlight" />
                 </tree>
               </field>                  
             </page>
@@ -186,6 +181,28 @@
                   <field name="accreditation_status" width="30px" />
                   <field name="concession" width="30px" />
                   <field name="observation" width="30px" />
+                  <field name="has_certification_feedback" invisible="1" />
+                  <button 
+                    name="action_message_certification_feedback" 
+                    icon="fa-check" 
+                    type="object" 
+                    class="oe_highlight" 
+                    attrs="{'invisible': [('has_certification_feedback', '=', False)]}"
+                  />
+                  <button 
+                    name="action_new_certification_feedback" 
+                    icon="fa-pencil" 
+                    type="object" 
+                    class="oe_highlight" 
+                    attrs="{'invisible': [('has_certification_feedback', '!=', False)]}"
+                  />
+                  <button 
+                    name="action_open_certification_feedback_form" 
+                    string="Retroalimentación" 
+                    type="object" 
+                    class="oe_highlight" 
+                    attrs="{'invisible': [('has_certification_feedback', '=', False)]}"
+                  />
                 </tree>
               </field>
             </page>

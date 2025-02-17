@@ -1,37 +1,95 @@
 <odoo>
   <data>
-    <!-- list attendance -->
-    <!-- <record model="ir.ui.view" id="tyt_recruitment.component_feeback_list">
+    <!-- list certification feedback -->
+    <record model="ir.ui.view" id="tyt_recruitment.component_feeback_list">
       <field name="name">Lista de retroalimentaciones</field>
       <field name="model">tyt_recruitment.certification_feedback</field>
       <field name="arch" type="xml">
         <tree>
           <field name="id"/>
-          <field name="campaign_id"/>
-          <field name="requisition_id"/>
-          <field name="trainer"/>
-          <field name="recruiter"/>
-          <field name="turn"/>
-          <button 
-            name="action_view_evaluation_rubric" 
-            string="Ver rúbrica de evaluación" 
-            type="object" class="oe_highlight" 
-            groups="tyt_recruitment.group_quality_user"
-            attrs="{'invisible': [('trainer', '=', False)]}"
-          />
+          <field name="name"/>
+          <field name="evaluation_average"/>
+          <field name="group"/>
+          <field name="campaign"/>
+          <field name="trainner"/>
         </tree>
       </field>
-    </record> -->
-    
-    <!-- list tag attendance -->
-    <record model="ir.ui.view" id="tyt_recruitment.component_feeback_form">
-      <field name="name">Lista de componentes para ficha de retroalimentación</field>
-      <field name="model">tyt_recruitment.component_feeback</field>
+    </record>
+
+    <!-- form certification feedback -->
+    <record id="view_certification_feedback_simple_form" model="ir.ui.view">
+      <field name="name">Formulario de Retroalimentación simple</field>
+      <field name="model">tyt_recruitment.certification_feedback</field>
       <field name="arch" type="xml">
-        <tree>
-          <field name="id"/>
-          <field name="text"/>
-        </tree>
+          <form string="Retroalimentación">
+            <sheet>  
+              <group>
+                <field name="kardex_id" readonly="1" class="o_form_uri o_form_readonly"/>
+                <field name="strengths" />
+                <field name="opportunity_areas"/>
+                <field name="suggestions_quality_technician"/>
+              </group>
+            </sheet>
+          </form>
+      </field>
+    </record>
+
+    <!-- form certification feedback -->
+
+    <record id="view_certification_feedback_form" model="ir.ui.view">
+      <field name="name">Formulario de Retroalimentación</field>
+      <field name="model">tyt_recruitment.certification_feedback</field>
+      <field name="arch" type="xml">
+          <form string="Retroalimentación">
+          <header>
+              <field name="state" invisible="1"/> 
+              <button 
+                name="action_view_notify" 
+                string="Notificar" 
+                type="object" 
+                class="oe_highlight"
+                attrs="{'invisible': [('state', '!=', 'doing')]}"    
+              />   
+              <field name="state" widget="statusbar"/>
+          </header>
+
+          <sheet>  
+              <group>
+                <field name="name" readonly="1"/>
+                <field name="evaluation_average" readonly="1"/>
+                <field name="group" readonly="1"/>
+                <field name="campaign" readonly="1"/>
+                <field name="trainner" readonly="1"/>
+              </group>
+              <notebook>
+                <page string="Respuestas">
+                  <field name="strengths" readonly="1"  />
+                  <field name="opportunity_areas" readonly="1"  />
+                  <field name="suggestions_quality_technician" readonly="1"  />
+                  <field name="prospectus_commitments" readonly="1"  />
+                </page>
+                <page string="Firma del aplicante" >
+                  <field name="applicant_signature" widget="signature" readonly="1"/>
+                </page>
+                <page string="Tecnico de Calidad" >
+                  <group>
+                    <field name="quality_technician" />
+                    <field 
+                      name="quality_signature" widget="signature"
+                      attrs="{'readonly': [('quality_technician', '=', False)]}"/>
+                  </group>
+                </page>
+                <page string="Responsable de Capacitación y Calidad" >
+                  <group>
+                    <field name="training_and_quality_manager" />
+                    <field 
+                      name="manager_signature" widget="signature"
+                      attrs="{'readonly': [('training_and_quality_manager', '=', False)]}"/>
+                  </group>
+                </page>
+              </notebook>
+          </sheet>
+          </form>
       </field>
     </record>
 
@@ -43,12 +101,6 @@
       <field name="view_mode">tree,form</field>
     </record>
 
-    <record model="ir.actions.act_window" id="tyt_recruitment_action_window_feedback_components">
-      <field name="name">Lista de componentes </field>
-      <field name="res_model">tyt_recruitment.component_feeback</field>
-      <field name="view_mode">tree,form</field>
-    </record>
-
     <!-- Top menu item -->
 
     <menuitem id="menu_custom_feeback_list"
@@ -57,10 +109,5 @@
       action="tyt_recruitment_action_window_feedback"
     />
 
-    <menuitem id="menu_custom_feedback_components"
-      name="Componentes de ficha de retroalimentación"
-      parent="menu_custom_attendance"
-      action="tyt_recruitment_action_window_feedback_components"
-    />
   </data>
 </odoo>

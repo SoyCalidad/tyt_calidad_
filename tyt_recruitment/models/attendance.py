@@ -197,21 +197,6 @@ class DaysOfWeek(models.Model):
             return {
                 'type': 'ir.actions.act_window_close'
             }
-        
-    def action_open_certification_feedback(self):
-        group = str(self.attendance_id.id)
-
-        applicant_name = self.applicant_id.name
-        campaign = self.attendance_id.campaign_id.display_name
-        trainer = self.attendance_id.trainer.name
-        
-        url = f"/certification_feedback/{self.id}/?applicant_name={applicant_name}&campaign={campaign}&trainer={trainer}&group={group}"
-        
-        return {
-            'type': 'ir.actions.act_url',
-            'url': url,
-            'target': 'new', 
-        }
 
 class SurveyAttendance(models.Model):
     _name = 'tyt_recruitment.survey_attendance'
@@ -269,6 +254,15 @@ class KardexAttendance(models.Model):
     average = fields.Float(string="Promedio", compute="_compute_average_score", store=True)
     highest_score = fields.Float(string="Promedio alto", compute="_compute_highest_score", store=True)
 
+    certification_feedback_ids = fields.One2many('tyt_recruitment.certification_feedback', 'kardex_id', string="Certificación de retroalimentación")
+    has_certification_feedback = fields.Boolean(string="Tiene retroalimentación", compute="_compute_has_certification_feedback")
+
+    @api.depends('certification_feedback_ids')
+    def _compute_has_certification_feedback(self):
+        for record in self:
+            record.has_certification_feedback = bool(record.certification_feedback_ids)
+            _logger.info(record.has_certification_feedback)
+
     @api.depends('survey_counter', 'exam1', 'exam2', 'exam3', 'exam4', 'exam5',
                  'exam6', 'exam7', 'exam8', 'exam9', 'exam10', 'exam11',
                  'exam12', 'exam13', 'exam14', 'exam15')
@@ -285,6 +279,41 @@ class KardexAttendance(models.Model):
                 except ValueError:
                     continue
             record.average = total / count if count > 0 else 0
+
+    def action_open_certification_feedback_form(self):
+        
+        url = f"/certification_feedback/{self.id}/"
+        
+        return {
+            'type': 'ir.actions.act_url',
+            'url': url,
+            'target': 'new', 
+        }
+        
+    def action_new_certification_feedback(self):
+
+        return {
+            'type': 'ir.actions.act_window',
+            'res_model': 'tyt_recruitment.certification_feedback',
+            'view_mode': 'form',
+            'view_id': self.env.ref('tyt_recruitment.view_certification_feedback_simple_form').id,
+            'target': 'new',
+            'context': {'default_kardex_id': self.id},
+        }
+    
+    def action_message_certification_feedback(self):
+
+        return {
+            'type': 'ir.actions.client',
+            'tag': 'display_notification',
+            'params': {
+                'title': 'Retroalimentación - Técnico de calidad',
+                'message': 'Ya ha completado los datos de esta retroalimentación',
+                'type': 'success',  
+                'sticky': False,
+                'next': {'type': 'success', 'class': 'o_notify_success'}
+            }
+        }
 
     @api.depends('survey_counter', 'exam1', 'exam2', 'exam3', 'exam4', 'exam5',
              'exam6', 'exam7', 'exam8', 'exam9', 'exam10', 'exam11',

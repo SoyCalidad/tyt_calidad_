@@ -9,35 +9,68 @@ from datetime import datetime
 
 class PublicFormController(http.Controller):
     
-    @http.route('/certification_feedback/<string:attendance_id>', type='http', auth='public', website=True)
-    def public_form(self, attendance_id, **post):
+    @http.route('/certification_feedback/<string:kardex_by_applicant_id>', type='http', auth='public', website=True)
+    def public_form(self, kardex_by_applicant_id, **post):
         
-        applicant_name = post.get('applicant_name')
-        campaign = post.get('campaign')
-        trainer = post.get('trainer')
-        group = post.get('group')
         current_date = str(datetime.today().strftime('%Y-%m-%d'))
 
-        _logger.info(f"Attendance ID: {attendance_id}")
-        _logger.info(f"applicant_name {applicant_name}")
-        _logger.info(f"campaign {campaign}")
-        _logger.info(f"trainer {trainer}")
-        _logger.info(f"group {group}")
-        _logger.info(f"current_date {current_date}")
+        kardex = request.env['tyt_recruitment.kardex_by_applicant'].sudo().search([
+            ("id", "=", kardex_by_applicant_id)
+        ])
 
-        components = request.env['tyt_recruitment.component_feeback'].sudo().search([])
+        kardex_json = {}
+        certification_feedback_json = {}
+        if kardex and kardex.attendance_id:
 
-        components_json = [{'id': str(q.id), 'text': q.text} for q in components]
+            kardex_json = {
+                'applicant_name': kardex.applicant_name or "",
+                'campaign': kardex.attendance_id.campaign_id.display_name or "",
+                'trainer': kardex.attendance_id.trainer.name or "",
+                'group': str(kardex.attendance_id.id) or "",
+                'evaluation_average': kardex.average or 0.0,
+                'current_date': current_date,
+                'kardex_by_applicant_id': kardex_by_applicant_id
+            }
 
-        context = {
-            'applicant_name': applicant_name,
-            'campaign': campaign,
-            'trainer': trainer,
-            'group': group,
-            'current_date': current_date,
-            'attendance_id': attendance_id,
-            'components_json': components_json
-        }
+            if kardex.certification_feedback_ids[0]:
 
+                _logger.info("aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa")
+                _logger.info(kardex.certification_feedback_ids[0].strengths)
+                _logger.info(kardex.certification_feedback_ids[0].opportunity_areas)
+                _logger.info(kardex.certification_feedback_ids[0].suggestions_quality_technician)
+
+                certification_feedback_json = {
+                    'strengths': kardex.certification_feedback_ids[0].strengths,
+                    'opportunity_areas': kardex.certification_feedback_ids[0].opportunity_areas,
+                    'suggestions_quality_technician': kardex.certification_feedback_ids[0].suggestions_quality_technician
+                }
+
+        context = {**kardex_json, **certification_feedback_json}
+        
         return request.render('tyt_recruitment.template_certification_feedback_form', context)
+
+    @http.route('/certification_feedback/submit', type='http', auth='public', website=True, csrf=False)
+    def submit_form(self, **post):
+        
+        kardex_by_applicant_id = post.get('kardex_by_applicant_id')
+
+        certification_feedback = request.env['tyt_recruitment.certification_feedback'].sudo().search([
+            ("kardex_id", "=", kardex_by_applicant_id)
+        ])
+
+        prospectus_commitments = post.get('prospectus_commitments')
+        # IMAGE SIGNATURE
+        image_base64 = post.get('signature')
+        image_data = None
+
+        if image_base64:
+            image_data = image_base64.split(",")[1]
+
+        if certification_feedback:
+            certification_feedback.sudo().write({
+                'prospectus_commitments': prospectus_commitments,
+                'applicant_signature': image_data
+            })
+
+        return request.render('tyt_recruitment.template_certification_feedback_success')
     
