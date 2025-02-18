@@ -156,12 +156,12 @@ class SWOTItem(models.Model):
     ], string='Tipo')
 
     weight = fields.Float(string='Peso', digits=(16, 2), required=True)
-    rating = fields.Selection([
-        ('1', '1 (Respuesta mala)'),
-        ('2', '2 (Respuesta media)'),
-        ('3', '3 (Respuesta superior a la media)'),
-        ('4', '4 (Respuesta superior)'),
-    ], string='Calificación')
+    # rating = fields.Selection([
+    #     ('1', '1 (Respuesta mala)'),
+    #     ('2', '2 (Respuesta media)'),
+    #     ('3', '3 (Respuesta superior a la media)'),
+    #     ('4', '4 (Respuesta superior)'),
+    # ], string='Calificación')
 
     weighted_rating = fields.Float(
         compute='_compute_weighted_rating', string='Calificación Ponderada', digits=(16, 2))
@@ -274,6 +274,12 @@ class Amenazas(models.Model):
         ('external', 'Factor externo')
     ], string='Tipo de Factor', default='external')
 
+    rating = fields.Selection([
+        ('1', '1 (Respuesta mala)'),
+        ('2', '2 (Respuesta media)'),
+        ('3', '3 (Respuesta superior a la media)'),
+        ('4', '4 (Respuesta superior)'),
+    ], string='Calificación')
 
 class CrossSWOT(models.Model):
     _name = 'mgmtsystem.context.cross.swot'
