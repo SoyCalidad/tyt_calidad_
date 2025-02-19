@@ -310,8 +310,7 @@ class KardexAttendance(models.Model):
                 'title': 'Retroalimentación - Técnico de calidad',
                 'message': 'Ya ha completado los datos de esta retroalimentación',
                 'type': 'success',  
-                'sticky': False,
-                'next': {'type': 'success', 'class': 'o_notify_success'}
+                'sticky': False
             }
         }
 
