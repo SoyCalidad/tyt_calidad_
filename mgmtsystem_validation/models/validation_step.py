@@ -38,7 +38,7 @@ class ValidationStep(models.Model):
 class Validation(models.Model):
     _name = 'mgmtsystem.validation'
     _description = 'Validación del sistema de gestión'
-    _inherit = ['mgmtsystem.version', 'mail.thread', 'mail.activity.mixin']
+    _inherit = ['mail.thread', 'mail.activity.mixin','mgmtsystem.version']
 
     state = fields.Selection(
         string=u'Estado',
