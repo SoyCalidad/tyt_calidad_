@@ -314,7 +314,7 @@ class Validation(models.Model):
 
 class MailValidation(models.Model):
     _name = 'mgmtsystem.validation.mail'
-    _inherit = ['mgmtsystem.validation','mail.thread', 'mail.activity.mixin']
+    _inherit = ['mgmtsystem.validation', 'mail.thread', 'mail.activity.mixin']
     _description = 'Comunicación de validación'
 
     state = fields.Selection(
