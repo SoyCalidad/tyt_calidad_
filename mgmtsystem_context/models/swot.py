@@ -156,15 +156,23 @@ class SWOTItem(models.Model):
     ], string='Tipo')
 
     weight = fields.Float(string='Peso', digits=(16, 2), required=True)
-    rating = fields.Selection([
-        ('1', '1 (Respuesta mala)'),
-        ('2', '2 (Respuesta media)'),
-        ('3', '3 (Respuesta superior a la media)'),
-        ('4', '4 (Respuesta superior)'),
-    ], string='Calificación')
+    # rating = fields.Selection([
+    #     ('1', '1 (Respuesta mala)'),
+    #     ('2', '2 (Respuesta media)'),
+    #     ('3', '3 (Respuesta superior a la media)'),
+    #     ('4', '4 (Respuesta superior)'),
+    # ], string='Calificación')
 
-    weighted_rating = fields.Float(
-        compute='_compute_weighted_rating', string='Calificación Ponderada', digits=(16, 2))
+    # weighted_rating = fields.Float(
+    #     compute='_compute_weighted_rating', string='Calificación Ponderada', digits=(16, 2))
+
+    # @api.depends('rating', 'weight')
+    # def _compute_weighted_rating(self):
+    #     res = 0.0
+    #     for each in self:
+    #         if each.weight and each.rating:
+    #             res = each.weight*float(each.rating)
+    #         each.weighted_rating = res
 
     weigth_html_warning = fields.Boolean(string='Advertencia de peso')
 
@@ -177,13 +185,7 @@ class SWOTItem(models.Model):
     external_weight_rest = fields.Float(
         related='swot_id.external_weight_rest', string='Faltante')
 
-    @api.depends('rating', 'weight')
-    def _compute_weighted_rating(self):
-        res = 0.0
-        for each in self:
-            if each.weight and each.rating:
-                res = each.weight*float(each.rating)
-            each.weighted_rating = res
+
 
 
 class Fortalezas(models.Model):
@@ -200,6 +202,17 @@ class Fortalezas(models.Model):
         ('3', '3 (Fortaleza Menor)'),
         ('4', '4 (Fortaleza Mayor)'),
     ], string='Calificación')
+
+    weighted_rating = fields.Float(
+        compute='_compute_weighted_rating', string='Calificación Ponderada', digits=(16, 2))
+
+    @api.depends('rating', 'weight')
+    def _compute_weighted_rating(self):
+        res = 0.0
+        for each in self:
+            if each.weight and each.rating:
+                res = each.weight*float(each.rating)
+            each.weighted_rating = res
 
     # @api.onchange('weight')
     # def _onchange_weight(self):
@@ -226,6 +239,16 @@ class Debilidades(models.Model):
         ('2', '2 (Debilidad Mayor)'),
     ], string='Calificación')
 
+    weighted_rating = fields.Float(
+        compute='_compute_weighted_rating', string='Calificación Ponderada', digits=(16, 2))
+
+    @api.depends('rating', 'weight')
+    def _compute_weighted_rating(self):
+        res = 0.0
+        for each in self:
+            if each.weight and each.rating:
+                res = each.weight*float(each.rating)
+            each.weighted_rating = res
     # @api.onchange('weight')
     # def _onchange_weight(self):
     #     sum_t = sum([x.weight for x in self.swot_id.debilidades])
@@ -253,6 +276,16 @@ class Oportunidades(models.Model):
         ('4', '4 (Respuesta superior)'),
     ], string='Calificación', help='Se asigna la calificación del factor, entre 1 y 4, para definir si las estrategias de la empresa están respondiendo con eficacia al factor')
 
+    weighted_rating = fields.Float(
+        compute='_compute_weighted_rating', string='Calificación Ponderada', digits=(16, 2))
+
+    @api.depends('rating', 'weight')
+    def _compute_weighted_rating(self):
+        res = 0.0
+        for each in self:
+            if each.weight and each.rating:
+                res = each.weight*float(each.rating)
+            each.weighted_rating = res
     # @api.onchange('weight')
     # def _onchange_weight(self):
     #     sum_t = sum([x.weight for x in self.swot_id.oportunidades]
@@ -274,6 +307,23 @@ class Amenazas(models.Model):
         ('external', 'Factor externo')
     ], string='Tipo de Factor', default='external')
 
+    rating = fields.Selection([
+        ('1', '1 (Respuesta mala)'),
+        ('2', '2 (Respuesta media)'),
+        ('3', '3 (Respuesta superior a la media)'),
+        ('4', '4 (Respuesta superior)'),
+    ], string='Calificación')
+
+    weighted_rating = fields.Float(
+        compute='_compute_weighted_rating', string='Calificación Ponderada', digits=(16, 2))
+
+    @api.depends('rating', 'weight')
+    def _compute_weighted_rating(self):
+        res = 0.0
+        for each in self:
+            if each.weight and each.rating:
+                res = each.weight*float(each.rating)
+            each.weighted_rating = res
 
 class CrossSWOT(models.Model):
     _name = 'mgmtsystem.context.cross.swot'

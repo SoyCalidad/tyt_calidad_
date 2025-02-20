@@ -250,14 +250,6 @@ class TrainingLine(models.Model):
 
     state = fields.Selection(
         string=u'Estado',
-        selection=[
-            ('elaborate', 'En elaboración'),
-            ('validate_ok', 'Validado'),
-            ('in_process', 'En proceso'),
-            ('final', 'Finalizado'),
-            ('caducated', 'Caducado'),
-            ('cancel', 'Obsoleto'),
-        ],
         related='training_id.state',
         readonly=True,
         store=True

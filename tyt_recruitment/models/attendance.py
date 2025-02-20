@@ -337,4 +337,4 @@ class ReasonForWithdrawal(models.Model):
     _description = 'Motivo de la baja'
     _rec_name = 'text'
 
-    text = fields.Char(required=True, string="Motivo", tracking=True)
+    text = fields.Char(required=True, string="Motivo")
