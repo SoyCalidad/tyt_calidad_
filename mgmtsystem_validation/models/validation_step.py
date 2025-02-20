@@ -50,8 +50,7 @@ class Validation(models.Model):
             ('cancel', 'Obsoleto')
         ],
         default='elaborate',
-        copy=False,
-        tracking=True
+        copy=False
     )
 
     def write(self, values):
@@ -86,11 +85,11 @@ class Validation(models.Model):
         compute='_get_users_check', string='Aprobada validación')
 
     date_elaborate = fields.Date(
-        string='Fecha de elaboración', default=fields.Date.today(), tracking=True)
+        string='Fecha de elaboración ', default=fields.Date.today() )
     date_review = fields.Date(
-        string='Fecha de revisión', tracking=True)
+        string='Fecha de revisión ')
     date_validate = fields.Date(
-        string='Fecha de validación', tracking=True)
+        string='Fecha de validación ')
 
     last_validate_date = fields.Date(
         compute='_compute_last_validate_date', string='Última fecha de validación')
@@ -317,3 +316,25 @@ class MailValidation(models.Model):
     _name = 'mgmtsystem.validation.mail'
     _inherit = ['mgmtsystem.validation', 'mail.thread', 'mail.activity.mixin']
     _description = 'Comunicación de validación'
+
+    state = fields.Selection(
+        string=u'Estado',
+        selection=[
+            ('elaborate', 'En elaboración'),
+            ('review', 'En revisión'),
+            ('validate', 'En validación'),
+            ('validate_ok', 'Validado'),
+            ('cancel', 'Obsoleto')
+        ],
+        default='elaborate',
+        copy=False,
+        tracking=True
+    )
+
+
+    date_elaborate = fields.Date(
+        string='Fecha de elaboración', default=fields.Date.today(), tracking=True)
+    date_review = fields.Date(
+        string='Fecha de revisión', tracking=True)
+    date_validate = fields.Date(
+        string='Fecha de validación', tracking=True)

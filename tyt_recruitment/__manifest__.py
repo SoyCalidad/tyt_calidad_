@@ -50,11 +50,6 @@
             'tyt_recruitment/static/lib/pdfjs/web/images/**',
             'tyt_recruitment/static/lib/pdfjs/web/locale/**',
         ],
-        'web.assets_backend': [
-            '/tyt_recruitment/static/src/img/logo.png',
-            '/tyt_recruitment/static/src/img/logo_large.png',
-            '/tyt_recruitment/static/src/img/fondo_form.png',
-        ],
     },
     'images': ["static/src/img/logo.png"],
 }
