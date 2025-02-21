@@ -184,6 +184,7 @@
                   <field name="has_certification_feedback" invisible="1" />
                   <button 
                     name="action_message_certification_feedback" 
+                    title=" "
                     icon="fa-check" 
                     type="object" 
                     class="oe_highlight" 
@@ -192,6 +193,7 @@
                   <button 
                     name="action_new_certification_feedback" 
                     icon="fa-pencil" 
+                    title=" "
                     type="object" 
                     class="oe_highlight" 
                     attrs="{'invisible': [('has_certification_feedback', '!=', False)]}"

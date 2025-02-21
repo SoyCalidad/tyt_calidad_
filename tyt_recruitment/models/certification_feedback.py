@@ -42,7 +42,7 @@ class CertificationFeeback(models.Model):
     training_and_quality_manager = fields.Many2one('hr.employee', string="Responsable de Capacitación y Calidad")
     kardex_id = fields.Many2one('tyt_recruitment.kardex_by_applicant', string="Kardex del aplicante")
 
-    @api.model
+    @api.model_create_multi
     def create(self, vals):
         registro = super(CertificationFeeback, self).create(vals)
 
