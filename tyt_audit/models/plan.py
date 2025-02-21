@@ -245,3 +245,7 @@ class Plan(models.Model):
             self.sites_id = False
         else:
             self.sites_id = False
+
+    def action_notify_schedule(self):
+        template = 'tyt_audit.audit_plan_notify_schedule_mail_template'
+        return self.notify_users_by_email(template)
