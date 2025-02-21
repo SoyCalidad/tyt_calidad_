@@ -7,6 +7,7 @@ from math import ceil
 from odoo import api, fields, models
 from odoo.exceptions import UserError, ValidationError
 from PIL import Image
+from PIL import Image, UnidentifiedImageError
 #from odoo.addons.report_xlsx.report.report_xlsx import ReportXlsx
 
 class IndividualReport(models.AbstractModel):
@@ -44,7 +45,9 @@ class IndividualReport(models.AbstractModel):
                 vertical_description_5 = workbook.add_format({'bg_color': '#BF9000', 'text_wrap': True,'valign': 'vcenter','align': 'center','rotation': 90,'border': 2,'font_size': 14,'bold': True,})
                 vertical_description_6 = workbook.add_format({'bg_color': '#FF99CC', 'text_wrap': True,'valign': 'vcenter','align': 'center','rotation': 90,'border': 2,'font_size': 14,'bold': True,})
 
-
+                auditor_check_and_done_format = workbook.add_format({'bg_color': '#66FF66', 'text_wrap': True, 'border': 1, 'align': 'center','valign': 'vcenter'})
+                auditor_check_or_done_format = workbook.add_format({'bg_color': '#FFBD33', 'text_wrap': True, 'border': 1, 'align': 'center','valign': 'vcenter'})
+                fixed_date_check_format = workbook.add_format({'bg_color': '#EB1919', 'text_wrap': True, 'border': 1, 'align': 'center','valign': 'vcenter'})
 
                 sheet1 = workbook.add_worksheet(str("Asignación por Auditor"))
 
@@ -67,21 +70,23 @@ class IndividualReport(models.AbstractModel):
 
                 # HEADER LOGO
                 company_id = self.env.user.company_id
+                if company_id.logo:
+                    try:
+                        buf_image = io.BytesIO(base64.b64decode(company_id.logo))
+                        im = Image.open(buf_image)
+                        width, height = im.size
+                        image_width = width
+                        image_height = height
+                        cell_width = 184.0
+                        cell_height = 184.0
+                        x_offset = 0.0
 
-                buf_image = io.BytesIO(base64.b64decode(company_id.logo))
-                im = Image.open(buf_image)
-                width, height = im.size
-                image_width = width
-                image_height = height
-                cell_width = 184.0
-                cell_height = 184.0
-                x_offset = 0.0
-
-                x_scale = cell_width/image_width
-                y_scale = cell_height/image_height
-                sheet1.insert_image('C5', "logo.png", {
-                    'image_data': buf_image, 'x_scale': x_scale, 'y_scale': y_scale, 'x_offset': x_offset})                
-
+                        x_scale = cell_width/image_width
+                        y_scale = cell_height/image_height
+                        sheet1.insert_image('C5', "logo.png", {
+                            'image_data': buf_image, 'x_scale': x_scale, 'y_scale': y_scale, 'x_offset': x_offset})
+                    except (base64.binascii.Error, UnidentifiedImageError, OSError):
+                        pass
 
                 # HEADER
                 sheet1.merge_range('C12:D14', 'CRONOGRAMA DE AUDITORIAS MENSUALES POR AUDITOR', s1_title_format2)
@@ -359,7 +364,17 @@ class IndividualReport(models.AbstractModel):
 
                     for line in line_ids:
                         value = "X" if line.done else ""
-                        sheet2.write(starting_row, done_column, value, done_row_format)
+
+                        if line.fixed_date_check:
+                            done_row_line_format = fixed_date_check_format
+                        elif line.auditor_check and line.done:
+                            done_row_line_format = auditor_check_and_done_format
+                        elif line.auditor_check or line.done:
+                            done_row_line_format = auditor_check_or_done_format
+                        else:
+                            done_row_line_format = done_row_format
+
+                        sheet2.write(starting_row, done_column, value, done_row_line_format)
                         done_column += 1  # Mover a la siguiente columna (H, I, J, ...)
                     
                     starting_row += 1  # Mover a la siguiente fila (15, 16, 17, ...)

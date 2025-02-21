@@ -27,3 +27,5 @@ class PlanGeneralScheduleLine(models.Model):
 
     # new field
     done = fields.Boolean(string="Realizado")
+    auditor_check = fields.Boolean(string='Auditor')
+    fixed_date_check = fields.Boolean(string='Fecha fija')

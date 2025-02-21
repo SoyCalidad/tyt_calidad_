@@ -20,7 +20,13 @@
                             string="Generar Fechas"
                             class="oe_highlight"
                             attrs="{'invisible':[('state', '!=', 'validate_ok')]}"
-                            />                            
+                            />
+                    <button string="Notificar cronograma"
+                            name="action_notify_schedule"
+                            type="object"
+                            class="oe_highlight"
+                            attrs="{'invisible':[('state', '!=', 'validate_ok')]}"/>
+
                     <!--attrs="{'invisible':['|', ('active','=',False), ('state', '!=', 'validate_ok'), ('is_process_started','=',True)]}"-->    
                 </xpath>            
                 <xpath expr="//sheet/div[3]" position="replace">
