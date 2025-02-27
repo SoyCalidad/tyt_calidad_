@@ -189,15 +189,6 @@ class JobApplication(models.Model):
         else:
             self.applicant_id.status = False
 
-    @api.model
-    def unlink(self):
-        for record in self:
-            # Aquí puedes agregar la lógica personalizada
-            if record.some_field == 'value':
-                _logger.info("removedddddddddddddddddddddddd")
-                _logger.info(record.some_field)
-        return super(JobApplication, self).unlink()
-
     def action_open_health_survey(self):
 
         name = self.applicant_id.name
@@ -219,10 +210,7 @@ class JobApplication(models.Model):
             'target': 'new', 
         }
 
-    def action_view_binary_file(self):
-
-        field_name = self.env.context.get('field_name')
-        field_f = self.env.context.get('field_f')
+    def action_view_binary_file(self, field_name, field_f):
 
         if not field_name or not field_f:
             return
@@ -354,7 +342,7 @@ class Applicant(models.Model):
 
             answer = self.env['survey.user_input.line'].sudo().search([
                 ('question_id', 'in', question.ids),
-                ('value_char_box', '=', self.social_security_number)
+                ('value_char_box', '=', self.employee_number)
             ])
 
             inputs = self.env['survey.user_input'].sudo().search([('id', 'in', answer.user_input_id.ids)])
