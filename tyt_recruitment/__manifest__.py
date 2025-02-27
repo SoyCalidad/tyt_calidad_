@@ -38,7 +38,10 @@
         'data/evaluation_rubric.xml',
         'wizards/rubric_signature.xml',
         'views/view_certification_feedback.xml',
-        'views/certification_feedback_form.xml'
+        'views/certification_feedback_form.xml',
+        'views/view_description_letter.xml',
+        'views/descriptive_letter_form.xml',
+        'views/descriptive_letter_template_form.xml'
     ],
     'auto_install': False,
     'installable': True,

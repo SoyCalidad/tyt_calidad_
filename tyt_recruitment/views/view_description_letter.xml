@@ -1,0 +1,280 @@
+<odoo>
+  <data>
+    <!-- list DESCRIPTIVE LETTER -->
+    <record model="ir.ui.view" id="tyt_recruitment.descriptive_letter_list">
+      <field name="name">Lista de plantillas de carta descriptiva</field>
+      <field name="model">tyt_recruitment.descriptive_letter</field>
+      <field name="arch" type="xml">
+        <tree>
+          <field name="course_name"/>
+          <field name="site"/>
+          <field name="training_location"/>
+          <field name="instructor_name"/>
+          <field name="general_objective"/>
+          <field name="participant_profile"/>
+          <field name="entry_knowledge_and_skills"/>
+          <field name="day_ids"/>
+          <field name="framing_topic_ids"/>
+          <button 
+            name="action_view_descriptive_letter_form" 
+            string="Ver plantilla" 
+            type="object" 
+            class="oe_highlight"
+          />
+        </tree>
+      </field>
+    </record>
+
+    <!-- form descriptive letter FRAMING TOPIC -->
+    <record id="view_descriptive_letter_framing_topic_form" model="ir.ui.view">
+      <field name="name">Formulario de tema en encuadre</field>
+      <field name="model">tyt_recruitment.descriptive_letter_framing_topic</field>
+      <field name="arch" type="xml">
+        <form string="Temas" dialog_size="large">
+          <sheet>
+            <group>
+              <field name="name" string="Nombre"/>
+              <field name="framing_subtopic_ids">
+                <tree readonly="1">
+                  <field name="name" />
+                  <field name="instructional_techniques" />
+                  <field name="group_techniques" />
+                  <field name="evaluation" />
+                  <field name="required_material" />
+                  <field name="time" />
+                  <field name="instructor_learning_activities" />
+                  <field name="participant_learning_activities" />
+                </tree>
+              </field>
+            </group>
+          </sheet>
+        </form>
+      </field>
+    </record>
+
+    <!-- form descriptive letter FRAMING SUBTOPIC -->
+    <record id="view_descriptive_letter_framing_subtopic_form" model="ir.ui.view">
+      <field name="name">Formulario de subtema en encuadre</field>
+      <field name="model">tyt_recruitment.descriptive_letter_framing_subtopic</field>
+      <field name="arch" type="xml">
+        <form string="Subtemas" dialog_size="medium">
+          <sheet>
+            <group>
+              <field name="name" />
+              <field name="instructional_techniques" />
+              <field name="group_techniques" />
+              <field name="evaluation" />
+              <field name="required_material" />
+              <field name="time" string="Tiempo"/>
+              <field name="instructor_learning_activities" />
+              <field name="participant_learning_activities" />
+            </group>
+          </sheet>
+        </form>
+      </field>
+    </record>
+
+    <!-- form descriptive letter DAYS -->
+    <record id="view_descriptive_letter_days_form" model="ir.ui.view">
+      <field name="name">Formulario de días</field>
+      <field name="model">tyt_recruitment.descriptive_letter_day</field>
+      <field name="arch" type="xml">
+          <form string="Días" dialog_size="large">
+            <sheet>  
+              <group>
+                <field name="name" />
+                <field name="topic_ids">
+                  <tree>
+                    <field name="name" />
+                    <field name="subtopic_ids" />
+                  </tree>
+                </field>
+              </group>
+            </sheet>
+          </form>
+      </field>
+    </record>
+
+    <!-- form descriptive letter TOPIC -->
+    <record id="view_descriptive_letter_topic_form" model="ir.ui.view">
+      <field name="name">Formulario de temas</field>
+      <field name="model">tyt_recruitment.descriptive_letter_topic</field>
+      <field name="arch" type="xml">
+          <form string="Temas" dialog_size="medium">
+            <sheet>  
+              <group>
+                <field name="name" />
+                <field name="subtopic_ids">
+                  <tree>
+                    <field name="name" />
+                    <field name="instructional_techniques" />
+                    <field name="group_techniques" />
+                    <field name="evaluation" />
+                    <field name="required_material" />
+                    <field name="time" string="Tiempo"/>
+                    <field name="instructor_learning_activities" />
+                    <field name="participant_learning_activities" />
+                  </tree>
+                </field>
+              </group>
+            </sheet>
+          </form>
+      </field>
+    </record>
+
+    <!-- form descriptive letter SUBTOPIC -->
+    <record id="view_descriptive_letter_subtopic_form" model="ir.ui.view">
+      <field name="name">Formulario de subtemas</field>
+      <field name="model">tyt_recruitment.descriptive_letter_subtopic</field>
+      <field name="arch" type="xml">
+          <form string="Temas" dialog_size="small">
+            <sheet>
+              <group>
+                <field name="name" />
+                <field name="instructional_techniques" />
+                <field name="group_techniques" />
+                <field name="evaluation" />
+                <field name="required_material" />
+                <field name="time" string="Tiempo"/>
+                <field name="instructor_learning_activities" />
+                <field name="participant_learning_activities" />
+              </group>
+            </sheet>
+          </form>
+      </field>
+    </record>
+
+    <!-- form DESCRIPTIVE LETTER -->
+
+    <record id="view_descriptive_letterform" model="ir.ui.view">
+      <field name="name">Formulario de Carta descriptiva</field>
+      <field name="model">tyt_recruitment.descriptive_letter</field>
+      <field name="arch" type="xml">
+          <form string="Retroalimentación">
+          <sheet>  
+              <group>
+                <field name="course_name" />
+                <field name="training_location" />
+                <field name="instructor_name" />
+                <field name="general_objective" />
+                <field name="participant_profile" />
+                <field name="entry_knowledge_and_skills" />
+              </group>
+              <group>
+                <field name="site"/>
+              </group>
+              <notebook>
+                <page string="Encuadre">
+                  <field name="framing_topic_ids">
+                    <tree readonly="1">
+                      <field name="name" />
+                      <field name="framing_subtopic_ids" />
+                    </tree>
+                  </field>
+                </page>
+                <page string="Días">
+                  <field name="day_ids">
+                    <tree readonly="1">
+                      <field name="name" />
+                      <field name="topic_ids" />
+                    </tree>
+                  </field>
+                </page>
+              </notebook>
+          </sheet>
+          </form>
+      </field>
+    </record>
+
+    <!-- INPUT -->
+    <record model="ir.ui.view" id="tyt_recruitment.descriptive_letter_input_list">
+      <field name="name">Lista de cartas descriptivas ingresada</field>
+      <field name="model">tyt_recruitment.descriptive_letter_input</field>
+      <field name="arch" type="xml">
+        <tree >
+          <field name="name"/>
+          <field name="site"/>
+          <field name="template" />
+          <field name="framing_topic_ids" />
+          <field name="day_ids" />
+          <button 
+            name="action_view_descriptive_letter_input_form" 
+            string="Editar desde la plantilla" 
+            type="object" 
+            class="oe_highlight"
+            attrs="{'invisible': [('framing_topic_ids', '=', False), ('day_ids', '=', False)]}"
+          />
+        </tree>
+      </field>
+    </record>
+
+    <record id="view_descriptive_letter_input_form" model="ir.ui.view">
+      <field name="name">Formulario de carta descriptiva ingresada</field>
+      <field name="model">tyt_recruitment.descriptive_letter_input</field>
+      <field name="arch" type="xml">
+        <form string="Carta descriptiva">
+          <sheet>  
+              <group>
+                <field name="name"/>
+                <field name="site"/>
+                <field name="template" attrs="{'readonly': [('site', '=', False)]}"/>
+              </group>
+              <notebook>
+                <page string="Encuadre">
+                  <field name="framing_topic_ids">
+                    <tree readonly="1">
+                      <field name="name" />
+                      <field name="framing_subtopic_ids" />
+                    </tree>
+                  </field>
+                </page>
+                <page string="Días">
+                  <field name="day_ids">
+                    <tree readonly="1">
+                      <field name="name" />
+                      <field name="topic_ids" />
+                    </tree>
+                  </field>
+                </page>
+              </notebook>
+          </sheet>
+          </form>
+      </field>
+    </record>
+
+    <!-- actions opening views on models -->
+
+    <record model="ir.actions.act_window" id="tyt_recruitment_action_window_letter">
+      <field name="name">Lista de plantillas carta descriptiva</field>
+      <field name="res_model">tyt_recruitment.descriptive_letter</field>
+      <field name="view_mode">tree,form</field>
+    </record>
+
+    <record model="ir.actions.act_window" id="tyt_recruitment_action_window_input_letter">
+      <field name="name">Lista cartas descriptivas</field>
+      <field name="res_model">tyt_recruitment.descriptive_letter_input</field>
+      <field name="view_mode">tree,form</field>
+    </record>
+
+    <!-- Top menu item -->
+
+    <menuitem id="menu_custom_descriptive_letter"
+      name="Carta descriptiva"
+      parent="hr_recruitment.menu_hr_recruitment_root"
+      sequence="26"
+    />
+
+    <menuitem id="menu_custom_letter_list"
+      name="Lista de plantillas - carta descriptiva"
+      parent="menu_custom_descriptive_letter"
+      action="tyt_recruitment_action_window_letter"
+    />
+
+    <menuitem id="menu_custom_input_letter_list"
+      name="Lista de cartas descriptivas"
+      parent="menu_custom_descriptive_letter"
+      action="tyt_recruitment_action_window_input_letter"
+    />
+
+  </data>
+</odoo>
