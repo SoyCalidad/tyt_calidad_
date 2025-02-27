@@ -217,7 +217,12 @@
                           <field name="birth_certificate" filename="birth_certificate_filename" /> 
                           <field name="birth_certificate_filename" invisible="1" />
                         </td>
-                        <td> <button name="action_view_binary_file" type="object" args="['birth_certificate_filename','birth_certificate']" string="Ver Documento" attrs="{'invisible': [('birth_certificate', '=', False)]}"/> </td>
+                        <td> 
+                          <button name="action_view_binary_file" type="object" 
+                            context="{'field_name': 'birth_certificate_filename', 'field_f': 'birth_certificate'}"
+                            string="Ver Documento" 
+                            attrs="{'invisible': [('birth_certificate', '=', False)]}"/> 
+                        </td>
                       </tr>
                       <tr>
                         <td> 02 </td>
@@ -231,7 +236,11 @@
                           <field name="rfc" filename="rfc_filename" /> 
                           <field name="rfc_filename" invisible="1" />
                         </td>
-                        <td> <button name="action_view_binary_file" type="object" args="['rfc_filename','rfc']" string="Ver Documento" attrs="{'invisible': [('rfc', '=', False)]}"/> </td>
+                        <td> <button name="action_view_binary_file" type="object" 
+                          context="{'field_name': 'rfc_filename', 'field_f': 'rfc'}"
+                          string="Ver Documento" 
+                          attrs="{'invisible': [('rfc', '=', False)]}"/> 
+                        </td>
                       </tr>
                       <tr>
                         <td> 03 </td>
@@ -245,7 +254,11 @@
                           <field name="curp" filename="curp_filename" /> 
                           <field name="curp_filename" invisible="1" />
                         </td>
-                        <td> <button name="action_view_binary_file" type="object" args="['curp_filename','curp']" string="Ver Documento" attrs="{'invisible': [('curp', '=', False)]}"/> </td>
+                        <td> <button name="action_view_binary_file" type="object"
+                          context="{'field_name': 'curp_filename', 'field_f': 'curp'}"
+                          string="Ver Documento" 
+                          attrs="{'invisible': [('curp', '=', False)]}"/> 
+                        </td>
                       </tr>
                       <tr>
                         <td> 04 </td>
@@ -259,7 +272,11 @@
                           <field name="study_certificate" filename="study_certificate_filename" /> 
                           <field name="study_certificate_filename" invisible="1" />
                         </td>
-                        <td> <button name="action_view_binary_file" type="object" args="['study_certificate_filename','study_certificate']" string="Ver Documento" attrs="{'invisible': [('study_certificate', '=', False)]}"/> </td>
+                        <td> <button name="action_view_binary_file" type="object"
+                          context="{'field_name': 'study_certificate_filename', 'field_f': 'study_certificate'}"
+                          string="Ver Documento" 
+                          attrs="{'invisible': [('study_certificate', '=', False)]}"/> 
+                        </td>
                       </tr>
                       <tr>
                         <td> 05 </td>
@@ -273,7 +290,10 @@
                           <field name="proposed_letter" filename="proposed_letter_filename" /> 
                           <field name="proposed_letter_filename" invisible="1" />
                         </td>
-                        <td> <button name="action_view_binary_file" type="object" args="['proposed_letter_filename','proposed_letter']" string="Ver Documento" attrs="{'invisible': [('proposed_letter', '=', False)]}"/> </td>
+                        <td> <button name="action_view_binary_file" type="object"
+                          context="{'field_name': 'proposed_letter_filename', 'field_f': 'proposed_letter'}"
+                          string="Ver Documento"
+                          attrs="{'invisible': [('proposed_letter', '=', False)]}"/> </td>
                       </tr>
                       <tr>
                         <td> 06 </td>
@@ -287,7 +307,11 @@
                           <field name="ine" filename="ine_filename" /> 
                           <field name="ine_filename" invisible="1" />
                         </td>
-                        <td> <button name="action_view_binary_file" type="object" args="['ine_filename','ine']" string="Ver Documento" attrs="{'invisible': [('ine', '=', False)]}"/> </td>
+                        <td> <button name="action_view_binary_file" type="object" 
+                          context="{'field_name': 'ine_filename', 'field_f': 'ine'}"
+                          string="Ver Documento" 
+                          attrs="{'invisible': [('ine', '=', False)]}"/> 
+                        </td>
                       </tr>
                       <tr>
                         <td> 07 </td>
@@ -301,7 +325,11 @@
                           <field name="reference_validation" filename="reference_validation_filename" /> 
                           <field name="reference_validation_filename" invisible="1" />
                         </td>
-                        <td> <button name="action_view_binary_file" type="object" args="['reference_validation_filename','reference_validation']" string="Ver Documento" attrs="{'invisible': [('reference_validation', '=', False)]}"/> </td>
+                        <td> <button name="action_view_binary_file" type="object"
+                          context="{'field_name': 'reference_validation_filename', 'field_f': 'reference_validation'}"
+                          string="Ver Documento" 
+                          attrs="{'invisible': [('reference_validation', '=', False)]}"/> 
+                        </td>
                       </tr>
                       <tr>
                         <td> 08 </td>
@@ -315,7 +343,11 @@
                           <field name="utility_bill" filename="utility_bill_filename" /> 
                           <field name="utility_bill_filename" invisible="1" />
                         </td>
-                        <td> <button name="action_view_binary_file" type="object" args="['utility_bill_filename','utility_bill']" string="Ver Documento" attrs="{'invisible': [('utility_bill', '=', False)]}"/> </td>
+                        <td> <button name="action_view_binary_file" type="object" 
+                          context="{'field_name': 'utility_bill_filename', 'field_f': 'utility_bill'}"
+                          string="Ver Documento" 
+                          attrs="{'invisible': [('utility_bill', '=', False)]}"/> 
+                        </td>
                       </tr>
                       <tr>
                         <td> 09 </td>
@@ -329,7 +361,11 @@
                           <field name="psychometric" filename="psychometric_filename" /> 
                           <field name="psychometric_filename" invisible="1" />
                         </td>
-                        <td> <button name="action_view_binary_file" type="object" args="['psychometric_filename','psychometric']" string="Ver Documento" attrs="{'invisible': [('psychometric', '=', False)]}"/> </td>
+                        <td> <button name="action_view_binary_file" type="object"
+                          context="{'field_name': 'psychometric_filename', 'field_f': 'psychometric'}"
+                          string="Ver Documento" 
+                          attrs="{'invisible': [('psychometric', '=', False)]}"/> 
+                        </td>
                       </tr>
                       <tr>
                         <td> 10 </td>
@@ -343,7 +379,11 @@
                           <field name="snn" filename="snn_filename" /> 
                           <field name="snn_filename" invisible="1" />
                         </td>
-                        <td> <button name="action_view_binary_file" type="object" args="['snn_filename','snn']" string="Ver Documento" attrs="{'invisible': [('snn', '=', False)]}"/> </td>
+                        <td> <button name="action_view_binary_file" type="object"
+                          context="{'field_name': 'snn_filename', 'field_f': 'snn'}"
+                          string="Ver Documento" 
+                          attrs="{'invisible': [('snn', '=', False)]}"/> 
+                        </td>
                       </tr>
                       <tr>
                         <td> 11 </td>
@@ -357,7 +397,11 @@
                           <field name="interbank_key" filename="interbank_key_filename" /> 
                           <field name="interbank_key_filename" invisible="1" />
                         </td>
-                        <td> <button name="action_view_binary_file" type="object" args="['interbank_key_filename','interbank_key']" string="Ver Documento" attrs="{'invisible': [('interbank_key', '=', False)]}"/> </td>
+                        <td> <button name="action_view_binary_file" type="object"
+                          context="{'field_name': 'interbank_key_filename', 'field_f': 'interbank_key'}"
+                          string="Ver Documento" 
+                          attrs="{'invisible': [('interbank_key', '=', False)]}"/> 
+                        </td>
                       </tr>
                       <tr>
                         <td> 12 </td>
@@ -371,7 +415,11 @@
                           <field name="value_proposition" filename="value_proposition_filename" /> 
                           <field name="value_proposition_filename" invisible="1" />
                         </td>
-                        <td> <button name="action_view_binary_file" type="object" args="['value_proposition_filename','value_proposition']" string="Ver Documento" attrs="{'invisible': [('value_proposition', '=', False)]}"/> </td>
+                        <td> <button name="action_view_binary_file" type="object"
+                          context="{'field_name': 'value_proposition_filename', 'field_f': 'value_proposition'}"
+                          string="Ver Documento" 
+                          attrs="{'invisible': [('value_proposition', '=', False)]}"/> 
+                        </td>
                       </tr>
                     </tbody>
                   </table>
@@ -414,7 +462,9 @@
                           <span attrs="{'invisible': [('birth_certificate', '!=', False)]}">X</span>
                         </td>
                         <td> <field name="birth_certificate_approved" attrs="{'invisible': [('birth_certificate', '=', False)]}"/> </td>
-                        <td> <button name="action_view_binary_file" type="object" args="['birth_certificate_filename','birth_certificate']" string="Ver Documento" attrs="{'invisible': [('birth_certificate', '=', False)]}"/> </td>
+                        <td> <button name="action_view_binary_file" type="object" 
+                          context="{'field_name': 'birth_certificate_filename', 'field_f': 'birth_certificate'}"
+                          string="Ver Documento" attrs="{'invisible': [('birth_certificate', '=', False)]}"/> </td>
                       </tr>
                       <tr>
                         <td> 02 </td>
@@ -425,7 +475,9 @@
                           <span attrs="{'invisible': [('rfc', '!=', False)]}">X</span>
                         </td>
                         <td> <field name="rfc_approved" attrs="{'invisible': [('rfc', '=', False)]}"/> </td>
-                        <td> <button name="action_view_binary_file" type="object" args="['rfc_filename','rfc']" string="Ver Documento" attrs="{'invisible': [('rfc', '=', False)]}"/> </td>
+                        <td> <button name="action_view_binary_file" type="object" 
+                        context="{'field_name': 'rfc_filename', 'field_f': 'rfc'}"
+                        string="Ver Documento" attrs="{'invisible': [('rfc', '=', False)]}"/> </td>
                       </tr>
                       <tr>
                         <td> 03 </td>
@@ -436,7 +488,9 @@
                           <span attrs="{'invisible': [('curp', '!=', False)]}">X</span>
                         </td>
                         <td> <field name="curp_approved" attrs="{'invisible': [('curp', '=', False)]}"/> </td>
-                        <td> <button name="action_view_binary_file" type="object" args="['curp_filename','curp']" string="Ver Documento" attrs="{'invisible': [('curp', '=', False)]}"/> </td>
+                        <td> <button name="action_view_binary_file" type="object"
+                        context="{'field_name': 'curp_filename', 'field_f': 'curp'}"
+                        string="Ver Documento" attrs="{'invisible': [('curp', '=', False)]}"/> </td>
                       </tr>
                       <tr>
                         <td> 04 </td>
@@ -447,7 +501,9 @@
                           <span attrs="{'invisible': [('study_certificate', '!=', False)]}">X</span>
                         </td>
                         <td> <field name="study_certificate_approved" attrs="{'invisible': [('study_certificate', '=', False)]}"/> </td>
-                        <td> <button name="action_view_binary_file" type="object" args="['study_certificate_filename','study_certificate']" string="Ver Documento" attrs="{'invisible': [('study_certificate', '=', False)]}"/> </td>
+                        <td> <button name="action_view_binary_file" type="object" 
+                        context="{'field_name': 'study_certificate_filename', 'field_f': 'study_certificate'}"
+                        string="Ver Documento" attrs="{'invisible': [('study_certificate', '=', False)]}"/> </td>
                       </tr>
                       <tr>
                         <td> 05 </td>
@@ -458,7 +514,9 @@
                           <span attrs="{'invisible': [('proposed_letter', '!=', False)]}">X</span>
                         </td>
                         <td> <field name="proposed_letter_approved" attrs="{'invisible': [('proposed_letter', '=', False)]}"/> </td>
-                        <td> <button name="action_view_binary_file" type="object" args="['proposed_letter_filename','proposed_letter']" string="Ver Documento" attrs="{'invisible': [('proposed_letter', '=', False)]}"/> </td>
+                        <td> <button name="action_view_binary_file" type="object"
+                        context="{'field_name': 'proposed_letter_filename', 'field_f': 'proposed_letter'}"
+                        string="Ver Documento" attrs="{'invisible': [('proposed_letter', '=', False)]}"/> </td>
                       </tr>
                       <tr>
                         <td> 06 </td>
@@ -469,7 +527,9 @@
                           <span attrs="{'invisible': [('ine', '!=', False)]}">X</span>
                         </td>
                         <td> <field name="ine_approved" attrs="{'invisible': [('ine', '=', False)]}"/> </td>
-                        <td> <button name="action_view_binary_file" type="object" args="['ine_filename','ine']" string="Ver Documento" attrs="{'invisible': [('ine', '=', False)]}"/> </td>
+                        <td> <button name="action_view_binary_file" type="object" 
+                        context="{'field_name': 'ine_filename', 'field_f': 'ine'}"
+                        string="Ver Documento" attrs="{'invisible': [('ine', '=', False)]}"/> </td>
                       </tr>
                       <tr>
                         <td> 07 </td>
@@ -480,7 +540,9 @@
                           <span attrs="{'invisible': [('reference_validation', '!=', False)]}">X</span>
                         </td>
                         <td> <field name="reference_validation_approved" attrs="{'invisible': [('reference_validation', '=', False)]}"/> </td>
-                        <td> <button name="action_view_binary_file" type="object" args="['reference_validation_filename','reference_validation']" string="Ver Documento" attrs="{'invisible': [('reference_validation', '=', False)]}"/> </td>
+                        <td> <button name="action_view_binary_file" type="object" 
+                        context="{'field_name': 'reference_validation_filename', 'field_f': 'reference_validation'}"
+                        string="Ver Documento" attrs="{'invisible': [('reference_validation', '=', False)]}"/> </td>
                       </tr>
                       <tr>
                         <td> 08 </td>
@@ -491,7 +553,9 @@
                           <span attrs="{'invisible': [('utility_bill', '!=', False)]}">X</span>
                         </td>
                         <td> <field name="utility_bill_approved" attrs="{'invisible': [('utility_bill', '=', False)]}"/> </td>
-                        <td> <button name="action_view_binary_file" type="object" args="['utility_bill_filename','utility_bill']" string="Ver Documento" attrs="{'invisible': [('utility_bill', '=', False)]}"/> </td>
+                        <td> <button name="action_view_binary_file" type="object" 
+                        context="{'field_name': 'utility_bill_filename', 'field_f': 'utility_bill'}"
+                        string="Ver Documento" attrs="{'invisible': [('utility_bill', '=', False)]}"/> </td>
                       </tr>
                       <tr>
                         <td> 09 </td>
@@ -502,7 +566,9 @@
                           <span attrs="{'invisible': [('psychometric', '!=', False)]}">X</span>
                         </td>
                         <td> <field name="psychometric_approved" attrs="{'invisible': [('psychometric', '=', False)]}"/> </td>
-                        <td> <button name="action_view_binary_file" type="object" args="['psychometric_filename','psychometric']" string="Ver Documento" attrs="{'invisible': [('psychometric', '=', False)]}"/> </td>
+                        <td> <button name="action_view_binary_file" type="object" 
+                        context="{'field_name': 'psychometric_filename', 'field_f': 'psychometric'}"
+                        string="Ver Documento" attrs="{'invisible': [('psychometric', '=', False)]}"/> </td>
                       </tr>
                       <tr>
                         <td> 10 </td>
@@ -513,7 +579,9 @@
                           <span attrs="{'invisible': [('snn', '!=', False)]}">X</span>
                         </td>
                         <td> <field name="snn_approved" attrs="{'invisible': [('snn', '=', False)]}"/> </td>
-                        <td> <button name="action_view_binary_file" type="object" args="['snn_filename','snn']" string="Ver Documento" attrs="{'invisible': [('snn', '=', False)]}"/> </td>
+                        <td> <button name="action_view_binary_file" type="object" 
+                        context="{'field_name': 'snn_filename', 'field_f': 'snn'}"
+                        string="Ver Documento" attrs="{'invisible': [('snn', '=', False)]}"/> </td>
                       </tr>
                       <tr>
                         <td> 11 </td>
@@ -524,7 +592,9 @@
                           <span attrs="{'invisible': [('interbank_key', '!=', False)]}">X</span>
                         </td>
                         <td> <field name="interbank_key_approved" attrs="{'invisible': [('interbank_key', '=', False)]}"/> </td>
-                        <td> <button name="action_view_binary_file" type="object" args="['interbank_key_filename','interbank_key']" string="Ver Documento" attrs="{'invisible': [('interbank_key', '=', False)]}"/> </td>
+                        <td> <button name="action_view_binary_file" type="object" 
+                        context="{'field_name': 'interbank_key_filename', 'field_f': 'interbank_key'}"
+                        string="Ver Documento" attrs="{'invisible': [('interbank_key', '=', False)]}"/> </td>
                       </tr>
                       <tr>
                         <td> 12 </td>
@@ -535,7 +605,9 @@
                           <span attrs="{'invisible': [('value_proposition', '!=', False)]}">X</span>
                         </td>
                         <td> <field name="value_proposition_approved" attrs="{'invisible': [('value_proposition', '=', False)]}"/> </td>
-                        <td> <button name="action_view_binary_file" type="object" args="['value_proposition_filename','value_proposition']" string="Ver Documento" attrs="{'invisible': [('value_proposition', '=', False)]}"/> </td>
+                        <td> <button name="action_view_binary_file" type="object" 
+                        context="{'field_name': 'value_proposition_filename', 'field_f': 'value_proposition'}"
+                        string="Ver Documento" attrs="{'invisible': [('value_proposition', '=', False)]}"/> </td>
                       </tr>
                     </tbody>
                   </table>

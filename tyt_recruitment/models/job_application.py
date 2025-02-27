@@ -210,7 +210,10 @@ class JobApplication(models.Model):
             'target': 'new', 
         }
 
-    def action_view_binary_file(self, field_name, field_f):
+    def action_view_binary_file(self):
+
+        field_name = self.env.context.get('field_name')
+        field_f = self.env.context.get('field_f')
 
         if not field_name or not field_f:
             return
