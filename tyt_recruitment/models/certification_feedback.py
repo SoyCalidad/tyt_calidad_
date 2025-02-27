@@ -17,29 +17,30 @@ class CertificationFeeback(models.Model):
     _name = 'tyt_recruitment.certification_feedback'
     _description = 'Rúbrica de evaluación al expositor'
     _rec_name = 'id'
+    _inherit = ['mail.thread']
 
-    date = fields.Date(string="Fecha")
+    date = fields.Date(string="Fecha", tracking=True)
 
-    name = fields.Char(string="Nombre")
-    evaluation_average = fields.Float(string="Promedio de Evaluación")
+    name = fields.Char(string="Nombre", tracking=True)
+    evaluation_average = fields.Float(string="Promedio de Evaluación", tracking=True)
 
-    group = fields.Char(string="Grupo")
-    campaign = fields.Char(string="Campaña")
-    trainner = fields.Char(string="Entrenador")
+    group = fields.Char(string="Grupo", tracking=True)
+    campaign = fields.Char(string="Campaña", tracking=True)
+    trainner = fields.Char(string="Entrenador", tracking=True)
 
-    applicant_signature = fields.Binary(string="Firma del aplicante")
-    quality_signature = fields.Binary(string="Firma del Técnico de calidad")
-    manager_signature = fields.Binary(string="Firma del responsable de capacitación y calidad")
+    applicant_signature = fields.Binary(string="Firma del aplicante", tracking=True)
+    quality_signature = fields.Binary(string="Firma del Técnico de calidad", tracking=True)
+    manager_signature = fields.Binary(string="Firma del responsable de capacitación y calidad", tracking=True)
 
-    strengths = fields.Text(string="Fortalezas")
-    opportunity_areas = fields.Text(string="Areas de Oportunidad")
-    suggestions_quality_technician = fields.Text(string="Sugerencias del Técnico de Calidad")
-    prospectus_commitments = fields.Text(string="Compromisos Prospecto")
+    strengths = fields.Text(string="Fortalezas", tracking=True)
+    opportunity_areas = fields.Text(string="Areas de Oportunidad", tracking=True)
+    suggestions_quality_technician = fields.Text(string="Sugerencias del Técnico de Calidad", tracking=True)
+    prospectus_commitments = fields.Text(string="Compromisos Prospecto", tracking=True)
 
-    state = fields.Selection(FEEDBACK_STATE, string='Estado', default='doing')
+    state = fields.Selection(FEEDBACK_STATE, string='Estado', default='doing', tracking=True)
 
-    quality_technician = fields.Many2one('hr.employee', string="Tecnico de Calidad")
-    training_and_quality_manager = fields.Many2one('hr.employee', string="Responsable de Capacitación y Calidad")
+    quality_technician = fields.Many2one('hr.employee', string="Tecnico de Calidad", tracking=True)
+    training_and_quality_manager = fields.Many2one('hr.employee', string="Responsable de Capacitación y Calidad", tracking=True)
     kardex_id = fields.Many2one('tyt_recruitment.kardex_by_applicant', string="Kardex del aplicante")
 
     @api.model_create_multi

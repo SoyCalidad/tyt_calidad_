@@ -17,32 +17,33 @@ class Attendance(models.Model):
     _name = 'tyt_recruitment.attendance'
     _description = 'Asistencia'
     _rec_name = 'id'
+    _inherit = ['mail.thread']
 
-    trainer = fields.Many2one('hr.employee', string="Entrenador")
-    center = fields.Char( string="Centro")
-    week = fields.Char( string="Semana")
-    turn = fields.Selection([('T/M', 'T/M'), ('T/V', 'T/V'), ('T/N', 'T/N')], string="Turno lista de prospectos")
+    trainer = fields.Many2one('hr.employee', string="Entrenador", tracking=True)
+    center = fields.Char( string="Centro", tracking=True)
+    week = fields.Char( string="Semana", tracking=True)
+    turn = fields.Selection([('T/M', 'T/M'), ('T/V', 'T/V'), ('T/N', 'T/N')], string="Turno lista de prospectos", tracking=True)
 
-    income = fields.Char( string="Ingresos", compute="_compute_income", store=True)
-    returns = fields.Char( string="Regresos")
-    desertion = fields.Char( string="Deserción")
+    income = fields.Char( string="Ingresos", compute="_compute_income", store=True, tracking=True)
+    returns = fields.Char( string="Regresos", tracking=True)
+    desertion = fields.Char( string="Deserción", tracking=True)
 
-    days = fields.Integer(string="Días de capacitación", store=True)
+    days = fields.Integer(string="Días de capacitación", store=True, tracking=True)
 
-    state = fields.Selection(ATTENDANCE_STATE, string='Estado', default='doing')
+    state = fields.Selection(ATTENDANCE_STATE, string='Estado', default='doing', tracking=True)
 
     attendance_days_of_week_ids = fields.One2many("tyt_recruitment.attendance_days_of_week", "attendance_id", string="Días de asistencia")
     kardex_by_applicant_ids = fields.One2many("tyt_recruitment.kardex_by_applicant", "attendance_id", string="Kardex de asistencia")
     kardex_by_applicant_two_ids = fields.One2many("tyt_recruitment.kardex_by_applicant", "attendance_id", string="Kardex de asistencia 2")
 
-    view_kardex = fields.Boolean(string="Ver kardex", default=False)
-    view_kardex_certificate = fields.Boolean(string="Ver kardex certificación", default=False)
+    view_kardex = fields.Boolean(string="Ver kardex", default=False, tracking=True)
+    view_kardex_certificate = fields.Boolean(string="Ver kardex certificación", default=False, tracking=True)
 
-    recruiter = fields.Char(string="Reclutador")
-    campaign_id = fields.Many2one("tyt_recruitment.campaign", string="Campaña", ondelete='cascade')
-    requisition_id = fields.Many2one("tyt_recruitment.requisition", ondelete='cascade')
+    recruiter = fields.Char(string="Reclutador", tracking=True)
+    campaign_id = fields.Many2one("tyt_recruitment.campaign", string="Campaña", ondelete='cascade', tracking=True)
+    requisition_id = fields.Many2one("tyt_recruitment.requisition", ondelete='cascade', tracking=True)
 
-    survey_counter = fields.Integer(string="Cantidad de exámenes", compute="_compute_survey_counter", store=True)
+    survey_counter = fields.Integer(string="Cantidad de exámenes", compute="_compute_survey_counter", store=True, tracking=True)
     surveys_ids = fields.One2many('tyt_recruitment.survey_attendance', 'attendance_id', string="Exámenes")
 
     @api.depends('kardex_by_applicant_ids.login')
@@ -117,9 +118,10 @@ class AttendanceState(models.Model):
     _name = 'tyt_recruitment.tag_attendance'
     _description = 'Estado'
     _rec_name = 'tag'
+    _inherit = ['mail.thread']
 
-    tag = fields.Char(required=True, string="Etiqueta")
-    name = fields.Char(required=True, string="Nombre")
+    tag = fields.Char(required=True, string="Etiqueta", tracking=True)
+    name = fields.Char(required=True, string="Nombre", tracking=True)
 
 class TagNameController(http.Controller):
     @http.route('/tag_name_list', auth='public', website=True)
@@ -130,46 +132,47 @@ class TagNameController(http.Controller):
 class DaysOfWeek(models.Model):
     _name = 'tyt_recruitment.attendance_days_of_week'
     _description = 'Días de la semana'
+    _inherit = ['mail.thread']
 
-    day1 = fields.Many2one('tyt_recruitment.tag_attendance', string="01")
-    day2 = fields.Many2one('tyt_recruitment.tag_attendance', string="02")
-    day3 = fields.Many2one('tyt_recruitment.tag_attendance', string="03")
-    day4 = fields.Many2one('tyt_recruitment.tag_attendance', string="04")
-    day5 = fields.Many2one('tyt_recruitment.tag_attendance', string="05")
-    day6 = fields.Many2one('tyt_recruitment.tag_attendance', string="06")
-    day7 = fields.Many2one('tyt_recruitment.tag_attendance', string="07")
-    day8 = fields.Many2one('tyt_recruitment.tag_attendance', string="08")
-    day9 = fields.Many2one('tyt_recruitment.tag_attendance', string="09")
-    day10 = fields.Many2one('tyt_recruitment.tag_attendance', string="10")
-    day11 = fields.Many2one('tyt_recruitment.tag_attendance', string="11")
-    day12 = fields.Many2one('tyt_recruitment.tag_attendance', string="12")
-    day13 = fields.Many2one('tyt_recruitment.tag_attendance', string="13")
-    day14 = fields.Many2one('tyt_recruitment.tag_attendance', string="14")
-    day15 = fields.Many2one('tyt_recruitment.tag_attendance', string="15")
-    day16 = fields.Many2one('tyt_recruitment.tag_attendance', string="16")
-    day17 = fields.Many2one('tyt_recruitment.tag_attendance', string="17")
-    day18 = fields.Many2one('tyt_recruitment.tag_attendance', string="18")
-    day19 = fields.Many2one('tyt_recruitment.tag_attendance', string="19")
-    day20 = fields.Many2one('tyt_recruitment.tag_attendance', string="20")
+    day1 = fields.Many2one('tyt_recruitment.tag_attendance', string="01", tracking=True)
+    day2 = fields.Many2one('tyt_recruitment.tag_attendance', string="02", tracking=True)
+    day3 = fields.Many2one('tyt_recruitment.tag_attendance', string="03", tracking=True)
+    day4 = fields.Many2one('tyt_recruitment.tag_attendance', string="04", tracking=True)
+    day5 = fields.Many2one('tyt_recruitment.tag_attendance', string="05", tracking=True)
+    day6 = fields.Many2one('tyt_recruitment.tag_attendance', string="06", tracking=True)
+    day7 = fields.Many2one('tyt_recruitment.tag_attendance', string="07", tracking=True)
+    day8 = fields.Many2one('tyt_recruitment.tag_attendance', string="08", tracking=True)
+    day9 = fields.Many2one('tyt_recruitment.tag_attendance', string="09", tracking=True)
+    day10 = fields.Many2one('tyt_recruitment.tag_attendance', string="10", tracking=True)
+    day11 = fields.Many2one('tyt_recruitment.tag_attendance', string="11", tracking=True)
+    day12 = fields.Many2one('tyt_recruitment.tag_attendance', string="12", tracking=True)
+    day13 = fields.Many2one('tyt_recruitment.tag_attendance', string="13", tracking=True)
+    day14 = fields.Many2one('tyt_recruitment.tag_attendance', string="14", tracking=True)
+    day15 = fields.Many2one('tyt_recruitment.tag_attendance', string="15", tracking=True)
+    day16 = fields.Many2one('tyt_recruitment.tag_attendance', string="16", tracking=True)
+    day17 = fields.Many2one('tyt_recruitment.tag_attendance', string="17", tracking=True)
+    day18 = fields.Many2one('tyt_recruitment.tag_attendance', string="18", tracking=True)
+    day19 = fields.Many2one('tyt_recruitment.tag_attendance', string="19", tracking=True)
+    day20 = fields.Many2one('tyt_recruitment.tag_attendance', string="20", tracking=True)
 
-    opday1 = fields.Many2one('tyt_recruitment.tag_attendance', string="OPE día 01")
-    opday2 = fields.Many2one('tyt_recruitment.tag_attendance', string="OPE día 02")
+    opday1 = fields.Many2one('tyt_recruitment.tag_attendance', string="OPE día 01", tracking=True)
+    opday2 = fields.Many2one('tyt_recruitment.tag_attendance', string="OPE día 02", tracking=True)
 
-    prospect_turn = fields.Selection(related="attendance_id.turn", string="Turno lista de prospectos")
-    right_turn = fields.Char(string="Turno correcto")
-    observations = fields.Char(string="Observaciones")
-    experience = fields.Char(string="Experiencia")
-    reason_for_withdrawal = fields.Many2one("hr.applicant.refuse.reason", string="Motivo de rechazo")
+    prospect_turn = fields.Selection(related="attendance_id.turn", string="Turno lista de prospectos", tracking=True)
+    right_turn = fields.Char(string="Turno correcto", tracking=True)
+    observations = fields.Char(string="Observaciones", tracking=True)
+    experience = fields.Char(string="Experiencia", tracking=True)
+    reason_for_withdrawal = fields.Many2one("hr.applicant.refuse.reason", string="Motivo de rechazo", tracking=True)
 
     
-    applicant_id = fields.Many2one("tyt_recruitment.applicant", string="Aplicante", ondelete='cascade')
-    recruiter = fields.Many2one(related="applicant_id.recruiter_id", string="Reclutador")
-    login = fields.Char(related="applicant_id.employee_number", string="Login")
+    applicant_id = fields.Many2one("tyt_recruitment.applicant", string="Aplicante", ondelete='cascade', tracking=True)
+    recruiter = fields.Many2one(related="applicant_id.recruiter_id", string="Reclutador", tracking=True)
+    login = fields.Char(related="applicant_id.employee_number", string="Login", tracking=True)
 
-    applicant_name = fields.Char(related="applicant_id.name", string="Nombre", store=True)
-    applicant_nss = fields.Char(related="applicant_id.social_security_number", string="Número de Seguro Social")
+    applicant_name = fields.Char(related="applicant_id.name", string="Nombre", store=True, tracking=True)
+    applicant_nss = fields.Char(related="applicant_id.social_security_number", string="Número de Seguro Social", tracking=True)
 
-    attendance_id = fields.Many2one('tyt_recruitment.attendance', string="Lista de asistencia", ondelete='cascade')
+    attendance_id = fields.Many2one('tyt_recruitment.attendance', string="Lista de asistencia", ondelete='cascade', tracking=True)
 
     @api.onchange('day1', 'day2', 'day3', 'day4', 'day5', 'day6', 'day7', 'day8', 'day9', 'day10', 'day11', 'day12', 'day13', 'day14', 'day15', 'day16', 'day17', 'day18', 'day19', 'day20')
     def _onchange_days(self):
@@ -201,61 +204,63 @@ class DaysOfWeek(models.Model):
 class SurveyAttendance(models.Model):
     _name = 'tyt_recruitment.survey_attendance'
     _description = 'Encuesta de capacitación'
+    _inherit = ['mail.thread']
 
-    survey_id = fields.Many2one('survey.survey', string="Examen")
-    title = fields.Char(related='survey_id.title', string='Título')
+    survey_id = fields.Many2one('survey.survey', string="Examen", tracking=True)
+    title = fields.Char(related='survey_id.title', string='Título', tracking=True)
     
-    attendance_id = fields.Many2one('tyt_recruitment.attendance', string="Lista de asistencia")
+    attendance_id = fields.Many2one('tyt_recruitment.attendance', string="Lista de asistencia", tracking=True)
 
 class KardexAttendance(models.Model):
     _name = 'tyt_recruitment.kardex_by_applicant'
     _description = 'Kardex de capacitación'
+    _inherit = ['mail.thread']
 
-    login = fields.Char(string="#")
+    login = fields.Char(string="#", tracking=True)
 
-    experience = fields.Char(string="Experiencia")
-    time = fields.Char(string="Tiempo")
+    experience = fields.Char(string="Experiencia", tracking=True)
+    time = fields.Char(string="Tiempo", tracking=True)
 
-    exam1 = fields.Char(string="Examen 1")
-    exam2 = fields.Char(string="Examen 2")
-    exam3 = fields.Char(string="Examen 3")
-    exam4 = fields.Char(string="Examen 4")
-    exam5 = fields.Char(string="Examen 5")
-    exam6 = fields.Char(string="Examen 6")
-    exam7 = fields.Char(string="Examen 7")
-    exam8 = fields.Char(string="Examen 8")
-    exam9 = fields.Char(string="Examen 9")
-    exam10 = fields.Char(string="Examen 10")
-    exam11 = fields.Char(string="Examen 11")
-    exam12 = fields.Char(string="Examen 12")
-    exam13 = fields.Char(string="Examen 13")
-    exam14 = fields.Char(string="Examen 14")
-    exam15 = fields.Char(string="Examen 15")
+    exam1 = fields.Char(string="Examen 1", tracking=True)
+    exam2 = fields.Char(string="Examen 2", tracking=True)
+    exam3 = fields.Char(string="Examen 3", tracking=True)
+    exam4 = fields.Char(string="Examen 4", tracking=True)
+    exam5 = fields.Char(string="Examen 5", tracking=True)
+    exam6 = fields.Char(string="Examen 6", tracking=True)
+    exam7 = fields.Char(string="Examen 7", tracking=True)
+    exam8 = fields.Char(string="Examen 8", tracking=True)
+    exam9 = fields.Char(string="Examen 9", tracking=True)
+    exam10 = fields.Char(string="Examen 10", tracking=True)
+    exam11 = fields.Char(string="Examen 11", tracking=True)
+    exam12 = fields.Char(string="Examen 12", tracking=True)
+    exam13 = fields.Char(string="Examen 13", tracking=True)
+    exam14 = fields.Char(string="Examen 14", tracking=True)
+    exam15 = fields.Char(string="Examen 15", tracking=True)
 
-    comments = fields.Char(string="Comentarios")
+    comments = fields.Char(string="Comentarios", tracking=True)
 
-    certification1 = fields.Char(string="Certificado 1")
-    certification2 = fields.Char(string="Certificado 2")
-    certification3 = fields.Char(string="Certificado 3")
-    comments_quality = fields.Char(string="Comentario - técnico de calidad")
+    certification1 = fields.Char(string="Certificado 1", tracking=True)
+    certification2 = fields.Char(string="Certificado 2", tracking=True)
+    certification3 = fields.Char(string="Certificado 3", tracking=True)
+    comments_quality = fields.Char(string="Comentario - técnico de calidad", tracking=True)
 
-    accreditation_status = fields.Char(string="Estatus de certificación")
-    concession = fields.Char(string="Concesión")
-    observation = fields.Char(string="Observaciones")
+    accreditation_status = fields.Char(string="Estatus de certificación", tracking=True)
+    concession = fields.Char(string="Concesión", tracking=True)
+    observation = fields.Char(string="Observaciones", tracking=True)
 
-    attendance_days_of_week_id = fields.Many2one('tyt_recruitment.attendance_days_of_week', string="Kardex de asistencia", ondelete='cascade')
-    applicant_id = fields.Many2one(related="attendance_days_of_week_id.applicant_id", string="Aplicante", ondelete='cascade')
-    marital_status = fields.Selection(related="applicant_id.marital_status", string="Estado civil")
-    applicant_name = fields.Char(related="applicant_id.computed_name", string="Nombre completo")
+    attendance_days_of_week_id = fields.Many2one('tyt_recruitment.attendance_days_of_week', string="Kardex de asistencia", ondelete='cascade', tracking=True)
+    applicant_id = fields.Many2one(related="attendance_days_of_week_id.applicant_id", string="Aplicante", ondelete='cascade', tracking=True)
+    marital_status = fields.Selection(related="applicant_id.marital_status", string="Estado civil", tracking=True)
+    applicant_name = fields.Char(related="applicant_id.computed_name", string="Nombre completo", tracking=True)
 
-    attendance_id = fields.Many2one('tyt_recruitment.attendance', string="Lista de asistencia", ondelete='cascade')
-    survey_counter = fields.Integer(related="attendance_id.survey_counter", string="Contandor de exámenes")
+    attendance_id = fields.Many2one('tyt_recruitment.attendance', string="Lista de asistencia", ondelete='cascade', tracking=True)
+    survey_counter = fields.Integer(related="attendance_id.survey_counter", string="Contandor de exámenes", tracking=True)
 
-    average = fields.Float(string="Promedio", compute="_compute_average_score", store=True)
-    highest_score = fields.Float(string="Promedio alto", compute="_compute_highest_score", store=True)
+    average = fields.Float(string="Promedio", compute="_compute_average_score", store=True, tracking=True)
+    highest_score = fields.Float(string="Promedio alto", compute="_compute_highest_score", store=True, tracking=True)
 
     certification_feedback_ids = fields.One2many('tyt_recruitment.certification_feedback', 'kardex_id', string="Certificación de retroalimentación")
-    has_certification_feedback = fields.Boolean(string="Tiene retroalimentación", compute="_compute_has_certification_feedback")
+    has_certification_feedback = fields.Boolean(string="Tiene retroalimentación", compute="_compute_has_certification_feedback", tracking=True)
 
     @api.depends('certification_feedback_ids')
     def _compute_has_certification_feedback(self):

@@ -12,107 +12,107 @@ class JobApplication(models.Model):
     _inherit = ['mail.thread']
     _rec_name = 'id'
 
-    request_date = fields.Date(string='Fecha')
-    requisition = fields.Char(string='Requisición')
-    site = fields.Char(string='Sitio')
+    request_date = fields.Date(string='Fecha', tracking=True)
+    requisition = fields.Char(string='Requisición', tracking=True)
+    site = fields.Char(string='Sitio', tracking=True)
 
-    signature_image = fields.Binary(string="Firma del solicitante")
+    signature_image = fields.Binary(string="Firma del solicitante", tracking=True)
 
     # Campos relacionados para acceder al nombre y apellidos del aplicante
-    applicant_name = fields.Char(related="applicant_id.name", string="Nombre", store=True)
-    applicant_last_name_father = fields.Char(related="applicant_id.last_name_father", string="Apellido Paterno", store=True)
-    applicant_last_name_mother = fields.Char(related="applicant_id.last_name_mother", string="Apellido Materno", store=True)
-    applicant_employee_number = fields.Char(related="applicant_id.employee_number", string="Número de empleado", store=True)
-    applicant_number_phone = fields.Char(related="applicant_id.number_phone", string="Teléfono", store=True)
-    applicant_birthdate = fields.Date(related="applicant_id.birthdate", string="Fecha de nacimiento", store=True)
-    applicant_birthplace = fields.Char(related="applicant_id.birthplace", string="Lugar de nacimiento", store=True)
-    applicant_rfc = fields.Char(related="applicant_id.rfc", string="Aplicante RFC", store=True)
-    applicant_curp = fields.Char(related="applicant_id.curp", string="Aplicante CURP", store=True)
-    applicant_social_security_number = fields.Char(related="applicant_id.social_security_number", string="Aplicante NNS", store=True)       
+    applicant_name = fields.Char(related="applicant_id.name", string="Nombre", store=True, tracking=True)
+    applicant_last_name_father = fields.Char(related="applicant_id.last_name_father", string="Apellido Paterno", store=True, tracking=True)
+    applicant_last_name_mother = fields.Char(related="applicant_id.last_name_mother", string="Apellido Materno", store=True, tracking=True)
+    applicant_employee_number = fields.Char(related="applicant_id.employee_number", string="Número de empleado", store=True, tracking=True)
+    applicant_number_phone = fields.Char(related="applicant_id.number_phone", string="Teléfono", store=True, tracking=True)
+    applicant_birthdate = fields.Date(related="applicant_id.birthdate", string="Fecha de nacimiento", store=True, tracking=True)
+    applicant_birthplace = fields.Char(related="applicant_id.birthplace", string="Lugar de nacimiento", store=True, tracking=True)
+    applicant_rfc = fields.Char(related="applicant_id.rfc", string="Aplicante RFC", store=True, tracking=True)
+    applicant_curp = fields.Char(related="applicant_id.curp", string="Aplicante CURP", store=True, tracking=True)
+    applicant_social_security_number = fields.Char(related="applicant_id.social_security_number", string="Aplicante NNS", store=True, tracking=True)       
 
-    campaign_id = fields.Many2one('tyt_recruitment.campaign', string="Campaña")
-    campaign_turn = fields.Selection(related="campaign_id.turn", string="Turno")
-    recruiter_id = fields.Many2one(related='applicant_id.recruiter_id', string="Reclutador")
+    campaign_id = fields.Many2one('tyt_recruitment.campaign', string="Campaña", tracking=True)
+    campaign_turn = fields.Selection(related="campaign_id.turn", string="Turno", tracking=True)
+    recruiter_id = fields.Many2one(related='applicant_id.recruiter_id', string="Reclutador", tracking=True)
 
-    applicant_id = fields.Many2one('tyt_recruitment.applicant')
+    applicant_id = fields.Many2one('tyt_recruitment.applicant', tracking=True)
     applicant_status = fields.Boolean( related="applicant_id.status", string="Aprobado", required=True, tracking=True)
 
-    academics_ids = fields.One2many('tyt_recruitment.data_academic', 'job_application_id', string="Formación académica")
-    children_ids = fields.One2many('tyt_recruitment.child', 'job_application_id', string="Hijos")
-    answer_ids = fields.One2many('tyt_recruitment.answer', 'job_application_id', string="Respuestas")
-    job_history_ids = fields.One2many('tyt_recruitment.job_history', 'job_application_id', string="Historial laboral")
-    reference_ids = fields.One2many('tyt_recruitment.reference', 'job_application_id', string="Referencia laboral")
+    academics_ids = fields.One2many('tyt_recruitment.data_academic', 'job_application_id', string="Formación académica", tracking=True)
+    children_ids = fields.One2many('tyt_recruitment.child', 'job_application_id', string="Hijos", tracking=True)
+    answer_ids = fields.One2many('tyt_recruitment.answer', 'job_application_id', string="Respuestas", tracking=True)
+    job_history_ids = fields.One2many('tyt_recruitment.job_history', 'job_application_id', string="Historial laboral", tracking=True)
+    reference_ids = fields.One2many('tyt_recruitment.reference', 'job_application_id', string="Referencia laboral", tracking=True)
 
-    father_data_id = fields.Many2one('tyt_recruitment.family_data_detail', string="Datos del padre")
-    mother_data_id = fields.Many2one('tyt_recruitment.family_data_detail', string="Datos de la madre")
-    spouse_data_id = fields.Many2one('tyt_recruitment.family_data_detail', string="Datos del cónyuge")
+    father_data_id = fields.Many2one('tyt_recruitment.family_data_detail', string="Datos del padre", tracking=True)
+    mother_data_id = fields.Many2one('tyt_recruitment.family_data_detail', string="Datos de la madre", tracking=True)
+    spouse_data_id = fields.Many2one('tyt_recruitment.family_data_detail', string="Datos del cónyuge", tracking=True)
 
-    complete_survey_id = fields.One2many("tyt_recruitment.complete_survey", 'job_application_id', string="Encuesta de salud")
-    has_complete_survey = fields.Boolean(string='Tiene Encuesta Completada', compute='compute_has_complete_survey')
+    complete_survey_id = fields.One2many("tyt_recruitment.complete_survey", 'job_application_id', string="Encuesta de salud", tracking=True)
+    has_complete_survey = fields.Boolean(string='Tiene Encuesta Completada', compute='compute_has_complete_survey', tracking=True)
 
-    birth_certificate = fields.Binary(string="Acta de nacimiento")
-    birth_certificate_filename = fields.Char(string="Nombre del Archivo - ")
-    birth_certificate_state = fields.Boolean(string="Estado - Acta de nacimiento", default=False)
-    birth_certificate_approved = fields.Boolean(string="Estado de aprobación - Acta de nacimiento", default=False)
+    birth_certificate = fields.Binary(string="Acta de nacimiento", tracking=True)
+    birth_certificate_filename = fields.Char(string="Nombre del Archivo - ", tracking=True)
+    birth_certificate_state = fields.Boolean(string="Estado - Acta de nacimiento", default=False, tracking=True)
+    birth_certificate_approved = fields.Boolean(string="Estado de aprobación - Acta de nacimiento", default=False, tracking=True)
 
-    rfc = fields.Binary(string="RFC")
-    rfc_filename = fields.Char(string="Nombre del Archivo - RFC")
-    rfc_state = fields.Boolean(string="Estado - RFC", default=False)
-    rfc_approved = fields.Boolean(string="Estado de aprobación - RFC", default=False)
+    rfc = fields.Binary(string="RFC", tracking=True)
+    rfc_filename = fields.Char(string="Nombre del Archivo - RFC", tracking=True)
+    rfc_state = fields.Boolean(string="Estado - RFC", default=False, tracking=True)
+    rfc_approved = fields.Boolean(string="Estado de aprobación - RFC", default=False, tracking=True)
 
-    curp = fields.Binary(string="CURP")
-    curp_filename = fields.Char(string="Nombre del Archivo - CURP")
-    curp_state = fields.Boolean(string="Estado - CURP", default=False)
-    curp_approved = fields.Boolean(string="Estado de aprobación - CURP", default=False)
+    curp = fields.Binary(string="CURP", tracking=True)
+    curp_filename = fields.Char(string="Nombre del Archivo - CURP", tracking=True)
+    curp_state = fields.Boolean(string="Estado - CURP", default=False, tracking=True)
+    curp_approved = fields.Boolean(string="Estado de aprobación - CURP", default=False, tracking=True)
 
-    study_certificate = fields.Binary(string="Comprobante de estudio")
-    study_certificate_filename = fields.Char(string="Nombre del Archivo - Comprobante de estudio")
-    study_certificate_state = fields.Boolean(string="Estado - Comprobante de estudio", default=False)
-    study_certificate_approved = fields.Boolean(string="Estado de aprobación - Comprobante de estudio", default=False)
+    study_certificate = fields.Binary(string="Comprobante de estudio", tracking=True)
+    study_certificate_filename = fields.Char(string="Nombre del Archivo - Comprobante de estudio", tracking=True)
+    study_certificate_state = fields.Boolean(string="Estado - Comprobante de estudio", default=False, tracking=True)
+    study_certificate_approved = fields.Boolean(string="Estado de aprobación - Comprobante de estudio", default=False, tracking=True)
 
-    proposed_letter = fields.Binary(string="Carta propuesta")
-    proposed_letter_filename = fields.Char(string="Nombre del Archivo - Carta propuesta")
-    proposed_letter_state = fields.Boolean(string="Estado - Carta propuesta", default=False)
-    proposed_letter_approved = fields.Boolean(string="Estado de aprobación - Carta propuesta", default=False)
+    proposed_letter = fields.Binary(string="Carta propuesta", tracking=True)
+    proposed_letter_filename = fields.Char(string="Nombre del Archivo - Carta propuesta", tracking=True)
+    proposed_letter_state = fields.Boolean(string="Estado - Carta propuesta", default=False, tracking=True)
+    proposed_letter_approved = fields.Boolean(string="Estado de aprobación - Carta propuesta", default=False, tracking=True)
 
-    ine = fields.Binary(string="INE")
-    ine_filename = fields.Char(string="Nombre del Archivo - INE")
-    ine_state = fields.Boolean(string="Estado - INE", default=False)
-    ine_approved = fields.Boolean(string="Estado de aprobación - INE", default=False)
+    ine = fields.Binary(string="INE", tracking=True)
+    ine_filename = fields.Char(string="Nombre del Archivo - INE", tracking=True)
+    ine_state = fields.Boolean(string="Estado - INE", default=False, tracking=True)
+    ine_approved = fields.Boolean(string="Estado de aprobación - INE", default=False, tracking=True)
 
-    reference_validation = fields.Binary(string="Validación de referencias")
-    reference_validation_filename = fields.Char(string="Nombre del Archivo - Validación de referencias")
-    reference_validation_state = fields.Boolean(string="Estado - Validación de referencias", default=False)
-    reference_validation_approved = fields.Boolean(string="Estado de aprobación - Validación de referencias", default=False)
+    reference_validation = fields.Binary(string="Validación de referencias", tracking=True)
+    reference_validation_filename = fields.Char(string="Nombre del Archivo - Validación de referencias", tracking=True)
+    reference_validation_state = fields.Boolean(string="Estado - Validación de referencias", default=False, tracking=True)
+    reference_validation_approved = fields.Boolean(string="Estado de aprobación - Validación de referencias", default=False, tracking=True)
     
-    utility_bill = fields.Binary(string="Comprobante de domicilio")
-    utility_bill_filename = fields.Char(string="Nombre del Archivo - Comprobante de domicilio")
-    utility_bill_state = fields.Boolean(string="Estado - Comprobante de domicilio", default=False)
-    utility_bill_approved = fields.Boolean(string="Estado de aprobación - Comprobante de domicilio", default=False)
+    utility_bill = fields.Binary(string="Comprobante de domicilio", tracking=True)
+    utility_bill_filename = fields.Char(string="Nombre del Archivo - Comprobante de domicilio", tracking=True)
+    utility_bill_state = fields.Boolean(string="Estado - Comprobante de domicilio", default=False, tracking=True)
+    utility_bill_approved = fields.Boolean(string="Estado de aprobación - Comprobante de domicilio", default=False, tracking=True)
 
-    psychometric = fields.Binary(string="Psicométrico")
-    psychometric_filename = fields.Char(string="Nombre del Archivo - Psicométrico")
-    psychometric_state = fields.Boolean(string="Estado - Psicométrico", default=False)
-    psychometric_approved = fields.Boolean(string="Estado de aprobación - Psicométrico", default=False)
+    psychometric = fields.Binary(string="Psicométrico", tracking=True)
+    psychometric_filename = fields.Char(string="Nombre del Archivo - Psicométrico", tracking=True)
+    psychometric_state = fields.Boolean(string="Estado - Psicométrico", default=False, tracking=True)
+    psychometric_approved = fields.Boolean(string="Estado de aprobación - Psicométrico", default=False, tracking=True)
 
-    snn = fields.Binary(string="SNN")
-    snn_filename = fields.Char(string="Nombre del Archivo - SNN")
-    snn_state = fields.Boolean(string="Estado - SNN", default=False)
-    snn_approved = fields.Boolean(string="Estado de aprobación - SNN", default=False)
+    snn = fields.Binary(string="SNN", tracking=True)
+    snn_filename = fields.Char(string="Nombre del Archivo - SNN", tracking=True)
+    snn_state = fields.Boolean(string="Estado - SNN", default=False, tracking=True)
+    snn_approved = fields.Boolean(string="Estado de aprobación - SNN", default=False, tracking=True)
 
-    interbank_key = fields.Binary(string="Clabe interbancaria")
-    interbank_key_filename = fields.Char(string="Nombre del Archivo - Clabe interbancaria")
-    interbank_key_state = fields.Boolean(string="Estado - Clabe interbancaria", default=False)
-    interbank_key_approved = fields.Boolean(string="Estado de aprobación - Clabe interbancaria", default=False)
+    interbank_key = fields.Binary(string="Clabe interbancaria", tracking=True)
+    interbank_key_filename = fields.Char(string="Nombre del Archivo - Clabe interbancaria", tracking=True)
+    interbank_key_state = fields.Boolean(string="Estado - Clabe interbancaria", default=False, tracking=True)
+    interbank_key_approved = fields.Boolean(string="Estado de aprobación - Clabe interbancaria", default=False, tracking=True)
 
-    value_proposition = fields.Binary(string="Propuesta de valor")
-    value_proposition_filename = fields.Char(string="Nombre del Archivo - Propuesta de valor")
-    value_proposition_state = fields.Boolean(string="Estado - Propuesta de valor", default=False)
-    value_proposition_approved = fields.Boolean(string="Estado de aprobación - Propuesta de valor", default=False)
+    value_proposition = fields.Binary(string="Propuesta de valor", tracking=True)
+    value_proposition_filename = fields.Char(string="Nombre del Archivo - Propuesta de valor", tracking=True)
+    value_proposition_state = fields.Boolean(string="Estado - Propuesta de valor", default=False, tracking=True)
+    value_proposition_approved = fields.Boolean(string="Estado de aprobación - Propuesta de valor", default=False, tracking=True)
 
-    expedient_status = fields.Boolean(string="Estado 01", default=False)
-    status_approved = fields.Float(string="Estado 02", default=0)
-    status_loaded = fields.Float(string="Estado 03", default=0)
+    expedient_status = fields.Boolean(string="Estado 01", default=False, tracking=True)
+    status_approved = fields.Float(string="Estado 02", default=0, tracking=True)
+    status_loaded = fields.Float(string="Estado 03", default=0, tracking=True)
 
     @api.onchange(
         'birth_certificate', 
@@ -238,49 +238,49 @@ class Applicant(models.Model):
     _description = 'tyt_recruitment.applicant'
     _inherit = ['mail.thread', 'mail.activity.mixin']
     
-    name = fields.Char(string="Nombre")
-    reference = fields.Char(string="Medio")
-    last_name_father = fields.Char(string="Apellido Paterno")
-    last_name_mother = fields.Char(string="Apellido Materno")
-    birthplace = fields.Char(string="Lugar de Nacimiento")
-    birthdate = fields.Date(string="Fecha de Nacimiento")
-    nationality = fields.Char(string="Nacionalidad")
-    gender = fields.Selection(GENDER_SELECTION, string="Género")
-    age = fields.Integer(string="Edad")
-    marital_status = fields.Selection(MARITAL_STATUS_SELECTION, string="Estado Civil")
-    social_security_number = fields.Char(string="Número de Seguro Social")
-    rfc = fields.Char(string="RFC")
-    curp = fields.Char(string="CURP")
-    address_street = fields.Char(string="Calle y Número")
-    address_neighborhood = fields.Char(string="Colonia")
-    address_city = fields.Char(string="Municipio")
-    number_phone = fields.Char(string="Número de teléfono")
-    personal_email = fields.Char(string="Correo electrónico")
-    live_with = fields.Char(string="Con quién vive")
-    rent_amount = fields.Float(string="Monto semanal de renta")
-    infonavit_credit_amount = fields.Float(string="Monto semanal de Infonavit")
-    transports = fields.Char(string="Cantidad de transportes y Tiempo de traslado")
-    requested_job_position = fields.Char(string="Puesto que solicita")
-    monthly_expenses = fields.Float(string="Gastos mensuales aproximados")
-    availability = fields.Char(string="Disponibilidad para empezar a trabajar")
-    dependents = fields.Char(string="Personas que dependen de ti")
-    foreign_nationality = fields.Boolean(string="Cuenta con nacionalidad extranjera")
-    daily_activities = fields.Text(string="Describa sus actividades diarias")
+    name = fields.Char(string="Nombre", tracking=True)
+    reference = fields.Char(string="Medio", tracking=True)
+    last_name_father = fields.Char(string="Apellido Paterno", tracking=True)
+    last_name_mother = fields.Char(string="Apellido Materno", tracking=True)
+    birthplace = fields.Char(string="Lugar de Nacimiento", tracking=True)
+    birthdate = fields.Date(string="Fecha de Nacimiento", tracking=True)
+    nationality = fields.Char(string="Nacionalidad", tracking=True)
+    gender = fields.Selection(GENDER_SELECTION, string="Género", tracking=True)
+    age = fields.Integer(string="Edad", tracking=True)
+    marital_status = fields.Selection(MARITAL_STATUS_SELECTION, string="Estado Civil", tracking=True)
+    social_security_number = fields.Char(string="Número de Seguro Social", tracking=True)
+    rfc = fields.Char(string="RFC", tracking=True)
+    curp = fields.Char(string="CURP", tracking=True)
+    address_street = fields.Char(string="Calle y Número", tracking=True)
+    address_neighborhood = fields.Char(string="Colonia", tracking=True)
+    address_city = fields.Char(string="Municipio", tracking=True)
+    number_phone = fields.Char(string="Número de teléfono", tracking=True)
+    personal_email = fields.Char(string="Correo electrónico", tracking=True)
+    live_with = fields.Char(string="Con quién vive", tracking=True)
+    rent_amount = fields.Float(string="Monto semanal de renta", tracking=True)
+    infonavit_credit_amount = fields.Float(string="Monto semanal de Infonavit", tracking=True)
+    transports = fields.Char(string="Cantidad de transportes y Tiempo de traslado", tracking=True)
+    requested_job_position = fields.Char(string="Puesto que solicita", tracking=True)
+    monthly_expenses = fields.Float(string="Gastos mensuales aproximados", tracking=True)
+    availability = fields.Char(string="Disponibilidad para empezar a trabajar", tracking=True)
+    dependents = fields.Char(string="Personas que dependen de ti", tracking=True)
+    foreign_nationality = fields.Boolean(string="Cuenta con nacionalidad extranjera", tracking=True)
+    daily_activities = fields.Text(string="Describa sus actividades diarias", tracking=True)
 
-    recruiter_comments = fields.Char(string="Comentarios del reclutador")
-    recruiter_id = fields.Many2one('hr.employee', string="Reclutador")
+    recruiter_comments = fields.Char(string="Comentarios del reclutador", tracking=True)
+    recruiter_id = fields.Many2one('hr.employee', string="Reclutador", tracking=True)
 
-    employee_id = fields.Many2one('hr.employee', string="Empleado relacionado")
-    employee_number = fields.Char(related="employee_id.x_studio_numero", string="Número de empleado")
+    employee_id = fields.Many2one('hr.employee', string="Empleado relacionado", tracking=True)
+    employee_number = fields.Char(related="employee_id.x_studio_numero", string="Número de empleado", tracking=True)
 
-    expedient_status = fields.Boolean(string="Estado de carga", default=False)
-    has_complete_survey = fields.Boolean(string='Tiene Encuesta Completada')
-    status = fields.Boolean(string="Status")
+    expedient_status = fields.Boolean(string="Estado de carga", default=False, tracking=True)
+    has_complete_survey = fields.Boolean(string='Tiene Encuesta Completada', tracking=True)
+    status = fields.Boolean(string="Status", tracking=True)
 
     # Campaña
-    campaign_id = fields.Many2one('tyt_recruitment.campaign', string="Campaña")
-    campaign_turn = fields.Selection(related="campaign_id.turn", string="Turno")
-    campaign_requsition = fields.Many2one(related="campaign_id.requisition_id", string="Requisición")
+    campaign_id = fields.Many2one('tyt_recruitment.campaign', string="Campaña", tracking=True)
+    campaign_turn = fields.Selection(related="campaign_id.turn", string="Turno", tracking=True)
+    campaign_requsition = fields.Many2one(related="campaign_id.requisition_id", string="Requisición", tracking=True)
 
     days_of_week_ids = fields.One2many("tyt_recruitment.attendance_days_of_week", 'applicant_id', string="Asistencia detalle")
 
@@ -364,50 +364,55 @@ class Applicant(models.Model):
 class DataAcademic(models.Model):
     _name = 'tyt_recruitment.data_academic'
     _description = 'tyt_recruitment.data_academic'
+    _inherit = ['mail.thread']
 
-    degree = fields.Char(string="Último grado de estudios")
-    institution = fields.Char(string="Institución académica")
-    specification = fields.Char(string="Comprobante de estudio")
+    degree = fields.Char(string="Último grado de estudios", tracking=True)
+    institution = fields.Char(string="Institución académica", tracking=True)
+    specification = fields.Char(string="Comprobante de estudio", tracking=True)
 
-    job_application_id = fields.Many2one('tyt_recruitment.job_application', string="Referencias", ondelete='cascade')
+    job_application_id = fields.Many2one('tyt_recruitment.job_application', string="Referencias", ondelete='cascade', tracking=True)
 
 class FamilyDataDetail(models.Model):
     _name = 'tyt_recruitment.family_data_detail'
     _description = 'tyt_recruitment.family_data_detail'
+    _inherit = ['mail.thread']
 
-    type = fields.Char(string="Tipo")
-    name = fields.Char(string="Nombre")
-    occupation = fields.Char(string="Ocupación")
-    phone_number = fields.Char(string="Teléfono")
+    type = fields.Char(string="Tipo", tracking=True)
+    name = fields.Char(string="Nombre", tracking=True)
+    occupation = fields.Char(string="Ocupación", tracking=True)
+    phone_number = fields.Char(string="Teléfono", tracking=True)
 
 class JobHistory(models.Model):
     _name = 'tyt_recruitment.job_history'
     _description = 'tyt_recruitment.job_history'
+    _inherit = ['mail.thread']
 
-    company_name = fields.Char(string="Nombre de la compañía")
-    start_date = fields.Date(string="Desde")
-    end_date = fields.Date(string="Hasta")
-    separation_reason = fields.Char(string="Motivo de serparación")
-    weekly_salary = fields.Char(string="Salario semanal")
+    company_name = fields.Char(string="Nombre de la compañía", tracking=True)
+    start_date = fields.Date(string="Desde", tracking=True)
+    end_date = fields.Date(string="Hasta", tracking=True)
+    separation_reason = fields.Char(string="Motivo de serparación", tracking=True)
+    weekly_salary = fields.Char(string="Salario semanal", tracking=True)
 
-    job_application_id = fields.Many2one('tyt_recruitment.job_application', string="Solicitud", ondelete='cascade')
+    job_application_id = fields.Many2one('tyt_recruitment.job_application', string="Solicitud", ondelete='cascade', tracking=True)
 
 class JobReference(models.Model):
     _name = 'tyt_recruitment.reference'
     _description = 'tyt_recruitment.reference'
+    _inherit = ['mail.thread']
 
-    name = fields.Char(string="Nombre completo")
-    type = fields.Char(string="Tipo")
-    occupation = fields.Char(string="Ocupación/Giro")
-    phone_number = fields.Char(string="Teléfono")
+    name = fields.Char(string="Nombre completo", tracking=True)
+    type = fields.Char(string="Tipo", tracking=True)
+    occupation = fields.Char(string="Ocupación/Giro", tracking=True)
+    phone_number = fields.Char(string="Teléfono", tracking=True)
 
-    job_application_id = fields.Many2one('tyt_recruitment.job_application', string="Referencias", ondelete='cascade')
+    job_application_id = fields.Many2one('tyt_recruitment.job_application', string="Referencias", ondelete='cascade', tracking=True)
 
 class Child(models.Model):
     _name = 'tyt_recruitment.child'
     _description = 'tyt_recruitment.child'
+    _inherit = ['mail.thread']
 
-    name = fields.Char(string="Nombre")
-    age = fields.Char(string="Edad") 
+    name = fields.Char(string="Nombre", tracking=True)
+    age = fields.Char(string="Edad", tracking=True) 
 
-    job_application_id = fields.Many2one('tyt_recruitment.job_application', string="Aplicante", ondelete='cascade')
+    job_application_id = fields.Many2one('tyt_recruitment.job_application', string="Aplicante", ondelete='cascade', tracking=True)

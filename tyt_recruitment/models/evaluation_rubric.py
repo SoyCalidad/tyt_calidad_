@@ -24,7 +24,7 @@ class EvaluationRubric(models.Model):
     date = fields.Date(string="Fecha", tracking=True)
     auditor = fields.Many2one('hr.employee', string="Auditor", tracking=True)
 
-    attendance_id = fields.Many2one('tyt_recruitment.attendance', string="Capacitación")
+    attendance_id = fields.Many2one('tyt_recruitment.attendance', string="Capacitación", tracking=True)
     week = fields.Char(related="attendance_id.week", string="Semana", tracking=True)
     coach = fields.Many2one(related="attendance_id.trainer", string="Entrenador", tracking=True)
     campaign = fields.Many2one(related="attendance_id.campaign_id", string="Campaña", tracking=True)
@@ -112,34 +112,37 @@ class EvaluationRubric(models.Model):
     _name = 'tyt_recruitment.detail_evaluation_rubric'
     _description = 'Pregunta de rúbrica de evaluación al expositor'
     _rec_name = 'id'
+    _inherit = ['mail.thread']
 
-    weighing = fields.Integer(string="Ponderación")
-    concept = fields.Char(string="Concepto")
-    description = fields.Text(string="Descripción")
+    weighing = fields.Integer(string="Ponderación", tracking=True)
+    concept = fields.Char(string="Concepto", tracking=True)
+    description = fields.Text(string="Descripción", tracking=True)
 
 class EvaluationRubric(models.Model):
     _name = 'tyt_recruitment.input_evaluation_rubric'
     _description = 'Respuesta de rúbrica de evaluación al expositor'
-    _rec_name = 'id'  
+    _rec_name = 'id'
+    _inherit = ['mail.thread']
 
-    compliance = fields.Selection([('yes', 'Sí'), ('no', 'No')], string="Cumple")
-    comment = fields.Char(string="Comentario")
+    compliance = fields.Selection([('yes', 'Sí'), ('no', 'No')], string="Cumple", tracking=True)
+    comment = fields.Char(string="Comentario", tracking=True)
 
-    evaluation_rubric_id = fields.Many2one('tyt_recruitment.evaluation_rubric', string="Rúbrica de evaluación")
-    detail_evaluation_rubric_id = fields.Many2one('tyt_recruitment.detail_evaluation_rubric', string="Respuesta")
+    evaluation_rubric_id = fields.Many2one('tyt_recruitment.evaluation_rubric', string="Rúbrica de evaluación", tracking=True)
+    detail_evaluation_rubric_id = fields.Many2one('tyt_recruitment.detail_evaluation_rubric', string="Respuesta", tracking=True)
 
-    weighing = fields.Integer(related='detail_evaluation_rubric_id.weighing', string="Ponderación")
-    concept = fields.Char(related='detail_evaluation_rubric_id.concept', string="Concepto")
-    description = fields.Text(related='detail_evaluation_rubric_id.description', string="Descripción")
+    weighing = fields.Integer(related='detail_evaluation_rubric_id.weighing', string="Ponderación", tracking=True)
+    concept = fields.Char(related='detail_evaluation_rubric_id.concept', string="Concepto", tracking=True)
+    description = fields.Text(related='detail_evaluation_rubric_id.description', string="Descripción", tracking=True)
     
-    evalutation_rubric_id = fields.Many2one('tyt_recruitment.evaluation_rubric', string="Componente de rúbrica")
+    evalutation_rubric_id = fields.Many2one('tyt_recruitment.evaluation_rubric', string="Componente de rúbrica", tracking=True)
 
 class EvaluationSignatureWizard(models.TransientModel):
     _name = 'tyt_recruitment.evaluation_signature_wizard'
     _description = 'Wizard para capturar la firma en la rúbrica de evaluación'
+    _inherit = ['mail.thread']
 
-    evaluation_rubric_id = fields.Many2one('tyt_recruitment.evaluation_rubric', string="Evaluación", required=True)
-    signature = fields.Binary(string="Firma")
+    evaluation_rubric_id = fields.Many2one('tyt_recruitment.evaluation_rubric', string="Evaluación", required=True, tracking=True)
+    signature = fields.Binary(string="Firma", tracking=True)
 
     def action_save_signature(self):
         if self.signature:
