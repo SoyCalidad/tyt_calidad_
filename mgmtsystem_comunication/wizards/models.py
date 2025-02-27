@@ -9,6 +9,7 @@ from PIL import Image
 
 class ComunicationPlanWizard(models.TransientModel):
     _name = 'comunication.plan.wizard'
+    _description = "comunication.plan.wizard"
 
     comunication_plan_id = fields.Many2one(
         'comunication.plan', string='Programa de comunicación', required=True)
@@ -27,6 +28,7 @@ class ComunicationPlanWizard(models.TransientModel):
 
 class ComunicationPlanLineWizard(models.TransientModel):
     _name = 'comunication.plan.line.wizard'
+    _description = "comunication.plan.line.wizard"
 
     comunication_plan_line_id = fields.Many2one(
         'comunication.plan.line', string='Plan de comunicación', required=True)
@@ -45,6 +47,8 @@ class ComunicationPlanLineWizard(models.TransientModel):
 
 class ComunicationPlanLineWizardReport(models.AbstractModel):
     _name = 'report.mgmtsystem_comunication.comunication_plan_line_report'
+    _description = "report.mgmtsystem_comunication.comunication_plan_line_report"
+
 
     @api.model
     def _get_report_values(self, docids, data=None):
@@ -64,6 +68,8 @@ class ComunicationPlanLineWizardReport(models.AbstractModel):
 
 class RecordMeetingWizard(models.TransientModel):
     _name = 'record.meeting.wizard'
+    _description = "record.meeting.wizard"
+
 
     record_meeting_id = fields.Many2one(
         'record.meeting', string='Acta de Reunión')
@@ -95,6 +101,8 @@ class RecordMeetingWizard(models.TransientModel):
 
 class RecordMeetingWizardReport(models.AbstractModel):
     _name = 'report.mgmtsystem_comunication.record_meeting_report_template'
+    _description = "report.mgmtsystem_comunication.record_meeting_report_template"
+
 
     @api.model
     def _get_report_values(self, docids, data=None):

@@ -89,6 +89,7 @@ class TrainingPlanLine(models.Model):
 
 class MgmtsystemContextOrganizationChart(models.Model):
     _name = 'mgmtsystem.context.organization_chart'
+    _description = "mgmtsystem.context.organization_chart"
     _inherit = ['mgmtsystem.context.organization_chart', 'documents.mixin']
 
     document_count = fields.Integer(compute='_compute_document_count')

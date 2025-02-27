@@ -4,6 +4,7 @@ from collections import defaultdict
 
 class ProcessEditionReport(models.AbstractModel):
     _name = 'report.mgmtsystem_process.report_process_edition_template'
+    _description = "report.mgmtsystem_process.report_process_edition_template"
 
     @api.model
     def _get_report_values(self, docids, data=None):

@@ -6,6 +6,8 @@ from odoo.exceptions import UserError, RedirectWarning, ValidationError
 
 class PlanInfrastructureLine(models.Model):
     _name = 'mgmtsystem.infrastructure.line'
+    _description = "mgmtsystem.infrastructure.line"
+
 
     plani_id = fields.Many2one(
         string=u'Programa de infraestructura',
@@ -105,7 +107,6 @@ class PlanInfrastructure(models.Model):
     _description = "Programa de infraestructura"
 
     lines_ids = fields.One2many(
-        string=u'Lineas',
         comodel_name='mgmtsystem.infrastructure.line',
         inverse_name='plani_id',
         copy=True,

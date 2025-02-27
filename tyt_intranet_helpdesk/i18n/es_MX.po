@@ -192,7 +192,7 @@ msgstr ""
 #: model_terms:ir.ui.view,arch_db:tyt_intranet_helpdesk.mailbox_followup
 #: model_terms:ir.ui.view,arch_db:tyt_intranet_helpdesk.portal_my_mailbox
 msgid "Buzón"
-msgstr ""
+msgstr "Buzón de sugerencias"
 
 #. module: tyt_intranet_helpdesk
 #: model:ir.model.fields,field_description:tyt_intranet_helpdesk.field_tyt_intranet_mailbox__close_date
@@ -424,7 +424,7 @@ msgstr "Baja"
 #: model_terms:ir.ui.view,arch_db:tyt_intranet_helpdesk.portal_my_home_mailbox
 #: model_terms:ir.ui.view,arch_db:tyt_intranet_helpdesk.portal_my_home_menu_mailbox
 msgid "Mailbox"
-msgstr "Buzón"
+msgstr "Buzón de sugerencias"
 
 #. module: tyt_intranet_helpdesk
 #: model_terms:ir.ui.view,arch_db:tyt_intranet_helpdesk.portal_my_mailbox
@@ -449,7 +449,7 @@ msgstr "Sitio"
 #. module: tyt_intranet_helpdesk
 #: model:mail.template,name:tyt_intranet_helpdesk.mail_template_tyt_intranet_mailbox
 msgid "Mailbox: Notification"
-msgstr "Notificación de buzón"
+msgstr "Notificación de buzón de sugerencias"
 
 #. module: tyt_intranet_helpdesk
 #: model:ir.model.fields,field_description:tyt_intranet_helpdesk.field_tyt_intranet_mailbox__message_main_attachment_id
@@ -803,7 +803,7 @@ msgstr "Debe seleccionar un responsable"
 #. module: tyt_intranet_helpdesk
 #: model:mail.template,subject:tyt_intranet_helpdesk.mail_template_tyt_intranet_mailbox
 msgid "{{ object.message_type_id.name }} - (ID: #{{ object.id }})"
-msgstr "Notificación de buzón"
+msgstr "Notificación de buzón de sugerencias"
 
 #. module: tyt_intranet_helpdesk
 #: model_terms:ir.ui.view,arch_db:tyt_intranet_helpdesk.mailbox_form_send

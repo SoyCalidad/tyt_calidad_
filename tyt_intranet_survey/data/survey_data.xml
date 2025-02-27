@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data noupdate="1">
+        <record id="tyt_survey_question_answer_simple_choice_1" model="tyt.survey.question.answer">
+            <field name="value">Muy bien</field>
+            <field name="answer_score">5.0</field>
+        </record>
+
+        <record id="tyt_survey_question_answer_simple_choice_2" model="tyt.survey.question.answer">
+            <field name="value">Bien</field>
+            <field name="answer_score">4.0</field>
+        </record>
+
+        <record id="tyt_survey_question_answer_simple_choice_3" model="tyt.survey.question.answer">
+            <field name="value">Mejorar</field>
+            <field name="answer_score">3.0</field>
+        </record>
+
+        <record id="tyt_survey_question_answer_simple_choice_4" model="tyt.survey.question.answer">
+            <field name="value">Mal</field>
+            <field name="answer_score">2.0</field>
+        </record>
+
+        <record id="tyt_survey_question_answer_simple_choice_5" model="tyt.survey.question.answer">
+            <field name="value">Muy mal</field>
+            <field name="answer_score">1.0</field>
+        </record>
+    </data>
+</odoo>

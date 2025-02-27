@@ -8,6 +8,8 @@ import logging
 
 class CrossSwotWizard(models.TransientModel):
     _name = "wizard.cross_swot.report"
+    _description = "wizard.cross_swot.report"
+
 
     cross_swot_id = fields.Many2one(
         'mgmtsystem.context.cross.swot', 
@@ -22,6 +24,8 @@ class CrossSwotWizard(models.TransientModel):
 
 class CrossSwotReport(models.AbstractModel):
         _name = 'report.mgmtsystem_context.report_cross_swot_template'
+        _description = "report.mgmtsystem_context.report_cross_swot_template"
+
 
         @api.model
         def _get_report_values(self, docids, data=None):

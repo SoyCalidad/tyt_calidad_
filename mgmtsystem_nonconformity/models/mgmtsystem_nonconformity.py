@@ -160,10 +160,10 @@ class MgmtsystemNonconformity(models.Model):
 
     root_cause = fields.Char(string='Causa raiz')
 
-    severity_id = fields.Many2one(
-        'mgmtsystem.nonconformity.severity',
-        'Severidad',
-    )
+    # severity_id = fields.Many2one(
+    #     'mgmtsystem.nonconformity.severity',
+    #     'Severidad',
+    # )
     analysis = fields.Text('Analisis')
 
     # 3. Action Plan

@@ -65,7 +65,6 @@ class NC(models.TransientModel):
         ondelete='cascade',
     )
     wline_ids = fields.One2many(
-        string=u'W Lineas',
         comodel_name='wizard.create.nc.line',
         inverse_name='nc_id',
     )

@@ -6,11 +6,11 @@ class CompanypurchaseOnboarding(models.Model):
 
     # employee dashboard onboarding
     purchase_onboarding_state = fields.Selection([('not_done', "Not done"), ('just_done', "Just done"), (
-        'done', "Done"), ('closed', "Closed")], string="State of the purchase onboarding panel", default='not_done')
+        'done', "Done"), ('closed', "Closed")], default='not_done')
     purchase_product_onboarding_state = fields.Selection([('not_done', "Not done"), ('just_done', "Just done"), (
-        'done', "Done"), ('closed', "Closed")], string="State of the purchase product onboarding panel", default='not_done')
+        'done', "Done"), ('closed', "Closed")], default='not_done')
     purchase_order_onboarding_state = fields.Selection([('not_done', "Not done"), ('just_done', "Just done"), (
-        'done', "Done"), ('closed', "Closed")], string="State of the purchase onboarding panel", default='not_done')
+        'done', "Done"), ('closed', "Closed")], default='not_done')
 
     @api.model
     def action_open_purchase_product(self, action_ref=None):

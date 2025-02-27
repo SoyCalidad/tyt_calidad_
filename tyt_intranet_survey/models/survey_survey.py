@@ -6,16 +6,16 @@ class Survey(models.Model):
 
     access_mode = fields.Selection(selection_add=[('intranet', 'Intranet')], ondelete={'intranet': 'cascade'})
     questions_mandatory = fields.Boolean('Mandatory Questions', default=False)
-    job_id = fields.Many2one('hr.job', string='Job Position')
-    department_id = fields.Many2one('hr.department', string='Department')
+    job_id = fields.Many2one('hr.job', string='Job Position', copy=False)
+    department_id = fields.Many2one('hr.department', string='Department', copy=False)
     gps = fields.Boolean(string='gps')
-    group_ids = fields.Many2many('res.groups', string='Groups')
+    group_ids = fields.Many2many('res.groups', string='Groups', copy=False)
     published_start_date = fields.Date('Published Start Date', copy=False)
     published_end_date = fields.Date('Published End Date', copy=False)
     publish_state = fields.Selection([
         ('draft', 'Draft'),
         ('published', 'Published'),
-    ], string='Publish State', default='draft')
+    ], string='Publish State', default='draft', copy=False)
 
     @api.onchange('gps')
     def onchange_gps(self):

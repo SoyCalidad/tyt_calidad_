@@ -1,2 +1,5 @@
 id,name,model_id:id,group_id:id,perm_read,perm_write,perm_create,perm_unlink
 access_survey_publish_user,survey.publish.user,model_survey_publish,tyt_intranet_base.group_intranet_user,1,1,1,1
+
+access_tyt_survey_question_answer_user,tyt.survey.question.answer.user,model_tyt_survey_question_answer,tyt_intranet_base.group_intranet_user,1,1,1,0
+access_tyt_survey_question_answer_manager,tyt.survey.question.answer.manager,model_tyt_survey_question_answer,tyt_intranet_base.group_intranet_manager,1,1,1,1

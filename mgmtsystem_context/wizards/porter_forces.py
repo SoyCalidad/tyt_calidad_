@@ -7,6 +7,8 @@ import logging
 
 class PorterForcesReport(models.AbstractModel):
     _name = 'report.mgmtsystem_context.external_issue_template'
+    _description = "report.mgmtsystem_context.external_issue_template"
+
 
     @api.model
     def _get_report_values(self, docids, data=None):
@@ -24,6 +26,8 @@ class PorterForcesReport(models.AbstractModel):
 
 class PorterForcesWizard(models.TransientModel):
     _name = "wizard.porter_forces.report"
+    _description = "wizard.porter_forces.report"
+
 
     external_issue_id = fields.Many2one('mgmtsystem.context.external_issue',
                                         string='Fuerza de Porter',

@@ -5,7 +5,7 @@
     'summary': 'Añade características al módulo DMS',
     'author': 'Soy Calidad',
     'website': 'www.soycalidad.com',
-    'license': '',
+    'license': 'Other proprietary',
     'category': 'dms',
     'depends': [
         'mgmtsystem_audit',

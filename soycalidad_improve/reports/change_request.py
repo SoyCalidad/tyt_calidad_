@@ -24,6 +24,7 @@ class MgmtsystemChangeRequestReportWizard(models.TransientModel):
 
 class ChangeRequestReportXls(models.AbstractModel):
     _name = 'report.report_change_request'
+    _description = "report.report_change_request"
     _inherit = 'report.report_xlsx.abstract'
 
     def generate_xlsx_report(self, workbook, data, matrixes):

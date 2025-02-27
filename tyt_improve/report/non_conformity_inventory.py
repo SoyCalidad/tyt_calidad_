@@ -10,6 +10,7 @@ import re
 
 class NonconformityInventoryMixin(models.AbstractModel):
     _name = 'report.tyt_improve.nonconformity_inventory_mixin'
+    _description = "report.tyt_improve.nonconformity_inventory_mixin"
     _inherit = 'report.report_xlsx.abstract'
 
     def generate_nonconformity_report(self, workbook, data, nonconformities):
@@ -143,6 +144,7 @@ class NonconformityInventoryMixin(models.AbstractModel):
 
 class GeneralNonconformityReport(models.AbstractModel):
     _name = 'report.tyt_improve.general_nonconformity_inventory'
+    _description = "report.tyt_improve.general_nonconformity_inventory"
     _inherit = 'report.tyt_improve.nonconformity_inventory_mixin'
 
     def generate_xlsx_report(self, workbook, data, records):

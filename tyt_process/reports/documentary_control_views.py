@@ -10,6 +10,7 @@ from PIL import Image
 
 class IndividualReport(models.AbstractModel):
     _name = 'report.tyt_process.record_inventory_report'
+    _description = "report.tyt_process.record_inventory_report"
     _inherit = 'report.report_xlsx.abstract'
 
     def generate_xlsx_report(self, workbook, data, records):

@@ -9,7 +9,7 @@
     """,
 
     'author': "soycalidad",
-
+    'license': 'Other proprietary',
     'category': 'Management System',
     'version': '0.1',
 

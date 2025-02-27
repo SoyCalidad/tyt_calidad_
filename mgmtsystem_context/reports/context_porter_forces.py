@@ -12,6 +12,8 @@ from odoo.tools import DEFAULT_SERVER_DATE_FORMAT
 
 class PorterForcesReportPDF(models.AbstractModel):
     _name = 'report.mgmtsystem_context.report_porter_forces_pdf'
+    _description = "report.mgmtsystem_context.report_porter_forces_pdf"
+
 
     @api.model
     def _get_report_values(self, docids, data=None):
@@ -27,6 +29,8 @@ class PorterForcesReportPDF(models.AbstractModel):
 class PorterForcesReportXLS(models.AbstractModel):
     _name = 'report.mgmtsystem_context.report_porter_forces'
     _inherit = 'report.report_xlsx.abstract'
+    _description = "report.mgmtsystem_context.report_porter_forces"
+
 
     def generate_xlsx_report(self, workbook, data, partners):
         """Generate a xls report with the data

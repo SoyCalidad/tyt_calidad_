@@ -10,6 +10,7 @@ from odoo import api, fields, models
 
 class LegalPlanReport(models.AbstractModel):
     _name = 'report.mgmtsystem_legal.report_requirements_template'
+    _description = "report.mgmtsystem_legal.report_requirements_template"
 
     @api.model
     def _get_report_values(self, docids, data=None):
@@ -28,6 +29,7 @@ class LegalPlanReport(models.AbstractModel):
 
 class LegalPlanReportWizard(models.TransientModel):
     _name = 'legal.plan.report.wizard'
+    _description = "legal.plan.report.wizard"
 
     def action_print(self):
         return self.env.ref('mgmtsystem_legal.report_announcement').report_action(self.plan_ids)
@@ -35,9 +37,6 @@ class LegalPlanReportWizard(models.TransientModel):
     plan_ids = fields.Many2one(
         string='Planes legales',
         comodel_name='legal.plan',
-        relation='plan_legal_wizard_report_rel',
-        column1='plan_id',
-        column2='wizard_id',
         required=True,
     )
 
@@ -47,6 +46,7 @@ class LegalPlanReportWizard(models.TransientModel):
 
 class ReportPlanLegal(models.AbstractModel):
     _name = 'report.mgmtsystem_legal.legal_plan'
+    _description = "report.mgmtsystem_legal.legal_plan"
     _inherit = 'report.report_xlsx.abstract'
 
     def generate_xlsx_report(self, workbook, data, plans):

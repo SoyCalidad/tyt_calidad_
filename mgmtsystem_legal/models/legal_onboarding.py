@@ -17,11 +17,11 @@ class ResCompany(models.Model):
 
     # legal dashboard onboarding
     legal_onboarding_state = fields.Selection([('not_done', "Not done"), ('just_done', "Just done"), (
-        'done', "Done"), ('closed', "Closed")], string="State of the account invoice onboarding panel", default='not_done')
+        'done', "Done"), ('closed', "Closed")], default='not_done')
     legal_plan_onboarding_state = fields.Selection([('not_done', "Not done"), ('just_done', "Just done"), (
-        'done', "Done"), ('closed', "Closed")], string="State of the account invoice onboarding panel", default='not_done')
+        'done', "Done"), ('closed', "Closed")], default='not_done')
     legal_legal_onboarding_state = fields.Selection([('not_done', "Not done"), ('just_done', "Just done"), (
-        'done', "Done"), ('closed', "Closed")], string="State of the account invoice onboarding panel", default='not_done')
+        'done', "Done"), ('closed', "Closed")], default='not_done')
 
     @api.model
     def action_open_legal_plan(self, action_ref=None):

@@ -15,7 +15,7 @@ class AuditPlan(models.Model):
         'process.edition', string='Procedimiento', domain=[('active','=',True)])
 
     parent_edition = fields.Many2one(
-        comodel_name='audit.plan', string='Padre', copy=False)
+        comodel_name='audit.plan', copy=False)
     old_versions = fields.One2many(
         comodel_name='audit.plan', string='Versiones antiguas',
         inverse_name='parent_edition', context={'active_version': False})
@@ -73,11 +73,11 @@ class AuditPlanValidation(models.Model):
     _inherit = 'mgmtsystem.validation.step'
 
     audit_plan_elaboration_id = fields.Many2one(
-        'audit.plan', string='Padre (Elaboración)')
+        'audit.plan')
     audit_plan_review_id = fields.Many2one(
-        'audit.plan', string='Padre (Revisión)')
+        'audit.plan')
     audit_plan_validation_id = fields.Many2one(
-        'audit.plan', string='Padre (Validación)')
+        'audit.plan')
 
 
 class AuditAudit(models.Model):
@@ -85,14 +85,9 @@ class AuditAudit(models.Model):
 
     state = fields.Selection(
         string=u'Estado',
-        selection=[
-            ('elaborate', 'En elaboración'),
-            ('review', 'En revisión'),
-            ('validate', 'En validación'),
-            ('validate_ok', 'Validado'),
+        selection_add=[
             ('send', 'Enviado'),
-            ('final', 'Finalizado'),
-            ('cancel', 'Obsoleto'),
+            ('final', 'Finalizado')
         ],
         default='elaborate',
         copy=False,
@@ -109,7 +104,7 @@ class AuditAudit(models.Model):
         'process.edition', string='Procedimiento', domain=[('active','=',True)])
 
     parent_edition = fields.Many2one(
-        comodel_name='audit.audit', string='Padre', copy=False)
+        comodel_name='audit.audit', copy=False)
     old_versions = fields.One2many(
         comodel_name='audit.audit', string='Versiones antiguas',
         inverse_name='parent_edition', context={'active_version': False})
@@ -132,8 +127,8 @@ class AudiAuditValidation(models.Model):
     _inherit = 'mgmtsystem.validation.step'
 
     audit_audit_elaboration_id = fields.Many2one(
-        'audit.audit', string='Padre (Elaboración)')
+        'audit.audit')
     audit_audit_review_id = fields.Many2one(
-        'audit.audit', string='Padre (Revisión)')
+        'audit.audit')
     audit_audit_validation_id = fields.Many2one(
-        'audit.audit', string='Padre (Validación)')
+        'audit.audit')

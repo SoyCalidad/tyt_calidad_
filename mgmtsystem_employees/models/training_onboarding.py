@@ -17,11 +17,11 @@ class ResCompany(models.Model):
 
     # training dashboard onboarding
     training_onboarding_state = fields.Selection([('not_done', "Not done"), ('just_done', "Just done"), (
-        'done', "Done"), ('closed', "Closed")], string="State of the account invoice onboarding panel", default='not_done')
+        'done', "Done"), ('closed', "Closed")], default='not_done')
     training_plan_onboarding_state = fields.Selection([('not_done', "Not done"), ('just_done', "Just done"), (
-        'done', "Done"), ('closed', "Closed")], string="State of the account invoice onboarding panel", default='not_done')
+        'done', "Done"), ('closed', "Closed")], default='not_done')
     training_training_onboarding_state = fields.Selection([('not_done', "Not done"), ('just_done', "Just done"), (
-        'done', "Done"), ('closed', "Closed")], string="State of the account invoice onboarding panel", default='not_done')
+        'done', "Done"), ('closed', "Closed")], default='not_done')
 
     @api.model
     def action_open_training_plan(self, action_ref=None):
@@ -70,7 +70,7 @@ class TrainingTraining(models.Model):
         """ Set the onboarding step as done """
         pass
 
-    @api.onchange('training_id')
+    #@api.onchange('training_id')
     def send_final(self):
         super().send_final()
         self.env.company.sudo().set_onboarding_step_done(

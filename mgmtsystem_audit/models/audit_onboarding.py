@@ -17,13 +17,13 @@ class ResCompany(models.Model):
 
     # audit dashboard onboarding
     audit_onboarding_state = fields.Selection([('not_done', "Not done"), ('just_done', "Just done"), (
-        'done', "Done"), ('closed', "Closed")], string="State of the account invoice onboarding panel", default='not_done')
+        'done', "Done"), ('closed', "Closed")], default='not_done')
     audit_plan_onboarding_state = fields.Selection([('not_done', "Not done"), ('just_done', "Just done"), (
-        'done', "Done"), ('closed', "Closed")], string="State of the account invoice onboarding panel", default='not_done')
+        'done', "Done"), ('closed', "Closed")], default='not_done')
     audit_audit_onboarding_state = fields.Selection([('not_done', "Not done"), ('just_done', "Just done"), (
-        'done', "Done"), ('closed', "Closed")], string="State of the account invoice onboarding panel", default='not_done')
+        'done', "Done"), ('closed', "Closed")], default='not_done')
     audit_report_onboarding_state = fields.Selection([('not_done', "Not done"), ('just_done', "Just done"), (
-        'done', "Done"), ('closed', "Closed")], string="State of the audit report onboarding ", default='not_done')
+        'done', "Done"), ('closed', "Closed")], default='not_done')
 
     @api.model
     def action_open_audit_plan(self, action_ref=None):

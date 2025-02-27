@@ -118,7 +118,7 @@ class MgmtCateg(models.Model):
         'mgmtsystem.validation.step', 'mgmt_categ_validation_id', string='Validación')
     
     parent_edition = fields.Many2one(
-        comodel_name='mgmt.categ', string='Padre', copy=False)
+        comodel_name='mgmt.categ', copy=False)
     old_versions = fields.One2many(
         comodel_name='mgmt.categ', string='Versiones antiguas',
         inverse_name='parent_edition', context={'active_version': False})

@@ -16,7 +16,7 @@ class ManagementReviewPlan(models.Model):
         'process.edition', string='Procedimiento', domain=[('active','=',True)])
 
     parent_edition = fields.Many2one(
-        comodel_name='management.review.plan', string='Padre', copy=False)
+        comodel_name='management.review.plan', copy=False)
     old_versions = fields.One2many(
         comodel_name='management.review.plan', string='Versiones antiguas',
         inverse_name='parent_edition', context={'active_version': False})
@@ -75,14 +75,9 @@ class ManagementeReview(models.Model):
 
     state = fields.Selection(
         string=u'Estado',
-        selection=[
-            ('elaborate', 'En elaboración'),
-            ('review', 'En revisión'),
-            ('validate', 'En validación'),
-            ('validate_ok', 'Validado'),
+        selection_add=[
             ('tracked', 'En proceso'),
-            ('closed', 'Terminado'),
-            ('cancel', 'Obsoleto')
+            ('closed', 'Terminado')
         ],
         default='elaborate',
         copy=False,
@@ -99,7 +94,7 @@ class ManagementeReview(models.Model):
         'process.edition', string='Procedimiento', domain=[('active','=',True)])
 
     parent_edition = fields.Many2one(
-        comodel_name='management.review', string='Padre', copy=False)
+        comodel_name='management.review', copy=False)
     old_versions = fields.One2many(
         comodel_name='management.review', string='Versiones antiguas',
         inverse_name='parent_edition', context={'active_version': False})
@@ -124,15 +119,15 @@ class ManagementeReviewValidation(models.Model):
     _inherit = 'mgmtsystem.validation.step'
 
     mgmt_review_plan_elaboration_id = fields.Many2one(
-        'management.review.plan', string='Padre')
+        'management.review.plan')
     mgmt_review_plan_review_id = fields.Many2one(
-        'management.review.plan', string='Padre')
+        'management.review.plan')
     mgmt_review_plan_validation_id = fields.Many2one(
-        'management.review.plan', string='Padre')
+        'management.review.plan')
 
     mgmt_review_elaboration_id = fields.Many2one(
-        'management.review', string='Padre')
+        'management.review')
     mgmt_review_review_id = fields.Many2one(
-        'management.review', string='Padre')
+        'management.review')
     mgmt_review_validation_id = fields.Many2one(
-        'management.review', string='Padre')
+        'management.review')

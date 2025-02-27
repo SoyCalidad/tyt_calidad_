@@ -12,17 +12,17 @@ class ResCompany(models.Model):
 
     # general dashboard onboarding
     general_onboarding_state = fields.Selection([('not_done', "Not done"), ('just_done', "Just done"), (
-        'done', "Done"), ('closed', "Closed")], string="State of the account invoice onboarding panel", default='not_done')
+        'done', "Done"), ('closed', "Closed")], default='not_done')
     general_analysis_onboarding_state = fields.Selection([('not_done', "Not done"), ('just_done', "Just done"), (
-        'done', "Done"), ('closed', "Closed")], string="State of the account invoice onboarding panel", default='not_done')
+        'done', "Done"), ('closed', "Closed")], default='not_done')
     general_plan_onboarding_state = fields.Selection([('not_done', "Not done"), ('just_done', "Just done"), (
-        'done', "Done"), ('closed', "Closed")], string="State of the account invoice onboarding panel", default='not_done')
+        'done', "Done"), ('closed', "Closed")], default='not_done')
     general_do_onboarding_state = fields.Selection([('not_done', "Not done"), ('just_done', "Just done"), (
-        'done', "Done"), ('closed', "Closed")], string="State of the account invoice onboarding panel", default='not_done')
+        'done', "Done"), ('closed', "Closed")], default='not_done')
     general_check_onboarding_state = fields.Selection([('not_done', "Not done"), ('just_done', "Just done"), (
-        'done', "Done"), ('closed', "Closed")], string="State of the account invoice onboarding panel", default='not_done')
+        'done', "Done"), ('closed', "Closed")], default='not_done')
     general_act_onboarding_state = fields.Selection([('not_done', "Not done"), ('just_done', "Just done"), (
-        'done', "Done"), ('closed', "Closed")], string="State of the account invoice onboarding panel", default='not_done')
+        'done', "Done"), ('closed', "Closed")], default='not_done')
 
     @api.model
     def action_open_general_plan(self, action_ref=None):
@@ -198,6 +198,7 @@ class ResCompany(models.Model):
 
 class GeneralCheck(models.Model):
     _name = 'general.check'
+    _description = "general.check"
 
     def action_save_onboarding_general_plan_step(self):
         """ Set the onboarding step as done """

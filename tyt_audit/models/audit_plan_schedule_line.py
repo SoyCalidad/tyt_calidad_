@@ -27,3 +27,10 @@ class PlanGeneralScheduleLine(models.Model):
 
     # new field
     done = fields.Boolean(string="Realizado")
+    auditor_check = fields.Boolean(string='Auditor')
+    can_edit_auditor_check = fields.Boolean('Can Edit Auditor', compute='_compute_can_edit_auditor_check')
+    fixed_date_check = fields.Boolean(string='Fecha fija')
+
+    def _compute_can_edit_auditor_check(self):
+        for record in self:
+            record.can_edit_auditor_check = self.env.user.has_group('tyt_audit.group_audit_auditor')

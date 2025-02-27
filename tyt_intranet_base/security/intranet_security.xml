@@ -5,14 +5,15 @@
         <field name="sequence">50</field>
     </record>
 
-    <record id="group_intranet_manager" model="res.groups">
-        <field name="name">Administrator</field>
-        <field name="category_id" ref="module_category_intranet"/>
-        <field name="users" eval="[(4, ref('base.user_root')),(4, ref('base.user_admin'))]"/>
-    </record>
-
     <record id="group_intranet_user" model="res.groups">
         <field name="name">User</field>
         <field name="category_id" ref="module_category_intranet"/>
+    </record>
+
+    <record id="group_intranet_manager" model="res.groups">
+        <field name="name">Administrator</field>
+        <field name="category_id" ref="module_category_intranet"/>
+        <field name="implied_ids" eval="[(4, ref('group_intranet_user'))]"/>
+        <field name="users" eval="[(4, ref('base.user_root')),(4, ref('base.user_admin'))]"/>
     </record>
 </odoo>

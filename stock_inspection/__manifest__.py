@@ -13,7 +13,7 @@
     """,
 
     'author': "HC",
-
+    'license': 'Other proprietary',
     'category': 'Uncategorized',
     'version': '0.1',
 

@@ -113,9 +113,7 @@ class Audit(models.Model):
         string=u'Observaciones/Alcance',
         required=True,
     )
-    golds = fields.Text(
-        string=u'Objetivos',
-    )
+    golds = fields.Text()
 
     report_count = fields.Integer(
         string=u'Informes',
@@ -135,7 +133,6 @@ class Audit(models.Model):
     )
 
     line_ids = fields.One2many(
-        string=u'Lineas',
         comodel_name='audit.line',
         inverse_name='audit_id',
     )
@@ -214,6 +211,8 @@ class Audit(models.Model):
 class AuditLine(models.Model):
     _name = 'audit.line'
     _order = 'sequence, name, datetime'
+    _description = "audit.line"
+
 
     audit_id = fields.Many2one(
         string=u'Auditoría',
@@ -260,6 +259,8 @@ class AuditLine(models.Model):
 class AuditReport(models.Model):
     _name = "audit.report"
     _inherit = ['mail.thread', 'mail.activity.mixin', 'mgmtsystem.code']
+    _description = "audit.report"
+
 
     audit_id = fields.Many2one(
         string=u'Auditoría',
@@ -268,7 +269,6 @@ class AuditReport(models.Model):
     )
 
     line_ids = fields.One2many(
-        string=u'Lineas',
         comodel_name='report.line',
         inverse_name='report_id',
         copy=True,
@@ -284,9 +284,7 @@ class AuditReport(models.Model):
         string=u'Requisito de la norma',
     )
     scope = fields.Text(u'Alcance', required=True)
-    golds = fields.Text(
-        string=u'Objetivos',
-    )
+    golds = fields.Text()
     auditor_id = fields.Reference(selection=[('res.partner', 'Auditor externo'), (
         'hr.employee', 'Auditor interno'), ], string="Auditor")
     team_id = fields.Many2one(
@@ -333,6 +331,8 @@ class AuditReport(models.Model):
 
 class img_adjunt(models.Model):
     _name = "img.adjunt"
+    _description = "img.adjunt"
+
 
     name = fields.Char(
         string=u'Nombre',
@@ -356,6 +356,8 @@ class img_adjunt(models.Model):
 
 class ReportLine(models.Model):
     _name = "report.line"
+    _description = "report.line"
+
 
     report_id = fields.Many2one(
         string=u'Reporte',

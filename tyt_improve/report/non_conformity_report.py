@@ -8,6 +8,7 @@ from datetime import datetime
 
 class NonconformityReportMixin(models.AbstractModel):
     _name = 'report.tyt_improve.nonconformity_report_mixin'
+    _description = "report.tyt_improve.nonconformity_report_mixin"
     _inherit = 'report.report_xlsx.abstract'
 
     def generate_nonconformity_report(self, workbook, data, nonconformities):
@@ -149,6 +150,7 @@ class NonconformityReportMixin(models.AbstractModel):
 
 class IndividualNonconformityReport(models.AbstractModel):
     _name = 'report.tyt_improve.individual_nonconformity_report'
+    _description = "report.tyt_improve.individual_nonconformity_report"
     _inherit = 'report.tyt_improve.nonconformity_report_mixin'
 
     def generate_xlsx_report(self, workbook, data, nonconformities):
@@ -156,6 +158,7 @@ class IndividualNonconformityReport(models.AbstractModel):
 
 class GeneralNonconformityReport(models.AbstractModel):
     _name = 'report.tyt_improve.general_nonconformity_report'
+    _description = "report.tyt_improve.general_nonconformity_report"
     _inherit = 'report.tyt_improve.nonconformity_report_mixin'
 
     def generate_xlsx_report(self, workbook, data, records):

@@ -14,10 +14,4 @@
               name="Configuration"
               parent="tyt_intranet_base.intranet_menu_root"
               sequence="100"/>
-
-    <menuitem id="intranet_groups_menu_action"
-              name="Intranet Access Group"
-              action="intranet_groups_action"
-              parent="intranet_configuration_menu"
-              sequence="10"/>
 </odoo>

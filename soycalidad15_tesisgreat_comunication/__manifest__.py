@@ -5,7 +5,7 @@
     'summary': 'Añade características al módulo Calidad-Comunicaciones Tesis Great',
     'author': 'Soy Calidad',
     'website': 'www.soycalidad.com',
-    'license': '',
+    'license': 'Other proprietary',
     'category': 'soycalidad',
     'depends': [
         'mgmtsystem_comunication',

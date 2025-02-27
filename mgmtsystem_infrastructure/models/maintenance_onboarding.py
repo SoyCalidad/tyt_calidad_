@@ -17,15 +17,15 @@ class ResCompany(models.Model):
 
     # maintenance dashboard onboarding
     maintenance_onboarding_state = fields.Selection([('not_done', "Not done"), ('just_done', "Just done"), (
-        'done', "Done"), ('closed', "Closed")], string="State of the account invoice onboarding panel", default='not_done')
+        'done', "Done"), ('closed', "Closed")], default='not_done')
     maintenance_plan_onboarding_state = fields.Selection([('not_done', "Not done"), ('just_done', "Just done"), (
-        'done', "Done"), ('closed', "Closed")], string="State of the account invoice onboarding panel", default='not_done')
+        'done', "Done"), ('closed', "Closed")], default='not_done')
     maintenance_maintenance_onboarding_state = fields.Selection([('not_done', "Not done"), ('just_done', "Just done"), (
-        'done', "Done"), ('closed', "Closed")], string="State of the account invoice onboarding panel", default='not_done')
+        'done', "Done"), ('closed', "Closed")], default='not_done')
     calibration_plan_onboarding_state = fields.Selection([('not_done', "Not done"), ('just_done', "Just done"), (
-        'done', "Done"), ('closed', "Closed")], string="State of the account invoice onboarding panel", default='not_done')
+        'done', "Done"), ('closed', "Closed")], default='not_done')
     calibration_calibration_onboarding_state = fields.Selection([('not_done', "Not done"), ('just_done', "Just done"), (
-        'done', "Done"), ('closed', "Closed")], string="State of the account invoice onboarding panel", default='not_done')
+        'done', "Done"), ('closed', "Closed")], default='not_done')
 
     @api.model
     def action_open_maintenance_plan(self, action_ref=None):

@@ -5,7 +5,7 @@
     'summary': 'Personalización del módulo de riesgos para Soy Calidad',
     'author': 'Soy Calidad',
     'website': 'www.soycalidad.com',
-    'license': '',
+    'license': 'Other proprietary',
     'category': 'soycalidad',
     'depends': [
         'mgmtsystem_opportunity'

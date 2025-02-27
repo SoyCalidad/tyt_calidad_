@@ -3,6 +3,7 @@ from odoo import api, models, fields
 
 class JobFunctionWizard(models.TransientModel):
     _name = 'mgmt.job_function.report.wizard'
+    _description = "mgmt.job_function.report.wizard"
 
     job_id = fields.Many2one('hr.job', string='Puesto', required=True)
 

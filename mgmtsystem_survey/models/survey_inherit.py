@@ -5,6 +5,8 @@ from odoo import models, fields, api, _
 
 class TypeSurvey(models.Model):
     _name = 'survey.type'
+    _description = "survey.type"
+
 
     name = fields.Char(
         string='Nombre',
@@ -17,6 +19,8 @@ class TypeSurvey(models.Model):
 
 class SurveyReport(models.Model):
     _name = 'survey.report'
+    _description = "survey.report"
+
 
     # survey_id = fields.Many2one(
     #     string='Encuesta',
@@ -108,6 +112,8 @@ class SurveyReport(models.Model):
 
 class ReportActionNoconf(models.Model):
     _name = 'survey.report.actionnonc'
+    _description = "survey.report.actionnonc"
+
 
     survey_id = fields.Many2one(
         string='Reporte',
@@ -265,15 +271,6 @@ class Survey(models.Model):
             res.update({'line_ids': vals})
         return res
 
-    state = fields.Selection(
-        string="Survey Stage",
-        selection=[
-            ('draft', 'Draft'),
-            ('open', 'In Progress'),
-            ('closed', 'Closed'),
-        ], default='draft', required=True,
-        group_expand='_read_group_states'
-    )
 
     def action_survey_views(self):
         type_action = self._context.get('type_action', '')

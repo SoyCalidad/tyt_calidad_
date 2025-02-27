@@ -3,6 +3,8 @@ from odoo import api, fields, models
 
 class InductionWizard(models.TransientModel):
     _name = 'employee_induction.wizard'
+    _description = "employee_induction.wizard"
+
 
     company_id = fields.Many2one(
         string=u'Compañia',

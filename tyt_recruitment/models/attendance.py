@@ -335,3 +335,11 @@ class KardexAttendance(models.Model):
                     except ValueError:
                         continue
             record.highest_score = highest_score
+
+
+class ReasonForWithdrawal(models.Model):
+    _name = 'tyt_recruitment.reason_for_withdrawal'
+    _description = 'Motivo de la baja'
+    _rec_name = 'text'
+
+    text = fields.Char(required=True, string="Motivo")
