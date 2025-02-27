@@ -11,5 +11,6 @@ from . import (
     wizard_attendance,
     survey,
     evaluation_rubric,
-    certification_feedback
+    certification_feedback,
+    descriptive_letter
 )
