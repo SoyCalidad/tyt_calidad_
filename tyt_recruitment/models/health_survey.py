@@ -16,7 +16,7 @@ class HealthSurvey(models.Model):
     _rec_name = 'name'
     _inherit = ['mail.thread', 'mail.activity.mixin', 'iso_base.email_basic']
 
-    name = fields.Char(string='Nombre de la encuesta', tracking=True,)
+    name = fields.Char(string='Nombre de la encuesta', tracking=True)
     code = fields.Char(string='Código', tracking=True)
     question_ids = fields.One2many("survey.question", 'health_survey_id', string='Preguntass', tracking=True, store=True)
 
@@ -32,27 +32,30 @@ class SurveyQuestion(models.Model):
 class CompleteSurvey(models.Model):
     _name = 'tyt_recruitment.complete_survey'
     _description = 'Encuesta completa'
+    _inherit = ['mail.thread']
 
-    state = fields.Selection([('draft', "PorEnviar"),('sent', "Enviado"),], string="Estado", default='draft')
-    recruiter_comments = fields.Char(string="Comentarios del reclutador")
-    signature_image = fields.Binary(string="Firma del solicitante")
-    job_application_id = fields.Many2one("tyt_recruitment.job_application", string="Aplicaicón de trabajo")
-    survey_answer_ids = fields.One2many('tyt_recruitment.survey_answer', 'complete_survey_id', string="Respuestas")
+    state = fields.Selection([('draft', "PorEnviar"),('sent', "Enviado"),], string="Estado", default='draft', tracking=True)
+    recruiter_comments = fields.Char(string="Comentarios del reclutador", tracking=True)
+    signature_image = fields.Binary(string="Firma del solicitante", tracking=True)
+    job_application_id = fields.Many2one("tyt_recruitment.job_application", string="Aplicaicón de trabajo", tracking=True)
+    survey_answer_ids = fields.One2many('tyt_recruitment.survey_answer', 'complete_survey_id', string="Respuestas", tracking=True)
 
 class SurveyAnswer(models.Model):
     _name = 'tyt_recruitment.survey_answer'
     _description = 'Respuesta'
+    _inherit = ['mail.thread']
 
-    text = fields.Char(string="Respuesta")
-    extra_text = fields.Char(string="Campo extra")
-    multiple_ids = fields.One2many("tyt_recruitment.multiple_answer", 'survey_answer_id', string='Respuestas multiples', store=True)
+    text = fields.Char(string="Respuesta", tracking=True)
+    extra_text = fields.Char(string="Campo extra", tracking=True)
+    multiple_ids = fields.One2many("tyt_recruitment.multiple_answer", 'survey_answer_id', string='Respuestas multiples', store=True, tracking=True)
 
-    question_id = fields.Many2one("survey.question", string="Pregunta")
-    complete_survey_id = fields.Many2one("tyt_recruitment.complete_survey", string="Encuesta completa", ondelete='cascade')
+    question_id = fields.Many2one("survey.question", string="Pregunta", tracking=True)
+    complete_survey_id = fields.Many2one("tyt_recruitment.complete_survey", string="Encuesta completa", ondelete='cascade', tracking=True)
 
 class MultipleAnswer(models.Model):
     _name = 'tyt_recruitment.multiple_answer'
     _description = 'Multiple respuesta'
+    _inherit = ['mail.thread']
 
-    text = fields.Char(string="Respuesta detalle")
-    survey_answer_id = fields.Many2one('tyt_recruitment.survey_answer', string='Respuesta', ondelete='cascade')
+    text = fields.Char(string="Respuesta detalle", tracking=True)
+    survey_answer_id = fields.Many2one('tyt_recruitment.survey_answer', string='Respuesta', ondelete='cascade', tracking=True)

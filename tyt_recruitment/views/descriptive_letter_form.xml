@@ -1,0 +1,321 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <template id="template_descriptive_letter_form" name="Public Form">
+        <link rel="stylesheet" href="/web/static/lib/bootstrap/dist/css/bootstrap.css"/>
+        <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons/font/bootstrap-icons.css"/>
+        <style type="text/css">
+            body {
+                background-image: url(/tyt_recruitment/static/src/img/fondo_form.png);
+            }
+            .row{
+                background: white;
+            }
+            h1 {
+                background-color: #1f8296;
+                padding: 10px;
+                color: white;
+            }
+            .title-style {
+                background-color: #1f8296;
+                border: 2px solid #dee2e6;
+                padding: 10px;
+                color: white;
+                display: flex;
+                justify-content: center;
+                align-items: center;
+            }
+            .container-form {
+                display: block;
+                gap: 20px;
+                padding: 40px!important;
+            }
+
+            .main-container {
+                width: 90%;
+            }
+
+            .topic-container {
+                display: flex;
+                width: 100%;
+                margin-top: 2px;
+            }
+
+            .day-container {
+                width: 10%;
+                background-color: #b7dee8;
+                font-family: arial;
+                height: auto;
+                display: flex;
+                justify-content: center;
+                align-items: center;
+                font-weight: bold;
+                font-size: 18px;
+            }
+
+            .framing-container {
+                width: 10%;
+                background-color: #b7dee8;
+                font-family: arial;
+                font-weight: bold;
+                font-size: 25px;
+                height: auto;
+                writing-mode: vertical-lr;
+                text-orientation: upright;
+                display: flex;
+                justify-content: center;
+                align-items: center;
+            }
+
+            .topic-block {
+                width: 20%;
+                font-weight: bold;
+                text-align: center;
+                display: flex;
+                align-items: center;
+                justify-content: center;
+            }
+
+            .subtopic-block {
+                width: 80%;
+                text-align: center;
+                display: flex;
+                align-items: center;
+                justify-content: center;
+                flex-direction: column;
+            }
+            .subtopic-row {
+                width: 100%;
+                background-color: #b7dee8;
+                text-align: center;
+                display: flex;
+                align-items: center;
+                justify-content: center;
+            }
+            .subtopic-cell-3{
+                width: 20%;
+                height: 100%;
+            }
+            .subtopic-cell-2{
+                width: 15%;
+                height: 100%;
+            }
+            .subtopic-cell-1{
+                width: 9%;
+                height: 100%;
+            }
+            textarea {
+                height:100%;
+                font-size: 11px!important;
+                resize: none;
+            }
+        </style>
+        <div class="container-form mt-4 mb-4">
+            <form id="descriptive-letter-form" t-att-action="'/descriptive_letter/submit/' + str(template_id) + '/' + str(letter_id)" method="post" class="p-4 border rounded bg-light">
+                <h1 class="text-center">CARTA DESCRIPTIVA</h1>
+                <h5 class="text-center"> Es indispensable contestar todas las preguntas. </h5>
+                <div id="first-part">
+
+                    <section class="p-3">
+                        <div style="width:100%;display:flex;">
+                            <div class="title-style" style="width:10%">
+                                 Contenido temático 
+                            </div>
+                            <div style="width:90%;display:flex;">
+                                <div class="title-style" style="width:20%">
+                                     Objetivo particular/Específico 
+                                </div>
+                                <div style="width:80%;display:flex;">
+                                    <div class="title-style" style="width:15%">
+                                        Subtemas 
+                                    </div>
+                                    <div style="display: flex; flex-wrap: wrap;width: 40%;">
+                                        <div class="title-style" style="width: 100%;">
+                                            ACTIVIDADES DE APRENDIZAJE
+                                        </div>
+                                        <div class="title-style" style="width: 50%;">
+                                            INSTRUCTOR
+                                        </div>
+                                        <div class="title-style" style="width: 50%;">
+                                            PARTICIPANTE
+                                        </div>
+                                    </div>                                    
+                                    <div class="title-style" style="width:9%">
+                                    Técnicas instruccionales 
+                                    </div>
+                                    <div class="title-style" style="width:9%">
+                                        Técnicas grupales 
+                                    </div>
+                                    <div class="title-style" style="width:9%">
+                                        Evaluación 
+                                    </div>
+                                    <div class="title-style" style="width:9%">
+                                        Material requerido 
+                                    </div>
+                                    <div class="title-style" style="width:9%">
+                                        Tiempo 
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div style="display:flex;width:100%">
+                            <div class="framing-container border">
+                                ENCUADRE
+                            </div>
+                            <div class="main-container">
+                                <t t-foreach="framing_topics" t-as="topic">
+                                    <div class="topic-container border">
+                                        <div t-att-style="topic['topic_style']" class="topic-block">
+                                            <t t-esc="topic['name']"/>
+                                        </div>
+
+                                        <div class="subtopic-block">
+                                            <t t-foreach="topic['framing_subtopics']" t-as="subtopic">
+                                                <div t-att-style="subtopic['subtopic_style']" class="subtopic-row">
+                                                    <div class="subtopic-cell-2 border">
+                                                        <textarea class="form-control" id="subtopic_name" t-att-name="'name_' + str(subtopic['id'])"><t t-esc="subtopic['name']"/></textarea>
+                                                    </div>
+                                                    <div class="subtopic-cell-3 border">
+                                                        <textarea class="form-control" id="subtopic_a" t-att-name="'instructor_learning_activities_' + str(subtopic['id'])"><t t-esc="subtopic['instructor_learning_activities']"/></textarea>
+                                                    </div>
+                                                    <div class="subtopic-cell-3 border">
+                                                        <textarea class="form-control" id="subtopic_b" t-att-name="'participant_learning_activities_' + str(subtopic['id'])"><t t-esc="subtopic['participant_learning_activities']"/></textarea>
+                                                    </div>
+                                                    <div class="subtopic-cell-1 border">
+                                                        <textarea class="form-control" id="subtopic_c" t-att-name="'instructional_techniques_' + str(subtopic['id'])"><t t-esc="subtopic['instructional_techniques']"/></textarea>
+                                                    </div>
+                                                    <div class="subtopic-cell-1 border">
+                                                        <textarea class="form-control" id="subtopic_d" t-att-name="'group_techniques_' + str(subtopic['id'])"><t t-esc="subtopic['group_techniques']"/></textarea>
+                                                    </div>
+                                                    <div class="subtopic-cell-1 border">
+                                                        <textarea class="form-control" id="subtopic_e" t-att-name="'evaluation_' + str(subtopic['id'])"><t t-esc="subtopic['evaluation']"/></textarea>
+                                                    </div>
+                                                    <div class="subtopic-cell-1 border">
+                                                        <textarea class="form-control" id="subtopic_f" t-att-name="'required_material_' + str(subtopic['id'])"><t t-esc="subtopic['required_material']"/></textarea>
+                                                    </div>
+                                                    <div class="subtopic-cell-1 border">
+                                                        <textarea class="form-control" id="subtopic_g" t-att-name="'time_' + str(subtopic['id'])"><t t-esc="subtopic['time']"/></textarea>
+                                                    </div>
+                                                </div>
+                                            </t>
+                                        </div>
+                                    </div>
+                                </t>
+                            </div>
+                        </div>
+                    </section>
+
+                    <section class="p-3">
+                        <div style="width:100%;display:flex;">
+                            <div class="title-style" style="width:10%">
+                                 Contenido temático 
+                            </div>
+                            <div style="width:90%;display:flex;">
+                                <div class="title-style" style="width:20%">
+                                     Objetivo particular/Específico 
+                                </div>
+                                <div style="width:80%;display:flex;">
+                                    <div class="title-style" style="width:15%">
+                                        Subtemas 
+                                    </div>
+                                    <div style="display: flex; flex-wrap: wrap;width: 40%;">
+                                        <div class="title-style" style="width: 100%;">
+                                            ACTIVIDADES DE APRENDIZAJE
+                                        </div>
+                                        <div class="title-style" style="width: 50%;">
+                                            INSTRUCTOR
+                                        </div>
+                                        <div class="title-style" style="width: 50%;">
+                                            PARTICIPANTE
+                                        </div>
+                                    </div>                                    
+                                    <div class="title-style" style="width:9%">
+                                    Técnicas instruccionales 
+                                    </div>
+                                    <div class="title-style" style="width:9%">
+                                        Técnicas grupales 
+                                    </div>
+                                    <div class="title-style" style="width:9%">
+                                        Evaluación 
+                                    </div>
+                                    <div class="title-style" style="width:9%">
+                                        Material requerido 
+                                    </div>
+                                    <div class="title-style" style="width:9%">
+                                        Tiempo 
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <t t-foreach="days" t-as="day">
+                            <div style="display:flex;width:100%">
+                                <div class="day-container border">
+                                    <t t-esc="day['name']"/>
+                                </div>
+                                <div class="main-container">
+                                    <t t-foreach="day['framing_topics']" t-as="topic">
+                                        <div class="topic-container border">
+                                            <div t-att-style="topic['topic_style']" class="topic-block">
+                                                <t t-esc="topic['name']"/>
+                                            </div>
+
+                                            <div class="subtopic-block">
+                                                <t t-foreach="topic['framing_subtopics']" t-as="subtopic">
+                                                    <div t-att-style="subtopic['subtopic_style']" class="subtopic-row">
+                                                        <div class="subtopic-cell-2 border">
+                                                            <textarea class="form-control" id="subtopic_name" t-att-name="'name_' + str(subtopic['id'])"><t t-esc="subtopic['name']"/></textarea>
+                                                        </div>
+                                                        <div class="subtopic-cell-3 border">
+                                                            <textarea class="form-control" id="subtopic_a" t-att-name="'instructor_learning_activities_' + str(subtopic['id'])"><t t-esc="subtopic['instructor_learning_activities']"/></textarea>
+                                                        </div>
+                                                        <div class="subtopic-cell-3 border">
+                                                            <textarea class="form-control" id="subtopic_b" t-att-name="'participant_learning_activities_' + str(subtopic['id'])"><t t-esc="subtopic['participant_learning_activities']"/></textarea>
+                                                        </div>
+                                                        <div class="subtopic-cell-1 border">
+                                                            <textarea class="form-control" id="subtopic_c" t-att-name="'instructional_techniques_' + str(subtopic['id'])"><t t-esc="subtopic['instructional_techniques']"/></textarea>
+                                                        </div>
+                                                        <div class="subtopic-cell-1 border">
+                                                            <textarea class="form-control" id="subtopic_d" t-att-name="'group_techniques_' + str(subtopic['id'])"><t t-esc="subtopic['group_techniques']"/></textarea>
+                                                        </div>
+                                                        <div class="subtopic-cell-1 border">
+                                                            <textarea class="form-control" id="subtopic_e" t-att-name="'evaluation_' + str(subtopic['id'])"><t t-esc="subtopic['evaluation']"/></textarea>
+                                                        </div>
+                                                        <div class="subtopic-cell-1 border">
+                                                            <textarea class="form-control" id="subtopic_f" t-att-name="'required_material_' + str(subtopic['id'])"><t t-esc="subtopic['required_material']"/></textarea>
+                                                        </div>
+                                                        <div class="subtopic-cell-1 border">
+                                                            <textarea class="form-control" id="subtopic_g" t-att-name="'time_' + str(subtopic['id'])"><t t-esc="subtopic['time']"/></textarea>
+                                                        </div>
+                                                    </div>
+                                                </t>
+                                            </div>
+                                        </div>
+                                    </t>
+                                </div>
+                            </div>
+                        </t>
+                    </section>
+
+                    <section>
+                        <div class="row mt-4">
+                            <div class="col text-end">
+                                <button type="submit" class="btn btn-primary btn-lg">
+                                    Enviar
+                                </button>
+                            </div>
+                        </div>
+                    </section>
+                </div>
+            </form>
+        </div>
+    </template>
+
+    <template id="template_descriptive_letter_success" name="Form Submission Success">
+        <link rel="stylesheet" href="/web/static/lib/bootstrap/dist/css/bootstrap.css"/>
+        <div class="container text-center mt-5">
+            <h4>¡Gracias por enviar el formulario!</h4>
+            <br/>   
+        </div>
+    </template>
+</odoo>

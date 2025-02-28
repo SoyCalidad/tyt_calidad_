@@ -15,6 +15,7 @@
     ],
     'data': [
         'security/ir.model.access.csv',
+        'security/security.xml',
         'views/audit_plan_tyt_auditor.xml',
         'views/audit_actions.xml',
         'views/audit_application_form.xml',
@@ -37,6 +38,7 @@
         'data/iso9001_standard2.xml',
         'data/iso9001_standard3.xml',
         'data/iso9001_standard_complement.xml',
+        'data/mail_template_data.xml',
     ],
     'assets': {
         'web.report_assets_common': [

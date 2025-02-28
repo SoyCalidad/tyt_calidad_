@@ -1,0 +1,28 @@
+<?xml version="1.0"?>
+<odoo>
+    <record id="group_audit_auditor" model="res.groups">
+        <field name="name">Auditor: Lectura y edición</field>
+        <field name="implied_ids" eval="[(4, ref('mgmtsystem_audit.group_audit_all'))]"/>
+        <field name="category_id" ref="mgmtsystem_audit.audit_management"/>
+    </record>
+
+    <record model="ir.rule" id="audit_plan_auditor_document">
+        <field name="name">Permisos Totales</field>
+        <field name="model_id" ref="model_audit_plan"/>
+        <field name="groups" eval="[(4, ref('tyt_audit.group_audit_auditor'))]"/>
+        <field name="perm_read" eval="1"/>
+        <field name="perm_write" eval="1"/>
+        <field name="perm_create" eval="1"/>
+        <field name="perm_unlink" eval="1"/>
+    </record>
+
+    <record model="ir.rule" id="audit_audit_auditor_document">
+        <field name="name">Permisos Totales</field>
+        <field name="model_id" ref="model_audit_audit"/>
+        <field name="groups" eval="[(4, ref('tyt_audit.group_audit_auditor'))]"/>
+        <field name="perm_read" eval="1"/>
+        <field name="perm_write" eval="1"/>
+        <field name="perm_create" eval="1"/>
+        <field name="perm_unlink" eval="1"/>
+    </record>
+</odoo>
