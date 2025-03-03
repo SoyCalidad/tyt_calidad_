@@ -7,6 +7,7 @@
             <field name="arch" type="xml">
                 <tree editable="bottom" create="false">
                     <field name="scheduled_date"/>
+                    <field name="scheduled_date_is_sunday" invisible="1"/>
                     <field name="can_edit_auditor_check" invisible="1"/>
                     <field name="auditor_check" attrs="{'readonly': [('can_edit_auditor_check', '=', False)]}"/>
                     <field name="done" groups="!tyt_audit.group_audit_auditor"/>

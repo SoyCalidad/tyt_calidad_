@@ -24,6 +24,10 @@ class PlanGeneralScheduleLine(models.Model):
     scheduled_date = fields.Date(
         string='Fecha prevista',
     )
+    scheduled_date_is_sunday = fields.Boolean(
+        string="Fecha prevista es domingo",
+        compute="_compute_scheduled_date_is_sunday",
+    )
 
     # new field
     done = fields.Boolean(string="Realizado")
@@ -34,3 +38,8 @@ class PlanGeneralScheduleLine(models.Model):
     def _compute_can_edit_auditor_check(self):
         for record in self:
             record.can_edit_auditor_check = self.env.user.has_group('tyt_audit.group_audit_auditor')
+
+    @api.depends('scheduled_date')
+    def _compute_scheduled_date_is_sunday(self):
+        for record in self:
+            record.scheduled_date_is_sunday = record.scheduled_date and record.scheduled_date.weekday() == 6
