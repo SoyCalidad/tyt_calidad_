@@ -7,12 +7,13 @@ from math import ceil
 from odoo import api, fields, models
 from odoo.exceptions import UserError, ValidationError
 from PIL import Image
+from PIL import Image, UnidentifiedImageError
 
 
 class IndividualReport(models.AbstractModel):
     _name = 'report.tyt_audit.audit_checklist_report'
     _inherit = 'report.report_xlsx.abstract'
-    _description = "report.tyt_audit.audit_checklist_report"
+    _description = "Lista de verificación"
 
 
     def generate_xlsx_report(self, workbook, data, matrixes):
@@ -78,20 +79,23 @@ class IndividualReport(models.AbstractModel):
                     'I2:J4', '', logo_box_format )
 
                 company_id = self.env.user.company_id
+                if company_id.logo:
+                    try:
+                        buf_image = io.BytesIO(base64.b64decode(company_id.logo))
+                        im = Image.open(buf_image)
+                        width, height = im.size
+                        image_width = width
+                        image_height = height
+                        cell_width = 184.0
+                        cell_height = 184.0
+                        x_offset = 0.0
 
-                buf_image = io.BytesIO(base64.b64decode(company_id.logo))
-                im = Image.open(buf_image)
-                width, height = im.size
-                image_width = width
-                image_height = height
-                cell_width = 92.0
-                cell_height = 92.0
-                x_offset = 118.0
-
-                x_scale = cell_width/image_width
-                y_scale = cell_height/image_height
-                sheet.insert_image('I2', "logo.png", {
-                    'image_data': buf_image, 'x_scale': x_scale, 'y_scale': y_scale, 'x_offset': x_offset})
+                        x_scale = cell_width / image_width
+                        y_scale = cell_height / image_height
+                        sheet.insert_image('C5', "logo.png", {
+                            'image_data': buf_image, 'x_scale': x_scale, 'y_scale': y_scale, 'x_offset': x_offset})
+                    except (base64.binascii.Error, UnidentifiedImageError, OSError):
+                        pass
 
                 # Cabecera de la tabla
                 headers = ['N°','Norma ISO 9001:2015', 'CLÁUSULA', 'RESPONSABLE', 'VERIFICACIÓN', 'HALLAZGO', 'EVIDENCIA', 'COMENTARIO', 'EVALUACIÓN']
