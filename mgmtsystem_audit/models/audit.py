@@ -175,7 +175,6 @@ class Audit(models.Model):
             if message != "":
                 each.message_post(
                     body='Empleados que no recibieron notificación:<br></br>'+message)
-            each.send_send()
 
     def get_emails(self):
         emails = []
@@ -193,7 +192,6 @@ class Audit(models.Model):
         '''
         self.ensure_one()
         template = 'mgmtsystem_audit.email_template_mgmtsystem_audit'
-        self.send_send()
         return self.notify_users_by_email(template)
 
     def open_audit_report_form(self):
