@@ -13,6 +13,7 @@ from odoo.modules.module import get_module_resource
 
 class CustomerDirectoryXlsxReport(models.AbstractModel):
     _name = 'report.customer_directory_xlsx_report'
+    _description = "report.customer_directory_xlsx_report"
     _inherit = 'report.report_xlsx.abstract'
 
     def generate_xlsx_report(self, workbook, data, records):

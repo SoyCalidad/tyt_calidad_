@@ -18,6 +18,8 @@ from odoo.tools import DEFAULT_SERVER_DATETIME_FORMAT
 class AuditPlanXLS(models.AbstractModel):
     _name = 'report.mgmtsystem_audit.report_audit_plan'
     _inherit = 'report.report_xlsx.abstract'
+    _description = "report.mgmtsystem_audit.report_audit_plan"
+
 
     def generate_xlsx_report(self, workbook, data, partners):
         """Generate a xls report with the data

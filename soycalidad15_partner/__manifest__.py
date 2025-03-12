@@ -5,7 +5,7 @@
     'summary': 'Añade características "Partner" a Soy Calidad 15',
     'author': 'Soy Calidad',
     'website': 'www.soycalidad.com',
-    'license': '',
+    'license': 'Other proprietary',
     'category': 'soycalidad',
     'depends': [
         'hola_calidad',

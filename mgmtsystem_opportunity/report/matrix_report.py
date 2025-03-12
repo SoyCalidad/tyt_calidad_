@@ -29,10 +29,7 @@ class WizardMatrix(models.TransientModel):
 
     matrix_ids = fields.Many2one(
         string='Matriz',
-        comodel_name='matrix.matrix',
-        relation='matrix_wizard_report_rel',
-        column1='matrix_id',
-        column2='wizard_id',
+        comodel_name='matrix.matrix'
     )
 
     @api.onchange('type')
@@ -50,6 +47,8 @@ class WizardMatrix(models.TransientModel):
 class IndividualReport(models.AbstractModel):
     _name = 'report.mgmtsystem_opprisk.report'
     _inherit = 'report.report_xlsx.abstract'
+    _description = "report.mgmtsystem_opprisk.report"
+
 
     def generate_xlsx_report(self, workbook, data, matrixes):
         try:
@@ -261,6 +260,8 @@ class IndividualReport(models.AbstractModel):
 class MatrixReportXls(models.AbstractModel):
     _name = 'report.matrix_report_xls.xlsx'
     _inherit = 'report.report_xlsx.abstract'
+    _description = "report.matrix_report_xls.xlsx"
+
 
     def generate_xlsx_report(self, workbook, data, lines):
 

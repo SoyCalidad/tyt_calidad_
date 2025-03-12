@@ -6,7 +6,7 @@
     'description': 'Este módulo gestiona las No Conformidades en Odoo.',
     'author': 'Soy Calidad',
     'website': 'www.soycalidad.com',
-    'license': '',
+    'license': 'Other proprietary',
     'category': 'soycalidad',
     'depends': [
         'mgmtsystem_nonconformity',

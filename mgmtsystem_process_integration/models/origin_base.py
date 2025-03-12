@@ -58,6 +58,7 @@ class ModelOrigin(models.AbstractModel):
 
 class Origin(models.Model):
     _name = 'model.origin'
+    _description = "model.origin"
 
     def verify_model(self, model):
         menu = ''

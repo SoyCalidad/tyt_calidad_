@@ -8,6 +8,7 @@ from datetime import datetime
 
 class ConformityEvaluationReportMixin(models.AbstractModel):
     _name = 'report.tyt_improve.conformity_evaluation_report_mixin'
+    _description = "report.tyt_improve.conformity_evaluation_report_mixin"
     _inherit = 'report.report_xlsx.abstract'
 
     def generate_conformity_evaluation_report(self, workbook, data, evaluations):
@@ -109,6 +110,7 @@ class ConformityEvaluationReportMixin(models.AbstractModel):
 
 class IndividualConformityEvaluationReport(models.AbstractModel):
     _name = 'report.tyt_improve.individual_conformity_evaluation_report'
+    _description = "report.tyt_improve.individual_conformity_evaluation_report"
     _inherit = 'report.tyt_improve.conformity_evaluation_report_mixin'
 
     def generate_xlsx_report(self, workbook, data, evaluations):
@@ -116,6 +118,7 @@ class IndividualConformityEvaluationReport(models.AbstractModel):
 
 class GeneralConformityEvaluationReport(models.AbstractModel):
     _name = 'report.tyt_improve.general_conformity_evaluation_report'
+    _description = "report.tyt_improve.general_conformity_evaluation_report"
     _inherit = 'report.tyt_improve.conformity_evaluation_report_mixin'
 
     def generate_xlsx_report(self, workbook, data, records):

@@ -3,6 +3,8 @@ from odoo import models, fields, api, _
 
 class CrossSwotFOWizardAction(models.TransientModel):
     _name = 'mgmtsystem.context.cross.swot.fo.action_wizard'
+    _description = "gmtsystem.context.cross.swot.fo.action_wizard"
+
 
     action_ids = fields.Many2many(
         'mgmtsystem.action',
@@ -21,6 +23,7 @@ class CrossSwotFOWizardAction(models.TransientModel):
 
 class CrossSwotDOWizardAction(models.TransientModel):
     _name = 'mgmtsystem.context.cross.swot.do.action_wizard'
+    _description = "gmtsystem.context.cross.swot.do.action_wizard"
 
     action_ids = fields.Many2many(
         'mgmtsystem.action',
@@ -39,6 +42,7 @@ class CrossSwotDOWizardAction(models.TransientModel):
 
 class CrossSwotFAWizardAction(models.TransientModel):
     _name = 'mgmtsystem.context.cross.swot.fa.action_wizard'
+    _description = "gmtsystem.context.cross.swot.fa.action_wizard"
 
     action_ids = fields.Many2many(
         'mgmtsystem.action',
@@ -57,6 +61,8 @@ class CrossSwotFAWizardAction(models.TransientModel):
 
 class CrossSwotDAWizardAction(models.TransientModel):
     _name = 'mgmtsystem.context.cross.swot.da.action_wizard'
+    _description = "gmtsystem.context.cross.swot.da.action_wizard"
+
 
     action_ids = fields.Many2many(
         'mgmtsystem.action',

@@ -9,6 +9,7 @@
     'website': "http://www.soycalidad.com",
 
     "category": "Management System",
+    'license': 'Other proprietary',
     'version': '1.1',
 
     'depends': [

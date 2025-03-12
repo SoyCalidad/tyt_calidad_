@@ -10,6 +10,7 @@ from odoo.exceptions import UserError, ValidationError
 
 class NonconformityInventoryMixin(models.AbstractModel):
     _name = 'report.tyt_improve.report_update_notification'
+    _description = "report.tyt_improve.report_update_notification"
     _inherit = 'report.report_xlsx.abstract'
 
     def generate_xlsx_report(self, workbook, data, records):

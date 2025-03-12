@@ -123,7 +123,7 @@ class Target(models.Model):
                 each.opps_count = len(each.opp_ids)
 
     parent_edition = fields.Many2one(
-        comodel_name='mgmtsystem.target', string='Padre', copy=False)
+        comodel_name='mgmtsystem.target', copy=False)
     old_versions = fields.One2many(
         comodel_name='mgmtsystem.target', string='Versiones antiguas',
         inverse_name='parent_edition', context={'active_version': False})

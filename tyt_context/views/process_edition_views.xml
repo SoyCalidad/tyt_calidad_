@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <record id="process_edition_history_view_form" model="ir.ui.view">
+        <field name="name">process.edition.history.view.form</field>
+        <field name="model">process.edition.history</field>
+        <field name="arch" type="xml">
+            <form string="Historial de cambios">
+                <sheet>
+                    <group>
+                        <group>
+                            <field name="process_edition_id" />
+                            <field name="publish_date" />
+                        </group>
+                        <group>
+                            <field name="numero" />
+                        </group>
+                    </group>
+                    <group>
+                        <field name="name" />
+                    </group>
+                </sheet>
+            </form>
+        </field>
+    </record>
+</odoo>

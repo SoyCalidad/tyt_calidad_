@@ -5,7 +5,7 @@
     'summary': 'Añade características al módulo Auditorías TYT Contact Center',
     'author': 'Soy Calidad',
     'website': 'www.soycalidad.com',
-    'license': '',
+    'license': 'Other proprietary',
     'category': 'soycalidad',
     'depends': [
         'mgmtsystem_validation',
@@ -15,6 +15,7 @@
     ],
     'data': [
         'security/ir.model.access.csv',
+        'security/security.xml',
         'views/audit_plan_tyt_auditor.xml',
         'views/audit_actions.xml',
         'views/audit_application_form.xml',
@@ -37,21 +38,13 @@
         'data/iso9001_standard2.xml',
         'data/iso9001_standard3.xml',
         'data/iso9001_standard_complement.xml',
+        'data/mail_template_data.xml',
     ],
     'assets': {
-        'web.assets_backend': [
-            '/tyt_audit/static/src/img/logo_large.png',
-            '/tyt_audit/static/src/img/fondo_form.png',
-        ],
-        'web.assets_frontend': [
-            '/tyt_audit/static/src/img/logo_large.png',
-            '/tyt_audit/static/src/img/fondo_form.png',
-        ],
         'web.report_assets_common': [
             '/tyt_audit/static/src/scss/report_informe.scss',
         ],
     },
-    'images': ['/tyt_audit/static/src/img/logo_large.png'],
     'auto_install': False,
     'installable': True,
     'application': False,

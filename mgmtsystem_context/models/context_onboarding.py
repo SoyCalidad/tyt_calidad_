@@ -17,19 +17,19 @@ class ResCompany(models.Model):
 
     # context dashboard onboarding
     context_onboarding_state = fields.Selection([('not_done', "Not done"), ('just_done', "Just done"), (
-        'done', "Done"), ('closed', "Closed")], string="State of the context onboarding panel", default='not_done')
+        'done', "Done"), ('closed', "Closed")], default='not_done')
     context_internal_issue_onboarding_state = fields.Selection([('not_done', "Not done"), ('just_done', "Just done"), (
-        'done', "Done"), ('closed', "Closed")], string="State of the context onboarding panel", default='not_done')
+        'done', "Done"), ('closed', "Closed")], default='not_done')
     context_external_issue_onboarding_state = fields.Selection([('not_done', "Not done"), ('just_done', "Just done"), (
-        'done', "Done"), ('closed', "Closed")], string="State of the context onboarding panel", default='not_done')
+        'done', "Done"), ('closed', "Closed")], default='not_done')
     context_swot_onboarding_state = fields.Selection([('not_done', "Not done"), ('just_done', "Just done"), (
-        'done', "Done"), ('closed', "Closed")], string="State of the context onboarding panel", default='not_done')
+        'done', "Done"), ('closed', "Closed")], default='not_done')
     context_pest_onboarding_state = fields.Selection([('not_done', "Not done"), ('just_done', "Just done"), (
-        'done', "Done"), ('closed', "Closed")], string="State of the context onboarding panel", default='not_done')
+        'done', "Done"), ('closed', "Closed")], default='not_done')
     context_stakeholders_onboarding_state = fields.Selection([('not_done', "Not done"), ('just_done', "Just done"), (
-        'done', "Done"), ('closed', "Closed")], string="State of the context onboarding panel", default='not_done')
+        'done', "Done"), ('closed', "Closed")], default='not_done')
     context_policy_onboarding_state = fields.Selection([('not_done', "Not done"), ('just_done', "Just done"), (
-        'done', "Done"), ('closed', "Closed")], string="State of the context onboarding panel", default='not_done')
+        'done', "Done"), ('closed', "Closed")], default='not_done')
 
     @api.model
     def action_open_context_internal_issue(self, action_ref=None):

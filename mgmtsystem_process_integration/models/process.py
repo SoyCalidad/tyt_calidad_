@@ -24,13 +24,11 @@ class MgmtCateg(models.Model):
 
     process_line_in_ids = fields.One2many(
         'mgmt.process.line',
-        'categ_in_id',
-        string='Lineas')
+        'categ_in_id',)
 
     process_line_out_ids = fields.One2many(
         'mgmt.process.line',
-        'categ_out_id',
-        string='Lineas')
+        'categ_out_id',)
 
     interaction_plan = fields.Many2many(
         'mgmt.process.interaction',
@@ -186,7 +184,7 @@ class Process(models.Model):
         'mgmt.process.resource', 'process_id', string='Recursos')
 
     process_line_in_ids = fields.One2many(
-        'mgmt.process.line', 'process_in_id', string='Lineas')
+        'mgmt.process.line', 'process_in_id')
 
     inputs_count = fields.Integer(compute='_compute_inputs', string='')
 
@@ -210,7 +208,7 @@ class Process(models.Model):
             each.clients_count = total
 
     process_line_out_ids = fields.One2many(
-        'mgmt.process.line', 'process_out_id', string='Lineas')
+        'mgmt.process.line', 'process_out_id')
 
     outputs_count = fields.Integer(
         compute='_compute_outputs_count', string='Salidas')
@@ -261,6 +259,7 @@ class ProcessResourceType(models.Model):
 
 class ProcessResource(models.Model):
     _name = 'mgmt.process.resource'
+    _description = "mgmt.process.resource"
 
     process_id = fields.Many2one('mgmt.process', domain=[('active','=',True)], string='Procedimiento')
     categ_id = fields.Many2one('mgmt.categ', string='Proceso')
@@ -328,6 +327,7 @@ class ProcessLine(models.Model):
 
 class ProcessLineInput(models.Model):
     _name = 'mgmt.process.line.input'
+    _description = "mgmt.process.line.input"
 
     name = fields.Char(string='Nombre')
     description = fields.Text(string='Descripción')
@@ -337,6 +337,7 @@ class ProcessLineInput(models.Model):
 
 class ProcessLineOutput(models.Model):
     _name = 'mgmt.process.line.output'
+    _description = "mgmt.process.line.output"
 
     name = fields.Char(string='Nombre')
     description = fields.Text(string='Descripción')

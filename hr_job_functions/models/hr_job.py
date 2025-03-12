@@ -76,7 +76,7 @@ class Job(models.Model):
     process_id = fields.Many2one(
         'mgmt.process', string='Proceso', required=False, domain=[('active','=',True)])
     parent_edition = fields.Many2one(
-        comodel_name='hr.job', string='Padre', copy=False)
+        comodel_name='hr.job', copy=False)
     old_versions = fields.One2many(
         comodel_name='hr.job', string='Versiones antiguas',
         inverse_name='parent_edition', context={'active_version': False})
@@ -193,6 +193,7 @@ class Job(models.Model):
 
 class JobFunctions(models.Model):
     _name = 'hr.job.function'
+    _description = "hr.job.function"
 
     name = fields.Text(string='Descripción')
     job_id = fields.Many2one('hr.job', string='Posición')
@@ -201,6 +202,7 @@ class JobFunctions(models.Model):
 
 class EvaluationFactors(models.Model):
     _name = 'hr.job.evaluation_factor'
+    _description = "hr.job.evaluation_factor"
 
     name = fields.Text(string='Descripción')
     job_id = fields.Many2one('hr.job', string='Posición')
@@ -208,6 +210,7 @@ class EvaluationFactors(models.Model):
 
 class JobCoordinator(models.Model):
     _name = 'hr.job.coordinator'
+    _description = "hr.job.coordinator"
 
     related_job = fields.Many2one('hr.job', string='Posición')
     job_id = fields.Many2one('hr.job', string='Posición')
@@ -215,6 +218,7 @@ class JobCoordinator(models.Model):
 
 class JobSupervisor(models.Model):
     _name = 'hr.job.supervisor'
+    _description = "hr.job.supervisor"
 
     related_job = fields.Many2one('hr.job', string='Posición')
     job_id = fields.Many2one('hr.job', string='Posición')
@@ -222,6 +226,7 @@ class JobSupervisor(models.Model):
 
 class JobSupervised(models.Model):
     _name = 'hr.job.supervised'
+    _description = "hr.job.supervised"
 
     related_job = fields.Many2one('hr.job', string='Posición')
     job_id = fields.Many2one('hr.job', string='Posición')
@@ -229,6 +234,7 @@ class JobSupervised(models.Model):
 
 class JobProfile(models.Model):
     _name = 'hr.job.profile'
+    _description = "hr.job.profile"
 
     name = fields.Char(string='Nombre', required=True)
     degree = fields.Selection([
@@ -247,6 +253,7 @@ class JobProfile(models.Model):
 
 class JobProfileSpecialty(models.Model):
     _name = 'hr.job.profile.specialty'
+    _description = "hr.job.profile.specialty"
 
     name = fields.Char(string='Descripción')
     profile_id = fields.Many2one('hr.job.profile', string='Perfil')
@@ -254,6 +261,7 @@ class JobProfileSpecialty(models.Model):
 
 class JobProfileExperience(models.Model):
     _name = 'hr.job.profile.experience'
+    _description = "hr.job.profile.experience"
 
     name = fields.Char(string='Descripción')
     profile_id = fields.Many2one('hr.job.profile', string='Perfil')
@@ -261,6 +269,7 @@ class JobProfileExperience(models.Model):
 
 class Skill(models.Model):
     _name = 'hr.job.skill'
+    _description = "hr.job.skill"
 
     job_id = fields.Many2one('hr.job', string='Posición')
     name = fields.Text(string='Descripción')
@@ -274,27 +283,33 @@ class Skill(models.Model):
 class GenericSkill(models.Model):
     _inherit = 'hr.job.skill'
     _name = 'hr.job.generic_skill'
+    _description = "hr.job.generic_skill"
     
     type=fields.Char(string='Tipo')
 
 class PositionSkill(models.Model):
     _inherit = 'hr.job.skill'
     _name = 'hr.job.position_skill'
+    _description = "hr.job.position_skill"
     
 class ClientSkill(models.Model):
     _inherit = 'hr.job.skill'
     _name = 'hr.job.client_skill'
+    _description = "hr.job.client_skill"
     
 class WorkteamSkill(models.Model):
     _inherit = 'hr.job.skill'
     _name = 'hr.job.workteam_skill'
+    _description = "hr.job.workteam_skill"
 
 
 class PersonalSkill(models.Model):
     _inherit = 'hr.job.skill'
     _name = 'hr.job.personal_skill'
+    _description = "hr.job.personal_skill"
 
 
 class StrategicSkill(models.Model):
     _inherit = 'hr.job.skill'
     _name = 'hr.job.strategic_skill'
+    _description = "hr.job.strategic_skill"

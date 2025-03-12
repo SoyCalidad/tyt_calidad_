@@ -13,7 +13,7 @@
     </data>
 
     <record id="menu_mailbox" model="website.menu">
-        <field name="name">Buzón</field>
+        <field name="name">Buzón de sugerencias</field>
         <field name="url">/mailbox</field>
         <field name="parent_id" ref="website.main_menu"/>
         <field name="sequence" type="int">10</field>

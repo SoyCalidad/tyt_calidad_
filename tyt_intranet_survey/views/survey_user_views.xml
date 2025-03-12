@@ -41,13 +41,39 @@
         <field name="domain">[('survey_id.access_mode', '=', 'intranet')]</field>
     </record>
 
+    <record id="survey_response_line_view_tree" model="ir.ui.view">
+        <field name="name">survey.user_input.line.view.tree.inherit</field>
+        <field name="model">survey.user_input.line</field>
+        <field name="inherit_id" ref="survey.survey_response_line_view_tree"/>
+        <field name="arch" type="xml">
+            <xpath expr="//field[@name='survey_id']" position="after">
+                <field name="employee_number"/>
+                <field name="partner_id"/>
+            </xpath>
+            <xpath expr="//field[@name='skipped']" position="after">
+                <field name="tipo_encuesta_id"/>
+                <field name="suggested_answer_id"/>
+                <field name="suggested_answer_value"/>
+            </xpath>
+            <xpath expr="//field[@name='user_input_id']" position="attributes">
+                <attribute name="optional">hide</attribute>
+            </xpath>
+            <xpath expr="//field[@name='answer_type']" position="attributes">
+                <attribute name="optional">hide</attribute>
+            </xpath>
+            <xpath expr="//field[@name='skipped']" position="attributes">
+                <attribute name="optional">hide</attribute>
+            </xpath>
+        </field>
+    </record>
+
     <record id="survey_user_input_line_view_graph" model="ir.ui.view">
         <field name="name">survey.user_input.line.view.graph</field>
         <field name="model">survey.user_input.line</field>
         <field name="arch" type="xml">
             <graph type="bar" stacked="0">
                 <field name="survey_id"/>
-                <field name="tipo_encuesta_id"/>
+                <field name="suggested_answer_value"/>
             </graph>
         </field>
     </record>
@@ -58,6 +84,7 @@
         <field name="arch" type="xml">
             <pivot>
                 <field name="survey_id" type="row"/>
+                <field name="suggested_answer_value" type="row"/>
                 <field name="tipo_encuesta_id" type="col"/>
             </pivot>
         </field>
@@ -67,5 +94,6 @@
         <field name="name">Detailed Answers</field>
         <field name="res_model">survey.user_input.line</field>
         <field name="view_mode">tree,form,graph,pivot</field>
+        <field name="domain">[('survey_id.access_mode', '=', 'intranet'), ('tipo_encuesta_id', '!=', False), ('suggested_answer_id', '!=', False)]</field>
     </record>
 </odoo>

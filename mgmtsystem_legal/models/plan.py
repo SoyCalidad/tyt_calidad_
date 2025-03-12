@@ -77,7 +77,7 @@ class Plan(models.Model):
     _description = "Programa de requisitos legales"
 
     parent_edition = fields.Many2one(
-        comodel_name='legal.plan', string='Padre', copy=False)
+        comodel_name='legal.plan', copy=False)
     old_versions = fields.One2many(
         comodel_name='legal.plan', string='Versiones antiguas',
         inverse_name='parent_edition', context={'active_version': False})
@@ -176,16 +176,11 @@ class Plan(models.Model):
 
     state = fields.Selection(
         string=u'Estado',
-        selection=[
+        selection_add=[
             ('draft', 'Borrador'),
             ('plan', 'Plan'),
-            ('elaborate', 'En elaboración'),
-            ('review', 'En revisión'),
-            ('validate', 'En validación'),
-            ('validate_ok', 'Validado'),
             ('on_track', 'En seguimiento'),
-            ('closed', 'Terminado'),
-            ('cancel', 'Obsoleto')
+            ('closed', 'Terminado')
         ],
         default='draft',
         copy=False,

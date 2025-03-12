@@ -52,36 +52,6 @@
         </field>
     </record>
 
-<!--    <record id="survey_survey_view_graph" model="ir.ui.view">-->
-<!--        <field name="name">survey.survey.view.graph.inherit</field>-->
-<!--        <field name="model">survey.survey</field>-->
-<!--        <field name="inherit_id" ref="survey.survey_survey_view_graph"/>-->
-<!--        <field name="arch" type="xml">-->
-
-<!--            <xpath expr="." position="inside">-->
-<!--                <field name="title" type="row"/>-->
-<!--                <field name="answer_not_done_count" type="row"/>-->
-<!--                <field name="answer_done_count" type="row"/>-->
-
-<!--                <field name="answer_count" type="measure"/>-->
-<!--            </xpath>-->
-<!--        </field>-->
-<!--    </record>-->
-
-<!--    <record id="survey_survey_view_pivot" model="ir.ui.view">-->
-<!--        <field name="name">survey.survey.view.pivot.inherit</field>-->
-<!--        <field name="model">survey.survey</field>-->
-<!--        <field name="inherit_id" ref="survey.survey_survey_view_pivot"/>-->
-<!--        <field name="arch" type="xml">-->
-
-<!--            <xpath expr="." position="inside">-->
-<!--                <field name="user_input_ids" type="row"/>-->
-<!--                <field name="answer_not_done_count" type="col"/>-->
-<!--                <field name="answer_done_count" type="col"/>-->
-<!--            </xpath>-->
-<!--        </field>-->
-<!--    </record>-->
-
     <record id="survey_survey_action" model="ir.actions.act_window">
         <field name="name">Surveys</field>
         <field name="res_model">survey.survey</field>

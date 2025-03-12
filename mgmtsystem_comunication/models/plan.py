@@ -73,14 +73,12 @@ class Plan(models.Model):
     _description = "Programa de comunicaciones"
 
     line_ids = fields.One2many(
-        string=u'Lineas',
         comodel_name='comunication.plan.line',
         inverse_name='plan_id',
         copy=True,
     )
 
     linetrack_ids = fields.One2many(
-        string=u'Lineas',
         comodel_name='comunication.plan.line',
         inverse_name='plan_id',
         domain=[('state', 'in', ('on_track', 'closed'))],
@@ -164,14 +162,9 @@ class Plan(models.Model):
 
     state = fields.Selection(
         string=u'Estado',
-        selection=[
-            ('elaborate', 'En elaboración'),
-            ('review', 'En revisión'),
-            ('validate', 'En validación'),
-            ('validate_ok', 'Validado'),
+        selection_add=[
             ('on_track', 'En seguimiento'),
-            ('closed', 'Terminado'),
-            ('cancel', 'Obsoleto')
+            ('closed', 'Terminado')
         ],
         default='elaborate',
         copy=False,

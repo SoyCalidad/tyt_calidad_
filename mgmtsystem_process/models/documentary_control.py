@@ -6,6 +6,7 @@ from odoo.exceptions import UserError
 
 class DocumentaryControl(models.Model):
     _name = 'documentary.control'
+    _description = "documentary.control"
 
     name = fields.Char(
         string='Nombre',
@@ -187,19 +188,20 @@ class AuditPlanValidation(models.Model):
     _inherit = 'mgmtsystem.validation.step'
 
     document_page_elaboration_id = fields.Many2one(
-        'document.page', string='Padre')
+        'document.page')
     document_page_review_id = fields.Many2one(
-        'document.page', string='Padre')
+        'document.page')
     document_page_validation_id = fields.Many2one(
-        'document.page', string='Padre')
+        'document.page')
 
 
 class AttachmentClasification(models.Model):
     _name = 'ir.attachment.clasification'
+    _description = "ir.attachment.clasification"
 
     name = fields.Char(string='Nombre')
     description = fields.Text(string='Descripción')
-    parent_id = fields.Many2one('ir.attachment.clasification', string='Padre')
+    parent_id = fields.Many2one('ir.attachment.clasification')
 
 
 class AttachmenteExtra(models.Model):

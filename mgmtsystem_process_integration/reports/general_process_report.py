@@ -14,6 +14,7 @@ from odoo.tools import DEFAULT_SERVER_DATE_FORMAT
 
 class GeneralProcessReport(models.AbstractModel):
     _name = 'report.mgmtsystem_process_integration.general_process_xls'
+    _description = "report.mgmtsystem_process_integration.general_process_xls"
     _inherit = 'report.report_xlsx.abstract'
 
     def generate_xlsx_report(self, workbook, data, partners):

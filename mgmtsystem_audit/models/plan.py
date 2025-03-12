@@ -110,7 +110,7 @@ class Plan(models.Model):
     )
 
     parent_edition = fields.Many2one(
-        comodel_name='audit.plan', string='Padre', copy=False)
+        comodel_name='audit.plan', copy=False)
     old_versions = fields.One2many(
         comodel_name='audit.plan', string='Versiones antiguas',
         inverse_name='parent_edition', context={'active_version': False})

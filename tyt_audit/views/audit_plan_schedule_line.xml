@@ -7,8 +7,11 @@
             <field name="arch" type="xml">
                 <tree editable="bottom" create="false">
                     <field name="scheduled_date"/>
-                    <field name="done"/>
-                    <!--<field name="name" string="Nombre de línea"/>-->     
+                    <field name="can_edit_auditor_check" invisible="1"/>
+                    <field name="auditor_check" attrs="{'readonly': [('can_edit_auditor_check', '=', False)]}"/>
+                    <field name="done" groups="!tyt_audit.group_audit_auditor"/>
+                    <field name="fixed_date_check" groups="!tyt_audit.group_audit_auditor"/>
+                    <!--<field name="name" string="Nombre de línea"/>-->
                     <!--<field name="schedule_id"/>-->
                 </tree>
             </field>

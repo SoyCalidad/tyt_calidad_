@@ -24,7 +24,7 @@ class CalibrationPlan(models.Model):
         copy=True,
     )
     parent_edition = fields.Many2one(
-        comodel_name='mgmtsystem.calibration.plan', string='Padre', copy=False)
+        comodel_name='mgmtsystem.calibration.plan', copy=False)
     old_versions = fields.One2many(
         comodel_name='mgmtsystem.calibration.plan', string='Versiones antiguas',
         inverse_name='parent_edition', context={'active_version': False})
@@ -56,7 +56,6 @@ class Calibration(models.Model):
         ondelete='cascade',
     )
     line_ids = fields.One2many(
-        string='Lineas',
         comodel_name='mgmtsystem.calibration.line',
         inverse_name='maintenance_id',
     )
@@ -109,7 +108,7 @@ class Calibration(models.Model):
         string='Resolución',
     )
     parent_edition = fields.Many2one(
-        comodel_name='mgmtsystem.calibration', string='Padre', copy=False)
+        comodel_name='mgmtsystem.calibration', copy=False)
     old_versions = fields.One2many(
         comodel_name='mgmtsystem.calibration', string='Versiones antiguas',
         inverse_name='parent_edition', context={'active_version': False})

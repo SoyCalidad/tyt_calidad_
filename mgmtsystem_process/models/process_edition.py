@@ -7,6 +7,7 @@ import difflib
 
 class EconomicActiviy(models.Model):
     _name = 'res.economy.activity'
+    _description = "res.economy.activity"
 
     name = fields.Char(string='Nombre')
     description = fields.Text(string='Descripción')
@@ -118,7 +119,7 @@ class ProcessEdition(models.Model):
     _order = 'numero desc'
 
     parent_edition = fields.Many2one(
-        comodel_name='process.edition', string='Padre', copy=False)
+        comodel_name='process.edition', copy=False)
     old_versions = fields.One2many(
         comodel_name='process.edition', string='Versiones antiguas',
         inverse_name='parent_edition', context={'active_version': False})
@@ -397,6 +398,7 @@ class ProcessEdition(models.Model):
 
 class ProcessEditionHistory(models.Model):
     _name = 'process.edition.history'
+    _description = "process.edition.history"
 
     process_edition_id = fields.Many2one('process.edition', string='Edición')
     numero = fields.Char(string='Número')

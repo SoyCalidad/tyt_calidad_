@@ -18,7 +18,7 @@ class ComunicationPlan(models.Model):
         'process.edition', string='Procedimiento', domain=[('active','=',True)])
 
     parent_edition = fields.Many2one(
-        comodel_name='comunication.plan', string='Padre', copy=False)
+        comodel_name='comunication.plan', copy=False)
     old_versions = fields.One2many(
         comodel_name='comunication.plan', string='Versiones antiguas',
         inverse_name='parent_edition', context={'active_version': False})
@@ -87,14 +87,9 @@ class ComunicationPlanLine(models.Model):
 
     state = fields.Selection(
         string=u'Estado',
-        selection=[
-            ('elaborate', 'En elaboración'),
-            ('review', 'En revisión'),
-            ('validate', 'En validación'),
-            ('validate_ok', 'Validado'),
+        selection_add=[
             ('on_track', 'En seguimiento'),
-            ('closed', 'Terminado'),
-            ('cancel', 'Obsoleto'),
+            ('closed', 'Terminado')
         ],
         default='elaborate',
         copy=False,
@@ -111,7 +106,7 @@ class ComunicationPlanLine(models.Model):
         'process.edition', string='Procedimiento', domain=[('active','=',True)])
 
     parent_edition = fields.Many2one(
-        comodel_name='comunication.plan.line', string='Padre', copy=False)
+        comodel_name='comunication.plan.line', copy=False)
     old_versions = fields.One2many(
         comodel_name='comunication.plan.line', string='Versiones antiguas',
         inverse_name='parent_edition', context={'active_version': False})
@@ -171,15 +166,15 @@ class ComunicationPlanValidation(models.Model):
     _inherit = 'mgmtsystem.validation.step'
 
     comunication_plan_elaboration_id = fields.Many2one(
-        'comunication.plan', string='Padre (Elaboración de programa de comunicación)')
+        'comunication.plan')
     comunication_plan_review_id = fields.Many2one(
-        'comunication.plan', string='Padre (Revisión de programa de comunicación)')
+        'comunication.plan')
     comunication_plan_validation_id = fields.Many2one(
-        'comunication.plan', string='Padre (Validación de programa de comunicación)')
+        'comunication.plan')
 
     comunication_plan_line_elaboration_id = fields.Many2one(
-        'comunication.plan.line', string='Padre (Elaboración de plan de comunicación)')
+        'comunication.plan.line')
     comunication_plan_line_review_id = fields.Many2one(
-        'comunication.plan.line', string='Padre (Revisión de plan de comunicación)')
+        'comunication.plan.line')
     comunication_plan_line_validation_id = fields.Many2one(
-        'comunication.plan.line', string='Padre (Validación de plan de comunicación)')
+        'comunication.plan.line')

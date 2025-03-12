@@ -86,7 +86,7 @@ class mgmtsystemMof(models.Model):
     # Validación
     
     parent_edition = fields.Many2one(
-        comodel_name='mgmtsystem.mof', string='Padre', copy=False)
+        comodel_name='mgmtsystem.mof', copy=False)
     old_versions = fields.One2many(
         comodel_name='mgmtsystem.mof', string='Versiones antiguas',
         inverse_name='parent_edition', context={'active_version': False})
@@ -110,8 +110,8 @@ class MOFValidation(models.Model):
     _inherit = 'mgmtsystem.validation.step'
 
     mgmtsystem_mof_elaboration_id = fields.Many2one(
-        'mgmtsystem.mof', string='Padre (Elaboración)')
+        'mgmtsystem.mof')
     mgmtsystem_mof_review_id = fields.Many2one(
-        'mgmtsystem.mof', string='Padre (Revisión)')
+        'mgmtsystem.mof')
     mgmtsystem_mof_validation_id = fields.Many2one(
-        'mgmtsystem.mof', string='Padre (Validación)')
+        'mgmtsystem.mof')

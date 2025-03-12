@@ -5,7 +5,7 @@
     'summary': 'Añade características al módulo CRM',
     'author': 'Soy Calidad',
     'website': 'www.soycalidad.com',
-    'license': '',
+    'license': 'Other proprietary',
     'category': 'crm',
     'depends': [
         'crm',

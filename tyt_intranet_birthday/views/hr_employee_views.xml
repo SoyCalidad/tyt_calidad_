@@ -43,6 +43,9 @@
                         <group>
                             <field name="birthday"/>
                             <field name="is_birthday" invisible="1"/>
+                            <field name="is_birthday_this_week" invisible="1"/>
+                            <field name="is_birthday_this_month" invisible="1"/>
+                            <field name="birthday_month" invisible="1"/>
                             <field name="include_in_birthday_publication"/>
                             <field name="include_in_all_birthday_publications"/>
                         </group>

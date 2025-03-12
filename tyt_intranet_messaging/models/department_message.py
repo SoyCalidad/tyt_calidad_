@@ -25,7 +25,7 @@ class DepartmentMessageReadStatus(models.Model):
 
     department_message_id = fields.Many2one('tyt.intranet.department_message', string='Department Message')
     user_id = fields.Many2one('res.users', string='User')
-    is_read = fields.Boolean(string='Is Read', default=False, tracking=True)
+    is_read = fields.Boolean(string='Is Read', default=False)
 
 
 class DepartmentMessage(models.Model):

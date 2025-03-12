@@ -78,7 +78,6 @@ class Plan(models.Model):
         comodel_name='mgmtsystem.plan.training',
         inverse_name='plan_id',
         copy=True,
-        ondelete='cascade',
     )
 
     categ_id = fields.Many2one(
@@ -97,18 +96,18 @@ class Plan(models.Model):
         required=True,
     )
 
-    state = fields.Selection(
-        string=u'Estado',
-        selection=[
-            ('elaborate', 'En elaboración'),
-            ('review', 'En revisión'),
-            ('validate', 'En validación'),
-            ('validate_ok', 'Validado'),
-            ('cancel', 'Obsoleto')
-        ],
-        default='elaborate',
-        copy=False,
-    )
+    # state = fields.Selection(
+    #     string=u'Estado',
+    #     selection=[
+    #         ('elaborate', 'En elaboración'),
+    #         ('review', 'En revisión'),
+    #         ('validate', 'En validación'),
+    #         ('validate_ok', 'Validado'),
+    #         ('cancel', 'Obsoleto')
+    #     ],
+    #     default='elaborate',
+    #     copy=False,
+    # )
 
     def unlink(self):
         for plan in self:

@@ -149,7 +149,7 @@ class Legal(models.Model):
         self.state = 'caducated'
 
     parent_edition = fields.Many2one(
-        comodel_name='legal.legal', string='Padre', copy=False)
+        comodel_name='legal.legal', copy=False)
     old_versions = fields.One2many(
         comodel_name='legal.legal', string='Versiones antiguas',
         inverse_name='parent_edition', context={'active_version': False})
@@ -174,6 +174,7 @@ class Legal(models.Model):
 
 class Article(models.Model):
     _name = "legal.article"
+    _description = "legal.article"
 
     legal_id = fields.Many2one(
         string=u'Requisito legal',

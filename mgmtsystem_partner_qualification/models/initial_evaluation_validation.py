@@ -12,7 +12,7 @@ class InitialEvaluation(models.Model):
         'mgmtsystem.validation.step', 'initial_evaluation_validation_id', string='Validación')
 
     parent_edition = fields.Many2one(
-        comodel_name='evaluation.initial_evaluation', string='Padre', copy=False)
+        comodel_name='evaluation.initial_evaluation', copy=False)
     old_versions = fields.One2many(
         comodel_name='evaluation.initial_evaluation', string='Versiones antiguas',
         inverse_name='parent_edition', context={'active_version': False})

@@ -13,24 +13,18 @@ class SurveySurvey(models.Model):
         'mgmtsystem.validation.step', 'survey_validation_id', string='Validación')
 
     parent_edition = fields.Many2one(
-        comodel_name='survey.survey', string='Padre', copy=False)
+        comodel_name='survey.survey', copy=False)
     old_versions = fields.One2many(
         comodel_name='survey.survey', string='Versiones antiguas',
         inverse_name='parent_edition', context={'active_version': False})
 
     state = fields.Selection(
         string="Survey Stage",
-        selection=[
-            ('elaborate', 'En elaboración'),
-            ('review', 'En revisión'),
-            ('validate', 'En validación'),
-            ('validate_ok', 'Validado'),
+        selection_add=[
             ('draft', 'Draft'),
             ('open', 'In Progress'),
-            ('closed', 'Closed'),
-            ('cancel', 'Obsoleto')
-        ], default='elaborate', required=True,
-        group_expand='_read_group_states'
+            ('closed', 'Closed')
+        ], group_expand='_read_group_states'
     )
 
     process_id = fields.Many2one(
@@ -77,8 +71,8 @@ class SurveySurveyValidation(models.Model):
     _inherit = 'mgmtsystem.validation.step'
 
     survey_elaboration_id = fields.Many2one(
-        'survey.survey', string='Padre')
+        'survey.survey')
     survey_review_id = fields.Many2one(
-        'survey.survey', string='Padre')
+        'survey.survey')
     survey_validation_id = fields.Many2one(
-        'survey.survey', string='Padre')
+        'survey.survey')

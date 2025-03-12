@@ -33,7 +33,7 @@ class MaintenancePlan(models.Model):
     _description = "Programa de mantenimientos"
 
     parent_edition = fields.Many2one(
-        comodel_name='mgmtsystem.maintenance.plan', string='Padre', copy=False)
+        comodel_name='mgmtsystem.maintenance.plan', copy=False)
     old_versions = fields.One2many(
         comodel_name='mgmtsystem.maintenance.plan', string='Versiones antiguas',
         inverse_name='parent_edition', context={'active_version': False})
@@ -87,7 +87,7 @@ class MaintenancePlan(models.Model):
         copy=True,
     )
     parent_edition = fields.Many2one(
-        comodel_name='mgmtsystem.maintenance.plan', string='Padre', copy=False)
+        comodel_name='mgmtsystem.maintenance.plan', copy=False)
     old_versions = fields.One2many(
         comodel_name='mgmtsystem.maintenance.plan', string='Versiones antiguas',
         inverse_name='parent_edition', context={'active_version': False})
@@ -145,15 +145,10 @@ class Maintenance(models.Model):
 
     state = fields.Selection(
         string=u'Estado',
-        selection=[
-            ('elaborate', 'En elaboración'),
-            ('review', 'En revisión'),
-            ('validate', 'En validación'),
-            ('validate_ok', 'Validado'),
+        selection_add=[
             ('in_process', 'En proceso'),
             ('final', 'Finalizado'),
-            ('caducated', 'Caducado'),
-            ('cancel', 'Obsoleto')
+            ('caducated', 'Caducado')
         ],
         default='elaborate',
         copy=False,
@@ -204,13 +199,12 @@ class Maintenance(models.Model):
         column2='maintenance_id',
     )
     line_ids = fields.One2many(
-        string='Lineas',
         comodel_name='mgmtsystem.maintenance.line',
         inverse_name='maintenance_id',
     )
 
     parent_edition = fields.Many2one(
-        comodel_name='mgmtsystem.maintenance', string='Padre', copy=False)
+        comodel_name='mgmtsystem.maintenance', copy=False)
     old_versions = fields.One2many(
         comodel_name='mgmtsystem.maintenance', string='Versiones antiguas',
         inverse_name='parent_edition', context={'active_version': False})

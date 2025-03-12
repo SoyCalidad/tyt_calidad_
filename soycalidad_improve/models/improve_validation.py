@@ -15,7 +15,7 @@ class ImprovePlanMatrix(models.Model):
         'process.edition', string='Procedimiento', domain=[('active','=',True)])
 
     parent_edition = fields.Many2one(
-        comodel_name='soycalidad.improve_plan.matrix', string='Padre', copy=False)
+        comodel_name='soycalidad.improve_plan.matrix', copy=False)
     old_versions = fields.One2many(
         comodel_name='soycalidad.improve_plan.matrix', string='Versiones antiguas',
         inverse_name='parent_edition', context={'active_version': False})
@@ -32,8 +32,8 @@ class ImprovePlanMatrixValidation(models.Model):
     _inherit = 'mgmtsystem.validation.step'
 
     improve_plan_matrix_elaboration_id = fields.Many2one(
-        'soycalidad.improve_plan.matrix', string='Padre')
+        'soycalidad.improve_plan.matrix')
     improve_plan_matrix_review_id = fields.Many2one(
-        'soycalidad.improve_plan.matrix', string='Padre')
+        'soycalidad.improve_plan.matrix')
     improve_plan_matrix_validation_id = fields.Many2one(
-        'soycalidad.improve_plan.matrix', string='Padre')
+        'soycalidad.improve_plan.matrix')

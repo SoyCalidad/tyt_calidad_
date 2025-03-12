@@ -8,6 +8,8 @@ from PIL import Image
 
 class ReportMixin(models.AbstractModel):
     _name = 'report.matrix.mixin'
+    _description = "report.matrix.mixin"
+
 
     def _get_workbook_formats(self, workbook):
         return {
@@ -222,6 +224,7 @@ class ReportMixin(models.AbstractModel):
 class IndividualReport(models.AbstractModel):
     _name = 'report.mgmtsystem_opprisk.report'
     _inherit = ['report.report_xlsx.abstract', 'report.matrix.mixin']
+    _description = "report.mgmtsystem_opprisk.report2"
 
     def generate_xlsx_report(self, workbook, data, matrixes):
         try:
@@ -236,6 +239,8 @@ class IndividualReport(models.AbstractModel):
 class MatrixReportXls(models.AbstractModel):
     _name = 'report.matrix_report_xls.xlsx'
     _inherit = ['report.report_xlsx.abstract', 'report.matrix.mixin']
+    _description = "report.matrix_report_xls.xlsx"
+
 
     def generate_xlsx_report(self, workbook, data, lines):
         try:

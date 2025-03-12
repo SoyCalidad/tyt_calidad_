@@ -5,7 +5,7 @@
     'summary': 'Añade características al módulo Contexto TYT Contact Center',
     'author': 'Soy Calidad',
     'website': 'www.soycalidad.com',
-    'license': '',
+    'license': 'Other proprietary',
     'category': 'soycalidad',
     'depends': [
         'base',
@@ -21,6 +21,7 @@
 
         'views/context.xml',
         'views/context_scope_views.xml',
+        'views/process_edition_views.xml',
         'report/stakeholders_report.xml',
         'wizard/product_service_communicate.xml',
         'views/menus.xml',

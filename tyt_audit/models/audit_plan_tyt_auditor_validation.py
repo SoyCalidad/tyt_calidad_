@@ -54,8 +54,8 @@ class AuditPlanValidation(models.Model):
     _inherit = 'mgmtsystem.validation.step'
 
     audit_plan_tyt_auditor_elaboration_id = fields.Many2one(
-        'audit.plan.tyt.auditor', string='Padre (Elaboración)')
+        'audit.plan.tyt.auditor')
     audit_plan_tyt_auditor_review_id = fields.Many2one(
-        'audit.plan.tyt.auditor', string='Padre (Revisión)')
+        'audit.plan.tyt.auditor')
     audit_plan_tyt_auditor_validation_id = fields.Many2one(
-        'audit.plan.tyt.auditor', string='Padre (Validación)')
+        'audit.plan.tyt.auditor')

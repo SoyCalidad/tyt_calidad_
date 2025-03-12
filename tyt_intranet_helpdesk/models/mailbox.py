@@ -36,7 +36,7 @@ class Mailbox(models.Model):
     close_date = fields.Date(string='Close Date', tracking=True)
     response = fields.Html(string='Response')
     survey_id = fields.Many2one('survey.survey', string='Survey', domain="[('access_mode', '=', 'public')]")
-    matrix_id = fields.Many2one('tyt.intranet.notification_matrix', compute='_compute_matrix_id', string='Matrix')
+    matrix_id = fields.Many2one('tyt.intranet.notification_matrix', compute='_compute_matrix_id', string='Matrix', store=True)
     responsible_ids = fields.Many2many('res.users', compute='_compute_responsible_ids', string='Responsibles')
 
     @api.depends('matrix_id', 'matrix_id.matrix_line_ids')

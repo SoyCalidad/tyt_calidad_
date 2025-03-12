@@ -5,7 +5,7 @@
     'summary': 'Reporte de Actividades de Oportunidad CRM',
     'author': 'Soy Calidad',
     'website': 'www.soycalidad.com',
-    'license': '',
+    'license': 'Other proprietary',
     'category': 'Soy educación',
     'depends': [
         'crm'

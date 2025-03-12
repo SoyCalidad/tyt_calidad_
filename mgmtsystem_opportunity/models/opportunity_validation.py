@@ -19,11 +19,11 @@ class MatrixValidation(models.Model):
     _inherit = 'mgmtsystem.validation.step'
 
     matrix_elaboration_id = fields.Many2one(
-        'matrix.matrix', string='Padre')
+        'matrix.matrix')
     matrix_review_id = fields.Many2one(
-        'matrix.matrix', string='Padre')
+        'matrix.matrix')
     matrix_validation_id = fields.Many2one(
-        'matrix.matrix', string='Padre')
+        'matrix.matrix')
 
 
 class MatrixBlockLine(models.Model):

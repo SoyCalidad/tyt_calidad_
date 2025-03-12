@@ -12,7 +12,7 @@ class TrainingPlan(models.Model):
         'mgmtsystem.validation.step', 'training_validation_id', string='Validación', copy=True)
 
     parent_edition = fields.Many2one(
-        comodel_name='mgmtsystem.plan', string='Padre', copy=False)
+        comodel_name='mgmtsystem.plan', copy=False)
     old_versions = fields.One2many(
         comodel_name='mgmtsystem.plan', string='Versiones antiguas',
         inverse_name='parent_edition', context={'active_version': False})
@@ -29,8 +29,8 @@ class TrainingPlanValidation(models.Model):
     _inherit = 'mgmtsystem.validation.step'
 
     training_elaboration_id = fields.Many2one(
-        'mgmtsystem.plan', string='Padre')
+        'mgmtsystem.plan')
     training_review_id = fields.Many2one(
-        'mgmtsystem.plan', string='Padre')
+        'mgmtsystem.plan')
     training_validation_id = fields.Many2one(
-        'mgmtsystem.plan', string='Padre')
+        'mgmtsystem.plan')

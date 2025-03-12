@@ -3,7 +3,8 @@ from odoo import api, fields, models
 
 class PolicyWizard(models.TransientModel):
     _name = 'wizard.policy.report'
-    
+    _description = "wizard.policy.report"
+
     policy_id = fields.Many2one('mgmtsystem.context.policy', string='Política de calidad')
     
     def action_print(self):

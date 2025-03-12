@@ -113,6 +113,20 @@ class JobApplication(models.Model):
     expedient_status = fields.Boolean(string="Estado 01", default=False, tracking=True)
     status_approved = fields.Float(string="Estado 02", default=0, tracking=True)
     status_loaded = fields.Float(string="Estado 03", default=0, tracking=True)
+    
+    # health_survey fields fix + job_application fields
+    
+    health_survey = fields.Binary(string="Encuesta de salud")
+    health_survey_filename = fields.Char(string="Nombre del Archivo")
+    health_survey_state = fields.Boolean(string="Estado", default=False)
+    health_survey_approved = fields.Boolean(string="Estado", default=False)
+
+    job_application = fields.Binary(string="Solicitud de empleo")
+    job_application_filename = fields.Char(string="Nombre del Archivo")
+    job_application_state = fields.Boolean(string="Estado", default=False)
+    job_application_approved = fields.Boolean(string="Estado", default=False)
+
+    ###########################
 
     @api.onchange(
         'birth_certificate', 
