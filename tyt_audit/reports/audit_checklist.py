@@ -86,14 +86,15 @@ class IndividualReport(models.AbstractModel):
                         width, height = im.size
                         image_width = width
                         image_height = height
-                        cell_width = 184.0
-                        cell_height = 184.0
-                        x_offset = 0.0
+                        cell_width = 92.0
+                        cell_height = 92.0
+                        x_offset = 118.0
+                        y_offset = 10.0
 
                         x_scale = cell_width / image_width
                         y_scale = cell_height / image_height
-                        sheet.insert_image('C5', "logo.png", {
-                            'image_data': buf_image, 'x_scale': x_scale, 'y_scale': y_scale, 'x_offset': x_offset})
+                        sheet.insert_image('I2', "logo.png", {
+                            'image_data': buf_image, 'x_scale': x_scale, 'y_scale': y_scale, 'x_offset': x_offset, 'y_offset': y_offset})
                     except (base64.binascii.Error, UnidentifiedImageError, OSError):
                         pass
 
