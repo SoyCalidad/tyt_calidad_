@@ -146,7 +146,7 @@
                             <!-- Fecha de Nacimiento -->
                             <div class="col-sm-6 col-md-3 col-lg-3 col-xl-3 col-xxl-3 p-4 border">
                                 <label for="birthdate" class="form-label">Fecha de Nacimiento:</label>
-                                <input type="date" class="form-control" id="birthdate" name="birthdate" required="required" min="1925-01-01" max="2025-01-01"/>
+                                <input type="date" class="form-control" id="birthdate" name="birthdate" required="required" min="1960-01-01" max="2025-01-01"/>
                             </div>
 
                             <!-- Nacionalidad -->
@@ -439,11 +439,11 @@
                                     <div class="row">
                                         <div class="col-sm-6 col-md-6 col-lg-6 col-xl-6 col-xxl-6 p-4 border">
                                             <label for="start_date" class="form-label">Desde</label>
-                                            <input type="date" class="form-control" name="start_date[]" required="required" min="1950-01-01"/>
+                                            <input type="date" class="form-control" name="start_date[]" required="required" min="1960-01-01" max="2035-01-01"/>
                                         </div>
                                         <div class="col-sm-6 col-md-6 col-lg-6 col-xl-6 col-xxl-6 p-4 border">
                                             <label for="end_date" class="form-label">Hasta</label>
-                                            <input type="date" class="form-control" name="end_date[]" required="required" min="1950-01-01"/>
+                                            <input type="date" class="form-control" name="end_date[]" required="required" min="1960-01-01" max="2035-01-01"/>
                                         </div>
                                     </div>
                                 </div>
