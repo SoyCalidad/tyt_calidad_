@@ -349,21 +349,22 @@ class Applicant(models.Model):
     def open_user_input_view(self):
         
         if len(self.days_of_week_ids) == 1:
-
+            _logger.info(f"len(self.days_of_week_ids) : {len(self.days_of_week_ids) }")
             survey_ids = self.days_of_week_ids.attendance_id.surveys_ids.survey_id.ids
-
+            _logger.info(f"survey_ids {len(survey_ids)}")
             question = self.env['survey.question'].sudo().search([
                 ('is_a_guest_question', '=', True),
                 ('survey_id', 'in', survey_ids)
             ])
-
+            _logger.info(f"question {len(question)}")
             answer = self.env['survey.user_input.line'].sudo().search([
                 ('question_id', 'in', question.ids),
                 ('value_char_box', '=', self.employee_number)
             ])
+            _logger.info(f"answer {len(answer)}")
 
             inputs = self.env['survey.user_input'].sudo().search([('id', 'in', answer.user_input_id.ids)])
-
+            _logger.info(f"inputs {len(inputs)}")
             if inputs:
                 return {
                     'name': 'Lista de encuestas realizadas por el aplicante',
@@ -375,8 +376,26 @@ class Applicant(models.Model):
                 }
             else:
                 return {
-                    'type': 'ir.actions.act_window_close'
+                    'type': 'ir.actions.client',
+                    'tag': 'display_notification',
+                    'params': {
+                        'title': 'Exámenes resueltos',
+                        'message': 'Usted ha resuelto 0 exámenes.',
+                        'type': 'success',  
+                        'sticky': False
+                    }
                 }
+        else:
+            return {
+                'type': 'ir.actions.client',
+                'tag': 'display_notification',
+                'params': {
+                    'title': 'Duplicado',
+                    'message': 'Existe más de un registro de asistencia incorrecto, comuníquese con su administrador.',
+                    'type': 'success',  
+                    'sticky': False
+                }
+            }
         
 class DataAcademic(models.Model):
     _name = 'tyt_recruitment.data_academic'
