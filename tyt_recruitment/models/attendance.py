@@ -65,7 +65,7 @@ class Attendance(models.Model):
                 
                 answer = self.env['survey.user_input.line'].sudo().search([
                     ('survey_id', '=', survey.survey_id.id),
-                    ('value_char_box', '=', kardex_applicant.attendance_days_of_week_id.applicant_id.social_security_number)
+                    ('value_char_box', '=', kardex_applicant.attendance_days_of_week_id.applicant_id.employee_number)
                 ], limit=1)
 
                 field_name = f"exam{index+1}"
