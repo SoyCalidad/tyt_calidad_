@@ -48,6 +48,7 @@ class IndividualReport(models.AbstractModel):
                 auditor_check_and_done_format = workbook.add_format({'bg_color': '#66FF66', 'text_wrap': True, 'border': 1, 'align': 'center','valign': 'vcenter'})
                 auditor_check_or_done_format = workbook.add_format({'bg_color': '#FFBD33', 'text_wrap': True, 'border': 1, 'align': 'center','valign': 'vcenter'})
                 fixed_date_check_format = workbook.add_format({'bg_color': '#EB1919', 'text_wrap': True, 'border': 1, 'align': 'center','valign': 'vcenter'})
+                scheduled_date_is_sunday_format = workbook.add_format({'bg_color': '#000000', 'text_wrap': True, 'border': 1, 'align': 'center','valign': 'vcenter'})
 
                 sheet1 = workbook.add_worksheet(str("Asignación por Auditor"))
 
@@ -363,9 +364,11 @@ class IndividualReport(models.AbstractModel):
                     sheet2.write(starting_row, blank_column, "", row_format)
 
                     for line in line_ids:
-                        value = "X" if line.done else ""
+                        value = "X" if line.done and not line.scheduled_date_is_sunday else ""
 
-                        if line.fixed_date_check:
+                        if line.scheduled_date_is_sunday:
+                            done_row_line_format = scheduled_date_is_sunday_format
+                        elif line.fixed_date_check:
                             done_row_line_format = fixed_date_check_format
                         elif line.auditor_check and line.done:
                             done_row_line_format = auditor_check_and_done_format

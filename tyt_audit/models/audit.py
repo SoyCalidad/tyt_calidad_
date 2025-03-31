@@ -276,6 +276,11 @@ class Audit(models.Model):
         default=0,
     )
 
+    def action_mail_send(self):
+        self.ensure_one()
+        template = 'tyt_audit.email_template_mgmtsystem_audit'
+        return self.notify_users_by_email(template)
+
 
     # @api.onchange('tyt_procedure_description_id', 'tyt_procedure_activity_id')
     # def _onchange_filter_planning_ids(self):

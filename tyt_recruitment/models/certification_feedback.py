@@ -74,16 +74,21 @@ class CertificationFeeback(models.Model):
     
     def action_view_notify(self):
         self.ensure_one()
-        
-        # Actualizar estado
-        self.state = 'notified'
 
         # Obtener correos
-        emails = filter(None, [self.quality_technician.work_email, self.training_and_quality_manager.work_email])
-        email_to = ", ".join(emails)
+        emails = filter(None, [
+            self.quality_technician.work_email, 
+            self.training_and_quality_manager.work_email,
+        ])
+
+        # Unir los correos con coma
+        email_to = ",".join(emails) if emails else False  
 
         # Obtener plantilla de correo
         template = self.env.ref('tyt_recruitment.email_template_certification_feedback', raise_if_not_found=False)
+
+        # Actualizar estado
+        self.state = 'notified'
         
         if template and email_to:
             template.with_context(email_to=email_to).send_mail(self.id, force_send=True)

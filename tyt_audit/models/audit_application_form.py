@@ -61,8 +61,10 @@ class AuditApplicationController(http.Controller):
                 #     raise UserError(f"El archivo {attachment.filename} está vacío.")
 
                 # Validar el tamaño del archivo
-                if len(file_content) > 20 * 1024 * 1024:  # 20 MB
-                    raise UserError(f"El archivo {attachment.filename} excede los 20 MB.")
+                ###############################
+                # if len(file_content) > 20 * 1024 * 1024:  # 20 MB
+                #     raise UserError(f"El archivo {attachment.filename} excede los 20 MB.")
+                ###############################
 
                 # Validar el tipo de archivo
                 # if attachment.content_type not in ['application/pdf', 'image/jpeg', 'image/png']:

@@ -86,7 +86,6 @@ class AuditAudit(models.Model):
     state = fields.Selection(
         string=u'Estado',
         selection_add=[
-            ('send', 'Enviado'),
             ('final', 'Finalizado')
         ],
         default='elaborate',

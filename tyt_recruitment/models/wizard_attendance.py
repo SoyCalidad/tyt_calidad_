@@ -38,13 +38,9 @@ class ConfirmationWizard(models.TransientModel):
         ])
 
         for applicant in applicants:
-            # Search a applicant exists for a attendance
-            exist_applicant = self.env['tyt_recruitment.attendance_days_of_week'].sudo().search([
-                ('applicant_nss', '=', applicant.social_security_number),
-                ('attendance_id', '=', current_attendance_id)
-            ], limit=1)
 
-            if not exist_applicant:
+            if len(applicant.days_of_week_ids) < 1:
+                _logger.info(f"tamaño de days_of_week_ids {len(applicant.days_of_week_ids)}")
                 new_data_prospect = {
                     "applicant_id": applicant.id,
                     "attendance_id": current_attendance_id,
