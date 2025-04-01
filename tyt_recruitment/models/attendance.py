@@ -57,21 +57,21 @@ class Attendance(models.Model):
             record.survey_counter = len(record.surveys_ids)
 
     def action_view_kardex(self):
-        
         self.view_kardex = True
 
         for kardex_applicant in self.kardex_by_applicant_ids:
             for index, survey in enumerate(self.surveys_ids):
-                
+                employee_number = kardex_applicant.attendance_days_of_week_id.applicant_id.employee_number
+
                 answer = self.env['survey.user_input.line'].sudo().search([
                     ('survey_id', '=', survey.survey_id.id),
-                    ('value_char_box', '=', kardex_applicant.attendance_days_of_week_id.applicant_id.employee_number)
+                    ('value_char_box', '=', employee_number)
                 ], limit=1)
 
                 field_name = f"exam{index+1}"
                 value = "0.0"
 
-                if answer: 
+                if answer and employee_number:
                     value = str(answer.user_input_id.scoring_percentage)
 
                 if hasattr(kardex_applicant, field_name):
@@ -174,6 +174,21 @@ class DaysOfWeek(models.Model):
 
     attendance_id = fields.Many2one('tyt_recruitment.attendance', string="Lista de asistencia", ondelete='cascade', tracking=True)
 
+    full_name = fields.Char(string="Nombre Completo", compute="_compute_full_name", store=True)
+
+    @api.depends('applicant_id.name', 'applicant_id.last_name_father', 'applicant_id.last_name_mother')
+    def _compute_full_name(self):
+        for record in self:
+            if record.applicant_id:
+                name = record.applicant_id.name or ''
+                last_name_father = record.applicant_id.last_name_father or ''
+                last_name_mother = record.applicant_id.last_name_mother or ''
+                record.full_name = f"{last_name_father} {last_name_mother} {name}".strip().upper()
+            elif record.applicant_name:
+                record.full_name = record.applicant_name.upper()
+            else:
+                record.full_name = ''
+
     @api.onchange('day1', 'day2', 'day3', 'day4', 'day5', 'day6', 'day7', 'day8', 'day9', 'day10', 'day11', 'day12', 'day13', 'day14', 'day15', 'day16', 'day17', 'day18', 'day19', 'day20')
     def _onchange_days(self):
         if not self.applicant_id.employee_id:
@@ -181,7 +196,7 @@ class DaysOfWeek(models.Model):
                 _logger.info(field_name)
                 _logger.info(self.applicant_id.name)
                 if self[field_name].tag == 'A':
-                    employee = self.env['hr.employee'].search([('l10n_mx_nss', '=', self.applicant_id.social_security_number)], limit=1)
+                    employee = self.env['hr.employee'].search([('segurosocial', '=', self.applicant_id.social_security_number)], limit=1)
                     self.applicant_id.write({'employee_id': employee.id})
 
     def show_applicant_details(self):
