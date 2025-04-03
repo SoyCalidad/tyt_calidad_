@@ -1,0 +1,114 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<odoo>
+
+    <record id="view_crehana_employee_tree" model="ir.ui.view">
+        <field name="name">hr.employee.tree.view</field>
+        <field name="model">hr.employee</field>
+        <field name="arch" type="xml">
+            <tree>
+                <field name="id"/>
+                <field name="name"/>
+                <field name="job_id"/>
+                <field name="id_crehana"/>
+                <field name="user_crehana"/>
+                <field name="level"/>
+                <field name="is_registered_in_crehana"/>
+                <field name="is_registered_on_a_learning_path"/>
+                <button 
+                    name="action_register_in_crehana" 
+                    type="object" 
+                    string="Registrar en Crehana" 
+                    class="oe_highlight"
+                    attrs="{'invisible': [('is_registered_in_crehana', '=', True)]}"/>
+                <button 
+                    name="action_register_on_a_learning_path" 
+                    type="object" 
+                    string="Registrar en una ruta de aprendizaje" 
+                    class="oe_highlight"
+                    attrs="{'invisible': ['|', ('is_registered_on_a_learning_path', '=', True), ('is_registered_in_crehana', '=', False)]}"/>
+                <button 
+                    name="action_show_learning_progress"  
+                    type="object" 
+                    string="Ver avance"  
+                    class="oe_highlight"
+                    attrs="{'invisible': [('is_registered_on_a_learning_path', '=', False)]}"/>
+            </tree>
+        </field>
+    </record>
+
+    <record id="view_crehana_employee_form" model="ir.ui.view">
+        <field name="name">hr.employee.form.view</field>
+        <field name="model">hr.employee</field>
+        <field name="arch" type="xml">
+            <form>
+                <sheet>
+                    <group>
+                        <field name="id" readonly="1"/>
+                        <field name="name"/>
+                        <field name="company_id" invisible="1"/>
+                        <field name="job_id"/>
+                        <field name="id_crehana"/>
+                        <field name="user_crehana"/>
+                        <field name="level"/>
+                        <field name="is_registered_in_crehana"/>
+                        <field name="is_registered_on_a_learning_path"/>
+                    </group>
+                </sheet>
+            </form>
+        </field>
+    </record>
+
+    <record id="view_crehana_employee_courses_form" model="ir.ui.view">
+        <field name="name">hr.employee.form.view</field>
+        <field name="model">hr.employee</field>
+        <field name="arch" type="xml">
+            <form edit="false">
+                <sheet>
+                    <group>
+                        <field name="id"/>
+                        <field name="name"/>
+                        <field name="company_id" invisible="1"/>
+                        <field name="job_id"/>
+                        <field name="id_crehana"/>
+                        <field name="user_crehana"/>
+                        <field name="level"/>
+                    </group>
+                    <group>
+                        <field name="course_ids">
+                           <tree editable="false">
+                                <field name="id_course"/>
+                                <field name="name"/>
+                                <field name="hours"/>
+                                <field name="progress"/>
+                                <field name="level_of_employee"/>
+                                <field name="job_of_employee"/>
+                            </tree>
+                        </field>
+                    </group>
+                </sheet>
+            </form>
+        </field>
+    </record>
+
+    <record id="action_employees" model="ir.actions.act_window">
+        <field name="name">Empleados</field>
+        <field name="res_model">hr.employee</field>
+        <field name="view_mode">tree,form</field>
+        <!-- <field name="view_id" ref="view_crehana_employee_tree"/> -->
+        <field name="view_ids" eval="[(5, 0, 0), (0, 0, {'view_mode': 'tree', 'view_id': ref('view_crehana_employee_tree')}), (0, 0, {'view_mode': 'form', 'view_id': ref('view_crehana_employee_form')})]"/>
+        <field name="context">{'default_dynamic_domain': True}</field>
+    </record>
+
+    <record id="action_server_report_progress" model="ir.actions.server">
+        <field name="name">Obtener rutas de aprendizaje</field>
+        <field name="model_id" ref="model_hr_employee"/>
+        <field name="state">code</field>
+        <field name="code">model.action_server_get_progress()</field>
+    </record>
+
+    <menuitem id="menu_employees" name="Empleados"
+        parent="menu_crehana_root" action="action_employees" sequence="30"/>
+
+    <menuitem id="menu_learning_progress_total" name="Obtener reporte de avances"
+        parent="menu_crehana_root" action="action_server_report_progress" sequence="91"/>
+</odoo>

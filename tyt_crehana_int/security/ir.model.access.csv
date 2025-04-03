@@ -1,0 +1,8 @@
+id,name,model_id:id,group_id:id,perm_read,perm_write,perm_create,perm_unlink
+access_job_positions,access_job_positions,model_tyt_crehana_job_positions,,1,1,1,1
+access_learning_course,access_learning_course,model_tyt_crehana_learning_course,,1,1,1,1
+
+access_learning_path,access_learning_path,model_tyt_crehana_learning_path,,1,1,1,1
+access_learning_path_course,access_learning_path_course,model_tyt_crehana_learning_path_course,,1,1,1,1
+
+access_crehana_settings,access_crehana_settings,model_tyt_crehana_crehana_settings,,1,1,1,1

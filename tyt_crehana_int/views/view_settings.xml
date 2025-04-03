@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <record id="view_api_credentials_form" model="ir.ui.view">
+        <field name="name">api.credentials.form</field>
+        <field name="model">tyt_crehana.crehana_settings</field>
+        <field name="arch" type="xml">
+            <form>
+                <sheet>
+                    <group>
+                        <field name="api_key" password="True"/>
+                        <field name="secret_access" password="True"/>
+                        <field name="organization_slug" />
+                    </group>
+                </sheet>
+            </form>
+        </field>
+    </record>
+
+    <record id="action_crehana_settigns" model="ir.actions.act_window">
+        <field name="name">Configuraciones</field>
+        <field name="res_model">tyt_crehana.crehana_settings</field>
+        <field name="view_mode">tree,form</field>
+    </record>
+
+    <!-- Menús -->
+    <menuitem id="menu_crehana_settings" name="Configuraciones"
+              parent="menu_crehana_root" action="action_crehana_settigns" sequence="99"/>
+</odoo>
