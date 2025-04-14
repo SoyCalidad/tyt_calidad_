@@ -6,3 +6,5 @@ access_learning_path,access_learning_path,model_tyt_crehana_learning_path,,1,1,1
 access_learning_path_course,access_learning_path_course,model_tyt_crehana_learning_path_course,,1,1,1,1
 
 access_crehana_settings,access_crehana_settings,model_tyt_crehana_crehana_settings,,1,1,1,1
+
+access_user_progress,access_user_progress,model_tyt_crehana_user_progress,,1,1,1,1
