@@ -54,6 +54,11 @@
                         <field name="is_registered_on_a_learning_path"/>
                     </group>
                 </sheet>
+                <div class="oe_chatter">
+                    <!-- <field name="message_follower_ids" widget="mail_followers"/>
+                    <field name="activity_ids" widget="mail_activity"/> -->
+                    <field name="message_ids" widget="mail_thread"/>
+                </div>
             </form>
         </field>
     </record>
@@ -93,22 +98,12 @@
     <record id="action_employees" model="ir.actions.act_window">
         <field name="name">Empleados</field>
         <field name="res_model">hr.employee</field>
-        <field name="view_mode">tree,form</field>
+        <field name="view_mode">tree</field>
         <!-- <field name="view_id" ref="view_crehana_employee_tree"/> -->
-        <field name="view_ids" eval="[(5, 0, 0), (0, 0, {'view_mode': 'tree', 'view_id': ref('view_crehana_employee_tree')}), (0, 0, {'view_mode': 'form', 'view_id': ref('view_crehana_employee_form')})]"/>
+        <field name="view_ids" eval="[(5, 0, 0), (0, 0, {'view_mode': 'tree', 'view_id': ref('view_crehana_employee_tree')}), (0, 0, {'view_mode': 'form', 'view_id': ref('view_crehana_employee_form')})]"/> 
         <field name="context">{'default_dynamic_domain': True}</field>
-    </record>
-
-    <record id="action_server_report_progress" model="ir.actions.server">
-        <field name="name">Obtener rutas de aprendizaje</field>
-        <field name="model_id" ref="model_hr_employee"/>
-        <field name="state">code</field>
-        <field name="code">model.action_server_get_progress()</field>
     </record>
 
     <menuitem id="menu_employees" name="Empleados"
         parent="menu_crehana_root" action="action_employees" sequence="30"/>
-
-    <menuitem id="menu_learning_progress_total" name="Obtener reporte de avances"
-        parent="menu_crehana_root" action="action_server_report_progress" sequence="91"/>
 </odoo>

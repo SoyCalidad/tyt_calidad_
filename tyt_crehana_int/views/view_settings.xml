@@ -1,5 +1,26 @@
 <?xml version="1.0" encoding="utf-8"?>
 <odoo>
+
+    <record id="view_api_credentials_tree" model="ir.ui.view">
+        <field name="name">api.credentials.tree</field>
+        <field name="model">tyt_crehana.crehana_settings</field>
+        <field name="arch" type="xml">
+            <tree>
+                <field name="organization_slug"/>
+                <button 
+                    name="action_view_general_progress_report" 
+                    string="Ver reporte de avances" 
+                    type="object" 
+                    class="oe_highlight" />
+                <button 
+                    name="action_fetch_paths_from_api" 
+                    string="Actualizar rutas de aprendizaje" 
+                    type="object" 
+                    class="oe_highlight" />
+            </tree>
+        </field>
+    </record>
+
     <record id="view_api_credentials_form" model="ir.ui.view">
         <field name="name">api.credentials.form</field>
         <field name="model">tyt_crehana.crehana_settings</field>
@@ -12,9 +33,72 @@
                         <field name="organization_slug" />
                     </group>
                 </sheet>
+                <div class="oe_chatter">
+                    <!-- <field name="message_follower_ids" widget="mail_followers"/>
+                    <field name="activity_ids" widget="mail_activity"/> -->
+                    <field name="message_ids" widget="mail_thread"/>
+                </div>
             </form>
         </field>
     </record>
+
+    <!-- Reporte -->
+
+    <record id="view_item_progress_tree" model="ir.ui.view">
+        <field name="name">tyt_crehana.user_progress.tree</field>
+        <field name="model">tyt_crehana.user_progress</field>
+        <field name="arch" type="xml">
+            <tree string="Reporte de Progreso">
+                <field name="user_id"/>
+                <field name="user_name"/>
+                <field name="user_email"/>
+                <field name="user_status"/>
+                <field name="user_info_extra"/>
+                <field name="is_enroll_active"/>
+                <field name="course_id"/>
+                <field name="course_name"/>
+                <field name="course_category"/>
+                <field name="course_subcategory"/>
+                <field name="is_admin_assigned"/>
+                <field name="assigned_by_name"/>
+                <field name="course_type"/>
+                <field name="course_is_reward"/>
+                <field name="course_duration_hours"/>
+                <field name="course_progress"/>
+                <field name="course_progress_hours"/>
+                <field name="course_is_completed"/>
+                <field name="project_status"/>
+                <field name="project_date"/>
+                <field name="quiz_status"/>
+                <field name="quiz_attemps"/>
+                <field name="quiz_best_correct_answers"/>
+                <field name="quiz_best_wrong_answers"/>
+                <field name="quiz_total_questions"/>
+                <field name="quiz_best_result"/>
+                <field name="course_is_certified"/>
+                <field name="course_has_participation_certificate"/>
+                <field name="course_enroll_date"/>
+                <field name="course_start_date"/>
+                <field name="course_complete_date"/>
+                <field name="project_url"/>
+                <field name="course_certificated_url"/>
+                <field name="course_participation_certificate_url"/>
+                <field name="course_certificated_date"/>
+                <field name="course_last_action_date"/>
+                <field name="user_division"/>
+                <field name="user_subsidiary"/>
+                <field name="user_job"/>
+                <field name="user_level"/>
+                <field name="user_role"/>
+                <field name="track_id"/>
+                <field name="track_name"/>
+                <field name="track_is_hidden"/>
+                <field name="user_custom_fields"/>
+            </tree>
+        </field>
+    </record>
+
+    <!-- Actions -->
 
     <record id="action_crehana_settigns" model="ir.actions.act_window">
         <field name="name">Configuraciones</field>
