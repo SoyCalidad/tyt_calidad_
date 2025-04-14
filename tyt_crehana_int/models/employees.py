@@ -19,8 +19,8 @@ class EmployeeExtension(models.Model):
         required=False,
     )
 
-    is_registered_in_crehana = fields.Boolean(string='¿Está registrado en crehana?')
-    is_registered_on_a_learning_path = fields.Boolean(string='¿Está registrado en una ruta de aprendizaje?')
+    is_registered_in_crehana = fields.Boolean(string='¿Está registrado en crehana?', tracking=True)
+    is_registered_on_a_learning_path = fields.Boolean(string='¿Está registrado en una ruta de aprendizaje?', tracking=True)
 
     course_ids = fields.One2many('tyt_crehana.learning_course', 'employee_id', string="Cursos")
     
@@ -48,251 +48,209 @@ class EmployeeExtension(models.Model):
     def action_register_in_crehana(self):
         _logger.info("Ejecutando action_register_in_crehana...")
 
-        url = "https://www.crehana.com/api/rest/org/demo-tyt-api/users/"
-        message = "Problemas con los datos, contacte con su administrador"
-        title = "Datos faltantes"
+        settings = self.env['tyt_crehana.crehana_settings'].get_first_settings()
 
-        if not self.work_email:
-            message = "No se encontró email de trabajo"
+        if settings:
 
-        elif not self.x_studio_nombres or not self.x_studio_apellido_paterno or not self.x_studio_apellido_materno:
-            message = "No se econtró el nombre del empleado"
+            url = f"https://www.crehana.com/api/rest/org/{settings.organization_slug}/users/"
+            message = "Problemas con los datos, contacte con su administrador"
+            title = "Datos faltantes"
+
+            if not self.work_email:
+                message = "No se encontró email de trabajo"
+
+            elif not self.empleado_nombre or not self.empleado_paterno or not self.empleado_materno:
+                message = "No se econtró el nombre del empleado"
+            else:
+                headers = {
+                    "api-key": settings.api_key,
+                    "secret-access": settings.secret_access,
+                    "Content-Type": "application/json"
+                }
+
+                payload = {
+                    "first_name": self.empleado_nombre,
+                    "last_name": f"{self.empleado_paterno} {self.empleado_materno}",
+                    "email": self.work_email
+                    # "password": "1234"
+                }
+
+                try:
+                    response = requests.post(url, json=payload, headers=headers, timeout=10)
+                    response.raise_for_status()
+
+                    title = "Registrado"
+                    message = "El empleado fue registrado exitosamente"
+
+                    data = response.json()
+
+                    self.id_crehana = data.get('id')
+                    self.user_crehana = data.get('user').get('username')
+                    self.is_registered_in_crehana = True
+
+                    return {'type': 'ir.actions.client', 'tag': 'reload'}
+                except requests.exceptions.RequestException as e:
+                    _logger.error(f"Error al obtener datos: {e}")
+                    raise models.ValidationError(f"Error al obtener datos: {e}")
+
+            return {
+                'type': 'ir.actions.client',
+                'tag': 'display_notification',
+                'params': {
+                    'title': title,
+                    'message': message,
+                    'type': 'success',  
+                    'sticky': False
+                }
+            } 
         else:
-            headers = {
-                "api-key": "6f73522fa7b4eb8c54a1",
-                "secret-access": "b65fbff8821dab56651bd23b6142080957a327c13f9e3f543ac3c306a746166e",
-                "Content-Type": "application/json"
-            }
-
-            payload = {
-                "first_name": self.x_studio_nombres,
-                "last_name": f"{self.x_studio_apellido_paterno} {self.x_studio_apellido_materno}",
-                "email": self.work_email
-                # "password": "1234"
-            }
-
-            _logger.info(f"payload {payload}")
-
-            try:
-                response = requests.post(url, json=payload, headers=headers, timeout=10)
-                response.raise_for_status()
-
-                title = "Registrado"
-                message = "El empleado fue registrado exitosamente"
-
-                data = response.json()
-
-                self.id_crehana = data.get('id')
-                self.is_registered_in_crehana = True
-
-                _logger.info(f"Registrado con el id: {data.get('id')}")
-                _logger.info(f"Registrado con el id: {data.get('user')}")
-
-                return {'type': 'ir.actions.client', 'tag': 'reload'}
-            except requests.exceptions.RequestException as e:
-                _logger.error(f"Error al obtener datos: {e}")
-                raise models.ValidationError(f"Error al obtener datos: {e}")
-
-        return {
-            'type': 'ir.actions.client',
-            'tag': 'display_notification',
-            'params': {
-                'title': title,
-                'message': message,
-                'type': 'success',  
-                'sticky': False
-            }
-        } 
+            _logger.error(f"Error de credenciales de acceso")
+            raise models.ValidationError("Error al obtener credenciales de acceso para API's")
 
     def action_register_on_a_learning_path(self):
         _logger.info("Ejecutando action_register_on_a_learning_path...")
 
-        url = "https://www.crehana.com/api/rest/org/demo-tyt-api/tracks/"
-        message = "Problemas con los datos, contacte con su administrador"
-        title = "Datos faltantes"
+        settings = self.env['tyt_crehana.crehana_settings'].get_first_settings()
 
-        if not self.id_crehana:
-            message = "No se encontró identificador de crehana"
+        if settings:
+
+            url = f"https://www.crehana.com/api/rest/org/{settings.organization_slug}/tracks/"
+            message = "Problemas con los datos, contacte con su administrador"
+            title = "Datos faltantes"
+
+            if not self.id_crehana:
+                message = "No se encontró identificador de crehana"
+            else:
+                headers = {
+                    "api-key": settings.api_key,
+                    "secret-access": settings.secret_access,
+                    "Content-Type": "application/x-www-form-urlencoded"
+                }
+
+                # Obtener ruta para su posición
+                position = self.env['tyt_crehana.job_positions'].sudo().search([
+                    ('job_id', '=', self.job_id.id)
+                ])
+
+                path_selected = None
+                if position.level_a and self.level == 'A':
+                    path_selected = position.path_to_position_a
+                elif position.level_b and self.level == 'B':
+                    path_selected = position.path_to_position_b
+                elif position.level_c and self.level == 'C':
+                    path_selected = position.path_to_position_c
+                elif position.level_d and self.level == 'D':
+                    path_selected = position.path_to_position_d
+
+                if path_selected and path_selected.id_path:
+
+                    data = {
+                        "team_id": str(path_selected.id_path),
+                        "user_organization_id": str(self.id_crehana),
+                    }
+
+                    try:
+                        response = requests.post(url, data=data, headers=headers, timeout=10)
+                        response.raise_for_status()
+
+                        title = "Registrado"
+                        message = "El empleado fue registrado exitosamente en la ruta de aprendizaje"
+
+                        data = response.json()
+
+                        self.is_registered_on_a_learning_path = True
+
+                        return {'type': 'ir.actions.client', 'tag': 'reload'}
+                    except requests.exceptions.RequestException as e:
+                        _logger.error(f"Error al obtener datos: {e}")
+                        raise models.ValidationError(f"Error al obtener datos: {e}")
+                else:
+                    title = "Error"
+                    message = "El empleado tiene problemas con su posición y/o nivel, contacte con un administrador."
+
+            return {
+                'type': 'ir.actions.client',
+                'tag': 'display_notification',
+                'params': {
+                    'title': title,
+                    'message': message,
+                    'type': 'success',  
+                    'sticky': False
+                }
+            }
         else:
-            headers = {
-                "api-key": "6f73522fa7b4eb8c54a1",
-                "secret-access": "b65fbff8821dab56651bd23b6142080957a327c13f9e3f543ac3c306a746166e",
-                "Content-Type": "application/json"
-            }
-
-            payload = {
-                "team_id": 17650,
-                "user_organization_id": self.id_crehana,
-            }
-
-            _logger.info(f"payload {payload}")
-
-            try:
-                response = requests.post(url, json=payload, headers=headers, timeout=10)
-                response.raise_for_status()
-
-                title = "Registrado"
-                message = "El empleado fue registrado exitosamente en la ruta de aprendizaje"
-
-                data = response.json()
-                
-                _logger.info(f"Registrado {data}")
-
-                return {'type': 'ir.actions.client', 'tag': 'reload'}
-            except requests.exceptions.RequestException as e:
-                _logger.error(f"Error al obtener datos: {e}")
-                raise models.ValidationError(f"Error al obtener datos: {e}")
-
-        return {
-            'type': 'ir.actions.client',
-            'tag': 'display_notification',
-            'params': {
-                'title': title,
-                'message': message,
-                'type': 'success',  
-                'sticky': False
-            }
-        } 
+            _logger.error(f"Error de credenciales de acceso")
+            raise models.ValidationError("Error al obtener credenciales de acceso para API's")
 
     def action_show_learning_progress(self):
         _logger.info("Ejecutando action_show_learning_progress...")
 
-        url = f"https://www.crehana.com/api/rest/org/demo-tyt-api/course_user_report/{self.id_crehana}/"
+        settings = self.env['tyt_crehana.crehana_settings'].get_first_settings()
 
-        headers = {
-            "api-key": "6f73522fa7b4eb8c54a1",
-            "secret-access": "b65fbff8821dab56651bd23b6142080957a327c13f9e3f543ac3c306a746166e",
-            "Content-Type": "application/json"
-        }
+        if settings:
+            url = f"https://www.crehana.com/api/rest/org/{settings.organization_slug}/course_user_report/{self.id_crehana}/"
 
-        try:
-            response = requests.get(url, headers=headers, timeout=10)
-            response.raise_for_status()
-
-            data = response.json()
-
-            for item in data:
-
-                data_course = item.get('course', {})
-                if not data_course:
-                    continue
-
-                course_info = data_course.get('course', {})
-                course_id = course_info.get('id')
-                course_title = course_info.get('title')
-
-                if not course_id or not course_title:
-                    continue
-
-                new_data = {
-                    "hours": item.get('hours', '0'),
-                    "progress": item.get('progress', '0')
-                }
-
-                course = self.env['tyt_crehana.learning_course'].search([
-                    ('id_course', '=', course_id),
-                    ('employee_id', '=', self.id)
-                ], limit=1)
-
-                if course:
-                    course.write(new_data)
-
-                else:
-                    new_data["id_course"] = course_id
-                    new_data["name"] = course_title
-                    new_data["employee_id"] = self.id
-                    new_data["level_of_employee"] = self.level
-                    new_data["job_of_employee"] = self.job_id.name
-
-                    self.env['tyt_crehana.learning_course'].create(new_data)   
-                              
-            _logger.info(f"employeeeeeeeeeeee {self.id}")
-            return {
-                'type': 'ir.actions.act_window',
-                'name': 'Cursos del Empleado',
-                'res_model': 'hr.employee',
-                'view_mode': 'form',
-                'view_id': self.env.ref('tyt_crehana_int.view_crehana_employee_courses_form').id,
-                'res_id': self.id,
-                'context': {'default_employee_id': self.id},
-                'target': 'current'
+            headers = {
+                "api-key": settings.api_key,
+                "secret-access": settings.secret_access,
+                "Content-Type": "application/json"
             }
 
-        except requests.exceptions.RequestException as e:
-            _logger.error(f"Error al obtener datos: {e}")
-            raise models.ValidationError(f"Error al obtener datos: {e}")
+            try:
+                response = requests.get(url, headers=headers, timeout=10)
+                response.raise_for_status()
 
-    @api.model
-    def action_server_get_progress(self):
-        _logger.info("into action_progress_total_from_api111111111111")
-        # data = self.fetch_progress_total()
-        _logger.info("into action_progress_total_from_api222222222222")
+                data = response.json()
 
-        partners = self.env['res.partner'].search([])  # Ejemplo de partners
+                for item in data:
 
-        workbook = None  # O crea un workbook con xlsxwriter
+                    data_course = item.get('course', {})
+                    if not data_course:
+                        continue
 
-        data = {
-            "records": [
-                {"id": 1, "name": "Requisición A", "description": "Descripción A", "created_at": "2025-04-02"},
-                {"id": 2, "name": "Requisición B", "description": "Descripción B", "created_at": "2025-04-03"}
-            ]
-        }
+                    course_info = data_course.get('course', {})
+                    course_id = course_info.get('id')
+                    course_title = course_info.get('title')
 
-        file_data = self.generate_report_profess(workbook, data, partners)
+                    if not course_id or not course_title:
+                        continue
 
-        # Devolver el archivo en un binario para descargar en Odoo
-        return {
-            'type': 'ir.actions.act_url',
-            'url': '/web/content/?model=tu.modelo&id=1&field=file_data&download=true',
-            'target': 'self',
-        }
+                    new_data = {
+                        "hours": item.get('hours', '0'),
+                        "progress": item.get('progress', '0')
+                    }
 
-    @api.model
-    def fetch_progress_total(self):
-        _logger.info("Ejecutando fetch_names_from_api...")
+                    course = self.env['tyt_crehana.learning_course'].search([
+                        ('id_course', '=', course_id),
+                        ('employee_id', '=', self.id)
+                    ], limit=1)
 
-    def generate_report_profess(self, workbook, data, partners):
-        if workbook is None:
-            output = BytesIO()
-            workbook = xlsxwriter.Workbook(output)
+                    if course:
+                        course.write(new_data)
 
-        sheet = workbook.add_worksheet('Reporte de requisición')
+                    else:
+                        new_data["id_course"] = course_id
+                        new_data["name"] = course_title
+                        new_data["employee_id"] = self.id
+                        new_data["level_of_employee"] = self.level
+                        new_data["job_of_employee"] = self.job_id.name
 
-        # Formato del título
-        title_format = workbook.add_format({
-            'font_size': 14,
-            'font_name': 'Calibri',
-            'bg_color': '#31869B',
-            'font_color': 'white',
-            'align': 'center',
-            'valign': 'vcenter',
-            'bold': True,
-            'border': 1
-        })
+                        self.env['tyt_crehana.learning_course'].create(new_data)   
+                                
+                return {
+                    'type': 'ir.actions.act_window',
+                    'name': 'Cursos del Empleado',
+                    'res_model': 'hr.employee',
+                    'view_mode': 'form',
+                    'view_id': self.env.ref('tyt_crehana_int.view_crehana_employee_courses_form').id,
+                    'res_id': self.id,
+                    'context': {'default_employee_id': self.id},
+                    'target': 'current'
+                }
 
-        # Formato de las celdas
-        cell_format = workbook.add_format({
-            'font_size': 12,
-            'font_name': 'Calibri',
-            'align': 'left',
-            'valign': 'vcenter',
-            'border': 1
-        })
-
-        # Suponiendo que `data` es un diccionario con una lista bajo la clave 'records'
-        records = data.get('records', [])
-
-        # Encabezados de la tabla
-        headers = ["ID", "Nombre", "Descripción", "Fecha de Creación"]
-        for col, header in enumerate(headers):
-            sheet.write(0, col, header, title_format)
-
-        # Escribir datos de la lista
-        for row, record in enumerate(records, start=1):
-            sheet.write(row, 0, record.get('id', ''), cell_format)
-            sheet.write(row, 1, record.get('name', ''), cell_format)
-            sheet.write(row, 2, record.get('description', ''), cell_format)
-            sheet.write(row, 3, record.get('created_at', ''), cell_format)
-
-        return workbook
+            except requests.exceptions.RequestException as e:
+                _logger.error(f"Error al obtener datos: {e}")
+                raise models.ValidationError(f"Error al obtener datos: {e}")
+        else:
+            _logger.error(f"Error de credenciales de acceso")
+            raise models.ValidationError("Error al obtener credenciales de acceso para API's")
