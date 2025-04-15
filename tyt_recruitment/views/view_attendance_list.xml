@@ -65,7 +65,7 @@
                 <tree editable="bottom">
                   <field name="id" width="30px" />
                   <field name="login" width="30px" />
-                  <field name="applicant_name" width="30px" />
+                  <field name="full_name" width="30px" />
                   <field name="day1" width="30px" attrs="{'column_invisible': [('parent.days', '&lt;', 1)]}"/>
                   <field name="day2" width="30px" attrs="{'column_invisible': [('parent.days', '&lt;', 2)]}"/>
                   <field name="day3" width="30px" attrs="{'column_invisible': [('parent.days', '&lt;', 3)]}"/>
