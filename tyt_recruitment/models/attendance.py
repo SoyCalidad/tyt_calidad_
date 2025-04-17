@@ -25,8 +25,8 @@ class Attendance(models.Model):
     turn = fields.Selection([('T/M', 'T/M'), ('T/V', 'T/V'), ('T/N', 'T/N')], string="Turno lista de prospectos", tracking=True)
 
     income = fields.Char( string="Ingresos", compute="_compute_income", store=True, tracking=True)
-    returns = fields.Char( string="Regresos", tracking=True)
-    desertion = fields.Char( string="Deserción", tracking=True)
+    returns = fields.Char( string="Regresos", compute="_compute_returns", tracking=True, default="0")
+    desertion = fields.Char( string="Deserción", tracking=True, default="0")
 
     days = fields.Integer(string="Días de capacitación", store=True, tracking=True)
 
@@ -50,6 +50,39 @@ class Attendance(models.Model):
     def _compute_income(self):
         for record in self:
             record.income = sum(1 for kardex in record.kardex_by_applicant_ids if kardex.login)
+
+    @api.depends(
+        'attendance_days_of_week_ids.day1', 'attendance_days_of_week_ids.day2',
+        'attendance_days_of_week_ids.day3', 'attendance_days_of_week_ids.day4',
+        'attendance_days_of_week_ids.day5', 'attendance_days_of_week_ids.day6',
+        'attendance_days_of_week_ids.day7', 'attendance_days_of_week_ids.day8',
+        'attendance_days_of_week_ids.day9', 'attendance_days_of_week_ids.day10',
+        'attendance_days_of_week_ids.day11', 'attendance_days_of_week_ids.day12',
+        'attendance_days_of_week_ids.day13', 'attendance_days_of_week_ids.day14',
+        'attendance_days_of_week_ids.day15', 'attendance_days_of_week_ids.day16',
+        'attendance_days_of_week_ids.day17', 'attendance_days_of_week_ids.day18',
+        'attendance_days_of_week_ids.day19', 'attendance_days_of_week_ids.day20',
+    )
+    def _compute_returns(self):
+        for record in self:
+            total = 0
+            for attendance_day in record.attendance_days_of_week_ids:
+                found_b = False
+                for i in range(3, 21):  # Recorremos day1 a day20
+                    day_field = f'day{i}'
+                    day_value = getattr(attendance_day, day_field, None)
+                    if day_value and getattr(day_value, 'tag', None) == 'B':
+                        found_b = True
+                        break  # Si ya encontramos uno con 'B', no revisamos los demás
+                if found_b:
+                    total += 1
+            record.returns = total
+
+    @api.onchange('income', 'returns')
+    def _onchange_desertion(self):
+        total = len(self.attendance_days_of_week_ids)
+        desertion_calculate = str( ( int(self.returns)*100 )/total ) + "%"
+        self.write({'desertion': desertion_calculate})
 
     @api.depends('surveys_ids')
     def _compute_survey_counter(self):
@@ -195,9 +228,11 @@ class DaysOfWeek(models.Model):
             for field_name in ['day1', 'day2', 'day3', 'day4', 'day5', 'day6', 'day7', 'day8', 'day9', 'day10', 'day11', 'day12', 'day13', 'day14', 'day15', 'day16', 'day17', 'day18', 'day19', 'day20']:
                 _logger.info(field_name)
                 _logger.info(self.applicant_id.name)
+                employee = self.env['hr.employee'].search([('segurosocial', '=', self.applicant_id.social_security_number)], limit=1)
+
                 if self[field_name].tag == 'A':
-                    employee = self.env['hr.employee'].search([('segurosocial', '=', self.applicant_id.social_security_number)], limit=1)
-                    self.applicant_id.write({'employee_id': employee.id})
+                    if employee.id and not self.login:
+                        self.applicant_id.write({'employee_id': employee.id})
 
     def show_applicant_details(self):
 
@@ -231,8 +266,6 @@ class KardexAttendance(models.Model):
     _description = 'Kardex de capacitación'
     _inherit = ['mail.thread']
 
-    login = fields.Char(string="#", tracking=True)
-
     experience = fields.Char(string="Experiencia", tracking=True)
     time = fields.Char(string="Tiempo", tracking=True)
 
@@ -265,6 +298,7 @@ class KardexAttendance(models.Model):
 
     attendance_days_of_week_id = fields.Many2one('tyt_recruitment.attendance_days_of_week', string="Kardex de asistencia", ondelete='cascade', tracking=True)
     applicant_id = fields.Many2one(related="attendance_days_of_week_id.applicant_id", string="Aplicante", ondelete='cascade', tracking=True)
+    login = fields.Char(related="applicant_id.employee_number", string="Login")
     marital_status = fields.Selection(related="applicant_id.marital_status", string="Estado civil", tracking=True)
     applicant_name = fields.Char(related="applicant_id.computed_name", string="Nombre completo", tracking=True)
 
