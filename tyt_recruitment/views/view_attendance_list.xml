@@ -63,7 +63,6 @@
             <page string="Lista de asistencia">
               <field name="attendance_days_of_week_ids" nolabel="1" options="{'no_create': True}">
                 <tree editable="bottom">
-                  <field name="id" width="30px" />
                   <field name="login" width="30px" />
                   <field name="full_name" width="30px" />
                   <field name="day1" width="30px" attrs="{'column_invisible': [('parent.days', '&lt;', 1)]}"/>
@@ -115,8 +114,6 @@
             <page string="Kardex" attrs="{'invisible': [('view_kardex', '=', False)]}" >
               <field name="kardex_by_applicant_ids" nolabel="1" options="{'no_create': True}">
                 <tree editable="bottom">
-
-                  <field name="id" width="30px" />
                   <field name="login" width="30px" />
                   <field name="applicant_name" width="30px" />
 
@@ -147,7 +144,6 @@
             <page string="Kardex - Certificación" groups="tyt_recruitment.group_quality_user" attrs="{'invisible': [('view_kardex_certificate', '=', False)]}">
               <field name="kardex_by_applicant_two_ids" nolabel="1" options="{'no_create': True}">
                 <tree editable="bottom">
-                  <field name="id" width="30px" readonly="1"/>
                   <field name="applicant_name" width="30px" readonly="1"/>
                   <field name="experience" width="30px" readonly="1"/>
                   <field name="time" width="30px" readonly="1"/>
