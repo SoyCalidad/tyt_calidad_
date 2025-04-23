@@ -81,7 +81,11 @@ class Attendance(models.Model):
     @api.onchange('income', 'returns')
     def _onchange_desertion(self):
         total = len(self.attendance_days_of_week_ids)
-        desertion_calculate = str( ( int(self.returns)*100 )/total ) + "%"
+        returns = int(self.returns)
+        if total > 0 and returns > 0:
+            desertion_calculate = str( ( returns*100 )/total ) + "%"
+        else:
+            desertion_calculate = "0"
         self.write({'desertion': desertion_calculate})
 
     @api.depends('surveys_ids')
