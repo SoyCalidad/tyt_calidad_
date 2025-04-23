@@ -36,6 +36,7 @@
             <header>
               <button name="action_view_kardex" string="Ver Kardex" type="object" class="oe_highlight" />
               <button name="action_view_kardex_certificate" string="Ver Certificación Kardex" type="object" class="oe_highlight" />
+              <button name="action_send_concession" string="Enviar concesión" type="object" class="oe_highlight" />
               <field name="state" widget="statusbar"/>
             </header>
 
@@ -63,7 +64,7 @@
             <page string="Lista de asistencia">
               <field name="attendance_days_of_week_ids" nolabel="1" options="{'no_create': True}">
                 <tree editable="bottom">
-                  <field name="login" width="30px" />
+                  <field name="login" width="30px" string="Número de empleado"/>
                   <field name="full_name" width="30px" />
                   <field name="day1" width="30px" attrs="{'column_invisible': [('parent.days', '&lt;', 1)]}"/>
                   <field name="day2" width="30px" attrs="{'column_invisible': [('parent.days', '&lt;', 2)]}"/>
@@ -114,7 +115,7 @@
             <page string="Kardex" attrs="{'invisible': [('view_kardex', '=', False)]}" >
               <field name="kardex_by_applicant_ids" nolabel="1" options="{'no_create': True}">
                 <tree editable="bottom">
-                  <field name="login" width="30px" />
+                  <field name="login" width="30px" string="Número de empleado"/>
                   <field name="applicant_name" width="30px" />
 
                   <field name="experience" width="30px" />
