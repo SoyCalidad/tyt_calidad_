@@ -114,3 +114,95 @@ class ReportCustomerRequisitionXlsx(models.AbstractModel):
                 sheet.write(row, 7, campaign.turn or '', data_format)
                 sheet.write(row, 8, campaign.priority or '', data_format)
                 row += 1
+
+class ReportCustomerAttendanceXlsx(models.AbstractModel):
+    _name = 'report.tyt_recruitment.report_attendance'
+    _description = 'Reporte de concesiones'
+    _inherit = 'report.report_xlsx.abstract'
+
+    def generate_xlsx_report(self, workbook, data, partners):
+
+        if workbook is None:
+            output = BytesIO()
+            workbook = xlsxwriter.Workbook(output)
+
+        sheet = workbook.add_worksheet('Reporte de concesiones')
+        
+        # Column headers
+        title_format = workbook.add_format({
+            'font_size': 22,
+            'font_name': 'Calibri',
+            'bg_color': '#31869B', 
+            'align': 'center', 
+            'valign': 'vcenter', 
+            'bold': True, 
+            'text_wrap': True, 
+            'border': True
+        })
+        subtitle_format = workbook.add_format({
+            'font_size': 16,
+            'font_name': 'Calibri',
+            'bg_color': '#215967', 
+            'align': 'center', 
+            'valign': 'vcenter', 
+            'text_wrap': True, 
+            'border': True
+        })
+        subtitle_format2 = workbook.add_format({
+            'font_size': 11,
+            'font_name': 'Calibri',
+            'bg_color': '#B7DEE8', 
+            'align': 'center', 
+            'valign': 'vcenter',
+            'bold': True, 
+            'text_wrap': True, 
+            'border': True
+        })
+        data_format = workbook.add_format({
+            'font_size': 11, 
+            'font_name': 'Calibri',
+            'align': 'center', 
+            'valign': 'vcenter', 
+            'text_wrap': True, 
+            'border': True
+        })
+        data_format2 = workbook.add_format({
+            'font_size': 11, 
+            'font_name': 'Calibri',
+            'font_color': '#1F3864',
+            'align': 'center', 
+            'valign': 'vcenter', 
+            'text_wrap': True, 
+            'border': True
+        })        
+
+        sheet.set_column('A:A', 15)
+        sheet.set_column('B:B', 50)
+        sheet.set_column('C:C', 20)
+        sheet.set_column('D:D', 20)
+
+        # Obtener la ruta absoluta de la imagen
+        sheet.insert_image('A1', get_module_resource('tyt_recruitment', 'static/src/img', 'logo.png'))
+
+        # Headers rows
+        sheet.merge_range('B2:D3', 'CONCESIONES', title_format)
+
+        sheet.write(4, 1, 'Concesiones#', data_format2)
+        # 'num_format': 'yyyy-mm-dd'
+
+        sheet.write(6, 1, 'NOMBRE', subtitle_format2)
+        sheet.write(6, 2, 'ESTATUS DE ACREDITACIÓN', subtitle_format2)
+        sheet.write(6, 3, 'CONCESIÓN', subtitle_format2)
+
+        # Data rows
+        row = 7
+        for partner in partners:
+
+            sheet.write(4, 2, partner.id or '', data_format)
+
+            for applicant_kardex in partner.kardex_by_applicant_ids:
+                if applicant_kardex.concession:
+                    sheet.write(row, 1, applicant_kardex.applicant_id.computed_name or '', data_format)
+                    sheet.write(row, 2, 'No certifica', data_format)
+                    sheet.write(row, 3, applicant_kardex.concession or '', data_format)
+                    row += 1

@@ -113,6 +113,50 @@ class Attendance(models.Model):
     def action_view_kardex_certificate(self):
         self.view_kardex_certificate = True
 
+    def action_send_concession(self):
+        self.ensure_one()
+        lang = self.env.context.get('lang')
+        template = self.env.ref('tyt_recruitment.mail_template_attendance_concession')
+
+        # Generar el archivo XLS y adjuntarlo al correo
+
+        report = self.env.ref('tyt_recruitment.action_report_report_concession')
+
+        generated_report = report._render_xlsx('tyt_recruitment.action_report_report_concession', docids=self.id, data=())
+        data_record = base64.b64encode(generated_report[0])
+        ir_values = {
+        'name': 'Invoice Report',
+        'type': 'binary',
+        'datas': data_record,
+        'store_fname': data_record,
+        'mimetype': 'application/vnd.ms-excel',
+        'res_model': 'account.move',
+        }
+        attachment = self.env['ir.attachment'].sudo().create(ir_values)
+
+        # attachment = self._create_attachment()
+
+        context = {
+            'default_model': 'tyt_recruitment.attendance',
+            'default_template_id': template.id if template else None,
+            'default_composition_mode': 'comment',
+            'mark_so_as_sent': True,
+            'default_email_to': "",
+            'default_subject': template.subject,
+            'default_body_html': template.body_html,
+            'default_attachment_ids': [(6, 0, [attachment.id])]
+        }
+        return {
+            'name': 'Previsualizar Correo',
+            'type': 'ir.actions.act_window',
+            'view_mode': 'form',
+            'res_model': 'mail.compose.message',
+            'views': [(False, 'form')],
+            'view_id': False,
+            'target': 'new',
+            'context': context,
+        }
+
     def rubric_view_json(self, rubric_id):
         return {
             'name': 'Vista Form del Registro',
@@ -292,8 +336,15 @@ class KardexAttendance(models.Model):
     certification3 = fields.Char(string="Certificado 3", tracking=True)
     comments_quality = fields.Char(string="Comentario - técnico de calidad", tracking=True)
 
-    accreditation_status = fields.Char(string="Estatus de certificación", tracking=True)
-    concession = fields.Char(string="Concesión", tracking=True)
+    accreditation_status = fields.Selection(
+        selection=[
+            ('certifica', 'Certifica'),
+            ('no_certifica', 'No certifica'),
+        ],
+        string="Estatus de certificación",
+        tracking=True
+    )
+    concession = fields.Boolean(string="Concesión", tracking=True)
     observation = fields.Char(string="Observaciones", tracking=True)
 
     attendance_days_of_week_id = fields.Many2one('tyt_recruitment.attendance_days_of_week', string="Kardex de asistencia", ondelete='cascade', tracking=True)
@@ -310,6 +361,13 @@ class KardexAttendance(models.Model):
 
     certification_feedback_ids = fields.One2many('tyt_recruitment.certification_feedback', 'kardex_id', string="Certificación de retroalimentación")
     has_certification_feedback = fields.Boolean(string="Tiene retroalimentación", compute="_compute_has_certification_feedback", tracking=True)
+
+    @api.onchange('accreditation_status')
+    def _onchange_accreditation_status(self):
+        if self.accreditation_status == 'no_certifica':
+            self.concession = True
+        else:
+            self.concession = False
 
     @api.depends('certification_feedback_ids')
     def _compute_has_certification_feedback(self):
