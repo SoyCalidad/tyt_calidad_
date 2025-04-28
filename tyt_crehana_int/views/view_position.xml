@@ -60,8 +60,9 @@
     </record>
 
     <!-- Menús -->
+    <menuitem id="menu_job_positions" name="Posiciones"
+        parent="menu_crehana_root" action="action_job_positions" sequence="20"/>
+
     <menuitem id="menu_crehana_root" name="Integración Crehana" sequence="10"/>
 
-    <menuitem id="menu_job_positions" name="Posiciones"
-              parent="menu_crehana_root" action="action_job_positions" sequence="20"/>
 </odoo>

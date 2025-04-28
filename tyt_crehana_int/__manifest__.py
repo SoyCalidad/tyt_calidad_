@@ -14,8 +14,8 @@
     ],
     'data': [
         'security/ir.model.access.csv',
-        'views/view_settings.xml',
         'views/view_position.xml',
+        'views/view_settings.xml',
         'views/view_employee.xml',
         'views/view_learning_path.xml'
     ],
