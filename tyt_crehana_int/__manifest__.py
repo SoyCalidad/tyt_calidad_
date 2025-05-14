@@ -1,0 +1,25 @@
+{
+    'name': 'Crehana Int',
+    'version': '0.1',
+    'description': 'Módulo Crehana TYT Contact Center',
+    'summary': 'Módulo Crehana TYT Contact Center',
+    'author': 'Soy Calidad',
+    'website': 'www.soycalidad.com',
+    'license': 'Other proprietary',
+    'category': 'Custom',
+    'depends': [
+        'base', 
+        'hr',
+        'mail'
+    ],
+    'data': [
+        'security/ir.model.access.csv',
+        'views/view_position.xml',
+        'views/view_settings.xml',
+        'views/view_employee.xml',
+        'views/view_learning_path.xml'
+    ],
+    'auto_install': False,
+    'installable': True,
+    'application': True,
+}

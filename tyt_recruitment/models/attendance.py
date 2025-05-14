@@ -25,8 +25,8 @@ class Attendance(models.Model):
     turn = fields.Selection([('T/M', 'T/M'), ('T/V', 'T/V'), ('T/N', 'T/N')], string="Turno lista de prospectos", tracking=True)
 
     income = fields.Char( string="Ingresos", compute="_compute_income", store=True, tracking=True)
-    returns = fields.Char( string="Regresos", tracking=True)
-    desertion = fields.Char( string="Deserción", tracking=True)
+    returns = fields.Char( string="Regresos", compute="_compute_returns", tracking=True, default="0")
+    desertion = fields.Char( string="Deserción", tracking=True, default="0")
 
     days = fields.Integer(string="Días de capacitación", store=True, tracking=True)
 
@@ -51,27 +51,64 @@ class Attendance(models.Model):
         for record in self:
             record.income = sum(1 for kardex in record.kardex_by_applicant_ids if kardex.login)
 
+    @api.depends(
+        'attendance_days_of_week_ids.day1', 'attendance_days_of_week_ids.day2',
+        'attendance_days_of_week_ids.day3', 'attendance_days_of_week_ids.day4',
+        'attendance_days_of_week_ids.day5', 'attendance_days_of_week_ids.day6',
+        'attendance_days_of_week_ids.day7', 'attendance_days_of_week_ids.day8',
+        'attendance_days_of_week_ids.day9', 'attendance_days_of_week_ids.day10',
+        'attendance_days_of_week_ids.day11', 'attendance_days_of_week_ids.day12',
+        'attendance_days_of_week_ids.day13', 'attendance_days_of_week_ids.day14',
+        'attendance_days_of_week_ids.day15', 'attendance_days_of_week_ids.day16',
+        'attendance_days_of_week_ids.day17', 'attendance_days_of_week_ids.day18',
+        'attendance_days_of_week_ids.day19', 'attendance_days_of_week_ids.day20',
+    )
+    def _compute_returns(self):
+        for record in self:
+            total = 0
+            for attendance_day in record.attendance_days_of_week_ids:
+                found_b = False
+                for i in range(3, 21):  # Recorremos day1 a day20
+                    day_field = f'day{i}'
+                    day_value = getattr(attendance_day, day_field, None)
+                    if day_value and getattr(day_value, 'tag', None) == 'B':
+                        found_b = True
+                        break  # Si ya encontramos uno con 'B', no revisamos los demás
+                if found_b:
+                    total += 1
+            record.returns = total
+
+    @api.onchange('income', 'returns')
+    def _onchange_desertion(self):
+        total = len(self.attendance_days_of_week_ids)
+        returns = int(self.returns)
+        if total > 0 and returns > 0:
+            desertion_calculate = str( ( returns*100 )/total ) + "%"
+        else:
+            desertion_calculate = "0"
+        self.write({'desertion': desertion_calculate})
+
     @api.depends('surveys_ids')
     def _compute_survey_counter(self):
         for record in self:
             record.survey_counter = len(record.surveys_ids)
 
     def action_view_kardex(self):
-        
         self.view_kardex = True
 
         for kardex_applicant in self.kardex_by_applicant_ids:
             for index, survey in enumerate(self.surveys_ids):
-                
+                employee_number = kardex_applicant.attendance_days_of_week_id.applicant_id.employee_number
+
                 answer = self.env['survey.user_input.line'].sudo().search([
                     ('survey_id', '=', survey.survey_id.id),
-                    ('value_char_box', '=', kardex_applicant.attendance_days_of_week_id.applicant_id.employee_number)
+                    ('value_char_box', '=', employee_number)
                 ], limit=1)
 
                 field_name = f"exam{index+1}"
                 value = "0.0"
 
-                if answer: 
+                if answer and employee_number:
                     value = str(answer.user_input_id.scoring_percentage)
 
                 if hasattr(kardex_applicant, field_name):
@@ -79,6 +116,50 @@ class Attendance(models.Model):
             
     def action_view_kardex_certificate(self):
         self.view_kardex_certificate = True
+
+    def action_send_concession(self):
+        self.ensure_one()
+        lang = self.env.context.get('lang')
+        template = self.env.ref('tyt_recruitment.mail_template_attendance_concession')
+
+        # Generar el archivo XLS y adjuntarlo al correo
+
+        report = self.env.ref('tyt_recruitment.action_report_report_concession')
+
+        generated_report = report._render_xlsx('tyt_recruitment.action_report_report_concession', docids=self.id, data=())
+        data_record = base64.b64encode(generated_report[0])
+        ir_values = {
+        'name': 'Invoice Report',
+        'type': 'binary',
+        'datas': data_record,
+        'store_fname': data_record,
+        'mimetype': 'application/vnd.ms-excel',
+        'res_model': 'account.move',
+        }
+        attachment = self.env['ir.attachment'].sudo().create(ir_values)
+
+        # attachment = self._create_attachment()
+
+        context = {
+            'default_model': 'tyt_recruitment.attendance',
+            'default_template_id': template.id if template else None,
+            'default_composition_mode': 'comment',
+            'mark_so_as_sent': True,
+            'default_email_to': "",
+            'default_subject': template.subject,
+            'default_body_html': template.body_html,
+            'default_attachment_ids': [(6, 0, [attachment.id])]
+        }
+        return {
+            'name': 'Previsualizar Correo',
+            'type': 'ir.actions.act_window',
+            'view_mode': 'form',
+            'res_model': 'mail.compose.message',
+            'views': [(False, 'form')],
+            'view_id': False,
+            'target': 'new',
+            'context': context,
+        }
 
     def rubric_view_json(self, rubric_id):
         return {
@@ -174,15 +255,32 @@ class DaysOfWeek(models.Model):
 
     attendance_id = fields.Many2one('tyt_recruitment.attendance', string="Lista de asistencia", ondelete='cascade', tracking=True)
 
+    full_name = fields.Char(string="Nombre Completo", compute="_compute_full_name", store=True)
+
+    @api.depends('applicant_id.name', 'applicant_id.last_name_father', 'applicant_id.last_name_mother')
+    def _compute_full_name(self):
+        for record in self:
+            if record.applicant_id:
+                name = record.applicant_id.name or ''
+                last_name_father = record.applicant_id.last_name_father or ''
+                last_name_mother = record.applicant_id.last_name_mother or ''
+                record.full_name = f"{last_name_father} {last_name_mother} {name}".strip().upper()
+            elif record.applicant_name:
+                record.full_name = record.applicant_name.upper()
+            else:
+                record.full_name = ''
+
     @api.onchange('day1', 'day2', 'day3', 'day4', 'day5', 'day6', 'day7', 'day8', 'day9', 'day10', 'day11', 'day12', 'day13', 'day14', 'day15', 'day16', 'day17', 'day18', 'day19', 'day20')
     def _onchange_days(self):
         if not self.applicant_id.employee_id:
             for field_name in ['day1', 'day2', 'day3', 'day4', 'day5', 'day6', 'day7', 'day8', 'day9', 'day10', 'day11', 'day12', 'day13', 'day14', 'day15', 'day16', 'day17', 'day18', 'day19', 'day20']:
                 _logger.info(field_name)
                 _logger.info(self.applicant_id.name)
+                employee = self.env['hr.employee'].search([('segurosocial', '=', self.applicant_id.social_security_number)], limit=1)
+
                 if self[field_name].tag == 'A':
-                    employee = self.env['hr.employee'].search([('l10n_mx_nss', '=', self.applicant_id.social_security_number)], limit=1)
-                    self.applicant_id.write({'employee_id': employee.id})
+                    if employee.id and not self.login:
+                        self.applicant_id.write({'employee_id': employee.id})
 
     def show_applicant_details(self):
 
@@ -216,8 +314,6 @@ class KardexAttendance(models.Model):
     _description = 'Kardex de capacitación'
     _inherit = ['mail.thread']
 
-    login = fields.Char(string="#", tracking=True)
-
     experience = fields.Char(string="Experiencia", tracking=True)
     time = fields.Char(string="Tiempo", tracking=True)
 
@@ -244,12 +340,20 @@ class KardexAttendance(models.Model):
     certification3 = fields.Char(string="Certificado 3", tracking=True)
     comments_quality = fields.Char(string="Comentario - técnico de calidad", tracking=True)
 
-    accreditation_status = fields.Char(string="Estatus de certificación", tracking=True)
-    concession = fields.Char(string="Concesión", tracking=True)
+    accreditation_status = fields.Selection(
+        selection=[
+            ('certifica', 'Certifica'),
+            ('no_certifica', 'No certifica'),
+        ],
+        string="Estatus de certificación",
+        tracking=True
+    )
+    concession = fields.Boolean(string="Concesión", tracking=True)
     observation = fields.Char(string="Observaciones", tracking=True)
 
     attendance_days_of_week_id = fields.Many2one('tyt_recruitment.attendance_days_of_week', string="Kardex de asistencia", ondelete='cascade', tracking=True)
     applicant_id = fields.Many2one(related="attendance_days_of_week_id.applicant_id", string="Aplicante", ondelete='cascade', tracking=True)
+    login = fields.Char(related="applicant_id.employee_number", string="Login")
     marital_status = fields.Selection(related="applicant_id.marital_status", string="Estado civil", tracking=True)
     applicant_name = fields.Char(related="applicant_id.computed_name", string="Nombre completo", tracking=True)
 
@@ -261,6 +365,13 @@ class KardexAttendance(models.Model):
 
     certification_feedback_ids = fields.One2many('tyt_recruitment.certification_feedback', 'kardex_id', string="Certificación de retroalimentación")
     has_certification_feedback = fields.Boolean(string="Tiene retroalimentación", compute="_compute_has_certification_feedback", tracking=True)
+
+    @api.onchange('accreditation_status')
+    def _onchange_accreditation_status(self):
+        if self.accreditation_status == 'no_certifica':
+            self.concession = True
+        else:
+            self.concession = False
 
     @api.depends('certification_feedback_ids')
     def _compute_has_certification_feedback(self):

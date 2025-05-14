@@ -309,7 +309,7 @@ class Applicant(models.Model):
     @api.depends('name', 'last_name_father', 'last_name_mother')
     def _compute_full_name(self):
         for rec in self:
-            rec.computed_name = f"{rec.name or ''} {rec.last_name_father or ''} {rec.last_name_mother or ''}".strip()
+            rec.computed_name = f"{rec.last_name_father or ''} {rec.last_name_mother or ''} {rec.name or ''}".strip().upper()
 
     def show_job_application(self):
 

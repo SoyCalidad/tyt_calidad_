@@ -1,0 +1,66 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<odoo>
+    <record id="view_position_tree" model="ir.ui.view">
+        <field name="name">tyt_crehana.job_positions.tree</field>
+        <field name="model">tyt_crehana.job_positions</field>
+        <field name="arch" type="xml">
+            <tree>
+                <field name="job_id"/>
+                <field name="level_a"/>
+                <field name="path_to_position_a"/>
+                <field name="level_b"/>
+                <field name="path_to_position_b"/>
+                <field name="level_c"/>
+                <field name="path_to_position_c"/>
+                <field name="level_d"/>
+                <field name="path_to_position_d"/>
+            </tree>
+        </field>
+    </record>
+
+    <record id="view_position_form" model="ir.ui.view">
+        <field name="name">tyt_crehana.job_positions.form</field>
+        <field name="model">tyt_crehana.job_positions</field>
+        <field name="arch" type="xml">
+            <form string="Posiciones">
+                <sheet>
+                    <group>
+                        <field name="job_id"/>
+                    </group>
+                    <group>
+                        <field name="level_a"/>
+                        <field name="path_to_position_a"/>
+                    </group>
+                    <group>
+                        <field name="level_b"/>
+                        <field name="path_to_position_b"/>
+                    </group>
+                    <group>
+                        <field name="level_c"/>
+                        <field name="path_to_position_c"/>
+                    </group>
+                    <group>
+                        <field name="level_d"/>
+                        <field name="path_to_position_d"/>
+                    </group>
+                </sheet>
+                <div class="oe_chatter">
+                    <!-- <field name="message_follower_ids" widget="mail_followers"/>
+                    <field name="activity_ids" widget="mail_activity"/> -->
+                    <field name="message_ids" widget="mail_thread"/>
+                </div>
+            </form>
+        </field>
+    </record>
+
+    <record id="action_job_positions" model="ir.actions.act_window">
+        <field name="name">Posiciones</field>
+        <field name="res_model">tyt_crehana.job_positions</field>
+        <field name="view_mode">tree,form</field>
+    </record>
+
+    <!-- Menús -->
+    <menuitem id="menu_crehana_root" name="Integración Crehana" sequence="10"/>
+    <menuitem id="menu_job_positions" name="Posiciones"
+        parent="menu_crehana_root" action="action_job_positions" sequence="20"/>
+</odoo>
