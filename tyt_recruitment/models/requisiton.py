@@ -182,6 +182,23 @@ class Requisition(models.Model):
             for field in self.fields_get():
                 if field not in ('state', 'id'):  # Exclude 'state' and 'id' fields from readonly
                     self[field].readonly = True
+
+    def action_open_generate_attendance(self):
+
+        attendance_list = self.env['tyt_recruitment.attendance'].search([
+            ('requisition_id', '=', self.id),
+        ], limit=1)
+
+        return {
+            'name': 'Confirmación',
+            'type': 'ir.actions.act_window',
+            'res_model': 'tyt_recruitment.attendance_confirmation_wizard',
+            'view_mode': 'form',
+            'target': 'new',
+            'context': {
+                'default_requisition_id': self.id,
+            }
+        }
     
 class Campaign(models.Model):
     _name = 'tyt_recruitment.campaign'

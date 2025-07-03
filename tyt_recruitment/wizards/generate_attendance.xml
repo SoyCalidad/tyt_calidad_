@@ -6,6 +6,7 @@
             <form string="Confirmación">
                 
                 <field name="attendance_id" invisible="1"/>
+                <field name="campaign_ids" />
                 <h3 attrs="{'invisible': [('attendance_id', '!=', False)]}">
                     Aún no tiene una lista de asistencia para esta campaña.
                 </h3>

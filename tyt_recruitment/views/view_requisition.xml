@@ -41,6 +41,7 @@
 
             <notebook>
               <page string="Campañas">
+                <button string="Asistencia" name="action_open_generate_attendance" type="object" class="oe_highlight"/> 
                 <field name="campaign_ids" nolabel="1" attrs="{'readonly': [('state', '=', 'sent')]}" options="{'no_create': True}">
                   <tree editable="bottom">
                     <field name="tag_id" width="200px" />
