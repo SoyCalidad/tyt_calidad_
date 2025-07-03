@@ -29,7 +29,6 @@ class ConfirmationWizard(models.TransientModel):
             current_attendance_id = 0
             if exist_attendance:
                 current_attendance_id = exist_attendance.id
-                _logger.info(f"Asistencia existente encontrada para la campaña {campaign.name} (ID: {campaign.id}). ID de asistencia: {current_attendance_id}")
             else:
                 attendance_data = {
                     "campaign_id": campaign.id,
@@ -40,19 +39,16 @@ class ConfirmationWizard(models.TransientModel):
                 }
                 new_attendance = self.env['tyt_recruitment.attendance'].sudo().create(attendance_data)
                 current_attendance_id = new_attendance.id
-                _logger.info(f"Nueva asistencia creada para la campaña {campaign.name} (ID: {campaign.id}). ID de asistencia: {current_attendance_id}")
 
             # 2. Crear prospectos de asistencia para los solicitantes de la campaña actual
             applicants = self.env['tyt_recruitment.applicant'].sudo().search([
                 ('campaign_id', '=', campaign.id),
                 ('status', '=', True),
             ])
-            _logger.info(f"Encontrados {len(applicants)} solicitantes activos para la campaña {campaign.name} (ID: {campaign.id}).")
 
             for applicant in applicants:
                 # Solo crear un nuevo prospecto si el solicitante no tiene días de semana asociados
                 if not applicant.days_of_week_ids: # Esto es más pythonico que len(applicant.days_of_week_ids) < 1
-                    _logger.info(f"Creando prospecto para el solicitante {applicant.name} (ID: {applicant.id}) en la campaña {campaign.name}.")
                     new_data_prospect = {
                         "applicant_id": applicant.id,
                         "attendance_id": current_attendance_id,
@@ -66,7 +62,7 @@ class ConfirmationWizard(models.TransientModel):
                     }
                     self.env['tyt_recruitment.kardex_by_applicant'].sudo().create(new_kardex)
                 else:
-                    _logger.info(f"El solicitante {applicant.name} (ID: {applicant.id}) ya tiene días de semana asociados. No se creó un nuevo prospecto.")
+                    _logger.info(f"El solicitante (ID: {applicant.id}) ya tiene días de semana asociados. No se creó un nuevo prospecto.")
 
         return {'type': 'ir.actions.act_window_close'}
 
