@@ -12,7 +12,7 @@ class ConfirmationWizard(models.TransientModel):
     campaign_id = fields.Many2one('tyt_recruitment.campaign', string="Campaña relacionada")
     requisition_id = fields.Many2one("tyt_recruitment.requisition")
     attendance_id = fields.Many2one("tyt_recruitment.attendance")
-    campaign_ids = fields.Many2many('tyt_recruitment.campaign', string="Campañas relacionadas", required=True, relation='tyt_conf_camp_rel')
+    campaign_ids = fields.Many2many('tyt_recruitment.campaign', string="Campañas relacionadas", required=True, relation='tyt_conf_camp_rel', domain="[('requisition_id', '=', requisition_id)]")
 
     def action_accept(self):
         """
