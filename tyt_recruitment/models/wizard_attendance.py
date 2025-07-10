@@ -16,53 +16,71 @@ class ConfirmationWizard(models.TransientModel):
 
     def action_accept(self):
         """
-        Procesa la aceptación para cada campaña relacionada.
-        Actualiza la asistencia existente o crea una nueva para cada campaña.
-        Crea prospectos de asistencia para los solicitantes de cada campaña.
+        Procesa la aceptación para todas las campañas relacionadas.
+        Crea una sola asistencia para todas las campañas.
+        Crea prospectos de asistencia para los solicitantes de todas las campañas.
         """
-        for campaign in self.campaign_ids:
-            # 1. Actualizar asistencia si existe, de lo contrario crear una nueva para la campaña actual
-            exist_attendance = self.env['tyt_recruitment.attendance'].sudo().search([
-                ('campaign_id', '=', campaign.id)
-            ], limit=1)
+        if not self.campaign_ids:
+            return {'type': 'ir.actions.act_window_close'}
+        
+        # 1. Verificar si existe una asistencia para alguna de las campañas
+        exist_attendance = self.env['tyt_recruitment.attendance'].sudo().search([
+            ('campaign_id', 'in', self.campaign_ids.ids),
+            ('requisition_id', '=', self.requisition_id.id)
+        ], limit=1)
 
-            current_attendance_id = 0
-            if exist_attendance:
-                current_attendance_id = exist_attendance.id
-            else:
-                attendance_data = {
-                    "campaign_id": campaign.id,
-                    "requisition_id": self.requisition_id.id,
-                    "center": self.requisition_id.site_id.display_name if self.requisition_id.site_id else False,
-                    "days": campaign.days,
-                    "week": self.requisition_id.periodo_id.x_name if self.requisition_id.periodo_id else False
+        current_attendance_id = 0
+        if exist_attendance:
+            current_attendance_id = exist_attendance.id
+            # Actualizar la asistencia existente para incluir todas las campañas
+        else:
+            # Crear una nueva asistencia que cubra todas las campañas
+            # Combinar los días de todas las campañas
+            all_days = []
+            for campaign in self.campaign_ids:
+                if campaign.days:
+                    all_days.extend(campaign.days.split(',') if isinstance(campaign.days, str) else [campaign.days])
+            
+            # Eliminar duplicados y unir
+            unique_days = list(set(all_days))
+            combined_days = ','.join(unique_days) if unique_days else False
+            
+            attendance_data = {
+                "campaign_ids": [(6, 0, self.campaign_ids.ids)],
+                "requisition_id": self.requisition_id.id,
+                "center": self.requisition_id.site_id.display_name if self.requisition_id.site_id else False,
+                "days": combined_days,
+                "week": self.requisition_id.periodo_id.x_name if self.requisition_id.periodo_id else False
+            }
+            new_attendance = self.env['tyt_recruitment.attendance'].sudo().create(attendance_data)
+            current_attendance_id = new_attendance.id
+
+        # 2. Crear prospectos de asistencia para los solicitantes de todas las campañas
+        all_applicants = self.env['tyt_recruitment.applicant'].sudo().search([
+            ('campaign_id', 'in', self.campaign_ids.ids),
+            ('status', '=', True),
+        ])
+
+        for applicant in all_applicants:
+            # Solo crear un nuevo prospecto si el solicitante no tiene días de semana asociados
+            if not applicant.days_of_week_ids:
+                # Obtener el turno de la campaña del solicitante
+                applicant_campaign_turn = applicant.campaign_id.turn if applicant.campaign_id else False
+                
+                new_data_prospect = {
+                    "applicant_id": applicant.id,
+                    "attendance_id": current_attendance_id,
+                    "right_turn": applicant_campaign_turn
                 }
-                new_attendance = self.env['tyt_recruitment.attendance'].sudo().create(attendance_data)
-                current_attendance_id = new_attendance.id
+                new_prospect = self.env['tyt_recruitment.attendance_days_of_week'].sudo().create(new_data_prospect)
 
-            # 2. Crear prospectos de asistencia para los solicitantes de la campaña actual
-            applicants = self.env['tyt_recruitment.applicant'].sudo().search([
-                ('campaign_id', '=', campaign.id),
-                ('status', '=', True),
-            ])
-
-            for applicant in applicants:
-                # Solo crear un nuevo prospecto si el solicitante no tiene días de semana asociados
-                if not applicant.days_of_week_ids: # Esto es más pythonico que len(applicant.days_of_week_ids) < 1
-                    new_data_prospect = {
-                        "applicant_id": applicant.id,
-                        "attendance_id": current_attendance_id,
-                        "right_turn": campaign.turn
-                    }
-                    new_prospect = self.env['tyt_recruitment.attendance_days_of_week'].sudo().create(new_data_prospect)
-
-                    new_kardex = {
-                        "attendance_days_of_week_id": new_prospect.id,
-                        "attendance_id": current_attendance_id
-                    }
-                    self.env['tyt_recruitment.kardex_by_applicant'].sudo().create(new_kardex)
-                else:
-                    _logger.info(f"El solicitante (ID: {applicant.id}) ya tiene días de semana asociados. No se creó un nuevo prospecto.")
+                new_kardex = {
+                    "attendance_days_of_week_id": new_prospect.id,
+                    "attendance_id": current_attendance_id
+                }
+                self.env['tyt_recruitment.kardex_by_applicant'].sudo().create(new_kardex)
+            else:
+                _logger.info(f"El solicitante (ID: {applicant.id}) ya tiene días de semana asociados. No se creó un nuevo prospecto.")
 
         return {'type': 'ir.actions.act_window_close'}
 
