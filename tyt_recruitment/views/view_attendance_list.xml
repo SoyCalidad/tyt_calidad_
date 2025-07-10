@@ -44,7 +44,8 @@
               <group >
                 <field name="trainer"/>
                 <field name="center"/>
-                <field name="campaign_id"/>
+                <field name="campaign_id" invisible="1" />
+                <field name="campaign_ids" />
                 <field name="week"/>
                 <field name="turn"/>
                 <field name="days"/>
@@ -89,6 +90,8 @@
 
                   <field name="opday1" width="30px" />
                   <field name="opday2" width="30px" />
+
+                  <field name="campaign_id" />
 
                   <field name="recruiter" width="30px" />
                   <field name="prospect_turn" width="30px" />

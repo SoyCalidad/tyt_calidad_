@@ -258,6 +258,8 @@ class DaysOfWeek(models.Model):
 
     full_name = fields.Char(string="Nombre Completo", compute="_compute_full_name", store=True)
 
+    campaign_id = fields.Many2one('tyt_recruitment.campaign', string="Campaña", ondelete='cascade', tracking=True)
+
     @api.depends('applicant_id.name', 'applicant_id.last_name_father', 'applicant_id.last_name_mother')
     def _compute_full_name(self):
         for record in self:
