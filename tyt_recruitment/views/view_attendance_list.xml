@@ -45,7 +45,7 @@
                 <field name="trainer"/>
                 <field name="center"/>
                 <field name="campaign_id" invisible="1" />
-                <field name="campaign_ids" />
+                <field name="campaign_ids" widget="many2many_tags" />
                 <field name="week"/>
                 <field name="turn"/>
                 <field name="days"/>

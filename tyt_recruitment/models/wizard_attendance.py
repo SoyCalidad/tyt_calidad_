@@ -70,7 +70,8 @@ class ConfirmationWizard(models.TransientModel):
                 new_data_prospect = {
                     "applicant_id": applicant.id,
                     "attendance_id": current_attendance_id,
-                    "right_turn": applicant_campaign_turn
+                    "right_turn": applicant_campaign_turn,
+                    "campaign_id": applicant.campaign_id.id
                 }
                 new_prospect = self.env['tyt_recruitment.attendance_days_of_week'].sudo().create(new_data_prospect)
 
