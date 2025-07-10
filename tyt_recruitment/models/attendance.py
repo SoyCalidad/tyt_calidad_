@@ -41,7 +41,7 @@ class Attendance(models.Model):
 
     recruiter = fields.Char(string="Reclutador", tracking=True)
     campaign_id = fields.Many2one("tyt_recruitment.campaign", string="Campaña", ondelete='cascade', tracking=True)
-    campaign_ids = fields.Many2many('tyt_recruitment.campaign', string="Campañas relacionadas", relation='tyt_att_camp_rel', domain="[('requisition_id', '=', requisition_id)]")
+    campaign_ids = fields.Many2many('tyt_recruitment.campaign', string="Campañas relacionadas", relation='tyt_att_camp_rel')
     requisition_id = fields.Many2one("tyt_recruitment.requisition", ondelete='cascade', tracking=True)
 
     survey_counter = fields.Integer(string="Cantidad de exámenes", compute="_compute_survey_counter", store=True, tracking=True)
