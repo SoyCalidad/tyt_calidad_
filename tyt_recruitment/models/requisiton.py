@@ -27,6 +27,7 @@ class Requisition(models.Model):
     periodo_id = fields.Many2one("x_periodo", string='Semana', tracking=True)
     campaign_ids = fields.One2many("tyt_recruitment.campaign", "requisition_id", string="Campaña", tracking=True)
     employee_ids = fields.Many2many('hr.employee', string="Empleados relacionados")
+    attendance_ids = fields.One2many("tyt_recruitment.attendance", "requisition_id", string="Listas de asistencia", tracking=True)
 
     access_token = fields.Char(string="Access Token", default=lambda self: str(uuid.uuid4()), readonly=True, copy=False)
 
@@ -198,6 +199,15 @@ class Requisition(models.Model):
             'context': {
                 'default_requisition_id': self.id,
             }
+        }
+    
+    def action_open_attendance_list(self):
+        return {
+            'name': 'Asistencias',
+            'type': 'ir.actions.act_window',
+            'res_model': 'tyt_recruitment.attendance',
+            'view_mode': 'tree,form',
+            'domain': [('requisition_id', '=', self.id)],
         }
     
 class Campaign(models.Model):
