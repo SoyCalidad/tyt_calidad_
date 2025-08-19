@@ -5,4 +5,5 @@ from . import (
     employees,
     learning_path,
     settings,
+    general_report,
 )

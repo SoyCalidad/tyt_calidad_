@@ -221,6 +221,114 @@ class MyModuleSettings(models.Model):
 
         return True
 
+    def _parse_date(self, date_str):
+        if not date_str or date_str == 'None':
+            return None
+        try:
+            return fields.Date.from_string(date_str)
+        except:
+            return None
+
+    def action_show_general_report(self):
+        settings = self.env['tyt_crehana.crehana_settings'].get_first_settings()
+
+        url = f"https://www.crehana.com/api/v5/rest/org/{settings.organization_slug}/reports/learning/general/"
+        headers = {
+            "api-key": settings.api_key,
+            "secret-access": settings.secret_access,
+            "Content-Type": "application/json"
+        }
+
+        try:
+            response = requests.get(url, headers=headers, timeout=10)
+            response.raise_for_status()
+            data = response.json()
+
+            existing_records = self.env['tyt.crehana.general.report'].search([])
+            existing_dict = {}
+            for record in existing_records:
+                key = f"{record.crehana_user_id}_{record.creahana_course_id}"
+                existing_dict[key] = record
+
+            records_to_create = []
+            records_to_update = []
+            
+            for result in data.get('results', []):
+                key = f"{result.get('user_id')}_{result.get('course_id')}"
+                custom_fields_str = str(result.get('user_custom_fields', [])) if result.get('user_custom_fields') else ''
+                
+                record_data = {
+                    'crehana_user_id': result.get('user_id'),
+                    'crehana_user_name': result.get('user_name'),
+                    'crehana_user_email': result.get('user_email'),
+                    'crehana_user_status': result.get('user_status'),
+                    'crehana_user_info_extra': result.get('user_info_extra'),
+                    'crehana_is_enroll_active': result.get('is_enroll_active', False),
+                    'creahana_course_id': result.get('course_id'),
+                    'creahana_course_name': result.get('course_name'),
+                    'creahana_course_category': result.get('course_category'),
+                    'creahana_course_subcategory': result.get('course_subcategory'),
+                    'creahana_is_admin_assigned': result.get('is_admin_assigned', False),
+                    'creahana_assigned_by_name': result.get('assigned_by_name'),
+                    'creahana_course_type': result.get('course_type'),
+                    'creahana_course_is_reward': result.get('course_is_reward'),
+                    'creahana_course_duration_hours': result.get('course_duration_hours', 0.0),
+                    'creahana_course_progress': result.get('course_progress', 0.0),
+                    'creahana_course_progress_hours': result.get('course_progress_hours', 0.0),
+                    'creahana_course_is_completed': result.get('course_is_completed', False),
+                    'creahana_project_status': result.get('project_status'),
+                    'creahana_project_date': self._parse_date(result.get('project_date')),
+                    'creahana_quiz_status': result.get('quiz_status'),
+                    'creahana_quiz_attempts': result.get('quiz_attemps'),
+                    'creahana_quiz_best_correct_answers': result.get('quiz_best_correct_answers'),
+                    'creahana_quiz_best_wrong_answers': result.get('quiz_best_wrong_answers'),
+                    'creahana_quiz_total_questions': result.get('quiz_total_questions'),
+                    'creahana_quiz_best_result': result.get('quiz_best_result'),
+                    'creahana_course_is_certified': result.get('course_is_certified', False),
+                    'creahana_course_has_participation_certificate': result.get('course_has_participation_certificate', False),
+                    'creahana_course_enroll_date': self._parse_date(result.get('course_enroll_date')),
+                    'creahana_course_start_date': self._parse_date(result.get('course_start_date')),
+                    'creahana_course_complete_date': self._parse_date(result.get('course_complete_date')),
+                    'creahana_project_url': result.get('project_url'),
+                    'creahana_course_certificated_url': result.get('course_certificated_url'),
+                    'creahana_course_participation_certificate_url': result.get('course_participation_certificate_url'),
+                    'creahana_course_certificated_date': self._parse_date(result.get('course_certificated_date')),
+                    'creahana_course_last_action_date': self._parse_date(result.get('course_last_action_date')),
+                    'creahana_user_division': result.get('user_division'),
+                    'creahana_user_subsidiary': result.get('user_subsidiary'),
+                    'creahana_user_job': result.get('user_job'),
+                    'creahana_user_level': result.get('user_level'),
+                    'creahana_user_role': result.get('user_role'),
+                    'creahana_track_id': result.get('track_id'),
+                    'creahana_track_name': result.get('track_name'),
+                    'creahana_track_is_hidden': result.get('track_is_hidden', False),
+                    'creahana_user_custom_fields': custom_fields_str,
+                }
+                
+                if key in existing_dict:
+                    records_to_update.append((existing_dict[key], record_data))
+                else:
+                    records_to_create.append(record_data)
+
+            if records_to_create:
+                self.env['tyt.crehana.general.report'].create(records_to_create)
+                _logger.info(f"Se crearon {len(records_to_create)} nuevos registros")
+
+            if records_to_update:
+                for record, data in records_to_update:
+                    record.write(data)
+                _logger.info(f"Se actualizaron {len(records_to_update)} registros existentes")
+
+            return {
+                'type': 'ir.actions.act_window',
+                'name': 'Reporte General',
+                'res_model': 'tyt.crehana.general.report',
+                'view_mode': 'tree',
+            }
+        except requests.exceptions.RequestException as e:
+            _logger.error(f"Error al obtener datos: {e}")
+            raise models.ValidationError(f"Error al obtener datos: {e}")
+
 class ItemProgress(models.TransientModel):
     _name = 'tyt_crehana.user_progress'
     _description = 'Reporte de progreso'

@@ -1,0 +1,69 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+
+    <record id="tyt_crehana_general_report_view_tree" model="ir.ui.view">
+        <field name="name">tyt.crehana.general.report.view.tree</field>
+        <field name="model">tyt.crehana.general.report</field>
+        <field name="arch" type="xml">
+            <tree string="Reporte General">
+                <field name="crehana_user_id" />
+                <field name="crehana_user_name" />
+                <field name="crehana_user_email" />
+                <field name="crehana_user_status" />
+                <field name="crehana_user_info_extra" optional="hide" />
+                <field name="crehana_is_enroll_active" />
+                <field name="creahana_course_id" />
+                <field name="creahana_course_name" />
+                <field name="creahana_course_category" />
+                <field name="creahana_course_subcategory" />
+                <field name="creahana_is_admin_assigned" />
+                <field name="creahana_assigned_by_name" />
+                <field name="creahana_course_type" />
+                <field name="creahana_course_is_reward" optional="hide" />
+                <field name="creahana_course_duration_hours" optional="hide" />
+                <field name="creahana_course_progress" optional="hide" />
+                <field name="creahana_course_progress_hours" optional="hide" />
+                <field name="creahana_course_is_completed" optional="hide" />
+                <field name="creahana_project_status" optional="hide" />
+                <field name="creahana_project_date" optional="hide" />
+                <field name="creahana_quiz_status" optional="hide" />
+                <field name="creahana_quiz_attempts" optional="hide" />
+                <field name="creahana_quiz_best_correct_answers" optional="hide" />
+                <field name="creahana_quiz_best_wrong_answers" optional="hide" />
+                <field name="creahana_quiz_total_questions" optional="hide" />
+                <field name="creahana_quiz_best_result" optional="hide" />
+                <field name="creahana_course_is_certified" optional="hide" />
+                <field name="creahana_course_has_participation_certificate" optional="hide" />
+                <field name="creahana_course_enroll_date" optional="hide" />
+                <field name="creahana_course_start_date" optional="hide" />
+                <field name="creahana_course_complete_date" optional="hide" />
+                <field name="creahana_project_url" optional="hide" />
+                <field name="creahana_course_certificated_url" optional="hide" />
+                <field name="creahana_course_participation_certificate_url" optional="hide" />
+                <field name="creahana_course_certificated_date" optional="hide" />
+                <field name="creahana_course_last_action_date" optional="hide" />
+                <field name="creahana_user_division" optional="hide" />
+                <field name="creahana_user_subsidiary" optional="hide" />
+                <field name="creahana_user_job" optional="hide" />
+                <field name="creahana_user_level" optional="hide" />
+                <field name="creahana_user_role" optional="hide" />
+                <field name="creahana_track_id" optional="hide" />
+                <field name="creahana_track_name" optional="hide" />
+                <field name="creahana_track_is_hidden" optional="hide" />
+                <field name="creahana_user_custom_fields" optional="hide" />
+            </tree>
+        </field>
+    </record>
+
+    <record id="tyt_creahana_general_report_action" model="ir.actions.act_window">
+        <field name="name">Reporte General</field>
+        <field name="res_model">tyt.crehana.general.report</field>
+        <field name="view_mode">tree</field>
+        <field name="domain">[]</field>
+        <field name="context">{}</field>
+    </record>
+
+    <menuitem id="menu_tyt_creahana_general_report" name="Reporte General"
+        parent="menu_crehana_root" action="tyt_creahana_general_report_action" sequence="20" />
+
+</odoo>

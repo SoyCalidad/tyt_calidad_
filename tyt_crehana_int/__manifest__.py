@@ -17,7 +17,8 @@
         'views/view_position.xml',
         'views/view_settings.xml',
         'views/view_employee.xml',
-        'views/view_learning_path.xml'
+        'views/view_learning_path.xml',
+        'views/view_general_report.xml',
     ],
     'auto_install': False,
     'installable': True,

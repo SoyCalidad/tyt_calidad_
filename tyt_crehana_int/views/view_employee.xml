@@ -32,6 +32,12 @@
                     string="Ver avance"  
                     class="oe_highlight"
                     attrs="{'invisible': [('is_registered_on_a_learning_path', '=', False)]}"/>
+                <button 
+                    name="action_show_user_report"  
+                    type="object" 
+                    string="Reporte de usuario"  
+                    class="oe_highlight"
+                    attrs="{'invisible': [('is_registered_on_a_learning_path', '=', False)]}"/>
             </tree>
         </field>
     </record>
@@ -49,10 +55,15 @@
                         <field name="job_id"/>
                         <field name="id_crehana"/>
                         <field name="user_crehana"/>
-                        <field name="level"/>
                         <field name="is_registered_in_crehana"/>
                         <field name="is_registered_on_a_learning_path"/>
                     </group>
+                    <div>
+                        <label for="level" />
+                        <field name="level" class="oe_inline" />
+                        <button string="Obtener nivel desde Crehana" name="tyt_crehana_get_employee_level" type="object" class="oe_inline"/>
+                        <button string="Establecer nivel en Crehana" name="update_employee_level" type="object" class="oe_inline"/>
+                    </div>
                 </sheet>
                 <div class="oe_chatter">
                     <!-- <field name="message_follower_ids" widget="mail_followers"/>
@@ -76,7 +87,7 @@
                         <field name="job_id"/>
                         <field name="id_crehana"/>
                         <field name="user_crehana"/>
-                        <field name="level"/>
+                        <field name="level" />
                     </group>
                     <group>
                         <field name="course_ids">

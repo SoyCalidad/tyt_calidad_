@@ -17,6 +17,7 @@
                     string="Actualizar rutas de aprendizaje" 
                     type="object" 
                     class="oe_highlight" />
+                <button string="Ver reporte general" name="action_show_general_report" type="object" class="oe_highlight"/>
             </tree>
         </field>
     </record>
