@@ -52,7 +52,7 @@ class EmployeeExtension(models.Model):
 
         if settings:
 
-            url = f"https://www.crehana.com/api/rest/org/{settings.organization_slug}/users/"
+            url = f"https://www.crehana.com/api/v5/rest/org/{settings.organization_slug}/users/"
             message = "Problemas con los datos, contacte con su administrador"
             title = "Datos faltantes"
 
@@ -71,7 +71,12 @@ class EmployeeExtension(models.Model):
                 payload = {
                     "first_name": self.empleado_nombre,
                     "last_name": f"{self.empleado_paterno} {self.empleado_materno}",
-                    "email": self.work_email
+                    "email": self.work_email,
+                    "area_level_1_id": "",
+                    "position_id": "",
+                    "position_category_id": "",
+                    "headquarter_id": "",
+                    "incorporation_date": "",
                     # "password": "1234"
                 }
 
@@ -93,6 +98,50 @@ class EmployeeExtension(models.Model):
                     _logger.error(f"Error al obtener datos: {e}")
                     raise models.ValidationError(f"Error al obtener datos: {e}")
 
+                # Actualizar nivel PDP del empleado
+
+                pdp_custom_fields_url = f"https://www.crehana.com/api/v5/rest/org/{settings.organization_slug}/users/{self.id_crehana}/custom_fields/"
+                pdp_custom_fields_payload = {
+                    "custom_fields": [
+                        {
+                            "id": 1944,
+                            "value": self.level or "",
+                            "type": "TEXT"
+                        }
+                    ]
+                }
+
+                try:
+                    custom_fields_response = requests.post(pdp_custom_fields_url, json=pdp_custom_fields_payload, headers=headers, timeout=10)
+                    custom_fields_response.raise_for_status()
+
+                    _logger.info("Campos personalizados actualizados exitosamente")
+                except requests.exceptions.RequestException as e:
+                    _logger.error(f"Error al actualizar campos personalizados: {e}")
+                    raise models.ValidationError(f"Error al actualizar campos personalizados: {e}")
+
+                # Actualizar el número del empleado
+
+                emp_number_custom_fields_url = f"https://www.crehana.com/api/v5/rest/org/{settings.organization_slug}/users/{self.id_crehana}/custom_fields/"
+                emp_number_custom_fields_payload = {
+                    "custom_fields": [
+                        {
+                            "id": 1942,
+                            "value": str(self.id),
+                            "type": "TEXT"
+                        }
+                    ]
+                }
+
+                try:
+                    emp_number_response = requests.post(emp_number_custom_fields_url, json=emp_number_custom_fields_payload, headers=headers, timeout=10)
+                    emp_number_response.raise_for_status()
+
+                    _logger.info("Número de empleado actualizado exitosamente")
+                except requests.exceptions.RequestException as e:
+                    _logger.error(f"Error al actualizar el número de empleado: {e}")
+                    raise models.ValidationError(f"Error al actualizar el número de empleado: {e}")
+
             return {
                 'type': 'ir.actions.client',
                 'tag': 'display_notification',
@@ -102,7 +151,8 @@ class EmployeeExtension(models.Model):
                     'type': 'success',  
                     'sticky': False
                 }
-            } 
+            }
+
         else:
             _logger.error(f"Error de credenciales de acceso")
             raise models.ValidationError("Error al obtener credenciales de acceso para API's")
@@ -113,6 +163,30 @@ class EmployeeExtension(models.Model):
         settings = self.env['tyt_crehana.crehana_settings'].get_first_settings()
 
         if settings:
+
+            # Obtener los datos del usuario y el id centralizado
+
+            user_url = f"https://www.crehana.com/api/rest/org/{settings.organization_slug}/users/?email={self.work_email}"
+            headers = {
+                "api-key": settings.api_key,
+                "secret-access": settings.secret_access,
+                "Content-Type": "application/json"
+            }
+
+            try:
+                response = requests.get(user_url, headers=headers, timeout=10)
+                response.raise_for_status()
+
+                data = response.json()
+
+                if data and isinstance(data, list) and len(data) > 0:
+                    self.id_crehana = data[0].get('id')
+                else:
+                    _logger.error(f"No se encontró el usuario en Crehana para el email: {self.work_email}")
+                    raise models.ValidationError("No se encontró el usuario en Crehana para el email proporcionado.")
+            except requests.exceptions.RequestException as e:
+                _logger.error(f"Error al obtener datos: {e}")
+                raise models.ValidationError(f"Error al obtener datos: {e}")
 
             url = f"https://www.crehana.com/api/rest/org/{settings.organization_slug}/tracks/"
             message = "Problemas con los datos, contacte con su administrador"
