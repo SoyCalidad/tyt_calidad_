@@ -86,8 +86,7 @@ class EmployeeExtension(models.Model):
                 "position_id": "1234",
                 "position_category_id": "1234",
                 "headquarter_id": "1234",
-                "incorporation_date": self.create_date.strftime('%Y-%m-%d') if self.create_date else '',
-                # "password": "1234"
+                "incorporation_date": self.create_date.strftime('%Y-%m-%d') if self.create_date else ''
             }
 
             try:
