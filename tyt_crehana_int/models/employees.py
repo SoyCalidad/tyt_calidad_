@@ -89,6 +89,8 @@ class EmployeeExtension(models.Model):
                 "incorporation_date": self.create_date.strftime('%Y-%m-%d') if self.create_date else ''
             }
 
+            _logger.info(f"Registrando empleado en Crehana con los siguientes datos: {payload}")
+
             try:
                 response = requests.post(url, json=payload, headers=headers, timeout=10)
                 response.raise_for_status()
@@ -101,7 +103,7 @@ class EmployeeExtension(models.Model):
                 _logger.info(f"Datos obtenidos: {data}")
 
                 self.id_crehana = data.get('id')
-                self.user_crehana = data.get('user').get('username')
+                self.user_crehana = data.get('user').get('username') if data.get('user') else ''
                 self.is_registered_in_crehana = True
 
                 # return {'type': 'ir.actions.client', 'tag': 'reload'}
