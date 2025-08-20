@@ -113,7 +113,7 @@ class EmployeeExtension(models.Model):
 
             # Actualizar nivel PDP del empleado
 
-            pdp_custom_fields_url = f"https://www.crehana.com/api/v5/rest/org/{settings.organization_slug}/users/{self.id_crehana}/custom_fields/"
+            pdp_custom_fields_url = f"https://www.crehana.com/api/v5/rest/org/{settings.organization_slug}/users/{self.id_crehana}/custom-fields/"
             pdp_custom_fields_payload = {
                 "custom_fields": [
                     {
@@ -135,7 +135,7 @@ class EmployeeExtension(models.Model):
 
             # Actualizar el número del empleado
 
-            emp_number_custom_fields_url = f"https://www.crehana.com/api/v5/rest/org/{settings.organization_slug}/users/{self.id_crehana}/custom_fields/"
+            emp_number_custom_fields_url = f"https://www.crehana.com/api/v5/rest/org/{settings.organization_slug}/users/{self.id_crehana}/custom-fields/"
             emp_number_custom_fields_payload = {
                 "custom_fields": [
                     {
@@ -399,7 +399,7 @@ class EmployeeExtension(models.Model):
 
         if settings and self.id_crehana:
 
-            url = f"https://www.crehana.com/api/v5/rest/org/{settings.organization_slug}/users/{self.id_crehana}/custom_fields/"
+            url = f"https://www.crehana.com/api/v5/rest/org/{settings.organization_slug}/users/{self.id_crehana}/custom-fields/"
             headers = {
                 "api-key": settings.api_key,
                 "secret-access": settings.secret_access,
