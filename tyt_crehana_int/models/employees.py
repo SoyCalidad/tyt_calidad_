@@ -82,11 +82,11 @@ class EmployeeExtension(models.Model):
                 "first_name": empleado_nombre,
                 "last_name": f"{empleado_paterno} {empleado_materno}",
                 "email": self.private_email or self.work_email,
-                "area_level_1_id": "",
-                "position_id": "",
-                "position_category_id": "",
-                "headquarter_id": "",
-                "incorporation_date": "",
+                "area_level_1_id": "1234",
+                "position_id": "1234",
+                "position_category_id": "1234",
+                "headquarter_id": "1234",
+                "incorporation_date": self.create_date.strftime('%Y-%m-%d') if self.create_date else '',
                 # "password": "1234"
             }
 
