@@ -23,7 +23,6 @@ msgstr ""
 #. module: document_page
 #. odoo-python
 #: code:addons/document_page/models/document_page.py:0
-#, python-format
 msgid "%s (copy)"
 msgstr "%s (copie)"
 
@@ -80,6 +79,13 @@ msgid "Backend URL"
 msgstr "Adresse universelle du serveur interne"
 
 #. module: document_page
+#: model:ir.actions.act_window,name:document_page.action_browse_all_content
+#: model:ir.actions.act_window,name:document_page.action_browse_top_content
+#: model:ir.ui.menu,name:document_page.menu_browse_content
+msgid "Browse Wiki Content"
+msgstr ""
+
+#. module: document_page
 #: model_terms:ir.ui.view,arch_db:document_page.view_wiki_create_menu
 msgid "Cancel"
 msgstr "Annuler"
@@ -120,6 +126,11 @@ msgstr "Cliquer pour créer une nouvelle page sur la toile."
 #: model_terms:ir.ui.view,arch_db:document_page.view_wiki_show_diff
 msgid "Close"
 msgstr "Fermer"
+
+#. module: document_page
+#: model:ir.model.fields,field_description:document_page.field_document_page__color
+msgid "Color Index"
+msgstr ""
 
 #. module: document_page
 #: model:ir.model.fields,field_description:document_page.field_document_page__company_id
@@ -293,6 +304,11 @@ msgid "If set, page is accessible only from this company"
 msgstr "Si coché, la page ne sera accessible que depuis cette société"
 
 #. module: document_page
+#: model:ir.model.fields,field_description:document_page.field_document_page__image
+msgid "Image"
+msgstr ""
+
+#. module: document_page
 #: model_terms:ir.ui.view,arch_db:document_page.view_wiki_form
 msgid "Information"
 msgstr "Information"
@@ -315,14 +331,6 @@ msgid "Last Contributor"
 msgstr "Dernier contributeur"
 
 #. module: document_page
-#: model:ir.model.fields,field_description:document_page.field_document_page____last_update
-#: model:ir.model.fields,field_description:document_page.field_document_page_create_menu____last_update
-#: model:ir.model.fields,field_description:document_page.field_document_page_history____last_update
-#: model:ir.model.fields,field_description:document_page.field_wizard_document_page_history_show_diff____last_update
-msgid "Last Modified on"
-msgstr "Dernière mise à jour le"
-
-#. module: document_page
 #: model:ir.model.fields,field_description:document_page.field_document_page__write_uid
 #: model:ir.model.fields,field_description:document_page.field_document_page_create_menu__write_uid
 #: model:ir.model.fields,field_description:document_page.field_document_page_history__write_uid
@@ -337,11 +345,6 @@ msgstr "Dernière modification par"
 #: model:ir.model.fields,field_description:document_page.field_wizard_document_page_history_show_diff__write_date
 msgid "Last Updated on"
 msgstr "Dernière mise à jour le"
-
-#. module: document_page
-#: model:ir.model.fields,field_description:document_page.field_document_page__message_main_attachment_id
-msgid "Main Attachment"
-msgstr "Pièce jointe principale"
 
 #. module: document_page
 #: model:res.groups,name:document_page.group_document_manager
@@ -466,6 +469,11 @@ msgid "Parent Menu"
 msgstr "Menu parent"
 
 #. module: document_page
+#: model:ir.model.fields,field_description:document_page.field_document_page__rating_ids
+msgid "Ratings"
+msgstr ""
+
+#. module: document_page
 #: model:ir.model.fields,field_description:document_page.field_document_page__activity_user_id
 msgid "Responsible User"
 msgstr "Utilisateur responsable"
@@ -484,7 +492,6 @@ msgstr "Révision"
 #. module: document_page
 #. odoo-python
 #: code:addons/document_page/wizard/document_page_show_diff.py:0
-#, python-format
 msgid "Select one or maximum two history revisions!"
 msgstr "Sélectionnez une révision ou deux maximum !"
 
@@ -504,6 +511,7 @@ msgstr ""
 #. module: document_page
 #: model:ir.model.fields,field_description:document_page.field_document_page__draft_summary
 #: model:ir.model.fields,field_description:document_page.field_document_page_history__summary
+#: model_terms:ir.ui.view,arch_db:document_page.view_wiki_filter
 msgid "Summary"
 msgstr "Résumé"
 
@@ -525,7 +533,6 @@ msgstr ""
 #. module: document_page
 #. odoo-python
 #: code:addons/document_page/models/document_page_history.py:0
-#, python-format
 msgid "There are no changes in revisions."
 msgstr "Il n’y a pas de différence entre ces révisions."
 
@@ -534,6 +541,11 @@ msgstr "Il n’y a pas de différence entre ces révisions."
 #: model_terms:ir.ui.view,arch_db:document_page.view_wiki_filter
 msgid "Title"
 msgstr "Titre"
+
+#. module: document_page
+#: model_terms:ir.ui.view,arch_db:document_page.view_browse_top_document_filter
+msgid "Top Level Ressources"
+msgstr ""
 
 #. module: document_page
 #: model:ir.model.fields,field_description:document_page.field_document_page__type
@@ -569,7 +581,6 @@ msgstr "Assistant de création de menu"
 #. module: document_page
 #. odoo-python
 #: code:addons/document_page/models/document_page.py:0
-#, python-format
 msgid "You cannot create recursive categories."
 msgstr "Vous ne pouvez pas créer des catégories récursives."
 
@@ -594,12 +605,17 @@ msgstr "ou"
 #. module: document_page
 #. odoo-python
 #: code:addons/document_page/models/document_page.py:0
-#, python-format
 msgid "summary"
 msgstr "résumé"
 
 #~ msgid "SMS Delivery error"
 #~ msgstr "Erreur d’envoi du minimessage"
+
+#~ msgid "Last Modified on"
+#~ msgstr "Dernière mise à jour le"
+
+#~ msgid "Main Attachment"
+#~ msgstr "Pièce jointe principale"
 
 #~ msgid "Document History"
 #~ msgstr "Historique du document"

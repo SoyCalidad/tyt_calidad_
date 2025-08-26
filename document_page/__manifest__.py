@@ -4,7 +4,7 @@
 
 {
     "name": "Document Page",
-    "version": "16.0.1.4.0",
+    "version": "18.0.2.0.0",
     "category": "Knowledge Management",
     "author": "OpenERP SA, Odoo Community Association (OCA)",
     "images": [
@@ -32,6 +32,8 @@
     "assets": {
         "web.assets_backend": [
             "document_page/static/src/scss/document_page.scss",
+            "document_page/static/src/js/document_page_kanban_controller.esm.js",
+            "document_page/static/src/js/document_page_kanban_view.esm.js",
         ],
     },
 }

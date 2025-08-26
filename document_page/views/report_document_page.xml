@@ -1,11 +1,10 @@
 <?xml version="1.0" encoding="utf-8" ?>
 <odoo>
-
     <template id="report_documentpage_doc">
         <t t-call="web.external_layout">
             <div class="page">
                 <h1 t-field="doc.name" />
-                <div t-raw="doc.content" />
+                <div t-out="doc.content" />
             </div>
         </t>
     </template>
@@ -27,5 +26,4 @@
         <field name="binding_type">report</field>
         <field name="binding_model_id" ref="model_document_page" />
     </record>
-
 </odoo>

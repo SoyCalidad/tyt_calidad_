@@ -10,8 +10,8 @@ msgstr ""
 "Project-Id-Version: Odoo Server 10.0\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2018-04-17 00:50+0000\n"
-"PO-Revision-Date: 2024-05-15 21:34+0000\n"
-"Last-Translator: Sergio Ariel Ameghino <ariel.ameghino@gmail.com>\n"
+"PO-Revision-Date: 2024-02-01 19:37+0000\n"
+"Last-Translator: Ivorra78 <informatica@totmaterial.es>\n"
 "Language-Team: Spanish (https://www.transifex.com/oca/teams/23907/es/)\n"
 "Language: es\n"
 "MIME-Version: 1.0\n"
@@ -23,7 +23,6 @@ msgstr ""
 #. module: document_page
 #. odoo-python
 #: code:addons/document_page/models/document_page.py:0
-#, python-format
 msgid "%s (copy)"
 msgstr "%s(copia)"
 
@@ -80,6 +79,13 @@ msgid "Backend URL"
 msgstr "URL de servidor"
 
 #. module: document_page
+#: model:ir.actions.act_window,name:document_page.action_browse_all_content
+#: model:ir.actions.act_window,name:document_page.action_browse_top_content
+#: model:ir.ui.menu,name:document_page.menu_browse_content
+msgid "Browse Wiki Content"
+msgstr ""
+
+#. module: document_page
 #: model_terms:ir.ui.view,arch_db:document_page.view_wiki_create_menu
 msgid "Cancel"
 msgstr "Cancelar"
@@ -120,6 +126,11 @@ msgstr "Pulse para crear una nueva página web."
 #: model_terms:ir.ui.view,arch_db:document_page.view_wiki_show_diff
 msgid "Close"
 msgstr "Cerrar"
+
+#. module: document_page
+#: model:ir.model.fields,field_description:document_page.field_document_page__color
+msgid "Color Index"
+msgstr ""
 
 #. module: document_page
 #: model:ir.model.fields,field_description:document_page.field_document_page__company_id
@@ -293,6 +304,11 @@ msgid "If set, page is accessible only from this company"
 msgstr "Si está establecido, la página es accesible solo para esta compañía"
 
 #. module: document_page
+#: model:ir.model.fields,field_description:document_page.field_document_page__image
+msgid "Image"
+msgstr ""
+
+#. module: document_page
 #: model_terms:ir.ui.view,arch_db:document_page.view_wiki_form
 msgid "Information"
 msgstr "Información"
@@ -315,14 +331,6 @@ msgid "Last Contributor"
 msgstr "Último contribuidor"
 
 #. module: document_page
-#: model:ir.model.fields,field_description:document_page.field_document_page____last_update
-#: model:ir.model.fields,field_description:document_page.field_document_page_create_menu____last_update
-#: model:ir.model.fields,field_description:document_page.field_document_page_history____last_update
-#: model:ir.model.fields,field_description:document_page.field_wizard_document_page_history_show_diff____last_update
-msgid "Last Modified on"
-msgstr "Última modificación el"
-
-#. module: document_page
 #: model:ir.model.fields,field_description:document_page.field_document_page__write_uid
 #: model:ir.model.fields,field_description:document_page.field_document_page_create_menu__write_uid
 #: model:ir.model.fields,field_description:document_page.field_document_page_history__write_uid
@@ -337,11 +345,6 @@ msgstr "Última actualización por"
 #: model:ir.model.fields,field_description:document_page.field_wizard_document_page_history_show_diff__write_date
 msgid "Last Updated on"
 msgstr "Última actualización el"
-
-#. module: document_page
-#: model:ir.model.fields,field_description:document_page.field_document_page__message_main_attachment_id
-msgid "Main Attachment"
-msgstr "Adjunto principal"
 
 #. module: document_page
 #: model:res.groups,name:document_page.group_document_manager
@@ -466,6 +469,11 @@ msgid "Parent Menu"
 msgstr "Menú superior"
 
 #. module: document_page
+#: model:ir.model.fields,field_description:document_page.field_document_page__rating_ids
+msgid "Ratings"
+msgstr ""
+
+#. module: document_page
 #: model:ir.model.fields,field_description:document_page.field_document_page__activity_user_id
 msgid "Responsible User"
 msgstr "Usuario responsable"
@@ -484,7 +492,6 @@ msgstr "Revisión"
 #. module: document_page
 #. odoo-python
 #: code:addons/document_page/wizard/document_page_show_diff.py:0
-#, python-format
 msgid "Select one or maximum two history revisions!"
 msgstr "¡Seleccione uno, o como máximo, dos revisiones de historial!"
 
@@ -504,6 +511,7 @@ msgstr ""
 #. module: document_page
 #: model:ir.model.fields,field_description:document_page.field_document_page__draft_summary
 #: model:ir.model.fields,field_description:document_page.field_document_page_history__summary
+#: model_terms:ir.ui.view,arch_db:document_page.view_wiki_filter
 msgid "Summary"
 msgstr "Resumen"
 
@@ -525,7 +533,6 @@ msgstr ""
 #. module: document_page
 #. odoo-python
 #: code:addons/document_page/models/document_page_history.py:0
-#, python-format
 msgid "There are no changes in revisions."
 msgstr "No hay cambios en las revisiones."
 
@@ -534,6 +541,11 @@ msgstr "No hay cambios en las revisiones."
 #: model_terms:ir.ui.view,arch_db:document_page.view_wiki_filter
 msgid "Title"
 msgstr "Título"
+
+#. module: document_page
+#: model_terms:ir.ui.view,arch_db:document_page.view_browse_top_document_filter
+msgid "Top Level Ressources"
+msgstr ""
 
 #. module: document_page
 #: model:ir.model.fields,field_description:document_page.field_document_page__type
@@ -552,13 +564,14 @@ msgstr "Utilícelo para vincular recursos de forma unívoca"
 
 #. module: document_page
 #: model:ir.model.fields,field_description:document_page.field_document_page__website_message_ids
+#, fuzzy
 msgid "Website Messages"
-msgstr "Mensajes del sitio web"
+msgstr "Páginas"
 
 #. module: document_page
 #: model:ir.model.fields,help:document_page.field_document_page__website_message_ids
 msgid "Website communication history"
-msgstr "Historial de comunicación del sitio web"
+msgstr ""
 
 #. module: document_page
 #: model:ir.model,name:document_page.model_document_page_create_menu
@@ -568,7 +581,6 @@ msgstr "Asistente para crear un menú"
 #. module: document_page
 #. odoo-python
 #: code:addons/document_page/models/document_page.py:0
-#, python-format
 msgid "You cannot create recursive categories."
 msgstr "No puede crear categorías recursivas."
 
@@ -593,12 +605,17 @@ msgstr "o"
 #. module: document_page
 #. odoo-python
 #: code:addons/document_page/models/document_page.py:0
-#, python-format
 msgid "summary"
 msgstr "resumen"
 
 #~ msgid "SMS Delivery error"
 #~ msgstr "Error de entrega de SMS"
+
+#~ msgid "Last Modified on"
+#~ msgstr "Última modificación el"
+
+#~ msgid "Main Attachment"
+#~ msgstr "Adjunto principal"
 
 #~ msgid "Document History"
 #~ msgstr "Historial del documento"
