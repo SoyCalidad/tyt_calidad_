@@ -72,6 +72,7 @@ class EmployeeChart(http.Controller):
                         lines += """<td class="leftLine topLine"></td>"""
             lines += """</tr>"""
             return lines
+        return ""
 
     def get_nodes(self, child_ids):
         if child_ids:
@@ -87,6 +88,7 @@ class EmployeeChart(http.Controller):
                 child_nodes += child_table + view + """</div></td></tr></table></td>"""
             nodes = child_nodes + """</tr>"""
             return nodes
+        return ""
 
     @http.route('/get/parent/child', type='http', auth='user', methods=['POST'], csrf=False)
     def get_parent_child(self, **post):
@@ -120,7 +122,8 @@ class EmployeeChart(http.Controller):
                 lines = self.get_lines(child_count)
                 nodes = self.get_nodes(employee.child_ids)
                 child_table = lines + nodes
-                value.append(child_table)
+                if child_table:
+                    value.append(child_table)
                 return child_table
 
 

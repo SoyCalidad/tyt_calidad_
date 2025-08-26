@@ -12,6 +12,7 @@
     "license": "AGPL-3",
     "website": "https://github.com/OCA/knowledge",
     "depends": ["base"],
+    'icon': 'document_knowledge/static/description/icon.svg',
     "data": [
         "data/ir_module_category.xml",
         "security/document_knowledge_security.xml",
