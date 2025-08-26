@@ -14,6 +14,6 @@ class ReportWizard(models.TransientModel):
         try:
             ids = objects.ids
             return self.env.ref(report_id).report_action(ids)
-        except Exception:
-            _logger.error('No se pudo descargar el reporte')
+        except Exception as e:
+            _logger.error(f'No se pudo descargar el reporte: {e}')
             raise UserError("Error al generar el reporte")

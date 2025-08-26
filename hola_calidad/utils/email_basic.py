@@ -32,9 +32,10 @@ class EmailBasic(models.AbstractModel):
         else:
             if template.lang:
                 lang = template._render_template(
-                    template.lang, model, [self.ids[0]])
+                    template.lang, model, [self.ids[0]])[self.ids[0]]
             else:
                 lang = self.env.user.lang
+
 
             ctx = {
                 'default_model': model,

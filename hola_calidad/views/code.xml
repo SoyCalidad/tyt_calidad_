@@ -20,17 +20,17 @@
         <field name="name">mgmtsystem.code.view.tree</field>
         <field name="model">mgmtsystem.code</field>
         <field name="arch" type="xml">
-            <tree string="Códigos">
+            <list string="Códigos">
                 <field name="name" />
                 <field name="sequence_id" />
-            </tree>
+            </list>
         </field>
     </record>
 
     <record id="mgmtsystem_code_action" model="ir.actions.act_window">
         <field name="name">Códigos</field>
         <field name="res_model">mgmtsystem.code</field>
-        <field name="view_mode">tree,form</field>
+        <field name="view_mode">list,form</field>
         <field name="domain">[]</field>
         <field name="context">{}</field>
         <field name="help" type="html">

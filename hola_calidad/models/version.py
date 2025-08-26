@@ -38,9 +38,9 @@ class Version(models.Model):
     # Overwrite this in the inherited class with comodel_name = class_name
 
     parent_edition = fields.Many2one(
-        comodel_name='mgmtsystem.version', copy=False)
+        comodel_name=_name, copy=False)
     old_versions = fields.One2many(
-        comodel_name='mgmtsystem.version', string='Versiones antiguas',
+        comodel_name=_name, string='Versiones antiguas',
         inverse_name='parent_edition', context={'active_version': False})
 
     def _copy_edition(self):
@@ -52,11 +52,12 @@ class Version(models.Model):
         return new_edition
 
     def action_open_older_versions(self):
-        result = self.env.ref(
-            'mgmtsystem_context.context_internal_issue_cancel_action').read()[0]
-        result['domain'] = [('id', 'in', self.old_versions.ids)]
-        result['context'] = {'active_version': False}
-        return result
+        pass
+        # result = self.env.ref(
+        #     'mgmtsystem_context.context_internal_issue_cancel_action').read()[0]
+        # result['domain'] = [('id', 'in', self.old_versions.ids)]
+        # result['context'] = {'active_version': False}
+        # return result
 
     def button_new_version(self):
         self.ensure_one()
@@ -64,7 +65,7 @@ class Version(models.Model):
         revno = self.version
         self.write({
             'version': revno + 1,
-            'name': self.name
+            #'name': self.name
         })
 
     #####################################################################

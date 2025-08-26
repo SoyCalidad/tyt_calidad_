@@ -14,8 +14,10 @@
                     </group>
                 </sheet>
                 <footer>
-                    <button name="action_print" type="object" string="Descargar" class="oe_highlight" icon="fa-download" attrs="{'invisible':[('pdf_bool', '=',True)]}"/>
-                    <button name="action_print_xls" type="object" string="Descargar XLS" class="oe_highlight" icon="fa-download" attrs="{'invisible':[('xls_bool', '=',True)]}"/>
+                    <button name="action_print" type="object" string="Descargar" class="oe_highlight" icon="fa-download" 
+                    invisible="pdf_bool == True"/>
+                    <button name="action_print_xls" type="object" string="Descargar XLS" class="oe_highlight" icon="fa-download" 
+                    invisible="xls_bool == True"/>
                     <button special="cancel" string="Cancelar"/>
                 </footer>
             </form>

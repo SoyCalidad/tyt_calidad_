@@ -8,35 +8,17 @@
         <field name="priority" eval="95"/>
         <field name="arch" type="xml">
 
-            <xpath expr="//div[hasclass('settings')]" position="inside">
-                <div class="app_settings_block" 
-                     data-string="Sistema de gestión" string="Sistema de gestión"
-                     data-key="hola_calidad">
-
-                    <h2>Sistema de gestión</h2>
-                    <div class="row mt16 o_settings_container">
-                        <div class="col-xs-12 col-md-6 o_setting_box hola_calidad">
-                        <!--
-                            <div class="o_setting_right_pane" name="hola_calidad_right_panel">
-                                <label for="resource_calendar_id"/>
-                                <div class="row">
-                                    <div class="text-muted col-md-8">
-                                        Set default calendar used to compute time allocation for leaves, timesheets, ...
-                                    </div>
+            <xpath expr="//form" position="inside">
+                <app data-string="Sistema de gestión" string="Sistema de gestión" name="hola_calidad" >
+                        <block title="Sistema de gestión">
+                            
+                            <div class="row mt16 o_settings_container">
+                                <div class="col-xs-12 col-md-6 o_setting_box hola_calidad">
                                 </div>
-                                <div class="content-group">
-                                    <div class="mt16">
-                                        <field name="resource_calendar_id" class="o_light_label" domain="[('company_id', '=', company_id)]" context="{'default_company_id': company_id}"/>
-                                    </div>
-                                </div> 
                             </div>
-                            <div class="o_setting_left_pane" name="hola_calidad_left_panel">
-                            </div>-->
+                        </block>
+                </app>
 
-                        </div>
-                    </div>
-
-                </div>
             </xpath>
 
         </field>

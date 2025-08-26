@@ -454,22 +454,22 @@ class Diagnostic(models.Model):
         default='draft',
     )
 
-    def get_diagnostic_values(self, diagnostic_list):
-        total_100 = total_75 = total_50 = total_25 = total_0 = total_na = 0
-        for line in diagnostic_list:
-            if line.qualification == 'na':
-                total_na += 1
-            if line.qualification == '100_porcent':
-                total_100 += 1
-            if line.qualification == '75_porcent':
-                total_75 += 1
-            if line.qualification == '50_porcent':
-                total_50 += 1
-            if line.qualification == '25_porcent':
-                total_25 += 1
-            if line.qualification == '0_porcent':
-                total_0 += 1
-        return [total_na, total_100, total_75, total_50, total_25, total_0]
+    # def get_diagnostic_values(self, diagnostic_list):
+    #     total_100 = total_75 = total_50 = total_25 = total_0 = total_na = 0
+    #     for line in diagnostic_list:
+    #         if line.qualification == 'na':
+    #             total_na += 1
+    #         if line.qualification == '100_porcent':
+    #             total_100 += 1
+    #         if line.qualification == '75_porcent':
+    #             total_75 += 1
+    #         if line.qualification == '50_porcent':
+    #             total_50 += 1
+    #         if line.qualification == '25_porcent':
+    #             total_25 += 1
+    #         if line.qualification == '0_porcent':
+    #             total_0 += 1
+    #     return [total_na, total_100, total_75, total_50, total_25, total_0]
 
     diagnostic4_ids_100 = fields.Integer(
         string=u'Total Contexto 100%', compute='_get_diagnostic', compute_sudo=True)
@@ -728,7 +728,6 @@ class Diagnostic(models.Model):
                             letter = 'F'
 
                         cell = sheet[letter+number]
-                        print(cell)
                         cell.value = 'X'
                         # cont=int(number) #comvertir a entero
                         cont = cont+1
@@ -743,7 +742,7 @@ class Diagnostic(models.Model):
             with open(tmp.name, 'rb') as f:
                 xls_filelike = BytesIO(f.read())
 
-        out = base64.encodestring(xls_filelike.getvalue())
+        out = base64.encodebytes(xls_filelike.getvalue())
 
         self.xls_helper.write({'datas': out, 'datas_fname': filename})
         filename += '%2Exlsx'
