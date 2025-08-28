@@ -1,18 +1,19 @@
-odoo.define('kanban_draggable.kanban_column',function(require){
-"use strict";
+/** @odoo-module **/
 
+import { KanbanColumn } from "@web/views/kanban/kanban_column";
+import { patch } from "@web/core/utils/patch";
 
-var KanbanColumn = require('web.KanbanColumn');
+patch(KanbanColumn.prototype,  {
+    async start() {
+        await super.start();
 
-KanbanColumn.include({
-    start: function () {
-        this._super.apply(this, arguments);
-
-        if (this.record_options.sortable==false){
-            this.$el.sortable( "disable" );
+        if (this.props.recordOptions?.sortable === false) {
+            // ⚠️ En OWL ya no existe this.$el.sortable
+            // Debes usar SortableJS (que ya está integrado en Odoo)
+            const sortable = Sortable.get(this.el);
+            if (sortable) {
+                sortable.option("disabled", true);
+            }
         }
-
     },
-
-});
 });

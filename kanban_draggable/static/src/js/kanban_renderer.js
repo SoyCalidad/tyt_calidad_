@@ -1,48 +1,37 @@
-odoo.define('kanban_draggable.kanban_renderer',function(require){
-"use strict";
+/** @odoo-module **/
 
+import { KanbanRenderer } from "@web/views/kanban/kanban_renderer";
+import { patch } from "@web/core/utils/patch";
 
-var KanbanRenderer = require('web.KanbanRenderer');
+patch(KanbanRenderer.prototype, {
+    /**
+     * Sobrescribimos _setState para añadir opciones de drag & drop
+     */
+    _setState(state) {
+        super._setState(state);
 
-KanbanRenderer.include({
-
-    _setState: function (state) {
-        this._super.apply(this, arguments);
-
-        var arch = this.arch;
-        var drag_drop = true;
-        if (arch.attrs.disable_drag_drop_record) {
-            if (arch.attrs.disable_drag_drop_record=='true') {
-                this.columnOptions.draggable = false;
-            }
+        const arch = this.props.arch;
+        if (arch.attrs.disable_drag_drop_record === "true") {
+            this.columnOptions.draggable = false;
         }
 
-        this.recordOptions.sortable = true;
-        if (arch.attrs.disable_sort_record) {
-            if (arch.attrs.disable_sort_record=='true') {
-                this.recordOptions.sortable = false;
-            }
-        }
-
-        this.columnOptions.sortable = true;
-        if (arch.attrs.disable_sort_column) {
-            if (arch.attrs.disable_sort_column=='true') {
-                this.columnOptions.sortable = false;
-            }
-        }
+        this.recordOptions.sortable = !(arch.attrs.disable_sort_record === "true");
+        this.columnOptions.sortable = !(arch.attrs.disable_sort_column === "true");
     },
 
-    _renderGrouped: function (fragment) {
-        this._super.apply(this, arguments);
+    /**
+     * Sobrescribimos _renderGrouped para manejar la desactivación
+     */
+    _renderGrouped(fragment) {
+        const res = super._renderGrouped(fragment);
 
-        if (this.columnOptions.sortable==false){
-            this.$el.sortable( "disable" );
+        if (this.columnOptions.sortable === false && this.el) {
+            // ⚠️ En OWL no existe this.$el.sortable, así que tendrías que
+            // integrar una librería como SortableJS si necesitas esto.
+            // Ejemplo (si usas SortableJS):
+            // Sortable.get(this.el)?.option("disabled", true);
         }
 
+        return res;
     },
-
-
-
-});
-
 });

@@ -44,7 +44,7 @@ Disable DragDrop/Sorting In Specific Kanban View
     'assets': {
         'web.assets_backend': [
             "/kanban_draggable/static/src/js/kanban_renderer.js",
-            "/kanban_draggable/static/src/js/kanban_column.js",
+            #"/kanban_draggable/static/src/js/kanban_column.js",
         ],
     },
 
