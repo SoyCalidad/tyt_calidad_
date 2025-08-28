@@ -2,7 +2,7 @@
 <odoo>
     <!-- ONBOARDING STEPS -->
 
-    <template id="onboarding_opportunity_matrix_opp_step">
+    <!-- <template id="onboarding_opportunity_matrix_opp_step">
         <t t-call="base.onboarding_step">
             <t t-set="title">Matriz de oportunidades</t>
             <t t-set="description">Cree una matriz de oportunidades.</t>
@@ -52,10 +52,10 @@
             <t t-set="model" t-value="'res.company'" />
             <t t-set="state" t-value="state.get('opportunity_risk_onboarding_state')" />
         </t>
-    </template>
+    </template> -->
 
     <!-- ONBOARDING PANELS -->
-    <template id="opportunity_onboarding_panel" name="opportunity.onboarding.panel">
+    <!-- <template id="opportunity_onboarding_panel" name="opportunity.onboarding.panel">
         <t t-call="base.onboarding_container">
             <t t-set="classes" t-value="'o_onboarding_blue'"/>
             <t t-set="bg_image" t-value="'/account/static/src/img/account_invoice_onboarding_bg.jpg'"/>
@@ -67,7 +67,7 @@
             <t t-call="mgmtsystem_opportunity.onboarding_opportunity_opp_step" name="opportunity_opp_step" />
             <t t-call="mgmtsystem_opportunity.onboarding_opportunity_matrix_opp_step" name="opportunity_matrix_opp_step" />
         </t>
-    </template>
+    </template> -->
 
     <!-- Views -->
 

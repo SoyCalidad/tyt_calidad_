@@ -21,11 +21,11 @@
                     </group>
                     <group string="Criterios">
                         <field name="criterio_ids">
-                            <tree>
+                            <list>
                                 <field name="name"/>
                                 <field name="description"/>
                                 <field name="line_ids" string="Alternativas"/>
-                            </tree>
+                            </list>
                             <form>
                                 <sheet>
                                     <div class="oe_title">
@@ -38,12 +38,12 @@
                                         <field name="description"/>
                                         <field name="evaluation_id"/>
                                         <field name="line_ids" string="Alternativas">
-                                            <tree editable="bottom">
+                                            <list editable="bottom">
                                                 <field name="name"/>
                                                 <field name="description"/>
                                                 <field name="value_less"/>
                                                 <field name="value_high"/>
-                                            </tree>
+                                            </list>
                                         </field>
                                     </group>
                                 </sheet>
@@ -71,12 +71,12 @@
                         <field name="description"/>
                         <field name="evaluation_id"/>
                         <field name="line_ids">
-                            <tree editable="bottom">
+                            <list editable="bottom">
                                 <field name="name"/>
                                 <field name="description"/>
                                 <field name="value_less"/>
                                 <field name="value_high"/>
-                            </tree>
+                            </list>
                         </field>
                     </group>
                 </sheet>
@@ -87,7 +87,7 @@
     <record model="ir.actions.act_window" id="evaluation_evaluation_action">
         <field name="name">Indicadores de riesgo</field>
         <field name="res_model">evaluation.evaluation</field>
-        <field name="view_mode">tree,form</field>
+        <field name="view_mode">list,form</field>
     </record>
 
     <menuitem name="Indicadores de riesgo" id="mitem_evaluation_evaluation" parent="menu_configuration_evaluation" action="evaluation_evaluation_action" groups="base.group_no_one,mgmtsystem_opportunity.group_opportunity_onlyread,mgmtsystem_opportunity.group_opportunity_onlyread_printreport,mgmtsystem_opportunity.group_opportunity_user_secundario,mgmtsystem_opportunity.group_opportunity_write_printreport" />
@@ -96,7 +96,7 @@
     <record model="ir.actions.act_window" id="matrix_categ_action">
         <field name="name">Categorías de matriz</field>
         <field name="res_model">matrix.categ</field>
-        <field name="view_mode">tree,form</field>
+        <field name="view_mode">list,form</field>
     </record>
 
     <menuitem name="Categorías de matriz" id="mitem_matrix_categ" parent="menu_configuration_evaluation" action="matrix_categ_action" groups="base.group_no_one,mgmtsystem_opportunity.group_opportunity_onlyread,mgmtsystem_opportunity.group_opportunity_onlyread_printreport,mgmtsystem_opportunity.group_opportunity_user_secundario,mgmtsystem_opportunity.group_opportunity_write_printreport"/>
