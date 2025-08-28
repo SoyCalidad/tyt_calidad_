@@ -346,7 +346,8 @@ class MgmtsystemAction(models.Model):
         group_expand='_group_expand_states',
     )
 
-    def _group_expand_states(self, states, domain, order):
+    @api.model
+    def _group_expand_states(self, states, domain, limit=None):
         return [key for key, val in type(self).state.selection]
 
     resources = fields.Text(string='Recursos')

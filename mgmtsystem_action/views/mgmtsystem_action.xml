@@ -172,11 +172,7 @@
                         </page>
                     </notebook>
                 </sheet>
-                <div class="oe_chatter">
-                    <field name="message_follower_ids" widget="mail_followers" groups="base.group_user" />
-                    <field name="activity_ids" widget="mail_activity" />
-                    <field name="message_ids" widget="mail_thread" />
-                </div>
+                <chatter/>
             </form>
         </field>
     </record>
@@ -258,7 +254,7 @@
     <record id="open_mgmtsystem_action_list" model="ir.actions.act_window">
         <field name="name">Acciones</field>
         <field name="res_model">mgmtsystem.action</field>
-        <field name="view_mode">kanban,tree,form,pivot</field>
+        <field name="view_mode">kanban,list,form,pivot</field>
         <field name="context">{"search_default_my_actions": 1}</field>
     </record>
 
