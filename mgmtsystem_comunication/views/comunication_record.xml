@@ -5,12 +5,12 @@
             <field name="name">record.meeting.tree</field>
             <field name="model">record.meeting</field>
             <field name="arch" type="xml">
-                <tree string="Minuta de reunión">
+                <list string="Minuta de reunión">
                     <field name="name" />
                     <field name="date_release" />
                     <field name="user_id" />
                     <field name="state" />
-                </tree>
+                </list>
             </field>
         </record>
         <record id="view_record_meeting_search" model="ir.ui.view">
@@ -37,17 +37,17 @@
                                 string="Notificar por email"
                                 type="object"
                                 class="oe_highlight"
-                                attrs="{'invisible':[('state','!=', 'elaborate')]}" />
+                                invisible="state != 'elaborate'" />
                         <button string="Notificar por sistema"
                                 name="send_in_process"
                                 type="object"
                                 class="btn-primary"
-                                attrs="{'invisible':[('state','!=', 'elaborate')]}" />
+                                invisible="state != 'elaborate'" />
                         <button string="Cerrar"
                                 name="send_close"
                                 type="object"
                                 class="btn-primary"
-                                attrs="{'invisible':[('state','!=', 'in_process')]}" />
+                                invisible="state != 'in_process'" />
                         <button string="Crear reunión asociada" name="create_record" type="object" class="btn-second" />
                     </header>
                     <sheet>
@@ -58,35 +58,35 @@
                         <div class="oe_title">
                             <label for='name' />
                             <h2>
-                                <field name="name" attrs="{'readonly': [('state','not in',('elaborate'))] }" />
+                                <field name="name" readonly="state not in ['elaborate']" />
                             </h2>
                         </div>
                         <group>
                             <group>
-                                <field name="document_id" options="{'no_create': True}" attrs="{'readonly': [('state','not in',('elaborate'))]}" />
-                                <field name="user_id" attrs="{'readonly': [('state','not in',('elaborate'))]}" />
+                                <field name="document_id" options="{'no_create': True}" readonly="state not in ['elaborate']" />
+                                <field name="user_id" readonly="state not in ['elaborate']" />
                                 <field name="reference" invisible="1" />
-                                <field name="line_id" attrs="{'readonly': [('state','not in',('elaborate'))], 'invisible':[('line_id','=', False)]}" />
+                                <field name="line_id" invisible="line_id == False" readonly="state not in ['elaborate']" />
                             </group>
                             <group>
-                                <field name="locate" attrs="{'readonly': [('state','not in',('elaborate'))] }" />
-                                <field name="date_release" attrs="{'readonly': [('state','not in',('elaborate'))] }" />
+                                <field name="locate" readonly="state not in ['elaborate']" />
+                                <field name="date_release" readonly="state not in ['elaborate']" />
                                 <field name="count_in_process" invisible="1" />
                             </group>
                         </group>
                         <group>
-                            <field name="resume" string="Observaciones" attrs="{'readonly': [('state','not in',('elaborate'))] }" />
+                            <field name="resume" string="Observaciones" readonly="state not in ['elaborate']" />
                         </group>
                         <notebook>
                             <page string="Agenda">
-                                <field name="pre_line_ids" attrs="{'readonly': [('state','=','close')]}" context="{'default_record_id': id}">
-                                    <tree editable="bottom">
+                                <field name="pre_line_ids" readonly="state == 'close'" context="{'default_record_id': id}">
+                                    <list editable="bottom">
                                         <field name="record_id" invisible="1" />
                                         <field name="name" string="Tema" />
                                         <field name="duration" widget="float_time" />
                                         <field name="employee_id" />
                                         <field name="partner_id" />
-                                    </tree>
+                                    </list>
                                     <form>
                                         <sheet>
                                             <div class="oe_title">
@@ -105,15 +105,15 @@
                                     </form>
                                 </field>
                             </page>
-                            <page string="Convocatoria" attrs="{'invisible':[('state','!=', 'elaborate')]}">
+                            <page string="Convocatoria" invisible="state != 'elaborate'">
                                 <separator string="Empleados" />
                                 <field name="employee_ids" />
                                 <separator string="Contactos" />
                                 <field name="partner_ids" />
                             </page>
-                            <page string="Acuerdos" attrs="{'invisible':[('state','=', 'elaborate')]}">
-                                <field name="line_ids" attrs="{'readonly': [('state','=','close')]}" context="{'default_record_id': id}">
-                                    <tree decoration-info="state=='in_process'">
+                            <page string="Acuerdos" invisible="state == 'elaborate'">
+                                <field name="line_ids" readonly="state == 'close'" context="{'default_record_id': id}">
+                                    <list decoration-info="state=='in_process'">
                                         <field name="record_id" invisible="1" />
                                         <field name="name" string="Acuerdo" />
                                         <field name="detail" />
@@ -124,7 +124,7 @@
                                         <field name="partner_id" />
                                         <field name="state" />
                                         <field name="check" />
-                                    </tree>
+                                    </list>
                                     <form>
                                         <header>
                                             <field name="state" widget="statusbar" />
@@ -155,22 +155,22 @@
                                     </form>
                                 </field>
                             </page>
-                            <page string="Asistencia" attrs="{'invisible':[('state','=', 'elaborate')]}">
+                            <page string="Asistencia" invisible="state == 'elaborate'">
                                 <separator string="Interna" />
-                                <field name="assistance_emp_ids" attrs="{'readonly': [('state','=','close')]}">
-                                    <tree editable="bottom" decoration-success="assistance=='A'" decoration-warning="assistance=='T'" decoration-danger="assistance=='F'">
+                                <field name="assistance_emp_ids" readonly="state == 'close'">
+                                    <list editable="bottom" decoration-success="assistance=='A'" decoration-warning="assistance=='T'" decoration-danger="assistance=='F'">
                                         <field name="employee_id" />
                                         <field name="assistance" />
                                         <field name="datetime" />
-                                    </tree>
+                                    </list>
                                 </field>
                                 <separator string="Externa" />
-                                <field name="assistance_par_ids" attrs="{'readonly': [('state','=','close')]}">
-                                    <tree editable="bottom" decoration-success="assistance=='A'" decoration-warning="assistance=='T'" decoration-danger="assistance=='F'">
+                                <field name="assistance_par_ids" readonly="state == 'close'">
+                                    <list editable="bottom" decoration-success="assistance=='A'" decoration-warning="assistance=='T'" decoration-danger="assistance=='F'">
                                         <field name="partner_id" />
                                         <field name="assistance" />
                                         <field name="datetime" />
-                                    </tree>
+                                    </list>
                                 </field>
                             </page>
                         </notebook>
@@ -199,14 +199,14 @@
             <field name="name">Minutas de reunión</field>
             <field name="type">ir.actions.act_window</field>
             <field name="res_model">record.meeting</field>
-            <field name="view_mode">tree,form,kanban,graph,pivot,calendar</field>
+            <field name="view_mode">list,form,kanban,graph,pivot,calendar</field>
             <field name="search_view_id" ref="view_record_meeting_search" />
         </record>
         <!--RECORD FIN-->
         <record id="show_records_action" model="ir.actions.act_window">
             <field name="name">Minutas de reunión</field>
             <field name="res_model">record.meeting</field>
-            <field name="view_mode">tree,form</field>
+            <field name="view_mode">list,form</field>
             <field name="domain">[]</field>
             <field name="context">{"search_default_line_id": active_id, "default_line_id": active_id}</field>
             <field name="help" type="html">
@@ -217,7 +217,7 @@
             <field name="name">comunication.plan.line.tree</field>
             <field name="model">comunication.plan.line</field>
             <field name="arch" type="xml">
-                <tree string="Comunicaciones">
+                <list string="Comunicaciones">
                     <field name="resume" />
                     <field name="partner_ids" widget="many2many_tags" />
                     <field name="employee_ids" widget="many2many_tags" />
@@ -225,7 +225,7 @@
                     <field name="date_release" />
                     <field name="via" />
                     <field name="state" />
-                </tree>
+                </list>
             </field>
         </record>
         <record id="view_plan_line_form" model="ir.ui.view">
@@ -239,52 +239,52 @@
                                 name="action_notify_employee"
                                 type="object"
                                 class="btn-success"
-                                attrs="{'invisible':[('state','not in', ('on_track'))]}" />
+                                invisible="state not in ['on_track']" />
                         <button string="Notificar por e-mail"
                                 name="action_notify_comunication_plan"
                                 type="object"
                                 class="btn-success"
-                                attrs="{'invisible':[('state','not in', ('on_track'))]}" />
+                                invisible="state not in ['on_track']" />
                         <button string="Enviar a Elaborar"
                                 name="send_elaborate"
                                 type="object"
                                 class="btn-primary"
-                                attrs="{'invisible':[('state','not in', ('review'))]}" />
+                                invisible="state not in ['review']" />
                         <button string="Enviar a Revisar"
                                 name="send_review"
                                 type="object"
                                 class="btn-primary"
-                                attrs="{'invisible':[('state','not in', ('elaborate'))]}" />
+                                invisible="state not in ['elaborate']" />
                         <button string="Enviar a Validar"
                                 name="send_validate"
                                 type="object"
                                 class="btn-primary"
-                                attrs="{'invisible':[('state','not in', ('review'))]}" />
+                                invisible="state not in ['review']" />
                         <button string="Validar"
                                 name="send_validate_ok"
                                 type="object"
                                 class="btn-primary"
-                                attrs="{'invisible':[('state','not in', ('validate'))]}" />
+                                invisible="state not in ['validate']" />
                         <button string="Comenzar seguimiento"
                                 name="send_on_track"
                                 type="object"
                                 class="btn-primary"
-                                attrs="{'invisible':[('state','!=', 'validate_ok')]}" />
+                                invisible="state != 'validate_ok'" />
                         <button string="Terminar"
                                 name="send_closed"
                                 type="object"
                                 class="btn-primary"
-                                attrs="{'invisible':[('state','!=', 'on_track')]}" />
+                                invisible="state != 'on_track'" />
                         <button string="Volver Obsoleto"
                                 confirm="Esto volverá obsoleto el presente registro. ¿Está seguro(a)?"
                                 name="send_cancel"
                                 type="object"
                                 class="btn-second"
-                                attrs="{'invisible': [('state','in',('cancel'))] }" />
+                                invisible="state in ['cancel']" />
                         <button name="button_new_version"
                                 type="object"
                                 string="Nueva versión"
-                                attrs="{'invisible':[('state', '!=', 'validate_ok')]}"
+                                invisible="state != 'validate_ok'"
                                 class="oe_highlight" />
                         <button type="object"
                                 name="action_create_record"
@@ -314,31 +314,31 @@
                         <div class="oe_title">
                             <label for="resume" />
                             <h2>
-                                <field name="resume" attrs="{'readonly': [('state','not in',('elaborate', 'validate_ok'))] }" />
+                                <field name="resume" readonly="state not in ['elaborate', 'validate_ok']" />
                             </h2>
                         </div>
                         <group>
-                            <field name="plan_id" attrs="{'readonly': [('state','not in',('elaborate'))]}" />
+                            <field name="plan_id" readonly="state not in ['elaborate']" />
                         </group>
                         <group>
                             <group>
-                                <field name="user_id" attrs="{'readonly': [('state','not in',('elaborate'))]}" />
-                                <field name="type" attrs="{'readonly': [('state','not in',('elaborate', 'validate_ok'))] }" />
-                                <field name="date_release" attrs="{'readonly': [('state','not in',('elaborate'))] }" />
-                                <field name="via" attrs="{'readonly': [('state','not in',('elaborate'))] }" />
+                                <field name="user_id" readonly="state not in ['elaborate']" />
+                                <field name="type" readonly="state not in ['elaborate', 'validate_ok']" />
+                                <field name="date_release" readonly="state not in ['elaborate']" />
+                                <field name="via" readonly="state not in ['elaborate']" />
                                 <field name="frequency_id" />
                             </group>
                         </group>
-                        <group string="Reprogramación" attrs="{'invisible':[('state','in', ('elaborate', 'validate_ok'))]}">
-                            <field name="reprogramming" attrs="{'readonly': [('state','in',('closed','cancel'))]}" />
-                            <field name="date_reprogramming" attrs="{'readonly': [('state','in',('closed','cancel'))],'invisible': [('reprogramming','=', False)],'required': [('reprogramming','=', True)]}" />
+                        <group string="Reprogramación" invisible="state in ['elaborate', 'validate_ok']">
+                            <field name="reprogramming" readonly="state in ['closed', 'cancel']" />
+                            <field name="date_reprogramming" invisible="reprogramming == False" readonly="state in ['closed', 'cancel']" required="reprogramming == True" />
                         </group>
                         <notebook>
                             <page name="partner_ids" string="A quiénes">
                                 <separator string="Empleados" />
-                                <field name="employee_ids" attrs="{'readonly': [('state','not in',('elaborate'))]}" />
+                                <field name="employee_ids" readonly="state not in ['elaborate']" />
                                 <separator string="Contactos" />
-                                <field name="partner_ids" attrs="{'readonly': [('state','not in',('elaborate'))]}" />
+                                <field name="partner_ids" readonly="state not in ['elaborate']" />
                             </page>
                             <page name="validation" string="Validación y Versión">
                                 <group>
@@ -347,16 +347,16 @@
                                     </group>
                                     <group colspan="4">
                                         <separator string="Elaboración" />
-                                        <field name="elaboration_step" colspan="2" nolabel="1" attrs="{'readonly': [('state','not in',('elaborate'))]}" />
+                                        <field name="elaboration_step" colspan="2" nolabel="1" readonly="state not in ['elaborate']" />
                                         <separator string="Revisión" />
-                                        <field name="review_step" colspan="2" nolabel="1" attrs="{'readonly': [('state','not in',('elaborate', 'review'))]}" />
+                                        <field name="review_step" colspan="2" nolabel="1" readonly="state not in ['elaborate', 'review']" />
                                         <separator string="Validación" />
-                                        <field name="validation_step" colspan="2" nolabel="1" attrs="{'readonly': [('state','not in',('elaborate', 'review', 'validate'))]}" />
+                                        <field name="validation_step" colspan="2" nolabel="1" readonly="state not in ['elaborate', 'review', 'validate']" />
                                     </group>
                                     <group colspan="4">
-                                        <field name="date_elaborate" attrs="{'required': [('state','in',('elaborate'))], 'readonly': True}" />
-                                        <field name="date_review" attrs="{'required': [('state','in',('review'))], 'readonly': True, 'invisible': [('state','in',('elaborate'))] }" />
-                                        <field name="date_validate" groups="base.group_no_one,base.user_admin" attrs="{'invisible': [('state','in',('elaborate','review'))] }" />
+                                        <field name="date_elaborate" readonly="True" required="state in ['elaborate']" />
+                                        <field name="date_review" invisible="state in ['elaborate']" readonly="True" required="state in ['review']" />
+                                        <field name="date_validate" groups="base.group_no_one,base.group_system" invisible="state in ['elaborate', 'review']" />
                                     </group>
                                 </group>
                             </page>
@@ -374,7 +374,7 @@
             <field name="name">Plan de Comunicaciones</field>
             <field name="type">ir.actions.act_window</field>
             <field name="res_model">comunication.plan.line</field>
-            <field name="view_mode">tree,form,kanban,graph,pivot</field>
+            <field name="view_mode">list,form,kanban,graph,pivot</field>
         </record>
     </data>
 </odoo>

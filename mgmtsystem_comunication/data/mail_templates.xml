@@ -20,8 +20,11 @@
                     </p>
                 </div>
             </field>
-            <field name="report_template" ref="action_report_record_conv_meeting" />
-            <field name="report_name">Reporte de Convocatoria</field>
+            <field name="report_template_ids" eval="[(6, 0, [
+                ref('mgmtsystem_comunication.action_report_record_conv_meeting'),
+            ])]" />
+            <!-- <field name="report_template" ref="action_report_record_conv_meeting" />
+            <field name="report_name">Reporte de Convocatoria</field> -->
             <!--<field name="report_name">Minuta de reunión_${object.name or ''}_${object.date_release or ''}</field>-->
             <field name="lang">${object.user_id.lang}</field>
             <!--<field name="user_signature" eval="False" /> -->
@@ -46,8 +49,11 @@
                     </p>
                 </div>
             </field>
-            <field name="report_template" ref="action_report_comunication_plan_line" />
-            <field name="report_name">Plan de Comunicaciones</field>
+            <!-- <field name="report_template" ref="action_report_comunication_plan_line" />
+            <field name="report_name">Plan de Comunicaciones</field> -->
+            <field name="report_template_ids" eval="[(6,0,[
+                ref('mgmtsystem_comunication.action_report_comunication_plan_line')
+            ])]" />
             <field name="lang">${user.lang}</field>
             <!--<field name="user_signature" eval="False" />-->
             <field name="auto_delete" eval="True" />

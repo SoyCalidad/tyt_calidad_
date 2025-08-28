@@ -12,8 +12,7 @@ from email.mime.text import MIMEText
 
 import pytz
 from odoo import _, api, fields, models
-from odoo.exceptions import (RedirectWarning, UserError, ValidationError,
-                             Warning)
+from odoo.exceptions import (RedirectWarning, UserError, ValidationError)
 
 
 class RecordMeeting(models.Model):
