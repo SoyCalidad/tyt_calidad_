@@ -360,7 +360,7 @@ class PlanLine(models.Model):
             'type': 'ir.actions.act_window',
             'view_id': attachment_view.id,
             'views': [(attachment_view.id, 'kanban'), (False, 'form')],
-            'view_mode': 'kanban,tree,form',
+            'view_mode': 'kanban,list,form',
             'view_type': 'form',
             'help': _('''<p class="oe_view_nocontent_create">
                         Haga clic para cargar archivos de evidencia
