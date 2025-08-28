@@ -30,7 +30,7 @@
     <record model="ir.actions.act_window" id="complaint_complaint_customer_report_action">
         <field name="name">Quejas y Reclamos internos</field>
         <field name="res_model">complaint.complaint</field>
-        <field name="view_mode">tree,form,graph,pivot</field>
+        <field name="view_mode">list,form,graph,pivot</field>
         <field name="domain">[('type','=','customer')]</field>
         <field name="context">{}</field>
     </record>
@@ -44,7 +44,7 @@
     <record model="ir.actions.act_window" id="complaint_complaint_supplier_report_action">
         <field name="name">Quejas y Reclamos externos</field>
         <field name="res_model">complaint.complaint</field>
-        <field name="view_mode">tree,form,graph,pivot</field>
+        <field name="view_mode">list,form,graph,pivot</field>
         <field name="domain">[('type','=','supplier')]</field>
         <field name="context">{}</field>
     </record>

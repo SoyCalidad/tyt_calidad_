@@ -55,8 +55,8 @@
         <field name="arch" type="xml">
             <form position="inside">
                 <footer position="replace">
-                    <button name="action_save_onboarding_complaints_internal_step" class="btn btn-primary" type="object" string="Crear" attrs="{'invisible':[('type','!=','customer')]}" />
-                    <button name="action_save_onboarding_complaints_external_step" class="btn btn-primary" type="object" string="Crear" attrs="{'invisible':[('type','!=','supplier')]}" />
+                    <button name="action_save_onboarding_complaints_internal_step" class="btn btn-primary" type="object" string="Crear" invisible="type != 'customer'" />
+                    <button name="action_save_onboarding_complaints_external_step" class="btn btn-primary" type="object" string="Crear" invisible="type != 'supplier'" />
                     <button special="cancel" string="Cancelar" />
                 </footer>
             </form>
