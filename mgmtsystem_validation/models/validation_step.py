@@ -158,10 +158,10 @@ class Validation(models.Model):
         if notify:
             self.notify_to_step_users(self.validation_step, 'validation')
 
-        review_activity = self.activity_ids.filtered(
-            lambda r: r.summary == 'Revisión de documento')
-        for review in review_activity:
-            review.action_done()
+        # review_activity = self.activity_ids.filtered(
+        #     lambda r: r.summary == 'Revisión de documento')
+        # for review in review_activity:
+        #     review.action_done()
 
     def send_validate_ok(self):
         if not self.validation_users_check:
@@ -173,10 +173,10 @@ class Validation(models.Model):
         dates = [x.date for x in self.validation_step]
         if dates:
             date_validate = max(dates)
-        validate_activity = self.activity_ids.filtered(
-            lambda r: r.summary == 'Validación de documento')
-        for validate in validate_activity:
-            validate.action_done()
+        # validate_activity = self.activity_ids.filtered(
+        #     lambda r: r.summary == 'Validación de documento')
+        # for validate in validate_activity:
+        #     validate.action_done()
         self.write({
             'state': 'validate_ok',
             'date_validate': date_validate,
@@ -199,7 +199,6 @@ class Validation(models.Model):
         elif type == 'validation':
             body += 'Validación de documento'
         for step in steps:
-            name = self.name or ''
             if step.user_id:
                 todo_id = self.env['mail.activity.type'].search(
                     [('name', '=', 'To Do')], limit=1).id
@@ -225,8 +224,8 @@ class Validation(models.Model):
             notification_ids.append((0, 0, {
                 'res_partner_id': step.user_id.partner_id.id,
                 'notification_type': 'inbox'}))
-        self.message_post(body=body, message_type='notification',
-                          subtype='mail.mt_comment', author_id=2, notification_ids=notification_ids)
+        # self.message_post(body=body, message_type='notification',
+        #                   subtype='mail.mt_comment', author_id=2, notification_ids=notification_ids)
 
     # Version inherit
 
@@ -260,7 +259,7 @@ class Validation(models.Model):
         self.write({
             'version': revno + 1,
             'state': 'elaborate',
-            'name': self.name
+            #'name': self.name
         })
         child_fields = ['audit_ids', 'line_ids',
                         'training_ids', 'maintenance_ids']
