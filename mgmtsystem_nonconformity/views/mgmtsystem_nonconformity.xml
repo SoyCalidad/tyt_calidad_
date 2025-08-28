@@ -19,9 +19,9 @@
         <field name="name">mgmtsystem.nonconformity.type.view.tree</field>
         <field name="model">mgmtsystem.nonconformity.type</field>
         <field name="arch" type="xml">
-            <tree string="Tipo de no conformidad">
+            <list string="Tipo de no conformidad">
                 <field name="name" />
-            </tree>
+            </list>
         </field>
     </record>
 
@@ -42,7 +42,7 @@
         <field name="name">mgmtsystem.nonconformity.tree</field>
         <field name="model">mgmtsystem.nonconformity</field>
         <field name="arch" type="xml">
-            <tree string="No-Conformidades">
+            <list string="No-Conformidades">
                 <field name="ref" />
                 <field name="name" />
                 <field name="date_found" />
@@ -50,7 +50,7 @@
                 <field name="user_id" />
                 <field name="company_id" groups="base.group_multi_company" />
                 <field name="state" />
-            </tree>
+            </list>
         </field>
     </record>
 
@@ -108,7 +108,7 @@
                                     <div class="oe_kanban_bottom_left">
                                         <span class='oe_kanban_mail_new' title='Unread Messages'>
                                             <i class='fa fa-comments' />
-                                            <t t-raw="record.message_needaction_counter.raw_value" />
+                                            <t t-esc="record.message_needaction_counter.raw_value" />
                                         </span>
                                     </div>
                                     <div class="oe_kanban_bottom_right">
@@ -153,17 +153,17 @@
                             name="send_acction"
                             type="object"
                             class="btn-primary"
-                            attrs="{'invisible':[('state','in',('pending','open','done','cancel'))]}" />
+                            invisible="state in ['pending', 'open', 'done', 'cancel']" />
                     <button string="Proceso"
                             name="send_process"
                             type="object"
                             class="btn-primary"
-                            attrs="{'invisible':[('state','!=', 'pending')]}" />
+                            invisible="state != 'pending'" />
                     <button string="Cerrado"
                             name="send_cerrado"
                             type="object"
                             class="btn-primary"
-                            attrs="{'invisible': [('state','in',('draft','pending','cancel','done'))]}" />
+                            invisible="state in ['draft', 'pending', 'cancel', 'done']" />
                     <button string="Cancelar"
                             name="send_cancel"
                             confirm="Esto volverá obsoleto el presente registro. ¿Está seguro(a)?"
@@ -182,11 +182,11 @@
                     </h1>
                     <div class="oe_title">
                         <h1 class="o_row">
-                            <field name="name" placeholder="Titulo No conformidad..." attrs="{'readonly':[('state','in',['done'])]}" />
+                            <field name="name" placeholder="Titulo No conformidad..." readonly="state in ['done']" />
                         </h1>
                     </div>
                     <group>
-                        <group attrs="{'readonly':[('state','in',['done'])]}">
+                        <group readonly="state in ['done']">
                             <separator string="Información" />
                             <field name="type_id" />
                             <field name="ref" />
@@ -199,14 +199,14 @@
                             <field name="nc_output" />
                             <separator string="Fechas" />
                             <field name="date_found" />
-                            <field name="date_limit" attrs="{'readonly':[('state','not in',['draft','analysis'])]}" />
+                            <field name="date_limit" readonly="state not in ['draft', 'analysis']" />
                         </group>
                         <group>
                             <separator string="Encargados" />
-                            <field name="employee_id" attrs="{'readonly':[('state','not in',['draft','analysis'])]}" />
-                            <field name="partner_id" string="Auditor" attrs="{'readonly':[('state','not in',['draft','analysis'])]}" />
-                            <field name="audit_team_id" attrs="{'readonly':[('state','not in',['draft','analysis'])]}" />
-                            <field name="user_id" attrs="{'readonly':[('state','in',['done'])]}" />
+                            <field name="employee_id" readonly="state not in ['draft', 'analysis']" />
+                            <field name="partner_id" string="Auditor" readonly="state not in ['draft', 'analysis']" />
+                            <field name="audit_team_id" readonly="state not in ['draft', 'analysis']" />
+                            <field name="user_id" readonly="state in ['done']" />
                             <field name="company_id" groups="base.group_multi_company" />
                         </group>
                     </group>
@@ -214,11 +214,11 @@
                         <page string="Investigación" name="description">
                             <group>
                                 <field name="investigation_method" />
-                                <field name="description" placeholder="Añadir descripción..." attrs="{'readonly':[('state','not in',['draft','analysis'])]}" />
+                                <field name="description" placeholder="Añadir descripción..." readonly="state not in ['draft', 'analysis']" />
                             </group>
-                            <group attrs="{'invisible': [('investigation_method','!=','cause')]}">
+                            <group invisible="investigation_method != 'cause'">
                                 <field name="cause_ids" context="{'default_cause_why_type': 'cause'}">
-                                    <tree editable="bottom">
+                                    <list editable="bottom">
                                         <field name="cause_id" />
                                         <field name="description" style="max-width:20vw;overflow-wrap: break-word;" />
                                         <field name="subcause_ids" widget="many2many_tags" context="{'default_parent_id': cause_id}" style="flex-flow: row wrap;">
@@ -228,40 +228,40 @@
                                             </form>
                                         </field>
                                         <field name="attachment_ids" widget="many2many_binary" />
-                                    </tree>
+                                    </list>
                                 </field>
                                 <field name="effect" style="max-width:75vw;overflow-wrap: break-word;" />
                                 <field name="conclusions" style="max-width:75vw;overflow-wrap: break-word;" />
                             </group>
-                            <group attrs="{'invisible': [('investigation_method','!=','why')]}">
+                            <group invisible="investigation_method != 'why'">
                                 <field name="why_ids" context="{'default_cause_why_type': 'why'}">
-                                    <tree editable="bottom">
+                                    <list editable="bottom">
                                         <field name="why_id" />
                                         <field name="description" style="max-width:20vw;overflow-wrap: break-word;" />
-                                    </tree>
+                                    </list>
                                 </field>
                                 <field name="root_cause" />
                             </group>
                         </page>
-                        <page string="Acciones" attrs="{'invisible':[('state','in',['draft'])]}">
+                        <page string="Acciones" invisible="state in ['draft']">
                             <separator string="Plan de acción" />
-                            <field name="action_ids" attrs="{'readonly': [('state','in',('validate_ok','cancel'))]}">
-                                <tree>
+                            <field name="action_ids" readonly="state in ['validate_ok', 'cancel']">
+                                <list>
                                     <field name="name" />
                                     <field name="description" />
                                     <field name="date_deadline" />
                                     <field name="state" />
-                                </tree>
+                                </list>
                             </field>
                         </page>
-                        <page string="Seguimiento" attrs="{'invisible':[('state','in',['draft','pending'])]}">
+                        <page string="Seguimiento" invisible="state in ['draft', 'pending']">
                             <separator string="Plan de seguimiento" />
-                            <field name="o_action_ids" attrs="{'readonly': [('state','in',('validate_ok','cancel'))]}">
-                                <tree>
+                            <field name="o_action_ids" readonly="state in ['validate_ok', 'cancel']">
+                                <list>
                                     <field name="name" />
                                     <field name="state" />
                                     <field name="date_closed" />
-                                </tree>
+                                </list>
                             </field>
                         </page>
                     </notebook>
@@ -285,13 +285,13 @@
                 <br />
                 <field name="report_id" invisible="1" />
                 <field name="wline_ids">
-                    <tree>
+                    <list>
                         <field name="name" />
                         <field name="type_id" />
                         <field name="date_found" />
                         <field name="auditor_id" invisible="1" />
                         <field name="team_id" invisible="1" />
-                    </tree>
+                    </list>
                 </field>
                 <footer>
                     <button name="create_nonconformity" string="Crear" type="object" class="btn-primary" />
@@ -327,7 +327,7 @@
                         <field name="date_limit" />
                     </group>
                 </group>
-                <!--field name="wline_ids"><tree><field name="name"/><field name="nc_id"/><field name="type"/><field name="standard"/></tree></field-->
+                <!--field name="wline_ids"><list><field name="name"/><field name="nc_id"/><field name="type"/><field name="standard"/></list></field-->
             </form>
         </field>
     </record>
@@ -362,7 +362,7 @@
                         string="Crear No conformidades"
                         type="action"
                         class="btn-primary"
-                        attrs="{'invisible': [('nonconformity_count','!=',0)]}"
+                        invisible="nonconformity_count != 0"
                         context="{'default_report_id': id}" />
             </field>
             <div name="button_box" class="oe_button_box">

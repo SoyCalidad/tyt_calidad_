@@ -9,10 +9,10 @@
 					<group>
 						<field name="name" invisible="1" />
 						<field name="cause_why_type" invisible="1" />
-						<field name="cause_id" attrs="{'invisible': [('cause_why_type','!=','cause')]}" />
-						<field name="why_id" attrs="{'invisible': [('cause_why_type','!=','why')]}" />
+						<field name="cause_id" invisible="cause_why_type != 'cause'" />
+						<field name="why_id" invisible="cause_why_type != 'why'" />
 						<field name="description" />
-						<field name="subcause_ids" attrs="{'invisible': [('cause_why_type','!=','cause')]}" widget="many2many_tags" />
+						<field name="subcause_ids" invisible="cause_why_type != 'cause'" widget="many2many_tags" />
 						<field name="attachment_ids" widget="many2many_binary" />
 					</group>
 				</sheet>
@@ -24,13 +24,13 @@
 		<field name="name">mgmtsystem.nonconformity.cause_why.view.tree</field>
 		<field name="model">mgmtsystem.nonconformity.cause_why</field>
 		<field name="arch" type="xml">
-			<tree string="Causa o Por qué">
+			<list string="Causa o Por qué">
 				<field name="name" invisible="1" />
 				<field name="cause_why_type" invisible="1" />
-				<field name="cause_id" attrs="{'invisible': [('cause_why_type','!=','cause')]}" />
-				<field name="why_id" attrs="{'invisible': [('cause_why_type','!=','why')]}" />
-				<field name="subcause_ids" attrs="{'invisible': [('cause_why_type','!=','cause')]}" widget="many2many_tags" />
-			</tree>
+				<field name="cause_id" invisible="cause_why_type != 'cause'" />
+				<field name="why_id" invisible="cause_why_type != 'why'" />
+				<field name="subcause_ids" invisible="cause_why_type != 'cause'" widget="many2many_tags" />
+			</list>
 		</field>
 	</record>
 
@@ -66,9 +66,9 @@
 						<field name="parent_id" invisible="1" />
 						<field name="is_base" invisible="1" />
 						<field name="subcause_ids">
-							<tree editable="bottom">
+							<list editable="bottom">
 								<field name="name" />
-							</tree>
+							</list>
 						</field>
 					</group>
 				</sheet>
@@ -80,12 +80,12 @@
 		<field name="name">mgmtsystem.nonconformity.cause.view.tree</field>
 		<field name="model">mgmtsystem.nonconformity.cause</field>
 		<field name="arch" type="xml">
-			<tree string="Causa">
+			<list string="Causa">
 				<field name="name" />
 				<field name="description" />
 				<field name="parent_id" invisible="1" />
 				<field name="subcause_ids" widget="many2many_tags" />
-			</tree>
+			</list>
 		</field>
 	</record>
 
@@ -108,10 +108,10 @@
 		<field name="name">mgmtsystem.nonconformity.cause.view.tree</field>
 		<field name="model">mgmtsystem.nonconformity.cause</field>
 		<field name="arch" type="xml">
-			<tree string="Causa">
+			<list string="Causa">
 				<field name="name" />
 				<field name="description" />
-			</tree>
+			</list>
 		</field>
 	</record>
 

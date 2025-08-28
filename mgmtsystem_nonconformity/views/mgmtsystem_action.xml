@@ -19,7 +19,7 @@
 				        name="%(show_action_ncs_action)d"
 				        class="oe_stat_button"
 				        icon="fa-file"
-				        attrs="{'invisible': [('nonconformity_count','=',0)]}">
+				        invisible="nonconformity_count == 0">
 					<field name="nonconformity_count" widget="statinfo" string="No conformidades" />
 				</button>
 			</xpath>
@@ -28,7 +28,7 @@
 			</field>
 			<field name="description" position="after">
 				<separator string="No conformidades relacionadas" colspan="4" />
-				<field name="nonconformity_ids" colspan="4" nolabel="1" attrs="{'invisible':[('nonconformity_ids','=',False)]}" />
+				<field name="nonconformity_ids" colspan="4" nolabel="1" invisible="nonconformity_ids == False" />
 			</field>
 		</field>
 	</record>
@@ -42,15 +42,15 @@
 				<field name="datetime_" invisible="1" />
 			</field>
 			<field name="line_ids" position="replace">
-				<field name="line_ids" attrs="{'readonly': [('state','not in',('draft'))] }" context="{'default_datetime': datetime_}">
-					<tree>
+				<field name="line_ids" readonly="state not in ['draft']" context="{'default_datetime': datetime_}">
+					<list>
 						<field name="name" />
 						<field name="employee_id" />
 						<field name="nc_id" />
 						<field name="datetime" />
 						<field name="found" />
 						<field name="image_attached" string="Adjuntos" />
-					</tree>
+					</list>
 				</field>
 			</field>
 		</field>
