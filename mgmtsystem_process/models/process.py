@@ -78,7 +78,7 @@ class MgmtCateg(models.Model):
                 ('active', '=', True)
             ], order='numero desc', limit=1)
             if document and document.references:
-                references = ', '.join([x.name for x in document.references])
+                references = ', '.join([x for x in document.references])
                 reference += references + '\n'
         self.reference = reference
 
@@ -130,12 +130,13 @@ class MgmtCateg(models.Model):
         """Método para abrir la lista de documentos
         """
         result = self.env.ref(
-            'knowledge.knowledge_action_documents').read()[0]
+            'document_knowledge.knowledge_action_documents').read()[0]
         result['domain'] = [('id', 'in', self.attachment_ids.ids)]
         return result
 
     def print_report(self):
-        return self.env.ref('mgmtsystem_process.report_mgmt_categ').report_action(self)
+        #return self.env.ref('mgmtsystem_process.report_mgmt_categ').report_action(self)
+        return True
 
 
 class Process(models.Model):
@@ -239,7 +240,7 @@ class Process(models.Model):
     def action_view_editions(self):
         for record in self:
             action = self.env.ref(
-                'document_page_procedure.action_procedures').read()[0]
+                'document_page.action_page').read()[0]
             documents = self.env['process.edition'].search(
                 [('process_id', '=', record.id)])
             if len(documents) > 1:

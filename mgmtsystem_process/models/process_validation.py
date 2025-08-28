@@ -17,7 +17,7 @@ class ProcessEdition(models.Model):
         """
         Create a notification from the employees
         """
-        base_url = request.env['ir.config_parameter'].sudo().get_param('web.base.url')
+        base_url = request.env['ir.config_parameter'].sudo().get_param('web.base.url') or ''
         base_url += '/web#id=%d&view_type=form&model=%s' % (
             self.id, self._name)
         self.env.cr.execute("""SELECT id FROM ir_model 

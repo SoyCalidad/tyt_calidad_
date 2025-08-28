@@ -14,10 +14,17 @@
     'category': "Management System",
     'version': '1.1',
 
-    'depends': ['hola_calidad','hr',
-                'document_knowledge',
-                'document_knowledge','document_page','report_xlsx', 'mgmtsystem_validation', 'purchase', 'stock'],
-
+    'depends': [
+        'hola_calidad',
+        'hr',
+        
+        'document_knowledge',
+        'document_page',
+        'report_xlsx', 
+        'mgmtsystem_validation', 
+        'purchase', 
+        'stock'
+    ],
     'data': [
         'data/mgmt_categ.xml',
         'security/security.xml',
@@ -34,9 +41,9 @@
         'report/report_process.xml',
         'report/report_process_edition.xml',
         'report/documentary_control.xml',
-        'data/mail_template_data.xml',
         'wizards/process_report.xml',
         'wizards/process_edition.xml',
+        'data/mail_template_data.xml',
     ],
     'installable': True,
     'application': True,

@@ -6,10 +6,10 @@
             <field name="name">mgmt.categ.dummy.view.tree</field>
             <field name="model">mgmt.categ.dummy</field>
             <field name="arch" type="xml">
-                <tree>
+                <list>
                     <!-- Add your fields here -->
                     <field name="name"/>
-                </tree>
+                </list>
             </field>
         </record>
 

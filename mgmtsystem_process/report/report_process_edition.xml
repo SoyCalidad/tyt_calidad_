@@ -469,7 +469,7 @@
          </t>
       </template>
 
-      <report id="report_process_edition"
+      <!-- <report id="report_process_edition"
               string="Edición de procedimiento"
               report_type="qweb-pdf"
               model="process.edition"
@@ -477,7 +477,26 @@
               file="Edición de Procedimiento"
               print_report_name="object.name"
               paperformat="hola_calidad.portrait"
-              groups="base.group_no_one,mgmtsystem_process.group_process_readonly_printreport,mgmtsystem_process.group_process_owner,mgmtsystem_process.group_process_all" />
+              groups="base.group_no_one,mgmtsystem_process.group_process_readonly_printreport,mgmtsystem_process.group_process_owner,mgmtsystem_process.group_process_all" /> -->
+
+      <record id="report_process_edition" model="ir.actions.report">
+            <field name="name">Edición de procedimiento</field>
+            <field name="model">process.edition</field>
+            <field name="report_type">qweb-pdf</field>
+            <field name="groups_id" eval="[(6, 0, [
+            ref('base.group_no_one'), 
+            ref('mgmtsystem_process.group_process_readonly_printreport'),
+            ref('mgmtsystem_process.group_process_owner'),
+            ref('mgmtsystem_process.group_process_all'),
+            
+            ])]" />
+            <field name="report_name">mgmtsystem_process.report_process_edition_template</field>
+            <field name="report_file">mgmtsystem_process.report_process_edition_template</field>
+            <field name="print_report_name">object.name</field>
+            <field name="paperformat_id" ref="hola_calidad.portrait" />
+            <field name="binding_model_id" ref="model_process_edition"/>
+            <field name="binding_type">report</field>
+        </record>
 
    </data>
 </odoo>

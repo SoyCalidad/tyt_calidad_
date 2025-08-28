@@ -27,8 +27,10 @@
                     </p>
                 </div>
             </field>
-            <field name="report_template" ref="report_process_edition" />
-            <field name="report_name">Edición de procedimiento_${(object.name or '').replace('/','_')}</field>
+            <field name="report_template_ids" 
+            eval="[(4, ref('mgmtsystem_process.report_process_edition'))]"
+            />
+
             <field name="lang">${user.lang}</field>
             <field name="auto_delete" eval="True" />
         </record>

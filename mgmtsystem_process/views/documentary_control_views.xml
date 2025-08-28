@@ -4,7 +4,7 @@
         <field name="name">documentary.control.tree</field>
         <field name="model">documentary.control</field>
         <field name="arch" type="xml">
-            <tree string="Inventario de Registro">
+            <list string="Inventario de Registro">
                 <field name="process_code" string="Código de procedimiento"/>
                 <field name="process_last_edition"/>
                 <field name="process_id" string="Nombre del procedimiento"/>
@@ -14,7 +14,7 @@
                 <field name="type_storage"/>
                 <field name="type"/>
                 <field name="process_approval_date"/>
-            </tree>
+            </list>
         </field>
     </record>
 
@@ -34,7 +34,7 @@
                     <div class="oe_title">
                         <label for="code"/>
                         <h1>
-                            <field name="code" attrs="{'readonly': [('process_id','=',False)]}"/>
+                            <field name="code" readonly="process_id == False"/>
                         </h1>
                     </div>
                     <group>
@@ -79,7 +79,7 @@
     <record model="ir.actions.act_window" id="documentary_control_action">
         <field name="name">Inventario de Registro</field>
         <field name="res_model">documentary.control</field>
-        <field name="view_mode">tree,form</field>
+        <field name="view_mode">list,form</field>
     </record>
 
 

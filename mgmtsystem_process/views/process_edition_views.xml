@@ -31,11 +31,11 @@
         <field name="name">view.edition.abbreviation.tree</field>
         <field name="model">edition.abbreviation</field>
         <field name="arch" type="xml">
-            <tree>
+            <list>
                 <field name="abbre" />
                 <field name="name" />
                 <field name="description" />
-            </tree>
+            </list>
         </field>
     </record>
 
@@ -44,7 +44,7 @@
         <field name="name">Glosario</field>
         <field name="type">ir.actions.act_window</field>
         <field name="res_model">edition.abbreviation</field>
-        <field name="view_mode">tree,form</field>
+        <field name="view_mode">list,form</field>
     </record>
 
     <!-- This Menu Item must have a parent and an action -->
@@ -65,38 +65,38 @@
                             name="send_elaborate"
                             type="object"
                             class="btn-primary"
-                            attrs="{'invisible':[('state','in', ('elaborate','cancel','validate_ok'))]}" />
+                            invisible="state in ['elaborate','cancel','validate_ok']" />
                     <button string="Enviar a Revisar"
                             name="send_review"
                             type="object"
                             class="btn-primary"
-                            attrs="{'invisible':[('state','!=', 'elaborate')]}" />
+                            invisible="state != 'elaborate'" />
                     <button string="Enviar a Validar"
                             name="send_validate"
                             type="object"
                             class="btn-primary"
-                            attrs="{'invisible':[('state','in', ('elaborate','validate','cancel','validate_ok'))]}" />
+                            invisible="state in ['elaborate','validate','cancel','validate_ok']" />
                     <button string="Validar"
                             name="send_validate_ok"
                             type="object"
                             class="btn-primary"
-                            attrs="{'invisible':[('state','not in', ('validate'))]}" />
+                            invisible="state not in ['validate']" />
                     <button string="Volver Obsoleto"
                             confirm="Esto volverá obsoleto el presente registro. ¿Está seguro(a)?"
                             name="send_cancel"
                             type="object"
                             class="btn-second"
-                            attrs="{'invisible': [('state','in',('cancel'))] }" />
+                            invisible="state in ['cancel']" />
                     <button name="button_new_version"
                             type="object"
                             string="Nueva versión"
-                            attrs="{'invisible':[('state', '!=', 'validate_ok')]}"
+                            invisible="state != 'validate_ok'"
                             class="oe_highlight" />
                     <!-- <button string="Comunicar procedimiento" name="send_edition_by_email" type="object" class="oe_highlight" attrs="{'invisible':[('state', '!=', 'validate_ok')]}"/> -->
                 </header>
                 <sheet>
                     <field name="active" invisible="1" />
-                    <widget name="web_ribbon" title="Archivado" bg_color="bg-danger" attrs="{'invisible': [('active', '=', True)]}" />
+                    <widget name="web_ribbon" title="Archivado" bg_color="bg-danger" invisible="active == True" />
                     <div class="oe_button_box" name="button_box">
                         <button type="object"
                                 name="action_open_older_versions"
@@ -112,7 +112,8 @@
                     </div>
                     <label for="process_id" />
                     <div class="o_row">
-                        <field name="process_id" placeholder="Procedimiento" colspan="3" attrs="{'readonly': [('state','not in',('elaborate'))]}" />
+                        <field name="process_id" placeholder="Procedimiento" colspan="3" 
+                        readonly="state not in ['elaborate']" />
                         <field name="version_as_string" colspan="1" nolabel="1" class="oe_inline" />
                     </div>
                     <field name="name" invisible="1" />
@@ -123,54 +124,62 @@
                         <field name="custom" />
                     </group>
                     <notebook>
-                        <page name="custom_detail" string="Contenido" attrs="{'readonly': [('state','in',('validate_ok'))], 'invisible': [('custom','=',False)]}">
-                            <group attrs="{'readonly': [('state','in',('validate_ok'))]}">
-                                <field name="custom_template_id" placeholder="Sin plantilla..." attrs="{'readonly': [('state','in',('validate_ok'))]}" />
+                        <page name="custom_detail" string="Contenido" 
+                        readonly="state in ['validate_ok']" 
+                        invisible="custom == False">
+                            <group 
+                            readonly="state in ['validate_ok']">
+                                <field name="custom_template_id" placeholder="Sin plantilla..." 
+                                readonly="state in ['validate_ok']" />
                             </group>
                             <group>
-                                <field name="custom_body" widget="html" attrs="{'readonly': [('state','in',('validate_ok'))]}" />
+                                <field name="custom_body" widget="html" 
+                                readonly="state in ['validate_ok']" />
                             </group>
                         </page>
-                        <page name="detail" string="Contenido" attrs="{'readonly': [('state','in',('validate_ok'))], 'invisible': [('custom','=',True)]}">
-                            <group attrs="{'readonly': [('state','in',('validate_ok'))]}">
-                                <field name="template_id" placeholder="Sin plantilla..." attrs="{'readonly': [('state','in',('validate_ok'))]}" />
+                        <page name="detail" string="Contenido" 
+                        readonly="state in ['validate_ok']"
+                        invisible="custom == True">
+                            <group readonly="state in ['validate_ok']">
+                                <field name="template_id" placeholder="Sin plantilla..." 
+                                readonly="state in ['validate_ok']" />
                             </group>
                             <separator string="1. Objeto" />
-                            <field name="purpose" widget="html" attrs="{'readonly': [('state','in',('validate_ok'))]}" />
+                            <field name="purpose" widget="html" readonly="state in ['validate_ok']" />
                             <separator string="2. Alcance" />
-                            <field name="scope" widget="html" attrs="{'readonly': [('state','in',('validate_ok'))]}" />
+                            <field name="scope" widget="html" readonly="state in ['validate_ok']" />
                             <separator string="3. Referencias" />
-                            <field name="references" widget="html" attrs="{'readonly': [('state','in',('validate_ok'))]}" />
+                            <field name="references" widget="html" readonly="state in ['validate_ok']" />
                             <separator string="4. Responsables" />
-                            <field name="responsible_ids" widget="one2many" attrs="{'readonly': [('state','in',('validate_ok'))]}">
-                                <tree editable="bottom">
+                            <field name="responsible_ids" widget="one2many" readonly="state in ['validate_ok']">
+                                <list editable="bottom">
                                     <field name="name" />
                                     <field name="description" />
-                                </tree>
+                                </list>
                             </field>
-                            <separator string="5. Definición y Abreviaturas" attrs="{'readonly': [('state','in',('validate_ok'))]}" />
-                            <field name="abbreviation_ids" attrs="{'readonly': [('state','in',('validate_ok'))]}">
-                                <tree>
+                            <separator string="5. Definición y Abreviaturas" readonly="state in ['validate_ok']" />
+                            <field name="abbreviation_ids" readonly="state in ['validate_ok']">
+                                <list>
                                     <field name="name" />
                                     <field name="description" />
-                                </tree>
+                                </list>
                             </field>
-                            <separator string="6. Desarrollo" attrs="{'readonly': [('state','in',('validate_ok'))]}" />
-                            <field name="body" widget="html" attrs="{'readonly': [('state','in',('validate_ok'))]}" />
+                            <separator string="6. Desarrollo" readonly="state in ['validate_ok']" />
+                            <field name="body" widget="html" readonly="state in ['validate_ok']" />
                             <separator string="7. Anexos" />
-                            <field name="flowchart" widget="html" attrs="{'readonly': [('state','in',('validate_ok'))]}" />
+                            <field name="flowchart" widget="html" readonly="state in ['validate_ok']" />
                             <separator string="8. Registros" />
-                            <field name="documentarycontrol_ids" attrs="{'readonly': [('state','in',('validate_ok'))]}">
-                                <tree>
+                            <field name="documentarycontrol_ids" readonly="state in ['validate_ok']">
+                                <list>
                                     <field name="name" />
                                     <field name="department_id" />
                                     <field name="type" />
                                     <field name="records_count" />
-                                </tree>
+                                </list>
                             </field>
                         </page>
                         <page name="info" string="Validación y versión">
-                            <group attrs="{'readonly': [('state','in',('validate_ok'))]}">
+                            <group readonly="state in ['validate_ok']">
                                 <group colspan="4">
                                     <field name="version" />
                                 </group>
@@ -178,11 +187,11 @@
                         </page>
                         <page name="change_history" string="Historial">
                             <field name="change_history">
-                                <tree>
+                                <list>
                                     <field name="numero" />
                                     <field name="publish_date" />
                                     <field name="name" />
-                                </tree>
+                                </list>
                             </field>
                         </page>
                     </notebook>
@@ -200,14 +209,14 @@
         <field name="name">view.wiki.tree.view.inherit</field>
         <field name="model">process.edition</field>
         <field name="arch" type="xml">
-            <tree string="Ediciones">
+            <list string="Ediciones">
                 <field name="code" />
                 <field name="name" />
                 <field name="version_as_string" />
                 <field name="state" />
                 <field name="categ_id" />
                 <field name="write_date" string="Ultima actualización" />
-            </tree>
+            </list>
         </field>
     </record>
 
@@ -233,7 +242,7 @@
     <record model="ir.actions.act_window" id="action_mgmt_process_edition">
         <field name="name">Ediciones</field>
         <field name="res_model">process.edition</field>
-        <field name="view_mode">tree,form</field>
+        <field name="view_mode">list,form</field>
         <field name="domain">[('state', '!=', 'cancel')]</field>
         <field name="help">Ediciones de procedimientos</field>
     </record>
@@ -241,7 +250,7 @@
     <record id="process_edition_cancel_action" model="ir.actions.act_window">
         <field name="name">Procesos</field>
         <field name="res_model">mgmt.process</field>
-        <field name="view_mode">tree,form</field>
+        <field name="view_mode">list,form</field>
         <field name="domain">[('state', '=', 'cancel')]</field>
         <field name="context">{}</field>
     </record>
@@ -259,7 +268,7 @@
                         <field name="economic_activity_name" invisible="1" />
                         <field name="company_id" invisible="1" />
                     </group>
-                    <group attrs="{'invisible': [('custom', '=', True)]}">
+                    <group invisible="custom  == True">
                         <!-- Add your fields here -->
                         <field name="name" />
                         <field name="purpose" />
@@ -268,7 +277,7 @@
                         <field name="body" />
                         <field name="flowchart" />
                     </group>
-                    <group attrs="{'invisible': [('custom', '=', False)]}">
+                    <group invisible="custom == False">
                         <field name="name" />
                         <field name="custom_body" widget="html" />
                     </group>
@@ -282,12 +291,12 @@
         <field name="name">process.edition.template.view.tree</field>
         <field name="model">process.edition.template</field>
         <field name="arch" type="xml">
-            <tree>
+            <list>
                 <!-- Add your fields here -->
                 <field name="name" />
                 <field name="custom" />
                 <field name="economic_activity_id" />
-            </tree>
+            </list>
         </field>
     </record>
 
@@ -296,7 +305,7 @@
         <field name="name">Plantillas</field>
         <field name="type">ir.actions.act_window</field>
         <field name="res_model">process.edition.template</field>
-        <field name="view_mode">tree,form</field>
+        <field name="view_mode">list,form</field>
 
     </record>
 

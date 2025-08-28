@@ -8,14 +8,18 @@
         <field name="arch" type="xml">
             <field name="version" position="before">
                 <separator string="Elaboración"/>
-                <field name="elaboration_step" colspan="2" nolabel="1" attrs="{'readonly': [('state','not in',('elaborate'))]}"/>
+                <field name="elaboration_step" colspan="2" nolabel="1" readonly="state not in ['elaborate']"/>
                 <separator string="Revisión"/>
-                <field name="review_step" colspan="2" nolabel="1" attrs="{'readonly': [('state','not in',('elaborate', 'review'))]}"/>
+                <field name="review_step" colspan="2" nolabel="1" 
+                readonly="state not in ['elaborate', 'review']"/>
                 <separator string="Validación"/>
-                <field name="validation_step" colspan="2" nolabel="1" attrs="{'readonly': [('state','not in',('elaborate', 'review', 'validate'))]}"/>
-                <field name="date_elaborate" attrs="{'required': [('state','in',('elaborate'))], 'readonly': True}"/>
-                <field name="date_review" attrs="{'required': [('state','in',('review'))], 'readonly': True, 'invisible': [('state','in',('elaborate'))] }"/>
-                <field name="date_validate" groups="base.group_no_one,base.user_admin" attrs="{'invisible': [('state','in',('elaborate','review'))] }"/>
+                <field name="validation_step" colspan="2" nolabel="1" 
+                readonly="state not in ['elaborate', 'review', 'validate']"/>
+                <field name="date_elaborate" required="state in ['elaborate']"
+                readonly="1"/>
+                <field name="date_review" 
+                required="state in ['review']" readonly="1" invisible="state in ['elaborate']"/>
+                <field name="date_validate" groups="base.group_no_one,base.group_system" invisible="state in ['elaborate','review']"/>
                 <field name="elaboration_users_check" invisible="1" />
                 <field name="review_users_check" invisible="1" />
                 <field name="validation_users_check" invisible="1" />

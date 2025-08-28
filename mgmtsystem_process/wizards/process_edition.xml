@@ -28,15 +28,14 @@
             <field name="binding_type">report</field>
         </record>
 
-        <record id="mgmt_process_cron" model="ir.cron">
+        <!-- <record id="mgmt_process_cron" model="ir.cron">
             <field name="name">Creación de procesos</field>
             <field name="model_id" ref="model_mgmt_process"/>
             <field name="interval_number">1</field>
             <field name="interval_type">days</field>
-            <field name="numbercall">-1</field>
             <field name="state">code</field>
             <field name="code">model.export_process()</field>
-        </record>
+        </record> -->
 
         <menuitem id="process_edition_report_menu" 
         name="Edición de procedimiento" 

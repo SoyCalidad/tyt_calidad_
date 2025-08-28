@@ -8,22 +8,42 @@
             report_type="xlsx"
             name="mgmtsystem_process.documentary_control_xls"
             file="Inventario de Registro"
-            groups="base.group_no_one,mgmtsystem_process.group_process_readonly_printreport,mgmtsystem_process.group_process_owner,mgmtsystem_process.group_process_all"/>
+            groups="base.group_no_one,mgmtsystem_process.group_process_readonly_printreport,mgmtsystem_process.group_process_owner,mgmtsystem_process.group_process_all" />
+
+        <!-- <record id="task_custom_report" model="ir.actions.report">
+            <field name="name">Field Service Report</field>
+            <field name="model">project.task</field>
+            <field name="report_type">qweb-pdf</field>
+            <field name="report_name">industry_fsm.worksheet_custom</field>
+            <field name="report_file">industry_fsm.worksheet_custom</field>
+            <field name="print_report_name">'Field Service Report - %s - %s' % (object.name, object.partner_id.name)</field>
+            <field name="binding_model_id" ref="model_project_task"/>
+            <field name="binding_type">report</field>
+        </record> -->
+
+        <record id="action_documentary_control_report" model="ir.actions.server">
+            <field name="name">Inventario de Registro</field>
+            <field name="model_id" ref="model_documentary_control" />
+            <field name="state">code</field>
+            <field name="code">
+                action = env.ref('mgmtsystem_process.documentary_control_report_xls').report_action(None)
+            </field>
+        </record>
 
         <menuitem
             id="process_report_root_menu"
             name="Reportes"
             parent="menu_process_root"
             sequence="100"
-            groups="base.group_no_one,mgmtsystem_process.group_process_readonly_printreport,mgmtsystem_process.group_process_owner,mgmtsystem_process.group_process_all"/>
+            groups="base.group_no_one,mgmtsystem_process.group_process_readonly_printreport,mgmtsystem_process.group_process_owner,mgmtsystem_process.group_process_all" />
 
         <menuitem
             id="documentary_control_report_menu"
             name="Inventario de Registro"
-            action="documentary_control_report_xls"
+            action="action_documentary_control_report"
             parent="process_report_root_menu"
             sequence="10"
-            groups="base.group_no_one,mgmtsystem_process.group_process_readonly,mgmtsystem_process.group_process_readonly_printreport,mgmtsystem_process.group_process_owner,mgmtsystem_process.group_process_all"/>
+            groups="base.group_no_one,mgmtsystem_process.group_process_readonly,mgmtsystem_process.group_process_readonly_printreport,mgmtsystem_process.group_process_owner,mgmtsystem_process.group_process_all" />
 
 
     </data>

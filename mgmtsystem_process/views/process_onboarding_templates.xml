@@ -2,7 +2,7 @@
 <odoo>
     <!-- ONBOARDING STEPS -->
 
-    <template id="onboarding_process_categ_type_step">
+    <!-- <template id="onboarding_process_categ_type_step">
         <t t-call="base.onboarding_step">
             <t t-set="title">Tipos de categoría de proceso</t>
             <t t-set="description">Cree una nueva categoría de proceso.</t>
@@ -52,10 +52,10 @@
             <t t-set="model" t-value="'res.company'" />
             <t t-set="state" t-value="state.get('process_edition_onboarding_state')" />
         </t>
-    </template>
+    </template> -->
 
     <!-- ONBOARDING PANELS -->
-    <template id="process_onboarding_panel" name="process.onboarding.panel">
+    <!-- <template id="process_onboarding_panel" name="process.onboarding.panel">
         <t t-call="base.onboarding_container">
             <t t-set="classes" t-value="'o_onboarding_violet'"/>
             <t t-set="bg_image" t-value="'/account/static/src/img/account_invoice_onboarding_bg.jpg'"/>
@@ -67,7 +67,7 @@
             <t t-call="mgmtsystem_process.onboarding_process_process_step" name="process_process_step" />
             <t t-call="mgmtsystem_process.onboarding_process_edition_step" name="process_edition_step" />
         </t>
-    </template>
+    </template> -->
 
     <!-- Views -->
 
