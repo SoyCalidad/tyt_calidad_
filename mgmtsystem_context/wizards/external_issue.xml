@@ -7,56 +7,57 @@
                 <form string="Wizard with step" version="7.0">
                     <field invisible="1" name="state"/>
 
-                    <group string="Poder de negociación de los clientes o compradores" states="step1">
+                    <group string="Poder de negociación de los clientes o compradores" invisible="state != 'step1'">
                         <field name="f1_name"/>
                         <field name="f1_desc"/>
                         <field name="f1_rel"/>
                     </group>
 
-                    <group string="Poder de negociación de los proveedores o vendedores" states="step2">
+                    <group string="Poder de negociación de los proveedores o vendedores" invisible="state != 'step2'" >
                         <field name="f2_name"/>
                         <field name="f2_desc"/>
                         <field name="f2_rel"/>
                     </group>
 
-                    <group string="Amenaza de nuevos competidores entrantes" states="step3">
+                    <group string="Amenaza de nuevos competidores entrantes" invisible="state != 'step3'" >
                         <field name="f3_name"/>
                         <field name="f3_desc"/>
                         <field name="f3_rel"/>
                     </group>
 
-                    <group string="Amenaza de productos sustitutos" states="step4">
+                    <group string="Amenaza de productos sustitutos" invisible="state != 'step4'" >
                         <field name="f4_name"/>
                         <field name="f4_desc"/>
                         <field name="f4_rel"/>
                     </group>
 
-                    <group string="Rivalidad entre los competidores" states="step5">
+                    <group string="Rivalidad entre los competidores" 
+                    invisible="state != 'step5'" >
                         <field name="f5_name"/>
                         <field name="f5_desc"/>
                         <field name="f5_rel"/>
                     </group>
 
-                    <footer states="step1">
+                    <footer invisible="state != 'step1'" >
                         <button name="action_step2" string="Siguiente" type="object"/>
                     </footer>
 
-                    <footer states="step2">
+                    <footer invisible="state != 'step2'" >
                         <button name="action_step3" string="Siguiente" type="object"/>
                         <button name="action_step1" string="Regresar" type="object"/>
                     </footer>
 
-                    <footer states="step3">
+                    <footer  invisible="state != 'step3'">
                         <button name="action_step4" string="Siguiente" type="object"/>
                         <button name="action_step2" string="Regresar" type="object"/>
                     </footer>
 
-                    <footer states="step4">
+                    <footer invisible="state != 'step4'">
                         <button name="action_step5" string="Siguiente" type="object"/>
                         <button name="action_step3" string="Regresar" type="object"/>
                     </footer>
 
-                    <footer states="step5">
+                    <footer invisible="state != 'step5'">
                         <button name="action_step4" string="Regresar" type="object"/>
                         <button name="action_finish" string="Finalizar" type="object"/>
                     </footer>

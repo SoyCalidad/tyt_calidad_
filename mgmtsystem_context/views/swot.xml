@@ -11,32 +11,32 @@
                                 name="send_elaborate"
                                 type="object"
                                 class="btn-primary"
-                                attrs="{'invisible':[('state','in', ('elaborate','cancel','validate_ok'))]}" />
+                                invisible="state in ['elaborate', 'cancel', 'validate_ok']" />
                         <button string="Enviar a Revisar"
                                 name="send_review"
                                 type="object"
                                 class="btn-primary"
-                                attrs="{'invisible':[('state','!=', 'elaborate')]}" />
+                                invisible="state != 'elaborate'" />
                         <button string="Enviar a Validar"
                                 name="send_validate"
                                 type="object"
                                 class="btn-primary"
-                                attrs="{'invisible':[('state','in', ('elaborate','validate','cancel','validate_ok'))]}" />
+                                invisible="state in ['elaborate', 'validate', 'cancel', 'validate_ok']" />
                         <button string="Validar"
                                 name="send_validate_ok"
                                 type="object"
                                 class="btn-primary"
-                                attrs="{'invisible':[('state','not in', ('validate'))]}" />
+                                invisible="state not in ['validate']" />
                         <button string="Volver Obsoleto"
                                 confirm="Esto volverá obsoleto el presente registro. ¿Está seguro(a)?"
                                 name="send_cancel"
                                 type="object"
                                 class="btn-second"
-                                attrs="{'invisible': [('state','in',('cancel'))] }" />
+                                invisible="state in ['cancel']" />
                         <button name="button_new_version"
                                 type="object"
                                 string="Nueva versión"
-                                attrs="{'invisible':['|', ('active','=',False), ('state', '!=', 'validate_ok')]}"
+                                invisible="(active == False or state != 'validate_ok')"
                                 class="oe_highlight" />
                     </header>
                     <sheet>
@@ -51,8 +51,8 @@
                                     name="open_cross_swot"
                                     class="oe_stat_button"
                                     icon="fa-bars"
-                                    attrs="{'invisible':[('state','not in', ('validate_ok'))]}">FODA Cruzado</button>
-                            <widget name="web_ribbon" title="Archived" bg_color="bg-danger" attrs="{'invisible': [('active', '=', True)]}" />
+                                    invisible="state not in ['validate_ok']">FODA Cruzado</button>
+                            <widget name="web_ribbon" title="Archived" bg_color="bg-danger" invisible="active == True" />
                             <field name="active" invisible="1" />
                         </div>
                         <label for="code" />
@@ -61,13 +61,13 @@
                         </h1>
                         <label for="name" />
                         <h1>
-                            <field name="name" attrs="{'readonly': [('state','in',('validate_ok','cancel'))]}" />
+                            <field name="name" readonly="state in ['validate_ok', 'cancel']" />
                         </h1>
                         <group>
-                            <field name="process_id" options="{'no_create': True}" placeholder="Procedimiento" colspan="4" attrs="{'readonly': [('state','not in',('elaborate'))]}" />
+                            <field name="process_id" options="{'no_create': True}" placeholder="Procedimiento" colspan="4" readonly="state not in ['elaborate']" />
                             <group string="Información">
-                                <field name="date" invisible="1" attrs="{'readonly': [('state','in',('validate_ok','cancel'))]}" />
-                                <field name="company_id" invisible="1" attrs="{'readonly': [('state','in',('validate_ok','cancel'))]}" />
+                                <field name="date" invisible="1" readonly="state in ['validate_ok', 'cancel']" />
+                                <field name="company_id" invisible="1" readonly="state in ['validate_ok', 'cancel']" />
                             </group>
                         </group>
                         <notebook>
@@ -79,28 +79,28 @@
                                     <field name="fortalezas"
                                            nolabel="1"
                                            colspan="2"
-                                           attrs="{'readonly': [('state','in',('validate_ok','cancel'))]}"
+                                           readonly="state in ['validate_ok', 'cancel']"
                                            context="{'default_swot_id': id}">
-                                        <tree style="white-space: pre-wrap;">
+                                        <list style="white-space: pre-wrap;">
                                             <field name="name" style="width:400px;max-width:400px;display:block;@media screen and (max-device-width: 800px){width: 200px;max-width: 200px;display: block;}" class="foda_name" />
                                             <field name="weight" sum="Peso" />
                                             <field name="weighted_rating" sum="Calificación ponderada" />
                                             <field name="swot_id" invisible="1" />
-                                        </tree>
+                                        </list>
                                     </field>
                                 </group>
                                 <group name="deb" string="Debilidades">
                                     <field name="debilidades"
                                            nolabel="1"
                                            colspan="2"
-                                           attrs="{'readonly': [('state','in',('validate_ok','cancel'))]}"
+                                           readonly="state in ['validate_ok', 'cancel']"
                                            context="{'default_swot_id': id}">
-                                        <tree style="white-space: pre-wrap;">
+                                        <list style="white-space: pre-wrap;">
                                             <field name="name" style="width:400px;max-width:400px;display:block;@media screen and (max-device-width: 800px){width: 200px;max-width: 200px;display: block;}" class="foda_name" />
                                             <field name="weight" sum="Peso" />
                                             <field name="weighted_rating" sum="Calificación ponderada" />
                                             <field name="swot_id" invisible="1" />
-                                        </tree>
+                                        </list>
                                     </field>
                                 </group>
                                 <group colspan="4">
@@ -112,7 +112,7 @@
                                     </div>
                                     <field name="internal_weight_sum" colspan="2" style="width:80%; max-width:300px;" />
                                     <field name="internal_total" colspan="2" style="width:80%; max-width:300px;" />
-                                    <field name="internal_interpretation" colspan="2" style="width:80%; max-width:300px;" attrs="{'readonly': [('state','in',('validate_ok','cancel'))]}"  />
+                                    <field name="internal_interpretation" colspan="2" style="width:80%; max-width:300px;" readonly="state in ['validate_ok', 'cancel']"  />
                                 </group>
                                 <span colspan="4">
                                     Cuando el Indice total es mayor o igual a 2.5 se considera que la empresa está en condiciones de afrontar el ambiente
@@ -128,28 +128,28 @@
                                     <field name="oportunidades"
                                            nolabel="1"
                                            colspan="2"
-                                           attrs="{'readonly': [('state','in',('validate_ok','cancel'))]}"
+                                           readonly="state in ['validate_ok', 'cancel']"
                                            context="{'default_swot_id': id}">
-                                        <tree style="white-space: pre-wrap;">
+                                        <list style="white-space: pre-wrap;">
                                             <field name="name" style="width:400px;max-width:400px;display:block;@media screen and (max-device-width: 800px){width: 200px;max-width: 200px;display: block;}" class="foda_name" />
                                             <field name="weight" sum="Peso" />
                                             <field name="weighted_rating" sum="Calificación ponderada" />
                                             <field name="swot_id" invisible="1" />
-                                        </tree>
+                                        </list>
                                     </field>
                                 </group>
                                 <group name="ame" string="Amenazas">
                                     <field name="amenazas"
                                            nolabel="1"
                                            colspan="2"
-                                           attrs="{'readonly': [('state','in',('validate_ok','cancel'))]}"
+                                           readonly="state in ['validate_ok', 'cancel']"
                                            context="{'default_swot_id': id}">
-                                        <tree style="white-space: pre-wrap;">
+                                        <list style="white-space: pre-wrap;">
                                             <field name="name" style="width:400px;max-width:400px;display:block;@media screen and (max-device-width: 800px){width: 200px;max-width: 200px;display: block;}" class="foda_name" />
                                             <field name="weight" sum="Peso" />
                                             <field name="weighted_rating" sum="Calificación ponderada" />
                                             <field name="swot_id" invisible="1" />
-                                        </tree>
+                                        </list>
                                     </field>
                                 </group>
                                 <group colspan="4">
@@ -161,7 +161,7 @@
                                     </div>
                                     <field name="external_weight_sum" colspan="2" style="width:80%; max-width:300px;" />
                                     <field name="external_total" colspan="2" style="width:80%; max-width:300px;" />
-                                    <field name="external_interpretation" colspan="2" style="width:80%; max-width:300px;" attrs="{'readonly': [('state','in',('validate_ok','cancel'))]}"  />
+                                    <field name="external_interpretation" colspan="2" style="width:80%; max-width:300px;" readonly="state in ['validate_ok', 'cancel']"  />
                                 </group>
                                 <span colspan="4">
                                     Cuando el Indice total es mayor o igual a 2.5 se considera que la empresa está en condiciones de afrontar el entorno de
@@ -172,19 +172,19 @@
                             </page>
                             <page name="validation" string="Validación y Versión">
                                 <group>
-                                    <field name="version" attrs="{'readonly': [('state','in',('validate_ok','cancel'))]}" />
+                                    <field name="version" readonly="state in ['validate_ok', 'cancel']" />
                                 </group>
                                 <group col="4">
                                     <group string="Usuarios" colspan="4">
                                         <separator string="Elaboración" />
-                                        <field name="elaboration_step" colspan="2" nolabel="1" attrs="{'readonly': [('state','not in',('elaborate'))]}" />
+                                        <field name="elaboration_step" colspan="2" nolabel="1" readonly="state not in ['elaborate']" />
                                         <separator string="Revisión" />
-                                        <field name="review_step" colspan="2" nolabel="1" attrs="{'readonly': [('state','not in',('elaborate', 'review'))]}" />
+                                        <field name="review_step" colspan="2" nolabel="1" readonly="state not in ['elaborate', 'review']" />
                                         <separator string="Validación" />
-                                        <field name="validation_step" colspan="2" nolabel="1" attrs="{'readonly': [('state','not in',('elaborate', 'review', 'validate'))]}" />
+                                        <field name="validation_step" colspan="2" nolabel="1" readonly="state not in ['elaborate', 'review', 'validate']" />
                                     </group>
                                     <group string="Fechas" colspan="2">
-                                        <field name="date_validate" groups="base.group_no_one,base.user_admin" attrs="{'readonly': False, 'invisible': [('state','in',('elaborate','review'))] }" />
+                                        <field name="date_validate" groups="base.group_no_one,base.group_system" invisible="state in ['elaborate', 'review']" readonly="False" />
                                     </group>
                                 </group>
                             </page>
@@ -203,13 +203,13 @@
             <field name="name">mgmtsystem.context.swot.view.tree</field>
             <field name="model">mgmtsystem.context.swot</field>
             <field name="arch" type="xml">
-                <tree string="">
+                <list string="">
                     <field name="name" />
                     <field name="company_id" />
                     <field name="state" />
                     <field name="version" />
-                    <field name="date_validate" groups="base.group_no_one,base.user_admin" />
-                </tree>
+                    <field name="date_validate" groups="base.group_no_one,base.group_system" />
+                </list>
             </field>
         </record>
 
@@ -249,7 +249,7 @@
             <field name="name">Análisis FODA</field>
             <field name="res_model">mgmtsystem.context.swot</field>
 
-            <field name="view_mode">tree,form</field>
+            <field name="view_mode">list,form</field>
             <field name="domain">[]</field>
             <field name="context">{}</field>
             <field name="help" type="html">
@@ -262,7 +262,7 @@
         <record id="context_swot_cancel_action" model="ir.actions.act_window">
             <field name="name">Análisis FODA</field>
             <field name="res_model">mgmtsystem.context.swot</field>
-            <field name="view_mode">tree,form</field>
+            <field name="view_mode">list,form</field>
             <field name="domain">[('state', '=', 'cancel')]</field>
             <field name="context">{}</field>
         </record>
@@ -349,19 +349,19 @@
             <field name="name">mgmtsystem.context.swot.fortaleza.view.tree</field>
             <field name="model">mgmtsystem.context.swot.fortaleza</field>
             <field name="arch" type="xml">
-                <tree string="" editable="bottom">
+                <list string="" editable="bottom">
                     <field name="name" />
                     <field name="weight" sum="Peso Total" />
                     <field name="rating" sum="Calificación Total" />
                     <field name="weighted_rating" sum="Calificación ponderada" />
-                </tree>
+                </list>
             </field>
         </record>
 
         <record id="swot_fortaleza_action" model="ir.actions.act_window">
             <field name="name">Fortaleza</field>
             <field name="res_model">mgmtsystem.context.swot.fortaleza</field>
-            <field name="view_mode">tree,form</field>
+            <field name="view_mode">list,form</field>
             <field name="domain">[]</field>
             <field name="context">{}</field>
             <field name="help" type="html">
@@ -451,19 +451,19 @@
             <field name="name">mgmtsystem.context.swot.oportunidad.view.tree</field>
             <field name="model">mgmtsystem.context.swot.oportunidad</field>
             <field name="arch" type="xml">
-                <tree string="" editable="bottom">
+                <list string="" editable="bottom">
                     <field name="name" />
                     <field name="weight" sum="Peso Total" />
                     <field name="rating" sum="Calificación Total" />
                     <field name="weighted_rating" sum="Calificación ponderada" />
-                </tree>
+                </list>
             </field>
         </record>
 
         <record id="swot_oportunidad_action" model="ir.actions.act_window">
             <field name="name">oportunidad</field>
             <field name="res_model">mgmtsystem.context.swot.oportunidad</field>
-            <field name="view_mode">tree,form</field>
+            <field name="view_mode">list,form</field>
             <field name="domain">[]</field>
             <field name="context">{}</field>
             <field name="help" type="html">
@@ -553,19 +553,19 @@
             <field name="name">mgmtsystem.context.swot.amenaza.view.tree</field>
             <field name="model">mgmtsystem.context.swot.amenaza</field>
             <field name="arch" type="xml">
-                <tree string="" editable="bottom">
+                <list string="" editable="bottom">
                     <field name="name" />
                     <field name="weight" sum="Peso Total" />
                     <field name="rating" sum="Calificación Total" />
                     <field name="weighted_rating" sum="Calificación ponderada" />
-                </tree>
+                </list>
             </field>
         </record>
 
         <record id="swot_amenaza_action" model="ir.actions.act_window">
             <field name="name">amenaza</field>
             <field name="res_model">mgmtsystem.context.swot.amenaza</field>
-            <field name="view_mode">tree,form</field>
+            <field name="view_mode">list,form</field>
             <field name="domain">[]</field>
             <field name="context">{}</field>
             <field name="help" type="html">
@@ -655,19 +655,19 @@
             <field name="name">mgmtsystem.context.swot.debilidad.view.tree</field>
             <field name="model">mgmtsystem.context.swot.debilidad</field>
             <field name="arch" type="xml">
-                <tree string="" editable="bottom">
+                <list string="" editable="bottom">
                     <field name="name" />
                     <field name="weight" sum="Peso Total" />
                     <field name="rating" sum="Calificación Total" />
                     <field name="weighted_rating" sum="Calificación ponderada" />
-                </tree>
+                </list>
             </field>
         </record>
 
         <record id="swot_debilidad_action" model="ir.actions.act_window">
             <field name="name">debilidad</field>
             <field name="res_model">mgmtsystem.context.swot.debilidad</field>
-            <field name="view_mode">tree,form</field>
+            <field name="view_mode">list,form</field>
             <field name="domain">[]</field>
             <field name="context">{}</field>
             <field name="help" type="html">
@@ -686,37 +686,37 @@
                                 name="send_elaborate"
                                 type="object"
                                 class="btn-primary"
-                                attrs="{'invisible':[('state','in', ('elaborate','cancel','validate_ok'))]}" />
+                                invisible="state in ['elaborate', 'cancel', 'validate_ok']" />
                         <button string="Enviar a Revisar"
                                 name="send_review"
                                 type="object"
                                 class="btn-primary"
-                                attrs="{'invisible':[('state','!=', 'elaborate')]}" />
+                                invisible="state != 'elaborate'" />
                         <button string="Enviar a Validar"
                                 name="send_validate"
                                 type="object"
                                 class="btn-primary"
-                                attrs="{'invisible':[('state','in', ('elaborate','validate','cancel','validate_ok'))]}" />
+                                invisible="state in ['elaborate', 'validate', 'cancel', 'validate_ok']" />
                         <button string="Validar"
                                 name="send_validate_ok"
                                 type="object"
                                 class="btn-primary"
-                                attrs="{'invisible':[('state','not in', ('validate'))]}" />
+                                invisible="state not in ['validate']" />
                         <button string="Volver Obsoleto"
                                 confirm="Esto volverá obsoleto el presente registro. ¿Está seguro(a)?"
                                 name="send_cancel"
                                 type="object"
                                 class="btn-second"
-                                attrs="{'invisible': [('state','in',('cancel'))] }" />
+                                invisible="state in ['cancel']" />
                         <button string="Ver acciones"
                                 name="action_see_actions"
                                 type="object"
                                 class="btn-primary"
-                                attrs="{'invisible': [('state', '!=', 'validate_ok')] }" />
+                                invisible="state != 'validate_ok'" />
                         <button name="button_new_version"
                                 type="object"
                                 string="Nueva versión"
-                                attrs="{'invisible':['|', ('active','=',False), ('state', '!=', 'validate_ok')]}"
+                                invisible="(active == False or state != 'validate_ok')"
                                 class="oe_highlight" />
                     </header>
                     <sheet>
@@ -727,72 +727,72 @@
                                     icon="fa-archive"
                                     style="white-space: nowrap;"
                                     string="Versiones antiguas" />
-                            <widget name="web_ribbon" title="Archived" bg_color="bg-danger" attrs="{'invisible': [('active', '=', True)]}" />
+                            <widget name="web_ribbon" title="Archived" bg_color="bg-danger" invisible="active == True" />
                             <field name="active" invisible="1" />
                         </div>
                         <div>
                             <h2>
-                                <field name="name" attrs="{'readonly': [('state','in',('validate_ok','cancel'))]}" />
+                                <field name="name" readonly="state in ['validate_ok', 'cancel']" />
                             </h2>
                         </div>
                         <group col="4">
                             <group string="Información General" colspan="4">
                                 <label for="process_id" />
                                 <div class="o_row">
-                                    <field name="process_id" options="{'no_create': True}" placeholder="Procedimiento" colspan="3" attrs="{'readonly': [('state','not in',('elaborate'))]}" />
+                                    <field name="process_id" options="{'no_create': True}" placeholder="Procedimiento" colspan="3" readonly="state not in ['elaborate']" />
                                 </div>
-                                <field name="swot_id" required="1" attrs="{'readonly': [('state','in',('validate_ok','cancel'))]}" />
+                                <field name="swot_id" required="1" readonly="state in ['validate_ok', 'cancel']" />
                             </group>
                             <notebook colspan="4">
                                 <page name="strategies" string="Estrategias">
                                     <group string="Estrategias" col="2">
-                                        <field name="fo" string="Optimizar fortaleza para aprovechar oportunidades" colspan="2" attrs="{'readonly': [('state','in',('validate_ok','cancel'))]}">
-                                            <tree string="">
+                                        <field name="fo" string="Optimizar fortaleza para aprovechar oportunidades" colspan="2" readonly="state in ['validate_ok', 'cancel']">
+                                            <list string="">
                                                 <field name="fortaleza" style="max-width:133px;" />
                                                 <field name="oportunidad" style="max-width:133px;" />
                                                 <field name="name" style="max-width:133px;" />
-                                            </tree>
+                                            </list>
                                         </field>
-                                        <field name="do" string="Contrarrestar debilidades para explotar oportunidades" colspan="2" attrs="{'readonly': [('state','in',('validate_ok','cancel'))]}">
-                                            <tree string="">
+                                        <field name="do" string="Contrarrestar debilidades para explotar oportunidades" colspan="2" readonly="state in ['validate_ok', 'cancel']">
+                                            <list string="">
                                                 <field name="debilidad" style="max-width:133px;" />
                                                 <field name="oportunidad" style="max-width:133px;" />
                                                 <field name="name" style="max-width:133px;" />
-                                            </tree>
+                                            </list>
                                         </field>
-                                        <field name="fa" string="Optimizar fortalezas para minimizar amenazas" colspan="2" attrs="{'readonly': [('state','in',('validate_ok','cancel'))]}">
-                                            <tree string="">
+                                        <field name="fa" string="Optimizar fortalezas para minimizar amenazas" colspan="2" readonly="state in ['validate_ok', 'cancel']">
+                                            <list string="">
                                                 <field name="fortaleza" style="max-width:133px;" />
                                                 <field name="amenaza" style="max-width:133px;" />
                                                 <field name="name" style="max-width:133px;" />
-                                            </tree>
+                                            </list>
                                         </field>
-                                        <field name="da" string="Contarrestar debilidades y amenazas" colspan="2" attrs="{'readonly': [('state','in',('validate_ok','cancel'))]}">
-                                            <tree string="">
+                                        <field name="da" string="Contarrestar debilidades y amenazas" colspan="2" readonly="state in ['validate_ok', 'cancel']">
+                                            <list string="">
                                                 <field name="debilidad" style="max-width:133px;" />
                                                 <field name="amenaza" style="max-width:133px;" />
                                                 <field name="name" style="max-width:133px;" />
-                                            </tree>
+                                            </list>
                                         </field>
                                     </group>
                                 </page>
                                 <page name="validation" string="Validación y Versión">
                                     <group>
-                                        <field name="version" attrs="{'readonly': [('state','in',('validate_ok','cancel'))]}" />
+                                        <field name="version" readonly="state in ['validate_ok', 'cancel']" />
                                     </group>
                                     <group col="4">
                                         <group string="Usuarios" colspan="4">
                                             <separator string="Elaboración" />
-                                            <field name="elaboration_step" colspan="2" nolabel="1" attrs="{'readonly': [('state','not in',('elaborate'))]}" />
+                                            <field name="elaboration_step" colspan="2" nolabel="1" readonly="state not in ['elaborate']" />
                                             <separator string="Revisión" />
-                                            <field name="review_step" colspan="2" nolabel="1" attrs="{'readonly': [('state','not in',('elaborate', 'review'))]}" />
+                                            <field name="review_step" colspan="2" nolabel="1" readonly="state not in ['elaborate', 'review']" />
                                             <separator string="Validación" />
-                                            <field name="validation_step" colspan="2" nolabel="1" attrs="{'readonly': [('state','not in',('elaborate', 'review', 'validate'))]}" />
+                                            <field name="validation_step" colspan="2" nolabel="1" readonly="state not in ['elaborate', 'review', 'validate']" />
                                         </group>
                                         <group string="Fechas" colspan="2">
-                                            <field name="date_elaborate" attrs="{'required': [('state','in',('elaborate'))], 'readonly': True}" />
-                                            <field name="date_review" attrs="{'required': [('state','in',('review'))], 'readonly': True, 'invisible': [('state','in',('elaborate'))] }" />
-                                            <field name="date_validate" groups="base.group_no_one,base.user_admin" attrs="{'invisible': [('state','in',('elaborate','review'))] }" />
+                                            <field name="date_elaborate" readonly="True" required="state in ['elaborate']" />
+                                            <field name="date_review" invisible="state in ['elaborate']" readonly="True" required="state in ['review']" />
+                                            <field name="date_validate" groups="base.group_no_one,base.group_system" invisible="state in ['elaborate', 'review']" />
                                         </group>
                                     </group>
                                 </page>
@@ -814,14 +814,14 @@
             <field name="name">mgmtsystem.context.cross.swot.view.tree</field>
             <field name="model">mgmtsystem.context.cross.swot</field>
             <field name="arch" type="xml">
-                <tree string="">
+                <list string="">
                     <field name="swot_id" />
                     <field name="name" />
                     <field name="fo" />
                     <field name="do" />
                     <field name="fa" />
                     <field name="da" />
-                </tree>
+                </list>
             </field>
         </record>
 
@@ -829,7 +829,7 @@
             <field name="name">FODA Cruzado</field>
             <field name="res_model">mgmtsystem.context.cross.swot</field>
 
-            <field name="view_mode">tree,form</field>
+            <field name="view_mode">list,form</field>
             <field name="domain">[]</field>
             <field name="context">{}</field>
             <field name="help" type="html">
@@ -843,7 +843,7 @@
             <field name="name">FODA Cruzado</field>
             <field name="res_model">mgmtsystem.context.cross.swot</field>
 
-            <field name="view_mode">tree,form</field>
+            <field name="view_mode">list,form</field>
             <field name="domain">[('state', '=', 'cancel')]</field>
             <field name="context">{}</field>
         </record>
@@ -882,7 +882,7 @@
                                     name="%(show_fo_actions_action)d"
                                     class="oe_stat_button"
                                     icon="fa-file"
-                                    attrs="{'invisible': [('action_count','=',0)]}">
+                                    invisible="action_count == 0">
                                 <field name="action_count" widget="statinfo" string="Acciones" />
                             </button>
                         </div>
@@ -897,12 +897,12 @@
                         </group>
                         <group string="Acciones">
                             <field name="action_ids" nolabel="1">
-                                <tree style="white-space: pre-wrap;">
+                                <list style="white-space: pre-wrap;">
                                     <field name="name" />   
                                     <field name="description" style="max-width: 200px;white-space:pre-wrap;overflow: overlay;" />
                                     <field name="date_deadline" />
                                     <field name="state" />
-                                </tree>
+                                </list>
                             </field>
                         </group>
                     </sheet>
@@ -914,7 +914,7 @@
             <field name="name">mgmtsystem.context.cross.swot.fo.view.tree</field>
             <field name="model">mgmtsystem.context.cross.swot.fo</field>
             <field name="arch" type="xml">
-                <tree string="">
+                <list string="">
                     <field name="code" />
                     <field name="fortaleza" />
                     <field name="oportunidad" />
@@ -925,8 +925,8 @@
                             name="mgmtsystem_context.fo_wizard_action"
                             class="oe_edit_only"
                             string="Crear acción"
-                            attrs="{'invisible': [('parent.state', '!=', 'validate_ok')] }" />
-                </tree>
+                            invisible="parent.state != 'validate_ok'" />
+                </list>
             </field>
         </record>
 
@@ -934,7 +934,7 @@
             <field name="name">Fortalezas-Oportunidades</field>
             <field name="res_model">mgmtsystem.context.cross.swot.fo</field>
 
-            <field name="view_mode">tree,form</field>
+            <field name="view_mode">list,form</field>
             <field name="domain">[]</field>
             <field name="context">{}</field>
         </record>
@@ -960,7 +960,7 @@
                                 name="%(show_do_actions_action)d"
                                 class="oe_stat_button"
                                 icon="fa-file"
-                                attrs="{'invisible': [('action_count','=',0)]}">
+                                invisible="action_count == 0">
                             <field name="action_count" widget="statinfo" string="Acciones" />
                         </button>
                     </div>
@@ -975,12 +975,12 @@
                     </group>
                     <group string="Acciones">
                         <field name="action_ids" nolabel="1">
-                            <tree style="white-space: pre-wrap;">
+                            <list style="white-space: pre-wrap;">
                                 <field name="name" />
                                 <field name="description" style="max-width: 200px;white-space:pre-wrap;overflow: overlay;" />
                                 <field name="date_deadline" />
                                 <field name="state" />
-                            </tree>
+                            </list>
                         </field>
                     </group>
                 </form>
@@ -991,7 +991,7 @@
             <field name="name">mgmtsystem.context.cross.swot.do.view.list</field>
             <field name="model">mgmtsystem.context.cross.swot.do</field>
             <field name="arch" type="xml">
-                <tree string="">
+                <list string="">
                     <field name="debilidad" />
                     <field name="oportunidad" />
                     <field name="name" />
@@ -1001,8 +1001,8 @@
                             name="mgmtsystem_context.do_wizard_action"
                             class="oe_edit_only"
                             string="Crear acción"
-                            attrs="{'invisible': [('parent.state', '!=', 'validate_ok')] }" />
-                </tree>
+                            invisible="parent.state != 'validate_ok'" />
+                </list>
             </field>
         </record>
 
@@ -1010,7 +1010,7 @@
             <field name="name">Debilidades - Oportunidades</field>
             <field name="res_model">mgmtsystem.context.cross.swot.do</field>
 
-            <field name="view_mode">tree,form</field>
+            <field name="view_mode">list,form</field>
             <field name="domain">[]</field>
             <field name="context">{}</field>
         </record>
@@ -1034,7 +1034,7 @@
                                 name="%(show_fa_actions_action)d"
                                 class="oe_stat_button"
                                 icon="fa-file"
-                                attrs="{'invisible': [('action_count','=',0)]}">
+                                invisible="action_count == 0">
                             <field name="action_count" widget="statinfo" string="Acciones" />
                         </button>
                     </div>
@@ -1049,12 +1049,12 @@
                     </group>
                     <group string="Acciones">
                         <field name="action_ids" nolabel="1">
-                            <tree style="white-space: pre-wrap;">
+                            <list style="white-space: pre-wrap;">
                                 <field name="name" />
                                 <field name="description" style="max-width: 200px;white-space:pre-wrap;overflow: overlay;" />
                                 <field name="date_deadline" />
                                 <field name="state" />
-                            </tree>
+                            </list>
                         </field>
                     </group>
                 </form>
@@ -1065,7 +1065,7 @@
             <field name="name">mgmtsystem.context.cross.swot.fa.view.list</field>
             <field name="model">mgmtsystem.context.cross.swot.fa</field>
             <field name="arch" type="xml">
-                <tree string="">
+                <list string="">
                     <field name="code" />
                     <field name="fortaleza" />
                     <field name="amenaza" />
@@ -1076,8 +1076,8 @@
                             name="mgmtsystem_context.fa_wizard_action"
                             class="oe_edit_only"
                             string="Crear acción"
-                            attrs="{'invisible': [('parent.state', '!=', 'validate_ok')] }" />
-                </tree>
+                            invisible="parent.state != 'validate_ok'" />
+                </list>
             </field>
         </record>
 
@@ -1085,7 +1085,7 @@
             <field name="name">Fortalezas - Amenazas</field>
             <field name="res_model">mgmtsystem.context.cross.swot.fa</field>
 
-            <field name="view_mode">tree,form</field>
+            <field name="view_mode">list,form</field>
             <field name="domain">[]</field>
             <field name="context">{}</field>
         </record>
@@ -1109,7 +1109,7 @@
                                 name="%(show_da_actions_action)d"
                                 class="oe_stat_button"
                                 icon="fa-file"
-                                attrs="{'invisible': [('action_count','=',0)]}">
+                                invisible="action_count == 0">
                             <field name="action_count" widget="statinfo" string="Acciones" />
                         </button>
                     </div>
@@ -1124,12 +1124,12 @@
                     </group>
                     <group string="Acciones">
                         <field name="action_ids" nolabel="1">
-                            <tree style="white-space: pre-wrap;">
+                            <list style="white-space: pre-wrap;">
                                 <field name="name" />
                                 <field name="description" style="max-width: 200px;white-space:pre-wrap;overflow: overlay;" />
                                 <field name="date_deadline" />
                                 <field name="state" />
-                            </tree>
+                            </list>
                         </field>
                     </group>
                 </form>
@@ -1140,7 +1140,7 @@
             <field name="name">mgmtsystem.context.cross.swot.da.view.list</field>
             <field name="model">mgmtsystem.context.cross.swot.da</field>
             <field name="arch" type="xml">
-                <tree string="">
+                <list string="">
                     <field name="debilidad" />
                     <field name="amenaza" />
                     <field name="name" />
@@ -1150,8 +1150,8 @@
                             name="mgmtsystem_context.da_wizard_action"
                             class="oe_edit_only"
                             string="Crear acción"
-                            attrs="{'invisible': [('parent.state', '!=', 'validate_ok')] }" />
-                </tree>
+                            invisible="parent.state != 'validate_ok'" />
+                </list>
             </field>
         </record>
 
@@ -1159,7 +1159,7 @@
             <field name="name">Debilidades - Amenazas</field>
             <field name="res_model">mgmtsystem.context.cross.swot.da</field>
 
-            <field name="view_mode">tree,form</field>
+            <field name="view_mode">list,form</field>
             <field name="domain">[]</field>
             <field name="context">{}</field>
         </record>
@@ -1278,38 +1278,38 @@
                             name="%(show_action_fo_action)d"
                             class="oe_stat_button"
                             icon="fa-file"
-                            attrs="{'invisible': [('fo_count','=',0)]}">
+                            invisible="fo_count == 0">
                         <field name="fo_count" widget="statinfo" string="FO" />
                     </button>
                     <button type="action"
                             name="%(show_action_do_action)d"
                             class="oe_stat_button"
                             icon="fa-file"
-                            attrs="{'invisible': [('do_count','=',0)]}">
+                            invisible="do_count == 0">
                         <field name="do_count" widget="statinfo" string="DO" />
                     </button>
                     <button type="action"
                             name="%(show_action_fa_action)d"
                             class="oe_stat_button"
                             icon="fa-file"
-                            attrs="{'invisible': [('fa_count','=',0)]}">
+                            invisible="fa_count == 0">
                         <field name="fa_count" widget="statinfo" string="FA" />
                     </button>
                     <button type="action"
                             name="%(show_action_da_action)d"
                             class="oe_stat_button"
                             icon="fa-file"
-                            attrs="{'invisible': [('da_count','=',0)]}">
+                            invisible="da_count == 0">
                         <field name="da_count" widget="statinfo" string="DA" />
                     </button>
                 </xpath>
                 <xpath expr="//notebook" position="inside">
-                    <page string="Estrategias" attrs="{'invisible': [('do_count','=',0),('fo_count','=',0),('fa_count','=',0),('da_count','=',0)]}">
+                    <page string="Estrategias" invisible="(do_count == 0 and fo_count == 0 and fa_count == 0 and da_count == 0)">
                         <group col="4">
-                            <field name="fo_ids" colspan="2" attrs="{'invisible':[('fo_ids','=',False)]}" />
-                            <field name="do_ids" colspan="2" attrs="{'invisible':[('do_ids','=',False)]}" />
-                            <field name="fa_ids" colspan="2" attrs="{'invisible':[('fa_ids','=',False)]}" />
-                            <field name="da_ids" colspan="2" attrs="{'invisible':[('da_ids','=',False)]}" />
+                            <field name="fo_ids" colspan="2" invisible="fo_ids == False" />
+                            <field name="do_ids" colspan="2" invisible="do_ids == False" />
+                            <field name="fa_ids" colspan="2" invisible="fa_ids == False" />
+                            <field name="da_ids" colspan="2" invisible="da_ids == False" />
                         </group>
                     </page>
                 </xpath>

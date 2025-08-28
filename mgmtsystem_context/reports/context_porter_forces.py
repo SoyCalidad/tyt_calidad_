@@ -17,8 +17,14 @@ class PorterForcesReportPDF(models.AbstractModel):
 
     @api.model
     def _get_report_values(self, docids, data=None):
-        external_issue = self.env['mgmtsystem.context.external_issue'].browse(
-            data['external_issue'])
+        if not data:
+            raise UserError(_("No se recibió información para generar el reporte."))
+        
+        external_issue_id = data.get("external_issue")
+        if not external_issue_id:
+            raise UserError(_("Falta el parámetro 'external_issue' para el reporte."))
+
+        external_issue = self.env['mgmtsystem.context.external_issue'].browse(external_issue_id)
         return {
             'docs': external_issue,
             'doc_ids': self.ids,

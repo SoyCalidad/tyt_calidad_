@@ -1,5 +1,4 @@
 from odoo import fields, models, api, _
-from odoo.exceptions import Warning
 from datetime import date, datetime
 import calendar
 from dateutil.relativedelta import relativedelta

@@ -1,25 +1,36 @@
 <odoo>
     <data>
 
-        <report id="action_context_policy_report_2"
-                model="mgmtsystem.context.policy"
-                string="Reporte de Política"
-                report_type="qweb-pdf"
-                groups="mgmtsystem_context.group_context_onlyread_printreport,mgmtsystem_context.group_context_write_printreport,mgmtsystem_context.group_context_all"
-                name="mgmtsystem_context.politica_de_calidad"
-                file="${object.name}"
-                print_report_name="object.name"
-                paperformat="hola_calidad.portrait" />
-        
+        <record id="action_context_policy_report_2" model="ir.actions.report">
+            <field name="name">Reporte de Política</field>
+            <field name="model">mgmtsystem.context.policy</field>
+            <field name="report_type">qweb-pdf</field>
+            <field name="report_name">mgmtsystem_context.politica_de_calidad</field>
+            <field name="report_file">mgmtsystem_context.politica_de_calidad</field>
+            <field name="print_report_name">'%s' % (object.name)</field>
+            <field name="paperformat_id" ref="hola_calidad.portrait" />
+            <field name="groups_id"
+                eval="[(6, 0, [
+                ref('mgmtsystem_context.group_context_onlyread_printreport'),
+                ref('mgmtsystem_context.group_context_write_printreport'),
+                ref('mgmtsystem_context.group_context_all')
+            ])]" />
+        </record>
+
+
+        <record id="action_context_policy_report_2" model="ir.actions.report">
+
+        </record>
+
         <report id="action_context_policy_report_simple"
-                model="mgmtsystem.context.policy"
-                string="Reporte de Política simplificado"
-                report_type="qweb-pdf"
-                groups="mgmtsystem_context.group_context_onlyread_printreport,mgmtsystem_context.group_context_write_printreport,mgmtsystem_context.group_context_all"
-                name="mgmtsystem_context.politica_de_calidad_simple"
-                file="Política de Calidad"
-                print_report_name="object.name"
-                paperformat="hola_calidad.portrait" />
+            model="mgmtsystem.context.policy"
+            string="Reporte de Política simplificado"
+            report_type="qweb-pdf"
+            groups="mgmtsystem_context.group_context_onlyread_printreport,mgmtsystem_context.group_context_write_printreport,mgmtsystem_context.group_context_all"
+            name="mgmtsystem_context.politica_de_calidad_simple"
+            file="Política de Calidad"
+            print_report_name="object.name"
+            paperformat="hola_calidad.portrait" />
 
         <template id="politica_de_calidad">
             <t t-call="web.html_container">
@@ -32,29 +43,42 @@
                     </t>
                     <div class="header">
                         <style type="text/css">
-                            .tg  {border-collapse:collapse;border-spacing:0;margin:0px auto;width:100%;}
-                            .tg td{border-color:black;border-style:solid;border-width:1px;font-family: Palatino, Palatino Linotype, Palatino LT STD, Book Antiqua, Georgia, serif;font-size:11px;
-                            overflow:hidden;padding:10px 5px;word-break:normal;text-align:middle;align:center;}
-                            .tg th{border-color:black;border-style:solid;border-width:1px;font-family: Palatino, Palatino Linotype, Palatino LT STD, Book Antiqua, Georgia, serif;font-size:11px;
+                            .tg {border-collapse:collapse;border-spacing:0;margin:0px
+                            auto;width:100%;}
+                            .tg
+                            td{border-color:black;border-style:solid;border-width:1px;font-family:
+                            Palatino, Palatino Linotype, Palatino LT STD, Book Antiqua, Georgia,
+                            serif;font-size:11px;
+                            overflow:hidden;padding:10px
+                            5px;word-break:normal;text-align:middle;align:center;}
+                            .tg
+                            th{border-color:black;border-style:solid;border-width:1px;font-family:
+                            Palatino, Palatino Linotype, Palatino LT STD, Book Antiqua, Georgia,
+                            serif;font-size:11px;
                             font-weight:normal;overflow:hidden;padding:10px 5px;word-break:normal;}
-                            .tg .tg-9wq8{border-color:inherit;text-align:center;vertical-align:middle}
-                            .tg .tg-1wig{border-color:inherit;text-align:center;vertical-align:middle;font-size:16px;font-weight:bold;}
-                            .tg .tg-0lax{border-color:inherit;text-align:center;vertical-align:middle;font-size:12px;}
+                            .tg
+                            .tg-9wq8{border-color:inherit;text-align:center;vertical-align:middle}
+                            .tg
+                            .tg-1wig{border-color:inherit;text-align:center;vertical-align:middle;font-size:16px;font-weight:bold;}
+                            .tg
+                            .tg-0lax{border-color:inherit;text-align:center;vertical-align:middle;font-size:12px;}
                         </style>
                         <table class="tg">
                             <tbody>
                                 <tr>
                                     <td class="tg-1wig" rowspan="3" width="20%" style="width:15%">
                                         <t t-if="company.logo">
-                                            <img t-att-src="image_data_uri(company.logo)" style="max-width:100px;max-height:100px;vertical-align:middle;" alt="Logo"/>
+                                            <img t-att-src="image_data_uri(company.logo)"
+                                                style="max-width:100px;max-height:100px;vertical-align:middle;"
+                                                alt="Logo" />
                                         </t>
-                                    </td>                                
-                                    <td class="tg-1wig" rowspan="3" width="80%" style="width:65%;">
-                                        <span t-field="doc.name" style="font-size:15px;font-weight:bold;" />
                                     </td>
-                                    <td class="tg-0lax" width="20%" style="width:20%">
-                                        Código:
-                                        <span t-field="doc.code" />
+                                    <td class="tg-1wig" rowspan="3" width="80%" style="width:65%;">
+                                        <span t-field="doc.name"
+                                            style="font-size:15px;font-weight:bold;" />
+                                    </td>
+                                    <td class="tg-0lax" width="20%" style="width:20%"> Código: <span
+                                            t-field="doc.code" />
                                     </td>
                                 </tr>
                                 <tr>
@@ -92,14 +116,26 @@
                         <div class="cover" style="page-break-after: always;">
                             <center>
                                 <style type="text/css">
-                                    .tg  {border-collapse:collapse;border-spacing:0;}
-                                    .tg td{font-family: Palatino, Palatino Linotype, Palatino LT STD, Book Antiqua, Georgia, serif;font-size:16px;padding:10px 5px;border-style:solid;border-width:1px;overflow:hidden;word-break:normal;border-color:black;}
-                                    .tg th{font-family: Palatino, Palatino Linotype, Palatino LT STD, Book Antiqua, Georgia, serif;font-size:16px;font-weight:normal;padding:10px 5px;border-style:solid;border-width:1px;overflow:hidden;word-break:normal;border-color:black;}
-                                    .tg .tg-zv36{font-weight:bold;background-color:#ffffff;border-color:inherit;text-align:left;vertical-align:top;width:33%}
-                                    .tg .tg-nrix{text-align:center;vertical-align:middle;font-weight: bold;border-style: none;font-size:25px;}
-                                    .tg .tg-rq3n{background-color:#ffffff;text-align:center;vertical-align:middle;border-style: none;font-size:20px;}
-                                    .tg .tg-7g6k{font-weight:bold;background-color:#efefef;border-color:inherit;text-align:center;vertical-align:top;font-size:16px;}
-                                    .tg .tg-3xi5{background-color:#ffffff;border-color:inherit;text-align:center;vertical-align:middle;font-size:11px;}
+                                    .tg {border-collapse:collapse;border-spacing:0;}
+                                    .tg td{font-family: Palatino, Palatino Linotype, Palatino LT
+                                    STD, Book Antiqua, Georgia, serif;font-size:16px;padding:10px
+                                    5px;border-style:solid;border-width:1px;overflow:hidden;word-break:normal;border-color:black;}
+                                    .tg th{font-family: Palatino, Palatino Linotype, Palatino LT
+                                    STD, Book Antiqua, Georgia,
+                                    serif;font-size:16px;font-weight:normal;padding:10px
+                                    5px;border-style:solid;border-width:1px;overflow:hidden;word-break:normal;border-color:black;}
+                                    .tg
+                                    .tg-zv36{font-weight:bold;background-color:#ffffff;border-color:inherit;text-align:left;vertical-align:top;width:33%}
+                                    .tg
+                                    .tg-nrix{text-align:center;vertical-align:middle;font-weight:
+                                    bold;border-style: none;font-size:25px;}
+                                    .tg
+                                    .tg-rq3n{background-color:#ffffff;text-align:center;vertical-align:middle;border-style:
+                                    none;font-size:20px;}
+                                    .tg
+                                    .tg-7g6k{font-weight:bold;background-color:#efefef;border-color:inherit;text-align:center;vertical-align:top;font-size:16px;}
+                                    .tg
+                                    .tg-3xi5{background-color:#ffffff;border-color:inherit;text-align:center;vertical-align:middle;font-size:11px;}
                                 </style>
                                 <table class="tg" width="85%">
                                     <tr>
@@ -155,42 +191,42 @@
                                         </td>
                                     </tr>
                                     <tr>
-                                        <td class="tg-7g6k">
-                                            Actualizado por: 
-                                            <t t-foreach="doc.elaboration_step" t-as="user">
+                                        <td class="tg-7g6k"> Actualizado por: <t
+                                                t-foreach="doc.elaboration_step" t-as="user">
                                                 <span t-field="user.user_id.partner_id.name" />
                                             </t>
                                         </td>
-                                        <td class="tg-7g6k">
-                                            Revisado por: 
-                                            <t t-foreach="doc.review_step" t-as="user">
+                                        <td class="tg-7g6k"> Revisado por: <t
+                                                t-foreach="doc.review_step" t-as="user">
                                                 <span t-field="user.user_id.partner_id.name" />
                                             </t>
                                         </td>
-                                        <td class="tg-7g6k">
-                                            Aprobado por: 
-                                            <t t-foreach="doc.validation_step" t-as="user">
+                                        <td class="tg-7g6k"> Aprobado por: <t
+                                                t-foreach="doc.validation_step" t-as="user">
                                                 <span t-field="user.user_id.partner_id.name" />
                                             </t>
                                         </td>
                                     </tr>
                                     <tr>
-                                        <td class="tg-zv36">
-                                            Firma: 
-                                            <t t-foreach="doc.elaboration_step" t-as="user">
-                                                <span t-if="doc.state=='validate_ok'" t-raw="user.user_id.signature" style="display:block;" />
+                                        <td class="tg-zv36"> Firma: <t
+                                                t-foreach="doc.elaboration_step" t-as="user">
+                                                <span t-if="doc.state=='validate_ok'"
+                                                    t-raw="user.user_id.signature"
+                                                    style="display:block;" />
                                             </t>
                                         </td>
-                                        <td class="tg-zv36">
-                                            Firma: 
-                                            <t t-foreach="doc.review_step" t-as="user">
-                                                <span t-if="doc.state=='validate_ok'" t-raw="user.user_id.signature" style="display:block;" />
+                                        <td class="tg-zv36"> Firma: <t t-foreach="doc.review_step"
+                                                t-as="user">
+                                                <span t-if="doc.state=='validate_ok'"
+                                                    t-raw="user.user_id.signature"
+                                                    style="display:block;" />
                                             </t>
                                         </td>
-                                        <td class="tg-zv36">
-                                            Firma: 
-                                            <t t-foreach="doc.validation_step" t-as="user">
-                                                <span t-if="doc.state=='validate_ok'" t-raw="user.user_id.signature" style="display:block;" />
+                                        <td class="tg-zv36"> Firma: <t
+                                                t-foreach="doc.validation_step" t-as="user">
+                                                <span t-if="doc.state=='validate_ok'"
+                                                    t-raw="user.user_id.signature"
+                                                    style="display:block;" />
                                             </t>
                                         </td>
                                     </tr>
@@ -218,17 +254,13 @@
                                         </td>
                                     </tr>
                                     <tr>
-                                        <td class="tg-zv36">
-                                            Fecha:
-                                            <span t-field="doc.date_elaborate" />
+                                        <td class="tg-zv36"> Fecha: <span
+                                                t-field="doc.date_elaborate" />
                                         </td>
-                                        <td class="tg-zv36">
-                                            Fecha:
-                                            <span t-field="doc.date_review" />
+                                        <td class="tg-zv36"> Fecha: <span t-field="doc.date_review" />
                                         </td>
-                                        <td class="tg-zv36">
-                                            Fecha:
-                                            <span t-field="doc.date_validate" />
+                                        <td class="tg-zv36"> Fecha: <span
+                                                t-field="doc.date_validate" />
                                         </td>
                                     </tr>
                                 </table>
@@ -250,19 +282,20 @@
                                         <t t-raw="doc.validation_step[0].user_id.signature" />
                                     </t>
                                 </div>
-                                <div class="singnature" style="text-align:center;width:400px;border: 0;border-top: 1px solid #000;">
+                                <div class="singnature"
+                                    style="text-align:center;width:400px;border: 0;border-top: 1px solid #000;">
                                     <div>
-                                        <span>Aprobado por: 
-                                            <t t-if="doc.validation_step">
+                                        <span>Aprobado por: <t t-if="doc.validation_step">
                                                 <span t-field="doc.validation_step[0].user_id.name" />
                                             </t>
                                         </span>
                                     </div>
                                     <div>
-                                        <span>Cargo: 
-                                            <t t-if="doc.validation_step">
-                                                <t t-if="doc.validation_step[0].user_id.employee_ids">
-                                                    <span t-field="doc.validation_step[0].user_id.employee_ids[0].job_id" />
+                                        <span>Cargo: <t t-if="doc.validation_step">
+                                                <t
+                                                    t-if="doc.validation_step[0].user_id.employee_ids">
+                                                    <span
+                                                        t-field="doc.validation_step[0].user_id.employee_ids[0].job_id" />
                                                 </t>
                                             </t>
                                         </span>
@@ -271,14 +304,12 @@
                             </center>
                         </div>
                         <div class="footer" style="border-top: 1px solid black;font-size: 8px;">
-                            <div class="text-center" style="border-top: 1px solid black;font-size: 10px;text-align:center;">
-                                ©
-                                <span t-field="company.name" />
-                                . All Rights Reserved.
-                                PROHIBIDA SU REPRODUCCIÓN SIN AUTORIZACIÓN EXPRESA DE LA DIRECCIÓN.
-                                CUALQUIER COPIA IMPRESA NO CONTROLADA. DEBE SER ROTULADA COMO "COPIA NO CONTROLADA".
-                                CONSULTE VERSIÓN ELECTRÓNICA
-                            </div>
+                            <div class="text-center"
+                                style="border-top: 1px solid black;font-size: 10px;text-align:center;">
+                                © <span t-field="company.name" /> . All Rights Reserved. PROHIBIDA
+                                SU REPRODUCCIÓN SIN AUTORIZACIÓN EXPRESA DE LA DIRECCIÓN. CUALQUIER
+                                COPIA IMPRESA NO CONTROLADA. DEBE SER ROTULADA COMO "COPIA NO
+                                CONTROLADA". CONSULTE VERSIÓN ELECTRÓNICA </div>
                         </div>
                     </t>
                 </t>
@@ -296,30 +327,43 @@
                     </t>
                     <div class="header">
                         <style type="text/css">
-                            .tg  {border-collapse:collapse;border-spacing:0;margin:0px auto;width:100%;}
-                            .tg td{border-color:black;border-style:solid;border-width:1px;font-family: Palatino, Palatino Linotype, Palatino LT STD, Book Antiqua, Georgia, serif;font-size:11px;
-                            overflow:hidden;padding:10px 5px;word-break:normal;text-align:middle;align:center;}
-                            .tg th{border-color:black;border-style:solid;border-width:1px;font-family: Palatino, Palatino Linotype, Palatino LT STD, Book Antiqua, Georgia, serif;font-size:11px;
+                            .tg {border-collapse:collapse;border-spacing:0;margin:0px
+                            auto;width:100%;}
+                            .tg
+                            td{border-color:black;border-style:solid;border-width:1px;font-family:
+                            Palatino, Palatino Linotype, Palatino LT STD, Book Antiqua, Georgia,
+                            serif;font-size:11px;
+                            overflow:hidden;padding:10px
+                            5px;word-break:normal;text-align:middle;align:center;}
+                            .tg
+                            th{border-color:black;border-style:solid;border-width:1px;font-family:
+                            Palatino, Palatino Linotype, Palatino LT STD, Book Antiqua, Georgia,
+                            serif;font-size:11px;
                             font-weight:normal;overflow:hidden;padding:10px 5px;word-break:normal;}
-                            .tg .tg-9wq8{border-color:inherit;text-align:center;vertical-align:middle}
-                            .tg .tg-1wig{border-color:inherit;text-align:center;vertical-align:middle;font-size:16px;font-weight:bold;}
-                            .tg .tg-0lax{border-color:inherit;text-align:center;vertical-align:middle;font-size:12px;}
+                            .tg
+                            .tg-9wq8{border-color:inherit;text-align:center;vertical-align:middle}
+                            .tg
+                            .tg-1wig{border-color:inherit;text-align:center;vertical-align:middle;font-size:16px;font-weight:bold;}
+                            .tg
+                            .tg-0lax{border-color:inherit;text-align:center;vertical-align:middle;font-size:12px;}
                         </style>
                         <table class="tg">
                             <tbody>
                                 <tr>
                                     <td class="tg-1wig" rowspan="3" width="20%" style="width:15%">
                                         <t t-if="company.logo">
-                                            <img t-att-src="image_data_uri(company.logo)" style="max-width:100px;max-height:100px;vertical-align:middle;" alt="Logo"/>
+                                            <img t-att-src="image_data_uri(company.logo)"
+                                                style="max-width:100px;max-height:100px;vertical-align:middle;"
+                                                alt="Logo" />
                                         </t>
                                     </td>
                                     <td class="tg-1wig" rowspan="3" width="80%" style="width:65%;">
                                         <span style="font-size:18px;font-weight:bold;">POLÍTICA</span>
-                                        <span t-field="doc.name" style="font-size:15px;font-weight:bold;" />
+                                        <span t-field="doc.name"
+                                            style="font-size:15px;font-weight:bold;" />
                                     </td>
-                                    <td class="tg-0lax" width="20%" style="width:20%">
-                                        Código:
-                                        <span t-field="doc.code" />
+                                    <td class="tg-0lax" width="20%" style="width:20%"> Código: <span
+                                            t-field="doc.code" />
                                     </td>
                                 </tr>
                                 <tr>
@@ -371,19 +415,20 @@
                                         <t t-raw="doc.validation_step[0].user_id.signature" />
                                     </t>
                                 </div>
-                                <div class="singnature" style="text-align:center;width:400px;border: 0;border-top: 1px solid #000;">
+                                <div class="singnature"
+                                    style="text-align:center;width:400px;border: 0;border-top: 1px solid #000;">
                                     <div>
-                                        <span>Aprobado por: 
-                                            <t t-if="doc.validation_step">
+                                        <span>Aprobado por: <t t-if="doc.validation_step">
                                                 <span t-field="doc.validation_step[0].user_id.name" />
                                             </t>
                                         </span>
                                     </div>
                                     <div>
-                                        <span>Cargo: 
-                                            <t t-if="doc.validation_step">
-                                                <t t-if="doc.validation_step[0].user_id.employee_ids">
-                                                    <span t-field="doc.validation_step[0].user_id.employee_ids[0].job_id" />
+                                        <span>Cargo: <t t-if="doc.validation_step">
+                                                <t
+                                                    t-if="doc.validation_step[0].user_id.employee_ids">
+                                                    <span
+                                                        t-field="doc.validation_step[0].user_id.employee_ids[0].job_id" />
                                                 </t>
                                             </t>
                                         </span>
@@ -392,14 +437,12 @@
                             </center>
                         </div>
                         <div class="footer" style="border-top: 1px solid black;font-size: 8px;">
-                            <div class="text-center" style="border-top: 1px solid black;font-size: 10px;text-align:center;">
-                                ©
-                                <span t-field="company.name" />
-                                . All Rights Reserved.
-                                PROHIBIDA SU REPRODUCCIÓN SIN AUTORIZACIÓN EXPRESA DE LA DIRECCIÓN.
-                                CUALQUIER COPIA IMPRESA NO CONTROLADA. DEBE SER ROTULADA COMO "COPIA NO CONTROLADA".
-                                CONSULTE VERSIÓN ELECTRÓNICA
-                            </div>
+                            <div class="text-center"
+                                style="border-top: 1px solid black;font-size: 10px;text-align:center;">
+                                © <span t-field="company.name" /> . All Rights Reserved. PROHIBIDA
+                                SU REPRODUCCIÓN SIN AUTORIZACIÓN EXPRESA DE LA DIRECCIÓN. CUALQUIER
+                                COPIA IMPRESA NO CONTROLADA. DEBE SER ROTULADA COMO "COPIA NO
+                                CONTROLADA". CONSULTE VERSIÓN ELECTRÓNICA </div>
                         </div>
                     </t>
                 </t>

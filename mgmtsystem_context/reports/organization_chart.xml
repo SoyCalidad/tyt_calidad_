@@ -8,7 +8,6 @@
         groups= "base.group_no_one,mgmtsystem_context.group_context_onlyread_printreport,mgmtsystem_context.group_context_write_printreport,mgmtsystem_context.group_context_all"
         name="mgmtsystem_context.organization_chart_report" 
         file="mgmtsystem_context.organization_chart_report" 
-        groups= "mgmtsystem_context.group_context_onlyread_printreport,mgmtsystem_context.group_context_write_printreport,mgmtsystem_context.group_context_all"
         />
 
         <template id="organization_chart_report">

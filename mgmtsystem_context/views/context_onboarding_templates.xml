@@ -2,7 +2,7 @@
 <odoo>
     <!-- ONBOARDING STEPS -->
 
-    <template id="onboarding_context_internal_issue_step">
+    <!-- <template id="onboarding_context_internal_issue_step">
         <t t-call="base.onboarding_step">
             <t t-set="title">Contexto interno</t>
             <t t-set="description">Cree una contexto interno.</t>
@@ -78,10 +78,10 @@
             <t t-set="model" t-value="'res.company'" />
             <t t-set="state" t-value="state.get('context_policy_onboarding_state')" />
         </t>
-    </template>
+    </template> -->
 
     <!-- ONBOARDING PANELS -->
-    <template id="context_onboarding_panel" name="context.onboarding.panel">
+    <!-- <template id="context_onboarding_panel" name="context.onboarding.panel">
         <t t-call="base.onboarding_container">
             <t t-set="classes" t-value="'o_onboarding_blue'"/>
             <t t-set="bg_image" t-value="'/account/static/src/img/account_invoice_onboarding_bg.jpg'"/>
@@ -95,7 +95,7 @@
             <t t-call="mgmtsystem_context.onboarding_context_stakeholders_step" name="context_stakeholders_step" />
             <t t-call="mgmtsystem_context.onboarding_context_policy_step" name="context_policy_step" />
         </t>
-    </template>
+    </template> -->
 
     <!-- Views -->
 
