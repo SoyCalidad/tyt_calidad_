@@ -9,10 +9,11 @@
     'category': '',
     'depends': [
         'hr',
+        'hr_recruitment',
+        
         'mgmtsystem_context',
         'mgmtsystem_employees',
         #'user_creation_from_employee123456',
-        'hr_recruitment',
     ],
     'data': [
         'data/sequences.xml',
@@ -23,7 +24,6 @@
         'security/ir.model.access.csv',
     ],
     'demo': [
-        ''
     ],
     'auto_install': False,
     'application': True,

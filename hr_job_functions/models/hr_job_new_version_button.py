@@ -16,7 +16,7 @@ class Validation(models.Model):
     favorite_user_ids = fields.Many2many('res.users', 'job_fav_user_rel_v2', 'job_id', 'user_id', default=_get_default_favorite_user_ids )
 
 
-    
+
     validation_state = fields.Selection(
         string=u'Estado',
         selection=[
@@ -176,7 +176,6 @@ class Validation(models.Model):
         elif type == 'validation':
             body += 'Validación de documento'
         for step in steps:
-            name = self.name or ''
             if step.user_id:
                 todo_id = self.env['mail.activity.type'].search(
                     [('name', '=', 'To Do')], limit=1).id
@@ -237,7 +236,7 @@ class Validation(models.Model):
         self.write({
             'version': revno + 1,
             'validation_state': 'elaborate',
-            'name': self.name
+            #'name': self.name
         })
         child_fields = ['audit_ids', 'line_ids',
                         'training_ids', 'maintenance_ids']

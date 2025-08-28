@@ -173,22 +173,25 @@ class Job(models.Model):
         for each in self.employee_ids:
             date = datetime.now().strftime('%d/%m/%Y')
             body = 'Manual de organización y funciones'
-            fp = tempfile.NamedTemporaryFile(suffix='.pdf')
+            fp = tempfile.NamedTemporaryFile(suffix='.pdf', delete=False, mode="wb+")
             data, data_format = self.env.ref(
-                'hr_job_functions.report_funinings').render([self.id])
-            fp.write(data)
-            part = open(fp.name, 'rb').read()
-            attachment = self.env['ir.attachment'].create({
-                'datas': base64.b64encode(part),
-                'name': 'Manual de organización y funciones.pdf'})
-            template_data = {
-                'subject': "Manual de funciones %s" % date,
-                'body_html': body,
-                'email_from': sender,
-                'email_to': each.work_email,
-                'attachment_ids': [(4, attachment.id)]
-            }
-            self.env['mail.mail'].create(template_data).send()
+                'hr_job_functions.report_funinings')._render_qweb_pdf([self.id])
+            if data and isinstance(data, (bytes, bytearray)):
+                fp.write(data)
+                fp.flush()
+                fp.seek(0)
+                part = open(fp.name, 'rb').read()
+                attachment = self.env['ir.attachment'].create({
+                    'datas': base64.b64encode(part),
+                    'name': 'Manual de organización y funciones.pdf'})
+                template_data = {
+                    'subject': "Manual de funciones %s" % date,
+                    'body_html': body,
+                    'email_from': sender,
+                    'email_to': each.work_email,
+                    'attachment_ids': [(4, attachment.id)]
+                }
+                self.env['mail.mail'].create(template_data).send()
 
 
 class JobFunctions(models.Model):
