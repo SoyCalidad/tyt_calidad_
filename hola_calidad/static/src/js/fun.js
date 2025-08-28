@@ -1,21 +1,22 @@
-odoo.define('hola_calidad.fun', function (require) {
-    "use strict";
-    
-    var form_widget = require('web.form_widgets');
-    var core = require('web.core');
-    var _t = core._t;
-    var QWeb = core.qweb;
-    
-    form_widget.WidgetButton.include({
-        on_click: function() {
-             if(this.node.attrs.custom === "click"){
-    
-                // YOUR CODE
-                console.log("CALL FUN FUNCTION");
-                // alert("It works!!");
-                return;
-             }
-             this._super();
-        },
-    });
-    });
+/** @odoo-module **/
+
+import { registry } from "@web/core/registry";
+import { FormButton } from "@web/views/form/form_button";
+
+/**
+ * Extendemos el comportamiento del FormButton
+ */
+export class CustomFormButton extends FormButton {
+    async onClick(ev) {
+        if (this.props.node.attrs.custom === "click") {
+            console.log("CALL FUN FUNCTION");
+            // alert("It works!!");
+            return;
+        }
+        // Caso contrario se ejecuta el comportamiento normal
+        await super.onClick(ev);
+    }
+}
+
+// Reemplazar el componente original en el registry
+registry.category("view_widgets").add("button", CustomFormButton);

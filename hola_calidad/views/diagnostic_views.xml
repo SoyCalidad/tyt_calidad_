@@ -105,7 +105,7 @@
                                 <field name="date_diagnostic" 
                                 readonly="1" 
                                 />
-                                <field name="date_validate" groups="base.group_no_one,base.user_admin" 
+                                <field name="date_validate" groups="base.group_no_one,base.group_system" 
                                 readonly="1" 
                                 />
                             </group>
@@ -913,7 +913,7 @@
         <record model="ir.actions.act_window" id="diagnostic_list_action">
             <field name="name">Análisis</field>
             <field name="res_model">hola_calidad.diagnostic</field>
-            <field name="view_mode">tree,form</field>
+            <field name="view_mode">list,form</field>
             <field name="help" type="html">
                 <p class="oe_view_nocontent_create">Crea diagnosticos de gestión de calidad</p>
             </field>
@@ -923,7 +923,7 @@
             <field name="name">Claúsulas</field>
             <field name="res_model">hola_calidad.clause</field>
       
-            <field name="view_mode">tree,form</field>
+            <field name="view_mode">list,form</field>
             <field name="help" type="html">
                 <p class="oe_view_nocontent_create">Crea claúsulas de gestión de calidad</p>
             </field>
@@ -933,7 +933,7 @@
             <field name="name">Requisitos</field>
             <field name="res_model">hola_calidad.requirement</field>
       
-            <field name="view_mode">tree,form</field>
+            <field name="view_mode">list,form</field>
             <field name="help" type="html">
                 <p class="oe_view_nocontent_create">Crea requisitos de gestión de calidad</p>
             </field>
