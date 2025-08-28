@@ -19,16 +19,16 @@
         <field name="name">mgmtsystem.action.type.view.tree</field>
         <field name="model">mgmtsystem.action.type</field>
         <field name="arch" type="xml">
-            <tree string="Tipo de acción">
+            <list string="Tipo de acción">
                 <field name="name" />
-            </tree>
+            </list>
         </field>
     </record>
 
     <record id="mgmtsystem_action_type_action" model="ir.actions.act_window">
         <field name="name">Tipo de acción</field>
         <field name="res_model">mgmtsystem.action.type</field>
-        <field name="view_mode">tree,form</field>
+        <field name="view_mode">list,form</field>
         <field name="domain">[]</field>
         <field name="context">{}</field>
         <field name="help" type="html">
@@ -41,9 +41,8 @@
     <record id="view_mgmtsystem_action_tree" model="ir.ui.view">
         <field name="name">mgmtsystem.action.tree</field>
         <field name="model">mgmtsystem.action</field>
-        <field name="type">tree</field>
         <field name="arch" type="xml">
-            <tree string="Acción" banner_route="/action/action_onboarding">
+            <list string="Acción" >
                 <field name="reference" />
                 <field name="name" string="Título" />
                 <field name="type_action_id" />
@@ -52,7 +51,7 @@
                 <field name="date_deadline" />
                 <field name="state" />
                 <field name="company_id" groups="base.group_multi_company" />
-            </tree>
+            </list>
         </field>
     </record>
 
@@ -88,18 +87,18 @@
                             name="send_follow"
                             type="object"
                             class="btn-primary"
-                            attrs="{'invisible':[('state','in',('follow','done','cancel'))]}" />
+                            invisible="state in ['follow','done','cancel']" />
                     <button string="Cerrar"
                             name="send_done"
                             type="object"
                             class="btn-primary"
-                            attrs="{'invisible':[('state','!=', 'follow')]}" />
+                            invisible="state != 'follow'" />
                     <button string="Cancelar"
                             name="send_cancel"
                             confirm="Esto volverá obsoleto el presente registro. ¿Está seguro(a)?"
                             type="object"
                             class="btn-second"
-                            attrs="{'invisible': [('state','in',('cancel'))]}" />
+                            invisible="state in ['cancel']" />
                 </header>
                 <sheet string="Acción">
                     <div class="oe_button_box" name="button_box"></div>
@@ -110,11 +109,11 @@
                     </div>
                     <group>
                         <group>
-                            <field name="type_action_id" attrs="{'readonly': [('state','not in',('open'))]}" />
-                            <field name="user_id" attrs="{'readonly': [('state','not in',('open'))]}" />
-                            <field name="track_user_id" attrs="{'readonly': [('state','not in',('open'))]}" />
-                            <field name="process_id" attrs="{'readonly': [('state','not in',('open'))]}" />
-                            <field name="system_id" options="{'no_create': True, 'no_edit': True}"  attrs="{'readonly': [('state','not in',('open'))]}" />
+                            <field name="type_action_id" readonly="state not in ['open']" />
+                            <field name="user_id" readonly="state not in ['open']" />
+                            <field name="track_user_id" readonly="state not in ['open']" />
+                            <field name="process_id" readonly="state not in ['open']" />
+                            <field name="system_id" options="{'no_create': True, 'no_edit': True}"  readonly="state not in ['open']" />
                         </group>
                         <group>
                             <field name="reference" />
@@ -122,9 +121,10 @@
                         </group>
                         <br />
                         <group>
-                            <field name="date_open" attrs="{'readonly': [('state','in',('done','cancel'))]}" />
-                            <field name="date_deadline" attrs="{'readonly': [('state','in',('done','cancel'))]}" />
-                            <field name="date_closed" attrs="{'invisible': [('date_closed','=',False)],'readonly': [('state','in',('done','cancel'))]}" />
+                            <field name="date_open" readonly="state in ['done','cancel']" />
+                            <field name="date_deadline" readonly="state in ['done','cancel']" />
+                            <field name="date_closed" invisible="date_closed == False" 
+                            readonly="state in ['done','cancel']" />
                         </group>
                         <group>
                             <field name="number_of_days_to_open" />
@@ -137,19 +137,22 @@
                         <page string="Descripción">
                             <field name="description" nolabel="1" />
                         </page>
-                        <page string="Seguimiento" attrs="{'invisible': [('state','in',('open'))]}">
+                        <page string="Seguimiento" 
+                        invisible="state in ['open']">
                             <group>
                                 <group>
-                                    <field name="date_follow" attrs="{'readonly': [('state','in',('close','cancel'))]}" />
+                                    <field name="date_follow" 
+                                    readonly="state in ['close','cancel']" />
                                     <label for="efficient" />
                                     <div>
-                                        <field name="efficient" class="oe_inline" style="vertical-align:baseline" attrs="{'readonly': [('state','in',('close','cancel'))]}" />
+                                        <field name="efficient" class="oe_inline" style="vertical-align:baseline" 
+                                        readonly="state in ['close','cancel']" />
                                         %
                                     </div>
-                                    <field name="evidence" attrs="{'readonly': [('state','in',('close','cancel'))]}" />
+                                    <field name="evidence" readonly="state in ['close','cancel']" />
                                 </group>
                                 <group>
-                                    <field name="result" attrs="{'readonly': [('state','in',('close','cancel'))]}" />
+                                    <field name="result" readonly="state in ['close','cancel']" />
                                 </group>
                             </group>
                         </page>
@@ -220,7 +223,7 @@
                                     <t t-if="record.message_needaction_counter.raw_value">
                                         <span class='oe_kanban_mail_new' title='Unread Messages'>
                                             <i class='fa fa-comments' />
-                                            <t t-raw="record.message_needaction_counter.raw_value" />
+                                            <t t-esc="record.message_needaction_counter.value" />
                                         </span>
                                     </t>
                                 </div>

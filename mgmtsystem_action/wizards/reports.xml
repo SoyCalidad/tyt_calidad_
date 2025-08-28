@@ -12,10 +12,10 @@
                     <group>
                         <field name="filter_by"/>
                     </group>
-                    <group attrs="{'invisible': [('filter_by','!=','action')]}">
+                    <group invisible="filter_by != 'action'">
                         <field name="action_ids"/>
                     </group>
-                    <group attrs="{'invisible': [('filter_by','!=','date')]}">
+                    <group invisible="filter_by != 'date'">
                         <field name="init_date"/>
                         <field name="end_date"/>
                     </group>
