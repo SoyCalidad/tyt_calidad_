@@ -32,7 +32,8 @@ class LegalPlanReportWizard(models.TransientModel):
     _description = "legal.plan.report.wizard"
 
     def action_print(self):
-        return self.env.ref('mgmtsystem_legal.report_announcement').report_action(self.plan_ids)
+        # return self.env.ref('mgmtsystem_legal.report_announcement').report_action(self.plan_ids)
+        return True 
 
     plan_ids = fields.Many2one(
         string='Planes legales',

@@ -61,14 +61,14 @@
             <field name="name">legal.legal.tree</field>
             <field name="model">legal.legal</field>
             <field name="arch" type="xml">
-                <tree string="Requisitos legales">
+                <list string="Requisitos legales">
                     <field name="name" />
                     <field name="type_id" />
                     <field name="entity_id" />
                     <field name="date_release" />
                     <field name="user_id" />
                     <field name="state" />
-                </tree>
+                </list>
             </field>
         </record>
 
@@ -83,23 +83,23 @@
                                 name="send_validate"
                                 type="object"
                                 class="btn-primary"
-                                attrs="{'invisible':[('state','!=', 'elaborate')]}" />
+                                invisible="state != 'elaborate'" />
                         <button string="Caducado"
                                 name="send_caducated"
                                 type="object"
                                 class="btn-second"
-                                attrs="{'invisible':[('state','!=', 'validate')]}" />
+                                invisible="state != 'validate'" />
                         <button name="button_new_version"
                                 type="object"
                                 string="Nueva versión"
-                                states="validate"
+                                invisible="state != 'validate'"
                                 class="oe_highlight" />
                     </header>
                     <sheet>
                         <div class="oe_button_box" name="button_box">
                             <!--
                             <button class="oe_stat_button"
-                                    attrs="{'invisible': [('articles_count','=',0)]}"
+                                    invisible="articles_count == 0"
                                     type="action"
                                     name="%()"
                                     icon="fa-files-o">
@@ -116,37 +116,37 @@
                         <div class="oe_title">
                             <label for="name" />
                             <h2>
-                                <field name="name" attrs="{'readonly': [('state','not in',('elaborate'))] }" />
+                                <field name="name" readonly="state not in ['elaborate']" />
                             </h2>
                         </div>
                         <group>
                             <group>
                                 <field name="version" />
-                                <field name="type_id" attrs="{'readonly': [('state','not in',('elaborate'))]}" required="True" />
-                                <field name="entity_id" attrs="{'readonly': [('state','not in',('elaborate'))] }" required="True" />
-                                <field name="reference" attrs="{'readonly': [('state','not in',('elaborate'))] }" />
-                                <field name="date_release" attrs="{'readonly': [('state','not in',('elaborate'))] }" required="True" />
+                                <field name="type_id" readonly="state not in ['elaborate']" required="True" />
+                                <field name="entity_id" readonly="state not in ['elaborate']" required="True" />
+                                <field name="reference" readonly="state not in ['elaborate']" />
+                                <field name="date_release" readonly="state not in ['elaborate']" required="True" />
                             </group>
                             <group>
-                                <field name="is_outsourcing" attrs="{'readonly': [('state','not in',('elaborate'))] }" />
-                                <field name="partner_id" attrs="{'invisible': [('is_outsourcing','=',False)],'readonly': [('state','not in',('elaborate'))]}" />
+                                <field name="is_outsourcing" readonly="state not in ['elaborate']" />
+                                <field name="partner_id" invisible="is_outsourcing == False" readonly="state not in ['elaborate']" />
                             </group>
                         </group>
                         <group>
-                            <field name="resume" attrs="{'readonly': [('state','not in',('elaborate'))] }" required="True" />
-                            <field name="user_id" attrs="{'invisible': [('is_outsourcing', '=', True)]}" />
+                            <field name="resume" readonly="state not in ['elaborate']" required="True" />
+                            <field name="user_id" invisible="is_outsourcing == True" />
                         </group>
                         <notebook>
                             <page string="Articulos">
-                                <field name="article_ids" attrs="{'readonly': [('state','not in',('elaborate'))]}">
-                                    <tree editable="bottom">
-                                        <field name="name" attrs="{'readonly': [('parent.state','not in',('elaborate'))]}" />
-                                        <field name="resume" attrs="{'readonly': [('parent.state','not in',('elaborate'))]}" />
-                                        <field name="stakeholders" attrs="{'readonly': [('parent.state','not in',('elaborate'))]}" />
-                                        <field name="partner_id" attrs="{'readonly': [('parent.state','not in',('elaborate'))]}" />
+                                <field name="article_ids" readonly="state not in ['elaborate']">
+                                    <list editable="bottom">
+                                        <field name="name" readonly="parent.state not in ['elaborate']" />
+                                        <field name="resume" readonly="parent.state not in ['elaborate']" />
+                                        <field name="stakeholders" readonly="parent.state not in ['elaborate']" />
+                                        <field name="partner_id" readonly="parent.state not in ['elaborate']" />
                                         <button name="action_see_attachments" type="object" string="Adjuntos" />
                                         <field name="has_attachments" invisible="1" />
-                                    </tree>
+                                    </list>
                                 </field>
                             </page>
                         </notebook>
@@ -180,7 +180,7 @@
             <field name="type">ir.actions.act_window</field>
             <field name="res_model">legal.legal</field>
 
-            <field name="view_mode">tree,form,kanban,graph,pivot</field>
+            <field name="view_mode">list,form,kanban,graph,pivot</field>
         </record>
 
         <menuitem id="legal_legal_item"
