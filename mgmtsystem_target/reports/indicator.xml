@@ -10,11 +10,12 @@
                         <group name="filter_by" string="Filtrar por">
                             <field name="filter_by" />
                         </group>
-                        <group name="date_filter" string="Filtrar por fechas" attrs="{'invisible': [('filter_by','!=','date')]}">
+                        <group name="date_filter" string="Filtrar por fechas" 
+                        invisible="filter_by != 'date'">
                             <field name="start_date" />
                             <field name="end_date" />
                         </group>
-                        <group name="indicator_filter" string="Filtrar por indicadores" attrs="{'invisible': [('filter_by','!=','indicator')]}">
+                        <group name="indicator_filter" string="Filtrar por indicadores" invisible="filter_by != 'indicator'">
                             <field name="indicator_ids" />
                         </group>
                     </sheet>

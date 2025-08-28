@@ -8,7 +8,6 @@
             <field name="code">model.mail_reminder()</field>
             <field name="interval_number">1</field>
             <field name="interval_type">days</field>
-            <field name="numbercall">-1</field>
         </record>
 
         <record id="view_indicator_actions_search" model="ir.ui.view">
@@ -24,7 +23,7 @@
         <record model="ir.actions.act_window" id="show_indicator_action">
             <field name="name">Indicadores</field>
             <field name="res_model">mgmtsystem.indicator</field>
-            <field name="view_mode">kanban,form,tree</field>
+            <field name="view_mode">kanban,form,list</field>
             <field name="context">{"search_default_target_id": active_id}</field>
             <field name="search_view_id" ref="view_indicator_actions_search" />
         </record>
@@ -43,7 +42,7 @@
         <record model="ir.actions.act_window" id="show_process_action">
             <field name="name">Indicadores</field>
             <field name="res_model">mgmt.process</field>
-            <field name="view_mode">kanban,form,tree</field>
+            <field name="view_mode">kanban,form,list</field>
             <field name="context">{"search_default_target_ids": active_id}</field>
             <field name="search_view_id" ref="view_process_actions_search" />
         </record>
@@ -60,44 +59,44 @@
                             name="send_elaborate"
                             type="object"
                             class="btn-primary"
-                            attrs="{'invisible':[('state','in', ('elaborate','cancel','validate_ok','active','inactive'))]}" />
+                            invisible="state in ['elaborate','cancel','validate_ok','active','inactive']" />
                         <button string="Enviar a Revisar"
                             name="send_review"
                             type="object"
                             class="btn-primary"
-                            attrs="{'invisible':[('state','!=', 'elaborate')]}" />
+                            invisible="state != 'elaborate'" />
                         <button string="Enviar a Validar"
                             name="send_validate"
                             type="object"
                             class="btn-primary"
-                            attrs="{'invisible':[('state','in', ('elaborate','validate','cancel','validate_ok','active','inactive'))]}" />
+                            invisible="state in ['elaborate','validate','cancel','validate_ok','active','inactive']" />
                         <button string="Validar"
                             name="send_validate_ok"
                             type="object"
                             class="btn-primary"
-                            attrs="{'invisible':[('state','not in', ('validate'))]}" />
+                            invisible="state not in ['validate']" />
                         <button string="Finalizar"
                             name="send_finish"
                             type="object"
                             class="btn-primary"
-                            attrs="{'invisible':[('state','not in', ('active'))]}" 
+                            invisible="state not in ['active']" 
                             confirm="Esto finalizará el presente objetivo. ¿Está seguro(a)?"/>
                         <button string="Iniciar planificación"
                             name="proceed_to_do_stage"
                             type="object"
                             class="oe_highlight"
-                            attrs="{'invisible': [('state','!=','validate_ok')]}" />
+                            invisible="state != 'validate_ok'" />
                         <button name="button_new_version"
                             type="object"
                             string="Nueva versión"
-                            attrs="{'invisible':[('state', 'not in', ('validate_ok', 'active'))]}"
+                            invisible="state not in ['validate_ok', 'active']"
                             class="btn-second" />
                         <button string="Volver Obsoleto"
                             confirm="Esto volverá obsoleto el presente registro. ¿Está seguro(a)?"
                             name="send_cancel"
                             type="object"
                             class="btn-second"
-                            attrs="{'invisible': [('state','in',('cancel'))] }" />
+                            invisible="state in ['cancel']" />
                     </header>
                     <sheet>
                         <div class="oe_button_box" name="button_box">
@@ -130,13 +129,13 @@
                             </h2>
                         </div>
                         <group string="Información del objetivo" col="4">
-                            <field name="name" colspan="4" attrs="{'readonly': [('state','in',('validate_ok','cancel'))]}" style="overflow-wrap: break-word;" />
-                            <field name="requirements" colspan="4" attrs="{'readonly': [('state','in',('validate_ok','cancel'))]}" style="overflow-wrap: break-word;" />
-                            <field name="process_id" attrs="{'readonly': [('state','in',('validate_ok','cancel'))]}" />
-                            <field name="process_ids_2" attrs="{'readonly': [('state','in',('validate_ok','cancel'))]}" widget="many2many_tags" />
-                            <field name="system_id" options="{'no_create': True, 'no_edit': True}" attrs="{'readonly': [('state','in',('validate_ok','cancel'))]}" />
-                            <field name="description" attrs="{'readonly': [('state','in',('validate_ok','cancel'))]}" />
-                            <field name="user_id" options="{'no_open': True}" attrs="{'readonly': [('state','in',('validate_ok','cancel'))]}" />
+                            <field name="name" colspan="4" readonly="state in ['validate_ok','cancel']" style="overflow-wrap: break-word;" />
+                            <field name="requirements" colspan="4" readonly="state in ['validate_ok','cancel']" style="overflow-wrap: break-word;" />
+                            <field name="process_id" readonly="state in ['validate_ok','cancel']" />
+                            <field name="process_ids_2" readonly="state in ['validate_ok','cancel']" widget="many2many_tags" />
+                            <field name="system_id" options="{'no_create': True, 'no_edit': True}" readonly="state in ['validate_ok','cancel']" />
+                            <field name="description" readonly="state in ['validate_ok','cancel']" />
+                            <field name="user_id" options="{'no_open': True}" readonly="state in ['validate_ok','cancel']" />
                             <field name="department_id" />
                             <field name="department_ids" widget="many2many_tags" />
                             <field name="category_ids" widget="many2many_tags" options="{'color_field': 'color',}" placeholder="Categorías" />
@@ -148,8 +147,8 @@
                                         nolabel="1"
                                         colspan="4"
                                         context="{'default_target_id': id}"
-                                        attrs="{'readonly': [('state','in',('validate_ok', 'inactive', 'active', 'closed', 'cancel'))] }">
-                                        <tree>
+                                        readonly="state in ['validate_ok', 'inactive', 'active', 'closed', 'cancel']">
+                                        <list>
                                             <field name="name" />
                                             <field name="goal_value" />
                                             <field name="action_id" />
@@ -160,38 +159,47 @@
                                                 string="Abrir planificación"
                                                 type="object"
                                                 class="oe_highlight"
-                                                attrs="{'invisible': [('parent.state','not in',('validate_ok', 'active'))] }" />
-                                        </tree>
+                                                invisible="parent.state not in ['validate_ok', 'active']" />
+                                        </list>
                                     </field>
-                                    <field name="goal_progress" attrs="{'readonly': [('state','in',('validate_ok','cancel'))]}" />
+                                    <field name="goal_progress" readonly="state in ['validate_ok','cancel']" />
                                 </group>
                             </page>
                             <page name="action" string="Acciones">
-                                <field name="action_ids" attrs="{'readonly': [('state','in',('validate_ok','cancel'))]}" />
+                                <field name="action_ids" readonly="state in ['validate_ok','cancel']" />
                             </page>
                             <page name="risk_opp" string="Riesgos y oportunidades">
                                 <separator string="Riesgos" />
-                                <field name="risk_ids" attrs="{'readonly': [('state','in',('validate_ok','cancel'))]}" />
+                                <field name="risk_ids" 
+                                readonly="state in ['validate_ok','cancel']" />
                                 <separator string="Oportunidades" />
-                                <field name="opp_ids" attrs="{'readonly': [('state','in',('validate_ok','cancel'))]}" />
+                                <field name="opp_ids" readonly="state in ['validate_ok','cancel']" />
                             </page>
                             <page name="validation" string="Validación y versión">
                                 <group>
-                                    <field name="version" attrs="{'readonly': [('state','in',('validate_ok','cancel'))]}" />
+                                    <field name="version" 
+                                    readonly="state in ['validate_ok','cancel']" />
                                 </group>
                                 <group col="4">
                                     <group string="Encargados de formulación" colspan="4">
                                         <separator string="Elaboración" />
-                                        <field name="elaboration_step" colspan="2" nolabel="1" attrs="{'readonly': [('state','not in',('elaborate'))]}" />
+                                        <field name="elaboration_step" colspan="2" nolabel="1" 
+                                        readonly="state not in ['elaborate']" />
                                         <separator string="Revisión" />
-                                        <field name="review_step" colspan="2" nolabel="1" attrs="{'readonly': [('state','not in',('elaborate', 'review'))]}" />
+                                        <field name="review_step" colspan="2" nolabel="1" 
+                                        readonly="state not in ['elaborate', 'review']" />
                                         <separator string="Validación" />
-                                        <field name="validation_step" colspan="2" nolabel="1" attrs="{'readonly': [('state','not in',('elaborate', 'review', 'validate'))]}" />
+                                        <field name="validation_step" colspan="2" nolabel="1" 
+                                        readonly="state not in ['elaborate', 'review', 'validate']" />
                                     </group>
                                     <group string="Fechas de formulación" colspan="4">
-                                        <field name="date_elaborate" attrs="{'required': [('state','in',('elaborate'))], 'readonly': True}" />
-                                        <field name="date_review" attrs="{'required': [('state','in',('review'))], 'readonly': True, 'invisible': [('state','in',('elaborate'))] }" />
-                                        <field name="date_validate" groups="base.group_no_one,base.user_admin" attrs="{'invisible': [('state','in',('elaborate','review'))] }" />
+                                        <field name="date_elaborate" 
+                                        required="state in ['elaborate']"
+                                        readonly="1" />
+                                        <field name="date_review" required="state in ['review']"
+                                        readonly="True"
+                                        invisible="state in ['elaborate']" />
+                                        <field name="date_validate" groups="base.group_no_one,base.group_system" invisible="state in ['elaborate','review']" />
                                     </group>
                                 </group>
                             </page>
@@ -210,7 +218,7 @@
             <field name="name">mgmtsystem.target.view.tree</field>
             <field name="model">mgmtsystem.target</field>
             <field name="arch" type="xml">
-                <tree string="Objetivo" banner_route="/target/target_onboarding">
+                <list string="Objetivo" >
                     <field name="name" />
                     <field name="indicator_ids" />
                     <field name="process_id" />
@@ -219,7 +227,7 @@
                     <field name="user_id" />
                     <field name="description" />
                     <field name="state" />
-                </tree>
+                </list>
             </field>
         </record>
 
@@ -227,7 +235,7 @@
             <field name="name">mgmtsystem.target.kanban</field>
             <field name="model">mgmtsystem.target</field>
             <field name="arch" type="xml">
-                <kanban default_group_by="state" class="o_kanban_small_column" banner_route="/target/target_onboarding">
+                <kanban default_group_by="state" class="o_kanban_small_column" >
                     <field name="code" />
                     <field name="name" />
                     <field name="description" />
@@ -260,7 +268,7 @@
         <record id="target_action" model="ir.actions.act_window">
             <field name="name">Objetivo</field>
             <field name="res_model">mgmtsystem.target</field>
-            <field name="view_mode">kanban,tree,form</field>
+            <field name="view_mode">kanban,list,form</field>
             <field name="domain">[]</field>
             <field name="context">{}</field>
             <field name="help" type="html">
@@ -273,7 +281,7 @@
         <record id="target_cancel_action" model="ir.actions.act_window">
             <field name="name">Políticas obsoletas</field>
             <field name="res_model">mgmtsystem.target</field>
-            <field name="view_mode">tree,form</field>
+            <field name="view_mode">list,form</field>
             <field name="domain">[('state','=','cancel')]</field>
             <field name="context">{}</field>
         </record>
@@ -281,14 +289,14 @@
         <record id="show_ac_target_action" model="ir.actions.act_window">
             <field name="name">Acciones</field>
             <field name="res_model">mgmtsystem.action</field>
-            <field name="view_mode">tree,form</field>
+            <field name="view_mode">list,form</field>
             <field name="context">{}</field>
         </record>
 
         <record id="show_risk_target_action" model="ir.actions.act_window">
             <field name="name">Acciones</field>
             <field name="res_model">matrix.block.line</field>
-            <field name="view_mode">tree,form</field>
+            <field name="view_mode">list,form</field>
             <field name="context">{}</field>
         </record>
 
@@ -317,18 +325,18 @@
             <field name="name">mgmtsystem.goal.view.tree</field>
             <field name="model">mgmtsystem.goal</field>
             <field name="arch" type="xml">
-                <tree string="">
+                <list string="">
                     <field name="name" />
                     <field name="type" />
                     <field name="value" />
-                </tree>
+                </list>
             </field>
         </record>
 
         <record id="goal_action" model="ir.actions.act_window">
             <field name="name">Metas</field>
             <field name="res_model">mgmtsystem.goal</field>
-            <field name="view_mode">tree,form</field>
+            <field name="view_mode">list,form</field>
             <field name="domain">[]</field>
             <field name="context">{}</field>
             <field name="help" type="html">
@@ -346,7 +354,7 @@
                     <sheet>
                         <group>
                             <div class="oe_button_box" name="button_box">
-                                <widget name="web_ribbon" title="Archived" bg_color="bg-danger" attrs="{'invisible': [('active', '=', True)]}" />
+                                <widget name="web_ribbon" title="Archived" bg_color="bg-danger" invisible="active == True" />
                                 <field name="active" invisible="1" />
                             </div>
                             <group>
@@ -370,7 +378,7 @@
             <field name="name">mgmtsystem.target.frequency.view.tree</field>
             <field name="model">mgmtsystem.target.frequency</field>
             <field name="arch" type="xml">
-                <tree string="">
+                <list string="">
                     <field name="name" />
                     <field name="active" />
                     <field name="note" />
@@ -378,14 +386,14 @@
                     <field name="months" />
                     <field name="weeks" />
                     <field name="days" />
-                </tree>
+                </list>
             </field>
         </record>
 
         <record id="measurement_frequency_action" model="ir.actions.act_window">
             <field name="name">Periodo de tiempo</field>
             <field name="res_model">mgmtsystem.target.frequency</field>
-            <field name="view_mode">tree,form</field>
+            <field name="view_mode">list,form</field>
             <field name="domain">[]</field>
             <field name="context">{}</field>
             <field name="help" type="html">
@@ -429,19 +437,19 @@
             <field name="name">mgmtsystem.indicator.history.view.tree</field>
             <field name="model">mgmtsystem.indicator.history</field>
             <field name="arch" type="xml">
-                <tree string="">
+                <list string="">
                     <field name="date" />
                     <field name="goal_value" />
                     <field name="real_result" />
                     <field name="comments" />
-                </tree>
+                </list>
             </field>
         </record>
 
         <record id="measurement_history_action" model="ir.actions.act_window">
             <field name="name">Historial de medición</field>
             <field name="res_model">mgmtsystem.indicator.history</field>
-            <field name="view_mode">graph,tree,form</field>
+            <field name="view_mode">graph,list,form</field>
             <field name="domain">[]</field>
             <field name="context">{}</field>
         </record>
@@ -459,7 +467,7 @@
         <record model="ir.actions.act_window" id="show_actions_action">
             <field name="name">Acciones</field>
             <field name="res_model">mgmtsystem.action</field>
-            <field name="view_mode">kanban,form,tree</field>
+            <field name="view_mode">kanban,form,list</field>
             <field name="context">{"search_default_target_ids": active_id}</field>
             <field name="search_view_id" ref="view_actions_action_search" />
         </record>
@@ -494,18 +502,18 @@
             <field name="arch" type="xml">
                 <form string="">
                     <header>
-                        <field name="do_state" widget="statusbar" statusbar_visible="plan,tracked,accomplished,caducated,reconsidered" />
-                        <button string="Logrado con observaciones" name="do_accomplished_observation" type="object" class="oe_highlight" attrs="{'invisible':[('do_state','!=', 'tracked')]}" />
+                        <field name="do_state" widget="statusbar" statusbar_visible="plan,tracked,accomplished,accomplished_observation,caducated,cancel" />
+                        <button string="Logrado con observaciones" name="do_accomplished_observation" type="object" class="oe_highlight" invisible="do_state != 'tracked'" />
                         <button string="Iniciar medición"
                             name="do_tracked"
                             type="object"
                             class="btn-primary"
-                            attrs="{'invisible':[('do_state','not in', ('plan'))]}" />
+                            invisible="do_state not in ['plan']" />
                         <button string="Caducar"
                             name="do_caducated"
                             type="object"
                             class="btn-primary"
-                            attrs="{'invisible':[('do_state','not in', ('tracked'))]}" />
+                            invisible="do_state not in ['tracked']" />
                         <button string="Cancelar" name="do_cancel" type="object" />
                     </header>
                     <sheet>
@@ -516,10 +524,11 @@
                         <group>
                             <field name="name" />
                         </group>
-                        <group string="Periodo de medición" col="4" attrs="{'readonly':[('do_state','in', ('accomplished', 'cancel'))]}">
-                            <field name="start_date" attrs="{'readonly':[('do_state','in', ('accomplished', 'cancel'))]}" />
-                            <field name="term_date" attrs="{'readonly':[('do_state','in', ('accomplished', 'cancel'))]}" />
-                            <field name="measurement_frequency" attrs="{'readonly':[('do_state','in', ('accomplished', 'cancel'))]}" />
+                        <group string="Periodo de medición" col="4" readonly="do_state in ['accomplished', 'cancel']">
+                            <field name="start_date" 
+                            readonly="do_state in ['accomplished', 'cancel']" />
+                            <field name="term_date" readonly="do_state in ['accomplished', 'cancel']" />
+                            <field name="measurement_frequency" readonly="do_state in ['accomplished', 'cancel']" />
                             <field name="goal_id" />
                             <field name="formula" />
                             <field name="target_id" style="max-width:200px;word-break:break-word;" />
@@ -536,16 +545,16 @@
                                             name="create_history"
                                             type="object"
                                             class="btn-primary"
-                                            attrs="{'invisible':[('do_state','not in', ('plan', 'open'))]}" />
+                                            invisible="do_state not in ['plan', 'open']" />
                                     </group>
                                     <field name="history_ids">
-                                        <tree editable="bottom">
+                                        <list editable="bottom">
                                             <field name="date" />
                                             <field name="goal_value" />
                                             <field name="real_result" />
                                             <field name="comments" />
                                             <field name="accomplished" />
-                                        </tree>
+                                        </list>
                                     </field>
                                     <group>
                                         <label for="c_goal_progress" />
@@ -585,7 +594,7 @@
             <field name="name">mgmtsystem.indicator.view.tree</field>
             <field name="model">mgmtsystem.indicator</field>
             <field name="arch" type="xml">
-                <tree string="Indicadores">
+                <list string="Indicadores">
                     <field name="target_id" invisible="1" />
                     <field name="code" />
                     <field name="name" />
@@ -594,7 +603,7 @@
                     <field name="start_date" />
                     <field name="term_date" />
                     <field name="measurement_frequency" />
-                </tree>
+                </list>
             </field>
         </record>
 
@@ -641,7 +650,7 @@
         <record id="indicator_action" model="ir.actions.act_window">
             <field name="name">Indicadores</field>
             <field name="res_model">mgmtsystem.indicator</field>
-            <field name="view_mode">tree,form</field>
+            <field name="view_mode">list,form</field>
             <field name="domain">[]</field>
             <field name="context">{}</field>
             <field name="help" type="html">
@@ -652,7 +661,7 @@
         <record id="indicator_action_2" model="ir.actions.act_window">
             <field name="name">Indicadores</field>
             <field name="res_model">mgmtsystem.indicator</field>
-            <field name="view_mode">kanban,tree,form,graph</field>
+            <field name="view_mode">kanban,list,form,graph</field>
             <field name="domain">[]</field>
             <field name="context">{}</field>
             <field name="help" type="html">
@@ -677,7 +686,7 @@
         <record model="ir.actions.act_window" id="show_target_action">
             <field name="name">Objetivos</field>
             <field name="res_model">mgmtsystem.target</field>
-            <field name="view_mode">kanban,form,tree</field>
+            <field name="view_mode">kanban,form,list</field>
             <field name="context">{"search_default_process_ids": active_id}</field>
             <field name="search_view_id" ref="view_target_search" />
         </record>
@@ -698,7 +707,7 @@
         <record model="ir.actions.act_window" id="show_target_action_action">
             <field name="name">Objetivos</field>
             <field name="res_model">mgmtsystem.target</field>
-            <field name="view_mode">kanban,form,tree</field>
+            <field name="view_mode">kanban,form,list</field>
             <field name="context">{"search_default_action_ids": active_id}</field>
             <field name="search_view_id" ref="view_target_search" />
         </record>

@@ -13,6 +13,8 @@
         'mgmtsystem_process',
         'mgmtsystem_opportunity',
         'mgmtsystem_documentary_control',
+        'mgmtsystem_nonconformity',
+
     ],
     'data': [
         'security/security.xml',

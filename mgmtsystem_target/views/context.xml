@@ -21,11 +21,11 @@
                     <page name="target" string="Objetivos">
                         <separator string="Objetivos" />
                         <field name="target_ids">
-                            <tree>
+                            <list>
                                 <field name="code" />
                                 <field name="name" />
                                 <field name="description" style="white-space:break-spaces;max-width:200px;"/>
-                            </tree>
+                            </list>
                         </field>
                     </page>
                 </notebook>

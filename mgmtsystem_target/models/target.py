@@ -6,9 +6,8 @@ from datetime import datetime, timedelta
 from dateutil.relativedelta import relativedelta
 
 from odoo import _, api, fields, models
-from odoo.addons import decimal_precision as dp
 from odoo.exceptions import (AccessError, RedirectWarning, UserError,
-                             ValidationError, Warning)
+                             ValidationError)
 from odoo.tools import DEFAULT_SERVER_DATE_FORMAT
 
 
@@ -185,7 +184,8 @@ class Target(models.Model):
     def current_indicator_progress(self):
         res = []
         for each in self.indicator_ids:
-            res.append(each.goal_id.current_goal_progress())
+            pass
+            #res.append(each.goal_id.current_goal_progress())
 
     @api.depends('action_ids')
     def _compute_actions_count(self):
@@ -352,9 +352,6 @@ class Indicator(models.Model):
             'context': context,
         }
 
-    @api.depends('action_ids')
-    def _compute_actions_count(self):
-        self.action_count = len(self.action_ids)
 
     def do_stage(self):
         self.do_state = 'plan'
@@ -393,7 +390,7 @@ class Indicator(models.Model):
                 )
 
     def create_history(self):
-        if self.do_state not in ('plan', 'open'):
+        if self.do_state not in ('plan',):
             raise UserError(
                 'Solo se puede crear un cronograma en la etapa de planificación o abierto')
         for each in self.history_ids:
@@ -519,9 +516,6 @@ class MeasurementPeriod(models.Model):
             months=self.months,
         )
 
-    @api.constrains('line_ids')
-    def _check_lines(self):
-        pass
 
     def compute(self, value, date_ref=False):
         date_ref = date_ref or fields.Date.today()
