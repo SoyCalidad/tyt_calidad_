@@ -23,11 +23,11 @@
             </field>
             <!--
             <field name="model_id" position="after">
-                <field name="document_id" attrs="{'invisible': [('config_type','!=','document')]}" />
+                <field name="document_id" invisible="config_type != 'document'" />
             </field>
             -->
             <field name="model_id" position="replace">
-                <field name="model_id" attrs="{'invisible': [('config_type','!=','model')]}" />
+                <field name="model_id" invisible="config_type != 'model'" />
             </field>
         </field>
     </record>

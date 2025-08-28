@@ -11,7 +11,7 @@ class ComplaintReport(models.AbstractModel):
 
     @api.model
     def _get_report_values(self, docids, data=None):
-        if data.get('is_wizard'):
+        if data and data.get('is_wizard'):
             if data['ids_']:
                 process = self.env['mgmt.categ'].browse(
                     data['ids_'],)

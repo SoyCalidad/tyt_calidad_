@@ -1,7 +1,7 @@
 from odoo import api, models
 
 
-class PurchaseReport(models.AbstractModel):
+class PurchaseOrderReport(models.AbstractModel):
     _name = 'report.purchase.report_purchaseorder'
     _description = 'Orden de compra (Reporte)'
 
@@ -20,7 +20,7 @@ class PurchaseReport(models.AbstractModel):
         }
 
 
-class PurchaseReport(models.AbstractModel):
+class PurchaseQuotationReport(models.AbstractModel):
     _name = 'report.purchase.report_purchasequotation'
     _description = 'Solicitud de presupuesto (Reporte)'
 
