@@ -2,7 +2,7 @@
 <odoo>
     <!-- ONBOARDING STEPS -->
 
-    <template id="general_analysis_onboarding_state">
+    <!-- <template id="general_analysis_onboarding_state">
         <t t-call="base.onboarding_step">
             <t t-set="title">Análisis</t>
             <t t-set="description"></t>
@@ -65,10 +65,10 @@
             <t t-set="model" t-value="'res.company'" />
             <t t-set="state" t-value="state.get('general_act_onboarding_state')" />
         </t>
-    </template>
+    </template> -->
 
     <!-- ONBOARDING PANELS -->
-    <template id="general_onboarding_panel" name="general.onboarding.panel">
+    <!-- <template id="general_onboarding_panel" name="general.onboarding.panel">
         <t t-call="base.onboarding_container">
             <t t-set="classes" t-value="'o_onboarding_blue'"/>
             <t t-set="bg_image" t-value="'/account/static/src/img/account_invoice_onboarding_bg.jpg'"/>
@@ -81,20 +81,19 @@
             <t t-call="menus_hola_calidad.general_check_onboarding_state" name="general_check_step" />
             <t t-call="menus_hola_calidad.general_act_onboarding_state" name="general_act_step" />
         </t>
-    </template>
+    </template> -->
 
     <!-- hola_calidad.diagnostic inherit tree view -->
-    <record id="view_id" model="ir.ui.view">
+    <!-- <record id="view_id" model="ir.ui.view">
         <field name="name">hola_calidad.diagnostic.inherit.view.tree</field>
         <field name="model">hola_calidad.diagnostic</field>
         <field name="inherit_id" ref="hola_calidad.hola_calidad_diagnostic_tree"/>
         <field name="arch" type="xml">
-            <!-- Add your xpath here -->
-            <tree position="attributes">
+            <list position="attributes">
                 <attribute name="banner_route">/general/general_onboarding</attribute>
-            </tree>
+            </list>
         </field>
-    </record>
+    </record> -->
 
 
 </odoo>
