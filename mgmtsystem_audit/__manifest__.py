@@ -11,7 +11,7 @@
     'license': 'Other proprietary',
     'version': '0.1',
 
-    'depends': ['mgmtsystem_process', 'hola_calidad', 'mgmtsystem_validation', 'mgmtsystem_documentary_control'],
+    'depends': ['mgmtsystem_process', 'hola_calidad', 'mgmtsystem_validation', 'mgmtsystem_documentary_control',],
 
     'data': [
         'security/security.xml',

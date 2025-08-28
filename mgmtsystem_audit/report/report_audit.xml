@@ -1,13 +1,15 @@
 <odoo>
     <data>
 
-        <report id="action_report_audit"
-                model="audit.audit"
-                string="Plan de auditoría"
-                report_type="qweb-pdf"
-                name="mgmtsystem_audit.audit_report"
-                file="mgmtsystem_audit.audit_report"
-                paperformat="hola_calidad.portrait" />
+        <record id="action_report_audit" model="ir.actions.report">
+            <field name="name">Plan de auditoría</field>
+            <field name="model">audit.audit</field>
+            <field name="report_type">qweb-pdf</field>
+            <field name="report_name">mgmtsystem_audit.audit_report</field>
+            <field name="report_file">mgmtsystem_audit.audit_report</field>
+            <field name="paperformat_id" ref="hola_calidad.portrait" />
+        </record>
+
 
         <template id="audit_report">
             <t t-call="web.html_container">
@@ -20,29 +22,41 @@
                     </t>
                     <div class="header">
                         <style type="text/css">
-                            .tg  {border-collapse:collapse;border-spacing:0;margin:0px auto;width:100%;}
-                            .tg td{border-color:#c0c0c0;border-style:solid;border-width:1px;font-family: Palatino, Palatino Linotype, Palatino LT STD, Book Antiqua, Georgia, serif;font-size:14px;
-                            overflow:hidden;padding:10px 5px;word-break:normal;text-align:middle;align:center;}
-                            .tg th{border-color:#c0c0c0;border-style:solid;border-width:1px;font-family: Palatino, Palatino Linotype, Palatino LT STD, Book Antiqua, Georgia, serif;font-size:14px;
+                            .tg {border-collapse:collapse;border-spacing:0;margin:0px
+                            auto;width:100%;}
+                            .tg
+                            td{border-color:#c0c0c0;border-style:solid;border-width:1px;font-family:
+                            Palatino, Palatino Linotype, Palatino LT STD, Book Antiqua, Georgia,
+                            serif;font-size:14px;
+                            overflow:hidden;padding:10px
+                            5px;word-break:normal;text-align:middle;align:center;}
+                            .tg
+                            th{border-color:#c0c0c0;border-style:solid;border-width:1px;font-family:
+                            Palatino, Palatino Linotype, Palatino LT STD, Book Antiqua, Georgia,
+                            serif;font-size:14px;
                             font-weight:normal;overflow:hidden;padding:10px 5px;word-break:normal;}
-                            .tg .tg-9wq8{border-color:inherit;text-align:center;vertical-align:middle}
-                            .tg .tg-1wig{border-color:inherit;text-align:center;vertical-align:middle;font-size:16px;font-weight:bold;}
-                            .tg .tg-0lax{border-color:inherit;text-align:center;vertical-align:middle;font-size:12px;}
+                            .tg
+                            .tg-9wq8{border-color:inherit;text-align:center;vertical-align:middle}
+                            .tg
+                            .tg-1wig{border-color:inherit;text-align:center;vertical-align:middle;font-size:16px;font-weight:bold;}
+                            .tg
+                            .tg-0lax{border-color:inherit;text-align:center;vertical-align:middle;font-size:12px;}
                         </style>
                         <table class="tg">
                             <tbody>
                                 <tr>
                                     <td class="tg-1wig" rowspan="3" width="20%" style="width:15%">
                                         <t t-if="company.logo">
-                                            <img t-att-src="image_data_uri(company.logo)" style="max-width:100px;max-height:100px;vertical-align:middle;" alt="Logo"/>
+                                            <img t-att-src="image_data_uri(company.logo)"
+                                                style="max-width:100px;max-height:100px;vertical-align:middle;"
+                                                alt="Logo" />
                                         </t>
                                     </td>
                                     <td class="tg-1wig" rowspan="3" width="80%" style="width:65%;">
                                         PLAN DE AUDITORÍA
                                     </td>
-                                    <td class="tg-0lax" style="width:20%">
-                                        Código: 
-                                        <span t-field="doc.code" />
+                                    <td class="tg-0lax" style="width:20%"> Código: <span
+                                            t-field="doc.code" />
                                     </td>
                                 </tr>
                                 <tr>
@@ -64,14 +78,25 @@
                         <div class="page">
                             <div class="general">
                                 <style type="text/css">
-                                    .tg  {border-collapse:collapse;border-spacing:0;width:100%;align:center}
-                                    .tg td{font-family: Palatino, Palatino Linotype, Palatino LT STD, Book Antiqua, Georgia, serif;font-size:14px;padding:10px 5px;border-style:solid;border-width:1px;overflow:hidden;word-break:normal;border-color:#c0c0c0;}
-                                    .tg th{font-family: Palatino, Palatino Linotype, Palatino LT STD, Book Antiqua, Georgia, serif;font-size:14px;font-weight:normal;padding:10px 5px;border-style:solid;border-width:1px;overflow:hidden;word-break:normal;border-color:#c0c0c0;}
-                                    .tg .tg-lboi{border-color:inherit;text-align:left;vertical-align:middle}
-                                    .tg .tg-fu7v{font-weight:bold;background-color:#efefef;border-color:inherit;text-align:left;vertical-align:middle}
-                                    .tg .tg-dvid{font-weight:bold;background-color:#efefef;border-color:inherit;text-align:left;vertical-align:top}
-                                    .tg .tg-0pky{border-color:inherit;text-align:left;vertical-align:top}
-                                    .tg .tg-c6of{background-color:#ffffff;border-color:inherit;text-align:left;vertical-align:top}
+                                    .tg
+                                    {border-collapse:collapse;border-spacing:0;width:100%;align:center}
+                                    .tg td{font-family: Palatino, Palatino Linotype, Palatino LT
+                                    STD, Book Antiqua, Georgia, serif;font-size:14px;padding:10px
+                                    5px;border-style:solid;border-width:1px;overflow:hidden;word-break:normal;border-color:#c0c0c0;}
+                                    .tg th{font-family: Palatino, Palatino Linotype, Palatino LT
+                                    STD, Book Antiqua, Georgia,
+                                    serif;font-size:14px;font-weight:normal;padding:10px
+                                    5px;border-style:solid;border-width:1px;overflow:hidden;word-break:normal;border-color:#c0c0c0;}
+                                    .tg
+                                    .tg-lboi{border-color:inherit;text-align:left;vertical-align:middle}
+                                    .tg
+                                    .tg-fu7v{font-weight:bold;background-color:#efefef;border-color:inherit;text-align:left;vertical-align:middle}
+                                    .tg
+                                    .tg-dvid{font-weight:bold;background-color:#efefef;border-color:inherit;text-align:left;vertical-align:top}
+                                    .tg
+                                    .tg-0pky{border-color:inherit;text-align:left;vertical-align:top}
+                                    .tg
+                                    .tg-c6of{background-color:#ffffff;border-color:inherit;text-align:left;vertical-align:top}
                                 </style>
                                 <table class="tg">
                                     <tr>
@@ -144,13 +169,23 @@
                             </div>
                             <div class="plan">
                                 <style type="text/css">
-                                    .tg  {border-collapse:collapse;border-spacing:0;width:100%;align:center}
-                                    .tg td{font-family: Palatino, Palatino Linotype, Palatino LT STD, Book Antiqua, Georgia, serif;font-size:14px;padding:10px 5px;border-style:solid;border-width:1px;overflow:hidden;word-break:normal;border-color:#c0c0c0;}
-                                    .tg th{font-family: Palatino, Palatino Linotype, Palatino LT STD, Book Antiqua, Georgia, serif;font-size:14px;font-weight:normal;padding:10px 5px;border-style:solid;border-width:1px;overflow:hidden;word-break:normal;border-color:#c0c0c0;}
-                                    .tg .tg-lboi{border-color:inherit;text-align:left;vertical-align:middle}
-                                    .tg .tg-wa1i{font-weight:bold;background-color:#efefef;border-color:inherit;text-align:center;vertical-align:middle}
-                                    .tg .tg-amwm{border-color:inherit;text-align:left;vertical-align:top}
-                                    .tg .tg-0lax{background-color:#ffffff;border-color:inherit;text-align:left;vertical-align:top}
+                                    .tg
+                                    {border-collapse:collapse;border-spacing:0;width:100%;align:center}
+                                    .tg td{font-family: Palatino, Palatino Linotype, Palatino LT
+                                    STD, Book Antiqua, Georgia, serif;font-size:14px;padding:10px
+                                    5px;border-style:solid;border-width:1px;overflow:hidden;word-break:normal;border-color:#c0c0c0;}
+                                    .tg th{font-family: Palatino, Palatino Linotype, Palatino LT
+                                    STD, Book Antiqua, Georgia,
+                                    serif;font-size:14px;font-weight:normal;padding:10px
+                                    5px;border-style:solid;border-width:1px;overflow:hidden;word-break:normal;border-color:#c0c0c0;}
+                                    .tg
+                                    .tg-lboi{border-color:inherit;text-align:left;vertical-align:middle}
+                                    .tg
+                                    .tg-wa1i{font-weight:bold;background-color:#efefef;border-color:inherit;text-align:center;vertical-align:middle}
+                                    .tg
+                                    .tg-amwm{border-color:inherit;text-align:left;vertical-align:top}
+                                    .tg
+                                    .tg-0lax{background-color:#ffffff;border-color:inherit;text-align:left;vertical-align:top}
                                 </style>
                                 <table id="line_ids" class="tg">
                                     <tr>
@@ -166,7 +201,8 @@
                                                 <span t-field="l.name" />
                                             </td>
                                             <td class="tg-wo31">
-                                                <span t-esc="context_timestamp(l.datetime).strftime('%d-%m-%Y %H:%M')" />
+                                                <span
+                                                    t-esc="context_timestamp(l.datetime).strftime('%d-%m-%Y %H:%M')" />
                                             </td>
                                             <td class="tg-wo31">
                                                 <span t-field="l.department_id.name" />
@@ -183,23 +219,18 @@
                             </div>
                         </div>
                         <div class="footer" style="border-top: 1px solid black;font-size: 8px;">
-                            <div class="text-center" style="border-top: 1px solid black;font-size: 10px;text-align:center;">
-                                ©
-                                <span t-field="company.name" />
-                                . All Rights Reserved.
-                                <br />
-                                PROHIBIDA SU REPRODUCCIÓN SIN AUTORIZACIÓN EXPRESA DE LA DIRECCIÓN.
-                                <br />
-                                CUALQUIER COPIA IMPRESA NO CONTROLADA. DEBE SER ROTULADA COMO "COPIA NO CONTROLADA".
-                                <br />
-                                CONSULTE VERSIÓN ELECTRÓNICA
-                            </div>
+                            <div class="text-center"
+                                style="border-top: 1px solid black;font-size: 10px;text-align:center;">
+                                © <span t-field="company.name" /> . All Rights Reserved. <br />
+                                PROHIBIDA SU REPRODUCCIÓN SIN AUTORIZACIÓN EXPRESA DE LA DIRECCIÓN. <br />
+                                CUALQUIER COPIA IMPRESA NO CONTROLADA. DEBE SER ROTULADA COMO "COPIA
+                                NO CONTROLADA". <br /> CONSULTE VERSIÓN ELECTRÓNICA </div>
                         </div>
                     </t>
                 </t>
             </t>
         </template>
 
-      
+
     </data>
 </odoo>

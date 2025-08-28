@@ -2,7 +2,7 @@
 <odoo>
     <!-- ONBOARDING STEPS -->
 
-    <template id="onboarding_audit_plan_step">
+    <!-- <template id="onboarding_audit_plan_step">
         <t t-call="base.onboarding_step">
             <t t-set="title">Programa de auditorías</t>
             <t t-set="description">Cree un programa de auditorías.</t>
@@ -39,10 +39,10 @@
             <t t-set="model" t-value="'res.company'" />
             <t t-set="state" t-value="state.get('audit_report_onboarding_state')" />
         </t>
-    </template>
+    </template> -->
 
     <!-- ONBOARDING PANELS -->
-    <template id="audit_onboarding_panel" name="audit.onboarding.panel">
+    <!-- <template id="audit_onboarding_panel" name="audit.onboarding.panel">
         <t t-call="base.onboarding_container">
             <t t-set="classes" t-value="'o_onboarding_blue'"/>
             <t t-set="bg_image" t-value="'/account/static/src/img/account_invoice_onboarding_bg.jpg'"/>
@@ -53,7 +53,7 @@
             <t t-call="mgmtsystem_audit.onboarding_audit_audit_step" name="audit_audit_step" />
             <t t-call="mgmtsystem_audit.onboarding_audit_report_step" name="audit_report_step" />
         </t>
-    </template>
+    </template> -->
 
     <!-- Views -->
 

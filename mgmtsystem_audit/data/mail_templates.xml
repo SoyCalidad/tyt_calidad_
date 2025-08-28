@@ -19,7 +19,10 @@
                 </div>
             </field>
             <field name="lang">{{ user.lang }}</field>
-            <field name="report_template" ref="mgmtsystem_audit.action_report_audit" />
+            <!-- <field name="report_template" ref="mgmtsystem_audit.action_report_audit" /> -->
+            <field name="report_template_ids" eval="[(6,0,[
+                ref('mgmtsystem_audit.action_report_audit')
+            ])]" />
             <field name="auto_delete" eval="True" />
         </record>
     </data>
