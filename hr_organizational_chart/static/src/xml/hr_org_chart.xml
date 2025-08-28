@@ -1,0 +1,13 @@
+<templates id="org_chart_templates" xml:space="preserve">
+    <t t-name="hr_org_chart_employee.OrgChartDepartment">
+        <div class="o_org_chart">
+            <t t-foreach="employee_data" t-as="emp" t-key="emp.id">
+                <div class="node" t-att-data-emp-id="emp.id" t-on-click="viewEmployee">
+                    <span class="office"><t t-esc="emp.office"/></span>
+                    <div class="title"><t t-esc="emp.name"/></div>
+                    <div class="content"><t t-esc="emp.title"/></div>
+                </div>
+            </t>
+        </div>
+    </t>
+</templates>
