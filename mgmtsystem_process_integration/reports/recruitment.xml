@@ -67,14 +67,13 @@
             <field name="binding_type">report</field>
         </record>
 
-        <report
-            id="report_general_applicant"
-            model="hr.general.applicant.report.wizard"
-            string="Solicitudes de empleo"
-            report_type="xlsx"
-            name="mgmtsystem_process_integration.general_applicant_report"
-            file="Solicitudes de empleo"
-        />
+        <record id="report_general_applicant" model="ir.actions.report">
+            <field name="name">Solicitudes de empleo</field>
+            <field name="model">hr.general.applicant.report.wizard</field>
+            <field name="report_type">xlsx</field>
+            <field name="report_name">mgmtsystem_process_integration.general_applicant_report</field>
+            <field name="report_file">Solicitudes de empleo</field>
+        </record>
 
 
         <menuitem id="general_applicant_report_menu" 

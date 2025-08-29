@@ -5,7 +5,7 @@
             <field name="name">Procedimientos de Contexto Organizacional</field>
             <field name="res_model">mgmt.process</field>
             
-            <field name="view_mode">kanban,tree,form</field>
+            <field name="view_mode">kanban,list,form</field>
             <field name="domain">[('name', '=', 'Contexto de la organización')]</field>
             <field name="context">{}</field>
         </record>

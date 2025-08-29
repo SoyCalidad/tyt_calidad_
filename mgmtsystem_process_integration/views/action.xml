@@ -5,7 +5,7 @@
             <field name="name">Riesgos</field>
             <field name="res_model">matrix.block.line</field>
             
-            <field name="view_mode">kanban,form,tree</field>
+            <field name="view_mode">kanban,form,list</field>
             <field name="context">{}</field>
         </record>
 
@@ -13,7 +13,7 @@
             <field name="name">Oportunidades</field>
             <field name="res_model">matrix.block.line</field>
             
-            <field name="view_mode">kanban,form,tree</field>
+            <field name="view_mode">kanban,form,list</field>
             <field name="context">{}</field>
         </record>
 
@@ -46,10 +46,10 @@
                         <field name="origin_model_id" invisible="1" />
                         <field name="origin_int_id" invisible="1" />
                         <field name="origin_ids">
-                            <tree>
+                            <list>
                                 <field name="origin_model_id" />
                                 <button string="Abrir origen" name="open_origin_record" type="object" class="oe_highlight" />    
-                            </tree>
+                            </list>
                         </field>
                     </page>
                     <page name="context" string="Contexto">
@@ -72,7 +72,7 @@
         <record id="mgmt_action_process_action" model="ir.actions.act_window">
             <field name="name">Procedimientos de Acciones</field>
             <field name="res_model">mgmt.process</field>
-            <field name="view_mode">kanban,tree,form</field>
+            <field name="view_mode">kanban,list,form</field>
             <field name="domain">[('name', '=', 'ACCIONES CORRECTIVAS, PREVENTIVAS Y DE MEJORA')]</field>
             <field name="context">{}</field>
         </record>

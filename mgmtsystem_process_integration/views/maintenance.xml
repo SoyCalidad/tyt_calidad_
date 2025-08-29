@@ -43,7 +43,7 @@
             <field name="name">Objetivos</field>
             <field name="res_model">mgmtsystem.target</field>
 
-            <field name="view_mode">kanban,form,tree</field>
+            <field name="view_mode">kanban,form,list</field>
             <field name="context">{"search_default_maintenance_ids": active_id}</field>
             <field name="search_view_id" ref="target_maintenance_filter"/>
         </record>
@@ -52,7 +52,7 @@
             <field name="name">No conformidades</field>
             <field name="res_model">mgmtsystem.nonconformity</field>
 
-            <field name="view_mode">kanban,form,tree</field>
+            <field name="view_mode">kanban,form,list</field>
             <field name="context">{"search_default_maintenance_ids": active_id}</field>
             <field name="search_view_id" ref="nc_maintenance_filter"/>
         </record>
@@ -61,7 +61,7 @@
             <field name="name">Acciones</field>
             <field name="res_model">mgmtsystem.action</field>
 
-            <field name="view_mode">kanban,form,tree</field>
+            <field name="view_mode">kanban,form,list</field>
             <field name="context">{"search_default_maintenance_ids": active_id}</field>
             <field name="search_view_id" ref="action_maintenance_filter"/>
         </record>
@@ -131,21 +131,21 @@
         <record model="ir.actions.act_window" id="action_maintenance_plan_target">
             <field name="name">Objetivos</field>
             <field name="res_model">mgmtsystem.target</field>
-            <field name="view_mode">kanban,form,tree</field>
+            <field name="view_mode">kanban,form,list</field>
             <field name="context">{}</field>
         </record>
 
         <record model="ir.actions.act_window" id="action_maintenance_plan_nc">
             <field name="name">No conformidades</field>
             <field name="res_model">mgmtsystem.nonconformity</field>
-            <field name="view_mode">kanban,form,tree</field>
+            <field name="view_mode">kanban,form,list</field>
             <field name="context">{}</field>
         </record>
 
         <record model="ir.actions.act_window" id="action_maintenance_plan_action">
             <field name="name">Acciones</field>
             <field name="res_model">mgmtsystem.action</field>
-            <field name="view_mode">kanban,form,tree</field>
+            <field name="view_mode">kanban,form,list</field>
             <field name="context">{}</field>
         </record>
 
@@ -215,7 +215,7 @@
             <field name="name">Procedimientos de Mantenimiento</field>
             <field name="res_model">mgmt.process</field>
 
-            <field name="view_mode">kanban,tree,form</field>
+            <field name="view_mode">kanban,list,form</field>
             <field name="domain">[('name', '=', 'INFRAESTRUCTURAS')]</field>
             <field name="context">{}</field>
         </record>

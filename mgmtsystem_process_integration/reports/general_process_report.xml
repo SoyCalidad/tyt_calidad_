@@ -1,13 +1,14 @@
 <odoo>
     <data>
 
-        <report id="action_report_general_process_xls"
-                model="mgmt.categ"
-                string="Ficha de proceso"
-                report_type="xlsx"
-                name="mgmtsystem_process_integration.general_process_xls"
-                file="Ficha de proceso"
-                print_report_name="object.name" />
+        <record id="action_report_general_process_xls" model="ir.actions.report">
+            <field name="model">mgmt.categ</field>
+            <field name="name">Ficha de proceso</field>
+            <field name="report_type">xlsx</field>
+            <field name="report_name">mgmtsystem_process_integration.general_process_xls</field>
+            <field name="report_file">Ficha de proceso</field>
+            <field name="print_report_name">object.name</field>
+        </record>
 
     </data>
 </odoo>

@@ -43,7 +43,7 @@
             <field name="name">Objetivos</field>
             <field name="res_model">mgmtsystem.target</field>
 
-            <field name="view_mode">kanban,form,tree</field>
+            <field name="view_mode">kanban,form,list</field>
             <field name="context">{"search_default_opportunity_ids": active_id}</field>
             <field name="search_view_id" ref="target_opportunity_filter"/>
         </record>
@@ -55,7 +55,7 @@
             <field name="name">No conformidades</field>
             <field name="res_model">mgmtsystem.nonconformity</field>
 
-            <field name="view_mode">kanban,form,tree</field>
+            <field name="view_mode">kanban,form,list</field>
             <field name="context">{"search_default_opportunity_ids": active_id}</field>
             <field name="search_view_id" ref="nc_opportunity_filter"/>
         </record>
@@ -64,7 +64,7 @@
             <field name="name">Acciones</field>
             <field name="res_model">mgmtsystem.action</field>
 
-            <field name="view_mode">kanban,form,tree</field>
+            <field name="view_mode">kanban,form,list</field>
             <field name="context">{}</field>
         </record>
 
@@ -94,10 +94,10 @@
                         <field name="origin_model_id" invisible="1"/>
                         <field name="origin_int_id" invisible="1"/>
                         <field name="origin_ids">
-                            <tree>
+                            <list>
                                 <field name="origin_model_id"/>
                                 <button string="Abrir origen" name="open_origin_record" type="object" class="oe_highlight"/>
-                            </tree>
+                            </list>
                         </field>
                     </page>
                     <page name="nonconformity_ids" string="No conformidades">
@@ -114,7 +114,7 @@
             <field name="name">Objetivos</field>
             <field name="res_model">mgmtsystem.target</field>
 
-            <field name="view_mode">kanban,form,tree</field>
+            <field name="view_mode">kanban,form,list</field>
             <field name="context">{}</field>
         </record>
 
@@ -122,7 +122,7 @@
             <field name="name">No conformidades</field>
             <field name="res_model">mgmtsystem.nonconformity</field>
 
-            <field name="view_mode">kanban,form,tree</field>
+            <field name="view_mode">kanban,form,list</field>
             <field name="context">{}</field>
         </record>
 
@@ -130,7 +130,7 @@
             <field name="name">Acciones</field>
             <field name="res_model">mgmtsystem.action</field>
 
-            <field name="view_mode">kanban,form,tree</field>
+            <field name="view_mode">kanban,form,list</field>
             <field name="context">{}</field>
         </record>
 
@@ -173,7 +173,7 @@
             <field name="name">Procedimientos de Riesgos y Oportunidades</field>
             <field name="res_model">mgmt.process</field>
 
-            <field name="view_mode">kanban,tree,form</field>
+            <field name="view_mode">kanban,list,form</field>
             <field name="domain">[('name', '=', 'GESTION DE RIESGOS Y OPORTUNIDADES')]</field>
             <field name="context">{}</field>
         </record>

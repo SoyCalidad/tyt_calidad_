@@ -1,16 +1,24 @@
 <odoo>
     <data>
-    
-        <report id="action_report_process_xls"
-            model="mgmt.process"
-            string="Ficha de procedimiento"
-            report_type="xlsx"
-            name="mgmtsystem_process_integration.process_file_xls"
-            file="Ficha de procedimiento"
-            groups="base.group_no_one,mgmtsystem_process.group_process_readonly_printreport,mgmtsystem_process.group_process_owner,mgmtsystem_process.group_process_all"/>
-        
+        <record id="action_report_process_xls" model="ir.actions.report">
+            <field name="name">Ficha de procedimiento</field>
+            <field name="model">mgmt.process</field>
+            <field name="report_type">xlsx</field>
+            <field name="report_name">mgmtsystem_process_integration.process_file_xls</field>
+            <field name="report_file">Ficha de procedimiento</field>
+            <field name="binding_model_id" ref="mgmtsystem_process.model_mgmt_process" />
+            <field name="binding_type">report</field>
+            <field name="groups_id"
+                eval="[(6, 0, [
+                ref('base.group_no_one'),
+                ref('mgmtsystem_process.group_process_readonly_printreport'),
+                ref('mgmtsystem_process.group_process_owner'),
+                ref('mgmtsystem_process.group_process_all')])]" />
+        </record>
+
+
         <record id="mgmtsystem_process.reporte_process" model="ir.actions.report">
-            <field name="binding_model_id" eval="False"/>
+            <field name="binding_model_id" eval="False" />
         </record>
 
     </data>

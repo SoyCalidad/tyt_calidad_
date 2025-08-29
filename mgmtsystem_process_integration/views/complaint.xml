@@ -44,7 +44,7 @@
             <field name="name">Objetivos</field>
             <field name="res_model">mgmtsystem.target</field>
 
-            <field name="view_mode">kanban,form,tree</field>
+            <field name="view_mode">kanban,form,list</field>
             <field name="context">{"search_default_complaint_ids": active_id}</field>
             <field name="search_view_id" ref="target_complaint_filter"/>
         </record>
@@ -53,7 +53,7 @@
             <field name="name">No conformidades</field>
             <field name="res_model">mgmtsystem.nonconformity</field>
 
-            <field name="view_mode">kanban,form,tree</field>
+            <field name="view_mode">kanban,form,list</field>
             <field name="context">{"search_default_complaint_ids": active_id}</field>
             <field name="search_view_id" ref="nc_complaint_filter"/>
         </record>
@@ -62,7 +62,7 @@
             <field name="name">Acciones</field>
             <field name="res_model">mgmtsystem.action</field>
 
-            <field name="view_mode">kanban,form,tree</field>
+            <field name="view_mode">kanban,form,list</field>
             <field name="context">{"search_default_complaint_ids": active_id}</field>
             <field name="search_view_id" ref="action_complaint_filter"/>
         </record>
@@ -71,7 +71,7 @@
             <field name="name">Riesgos y oportunidades</field>
             <field name="res_model">matrix.block.line</field>
 
-            <field name="view_mode">kanban,form,tree</field>
+            <field name="view_mode">kanban,form,list</field>
             <field name="context">{"search_default_nonconformity_ids": active_id}</field>
             <field name="search_view_id" ref="view_matrix_block_line_search"/>
         </record>
@@ -129,7 +129,7 @@
             <field name="name">Procedimientos de satisfacción del cliente</field>
             <field name="res_model">mgmt.process</field>
 
-            <field name="view_mode">kanban,tree,form</field>
+            <field name="view_mode">kanban,list,form</field>
             <field name="domain">[('name', '=', 'SATISFACCIÓN DEL CLIENTE')]</field>
             <field name="context">{}</field>
         </record>

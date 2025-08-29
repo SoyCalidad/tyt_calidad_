@@ -30,21 +30,21 @@
         <record model="ir.actions.act_window" id="show_target_training_action">
             <field name="name">Objetivos</field>
             <field name="res_model">mgmtsystem.target</field>
-            <field name="view_mode">kanban,form,tree</field>
+            <field name="view_mode">kanban,form,list</field>
             <field name="context">{"search_default_training_ids": active_id}</field>
             <field name="search_view_id" ref="target_training_filter"/>
         </record>
         <record model="ir.actions.act_window" id="show_nc_training_action">
             <field name="name">No conformidades</field>
             <field name="res_model">mgmtsystem.nonconformity</field>
-            <field name="view_mode">kanban,form,tree</field>
+            <field name="view_mode">kanban,form,list</field>
             <field name="context">{"search_default_training_ids": active_id}</field>
             <field name="search_view_id" ref="nc_training_filter"/>
         </record>
         <record model="ir.actions.act_window" id="show_ac_training_action">
             <field name="name">Acciones</field>
             <field name="res_model">mgmtsystem.action</field>
-            <field name="view_mode">kanban,form,tree</field>
+            <field name="view_mode">kanban,form,list</field>
             <field name="context">{"search_default_training_ids": active_id}</field>
             <field name="search_view_id" ref="action_training_filter"/>
         </record>
@@ -81,19 +81,19 @@
         <record model="ir.actions.act_window" id="show_target_plan_training_action">
             <field name="name">Objetivos</field>
             <field name="res_model">mgmtsystem.target</field>
-            <field name="view_mode">kanban,form,tree</field>
+            <field name="view_mode">kanban,form,list</field>
             <field name="context">{}</field>
         </record>
         <record model="ir.actions.act_window" id="show_nc_plan_training_action">
             <field name="name">No conformidades</field>
             <field name="res_model">mgmtsystem.nonconformity</field>
-            <field name="view_mode">kanban,form,tree</field>
+            <field name="view_mode">kanban,form,list</field>
             <field name="context">{}</field>
         </record>
         <record model="ir.actions.act_window" id="show_ac_plan_training_action">
             <field name="name">Acciones</field>
             <field name="res_model">mgmtsystem.action</field>
-            <field name="view_mode">kanban,form,tree</field>
+            <field name="view_mode">kanban,form,list</field>
             <field name="context">{}</field>
         </record>
         <record id="training_plan_view_form" model="ir.ui.view">
@@ -130,7 +130,7 @@
         <record id="mgmt_training_process_action" model="ir.actions.act_window">
             <field name="name">Procedimientos de Capacitaciones</field>
             <field name="res_model">mgmt.process</field>
-            <field name="view_mode">kanban,tree,form</field>
+            <field name="view_mode">kanban,list,form</field>
             <field name="domain">[('name', '=', 'CAPACITACIONES')]</field>
             <field name="context">{}</field>
         </record>

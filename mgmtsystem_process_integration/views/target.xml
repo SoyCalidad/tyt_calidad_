@@ -5,7 +5,7 @@
             <field name="name">Procedimientos de Objetivos</field>
             <field name="res_model">mgmt.process</field>
 
-            <field name="view_mode">kanban,tree,form</field>
+            <field name="view_mode">kanban,list,form</field>
             <field name="domain">[('name', '=', 'Seguimiento y medición de indicadores')]</field>
             <field name="context">{}</field>
         </record>
@@ -17,11 +17,11 @@
             <field name="inherit_id" ref="mgmtsystem_target.target_view_form"/>
             <field name="arch" type="xml">
                 <field name="user_id" position="after">
-                    <field name="resource_ids" widget="many2many_tags" options="{'no_open': True}" attrs="{'readonly': [('state','in',('validate_ok','cancel'))]}"/>
+                    <field name="resource_ids" widget="many2many_tags" options="{'no_open': True}" readonly="state in ['validate_ok', 'cancel']"/>
                 </field>
                 <notebook position="inside">
                     <page name="comunication" string="Comunicaciones">
-                        <field name="comunication_ids" attrs="{'readonly': [('state','in',('validate_ok','cancel'))]}"/>
+                        <field name="comunication_ids" readonly="state in ['validate_ok', 'cancel']"/>
                     </page>
                     <page string="No conformidades" name="No conformidades">
                         <group>
@@ -34,10 +34,10 @@
                         <field name="origin_model_id" invisible="1"/>
                         <field name="origin_int_id" invisible="1"/>
                         <field name="origin_ids">
-                            <tree>
+                            <list>
                                 <field name="origin_model_id"/>
                                 <button string="Abrir origen" name="open_origin_record" type="object" class="oe_highlight"/>
-                            </tree>
+                            </list>
                         </field>
                     </page>
                 </notebook>

@@ -20,17 +20,17 @@
             <field name="name">mgmt.process.line.client_supplier.view.tree</field>
             <field name="model">mgmt.process.line.client_supplier</field>
             <field name="arch" type="xml">
-                <tree string="">
+                <list string="">
                     <field name="name" />
                     <field name="type" invisible="1" />
-                </tree>
+                </list>
             </field>
         </record>
 
         <record id="mgmt_process_line_client_supplier_action" model="ir.actions.act_window">
             <field name="name">Cliente/Proveedor</field>
             <field name="res_model">mgmt.process.line.client_supplier</field>
-            <field name="view_mode">tree,form</field>
+            <field name="view_mode">list,form</field>
             <field name="domain">[]</field>
             <field name="context">{}</field>
             <field name="help" type="html">
@@ -57,17 +57,17 @@
             <field name="name">mgmt.process.interaction.view.tree</field>
             <field name="model">mgmt.process.interaction</field>
             <field name="arch" type="xml">
-                <tree string="">
+                <list string="">
                     <field name="type" invisible="1" />
                     <field name="name" />
-                </tree>
+                </list>
             </field>
         </record>
 
         <record id="mgmt_process_interaction_action" model="ir.actions.act_window">
             <field name="name">Interacciones</field>
             <field name="res_model">mgmt.process.interaction</field>
-            <field name="view_mode">tree,form</field>
+            <field name="view_mode">list,form</field>
             <field name="domain">[]</field>
             <field name="context">{}</field>
         </record>
@@ -75,7 +75,7 @@
         <record model="ir.actions.act_window" id="show_target_action_8">
             <field name="name">Objetivos</field>
             <field name="res_model">mgmtsystem.target</field>
-            <field name="view_mode">kanban,form,tree</field>
+            <field name="view_mode">kanban,form,list</field>
             <field name="context">{"search_default_process_ids": active_id}</field>
             <field name="search_view_id" ref="target_filter" />
         </record>
@@ -83,7 +83,7 @@
         <record model="ir.actions.act_window" id="show_target_nc_action_8">
             <field name="name">No conformidades</field>
             <field name="res_model">mgmtsystem.nonconformity</field>
-            <field name="view_mode">kanban,form,tree</field>
+            <field name="view_mode">kanban,form,list</field>
             <field name="context">{"search_default_process_ids": active_id}</field>
             <field name="search_view_id" ref="nc_filter" />
         </record>
@@ -91,7 +91,7 @@
         <record model="ir.actions.act_window" id="show_target_ac_action_8">
             <field name="name">Acciones</field>
             <field name="res_model">mgmtsystem.action</field>
-            <field name="view_mode">kanban,form,tree</field>
+            <field name="view_mode">kanban,form,list</field>
             <field name="context">{"search_default_process_ids": active_id}</field>
             <field name="search_view_id" ref="action_filter" />
         </record>
@@ -116,11 +116,11 @@
                 <xpath expr="//notebook/page[1]" position="inside">
                     <group>
                         <field name="resource_ids">
-                            <tree editable="1">
+                            <list editable="bottom">
                                 <field name="type_id" />
                                 <field name="name" />
                                 <field name="description" />
-                            </tree>
+                            </list>
                         </field>
                     </group>
                 </xpath>
@@ -130,46 +130,46 @@
                         <group string="Proceso" col="2">
                             <separator string="Entradas" colspan="2"/>
                             <field name="process_line_in_ids" nolabel="1" colspan="2">
-                                <tree editable="bottom">
+                                <list editable="bottom">
                                     <field name="supplier_id" widget="many2many_tags" context="{'default_type': 'input'}"/>
                                     <field name="input_id" widget="many2many_tags"/>
-                                </tree>
+                                </list>
                             </field>
                             <separator string="Actividades" colspan="2"/>
                             <separator string="Planificar" colspan="2"/>
                             <field name="interaction_plan" context="{'default_type': 'plan'}" colspan="2" nolabel="1">
-                                <tree string="">
+                                <list string="">
                                     <field name="type" invisible="1"/>
                                     <field name="name" style="width:200px;max-width:200px;"/>
-                                </tree>
+                                </list>
                             </field>
                             <separator string="Hacer" colspan="2"/>
                             <field name="interaction_do" context="{'default_type': 'do'}" colspan="2" nolabel="1">
-                                <tree string="">
+                                <list string="">
                                     <field name="type" invisible="1"/>
                                     <field name="name" style="width:200px;max-width:200px;"/>
-                                </tree>
+                                </list>
                             </field>
                             <separator string="Verificar" colspan="2"/>
                             <field name="interaction_verify" context="{'default_type': 'verify'}" colspan="2" nolabel="1">
-                                <tree string="">
+                                <list string="">
                                     <field name="type" invisible="1"/>
                                     <field name="name" style="width:200px;max-width:200px;"/>
-                                </tree>
+                                </list>
                             </field>
                             <separator string="Actuar" colspan="2"/>
                             <field name="interaction_act" context="{'default_type': 'act'}" colspan="2" nolabel="1">
-                                <tree string="">
+                                <list string="">
                                     <field name="type" invisible="1"/>
                                     <field name="name" style="width:200px;max-width:200px;"/>
-                                </tree>
+                                </list>
                             </field>
                             <separator string="Salidas" colspan="2"/>
                             <field name="process_line_out_ids" nolabel="1" colspan="2">
-                                <tree editable="bottom">
+                                <list editable="bottom">
                                     <field name="output_id" widget="many2many_tags"/>
                                     <field name="client_id" widget="many2many_tags" context="{'default_type': 'output'}"/>
-                                </tree>
+                                </list>
                             </field>
                         </group>
                     </page>
@@ -251,16 +251,16 @@
             <field name="name">mgmt.process.resource.type.view.tree</field>
             <field name="model">mgmt.process.resource.type</field>
             <field name="arch" type="xml">
-                <tree string="Recurso">
+                <list string="Recurso">
                     <field name="name" />
-                </tree>
+                </list>
             </field>
         </record>
 
         <record id="process_resource_type_action" model="ir.actions.act_window">
             <field name="name">Tipo de recurso de proceso</field>
             <field name="res_model">mgmt.process.resource.type</field>
-            <field name="view_mode">tree,form</field>
+            <field name="view_mode">list,form</field>
             <field name="domain">[]</field>
             <field name="context">{}</field>
         </record>
@@ -285,18 +285,18 @@
             <field name="name">mgmt.process.resource.view.tree</field>
             <field name="model">mgmt.process.resource</field>
             <field name="arch" type="xml">
-                <tree string="">
+                <list string="">
                     <field name="name" />
                     <field name="type_id" />
                     <field name="description" />
-                </tree>
+                </list>
             </field>
         </record>
 
         <record id="process_resource_action" model="ir.actions.act_window">
             <field name="name">Recurso</field>
             <field name="res_model">mgmt.process.resource</field>
-            <field name="view_mode">tree,form</field>
+            <field name="view_mode">list,form</field>
             <field name="domain">[]</field>
             <field name="context">{}</field>
         </record>
@@ -322,19 +322,19 @@
             <field name="name">mgmt.process.line.view.tree</field>
             <field name="model">mgmt.process.line</field>
             <field name="arch" type="xml">
-                <tree string="">
+                <list string="">
                     <field name="supplier_id" />
                     <field name="input_id" />
                     <field name="output_id" />
                     <field name="client_id" />
-                </tree>
+                </list>
             </field>
         </record>
 
         <record id="process_line_action" model="ir.actions.act_window">
             <field name="name">Linea</field>
             <field name="res_model">mgmt.process.line</field>
-            <field name="view_mode">tree,form</field>
+            <field name="view_mode">list,form</field>
             <field name="domain">[]</field>
             <field name="context">{}</field>
         </record>
@@ -358,17 +358,17 @@
             <field name="name">mgmt.process.line.input.view.tree</field>
             <field name="model">mgmt.process.line.input</field>
             <field name="arch" type="xml">
-                <tree string="">
+                <list string="">
                     <field name="name" />
                     <field name="description" />
-                </tree>
+                </list>
             </field>
         </record>
 
         <record id="process_line_input_action" model="ir.actions.act_window">
             <field name="name">Entrada</field>
             <field name="res_model">mgmt.process.line.input</field>
-            <field name="view_mode">tree,form</field>
+            <field name="view_mode">list,form</field>
             <field name="domain">[]</field>
             <field name="context">{}</field>
         </record>
@@ -392,17 +392,17 @@
             <field name="name">mgmt.process.line.output.view.tree</field>
             <field name="model">mgmt.process.line.output</field>
             <field name="arch" type="xml">
-                <tree string="">
+                <list string="">
                     <field name="name" />
                     <field name="description" />
-                </tree>
+                </list>
             </field>
         </record>
 
         <record id="process_line_output_action" model="ir.actions.act_window">
             <field name="name">Entrada</field>
             <field name="res_model">mgmt.process.line.output</field>
-            <field name="view_mode">tree,form</field>
+            <field name="view_mode">list,form</field>
             <field name="domain">[]</field>
             <field name="context">{}</field>
         </record>
@@ -417,68 +417,68 @@
                         <group string="Proceso" col="2">
                             <separator string="Recursos" colspan="2" />
                             <field name="resource_ids" nolabel="1" colspan="2">
-                                <tree editable="bottom">
+                                <list editable="bottom">
                                     <field name="type_id" />
                                     <field name="name" />
                                     <field name="description" />
-                                </tree>
+                                </list>
                             </field>
                             <separator string="Entradas" colspan="2" />
                             <field name="process_line_in_ids" nolabel="1" colspan="2">
-                                <tree editable="bottom">
+                                <list editable="bottom">
                                     <field name="supplier_id" widget="many2many_tags" context="{'default_type': 'input'}" />
                                     <field name="input_id" widget="many2many_tags" />
-                                </tree>
+                                </list>
                             </field>
                             <separator string="Actividades" colspan="2" />
                             <separator string="Planificar" colspan="2" />
                             <field name="interaction_plan" context="{'default_type': 'plan'}" colspan="2" nolabel="1">
-                                <tree string="">
+                                <list string="">
                                     <field name="type" invisible="1" />
                                     <field name="name" style="width:200px;max-width:200px;" />
-                                </tree>
+                                </list>
                             </field>
                             <separator string="Hacer" colspan="2" />
                             <field name="interaction_do" context="{'default_type': 'do'}" colspan="2" nolabel="1">
-                                <tree string="">
+                                <list string="">
                                     <field name="type" invisible="1" />
                                     <field name="name" style="width:200px;max-width:200px;" />
-                                </tree>
+                                </list>
                             </field>
                             <separator string="Verificar" colspan="2" />
                             <field name="interaction_verify" context="{'default_type': 'verify'}" colspan="2" nolabel="1">
-                                <tree string="">
+                                <list string="">
                                     <field name="type" invisible="1" />
                                     <field name="name" style="width:200px;max-width:200px;" />
-                                </tree>
+                                </list>
                             </field>
                             <separator string="Actuar" colspan="2" />
                             <field name="interaction_act" context="{'default_type': 'act'}" colspan="2" nolabel="1">
-                                <tree string="">
+                                <list string="">
                                     <field name="type" invisible="1" />
                                     <field name="name" style="width:200px;max-width:200px;" />
-                                </tree>
+                                </list>
                             </field>
                             <separator string="Salidas" colspan="2" />
                             <field name="process_line_out_ids" nolabel="1" colspan="2">
-                                <tree editable="bottom">
+                                <list editable="bottom">
                                     <field name="output_id" widget="many2many_tags" />
                                     <field name="client_id" widget="many2many_tags" context="{'default_type': 'output'}" />
-                                </tree>
+                                </list>
                             </field>
                         </group>
                     </page>
                 </xpath>
                 <field name="process_ids" position="replace">
                     <field name="process_ids" context="{'default_categ_id': id}">
-                        <tree>
+                        <list>
                             <field name="code" />
                             <field name="name" />
                             <field name="last_edition" />
                             <field name="validate_date" />
                             <field name="create_date" />
                             <button string="Imprimir reporte" name="action_print_report" type="object" class="oe_highlight" />
-                        </tree>
+                        </list>
                     </field>
                 </field>
             </field>
