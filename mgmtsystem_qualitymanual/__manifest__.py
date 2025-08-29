@@ -20,7 +20,9 @@
                 'mgmtsystem_comunication',
                 'mgmtsystem_employees',
                 'mgmtsystem_partner_qualification',
-                'stock_inspection'],
+                'stock_inspection',
+                'mgmtsystem_complaints',            
+    ],
 
     'data': [
         'security/ir.model.access.csv',
