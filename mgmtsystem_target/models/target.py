@@ -294,11 +294,12 @@ class Indicator(models.Model):
         ('accomplished_observation', 'Logrado con observaciones'),
         ('caducated', 'Caducado'),
         ('cancel', 'Cancelado'),
-    ], string='Etapas', group_expand='_expand_groups', default='plan', copy=False)
+    ], string='Etapas', group_expand='_group_expand', default='plan', copy=False)
 
     @api.model
-    def _expand_groups(self, states, domain, order):
+    def _group_expand(self, states, domain, limit=None):
         return ['plan', 'tracked', 'accomplished', 'caducated', 'cancel']
+    
     target_id = fields.Many2one('mgmtsystem.target', string='Objetivo')
     goal_id = fields.Many2one('mgmtsystem.goal', string='Meta')
     description = fields.Text(string='Descripción')
