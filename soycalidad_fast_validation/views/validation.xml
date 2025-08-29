@@ -11,7 +11,7 @@
                     name="fast_validation"
                     type="object"
                     class="oe_highlight"
-                    attrs="{'invisible':[('state','!=', 'elaborate')]}"/>
+                    invisible="state != 'elaborate'"/>
             </button>
         </field>
     </record>
@@ -26,7 +26,7 @@
                     name="fast_validation"
                     type="object"
                     class="oe_highlight"
-                    attrs="{'invisible':[('state','!=', 'elaborate')]}"/>
+                    invisible="state != 'elaborate'"/>
             </button>
         </field>
     </record>
@@ -41,7 +41,7 @@
                     name="fast_validation"
                     type="object"
                     class="oe_highlight"
-                    attrs="{'invisible':[('state','!=', 'elaborate')]}"/>
+                    invisible="state != 'elaborate'"/>
             </button>
         </field>
     </record>
@@ -56,7 +56,7 @@
                     name="fast_validation"
                     type="object"
                     class="oe_highlight"
-                    attrs="{'invisible':[('state','!=', 'elaborate')]}"/>
+                    invisible="state != 'elaborate'"/>
             </button>
         </field>
     </record>
@@ -71,7 +71,7 @@
                     name="fast_validation"
                     type="object"
                     class="oe_highlight"
-                    attrs="{'invisible':[('state','!=', 'elaborate')]}"/>
+                    invisible="state != 'elaborate'"/>
             </button>
         </field>
     </record>
@@ -86,7 +86,7 @@
                     name="fast_validation"
                     type="object"
                     class="oe_highlight"
-                    attrs="{'invisible':[('state','!=', 'elaborate')]}"/>
+                    invisible="state != 'elaborate'"/>
             </button>
         </field>
     </record>
@@ -101,7 +101,7 @@
                     name="fast_validation"
                     type="object"
                     class="oe_highlight"
-                    attrs="{'invisible':[('state','!=', 'elaborate')]}"/>
+                    invisible="state != 'elaborate'"/>
             </button>
         </field>
     </record>
@@ -116,7 +116,7 @@
                     name="fast_validation"
                     type="object"
                     class="oe_highlight"
-                    attrs="{'invisible':[('state','!=', 'elaborate')]}"/>
+                    invisible="state != 'elaborate'"/>
             </button>
         </field>
     </record>
@@ -131,7 +131,7 @@
                     name="fast_validation"
                     type="object"
                     class="oe_highlight"
-                    attrs="{'invisible':[('state','!=', 'elaborate')]}"/>
+                    invisible="state != 'elaborate'"/>
             </button>
         </field>
     </record>
@@ -146,7 +146,7 @@
                     name="fast_validation"
                     type="object"
                     class="oe_highlight"
-                    attrs="{'invisible':[('state','!=', 'elaborate')]}"/>
+                    invisible="state != 'elaborate'"/>
             </button>
         </field>
     </record>
@@ -161,7 +161,7 @@
                     name="fast_validation"
                     type="object"
                     class="oe_highlight"
-                    attrs="{'invisible':[('state','!=', 'elaborate')]}"/>
+                    invisible="state != 'elaborate'"/>
             </button>
         </field>
     </record>
@@ -176,7 +176,7 @@
                     name="fast_validation"
                     type="object"
                     class="oe_highlight"
-                    attrs="{'invisible':[('state','!=', 'elaborate')]}"/>
+                    invisible="state != 'elaborate'"/>
             </button>
         </field>
     </record>
@@ -191,7 +191,7 @@
                     name="fast_validation"
                     type="object"
                     class="oe_highlight"
-                    attrs="{'invisible':[('state','!=', 'elaborate')]}"/>
+                    invisible="state != 'elaborate'"/>
             </button>
         </field>
     </record>
@@ -206,7 +206,7 @@
                     name="fast_validation"
                     type="object"
                     class="oe_highlight"
-                    attrs="{'invisible':[('state','!=', 'elaborate')]}"/>
+                    invisible="state != 'elaborate'"/>
             </button>
         </field>
     </record>
@@ -221,7 +221,7 @@
                     name="fast_validation"
                     type="object"
                     class="oe_highlight"
-                    attrs="{'invisible':[('state','!=', 'elaborate')]}"/>
+                    invisible="state != 'elaborate'"/>
             </button>
         </field>
     </record>
@@ -236,7 +236,7 @@
                     name="fast_validation"
                     type="object"
                     class="oe_highlight"
-                    attrs="{'invisible':[('state','!=', 'elaborate')]}"/>
+                    invisible="state != 'elaborate'"/>
             </button>
         </field>
     </record>
@@ -251,7 +251,7 @@
                     name="fast_validation"
                     type="object"
                     class="oe_highlight"
-                    attrs="{'invisible':[('state','!=', 'elaborate')]}"/>
+                    invisible="state != 'elaborate'"/>
             </button>
         </field>
     </record>
@@ -266,7 +266,7 @@
                     name="fast_validation"
                     type="object"
                     class="oe_highlight"
-                    attrs="{'invisible':[('state','!=', 'elaborate')]}"/>
+                    invisible="state != 'elaborate'"/>
             </button>
         </field>
     </record>
@@ -281,7 +281,7 @@
                     name="fast_validation"
                     type="object"
                     class="oe_highlight"
-                    attrs="{'invisible':[('state','!=', 'elaborate')]}"/>
+                    invisible="state != 'elaborate'"/>
             </button>
         </field>
     </record>
@@ -296,7 +296,7 @@
                     name="fast_validation"
                     type="object"
                     class="oe_highlight"
-                    attrs="{'invisible':[('state','!=', 'elaborate')]}"/>
+                    invisible="state != 'elaborate'"/>
             </button>
         </field>
     </record>
@@ -311,7 +311,7 @@
                     name="fast_validation"
                     type="object"
                     class="oe_highlight"
-                    attrs="{'invisible':[('state','!=', 'elaborate')]}"/>
+                    invisible="state != 'elaborate'"/>
             </button>
         </field>
     </record>
@@ -326,7 +326,7 @@
                     name="fast_validation"
                     type="object"
                     class="oe_highlight"
-                    attrs="{'invisible':[('state','!=', 'elaborate')]}"/>
+                    invisible="state != 'elaborate'"/>
             </button>
         </field>
     </record>
@@ -341,7 +341,7 @@
                     name="fast_validation"
                     type="object"
                     class="oe_highlight"
-                    attrs="{'invisible':[('state','!=', 'elaborate')]}"/>
+                    invisible="state != 'elaborate'"/>
             </button>
         </field>
     </record>
@@ -356,7 +356,7 @@
                     name="fast_validation"
                     type="object"
                     class="oe_highlight"
-                    attrs="{'invisible':[('state','!=', 'elaborate')]}"/>
+                    invisible="state != 'elaborate'"/>
             </button>
         </field>
     </record>
@@ -371,7 +371,7 @@
                     name="fast_validation"
                     type="object"
                     class="oe_highlight"
-                    attrs="{'invisible':[('state','!=', 'elaborate')]}"/>
+                    invisible="state != 'elaborate'"/>
             </button>
         </field>
     </record>
@@ -386,7 +386,7 @@
                     name="fast_validation"
                     type="object"
                     class="oe_highlight"
-                    attrs="{'invisible':[('state','!=', 'elaborate')]}"/>
+                    invisible="state != 'elaborate'"/>
             </button>
         </field>
     </record>
@@ -401,7 +401,7 @@
                     name="fast_validation"
                     type="object"
                     class="oe_highlight"
-                    attrs="{'invisible':[('state','!=', 'elaborate')]}"/>
+                    invisible="state != 'elaborate'"/>
             </button>
         </field>
     </record>
@@ -416,7 +416,7 @@
                     name="fast_validation"
                     type="object"
                     class="oe_highlight"
-                    attrs="{'invisible':[('state','!=', 'elaborate')]}"/>
+                    invisible="state != 'elaborate'"/>
             </button>
         </field>
     </record>
@@ -431,7 +431,7 @@
                     name="fast_validation"
                     type="object"
                     class="oe_highlight"
-                    attrs="{'invisible':[('state','!=', 'elaborate')]}"/>
+                    invisible="state != 'elaborate'"/>
             </button>
         </field>
     </record>
@@ -446,7 +446,7 @@
                     name="fast_validation"
                     type="object"
                     class="oe_highlight"
-                    attrs="{'invisible':[('state','!=', 'elaborate')]}"/>
+                    invisible="state != 'elaborate'"/>
             </button>
         </field>
     </record>
@@ -461,7 +461,7 @@
                     name="fast_validation"
                     type="object"
                     class="oe_highlight"
-                    attrs="{'invisible':[('state','!=', 'elaborate')]}"/>
+                    invisible="state != 'elaborate'"/>
             </button>
         </field>
     </record>
