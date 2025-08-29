@@ -33,11 +33,12 @@
     </record>
    
 
-    <report id="action_report_improve_plan_matrix"
-            model="soycalidad.improve_plan.matrix"
-            string="Matriz de planificación de cambios"
-            report_type="xlsx"
-            name="report_improve_plan_matrix"
-            file="Matriz de planificación de cambios" />
+    <record id="action_report_improve_plan_matrix" model="ir.actions.report">
+        <field name="model">soycalidad.improve_plan.matrix</field>
+        <field name="name">Matriz de planificación de cambios</field>
+        <field name="report_type">xlsx</field>
+        <field name="report_name">report_improve_plan_matrix</field>
+        <field name="report_file">Matriz de planificación de cambios</field>
+    </record>
 
 </odoo>

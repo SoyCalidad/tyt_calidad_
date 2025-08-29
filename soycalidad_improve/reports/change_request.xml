@@ -32,11 +32,13 @@
         <field name="binding_type">report</field>
     </record>
 
-    <report id="action_report_change_request"
-            model="soycalidad.change_request"
-            string="Planificación de cambio"
-            report_type="xlsx"
-            name="report_change_request"
-            file="Planificación de cambio" />
+
+    <record id="action_report_change_request" model="ir.actions.report">
+        <field name="model">soycalidad.change_request</field>
+        <field name="name">Planificación de cambio</field>
+        <field name="report_file">Planificación de cambio</field>
+        <field name="report_type">xlsx</field>
+        <field name="report_name">report_change_request</field>
+    </record>
 
 </odoo>
