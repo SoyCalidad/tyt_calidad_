@@ -6,7 +6,7 @@ import io
 from PIL import Image
 
 from odoo import api, fields, models
-from odoo.exceptions import ValidationError, Warning
+from odoo.exceptions import ValidationError
 
 
 class MaintananceRequestWizard(models.TransientModel):
@@ -149,4 +149,4 @@ class ReportRequestReport(models.AbstractModel):
 
         except Exception as e:
             print(e)
-            raise Warning("Hubo un error al generar el reporte")
+            raise ValidationError("Hubo un error al generar el reporte")

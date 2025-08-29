@@ -6,11 +6,12 @@
             <field name="model">wizard.create.products</field>
             <field name="arch" type="xml">
                 <form string="Crear equipos">
-                    <p class="oe_grey">Esta vista simplifica la creación de equipos tomando como plantilla para la creación de otros.</p>
+                    <p class="oe_grey">Esta vista simplifica la creación de equipos tomando como
+                        plantilla para la creación de otros.</p>
                     <br />
                     <field name="equipment_id" invisible="1" />
                     <field name="lines_ids">
-                        <tree editable="bottom">
+                        <list editable="bottom">
                             <field name="equipment_id" invisible="1" />
                             <field name="name" />
                             <field name="serial_number" />
@@ -19,10 +20,11 @@
                             <field name="assign_date" />
                             <field name="location" />
                             <field name="scrap_date" />
-                        </tree>
+                        </list>
                     </field>
                     <footer>
-                        <button name="create_products" string="Crear equipos" type="object" class="btn-primary" />
+                        <button name="create_products" string="Crear equipos" type="object"
+                            class="btn-primary" />
                         <button string="Cancelar" class="btn-default" special="cancel" />
                     </footer>
                 </form>
@@ -47,11 +49,15 @@
                 <field name="name" position="before">
                     <field name="id" />
                 </field>
-                <div class="o_dropdown_kanban dropdown" position="before">
-                    <div class="o_kanban_image">
-                        <img t-att-src="kanban_image('maintenance.equipment', 'image_variant_128', record.id.raw_value)" alt="Equipment" class="o_image_64_contain"/>
+
+                <xpath expr="//t[@t-name='card']/div" position="before">
+                    <div class="o_kanban_image mb-2">
+                        <img
+                            t-att-src="kanban_image('maintenance.equipment', 'image_128', record.id.raw_value)"
+                            alt="Equipment"
+                            class="o_image_64_contain" />
                     </div>
-                </div>
+                </xpath>
             </field>
         </record>
 
@@ -62,22 +68,23 @@
             <field name="model">maintenance.equipment</field>
             <field name="arch" type="xml">
                 <div class="oe_title" position="before">
-                    <field name="image_variant_1920" widget="image" class="oe_avatar" options="{'preview_image': 'image_variant_128'}" />
+                    <field name="image_variant_1920" widget="image" class="oe_avatar"
+                        options="{'preview_image': 'image_variant_128'}" />
                 </div>
                 <div name="button_box" position="replace">
                     <div class="oe_button_box" name="button_box">
                         <button name="maintenance_action"
-                                type="object"
-                                class="oe_stat_button"
-                                icon="fa-wrench"
-                                context="{'type_maintenance':'maintenance','default_equipment_id': id}">
+                            type="object"
+                            class="oe_stat_button"
+                            icon="fa-wrench"
+                            context="{'type_maintenance':'maintenance','default_equipment_id': id}">
                             <field string="Mantenimiento" name="maintenance_count" widget="statinfo" />
                         </button>
                         <button name="maintenance_action"
-                                type="object"
-                                class="oe_stat_button"
-                                icon="fa-ticket"
-                                context="{'type_maintenance':'calibration','default_equipment_id': id}">
+                            type="object"
+                            class="oe_stat_button"
+                            icon="fa-ticket"
+                            context="{'type_maintenance':'calibration','default_equipment_id': id}">
                             <field string="Calibracion" name="calibration_count" widget="statinfo" />
                         </button>
                     </div>
@@ -85,10 +92,10 @@
                 <sheet position="before">
                     <header>
                         <button name="%(action_createproduct_wizard)d"
-                                string="Generar más equipos como este"
-                                type="action"
-                                class="btn-primary"
-                                context="{'default_equipment_id': id}" />
+                            string="Generar más equipos como este"
+                            type="action"
+                            class="btn-primary"
+                            context="{'default_equipment_id': id}" />
                         <field name="state" widget="statusbar" />
                     </header>
                 </sheet>
@@ -109,7 +116,7 @@
                 <notebook position="inside">
                     <page name="request_maintenance" string="Mantenimiento">
                         <separator string="Peticiones de Mantenimiento" />
-                        <field name="request_maintenance_m_ids" domain="[('equipment_id', '=', id)]"> 
+                        <field name="request_maintenance_m_ids" domain="[('equipment_id', '=', id)]">
                         </field>
                     </page>
                 </notebook>
@@ -140,8 +147,9 @@
             <field name="model">maintenance.request</field>
             <field name="arch" type="xml">
                 <xpath expr="//field[@name='description']" position="replace">
-                    <field name="state" invisible="1"/>
-                    <field name="description" placeholder="Internal Note ......." attrs="{'readonly':[('state', '=', '4repaired')]}"/>
+                    <field name="state" invisible="1" />
+                    <field name="description" placeholder="Internal Note ......."
+                        readonly="state == '4repaired'" />
                 </xpath>
             </field>
         </record>
@@ -157,13 +165,17 @@
                     <attribute name="invisible">1</attribute>
                 </field>
                 <field name="name" position="replace">
-                    <field name="name" placeholder="Maintenance Request"  attrs="{'invisible' : [('type_line','!=','maintenance')]}" />
-                    <field name="name" placeholder="Petición de calibración" attrs="{'invisible' : [('type_line','!=','calibration')]}"/>
+                    <field name="name" placeholder="Maintenance Request"
+                        invisible="type_line != 'maintenance'" />
+                    <field name="name" placeholder="Petición de calibración"
+                        invisible="type_line != 'calibration'" />
                 </field>
                 <field name="user_id" position="replace">
                     <field name="type_line" invisible="1" />
-                    <field name="user_id" string="Responsable de mantenimiento" attrs="{'invisible' : [('type_line','!=','maintenance')]}" />
-                    <field name="user_id" string="Responsable de calibración" attrs="{'invisible' : [('type_line','!=','calibration')]}" />
+                    <field name="user_id" string="Responsable de mantenimiento"
+                        invisible="type_line != 'maintenance'" />
+                    <field name="user_id" string="Responsable de calibración"
+                        invisible="type_line != 'calibration'" />
                 </field>
             </field>
         </record>
@@ -177,7 +189,8 @@
                 <kanban position="attributes">
                     <attribute name="default_group_by">state</attribute>
                     <attribute name="disable_drag_drop_record">true</attribute>
-                    <!--attribute name="edit">False</attribute-->
+                    <!--attribute
+                    name="edit">False</attribute-->
                 </kanban>
             </field>
         </record>
@@ -190,22 +203,22 @@
             <field name="arch" type="xml">
                 <!-- Add your xpath here -->
                 <field name="name" position="replace">
-                    <field name="name" string="Título"/>
+                    <field name="name" string="Título" />
                 </field>
                 <field name="employee_id" position="replace">
-                    <field name="employee_id" invisible="1"/>
+                    <field name="employee_id" invisible="1" />
                 </field>
                 <field name="user_id" position="replace">
-                    <field name="user_id" string="Responsable"/>
+                    <field name="user_id" string="Responsable" />
                 </field>
                 <field name="category_id" position="replace">
-                    <field name="maintenance_type" string="Tipo de Mantenimiento"/>
+                    <field name="maintenance_type" string="Tipo de Mantenimiento" />
                 </field>
                 <field name="request_date" position="attributes">
                     <attribute name="string">Fecha de ejecución</attribute>
                 </field>
                 <field name="stage_id" position="replace">
-                    <field name="description" string="Observación"/>
+                    <field name="description" string="Observación" />
                 </field>
             </field>
         </record>
@@ -228,41 +241,48 @@
                 </field>
                 <form>
                     <header>
-                          <field name="state" widget="statusbar" statusbar_visible="1new,2approved,3in_process,4repaired" attrs="{'invisible': True}" />
+                        <field name="state" widget="statusbar"
+                            statusbar_visible="1new,2approved,3in_process,4repaired"
+                            invisible="True" />
                     </header>
                 </form>
                 <button name="archive_equipment_request" position="before">
                     <button string="Enviar solicitud"
-                            name="action_notify_employee"
-                            type="object"
-                            class="btn-primary"
-                            attrs="{'invisible': ['|',('state', '!=', '1new'),('archive', '=', True)]}" />
-                    <button string="Validar" name="send_approved" type="object" attrs="{'invisible': ['|',('state', '!=', '1new'),('archive', '=', True)]}" />
+                        name="action_notify_employee"
+                        type="object"
+                        class="btn-primary"
+                        invisible="(state != '1new' or archive == True)" />
+                    <button string="Validar" name="send_approved" type="object"
+                        invisible="(state != '1new' or archive == True)" />
                     <button string="Iniciar proceso"
-                            name="send_in_process"
-                            type="object"
-                            attrs="{'invisible': ['|',('state', '!=', '2approved'),('archive', '=', True)]}"
-                            class="btn-primary" />
+                        name="send_in_process"
+                        type="object"
+                        invisible="(state != '2approved' or archive == True)"
+                        class="btn-primary" />
                     <button string="Realizado"
-                            name="send_repaired"
-                            type="object"
-                            attrs="{'invisible': ['|',('state', '!=', '3in_process'),('archive', '=', True)]}"
-                            class="btn-primary" />
+                        name="send_repaired"
+                        type="object"
+                        invisible="(state != '3in_process' or archive == True)"
+                        class="btn-primary" />
                     <button string="Desecho"
-                            name="send_scrap"
-                            type="object"
-                            attrs="{'invisible': ['|',('state', '!=', '3in_process'),('archive', '=', True)]}"
-                            class="btn-primary" />
+                        name="send_scrap"
+                        type="object"
+                        invisible="(state != '3in_process' or archive == True)"
+                        class="btn-primary" />
                 </button>
                 <header>
-                    <field name="state" widget="statusbar" statusbar_visible="1new,2approved,3in_process,4repaired" />
+                    <field name="state" widget="statusbar"
+                        statusbar_visible="1new,2approved,3in_process,4repaired" />
                 </header>
                 <field name="equipment_id" position="after">
                     <field name="cost" />
-                    <field name="responsable_id" attrs="{'readonly': [('state','!=','1new')]}" options="{ 'no_open': True, 'no_edit': True, 'no_create_edit': True, 'no_create': True}" />
+                    <field name="responsable_id" readonly="state != '1new'"
+                        options="{ 'no_open': True, 'no_edit': True, 'no_create_edit': True, 'no_create': True}" />
                     <field name="type_line" />
-                    <field name="maintenance_line_id" attrs="{'invisible': [('type_line','!=','maintenance'),('maintenance_line_id','=',False)]}" />
-                    <field name="calibration_line_id" attrs="{'invisible': [('type_line','!=','calibration'),('calibration_line_id','=',False)]}" />
+                    <field name="maintenance_line_id"
+                        invisible="(type_line != 'maintenance' and maintenance_line_id == False)" />
+                    <field name="calibration_line_id"
+                        invisible="(type_line != 'calibration' and calibration_line_id == False)" />
                 </field>
             </field>
         </record>
@@ -274,7 +294,6 @@
             <field name="code">model.mail_reminder()</field>
             <field name="interval_number">1</field>
             <field name="interval_type">days</field>
-            <field name="numbercall">-1</field>
         </record>
 
     </data>

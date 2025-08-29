@@ -5,7 +5,7 @@
         <record id="hr_calibration_request_action" model="ir.actions.act_window">
             <field name="name">Peticiones de calibración</field>
             <field name="res_model">maintenance.request</field>
-            <field name="view_mode">kanban,tree,form,pivot,graph,calendar</field>
+            <field name="view_mode">kanban,list,form,pivot,graph,calendar</field>
             <field name="view_id" ref="maintenance.hr_equipment_request_view_kanban" />
             <field name="context">{'default_user_id': uid,'default_type_line':'calibration'}</field>
             <field name="domain">[('type_line','=','calibration')]</field>
@@ -19,7 +19,7 @@
         <record id="hr_calibration_request_action_cal" model="ir.actions.act_window">
             <field name="name">Peticiones</field>
             <field name="res_model">maintenance.request</field>
-            <field name="view_mode">calendar,kanban,tree,form,pivot,graph</field>
+            <field name="view_mode">calendar,kanban,list,form,pivot,graph</field>
             <field name="view_id" ref="maintenance.hr_equipment_view_calendar" />
             <field name="context">{'default_type_line':'calibration'}</field>
             <field name="domain">[('type_line','=','calibration')]</field>
@@ -35,11 +35,11 @@
             <field name="name">mgmtsystem.calibration.line.tree</field>
             <field name="model">mgmtsystem.calibration.line</field>
             <field name="arch" type="xml">
-                <tree string="Historial de Calibraciones">
+                <list string="Historial de Calibraciones">
                     <field name="name" />
                     <field name="scheduled_date" />
                     <field name="maintenance_request_ids" />
-                </tree>
+                </list>
             </field>
         </record>
 
@@ -52,7 +52,7 @@
                         <group>
                             <field name="name" />
                             <field name="scheduled_date" />
-                            <field name="maintenance_id" attrs="{'invisible': [('maintenance_id','=',False)]}" />
+                            <field name="maintenance_id" invisible="maintenance_id == False" />
                         </group>
                         <notebook>
                             <page string="Peticiones de calibración">
@@ -69,12 +69,12 @@
             <field name="name">mgmtsystem.calibration.tree</field>
             <field name="model">mgmtsystem.calibration</field>
             <field name="arch" type="xml">
-                <tree string="Calibraciones">
+                <list string="Calibraciones">
                     <field name="name" />
                     <field name="start_date" />
                     <field name="limit_date" />
                     <field name="state" />
-                </tree>
+                </list>
             </field>
         </record>
 
@@ -89,32 +89,32 @@
                                 name="send_review"
                                 type="object"
                                 class="btn-primary"
-                                attrs="{'invisible':[('state','not in', ('elaborate'))]}" />
+                                invisible="state not in ['elaborate']" />
                         <button string="Enviar a Validar"
                                 name="send_validate"
                                 type="object"
                                 class="btn-primary"
-                                attrs="{'invisible':[('state','not in', ('review'))]}" />
+                                invisible="state not in ['review']" />
                         <button string="Validar"
                                 name="send_validate_ok"
                                 type="object"
                                 class="btn-primary"
-                                attrs="{'invisible':[('state','not in', ('validate'))]}" />
+                                invisible="state not in ['validate']" />
                         <button string="Volver Obsoleto"
                                 confirm="Esto volverá obsoleto el presente registro. ¿Está seguro(a)?"
                                 name="send_cancel"
                                 type="object"
                                 class="btn-second"
-                                attrs="{'invisible': [('state','in',('cancel'))] }" />
+                                invisible="state in ['cancel']" />
                         <button type="object"
                                 name="generate_maintenance_schedule"
                                 string="Crear cronograma"
                                 class="btn-primary"
-                                attrs="{'invisible': [('state','!=','validate_ok')]}" />
+                                invisible="state != 'validate_ok'" />
                         <button name="button_new_version"
                                 type="object"
                                 string="Nueva versión"
-                                attrs="{'invisible':[('state', '!=', 'validate_ok')]}"
+                                invisible="state != 'validate_ok'"
                                 class="oe_highlight" />
                     </header>
                     <sheet>
@@ -134,15 +134,15 @@
                         </group>
                         <group>
                             <group string="Detalles">
-                                <field name="employee_id" attrs="{'readonly': [('state','not in',('elaborate'))] }" />
-                                <field name="type" attrs="{'readonly': [('state','not in',('elaborate'))] }" />
-                                <field name="estimate" attrs="{'readonly': [('state','not in',('elaborate'))] }" />
-                                <field name="plan_id" attrs="{'invisible': [('plan_id','=',False)]}" />
+                                <field name="employee_id" readonly="state not in ['elaborate']" />
+                                <field name="type" readonly="state not in ['elaborate']" />
+                                <field name="estimate" readonly="state not in ['elaborate']" />
+                                <field name="plan_id" invisible="plan_id == False" />
                             </group>
                             <group string="Fechas">
-                                <field name="start_date" attrs="{'readonly': [('state','in',('validate_ok','cancel'))]}" />
-                                <field name="limit_date" attrs="{'readonly': [('state','in',('validate_ok','cancel'))]}" />
-                                <field name="new_frequency_id" attrs="{'readonly': [('state','not in',('elaborate'))] }" />
+                                <field name="start_date" readonly="state in ['validate_ok', 'cancel']" />
+                                <field name="limit_date" readonly="state in ['validate_ok', 'cancel']" />
+                                <field name="new_frequency_id" readonly="state not in ['elaborate']" />
                                 <br />
                             </group>
                         </group>
@@ -157,13 +157,13 @@
                                     <field name="uom2_id" placeholder="Unidad de medida" class="oe_inline" options="{'no_create_edit': True,'no_create': True}" />
                                 </div>
                             </div>
-                            <field name="calibration_range" attrs="{'readonly': [('state','in',('validate_ok','cancel'))]}" />
-                            <field name="resolution" attrs="{'readonly': [('state','in',('validate_ok','cancel'))]}" />
+                            <field name="calibration_range" readonly="state in ['validate_ok', 'cancel']" />
+                            <field name="resolution" readonly="state in ['validate_ok', 'cancel']" />
                         </group>
                         <notebook>
                             <page string="Equipos">
-                                <field name="equipment_ids" attrs="{'readonly': [('state','in',('final','caducated','cancel'))]}">
-                                    <tree>
+                                <field name="equipment_ids" readonly="state in ['final', 'caducated', 'cancel']">
+                                    <list>
                                         <field name="name" />
                                         <field name="employee_id" />
                                         <field name="department_id" />
@@ -172,11 +172,11 @@
                                         <field name="technician_user_id" />
                                         <field name="category_id" string="Categoría" />
                                         <field name="location" />
-                                    </tree>
+                                    </list>
                                 </field>
                             </page>
                             <page string="Cronograma">
-                                <field name="line_ids" attrs="{'readonly': [('state','in',('validate_ok','cancel'))]}" />
+                                <field name="line_ids" readonly="state in ['validate_ok', 'cancel']" />
                             </page>
                             <page string="Validación">
                                 <group>
@@ -185,26 +185,22 @@
                                     </group>
                                     <group colspan="4">
                                         <separator string="Elaboración" />
-                                        <field name="elaboration_step" colspan="2" nolabel="1" attrs="{'readonly': [('state','not in',('elaborate'))]}" />
+                                        <field name="elaboration_step" colspan="2" nolabel="1" readonly="state not in ['elaborate']" />
                                         <separator string="Revisión" />
-                                        <field name="review_step" colspan="2" nolabel="1" attrs="{'readonly': [('state','not in',('elaborate', 'review'))]}" />
+                                        <field name="review_step" colspan="2" nolabel="1" readonly="state not in ['elaborate', 'review']" />
                                         <separator string="Validación" />
-                                        <field name="validation_step" colspan="2" nolabel="1" attrs="{'readonly': [('state','not in',('elaborate', 'review', 'validate'))]}" />
+                                        <field name="validation_step" colspan="2" nolabel="1" readonly="state not in ['elaborate', 'review', 'validate']" />
                                     </group>
                                     <group colspan="4">
-                                        <field name="date_elaborate" attrs="{'required': [('state','in',('elaborate'))], 'readonly': True}" />
-                                        <field name="date_review" attrs="{'required': [('state','in',('review'))], 'readonly': True, 'invisible': [('state','in',('elaborate'))] }" />
-                                        <field name="date_validate" groups="base.group_no_one,base.user_admin" attrs="{'invisible': [('state','in',('elaborate','review'))] }" />
+                                        <field name="date_elaborate" readonly="True" required="state in ['elaborate']" />
+                                        <field name="date_review" invisible="state in ['elaborate']" readonly="True" required="state in ['review']" />
+                                        <field name="date_validate" groups="base.group_no_one,base.group_system" invisible="state in ['elaborate', 'review']" />
                                     </group>
                                 </group>
                             </page>
                         </notebook>
                     </sheet>
-                    <div class="oe_chatter">
-                        <field name="message_follower_ids" widget="mail_followers" />
-                        <field name="activity_ids" widget="mail_activity" />
-                        <field name="message_ids" widget="mail_thread" />
-                    </div>
+                    <chatter/>
                 </form>
             </field>
         </record>
@@ -213,7 +209,7 @@
             <field name="name">Plan de Calibraciones</field>
             <field name="type">ir.actions.act_window</field>
             <field name="res_model">mgmtsystem.calibration</field>
-            <field name="view_mode">tree,form,kanban</field>
+            <field name="view_mode">list,form,kanban</field>
         </record>
 
         <!--Programa de calibraciones-->
@@ -221,13 +217,13 @@
             <field name="name">mgmtsystem.calibration.plan.tree</field>
             <field name="model">mgmtsystem.calibration.plan</field>
             <field name="arch" type="xml">
-                <tree string="Programa de calibraciones">
+                <list string="Programa de calibraciones">
                     <field name="name" />
                     <field name="version" />
                     <field name="edition_id" />
                     <field name="maintenance_ids" />
                     <field name="state" />
-                </tree>
+                </list>
             </field>
         </record>
 
@@ -242,32 +238,32 @@
                                 name="send_elaborate"
                                 type="object"
                                 class="btn-primary"
-                                attrs="{'invisible':[('state','in', ('elaborate','validate','validate_ok','cancel'))]}" />
+                                invisible="state in ['elaborate', 'validate', 'validate_ok', 'cancel']" />
                         <button string="Enviar a Revisar"
                                 name="send_review"
                                 type="object"
                                 class="btn-primary"
-                                attrs="{'invisible':[('state','in', ('review','validate_ok','cancel'))]}" />
+                                invisible="state in ['review', 'validate_ok', 'cancel']" />
                         <button string="Enviar a Validar"
                                 name="send_validate"
                                 type="object"
                                 class="btn-primary"
-                                attrs="{'invisible':[('state','in', ('elaborate','validate','validate_ok','cancel'))]}" />
+                                invisible="state in ['elaborate', 'validate', 'validate_ok', 'cancel']" />
                         <button string="Validar"
                                 name="send_validate_ok"
                                 type="object"
                                 class="btn-primary"
-                                attrs="{'invisible':[('state','not in', ('validate'))]}" />
+                                invisible="state not in ['validate']" />
                         <button string="Volver Obsoleto"
                                 confirm="Esto volverá obsoleto el presente registro. ¿Está seguro(a)?"
                                 name="send_cancel"
                                 type="object"
                                 class="btn-second"
-                                attrs="{'invisible': [('state','in',('cancel'))] }" />
+                                invisible="state in ['cancel']" />
                         <button name="button_new_version"
                                 type="object"
                                 string="Nueva versión"
-                                attrs="{'invisible':[('state', '!=', 'validate_ok')]}"
+                                invisible="state != 'validate_ok'"
                                 class="oe_highlight" />
                     </header>
                     <sheet>
@@ -288,17 +284,17 @@
                         <label for="name" />
                         <div class="oe_title">
                             <h2>
-                                <field name="name" attrs="{'readonly': [('state','not in',('elaborate','review','validate'))]}" />
+                                <field name="name" readonly="state not in ['elaborate', 'review', 'validate']" />
                             </h2>
                         </div>
                         <label for="edition_id" />
                         <div class="o_row">
-                            <field name="edition_id" options="{'no_create': True}" colspan="3" attrs="{'readonly': [('state','not in',('elaborate'))] }" />
+                            <field name="edition_id" options="{'no_create': True}" colspan="3" readonly="state not in ['elaborate']" />
                         </div>
                         <notebook>
                             <page string="Calibraciones">
-                                <field name="maintenance_ids" attrs="{'readonly': [('state','in',('validate_ok', 'cancel'))] }">
-                                    <tree>
+                                <field name="maintenance_ids" readonly="state in ['validate_ok', 'cancel']">
+                                    <list>
                                         <field name="name" />
                                         <field name="employee_id" />
                                         <field name="type" />
@@ -306,7 +302,7 @@
                                         <field name="limit_date" />
                                         <field name="estimate" />
                                         <field name="frequency_id" />
-                                    </tree>
+                                    </list>
                                 </field>
                             </page>
                             <page string="Validación">
@@ -316,26 +312,22 @@
                                     </group>
                                     <group colspan="4">
                                         <separator string="Elaboración" />
-                                        <field name="elaboration_step" colspan="2" nolabel="1" attrs="{'readonly': [('state','not in',('elaborate'))]}" />
+                                        <field name="elaboration_step" colspan="2" nolabel="1" readonly="state not in ['elaborate']" />
                                         <separator string="Revisión" />
-                                        <field name="review_step" colspan="2" nolabel="1" attrs="{'readonly': [('state','not in',('elaborate', 'review'))]}" />
+                                        <field name="review_step" colspan="2" nolabel="1" readonly="state not in ['elaborate', 'review']" />
                                         <separator string="Validación" />
-                                        <field name="validation_step" colspan="2" nolabel="1" attrs="{'readonly': [('state','not in',('elaborate', 'review', 'validate'))]}" />
+                                        <field name="validation_step" colspan="2" nolabel="1" readonly="state not in ['elaborate', 'review', 'validate']" />
                                     </group>
                                     <group colspan="4">
-                                        <field name="date_elaborate" attrs="{'required': [('state','in',('elaborate'))], 'readonly': True}" />
-                                        <field name="date_review" attrs="{'required': [('state','in',('review'))], 'readonly': True, 'invisible': [('state','in',('elaborate'))] }" />
-                                        <field name="date_validate" groups="base.group_no_one,base.user_admin" attrs="{'invisible': [('state','in',('elaborate','review'))] }" />
+                                        <field name="date_elaborate" readonly="True" required="state in ['elaborate']" />
+                                        <field name="date_review" invisible="state in ['elaborate']" readonly="True" required="state in ['review']" />
+                                        <field name="date_validate" groups="base.group_no_one,base.group_system" invisible="state in ['elaborate', 'review']" />
                                     </group>
                                 </group>
                             </page>
                         </notebook>
                     </sheet>
-                    <div class="oe_chatter">
-                        <field name="message_follower_ids" widget="mail_followers" />
-                        <field name="activity_ids" widget="mail_activity" />
-                        <field name="message_ids" widget="mail_thread" />
-                    </div>
+                    <chatter/>
                 </form>
             </field>
         </record>
@@ -344,7 +336,7 @@
             <field name="name">Programa de calibraciones</field>
             <field name="type">ir.actions.act_window</field>
             <field name="res_model">mgmtsystem.calibration.plan</field>
-            <field name="view_mode">tree,form,kanban</field>
+            <field name="view_mode">list,form,kanban</field>
         </record>
 
         <menuitem id="menu_c_request"
