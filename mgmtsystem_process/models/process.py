@@ -64,7 +64,7 @@ class MgmtCateg(models.Model):
             each.attachments_count = count
 
     @api.model
-    def _read_group_type(self, stages, domain, order):
+    def _read_group_type(self, states, domain, limit=None):
         type_ids = self.env['mgmt.categ.type'].search([], order='weight asc')
         return type_ids
 
@@ -177,7 +177,7 @@ class Process(models.Model):
     )
 
     @api.model
-    def _read_group_type(self, stages, domain, order):
+    def _read_group_type(self, states, domain, limit=None):
         type_ids = self.env['mgmt.categ.type'].search([])
         return type_ids
 

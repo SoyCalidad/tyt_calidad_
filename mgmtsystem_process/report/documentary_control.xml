@@ -1,14 +1,19 @@
 <odoo>
     <data>
 
-        <report
-            id="documentary_control_report_xls"
-            model="documentary.control"
-            string="Inventario de Registro"
-            report_type="xlsx"
-            name="mgmtsystem_process.documentary_control_xls"
-            file="Inventario de Registro"
-            groups="base.group_no_one,mgmtsystem_process.group_process_readonly_printreport,mgmtsystem_process.group_process_owner,mgmtsystem_process.group_process_all" />
+        <record id="documentary_control_report_xls" model="ir.actions.report">
+            <field name="name">Inventario de Registro</field>
+            <field name="model">documentary.control</field>
+            <field name="report_type">xlsx</field>
+            <field name="report_name">mgmtsystem_process.documentary_control_xls</field>
+            <field name="report_file">Inventario de Registro</field>
+            <field name="groups_id" eval="[(6,0,[
+                ref('base.group_no_one'),
+                ref('mgmtsystem_process.group_process_readonly_printreport'),
+                ref('mgmtsystem_process.group_process_owner'),
+                ref('mgmtsystem_process.group_process_all'),
+            ])]"></field>
+        </record>
 
         <!-- <record id="task_custom_report" model="ir.actions.report">
             <field name="name">Field Service Report</field>

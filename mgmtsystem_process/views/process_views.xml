@@ -132,10 +132,7 @@
                         </page>
                     </notebook>
                 </sheet>
-                <div class="oe_chatter">
-                    <field name="message_follower_ids" widget="mail_followers" />
-                    <field name="message_ids" widget="mail_thread" />
-                </div>
+                <chatter/>
 
             </form>
         </field>
@@ -364,10 +361,7 @@
                     </notebook>
                 </sheet>
 
-                <div class="oe_chatter">
-                    <field name="message_follower_ids" widget="mail_followers" />
-                    <field name="message_ids" widget="mail_thread" />
-                </div>
+                <chatter/>
 
             </form>
         </field>
@@ -465,7 +459,7 @@
     <record model="ir.actions.act_window" id="action_mgmt_categ_procedures">
         <field name="name">Mapa de procesos</field>
         <field name="res_model">mgmt.categ</field>
-        <field name="view_mode">kanban,tree,form</field>
+        <field name="view_mode">kanban,list,form</field>
     </record>
     
 

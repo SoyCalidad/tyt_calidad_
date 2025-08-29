@@ -469,14 +469,21 @@ h1 {
                   <field name="header_spacing">30</field>
                   <field name="dpi">90</field>
             </record>
-            <report id="reporte_process"
-                    string="Mapa de procesos"
-                    report_type="qweb-pdf"
-                    model="mgmt.categ"
-                    name="mgmtsystem_process.reporte_process_hola_calidad_template"
-                    file="Mapa de Procesos"
-                    paperformat="paperformat_lowmargin"
-                    groups="base.group_no_one,mgmtsystem_process.group_process_readonly_printreport,mgmtsystem_process.group_process_owner,mgmtsystem_process.group_process_all" />
+
+            <record id="reporte_process" model="ir.actions.report">
+                  <field name="name">Mapa de procesos</field>
+                  <field name="model">mgmt.categ</field>
+                  <field name="report_name">mgmtsystem_process.reporte_process_hola_calidad_template</field>
+                  <field name="report_file">Mapa de Procesos</field>
+                  <field name="report_type">qweb-pdf</field>
+                  <field name="paperformat_id" ref="paperformat_lowmargin" />
+                  <field name="groups_id" eval="[(6,0,[
+                        ref('base.group_no_one'),
+                        ref('mgmtsystem_process.group_process_readonly_printreport'),
+                        ref('mgmtsystem_process.group_process_owner'),
+                        ref('mgmtsystem_process.group_process_all'),
+                  ])]" />
+            </record>
      
       </data>
 </odoo>
