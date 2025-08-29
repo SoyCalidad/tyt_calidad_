@@ -5,12 +5,12 @@
         <field name="name">res.partner.evaluation.tree</field>
         <field name="model">res.partner.evaluation</field>
         <field name="arch" type="xml">
-            <tree>
+            <list>
                 <field name="name" />
                 <field name="item_ids" />
                 <field name="state" />
                 <field name="version" />
-            </tree>
+            </list>
         </field>
     </record>
     <record id="res_partner_evaluation_form" model="ir.ui.view">
@@ -24,32 +24,32 @@
                             name="send_elaborate"
                             type="object"
                             class="btn-primary"
-                            attrs="{'invisible':[('state','in', ('elaborate','cancel','validate_ok'))]}" />
+                            invisible="state in ['elaborate', 'cancel', 'validate_ok']" />
                     <button string="Enviar a Revisar"
                             name="send_review"
                             type="object"
                             class="btn-primary"
-                            attrs="{'invisible':[('state','!=', 'elaborate')]}" />
+                            invisible="state != 'elaborate'" />
                     <button string="Enviar a Validar"
                             name="send_validate"
                             type="object"
                             class="btn-primary"
-                            attrs="{'invisible':[('state','in', ('elaborate','validate','cancel','validate_ok'))]}" />
+                            invisible="state in ['elaborate', 'validate', 'cancel', 'validate_ok']" />
                     <button string="Validar"
                             name="send_validate_ok"
                             type="object"
                             class="btn-primary"
-                            attrs="{'invisible':[('state','not in', ('validate'))]}" />
+                            invisible="state not in ['validate']" />
                     <button string="Volver Obsoleto"
                             confirm="Esto volverá obsoleto el presente registro. ¿Está seguro(a)?"
                             name="send_cancel"
                             type="object"
                             class="btn-second"
-                            attrs="{'invisible': [('state','in',('cancel'))] }" />
+                            invisible="state in ['cancel']" />
                     <button name="button_new_version"
                             type="object"
                             string="Nueva versión"
-                            attrs="{'invisible':['|', ('active','=',False), ('state', '!=', 'validate_ok')]}"
+                            invisible="(active == False or state != 'validate_ok')"
                             class="oe_highlight" />
                 </header>
                 <sheet>
@@ -60,7 +60,7 @@
                                 icon="fa-archive"
                                 style="white-space: nowrap;"
                                 string="Versiones antiguas" />
-                        <widget name="web_ribbon" title="Archived" bg_color="bg-danger" attrs="{'invisible': [('active', '=', True)]}" />
+                        <widget name="web_ribbon" title="Archived" bg_color="bg-danger" invisible="active == True" />
                         <field name="active" invisible="1" />
                     </div>
                     <label for="name" />
@@ -92,16 +92,16 @@
                                 </group>
                                 <group colspan="4">
                                     <separator string="Elaboración" />
-                                    <field name="elaboration_step" colspan="2" nolabel="1" attrs="{'readonly': [('state','not in',('elaborate'))]}" />
+                                    <field name="elaboration_step" colspan="2" nolabel="1" readonly="state not in ['elaborate']" />
                                     <separator string="Revisión" />
-                                    <field name="review_step" colspan="2" nolabel="1" attrs="{'readonly': [('state','not in',('elaborate', 'review'))]}" />
+                                    <field name="review_step" colspan="2" nolabel="1" readonly="state not in ['elaborate', 'review']" />
                                     <separator string="Validación" />
-                                    <field name="validation_step" colspan="2" nolabel="1" attrs="{'readonly': [('state','not in',('elaborate', 'review', 'validate'))]}" />
+                                    <field name="validation_step" colspan="2" nolabel="1" readonly="state not in ['elaborate', 'review', 'validate']" />
                                 </group>
                                 <group colspan="4">
-                                    <field name="date_elaborate" attrs="{'required': [('state','in',('elaborate'))], 'readonly': True}" />
-                                    <field name="date_review" attrs="{'required': [('state','in',('review'))], 'readonly': True, 'invisible': [('state','in',('elaborate'))] }" />
-                                    <field name="date_validate" groups="base.group_no_one,base.user_admin" attrs="{'invisible': [('state','in',('elaborate','review'))] }" />
+                                    <field name="date_elaborate" readonly="True" required="state in ['elaborate']" />
+                                    <field name="date_review" invisible="state in ['elaborate']" readonly="True" required="state in ['review']" />
+                                    <field name="date_validate" groups="base.group_no_one,base.group_system" invisible="state in ['elaborate', 'review']" />
                                 </group>
                             </group>
                         </page>
@@ -111,18 +111,14 @@
                         </page>
                     </notebook>
                 </sheet>
-                <div class="oe_chatter">
-                    <field name="message_follower_ids" widget="mail_followers" />
-                    <field name="activity_ids" widget="mail_activity" />
-                    <field name="message_ids" widget="mail_thread" />
-                </div>
+                <chatter/>
             </form>
         </field>
     </record>
     <record model="ir.actions.act_window" id="action_res_partner_evaluation">
         <field name="name">Evaluaciones de seguimiento</field>
         <field name="res_model">res.partner.evaluation</field>
-        <field name="view_mode">tree,form</field>
+        <field name="view_mode">list,form</field>
         <field name="help">Evaluaciones para proveedor</field>
     </record>
     <menuitem id="menu_res_partner_evaluation"
@@ -135,11 +131,11 @@
         <field name="name">res.partner.evaluation.item.tree</field>
         <field name="model">res.partner.evaluation.item</field>
         <field name="arch" type="xml">
-            <tree>
+            <list>
                 <field name="name" />
                 <field name="line_ids" />
                 <field name="weight_total" />
-            </tree>
+            </list>
         </field>
     </record>
     <record id="res_partner_evaluation_item_form" model="ir.ui.view">
@@ -158,10 +154,10 @@
                     <group>
                         <field name="weight_total" />
                         <field name="line_ids" context="{'default_evaluation_id':id}">
-                            <tree editable='bottom'>
+                            <list editable='bottom'>
                                 <field name="weight" />
                                 <field name="name" />
-                            </tree>
+                            </list>
                         </field>
                     </group>
                 </sheet>
@@ -173,7 +169,7 @@
         <field name="name">res.partner.evaluation.history.tree</field>
         <field name="model">res.partner.evaluation.history</field>
         <field name="arch" type="xml">
-            <tree>
+            <list>
                 <field name="evaluation_id" />
                 <field name="partner_id" />
                 <field name="date_history" />
@@ -181,7 +177,7 @@
                 <field name="qualification" />
                 <button string="Descargar reporte" type="object" class="btn-primary" name="print_evaluation" />
                 <button string="Enviar por email" type="object" class="btn-primary" name="send_email" />
-            </tree>
+            </list>
         </field>
     </record>
     <record id="res_partner_evaluation_history_form" model="ir.ui.view">
@@ -218,7 +214,7 @@
     <record model="ir.actions.act_window" id="action_res_partner_evaluation_history">
         <field name="name">Listado de evaluaciones de seguimiento</field>
         <field name="res_model">res.partner.evaluation.history</field>
-        <field name="view_mode">tree,form</field>
+        <field name="view_mode">list,form</field>
         <field name="help">Historial de evaluaciones para socio</field>
     </record>
     <menuitem id="menu_res_partner_evaluation_history"
@@ -231,11 +227,11 @@
         <field name="name">res.partner.evaluation.history.item.tree</field>
         <field name="model">res.partner.evaluation.history.item</field>
         <field name="arch" type="xml">
-            <tree>
+            <list>
                 <field name="name" />
                 <field name="history_line_ids" />
                 <field name="qualification_item" />
-            </tree>
+            </list>
         </field>
     </record>
     <record id="res_partner_evaluation_history_item_form" model="ir.ui.view">
@@ -258,12 +254,12 @@
                     </group>
                     <separator string="Calificaciones" />
                     <field name="history_line_ids" context="{'default_history_item_id':id}">
-                        <tree create="false" delete="false" editable="bottom">
+                        <list create="false" delete="false" editable="bottom">
                             <field name="line_id" />
                             <field name="scala" />
                             <field name="name" invisible="1" />
                             <field name="qualification_line" invisible="1" />
-                        </tree>
+                        </list>
                     </field>
                 </sheet>
             </form>

@@ -26,8 +26,11 @@
                     </p>
                 </div>
             </field>
-            <field name="report_template" ref="action_report_res_partner_evaluation" />
-            <field name="report_name">Evaluación de seguimiento_${(object.name or '').replace('/','_')}</field>
+            <!-- <field name="report_template" ref="action_report_res_partner_evaluation" />
+            <field name="report_name">Evaluación de seguimiento_${(object.name or '').replace('/','_')}</field> -->
+            <field name="report_template_ids" eval="[(6,0,[
+                ref('mgmtsystem_partner_qualification.action_report_res_partner_evaluation')
+            ])]" />
             <field name="lang">${object.partner_id.lang}</field>
             <!-- <field name="user_signature" eval="False" /> -->
             <field name="auto_delete" eval="True" />

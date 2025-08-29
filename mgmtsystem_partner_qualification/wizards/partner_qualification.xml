@@ -11,11 +11,11 @@
                         <group name="filter_by" string="Filtrar por">
                             <field name="filter_by" />
                         </group>
-                        <group name="date" string="Fecha" attrs="{'invisible': [('filter_by','!=','date')]}">
+                        <group name="date" string="Fecha" invisible="filter_by != 'date'">
                             <field name="start_date" />
                             <field name="end_date" />
                         </group>
-                        <group name="supplier" string="Proveedor" attrs="{'invisible': [('filter_by','!=','supplier')]}">
+                        <group name="supplier" string="Proveedor" invisible="filter_by != 'supplier'">
                             <field name="supplier_ids" />
                         </group>
                         <footer>

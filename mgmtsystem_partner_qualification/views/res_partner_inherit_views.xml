@@ -15,9 +15,9 @@
                     groups="mgmtsystem_partner_qualification.group_partner_evaluation_onlyread_printreport,mgmtsystem_partner_qualification.group_partner_evaluation_write_printreport,mgmtsystem_partner_qualification.group_partner_evaluation_all">
                     <group col="4">
                         <field name="supplier" />
-                        <field name="vip_supplier" attrs="{'invisible': [('supplier', '=', False)]}" />
+                        <field name="vip_supplier" invisible="supplier == False" />
                         <field name="customer" />
-                        <field name="vip_customer" attrs="{'invisible': [('customer', '=', False)]}" />
+                        <field name="vip_customer" invisible="customer == False" />
                         <field name="stockist" />
                     </group>
                 </div>
@@ -34,7 +34,7 @@
                     groups="mgmtsystem_partner_qualification.group_partner_evaluation_onlyread_printreport,mgmtsystem_partner_qualification.group_partner_evaluation_write_printreport,mgmtsystem_partner_qualification.group_partner_evaluation_all">
                     <group>
                         <field name="responsible_id" />
-                        <field name="evaluation_date" attrs="{'required': [('vip_supplier', '=', True)]}" />
+                        <field name="evaluation_date" required="vip_supplier == True" />
                         <field name="frequency_id" />
                         <field name="next_evaluation_date" invisible="1" />
                         <field name="evaluation_id" invisible="1" />
@@ -57,7 +57,6 @@
         <field name="model_id" ref="model_res_partner" />
         <field name="interval_number">1</field>
         <field name="interval_type">days</field>
-        <field name="numbercall">-1</field>
         <field name="state">code</field>
         <field name="code">model.action_notify()</field>
     </record>
