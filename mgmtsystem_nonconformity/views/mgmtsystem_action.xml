@@ -3,7 +3,7 @@
 	<record model="ir.actions.act_window" id="show_action_ncs_action">
 		<field name="name">No conformidades</field>
 		<field name="res_model">mgmtsystem.nonconformity</field>
-		<field name="view_mode">kanban,form,tree</field>
+		<field name="view_mode">kanban,form,list</field>
 		<field name="context">{"search_default_action_ids": active_id}</field>
 		<field name="search_view_id" ref="view_mgmtsystem_nonconformity_filter" />
 	</record>

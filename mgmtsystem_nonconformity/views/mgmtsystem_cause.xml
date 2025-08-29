@@ -37,7 +37,7 @@
 	<record id="mgmtsystem_nonconformity_cause_why_action" model="ir.actions.act_window">
 		<field name="name">Causa o Por qué</field>
 		<field name="res_model">mgmtsystem.nonconformity.cause_why</field>
-		<field name="view_mode">tree,form</field>
+		<field name="view_mode">list,form</field>
 		<field name="domain">[]</field>
 		<field name="context">{}</field>
 		<field name="help" type="html">
@@ -118,7 +118,7 @@
 	<record id="mgmtsystem_nonconformity_why_action" model="ir.actions.act_window">
 		<field name="name">Action Name</field>
 		<field name="res_model">mgmtsystem.nonconformity.why</field>
-		<field name="view_mode">tree,form</field>
+		<field name="view_mode">list,form</field>
 		<field name="domain">[]</field>
 		<field name="context">{}</field>
 		<field name="help" type="html">
