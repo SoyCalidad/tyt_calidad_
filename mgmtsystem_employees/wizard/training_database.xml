@@ -10,10 +10,10 @@
                         <field name="training_filter" />
                         <field name="date_filter" />
                     </group>
-                    <group attrs="{'invisible': [('training_filter','!=',True)]}">
+                    <group invisible="training_filter != True">
                         <field name="training_ids"/>
                     </group>
-                    <group attrs="{'invisible': [('date_filter','!=',True)]}">
+                    <group invisible="date_filter != True">
                         <field name="init_date"/>
                         <field name="end_date"/>
                     </group>

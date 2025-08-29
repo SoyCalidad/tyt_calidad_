@@ -2,7 +2,7 @@
 <odoo>
     <!-- ONBOARDING STEPS -->
 
-    <template id="onboarding_training_plan_step">
+    <!-- <template id="onboarding_training_plan_step">
         <t t-call="base.onboarding_step">
             <t t-set="title">Programa de capacitaciones</t>
             <t t-set="description">Cree un programa de capacitaciones.</t>
@@ -26,10 +26,10 @@
             <t t-set="model" t-value="'res.company'" />
             <t t-set="state" t-value="state.get('training_training_onboarding_state')" />
         </t>
-    </template>
+    </template> -->
 
     <!-- ONBOARDING PANELS -->
-    <template id="training_onboarding_panel" name="training.onboarding.panel">
+    <!-- <template id="training_onboarding_panel" name="training.onboarding.panel">
         <t t-call="base.onboarding_container">
             <t t-set="classes" t-value="'o_onboarding_blue'"/>
             <t t-set="bg_image" t-value="'/account/static/src/img/account_invoice_onboarding_bg.jpg'"/>
@@ -39,7 +39,7 @@
             <t t-call="mgmtsystem_employees.onboarding_training_plan_step" name="training_plan_step" />
             <t t-call="mgmtsystem_employees.onboarding_training_training_step" name="training_training_step" />
         </t>
-    </template>
+    </template> -->
 
     <!-- Views -->
 

@@ -1,11 +1,11 @@
+<?xml version='1.0' encoding='UTF-8'?>
 <odoo>
-    <report
-        id="report_training_complete_xlsx"
-        model="mgmtsystem.plan.training"
-        string="Base de datos de información(XLSX)"
-        report_type="xlsx"
-        name="mgmtsystem_employees.training_complete"
-        file="Capacitaciones"
-        attachment_use="False"/>
-
+  <record id="report_training_complete_xlsx" model="ir.actions.report">
+    <field name="model">mgmtsystem.plan.training</field>
+    <field name="name">Base de datos de información(XLSX)</field>
+    <field name="report_type">xlsx</field>
+    <field name="report_name">mgmtsystem_employees.training_complete</field>
+    <field name="report_file">Capacitaciones</field>
+    <field name="attachment_use">False</field>
+  </record>
 </odoo>

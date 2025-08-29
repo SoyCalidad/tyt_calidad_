@@ -1,19 +1,18 @@
-<?xml version="1.0" encoding="UTF-8"?>
+<?xml version='1.0' encoding='UTF-8'?>
 <!--Estructura basica de reportes-->
 <odoo>
-   <data>
-      <template id="training_plan_report">
-         <t t-foreach="docs" t-as="o">
-            <t t-if="o and 'company_id' in o">
-               <t t-set="company" t-value="o.company_id" />
-            </t>
-            <t t-if="not o or not 'company_id' in o">
-               <t t-set="company" t-value="res_company" />
-            </t>
-            <t t-call="web.html_container">
-
-               <div class="header">
-                  <style type="text/css">
+  <data>
+    <template id="training_plan_report">
+      <t t-foreach="docs" t-as="o">
+        <t t-if="o and 'company_id' in o">
+          <t t-set="company" t-value="o.company_id"/>
+        </t>
+        <t t-if="not o or not 'company_id' in o">
+          <t t-set="company" t-value="res_company"/>
+        </t>
+        <t t-call="web.html_container">
+          <div class="header">
+            <style type="text/css">
                      .tg  {border-collapse:collapse;border-spacing:0;margin:0px auto;width:100%;}
                      .tg td{border-color:black;border-style:solid;border-width:1px;font-family: Palatino, Palatino Linotype, Palatino LT STD, Book Antiqua, Georgia, serif;font-size:14px;
                      overflow:hidden;padding:10px 5px;word-break:normal;text-align:middle;align:center;}
@@ -23,42 +22,41 @@
                      .tg .tg-1wig{border-color:inherit;text-align:center;vertical-align:middle;font-size:16px;font-weight:bold;}
                      .tg .tg-0lax{border-color:inherit;text-align:center;vertical-align:middle;font-size:12px;}
                   </style>
-                  <table class="tg">
-                     <tbody>
-                        <tr>
-                           <td class="tg-1wig" rowspan="3" width="20%" style="width:15%">
-                              <t t-if="company.logo">
-                                 <img t-att-src="image_data_uri(company.logo)" style="max-width:100px;max-height:100px;vertical-align:middle;" alt="Logo"/>
-                              </t>
-                           </td>
-                           <td class="tg-1wig" rowspan="3" width="80%" style="width:65%;">
-                              <span style="font-size:18px;font-weight:bold;">PROGRAMA ANUAL DE CAPACITACIONES</span>
-                              <br />
-                              <span t-field="o.name" style="font-size:15px;font-weight:bold;" />
-                           </td>
-                           <td class="tg-0lax" width="20%" style="width:20%">
+            <table class="tg">
+              <tbody>
+                <tr>
+                  <td class="tg-1wig" rowspan="3" width="20%" style="width:15%">
+                    <t t-if="company.logo">
+                      <img t-att-src="image_data_uri(company.logo)" style="max-width:100px;max-height:100px;vertical-align:middle;" alt="Logo"/>
+                    </t>
+                  </td>
+                  <td class="tg-1wig" rowspan="3" width="80%" style="width:65%;">
+                    <span style="font-size:18px;font-weight:bold;">PROGRAMA ANUAL DE CAPACITACIONES</span>
+                    <br/>
+                    <span t-field="o.name" style="font-size:15px;font-weight:bold;"/>
+                  </td>
+                  <td class="tg-0lax" width="20%" style="width:20%">
                               Código:
-                              <span t-field="o.code" />
+                              <span t-field="o.code"/>
                            </td>
-                        </tr>
-                        <tr>
-                           <td class="tg-0lax">
+                </tr>
+                <tr>
+                  <td class="tg-0lax">
                               Versión:
-                              <span t-field="o.version" />
+                              <span t-field="o.version"/>
                            </td>
-                        </tr>
-                        <tr>
-                           <td class="tg-0lax">
+                </tr>
+                <tr>
+                  <td class="tg-0lax">
                               Fecha de validación:
-                              <span t-field="o.date_validate" />
+                              <span t-field="o.date_validate"/>
                            </td>
-                        </tr>
-                     </tbody>
-                  </table>
-               </div>
-               <t t-call="web.external_layout">
-
-                  <style type="text/css">
+                </tr>
+              </tbody>
+            </table>
+          </div>
+          <t t-call="web.external_layout">
+            <style type="text/css">
                      .tg  {border-collapse:collapse;border-spacing:0;margin:0px auto;width:100%;}
                      .tg td{border-style:solid;border-width:0px;font-family: Palatino, Palatino Linotype, Palatino LT STD, Book Antiqua, Georgia, serif;font-size:14px;overflow:hidden;
                      padding:10px 5px;word-break:normal;text-align:center;}
@@ -68,68 +66,72 @@
                      .tg .tg-ve36{border-color:#c0c0c0;text-align:center;vertical-align:middle}
                      .tg .tg-5d78{background-color:#efefef;border-color:#c0c0c0;color:#000000;font-weight:bold;text-align:center;vertical-align:middle}
                   </style>
-                  <table class="tg">
-                     <tbody>
-                        <tr>
-                           <td class="tg-5d78">TEMA</td>
-                           <td class="tg-5d78">EXPOSITOR</td>
-                           <td class="tg-5d78">MES</td>
-                           <td class="tg-5d78">FECHA</td>
-                           <td class="tg-5d78">DURACIÓN</td>
-                           <td class="tg-5d78">TIPO</td>
-                        </tr>
-                        <t t-foreach="o.training_ids" t-as="tra">
-                           <tr>
-                              <td class="tg-ve35">
-                                 <span t-field="tra.name" />
-                              </td>
-                              <td class="tg-ve35">
-                                 <t t-if="tra.exponent_id">
-                                    <span t-field="tra.exponent_id.name" />
-                                 </t>
-                              </td>
-                              <td class="tg-ve35" style="text-align:center;">
-                                 <span t-field="tra.month_training" />
-                              </td>
-                              <td class="tg-ve35">
-                                 <span t-field="tra.date_training" />
-                              </td>
-                              <td class="tg-ve35">
-                                 <span t-field="tra.duration" t-options="{'widget': 'float_time'}" />
-                              </td>
-                              <td class="tg-ve35">
-                                 <span t-field="tra.type" />
-                              </td>
-                           </tr>
-                        </t>
-                     </tbody>
-                  </table>
-                  <div class="footer" style="border-top: 1px solid black;font-size: 8px;">
-                     <div class="text-center" style="border-top: 1px solid black;font-size: 10px;text-align:center;">
+            <table class="tg">
+              <tbody>
+                <tr>
+                  <td class="tg-5d78">TEMA</td>
+                  <td class="tg-5d78">EXPOSITOR</td>
+                  <td class="tg-5d78">MES</td>
+                  <td class="tg-5d78">FECHA</td>
+                  <td class="tg-5d78">DURACIÓN</td>
+                  <td class="tg-5d78">TIPO</td>
+                </tr>
+                <t t-foreach="o.training_ids" t-as="tra">
+                  <tr>
+                    <td class="tg-ve35">
+                      <span t-field="tra.name"/>
+                    </td>
+                    <td class="tg-ve35">
+                      <t t-if="tra.exponent_id">
+                        <span t-field="tra.exponent_id.name"/>
+                      </t>
+                    </td>
+                    <td class="tg-ve35" style="text-align:center;">
+                      <span t-field="tra.month_training"/>
+                    </td>
+                    <td class="tg-ve35">
+                      <span t-field="tra.date_training"/>
+                    </td>
+                    <td class="tg-ve35">
+                      <span t-field="tra.duration" t-options="{'widget': 'float_time'}"/>
+                    </td>
+                    <td class="tg-ve35">
+                      <span t-field="tra.type"/>
+                    </td>
+                  </tr>
+                </t>
+              </tbody>
+            </table>
+            <div class="footer" style="border-top: 1px solid black;font-size: 8px;">
+              <div class="text-center" style="border-top: 1px solid black;font-size: 10px;text-align:center;">
                         ©
-                        <span t-field="company.name" />
+                        <span t-field="company.name"/>
                         . All Rights Reserved.
-                        <br />
+                        <br/>
                         PROHIBIDA SU REPRODUCCIÓN SIN AUTORIZACIÓN EXPRESA DE LA DIRECCIÓN.
-                        <br />
+                        <br/>
                         CUALQUIER COPIA IMPRESA NO CONTROLADA. DEBE SER ROTULADA COMO "COPIA NO CONTROLADA".
-                        <br />
+                        <br/>
                         CONSULTE VERSIÓN ELECTRÓNICA
                      </div>
-                  </div>
-               </t>
-            </t>
-         </t>
-      </template>
-
-      <report id="report_trainings"
-              string="Reporte del programa anual "
-              report_type="qweb-pdf"
-              model="mgmtsystem.plan"
-              name="mgmtsystem_employees.training_plan_report"
-              groups="base.group_no_one,mgmtsystem_employees.group_employees_onlyread_printreport,mgmtsystem_employees.group_employees_write_printreport,mgmtsystem_employees.group_employees_all"
-              file="Programa anual de capacitaciones"
-              paperformat="hola_calidad.portrait" />
-
-   </data>
+            </div>
+          </t>
+        </t>
+      </t>
+    </template>
+    <record id="report_trainings" model="ir.actions.report">
+      <field name="model">mgmtsystem.plan</field>
+      <field name="name">Reporte del programa anual </field>
+      <field name="report_type">qweb-pdf</field>
+      <field name="report_name">mgmtsystem_employees.training_plan_report</field>
+      <field name="report_file">Programa anual de capacitaciones</field>
+      <field name="groups_id" eval="[(6,0,[
+         ref('base.group_no_one'),
+         ref('mgmtsystem_employees.group_employees_onlyread_printreport'),
+         ref('mgmtsystem_employees.group_employees_write_printreport'),
+         ref('mgmtsystem_employees.group_employees_all'),
+      ])]"></field>
+      <field name="paperformat_id" ref="hola_calidad.portrait"/>
+    </record>
+  </data>
 </odoo>

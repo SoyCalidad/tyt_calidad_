@@ -25,9 +25,9 @@ class Employee(models.Model):
     job_title = fields.Char(related='job_id.name', string='Cargo')
     job_name = fields.Char(related='job_id.name', string='Cargo')
 
-    @api.onchange('address_home_id')
-    def _onchange_new_user_id(self):
-        self.identification_id = self.address_home_id.vat
+    # @api.onchange('address_home_id')
+    # def _onchange_new_user_id(self):
+    #     self.identification_id = self.address_home_id.vat
 
     @api.depends('training_line_ids')
     def _compute_trainings_count(self):

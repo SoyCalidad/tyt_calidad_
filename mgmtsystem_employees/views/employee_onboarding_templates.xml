@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
 <odoo>
     <!-- ONBOARDING STEPS -->
-
+<!-- 
     <template id="onboarding_hr_department_step">
-        <t t-call="base.onboarding_step">
+        <t t-call="web_tour.onboarding_step">
             <t t-set="title">Departamento</t>
             <t t-set="description">Cree un departamento.</t>
             <t t-set="done_icon" t-value="'fa-star'" />
@@ -39,10 +39,10 @@
             <t t-set="model" t-value="'res.company'" />
             <t t-set="state" t-value="state.get('hr_employee_onboarding_state')" />
         </t>
-    </template>
+    </template> -->
 
     <!-- ONBOARDING PANELS -->
-    <template id="employee_onboarding_panel" name="employee.onboarding.panel">
+    <!-- <template id="employee_onboarding_panel" name="employee.onboarding.panel">
         <t t-call="base.onboarding_container">
             <t t-set="classes" t-value="'o_onboarding_blue'"/>
             <t t-set="bg_image" t-value="'/account/static/src/img/account_invoice_onboarding_bg.jpg'"/>
@@ -53,7 +53,7 @@
             <t t-call="mgmtsystem_employees.onboarding_hr_job_step" name="hr_job_step" />
             <t t-call="mgmtsystem_employees.onboarding_hr_employee_step" name="hr_employee_step" />
         </t>
-    </template>
+    </template> -->
 
     <!-- Views -->
 

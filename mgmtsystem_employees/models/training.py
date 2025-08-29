@@ -13,7 +13,7 @@ from email.mime.application import MIMEApplication
 
 
 from odoo import _, api, fields, models
-from odoo.exceptions import RedirectWarning, UserError, ValidationError, Warning
+from odoo.exceptions import RedirectWarning, UserError, ValidationError
 
 
 class Training(models.Model):
@@ -343,7 +343,7 @@ class TrainingLine(models.Model):
                 self.emresponse_id = response.id
             else:
                 response = self.emresponse_id
-            return self.employee_survey_id.with_context(survey_token=response.token).action_start_survey()
+            return self.employee_survey_id.with_context(survey_token=response.access_token).action_start_survey()
         if typesurvey == 'exponent':
             if not self.exresponse_id:
                 response = self.env['survey.user_input'].create(
@@ -351,7 +351,7 @@ class TrainingLine(models.Model):
                 self.exresponse_id = response.id
             else:
                 response = self.exresponse_id
-            return self.exponent_survey_id.with_context(survey_token=response.token).action_start_survey()
+            return self.exponent_survey_id.with_context(survey_token=response.access_token).action_start_survey()
         if typesurvey == 'efficiency':
             if not self.efresponse_id:
                 response = self.env['survey.user_input'].create(
@@ -359,7 +359,7 @@ class TrainingLine(models.Model):
                 self.efresponse_id = response.id
             else:
                 response = self.efresponse_id
-            return self.efficiency_survey_id.with_context(survey_token=response.token).action_start_survey()
+            return self.efficiency_survey_id.with_context(survey_token=response.access_token).action_start_survey()
 
     def action_print_survey(self):
         self.ensure_one()
@@ -369,19 +369,19 @@ class TrainingLine(models.Model):
                 return self.employee_survey_id.action_print_survey()
             else:
                 response = self.emresponse_id
-                return self.employee_survey_id.with_context(survey_token=response.token).action_print_survey()
+                return self.employee_survey_id.with_context(survey_token=response.access_token).action_print_survey()
         if typesurvey == 'exponent':
             if not self.emresponse_id:
                 return self.exponent_survey_id.action_print_survey()
             else:
                 response = self.emresponse_id
-                return self.exponent_survey_id.with_context(survey_token=response.token).action_print_survey()
+                return self.exponent_survey_id.with_context(survey_token=response.access_token).action_print_survey()
         if typesurvey == 'efficiency':
             if not self.emresponse_id:
                 return self.efficiency_survey_id.action_print_survey()
             else:
                 response = self.emresponse_id
-                return self.efficiency_survey_id.with_context(survey_token=response.token).action_print_survey()
+                return self.efficiency_survey_id.with_context(survey_token=response.access_token).action_print_survey()
 
     def action_see_attachments(self):
         domain = [
@@ -395,7 +395,7 @@ class TrainingLine(models.Model):
             'type': 'ir.actions.act_window',
             'view_id': attachment_view.id,
             'views': [(attachment_view.id, 'kanban'), (False, 'form')],
-            'view_mode': 'kanban,tree,form',
+            'view_mode': 'kanban,list,form',
             'view_type': 'form',
             'help': _('''<p class="oe_view_nocontent_create">
                         Haga clic para cargar archivos de la capacitación

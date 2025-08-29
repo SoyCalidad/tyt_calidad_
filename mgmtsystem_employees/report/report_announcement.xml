@@ -13,29 +13,37 @@
             <t t-call="web.html_container">
                <div class="header">
                   <style type="text/css">
-                     .tg  {border-collapse:collapse;border-spacing:0;margin:0px auto;width:100%;}
-                     .tg td{border-color:black;border-style:solid;border-width:1px;font-family: Palatino, Palatino Linotype, Palatino LT STD, Book Antiqua, Georgia, serif;font-size:14px;
-                     overflow:hidden;padding:10px 5px;word-break:normal;text-align:middle;align:center;}
-                     .tg th{border-color:black;border-style:solid;border-width:1px;font-family: Palatino, Palatino Linotype, Palatino LT STD, Book Antiqua, Georgia, serif;font-size:14px;
+                     .tg {border-collapse:collapse;border-spacing:0;margin:0px auto;width:100%;}
+                     .tg td{border-color:black;border-style:solid;border-width:1px;font-family:
+                     Palatino, Palatino Linotype, Palatino LT STD, Book Antiqua, Georgia,
+                     serif;font-size:14px;
+                     overflow:hidden;padding:10px
+                     5px;word-break:normal;text-align:middle;align:center;}
+                     .tg th{border-color:black;border-style:solid;border-width:1px;font-family:
+                     Palatino, Palatino Linotype, Palatino LT STD, Book Antiqua, Georgia,
+                     serif;font-size:14px;
                      font-weight:normal;overflow:hidden;padding:10px 5px;word-break:normal;}
                      .tg .tg-9wq8{border-color:inherit;text-align:center;vertical-align:middle}
-                     .tg .tg-1wig{border-color:inherit;text-align:center;vertical-align:middle;font-size:16px;font-weight:bold;}
-                     .tg .tg-0lax{border-color:inherit;text-align:center;vertical-align:middle;font-size:12px;font-weigth:bold;}
+                     .tg
+                     .tg-1wig{border-color:inherit;text-align:center;vertical-align:middle;font-size:16px;font-weight:bold;}
+                     .tg
+                     .tg-0lax{border-color:inherit;text-align:center;vertical-align:middle;font-size:12px;font-weigth:bold;}
                   </style>
                   <table class="tg">
                      <tbody>
                         <tr>
                            <td class="tg-1wig" rowspan="2" width="20%" style="width:15%">
                               <t t-if="company.logo">
-                                 <img t-att-src="image_data_uri(company.logo)" style="max-width:100px;max-height:100px;vertical-align:middle;" alt="Logo"/>
+                                 <img t-att-src="image_data_uri(company.logo)"
+                                    style="max-width:100px;max-height:100px;vertical-align:middle;"
+                                    alt="Logo" />
                               </t>
                            </td>
                            <td class="tg-1wig" rowspan="2" width="80%" style="width:65%;">
                               INFORME DE CONVOCATORIAS
                            </td>
-                           <td class="tg-0lax" width="20%" style="width:20%">
-                              Código:
-                              <span t-field="o.reference" />
+                           <td class="tg-0lax" width="20%" style="width:20%"> Código: <span
+                                 t-field="o.reference" />
                            </td>
                         </tr>
                         <!-- <tr>
@@ -44,13 +52,8 @@
                            </td>
                         </tr> -->
                         <tr>
-                           <td class="tg-0lax">
-                              
-                                 Hoja
-                              <span class="page" />
-                                 de
-                              <span class="topage" />
-                              
+                           <td class="tg-0lax"> Hoja <span class="page" /> de <span class="topage" />
+
                            </td>
                         </tr>
                      </tbody>
@@ -60,13 +63,19 @@
                <t t-call="web.external_layout">
                   <div class="page">
                      <style type="text/css">
-                        .tg  {border-collapse:collapse;border-spacing:0;margin:0px auto;width:100%}
-                        .tg td{border-color:black;border-style:solid;border-width:1px;font-family: Palatino, Palatino Linotype, Palatino LT STD, Book Antiqua, Georgia, serif;font-size:14px;
+                        .tg {border-collapse:collapse;border-spacing:0;margin:0px auto;width:100%}
+                        .tg td{border-color:black;border-style:solid;border-width:1px;font-family:
+                        Palatino, Palatino Linotype, Palatino LT STD, Book Antiqua, Georgia,
+                        serif;font-size:14px;
                         overflow:hidden;padding:10px 5px;word-break:normal;widht:25%;}
-                        .tg th{border-color:black;border-style:solid;border-width:1px;font-family: Palatino, Palatino Linotype, Palatino LT STD, Book Antiqua, Georgia, serif;font-size:14px;
+                        .tg th{border-color:black;border-style:solid;border-width:1px;font-family:
+                        Palatino, Palatino Linotype, Palatino LT STD, Book Antiqua, Georgia,
+                        serif;font-size:14px;
                         font-weight:normal;overflow:hidden;padding:10px 5px;word-break:normal;}
-                        .tg .tg-mevu{background-color:#efefef;border-color:#c0c0c0;color:#000000;font-weight:bold;text-align:left;vertical-align:top}
-                        .tg .tg-hx12{background-color:#efefef;border-color:#c0c0c0;font-weight:bold;text-align:left;vertical-align:top}
+                        .tg
+                        .tg-mevu{background-color:#efefef;border-color:#c0c0c0;color:#000000;font-weight:bold;text-align:left;vertical-align:top}
+                        .tg
+                        .tg-hx12{background-color:#efefef;border-color:#c0c0c0;font-weight:bold;text-align:left;vertical-align:top}
                         .tg .tg-wo29{border-color:#c0c0c0;text-align:left;vertical-align:top}
                      </style>
                      <table class="tg">
@@ -107,13 +116,18 @@
                      </table>
                      <br />
                      <style type="text/css">
-                        .tg  {border-collapse:collapse;border-spacing:0;margin:0px auto;}
-                        .tg td{border-style:solid;border-width:0px;font-family: Palatino, Palatino Linotype, Palatino LT STD, Book Antiqua, Georgia, serif;font-size:14px;overflow:hidden;
+                        .tg {border-collapse:collapse;border-spacing:0;margin:0px auto;}
+                        .tg td{border-style:solid;border-width:0px;font-family: Palatino, Palatino
+                        Linotype, Palatino LT STD, Book Antiqua, Georgia,
+                        serif;font-size:14px;overflow:hidden;
                         padding:10px 5px;word-break:normal;text-align:center;}
-                        .tg th{border-style:solid;border-width:0px;font-family: Palatino, Palatino Linotype, Palatino LT STD, Book Antiqua, Georgia, serif;font-size:14px;font-weight:normal;
+                        .tg th{border-style:solid;border-width:0px;font-family: Palatino, Palatino
+                        Linotype, Palatino LT STD, Book Antiqua, Georgia,
+                        serif;font-size:14px;font-weight:normal;
                         overflow:hidden;padding:10px 5px;word-break:normal;}
                         .tg .tg-ve35{border-color:#c0c0c0;text-align:left;vertical-align:middle}
-                        .tg .tg-5d78{background-color:#efefef;border-color:#c0c0c0;color:#000000;font-weight:bold;text-align:center;vertical-align:middle}
+                        .tg
+                        .tg-5d78{background-color:#efefef;border-color:#c0c0c0;color:#000000;font-weight:bold;text-align:center;vertical-align:middle}
                      </style>
                      <table class="tg">
                         <tbody>
@@ -145,30 +159,27 @@
                      </table>
                   </div>
                   <div class="footer" style="border-top: 1px solid black;font-size: 8px;">
-                     <div class="text-center" style="border-top: 1px solid black;font-size: 10px;text-align:center;">
-                        ©
-                        <span t-field="company.name" />
-                        . All Rights Reserved.
-                        <br />
-                        PROHIBIDA SU REPRODUCCIÓN SIN AUTORIZACIÓN EXPRESA DE LA DIRECCIÓN.
-                        <br />
-                        CUALQUIER COPIA IMPRESA NO CONTROLADA. DEBE SER ROTULADA COMO "COPIA NO CONTROLADA".
-                        <br />
-                        CONSULTE VERSIÓN ELECTRÓNICA
-                     </div>
+                     <div class="text-center"
+                        style="border-top: 1px solid black;font-size: 10px;text-align:center;"> © <span
+                           t-field="company.name" /> . All Rights Reserved. <br /> PROHIBIDA SU
+                        REPRODUCCIÓN SIN AUTORIZACIÓN EXPRESA DE LA DIRECCIÓN. <br /> CUALQUIER
+                        COPIA IMPRESA NO CONTROLADA. DEBE SER ROTULADA COMO "COPIA NO CONTROLADA". <br />
+                        CONSULTE VERSIÓN ELECTRÓNICA </div>
                   </div>
                </t>
             </t>
          </t>
       </template>
 
-      <report id="report_announcement"
-              string="Reporte de la convocatoria"
-              report_type="qweb-pdf"
-              model="mgmtsystem.plan.training"
-              name="mgmtsystem_employees.report_announcement_template"
-              file="Reporte de convocatoria"
-              paperformat="hola_calidad.landscape" />
+      <record id="report_announcement" model="ir.actions.report">
+         <field name="name">Reporte de la convocatoria</field>
+         <field name="model">mgmtsystem.plan.training</field>
+         <field name="report_type">qweb-pdf</field>
+         <field name="report_name">mgmtsystem_employees.report_announcement_template</field>
+         <field name="print_report_name">'Reporte de convocatoria'</field>
+         <field name="paperformat_id" ref="hola_calidad.landscape" />
+      </record>
+
 
    </data>
 </odoo>

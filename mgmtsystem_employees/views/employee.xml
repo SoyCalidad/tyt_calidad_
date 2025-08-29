@@ -4,15 +4,16 @@
         <record model="ir.actions.act_window" id="show_training_line_employee_action">
             <field name="name">Capacitaciones</field>
             <field name="res_model">mgmtsystem.plan.training.line</field>
-            <field name="view_mode">tree,form</field>
+            <field name="view_mode">list,form</field>
             <field name="context">{"search_default_employee_id": active_id}</field>
             <field name="search_view_id" ref="view_mgmtsystem_plan_training_line_search" />
             <field name="help" type="html">
                 <p class="oe_view_nocontent_create">No existen capacitaciones para este empleado</p>
             </field>
         </record>
-        
-        <record id="hr_kanban_view_employees_inherit" model="ir.ui.view">
+
+        <!-- Vista innecesario odoo ya hace esta validación -->
+        <!-- <record id="hr_kanban_view_employees_inherit" model="ir.ui.view">
             <field name="name">hr.employee.view.kanban.inherit</field>
             <field name="model">hr.employee</field>
             <field name="inherit_id" ref="hr.hr_kanban_view_employees" />
@@ -23,7 +24,7 @@
                     </span>
                 </span>
             </field>
-        </record>
+        </record> -->
 
         <record id="mgmt_hr_employee_inherit_form" model="ir.ui.view">
             <field name="name">mgmt.hr.employee.inherit.form</field>
@@ -34,7 +35,7 @@
                     <button type="action"
                             name="%(show_training_line_employee_action)d"
                             class="oe_stat_button"
-                            attrs="{'invisible': [('trainings_count','=',0)]}"
+                            invisible="trainings_count == 0"
                             icon="fa-briefcase"
                             groups="hr.group_hr_manager">
                         <field name="trainings_count" widget="statinfo" string="Capacitaciones" />

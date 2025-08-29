@@ -11,7 +11,12 @@
     'license': 'Other proprietary',
     'version': '0.1',
 
-    'depends': ['hr_recruitment', 'mgmtsystem_process', 'survey', 'mgmtsystem_legal', 'mgmtsystem_documentary_control'],
+    'depends': [
+        'hr_recruitment', 
+        'mgmtsystem_process', 
+        'survey', 
+        'mgmtsystem_legal', 
+        'mgmtsystem_documentary_control',],
 
     'data': [
         'security/security.xml',

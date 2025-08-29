@@ -19,14 +19,14 @@ class TrainingCertificate(models.TransientModel):
 
     employee_ids = fields.Many2many('hr.employee', string='Empleados')
 
-    def print_certficate(self):
-        for each in self:
-            ids = []
-            for line in each.line_ids:
-                if line.state_test == 'approved':
-                    ids.append(line.id)
-            if ids:
-                return self.env.ref('mgmtsystem_employees.action_report_training_certificate').report_action(tuple(ids))
+    # def print_certficate(self):
+    #     for each in self:
+    #         ids = []
+    #         for line in each.line_ids:
+    #             if line.state_test == 'approved':
+    #                 ids.append(line.id)
+    #         if ids:
+    #             return self.env.ref('mgmtsystem_employees.action_report_training_certificate').report_action(tuple(ids))
 
 
 
