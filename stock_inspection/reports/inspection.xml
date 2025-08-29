@@ -1,6 +1,12 @@
 <odoo>
     <data>
-        <report id="action_report_stock_inspection" model="stock_inspection.stock_inspection" string="Ficha de inspección" report_type="qweb-pdf" name="stock_inspection.inspection_report" file="stock_inspection.inspection_report" />
+        <record id="action_report_stock_inspection" model="ir.actions.report">
+            <field name="model">stock_inspection.stock_inspection</field>
+            <field name="name">Ficha de inspección</field>
+            <field name="report_type">qweb-pdf</field>
+            <field name="report_name">stock_inspection.inspection_report</field>
+            <field name="report_file">stock_inspection.inspection_report</field>
+        </record>
         <template id="inspection_report">
             <t t-call="web.html_container">
                 <t t-foreach="docs" t-as="doc">
@@ -95,13 +101,13 @@
                 </t>
             </t>
         </template>
-        <report
-            id="action_report_stock_picking_inspection"
-            model="stock.picking.inspection"
-            string="Evaluación de compras"
-            report_type="xlsx"
-            name="stock_inspection.stock_picking_inspection_report"
-            file="Evaluación de compras"
-        />
+
+        <record id="action_report_stock_picking_inspection" model="ir.actions.report">
+            <field name="model">stock.picking.inspection</field>
+            <field name="name">Evaluación de compras</field>
+            <field name="report_type">xlsx</field>
+            <field name="report_name">stock_inspection.stock_picking_inspection_report</field>
+            <field name="report_file">Evaluación de compras</field>
+        </record>
     </data>
 </odoo>

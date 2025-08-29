@@ -20,7 +20,7 @@
       <field name="name">Fichas de Inspección</field>
       <field name="res_model">stock_inspection.stock_inspection</field>
       
-      <field name="view_mode">tree,form</field>
+      <field name="view_mode">list,form</field>
       <field name="search_view_id" ref="stock_inspection_search_form" />
       <field name="context">{
         'search_default_stock_picking_id': [active_id],
@@ -36,7 +36,7 @@
       <field name="name">Fichas de Inspección</field>
       <field name="res_model">stock_inspection.stock_inspection</field>
       
-      <field name="view_mode">tree,form</field>
+      <field name="view_mode">list,form</field>
       <field name="help" type="html">
         <p class="oe_view_nocontent_create"> No hay fichas aún, cree una.</p>
       </field>
@@ -65,10 +65,10 @@
       <field name="arch" type="xml">
         <form string="Ficha de compra" create="true">
           <header>
-            <!-- <button name="evaluate_diagnostic" attrs="{'invisible': [('state','in',['draft'])]}" string="Generar Reporte" type="object" class="btn-primary"/>
-            <button name="change_state_draft" attrs="{'invisible': [('state','in',['draft','validate'])]}" string="Atrás" type="object" class="btn-primary"/>
-            <button name="change_state_eval" attrs="{'invisible': [('state','in',['validate','evaluate'])]}" string="Analizar detalladamente" type="object" class="btn-primary"/> -->
-            <button name="change_state_validate" attrs="{'invisible': [('state','in',['validate'])]}" string="Culminar" type="object" class="btn-primary" />
+            <!-- <button name="evaluate_diagnostic" invisible="state in ['draft']" string="Generar Reporte" type="object" class="btn-primary"/>
+            <button name="change_state_draft" invisible="state in ['draft', 'validate']" string="Atrás" type="object" class="btn-primary"/>
+            <button name="change_state_eval" invisible="state in ['validate', 'evaluate']" string="Analizar detalladamente" type="object" class="btn-primary"/> -->
+            <button name="change_state_validate" invisible="state in ['validate']" string="Culminar" type="object" class="btn-primary" />
             <field name="state" widget="statusbar" />
           </header>
           <sheet>
@@ -77,40 +77,40 @@
             <group>
 
               <group>
-                <field name="name" attrs="{'readonly': [('state','in',['validate'])]}" />
+                <field name="name" readonly="state in ['validate']" />
 
               </group>
 
               <group>
-                <field name="proveedor_ids" attrs="{'readonly': [('state','in',['validate'])]}" />
-                <!-- <field name="purchase_order_id" widget="many2many_tags" attrs="{'readonly': [('state','in',['validate'])]}"/> -->
+                <field name="proveedor_ids" readonly="state in ['validate']" />
+                <!-- <field name="purchase_order_id" widget="many2many_tags" readonly="state in ['validate']"/> -->
               </group>
 
               <group>
-                <field name="purchase_order_id" attrs="{'readonly': [('state','in',['validate'])]}" />
+                <field name="purchase_order_id" readonly="state in ['validate']" />
 
               </group>
               <group>
-                <field name="user_ids" attrs="{'readonly': [('state','in',['validate'])]}" />
+                <field name="user_ids" readonly="state in ['validate']" />
               </group>
 
             </group>
 
             <group>
               <group>
-                <field name="date_inspection" attrs="{'readonly': [('state','in',['validate'])]}" />
+                <field name="date_inspection" readonly="state in ['validate']" />
               </group>
               <group></group>
             </group>
 
             <group>
 
-              <field name="criterio_ids" attrs="{'readonly': [('state','in',['validate'])]}">
-                <tree editable="bottom">
+              <field name="criterio_ids" readonly="state in ['validate']">
+                <list editable="bottom">
                   <!-- <field name="name" /> -->
                   <field name="complete_name" />
                   <field name="qualification" />
-                </tree>
+                </list>
               </field>
             </group>
 
@@ -121,11 +121,7 @@
 
           <!-- Añadir seguimientos (logs) -->
           <xpath expr="//sheet" position="after">
-            <div class="oe_chatter">
-              <field name="message_follower_ids" widget="mail_followers" />
-              <field name="activity_ids" widget="mail_activity" />
-              <field name="message_ids" widget="mail_thread" />
-            </div>
+            <chatter/>
           </xpath>
 
         </form>
@@ -138,13 +134,13 @@
       <field name="model">stock_inspection.stock_inspection</field>
       <field eval="1" name="priority" />
       <field name="arch" type="xml">
-        <tree string="Ficha de compra">
+        <list string="Ficha de compra">
           <field name="name" />
           <field name="proveedor_ids" />
           <field name="purchase_order_id" />
           <field name="user_ids" />
           <field name="date_inspection" />
-        </tree>
+        </list>
       </field>
     </record>
 
@@ -154,18 +150,18 @@
     <record model="ir.actions.act_window" id="test">
       <field name="name">Criterios de producto</field>
       <field name="res_model">stock_inspection.criterio</field>
-      <field name="view_mode">tree,form</field>
+      <field name="view_mode">list,form</field>
     </record>
 
     <record id="stock_inspection_criterio_tree" model="ir.ui.view">
       <field name="name">stock_inspection.criterio.tree</field>
       <field name="model">stock_inspection.criterio</field>
       <field name="arch" type="xml">
-        <tree>
+        <list>
           
           <field name="complete_name"/>
           
-        </tree>
+        </list>
       </field>
     </record>
 
@@ -173,7 +169,7 @@
       <field name="name">Claúsulas</field>
       <field name="res_model">hola_calidad.clause</field>
       
-      <field name="view_mode">tree,form</field>
+      <field name="view_mode">list,form</field>
       <field name="help" type="html">
         <p class="oe_view_nocontent_create">Crea claúsulas de gestión de calidad</p>
       </field>

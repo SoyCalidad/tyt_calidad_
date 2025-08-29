@@ -17,15 +17,15 @@
             <field name="name">stock.inspection.item.view.tree</field>
             <field name="model">stock.inspection.item</field>
             <field name="arch" type="xml">
-                <tree string="Criterio de evaluación">
+                <list string="Criterio de evaluación">
                     <field name="name" />
-                </tree>
+                </list>
             </field>
         </record>
         <record id="stock_inspection_item_action" model="ir.actions.act_window">
             <field name="name">Criterio de evaluación</field>
             <field name="res_model">stock.inspection.item</field>
-            <field name="view_mode">tree,form</field>
+            <field name="view_mode">list,form</field>
             <field name="domain">[]</field>
             <field name="context">{}</field>
         </record>
@@ -35,37 +35,37 @@
             <field name="arch" type="xml">
                 <form string="Evaluación">
                     <header>
-                        <field name="state" widget="statusbar" statusbar_visible="elaborate,review,validate,validate_ok,on_track,closed" />
+                        <field name="state" widget="statusbar" statusbar_visible="elaborate,review,validate,validate_ok,cancel" />
                         <button string="Enviar a Elaborar"
                                 name="send_elaborate"
                                 type="object"
                                 class="btn-primary"
-                                attrs="{'invisible':[('state','not in', ('review'))]}" />
+                                invisible="state not in ['review']" />
                         <button string="Enviar a Revisar"
                                 name="send_review"
                                 type="object"
                                 class="btn-primary"
-                                attrs="{'invisible':[('state','not in', ('elaborate'))]}" />
+                                invisible="state not in ['elaborate']" />
                         <button string="Enviar a Validar"
                                 name="send_validate"
                                 type="object"
                                 class="btn-primary"
-                                attrs="{'invisible':[('state','not in', ('review'))]}" />
+                                invisible="state not in ['review']" />
                         <button string="Validar"
                                 name="send_validate_ok"
                                 type="object"
                                 class="btn-primary"
-                                attrs="{'invisible':[('state','not in', ('validate'))]}" />
+                                invisible="state not in ['validate']" />
                         <button string="Volver Obsoleto"
                                 confirm="Esto volverá obsoleto el presente registro. ¿Está seguro(a)?"
                                 name="send_cancel"
                                 type="object"
                                 class="btn-second"
-                                attrs="{'invisible': [('state','in',('cancel'))] }" />
+                                invisible="state in ['cancel']" />
                         <button name="button_new_version"
                                 type="object"
                                 string="Nueva versión"
-                                attrs="{'invisible':[('state', '!=', 'validate_ok')]}"
+                                invisible="state != 'validate_ok'"
                                 class="oe_highlight" />
                     </header>
                     <sheet>
@@ -80,14 +80,14 @@
                         <div class="oe_title">
                             <label for="name" />
                             <h2>
-                                <field name="name" attrs="{'readonly': [('state','in',('validate_ok'))] }" />
+                                <field name="name" readonly="state in ['validate_ok']" />
                             </h2>
                         </div>
                         <notebook>
                             <page name="criteria" string="Criterios">
                                 <group>
                                     <separator string="Criterios" colspan="2" />
-                                    <field name="item_ids" nolabel="1" attrs="{'readonly': [('state','in',('validate_ok'))] }" />
+                                    <field name="item_ids" nolabel="1" readonly="state in ['validate_ok']" />
                                 </group>
                             </page>
                             <page name="validation" string="Validación y Versión">
@@ -97,26 +97,22 @@
                                     </group>
                                     <group colspan="4">
                                         <separator string="Elaboración" />
-                                        <field name="elaboration_step" colspan="2" nolabel="1" attrs="{'readonly': [('state','not in',('elaborate'))]}" />
+                                        <field name="elaboration_step" colspan="2" nolabel="1" readonly="state not in ['elaborate']" />
                                         <separator string="Revisión" />
-                                        <field name="review_step" colspan="2" nolabel="1" attrs="{'readonly': [('state','not in',('elaborate', 'review'))]}" />
+                                        <field name="review_step" colspan="2" nolabel="1" readonly="state not in ['elaborate', 'review']" />
                                         <separator string="Validación" />
-                                        <field name="validation_step" colspan="2" nolabel="1" attrs="{'readonly': [('state','not in',('elaborate', 'review', 'validate'))]}" />
+                                        <field name="validation_step" colspan="2" nolabel="1" readonly="state not in ['elaborate', 'review', 'validate']" />
                                     </group>
                                     <group colspan="4">
-                                        <field name="date_elaborate" attrs="{'required': [('state','in',('elaborate'))], 'readonly': True}" />
-                                        <field name="date_review" attrs="{'required': [('state','in',('review'))], 'readonly': True, 'invisible': [('state','in',('elaborate'))] }" />
-                                        <field name="date_validate" groups="base.group_no_one,base.user_admin" attrs="{'invisible': [('state','in',('elaborate','review'))] }" />
+                                        <field name="date_elaborate" readonly="True" required="state in ['elaborate']" />
+                                        <field name="date_review" invisible="state in ['elaborate']" readonly="True" required="state in ['review']" />
+                                        <field name="date_validate" groups="base.group_no_one,base.group_system" invisible="state in ['elaborate', 'review']" />
                                     </group>
                                 </group>
                             </page>
                         </notebook>
                     </sheet>
-                    <div class="oe_chatter">
-                        <field name="message_follower_ids" widget="mail_followers" />
-                        <field name="activity_ids" widget="mail_activity" />
-                        <field name="message_ids" widget="mail_thread" />
-                    </div>
+                    <chatter/>
                 </form>
             </field>
         </record>
@@ -124,16 +120,16 @@
             <field name="name">stock.inspection.view.tree</field>
             <field name="model">stock.inspection</field>
             <field name="arch" type="xml">
-                <tree string="Evaluación">
+                <list string="Evaluación">
                     <field name="name" />
                     <field name="item_ids" />
-                </tree>
+                </list>
             </field>
         </record>
         <record id="stock_inspection_action" model="ir.actions.act_window">
             <field name="name">Evaluación</field>
             <field name="res_model">stock.inspection</field>
-            <field name="view_mode">tree,form</field>
+            <field name="view_mode">list,form</field>
             <field name="domain">[]</field>
             <field name="context">{}</field>
         </record>
@@ -157,18 +153,18 @@
             <field name="name">stock.picking.inspection.item.view.tree</field>
             <field name="model">stock.picking.inspection.item</field>
             <field name="arch" type="xml">
-                <tree string="Evaluación">
+                <list string="Evaluación">
                     <field name="name" />
                     <field name="yes" />
                     <field name="no" />
                     <field name="no_apply" />
-                </tree>
+                </list>
             </field>
         </record>
         <record id="stock_picking_inspection_item_action" model="ir.actions.act_window">
             <field name="name">Evaluación</field>
             <field name="res_model">stock.picking.inspection.item</field>
-            <field name="view_mode">tree,form</field>
+            <field name="view_mode">list,form</field>
             <field name="domain">[]</field>
             <field name="context">{}</field>
         </record>
@@ -185,12 +181,12 @@
                         </group>
                         <group>
                             <field name="item_ids">
-                                <tree editable="bottom">
+                                <list editable="bottom">
                                     <field name="name" />
                                     <field name="yes" />
                                     <field name="no" />
                                     <field name="no_apply" />
-                                </tree>
+                                </list>
                             </field>
                         </group>
                         <group>
@@ -204,18 +200,18 @@
             <field name="name">stock.picking.inspection.view.tree</field>
             <field name="model">stock.picking.inspection</field>
             <field name="arch" type="xml">
-                <tree string="">
+                <list string="">
                     <field name="inspection_id" />
                     <field name="inspection_date" />
                     <field name="employee_id" />
                     <button string="Imprimir evaluación" type="object" class="btn-primary" name="print_evaluation" />
-                </tree>
+                </list>
             </field>
         </record>
         <record id="stock_picking_inspection_action" model="ir.actions.act_window">
             <field name="name">Evaluación</field>
             <field name="res_model">stock.picking.inspection</field>
-            <field name="view_mode">tree,form</field>
+            <field name="view_mode">list,form</field>
             <field name="domain">[]</field>
             <field name="context">{}</field>
         </record>
@@ -230,7 +226,7 @@
                     </page>
                 </notebook>
                 <field name="owner_id" position="after">
-                    <field name="return_date" groups="stock.group_tracking_owner" attrs="{'invisible': ['|', ('picking_type_code', '!=', 'incoming'), ('owner_id', '=', None)]}" />
+                    <field name="return_date" groups="stock.group_tracking_owner" invisible="(picking_type_code != 'incoming' or owner_id == None)" />
                 </field>
             </field>
         </record>

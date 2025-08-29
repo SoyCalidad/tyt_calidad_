@@ -6,11 +6,11 @@
       <field name="name">stock_inspection list</field>
       <field name="model">stock_inspection.criterio</field>
       <field name="arch" type="xml">
-        <tree>
+        <list>
           <!-- <field name="name"/> -->
           <field name="complete_name"/>
           <!-- <field name="value2"/> -->
-        </tree>
+        </list>
       </field>
     </record>
    
@@ -20,7 +20,7 @@
     <record model="ir.actions.act_window" id="stock_inspection.action_window">
       <field name="name">Criterios de producto</field>
       <field name="res_model">stock_inspection.criterio</field>
-      <field name="view_mode">tree,form</field>
+      <field name="view_mode">list,form</field>
     </record>
    
 

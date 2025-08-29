@@ -18,7 +18,7 @@
     'version': '0.1',
 
     # any module necessary for this one to work correctly
-    'depends': ['purchase', 'stock', 'base', 'mgmtsystem_validation'],
+    'depends': ['purchase', 'stock', 'base', 'mgmtsystem_validation', 'report_xlsx'],
 
     # always loaded
     'data': [
