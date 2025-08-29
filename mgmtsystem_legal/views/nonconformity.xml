@@ -14,7 +14,7 @@
         <field name="name">Acciones</field>
         <field name="res_model">mgmtsystem.action</field>
         
-        <field name="view_mode">kanban,form,tree</field>
+        <field name="view_mode">kanban,form,list</field>
         <field name="context">{"search_default_nonconformity_ids": active_id}</field>
         <field name="search_view_id" ref="view_nc_actions_search"/>
     </record>
@@ -113,7 +113,7 @@
         <field name="name">No conformidades</field>
         <field name="res_model">mgmtsystem.nonconformity</field>
         
-        <field name="view_mode">kanban,form,tree</field>
+        <field name="view_mode">kanban,form,list</field>
         <field name="context">{"search_default_action_ids": active_id}</field>
         <field name="search_view_id" ref="view_action_ncs_search"/>
     </record>
