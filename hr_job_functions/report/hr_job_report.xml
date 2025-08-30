@@ -670,12 +670,13 @@
             </style>
         </template>
 
-        <report id="report_funinings"
-                string="Manual de organización y funciones"
-                report_type="qweb-pdf"
-                model="hr.job"
-                name="hr_job_functions.reporte_resultados_employees_template"
-                file="Manual de organización y funciones"
-                paperformat="hola_calidad.portrait" />
+        <record id="report_funinings" model="ir.actions.report">
+            <field name="name">Manual de organización y funciones</field>
+            <field name="report_file">Manual de organización y funciones</field>
+            <field name="report_type">qweb-pdf</field>
+            <field name="model">hr.job</field>
+            <field name="report_name">hr_job_functions.reporte_resultados_employees_template</field>
+            <field name="paperformat_id" ref="hola_calidad.portrait" />
+        </record>
     </data>
 </odoo>

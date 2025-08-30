@@ -1,13 +1,12 @@
+<?xml version='1.0' encoding='UTF-8'?>
 <odoo>
-    <data>
-
-        <report
-            id="report_comunication_plan"
-            model="comunication.plan"
-            string="Programa de Comunicaciones"
-            report_type="xlsx"
-            name="mgmtsystem_comunication.report_comunication_plan"
-            file="Programa de Comunicaciones" />
-
-    </data>
+  <data>
+    <record id="report_comunication_plan" model="ir.actions.report">
+      <field name="model">comunication.plan</field>
+      <field name="name">Programa de Comunicaciones</field>
+      <field name="report_type">xlsx</field>
+      <field name="report_name">mgmtsystem_comunication.report_comunication_plan</field>
+      <field name="report_file">Programa de Comunicaciones</field>
+    </record>
+  </data>
 </odoo>

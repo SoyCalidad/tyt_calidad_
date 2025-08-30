@@ -75,12 +75,7 @@
                         </notebook>
                     </div>
                 </sheet>
-                <div class="oe_chatter">
-                    <field name="message_follower_ids" widget="mail_followers" />
-                    <field name="activity_ids" widget="mail_activity" />
-                    <field name="message_ids" widget="mail_thread" />
-                </div>
-            </form>
+                <chatter />            </form>
         </field>
     </record>
     <!--Comité de calidad-->
@@ -419,12 +414,7 @@
                         <!--<page name="validation" string="Validación y Versión"><group col="4"><group colspan="2"><field name="elaborate_ids" widget="many2many_tags" options="{ 'no_open': True, 'no_create_edit': True, 'no_create': True}" readonly="state not in ['elaborate']"/><field name="review_ids" widget="many2many_tags" options="{ 'no_open': True}" readonly="state not in ['elaborate', 'review']"/><field name="validate_ids" widget="many2many_tags" options="{ 'no_open': True}" readonly="state not in ['elaborate', 'review', 'validate']"/></group><group colspan="2"><field name="date_validate" groups="base.group_no_one,base.group_system" invisible="state in ['elaborate', 'review']" readonly="False"/></group></group></page>-->
                     </notebook>
                 </sheet>
-                <div class="oe_chatter">
-                    <field name="message_follower_ids" widget="mail_followers" />
-                    <field name="activity_ids" widget="mail_activity" />
-                    <field name="message_ids" widget="mail_thread" />
-                </div>
-            </form>
+                <chatter />            </form>
         </field>
     </record>
     <record id="mgmtsystem_review_plan_action1" model="ir.actions.act_window">
