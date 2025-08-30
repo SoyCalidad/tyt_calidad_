@@ -26,6 +26,11 @@ class SurveySurvey(models.Model):
             ('closed', 'Closed')
         ], group_expand='_read_group_states'
     )
+    
+    @api.model
+    def _read_group_states(self, states, domain, order):
+        """Permite expandir todos los estados definidos, aunque no existan registros."""
+        return [key for key, val in self._fields['state'].selection]
 
     process_id = fields.Many2one(
         comodel_name='process.edition', string='Procedimiento', required=False)

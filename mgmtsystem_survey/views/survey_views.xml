@@ -15,7 +15,7 @@
                         string="Iniciar encuesta"
                         type="object"
                         class="oe_highlight"
-                        attrs="{'invisible': ['|', ('state', '!=', 'validate_ok'), ('id', '=', False)]}" />
+                        invisible="(state != 'validate_ok' or id == False)" />
             </button>
             -->
             <!-- "action_draft" NO EXISTE en ODOO 15
@@ -25,33 +25,33 @@
             </button>
             -->
             <header position="inside">
-                <!-- <button string="Enviar a Elaborar" name="send_elaborate" type="object" class="btn-primary" attrs="{'invisible':[('state','in', ('elaborate','cancel','validate_ok'))]}"/> -->
+                <!-- <button string="Enviar a Elaborar" name="send_elaborate" type="object" class="btn-primary" invisible="state in ['elaborate', 'cancel', 'validate_ok']"/> -->
                 <button string="Enviar a Revisar"
                         name="send_review"
                         type="object"
                         class="btn-primary"
-                        attrs="{'invisible':[('state','!=', 'elaborate')]}" />
+                        invisible="state != 'elaborate'" />
                 <button string="Enviar a Validar"
                         name="send_validate"
                         type="object"
                         class="btn-primary"
-                        attrs="{'invisible':[('state','!=', 'review')]}" />
+                        invisible="state != 'review'" />
                 <button string="Validar"
                         name="send_validate_ok"
                         type="object"
                         class="btn-primary"
-                        attrs="{'invisible':[('state','!=', 'validate')]}"
+                        invisible="state != 'validate'"
                         confirm="¿Está seguro? Esta acción validará el documento" />
                 <button string="Volver Obsoleto"
                         confirm="Esto volverá obsoleto el presente registro. ¿Está seguro(a)?"
                         name="send_cancel"
                         type="object"
                         class="btn-second"
-                        attrs="{'invisible': [('state','in',('cancel'))] }" />
+                        invisible="state in ['cancel']" />
                 <button name="button_new_version"
                         type="object"
                         string="Nueva versión"
-                        attrs="{'invisible':[('state', '!=', 'closed')]}"
+                        invisible="state != 'closed'"
                         class="oe_highlight" />
             </header>
             <button name="action_survey_user_input" position="before">
@@ -60,7 +60,7 @@
                         context="{'type_action':'nc'}"
                         class="oe_stat_button"
                         icon="fa-clipboard"
-                        attrs="{'invisible': [('state', '!=', 'validate_ok')]}">
+                        invisible="state != 'validate_ok'">
                     <field string="No conformidades" name="count_ncs" widget="statinfo" />
                 </button>
                 <button name="action_survey_views"
@@ -68,7 +68,7 @@
                         context="{'type_action':'action'}"
                         class="oe_stat_button"
                         icon="fa-check-square-o"
-                        attrs="{'invisible': [('state', '!=', 'validate_ok')]}">
+                        invisible="state != 'validate_ok'">
                     <field string="Acciones" name="count_actions" widget="statinfo" />
                     <br />
                 </button>
@@ -120,30 +120,30 @@
                         </group>
                         <group colspan="4">
                             <separator string="Elaboración" />
-                            <field name="elaboration_step" colspan="2" nolabel="1" attrs="{'readonly': [('state','not in',('elaborate'))]}" />
+                            <field name="elaboration_step" colspan="2" nolabel="1" readonly="state not in ['elaborate']" />
                             <separator string="Revisión" />
-                            <field name="review_step" colspan="2" nolabel="1" attrs="{'readonly': [('state','not in',('elaborate', 'review'))]}" />
+                            <field name="review_step" colspan="2" nolabel="1" readonly="state not in ['elaborate', 'review']" />
                             <separator string="Validación" />
-                            <field name="validation_step" colspan="2" nolabel="1" attrs="{'readonly': [('state','not in',('elaborate', 'review', 'validate'))]}" />
+                            <field name="validation_step" colspan="2" nolabel="1" readonly="state not in ['elaborate', 'review', 'validate']" />
                         </group>
                         <group colspan="2">
-                            <field name="date_elaborate" attrs="{'required': [('state','in',('elaborate'))], 'readonly': True}" />
-                            <field name="date_review" attrs="{'required': [('state','in',('review'))], 'readonly': True, 'invisible': [('state','in',('elaborate'))] }" />
-                            <field name="date_validate" groups="base.group_no_one,base.user_admin" attrs="{'invisible': [('state','in',('elaborate','review'))] }" />
+                            <field name="date_elaborate" readonly="True" required="state in ['elaborate']" />
+                            <field name="date_review" invisible="state in ['elaborate']" readonly="True" required="state in ['review']" />
+                            <field name="date_validate" groups="base.group_no_one,base.group_system" invisible="state in ['elaborate', 'review']" />
                         </group>
                     </group>
                 </page>
                 <page string="Conclusiones">
                     <separator string="Conclusiones y recomendaciones" />
-                    <field name="line_ids" context="{'default_survey_id': active_id}">
-                        <tree editable="bottom">
+                    <field name="line_ids" context="{'default_survey_id': context.get('active_id')}">
+                        <list editable="bottom">
                             <field name="survey_id" invisible="1" />
                             <field name="question_id" />
                             <field name="description" />
                             <field name="nc_id" string="No conformidad relacionada" />
                             <field name="action_id" string="Acción correctiva relacionada" />
                             <field name="attachment_ids" widget="many2many_binary"/>
-                        </tree>
+                        </list>
                     </field>
                     <group string="Conclusiones y recomendaciones generales">
                         <field name="con_rec" widget="html" nolabel="1" />
@@ -201,11 +201,11 @@
         <field name="name">survey.report.actionnonc.tree</field>
         <field name="model">survey.report.actionnonc</field>
         <field name="arch" type="xml">
-            <tree>
+            <list>
                 <field name="description" />
                 <field name="nc_id" />
                 <field name="action_id" />
-            </tree>
+            </list>
         </field>
     </record>
 
@@ -213,7 +213,7 @@
         <field name="name">Acciones y  NCs</field>
         <field name="res_model">survey.report.actionnonc</field>
 
-        <field name="view_mode">tree,kanban,form</field>
+        <field name="view_mode">list,kanban,form</field>
         <field name="view_id" ref="view_survey_report_actionnonc_tree" />
         <field name="search_view_id" ref="survey_action_nc_search" />
         <field name="help" type="html">
@@ -252,7 +252,7 @@
         <field name="name">Lineas de respuestas</field>
         <field name="res_model">survey.user_input.line</field>
 
-        <field name="view_mode">graph,tree,pivot,kanban,form</field>
+        <field name="view_mode">graph,list,pivot,kanban,form</field>
         <field name="search_view_id" ref="survey.survey_response_line_search" />
         <field name="help" type="html">
             <p>No hay lineas aún.</p>

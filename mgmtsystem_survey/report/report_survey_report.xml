@@ -1,20 +1,22 @@
 <odoo>
     <data>
 
-        <report
-            id="action_report_survey_report"
-            model="survey.survey"
-            string="Resultados de encuesta (XLS)"
-            report_type="xlsx"
-            name="mgmtsystem_survey.survey_report"
-            file="Encuesta"
-            />
+        <record id="action_report_survey_report" model="ir.actions.report">
+            <field name="name">Resultados de encuesta (XLS)</field>
+            <field name="model">survey.survey</field>
+            <field name="report_type">xlsx</field>
+            <field name="report_name">mgmtsystem_survey.survey_report</field>
+            <field name="report_file">Encuesta</field>
+            <field name="binding_model_id" ref="survey.model_survey_survey" />
+            <field name="binding_type">report</field>
+        </record>
+
 
         <menuitem
             id="survey_report_menu"
             name="Reportes"
             parent="survey.menu_surveys"
-            sequence="100"/>
+            sequence="100" />
 
         <record id="survey_wizard_view_form" model="ir.ui.view">
             <field name="name">survey_report.wizard.view.form</field>
@@ -22,12 +24,16 @@
             <field name="arch" type="xml">
                 <form>
                     <group>
-                        <field name="survey_id"/>
+                        <field name="survey_id" />
                     </group>
                     <footer>
-                        <button name="action_print" type="object" string="Descargar Informe de encuesta" class="oe_highlight" icon="fa-download" context="{'type_action':'report'}"/>
-                        <button name="action_print" type="object" string="Descargar Análisis de encuesta" class="oe_highlight" icon="fa-download" context="{'type_action':'analysis'}"/>
-                        <button string="Cancelar" special="cancel"/>
+                        <button name="action_print" type="object"
+                            string="Descargar Informe de encuesta" class="oe_highlight"
+                            icon="fa-download" context="{'type_action':'report'}" />
+                        <button name="action_print" type="object"
+                            string="Descargar Análisis de encuesta" class="oe_highlight"
+                            icon="fa-download" context="{'type_action':'analysis'}" />
+                        <button string="Cancelar" special="cancel" />
                     </footer>
                 </form>
             </field>
@@ -38,7 +44,7 @@
             <field name="type">ir.actions.act_window</field>
             <field name="res_model">survey_report.wizard</field>
             <field name="view_mode">form</field>
-            <field name="view_id" ref="survey_wizard_view_form"/>
+            <field name="view_id" ref="survey_wizard_view_form" />
             <field name="target">new</field>
             <field name="binding_type">report</field>
         </record>
@@ -47,7 +53,7 @@
             name="Encuesta"
             action="action_report_survey_survey"
             parent="survey_report_menu"
-            sequence="2"/>
+            sequence="2" />
 
     </data>
 </odoo>

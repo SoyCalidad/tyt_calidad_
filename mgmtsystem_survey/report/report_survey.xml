@@ -402,6 +402,14 @@
             </t>
          </t>
       </template>
-      <report id="reporte_survey" string="Informe de encuesta" report_type="qweb-pdf" model="survey.survey" name="mgmtsystem_survey.reporte_encuestas_template" file="Informe de encuesta" paperformat="hola_calidad.portrait" />
+
+      <record id="reporte_survey" model="ir.actions.report">
+         <field name="name">Informe de encuesta</field>
+         <field name="report_type">qweb-pdf</field>
+         <field name="model">survey.survey</field>
+         <field name="report_name">mgmtsystem_survey.reporte_encuestas_template</field>
+         <field name="report_file">Informe de encuesta</field>
+         <field name="paperformat_id" ref="hola_calidad.portrait" />
+      </record>
    </data>
 </odoo>
