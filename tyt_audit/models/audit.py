@@ -3,7 +3,7 @@
 from datetime import datetime
 
 from odoo import _, api, fields, models, tools
-from odoo.exceptions import ValidationError, Warning
+from odoo.exceptions import ValidationError, UserError
 
 class AuditProcedure(models.Model):
     _name = "audit.audit.procedure"
@@ -14,7 +14,7 @@ class AuditProcedure(models.Model):
         required=True,
     )
 
-class AuditPlanningClause(models.Model):
+class AuditPlanningIso9001(models.Model):
     _name = "audit.audit.planning.iso9001_standard"
     _description = "Lista de Verificación / Planificación / Cláusula"
 
@@ -216,7 +216,7 @@ class Audit(models.Model):
     )
 
     tyt_sites_related_id = fields.Many2one(
-        'x_sitios',
+        'tyt_studio.sites',
         string='Sitio',
         related='plan_id.sites_id',
         store=True,

@@ -12,7 +12,7 @@ class AuditPlanTytAuditorSchedule(models.Model):
     )    
 
     tyt_sites_id = fields.Many2one(
-        'x_sitios',
+        'tyt_studio.sites',
         string='Sitios'
     )    
     responsible_auditors_id = fields.Many2many('res.partner', string='Auditores Responsables')

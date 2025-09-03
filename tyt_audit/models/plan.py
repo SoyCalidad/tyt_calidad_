@@ -87,7 +87,7 @@ class PlanGeneralSchedule(models.Model):
     )
     '''
     sites_id = fields.Many2one(
-        'x_sitios',
+        'tyt_studio.sites',
         string='Sitio',
     )
 
@@ -214,14 +214,14 @@ class Plan(models.Model):
 
     # Campo computado que recopila los IDs de los sitios disponibles
     available_site_ids = fields.Many2many(
-        'x_sitios',
+        'tyt_studio.sites',
         compute='_compute_available_site_ids',
         string='Sitios Disponibles'
     )
 
     # Campo Many2one para seleccionar un único sitio, restringido por el dominio
     sites_id = fields.Many2one(
-        'x_sitios',
+        'tyt_studio.sites',
         string='Sitio',
         domain="[('id', 'in', available_site_ids)]",
     )
@@ -236,7 +236,7 @@ class Plan(models.Model):
             else:
                 # Si no hay un auditor asociado, no hay sitios disponibles
                 # Asigna un recordset vacío de x_sitios para que el dominio no muestre ningún sitio
-                record.available_site_ids = self.env['x_sitios'].browse([])
+                record.available_site_ids = self.env['tyt_studio.sites'].browse([])
 
     @api.onchange('audit_plan_tyt_auditor_id')
     def _onchange_audit_plan_tyt_auditor_id(self):

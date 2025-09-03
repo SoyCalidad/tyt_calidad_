@@ -13,21 +13,21 @@
                             type="object"
                             string="Iniciar Proceso"
                             class="oe_highlight"
-                            attrs="{'invisible':['|', ('state', '!=', 'validate_ok'), ('is_process_started','=',True)]}" 
+                            invisible="(state != 'validate_ok' or is_process_started == True)" 
                             />
                     <button name="generate_schedule_lines"
                             type="object"
                             string="Generar Fechas"
                             class="oe_highlight"
-                            attrs="{'invisible':[('state', '!=', 'validate_ok')]}"
+                            invisible="state != 'validate_ok'"
                             />
                     <button string="Notificar cronograma"
                             name="action_notify_schedule"
                             type="object"
                             class="oe_highlight"
-                            attrs="{'invisible':[('state', '!=', 'validate_ok')]}"/>
+                            invisible="state != 'validate_ok'"/>
 
-                    <!--attrs="{'invisible':['|', ('active','=',False), ('state', '!=', 'validate_ok'), ('is_process_started','=',True)]}"-->    
+                    <!--invisible="(active == False or state != 'validate_ok')"-->    
                 </xpath>            
                 <xpath expr="//sheet/div[3]" position="replace">
                     <div>
@@ -54,7 +54,7 @@
                         <!--<field name="schedule_ids" domain="[('sites_id', '=', sites_id)]">-->
                         <field name="filtered_schedule_ids" mode="tree,form" context="{'form_view_ref':'tyt_audit.view_audit_plan_schedule_form'}">
                         <!--<field name="schedule_ids" domain="[('sites_id', '=', sites_id)]" context="{'default_audit_plan_id': active_id, 'default_sites_id': sites_id}" mode="tree,form">-->
-                            <tree>
+                            <list>
                                 <!--<field name="name" readonly="1"/>-->
                                 <field name="description_id" readonly="1"/>
                                 <field name="activity_id" readonly="1"/>
@@ -62,7 +62,7 @@
                                 <field name="responsible_auditors_id" widget="many2many_tags"/>
                                 <field name="total_weeks" readonly="1"/>
                                 <button name="%(action_audit_plan_schedule_line_ids)d" type="action" string="Ver Fechas" class="btn-primary"/>
-                            </tree>
+                            </list>
                             <!--
                             <form string="Cronograma de Auditoría">
                                 <sheet>
@@ -102,7 +102,7 @@
             <field name="name">Cronograma de Auditorías - General</field>
             <field name="type">ir.actions.act_window</field>
             <field name="res_model">audit.plan</field>
-            <field name="view_mode">tree,form,kanban,graph,pivot</field>
+            <field name="view_mode">list,form,kanban,graph,pivot</field>
         </record>
 
         <record id="mgmtsystem_audit.audit_plan_report_wizard_action2" model="ir.actions.act_window">
@@ -137,14 +137,14 @@
 
         <!-- Onboard Template-->
 
-        <template id="inherit_onboarding_audit_plan_step" inherit_id="mgmtsystem_audit.onboarding_audit_plan_step">
+        <!-- <template id="inherit_onboarding_audit_plan_step" inherit_id="mgmtsystem_audit.onboarding_audit_plan_step">
             <xpath expr="//t[@t-set='title']" position="replace">
                 <t t-set="title">Cronograma de Auditorías</t>
             </xpath>
             <xpath expr="//t[@t-set='description']" position="replace">
                 <t t-set="description">Cree un Cronograma de Auditorías.</t>
             </xpath>
-        </template>
+        </template> -->
 
     </data>
 </odoo>

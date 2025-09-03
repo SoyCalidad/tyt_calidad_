@@ -12,9 +12,9 @@
                             type="object"
                             string="Iniciar Proceso"
                             class="oe_highlight"
-                            attrs="{'invisible':['|', ('state', '!=', 'validate_ok'), ('is_process_started','=',True)]}"
+                            invisible="(state != 'validate_ok' or is_process_started == True)"
                             />                          
-                    <!--attrs="{'invisible':['|', ('state', '!=', 'validate_ok'), ('is_process_started','=',True)]}"-->    
+                    <!--invisible="(state != 'validate_ok' or is_process_started == True)"-->    
                 </xpath>   
             </field>
         </record>

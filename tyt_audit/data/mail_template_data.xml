@@ -22,8 +22,9 @@
                     </p>
                 </div>
             </field>
-            <field name="report_template" ref="action_audit_schedule_xlsx"/>
-            <field name="report_name">{{ object.name or 'n/a' }}</field>
+            <field name="report_template_ids" eval="[(6,0,[
+                ref('tyt_audit.action_audit_schedule_xlsx')
+            ])]" />
             <field name="auto_delete" eval="True"/>
         </record>
     </data>
@@ -49,8 +50,9 @@
                 </div>
             </field>
             <field name="lang">{{ user.lang }}</field>
-            <field name="report_template" ref="tyt_audit.action_audit_checklist_xlsx" />
-            <field name="report_name">{{ object.name or 'n/a' }}</field>
+            <field name="report_template_ids" eval="[(6,0,[
+                ref('tyt_audit.action_audit_checklist_xlsx')
+            ])]" />
             <field name="auto_delete" eval="True" />
         </record>
     </data>

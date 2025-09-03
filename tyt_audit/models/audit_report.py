@@ -4,7 +4,7 @@
 from datetime import datetime
 
 from odoo import _, api, fields, models, tools
-from odoo.exceptions import ValidationError, Warning
+from odoo.exceptions import ValidationError, UserError
 
 class AuditReport(models.Model):
     _inherit = "audit.report"
@@ -18,7 +18,7 @@ class AuditReport(models.Model):
 
 
     site_id = fields.Many2one(
-        'x_sitios',
+        'tyt_studio.sites',
         string='Sitios'
     )
 

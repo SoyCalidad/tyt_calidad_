@@ -3,7 +3,7 @@
 from datetime import datetime
 
 from odoo import _, api, fields, models, tools
-from odoo.exceptions import ValidationError, Warning
+from odoo.exceptions import ValidationError
 
 class AuditPlanning(models.Model):
     _name = "audit.audit.planning.template"

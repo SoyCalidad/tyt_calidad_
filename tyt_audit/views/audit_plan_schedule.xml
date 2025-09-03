@@ -8,9 +8,9 @@
                     <sheet>
                         <group>
                             <field name="responsible_auditors_id">
-                                <tree >
+                                <list >
                                     <field name="name" />
-                                </tree>
+                                </list>
                             </field>
                         </group>
                         <footer>

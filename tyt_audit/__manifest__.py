@@ -12,6 +12,7 @@
         'mgmtsystem_nonconformity',
         'mgmtsystem_audit',
         'website',
+        'tyt_studio',
     ],
     'data': [
         'security/ir.model.access.csv',
@@ -48,4 +49,11 @@
     'auto_install': False,
     'installable': True,
     'application': False,
+    "external_dependencies": {
+        "python": [
+            "PyMuPDF",
+            "pandas",
+            "bs4",
+        ],
+    },
 }

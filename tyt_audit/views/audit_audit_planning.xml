@@ -4,7 +4,7 @@
             <field name="name">audit.audit.planning.tree</field>
             <field name="model">audit.audit.planning</field>
             <field name="arch" type="xml">
-                <tree editable="top">
+                <list editable="top">
                     <field name="iso_9001_standards_ids" widget="many2many_tags"/>
                     <field name="iso_9001_combined_names" widget="text" optional="hide" />
                     <field name="clause_id" />
@@ -19,7 +19,7 @@
                         string="Generar Auditoría"
                         type="object"
                         class="btn-primary oe_highlight" />
-                </tree>
+                </list>
             </field>
         </record>
         
@@ -31,7 +31,7 @@
         <record id="action_audit_audit_planning_list" model="ir.actions.act_window">
             <field name="name">Lista de Verificación</field>
             <field name="res_model">audit.audit.planning</field>
-            <field name="view_mode">tree,form</field>
+            <field name="view_mode">list,form</field>
             <field name="domain">[]</field>
             <field name="context">{}</field>
         </record>

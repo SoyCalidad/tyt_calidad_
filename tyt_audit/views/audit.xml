@@ -5,11 +5,11 @@
             <field name="name">audit.planning.iso9001_standard.tree</field>
             <field name="model">audit.audit.planning.iso9001_standard</field>
             <field name="arch" type="xml">
-                <tree string="Cláusulas de Planificación de Auditoría ISO9001">
+                <list string="Cláusulas de Planificación de Auditoría ISO9001">
                     <field name="name"/>
                     <field name="complete_name"/>
                     <!--<field name="combined_name"/>-->
-                </tree>
+                </list>
             </field>
         </record>    
         
@@ -22,7 +22,7 @@
                     <div class="oe_title">
                         <label for="name" />
                         <h2>
-                            <field name="name" string="Nombre" attrs="{'readonly': [('state','not in',('elaborate'))] }" />
+                            <field name="name" string="Nombre" readonly="state not in ['elaborate']" />
                         </h2>
                     </div>    
                 </xpath>            
@@ -30,7 +30,7 @@
                     <label for="plan_id" string="Cronograma de auditorías - General" />
                     <div class="oe_title">
                         <h3>
-                            <field name="plan_id" colspan="2" style="width:80%%" attrs="{'readonly': [('state','in',('send', 'final', 'cancel'))]}" />
+                            <field name="plan_id" colspan="2" style="width:80%%" readonly="state in ['send', 'final', 'cancel']" />
                         </h3>
                     </div>
 
@@ -38,7 +38,7 @@
 
                 </xpath>
                 <xpath expr="//sheet/group[1]" position="replace">
-                    <group attrs="{'readonly': [('state','in',('send', 'final', 'cancel'))]}">                   
+                    <group readonly="state in ['send', 'final', 'cancel']">                   
                         <group>
                             <!--<field name="plan_id"  />-->
                             <field name="tyt_sites_related_id"  />
@@ -51,8 +51,8 @@
                             <field name="date_init" invisible = "1"/>
                         </group>
                         <group>
-                            <field name="audit_date" attrs="{'required': [('state','in',['validate_ok'])]}" />
-                            <field name="audited_week" attrs="{'required': [('state','in',['validate_ok'])]}" />
+                            <field name="audit_date" required="state in ['validate_ok']" />
+                            <field name="audited_week" required="state in ['validate_ok']" />
                         </group>
                     </group>                      
                 </xpath>
@@ -65,27 +65,27 @@
                 <xpath expr="//sheet/notebook/page[1]" position="replace">
                     <page string="Planificación">
                         <field name="planning_ids" >
-                            <tree editable="bottom">
-                                <field name="iso_9001_standards_ids" widget="many2many_tags" attrs="{'readonly': [('parent.state','not in',('draft'))]}" />
-                                <field name="clause_id" attrs="{'readonly': [('parent.state','not in',('draft'))]}" />
-                                <!-- <field name="employee_id" attrs="{'readonly': [('parent.state','not in',('draft'))]}" /> -->
+                            <list editable="bottom">
+                                <field name="iso_9001_standards_ids" widget="many2many_tags" readonly="parent.state not in ['draft']" />
+                                <field name="clause_id" readonly="parent.state not in ['draft']" />
+                                <!-- <field name="employee_id" readonly="parent.state not in ['draft']" /> -->
                                 <field name="new_job_id" 
                                        string="Responsable" 
                                        options="{'no_create': False}" 
-                                       attrs="{'readonly': [('parent.state','not in',('draft'))]}" />
-                                <field name="verification" attrs="{'readonly': [('parent.state','not in',('draft'))]}" />
-                                <field name="finding" attrs="{'readonly': [('parent.state','in',('cancel'))]}" />
-                                <field name="evidence_char" attrs="{'readonly': [('parent.state','not in',('draft'))]}"/>
+                                       readonly="parent.state not in ['draft']" />
+                                <field name="verification" readonly="parent.state not in ['draft']" />
+                                <field name="finding" readonly="parent.state in ['cancel']" />
+                                <field name="evidence_char" readonly="parent.state not in ['draft']"/>
                                 <field name="evidence_attachment_ids" widget="many2many_tags" />
-                                <!-- <field name="evidence_attachment_ids" widget="many2many_binary" attrs="{'readonly': [('parent.state', 'not in', ('elaborate', 'validate_ok'))]}"/> -->
-                                <field name="comment" attrs="{'readonly': [('parent.state','in',('cancel'))]}" />
-                                <field name="evaluation" attrs="{'readonly': [('parent.state','not in',('draft'))]}" />
+                                <!-- <field name="evidence_attachment_ids" widget="many2many_binary" readonly="parent.state not in ['elaborate', 'validate_ok']"/> -->
+                                <field name="comment" readonly="parent.state in ['cancel']" />
+                                <field name="evaluation" readonly="parent.state not in ['draft']" />
                                 <button name="action_open_audit_application_form"
                                         string="Generar Auditoría"
                                         type="object"
                                         class="btn-primary oe_highlight" />
                                 <!-- Botón para Crear Auditorías -->
-                            </tree>
+                            </list>
                         </field>
                     </page>
                 </xpath>
@@ -109,7 +109,7 @@
         <record id="action_audit_planning_iso9001_standard_tree" model="ir.actions.act_window">
             <field name="name">Cláusulas de Planificación de Auditoría ISO9001</field>
             <field name="res_model">audit.audit.planning.iso9001_standard</field>
-            <field name="view_mode">tree,form</field>
+            <field name="view_mode">list,form</field>
             <field name="view_id" ref="view_audit_planning_iso9001_standard_tree"/>
             <field name="target">current</field>
         </record>            
@@ -118,7 +118,7 @@
             <field name="name">Listas de Verificación</field>
             <field name="type">ir.actions.act_window</field>
             <field name="res_model">audit.audit</field>
-            <field name="view_mode">tree,form,kanban,graph,pivot</field>
+            <field name="view_mode">list,form,kanban,graph,pivot</field>
         </record>
 
         <record id="mgmtsystem_audit.audit_report_wizard_action2" model="ir.actions.act_window">
@@ -153,14 +153,14 @@
 
             <!-- Onboard Template-->
 
-        <template id="inherit_onboarding_audit_audit_step" inherit_id="mgmtsystem_audit.onboarding_audit_audit_step">
+        <!-- <template id="inherit_onboarding_audit_audit_step" inherit_id="mgmtsystem_audit.onboarding_audit_audit_step">
             <xpath expr="//t[@t-set='title']" position="replace">
                 <t t-set="title">Listas de Verificación</t>
             </xpath>
             <xpath expr="//t[@t-set='description']" position="replace">
                 <t t-set="description">Cree una Lista de Verificación.</t>
             </xpath>
-        </template>
+        </template> -->
 
 
 

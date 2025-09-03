@@ -27,21 +27,21 @@
                 <xpath expr="//sheet/group[1]" position="replace">
                     <group>
                         <group>
-                            <field name="site_id" attrs="{'readonly': [('state','not in',('draft','in_process'))] }" />
-                            <field name="site_manager_id" attrs="{'readonly': [('state','not in',('draft','in_process'))] }" />
-                            <field name="site_manager_email" attrs="{'readonly': [('state','not in',('draft','in_process'))] }" />
-                            <field name="training_manager_id" attrs="{'readonly': [('state','not in',('draft','in_process'))] }" />
-                            <field name="standard" invisible="1" attrs="{'readonly': [('state','not in',('draft','in_process'))] }"  />
-                            <field name="auditor_id" attrs="{'readonly': [('state','not in',('draft','in_process'))] }" />
-                            <field name="audited_ids" widget="many2many_tags" attrs="{'readonly': [('state','not in',('draft','in_process'))] }" />
-                            <field name="next_audit" attrs="{'readonly': [('state','not in',('draft','in_process'))] }" />
-                            <field name="audit_duration" string = "Duración de la Auditoría (en días)" attrs="{'readonly': [('state','not in',('draft','in_process'))] }" />
+                            <field name="site_id" readonly="state not in ['draft', 'in_process']" />
+                            <field name="site_manager_id" readonly="state not in ['draft', 'in_process']" />
+                            <field name="site_manager_email" readonly="state not in ['draft', 'in_process']" />
+                            <field name="training_manager_id" readonly="state not in ['draft', 'in_process']" />
+                            <field name="standard" invisible="1" readonly="state not in ['draft', 'in_process']"  />
+                            <field name="auditor_id" readonly="state not in ['draft', 'in_process']" />
+                            <field name="audited_ids" widget="many2many_tags" readonly="state not in ['draft', 'in_process']" />
+                            <field name="next_audit" readonly="state not in ['draft', 'in_process']" />
+                            <field name="audit_duration" string = "Duración de la Auditoría (en días)" readonly="state not in ['draft', 'in_process']" />
                         </group>
                         <group>
-                            <field name="team_id" string = "Equipo Auditor" attrs="{'readonly': [('state','not in',('draft','in_process'))] }" />
-                            <field name="audit_id" string="Lista de Verificación" attrs="{'readonly': [('state','not in',('draft'))] }" />
-                            <field name="tyt_procedure_description_id" attrs="{'readonly': [('state','not in',('draft'))] }" />
-                            <field name="tyt_procedure_activity_id" attrs="{'readonly': [('state','not in',('draft'))] }" />
+                            <field name="team_id" string = "Equipo Auditor" readonly="state not in ['draft', 'in_process']" />
+                            <field name="audit_id" string="Lista de Verificación" readonly="state not in ['draft']" />
+                            <field name="tyt_procedure_description_id" readonly="state not in ['draft']" />
+                            <field name="tyt_procedure_activity_id" readonly="state not in ['draft']" />
                         </group>
                     </group>
                 </xpath>
@@ -55,18 +55,18 @@
                 </xpath>
                 <xpath expr="//sheet/notebook/page[1]" position="replace">
                     <page string="Lineas">
-                        <field name="tyt_line_ids" attrs="{'readonly': [('state','in',('in_process'))] }">
-                            <tree editable="bottom">
-                                <field name="iso_9001_standards_ids" widget="many2many_tags" attrs="{'readonly': [('parent.state','not in',('elaborate','validate_ok'))]}" />
-                                <field name="clause_id" attrs="{'readonly': [('parent.state','not in',('elaborate','validate_ok'))]}" />
-                                <!-- <field name="employee_id" attrs="{'readonly': [('parent.state','not in',('elaborate','validate_ok'))]}" /> -->
-                                <field name="new_job_id" attrs="{'readonly': [('parent.state','not in',('elaborate','validate_ok'))]}" string="Responsable"/>
-                                <field name="verification" attrs="{'readonly': [('parent.state','not in',('elaborate','validate_ok'))]}" />
-                                <field name="finding" attrs="{'readonly': [('parent.state','not in',('elaborate','validate_ok'))]}" />
-                                <field name="evidence_attachment_ids" widget="many2many_tags" attrs="{'readonly': [('parent.state','not in',('elaborate','validate_ok'))]}"/>
-                                <field name="comment" attrs="{'readonly': [('parent.state','not in',('elaborate','validate_ok'))]}"  />
-                                <field name="evaluation" attrs="{'readonly': [('parent.state','not in',('elaborate','validate_ok'))]}"  />
-                            </tree>
+                        <field name="tyt_line_ids" readonly="state in ['in_process']">
+                            <list editable="bottom">
+                                <field name="iso_9001_standards_ids" widget="many2many_tags" readonly="parent.state not in ['elaborate', 'validate_ok']" />
+                                <field name="clause_id" readonly="parent.state not in ['elaborate', 'validate_ok']" />
+                                <!-- <field name="employee_id" readonly="parent.state not in ['elaborate', 'validate_ok']" /> -->
+                                <field name="new_job_id" readonly="parent.state not in ['elaborate', 'validate_ok']" string="Responsable"/>
+                                <field name="verification" readonly="parent.state not in ['elaborate', 'validate_ok']" />
+                                <field name="finding" readonly="parent.state not in ['elaborate', 'validate_ok']" />
+                                <field name="evidence_attachment_ids" widget="many2many_tags" readonly="parent.state not in ['elaborate', 'validate_ok']"/>
+                                <field name="comment" readonly="parent.state not in ['elaborate', 'validate_ok']"  />
+                                <field name="evaluation" readonly="parent.state not in ['elaborate', 'validate_ok']"  />
+                            </list>
                         </field>
                     </page>
                 </xpath>
@@ -83,7 +83,7 @@
         <record id="action_audit_audit_planning" model="ir.actions.act_window">
             <field name="name">audit.audit.planning.w.action</field>
             <field name="res_model">audit.audit.planning</field>
-            <field name="view_mode">tree</field>
+            <field name="view_mode">list</field>
             <!-- quitando 'form' de la acción de ventana -->
         </record>
 

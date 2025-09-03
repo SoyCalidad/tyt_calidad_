@@ -4,8 +4,8 @@
             <field name="name">audit.audit.planning.template.tree</field>
             <field name="model">audit.audit.planning.template</field>
             <field name="arch" type="xml">
-                <!-- <tree editable="top"> -->
-                <tree >
+                <!-- <list editable="top"> -->
+                <list >
                     <field name="iso_9001_standards_ids" widget="many2many_tags"/>
                     <field name="iso_9001_combined_names" widget="text" optional="hide" />
                     <field name="clause_id" />
@@ -14,7 +14,7 @@
                     <field name="finding" />
                     <field name="evidence_char"/>
                     <!-- <field name="evidence_attachment_ids" widget="many2many_tags"/> -->
-                </tree>
+                </list>
             </field>
         </record>
         
@@ -63,7 +63,7 @@
         <record id="action_audit_audit_planning_template_list" model="ir.actions.act_window">
             <field name="name">Templates de Lista de verificación</field>
             <field name="res_model">audit.audit.planning.template</field>
-            <field name="view_mode">tree,form</field>
+            <field name="view_mode">list,form</field>
             <field name="domain">[]</field>
             <field name="context">{}</field>
         </record>
@@ -75,4 +75,3 @@
                 sequence="1"/>
     </data>
 </odoo>
-
