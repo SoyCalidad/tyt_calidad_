@@ -143,7 +143,7 @@ class IndividualReport(models.AbstractModel):
                     sheet2.write(row, 5, record.int_code or '', cell_format)  # Columna F (índice 5)
                     sheet2.write(row, 6, record.name or '', cell_format)  # Columna G (índice 6)
                     sheet2.write(row, 7, record.job_id.name if record.job_id else '', cell_format)  # Columna H (índice 7)
-                    sheet2.write(row, 8, record.tyt_sites_id.x_name if record.tyt_sites_id else '', cell_format)  # Columna I (índice 8)
+                    sheet2.write(row, 8, record.tyt_sites_id.name if record.tyt_sites_id else '', cell_format)  # Columna I (índice 8)
 
                     int_code = record.int_code or ''
                     name = record.name or ''

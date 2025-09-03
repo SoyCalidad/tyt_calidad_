@@ -25,13 +25,13 @@
         <field name="name">tyt.distribution.list.view.tree</field>
         <field name="model">tyt.distribution.list</field>
         <field name="arch" type="xml">
-            <tree string="Distribution List">
+            <list string="Distribution List">
                 <field name="number_of_copy" />
                 <field name="distributed_to" />
                 <field name="job_id" />
                 <field name="distribution_date" />
                 <field name="place" />
-            </tree>
+            </list>
         </field>
     </record>
 
@@ -52,7 +52,7 @@
     <record id="tyt_distribution_list_action" model="ir.actions.act_window">
         <field name="name">Distribution List</field>
         <field name="res_model">tyt.distribution.list</field>
-        <field name="view_mode">tree,form</field>
+        <field name="view_mode">list,form</field>
     </record>
 
     <!-- tyt.document.record -->
@@ -78,12 +78,12 @@
         <field name="name">tyt.document.record.view.tree</field>
         <field name="model">tyt.document.record</field>
         <field name="arch" type="xml">
-            <tree string="Document Record">
+            <list string="Document Record">
                 <field name="prefix" />
                 <field name="name" />
                 <field name="responsible" />
                 <field name="location" />
-            </tree>
+            </list>
         </field>
     </record>
 
@@ -105,7 +105,7 @@
     <record id="tyt_document_record_action" model="ir.actions.act_window">
         <field name="name">Document Record</field>
         <field name="res_model">tyt.document.record</field>
-        <field name="view_mode">tree,form</field>
+        <field name="view_mode">list,form</field>
     </record>
 
     <record id="system_process_edition_form_view_inherit_inherit" model="ir.ui.view">
@@ -130,13 +130,13 @@
             <notebook position="inside">
                 <page name="distribution_list" string="Distribution List">
                     <field name="tyt_distribution_list_ids">
-                        <tree>
+                        <list>
                             <field name="number_of_copy" />
                             <field name="distributed_to" />
                             <field name="job_id" />
                             <field name="distribution_date" />
                             <field name="place" />
-                        </tree>
+                        </list>
                     </field>
                 </page>
             </notebook>

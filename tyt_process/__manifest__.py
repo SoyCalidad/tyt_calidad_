@@ -12,6 +12,7 @@
         'mgmtsystem_process',
         'mgmtsystem_process_integration',
         'mgmtsystem_qualitymanual',
+        'tyt_studio',
     ],
     'data': [
         'security/ir.model.access.csv',
@@ -40,6 +41,12 @@
         'web.report_assets_common': [
                 "/tyt_process/static/src/scss/fonts.scss",
                 "/tyt_process/static/src/scss/procedure_edition.scss",
+        ],
+    },
+    "external_dependencies": {
+        "python": [
+            "PyMuPDF",
+            "bs4",
         ],
     },
     'auto_install': False,

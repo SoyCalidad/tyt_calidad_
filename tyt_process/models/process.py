@@ -13,13 +13,13 @@ class MgmtCateg(models.Model):
     _inherit = 'mgmt.categ'
 
     type = fields.Many2one(
-        'mgmt.categ.type', string='Área', group_expand='_read_group_type', required=True)
+        'mgmt.categ.type', string='Área',  required=True)
     
     tyt_documents= fields.Many2one(
         'mgmt.categ.docs', string='Documentos')
 
     tyt_sites_id = fields.Many2one(
-        'x_sitios', string='Ubicación')
+        'tyt_studio.sites', string='Ubicación')
     
     referencess = fields.Text(string='Referencias')
 
@@ -40,7 +40,7 @@ class ProcessInherit(models.Model):
     )
 
     type = fields.Many2one(
-        'mgmt.categ.type', string='Área', group_expand='_read_group_type', required=True,)
+        'mgmt.categ.type', string='Área', required=True,)
 
     @api.depends('name')
     def _compute_last_edition(self):

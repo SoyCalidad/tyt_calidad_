@@ -51,7 +51,7 @@
     <record id="mgmtsystem_process.mgmt_process_categ_type_action" model="ir.actions.act_window">
         <field name="name">Áreas</field>
         <field name="res_model">mgmt.categ.type</field>
-        <field name="view_mode">tree,form</field>
+        <field name="view_mode">list,form</field>
         <field name="domain" />
         <field name="context">{}</field>
     </record>

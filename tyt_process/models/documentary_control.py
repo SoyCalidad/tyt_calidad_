@@ -7,13 +7,13 @@ import logging
 
 _logger = logging.getLogger(__name__)
 
-class DocumentaryControl(models.Model):
+class DocumentaryControlTytDocs(models.Model):
     _name = 'documentary.control.tyt_docs'
     _description = "documentary.control.tyt_docs"
 
     name = fields.Char()
     abbreviation = fields.Char(string="Abreviatura")
-
+    
 class DocumentaryControl(models.Model):
     _inherit = 'documentary.control'
 
@@ -45,7 +45,7 @@ class DocumentaryControl(models.Model):
     job_id = fields.Many2one('hr.job', string='Responsable')
 
     tyt_sites_id = fields.Many2one(
-        'x_sitios', string='Sitio'
+        'tyt_studio.sites', string='Sitio'
     )
 
     next_number_str = fields.Char(

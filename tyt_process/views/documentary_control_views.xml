@@ -18,9 +18,9 @@
             <field name="inherit_id" ref="mgmtsystem_documentary_control.view_documentary_control_form_inherit" />
             <field name="arch" type="xml">
                 <field name="diffusion" position="after">
-                    <field name="reception_date" attrs="{'invisible': [('type', '!=', 'externa')]}"/>
-                    <field name="sender_id" attrs="{'invisible': [('type', '!=', 'externa')]}"/>
-                    <field name="received_by_id" attrs="{'invisible': [('type', '!=', 'externa')]}"/>
+                    <field name="reception_date" invisible="type != 'externa'"/>
+                    <field name="sender_id" invisible="type != 'externa'"/>
+                    <field name="received_by_id" invisible="type != 'externa'"/>
                 </field>
                 <xpath expr="//sheet/div[1]" position="replace">
                     <div class="oe_title">
