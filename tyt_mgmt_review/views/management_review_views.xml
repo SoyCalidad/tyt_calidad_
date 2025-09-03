@@ -10,13 +10,13 @@
                 </xpath>
                 <xpath expr="//sheet/group[1]/group[1]/field[@name='plan_id']" position="attributes">
                     <!-- Remover el atributo `invisible` de plan_id -->
-                    <attribute name="attrs">{}</attribute>
+                    <attribute name="invisible"></attribute>
                 </xpath>
                 <xpath expr="//sheet/notebook/page[2]" position="after">
                     <page string="Informe">
                         <group>
-                            <field name="line2_ids" nolabel="1" attrs="{'readonly': [('state','in',('cancel'))] }" colspan="2">
-                                <tree>
+                            <field name="line2_ids" nolabel="1" readonly="state in ['cancel']" colspan="2">
+                                <list>
                                     <field name="name" />
                                     <field name="job_id" />
                                     <field name="clausule_id" />
@@ -25,7 +25,7 @@
                                     <field name="department_pro_id" />
                                     <field name="department_clau_id" />
                                     <field name="achieved" />
-                                </tree>
+                                </list>
                             </field>
                         </group>
                     </page>               
@@ -37,7 +37,7 @@
                 </xpath>
                 <xpath expr="//sheet/notebook/page[@name='detail']/div[1]/group[1]/group[1]" position="replace">
                     <group colspan="2">
-                        <field name="record_meeting_ids" string="Minutas de reunión" attrs="{'readonly': [('state','in',('validate_ok','closed','cancel'))]}" />
+                        <field name="record_meeting_ids" string="Minutas de reunión" readonly="state in ['validate_ok', 'closed', 'cancel']" />
                         <field name="record_meeting_actions" string="Acciones de Minutas de reunión"/>
                     </group>
                 </xpath>                
