@@ -1,6 +1,6 @@
 {
     'name': 'Onboarding Soy Calidad',
-    'version': '13.0.0.0',
+    'version': '18.0.0.0',
     'description': 'Añade tableros onboarding a los módulos del sistema.',
     'summary': 'Los onboarding permitirán crear los elementos básicos de cada módulo.',
     'author': 'Soy Calidad',
