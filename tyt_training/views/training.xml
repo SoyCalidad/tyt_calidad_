@@ -8,30 +8,30 @@
                 <xpath expr="//sheet/group[2]" position="replace">
                     <group>
                         <group>
-                            <field name="plan_id" attrs="{'readonly': [('state','not in',('elaborate','validate_ok'))]}" />                            
-                            <field name="exponent_id" attrs="{'readonly': [('state','not in',('elaborate','validate_ok'))]}" />
+                            <field name="plan_id" readonly="state not in ['elaborate', 'validate_ok']" />                            
+                            <field name="exponent_id" readonly="state not in ['elaborate', 'validate_ok']" />
                         </group>
                         
                         <group>
-                            <field name="training_frequency" attrs="{'readonly': [('state','not in',('elaborate'))] }" />
-                            <field name="month_training" attrs="{'readonly': [('state','not in',('elaborate'))] }" />
+                            <field name="training_frequency" readonly="state not in ['elaborate']" />
+                            <field name="month_training" readonly="state not in ['elaborate']" />
                         </group>                    
                     </group>                  
                     <group>
                         <group>
-                            <field name="exponent_job_id" string="Puesto del Emisor"  readonly="1" attrs="{'invisible': [('exponent_job_id','=',False)]}" />
-                            <field name="type" attrs="{'readonly': [('state','not in',('elaborate'))] }" />                        
+                            <field name="exponent_job_id" string="Puesto del Emisor"  readonly="1" invisible="exponent_job_id == False" />
+                            <field name="type" readonly="state not in ['elaborate']" />                        
                             <field name="responsible_status" />
-                            <field name="responsible_in_id" attrs="{'invisible': [('responsible_status','=',True)]}" />
-                            <field name="responsible_ex_id" attrs="{'invisible': [('responsible_status','=',False)]}" />                        
+                            <field name="responsible_in_id" invisible="responsible_status == True" />
+                            <field name="responsible_ex_id" invisible="responsible_status == False" />                        
                         </group>
                         <group>
                             <field name="date_training" />
-                            <field name="duration" widget="float_time" attrs="{'readonly': [('state','not in',('elaborate','validate_ok'))]}" />                  
-                            <field name="training_target" attrs="{'readonly': [('state','not in',('elaborate'))] }" />
-                            <field name="training_format" attrs="{'readonly': [('state','not in',('elaborate'))] }" />
-                            <field name="training_place" attrs="{'readonly': [('state','not in',('elaborate'))] }" />
-                            <field name="training_media" attrs="{'readonly': [('state','not in',('elaborate'))] }" />
+                            <field name="duration" widget="float_time" readonly="state not in ['elaborate', 'validate_ok']" />                  
+                            <field name="training_target" readonly="state not in ['elaborate']" />
+                            <field name="training_format" readonly="state not in ['elaborate']" />
+                            <field name="training_place" readonly="state not in ['elaborate']" />
+                            <field name="training_media" readonly="state not in ['elaborate']" />
                         </group>
                     </group>                
                 </xpath>
