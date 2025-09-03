@@ -1,6 +1,6 @@
 {
     'name': 'Bug Tracker de Soy Calidad',
-    'version': '13.0.0.0',
+    'version': '18.0.0.0',
     'description': 'Añade un botón en la pantallla principal para reportar bugs',
     'summary': 'Botón de reporte de bugs',
     'author': 'Soy Calidad',
@@ -11,7 +11,6 @@
         'base'
     ],
     'data': [
-        'views/tree_view_asset.xml',
     ],
     'demo': [
     ],

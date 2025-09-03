@@ -1,26 +1,24 @@
-odoo.define('soycalidad_bugtracker.tree_view_button', function (require) {
-    "use strict";
+/** @odoo-module **/
 
-    var core = require('web.core');
-    var ListView = require('web.ListView');
-    var ListController = require("web.ListController");
+import { ListController } from "@web/views/list/list_controller";
+import { patch } from "@web/core/utils/patch";
 
-    var IncludeListView = {
+patch(ListController.prototype,  {
 
-        buttons_template: 'ListView.buttons',
-        events: _.extend({}, ListController.prototype.events, {
-            'click .o_list_bug_report': 'crete_leave_from_summary',
-        }),
-        crete_leave_from_summary: function () {
-            var self = this;
-            var action = {
-                type: 'ir.actions.act_url',
-                target: "new",
-                url: "https://forms.gle/EjwLyPoFtcM5WojY8",
-            };
-            return this.do_action(action);
-        },
+    // Eventos adicionales
+    events: Object.assign({}, ListController.prototype.events, {
+        "click .o_list_bug_report": "_onClickBugReport",
+    }),
 
-    };
-    ListController.include(IncludeListView);
+    /**
+     * Acción al hacer click en el botón
+     */
+    _onClickBugReport(ev) {
+        ev.preventDefault();
+        this.env.services.action.doAction({
+            type: "ir.actions.act_url",
+            target: "new",
+            url: "https://forms.gle/EjwLyPoFtcM5WojY8",
+        });
+    },
 });
