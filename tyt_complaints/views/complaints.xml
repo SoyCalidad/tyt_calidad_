@@ -20,7 +20,7 @@
                         <field name="target_req" />
                         <field name="name" style="max-width:15vw;overflow-wrap: break-word;" />
                         <field name="is_legal" />
-                        <field name="legal_id" attrs="{'readonly': [('is_legal','=',False)]}" />
+                        <field name="legal_id" readonly="is_legal == False" />
                         <field name="type" />
                         <field name="job_req" />
                         <field name="limit_date_req" string="Fecha Límite para cumplir con el requisito"/>                        
@@ -36,7 +36,7 @@
         <record model="ir.actions.act_window" id="tyt_int_claims_action">
             <field name="name">Quejas internas</field>
             <field name="res_model">complaint.complaint</field>
-            <field name="view_mode">tree,form</field>
+            <field name="view_mode">list,form</field>
             <field name="search_view_id" ref="mgmtsystem_complaints.view_complaint_complaint_search" />
             <field name="domain" eval="[('type', '=', 'customer'), ('categ_id', '=', ref('mgmtsystem_complaints.categ1'))]"/>
             <field name="context" eval="{'default_type': 'customer', 'default_categ_id': ref('mgmtsystem_complaints.categ1')}"/>
@@ -53,7 +53,7 @@
         <record model="ir.actions.act_window" id="tyt_ext_claims_action">
             <field name="name">Quejas externas</field>
             <field name="res_model">complaint.complaint</field>
-            <field name="view_mode">tree,form</field>
+            <field name="view_mode">list,form</field>
             <field name="search_view_id" ref="mgmtsystem_complaints.view_complaint_complaint_search" />
             <field name="domain" eval="[('type', '=', 'supplier'), ('categ_id', '=', ref('mgmtsystem_complaints.categ1'))]"/>
             <field name="context" eval="{'default_type': 'supplier', 'default_categ_id': ref('mgmtsystem_complaints.categ1')}"/>
@@ -71,7 +71,7 @@
         <record model="ir.actions.act_window" id="tyt_int_complaints_action">
             <field name="name">Reclamos internos</field>
             <field name="res_model">complaint.complaint</field>
-            <field name="view_mode">tree,form</field>
+            <field name="view_mode">list,form</field>
             <field name="search_view_id" ref="mgmtsystem_complaints.view_complaint_complaint_search" />
             <field name="domain" eval="[('type', '=', 'customer'), ('categ_id', '=', ref('mgmtsystem_complaints.categ2'))]"/>
             <field name="context" eval="{'default_type': 'customer', 'default_categ_id': ref('mgmtsystem_complaints.categ2')}"/>
@@ -86,7 +86,7 @@
         <record model="ir.actions.act_window" id="tyt_ext_complaints_action">
             <field name="name">Reclamos externos</field>
             <field name="res_model">complaint.complaint</field>
-            <field name="view_mode">tree,form</field>
+            <field name="view_mode">list,form</field>
             <field name="search_view_id" ref="mgmtsystem_complaints.view_complaint_complaint_search" />
             <field name="domain" eval="[('type', '=', 'supplier'), ('categ_id', '=', ref('mgmtsystem_complaints.categ2'))]"/>
             <field name="context" eval="{'default_type': 'supplier', 'default_categ_id': ref('mgmtsystem_complaints.categ2')}"/>
@@ -102,7 +102,7 @@
         <record model="ir.actions.act_window" id="tyt_others_categ_action">
             <field name="name">Otros</field>
             <field name="res_model">complaint.complaint</field>
-            <field name="view_mode">tree,form</field>
+            <field name="view_mode">list,form</field>
             <field name="search_view_id" ref="mgmtsystem_complaints.view_complaint_complaint_search" />
             <field name="domain" eval="[('categ_id', 'not in', [ref('mgmtsystem_complaints.categ1'), ref('mgmtsystem_complaints.categ2')])]"/>
             <field name="context">{"default_type":'customer'}</field>
