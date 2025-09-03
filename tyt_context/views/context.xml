@@ -8,14 +8,14 @@
                 <xpath expr="//sheet/group[3]" position="replace">
                     <group>
                         <field name="requirements">
-                            <tree string="Requerimientos">
+                            <list string="Requerimientos">
                                 <field name="target_req" />
                                 <field name="name" style="max-width:15vw;overflow-wrap: break-word;" />
                                 <field name="legal_id" />
                                 <field name="job_req" />
                                 <field name="limit_date_req" />
                                 <field name="type" />
-                            </tree>
+                            </list>
                         </field>
                         <field name="mgmt_process" options="{'no_create': False}" />
                     </group>
@@ -33,7 +33,7 @@
                         <field name="target_req" />
                         <field name="name" style="max-width:15vw;overflow-wrap: break-word;" />
                         <field name="is_legal" />
-                        <field name="legal_id" attrs="{'readonly': [('is_legal','=',False)]}" />
+                        <field name="legal_id" readonly="is_legal == False" />
                         <field name="type" />
                         <field name="job_req" />
                         <field name="limit_date_req" string="Fecha Límite para cumplir con el requisito"/>
@@ -51,7 +51,7 @@
                     <!--<field name="target_req" />
                     <field name="name" style="max-width:15vw;overflow-wrap: break-word;" />
                     <field name="is_legal" />
-                    <field name="legal_id" attrs="{'readonly': [('is_legal','=',False)]}" />-->
+                    <field name="legal_id" readonly="is_legal == False" />-->
                     <field name="job_req" />
                     <field name="limit_date_req" />
                     <!--<field name="type" />-->
@@ -60,7 +60,7 @@
                     <field name="target_req" />
                     <!--<field name="name" style="max-width:15vw;overflow-wrap: break-word;" />
                     <field name="is_legal" />
-                    <field name="legal_id" attrs="{'readonly': [('is_legal','=',False)]}" />
+                    <field name="legal_id" readonly="is_legal == False" />
                     <field name="job_req" />
                     <field name="limit_date_req" />-->
                     <!--<field name="type" />-->

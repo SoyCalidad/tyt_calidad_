@@ -20,8 +20,9 @@
                     </p>
                 </div>
             </field>
-            <field name="report_template" ref="tyt_context_scope_report_action"/>
-            <field name="report_name">Alcance {{ object.name or '' }}</field>
+            <field name="report_template_ids" eval="[(6,0,[
+                ref('tyt_context.tyt_context_scope_report_action')
+            ])]"></field>
             <field name="auto_delete" eval="True"/>
         </record>
     </data>

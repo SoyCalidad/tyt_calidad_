@@ -11,43 +11,43 @@
                             name="send_elaborate"
                             type="object"
                             class="btn-primary"
-                            attrs="{'invisible':[('state','in', ('elaborate','cancel','validate_ok'))]}" />
+                            invisible="state in ['elaborate', 'cancel', 'validate_ok']" />
                     <button string="Enviar a Revisar"
                             name="send_review"
                             type="object"
                             class="btn-primary"
-                            attrs="{'invisible':[('state','!=', 'elaborate')]}" />
+                            invisible="state != 'elaborate'" />
                     <button string="Enviar a Validar"
                             name="send_validate"
                             type="object"
                             class="btn-primary"
-                            attrs="{'invisible':[('state','in', ('elaborate','validate','cancel','validate_ok'))]}" />
+                            invisible="state in ['elaborate', 'validate', 'cancel', 'validate_ok']" />
                     <button string="Validar"
                             name="send_validate_ok"
                             type="object"
                             class="btn-primary"
-                            attrs="{'invisible':[('state','not in', ('validate'))]}" />
+                            invisible="state not in ['validate']" />
                     <button string="Volver Obsoleto"
                             confirm="Esto volverá obsoleto el presente registro. ¿Está seguro(a)?"
                             name="send_cancel"
                             type="object"
                             class="btn-second"
-                            attrs="{'invisible': [('state','in',('cancel'))] }" />
+                            invisible="state in ['cancel']" />
                     <button name="button_new_version"
                             type="object"
                             string="Nueva versión"
-                            attrs="{'invisible':[('state', '!=', 'validate_ok')]}"
+                            invisible="state != 'validate_ok'"
                             class="oe_highlight" />
                     <button string="Validación rápida"
                             name="fast_validation"
                             type="object"
                             class="oe_highlight"
-                            attrs="{'invisible':[('state','!=', 'elaborate')]}"/>
-                    <button string="Comunicar alcance" name="send_context_scope_by_email" type="object" class="oe_highlight" attrs="{'invisible':[('state', '!=', 'validate_ok')]}"/>
+                            invisible="state != 'elaborate'"/>
+                    <button string="Comunicar alcance" name="send_context_scope_by_email" type="object" class="oe_highlight" invisible="state != 'validate_ok'"/>
                 </header>
                 <sheet>
                     <field name="active" invisible="1" />
-                    <widget name="web_ribbon" title="Archivado" bg_color="bg-danger" attrs="{'invisible': [('active', '=', True)]}" />
+                    <widget name="web_ribbon" title="Archivado" bg_color="bg-danger" invisible="active == True" />
                     <div class="oe_button_box" name="button_box">
                         <button type="object"
                                 name="action_open_older_versions"
@@ -62,13 +62,13 @@
                         </h1>
                         <label for="name" />
                         <h1>
-                            <field name="name" required="1" attrs="{'readonly': [('state','not in',('elaborate'))] }" />
+                            <field name="name" required="1" readonly="state not in ['elaborate']" />
                         </h1>
                     </div>
                     <group>
                         <label for="process_id" />
                         <div class="o_row">
-                            <field name="process_id" required="1" options="{'no_create': True}" colspan="3" attrs="{'readonly': [('state','not in',('elaborate'))]}" />
+                            <field name="process_id" required="1" options="{'no_create': True}" colspan="3" readonly="state not in ['elaborate']" />
                             <field name="version_as_string" colspan="1" nolabel="1" class="oe_inline" />
                         </div>
                     </group>
@@ -99,31 +99,31 @@
                         <page string="Validación y versión" name="version_info">
                             <group col="4">
                                 <group colspan="4">
-                                    <field name="version" attrs="{'readonly': [('state','in',('validate_ok','cancel'))]}" />
+                                    <field name="version" readonly="state in ['validate_ok', 'cancel']" />
                                 </group>
                                 <group colspan="4">
                                     <separator string="Elaboración" />
-                                    <field name="elaboration_step" colspan="2" nolabel="1" attrs="{'readonly': [('state','not in',('elaborate'))]}" />
+                                    <field name="elaboration_step" colspan="2" nolabel="1" readonly="state not in ['elaborate']" />
                                     <separator string="Revisión" />
-                                    <field name="review_step" colspan="2" nolabel="1" attrs="{'readonly': [('state','not in',('elaborate', 'review'))]}" />
+                                    <field name="review_step" colspan="2" nolabel="1" readonly="state not in ['elaborate', 'review']" />
                                     <separator string="Validación" />
-                                    <field name="validation_step" colspan="2" nolabel="1" attrs="{'readonly': [('state','not in',('elaborate', 'review', 'validate'))]}" />
+                                    <field name="validation_step" colspan="2" nolabel="1" readonly="state not in ['elaborate', 'review', 'validate']" />
                                 </group>
                                 <group colspan="2">
-                                    <field name="date_elaborate" attrs="{'required': [('state','in',('elaborate'))], 'readonly': True}" />
-                                    <field name="date_review" attrs="{'required': [('state','in',('review'))], 'readonly': True, 'invisible': [('state','in',('elaborate'))] }" />
-                                    <field name="date_validate" groups="base.group_no_one,base.user_admin" attrs="{'invisible': [('state','in',('elaborate','review'))] }" />
+                                    <field name="date_elaborate" readonly="True" required="state in ['elaborate']" />
+                                    <field name="date_review" invisible="state in ['elaborate']" readonly="True" required="state in ['review']" />
+                                    <field name="date_validate" groups="base.group_no_one,base.group_system" invisible="state in ['elaborate', 'review']" />
                                 </group>
                             </group>
                         </page>
                         <page name="change_history" string="Historial">
-                            <field name="change_history" context="{'default_scope_id': active_id}">
-                                <tree>
+                            <field name="change_history" context="{'default_scope_id': context.get('active_id')}">
+                                <list>
                                     <field name="scope_id" invisible="1" />
                                     <field name="numero" />
                                     <field name="publish_date" />
                                     <field name="name" />
-                                </tree>
+                                </list>
                                 <form>
                                     <sheet>
                                         <group>
@@ -145,11 +145,7 @@
                         </page>
                     </notebook>
                 </sheet>
-                <div class="oe_chatter">
-                    <field name="message_follower_ids" widget="mail_followers" />
-                    <field name="activity_ids" widget="mail_activity" />
-                    <field name="message_ids" widget="mail_thread" />
-                </div>
+                <chatter/>
             </form>
         </field>
     </record>
@@ -158,28 +154,28 @@
         <field name="name">tyt.context.scope.view.tree</field>
         <field name="model">tyt.context.scope</field>
         <field name="arch" type="xml">
-            <tree>
+            <list>
                 <field name="code" />
                 <field name="name" />
                 <field name="version_as_string" />
                 <field name="state" />
                 <field name="process_id" />
                 <field name="write_date" string="Ultima actualización"/>
-            </tree>
+            </list>
         </field>
     </record>
 
     <record id="tyt_context_scope_action" model="ir.actions.act_window">
         <field name="name">Alcance</field>
         <field name="res_model">tyt.context.scope</field>
-        <field name="view_mode">tree,form</field>
+        <field name="view_mode">list,form</field>
         <field name="domain">[('state', '!=', 'cancel')]</field>
     </record>
 
     <record id="tyt_context_scope_cancel_action" model="ir.actions.act_window">
         <field name="name">Alcance</field>
         <field name="res_model">tyt.context.scope</field>
-        <field name="view_mode">tree,form</field>
+        <field name="view_mode">list,form</field>
         <field name="domain">[('state', '=', 'cancel')]</field>
         <field name="context">{}</field>
     </record>

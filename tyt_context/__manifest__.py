@@ -44,4 +44,9 @@
     'auto_install': False,
     'installable': True,
     'application': False,
+    "external_dependencies": {
+        "python": [
+            "PyMuPDF",
+        ],
+    },
 }
