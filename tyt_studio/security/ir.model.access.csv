@@ -1,0 +1,11 @@
+id,name,model_id:id,group_id:id,perm_read,perm_write,perm_create,perm_unlink
+access_tyt_studio_sites,access.tyt.studio.sites,model_tyt_studio_sites,base.group_user,1,1,1,1
+access_tyt_studio_site,access.tyt.studio.site,model_tyt_studio_site,base.group_user,1,1,1,1
+access_tyt_studio_type_site,access.tyt.studio.type.site,model_tyt_studio_type_site,base.group_user,1,1,1,1
+access_tyt_studio_noms,access.tyt.studio.noms,model_tyt_studio_noms,base.group_user,1,1,1,1
+access_tyt_studio_survey_type,access.tyt.studio.survey.type,model_tyt_studio_survey_type,base.group_user,1,1,1,1
+access_tyt_studio_survey_area,access.tyt.studio.survey.area,model_tyt_studio_survey_area,base.group_user,1,1,1,1
+access_tyt_studio_ano,access.tyt.studio..ano,model_tyt_studio_ano,base.group_user,1,1,1,1
+access_tyt_studio_period_type,access.tyt.studio.period_type,model_tyt_studio_period_type,base.group_user,1,1,1,1
+access_tyt_studio_period,access.tyt.studio.period,model_tyt_studio_period,base.group_user,1,1,1,1
+

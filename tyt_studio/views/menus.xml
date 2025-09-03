@@ -1,0 +1,15 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<odoo>    
+
+    <!-- Menú dentro del root de Employees -->
+    <menuitem id="menu_sites_root"
+              name="Sitios"
+              parent="hr.menu_hr_root"
+              action="action_tyt_studio_sites"
+    />
+    <menuitem id="menu_sites_root"
+              name="Sitio"
+              parent="hr.menu_hr_root"
+              action="action_tyt_studio_site"
+    />
+</odoo>

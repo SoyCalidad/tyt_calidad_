@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<odoo>
+    <!-- Vista tipo lista editable -->
+    <record id="view_tyt_studio_sites_list" model="ir.ui.view">
+        <field name="name">tyt_studio.sites.list</field>
+        <field name="model">tyt_studio.sites</field>
+        <field name="arch" type="xml">
+            <list string="Sitios" editable="bottom">
+                <field name="name"/>
+                <field name="numero"/>
+                <field name="site_id"/>
+            </list>
+        </field>
+    </record>
+    <record id="action_tyt_studio_sites" model="ir.actions.act_window">
+        <field name="name">Sitios</field>
+        <field name="res_model">tyt_studio.sites</field>
+    </record>
+
+</odoo>

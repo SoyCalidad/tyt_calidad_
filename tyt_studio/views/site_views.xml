@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<odoo>
+    <!-- Vista tipo lista editable -->
+    <record id="view_tyt_studio_site_list" model="ir.ui.view">
+        <field name="name">tyt_studio.site.list</field>
+        <field name="model">tyt_studio.site</field>
+        <field name="arch" type="xml">
+            <list string="Sitios" editable="bottom">
+                <field name="id" />
+                <field name="tipo_sitio" />
+                <field name="sitio1" />
+                <field name="name"/>
+                <field name="sitios0"/>
+                <field name="sitios"/>
+                <field name="departamento"/>
+                <field name="cuenta_analitica"/>
+                <field name="cuan"/>
+                <field name="id0"/>
+                <field name="codigo"/>
+                <field name="create_uid"/>
+                <field name="create_date"/>
+            </list>
+        </field>
+    </record>
+    <record id="action_tyt_studio_site" model="ir.actions.act_window">
+        <field name="name">Sitio</field>
+        <field name="res_model">tyt_studio.sites</field>
+    </record>
+
+</odoo>
