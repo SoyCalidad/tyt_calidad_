@@ -6,14 +6,14 @@
             <field name="name">Lista de rúbricas</field>
             <field name="model">tyt_recruitment.evaluation_rubric</field>
             <field name="arch" type="xml">
-                <tree>
+                <list>
                     <field name="id" />
                     <field name="week" />
                     <field name="date" />
                     <field name="auditor" />
                     <field name="coach" />
                     <field name="campaign" />
-                </tree>
+                </list>
             </field>
         </record>
 
@@ -31,14 +31,14 @@
                         string="Validar y notificar" 
                         type="object" 
                         class="oe_highlight"
-                        attrs="{'invisible': [('state', '!=', 'doing')]}"    
+                        invisible="state != 'doing'"    
                     />   
                     <button 
                         name="action_view_signature" 
                         string="Firmar" 
                         type="object" 
                         class="oe_highlight"
-                        attrs="{'invisible': [('state', '!=', 'validated_notified')]}"
+                        invisible="state != 'validated_notified'"
                     />
                     <field name="state" widget="statusbar"/>
                 </header>
@@ -55,13 +55,13 @@
                         <page string="Detalles de la rúbrica">
                             <field name="status_approved" widget="progressbar" />
                             <field name="input_evaluation_rubric_ids" nolabel="1"> 
-                                <tree editable="bottom">
+                                <list editable="bottom">
                                     <field name="weighing" width="10px"/>
                                     <field name="concept" width="30px"/>
                                     <field name="description" width="200px"/>
                                     <field name="compliance" width="20px" />
                                     <field name="comment" />
-                                </tree>
+                                </list>
                             </field>
                         </page>
                         <page string="Firma" >
@@ -79,12 +79,12 @@
             <field name="name">Lista de detalles de rúbrica para evaluación</field>
             <field name="model">tyt_recruitment.detail_evaluation_rubric</field>
             <field name="arch" type="xml">
-                <tree>
+                <list>
                 <field name="id" />
                 <field name="weighing" />
                 <field name="concept" />
                 <field name="description" />
-                </tree>
+                </list>
             </field>
         </record>
 
@@ -93,13 +93,13 @@
         <record model="ir.actions.act_window" id="tyt_recruitment.action_window_rubric">
             <field name="name">Lista de rúbricas</field>
             <field name="res_model">tyt_recruitment.evaluation_rubric</field>
-            <field name="view_mode">tree,form</field>
+            <field name="view_mode">list,form</field>
         </record>
 
         <record model="ir.actions.act_window" id="tyt_recruitment.action_window_detail_rubric">
             <field name="name">Lista de rúbricas</field>
             <field name="res_model">tyt_recruitment.detail_evaluation_rubric</field>
-            <field name="view_mode">tree,form</field>
+            <field name="view_mode">list,form</field>
         </record>
 
         <!-- Top menu item -->

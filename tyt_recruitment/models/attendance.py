@@ -391,7 +391,7 @@ class KardexAttendance(models.Model):
             count = 0
             for i in range(1, record.survey_counter + 1):
                 exam_field = f"exam{i}"
-                score = getattr(record, exam_field, None)
+                score = getattr(record, exam_field, 0)
                 try:
                     total += float(score)
                     count += 1

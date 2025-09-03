@@ -12,7 +12,8 @@
         'hr_recruitment',
         'report_xlsx',
         'website',
-        'survey'
+        'survey',
+        'tyt_studio',
     ],
     'data': [
         'security/ir.model.access.csv',
@@ -49,11 +50,11 @@
 
     'assets': {
         'tyt_recruitment.assets_pdfjs_viewer': [
-            'tyt_recruitment/static/lib/pdfjs/build/pdf.js',
-            'tyt_recruitment/static/lib/pdfjs/build/pdf.worker.js',
-            'tyt_recruitment/static/lib/pdfjs/web/viewer.css',
-            'tyt_recruitment/static/lib/pdfjs/web/viewer.js',
-            'tyt_recruitment/static/lib/pdfjs/web/viewer.html',
+            # 'tyt_recruitment/static/lib/pdfjs/build/pdf.js',
+            # 'tyt_recruitment/static/lib/pdfjs/build/pdf.worker.js',
+            # 'tyt_recruitment/static/lib/pdfjs/web/viewer.css',
+            # 'tyt_recruitment/static/lib/pdfjs/web/viewer.js',
+            # 'tyt_recruitment/static/lib/pdfjs/web/viewer.html',
             'tyt_recruitment/static/lib/pdfjs/web/cmaps/**',
             'tyt_recruitment/static/lib/pdfjs/web/images/**',
             'tyt_recruitment/static/lib/pdfjs/web/locale/**',

@@ -54,7 +54,7 @@ class ConfirmationWizard(models.TransientModel):
                 "requisition_id": self.requisition_id.id,
                 "center": self.requisition_id.site_id.display_name if self.requisition_id.site_id else False,
                 "days": combined_days,
-                "week": self.requisition_id.periodo_id.x_name if self.requisition_id.periodo_id else False
+                "week": self.requisition_id.periodo_id.name if self.requisition_id.periodo_id else False
             }
             new_attendance = self.env['tyt_recruitment.attendance'].sudo().create(attendance_data)
             current_attendance_id = new_attendance.id

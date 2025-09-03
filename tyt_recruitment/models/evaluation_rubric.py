@@ -43,15 +43,15 @@ class EvaluationRubric(models.Model):
         else:
             self.status_approved = 0
 
-    @api.depends('kardex_by_applicant_ids.login')
-    def _compute_income(self):
-        for record in self:
-            record.income = sum(1 for kardex in record.kardex_by_applicant_ids if kardex.login)
+    # @api.depends('kardex_by_applicant_ids.login')
+    # def _compute_income(self):
+    #     for record in self:
+    #         record.income = sum(1 for kardex in record.kardex_by_applicant_ids if kardex.login)
 
-    @api.depends('surveys_ids')
-    def _compute_survey_counter(self):
-        for record in self:
-            record.survey_counter = len(record.surveys_ids)
+    # @api.depends('surveys_ids')
+    # def _compute_survey_counter(self):
+    #     for record in self:
+    #         record.survey_counter = len(record.surveys_ids)
 
     @api.onchange('signature')
     def _compute_state(self):
@@ -108,7 +108,7 @@ class EvaluationRubric(models.Model):
             }
         }
 
-class EvaluationRubric(models.Model):
+class DetailEvaluationRubric(models.Model):
     _name = 'tyt_recruitment.detail_evaluation_rubric'
     _description = 'Pregunta de rúbrica de evaluación al expositor'
     _rec_name = 'id'
@@ -118,7 +118,7 @@ class EvaluationRubric(models.Model):
     concept = fields.Char(string="Concepto", tracking=True)
     description = fields.Text(string="Descripción", tracking=True)
 
-class EvaluationRubric(models.Model):
+class InputEvaluationRubric(models.Model):
     _name = 'tyt_recruitment.input_evaluation_rubric'
     _description = 'Respuesta de rúbrica de evaluación al expositor'
     _rec_name = 'id'

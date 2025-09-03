@@ -5,7 +5,7 @@
       <field name="name">Lista de plantillas de carta descriptiva</field>
       <field name="model">tyt_recruitment.descriptive_letter</field>
       <field name="arch" type="xml">
-        <tree>
+        <list>
           <field name="course_name"/>
           <field name="site"/>
           <field name="training_location"/>
@@ -21,7 +21,7 @@
             type="object" 
             class="oe_highlight"
           />
-        </tree>
+        </list>
       </field>
     </record>
 
@@ -35,7 +35,7 @@
             <group>
               <field name="name" string="Nombre"/>
               <field name="framing_subtopic_ids">
-                <tree readonly="1">
+                <list readonly="1">
                   <field name="name" />
                   <field name="instructional_techniques" />
                   <field name="group_techniques" />
@@ -44,7 +44,7 @@
                   <field name="time" />
                   <field name="instructor_learning_activities" />
                   <field name="participant_learning_activities" />
-                </tree>
+                </list>
               </field>
             </group>
           </sheet>
@@ -84,10 +84,10 @@
               <group>
                 <field name="name" />
                 <field name="topic_ids">
-                  <tree>
+                  <list>
                     <field name="name" />
                     <field name="subtopic_ids" />
-                  </tree>
+                  </list>
                 </field>
               </group>
             </sheet>
@@ -105,7 +105,7 @@
               <group>
                 <field name="name" />
                 <field name="subtopic_ids">
-                  <tree>
+                  <list>
                     <field name="name" />
                     <field name="instructional_techniques" />
                     <field name="group_techniques" />
@@ -114,7 +114,7 @@
                     <field name="time" string="Tiempo"/>
                     <field name="instructor_learning_activities" />
                     <field name="participant_learning_activities" />
-                  </tree>
+                  </list>
                 </field>
               </group>
             </sheet>
@@ -166,18 +166,18 @@
               <notebook>
                 <page string="Encuadre">
                   <field name="framing_topic_ids">
-                    <tree readonly="1">
+                    <list readonly="1">
                       <field name="name" />
                       <field name="framing_subtopic_ids" />
-                    </tree>
+                    </list>
                   </field>
                 </page>
                 <page string="Días">
                   <field name="day_ids">
-                    <tree readonly="1">
+                    <list readonly="1">
                       <field name="name" />
                       <field name="topic_ids" />
-                    </tree>
+                    </list>
                   </field>
                 </page>
               </notebook>
@@ -191,7 +191,7 @@
       <field name="name">Lista de cartas descriptivas ingresada</field>
       <field name="model">tyt_recruitment.descriptive_letter_input</field>
       <field name="arch" type="xml">
-        <tree >
+        <list >
           <field name="name"/>
           <field name="site"/>
           <field name="template" />
@@ -202,9 +202,9 @@
             string="Editar desde la plantilla" 
             type="object" 
             class="oe_highlight"
-            attrs="{'invisible': [('framing_topic_ids', '=', False), ('day_ids', '=', False)]}"
+            invisible="(framing_topic_ids == False and day_ids == False)"
           />
-        </tree>
+        </list>
       </field>
     </record>
 
@@ -217,23 +217,23 @@
               <group>
                 <field name="name"/>
                 <field name="site"/>
-                <field name="template" attrs="{'readonly': [('site', '=', False)]}"/>
+                <field name="template" readonly="site == False"/>
               </group>
               <notebook>
                 <page string="Encuadre">
                   <field name="framing_topic_ids">
-                    <tree readonly="1">
+                    <list readonly="1">
                       <field name="name" />
                       <field name="framing_subtopic_ids" />
-                    </tree>
+                    </list>
                   </field>
                 </page>
                 <page string="Días">
                   <field name="day_ids">
-                    <tree readonly="1">
+                    <list readonly="1">
                       <field name="name" />
                       <field name="topic_ids" />
-                    </tree>
+                    </list>
                   </field>
                 </page>
               </notebook>
@@ -247,13 +247,13 @@
     <record model="ir.actions.act_window" id="tyt_recruitment_action_window_letter">
       <field name="name">Lista de plantillas carta descriptiva</field>
       <field name="res_model">tyt_recruitment.descriptive_letter</field>
-      <field name="view_mode">tree,form</field>
+      <field name="view_mode">list,form</field>
     </record>
 
     <record model="ir.actions.act_window" id="tyt_recruitment_action_window_input_letter">
       <field name="name">Lista cartas descriptivas</field>
       <field name="res_model">tyt_recruitment.descriptive_letter_input</field>
-      <field name="view_mode">tree,form</field>
+      <field name="view_mode">list,form</field>
     </record>
 
     <!-- Top menu item -->

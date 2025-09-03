@@ -10,10 +10,10 @@
                     <field name="campaign_ids" />
                     <field name="attendance_groups_sizes" />
                 </group>
-                <h3 attrs="{'invisible': [('attendance_id', '!=', False)]}">
+                <h3 invisible="attendance_id != False">
                     Aún no tiene una lista de asistencia para esta campaña.
                 </h3>
-                <div attrs="{'invisible': [('attendance_id', '=', False)]}">
+                <div invisible="attendance_id == False">
                     <h3>
                         Ya tiene una lista de asistencia generada para esta campaña.
                     </h3>

@@ -5,7 +5,7 @@
       <field name="name">Lista de asistencia</field>
       <field name="model">tyt_recruitment.attendance</field>
       <field name="arch" type="xml">
-        <tree>
+        <list>
           <field name="id"/>
           <field name="campaign_id"/>
           <field name="requisition_id"/>
@@ -17,9 +17,9 @@
             string="Ver rúbrica de evaluación" 
             type="object" class="oe_highlight" 
             groups="tyt_recruitment.group_quality_user"
-            attrs="{'invisible': [('trainer', '=', False)]}"
+            invisible="trainer == False"
           />
-        </tree>
+        </list>
       </field>
     </record>
 
@@ -64,29 +64,29 @@
             <notebook>
             <page string="Lista de asistencia">
               <field name="attendance_days_of_week_ids" nolabel="1" options="{'no_create': True}">
-                <tree editable="bottom">
+                <list editable="bottom">
                   <field name="login" width="30px" string="Número de empleado"/>
                   <field name="full_name" width="30px" />
-                  <field name="day1" width="30px" attrs="{'column_invisible': [('parent.days', '&lt;', 1)]}"/>
-                  <field name="day2" width="30px" attrs="{'column_invisible': [('parent.days', '&lt;', 2)]}"/>
-                  <field name="day3" width="30px" attrs="{'column_invisible': [('parent.days', '&lt;', 3)]}"/>
-                  <field name="day4" width="30px" attrs="{'column_invisible': [('parent.days', '&lt;', 4)]}"/>
-                  <field name="day5" width="30px" attrs="{'column_invisible': [('parent.days', '&lt;', 5)]}"/>
-                  <field name="day6" width="30px" attrs="{'column_invisible': [('parent.days', '&lt;', 6)]}"/>
-                  <field name="day7" width="30px" attrs="{'column_invisible': [('parent.days', '&lt;', 7)]}"/>
-                  <field name="day8" width="30px" attrs="{'column_invisible': [('parent.days', '&lt;', 8)]}" />
-                  <field name="day9" width="30px" attrs="{'column_invisible': [('parent.days', '&lt;', 9)]}" />
-                  <field name="day10" width="30px" attrs="{'column_invisible': [('parent.days', '&lt;', 10)]}" />
-                  <field name="day11" width="30px" attrs="{'column_invisible': [('parent.days', '&lt;', 11)]}" />
-                  <field name="day12" width="30px" attrs="{'column_invisible': [('parent.days', '&lt;', 12)]}" />
-                  <field name="day13" width="30px" attrs="{'column_invisible': [('parent.days', '&lt;', 13)]}" />
-                  <field name="day14" width="30px" attrs="{'column_invisible': [('parent.days', '&lt;', 14)]}" />
-                  <field name="day15" width="30px" attrs="{'column_invisible': [('parent.days', '&lt;', 15)]}" />
-                  <field name="day16" width="30px" attrs="{'column_invisible': [('parent.days', '&lt;', 16)]}" />
-                  <field name="day17" width="30px" attrs="{'column_invisible': [('parent.days', '&lt;', 17)]}" />
-                  <field name="day18" width="30px" attrs="{'column_invisible': [('parent.days', '&lt;', 18)]}" />
-                  <field name="day19" width="30px" attrs="{'column_invisible': [('parent.days', '&lt;', 19)]}" />
-                  <field name="day20" width="30px" attrs="{'column_invisible': [('parent.days', '&lt;', 20)]}" />
+                  <field name="day1" width="30px" column_invisible="parent.days &lt; 1"/>
+                  <field name="day2" width="30px" column_invisible="parent.days &lt; 2"/>
+                  <field name="day3" width="30px" column_invisible="parent.days &lt; 3"/>
+                  <field name="day4" width="30px" column_invisible="parent.days &lt; 4"/>
+                  <field name="day5" width="30px" column_invisible="parent.days &lt; 5"/>
+                  <field name="day6" width="30px" column_invisible="parent.days &lt; 6"/>
+                  <field name="day7" width="30px" column_invisible="parent.days &lt; 7"/>
+                  <field name="day8" width="30px" column_invisible="parent.days &lt; 8" />
+                  <field name="day9" width="30px" column_invisible="parent.days &lt; 9" />
+                  <field name="day10" width="30px" column_invisible="parent.days &lt; 10" />
+                  <field name="day11" width="30px" column_invisible="parent.days &lt; 11" />
+                  <field name="day12" width="30px" column_invisible="parent.days &lt; 12" />
+                  <field name="day13" width="30px" column_invisible="parent.days &lt; 13" />
+                  <field name="day14" width="30px" column_invisible="parent.days &lt; 14" />
+                  <field name="day15" width="30px" column_invisible="parent.days &lt; 15" />
+                  <field name="day16" width="30px" column_invisible="parent.days &lt; 16" />
+                  <field name="day17" width="30px" column_invisible="parent.days &lt; 17" />
+                  <field name="day18" width="30px" column_invisible="parent.days &lt; 18" />
+                  <field name="day19" width="30px" column_invisible="parent.days &lt; 19" />
+                  <field name="day20" width="30px" column_invisible="parent.days &lt; 20" />
 
                   <field name="opday1" width="30px" />
                   <field name="opday2" width="30px" />
@@ -104,70 +104,70 @@
                     string="Ver" 
                     type="object" 
                     class="oe_highlight" />
-                </tree>
+                </list>
               </field>                  
             </page>
             <page string="Exámenes">
               <field name="surveys_ids" nolabel="1"> 
-                <tree editable="bottom">
+                <list editable="bottom">
                   <field name="id" width="30px" />
                   <field name="survey_id" />
-                </tree>
+                </list>
               </field>
             </page>
-            <page string="Kardex" attrs="{'invisible': [('view_kardex', '=', False)]}" >
+            <page string="Kardex" invisible="view_kardex == False" >
               <field name="kardex_by_applicant_ids" nolabel="1" options="{'no_create': True}">
-                <tree editable="bottom">
+                <list editable="bottom">
                   <field name="login" width="30px" string="Número de empleado"/>
                   <field name="applicant_name" width="30px" />
 
                   <field name="experience" width="30px" />
                   <field name="time" width="30px" />
                   <field name="marital_status" width="30px" />
-                  <field name="exam1" width="30px" attrs="{'column_invisible': [('parent.survey_counter', '&lt;', 1)]}"/>
-                  <field name="exam2" width="30px" attrs="{'column_invisible': [('parent.survey_counter', '&lt;', 2)]}"/>
-                  <field name="exam3" width="30px" attrs="{'column_invisible': [('parent.survey_counter', '&lt;', 3)]}"/>
-                  <field name="exam4" width="30px" attrs="{'column_invisible': [('parent.survey_counter', '&lt;', 4)]}"/>
-                  <field name="exam5" width="30px" attrs="{'column_invisible': [('parent.survey_counter', '&lt;', 5)]}"/>
-                  <field name="exam6" width="30px" attrs="{'column_invisible': [('parent.survey_counter', '&lt;', 6)]}"/>
-                  <field name="exam7" width="30px" attrs="{'column_invisible': [('parent.survey_counter', '&lt;', 7)]}"/>
-                  <field name="exam8" width="30px" attrs="{'column_invisible': [('parent.survey_counter', '&lt;', 8)]}" />
-                  <field name="exam9" width="30px" attrs="{'column_invisible': [('parent.survey_counter', '&lt;', 9)]}" />
-                  <field name="exam10" width="30px" attrs="{'column_invisible': [('parent.survey_counter', '&lt;', 10)]}" />
-                  <field name="exam11" width="30px" attrs="{'column_invisible': [('parent.survey_counter', '&lt;', 11)]}" />
-                  <field name="exam12" width="30px" attrs="{'column_invisible': [('parent.survey_counter', '&lt;', 12)]}" />
-                  <field name="exam13" width="30px" attrs="{'column_invisible': [('parent.survey_counter', '&lt;', 13)]}" />
-                  <field name="exam14" width="30px" attrs="{'column_invisible': [('parent.survey_counter', '&lt;', 14)]}" />
-                  <field name="exam15" width="30px" attrs="{'column_invisible': [('parent.survey_counter', '&lt;', 15)]}" />
+                  <field name="exam1" width="30px" column_invisible="parent.survey_counter &lt; 1"/>
+                  <field name="exam2" width="30px" column_invisible="parent.survey_counter &lt; 2"/>
+                  <field name="exam3" width="30px" column_invisible="parent.survey_counter &lt; 3"/>
+                  <field name="exam4" width="30px" column_invisible="parent.survey_counter &lt; 4"/>
+                  <field name="exam5" width="30px" column_invisible="parent.survey_counter &lt; 5"/>
+                  <field name="exam6" width="30px" column_invisible="parent.survey_counter &lt; 6"/>
+                  <field name="exam7" width="30px" column_invisible="parent.survey_counter &lt; 7"/>
+                  <field name="exam8" width="30px" column_invisible="parent.survey_counter &lt; 8" />
+                  <field name="exam9" width="30px" column_invisible="parent.survey_counter &lt; 9" />
+                  <field name="exam10" width="30px" column_invisible="parent.survey_counter &lt; 10" />
+                  <field name="exam11" width="30px" column_invisible="parent.survey_counter &lt; 11" />
+                  <field name="exam12" width="30px" column_invisible="parent.survey_counter &lt; 12" />
+                  <field name="exam13" width="30px" column_invisible="parent.survey_counter &lt; 13" />
+                  <field name="exam14" width="30px" column_invisible="parent.survey_counter &lt; 14" />
+                  <field name="exam15" width="30px" column_invisible="parent.survey_counter &lt; 15" />
 
                   <field name="average" width="30px" />
                   <field name="comments" width="30px" />
-                </tree>
+                </list>
               </field>
             </page>
-            <page string="Kardex - Certificación" groups="tyt_recruitment.group_quality_user" attrs="{'invisible': [('view_kardex_certificate', '=', False)]}">
+            <page string="Kardex - Certificación" groups="tyt_recruitment.group_quality_user" invisible="view_kardex_certificate == False">
               <field name="kardex_by_applicant_two_ids" nolabel="1" options="{'no_create': True}">
-                <tree editable="bottom">
+                <list editable="bottom">
                   <field name="applicant_name" width="30px" readonly="1"/>
                   <field name="experience" width="30px" readonly="1"/>
                   <field name="time" width="30px" readonly="1"/>
                   <field name="marital_status" width="30px" readonly="1"/>
 
-                  <field name="exam1" width="30px" readonly="1" attrs="{'column_invisible': [('parent.survey_counter', '&lt;', 1)]}"/>
-                  <field name="exam2" width="30px" readonly="1" attrs="{'column_invisible': [('parent.survey_counter', '&lt;', 2)]}"/>
-                  <field name="exam3" width="30px" readonly="1" attrs="{'column_invisible': [('parent.survey_counter', '&lt;', 3)]}"/>
-                  <field name="exam4" width="30px" readonly="1" attrs="{'column_invisible': [('parent.survey_counter', '&lt;', 4)]}"/>
-                  <field name="exam5" width="30px" readonly="1" attrs="{'column_invisible': [('parent.survey_counter', '&lt;', 5)]}"/>
-                  <field name="exam6" width="30px" readonly="1" attrs="{'column_invisible': [('parent.survey_counter', '&lt;', 6)]}"/>
-                  <field name="exam7" width="30px" readonly="1" attrs="{'column_invisible': [('parent.survey_counter', '&lt;', 7)]}"/>
-                  <field name="exam8" width="30px" readonly="1" attrs="{'column_invisible': [('parent.survey_counter', '&lt;', 8)]}"/>
-                  <field name="exam9" width="30px" readonly="1" attrs="{'column_invisible': [('parent.survey_counter', '&lt;', 9)]}"/>
-                  <field name="exam10" width="30px" readonly="1" attrs="{'column_invisible': [('parent.survey_counter', '&lt;', 10)]}"/>
-                  <field name="exam11" width="30px" readonly="1" attrs="{'column_invisible': [('parent.survey_counter', '&lt;', 11)]}"/>
-                  <field name="exam12" width="30px" readonly="1" attrs="{'column_invisible': [('parent.survey_counter', '&lt;', 12)]}"/>
-                  <field name="exam13" width="30px" readonly="1" attrs="{'column_invisible': [('parent.survey_counter', '&lt;', 13)]}"/>
-                  <field name="exam14" width="30px" readonly="1" attrs="{'column_invisible': [('parent.survey_counter', '&lt;', 14)]}"/>
-                  <field name="exam15" width="30px" readonly="1" attrs="{'column_invisible': [('parent.survey_counter', '&lt;', 15)]}"/>
+                  <field name="exam1" width="30px" readonly="1" column_invisible="parent.survey_counter &lt; 1"/>
+                  <field name="exam2" width="30px" readonly="1" column_invisible="parent.survey_counter &lt; 2"/>
+                  <field name="exam3" width="30px" readonly="1" column_invisible="parent.survey_counter &lt; 3"/>
+                  <field name="exam4" width="30px" readonly="1" column_invisible="parent.survey_counter &lt; 4"/>
+                  <field name="exam5" width="30px" readonly="1" column_invisible="parent.survey_counter &lt; 5"/>
+                  <field name="exam6" width="30px" readonly="1" column_invisible="parent.survey_counter &lt; 6"/>
+                  <field name="exam7" width="30px" readonly="1" column_invisible="parent.survey_counter &lt; 7"/>
+                  <field name="exam8" width="30px" readonly="1" column_invisible="parent.survey_counter &lt; 8"/>
+                  <field name="exam9" width="30px" readonly="1" column_invisible="parent.survey_counter &lt; 9"/>
+                  <field name="exam10" width="30px" readonly="1" column_invisible="parent.survey_counter &lt; 10"/>
+                  <field name="exam11" width="30px" readonly="1" column_invisible="parent.survey_counter &lt; 11"/>
+                  <field name="exam12" width="30px" readonly="1" column_invisible="parent.survey_counter &lt; 12"/>
+                  <field name="exam13" width="30px" readonly="1" column_invisible="parent.survey_counter &lt; 13"/>
+                  <field name="exam14" width="30px" readonly="1" column_invisible="parent.survey_counter &lt; 14"/>
+                  <field name="exam15" width="30px" readonly="1" column_invisible="parent.survey_counter &lt; 15"/>
 
                   <field name="average" width="30px" readonly="1"/>
                   <field name="comments" width="30px" readonly="1"/>
@@ -188,7 +188,7 @@
                     icon="fa-check" 
                     type="object" 
                     class="oe_highlight" 
-                    attrs="{'invisible': [('has_certification_feedback', '=', False)]}"
+                    invisible="has_certification_feedback == False"
                   />
                   <button 
                     name="action_new_certification_feedback" 
@@ -196,16 +196,16 @@
                     title=" "
                     type="object" 
                     class="oe_highlight" 
-                    attrs="{'invisible': [('has_certification_feedback', '!=', False)]}"
+                    invisible="has_certification_feedback != False"
                   />
                   <button 
                     name="action_open_certification_feedback_form" 
                     string="Retroalimentación" 
                     type="object" 
                     class="oe_highlight" 
-                    attrs="{'invisible': [('has_certification_feedback', '=', False)]}"
+                    invisible="has_certification_feedback == False"
                   />
-                </tree>
+                </list>
               </field>
             </page>
           </notebook>
@@ -218,11 +218,11 @@
       <field name="name">Lista de estados de asistencia</field>
       <field name="model">tyt_recruitment.tag_attendance</field>
       <field name="arch" type="xml">
-        <tree>
+        <list>
           <field name="id"/>
           <field name="name"/>
           <field name="tag"/>
-        </tree>
+        </list>
       </field>
     </record>
 
@@ -231,13 +231,13 @@
     <record model="ir.actions.act_window" id="tyt_recruitment_action_window_attendance">
       <field name="name">Asistencias</field>
       <field name="res_model">tyt_recruitment.attendance</field>
-      <field name="view_mode">tree,form</field>
+      <field name="view_mode">list,form</field>
     </record>
 
     <record model="ir.actions.act_window" id="tyt_recruitment_action_window_tag_attendance">
       <field name="name">Etiqueta de asistencia </field>
       <field name="res_model">tyt_recruitment.tag_attendance</field>
-      <field name="view_mode">tree,form</field>
+      <field name="view_mode">list,form</field>
     </record>
 
     <!-- Top menu item -->

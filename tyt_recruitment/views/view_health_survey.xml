@@ -6,11 +6,11 @@
       <field name="name">Lista de encuestas</field>
       <field name="model">tyt_recruitment.health_survey</field>
       <field name="arch" type="xml">
-        <tree string="Lista de encuestas de salud">
+        <list string="Lista de encuestas de salud">
           <field name="id" width="100px"/>
           <field name="name"/>
           <field name="code"/>
-        </tree>
+        </list>
       </field>
     </record>
 
@@ -29,7 +29,7 @@
             <notebook>
               <page string="Preguntas">
                 <field name="question_ids" nolabel="1" widget="question_page_one2many" >
-                  <tree editable="bottom">
+                  <list editable="bottom">
                     <field name="sequence" widget="handle"/>
                     <field name="title" widget="survey_description_page"/>
                     <field name="background_image" invisible="1"/>
@@ -38,17 +38,12 @@
                     <control>
                       <create name="add_question_control" string="Agregar pregunta"/>
                     </control>
-                  </tree>
+                  </list>
                 </field>
               </page>
             </notebook>
           </sheet>
-          <div class="oe_chatter">
-            <field name="message_follower_ids" widget="mail_followers" />
-            <field name="activity_ids" widget="mail_activity" />
-            <field name="message_ids" widget="mail_thread" />
-          </div>
-        </form>
+          <chatter />        </form>
       </field>
     </record>
 
@@ -73,9 +68,9 @@
       <field name="name">Lista de respuestas multiples</field>
       <field name="model">tyt_recruitment.multiple_answer</field>
       <field name="arch" type="xml">
-          <tree string="Lista de respuestas multiples" create="0" edit="0">
+          <list string="Lista de respuestas multiples" create="0" edit="0">
               <field name="text" readonly="1"/>
-          </tree>
+          </list>
       </field>
     </record>
 
@@ -83,7 +78,7 @@
     <record model="ir.actions.act_window" id="tyt_recruitment_action_window_health_survey">
       <field name="name">Lista de encuestas</field>
       <field name="res_model">tyt_recruitment.health_survey</field>
-      <field name="view_mode">tree,form</field>
+      <field name="view_mode">list,form</field>
       <field name="view_id" ref="tyt_recruitment_health_survey_list"/>
     </record>
 

@@ -5,14 +5,14 @@
       <field name="name">Lista de retroalimentaciones</field>
       <field name="model">tyt_recruitment.certification_feedback</field>
       <field name="arch" type="xml">
-        <tree>
+        <list>
           <field name="id"/>
           <field name="name"/>
           <field name="evaluation_average"/>
           <field name="group"/>
           <field name="campaign"/>
           <field name="trainner"/>
-        </tree>
+        </list>
       </field>
     </record>
 
@@ -48,7 +48,7 @@
                 string="Notificar" 
                 type="object" 
                 class="oe_highlight"
-                attrs="{'invisible': [('state', '!=', 'doing')]}"    
+                invisible="state != 'doing'"    
               />   
               <field name="state" widget="statusbar"/>
           </header>
@@ -76,7 +76,7 @@
                     <field name="quality_technician" />
                     <field 
                       name="quality_signature" widget="signature"
-                      attrs="{'readonly': [('quality_technician', '=', False)]}"/>
+                      readonly="quality_technician == False"/>
                   </group>
                 </page>
                 <page string="Responsable de Capacitación y Calidad" >
@@ -84,7 +84,7 @@
                     <field name="training_and_quality_manager" />
                     <field 
                       name="manager_signature" widget="signature"
-                      attrs="{'readonly': [('training_and_quality_manager', '=', False)]}"/>
+                      readonly="training_and_quality_manager == False"/>
                   </group>
                 </page>
               </notebook>
@@ -98,7 +98,7 @@
     <record model="ir.actions.act_window" id="tyt_recruitment_action_window_feedback">
       <field name="name">Lista de retroalimentaciones</field>
       <field name="res_model">tyt_recruitment.certification_feedback</field>
-      <field name="view_mode">tree,form</field>
+      <field name="view_mode">list,form</field>
     </record>
 
     <!-- Top menu item -->

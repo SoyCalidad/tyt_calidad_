@@ -24,7 +24,7 @@ class DescriptiveLetter(models.Model):
     participant_profile = fields.Char(string="Perfil de los participantes", tracking=True)  
     entry_knowledge_and_skills = fields.Char(string="Conocimiento y habilidades para ingresar al curso", tracking=True)  
 
-    site = fields.Many2one('x_sitios', string="Sitio", required=True, tracking=True)
+    site = fields.Many2one('tyt_studio.sites', string="Sitio", required=True, tracking=True)
 
     day_ids = fields.One2many('tyt_recruitment.descriptive_letter_day', 'descriptive_letter_id', string="Días")
     framing_topic_ids = fields.One2many('tyt_recruitment.descriptive_letter_framing_topic', 'descriptive_letter_id', string="Encuadre - temas")
@@ -153,7 +153,7 @@ class DescriptiveLetterInput(models.Model):
     _inherit = ['mail.thread']
 
     name = fields.Char(string="Nombre", required=True, tracking=True)
-    site = fields.Many2one('x_sitios', string="Sitio", required=True, tracking=True)
+    site = fields.Many2one('tyt_studio.sites', string="Sitio", required=True, tracking=True)
     template = fields.Many2one('tyt_recruitment.descriptive_letter', string="Plantilla", tracking=True)
 
     framing_topic_ids = fields.One2many('tyt_recruitment.descriptive_letter_framing_topic', 'descriptive_letter_input_id', string="Encuadre - temas")

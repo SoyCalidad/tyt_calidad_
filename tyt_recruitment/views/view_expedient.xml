@@ -6,11 +6,11 @@
       <field name="name">Lista de expediente</field>
       <field name="model">tyt_recruitment.expedient</field>
       <field name="arch" type="xml">
-        <tree>
+        <list>
           <field name="success_rate" />
           <field name="birth_certificate" />
           <field name="rfc" />
-        </tree>
+        </list>
       </field>
     </record>
 

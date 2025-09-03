@@ -5,7 +5,7 @@
         <field name="name">Applicant Tree</field>
         <field name="model">tyt_recruitment.applicant</field>
         <field name="arch" type="xml">
-            <tree>
+            <list>
                 <field name="last_name_father"/>
                 <field name="last_name_mother"/>
                 <field name="name"/>
@@ -15,7 +15,7 @@
                 <field name="birthplace"/>
                 <field name="rfc"/>
                 <field name="curp"/>
-            </tree>
+            </list>
         </field>
         </record>
 
@@ -24,7 +24,7 @@
             <field name="name">tyt_recruitment.model.applicants.form</field>
             <field name="model">tyt_recruitment.applicant</field>
             <field name="arch" type="xml">
-                <tree string="Lista">
+                <list string="Lista">
                 <field name="last_name_father"/>
                 <field name="last_name_mother"/>
                 <field name="name"/>
@@ -50,7 +50,7 @@
                     string="Ver aplicación" 
                     type="object" 
                     class="oe_highlight" />
-                </tree>
+                </list>
             </field>
         </record>
 
@@ -182,12 +182,7 @@
                         </div>
 
                     </sheet>
-                    <div class="oe_chatter">
-                        <field name="message_follower_ids" options="{'post_refresh': 'recipients'}"/>
-                        <field name="activity_ids"/>
-                        <field name="message_ids"/>
-                    </div>
-                </form>
+                    <chatter />                </form>
             </field>
         </record>   
     </data>
