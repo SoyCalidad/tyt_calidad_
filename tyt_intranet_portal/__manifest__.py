@@ -9,6 +9,10 @@
     'category': 'soycalidad',
     'depends': [
         'portal',
+        'account',
+        'hr_timesheet',
+        'purchase',
+        'sign',
     ],
     'data': [
         'views/portal_templates.xml',
