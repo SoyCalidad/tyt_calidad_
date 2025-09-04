@@ -1,14 +1,12 @@
+<?xml version='1.0' encoding='UTF-8'?>
 <odoo>
-    <data>
-
-        <report
-            id="action_report_survey_report"
-            model="survey.survey"
-            string="Customer satisfaction report"
-            report_type="xlsx"
-            name="customer_satisfaction_report"
-            file="Customer satisfaction report"
-            />
-
-    </data>
+  <data>
+    <record id="action_report_survey_report" model="ir.actions.report">
+      <field name="model">survey.survey</field>
+      <field name="name">Customer satisfaction report</field>
+      <field name="report_type">xlsx</field>
+      <field name="report_name">customer_satisfaction_report</field>
+      <field name="report_file">Customer satisfaction report</field>
+    </record>
+  </data>
 </odoo>
