@@ -13,7 +13,7 @@ class BirthdayPublicationPortal(portal.CustomerPortal):
     def home(self, **kw):
         values = self._prepare_portal_layout_values()
         show_birthday_card_modal = True
-        employee = request.env.user.x_studio_empleado
+        employee = request.env.user.empleado
         if employee and employee.birthday_publication_ids:
             if request.session.get('birthday_card_modal_shown'):
                 show_birthday_card_modal = False
@@ -39,15 +39,15 @@ class BirthdayPublicationPortal(portal.CustomerPortal):
         return values
 
     def _prepare_birthday_publication_domain(self):
-        employee = request.env.user.x_studio_empleado
+        employee = request.env.user.empleado
         return [
             ('include_in_birthday_publication', '=', True),
             ('birthday', '!=', False),
             ('is_birthday', '=', True),
-            ('x_studio_sitios0', '!=', False),
+            ('sitios0', '!=', False),
             '|',
             ('include_in_all_birthday_publications', '=', True),
-            ('x_studio_sitios0.id', '=', employee.x_studio_sitios0.id),
+            ('sitios0.id', '=', employee.sitios0.id),
         ]
 
     @http.route(['/birthday_publication', '/birthday_publication/page/<int:page>'], type='http', auth='user', website=True)

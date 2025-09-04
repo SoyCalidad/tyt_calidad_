@@ -8,7 +8,7 @@
     'license': 'Other proprietary',
     'category': 'soycalidad',
     'depends': [
-        'base', 'mail', 'portal', 'website', 'tyt_intranet_base',
+        'base', 'mail', 'portal', 'website', 'tyt_intranet_base', 'tyt_studio',
     ],
     'data': [
         'security/ir.model.access.csv',
