@@ -9,6 +9,8 @@
     'category': 'soycalidad',
     'depends': [
         'tyt_intranet_base',
+        'survey',
+        
     ],
     'data': [
         'security/ir.model.access.csv',

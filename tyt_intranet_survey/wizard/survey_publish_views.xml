@@ -11,19 +11,19 @@
                         <div name="dates" class="o_row">
                             <field name="start_date" widget="daterange" options='{"related_end_date": "end_date"}'/>
                             <i class="fa fa-long-arrow-right mx-2 oe_edit_only" aria-label="Arrow icon" title="Arrow"/>
-                            <i class="fa fa-long-arrow-right mx-2 oe_read_only" aria-label="Arrow icon" title="Arrow" attrs="{'invisible': [('start_date', '=', False), ('end_date', '=', False)]}"/>
+                            <i class="fa fa-long-arrow-right mx-2 oe_read_only" aria-label="Arrow icon" title="Arrow" invisible="(start_date == False and end_date == False)"/>
                             <field name="end_date" widget="daterange" options='{"related_start_date": "start_date"}'/>
                         </div>
                     </group>
                     <notebook>
                         <page string="Surveys">
                             <field name="survey_ids" readonly="1">
-                                <tree no_open="1">
+                                <list no_open="1">
                                     <field name="title"/>
                                     <field name="user_id" widget="many2one_avatar_user"/>
                                     <field name="group_ids" widget="many2many_tags"/>
                                     <field name="publish_state" widget="badge" decoration-info="publish_state == 'draft'" decoration-success="publish_state == 'published'"/>
-                                </tree>
+                                </list>
                             </field>
                         </page>
                     </notebook>

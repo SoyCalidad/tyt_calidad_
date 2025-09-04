@@ -9,8 +9,8 @@
                 <group>
                     <group string="Typification" name="typification">
                         <field name="survey_publish_state" invisible="1"/>
-                        <field name="area_encuesta_id" widget="selection" attrs="{'readonly': [('survey_publish_state', '=', 'published')]}"/>
-                        <field name="tipo_encuesta_id" widget="selection" attrs="{'readonly': [('survey_publish_state', '=', 'published')]}"/>
+                        <field name="area_encuesta_id" widget="selection" readonly="survey_publish_state == 'published'"/>
+                        <field name="tipo_encuesta_id" widget="selection" readonly="survey_publish_state == 'published'"/>
                     </group>
                     <group>
                     </group>
@@ -38,16 +38,16 @@
         <field name="name">tyt.survey.question.answer.view.tree</field>
         <field name="model">tyt.survey.question.answer</field>
         <field name="arch" type="xml">
-            <tree editable="bottom">
+            <list editable="bottom">
                 <field name="value"/>
                 <field name="answer_score"/>
-            </tree>
+            </list>
         </field>
     </record>
 
     <record id="tyt_survey_question_answer_action" model="ir.actions.act_window">
         <field name="name">Suggested Answers</field>
         <field name="res_model">tyt.survey.question.answer</field>
-        <field name="view_mode">tree,form</field>
+        <field name="view_mode">list,form</field>
     </record>
 </odoo>

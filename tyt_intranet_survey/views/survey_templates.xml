@@ -16,7 +16,8 @@
         </xpath>
     </template>
 
-    <template id="survey_fill_form_done" inherit_id="survey.survey_fill_form_done">
+    <!-- en odoo 18.0 no existe este elemento-->
+    <!-- <template id="survey_fill_form_done" inherit_id="survey.survey_fill_form_done">
         <xpath expr="//div[@t-if='graph_data']" position="replace">
             <div t-if="survey.access_mode != 'intranet'">
                 <div class="o_survey_result p-4 col-12 row" t-if="graph_data">
@@ -41,5 +42,5 @@
                 </div>
             </xpath>
         </xpath>
-    </template>
+    </template> -->
 </odoo>
