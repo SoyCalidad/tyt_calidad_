@@ -9,6 +9,7 @@
     'category': 'soycalidad',
     'depends': [
         'hr',
+        'tyt_studio',
     ],
     'data': [
         'security/intranet_security.xml',

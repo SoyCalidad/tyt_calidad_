@@ -8,7 +8,7 @@ class Groups(models.Model):
 
     name = fields.Char(string='Name')
     department_id = fields.Many2one('hr.department', string='Department')
-    sitio_id = fields.Many2one(related='department_id.x_studio_sitio', string='Site', store=True)
+    sitio_id = fields.Many2one(related='department_id.sitio', string='Site', store=True)
     job_id = fields.Many2one('hr.job', string='Job Position')
     employee_ids = fields.Many2many(
         comodel_name='hr.employee',
@@ -103,7 +103,7 @@ class Groups(models.Model):
         self.ensure_one()
         return {
             'name': _('Employees'),
-            'view_mode': 'tree,form',
+            'view_mode': 'list,form',
             'res_model': 'hr.employee',
             'type': 'ir.actions.act_window',
             'context': {'create': False, 'delete': False},
@@ -115,7 +115,7 @@ class Groups(models.Model):
         self.ensure_one()
         return {
             'name': _('Users'),
-            'view_mode': 'tree,form',
+            'view_mode': 'list,form',
             'res_model': 'res.users',
             'type': 'ir.actions.act_window',
             'context': {'create': False, 'delete': False},
