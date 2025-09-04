@@ -5,7 +5,7 @@
         <field name="name">tyt.crehana.general.report.view.tree</field>
         <field name="model">tyt.crehana.general.report</field>
         <field name="arch" type="xml">
-            <tree string="Reporte General">
+            <list string="Reporte General">
                 <field name="crehana_user_id" />
                 <field name="crehana_user_name" />
                 <field name="crehana_user_email" />
@@ -51,14 +51,14 @@
                 <field name="creahana_track_name" optional="hide" />
                 <field name="creahana_track_is_hidden" optional="hide" />
                 <field name="creahana_user_custom_fields" optional="hide" />
-            </tree>
+            </list>
         </field>
     </record>
 
     <record id="tyt_creahana_general_report_action" model="ir.actions.act_window">
         <field name="name">Reporte General</field>
         <field name="res_model">tyt.crehana.general.report</field>
-        <field name="view_mode">tree</field>
+        <field name="view_mode">list</field>
         <field name="domain">[]</field>
         <field name="context">{}</field>
     </record>

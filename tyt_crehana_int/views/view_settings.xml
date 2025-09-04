@@ -5,7 +5,7 @@
         <field name="name">api.credentials.tree</field>
         <field name="model">tyt_crehana.crehana_settings</field>
         <field name="arch" type="xml">
-            <tree>
+            <list>
                 <field name="organization_slug"/>
                 <button 
                     name="action_view_general_progress_report" 
@@ -18,7 +18,7 @@
                     type="object" 
                     class="oe_highlight" />
                 <button string="Ver reporte general" name="action_show_general_report" type="object" class="oe_highlight"/>
-            </tree>
+            </list>
         </field>
     </record>
 
@@ -34,12 +34,7 @@
                         <field name="organization_slug" />
                     </group>
                 </sheet>
-                <div class="oe_chatter">
-                    <!-- <field name="message_follower_ids" widget="mail_followers"/>
-                    <field name="activity_ids" widget="mail_activity"/> -->
-                    <field name="message_ids" widget="mail_thread"/>
-                </div>
-            </form>
+                <chatter />            </form>
         </field>
     </record>
 
@@ -49,7 +44,7 @@
         <field name="name">tyt_crehana.user_progress.tree</field>
         <field name="model">tyt_crehana.user_progress</field>
         <field name="arch" type="xml">
-            <tree string="Reporte de Progreso">
+            <list string="Reporte de Progreso">
                 <field name="user_id"/>
                 <field name="user_name"/>
                 <field name="user_email"/>
@@ -95,7 +90,7 @@
                 <field name="track_name"/>
                 <field name="track_is_hidden"/>
                 <field name="user_custom_fields"/>
-            </tree>
+            </list>
         </field>
     </record>
 
@@ -104,7 +99,7 @@
     <record id="action_crehana_settigns" model="ir.actions.act_window">
         <field name="name">Configuraciones</field>
         <field name="res_model">tyt_crehana.crehana_settings</field>
-        <field name="view_mode">tree,form</field>
+        <field name="view_mode">list,form</field>
     </record>
 
     <!-- Menús -->

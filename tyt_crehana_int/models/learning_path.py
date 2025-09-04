@@ -87,10 +87,10 @@ class LearningPath(models.Model):
 
             except requests.exceptions.RequestException as e:
                 _logger.error(f"Error al obtener datos: {e}")
-                raise models.ValidationError(f"Error al obtener datos: {e}")
+                raise ValidationError(f"Error al obtener datos: {e}")
         else:
             _logger.error(f"Error de credenciales de acceso")
-            raise models.ValidationError("Error al obtener credenciales de acceso para API's")
+            raise ValidationError("Error al obtener credenciales de acceso para API's")
         return True
 
 class LearningPathCourse(models.Model):

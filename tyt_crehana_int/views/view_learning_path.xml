@@ -5,11 +5,11 @@
         <field name="name">tyt.crehana.learning.path.tree</field>
         <field name="model">tyt_crehana.learning_path</field>
         <field name="arch" type="xml">
-            <tree create="false">
+            <list create="false">
                 <field name="id_path"/>
                 <field name="name"/>
                 <field name="course_ids"/>
-            </tree>
+            </list>
         </field>
     </record>
 
@@ -25,18 +25,13 @@
                         <field name="name"/>
                     </group>
                     <field name="course_ids">
-                        <tree>
+                        <list>
                             <field name="id_course"/>
                             <field name="title"/>
-                        </tree>
+                        </list>
                     </field>
                 </sheet>
-                <div class="oe_chatter">
-                    <!-- <field name="message_follower_ids" widget="mail_followers"/>
-                    <field name="activity_ids" widget="mail_activity"/> -->
-                    <field name="message_ids" widget="mail_thread"/>
-                </div>
-            </form>
+                <chatter />            </form>
         </field>
     </record>
 
@@ -44,7 +39,7 @@
     <record id="action_learning_path" model="ir.actions.act_window">
         <field name="name">Lista de rutas de aprendizaje</field>
         <field name="res_model">tyt_crehana.learning_path</field>
-        <field name="view_mode">tree,form</field>
+        <field name="view_mode">list,form</field>
     </record>
 
     <!-- Menú -->

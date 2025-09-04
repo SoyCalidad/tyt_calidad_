@@ -139,10 +139,10 @@ class MyModuleSettings(models.Model):
 
             except requests.exceptions.RequestException as e:
                 _logger.error(f"Error al obtener datos: {e}")
-                raise models.ValidationError(f"Error al obtener datos: {e}")
+                raise ValidationError(f"Error al obtener datos: {e}")
         else:
             _logger.error(f"Error de credenciales de acceso")
-            raise models.ValidationError("Error al obtener credenciales de acceso para API's")
+            raise ValidationError("Error al obtener credenciales de acceso para API's")
     
     def action_fetch_paths_from_api(self):
         _logger.info("call action_fetch_paths_from_api")
@@ -214,10 +214,10 @@ class MyModuleSettings(models.Model):
 
             except requests.exceptions.RequestException as e:
                 _logger.error(f"Error al obtener datos: {e}")
-                raise models.ValidationError(f"Error al obtener datos: {e}")
+                raise ValidationError(f"Error al obtener datos: {e}")
         else:
             _logger.error(f"Error de credenciales de acceso")
-            raise models.ValidationError("Error al obtener credenciales de acceso para API's")
+            raise ValidationError("Error al obtener credenciales de acceso para API's")
 
         return True
 
@@ -327,7 +327,7 @@ class MyModuleSettings(models.Model):
             }
         except requests.exceptions.RequestException as e:
             _logger.error(f"Error al obtener datos: {e}")
-            raise models.ValidationError(f"Error al obtener datos: {e}")
+            raise ValidationError(f"Error al obtener datos: {e}")
 
 class ItemProgress(models.TransientModel):
     _name = 'tyt_crehana.user_progress'

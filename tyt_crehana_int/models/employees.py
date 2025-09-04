@@ -1,6 +1,7 @@
 # -*- coding: utf-8 -*-
 import requests
 from odoo import api, models, fields
+from odoo.exceptions import ValidationError
 
 import xlsxwriter
 from io import BytesIO
@@ -25,7 +26,7 @@ class EmployeeExtension(models.Model):
     course_ids = fields.One2many('tyt_crehana.learning_course', 'employee_id', string="Cursos")
     
     @api.model
-    def search(self, args, offset=0, limit=None, order=None, count=False):
+    def search(self, args, offset=0, limit=None, order=None):
         context = self.env.context
 
         if context.get('default_dynamic_domain'):
@@ -43,7 +44,7 @@ class EmployeeExtension(models.Model):
             if levels:
                 args.append(('level', 'in', levels))
 
-        return super().search(args, offset=offset, limit=limit, order=order, count=count)
+        return super().search(args, offset=offset, limit=limit, order=order,)
     
     def action_register_in_crehana(self):
         _logger.info("Ejecutando action_register_in_crehana...")
@@ -66,7 +67,7 @@ class EmployeeExtension(models.Model):
                     empleado_paterno = nombres_completos[1] if len(nombres_completos) > 1 else ''
                     empleado_materno = nombres_completos[2] if len(nombres_completos) > 2 else ''
                 else:
-                    raise models.ValidationError("El nombre del empleado no está definido correctamente. Por favor, asegúrese de que el campo 'name' esté completo.")
+                    raise ValidationError("El nombre del empleado no está definido correctamente. Por favor, asegúrese de que el campo 'name' esté completo.")
             else:
                 empleado_nombre = self.empleado_nombre.strip() if self.empleado_nombre else ''
                 empleado_paterno = self.empleado_paterno.strip() if self.empleado_paterno else ''
@@ -109,7 +110,7 @@ class EmployeeExtension(models.Model):
                 # return {'type': 'ir.actions.client', 'tag': 'reload'}
             except requests.exceptions.RequestException as e:
                 _logger.error(f"Error al obtener datos: {e}")
-                raise models.ValidationError(f"Error al obtener datos: {e}")
+                raise ValidationError(f"Error al obtener datos: {e}")
 
             # Actualizar nivel PDP del empleado
 
@@ -131,7 +132,7 @@ class EmployeeExtension(models.Model):
                 _logger.info("Campos personalizados actualizados exitosamente")
             except requests.exceptions.RequestException as e:
                 _logger.error(f"Error al actualizar campos personalizados: {e}")
-                raise models.ValidationError(f"Error al actualizar campos personalizados: {e}")
+                raise ValidationError(f"Error al actualizar campos personalizados: {e}")
 
             # Actualizar el número del empleado
 
@@ -153,7 +154,7 @@ class EmployeeExtension(models.Model):
                 _logger.info("Número de empleado actualizado exitosamente")
             except requests.exceptions.RequestException as e:
                 _logger.error(f"Error al actualizar el número de empleado: {e}")
-                raise models.ValidationError(f"Error al actualizar el número de empleado: {e}")
+                raise ValidationError(f"Error al actualizar el número de empleado: {e}")
 
             return {
                 'type': 'ir.actions.client',
@@ -168,7 +169,7 @@ class EmployeeExtension(models.Model):
 
         else:
             _logger.error(f"Error de credenciales de acceso")
-            raise models.ValidationError("Error al obtener credenciales de acceso para API's")
+            raise ValidationError("Error al obtener credenciales de acceso para API's")
 
     def action_register_on_a_learning_path(self):
         _logger.info("Ejecutando action_register_on_a_learning_path...")
@@ -200,10 +201,10 @@ class EmployeeExtension(models.Model):
                     self.id_crehana = data[0].get('id')
                 else:
                     _logger.error(f"No se encontró el usuario en Crehana para el email: {email}")
-                    raise models.ValidationError("No se encontró el usuario en Crehana para el email proporcionado.")
+                    raise ValidationError("No se encontró el usuario en Crehana para el email proporcionado.")
             except requests.exceptions.RequestException as e:
                 _logger.error(f"Error al obtener datos: {e}")
-                raise models.ValidationError(f"Error al obtener datos: {e}")
+                raise ValidationError(f"Error al obtener datos: {e}")
 
             url = f"https://www.crehana.com/api/rest/org/{settings.organization_slug}/tracks/"
             message = "Problemas con los datos, contacte con su administrador"
@@ -256,7 +257,7 @@ class EmployeeExtension(models.Model):
                         return {'type': 'ir.actions.client', 'tag': 'reload'}
                     except requests.exceptions.RequestException as e:
                         _logger.error(f"Error al obtener datos: {e}")
-                        raise models.ValidationError(f"Error al obtener datos: {e}")
+                        raise ValidationError(f"Error al obtener datos: {e}")
                 else:
                     title = "Error"
                     message = "El empleado tiene problemas con su posición y/o nivel, contacte con un administrador."
@@ -273,7 +274,7 @@ class EmployeeExtension(models.Model):
             }
         else:
             _logger.error(f"Error de credenciales de acceso")
-            raise models.ValidationError("Error al obtener credenciales de acceso para API's")
+            raise ValidationError("Error al obtener credenciales de acceso para API's")
 
     def action_show_learning_progress(self):
         _logger.info("Ejecutando action_show_learning_progress...")
@@ -343,10 +344,10 @@ class EmployeeExtension(models.Model):
 
             except requests.exceptions.RequestException as e:
                 _logger.error(f"Error al obtener datos: {e}")
-                raise models.ValidationError(f"Error al obtener datos: {e}")
+                raise ValidationError(f"Error al obtener datos: {e}")
         else:
             _logger.error(f"Error de credenciales de acceso")
-            raise models.ValidationError("Error al obtener credenciales de acceso para API's")
+            raise ValidationError("Error al obtener credenciales de acceso para API's")
 
     def action_show_user_report(self):
 
@@ -384,16 +385,16 @@ class EmployeeExtension(models.Model):
                 }
             except requests.exceptions.RequestException as e:
                 _logger.error(f"Error al obtener datos: {e}")
-                raise models.ValidationError(f"Error al obtener datos: {e}")
+                raise ValidationError(f"Error al obtener datos: {e}")
         else:
             _logger.error(f"Error de credenciales de acceso")
-            raise models.ValidationError("Error al obtener credenciales de acceso para API's")
+            raise ValidationError("Error al obtener credenciales de acceso para API's")
 
     def update_employee_level(self):
 
         if not self.level:
             _logger.error("El nivel del empleado no está definido.")
-            raise models.ValidationError("El nivel del empleado no está definido.")
+            raise ValidationError("El nivel del empleado no está definido.")
 
         settings = self.env['tyt_crehana.crehana_settings'].get_first_settings()
 
@@ -423,7 +424,7 @@ class EmployeeExtension(models.Model):
                 _logger.info("Nivel PDP actualizado exitosamente")
             except requests.exceptions.RequestException as e:
                 _logger.error(f"Error al actualizar nivel PDP: {e}")
-                raise models.ValidationError(f"Error al actualizar nivel PDP: {e}")
+                raise ValidationError(f"Error al actualizar nivel PDP: {e}")
     
     def tyt_crehana_get_employee_level(self):
 
@@ -455,7 +456,7 @@ class EmployeeExtension(models.Model):
                             break
                 else:
                     _logger.error(f"No se encontró el reporte en Crehana para el email: {self.private_email or self.work_email}")
-                    raise models.ValidationError("No se encontró el reporte o el nivel del empleado en Crehana para el email proporcionado.")
+                    raise ValidationError("No se encontró el reporte o el nivel del empleado en Crehana para el email proporcionado.")
             except requests.exceptions.RequestException as e:
                 _logger.error(f"Error al obtener datos: {e}")
-                raise models.ValidationError(f"Error al obtener datos: {e}")
+                raise ValidationError(f"Error al obtener datos: {e}")

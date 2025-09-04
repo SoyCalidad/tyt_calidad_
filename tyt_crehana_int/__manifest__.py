@@ -10,7 +10,8 @@
     'depends': [
         'base', 
         'hr',
-        'mail'
+        'mail',
+        'tyt_recruitment',
     ],
     'data': [
         'security/ir.model.access.csv',
