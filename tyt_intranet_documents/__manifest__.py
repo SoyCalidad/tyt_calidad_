@@ -8,7 +8,7 @@
     'license': 'Other proprietary',
     'category': 'soycalidad',
     'depends': [
-        'base', 'web', 'documents', 'portal', 'website',
+        'base', 'web', 'documents', 'portal', 'website', 'documents',
     ],
     'data': [
         'security/ir.model.access.csv',
