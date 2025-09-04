@@ -3,8 +3,9 @@
     <menuitem id="supplier_complaints_inventory_menu_action"
               name="Supplier Complaints Inventory"
               action="tyt_contacts_reports.supplier_complaints_inventory_action"
-              parent="studio_customization.contactos_contactos_dbdd023c-ffbb-4e12-988a-ab1ce6f8358e"
+              parent="contacts.res_partner_menu_contacts"
               sequence="10"/>
+
 
     <menuitem id="tyt_contacts_reports_menu"
               name="Extra Reports"

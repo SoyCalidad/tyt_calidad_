@@ -6,7 +6,7 @@
         <field name="inherit_id" ref="mgmtsystem_partner_qualification.res_partner_form_inherit"/>
         <field name="arch" type="xml">
             <xpath expr="//field[@name='vip_customer']" position="after">
-                <field name="customer_campaign_ids" attrs="{'invisible': [('customer', '=', False)]}" widget="many2many_tags" options="{'color_field': 'color'}"/>
+                <field name="customer_campaign_ids" invisible="customer == False" widget="many2many_tags" options="{'color_field': 'color'}"/>
             </xpath>
             <xpath expr="//group//div[hasclass('partner_type')]" position="inside">
                 <group col="2" class="mt-5">
