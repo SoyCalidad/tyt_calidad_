@@ -1,8 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
 <odoo>
     <template id="tyt_snippets" inherit_id="website.snippets">
-        <xpath expr="//div[@id='snippet_structure']/div[hasclass('o_panel_body')]" position="inside">
-            <t t-snippet="tyt_intranet_messaging.s_tyt_message_popup" t-thumbnail="/website/static/src/img/snippets_thumbs/s_popup.svg"/>
+        <xpath expr="//snippets[@id='snippet_structure']" position="inside">
+            <t t-snippet="tyt_intranet_messaging.s_tyt_message_popup" t-thumbnail="/website/static/src/img/snippets_thumbs/s_alert.svg" string="TYT Message Popup"/>
+        
         </xpath>
     </template>
 </odoo>

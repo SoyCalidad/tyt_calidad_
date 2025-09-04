@@ -7,9 +7,13 @@
             <form>
                 <header>
                     <field name="state" widget="statusbar"/>
-                    <button name="action_publish" string="Publish" type="object" states="draft" class="btn-primary"/>
+                    <button name="action_publish" string="Publish" type="object" 
+                    invisible="state!='draft'"
+                     class="btn-primary"/>
                     <button name="action_draft" string="Reset to Draft"
-                            type="object" states="published" class="btn-secondary"
+                            type="object" 
+                            invisible="state!='published'"
+                            class="btn-secondary"
                             confirm="Are you sure you want to reset to draft?"/>
                 </header>
                 <sheet>
@@ -30,7 +34,7 @@
                     <group name="Attachments">
                         <label for="attachment_ids" string="Attachments"/>
                         <br/>
-                        <field name="attachment_ids" attrs="{'readonly': [('state', 'not in', ('draft'))]}"
+                        <field name="attachment_ids" readonly="state not in ['draft']"
                                nolabel="1" colspan="2" widget="many2many_binary" class="o_sign_attachments"/>
                     </group>
                     <notebook>
@@ -59,21 +63,16 @@
                         </page>
                         <page string="Read Status" name="read_status">
                             <field name="read_status_ids">
-                                <tree create="false" delete="false" edit="false" no_open="1">
+                                <list create="false" delete="false" edit="false" no_open="1">
                                     <field name="department_message_id" invisible="1"/>
                                     <field name="user_id"/>
                                     <field name="is_read"/>
-                                </tree>
+                                </list>
                             </field>
                         </page>
                     </notebook>
                 </sheet>
-                <div class="oe_chatter">
-                    <field name="message_follower_ids" widget="mail_followers"/>
-                    <field name="activity_ids" widget="mail_activity"/>
-                    <field name="message_ids" widget="mail_thread"/>
-                </div>
-            </form>
+                <chatter />            </form>
         </field>
     </record>
 
@@ -81,14 +80,14 @@
         <field name="name">tyt.intranet.department_message.view.tree</field>
         <field name="model">tyt.intranet.department_message</field>
         <field name="arch" type="xml">
-            <tree default_order="published_date desc">
+            <list default_order="published_date desc">
                 <field name="sender_portal"/>
                 <field name="subject"/>
                 <field name="tag_ids" widget="many2many_tags" options=" {'color_field': 'color'}"/>
                 <field name="published_date"/>
                 <field name="deadline_date"/>
                 <field name="state" widget="badge" decoration-info="state == 'draft'" decoration-success="state == 'published'"/>
-            </tree>
+            </list>
         </field>
     </record>
 
@@ -108,7 +107,7 @@
     <record id="tyt_intranet_department_message_action" model="ir.actions.act_window">
         <field name="name">Department Messages</field>
         <field name="res_model">tyt.intranet.department_message</field>
-        <field name="view_mode">tree,form</field>
+        <field name="view_mode">list,form</field>
     </record>
 
     <record id="tyt_intranet_department_message_tag_view_form" model="ir.ui.view">
@@ -132,15 +131,15 @@
         <field name="name">tyt.intranet.department_message.tag.view.tree</field>
         <field name="model">tyt.intranet.department_message.tag</field>
         <field name="arch" type="xml">
-            <tree editable="bottom">
+            <list editable="bottom">
                 <field name="name"/>
-            </tree>
+            </list>
         </field>
     </record>
 
     <record id="tyt_intranet_department_message_tag_action" model="ir.actions.act_window">
         <field name="name">Department Message Tags</field>
         <field name="res_model">tyt.intranet.department_message.tag</field>
-        <field name="view_mode">tree,form</field>
+        <field name="view_mode">list,form</field>
     </record>
 </odoo>

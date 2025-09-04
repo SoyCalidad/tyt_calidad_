@@ -10,6 +10,7 @@ class DepartmentMessageTag(models.Model):
     def _get_default_color(self):
         return randint(1, 11)
 
+
     name = fields.Char(string='Name')
     color = fields.Integer(string='Color', default=_get_default_color)
     active = fields.Boolean(string='Active', default=True)
@@ -50,7 +51,8 @@ class DepartmentMessage(models.Model):
     footer = fields.Html(string='Footer')
 
     job_id = fields.Many2one('hr.job', string='Job Position')
-    department_id = fields.Many2one('hr.department', string='Department')
+    #job_departmanet = fields.Many2one(related="job_id.department_id")
+    department_id = fields.Many2one('hr.department', string='Department') #aqui
     gps = fields.Boolean(string='gps')
     group_ids = fields.Many2many('res.groups', 'tyt_intranet_department_message_group_rel',
                                  'message_id', 'group_id', string="Groups")
@@ -61,8 +63,8 @@ class DepartmentMessage(models.Model):
     def onchange_gps(self):
         self.ensure_one()
         if self.gps and self.job_id:
-            groups = self.env['res.groups'].search([('x_studio_job', '=', self.job_id.id)])
-            self.group_ids = [(6, 0, [groups.id])] if groups else []
+            groups = self.env['res.groups'].search([('job_id', '=', self.job_id.id)])
+            self.group_ids = [(6, 0, [groups.ids])] if groups else []
             existing_user_ids = self.read_status_ids.mapped('user_id.id')
             new_user_ids = groups.mapped('users.id')
             unique_user_ids = set(new_user_ids) - set(existing_user_ids)
