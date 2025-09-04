@@ -38,7 +38,7 @@
             <field name="name">hr.employee.quality.tree</field>
             <field name="model">hr.employee</field>
             <field name="arch" type="xml">
-                <tree string="Employees" expand="context.get('expand', False)" multi_edit="1" sample="1" js_class="hr_employee_list">
+                <list string="Employees" expand="context.get('expand', False)" multi_edit="1" sample="1" js_class="hr_employee_list">
                     <header>
                         <button name="%(hr.plan_wizard_action)d" type="action" string="Launch Plan" context="{'action_plan': True}"/>
                     </header>
@@ -59,7 +59,7 @@
                     <field name="active" invisible="1"/>
                     <field name="category_ids" widget="many2many_tags" options="{'color_field': 'color'}" optional="hide"/>
                     <field name="country_id" optional="hide"/>
-                </tree>
+                </list>
             </field>
         </record>
 
@@ -80,24 +80,24 @@
                     <field name="last_activity_time" invisible="1"/>
                     <field name="last_activity" invisible="1"/>
                     <header>
-                        <button name="%(hr.plan_wizard_action)d" string="Launch Plan" type="action" groups="hr.group_hr_user" attrs="{'invisible': [('active', '=', False)]}"/>
+                        <button name="%(hr.plan_wizard_action)d" string="Launch Plan" type="action" groups="hr.group_hr_user" invisible="active == False"/>
                     </header>
                     <sheet>
                         <div name="button_box" class="oe_button_box">
                         </div>
-                        <widget name="web_ribbon" title="Archived" bg_color="bg-danger" attrs="{'invisible': [('active', '=', True)]}"/>
+                        <widget name="web_ribbon" title="Archived" bg_color="bg-danger" invisible="active == True"/>
                         <field name="avatar_128" invisible="1"/>
                         <div class="o_employee_avatar">
                             <field name="image_1920" widget='image' class="oe_avatar m-0" options='{"zoom": true, "preview_image":"avatar_128"}'/>
                             <div id="hr_presence_status" class="d-flex align-items-end fs-6 o_employee_availability">
                                 <!-- Employee is present/connected and it is normal according to his work schedule  -->
-                                <small role="img" class="fa fa-fw fa-circle text-success o_button_icon hr_presence align-middle" attrs="{'invisible': [('hr_icon_display', '!=', 'presence_present')]}" aria-label="Present" title="Present"/>
+                                <small role="img" class="fa fa-fw fa-circle text-success o_button_icon hr_presence align-middle" invisible="hr_icon_display != 'presence_present'" aria-label="Present" title="Present"/>
                                 <!-- Employee is not present and it is normal according to his work schedule -->
-                                <small role="img" class="fa fa-fw fa-circle-o text-muted o_button_icon hr_presence align-middle" attrs="{'invisible': [('hr_icon_display', '!=', 'presence_absent')]}" aria-label="Absent" title="Absent" name="presence_absent"/>
+                                <small role="img" class="fa fa-fw fa-circle-o text-muted o_button_icon hr_presence align-middle" invisible="hr_icon_display != 'presence_absent'" aria-label="Absent" title="Absent" name="presence_absent"/>
                                 <!-- Employee is connected but according to his work schedule, he should not work for now  -->
-                                <small role="img" class="fa fa-fw fa-circle-o text-success o_button_icon hr_presence align-middle" attrs="{'invisible': [('hr_icon_display', '!=', 'presence_absent_active')]}" aria-label="Present but not active" title="Present but not active" name="presence_absent_active"/>
+                                <small role="img" class="fa fa-fw fa-circle-o text-success o_button_icon hr_presence align-middle" invisible="hr_icon_display != 'presence_absent_active'" aria-label="Present but not active" title="Present but not active" name="presence_absent_active"/>
                                 <!-- Employee is not here but according to his work schedule, he should be connected -->
-                                <small role="img" class="fa fa-fw fa-circle text-warning o_button_icon hr_presence align-middle" attrs="{'invisible': [('hr_icon_display', '!=', 'presence_to_define')]}" aria-label="To define" title="To define" name="presence_to_define"/>
+                                <small role="img" class="fa fa-fw fa-circle text-warning o_button_icon hr_presence align-middle" invisible="hr_icon_display != 'presence_to_define'" aria-label="To define" title="To define" name="presence_to_define"/>
                             </div>
                         </div>
                         <div class="oe_title">
@@ -142,7 +142,7 @@
                                         <group name="managers" string="Approvers" class="hide-group-if-empty" invisible="1">
                                             <!-- is overridden in other hr related modules -->
                                         </group>
-                                        <group name="departure" string="Departure" attrs="{'invisible': [('active', '=', True)]}">
+                                        <group name="departure" string="Departure" invisible="active == True">
                                             <field name="departure_reason_id" options="{'no_edit': True, 'no_create': True, 'no_open': True}"/>
                                             <field name="departure_description"/>
                                             <field name="departure_date"/>
@@ -150,7 +150,7 @@
                                         <group string="Schedule">
                                             <field name="resource_calendar_id" required="1"/>
                                             <field name="id" invisible="1"/>
-                                            <field name="tz" attrs="{'required': [('id', '!=', False)]}"/>
+                                            <field name="tz" required="id != False"/>
                                         </group>
                                     </div>
                                 </div>
@@ -158,15 +158,15 @@
                             <page name="personal_information" string="Información privada" groups="hr.group_hr_user">
                                 <group>
                                     <group string="Private Contact">
-                                        <field name="address_home_id"
+                                        <!-- <field name="address_home_id"
                                             context="{
                                                 'show_address': 1,
                                                 'default_type': 'private',
                                                 'form_view_ref': 'base.res_partner_view_form_private'}"
-                                            options='{"always_reload": True, "highlight_first_line": True}'/>
+                                            options='{"always_reload": True, "highlight_first_line": True}'/> -->
                                         <field name="private_email" string="Email"/>
                                         <field name="phone" string="Phone" readonly="True"/>
-                                        <field name="bank_account_id" context="{'default_partner_id': address_home_id}"/>
+                                        <field name="bank_account_id" context="{'default_partner_id': context.get('address_home_id')}"/>
                                         <field name="lang" string="Language"/>
                                         <label for="km_home_work"/>
                                         <div class="o_row" name="div_km_home_work">
@@ -176,8 +176,8 @@
                                     </group>
                                     <group string="Family Status">
                                         <field name="marital"/>
-                                        <field name="spouse_complete_name" attrs="{'invisible': [('marital', 'not in', ['married', 'cohabitant'])]}"/>
-                                        <field name="spouse_birthdate" attrs="{'invisible': [('marital', 'not in', ['married', 'cohabitant'])]}"/>
+                                        <field name="spouse_complete_name" invisible="marital not in ['married', 'cohabitant']"/>
+                                        <field name="spouse_birthdate" invisible="marital not in ['married', 'cohabitant']"/>
                                         <field name="children"/>
                                         <separator name="emergency" string="Emergency"/>
                                         <field name="emergency_contact"/>
@@ -217,8 +217,8 @@
                                         <label for="barcode"/>
                                         <div class="o_row">
                                             <field name="barcode"/>
-                                            <button string="Generate" class="btn btn-link" type="object" name="generate_random_barcode" attrs="{'invisible': [('barcode', '!=', False)]}"/>
-                                            <button name="%(hr.hr_employee_print_badge)d" string="Print Badge" class="btn btn-link" type="action" attrs="{'invisible': [('barcode', '=', False)]}"/>
+                                            <button string="Generate" class="btn btn-link" type="object" name="generate_random_barcode" invisible="barcode != False"/>
+                                            <button name="%(hr.hr_employee_print_badge)d" string="Print Badge" class="btn btn-link" type="action" invisible="barcode == False"/>
                                         </div>
                                     </group>
                                     <group string='Payroll' name="payroll_group" invisible="1">
@@ -229,12 +229,7 @@
                         </notebook>
 
                     </sheet>
-                    <div class="oe_chatter">
-                        <field name="message_follower_ids" groups="base.group_user" options="{'post_refresh': 'recipients'}"/>
-                        <field name="activity_ids"/>
-                        <field name="message_ids"/>
-                    </div>
-                </form>
+                    <chatter />                </form>
             </field>
         </record>
 
@@ -315,17 +310,17 @@
             <field name="priority" eval="1000"/>
             <field name="arch" type="xml">
                 <div name="button_box" position="inside">
-                    <field name="related_contacts_count" invisible="1"/>
+                    <!-- <field name="related_contacts_count" invisible="1"/>
                     <button name="action_related_contacts"
                         class="oe_stat_button"
                         icon="fa-address-card-o"
                         type="object"
-                        attrs="{'invisible': ['|', ('id', '=', False), ('related_contacts_count', '=', 0)]}">
+                        invisible="(id == False or related_contacts_count == 0)">
                         <div class="o_field_widget o_stat_info">
                             <span class="o_stat_value"><field name="related_contacts_count"/></span>
                             <span class="o_stat_text">Contacts</span>
                         </div>
-                    </button>
+                    </button> -->
                 </div>
             </field>
         </record>    
