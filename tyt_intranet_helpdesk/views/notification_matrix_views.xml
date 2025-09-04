@@ -21,16 +21,16 @@
         <field name="name">tyt.intranet.service_area.tree.form</field>
         <field name="model">tyt.intranet.service_area</field>
         <field name="arch" type="xml">
-            <tree editable="bottom">
+            <list editable="bottom">
                 <field name="name"/>
-            </tree>
+            </list>
         </field>
     </record>
 
     <record id="tyt_intranet_service_area_action" model="ir.actions.act_window">
         <field name="name">Service Areas</field>
         <field name="res_model">tyt.intranet.service_area</field>
-        <field name="view_mode">tree,form</field>
+        <field name="view_mode">list,form</field>
     </record>
 
     <record id="tyt_intranet_message_type_view_form" model="ir.ui.view">
@@ -54,16 +54,16 @@
         <field name="name">tyt.intranet.message_type.tree.form</field>
         <field name="model">tyt.intranet.message_type</field>
         <field name="arch" type="xml">
-            <tree editable="bottom">
+            <list editable="bottom">
                 <field name="name"/>
-            </tree>
+            </list>
         </field>
     </record>
 
     <record id="tyt_intranet_message_type_action" model="ir.actions.act_window">
         <field name="name">Message Types</field>
         <field name="res_model">tyt.intranet.message_type</field>
-        <field name="view_mode">tree,form</field>
+        <field name="view_mode">list,form</field>
     </record>
 
     <record id="tyt_intranet_notification_matrix_view_form" model="ir.ui.view">
@@ -99,17 +99,17 @@
         <field name="name">tyt.intranet.notification_matrix.view.tree</field>
         <field name="model">tyt.intranet.notification_matrix</field>
         <field name="arch" type="xml">
-            <tree>
+            <list>
                 <field name="name"/>
                 <field name="site_id"/>
-            </tree>
+            </list>
         </field>
     </record>
 
     <record id="tyt_intranet_notification_matrix_action" model="ir.actions.act_window">
         <field name="name">Notification Matrices</field>
         <field name="res_model">tyt.intranet.notification_matrix</field>
-        <field name="view_mode">tree,form</field>
+        <field name="view_mode">list,form</field>
     </record>
 
     <record id="tyt_intranet_notification_matrix_line_view_form" model="ir.ui.view">
@@ -126,11 +126,11 @@
                     <notebook>
                         <page string="Notification Matrix Line Message Types">
                             <field name="matrix_line_message_type_ids">
-                                <tree editable="bottom" create="false" delete="false">
+                                <list editable="bottom" create="false" delete="false">
                                     <field name="notification_matrix_line_id" invisible="1"/>
                                     <field name="message_type_id" readonly="1"/>
                                     <field name="user_ids" widget="many2many_tags"/>
-                                </tree>
+                                </list>
                             </field>
                         </page>
                     </notebook>
@@ -143,16 +143,16 @@
         <field name="name">tyt.intranet.notification_matrix.line.view.tree</field>
         <field name="model">tyt.intranet.notification_matrix.line</field>
         <field name="arch" type="xml">
-            <tree>
+            <list>
                 <field name="service_area_id"/>
                 <field name="responsible_id" widget="many2one_avatar_user"/>
-            </tree>
+            </list>
         </field>
     </record>
 
     <record id="tyt_intranet_notification_line_matrix_action" model="ir.actions.act_window">
         <field name="name">Notification Matrix Lines</field>
         <field name="res_model">tyt.intranet.notification_matrix.line</field>
-        <field name="view_mode">tree,form</field>
+        <field name="view_mode">list,form</field>
     </record>
 </odoo>

@@ -66,6 +66,6 @@ class NotificationMatrix(models.Model):
     _inherit = ['mail.thread', 'mail.activity.mixin']
 
     name = fields.Char(string='Name')
-    site_id = fields.Many2one('x_sitios', string='Site')
+    site_id = fields.Many2one('tyt_studio.sites', string='Site')
     matrix_line_ids = fields.One2many('tyt.intranet.notification_matrix.line', 'notification_matrix_id',
                                       string='Notification Matrix Lines')

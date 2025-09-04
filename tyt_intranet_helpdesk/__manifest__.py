@@ -8,7 +8,7 @@
     'license': 'Other proprietary',
     'category': 'soycalidad',
     'depends': [
-        'base', 'mail', 'portal', 'website', 'hola_calidad',
+        'base', 'mail', 'portal', 'website', 'hola_calidad', 'tyt_studio', 'survey',
     ],
     'data': [
         'security/ir.model.access.csv',

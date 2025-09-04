@@ -25,8 +25,8 @@ class MailboxController(http.Controller):
     @http.route('/mailbox', type='http', auth='user', website=True)
     def mailbox_form(self):
         values = request.params.copy()
-        site_ids = request.env['x_sitios'].sudo().search([])
-        user_site = request.env.user.x_studio_sitio.x_studio_sitios
+        site_ids = request.env['tyt_studio.sites'].sudo().search([])
+        user_site = request.env.user.sitio.sitios
         values['user_site_id'] = user_site.id if user_site and user_site.id in site_ids.ids else None
         values['site_ids'] = site_ids
         values['service_area_ids'] = request.env['tyt.intranet.service_area'].sudo().search([])
