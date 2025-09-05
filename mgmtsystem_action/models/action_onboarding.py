@@ -50,5 +50,5 @@ class ActionAction(models.Model):
 
     def send_done(self):
         super().send_done()
-        self.env.company.sudo().set_onboarding_step_done(
-            'action_action_onboarding_state')
+        # self.env.company.sudo().set_onboarding_step_done(
+        #     'action_action_onboarding_state')

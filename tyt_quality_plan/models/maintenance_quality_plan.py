@@ -11,7 +11,7 @@ class MaintenanceQualityPlan(models.Model):
     
     name = fields.Char(string='Name', required=True, copy=False, index=True)
     week = fields.Integer(string='Week', required=True)
-    site = fields.Many2one('x_sitios', string='Site', required=True)
+    site = fields.Many2one('tyt_studio.sites', string='Site', required=True)
     
     total_controls = fields.Integer(string='Total Controls', compute='_compute_totals', store=True)
     total_monitoring = fields.Integer(string='Total Monitoring', compute='_compute_totals', store=True)

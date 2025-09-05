@@ -25,6 +25,9 @@ from odoo import http
 from odoo.exceptions import UserError
 from odoo.http import request
 
+import logging
+
+_logger = logging.getLogger(__name__)
 
 class EmployeeChart(http.Controller):
 
@@ -90,28 +93,31 @@ class EmployeeChart(http.Controller):
             return nodes
         return ""
 
-    @http.route('/get/parent/child', type='http', auth='user', methods=['POST'], csrf=False)
+    @http.route('/get/parent/child', type='json', auth='user', methods=['POST'], csrf=False)
     def get_parent_child(self, **post):
-        if post:
-            val = 0
-            for line in post:
-                if line:
-                    val = int(line)
-            child_ids = request.env['hr.employee'].sudo().browse(val).child_ids
-            emp = request.env['hr.employee'].sudo().browse(val)
+        _logger.info(f"data post: {post}")
+        employee_id = int(post.get("employee_id", 0))
+        if employee_id:
+            child_ids = request.env['hr.employee'].sudo().browse(employee_id).child_ids
+            emp = request.env['hr.employee'].sudo().browse(employee_id)
             table = """<table><tr><td colspan='""" + str(len(child_ids) * 2) + """'><div class="node">"""
             view = """ <div id="parent" class='o_chart_head'><a>
-                <div id='""" + str(val) + """' class="o_employee_border">
-                <img class='o_emp_active' src='/web/image/hr.employee.public/""" + str(val) + """/image_1024/'/></div>
-                <div class='employee_name o_width'><p>""" + str(emp.name) + """</p>
-                <p>""" + str(emp.job_id.name) + """</p></div></a></div>"""
+                <div id='""" + str(employee_id) + """' class="o_employee_border">
+                <img class='o_emp_active cursor-pointer' src='/web/image/hr.employee.public/""" + str(employee_id) + """/image_1024/'/></div>
+                <div class='employee_name cursor-pointer o_width'><p>""" + str(emp.name) + """</p>
+                <p>""" + str(emp.job_id.name or '') + """</p></div></a></div>"""
             table += view + """</div></td></tr>"""
             loop_len = len(child_ids)*2
             lines = self.get_lines(loop_len)
             nodes = self.get_nodes(child_ids)
             table += lines + nodes
-            return table
-
+            return {
+                'html': table
+            }
+        return {
+            'html': ''
+        }
+    
     @http.route('/get/child/data', type='json', auth='user', methods=['POST'], csrf=False)
     def get_child_data(self, click_id):
         if click_id:
@@ -127,6 +133,24 @@ class EmployeeChart(http.Controller):
                 return child_table
 
 
+    @http.route('/get/employee/tree', type='json', auth='user', methods=['POST'], csrf=False)
+    def get_employee_tree(self, employee_id=None):
+        def serialize_employee(emp):
+            return {
+                "id": emp.id,
+                "name": emp.name,
+                "job": emp.job_id.name or "",
+                "image_url": f"/web/image/hr.employee.public/{emp.id}/image_1024",
+                "children": [serialize_employee(child) for child in emp.child_ids],
+            }
+
+        if not employee_id:
+            # raíz (los empleados sin manager)
+            employees = request.env['hr.employee'].sudo().search([('parent_id', '=', False)])
+            return [serialize_employee(emp) for emp in employees]
+        else:
+            emp = request.env['hr.employee'].sudo().browse(int(employee_id))
+            return serialize_employee(emp)
 
 
 

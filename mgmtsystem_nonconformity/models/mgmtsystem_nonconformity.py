@@ -274,7 +274,7 @@ class MgmtsystemNonconformity(models.Model):
                 for action in nc.action_ids:
                     if action.state not in ['done', 'cancel']:
                         # if action:
-                        raise models.ValidationError(
+                        raise ValidationError(
                             _("Se requiere validar el plan de acción para poner una No conformidad en cerrado"))
 
     @api.model

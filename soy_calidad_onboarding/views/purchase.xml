@@ -13,9 +13,9 @@
             <t t-set="model" t-value="'res.company'" />
             <t t-set="state" t-value="state.get('purchase_product_onboarding_state')" />
         </t>
-    </template>
+    </template> -->
 
-    <template id="onboarding_purchase_order_step">
+    <!-- <template id="onboarding_purchase_order_step">
         <t t-call="base.onboarding_step">
             <t t-set="title">Solicitudes de presupuesto</t>
             <t t-set="description">Cree una nueva solicitud de presupuesto.</t>

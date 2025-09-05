@@ -35,10 +35,15 @@ class InternalIssue(models.Model):
         get_com_folder = self._get_document_folder()
         root_model = 'mgmtsystem.context.internal_issue'
         action = self.env['ir.actions.act_window']._for_xml_id('documents.document_action')
+        folder_id = get_com_folder.id if get_com_folder else False
         action['context'] = {
             #'default_partner_id': self.address_home_id.id,
-            'searchpanel_default_folder_id':    get_com_folder and get_com_folder.id,
+            'searchpanel_default_folder_id': folder_id,
             #'preaction_res_model': self.set_root_model() ,
+            'default_res_model': self._name,
+            'default_res_id': self.id,
+            'default_folder_id': folder_id,
+            'search_default_filter_folder': folder_id,
         }
         action['domain'] = self._get_each_cplan_domain()
         return action
@@ -77,10 +82,15 @@ class ExternalIssue(models.Model):
         get_com_folder = self._get_document_folder()
         root_model = 'mgmtsystem.context.external_issue'
         action = self.env['ir.actions.act_window']._for_xml_id('documents.document_action')
+        folder_id = get_com_folder.id if get_com_folder else False
         action['context'] = {
             #'default_partner_id': self.address_home_id.id,
             'searchpanel_default_folder_id':    get_com_folder and get_com_folder.id,
             #'preaction_res_model': self.set_root_model() ,
+            'default_res_model': self._name,
+            'default_res_id': self.id,
+            'default_folder_id': folder_id,
+            'search_default_filter_folder': folder_id,
         }
         action['domain'] = self._get_each_cplan_domain()
         return action
@@ -119,10 +129,15 @@ class SWOT(models.Model):
         get_com_folder = self._get_document_folder()
         root_model = 'mgmtsystem.context.swot'
         action = self.env['ir.actions.act_window']._for_xml_id('documents.document_action')
+        folder_id = get_com_folder.id if get_com_folder else False 
         action['context'] = {
             #'default_partner_id': self.address_home_id.id,
             'searchpanel_default_folder_id':    get_com_folder and get_com_folder.id,
             #'preaction_res_model': self.set_root_model() ,
+            'default_res_model': self._name,
+            'default_res_id': self.id,
+            'default_folder_id': folder_id,
+            'search_default_filter_folder': folder_id,
         }
         action['domain'] = self._get_each_cplan_domain()
         return action
@@ -161,10 +176,15 @@ class PEST(models.Model):
         get_com_folder = self._get_document_folder()
         root_model = 'mgmtsystem.context.pest'
         action = self.env['ir.actions.act_window']._for_xml_id('documents.document_action')
+        folder_id = get_com_folder.id if get_com_folder else False
         action['context'] = {
             #'default_partner_id': self.address_home_id.id,
             'searchpanel_default_folder_id':    get_com_folder and get_com_folder.id,
             #'preaction_res_model': self.set_root_model() ,
+            'default_res_model': self._name,
+            'default_res_id': self.id,
+            'default_folder_id': folder_id,
+            'search_default_filter_folder': folder_id,
         }
         action['domain'] = self._get_each_cplan_domain()
         return action
@@ -203,10 +223,15 @@ class Stakeholders(models.Model):
         get_com_folder = self._get_document_folder()
         root_model = 'mgmtsystem.stakeholders'
         action = self.env['ir.actions.act_window']._for_xml_id('documents.document_action')
+        folder_id = get_com_folder.id if get_com_folder else False 
         action['context'] = {
             #'default_partner_id': self.address_home_id.id,
             'searchpanel_default_folder_id':    get_com_folder and get_com_folder.id,
             #'preaction_res_model': self.set_root_model() ,
+            'default_res_model': self._name,
+            'default_res_id': self.id,
+            'default_folder_id': folder_id,
+            'search_default_filter_folder': folder_id,
         }
         action['domain'] = self._get_each_cplan_domain()
         return action
@@ -245,10 +270,15 @@ class Policy(models.Model):
         get_com_folder = self._get_document_folder()
         root_model = 'mgmtsystem.context.policy'
         action = self.env['ir.actions.act_window']._for_xml_id('documents.document_action')
+        folder_id = get_com_folder.id if get_com_folder else False
         action['context'] = {
             #'default_partner_id': self.address_home_id.id,
             'searchpanel_default_folder_id':    get_com_folder and get_com_folder.id,
             #'preaction_res_model': self.set_root_model() ,
+            'default_res_model': self._name,
+            'default_res_id': self.id,
+            'default_folder_id': folder_id,
+            'search_default_filter_folder': folder_id,
         }
         action['domain'] = self._get_each_cplan_domain()
         return action

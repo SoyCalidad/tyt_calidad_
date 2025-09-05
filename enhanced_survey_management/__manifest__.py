@@ -21,7 +21,7 @@
 ###############################################################################
 {
     'name': 'Enhanced Survey Management',
-    'version': '16.0.1.0.0',
+    'version': '18.0.1.0.0',
     'category': 'Extra Tools',
     'summary': 'Enhance your survey management with new question kinds and more',
     'description': 'Upgrade your survey management capabilities with the '

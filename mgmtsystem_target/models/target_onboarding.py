@@ -51,8 +51,6 @@ class TargetTarget(models.Model):
 
     def send_finish(self):
         super().send_finish()
-        self.env.company.sudo().set_onboarding_step_done(
-            'target_target_onboarding_state')
 
 
 class TargetIndicator(models.Model):
@@ -64,5 +62,3 @@ class TargetIndicator(models.Model):
 
     def do_accomplished(self):
         super().do_accomplished()
-        self.env.company.sudo().set_onboarding_step_done(
-            'target_indicator_onboarding_state')

@@ -7,40 +7,40 @@
             <form string="Patrol Log">
                 <header>
                     <button name="action_confirm" string="Save" type="object" class="oe_highlight"
-                            attrs="{'invisible': [('state', '!=', 'draft')]}"/>
+                            invisible="state != 'draft'"/>
                     <button name="action_cancel" string="Cancel" type="object" class="oe_link"
-                            attrs="{'invisible': [('state', '!=', 'draft')]}"/>
+                            invisible="state != 'draft'"/>
                     <button name="action_draft" string="Edit" type="object" class="oe_highlight"
-                            attrs="{'invisible': [('state', '!=', 'confirmed')]}"/>
+                            invisible="state != 'confirmed'"/>
                 </header>
-                <sheet attrs="{'readonly': [('state', '=', 'confirmed')]}">
+                <sheet readonly="state == 'confirmed'">
                     <group>
-                        <field name="name" attrs="{'readonly': [('state', '=', 'confirmed')]}"/>
-                        <field name="user_id" attrs="{'readonly': [('state', '=', 'confirmed')]}"/>
-                        <field name="production_date" attrs="{'readonly': [('state', '=', 'confirmed')]}"/>
+                        <field name="name" readonly="state == 'confirmed'"/>
+                        <field name="user_id" readonly="state == 'confirmed'"/>
+                        <field name="production_date" readonly="state == 'confirmed'"/>
                         <field name="state" invisible="1"/> 
                     </group>
 
                     <notebook>
                         <page string="Development">
-                            <field name="patrol_log_line_ids" attrs="{'readonly': [('state', '=', 'confirmed')]}">
-                                <tree editable="bottom" create="false" delete="false">
+                            <field name="patrol_log_line_ids" readonly="state == 'confirmed'">
+                                <list editable="bottom" create="false" delete="false">
                                     <field name="location"/>
                                     <field name="description"/>
-                                </tree>
+                                </list>
                             </field>
                         </page>
                         <page string="Validation and version">
-                            <field name="patrol_log_stages_ids" attrs="{'readonly': [('state', '=', 'confirmed')]}">
-                                <tree editable="bottom" create="false" delete="false">
+                            <field name="patrol_log_stages_ids" readonly="state == 'confirmed'">
+                                <list editable="bottom" create="false" delete="false">
                                     <field name="stage"/>
                                     <field name="manager_id"/>
-                                </tree>
+                                </list>
                             </field>
                         </page>
                     </notebook>
                     <group>
-                        <field name="observations" attrs="{'readonly': [('state', '=', 'confirmed')]}"/>
+                        <field name="observations" readonly="state == 'confirmed'"/>
                     </group>
                 </sheet>
             </form>
@@ -52,11 +52,11 @@
         <field name="name">maintenance.patrollog.tree</field>
         <field name="model">maintenance.patrollog</field>
         <field name="arch" type="xml">
-            <tree string="Patrol Logs">
+            <list string="Patrol Logs">
                 <field name="name"/>
                 <field name="user_id"/>
                 <field name="production_date"/>
-            </tree>
+            </list>
         </field>
     </record>
 
@@ -69,7 +69,7 @@
     <record id="action_maintenance_patrollog" model="ir.actions.act_window">
         <field name="name">Patrol Logs</field>
         <field name="res_model">maintenance.patrollog</field>
-        <field name="view_mode">tree,form</field>
+        <field name="view_mode">list,form</field>
     </record>
 
     <!-- Submenú para acceder a los Patrol Logs -->

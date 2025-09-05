@@ -50,5 +50,5 @@ class SurveySurvey(models.Model):
 
     def send_validate(self):
         super().send_validate()
-        self.env.company.sudo().set_onboarding_step_done(
-            'survey_survey_onboarding_state')
+        # self.env.company.sudo().set_onboarding_step_done(
+        #     'survey_survey_onboarding_state')

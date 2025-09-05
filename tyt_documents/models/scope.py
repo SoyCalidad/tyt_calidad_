@@ -16,7 +16,7 @@ class ContextScope(models.Model):
 
     def _get_each_cplan_domain(self):
         self.ensure_one()
-        user_domain = [('res_model', '=', 'tyt.context.scope'), ('res_id', '=', self.id)]
+        user_domain = [('res_model', '=', 'tyt.context.scope'), ('res_id', '=', self.id), ("type", "!=", "folder")]
         final_domain = expression.AND([user_domain])
         return final_domain
 
@@ -34,9 +34,14 @@ class ContextScope(models.Model):
         get_com_folder = self._get_document_folder()
         root_model = 'mgmtsystem.context.internal_issue'
         action = self.env['ir.actions.act_window']._for_xml_id('documents.document_action')
+        folder_id = get_com_folder.id if get_com_folder else False
         action['context'] = {
             #'default_partner_id': self.address_home_id.id,
-            'searchpanel_default_folder_id':    get_com_folder and get_com_folder.id,
+            'searchpanel_default_folder_id': folder_id,
+            'default_res_model': self._name,
+            'default_res_id': self.id,
+            'default_folder_id': folder_id,
+            'search_default_filter_folder': folder_id,
             #'preaction_res_model': self.set_root_model() ,
         }
         action['domain'] = self._get_each_cplan_domain()

@@ -1,5 +1,14 @@
+<?xml version='1.0' encoding='UTF-8'?>
 <odoo>
-    <data>
-        <report id="action_report_target_quality" model="mgmtsystem.target" string="Objetivos de Calidad" report_type="qweb-pdf" paperformat="tyt_target.landscape" name="tyt_target.tyt_target_quality_report" file="tyt_target.tyt_target_quality_report" groups="base.group_no_one,mgmtsystem_target.group_target_user_interno,mgmtsystem_target.group_target_write_printreport,mgmtsystem_target.group_target_all" />
-    </data>
+  <data>
+    <record id="action_report_target_quality" model="ir.actions.report">
+      <field name="model">mgmtsystem.target</field>
+      <field name="name">Objetivos de Calidad</field>
+      <field name="report_type">qweb-pdf</field>
+      <field name="report_name">tyt_target.tyt_target_quality_report</field>
+      <field name="report_file">tyt_target.tyt_target_quality_report</field>
+      <field name="paperformat_id" ref="tyt_target.landscape"/>
+      <field name="groups_id" eval="[(6, 0, [ref('base.group_no_one'), ref('mgmtsystem_target.group_target_user_interno'), ref('mgmtsystem_target.group_target_write_printreport'), ref('mgmtsystem_target.group_target_all')])]"/>
+    </record>
+  </data>
 </odoo>

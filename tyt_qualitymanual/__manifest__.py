@@ -26,6 +26,12 @@
             '/tyt_qualitymanual/static/src/scss/qualitymanual.scss',
         ],
     },
+    "external_dependencies": {
+        "python": [
+            "PyMuPDF",
+            "bs4",
+        ],
+    },
     'auto_install': False,
     'installable': True,
     'application': False,

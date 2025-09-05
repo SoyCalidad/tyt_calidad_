@@ -8,7 +8,7 @@ class SurveySatisfactionQuestion(models.Model):
     # code = fields.Char(string="Code", required=True)
     code = fields.Char(string="Code", required=False)
 
-class SurveySatisfactionQuestion(models.Model):
+class SurveySatisfactionLine(models.Model):
     _name = "tyt.satisfaction.survey.line"
     _description = "Satisfaction Survey Line"
     

@@ -26,8 +26,7 @@ class ProcessCategType(models.Model):
 
     def send_validate_ok(self):
         self.state = 'validate_ok'
-        self.env.company.sudo().set_onboarding_step_done(
-            'process_categ_type_onboarding_state')
+        #self.env.company.sudo().set_onboarding_step_done('process_categ_type_onboarding_state')
 
 
 class ProcessCateg(models.Model):
@@ -70,8 +69,8 @@ class ProcessProcess(models.Model):
 
     def send_validate_ok(self):
         self.state = 'validate_ok'
-        self.env.company.sudo().set_onboarding_step_done(
-            'process_process_onboarding_state')
+        # self.env.company.sudo().set_onboarding_step_done(
+        #     'process_process_onboarding_state')
 
 
 class ProcessEdition(models.Model):
@@ -89,5 +88,4 @@ class ProcessEdition(models.Model):
 
     def send_validate_ok(self):
         super().send_validate_ok()
-        self.env.company.sudo().set_onboarding_step_done(
-            'process_edition_onboarding_state')
+        #self.env.company.sudo().set_onboarding_step_done('process_edition_onboarding_state')

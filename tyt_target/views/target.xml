@@ -11,24 +11,24 @@
 
                 <xpath expr="//sheet/group[1]" position="replace">
                     <group string="Información del objetivo" col="2">
-                        <field name="name" colspan="2" attrs="{'readonly': [('state','in',('validate_ok','cancel'))]}" style="overflow-wrap: break-word;" />
-                        <field name="requirements" colspan="2" attrs="{'readonly': [('state','in',('validate_ok','cancel'))]}" style="overflow-wrap: break-word;" />
+                        <field name="name" colspan="2" readonly="state in ['validate_ok', 'cancel']" style="overflow-wrap: break-word;" />
+                        <field name="requirements" colspan="2" readonly="state in ['validate_ok', 'cancel']" style="overflow-wrap: break-word;" />
                     </group>
                 </xpath>
                 <xpath expr="//sheet/group[1]" position="after">
                     <group>
                         <group>
-                            <field name="process_id" attrs="{'readonly': [('state','in',('validate_ok','cancel'))]}" />
-                            <field name="system_id" options="{'no_create': True, 'no_edit': True}" attrs="{'readonly': [('state','in',('validate_ok','cancel'))]}" />
-                            <field name="job_id" options="{'no_create': True, 'no_edit': True}" attrs="{'readonly': [('state','in',('validate_ok','cancel'))]}" />
+                            <field name="process_id" readonly="state in ['validate_ok', 'cancel']" />
+                            <field name="system_id" options="{'no_create': True, 'no_edit': True}" readonly="state in ['validate_ok', 'cancel']" />
+                            <field name="job_id" options="{'no_create': True, 'no_edit': True}" readonly="state in ['validate_ok', 'cancel']" />
                             <field name="department_id" />
                             <field name="category_ids" widget="many2many_tags" options="{'color_field': 'color',}" placeholder="Categorías" />
                         </group>
                         <group>
                             <field name="timeframe" />
-                            <field name="process_ids_2" attrs="{'readonly': [('state','in',('validate_ok','cancel'))]}" widget="many2many_tags" />
-                            <field name="description" attrs="{'readonly': [('state','in',('validate_ok','cancel'))]}" />
-                            <field name="resource_ids" widget="many2many_tags" attrs="{'readonly': [('state','in',('validate_ok','cancel'))]}" />
+                            <field name="process_ids_2" readonly="state in ['validate_ok', 'cancel']" widget="many2many_tags" />
+                            <field name="description" readonly="state in ['validate_ok', 'cancel']" />
+                            <field name="resource_ids" widget="many2many_tags" readonly="state in ['validate_ok', 'cancel']" />
                             <field name="department_ids" widget="many2many_tags" />
                             <field name="evidence" />
                         </group>

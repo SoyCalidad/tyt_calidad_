@@ -38,9 +38,10 @@
     ],
     'assets': {
         'web.assets_backend': [
-            'hr_organizational_chart/static/src/js/organizational_view.js',
-            'hr_organizational_chart/static/src/scss/chart_view.scss',
-            'hr_organizational_chart/static/src/xml/chart_view.xml',
+            # 'hr_organizational_chart/static/src/js/organizational_view.js',
+            # 'hr_organizational_chart/static/src/scss/chart_view.scss',
+            # 'hr_organizational_chart/static/src/xml/chart_view.xml',
+            'hr_organizational_chart/static/src/**/*',
         ],
     },
     'images': ['static/description/banner.png'],

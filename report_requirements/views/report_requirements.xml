@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="UTF-8"?>
+<?xml version='1.0' encoding='UTF-8'?>
 <!--Estructura basica de reportes-->
 <odoo>
    <data>
@@ -20,14 +20,15 @@
          <field name="header_spacing">30</field>
          <field name="dpi">80</field>
       </record>
-      <report id="report_requirements" 
-      string="Reporte de requisitos legales" 
-      report_type="qweb-pdf" 
-      model="legal.plan" 
-      name="report_requirements_template" 
-      file="report_requirements_template"
-      paperformat="requirements"
-      groups="base.group_no_one,mgmtsystem_legal.group_legal_onlyread_printreport,mgmtsystem_legal.group_legal_write_printreport,mgmtsystem_legal.group_legal_all"
-       />
+      <record id="report_requirements" model="ir.actions.report">
+         <field name="model">legal.plan</field>
+         <field name="name">Reporte de requisitos legales</field>
+         <field name="report_type">qweb-pdf</field>
+         <field name="report_name">report_requirements_template</field>
+         <field name="report_file">report_requirements_template</field>
+         <field name="paperformat_id" ref="requirements" />
+         <field name="groups_id"
+            eval="[(6, 0, [ref('base.group_no_one'), ref('mgmtsystem_legal.group_legal_onlyread_printreport'), ref('mgmtsystem_legal.group_legal_write_printreport'), ref('mgmtsystem_legal.group_legal_all')])]" />
+      </record>
    </data>
 </odoo>

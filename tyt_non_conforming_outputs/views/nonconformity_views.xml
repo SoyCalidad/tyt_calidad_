@@ -6,7 +6,7 @@
             <field name="inherit_id" ref="mgmtsystem_nonconformity.view_mgmtsystem_nonconformity_form"/>
             <field name="arch" type="xml">
                 <field name="company_id" position="after">
-                    <field name="client_id" attrs="{'invisible': [('nc_output', '=', False)]}"/>
+                    <field name="client_id" invisible="nc_output == False"/>
                 </field>
                 
                 <xpath expr="//notebook" position="inside">

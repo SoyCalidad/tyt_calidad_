@@ -12,6 +12,7 @@
         <record id="view_audit_plan_tree" model="ir.ui.view">
             <field name="name">audit.plan.tree</field>
             <field name="model">audit.plan</field>
+            <field name="type">list</field> 
             <field name="arch" type="xml">
                 <list string="Programa" >
                     <field name="name" />
@@ -84,7 +85,7 @@
                         <label for="name" />
                         <div class="oe_title">
                             <h2>
-                                <field name="name" colspan="2" style="width:80%%" />
+                                <field name="name" colspan="2" style="width:80%" />
                             </h2>
                         </div>
                         <div class="oe_title">
@@ -143,6 +144,7 @@
             <field name="type">ir.actions.act_window</field>
             <field name="res_model">audit.plan</field>
             <field name="view_mode">list,form,kanban,graph,pivot</field>
+            <field name="view_id" ref="view_audit_plan_tree"/>
         </record>
 
         <menuitem id="hr_item_annual_plan"

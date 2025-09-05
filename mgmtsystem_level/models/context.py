@@ -1,5 +1,5 @@
 from odoo import api, fields, models
-from odoo.exceptions import Warning, UserError
+from odoo.exceptions import UserError
 
 
 class InternalIssue(models.Model):
@@ -44,7 +44,7 @@ class InternalIssue(models.Model):
                     if each.quality_policy.current_level in _na[current_level]:
                         pass
                     else:
-                        raise Warning(
+                        raise UserError(
                             'La política de calidad tiene un nivel inferior al solicitado')
 
     @api.model
@@ -67,14 +67,14 @@ class InternalIssue(models.Model):
         result = super(InternalIssue, self).write(values)
         self.verify_policy_level(self.current_level)
         if not self.morals:
-            raise Warning('Los valores son obligatorios')
+            raise UserError('Los valores son obligatorios')
         return result
 
     @api.model
     def create(self, values):
         result = super(InternalIssue, self).create(values)
         if not result.morals:
-            raise Warning('Los valores son obligatorios')
+            raise UserError('Los valores son obligatorios')
         return result
 
 
@@ -102,7 +102,7 @@ class ContextPolicy(models.Model):
     def write(self, values):
         result = super(ContextPolicy, self).write(values)
         if self.current_level == '3' and not self.social_resp:
-            raise Warning(
+            raise UserError(
                 'La política de responsabilidad social es necesaria para el nivel 3')
         return result
 

@@ -78,8 +78,8 @@ class HrDepartment(models.Model):
 
     def send_validate(self):
         super().send_validate()
-        self.env.company.sudo().set_onboarding_step_done(
-            'hr_department_onboarding_state')
+        # self.env.company.sudo().set_onboarding_step_done(
+        #     'hr_department_onboarding_state')
 
 
 class HrJob(models.Model):
@@ -92,8 +92,8 @@ class HrJob(models.Model):
     # @api.onchange('employee_id')
     def send_final(self):
         super().send_final()
-        self.env.company.sudo().set_onboarding_step_done(
-            'hr_job_onboarding_state')
+        # self.env.company.sudo().set_onboarding_step_done(
+        #     'hr_job_onboarding_state')
         
 class HrEmployee(models.Model):
     _inherit = 'hr.employee'
@@ -104,8 +104,8 @@ class HrEmployee(models.Model):
 
     def send_validate(self):
         super().send_validate()
-        self.env.company.sudo().set_onboarding_step_done(
-            'hr_employee_onboarding_state')
+        # self.env.company.sudo().set_onboarding_step_done(
+        #     'hr_employee_onboarding_state')
 
 
 # class HrOrgChart(models.Model):

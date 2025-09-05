@@ -59,8 +59,8 @@ class TrainingPlan(models.Model):
 
     def send_validate(self):
         super().send_validate()
-        self.env.company.sudo().set_onboarding_step_done(
-            'training_plan_onboarding_state')
+        # self.env.company.sudo().set_onboarding_step_done(
+        #     'training_plan_onboarding_state')
 
 
 class TrainingTraining(models.Model):
@@ -73,6 +73,6 @@ class TrainingTraining(models.Model):
     #@api.onchange('training_id')
     def send_final(self):
         super().send_final()
-        self.env.company.sudo().set_onboarding_step_done(
-            'training_training_onboarding_state')
+        # self.env.company.sudo().set_onboarding_step_done(
+        #     'training_training_onboarding_state')
 

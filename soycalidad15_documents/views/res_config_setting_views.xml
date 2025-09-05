@@ -3,30 +3,113 @@
     <record id="res_config_settings_view_form" model="ir.ui.view">
         <field name="name">res.config.settings.view.form.inherit.documents</field>
         <field name="model">res.config.settings</field>
-        <field name="priority" eval="70"/>
-        <field name="inherit_id" ref="base.res_config_settings_view_form"/>
+        <field name="priority" eval="70" />
+        <field name="inherit_id" ref="base.res_config_settings_view_form" />
         <field name="arch" type="xml">
-            <xpath expr="//div[hasclass('o_documents_block')]" position="attributes">
-                <attribute name="invisible">0</attribute>
+            <xpath expr="//app[@name='documents']" position="attributes">
+                <attribute name="notApp">0</attribute>
             </xpath>
-            <xpath expr="//div[hasclass('o_documents_block')]" position="inside">
+            <xpath expr="//block[@id='files_centralization_section']" position="inside">
+                <setting string="Comunicaciones" company_dependent="1"
+                    help="Centralize your communications' documents (contracts, payslips, etc.)">
+                    <field name="documents_communications_settings" />
+                    <div name="documents_communications_folder" class="content-group"
+                        invisible="not documents_communications_settings">
+                        <div class="row mt16">
+                            <label class="o_form_label col-lg-3"
+                                for="documents_communications_folder" string="Workspace" />
+                            <field name="documents_communications_folder"
+                                required="documents_communications_settings"
+                                widget="documents_folder_many2one"
+                                options="{'no_create': True, 'no_create_edit': True}" />
+                        </div>
+                    </div>
+                    <div id="documents_hr_tags" class="mt-3" />
+                </setting>
+                <setting company_dependent="1"
+                    string="Capacitaciones"
+                    help="Centralize your training' documents (contracts, payslips, etc.)">
+                    <field name="documents_training_settings" />
+                    <div name="documents_training_folder" class="content-group"
+                        invisible="not documents_training_settings">
+                        <div class="row mt16">
+                            <label class="o_form_label col-lg-3" for="documents_training_folder"
+                                string="Workspace" />
+                            <field name="documents_training_folder" required="documents_training_settings"
+                                widget="documents_folder_many2one"
+                                options="{'no_create': True, 'no_create_edit': True}" />
+                        </div>
+                    </div>
+                </setting>
+                <setting company_dependent="1" 
+                string="Procesos"
+                help="Centralize your process' documents (contracts, payslips, etc.)">
+                    <field name="documents_process_settings"/>
+                    <div name="documents_process_folder" class="content-group" invisible="not documents_process_settings">
+                        <div class="row mt16">
+                            <label class="o_form_label col-lg-3" for="documents_process_folder" string="Workspace"/>
+                            <field name="documents_process_folder" required="documents_process_settings" widget="documents_folder_many2one" options="{'no_create': True, 'no_create_edit': True}"/>
+                        </div>
+                    </div>
+                    <div id="documents_hr_tags" class="mt-3"/>
+                </setting>
+                <setting company_dependent="1" 
+                string="Contexto"
+                help="Centralize your context' documents (contracts, payslips, etc.)">
+                    <field name="documents_context_settings"/>
+                    <div name="documents_context_folder" class="content-group" invisible="not documents_context_settings">
+                        <div class="row mt16">
+                            <label class="o_form_label col-lg-3" for="documents_context_folder" string="Workspace"/>
+                            <field name="documents_context_folder" required="documents_context_settings" widget="documents_folder_many2one" options="{'no_create': True, 'no_create_edit': True}"/>
+                        </div>
+                    </div>
+                </setting>
+                <setting company_dependent="1" help="Centralize your Risks and Oportunities' documents (contracts, payslips, etc.)" string="Riesgos y Oportunidades">
+                    <field name="documents_risk_op_settings"/>
+                    <div name="documents_risk_op_folder" class="content-group" invisible="not documents_risk_op_settings">
+                        <div class="row mt16">
+                            <label class="o_form_label col-lg-3" for="documents_risk_op_folder" string="Workspace"/>
+                            <field name="documents_risk_op_folder" required="documents_risk_op_settings" widget="documents_folder_many2one" options="{'no_create': True, 'no_create_edit': True}"/>
+                        </div>
+                    </div>
+                </setting>
+                <setting company_dependent="1" help="Centralize your legal requirements' documents (contracts, payslips, etc.)" string="Requisitos legales">
+                    <field name="documents_legal_requirements_settings"/>
+                    <div name="documents_legal_requirements_folder" class="content-group" invisible="not documents_legal_requirements_settings">
+                        <div class="row mt16">
+                            <label class="o_form_label col-lg-3" for="documents_legal_requirements_folder" string="Workspace"/>
+                            <field name="documents_legal_requirements_folder" required="documents_legal_requirements_settings" widget="documents_folder_many2one" options="{'no_create': True, 'no_create_edit': True}"/>
+                        </div>
+                    </div>
+                </setting>
+
+            </xpath>
+
+            <!-- <xpath expr="//block[@id='files_centralization_section']" position="inside">
                 <div class="row mt16 o_settings_container">
                     <div class="col-xs-12 col-md-6 o_setting_box">
                         <div class="o_setting_left_pane">
-                            <field name="documents_communications_settings"/>
+                            <field name="documents_requirements_settings" />
                         </div>
                         <div class="o_setting_right_pane o_documents_right_pane">
-                            <label for="documents_communications_settings"/>
-                            <span class="fa fa-lg fa-building-o" title="Values set here are company-specific." aria-label="Values set here are company-specific." groups="base.group_multi_company" role="img"/>
+                            <label for="documents_requirements_settings" />
+                            <span class="fa fa-lg fa-building-o"
+                                title="Values set here are company-specific."
+                                aria-label="Values set here are company-specific."
+                                groups="base.group_multi_company" role="img" />
                             <div class="row">
                                 <div class="text-muted col-md-12">
-                                    Centralize your communications' documents (contracts, payslips, etc.)
+                                    Centralize your requirements' documents (contracts, payslips,
+                                    etc.)
                                 </div>
                             </div>
-                            <div name="documents_communications_folder" class="content-group" attrs="{'invisible' : [('documents_communications_settings', '=', False)]}">
+                            <div name="documents_requirements_folder" class="content-group"
+                                invisible="documents_requirements_settings == False">
                                 <div class="row mt16">
-                                    <label class="o_form_label col-lg-3" for="documents_communications_folder" string="Workspace"/>
-                                   <field name="documents_communications_folder" attrs="{'required' : [('documents_communications_settings', '=', True)]}"/>
+                                    <label class="o_form_label col-lg-3"
+                                        for="documents_requirements_folder" string="Workspace" />
+                                    <field name="documents_requirements_folder"
+                                        required="documents_requirements_settings == True" />
                                 </div>
                             </div>
                         </div>
@@ -34,174 +117,30 @@
                 </div>
             </xpath>
 
-            <xpath expr="//div[hasclass('o_documents_block')]" position="inside">
+            <xpath expr="//block[@id='files_centralization_section']" position="inside">
                 <div class="row mt16 o_settings_container">
                     <div class="col-xs-12 col-md-6 o_setting_box">
                         <div class="o_setting_left_pane">
-                            <field name="documents_training_settings"/>
+                            <field name="documents_surveys_settings" />
                         </div>
                         <div class="o_setting_right_pane o_documents_right_pane">
-                            <label for="documents_training_settings"/>
-                            <span class="fa fa-lg fa-building-o" title="Values set here are company-specific." aria-label="Values set here are company-specific." groups="base.group_multi_company" role="img"/>
-                            <div class="row">
-                                <div class="text-muted col-md-12">
-                                    Centralize your training' documents (contracts, payslips, etc.)
-                                </div>
-                            </div>
-                            <div name="documents_training_folder" class="content-group" attrs="{'invisible' : [('documents_training_settings', '=', False)]}">
-                                <div class="row mt16">
-                                    <label class="o_form_label col-lg-3" for="documents_training_folder" string="Workspace"/>
-                                   <field name="documents_training_folder" attrs="{'required' : [('documents_training_settings', '=', True)]}"/>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </xpath>
-
-            <xpath expr="//div[hasclass('o_documents_block')]" position="inside">
-                <div class="row mt16 o_settings_container">
-                    <div class="col-xs-12 col-md-6 o_setting_box">
-                        <div class="o_setting_left_pane">
-                            <field name="documents_process_settings"/>
-                        </div>
-                        <div class="o_setting_right_pane o_documents_right_pane">
-                            <label for="documents_process_settings"/>
-                            <span class="fa fa-lg fa-building-o" title="Values set here are company-specific." aria-label="Values set here are company-specific." groups="base.group_multi_company" role="img"/>
-                            <div class="row">
-                                <div class="text-muted col-md-12">
-                                    Centralize your process' documents (contracts, payslips, etc.)
-                                </div>
-                            </div>
-                            <div name="documents_process_folder" class="content-group" attrs="{'invisible' : [('documents_process_settings', '=', False)]}">
-                                <div class="row mt16">
-                                    <label class="o_form_label col-lg-3" for="documents_process_folder" string="Workspace"/>
-                                   <field name="documents_process_folder" attrs="{'required' : [('documents_process_settings', '=', True)]}"/>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </xpath>
-
-            <xpath expr="//div[hasclass('o_documents_block')]" position="inside">
-                <div class="row mt16 o_settings_container">
-                    <div class="col-xs-12 col-md-6 o_setting_box">
-                        <div class="o_setting_left_pane">
-                            <field name="documents_context_settings"/>
-                        </div>
-                        <div class="o_setting_right_pane o_documents_right_pane">
-                            <label for="documents_context_settings"/>
-                            <span class="fa fa-lg fa-building-o" title="Values set here are company-specific." aria-label="Values set here are company-specific." groups="base.group_multi_company" role="img"/>
-                            <div class="row">
-                                <div class="text-muted col-md-12">
-                                    Centralize your context' documents (contracts, payslips, etc.)
-                                </div>
-                            </div>
-                            <div name="documents_context_folder" class="content-group" attrs="{'invisible' : [('documents_context_settings', '=', False)]}">
-                                <div class="row mt16">
-                                    <label class="o_form_label col-lg-3" for="documents_context_folder" string="Workspace"/>
-                                   <field name="documents_context_folder" attrs="{'required' : [('documents_context_settings', '=', True)]}"/>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </xpath>
-
-            <xpath expr="//div[hasclass('o_documents_block')]" position="inside">
-                <div class="row mt16 o_settings_container">
-                    <div class="col-xs-12 col-md-6 o_setting_box">
-                        <div class="o_setting_left_pane">
-                            <field name="documents_risk_op_settings"/>
-                        </div>
-                        <div class="o_setting_right_pane o_documents_right_pane">
-                            <label for="documents_risk_op_settings"/>
-                            <span class="fa fa-lg fa-building-o" title="Values set here are company-specific." aria-label="Values set here are company-specific." groups="base.group_multi_company" role="img"/>
-                            <div class="row">
-                                <div class="text-muted col-md-12">
-                                    Centralize your Risks and Oportunities' documents (contracts, payslips, etc.)
-                                </div>
-                            </div>
-                            <div name="documents_risk_op_folder" class="content-group" attrs="{'invisible' : [('documents_risk_op_settings', '=', False)]}">
-                                <div class="row mt16">
-                                    <label class="o_form_label col-lg-3" for="documents_risk_op_folder" string="Workspace"/>
-                                   <field name="documents_risk_op_folder" attrs="{'required' : [('documents_risk_op_settings', '=', True)]}"/>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </xpath>
-
-            <xpath expr="//div[hasclass('o_documents_block')]" position="inside">
-                <div class="row mt16 o_settings_container">
-                    <div class="col-xs-12 col-md-6 o_setting_box">
-                        <div class="o_setting_left_pane">
-                            <field name="documents_legal_requirements_settings"/>
-                        </div>
-                        <div class="o_setting_right_pane o_documents_right_pane">
-                            <label for="documents_legal_requirements_settings"/>
-                            <span class="fa fa-lg fa-building-o" title="Values set here are company-specific." aria-label="Values set here are company-specific." groups="base.group_multi_company" role="img"/>
-                            <div class="row">
-                                <div class="text-muted col-md-12">
-                                    Centralize your legal requirements' documents (contracts, payslips, etc.)
-                                </div>
-                            </div>
-                            <div name="documents_legal_requirements_folder" class="content-group" attrs="{'invisible' : [('documents_legal_requirements_settings', '=', False)]}">
-                                <div class="row mt16">
-                                    <label class="o_form_label col-lg-3" for="documents_legal_requirements_folder" string="Workspace"/>
-                                   <field name="documents_legal_requirements_folder" attrs="{'required' : [('documents_legal_requirements_settings', '=', True)]}"/>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </xpath>
-
-            <xpath expr="//div[hasclass('o_documents_block')]" position="inside">
-                <div class="row mt16 o_settings_container">
-                    <div class="col-xs-12 col-md-6 o_setting_box">
-                        <div class="o_setting_left_pane">
-                            <field name="documents_requirements_settings"/>
-                        </div>
-                        <div class="o_setting_right_pane o_documents_right_pane">
-                            <label for="documents_requirements_settings"/>
-                            <span class="fa fa-lg fa-building-o" title="Values set here are company-specific." aria-label="Values set here are company-specific." groups="base.group_multi_company" role="img"/>
-                            <div class="row">
-                                <div class="text-muted col-md-12">
-                                    Centralize your requirements' documents (contracts, payslips, etc.)
-                                </div>
-                            </div>
-                            <div name="documents_requirements_folder" class="content-group" attrs="{'invisible' : [('documents_requirements_settings', '=', False)]}">
-                                <div class="row mt16">
-                                    <label class="o_form_label col-lg-3" for="documents_requirements_folder" string="Workspace"/>
-                                   <field name="documents_requirements_folder" attrs="{'required' : [('documents_requirements_settings', '=', True)]}"/>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </xpath>
-
-            <xpath expr="//div[hasclass('o_documents_block')]" position="inside">
-                <div class="row mt16 o_settings_container">
-                    <div class="col-xs-12 col-md-6 o_setting_box">
-                        <div class="o_setting_left_pane">
-                            <field name="documents_surveys_settings"/>
-                        </div>
-                        <div class="o_setting_right_pane o_documents_right_pane">
-                            <label for="documents_surveys_settings"/>
-                            <span class="fa fa-lg fa-building-o" title="Values set here are company-specific." aria-label="Values set here are company-specific." groups="base.group_multi_company" role="img"/>
+                            <label for="documents_surveys_settings" />
+                            <span class="fa fa-lg fa-building-o"
+                                title="Values set here are company-specific."
+                                aria-label="Values set here are company-specific."
+                                groups="base.group_multi_company" role="img" />
                             <div class="row">
                                 <div class="text-muted col-md-12">
                                     Centralize your survey' documents (contracts, payslips, etc.)
                                 </div>
                             </div>
-                            <div name="documents_surveys_folder" class="content-group" attrs="{'invisible' : [('documents_surveys_settings', '=', False)]}">
+                            <div name="documents_surveys_folder" class="content-group"
+                                invisible="documents_surveys_settings == False">
                                 <div class="row mt16">
-                                    <label class="o_form_label col-lg-3" for="documents_surveys_folder" string="Workspace"/>
-                                   <field name="documents_surveys_folder" attrs="{'required' : [('documents_surveys_settings', '=', True)]}"/>
+                                    <label class="o_form_label col-lg-3"
+                                        for="documents_surveys_folder" string="Workspace" />
+                                    <field name="documents_surveys_folder"
+                                        required="documents_surveys_settings == True" />
                                 </div>
                             </div>
                         </div>
@@ -209,24 +148,30 @@
                 </div>
             </xpath>
 
-            <xpath expr="//div[hasclass('o_documents_block')]" position="inside">
+            <xpath expr="//block[@id='files_centralization_section']" position="inside">
                 <div class="row mt16 o_settings_container">
                     <div class="col-xs-12 col-md-6 o_setting_box">
                         <div class="o_setting_left_pane">
-                            <field name="documents_target_settings"/>
+                            <field name="documents_target_settings" />
                         </div>
                         <div class="o_setting_right_pane o_documents_right_pane">
-                            <label for="documents_target_settings"/>
-                            <span class="fa fa-lg fa-building-o" title="Values set here are company-specific." aria-label="Values set here are company-specific." groups="base.group_multi_company" role="img"/>
+                            <label for="documents_target_settings" />
+                            <span class="fa fa-lg fa-building-o"
+                                title="Values set here are company-specific."
+                                aria-label="Values set here are company-specific."
+                                groups="base.group_multi_company" role="img" />
                             <div class="row">
                                 <div class="text-muted col-md-12">
                                     Centralize your target' documents (contracts, payslips, etc.)
                                 </div>
                             </div>
-                            <div name="documents_target_folder" class="content-group" attrs="{'invisible' : [('documents_target_settings', '=', False)]}">
+                            <div name="documents_target_folder" class="content-group"
+                                invisible="documents_target_settings == False">
                                 <div class="row mt16">
-                                    <label class="o_form_label col-lg-3" for="documents_target_folder" string="Workspace"/>
-                                   <field name="documents_target_folder" attrs="{'required' : [('documents_target_settings', '=', True)]}"/>
+                                    <label class="o_form_label col-lg-3"
+                                        for="documents_target_folder" string="Workspace" />
+                                    <field name="documents_target_folder"
+                                        required="documents_target_settings == True" />
                                 </div>
                             </div>
                         </div>
@@ -234,24 +179,30 @@
                 </div>
             </xpath>
 
-            <xpath expr="//div[hasclass('o_documents_block')]" position="inside">
+            <xpath expr="//block[@id='files_centralization_section']" position="inside">
                 <div class="row mt16 o_settings_container">
                     <div class="col-xs-12 col-md-6 o_setting_box">
                         <div class="o_setting_left_pane">
-                            <field name="documents_indicators_settings"/>
+                            <field name="documents_indicators_settings" />
                         </div>
                         <div class="o_setting_right_pane o_documents_right_pane">
-                            <label for="documents_indicators_settings"/>
-                            <span class="fa fa-lg fa-building-o" title="Values set here are company-specific." aria-label="Values set here are company-specific." groups="base.group_multi_company" role="img"/>
+                            <label for="documents_indicators_settings" />
+                            <span class="fa fa-lg fa-building-o"
+                                title="Values set here are company-specific."
+                                aria-label="Values set here are company-specific."
+                                groups="base.group_multi_company" role="img" />
                             <div class="row">
                                 <div class="text-muted col-md-12">
                                     Centralize your indicator' documents (contracts, payslips, etc.)
                                 </div>
                             </div>
-                            <div name="documents_indicators_folder" class="content-group" attrs="{'invisible' : [('documents_indicators_settings', '=', False)]}">
+                            <div name="documents_indicators_folder" class="content-group"
+                                invisible="documents_indicators_settings == False">
                                 <div class="row mt16">
-                                    <label class="o_form_label col-lg-3" for="documents_indicators_folder" string="Workspace"/>
-                                   <field name="documents_indicators_folder" attrs="{'required' : [('documents_indicators_settings', '=', True)]}"/>
+                                    <label class="o_form_label col-lg-3"
+                                        for="documents_indicators_folder" string="Workspace" />
+                                    <field name="documents_indicators_folder"
+                                        required="documents_indicators_settings == True" />
                                 </div>
                             </div>
                         </div>
@@ -259,24 +210,31 @@
                 </div>
             </xpath>
 
-            <xpath expr="//div[hasclass('o_documents_block')]" position="inside">
+            <xpath expr="//block[@id='files_centralization_section']" position="inside">
                 <div class="row mt16 o_settings_container">
                     <div class="col-xs-12 col-md-6 o_setting_box">
                         <div class="o_setting_left_pane">
-                            <field name="documents_maintenance_settings"/>
+                            <field name="documents_maintenance_settings" />
                         </div>
                         <div class="o_setting_right_pane o_documents_right_pane">
-                            <label for="documents_maintenance_settings"/>
-                            <span class="fa fa-lg fa-building-o" title="Values set here are company-specific." aria-label="Values set here are company-specific." groups="base.group_multi_company" role="img"/>
+                            <label for="documents_maintenance_settings" />
+                            <span class="fa fa-lg fa-building-o"
+                                title="Values set here are company-specific."
+                                aria-label="Values set here are company-specific."
+                                groups="base.group_multi_company" role="img" />
                             <div class="row">
                                 <div class="text-muted col-md-12">
-                                    Centralize your maintenance' documents (contracts, payslips, etc.)
+                                    Centralize your maintenance' documents (contracts, payslips,
+                                    etc.)
                                 </div>
                             </div>
-                            <div name="documents_maintenance_folder" class="content-group" attrs="{'invisible' : [('documents_maintenance_settings', '=', False)]}">
+                            <div name="documents_maintenance_folder" class="content-group"
+                                invisible="documents_maintenance_settings == False">
                                 <div class="row mt16">
-                                    <label class="o_form_label col-lg-3" for="documents_maintenance_folder" string="Workspace"/>
-                                   <field name="documents_maintenance_folder" attrs="{'required' : [('documents_maintenance_settings', '=', True)]}"/>
+                                    <label class="o_form_label col-lg-3"
+                                        for="documents_maintenance_folder" string="Workspace" />
+                                    <field name="documents_maintenance_folder"
+                                        required="documents_maintenance_settings == True" />
                                 </div>
                             </div>
                         </div>
@@ -284,24 +242,31 @@
                 </div>
             </xpath>
 
-            <xpath expr="//div[hasclass('o_documents_block')]" position="inside">
+            <xpath expr="//block[@id='files_centralization_section']" position="inside">
                 <div class="row mt16 o_settings_container">
                     <div class="col-xs-12 col-md-6 o_setting_box">
                         <div class="o_setting_left_pane">
-                            <field name="documents_management_review_settings"/>
+                            <field name="documents_management_review_settings" />
                         </div>
                         <div class="o_setting_right_pane o_documents_right_pane">
-                            <label for="documents_management_review_settings"/>
-                            <span class="fa fa-lg fa-building-o" title="Values set here are company-specific." aria-label="Values set here are company-specific." groups="base.group_multi_company" role="img"/>
+                            <label for="documents_management_review_settings" />
+                            <span class="fa fa-lg fa-building-o"
+                                title="Values set here are company-specific."
+                                aria-label="Values set here are company-specific."
+                                groups="base.group_multi_company" role="img" />
                             <div class="row">
                                 <div class="text-muted col-md-12">
-                                    Centralize your management review' documents (contracts, payslips, etc.)
+                                    Centralize your management review' documents (contracts,
+                                    payslips, etc.)
                                 </div>
                             </div>
-                            <div name="documents_management_review_folder" class="content-group" attrs="{'invisible' : [('documents_management_review_settings', '=', False)]}">
+                            <div name="documents_management_review_folder" class="content-group"
+                                invisible="documents_management_review_settings == False">
                                 <div class="row mt16">
-                                    <label class="o_form_label col-lg-3" for="documents_management_review_folder" string="Workspace"/>
-                                   <field name="documents_management_review_folder" attrs="{'required' : [('documents_management_review_settings', '=', True)]}"/>
+                                    <label class="o_form_label col-lg-3"
+                                        for="documents_management_review_folder" string="Workspace" />
+                                    <field name="documents_management_review_folder"
+                                        required="documents_management_review_settings == True" />
                                 </div>
                             </div>
                         </div>
@@ -309,24 +274,31 @@
                 </div>
             </xpath>
 
-            <xpath expr="//div[hasclass('o_documents_block')]" position="inside">
+            <xpath expr="//block[@id='files_centralization_section']" position="inside">
                 <div class="row mt16 o_settings_container">
                     <div class="col-xs-12 col-md-6 o_setting_box">
                         <div class="o_setting_left_pane">
-                            <field name="documents_nonconformities_settings"/>
+                            <field name="documents_nonconformities_settings" />
                         </div>
                         <div class="o_setting_right_pane o_documents_right_pane">
-                            <label for="documents_nonconformities_settings"/>
-                            <span class="fa fa-lg fa-building-o" title="Values set here are company-specific." aria-label="Values set here are company-specific." groups="base.group_multi_company" role="img"/>
+                            <label for="documents_nonconformities_settings" />
+                            <span class="fa fa-lg fa-building-o"
+                                title="Values set here are company-specific."
+                                aria-label="Values set here are company-specific."
+                                groups="base.group_multi_company" role="img" />
                             <div class="row">
                                 <div class="text-muted col-md-12">
-                                    Centralize your non conformities' documents (contracts, payslips, etc.)
+                                    Centralize your non conformities' documents (contracts,
+                                    payslips, etc.)
                                 </div>
                             </div>
-                            <div name="documents_nonconformities_folder" class="content-group" attrs="{'invisible' : [('documents_nonconformities_settings', '=', False)]}">
+                            <div name="documents_nonconformities_folder" class="content-group"
+                                invisible="documents_nonconformities_settings == False">
                                 <div class="row mt16">
-                                    <label class="o_form_label col-lg-3" for="documents_nonconformities_folder" string="Workspace"/>
-                                   <field name="documents_nonconformities_folder" attrs="{'required' : [('documents_nonconformities_settings', '=', True)]}"/>
+                                    <label class="o_form_label col-lg-3"
+                                        for="documents_nonconformities_folder" string="Workspace" />
+                                    <field name="documents_nonconformities_folder"
+                                        required="documents_nonconformities_settings == True" />
                                 </div>
                             </div>
                         </div>
@@ -334,24 +306,30 @@
                 </div>
             </xpath>
 
-            <xpath expr="//div[hasclass('o_documents_block')]" position="inside">
+            <xpath expr="//block[@id='files_centralization_section']" position="inside">
                 <div class="row mt16 o_settings_container">
                     <div class="col-xs-12 col-md-6 o_setting_box">
                         <div class="o_setting_left_pane">
-                            <field name="documents_actions_settings"/>
+                            <field name="documents_actions_settings" />
                         </div>
                         <div class="o_setting_right_pane o_documents_right_pane">
-                            <label for="documents_actions_settings"/>
-                            <span class="fa fa-lg fa-building-o" title="Values set here are company-specific." aria-label="Values set here are company-specific." groups="base.group_multi_company" role="img"/>
+                            <label for="documents_actions_settings" />
+                            <span class="fa fa-lg fa-building-o"
+                                title="Values set here are company-specific."
+                                aria-label="Values set here are company-specific."
+                                groups="base.group_multi_company" role="img" />
                             <div class="row">
                                 <div class="text-muted col-md-12">
                                     Centralize your actions' documents (contracts, payslips, etc.)
                                 </div>
                             </div>
-                            <div name="documents_actions_folder" class="content-group" attrs="{'invisible' : [('documents_actions_settings', '=', False)]}">
+                            <div name="documents_actions_folder" class="content-group"
+                                invisible="documents_actions_settings == False">
                                 <div class="row mt16">
-                                    <label class="o_form_label col-lg-3" for="documents_actions_folder" string="Workspace"/>
-                                   <field name="documents_actions_folder" attrs="{'required' : [('documents_actions_settings', '=', True)]}"/>
+                                    <label class="o_form_label col-lg-3"
+                                        for="documents_actions_folder" string="Workspace" />
+                                    <field name="documents_actions_folder"
+                                        required="documents_actions_settings == True" />
                                 </div>
                             </div>
                         </div>
@@ -359,30 +337,36 @@
                 </div>
             </xpath>
 
-            <xpath expr="//div[hasclass('o_documents_block')]" position="inside">
+            <xpath expr="//block[@id='files_centralization_section']" position="inside">
                 <div class="row mt16 o_settings_container">
                     <div class="col-xs-12 col-md-6 o_setting_box">
                         <div class="o_setting_left_pane">
-                            <field name="documents_audits_settings"/>
+                            <field name="documents_audits_settings" />
                         </div>
                         <div class="o_setting_right_pane o_documents_right_pane">
-                            <label for="documents_audits_settings"/>
-                            <span class="fa fa-lg fa-building-o" title="Values set here are company-specific." aria-label="Values set here are company-specific." groups="base.group_multi_company" role="img"/>
+                            <label for="documents_audits_settings" />
+                            <span class="fa fa-lg fa-building-o"
+                                title="Values set here are company-specific."
+                                aria-label="Values set here are company-specific."
+                                groups="base.group_multi_company" role="img" />
                             <div class="row">
                                 <div class="text-muted col-md-12">
                                     Centralize your audits' documents (contracts, payslips, etc.)
                                 </div>
                             </div>
-                            <div name="documents_audits_folder" class="content-group" attrs="{'invisible' : [('documents_audits_settings', '=', False)]}">
+                            <div name="documents_audits_folder" class="content-group"
+                                invisible="documents_audits_settings == False">
                                 <div class="row mt16">
-                                    <label class="o_form_label col-lg-3" for="documents_audits_folder" string="Workspace"/>
-                                   <field name="documents_audits_folder" attrs="{'required' : [('documents_audits_settings', '=', True)]}"/>
+                                    <label class="o_form_label col-lg-3"
+                                        for="documents_audits_folder" string="Workspace" />
+                                    <field name="documents_audits_folder"
+                                        required="documents_audits_settings == True" />
                                 </div>
                             </div>
                         </div>
                     </div>
                 </div>
-            </xpath>
+            </xpath> -->
 
         </field>
     </record>

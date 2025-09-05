@@ -9,8 +9,11 @@ class ResConfigSettings(models.TransientModel):
 
     documents_communications_settings = fields.Boolean(related='company_id.documents_communications_settings', readonly=False,
                                                 string="Comunicaciones")
-    documents_communications_folder = fields.Many2one('documents.folder', related='company_id.documents_communications_folder', readonly=False,
-                                     string="communications default workspace")
+    documents_communications_folder = fields.Many2one(
+        'documents.document', 
+        related='company_id.documents_communications_folder', 
+        readonly=False,
+        string="communications default workspace")
     #communications_tags = fields.Many2many('documents.tag', 'communications_tags_table',
                                     #related='company_id.communications_tags', readonly=False,
                                     #string="communications Tags")
@@ -23,7 +26,7 @@ class ResConfigSettings(models.TransientModel):
 
     documents_training_settings = fields.Boolean(related='company_id.documents_training_settings', readonly=False,
                                                 string="Capacitaciones")
-    documents_training_folder = fields.Many2one('documents.folder', related='company_id.documents_training_folder', readonly=False,
+    documents_training_folder = fields.Many2one('documents.document', related='company_id.documents_training_folder', readonly=False,
                                      string="communications default workspace")
 
     @api.onchange('documents_training_folder')
@@ -33,7 +36,7 @@ class ResConfigSettings(models.TransientModel):
 
     documents_process_settings = fields.Boolean(related='company_id.documents_process_settings', readonly=False,
                                                 string="Procesos")
-    documents_process_folder = fields.Many2one('documents.folder', related='company_id.documents_process_folder', readonly=False,
+    documents_process_folder = fields.Many2one('documents.document', related='company_id.documents_process_folder', readonly=False,
                                      string="communications default workspace")
 
     @api.onchange('documents_process_folder')
@@ -43,7 +46,7 @@ class ResConfigSettings(models.TransientModel):
 
     documents_context_settings = fields.Boolean(related='company_id.documents_context_settings', readonly=False,
                                                 string="Contexto")
-    documents_context_folder = fields.Many2one('documents.folder', related='company_id.documents_context_folder', readonly=False,
+    documents_context_folder = fields.Many2one('documents.document', related='company_id.documents_context_folder', readonly=False,
                                      string="communications default workspace")
 
     @api.onchange('documents_context_folder')
@@ -53,7 +56,7 @@ class ResConfigSettings(models.TransientModel):
 
     documents_risk_op_settings = fields.Boolean(related='company_id.documents_risk_op_settings', readonly=False,
                                                 string="Riesgos y Oportunidades")
-    documents_risk_op_folder = fields.Many2one('documents.folder', related='company_id.documents_risk_op_folder', readonly=False,
+    documents_risk_op_folder = fields.Many2one('documents.document', related='company_id.documents_risk_op_folder', readonly=False,
                                      string="communications default workspace")
 
     @api.onchange('documents_risk_op_folder')
@@ -63,7 +66,7 @@ class ResConfigSettings(models.TransientModel):
 
     documents_legal_requirements_settings = fields.Boolean(related='company_id.documents_legal_requirements_settings', readonly=False,
                                                 string="Requisitos legales")
-    documents_legal_requirements_folder = fields.Many2one('documents.folder', related='company_id.documents_legal_requirements_folder', readonly=False,
+    documents_legal_requirements_folder = fields.Many2one('documents.document', related='company_id.documents_legal_requirements_folder', readonly=False,
                                      string="communications default workspace")
 
     @api.onchange('documents_legal_requirements_folder')
@@ -73,7 +76,7 @@ class ResConfigSettings(models.TransientModel):
 
     documents_requirements_settings = fields.Boolean(related='company_id.documents_requirements_settings', readonly=False,
                                                 string="Requisitos")
-    documents_requirements_folder = fields.Many2one('documents.folder', related='company_id.documents_requirements_folder', readonly=False,
+    documents_requirements_folder = fields.Many2one('documents.document', related='company_id.documents_requirements_folder', readonly=False,
                                      string="communications default workspace")
 
     @api.onchange('documents_requirements_folder')
@@ -83,7 +86,7 @@ class ResConfigSettings(models.TransientModel):
 
     documents_surveys_settings = fields.Boolean(related='company_id.documents_surveys_settings', readonly=False,
                                                 string="Encuestas")
-    documents_surveys_folder = fields.Many2one('documents.folder', related='company_id.documents_surveys_folder', readonly=False,
+    documents_surveys_folder = fields.Many2one('documents.document', related='company_id.documents_surveys_folder', readonly=False,
                                      string="communications default workspace")
 
     @api.onchange('documents_surveys_folder')
@@ -93,7 +96,7 @@ class ResConfigSettings(models.TransientModel):
 
     documents_target_settings = fields.Boolean(related='company_id.documents_target_settings', readonly=False,
                                                 string="Objetivos y Medición")
-    documents_target_folder = fields.Many2one('documents.folder', related='company_id.documents_target_folder', readonly=False,
+    documents_target_folder = fields.Many2one('documents.document', related='company_id.documents_target_folder', readonly=False,
                                      string="communications default workspace")
 
     @api.onchange('documents_target_folder')
@@ -103,7 +106,7 @@ class ResConfigSettings(models.TransientModel):
 
     documents_indicators_settings = fields.Boolean(related='company_id.documents_indicators_settings', readonly=False,
                                                 string="Indicadores")
-    documents_indicators_folder = fields.Many2one('documents.folder', related='company_id.documents_indicators_folder', readonly=False,
+    documents_indicators_folder = fields.Many2one('documents.document', related='company_id.documents_indicators_folder', readonly=False,
                                      string="communications default workspace")
 
     @api.onchange('documents_indicators_folder')
@@ -113,7 +116,7 @@ class ResConfigSettings(models.TransientModel):
 
     documents_maintenance_settings = fields.Boolean(related='company_id.documents_maintenance_settings', readonly=False,
                                                 string="Mantenimiento y Calibración")
-    documents_maintenance_folder = fields.Many2one('documents.folder', related='company_id.documents_maintenance_folder', readonly=False,
+    documents_maintenance_folder = fields.Many2one('documents.document', related='company_id.documents_maintenance_folder', readonly=False,
                                      string="communications default workspace")
 
     @api.onchange('documents_maintenance_folder')
@@ -123,7 +126,7 @@ class ResConfigSettings(models.TransientModel):
 
     documents_management_review_settings = fields.Boolean(related='company_id.documents_management_review_settings', readonly=False,
                                                 string="Revisión por la Dirección")
-    documents_management_review_folder = fields.Many2one('documents.folder', related='company_id.documents_management_review_folder', readonly=False,
+    documents_management_review_folder = fields.Many2one('documents.document', related='company_id.documents_management_review_folder', readonly=False,
                                      string="communications default workspace")
 
     @api.onchange('documents_management_review_folder')
@@ -133,7 +136,7 @@ class ResConfigSettings(models.TransientModel):
 
     documents_nonconformities_settings = fields.Boolean(related='company_id.documents_nonconformities_settings', readonly=False,
                                                 string="No conformidades")
-    documents_nonconformities_folder = fields.Many2one('documents.folder', related='company_id.documents_nonconformities_folder', readonly=False,
+    documents_nonconformities_folder = fields.Many2one('documents.document', related='company_id.documents_nonconformities_folder', readonly=False,
                                      string="communications default workspace")
 
     @api.onchange('documents_nonconformities_folder')
@@ -143,7 +146,7 @@ class ResConfigSettings(models.TransientModel):
 
     documents_actions_settings = fields.Boolean(related='company_id.documents_actions_settings', readonly=False,
                                                 string="Acciones")
-    documents_actions_folder = fields.Many2one('documents.folder', related='company_id.documents_actions_folder', readonly=False,
+    documents_actions_folder = fields.Many2one('documents.document', related='company_id.documents_actions_folder', readonly=False,
                                      string="communications default workspace")
 
     @api.onchange('documents_actions_folder')
@@ -153,7 +156,7 @@ class ResConfigSettings(models.TransientModel):
 
     documents_audits_settings = fields.Boolean(related='company_id.documents_audits_settings', readonly=False,
                                                 string="Auditorías")
-    documents_audits_folder = fields.Many2one('documents.folder', related='company_id.documents_audits_folder', readonly=False,
+    documents_audits_folder = fields.Many2one('documents.document', related='company_id.documents_audits_folder', readonly=False,
                                      string="communications default workspace")
 
     @api.onchange('documents_audits_folder')

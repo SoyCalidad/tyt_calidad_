@@ -14,7 +14,7 @@
     'license': 'Other proprietary',
     'version': '0.1',
 
-    'depends': ['base','maintenance','report_xlsx'],
+    'depends': ['base','maintenance','report_xlsx', 'tyt_studio'],
 
     'data': [
         'security/ir.model.access.csv',

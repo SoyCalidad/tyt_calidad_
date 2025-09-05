@@ -67,8 +67,6 @@ class ChangeRequest(models.Model):
 
     def send_validate_ok(self):
         super().send_validate_ok()
-        self.env.company.sudo().set_onboarding_step_done(
-            'change_request_onboarding_state')
 
 
 class ImprovePlanMatrix(models.Model):
@@ -80,8 +78,6 @@ class ImprovePlanMatrix(models.Model):
 
     def send_validate_ok(self):
         super().send_validate_ok()
-        self.env.company.sudo().set_onboarding_step_done(
-            'improve_improve_onboarding_state')
 
 
 class ImprovePlan(models.Model):
@@ -94,8 +90,6 @@ class ImprovePlan(models.Model):
 
     def send_validate_ok(self):
         super().send_validate_ok()
-        self.env.company.sudo().set_onboarding_step_done(
-            'improve_plan_onboarding_state')
 
 
 

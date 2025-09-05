@@ -1,30 +1,50 @@
 /** @odoo-module **/
 
 import { registry } from "@web/core/registry";
+import { useService } from "@web/core/utils/hooks";
 import { _t } from "@web/core/l10n/translation";
-import { AbstractAction } from "@web/webclient/actions/abstract_action";
-import { jsonRpc } from "@web/core/network/rpc_service";
+import { Component, onMounted, onWillStart, useState } from "@odoo/owl";
+import { rpc } from "@web/core/network/rpc";
 
-export class EmployeeOrganizationalChart extends AbstractAction {
+
+class EmployeeOrganizationalChart extends Component {
+
+    static template = "hr_organizational_chart.OrganizationalEmployeeChart";
+
     setup() {
-        super.setup();
-        this.renderEmployeeDetails();
+        this.http = useService("http");
+        this.state = useState({ employees: [] });
+        onMounted(async () => {
+            this.renderEmployeeDetails();
+        
+        })
+
     }
 
     // Renderiza los detalles del empleado inicial
     async renderEmployeeDetails() {
         try {
-            const result = await jsonRpc("/get/parent/employee", "call", {});
-            this.parent_len = result[1];
+            const result = await rpc("/get/parent/employee", {});
+            this.parent_len = result[1]
+            console.log("result", result)
 
-            // Usamos fetch en vez de $.ajax
-            const response = await fetch("/get/parent/child", {
-                method: "POST",
-                headers: { "Content-Type": "application/json" },
-                body: JSON.stringify(result[0]),
-            });
-            const value = await response.text();
-            document.querySelector("#o_parent_employee").insertAdjacentHTML("beforeend", value);
+
+            const childResponse = await rpc("/get/parent/child", {
+                employee_id: result[0],
+            } )
+            console.log("childresponse", childResponse)
+            // document.querySelector("#o_parent_employee").insertAdjacentHTML("beforeend", value);
+            const parentEl = document.querySelector("#o_parent_employee");
+            if (parentEl && childResponse.html) {
+                //parentEl.innerHTML += childResponse;
+                parentEl.insertAdjacentHTML("beforeend", childResponse.html);
+                parentEl.querySelectorAll(".employee_name").forEach(img => {
+                    img.addEventListener("click", (ev) => this.view_employee(ev));
+                });
+                parentEl.querySelectorAll("img").forEach(img => {
+                    img.addEventListener("click", (ev) => this._getChild_data(ev));
+                });
+            }
         } catch (error) {
             console.error("Error en renderEmployeeDetails:", error);
         }
@@ -44,14 +64,14 @@ export class EmployeeOrganizationalChart extends AbstractAction {
 
                 if (child_length === 1) {
                     try {
-                        const col_val = await jsonRpc("/get/parent/colspan", "call", {
+                        const col_val = await rpc("/get/parent/colspan", {
                             emp_id: parseInt(this.id),
                         });
                         if (col_val) {
                             this.colspan_td.colSpan = col_val;
                         }
 
-                        const result = await jsonRpc("/get/child/data", "call", {
+                        const result = await rpc("/get/child/data", "call", {
                             click_id: parseInt(this.id),
                         });
                         if (result) {
@@ -75,7 +95,7 @@ export class EmployeeOrganizationalChart extends AbstractAction {
     view_employee(ev) {
         if (ev.target.parentElement?.className) {
             const id = parseInt(ev.target.parentElement.parentElement.children[0].id);
-            this.doAction({
+            this.env.services.action.doAction({
                 name: _t("Employee"),
                 type: "ir.actions.act_window",
                 res_model: "hr.employee",

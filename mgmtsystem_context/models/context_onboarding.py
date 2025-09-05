@@ -101,8 +101,8 @@ class ContextInternalIssue(models.Model):
 
     def send_validate_ok(self):
         super().send_validate_ok()
-        self.env.company.sudo().set_onboarding_step_done(
-            'context_internal_issue_onboarding_state')
+        # self.env.company.sudo().set_onboarding_step_done(
+        #     'context_internal_issue_onboarding_state')
 
 
 class ContextExternalIssue(models.Model):
@@ -120,8 +120,8 @@ class ContextExternalIssue(models.Model):
 
     def send_validate_ok(self):
         super().send_validate_ok()
-        self.env.company.sudo().set_onboarding_step_done(
-            'context_external_issue_onboarding_state')
+        # self.env.company.sudo().set_onboarding_step_done(
+        #     'context_external_issue_onboarding_state')
 
 
 class ContextSWOT(models.Model):
@@ -139,8 +139,8 @@ class ContextSWOT(models.Model):
 
     def send_validate_ok(self):
         super().send_validate_ok()
-        self.env.company.sudo().set_onboarding_step_done(
-            'context_swot_onboarding_state')
+        # self.env.company.sudo().set_onboarding_step_done(
+        #     'context_swot_onboarding_state')
 
 
 class ContextPEST(models.Model):
@@ -158,8 +158,8 @@ class ContextPEST(models.Model):
 
     def send_validate_ok(self):
         super().send_validate_ok()
-        self.env.company.sudo().set_onboarding_step_done(
-            'context_pest_onboarding_state')
+        # self.env.company.sudo().set_onboarding_step_done(
+        #     'context_pest_onboarding_state')
 
 
 class ContextStakeholders(models.Model):
@@ -177,8 +177,8 @@ class ContextStakeholders(models.Model):
 
     def send_validate_ok(self):
         super().send_validate_ok()
-        self.env.company.sudo().set_onboarding_step_done(
-            'context_stakeholders_onboarding_state')
+        # self.env.company.sudo().set_onboarding_step_done(
+        #     'context_stakeholders_onboarding_state')
 
 
 class ContextPolicy(models.Model):
@@ -196,5 +196,5 @@ class ContextPolicy(models.Model):
 
     def send_validate_ok(self):
         super().send_validate_ok()
-        self.env.company.sudo().set_onboarding_step_done(
-            'context_policy_onboarding_state')
+        # self.env.company.sudo().set_onboarding_step_done(
+        #     'context_policy_onboarding_state')

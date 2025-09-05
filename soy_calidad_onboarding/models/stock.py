@@ -52,9 +52,3 @@ class StockPicking(models.Model):
 
     def send_validate(self):
         super().send_validate()
-        if self.picking_type_code == 'incoming':
-            self.env.company.sudo().set_onboarding_step_done(
-                'stock_in_onboarding_state')
-        if self.picking_type_code == 'outgoing':
-            self.env.company.sudo().set_onboarding_step_done(
-                'stock_out_onboarding_state')

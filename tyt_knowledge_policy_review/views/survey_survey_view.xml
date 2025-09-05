@@ -8,16 +8,16 @@
                 <group>
                     <field name="custom_description_enabled"/>
                 </group>
-                <group attrs="{'invisible': [('custom_description_enabled', '=', False)]}">
+                <group invisible="custom_description_enabled == False">
                     <field name="custom_description_line_ids" editable="bottom" string="">
-                        <tree>
+                        <list>
                             <field name="date"/>
                             <field name="login"/>
                             <field name="agent"/>
                             <field name="supervisor"/>
                             <field name="campaign"/>
                             <field name="turn"/>
-                        </tree>
+                        </list>
                         <form>
                             <group>
                                 <field name="date"/>

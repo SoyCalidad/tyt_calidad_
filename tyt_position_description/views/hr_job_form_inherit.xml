@@ -15,8 +15,8 @@
                             <field name="nivel_organizacional" string="Nivel Organizacional" />
                         </group>
                         <group string="Nivel de Madurez">
-                            <field name="nivel_detalle_ids" widget="one2many_list" context="{'default_parent_id': active_id}">
-                                <tree>
+                            <field name="nivel_detalle_ids" widget="one2many_list" context="{'default_parent_id': context.get('active_id')}">
+                                <list>
                                     <field name="sequence" widget="handle"/>
                                     <field name="nivel_id"/>
                                     <field name="tiempo_graduacion"/>
@@ -30,7 +30,7 @@
                                     <field name="edad_minima"/>
                                     <field name="idiomas"/>
                                     <field name="curso_id"/>  
-                                </tree>
+                                </list>
                             </field>
                         </group>
                         
@@ -117,47 +117,47 @@
                         </group>
                         <group groups="mgmtsystem_process.group_process_readonly_printreport,mgmtsystem_process.group_process_owner,mgmtsystem_process.group_process_all">
                             <field name="related_process_ids" string="Procedimientos">
-                                <tree>
+                                <list>
                                     <field name="code" />
                                     <field name="name" style="max-width:200px;" />
                                     <field name="categ_id" />
-                                </tree>
+                                </list>
                             </field>
                             <field name="responsible_process_ids" string="Políticas">
-                                <tree>
+                                <list>
                                     <field name="code" />
                                     <field name="name" style="max-width:200px;" />
                                     <field name="categ_id" />
-                                </tree>
+                                </list>
                             </field>
                         </group>
                     </page>
 
                     <page id="info" string="Funciones" 
                         groups="mgmtsystem_employees.group_employees_onlyread_printreport,mgmtsystem_employees.group_employees_write_printreport,mgmtsystem_employees.group_employees_all">
-                        <group attrs="{'readonly':[('validation_state','in', ('validate_ok'))]}">
-                            <field name="job_profile" attrs="{'readonly':[('validation_state','in', ('validate_ok'))]}" />
-                            <field name="functions" attrs="{'readonly':[('validation_state','in', ('validate_ok'))]}">
-                                <tree>
+                        <group readonly="validation_state in ['validate_ok']">
+                            <field name="job_profile" readonly="validation_state in ['validate_ok']" />
+                            <field name="functions" readonly="validation_state in ['validate_ok']">
+                                <list>
                                     <field name="name" style="max-width:200px;" />
-                                </tree>
+                                </list>
                             </field>
-                            <field name="evaluation_factors" attrs="{'readonly':[('validation_state','in', ('validate_ok'))]}">
-                                <tree>
+                            <field name="evaluation_factors" readonly="validation_state in ['validate_ok']">
+                                <list>
                                     <field name="name" style="max-width:200px;" />
-                                </tree>
+                                </list>
                             </field>
                         </group>
                     </page>
 
                     <page id="skills" string="Competencias"
                         groups="mgmtsystem_employees.group_employees_onlyread_printreport,mgmtsystem_employees.group_employees_write_printreport,mgmtsystem_employees.group_employees_all">
-                        <group attrs="{'readonly':[('validation_state','in', ('validate_ok'))]}">
-                            <field name="generic_skills" mode="tree,form" attrs="{'readonly': [('validation_state', 'in', ('validate_ok'))]}">
-                                <tree>
+                        <group readonly="validation_state in ['validate_ok']">
+                            <field name="generic_skills" mode="list,form" readonly="validation_state in ['validate_ok']">
+                                <list>
                                     <field name="type"/>
                                     <field name="name"/>
-                                </tree>
+                                </list>
                                 <form>
                                     <sheet>
                                         <div class="oe_title" style="font-weight: bold;">
@@ -171,10 +171,10 @@
                                     </sheet>
                                 </form>
                             </field>
-                            <field name="position_skills" attrs="{'readonly':[('validation_state','in', ('validate_ok'))]}">
-                                <tree>
+                            <field name="position_skills" readonly="validation_state in ['validate_ok']">
+                                <list>
                                     <field name="name"/>
-                                </tree>
+                                </list>
                                 <form>
                                     <sheet>
                                         <div class="oe_title" style="font-weight: bold;">
@@ -184,10 +184,10 @@
                                     </sheet>
                                 </form>
                             </field>
-                            <field name="client_skills" attrs="{'readonly':[('validation_state','in', ('validate_ok'))]}">
-                                <tree>
+                            <field name="client_skills" readonly="validation_state in ['validate_ok']">
+                                <list>
                                     <field name="name"/>
-                                </tree>
+                                </list>
                                 <form>
                                     <sheet>
                                         <div class="oe_title" style="font-weight: bold;">
@@ -202,22 +202,22 @@
 
                     <page name="version_info" string="Validación y versión"
                         groups="mgmtsystem_employees.group_employees_onlyread_printreport,mgmtsystem_employees.group_employees_write_printreport,mgmtsystem_employees.group_employees_all">
-                        <group col="2" attrs="{'readonly':[('validation_state','in', ('validate_ok'))]}">
+                        <group col="2" readonly="validation_state in ['validate_ok']">
                             <group colspan="2">
                                 <field name="version" />
                             </group>
                             <group colspan="2">
                                 <separator string="" />
-                                <field name="elaboration_step" colspan="2" nolabel="1" attrs="{'readonly': [('validation_state','not in',('elaborate'))]}" />
+                                <field name="elaboration_step" colspan="2" nolabel="1" readonly="validation_state not in ['elaborate']" />
                                 <separator string="Revisión" />
-                                <field name="review_step" colspan="2" nolabel="1" attrs="{'readonly': [('validation_state','not in',('elaborate', 'review'))]}" />
+                                <field name="review_step" colspan="2" nolabel="1" readonly="validation_state not in ['elaborate', 'review']" />
                                 <separator string="Validación" />
-                                <field name="validation_step" colspan="2" nolabel="1" attrs="{'readonly': [('validation_state','not in',('elaborate', 'review', 'validate'))]}" />
+                                <field name="validation_step" colspan="2" nolabel="1" readonly="validation_state not in ['elaborate', 'review', 'validate']" />
                             </group>
                             <group colspan="2">
-                                <field name="date_elaborate" invisible="1" attrs="{'required': [('validation_state','in',('elaborate'))], 'readonly': True}" />
-                                <field name="date_review" invisible="1" attrs="{'required': [('validation_state','in',('review'))], 'readonly': True, 'invisible': [('validation_state','in',('elaborate'))] }" />
-                                <field name="date_validate" invisible="1" groups="base.group_no_one,base.user_admin" attrs="{'invisible': [('validation_state','in',('elaborate','review'))] }" />
+                                <field name="date_elaborate" readonly="True" required="validation_state in ['elaborate']" />
+                                <field name="date_review" invisible="validation_state in ['elaborate']" readonly="True" required="validation_state in ['review']" />
+                                <field name="date_validate"  groups="base.group_no_one,base.group_system" invisible="validation_state in ['elaborate', 'review']" />
                             </group>
                         </group>
                     </page>
@@ -227,4 +227,3 @@
         </record>
     </data>
 </odoo>
-

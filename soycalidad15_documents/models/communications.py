@@ -1,4 +1,5 @@
 from odoo import models, fields, api
+from odoo.exceptions import ValidationError
 from odoo.osv import expression
 
 
@@ -17,10 +18,13 @@ class ComunicationPlan(models.Model):
         self.ensure_one()
         document_vals = {}
         if self._check_create_documents():
+            folder = self._get_document_folder()
+            if not folder:
+                raise ValidationError("No existe la carpeta para este documento")
             document_vals = {
                 'attachment_id': attachment.id,
                 'name': attachment.name or self.display_name,
-                'folder_id': self._get_document_folder().id,
+                'folder_id': folder.id,
                 'owner_id': self._get_document_owner().id,
                 'partner_id': self._get_document_partner().id,
                 'tag_ids': [(6, 0, self._get_document_tags().ids)],
@@ -41,6 +45,7 @@ class ComunicationPlan(models.Model):
         # unlink documents.document directly so mail.activity.mixin().unlink is called
         #self.env['documents.document'].sudo().search([('attachment_id', 'in', self.attachment_ids.ids)]).unlink()
         #return super(ComunicationPlan, self).unlink()
+    
     
     def _get_document_folder(self):
         return self.company_id.documents_communications_folder if self.company_id.documents_communications_settings else False
@@ -88,11 +93,15 @@ class ComunicationPlan(models.Model):
         action = self.env['ir.actions.act_window']._for_xml_id('documents.document_action')
         # Documents created within that action will be 'assigned' to the employee
         # Also makes sure that the views starts on the  get_com_folder
-        
+        folder_id = get_com_folder.id if get_com_folder else False
         action['context'] = {
             #'default_partner_id': self.address_home_id.id,
-            'searchpanel_default_folder_id':    get_com_folder and get_com_folder.id,
+            'searchpanel_default_folder_id': folder_id,
             #'preaction_res_model': self.set_root_model() ,
+            'default_res_model': self._name,
+            'default_res_id': self.id,
+            'default_folder_id': folder_id,
+            'search_default_filter_folder': folder_id,
         }
         action['domain'] = self._get_each_cplan_domain()
         return action
@@ -133,10 +142,15 @@ class ComunicationComunication(models.Model):
         get_com_folder = self._get_document_folder()
         root_model = 'comunication.plan.line'
         action = self.env['ir.actions.act_window']._for_xml_id('documents.document_action')
+        folder_id = get_com_folder.id if get_com_folder else False 
         action['context'] = {
             #'default_partner_id': self.address_home_id.id,
-            'searchpanel_default_folder_id':    get_com_folder and get_com_folder.id,
+            'searchpanel_default_folder_id': folder_id,
             #'preaction_res_model': self.set_root_model() ,
+            'default_res_model': self._name,
+            'default_res_id': self.id,
+            'default_folder_id': folder_id,
+            'search_default_filter_folder': folder_id,
         }
         action['domain'] = self._get_each_cplan_domain()
         return action
@@ -179,10 +193,15 @@ class RecordMeeting(models.Model):
         get_com_folder = self._get_document_folder()
         root_model = 'record.meeting'
         action = self.env['ir.actions.act_window']._for_xml_id('documents.document_action')
+        folder_id = get_com_folder.id if get_com_folder else False
         action['context'] = {
             #'default_partner_id': self.address_home_id.id,
-            'searchpanel_default_folder_id':    get_com_folder and get_com_folder.id,
+            'searchpanel_default_folder_id': folder_id,
             #'preaction_res_model': self.set_root_model() ,
+            'default_res_model': self._name,
+            'default_res_id': self.id,
+            'default_folder_id': folder_id,
+            'search_default_filter_folder': folder_id,
         }
         action['domain'] = self._get_each_cplan_domain()
         return action
