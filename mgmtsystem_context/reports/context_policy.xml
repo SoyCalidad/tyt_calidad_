@@ -10,6 +10,8 @@
       <field name="print_report_name">'%s' % (object.name)</field>
       <field name="paperformat_id" ref="hola_calidad.portrait"/>
       <field name="groups_id" eval="[(6, 0, [                 ref('mgmtsystem_context.group_context_onlyread_printreport'),                 ref('mgmtsystem_context.group_context_write_printreport'),                 ref('mgmtsystem_context.group_context_all')             ])]"/>
+      <field name="binding_model_id" ref="model_mgmtsystem_context_policy" />
+      <field name="binding_type">report</field>
     </record>
     <record id="action_context_policy_report_2" model="ir.actions.report">
 
@@ -23,6 +25,8 @@
       <field name="print_report_name">object.name</field>
       <field name="paperformat_id" ref="hola_calidad.portrait"/>
       <field name="groups_id" eval="[(6, 0, [ref('mgmtsystem_context.group_context_onlyread_printreport'), ref('mgmtsystem_context.group_context_write_printreport'), ref('mgmtsystem_context.group_context_all')])]"/>
+      <field name="binding_model_id" ref="model_mgmtsystem_context_policy" />
+            <field name="binding_type">report</field>
     </record>
     <template id="politica_de_calidad">
       <t t-call="web.html_container">

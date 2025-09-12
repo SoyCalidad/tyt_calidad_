@@ -9,6 +9,8 @@
       <field name="report_name">mgmtsystem_audit.reporte_plananual02_auditorias_template</field>
       <field name="report_file">mgmtsystem_audit.reporte_plananual02_auditorias_template</field>
       <field name="paperformat_id" ref="hola_calidad.landscape"/>
+      <field name="binding_model_id" ref="model_audit_plan" />
+      <field name="binding_type">report</field>
     </record>
     <!-- <report id="report_audit_plan" string="Programa anual de auditorías " report_type="xlsx" model="audit.plan" name="mgmtsystem_audit.report_audit_plan" file="Programa de auditorías" /> -->
     <template id="reporte_plananual02_auditorias_template">

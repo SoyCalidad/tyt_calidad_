@@ -22,8 +22,8 @@ class Employee(models.Model):
 
     new_user_id = fields.Many2one('hr.employee', string='Contacto')
 
-    job_title = fields.Char(related='job_id.name', string='Cargo')
-    job_name = fields.Char(related='job_id.name', string='Cargo')
+    job_title = fields.Char(related='job_id.name', string='Cargo', translate=True)
+    job_name = fields.Char(related='job_id.name', string='Cargo', translate=True)
 
     # @api.onchange('address_home_id')
     # def _onchange_new_user_id(self):

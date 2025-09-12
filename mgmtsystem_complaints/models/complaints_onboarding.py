@@ -64,9 +64,4 @@ class ComplaintComplaint(models.Model):
     @api.onchange('state')
     def _onchange_state(self):
         super()._onchange_state()
-        if self.state == 'done' and self.type == 'supplier':
-            self.env.company.sudo().set_onboarding_step_done(
-                'complaints_external_onboarding_state')
-        if self.state == 'done' and self.type == 'customer':
-            self.env.company.sudo().set_onboarding_step_done(
-                'complaints_internal_onboarding_state')
+        

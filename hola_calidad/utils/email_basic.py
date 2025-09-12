@@ -39,7 +39,7 @@ class EmailBasic(models.AbstractModel):
 
             ctx = {
                 'default_model': model,
-                'default_res_id': self.ids[0],
+                'default_res_ids': self.ids,
                 'default_use_template': bool(template),
                 'default_template_id': template.id,
                 'default_composition_mode': 'comment',

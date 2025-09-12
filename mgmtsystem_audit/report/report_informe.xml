@@ -169,6 +169,8 @@
       <field name="report_name">mgmtsystem_audit.report_informe_auditorias_template</field>
       <field name="report_file">mgmtsystem_audit.report_informe_auditorias_template</field>
       <field name="paperformat_id" ref="hola_calidad.portrait"/>
+      <field name="binding_model_id" ref="model_audit_report" />
+      <field name="binding_type">report</field>
     </record>
   </data>
 </odoo>

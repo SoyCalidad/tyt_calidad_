@@ -68,8 +68,6 @@ class MgmtReviewPlan(models.Model):
 
     def send_validate_ok(self):
         super().send_validate_ok()
-        self.env.company.sudo().set_onboarding_step_done(
-            'mgmt_review_plan_onboarding_state')
 
 
 class MgmtReviewReview(models.Model):
@@ -81,8 +79,6 @@ class MgmtReviewReview(models.Model):
 
     def send_validate_ok(self):
         super().send_validate_ok()
-        self.env.company.sudo().set_onboarding_step_done(
-            'mgmt_review_review_onboarding_state')
 
 
 class MgmtReviewRecord(models.Model):
@@ -94,5 +90,3 @@ class MgmtReviewRecord(models.Model):
 
     def send_close(self):
         super().send_close()
-        self.env.company.sudo().set_onboarding_step_done(
-            'mgmt_review_record_onboarding_state')

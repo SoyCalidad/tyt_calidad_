@@ -3,59 +3,63 @@
 import { registry } from "@web/core/registry";
 import { useService } from "@web/core/utils/hooks";
 import { _t } from "@web/core/l10n/translation";
-import { Component, onMounted, onWillStart, useState } from "@odoo/owl";
+import { Component, onMounted } from "@odoo/owl";
 import { rpc } from "@web/core/network/rpc";
 
 
-class EmployeeOrganizationalChart extends Component {
+class OrganizationalDashboard extends Component {
 
-    static template = "hr_organizational_chart.OrganizationalEmployeeChart";
+    static template = "hr_organizational_chart.organization_dashboard";
 
     setup() {
-        this.http = useService("http");
-        this.state = useState({ employees: [] });
         onMounted(async () => {
             this.renderEmployeeDetails();
-        
         })
 
     }
 
-    // Renderiza los detalles del empleado inicial
     async renderEmployeeDetails() {
         try {
             const result = await rpc("/get/parent/employee", {});
             this.parent_len = result[1]
-            console.log("result", result)
-
 
             const childResponse = await rpc("/get/parent/child", {
                 employee_id: result[0],
             } )
-            console.log("childresponse", childResponse)
-            // document.querySelector("#o_parent_employee").insertAdjacentHTML("beforeend", value);
             const parentEl = document.querySelector("#o_parent_employee");
             if (parentEl && childResponse.html) {
-                //parentEl.innerHTML += childResponse;
                 parentEl.insertAdjacentHTML("beforeend", childResponse.html);
-                parentEl.querySelectorAll(".employee_name").forEach(img => {
-                    img.addEventListener("click", (ev) => this.view_employee(ev));
-                });
-                parentEl.querySelectorAll("img").forEach(img => {
-                    img.addEventListener("click", (ev) => this._getChild_data(ev));
-                });
+                this._addEvents(parentEl, false);
+                // parentEl.querySelectorAll(".employee_name").forEach(img => {
+                //     img.addEventListener("click", (ev) => this.view_employee(ev));
+                // });
+                // parentEl.querySelectorAll("img").forEach(img => {
+                //     img.addEventListener("click", (ev) => this._getChild_data(ev));
+                // });
             }
         } catch (error) {
             console.error("Error en renderEmployeeDetails:", error);
         }
     }
 
+    _addEvents(el, removeEventListener=true) {
+        el.querySelectorAll(".employee_name").forEach(query => {
+
+            query.addEventListener("click", (ev) => this.view_employee(ev))
+        });
+        el.querySelectorAll("img").forEach(img => {
+
+            img.addEventListener("click", this._getChild_data.bind(this));
+        });
+    }
+
     // Evento: expandir/colapsar hijos
     async _getChild_data(ev) {
         const target = ev.target;
+        console.log("target", target)
         if (target.parentElement?.className) {
             this.id = target.parentElement.id;
-            this.check_child = document.querySelector(`#${this.id}.o_level_1`);
+            this.check_child = document.querySelector(`#${CSS.escape(this.id)}.o_level_1`);
 
             if (this.check_child) {
                 this.colspan_td = this.check_child.closest("td");
@@ -71,17 +75,18 @@ class EmployeeOrganizationalChart extends Component {
                             this.colspan_td.colSpan = col_val;
                         }
 
-                        const result = await rpc("/get/child/data", "call", {
+                        const result = await rpc("/get/child/data", {
                             click_id: parseInt(this.id),
                         });
+                        console.log("tbody_child",this.tbody_child.querySelector("table:last-of-type"))
                         if (result) {
                             this.tbody_child.insertAdjacentHTML("beforeend", result);
+                            this._addEvents(this.tbody_child.querySelector("table:last-of-type"));
                         }
                     } catch (error) {
                         console.error("Error en _getChild_data:", error);
                     }
                 } else {
-                    // Colapsar hijos
                     for (let i = 0; i < 3; i++) {
                         this.tbody_child.children[1].remove();
                     }
@@ -108,4 +113,4 @@ class EmployeeOrganizationalChart extends Component {
 }
 
 // Registro del action
-registry.category("actions").add("organization_dashboard", EmployeeOrganizationalChart);
+registry.category("actions").add("organization_dashboard", OrganizationalDashboard);

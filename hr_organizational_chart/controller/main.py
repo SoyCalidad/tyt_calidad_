@@ -87,7 +87,7 @@ class EmployeeChart(http.Controller):
                     <div id='""" + str(child.id) + """' class="o_employee_border">
                     <img src='/web/image/hr.employee.public/""" + str(child.id) + """/image_1024/'/></div>
                     <div class='employee_name'><p>""" + str(child.name) + """</p>
-                    <p>""" + str(child.job_id.name) + """</p></div></a></div>"""
+                    <p>""" + str(child.job_id.name or '') + """</p></div></a></div>"""
                 child_nodes += child_table + view + """</div></td></tr></table></td>"""
             nodes = child_nodes + """</tr>"""
             return nodes

@@ -337,7 +337,7 @@ class History(models.Model):
                 template.lang, 'res.partner.evaluation.history', self.ids[0])
         ctx = {
             'default_model': 'res.partner.evaluation.history',
-            'default_res_id': self.ids[0],
+            'default_res_ids': self.ids,
             'default_use_template': bool(template),
             'default_template_id': template.id,
             'default_composition_mode': 'comment',

@@ -8,6 +8,8 @@
             <field name="report_name">mgmtsystem_audit.audit_report</field>
             <field name="report_file">mgmtsystem_audit.audit_report</field>
             <field name="paperformat_id" ref="hola_calidad.portrait" />
+            <field name="binding_model_id" ref="model_audit_audit" />
+            <field name="binding_type">report</field>
         </record>
 
 

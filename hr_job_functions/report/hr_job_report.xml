@@ -677,6 +677,8 @@
             <field name="model">hr.job</field>
             <field name="report_name">hr_job_functions.reporte_resultados_employees_template</field>
             <field name="paperformat_id" ref="hola_calidad.portrait" />
+            <field name="binding_model_id" ref="model_hr_job" />
+            <field name="binding_type">report</field>
         </record>
     </data>
 </odoo>

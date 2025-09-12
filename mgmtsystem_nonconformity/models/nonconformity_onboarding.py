@@ -50,6 +50,4 @@ class NonconformityNonconformity(models.Model):
 
     @api.onchange('state')
     def _onchange_state(self):
-        if self.state == 'done':
-            self.env.company.sudo().set_onboarding_step_done(
-                'nonconformity_nonconformity_onboarding_state')
+        pass

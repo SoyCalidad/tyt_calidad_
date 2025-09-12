@@ -86,12 +86,6 @@ class OpportunityMatrix(models.Model):
 
     def send_validate_ok(self):
         super().send_validate_ok()
-        if self.type == 'risk':
-            self.env.company.sudo().set_onboarding_step_done(
-                'opportunity_matrix_risk_onboarding_state')
-        if self.type == 'opportunity':
-            self.env.company.sudo().set_onboarding_step_done(
-                'opportunity_matrix_opp_onboarding_state')
 
 
 class OpportunityMatrixLine(models.Model):
@@ -103,9 +97,3 @@ class OpportunityMatrixLine(models.Model):
 
     def send_validate(self):
         super().send_validate()
-        if self.type == 'risk':
-            self.env.company.sudo().set_onboarding_step_done(
-                'opportunity_risk_onboarding_state')
-        if self.type == 'opportunity':
-            self.env.company.sudo().set_onboarding_step_done(
-                'opportunity_opp_onboarding_state')

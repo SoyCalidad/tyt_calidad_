@@ -1,10 +1,10 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <templates xml:space="preserve">
-   <t t-name="documentsInfo" t-inherit="documents.DocumentsInspector.documentsInfo" t-inherit-mode="extension" owl="1">
+   <!-- <t t-name="documentsInfo" t-inherit="documents.DocumentsInspector.documentsInfo" t-inherit-mode="extension" owl="1">
        <xpath expr="//table/tbody/t[@t-if='nbPreviews === 1']" position="inside">
             <t t-call="documents.DocumentsInspector.field">
                 <t t-set="field" t-translation="off">short_name</t>
             </t>
        </xpath>
-   </t>
+   </t> -->
 </templates>

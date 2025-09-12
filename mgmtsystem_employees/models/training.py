@@ -265,7 +265,8 @@ class TrainingLine(models.Model):
         string=u'Departamento',
         related='employee_id.department_id.name',
         readonly=True,
-        store=True
+        store=True,
+        translate=True
     )
 
     assistance = fields.Selection(

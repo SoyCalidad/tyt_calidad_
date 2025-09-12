@@ -68,8 +68,7 @@ class ComunicationPlan(models.Model):
 
     def send_validate_ok(self):
         super().send_validate_ok()
-        self.env.company.sudo().set_onboarding_step_done(
-            'comunication_plan_onboarding_state')
+        
 
 
 class ComunicationComunication(models.Model):
@@ -81,8 +80,7 @@ class ComunicationComunication(models.Model):
 
     def send_validate_ok(self):
         super().send_validate_ok()
-        self.env.company.sudo().set_onboarding_step_done(
-            'comunication_comunication_onboarding_state')
+        
 
 
 class ComunicationRecord(models.Model):
@@ -94,5 +92,4 @@ class ComunicationRecord(models.Model):
 
     def send_close(self):
         super().send_close()
-        self.env.company.sudo().set_onboarding_step_done(
-            'comunication_record_onboarding_state')
+        

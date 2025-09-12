@@ -58,8 +58,7 @@ class ResCompany(models.Model):
         diagnostic = self.env['hola_calidad.diagnostic'].search(
             [('state', '=', 'validate')])
         if diagnostic:
-            self.env.company.sudo().set_onboarding_step_done(
-                'general_analysis_onboarding_state')
+            pass 
         else:
             res = []
             l = [diagnostic]
@@ -107,8 +106,7 @@ class ResCompany(models.Model):
             [('state', '=', 'validate_ok')])
 
         if context_external_issue and context_stakeholders and context_internal_issue and context_swot and context_pest and context_policy and process_categ and process_categ_type and process_process and process_edition and risk and opportunity and matrix_risk and matrix_opportunity and legal_legal:
-            self.env.company.sudo().set_onboarding_step_done(
-                'general_plan_onboarding_state')
+            pass
         else:
             res = []
             l = [context_external_issue, context_stakeholders, context_internal_issue, context_swot, context_pest, context_policy, process_categ,
@@ -136,8 +134,7 @@ class ResCompany(models.Model):
             [('state', '=', 'validate_ok')])
 
         if comunication_plan and comunication_meeting and training_plan and training_training and maintenance_plan and maintenance_maintenance:
-            self.env.company.sudo().set_onboarding_step_done(
-                'general_do_onboarding_state')
+            pass
         else:
             res = []
             l = [comunication_plan, comunication_meeting, training_plan, training_training, maintenance_plan, maintenance_maintenance]
@@ -164,8 +161,7 @@ class ResCompany(models.Model):
             [('state', '=', 'validate_ok')])
 
         if target_target and target_indicator and audit_plan and audit_audit and mgmt_review_plan and mgmt_review_review:
-            self.env.company.sudo().set_onboarding_step_done(
-                'general_check_onboarding_state')
+            pass
         else:
             res = []
             l = [target_target, target_indicator, audit_plan, audit_audit, mgmt_review_plan, mgmt_review_review]
@@ -183,8 +179,7 @@ class ResCompany(models.Model):
         action = self.env['mgmtsystem.action'].search(
             [('state', '=', 'done')])
         if nc and action:
-            self.env.company.sudo().set_onboarding_step_done(
-                'general_act_onboarding_state')
+            pass
         else:
             res = []
             l = [nc, action]

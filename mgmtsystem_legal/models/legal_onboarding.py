@@ -59,8 +59,6 @@ class LegalPlan(models.Model):
 
     def send_validate_ok(self):
         super().send_validate_ok()
-        self.env.company.sudo().set_onboarding_step_done(
-            'legal_plan_onboarding_state')
 
 
 class LegalLegal(models.Model):
@@ -72,5 +70,3 @@ class LegalLegal(models.Model):
 
     def send_validate(self):
         super().send_validate()
-        self.env.company.sudo().set_onboarding_step_done(
-            'legal_legal_onboarding_state')

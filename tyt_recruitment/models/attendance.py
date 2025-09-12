@@ -308,7 +308,7 @@ class SurveyAttendance(models.Model):
     _inherit = ['mail.thread']
 
     survey_id = fields.Many2one('survey.survey', string="Examen", tracking=True)
-    title = fields.Char(related='survey_id.title', string='Título', tracking=True)
+    title = fields.Char(related='survey_id.title', string='Título', tracking=True,  translate=True)
     
     attendance_id = fields.Many2one('tyt_recruitment.attendance', string="Lista de asistencia", tracking=True)
 

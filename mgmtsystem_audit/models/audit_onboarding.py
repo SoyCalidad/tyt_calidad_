@@ -68,8 +68,7 @@ class AuditPlan(models.Model):
 
     def send_validate_ok(self):
         super().send_validate_ok()
-        self.env.company.sudo().set_onboarding_step_done(
-            'audit_plan_onboarding_state')
+        
 
 
 class Auditaudit(models.Model):
@@ -81,8 +80,7 @@ class Auditaudit(models.Model):
 
     def send_final(self):
         super().send_final()
-        self.env.company.sudo().set_onboarding_step_done(
-            'audit_audit_onboarding_state')
+        
 
 class AuditReport(models.Model):
     _inherit = 'audit.report'
@@ -93,6 +91,5 @@ class AuditReport(models.Model):
 
     def send_final(self):
         super().send_final()
-        self.env.company.sudo().set_onboarding_step_done(
-            'audit_report_onboarding_state')
+        
 

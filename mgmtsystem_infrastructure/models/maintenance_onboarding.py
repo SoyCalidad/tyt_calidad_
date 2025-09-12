@@ -83,8 +83,6 @@ class MaintenancePlan(models.Model):
 
     def send_validate_ok(self):
         super().send_validate_ok()
-        self.env.company.sudo().set_onboarding_step_done(
-            'maintenance_plan_onboarding_state')
 
 
 class MaintenanceMaintenance(models.Model):
@@ -102,8 +100,6 @@ class MaintenanceMaintenance(models.Model):
 
     def send_validate_ok(self):
         super().send_validate_ok()
-        self.env.company.sudo().set_onboarding_step_done(
-            'maintenance_maintenance_onboarding_state')
 
 
 class maintenanceSWOT(models.Model):
@@ -121,8 +117,6 @@ class maintenanceSWOT(models.Model):
 
     def send_validate_ok(self):
         super().send_validate_ok()
-        self.env.company.sudo().set_onboarding_step_done(
-            'calibration_plan_onboarding_state')
 
 
 class maintenancePEST(models.Model):
@@ -140,5 +134,3 @@ class maintenancePEST(models.Model):
 
     def send_validate_ok(self):
         super().send_validate_ok()
-        self.env.company.sudo().set_onboarding_step_done(
-            'calibration_calibration_onboarding_state')

@@ -114,7 +114,7 @@ class Employee(models.Model):
             vals['code'] = self.env['ir.sequence'].next_by_code('employee.sequence')
 
         # Crear todos los registros utilizando el método super
-        records = super(Employee, self).create(vals_list)
+        records = super().create(vals_list)
 
         return records
 

@@ -41,6 +41,8 @@
       <field name="report_file">Indicadores</field>
       <field name="paperformat_id" ref="hola_calidad.landscape"/>
       <field name="groups_id" eval="[(6, 0, [ref('base.group_no_one'), ref('mgmtsystem_target.group_target_user_interno'), ref('mgmtsystem_target.group_target_write_printreport'), ref('mgmtsystem_target.group_target_all')])]"/>
+      <field name="binding_model_id" ref="model_mgmtsystem_indicator" />
+      <field name="binding_type">report</field>
     </record>
     <record id="action_report_indicator" model="ir.actions.report">
       <field name="model">mgmtsystem.indicator</field>
@@ -50,6 +52,8 @@
       <field name="report_file">Indicadores</field>
       <field name="paperformat_id" ref="hola_calidad.landscape"/>
       <field name="groups_id" eval="[(6, 0, [ref('base.group_no_one'), ref('mgmtsystem_target.group_target_user_interno'), ref('mgmtsystem_target.group_target_write_printreport'), ref('mgmtsystem_target.group_target_all')])]"/>
+      <field name="binding_model_id" ref="model_mgmtsystem_indicator" />
+      <field name="binding_type">report</field>
     </record>
     <template id="single_indicator_report">
       <t t-call="web.html_container">

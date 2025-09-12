@@ -287,6 +287,8 @@
       <field name="report_file">Análisis de Porter</field>
       <field name="paperformat_id" ref="hola_calidad.portrait"/>
       <field name="groups_id" eval="[(6, 0, [ref('base.group_no_one'), ref('mgmtsystem_context.group_context_onlyread_printreport'), ref('mgmtsystem_context.group_context_write_printreport'), ref('mgmtsystem_context.group_context_all')])]"/>
+      <field name="binding_model_id" ref="model_mgmtsystem_context_external_issue" />
+      <field name="binding_type">report</field>
     </record>
   </data>
 </odoo>
