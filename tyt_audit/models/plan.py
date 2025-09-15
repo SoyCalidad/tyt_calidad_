@@ -5,7 +5,7 @@ from odoo.exceptions import UserError, RedirectWarning, ValidationError
 
 
 from datetime import tzinfo, date, datetime, timedelta
-import pandas as pd
+
 
 '''
 class Frequency(models.Model):

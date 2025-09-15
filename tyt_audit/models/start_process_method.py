@@ -4,8 +4,8 @@ from odoo import models, fields, api, _
 from odoo.exceptions import UserError, RedirectWarning, ValidationError
 
 from datetime import tzinfo, date, datetime, timedelta
-import pandas as pd
 import logging
+
 _logger = logging.getLogger(__name__)
 
 class Plan(models.Model):

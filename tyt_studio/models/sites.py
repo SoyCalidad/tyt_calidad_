@@ -4,7 +4,7 @@ class Noms(models.Model):
     _name="tyt_studio.noms"
     _description = "noms"
     
-    name = fields.Char(string="Descripción")
+    name = fields.Char(string="Descripción", translate=True, required=True)
 
 
 class TypeSite(models.Model):
@@ -13,7 +13,7 @@ class TypeSite(models.Model):
     _order = "sequence asc, id asc"
     
     active = fields.Boolean(default=True, )
-    name = fields.Char(string="Descripción")
+    name = fields.Char(string="Descripción", translate=True, required=True)
     sequence = fields.Integer(string="Secuencia")
     
 
@@ -24,7 +24,7 @@ class Sitio(models.Model):
     _inherit = ['mail.thread', 'mail.activity.mixin'] 
 
     active = fields.Boolean(string='Activo', default=True)
-    name = fields.Char(string='Nombre', required=True)
+    name = fields.Char(string='Nombre', required=True, translate=True)
     codigo = fields.Char(string='Codigo')
     cuan = fields.Many2one('account.analytic.account', string='CUAN', ondelete='set null')
     cuenta_analitica = fields.Many2one('account.analytic.account', string='Cuenta Analitica', ondelete='set null')
@@ -45,6 +45,6 @@ class Sitios(models.Model):
     _name = 'tyt_studio.sites'
     _description = 'Sitios'
     
-    name = fields.Char(string="Nombre del sitio", required=True)
+    name = fields.Char(string="Nombre del sitio", required=True, translate=True)
     numero = fields.Integer(string="ID Nombre feo", readonly=True, related="site_id.id" )
     site_id = fields.Many2one('tyt_studio.site', ondelete='cascade', string="Sitio")
