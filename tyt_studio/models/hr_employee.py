@@ -7,4 +7,3 @@ class HrEmployee(models.Model):
     numero = fields.Char(string="Numero")
     sitios0 = fields.Many2one('tyt_studio.sites', ondelete="set null", string="Sitios0")
     
-    segurosocial = fields.Char(string="Seguro social", )

@@ -279,7 +279,7 @@ class DaysOfWeek(models.Model):
             for field_name in ['day1', 'day2', 'day3', 'day4', 'day5', 'day6', 'day7', 'day8', 'day9', 'day10', 'day11', 'day12', 'day13', 'day14', 'day15', 'day16', 'day17', 'day18', 'day19', 'day20']:
                 _logger.info(field_name)
                 _logger.info(self.applicant_id.name)
-                employee = self.env['hr.employee'].search([('segurosocial', '=', self.applicant_id.social_security_number)], limit=1)
+                employee = self.env['hr.employee'].search([('sinid', '=', self.applicant_id.social_security_number)], limit=1)
 
                 if self[field_name].tag == 'A':
                     if employee.id and not self.login:
