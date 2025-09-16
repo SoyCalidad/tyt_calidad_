@@ -83,25 +83,25 @@ class EmployeeExtension(models.Model):
         Mapeo de campos Odoo a IDs de campos personalizados de Crehana
         """
         return {
-            1936: {"field": "cliente", "type": "TEXT"},
-            1941: {"field": "centros", "type": "TEXT"},
-            1946: {"field": "especialidades", "type": "TEXT"},
-            1951: {"field": "generacion", "type": "TEXT"},
-            1937: {"field": "perfil", "type": "TEXT"},
+            1936: {"field": "cliente", "type": "MULTIPLE"},
+            1941: {"field": "centros", "type": "MULTIPLE"},
+            1946: {"field": "especialidades", "type": "MULTIPLE"},
+            1951: {"field": "generacion", "type": "MULTIPLE"},
+            1937: {"field": "perfil", "type": "MULTIPLE"},
             1942: {"field": "no_empleado", "type": "TEXT"},
-            1947: {"field": "proyecto_asignado_1", "type": "TEXT"},
-            1938: {"field": "puesto", "type": "TEXT"},
-            1943: {"field": "area", "type": "TEXT"},
-            1948: {"field": "proyecto_asignado_2", "type": "TEXT"},
-            1939: {"field": "campanas", "type": "TEXT"},
+            1947: {"field": "proyecto_asignado_1", "type": "MULTIPLE"},
+            1938: {"field": "puesto", "type": "MULTIPLE"},
+            1943: {"field": "area", "type": "MULTIPLE"},
+            1948: {"field": "proyecto_asignado_2", "type": "MULTIPLE"},
+            1939: {"field": "campanas", "type": "MULTIPLE"},
             1944: {
                 "field": "nivel_pdp",
-                "type": "TEXT",
+                "type": "MULTIPLE",
             },
             1949: {"field": "fecha_nacimiento", "type": "DATE"},
-            1940: {"field": "turnos", "type": "TEXT"},
+            1940: {"field": "turnos", "type": "MULTIPLE"},
             1945: {"field": "fecha_ingreso", "type": "DATE"},
-            1950: {"field": "sexo", "type": "TEXT"},
+            1950: {"field": "sexo", "type": "MULTIPLE"},
         }
 
     def _prepare_custom_fields_payload(self, field_ids=None):
@@ -140,7 +140,7 @@ class EmployeeExtension(models.Model):
                 if isinstance(field_value, str):
                     formatted_value = field_value
                 else:
-                    formatted_value = field_value.strftime("%Y-%m-%d")
+                    formatted_value = field_value.strftime("%d-%m-%Y")
             elif field_type == "MULTIPLE":
                 # Para campos MULTIPLE, enviar como string pero puede contener múltiples valores separados
                 formatted_value = str(field_value) if field_value else ""
@@ -754,3 +754,9 @@ class EmployeeExtension(models.Model):
             except requests.exceptions.RequestException as e:
                 _logger.error(f"Error al obtener datos: {e}")
                 raise models.ValidationError(f"Error al obtener datos: {e}")
+
+    def action_employee_crehana_sync(self):
+        # Obtener todos los empleados no registrados en Crehana
+        employees = self.search([("is_registered_in_crehana", "=", False)])
+        for employee in employees:
+            employee.action_register_in_crehana()
