@@ -145,6 +145,8 @@
       <field name="report_name">mgmtsystem_infrastructure.maintance_plan_report</field>
       <field name="report_file">Programa de mantenimientos</field>
       <field name="paperformat_id" ref="hola_calidad.landscape"/>
+      <field name="binding_model_id" ref="model_mgmtsystem_maintenance_plan" />
+      <field name="binding_type">report</field>
     </record>
     <record id="maintenance_plan_wizard_view_form" model="ir.ui.view">
       <field name="name">maintance.plan.wizard.view.form</field>

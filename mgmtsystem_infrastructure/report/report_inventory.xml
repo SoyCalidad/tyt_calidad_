@@ -405,6 +405,8 @@
       <field name="report_name">mgmtsystem_infrastructure.report_maintenance_plan</field>
       <field name="report_file">mgmtsystem_infrastructure.report_maintenance_plan</field>
       <field name="paperformat_id" ref="hola_calidad.portrait"/>
+      <field name="binding_model_id" ref="model_mgmtsystem_maintenance" />
+      <field name="binding_type">report</field>
     </record>
     <record id="action_report_calibration_plan" model="ir.actions.report">
       <field name="model">mgmtsystem.calibration</field>
@@ -413,6 +415,8 @@
       <field name="report_name">mgmtsystem_infrastructure.report_calibration_plan</field>
       <field name="report_file">mgmtsystem_infrastructure.report_calibration_plan</field>
       <field name="paperformat_id" ref="hola_calidad.portrait"/>
+      <field name="binding_model_id" ref="model_mgmtsystem_calibration" />
+      <field name="binding_type">report</field>
     </record>
   </data>
 </odoo>

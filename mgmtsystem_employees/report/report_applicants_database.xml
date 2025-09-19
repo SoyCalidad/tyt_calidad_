@@ -136,6 +136,8 @@
         ref('mgmtsystem_employees.group_employees_all'),
       ])]"></field>
       <field name="paperformat_id" ref="hola_calidad.landscape"/>
+      <field name="binding_model_id" ref="model_hr_applicant" />
+      <field name="binding_type">report</field>
     </record>
   </data>
 </odoo>

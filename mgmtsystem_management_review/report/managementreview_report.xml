@@ -263,6 +263,8 @@
     <field name="report_name">mgmtsystem_management_review.report_managementreview</field>
     <field name="report_file">mgmtsystem_management_review.report_managementreview</field>
     <field name="paperformat_id" ref="hola_calidad.portrait"/>
+    <field name="binding_model_id" ref="model_management_review" />
+    <field name="binding_type">report</field>
   </record>
   <record id="mgm_review_wizard_view_form" model="ir.ui.view">
     <field name="name">wizard.mgmtsystem_management_review.report.view.form</field>

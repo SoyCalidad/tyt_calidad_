@@ -8,6 +8,8 @@
             <field name="report_name">mgmtsystem_process_integration.general_process_xls</field>
             <field name="report_file">Ficha de proceso</field>
             <field name="print_report_name">object.name</field>
+            <field name="binding_model_id" ref="model_mgmt_categ" />
+            <field name="binding_type">report</field>
         </record>
 
     </data>

@@ -558,6 +558,8 @@
     <field name="report_name">mgmtsystem_process.reporte_process_hola_calidad_template</field>
     <field name="report_file">Mapa de Procesos</field>
     <field name="paperformat_id" ref="mgmtsystem_process.paperformat_lowmargin"/>
+    <field name="binding_model_id" ref="mgmtsystem_process.model_mgmt_categ" />
+    <field name="binding_type">report</field>
   </record>
   <menuitem id="mgmt_process_manual_quality" name="Manual de calidad" parent="mgmtsystem_process.menu_process_root" sequence="40" groups="base.group_no_one,mgmtsystem_process.group_process_readonly,mgmtsystem_process.group_process_readonly_printreport,mgmtsystem_process.group_process_owner,mgmtsystem_process.group_process_all"/>
   <menuitem id="menu_mgmtsystem_qualitymanual" name="Manual de calidad" action="action_mgmtsystem_qualitymanual" sequence="10" parent="mgmt_process_manual_quality"/>

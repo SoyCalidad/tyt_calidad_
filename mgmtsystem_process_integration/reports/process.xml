@@ -14,6 +14,8 @@
                 ref('mgmtsystem_process.group_process_readonly_printreport'),
                 ref('mgmtsystem_process.group_process_owner'),
                 ref('mgmtsystem_process.group_process_all')])]" />
+            <field name="binding_model_id" ref="model_mgmt_process" />
+            <field name="binding_type">report</field>
         </record>
 
 

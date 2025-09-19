@@ -39,6 +39,8 @@
         <field name="report_type">xlsx</field>
         <field name="report_name">report_improve_plan_matrix</field>
         <field name="report_file">Matriz de planificación de cambios</field>
+        <field name="binding_model_id" ref="model_soycalidad_improve_plan_matrix" />
+        <field name="binding_type">report</field>
     </record>
 
 </odoo>

@@ -8,5 +8,7 @@
         <field name="binding_model_id" ref="model_survey_survey"/>
         <field name="binding_type">report</field>
         <field name="print_report_name">'Knowledge and Policy Review'</field>
+        <field name="binding_model_id" ref="model_survey_survey" />
+        <field name="binding_type">report</field>
     </record>
 </odoo>

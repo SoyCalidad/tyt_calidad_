@@ -29,6 +29,8 @@
          <field name="paperformat_id" ref="requirements" />
          <field name="groups_id"
             eval="[(6, 0, [ref('base.group_no_one'), ref('mgmtsystem_legal.group_legal_onlyread_printreport'), ref('mgmtsystem_legal.group_legal_write_printreport'), ref('mgmtsystem_legal.group_legal_all')])]" />
+         <field name="binding_model_id" ref="mgmtsystem_legal.model_legal_plan" />
+         <field name="binding_type">report</field>
       </record>
    </data>
 </odoo>

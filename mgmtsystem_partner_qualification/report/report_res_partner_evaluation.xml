@@ -7,6 +7,8 @@
             <field name="report_type">xlsx</field>
             <field name="report_name">mgmtsystem_partner_qualification.partner_evaluation</field>
             <field name="report_file">Evaluación de seguimiento</field>
+            <field name="binding_model_id" ref="model_res_partner_evaluation_history" />
+            <field name="binding_type">report</field>
         </record>
 
     </data>

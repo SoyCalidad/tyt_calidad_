@@ -12,6 +12,7 @@
         'mgmtsystem_nonconformity',
         'mgmtsystem_audit',
         'soycalidad_improve',
+        'tyt_audit',
     ],
     'data': [
         'security/ir.model.access.csv',

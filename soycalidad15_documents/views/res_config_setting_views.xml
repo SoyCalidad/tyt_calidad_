@@ -82,261 +82,97 @@
                         </div>
                     </div>
                 </setting>
-
-            </xpath>
-
-            <!-- <xpath expr="//block[@id='files_centralization_section']" position="inside">
-                <div class="row mt16 o_settings_container">
-                    <div class="col-xs-12 col-md-6 o_setting_box">
-                        <div class="o_setting_left_pane">
-                            <field name="documents_requirements_settings" />
-                        </div>
-                        <div class="o_setting_right_pane o_documents_right_pane">
-                            <label for="documents_requirements_settings" />
-                            <span class="fa fa-lg fa-building-o"
-                                title="Values set here are company-specific."
-                                aria-label="Values set here are company-specific."
-                                groups="base.group_multi_company" role="img" />
-                            <div class="row">
-                                <div class="text-muted col-md-12">
-                                    Centralize your requirements' documents (contracts, payslips,
-                                    etc.)
-                                </div>
-                            </div>
-                            <div name="documents_requirements_folder" class="content-group"
-                                invisible="documents_requirements_settings == False">
-                                <div class="row mt16">
-                                    <label class="o_form_label col-lg-3"
-                                        for="documents_requirements_folder" string="Workspace" />
-                                    <field name="documents_requirements_folder"
-                                        required="documents_requirements_settings == True" />
-                                </div>
-                            </div>
+                <setting company_dependent="1" help="Centralize your requirements' documents (contracts, payslips, etc.)" string="Requisitos">
+                    <field name="documents_requirements_settings"/>
+                    <div name="documents_requirements_folder" class="content-group" invisible="not documents_requirements_settings">
+                        <div class="row mt16">
+                            <label class="o_form_label col-lg-3" for="documents_requirements_folder" string="Workspace"/>
+                            <field name="documents_requirements_folder" required="documents_requirements_settings" widget="documents_folder_many2one" options="{'no_create': True, 'no_create_edit': True}"/>
                         </div>
                     </div>
-                </div>
-            </xpath>
-
-            <xpath expr="//block[@id='files_centralization_section']" position="inside">
-                <div class="row mt16 o_settings_container">
-                    <div class="col-xs-12 col-md-6 o_setting_box">
-                        <div class="o_setting_left_pane">
-                            <field name="documents_surveys_settings" />
-                        </div>
-                        <div class="o_setting_right_pane o_documents_right_pane">
-                            <label for="documents_surveys_settings" />
-                            <span class="fa fa-lg fa-building-o"
-                                title="Values set here are company-specific."
-                                aria-label="Values set here are company-specific."
-                                groups="base.group_multi_company" role="img" />
-                            <div class="row">
-                                <div class="text-muted col-md-12">
-                                    Centralize your survey' documents (contracts, payslips, etc.)
-                                </div>
-                            </div>
-                            <div name="documents_surveys_folder" class="content-group"
-                                invisible="documents_surveys_settings == False">
-                                <div class="row mt16">
-                                    <label class="o_form_label col-lg-3"
-                                        for="documents_surveys_folder" string="Workspace" />
-                                    <field name="documents_surveys_folder"
-                                        required="documents_surveys_settings == True" />
-                                </div>
-                            </div>
+                </setting>
+                <setting company_dependent="1" help="Centralize your survey' documents (contracts, payslips, etc.)" string="Encuestas">
+                    <field name="documents_surveys_settings"/>
+                    <div name="documents_surveys_folder" class="content-group" invisible="not documents_surveys_settings">
+                        <div class="row mt16">
+                            <label class="o_form_label col-lg-3" for="documents_surveys_folder" string="Workspace"/>
+                            <field name="documents_surveys_folder" required="documents_surveys_settings" widget="documents_folder_many2one" options="{'no_create': True, 'no_create_edit': True}"/>
                         </div>
                     </div>
-                </div>
-            </xpath>
-
-            <xpath expr="//block[@id='files_centralization_section']" position="inside">
-                <div class="row mt16 o_settings_container">
-                    <div class="col-xs-12 col-md-6 o_setting_box">
-                        <div class="o_setting_left_pane">
-                            <field name="documents_target_settings" />
-                        </div>
-                        <div class="o_setting_right_pane o_documents_right_pane">
-                            <label for="documents_target_settings" />
-                            <span class="fa fa-lg fa-building-o"
-                                title="Values set here are company-specific."
-                                aria-label="Values set here are company-specific."
-                                groups="base.group_multi_company" role="img" />
-                            <div class="row">
-                                <div class="text-muted col-md-12">
-                                    Centralize your target' documents (contracts, payslips, etc.)
-                                </div>
-                            </div>
-                            <div name="documents_target_folder" class="content-group"
-                                invisible="documents_target_settings == False">
-                                <div class="row mt16">
-                                    <label class="o_form_label col-lg-3"
-                                        for="documents_target_folder" string="Workspace" />
-                                    <field name="documents_target_folder"
-                                        required="documents_target_settings == True" />
-                                </div>
-                            </div>
+                </setting>
+                <setting company_dependent="1" help="Centralize your target' documents (contracts, payslips, etc.)" string="Objetivos y Medición">
+                    <field name="documents_target_settings"/>
+                    <div name="documents_target_folder" class="content-group" invisible="not documents_target_settings">
+                        <div class="row mt16">
+                            <label class="o_form_label col-lg-3" for="documents_target_folder" string="Workspace"/>
+                            <field name="documents_target_folder" required="documents_target_settings" widget="documents_folder_many2one" options="{'no_create': True, 'no_create_edit': True}"/>
                         </div>
                     </div>
-                </div>
-            </xpath>
-
-            <xpath expr="//block[@id='files_centralization_section']" position="inside">
-                <div class="row mt16 o_settings_container">
-                    <div class="col-xs-12 col-md-6 o_setting_box">
-                        <div class="o_setting_left_pane">
-                            <field name="documents_indicators_settings" />
-                        </div>
-                        <div class="o_setting_right_pane o_documents_right_pane">
-                            <label for="documents_indicators_settings" />
-                            <span class="fa fa-lg fa-building-o"
-                                title="Values set here are company-specific."
-                                aria-label="Values set here are company-specific."
-                                groups="base.group_multi_company" role="img" />
-                            <div class="row">
-                                <div class="text-muted col-md-12">
-                                    Centralize your indicator' documents (contracts, payslips, etc.)
-                                </div>
-                            </div>
-                            <div name="documents_indicators_folder" class="content-group"
-                                invisible="documents_indicators_settings == False">
-                                <div class="row mt16">
-                                    <label class="o_form_label col-lg-3"
-                                        for="documents_indicators_folder" string="Workspace" />
-                                    <field name="documents_indicators_folder"
-                                        required="documents_indicators_settings == True" />
-                                </div>
-                            </div>
+                </setting>
+                <setting company_dependent="1" help="Centralize your indicator' documents (contracts, payslips, etc.)" string="Indicadores">
+                    <field name="documents_indicators_settings"/>
+                    <div name="documents_indicators_folder" class="content-group" invisible="not documents_indicators_settings">
+                        <div class="row mt16">
+                            <label class="o_form_label col-lg-3" for="documents_indicators_folder" string="Workspace"/>
+                            <field name="documents_indicators_folder" required="documents_indicators_settings" widget="documents_folder_many2one" options="{'no_create': True, 'no_create_edit': True}"/>
                         </div>
                     </div>
-                </div>
-            </xpath>
-
-            <xpath expr="//block[@id='files_centralization_section']" position="inside">
-                <div class="row mt16 o_settings_container">
-                    <div class="col-xs-12 col-md-6 o_setting_box">
-                        <div class="o_setting_left_pane">
-                            <field name="documents_maintenance_settings" />
-                        </div>
-                        <div class="o_setting_right_pane o_documents_right_pane">
-                            <label for="documents_maintenance_settings" />
-                            <span class="fa fa-lg fa-building-o"
-                                title="Values set here are company-specific."
-                                aria-label="Values set here are company-specific."
-                                groups="base.group_multi_company" role="img" />
-                            <div class="row">
-                                <div class="text-muted col-md-12">
-                                    Centralize your maintenance' documents (contracts, payslips,
-                                    etc.)
-                                </div>
-                            </div>
-                            <div name="documents_maintenance_folder" class="content-group"
-                                invisible="documents_maintenance_settings == False">
-                                <div class="row mt16">
-                                    <label class="o_form_label col-lg-3"
-                                        for="documents_maintenance_folder" string="Workspace" />
-                                    <field name="documents_maintenance_folder"
-                                        required="documents_maintenance_settings == True" />
-                                </div>
-                            </div>
+                </setting>
+                <setting company_dependent="1" help="Centralize your maintenance' documents (contracts, payslips, etc.)" string="Mantenimiento y Calibración">
+                    <field name="documents_maintenance_settings"/>
+                    <div name="documents_maintenance_folder" class="content-group" invisible="not documents_maintenance_settings">
+                        <div class="row mt16">
+                            <label class="o_form_label col-lg-3" for="documents_maintenance_folder" string="Workspace"/>
+                            <field name="documents_maintenance_folder" required="documents_maintenance_settings" widget="documents_folder_many2one" options="{'no_create': True, 'no_create_edit': True}"/>
                         </div>
                     </div>
-                </div>
-            </xpath>
-
-            <xpath expr="//block[@id='files_centralization_section']" position="inside">
-                <div class="row mt16 o_settings_container">
-                    <div class="col-xs-12 col-md-6 o_setting_box">
-                        <div class="o_setting_left_pane">
-                            <field name="documents_management_review_settings" />
-                        </div>
-                        <div class="o_setting_right_pane o_documents_right_pane">
-                            <label for="documents_management_review_settings" />
-                            <span class="fa fa-lg fa-building-o"
-                                title="Values set here are company-specific."
-                                aria-label="Values set here are company-specific."
-                                groups="base.group_multi_company" role="img" />
-                            <div class="row">
-                                <div class="text-muted col-md-12">
-                                    Centralize your management review' documents (contracts,
-                                    payslips, etc.)
-                                </div>
-                            </div>
-                            <div name="documents_management_review_folder" class="content-group"
-                                invisible="documents_management_review_settings == False">
-                                <div class="row mt16">
-                                    <label class="o_form_label col-lg-3"
-                                        for="documents_management_review_folder" string="Workspace" />
-                                    <field name="documents_management_review_folder"
-                                        required="documents_management_review_settings == True" />
-                                </div>
-                            </div>
+                </setting>
+                <setting company_dependent="1" help="Centralize your management review' documents (contracts, payslips, etc.)" 
+                string="Revisión por la Dirección">
+                    <field name="documents_management_review_settings"/>
+                    <div name="documents_management_review_folder" class="content-group" invisible="not documents_management_review_settings">
+                        <div class="row mt16">
+                            <label class="o_form_label col-lg-3" for="documents_management_review_folder" string="Workspace"/>
+                            <field name="documents_management_review_folder" required="documents_management_review_settings" widget="documents_folder_many2one" options="{'no_create': True, 'no_create_edit': True}"/>
                         </div>
                     </div>
-                </div>
-            </xpath>
-
-            <xpath expr="//block[@id='files_centralization_section']" position="inside">
-                <div class="row mt16 o_settings_container">
-                    <div class="col-xs-12 col-md-6 o_setting_box">
-                        <div class="o_setting_left_pane">
-                            <field name="documents_nonconformities_settings" />
-                        </div>
-                        <div class="o_setting_right_pane o_documents_right_pane">
-                            <label for="documents_nonconformities_settings" />
-                            <span class="fa fa-lg fa-building-o"
-                                title="Values set here are company-specific."
-                                aria-label="Values set here are company-specific."
-                                groups="base.group_multi_company" role="img" />
-                            <div class="row">
-                                <div class="text-muted col-md-12">
-                                    Centralize your non conformities' documents (contracts,
-                                    payslips, etc.)
-                                </div>
-                            </div>
-                            <div name="documents_nonconformities_folder" class="content-group"
-                                invisible="documents_nonconformities_settings == False">
-                                <div class="row mt16">
-                                    <label class="o_form_label col-lg-3"
-                                        for="documents_nonconformities_folder" string="Workspace" />
-                                    <field name="documents_nonconformities_folder"
-                                        required="documents_nonconformities_settings == True" />
-                                </div>
-                            </div>
+                </setting>
+                <setting company_dependent="1" help="Centralize your non conformities' documents (contracts, payslips, etc.)"
+                string="No conformidades"
+                >
+                    <field name="documents_nonconformities_settings"/>
+                    <div name="documents_nonconformities_folder" class="content-group" invisible="not documents_nonconformities_settings">
+                        <div class="row mt16">
+                            <label class="o_form_label col-lg-3" for="documents_nonconformities_folder" string="Workspace"/>
+                            <field name="documents_nonconformities_folder" required="documents_nonconformities_settings" widget="documents_folder_many2one" options="{'no_create': True, 'no_create_edit': True}"/>
                         </div>
                     </div>
-                </div>
-            </xpath>
-
-            <xpath expr="//block[@id='files_centralization_section']" position="inside">
-                <div class="row mt16 o_settings_container">
-                    <div class="col-xs-12 col-md-6 o_setting_box">
-                        <div class="o_setting_left_pane">
-                            <field name="documents_actions_settings" />
-                        </div>
-                        <div class="o_setting_right_pane o_documents_right_pane">
-                            <label for="documents_actions_settings" />
-                            <span class="fa fa-lg fa-building-o"
-                                title="Values set here are company-specific."
-                                aria-label="Values set here are company-specific."
-                                groups="base.group_multi_company" role="img" />
-                            <div class="row">
-                                <div class="text-muted col-md-12">
-                                    Centralize your actions' documents (contracts, payslips, etc.)
-                                </div>
-                            </div>
-                            <div name="documents_actions_folder" class="content-group"
-                                invisible="documents_actions_settings == False">
-                                <div class="row mt16">
-                                    <label class="o_form_label col-lg-3"
-                                        for="documents_actions_folder" string="Workspace" />
-                                    <field name="documents_actions_folder"
-                                        required="documents_actions_settings == True" />
-                                </div>
-                            </div>
+                </setting>
+                <setting company_dependent="1" help="Centralize your actions' documents (contracts, payslips, etc.)"
+                string="Acciones"
+                >
+                    <field name="documents_actions_settings"/>
+                    <div name="documents_actions_folder" class="content-group" invisible="not documents_actions_settings">
+                        <div class="row mt16">
+                            <label class="o_form_label col-lg-3" for="documents_actions_folder" string="Workspace"/>
+                            <field name="documents_actions_folder" required="documents_actions_settings" widget="documents_folder_many2one" options="{'no_create': True, 'no_create_edit': True}"/>
                         </div>
                     </div>
-                </div>
+                </setting>
+                <setting company_dependent="1" help="Centralize your audits' documents (contracts, payslips, etc.)"
+                string="Auditorías"
+                >
+                    <field name="documents_audits_settings"/>
+                    <div name="documents_audits_folder" class="content-group" invisible="not documents_audits_settings">
+                        <div class="row mt16">
+                            <label class="o_form_label col-lg-3" for="documents_audits_folder" string="Workspace"/>
+                            <field name="documents_audits_folder" required="documents_audits_settings" widget="documents_folder_many2one" options="{'no_create': True, 'no_create_edit': True}"/>
+                        </div>
+                    </div>
+                </setting>
             </xpath>
 
+            <!-- 
             <xpath expr="//block[@id='files_centralization_section']" position="inside">
                 <div class="row mt16 o_settings_container">
                     <div class="col-xs-12 col-md-6 o_setting_box">
@@ -351,7 +187,7 @@
                                 groups="base.group_multi_company" role="img" />
                             <div class="row">
                                 <div class="text-muted col-md-12">
-                                    Centralize your audits' documents (contracts, payslips, etc.)
+                                    
                                 </div>
                             </div>
                             <div name="documents_audits_folder" class="content-group"

@@ -161,11 +161,11 @@
                                 <form>
                                     <sheet>
                                         <div class="oe_title" style="font-weight: bold;">
-                                            <t t-esc="'Type'"/>
+                                            <label for="type" />
                                         </div>
                                         <field name="type" string="Type" label="true"/>
                                         <div class="oe_title" style="font-weight: bold;">
-                                            <t t-esc="'Name'"/>
+                                            Name
                                         </div>
                                         <field name="name" string="Name" label="true"/>
                                     </sheet>
@@ -178,7 +178,7 @@
                                 <form>
                                     <sheet>
                                         <div class="oe_title" style="font-weight: bold;">
-                                            <t t-esc="'Name'"/>
+                                            Name
                                         </div>
                                         <field name="name" string="Name" label="true"/>
                                     </sheet>
@@ -191,7 +191,7 @@
                                 <form>
                                     <sheet>
                                         <div class="oe_title" style="font-weight: bold;">
-                                            <t t-esc="'Name'"/>
+                                            Name
                                         </div>
                                         <field name="name" string="Name" label="true"/>
                                     </sheet>

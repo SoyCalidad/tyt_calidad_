@@ -13,6 +13,8 @@
                 ref('mgmtsystem_process.group_process_owner'),
                 ref('mgmtsystem_process.group_process_all'),
             ])]"></field>
+            <field name="binding_model_id" ref="model_documentary_control" />
+            <field name="binding_type">report</field>
         </record>
 
         <!-- <record id="task_custom_report" model="ir.actions.report">

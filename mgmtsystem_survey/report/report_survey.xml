@@ -410,6 +410,8 @@
          <field name="report_name">mgmtsystem_survey.reporte_encuestas_template</field>
          <field name="report_file">Informe de encuesta</field>
          <field name="paperformat_id" ref="hola_calidad.portrait" />
+         <field name="binding_model_id" ref="model_survey_survey" />
+         <field name="binding_type">report</field>
       </record>
    </data>
 </odoo>

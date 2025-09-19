@@ -74,6 +74,8 @@
       <field name="report_file">Contexto de la organización</field>
       <field name="paperformat_id" ref="hola_calidad.portrait"/>
       <field name="groups_id" eval="[(6, 0, [ref('base.group_no_one'), ref('mgmtsystem_context.group_context_onlyread_printreport'), ref('mgmtsystem_context.group_context_write_printreport'), ref('mgmtsystem_context.group_context_all')])]"/>
+      <field name="binding_model_id" ref="model_mgmtsystem_context_internal_issue" />
+      <field name="binding_type">report</field>
     </record>
   </data>
 </odoo>

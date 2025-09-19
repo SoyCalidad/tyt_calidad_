@@ -1,14 +1,29 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <odoo>
     <!-- en odoo 18.0 documents no existe este modelo-->
-    <!-- <record id="folder_view_tree" model="ir.ui.view">
+    <record id="folder_view_tree" model="ir.ui.view">
         <field name="name">folder.view.tree.inherit</field>
-        <field name="model">documents.folder</field>
-        <field name="inherit_id" ref="documents.folder_view_tree"/>
+        <field name="model">documents.document</field>
+        <field name="inherit_id" ref="documents.documents_view_list"/>
         <field name="arch" type="xml">
             <xpath expr="//field[@name='display_name']" position="after">
                 <field name="is_intranet_folder"/>
             </xpath>
         </field>
-    </record> -->
+    </record>
+
+    <record id="folder_view_form" model="ir.ui.view">
+        <field name="name">New folder form inherit</field>
+        <field name="model">documents.document</field>
+        <field name="inherit_id" ref="documents.document_view_form_new_folder" />
+        <field name="arch" type="xml">
+            <xpath expr="//sheet" position="inside">
+                <group string="Intranet">
+                    <group>
+                        <field name="is_intranet_folder"/>
+                    </group>
+                </group>
+            </xpath>
+        </field>
+    </record>
 </odoo>

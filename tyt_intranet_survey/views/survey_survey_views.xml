@@ -17,10 +17,10 @@
             </xpath>
             <xpath expr="//label[@for='is_attempts_limited']" position="attributes">
                 
-                <attribute name="invisible">(access_mode == "intranet" or (access_mode == "public" and users_login_required is False))</attribute>
+                <attribute name="invisible">(access_mode == "intranet" or (access_mode == "public" and users_login_required == False))</attribute>
             </xpath>
             <xpath expr="//field[@name='is_attempts_limited']" position="attributes">
-                <attribute name="invisible">(access_mode == "intranet" or (access_mode == "public" and users_login_required is False))</attribute>
+                <attribute name="invisible">(access_mode == "intranet" or (access_mode == "public" and users_login_required == False))</attribute>
             </xpath>
             <xpath expr="//field[@name='question_and_page_ids']" position="attributes">
                 <attribute name="context">{

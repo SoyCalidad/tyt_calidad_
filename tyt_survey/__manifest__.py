@@ -10,6 +10,7 @@
     'depends': [
         'survey',
         'website',
+        'report_xlsx',
     ],
     'data': [
         'data/tyt.satisfaction.survey.question.csv',

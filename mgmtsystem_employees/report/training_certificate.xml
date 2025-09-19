@@ -31,6 +31,8 @@
     <field name="report_name">mgmtsystem_employees.report_training_certificate</field>
     <field name="report_file">Certificado</field>
     <field name="paperformat_id" ref="cert"/>
+    <field name="binding_model_id" ref="model_mgmtsystem_plan_training_line" />
+    <field name="binding_type">report</field>
   </record>
   <template id="report_training_certificate">
     <div class="header"/>

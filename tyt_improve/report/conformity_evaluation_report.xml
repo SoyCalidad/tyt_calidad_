@@ -8,5 +8,7 @@
         <field name="report_file">Reporte de Evaluación de Conformidad</field>
         <field name="binding_type">action</field>
         <field name="print_report_name">'Evaluación de Conformidad - %s' % object.name</field>
+        <field name="binding_model_id" ref="model_mgmtsystem_nonconformity" />
+        <field name="binding_type">report</field>
     </record>
 </odoo>

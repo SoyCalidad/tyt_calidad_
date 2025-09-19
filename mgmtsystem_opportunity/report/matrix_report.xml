@@ -61,5 +61,7 @@
     ref('base.group_no_one'), 
     ref('mgmtsystem_opportunity.group_opportunity_onlyread_printreport'), 
     ref('mgmtsystem_opportunity.group_opportunity_user_secundario'), ref('mgmtsystem_opportunity.group_opportunity_write_printreport')])]"/>
+    <field name="binding_model_id" ref="model_matrix_matrix" />
+    <field name="binding_type">report</field>
   </record>
 </odoo>

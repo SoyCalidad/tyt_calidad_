@@ -9,6 +9,8 @@
       <field name="report_file">tyt_target.tyt_target_quality_report</field>
       <field name="paperformat_id" ref="tyt_target.landscape"/>
       <field name="groups_id" eval="[(6, 0, [ref('base.group_no_one'), ref('mgmtsystem_target.group_target_user_interno'), ref('mgmtsystem_target.group_target_write_printreport'), ref('mgmtsystem_target.group_target_all')])]"/>
+      <field name="binding_model_id" ref="model_mgmtsystem_target" />
+      <field name="binding_type">report</field>
     </record>
   </data>
 </odoo>

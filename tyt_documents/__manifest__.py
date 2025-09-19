@@ -11,6 +11,7 @@
         'base',
         'documents',
         'tyt_context',
+        'soycalidad15_documents',
     ],
     'data': [
         'views/scope_views.xml',

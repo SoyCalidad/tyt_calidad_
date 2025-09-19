@@ -483,6 +483,8 @@ h1 {
                         ref('mgmtsystem_process.group_process_owner'),
                         ref('mgmtsystem_process.group_process_all'),
                   ])]" />
+                  <field name="binding_model_id" ref="model_mgmt_categ" />
+                  <field name="binding_type">report</field>
             </record>
      
       </data>

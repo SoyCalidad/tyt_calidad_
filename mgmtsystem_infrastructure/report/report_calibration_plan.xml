@@ -10,6 +10,8 @@
       <field name="report_name">mgmtsystem_infrastructure.calibration_plan_report</field>
       <field name="report_file">Programa de calibraciones</field>
       <field name="paperformat_id" ref="hola_calidad.landscape"/>
+      <field name="binding_model_id" ref="model_mgmtsystem_calibration_plan" />
+      <field name="binding_type">report</field>
     </record>
     <record id="calibration_plan_wizard_view_form" model="ir.ui.view">
       <field name="name">calibration.plan.wizard.view.form</field>

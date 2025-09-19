@@ -9,6 +9,8 @@
       <field name="report_file">Matriz de requisitos legales</field>
       <field name="attachment_use">False</field>
       <field name="groups_id" eval="[(6, 0, [ref('base.group_no_one'), ref('mgmtsystem_legal.group_legal_onlyread_printreport'), ref('mgmtsystem_legal.group_legal_write_printreport'), ref('mgmtsystem_legal.group_legal_all')])]"/>
+      <field name="binding_model_id" ref="model_legal_plan" />
+      <field name="binding_type">report</field>
     </record>
     <record id="legal_wizard_view_form" model="ir.ui.view">
       <field name="name">Programa de requisitos legales</field>

@@ -208,6 +208,8 @@
       <field name="report_name">mgmtsystem_infrastructure.reporte_plan_infrastructure2_template</field>
       <field name="report_file">mgmtsystem_infrastructure.reporte_plan_infrastructure2_template</field>
       <field name="paperformat_id" ref="hola_calidad.portrait"/>
+      <field name="binding_model_id" ref="model_mgmtsystem_maintenance" />
+      <field name="binding_type">report</field>
     </record>
   </data>
 </odoo>

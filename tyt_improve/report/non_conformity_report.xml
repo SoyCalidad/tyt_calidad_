@@ -7,5 +7,7 @@
     <field name="report_name">tyt_improve.individual_nonconformity_report</field>
     <field name="report_file">Matriz</field>
     <field name="print_report_name">'Registro de no conformidad - %s' % object.name</field>
+    <field name="binding_model_id" ref="model_mgmtsystem_nonconformity" />
+    <field name="binding_type">report</field>
   </record>
 </odoo>

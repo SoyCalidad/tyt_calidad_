@@ -7,6 +7,8 @@
       <field name="report_type">xlsx</field>
       <field name="report_name">mgmtsystem_infrastructure.report_request</field>
       <field name="report_file">Petición de mantenimiento/calibración</field>
+      <field name="binding_model_id" ref="model_maintenance_request" />
+    <field name="binding_type">report</field>
     </record>
     <record id="maintenance_request_wizard_view_form" model="ir.ui.view">
       <field name="name">maintenance.request.wizard.view.form</field>

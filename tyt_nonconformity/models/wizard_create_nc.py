@@ -11,7 +11,7 @@ class TYTNC(models.TransientModel):
             return
 
         # Buscar líneas con `finding = non_conformity` en el modelo `audit.audit.planning`
-        lines = self.env['audit.audit.planning'].search([
+        lines = self.env['audit.audit.planning'].sudo().search([
             ('audit_report_id', '=', self.report_id.id),
             ('finding', '=', 'non_conformity'),
         ])
