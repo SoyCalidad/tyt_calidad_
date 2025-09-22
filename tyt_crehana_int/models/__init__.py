@@ -6,4 +6,5 @@ from . import (
     learning_path,
     settings,
     general_report,
+    hr_employee_crehana,
 )

@@ -93,6 +93,13 @@
                         <field name="especialidades" />
                         <field name="generacion" />
                     </group>
+                    
+                    <group groups="base.group_no_one">
+                        <button string="Registrar en Crehana" name="action_register_in_crehana" type="object" class="oe_highlight" attrs="{'invisible': [('is_registered_in_crehana', '=', True)]}"/>
+                        <button string="Sincronizar con Crehana" name="tyt_sync_with_crehana" type="object" class="oe_highlight" attrs="{'invisible': [('is_registered_in_crehana', '=', False)]}"/>
+                        <button string="Consultar Cursos" name="tyt_get_crehana_employee_courses" type="object"/>
+                        <button string="Consultar Progreso" name="tyt_get_crehana_employee_progress" type="object"/>
+                    </group>
                 </sheet>
                 <div class="oe_chatter">
                     <!-- <field name="message_follower_ids" widget="mail_followers"/>
