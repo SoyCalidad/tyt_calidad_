@@ -210,6 +210,7 @@ class HrEmployee(models.Model):
                 )
 
             crehana_users_data = self.tyt_get_all_crehana_employees()
+            _logger.info(f"Se obtuvieron {crehana_users_data} usuarios de Crehana")
             # Buscar a nuestro usuario con todos sus datos em la lista de empleados de Crehana se encuentra dentro de data, siendo una lista de diccionarios
             crehana_user_data = [
                 user for user in crehana_users_data if user["id"] == self.x_studio_numero
