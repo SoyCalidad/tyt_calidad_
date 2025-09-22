@@ -209,7 +209,22 @@ class HrEmployee(models.Model):
                     f"No se encontró usuario en Crehana para empleado {self.name}"
                 )
 
-            crehana_user = self.tyt_get_crehana_employee_by_id(self.x_studio_numero)
+            crehana_users_data = self.tyt_get_all_crehana_employees()
+            # Buscar a nuestro usuario con todos sus datos em la lista de empleados de Crehana se encuentra dentro de data, siendo una lista de diccionarios
+            crehana_user_data = [
+                user for user in crehana_users_data if user["id"] == self.x_studio_numero
+            ]
+
+            if not crehana_user_data:
+                _logger.warning(
+                    f"No se encontró usuario en Crehana para empleado {self.name}"
+                )
+                return False
+
+            crehana_user = crehana_user_data[0]
+
+            _logger.info(f"Datos del empleado {self.name}: {crehana_user}")
+
             if crehana_user:
                 _logger.info(f"Datos sincronizados para empleado {self.name}")
                 return True
