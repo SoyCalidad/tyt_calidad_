@@ -200,9 +200,27 @@ class HrEmployee(models.Model):
             return False
 
         try:
+            
+            # Si el campo x_studio_numero está vacío buscar por email
+            # Ejemplo: https://www.crehana.com/api/rest/org/demo-tyt-api/users/?email=abigail.peterson33@example.com
+            email = self.private_email or self.work_email
+            if not email:
+                _logger.warning(
+                    f"Empleado {self.name} no tiene email configurado"
+                )
+                return False
+
+            crehana_user = self.retrieve_user_by_email(email)
+            if crehana_user:
+                self.x_studio_numero = crehana_user["id"]
+                
+            else:
+                _logger.warning(
+                    f"No se encontró usuario en Crehana para empleado {self.name}"
+                )
+
             crehana_user = self.tyt_get_crehana_employee_by_id(self.x_studio_numero)
             if crehana_user:
-                # Aquí puedes agregar lógica para sincronizar campos específicos
                 _logger.info(f"Datos sincronizados para empleado {self.name}")
                 return True
             else:
