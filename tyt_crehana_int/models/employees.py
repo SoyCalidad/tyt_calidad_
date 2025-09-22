@@ -184,13 +184,13 @@ class EmployeeExtension(models.Model):
             response.raise_for_status()
 
             _logger.info(
-                f"Campos personalizados enviados exitosamente para empleado {self.name}"
+                f"Campos personalizados enviados exitosamente para empleado {self.name} {response}"
             )
             return True
 
         except requests.exceptions.RequestException as e:
             _logger.error(
-                f"Error al enviar campos personalizados para {self.name}: {e}"
+                f"Error al enviar campos personalizados para {self.name}: {e} {response}"
             )
             return False
 
