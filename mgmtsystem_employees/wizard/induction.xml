@@ -11,7 +11,7 @@
                         <field name="employee_ids"/>
                     </group>
                     <footer>
-                        <button name="action_print" type="object" string="Descargar" class="oe_highlight" icon="fa-download"/>
+                        <button name="action_print" type="object" string="Descargar" class="oe_highlight" icon="fa-download" title="Descargar"/>
                         <button string="Cancelar" special="cancel"/>
                     </footer>
                 </form>

@@ -65,8 +65,8 @@
                     <field name="name" />
                     <field name="priority" />
                     <templates>
-                        <t t-name="kanban-box">
-                            <div class="oe_kanban_global_click">
+                        <t t-name="card">
+                            <main class="oe_kanban_global_click">
                                 <div class="oe_kanban_vignette">
                                     <div class="oe_attachment">
                                         <div class="row">
@@ -75,7 +75,7 @@
                                                     <t t-set="webimage" t-value="new RegExp('image.*(gif|jpeg|jpg|png)').test(record.mimetype.value)" />
                                                     <div t-if="!webimage" class="o_image" t-att-data-mimetype="record.mimetype.value" />
                                                     <div t-if="webimage" class="o_attachment_image">
-                                                        <img t-attf-src="/web/image/#{record.ir_attachment_id.raw_value}?download=1" />
+                                                        <img t-attf-src="/web/image/#{record.ir_attachment_id.raw_value}?download=1" alt="Archivo adjunto"/>
                                                     </div>
                                                 </a>
                                             </div>
@@ -91,7 +91,7 @@
                                         </div>
                                     </div>
                                 </div>
-                            </div>
+                            </main>
                         </t>
                     </templates>
                 </kanban>

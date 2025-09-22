@@ -324,7 +324,7 @@ class Indicator(models.Model):
     max_goal_progress = fields.Float(string="Max Progress", default=100)
 
     last_medition = fields.Many2one(
-        'mgmtsystem.indicator.history', compute='_compute_current_goal_progress', string='Última medición', compute_sudo=True)
+        'mgmtsystem.indicator.history', compute='_compute_current_goal_progress', string='Última medición', compute_sudo=True, store=True)
     nonconformity_ids = fields.Many2many(
         'mgmtsystem.nonconformity', string='No conformidades', relation='nonconformity_indicator')
 

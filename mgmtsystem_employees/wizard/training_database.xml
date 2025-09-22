@@ -18,7 +18,7 @@
                         <field name="end_date"/>
                     </group>
                     <footer>
-                        <button name="action_print" type="object" string="Descargar base de datos de capacitaciones" class="oe_highlight" icon="fa-download" />
+                        <button name="action_print" type="object" string="Descargar base de datos de capacitaciones" class="oe_highlight" icon="fa-download" title="Descargar"/>
                         <button string="Cancelar" special="cancel"/>
                     </footer>
                 </form>

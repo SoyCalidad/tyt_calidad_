@@ -191,34 +191,36 @@
                 <field name="create_date" />
                 <field name="write_date" />
                 <templates>
-                    <div t-name="kanban-box" t-attf-class="oe_kanban_card oe_kanban_global_click">
-                        <small>
-                            [
-                            <field name="code" />
-                            ]
-                        </small>
-                        <strong>
-                            <field name="name" />
-                        </strong>
-                        <br />
-                        <field name="last_edition" widget="html" />
-                        <div class="o_kanban_record_bottom">
-                            <ul class="list-unstyled">
-                                <li>
-                                    <a type="action" name="%(show_process_editions_action)d">Ver ediciones</a>
-                                </li>
-                            </ul>
-                        </div>
-                        <br />
-                        <div style="width:100%;text-align:right;">
+                    <div t-name="card" t-attf-class="oe_kanban_card oe_kanban_global_click">
+                        <main>
                             <small>
-                                Creación
-                                <field name="create_date" />
-                                <br />
-                                Actualizado
-                                <field name="write_date" />
+                                [
+                                <field name="code" />
+                                ]
                             </small>
-                        </div>
+                            <strong>
+                                <field name="name" />
+                            </strong>
+                            <br />
+                            <field name="last_edition" widget="html" />
+                            <div class="o_kanban_record_bottom">
+                                <ul class="list-unstyled">
+                                    <li>
+                                        <a type="action" name="%(show_process_editions_action)d">Ver ediciones</a>
+                                    </li>
+                                </ul>
+                            </div>
+                            <br />
+                            <div style="width:100%;text-align:right;">
+                                <small>
+                                    Creación
+                                    <field name="create_date" />
+                                    <br />
+                                    Actualizado
+                                    <field name="write_date" />
+                                </small>
+                            </div>
+                        </main>
                     </div>
                 </templates>
             </kanban>
@@ -411,8 +413,8 @@
                 <field name="code" />
                 <field name="sequence" invisible="1" />
                 <templates>
-                    <t t-name="kanban-box">
-                        <div t-attf-class="{{!selection_mode ? 'oe_kanban_color_' + kanban_getcolor(record.color.raw_value) : ''}} oe_kanban_card oe_kanban_global_click oe_applicant_kanban oe_semantic_html_override">
+                    <t t-name="card">
+                        <main t-attf-class="{{!selection_mode ? 'oe_kanban_color_' + kanban_getcolor(record.color.raw_value) : ''}} oe_kanban_card oe_kanban_global_click oe_applicant_kanban oe_semantic_html_override">
                             <div class="o_dropdown_kanban dropdown">
                                 <a class="dropdown-toggle o-no-caret btn"
                                    role="button"
@@ -449,7 +451,7 @@
                                 </div>
                             </div>
                             <div class="oe_clear"></div>
-                        </div>
+                        </main>
                     </t>
                 </templates>
             </kanban>

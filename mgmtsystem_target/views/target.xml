@@ -237,23 +237,25 @@
                     <field name="description" />
                     <field name="state" />
                     <templates>
-                        <div t-name="kanban-box" t-attf-class="oe_kanban_card oe_kanban_global_click">
-                            <small>
-                                [
-                                <field name="code" />
-                                ]
-                            </small>
-                            <strong style="max-width:240px;overflow-wrap: break-word;">
-                                <field name="name" />
-                            </strong>
-                            <br />
-                            <div class="o_kanban_record_bottom">
-                                <ul class="list-unstyled">
-                                    <li>
-                                        <button class="btn-success" type="action" name="%(show_indicator_action)d">Ver Indicadores</button>
-                                    </li>
-                                </ul>
-                            </div>
+                        <div t-name="card" t-attf-class="oe_kanban_card oe_kanban_global_click">
+                            <main>
+                                <small>
+                                    [
+                                    <field name="code" />
+                                    ]
+                                </small>
+                                <strong style="max-width:240px;overflow-wrap: break-word;">
+                                    <field name="name" />
+                                </strong>
+                                <br />
+                                <div class="o_kanban_record_bottom">
+                                    <ul class="list-unstyled">
+                                        <li>
+                                            <button class="btn-success" type="action" name="%(show_indicator_action)d">Ver Indicadores</button>
+                                        </li>
+                                    </ul>
+                                </div>
+                            </main>
                         </div>
                     </templates>
                 </kanban>
@@ -484,7 +486,7 @@
             <field name="model">mgmtsystem.indicator</field>
             <field name="arch" type="xml">
                 <graph string="Indicadores">
-                    <field name="target_id" group="True" />
+                    <field name="target_id" />
                     <field name="name" />
                     <field name="goal_value" type="measure" />
                     <field name="c_goal_progress" type="measure" />
@@ -614,8 +616,8 @@
                     <field name="c_goal_progress" />
                     <field name="max_goal_progress" invisible="1"/>
                     <templates>
-                        <t t-name="kanban-box">
-                            <div t-attf-class="oe_kanban_card oe_kanban_global_click">
+                        <t t-name="card">
+                            <main t-attf-class="oe_kanban_card oe_kanban_global_click">
                                 <div class="o_kanban_content">
                                     <p>
                                         <strong>
@@ -632,7 +634,7 @@
                                 <div class="o_kanban_record_bottom">
                                     <button class="btn-primary" type="action" name="%(show_actions_action)d">Ver acciones</button>
                                 </div>
-                            </div>
+                            </main>
                         </t>
                     </templates>
                 </kanban>

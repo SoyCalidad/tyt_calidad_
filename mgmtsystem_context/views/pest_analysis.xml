@@ -295,14 +295,14 @@
                         <notebook>
                             <page name="risk" string="Riesgos">
                                 <separator string="Riesgos" />
-                                <div class="alert alert-info">
+                                <div class="alert alert-info" role="alert">
                                     RIESGOS: Es la probabilidad de que algo suceda y las consecuencias que puedan afectar positiva o negativamente, los resultado de los procesos u objetivos de la empresa.
                                 </div>
                                 <field name="risk_ids" colspan="2" context="{'default_type': 'risk'}" />
                             </page>
                             <page name="opportunity" string="Oportunidades">
                                 <separator string="Oportunidades" />
-                                <div class="alert alert-info">
+                                <div class="alert alert-info" role="alert">
                                     OPORTUNIDADES: se entiende como los beneficios o las posibilidades que se presentan como consecuencia de la ocurrencia de un determinado evento. Curiosamente, un riesgo, que representa una amenaza algo negativo y la oportunidad algo positivo.
                                 </div>
                                 <field name="opportunity_ids" colspan="2" context="{'default_type': 'opportunity'}" />

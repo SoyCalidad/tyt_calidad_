@@ -123,8 +123,12 @@
                                         <field name="action_id" />
                                         <field name="date_reprogramming" required="reprogramming == True" />
                                         <field name="has_attachments" invisible="1" />
-                                        <button name="action_see_attachments" type="object" icon="fa-files-o" invisible="has_attachments == False" />
-                                        <button name="action_see_attachments" type="object" icon="fa-file" invisible="has_attachments == True" />
+                                        <button name="action_see_attachments" type="object" icon="fa-files-o" 
+                                        title="Ver"
+                                        invisible="has_attachments == False" />
+                                        <button name="action_see_attachments" type="object" icon="fa-file"
+                                        title="Ver"
+                                        invisible="has_attachments == True" />
                                     </list>
                                 </field>
                             </page>

@@ -14,7 +14,7 @@
                         type="object"
                         string="Descargar certificados"
                         class="oe_highlight"
-                        icon="fa-download"/>
+                        icon="fa-download" title="Descargar"/>
                     <button string="Cancelar" special="cancel"/>
                 </footer>
             </form>
@@ -50,7 +50,7 @@
                         type="object"
                         string="Descargar certificados"
                         class="oe_highlight"
-                        icon="fa-download"/>
+                        icon="fa-download" title="Descargar"/>
                     <button string="Cancelar" special="cancel"/>
                 </footer>
             </form>

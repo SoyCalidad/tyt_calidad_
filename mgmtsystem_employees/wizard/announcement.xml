@@ -11,7 +11,7 @@
                         <field name="training_ids"/>
                     </group>
                     <footer>
-                        <button name="export_xls" type="object" default_focus="1" string="Exportar Reporte Excel" class="oe_highlight" context="{'xls_export':1}" icon="fa-download"/>
+                        <button name="export_xls" type="object" default_focus="1" string="Exportar Reporte Excel" class="oe_highlight" context="{'xls_export':1}" icon="fa-download" title="Exportar Reporte Excel"/>
                         <button string="Cancelar" special="cancel"/>
                     </footer>
                 </form>
@@ -28,7 +28,7 @@
                         <field name="training_ids"/>
                     </group>
                     <footer>
-                        <button name="action_print" type="object" string="Descargar Convocatoria" class="oe_highlight" icon="fa-download" context="{'type_action':'announcement'}"/>
+                        <button name="action_print" type="object" string="Descargar Convocatoria" class="oe_highlight" icon="fa-download" context="{'type_action':'announcement'}" title="Descargar" />
                         <button string="Cancelar" special="cancel"/>
                     </footer>
                 </form>
@@ -45,7 +45,7 @@
                         <field name="training_ids"/>
                     </group>
                     <footer>
-                        <button name="action_print" type="object" string="Descargar Asistencia" class="oe_highlight" icon="fa-download" context="{'type_action':'attendance'}"/>
+                        <button name="action_print" type="object" string="Descargar Asistencia" class="oe_highlight" icon="fa-download" context="{'type_action':'attendance'}" title="Descargar" />
                         <button string="Cancelar" special="cancel"/>
                     </footer>
                 </form>

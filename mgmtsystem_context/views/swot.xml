@@ -219,7 +219,7 @@
                     <field name="debilidades" />
                     <field name="amenazas" />
                     <templates>
-                        <div t-name="kanban-box" t-attf-class="oe_kanban_card oe_kanban_global_click">
+                        <div t-name="card" t-attf-class="oe_kanban_card oe_kanban_global_click">
                             <strong>
                                 <field name="fortalezas" />
                             </strong>
@@ -279,7 +279,7 @@
                             <field name="swot_id" invisible="1" />
                         </group>
                         <group>
-                            <div class="alert alert-warning" style="width: 620px; max-width: 100%;">
+                            <div class="alert alert-warning" role="status" style="width: 620px; max-width: 100%;">
                                 <div>
                                     <strong>Advertencia!</strong> La suma de los pesos no puede sobrepasar 1.0.
                                 </div>
@@ -381,7 +381,7 @@
                             <field name="swot_id" invisible="1" />
                         </group>
                         <group>
-                            <div class="alert alert-warning" style="width: 620px; max-width: 100%;">
+                            <div class="alert alert-warning" role="status" style="width: 620px; max-width: 100%;">
                                 <div>
                                     <strong>Advertencia!</strong> La suma de los pesos no puede sobrepasar 1.0.
                                 </div>
@@ -483,7 +483,7 @@
                             <field name="swot_id" invisible="1" />
                         </group>
                         <group>
-                            <div class="alert alert-warning" style="width: 620px; max-width: 100%;">
+                            <div class="alert alert-warning" role="alert" style="width: 620px; max-width: 100%;">
                                 <div>
                                     <strong>Advertencia!</strong> La suma de los pesos no puede sobrepasar 1.0.
                                 </div>
@@ -585,7 +585,7 @@
                             <field name="swot_id" invisible="1" />
                         </group>
                         <group>
-                            <div class="alert alert-warning" style="width: 620px; max-width: 100%;">
+                            <div class="alert alert-warning" style="width: 620px; max-width: 100%;" role="alert">
                                 <div>
                                     <strong>Advertencia!</strong> La suma de los pesos no puede sobrepasar 1.0.
                                 </div>

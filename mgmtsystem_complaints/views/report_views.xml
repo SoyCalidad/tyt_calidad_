@@ -5,7 +5,7 @@
         <field name="model">complaint.complaint</field>
         <field name="arch" type="xml">
             <graph>
-                <field name="categ_id" group="True"/>
+                <field name="categ_id" />
             </graph>
         </field>
     </record>

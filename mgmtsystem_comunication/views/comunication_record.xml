@@ -294,7 +294,7 @@
                             <button type="action" name="%(show_records_action)d" class="oe_stat_button" icon="fa-briefcase">
                                 <field name="records_count" widget="statinfo" string="Minutas de reunión" />
                             </button>
-                            <button type="object" name="action_see_attachments" class="oe_stat_button" icon="fa-files-o">
+                            <button type="object" name="action_see_attachments" class="oe_stat_button" icon="fa-files-o" title="Ver">
                                 <field name="attachs_count" widget="statinfo" string="Adjuntos" />
                             </button>
                             <button type="object"

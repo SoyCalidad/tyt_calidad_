@@ -11,8 +11,8 @@
                     <field name="name" />
                     <field name="priority" />
                     <templates>
-                        <t t-name="kanban-box">
-                            <div class="oe_kanban_global_click">
+                        <t t-name="card">
+                            <main class="oe_kanban_global_click">
                                 <div class="oe_kanban_vignette">
                                     <div class="oe_attachment">
                                         <div class="row">
@@ -21,7 +21,9 @@
                                                     <t t-set="webimage" t-value="new RegExp('image.*(gif|jpeg|jpg|png)').test(record.mimetype.value)" />
                                                     <div t-if="!webimage" class="o_image" t-att-data-mimetype="record.mimetype.value" />
                                                     <div t-if="webimage" class="o_attachment_image">
-                                                        <img t-attf-src="/web/image/#{record.ir_attachment_id.raw_value}?download=1" />
+                                                        <img t-attf-src="/web/image/#{record.ir_attachment_id.raw_value}?download=1" 
+                                                        alt="Archivo adjunto"
+                                                        />
                                                     </div>
                                                 </a>
                                             </div>
@@ -38,7 +40,7 @@
                                         </div>
                                     </div>
                                 </div>
-                            </div>
+                            </main>
                         </t>
                     </templates>
                 </kanban>
@@ -209,13 +211,15 @@
                                         column_invisible="parent.state not in  ['in_process', 'final']" />
                                         <field name="has_attachments" invisible="1" />
                                         <button name="action_see_attachments" type="object" icon="fa-files-o" 
+                                        title="Ver"
                                         invisible="has_attachments == False" />
                                         <button name="action_see_attachments" type="object" icon="fa-file" 
+                                        title="Ver"
                                         invisible="has_attachments == True" />
                                         <field name="observations" 
                                         readonly="state in ['final', 'cancel']" />
                                         <field name="confirm" />
-                                        <button name="print_certficate" type="object" icon="fa-download" />
+                                        <button name="print_certficate" type="object" icon="fa-download" title="Download"/>
                                     </list>
                                 </field>
                                 <field name="employee_ids" invisible="state not in ['elaborate','review','validate','validate_ok']" />
@@ -320,6 +324,7 @@
                     <button name="print_certficate"
                             type="object"
                             string="Descargar"
+                            title="Descargar"
                             class="oe_highlight"
                             icon="fa-download" />
                 </list>

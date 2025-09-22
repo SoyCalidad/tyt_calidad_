@@ -9,7 +9,6 @@ from odoo.exceptions import ValidationError, UserError, RedirectWarning
 from odoo.tools.misc import DEFAULT_SERVER_DATE_FORMAT, format_date
 from odoo.tools.float_utils import float_round, float_is_zero
 from odoo.tools import date_utils
-from odoo.tests.common import Form
 
 
 class ResCompanyEmployeeOnboarding(models.Model):

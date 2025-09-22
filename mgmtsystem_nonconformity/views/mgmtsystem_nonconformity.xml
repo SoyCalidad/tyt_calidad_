@@ -82,8 +82,8 @@
         <field name="name"/>
         <field name="message_needaction_counter"/>
         <templates>
-          <t t-name="kanban-box">
-            <div t-attf-class="#{kanban_color(red)} oe_kanban_global_click">
+          <t t-name="card">
+            <main t-attf-class="#{kanban_color(red)} oe_kanban_global_click">
               <div class="o_project_kanban_main">
                 <div class="o_kanban_card_content">
                   <div>
@@ -107,7 +107,7 @@
                   </div>
                 </div>
               </div>
-            </div>
+            </main>
           </t>
         </templates>
       </kanban>

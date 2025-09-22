@@ -228,7 +228,7 @@
         <field name="type">graph</field>
         <field name="arch" type="xml">
             <graph string="Lineas">
-                <field name="question_id" group="True" />
+                <field name="question_id"  />
                 <!--<field name="value_suggested" /> ESTE CAMPO NO EXISTE en ODOO 15 -->
             </graph>
         </field>
