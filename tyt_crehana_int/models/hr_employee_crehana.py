@@ -209,7 +209,21 @@ class HrEmployee(models.Model):
                     f"No se encontró usuario en Crehana para empleado {self.name}"
                 )
 
-            crehana_users_data = self.tyt_get_all_crehana_employees()
+            url = f"https://www.crehana.com/api/v5/rest/org/{self.organization_slug}/users/"
+
+            headers = {
+                "api-key": self.api_key,
+                "secret-access": self.secret_access,
+                "Content-Type": "application/json",
+            }
+
+            response = requests.get(url, headers=headers, timeout=10)
+            response.raise_for_status()
+
+            response = response.json()
+
+            crehana_users_data = response["data"]
+
             _logger.info(f"Se obtuvieron {crehana_users_data} usuarios de Crehana")
             # Buscar a nuestro usuario con todos sus datos em la lista de empleados de Crehana se encuentra dentro de data, siendo una lista de diccionarios
             crehana_user_data = [
