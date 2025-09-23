@@ -215,7 +215,7 @@ class HrEmployee(models.Model):
             if not settings:
                 _logger.error("No se encontraron credenciales de Crehana")
                 return False
-            url = f"https://www.crehana.com/api/v5/rest/org/{settings.organization_slug}/users/?search={self.x_studio_numero}"
+            url = f"https://www.crehana.com/api/v5/rest/org/{settings.organization_slug}/users/"
 
             headers = {
                 "api-key": settings.api_key,
@@ -223,7 +223,11 @@ class HrEmployee(models.Model):
                 "Content-Type": "application/json",
             }
 
-            response = requests.get(url, headers=headers, timeout=10)
+            params = {
+                "limit": 10000,
+            }
+
+            response = requests.get(url, headers=headers, params=params, timeout=10)
             response.raise_for_status()
 
             response = response.json()
