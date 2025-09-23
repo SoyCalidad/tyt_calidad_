@@ -209,13 +209,11 @@ class HrEmployee(models.Model):
                     f"No se encontró usuario en Crehana para empleado {self.name}"
                 )
 
-            settings = self.env["tyt_crehana.crehana_settings"].get_first_settings()
-
-            url = f"https://www.crehana.com/api/v5/rest/org/{settings.organization_slug}/users/"
+            url = f"https://www.crehana.com/api/v5/rest/org/{self.organization_slug}/users/"
 
             headers = {
-                "api-key": settings.api_key,
-                "secret-access": settings.secret_access,
+                "api-key": self.api_key,
+                "secret-access": self.secret_access,
                 "Content-Type": "application/json",
             }
 
@@ -226,10 +224,14 @@ class HrEmployee(models.Model):
 
             crehana_users_data = response["data"]
 
-            _logger.info(f"Se obtuvieron {crehana_users_data} usuarios de Crehana")
-            crehana_user_data = [
-                user for user in crehana_users_data if user["id"] == self.x_studio_numero
-            ]
+            crehana_user_data = next(
+                (
+                    item
+                    for item in crehana_users_data
+                    if item["id"] == int(self.x_studio_numero)
+                ),
+                None,
+            )
 
             if not crehana_user_data:
                 _logger.warning(
@@ -242,6 +244,19 @@ class HrEmployee(models.Model):
             _logger.info(f"Datos del empleado {self.name}: {crehana_user}")
 
             if crehana_user:
+                mapping = self._get_custom_fields_mapping()
+                for key, meta in mapping.items():
+                    cf = next(
+                        (
+                            x
+                            for x in crehana_user.get("custom_fields", [])
+                            if isinstance(x, dict) and x.get("id") == key
+                        ),
+                        None,
+                    )
+                    if cf:
+                        setattr(self, meta["field"], cf.get("value"))
+
                 _logger.info(f"Datos sincronizados para empleado {self.name}")
                 return True
             else:
