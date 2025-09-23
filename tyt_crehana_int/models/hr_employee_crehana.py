@@ -224,15 +224,19 @@ class HrEmployee(models.Model):
             }
 
             params = {
-                "limit": 10000,
+                "limit": 1000,
+                # "search": self.x_studio_numero,
             }
 
             response = requests.get(url, headers=headers, params=params, timeout=60)
             response.raise_for_status()
-
             response = response.json()
 
             crehana_response_data = response["data"]
+
+            _logger.info(
+                f"Datos de empleados obtenidos de Crehana: {len(crehana_response_data)}"
+            )
 
             crehana_user_data = next(
                 (
