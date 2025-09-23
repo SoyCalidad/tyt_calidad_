@@ -337,13 +337,14 @@ class HrEmployee(models.Model):
 
             # response = self.tyt_create_crehana_employee(payload)
             settings = self.env["tyt_crehana.crehana_settings"].get_first_settings()
-            base_url = (
-                f"https://www.crehana.com/api/v5/rest/org/{settings.organization_slug}"
+            url = (
+                f"https://www.crehana.com/api/v5/rest/org/{settings.organization_slug}/users/"
             )
-            endpoint = self.ENDPOINTS["POST"]["create_user"]
-            url = f"{base_url}{endpoint}"
-            headers = self._get_crehana_headers()
-
+            headers = {
+                "api-key": settings.api_key,
+                "secret-access": settings.secret_access,
+                "Content-Type": "application/json",
+            }
             response = requests.post(url, headers=headers, json=payload, timeout=30)
             response.raise_for_status()
 
