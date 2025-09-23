@@ -1,6 +1,7 @@
 from odoo import api, fields, models
 import requests
 import logging
+from datetime import datetime
 
 _logger = logging.getLogger(__name__)
 
@@ -201,7 +202,7 @@ class HrEmployee(models.Model):
                 )
 
             crehana_user = self.retrieve_user_by_email()
-            if crehana_user:
+            if crehana_user and not self.x_studio_numero:
                 self.x_studio_numero = crehana_user[0]["id"]
 
             else:
@@ -228,11 +229,12 @@ class HrEmployee(models.Model):
 
             crehana_response_data = response["data"]
 
-            for item in crehana_response_data:
-                _logger.info(f"Datos del empleado {self.name}: {item} {item['id']}")
-
             crehana_user_data = next(
-                (item for item in crehana_response_data if item["id"] == int(self.x_studio_numero)),
+                (
+                    item
+                    for item in crehana_response_data
+                    if item["id"] == int(self.x_studio_numero)
+                ),
                 None,
             )
 
@@ -337,15 +339,12 @@ class HrEmployee(models.Model):
 
             # response = self.tyt_create_crehana_employee(payload)
             settings = self.env["tyt_crehana.crehana_settings"].get_first_settings()
-            url = (
-                f"https://www.crehana.com/api/v5/rest/org/{settings.organization_slug}/users/"
-            )
+            url = f"https://www.crehana.com/api/v5/rest/org/{settings.organization_slug}/users/"
             headers = {
                 "api-key": settings.api_key,
                 "secret-access": settings.secret_access,
                 "Content-Type": "application/json",
             }
-
             response = requests.post(url, headers=headers, json=payload, timeout=30)
             response.raise_for_status()
 
@@ -366,7 +365,6 @@ class HrEmployee(models.Model):
                 f"Empleado registrado exitosamente. ID: {self.x_studio_numero}"
             )
 
-            # Enviar campos personalizados
             self._send_custom_fields_to_crehana()
 
         except Exception as e:
@@ -409,7 +407,7 @@ class HrEmployee(models.Model):
         settings = self.env["tyt_crehana.crehana_settings"].get_first_settings()
         if not settings:
             _logger.error("No se encontraron credenciales de Crehana")
-        
+
         url = f"https://www.crehana.com/api/v5/rest/org/{settings.organization_slug}/users/{self.x_studio_numero}/custom-fields/"
 
         headers = {
@@ -418,6 +416,8 @@ class HrEmployee(models.Model):
             "Content-Type": "application/json",
         }
         payload = self._prepare_custom_fields_payload(field_ids)
+
+        _logger.info(f"Enviando campos personalizados a Crehana: {payload}")
 
         try:
             response = requests.post(url, json=payload, headers=headers, timeout=10)
@@ -465,7 +465,13 @@ class HrEmployee(models.Model):
             # Formatear valor según el tipo
             if field_type == "DATE" and field_value:
                 if isinstance(field_value, str):
-                    formatted_value = field_value
+                    try:
+                        # Los datos llegan en este formato: %d/%m/%Y debemos formatear a %Y-%m-%d
+                        formatted_value = datetime.strptime(field_value, "%d/%m/%Y").strftime(
+                            "%Y-%m-%d"
+                        )
+                    except Exception:
+                        formatted_value = field_value
                 else:
                     formatted_value = field_value.strftime("%d-%m-%Y")
             elif field_type == "MULTIPLE":
