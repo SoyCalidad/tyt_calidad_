@@ -104,11 +104,11 @@ class HrEmployee(models.Model):
 
     def tyt_get_crehana_employee_courses(self, user_id=None):
         """Obtiene los cursos asignados a un usuario de Crehana"""
-        if not user_id and hasattr(self, "x_studio_numero"):
-            user_id = self.x_studio_numero
+        if not user_id and hasattr(self, "id_crehana"):
+            user_id = self.id_crehana
 
         if not user_id:
-            _logger.warning("No se proporcionó user_id ni se encontró x_studio_numero")
+            _logger.warning("No se proporcionó user_id ni se encontró id_crehana")
             return []
 
         endpoint = self.ENDPOINTS["GET"]["user_courses"].format(user_id=user_id)
@@ -123,11 +123,11 @@ class HrEmployee(models.Model):
 
     def tyt_get_crehana_employee_progress(self, user_id=None):
         """Obtiene el progreso de un usuario en sus cursos de Crehana"""
-        if not user_id and hasattr(self, "x_studio_numero"):
-            user_id = self.x_studio_numero
+        if not user_id and hasattr(self, "id_crehana"):
+            user_id = self.id_crehana
 
         if not user_id:
-            _logger.warning("No se proporcionó user_id ni se encontró x_studio_numero")
+            _logger.warning("No se proporcionó user_id ni se encontró id_crehana")
             return {}
 
         endpoint = self.ENDPOINTS["GET"]["user_progress"].format(user_id=user_id)
@@ -157,11 +157,11 @@ class HrEmployee(models.Model):
 
     def tyt_update_crehana_employee(self, user_data, user_id=None):
         """Actualiza un usuario existente en Crehana"""
-        if not user_id and hasattr(self, "x_studio_numero"):
-            user_id = self.x_studio_numero
+        if not user_id and hasattr(self, "id_crehana"):
+            user_id = self.id_crehana
 
         if not user_id:
-            _logger.warning("No se proporcionó user_id ni se encontró x_studio_numero")
+            _logger.warning("No se proporcionó user_id ni se encontró id_crehana")
             return None
 
         endpoint = self.ENDPOINTS["POST"]["update_user"].format(user_id=user_id)
@@ -176,11 +176,11 @@ class HrEmployee(models.Model):
 
     def tyt_enroll_crehana_employee(self, course_data, user_id=None):
         """Inscribe un usuario en uno o más cursos de Crehana"""
-        if not user_id and hasattr(self, "x_studio_numero"):
-            user_id = self.x_studio_numero
+        if not user_id and hasattr(self, "id_crehana"):
+            user_id = self.id_crehana
 
         if not user_id:
-            _logger.warning("No se proporcionó user_id ni se encontró x_studio_numero")
+            _logger.warning("No se proporcionó user_id ni se encontró id_crehana")
             return None
 
         endpoint = self.ENDPOINTS["POST"]["enroll_user"].format(user_id=user_id)
@@ -197,14 +197,14 @@ class HrEmployee(models.Model):
         """Sincroniza los datos del empleado con Crehana"""
         try:
 
-            if not hasattr(self, "x_studio_numero") or not self.x_studio_numero:
+            if not hasattr(self, "id_crehana") or not self.id_crehana:
                 _logger.warning(
                     f"Empleado {self.name} no tiene número de usuario de Crehana configurado"
                 )
 
             crehana_user = self.retrieve_user_by_email()
-            if crehana_user and not self.x_studio_numero:
-                self.x_studio_numero = crehana_user[0]["id"]
+            if crehana_user and not self.id_crehana:
+                self.id_crehana = crehana_user[0]["id"]
 
             else:
                 _logger.warning(
@@ -242,7 +242,7 @@ class HrEmployee(models.Model):
                 (
                     item
                     for item in crehana_response_data
-                    if item["id"] == int(self.x_studio_numero)
+                    if item["id"] == int(self.id_crehana)
                 ),
                 None,
             )
@@ -361,7 +361,7 @@ class HrEmployee(models.Model):
 
             _logger.info(f"Respuesta de Crehana: {str(response)}")
 
-            self.x_studio_numero = response.get("id")
+            self.id_crehana = response.get("id")
             self.user_crehana = (
                 response.get("user").get("username") if response.get("user") else ""
             )
@@ -371,7 +371,7 @@ class HrEmployee(models.Model):
             message = "El empleado fue registrado exitosamente"
 
             _logger.info(
-                f"Empleado registrado exitosamente. ID: {self.x_studio_numero}"
+                f"Empleado registrado exitosamente. ID: {self.id_crehana}"
             )
 
             self._send_custom_fields_to_crehana()
@@ -415,7 +415,7 @@ class HrEmployee(models.Model):
         :param field_ids: Lista de IDs de campos específicos a enviar
         :return: True si fue exitoso, False en caso contrario
         """
-        if not self.x_studio_numero:
+        if not self.id_crehana:
             _logger.warning(f"Empleado {self.name} no tiene ID de Crehana registrado")
             return False
 
@@ -424,7 +424,7 @@ class HrEmployee(models.Model):
             _logger.error("No se encontraron credenciales de Crehana")
             return False  # Agregado return False que faltaba
 
-        url = f"https://www.crehana.com/api/v5/rest/org/{settings.organization_slug}/users/{self.x_studio_numero}/custom-fields/"
+        url = f"https://www.crehana.com/api/v5/rest/org/{settings.organization_slug}/users/{self.id_crehana}/custom-fields/"
 
         headers = {
             "api-key": settings.api_key,
@@ -508,7 +508,7 @@ class HrEmployee(models.Model):
         """
         Versión alternativa que serializa manualmente el JSON para garantizar comillas dobles
         """
-        if not self.x_studio_numero:
+        if not self.id_crehana:
             _logger.warning(f"Empleado {self.name} no tiene ID de Crehana registrado")
             return False
 
@@ -517,7 +517,7 @@ class HrEmployee(models.Model):
             _logger.error("No se encontraron credenciales de Crehana")
             return False
 
-        url = f"https://www.crehana.com/api/v5/rest/org/{settings.organization_slug}/users/{self.x_studio_numero}/custom-fields/"
+        url = f"https://www.crehana.com/api/v5/rest/org/{settings.organization_slug}/users/{self.id_crehana}/custom-fields/"
 
         headers = {
             "api-key": settings.api_key,
@@ -639,7 +639,7 @@ class HrEmployee(models.Model):
             1946: {"field": "especialidades", "type": "MULTIPLE"},
             1951: {"field": "generacion", "type": "MULTIPLE"},
             1937: {"field": "perfil", "type": "MULTIPLE"},
-            1942: {"field": "no_empleado", "type": "TEXT"},
+            1942: {"field": "x_studio_numero", "type": "TEXT"},
             1947: {"field": "proyecto_asignado_1", "type": "MULTIPLE"},
             1938: {"field": "puesto", "type": "MULTIPLE"},
             1943: {"field": "area", "type": "MULTIPLE"},
@@ -657,8 +657,8 @@ class HrEmployee(models.Model):
 
     @api.model
     def tyt_sync_all_employees_with_crehana(self):
-        """Sincroniza todos los empleados que tienen configurado x_studio_numero con Crehana"""
-        employees_with_crehana = self.search([("x_studio_numero", "!=", False)])
+        """Sincroniza todos los empleados que tienen configurado id_crehana con Crehana"""
+        employees_with_crehana = self.search([("id_crehana", "!=", False)])
         results = {"success": 0, "failed": 0, "total": len(employees_with_crehana)}
 
         for employee in employees_with_crehana:

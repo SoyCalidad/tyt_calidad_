@@ -160,7 +160,7 @@ class EmployeeExtension(models.Model):
         :param field_ids: Lista de IDs de campos específicos a enviar
         :return: True si fue exitoso, False en caso contrario
         """
-        if not self.x_studio_numero:
+        if not self.id_crehana:
             _logger.warning(f"Empleado {self.name} no tiene ID de Crehana registrado")
             return False
 
@@ -169,7 +169,7 @@ class EmployeeExtension(models.Model):
             _logger.error("No se encontraron credenciales de Crehana")
             return False
 
-        url = f"https://www.crehana.com/api/v5/rest/org/{settings.organization_slug}/users/{self.x_studio_numero}/custom-fields/"
+        url = f"https://www.crehana.com/api/v5/rest/org/{settings.organization_slug}/users/{self.id_crehana}/custom-fields/"
 
         headers = {
             "api-key": settings.api_key,
@@ -271,7 +271,7 @@ class EmployeeExtension(models.Model):
                 data = response.json()
                 _logger.info(f"Datos obtenidos: {data}")
 
-                self.x_studio_numero = data.get("id")
+                self.id_crehana = data.get("id")
                 self.user_crehana = (
                     data.get("user").get("username") if data.get("user") else ""
                 )
@@ -312,7 +312,7 @@ class EmployeeExtension(models.Model):
         """
         Acción independiente para sincronizar solo los campos personalizados
         """
-        if not self.x_studio_numero:
+        if not self.id_crehana:
             return {
                 "type": "ir.actions.client",
                 "tag": "display_notification",
@@ -412,7 +412,7 @@ class EmployeeExtension(models.Model):
                 _logger.info(f"Datos obtenidos: {data}")
 
                 if data and isinstance(data, list) and len(data) > 0:
-                    self.x_studio_numero = data[0].get("id")
+                    self.id_crehana = data[0].get("id")
                 else:
                     _logger.error(
                         f"No se encontró el usuario en Crehana para el email: {email}"
@@ -428,7 +428,7 @@ class EmployeeExtension(models.Model):
             message = "Problemas con los datos, contacte con su administrador"
             title = "Datos faltantes"
 
-            if not self.x_studio_numero:
+            if not self.id_crehana:
                 message = "No se encontró identificador de crehana"
             else:
                 headers = {
@@ -458,7 +458,7 @@ class EmployeeExtension(models.Model):
 
                     data = {
                         "team_id": str(path_selected.id_path),
-                        "user_organization_id": str(self.x_studio_numero),
+                        "user_organization_id": str(self.id_crehana),
                     }
 
                     try:
@@ -506,7 +506,7 @@ class EmployeeExtension(models.Model):
         settings = self.env["tyt_crehana.crehana_settings"].get_first_settings()
 
         if settings:
-            url = f"https://www.crehana.com/api/rest/org/{settings.organization_slug}/course_user_report/{self.x_studio_numero}/"
+            url = f"https://www.crehana.com/api/rest/org/{settings.organization_slug}/course_user_report/{self.id_crehana}/"
 
             headers = {
                 "api-key": settings.api_key,
@@ -690,9 +690,9 @@ class EmployeeExtension(models.Model):
 
         settings = self.env["tyt_crehana.crehana_settings"].get_first_settings()
 
-        if settings and self.x_studio_numero:
+        if settings and self.id_crehana:
 
-            url = f"https://www.crehana.com/api/v5/rest/org/{settings.organization_slug}/users/{self.x_studio_numero}/custom-fields/"
+            url = f"https://www.crehana.com/api/v5/rest/org/{settings.organization_slug}/users/{self.id_crehana}/custom-fields/"
             headers = {
                 "api-key": settings.api_key,
                 "secret-access": settings.secret_access,
@@ -718,7 +718,7 @@ class EmployeeExtension(models.Model):
 
         settings = self.env["tyt_crehana.crehana_settings"].get_first_settings()
 
-        if settings and self.x_studio_numero:
+        if settings and self.id_crehana:
 
             url = f"https://www.crehana.com/api/v5/rest/org/{settings.organization_slug}/reports/learning/general/?user_email={self.private_email or self.work_email}"
             headers = {
