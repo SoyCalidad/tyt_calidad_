@@ -2,6 +2,7 @@ from odoo import api, fields, models
 import requests
 import logging
 from datetime import datetime
+import json
 
 _logger = logging.getLogger(__name__)
 
@@ -413,6 +414,7 @@ class HrEmployee(models.Model):
         settings = self.env["tyt_crehana.crehana_settings"].get_first_settings()
         if not settings:
             _logger.error("No se encontraron credenciales de Crehana")
+            return False  # Agregado return False que faltaba
 
         url = f"https://www.crehana.com/api/v5/rest/org/{settings.organization_slug}/users/{self.x_studio_numero}/custom-fields/"
 
@@ -420,23 +422,146 @@ class HrEmployee(models.Model):
             "api-key": settings.api_key,
             "secret-access": settings.secret_access,
             "Content-Type": "application/json",
+            "Accept": "application/json",  # Agregado para mejor compatibilidad
         }
 
         payload = self._prepare_custom_fields_payload(field_ids)
 
-        _logger.info(f"Enviando campos personalizados a Crehana: {payload}")
+        # Asegurar que el payload esté en formato JSON válido con comillas dobles
+        try:
+            # Convertir a JSON string y luego de vuelta a dict para asegurar formato correcto
+            json_string = json.dumps(payload, ensure_ascii=False)
+            validated_payload = json.loads(json_string)
+
+            # Log del payload con formato JSON correcto
+            _logger.info(f"Enviando campos personalizados a Crehana para {self.name}:")
+            _logger.info(f"URL: {url}")
+            _logger.info(f"Payload JSON: {json_string}")
+
+        except (TypeError, ValueError) as e:
+            _logger.error(f"Error al serializar payload para {self.name}: {str(e)}")
+            return False
 
         try:
-            response = requests.post(url, json=payload, headers=headers, timeout=10)
+            # Usar el payload validado y enviar como JSON
+            response = requests.post(
+                url,
+                json=validated_payload,  # requests.post con json= automáticamente serializa y usa comillas dobles
+                headers=headers,
+                timeout=30,  # Aumentado timeout para operaciones que podrían ser lentas
+            )
+
+            # Log de la respuesta para debugging
+            _logger.info(f"Status Code: {response.status_code}")
+            _logger.info(f"Response Headers: {dict(response.headers)}")
+
+            # Intentar loggear la respuesta (si es JSON)
+            try:
+                response_json = response.json()
+                _logger.info(
+                    f"Response JSON: {json.dumps(response_json, ensure_ascii=False)}"
+                )
+            except:
+                _logger.info(f"Response Text: {response.text}")
+
             response.raise_for_status()
+
             _logger.info(
                 f"Campos personalizados enviados exitosamente para empleado {self.name}"
             )
+            return True
+
+        except requests.exceptions.Timeout:
+            _logger.error(f"Timeout al enviar campos personalizados para {self.name}")
+            return False
+
+        except requests.exceptions.ConnectionError:
+            _logger.error(
+                f"Error de conexión al enviar campos personalizados para {self.name}"
+            )
+            return False
+
+        except requests.exceptions.HTTPError as e:
+            _logger.error(
+                f"Error HTTP al enviar campos personalizados para {self.name}: {e}"
+            )
+            _logger.error(f"Status Code: {response.status_code}")
+            _logger.error(f"Response: {response.text}")
+            return False
+
+        except Exception as e:
+            _logger.error(
+                f"Error inesperado al enviar campos personalizados para {self.name}: {str(e)}"
+            )
+            return False
+
+    # MÉTODO ALTERNATIVO: Si aún tienes problemas, usa este método que serializa manualmente
+    def _send_custom_fields_to_crehana_alternative(self, field_ids=None):
+        """
+        Versión alternativa que serializa manualmente el JSON para garantizar comillas dobles
+        """
+        if not self.x_studio_numero:
+            _logger.warning(f"Empleado {self.name} no tiene ID de Crehana registrado")
+            return False
+
+        settings = self.env["tyt_crehana.crehana_settings"].get_first_settings()
+        if not settings:
+            _logger.error("No se encontraron credenciales de Crehana")
+            return False
+
+        url = f"https://www.crehana.com/api/v5/rest/org/{settings.organization_slug}/users/{self.x_studio_numero}/custom-fields/"
+
+        headers = {
+            "api-key": settings.api_key,
+            "secret-access": settings.secret_access,
+            "Content-Type": "application/json",
+            "Accept": "application/json",
+        }
+
+        payload = self._prepare_custom_fields_payload(field_ids)
+
+        try:
+            # Serializar manualmente el payload a JSON string
+            json_payload = json.dumps(
+                payload, ensure_ascii=False, separators=(",", ":")
+            )
+
+            _logger.info(f"Enviando campos personalizados a Crehana para {self.name}:")
+            _logger.info(f"Payload JSON: {json_payload}")
+
+            # Enviar usando data= en lugar de json= para control total del formato
+            response = requests.post(
+                url,
+                data=json_payload,  # Enviar como string JSON serializado manualmente
+                headers=headers,
+                timeout=30,
+            )
+
+            _logger.info(f"Status Code: {response.status_code}")
+
+            try:
+                response_json = response.json()
+                _logger.info(
+                    f"Response: {json.dumps(response_json, ensure_ascii=False)}"
+                )
+            except:
+                _logger.info(f"Response Text: {response.text}")
+
+            response.raise_for_status()
+
+            _logger.info(
+                f"Campos personalizados enviados exitosamente para empleado {self.name}"
+            )
+            return True
 
         except Exception as e:
             _logger.error(
                 f"Error al enviar campos personalizados para {self.name}: {str(e)}"
             )
+            if "response" in locals():
+                _logger.error(f"Status Code: {response.status_code}")
+                _logger.error(f"Response: {response.text}")
+            return False
 
     def _prepare_custom_fields_payload(self, field_ids=None):
         """
@@ -474,9 +599,9 @@ class HrEmployee(models.Model):
                 if isinstance(field_value, str):
                     try:
                         # Los datos llegan en este formato: %d/%m/%Y debemos formatear a %Y-%m-%d
-                        formatted_value = datetime.strptime(field_value, "%d/%m/%Y").strftime(
-                            "%Y-%m-%d"
-                        )
+                        formatted_value = datetime.strptime(
+                            field_value, "%d/%m/%Y"
+                        ).strftime("%Y-%m-%d")
                     except Exception:
                         formatted_value = field_value
                 else:
