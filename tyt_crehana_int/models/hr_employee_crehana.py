@@ -393,6 +393,12 @@ class HrEmployee(models.Model):
             },
         }
 
+    def action_sync_custom_fields_crehana(self):
+        """
+        Acción independiente para sincronizar solo los campos personalizados
+        """
+        return self._send_custom_fields_to_crehana()
+
     def _send_custom_fields_to_crehana(self, field_ids=None):
         """
         Envía campos personalizados a Crehana
@@ -415,6 +421,7 @@ class HrEmployee(models.Model):
             "secret-access": settings.secret_access,
             "Content-Type": "application/json",
         }
+
         payload = self._prepare_custom_fields_payload(field_ids)
 
         _logger.info(f"Enviando campos personalizados a Crehana: {payload}")
