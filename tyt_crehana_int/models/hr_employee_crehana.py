@@ -227,7 +227,7 @@ class HrEmployee(models.Model):
                 "limit": 10000,
             }
 
-            response = requests.get(url, headers=headers, params=params, timeout=10)
+            response = requests.get(url, headers=headers, params=params, timeout=60)
             response.raise_for_status()
 
             response = response.json()
