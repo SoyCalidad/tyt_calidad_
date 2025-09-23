@@ -226,24 +226,24 @@ class HrEmployee(models.Model):
 
             response = response.json()
 
-            crehana_users_data = response["data"]
+            crehana_response_data = response["data"]
+
+            for item in crehana_response_data:
+                _logger.info(f"Datos del empleado {self.name}: {item} {item['id']}")
 
             crehana_user_data = next(
-                (
-                    item
-                    for item in crehana_users_data
-                    if item["id"] == int(self.x_studio_numero)
-                ),
+                (item for item in crehana_response_data if item["id"] == int(self.x_studio_numero)),
                 None,
             )
+
+            _logger.info(f"Datos del empleado type dict {type(crehana_user_data)}")
 
             if not crehana_user_data:
                 _logger.warning(
                     f"No se encontró usuario en Crehana para empleado {self.name}"
                 )
-                return False
 
-            crehana_user = crehana_user_data[0]
+            crehana_user = crehana_user_data
 
             _logger.info(f"Datos del empleado {self.name}: {crehana_user}")
 
@@ -262,12 +262,10 @@ class HrEmployee(models.Model):
                         setattr(self, meta["field"], cf.get("value"))
 
                 _logger.info(f"Datos sincronizados para empleado {self.name}")
-                return True
             else:
                 _logger.warning(
                     f"No se encontró usuario en Crehana para empleado {self.name}"
                 )
-                return False
         except Exception as e:
             _logger.error(
                 f"Error al sincronizar empleado {self.name} con Crehana: {str(e)}"
@@ -367,14 +365,7 @@ class HrEmployee(models.Model):
             )
 
             # Enviar campos personalizados
-            if self._send_custom_fields_to_crehana():
-                _logger.info(
-                    "Todos los campos personalizados fueron enviados exitosamente"
-                )
-            else:
-                _logger.warning(
-                    "Hubo problemas al enviar algunos campos personalizados"
-                )
+            self._send_custom_fields_to_crehana()
 
         except Exception as e:
             _logger.error(f"Error en registro de empleado en Crehana: {str(e)}")
@@ -413,23 +404,30 @@ class HrEmployee(models.Model):
             _logger.warning(f"Empleado {self.name} no tiene ID de Crehana registrado")
             return False
 
-        endpoint = self.ENDPOINTS["POST"]["custom_fields"].format(
-            user_id=self.x_studio_numero
-        )
+        settings = self.env["tyt_crehana.crehana_settings"].get_first_settings()
+        if not settings:
+            _logger.error("No se encontraron credenciales de Crehana")
+        
+        url = f"https://www.crehana.com/api/v5/rest/org/{settings.organization_slug}/users/{self.x_studio_numero}/custom-fields/"
+
+        headers = {
+            "api-key": settings.api_key,
+            "secret-access": settings.secret_access,
+            "Content-Type": "application/json",
+        }
         payload = self._prepare_custom_fields_payload(field_ids)
 
         try:
-            response = self._make_crehana_request("POST", endpoint, data=payload)
+            response = requests.post(url, json=payload, headers=headers, timeout=10)
+            response.raise_for_status()
             _logger.info(
                 f"Campos personalizados enviados exitosamente para empleado {self.name}"
             )
-            return True
 
         except Exception as e:
             _logger.error(
                 f"Error al enviar campos personalizados para {self.name}: {str(e)}"
             )
-            return False
 
     def _prepare_custom_fields_payload(self, field_ids=None):
         """
