@@ -209,11 +209,13 @@ class HrEmployee(models.Model):
                     f"No se encontró usuario en Crehana para empleado {self.name}"
                 )
 
-            url = f"https://www.crehana.com/api/v5/rest/org/{self.organization_slug}/users/"
+            settings = self.env["tyt_crehana.crehana_settings"].get_first_settings()
+
+            url = f"https://www.crehana.com/api/v5/rest/org/{settings.organization_slug}/users/"
 
             headers = {
-                "api-key": self.api_key,
-                "secret-access": self.secret_access,
+                "api-key": settings.api_key,
+                "secret-access": settings.secret_access,
                 "Content-Type": "application/json",
             }
 
