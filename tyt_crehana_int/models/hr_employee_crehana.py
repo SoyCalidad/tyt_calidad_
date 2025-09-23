@@ -345,6 +345,7 @@ class HrEmployee(models.Model):
                 "secret-access": settings.secret_access,
                 "Content-Type": "application/json",
             }
+
             response = requests.post(url, headers=headers, json=payload, timeout=30)
             response.raise_for_status()
 
