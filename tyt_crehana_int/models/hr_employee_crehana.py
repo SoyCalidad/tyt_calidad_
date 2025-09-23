@@ -223,10 +223,10 @@ class HrEmployee(models.Model):
                 "Content-Type": "application/json",
             }
 
-            params = {
-                "limit": 1000,
-                # "search": self.x_studio_numero,
-            }
+            if self.crehana_email:
+                params = {"search": self.crehana_email}
+            else:
+                params = {"limit": 10000}
 
             response = requests.get(url, headers=headers, params=params, timeout=60)
             response.raise_for_status()
@@ -237,6 +237,7 @@ class HrEmployee(models.Model):
             _logger.info(
                 f"Datos de empleados obtenidos de Crehana: {len(crehana_response_data)}"
             )
+            _logger.info(f"Datos de empleados obtenidos de Crehana: {crehana_response_data}")
 
             crehana_user_data = next(
                 (
@@ -246,8 +247,6 @@ class HrEmployee(models.Model):
                 ),
                 None,
             )
-
-            _logger.info(f"Datos del empleado type dict {type(crehana_user_data)}")
 
             if not crehana_user_data:
                 _logger.warning(
@@ -259,6 +258,7 @@ class HrEmployee(models.Model):
             _logger.info(f"Datos del empleado {self.name}: {crehana_user}")
 
             if crehana_user:
+                self.crehana_email = crehana_user.get("email")
                 mapping = self._get_custom_fields_mapping()
                 for key, meta in mapping.items():
                     cf = next(
@@ -370,9 +370,7 @@ class HrEmployee(models.Model):
             title = "Registrado"
             message = "El empleado fue registrado exitosamente"
 
-            _logger.info(
-                f"Empleado registrado exitosamente. ID: {self.id_crehana}"
-            )
+            _logger.info(f"Empleado registrado exitosamente. ID: {self.id_crehana}")
 
             self._send_custom_fields_to_crehana()
 

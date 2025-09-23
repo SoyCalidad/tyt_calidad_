@@ -50,6 +50,7 @@ class EmployeeExtension(models.Model):
     turnos = fields.Char(string="Turnos")
     fecha_ingreso = fields.Date(string="Fecha de Ingreso")
     sexo = fields.Char(string="Sexo")
+    crehana_email = fields.Char(string="Email Crehana")
 
     @api.model
     def search(self, args, offset=0, limit=None, order=None, count=False):
