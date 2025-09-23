@@ -215,7 +215,7 @@ class HrEmployee(models.Model):
             if not settings:
                 _logger.error("No se encontraron credenciales de Crehana")
                 return False
-            url = f"https://www.crehana.com/api/v5/rest/org/{settings.organization_slug}/users/"
+            url = f"https://www.crehana.com/api/v5/rest/org/{settings.organization_slug}/users/?search={self.x_studio_numero}"
 
             headers = {
                 "api-key": settings.api_key,
