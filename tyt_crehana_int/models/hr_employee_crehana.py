@@ -612,6 +612,9 @@ class HrEmployee(models.Model):
             else:  # TEXT
                 formatted_value = str(field_value) if field_value else ""
 
+            # No añadir si el valor es vacío
+            if not formatted_value:
+                continue
             custom_fields.append(
                 {"id": field_id, "value": formatted_value, "type": field_type}
             )
