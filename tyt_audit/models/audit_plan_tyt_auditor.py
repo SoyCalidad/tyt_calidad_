@@ -131,7 +131,8 @@ class AuditPlanTytAuditor(models.Model):
         records = super(AuditPlanTytAuditor, self).create(vals_list)
 
         # Lista de IDs de sitios
-        site_ids = [1, 2, 10, 9, 8, 7, 5, 3]
+        #site_ids = [1, 2, 10, 9, 8, 7, 5, 3]
+        site_ids = []
 
         # Preparar los valores para los registros de audit.plan.tyt.auditor.schedule
         schedule_vals = []

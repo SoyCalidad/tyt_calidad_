@@ -25,7 +25,7 @@ class LearningPath(models.Model):
             'name': 'Lista de rutas de aprendizaje',
             'type': 'ir.actions.act_window',
             'res_model': 'tyt_crehana.learning_path',
-            'view_mode': 'tree',
+            'view_mode': 'list',
             'view_id': self.env.ref('tyt_crehana_int.tyt_crehana_learning_path_tree_view').id,
             'target': 'current'
         }

@@ -198,11 +198,13 @@ class Validation(models.Model):
             body += 'Validación de documento'
         notification_ids = []
         for step in steps:
-            notification_ids.append((0, 0, {
-                'res_partner_id': step.user_id.partner_id.id,
-                'notification_type': 'inbox'}))
-        self.message_post(body=body, message_type='notification',
-                          subtype='mail.mt_comment', author_id=2, notification_ids=notification_ids)
+            notification_ids.append(step.user_id.partner_id.id)
+        self.message_post(
+            body=body, 
+            message_type='notification',
+            subtype='mail.mt_comment', 
+            partner_ids=notification_ids,
+        )
 
     # Version inherit
 

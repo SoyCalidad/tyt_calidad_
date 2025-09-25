@@ -127,7 +127,7 @@ class ReportQualityPlanXlsx(models.AbstractModel):
         sheet.write('I2', quality_plan.week or '', s_data_format)
         
         sheet.write('G3', 'Sitio:', s_data_bold_format)
-        sheet.write('I3', quality_plan.site.x_name or '', s_data_format)
+        sheet.write('I3', quality_plan.site.name or '', s_data_format)
         
         # Cabecera 
         sheet.set_row(6, 15)

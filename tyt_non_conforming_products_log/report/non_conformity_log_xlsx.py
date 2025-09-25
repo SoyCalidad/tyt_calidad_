@@ -185,7 +185,7 @@ class NonConformityOutputXlsxReport(models.AbstractModel):
         row = 9
         for record in records:
             row += 1
-            sheet.write(row, 1, record.site.x_name or '', format21_left)  # Columna B
+            sheet.write(row, 1, record.site.name or '', format21_left)  # Columna B
             sheet.write(row, 2, record.report_id or '', format21_left)  # Columna C
             sheet.write(row, 3, record.campaign.name or '', format21_left)  # Columna D
             sheet.write(row, 4, record.report_date or '', format21_date_center)  # Columna E

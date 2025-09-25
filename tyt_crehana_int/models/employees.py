@@ -378,7 +378,7 @@ class EmployeeExtension(models.Model):
                     'type': 'ir.actions.act_window',
                     'name': 'Reporte del Empleado',
                     'res_model': 'tyt.crehana.general.report',
-                    'view_mode': 'tree',
+                    'view_mode': 'list',
                     'res_id': False,
                     'domain': [('crehana_user_email', '=', email)],
                     'target': 'current',

@@ -343,7 +343,7 @@ class Indicator(models.Model):
         return {
             'name': 'Periodos',
             'view_type': 'form',
-            'view_mode': 'tree',
+            'view_mode': 'list',
             'views': [(view_id, 'form')],
             'res_model': 'mgmtsystem.indicator',
             'view_id': view_id,

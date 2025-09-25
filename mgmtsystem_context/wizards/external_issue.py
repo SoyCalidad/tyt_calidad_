@@ -137,8 +137,8 @@ class ExternalIssueCreate(models.TransientModel):
 
         return {
             'name': 'Abrir',
-            'view_mode': 'tree',
-            'views': [[tree_view_id, 'tree'], [form_view_id, 'form']],
+            'view_mode': 'list',
+            'views': [[tree_view_id, 'list'], [form_view_id, 'form']],
             'res_model': 'mgmtsystem.context.external_issue',
             'type': 'ir.actions.act_window',
             'target': 'current',

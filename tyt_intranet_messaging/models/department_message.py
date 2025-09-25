@@ -2,6 +2,11 @@ from odoo import api, fields, models, _
 from odoo.exceptions import UserError
 from random import randint
 
+import logging 
+
+
+_logger = logging.getLogger(__name__)
+
 
 class DepartmentMessageTag(models.Model):
     _name = 'tyt.intranet.department_message.tag'
@@ -60,8 +65,7 @@ class DepartmentMessage(models.Model):
     read_status_ids = fields.One2many('tyt.intranet.department_message.read_status', 'department_message_id', string='Read Status')
 
     @api.onchange('gps')
-    def onchange_gps(self):
-        self.ensure_one()
+    def _onchange_gps(self):
         if self.gps and self.job_id:
             groups = self.env['res.groups'].search([('job_id', '=', self.job_id.id)])
             self.group_ids = [(6, 0, [groups.ids])] if groups else []

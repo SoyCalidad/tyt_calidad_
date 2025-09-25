@@ -174,7 +174,9 @@ class Audit(models.Model):
                     message = message + '<li>' + employee_id + '</li>'
             if message != "":
                 each.message_post(
-                    body='Empleados que no recibieron notificación:<br></br>'+message)
+                    body='Empleados que no recibieron notificación:<br></br>'+message,
+                    body_is_html=True,    
+                )
 
     def get_emails(self):
         emails = []

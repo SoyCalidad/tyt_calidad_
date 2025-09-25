@@ -370,7 +370,7 @@ class Applicant(models.Model):
                     'name': 'Lista de encuestas realizadas por el aplicante',
                     'type': 'ir.actions.act_window',
                     'res_model': 'survey.user_input',
-                    'view_mode': 'tree',
+                    'view_mode': 'list',
                     'target': 'current',
                     'domain': [('id', 'in', inputs.ids)]
                 }

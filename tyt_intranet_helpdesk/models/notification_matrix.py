@@ -1,5 +1,9 @@
 from odoo import api, fields, models, _
 
+import logging 
+
+_logger = logging.getLogger(__name__)
+
 
 class MessageType(models.Model):
     _name = 'tyt.intranet.message_type'
@@ -46,18 +50,22 @@ class NotificationMatrixLine(models.Model):
         'tyt.intranet.notification_matrix.line.message_type', 'notification_matrix_line_id',
         string='Notification Matrix Line Message Types')
 
+
     @api.onchange('notification_matrix_id')
     def _onchange_create_matrix_line_message_type_ids(self):
         for record in self:
             record.matrix_line_message_type_ids = [(5, 0, 0)]
             if record.notification_matrix_id:
-                message_types = self.env['tyt.intranet.message_type'].search([])
+                message_types = self.env['tyt.intranet.message_type'].sudo().search([])
                 lines_to_create = []
                 for message_type in message_types:
                     lines_to_create.append((0, 0, {
                         'message_type_id': message_type.id,
+                        'notification_matrix_line_id': record.id,
+                        'user_ids': [],
                     }))
                 record.matrix_line_message_type_ids = lines_to_create
+
 
 
 class NotificationMatrix(models.Model):
@@ -67,5 +75,8 @@ class NotificationMatrix(models.Model):
 
     name = fields.Char(string='Name')
     site_id = fields.Many2one('tyt_studio.sites', string='Site')
-    matrix_line_ids = fields.One2many('tyt.intranet.notification_matrix.line', 'notification_matrix_id',
-                                      string='Notification Matrix Lines')
+    matrix_line_ids = fields.One2many(
+        'tyt.intranet.notification_matrix.line', 
+        'notification_matrix_id',
+        string='Notification Matrix Lines'
+    )

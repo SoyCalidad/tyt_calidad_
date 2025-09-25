@@ -104,7 +104,7 @@ class MgmtCateg(models.Model):
         result = super(MgmtCateg, self).write(values)
 
         if message != "":
-            self.message_post(body=message)
+            self.message_post(body=message, body_is_html=True)
 
         return result
 
@@ -116,7 +116,7 @@ class MgmtCateg(models.Model):
         return {
             'name': 'Conclusiones y recomendaciones',
             'view_type': 'form',
-            'view_mode': 'tree',
+            'view_mode': 'list',
             'views': [(view_id, 'form')],
             'res_model': 'mgmt.categ',
             'view_id': view_id,
@@ -309,7 +309,7 @@ class Process(models.Model):
         result = super(Process, self).write(values)
 
         if message != "":
-            self.message_post(body=message)
+            self.message_post(body=message, body_is_html=True)
 
         return result
 

@@ -97,15 +97,15 @@ class ChangeRequest(models.Model):
         Cambia el estado a 'Aprobada' y termina el proceso
         """
         for each in self:
-            notification_ids = []
             body = 'Su cambio ha sido aprobado'
             try:
                 if each.employee_id and each.employee_id.user_id and each.employee_id.user_id.partner_id:
-                    notification_ids.append((0, 0, {
-                        'res_partner_id': each.employee_id.user_id.partner_id.id,
-                        'notification_type': 'inbox'}))
-                    self.message_post(body=body, message_type='notification',
-                                      subtype_xmlid='mail.mt_comment', author_id=2, notification_ids=notification_ids)
+                    self.message_post(
+                        body=body, 
+                        message_type='notification',
+                        subtype_xmlid='mail.mt_comment', 
+                        partner_ids=[each.employee_id.user_id.partner_id.id],
+                    )
                                     # "subtype" parameter to "subtype_xmlid" to make it compatible with Odoo 15 
             except:
                 pass
@@ -144,6 +144,8 @@ class ChangeRequest(models.Model):
         name = self.description or ''
         body = 'Solicitud de cambio'
 
+        if not self.responsible_id:
+            return 
         # Envía una notificación mediante correo
         mail_content = "  Saludos  " + self.responsible_id.name + \
             ",<br/>Hay una solicitud de cambio asignada a usted:  " + name
@@ -156,13 +158,13 @@ class ChangeRequest(models.Model):
         self.env['mail.mail'].create(main_content).send()
 
         # Envía una notificación mediante el sistema
-        notification_ids = []
-        notification_ids.append((0, 0, {
-            'res_partner_id': self.responsible_id.partner_id.id,
-            'notification_type': 'inbox'}))
-        self.message_post(body=body, message_type='notification',
-                          subtype_xmlid='mail.mt_comment', author_id=2, notification_ids=notification_ids)
-                        # "subtype" parameter to "subtype_xmlid" to make it compatible with Odoo 15 
+        self.message_post(
+            body=body,
+            message_type='notification',
+            subtype_xmlid='mail.mt_comment', 
+            partner_ids=[self.responsible_id.partner_id.id],
+        )
+    
     def action_maintenanceplan_views(self):
         type_action = self._context.get('type_action', '')
         if type_action == '':

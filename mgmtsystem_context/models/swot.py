@@ -370,7 +370,7 @@ class CrossSWOT(models.Model):
             'name': _('Acciones'),
             'res_model': 'mgmtsystem.action',
             'view_type': 'form',
-            'view_mode': 'tree,form',
+            'view_mode': 'list,form',
             'target': 'current',
             'domain': domain,
         }

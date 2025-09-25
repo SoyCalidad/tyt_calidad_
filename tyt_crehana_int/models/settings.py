@@ -2,7 +2,7 @@
 import requests
 from odoo import models, fields, api, _
 
-from odoo.exceptions import UserError
+from odoo.exceptions import UserError, ValidationError
 
 import logging
 _logger = logging.getLogger(__name__)
@@ -132,7 +132,7 @@ class MyModuleSettings(models.Model):
                     'type': 'ir.actions.act_window',
                     'name': 'Reporte de avances',
                     'res_model': 'tyt_crehana.user_progress',
-                    'view_mode': 'tree',
+                    'view_mode': 'list',
                     'res_id': self.id,
                     'target': 'current'
                 }
@@ -151,7 +151,7 @@ class MyModuleSettings(models.Model):
             'name': 'Lista de rutas de aprendizaje',
             'type': 'ir.actions.act_window',
             'res_model': 'tyt_crehana.learning_path',
-            'view_mode': 'tree',
+            'view_mode': 'list',
             'view_id': self.env.ref('tyt_crehana_int.tyt_crehana_learning_path_tree_view').id,
             'target': 'current'
         }
@@ -323,7 +323,7 @@ class MyModuleSettings(models.Model):
                 'type': 'ir.actions.act_window',
                 'name': 'Reporte General',
                 'res_model': 'tyt.crehana.general.report',
-                'view_mode': 'tree',
+                'view_mode': 'list',
             }
         except requests.exceptions.RequestException as e:
             _logger.error(f"Error al obtener datos: {e}")

@@ -17,6 +17,7 @@
     'data': [
         'security/ir.model.access.csv',
         'security/security.xml',
+        
         'views/audit_plan_tyt_auditor.xml',
         'views/audit_actions.xml',
         'views/audit_application_form.xml',
@@ -28,6 +29,7 @@
         'views/audit_audit_planning.xml',
         'views/audit_audit_planning_template.xml',
         'views/start_process_audit_audit.xml',
+        
         'reports/report_paperformat.xml',
         'reports/report_layout.xml',
         'reports/report_informe.xml',

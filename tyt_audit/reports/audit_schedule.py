@@ -20,7 +20,7 @@ class IndividualReport(models.AbstractModel):
         try:
             for matrix in matrixes:
                 
-                if not matrix.sites_id or not matrix.sites_id.x_name:
+                if not matrix.sites_id or not matrix.sites_id.name:
                     raise UserError("Debe asignar un 'SITIO' para descargar el reporte de 'Cronograma de Auditoría'.")
 
                 # Definir algunos formatos de celda
@@ -149,7 +149,7 @@ class IndividualReport(models.AbstractModel):
                     col_K = 10
 
                     # Escribir Nombre del Sitio en Columna C
-                    site_name = schedule.tyt_sites_id.x_name or ''
+                    site_name = schedule.tyt_sites_id.name or ''
                     sheet1.write(start_row, col_C, site_name, s1_sites_row)
 
                     # Escribir Auditores Responsables en Columna D
@@ -185,7 +185,7 @@ class IndividualReport(models.AbstractModel):
                 # =====================================================
 
 
-                sheet2 = workbook.add_worksheet(str(matrix.sites_id.x_name))
+                sheet2 = workbook.add_worksheet(str(matrix.sites_id.name))
 
 
                 # Configuración del formato general del archivo

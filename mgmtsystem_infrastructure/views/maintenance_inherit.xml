@@ -53,7 +53,7 @@
                 <xpath expr="//t[@t-name='card']/div" position="before">
                     <div class="o_kanban_image mb-2">
                         <img
-                            t-att-src="kanban_image('maintenance.equipment', 'image_128', record.id.raw_value)"
+                            t-att-src="'/web/image/maintenance.equipment/' + record.id.raw_value + '/image_variant_1920'"
                             alt="Equipment"
                             class="o_image_64_contain" />
                     </div>

@@ -1,5 +1,8 @@
 from odoo import api, exceptions, fields, models, _
 
+import logging 
+
+_logger = logging.getLogger(__name__)
 
 class Survey(models.Model):
     _inherit = 'survey.survey'
@@ -18,8 +21,7 @@ class Survey(models.Model):
     ], string='Publish State', default='draft', copy=False)
 
     @api.onchange('gps')
-    def onchange_gps(self):
-        self.ensure_one()
+    def _onchange_gps(self):
         if self.gps and self.job_id:
             groups = self.env['res.groups'].search([('job_id', '=', self.job_id.id)])
             self.group_ids = [(6, 0, groups.ids)] if groups else []

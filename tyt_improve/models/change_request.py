@@ -29,15 +29,14 @@ class ChangeRequest(models.Model):
         Cambia el estado a 'Aprobada' y termina el proceso
         """
         for each in self:
-            notification_ids = []
             body = 'Su cambio ha sido aprobado'
             try:
                 if each.employee_id and each.employee_id.user_id and each.employee_id.user_id.partner_id:
-                    notification_ids.append((0, 0, {
-                        'res_partner_id': each.employee_id.user_id.partner_id.id,
-                        'notification_type': 'inbox'}))
-                    self.message_post(body=body, message_type='notification',
-                                      subtype_xmlid='mail.mt_comment', author_id=2, notification_ids=notification_ids)
+                    self.message_post(
+                        body=body, message_type='notification',
+                        subtype_xmlid='mail.mt_comment', 
+                        partner_ids=[each.employee_id.user_id.partner_id.id],
+                    )
                                     # "subtype" parameter to "subtype_xmlid" to make it compatible with Odoo 15 
             except:
                 pass

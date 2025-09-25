@@ -1,6 +1,6 @@
 from odoo import fields, models, api
 
-class ManagementReviewTeamLine2(models.Model):
+class ManagementReviewLocation(models.Model):
     _name = "management.review.location"
     _description = "Ubicación"
 
@@ -18,13 +18,13 @@ class ManagementReview(models.Model):
     location_id = fields.Many2one('management.review.location', string='Ubicación')
 
 
-class ManagementReviewTeamLine2(models.Model):
+class ManagementReviewLine2Clausule(models.Model):
     _name = "management.review.line2.clausule"
     _description = "Integrante comité de calidad"
 
     name = fields.Char(string='Nombre')
 
-class ManagementReviewTeamLine2(models.Model):
+class ManagementReviewLine2Process(models.Model):
     _name = "management.review.line2.process"
     _description = "Integrante comité de calidad"
 

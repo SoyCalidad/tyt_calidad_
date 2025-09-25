@@ -64,6 +64,6 @@
     </record>
 
     <menuitem id="menu_tyt_creahana_general_report" name="Reporte General"
-        parent="menu_crehana_root" action="tyt_creahana_general_report_action" sequence="20" />
+        parent="menu_crehana_root" action="tyt_creahana_general_report_action" sequence="110" />
 
 </odoo>

@@ -2,6 +2,7 @@
 
 from odoo import api, models, fields
 from odoo.http import request
+from odoo.exceptions import ValidationError
 import uuid
 from io import BytesIO
 import base64
@@ -100,6 +101,9 @@ class Requisition(models.Model):
             self['periodo_id'] = current_period.id
             self['request_date'] = current_period.f1
             self['closing_date'] = current_period.f2
+            
+        else:
+            raise ValidationError("No hay registros del periodo. Seleccione otra fecha")
 
     def get_share_url(self):
         self.ensure_one()
@@ -206,7 +210,7 @@ class Requisition(models.Model):
             'name': 'Asistencias',
             'type': 'ir.actions.act_window',
             'res_model': 'tyt_recruitment.attendance',
-            'view_mode': 'tree,form',
+            'view_mode': 'list,form',
             'domain': [('requisition_id', '=', self.id)],
         }
     
@@ -260,8 +264,8 @@ class Campaign(models.Model):
             'name': 'Lista de aplicantes',
             'type': 'ir.actions.act_window',
             'res_model': 'tyt_recruitment.applicant',
-            'view_mode': 'tree',
-            'views': [(self.env.ref('tyt_recruitment.template_applicants').id, 'tree')],
+            'view_mode': 'list',
+            'views': [(self.env.ref('tyt_recruitment.template_applicants').id, 'list')],
             'target': 'new',
             'domain': [('id', 'in', applicants.ids)],
             'context': {

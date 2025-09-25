@@ -35,12 +35,12 @@ class ProcessEdition(models.Model):
             body = ''
         for emp in employees:
             if emp.user_id and emp.user_id.partner_id:
-                notification_ids = []
-                notification_ids.append((0, 0, {
-                    'res_partner_id': emp.user_id.partner_id.id,
-                    'notification_type': 'inbox'}))
-                self.message_post(body=body, message_type='notification',
-                                  subtype='mail.mt_comment', notification_ids=notification_ids)
+                self.message_post(
+                    body=body, 
+                    message_type='notification',
+                    subtype='mail.mt_comment', 
+                    partner_ids=[emp.user_id.partner_id.id],
+                )
 
     def notify_to_users(self):
         """

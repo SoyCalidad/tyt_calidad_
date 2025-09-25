@@ -61,12 +61,14 @@ class EmailBasic(models.AbstractModel):
     def notify_users_by_system(self, partners, body):
         notification_ids = []
         for partner in partners:
-            notification_ids = []
-            notification_ids.append((0, 0, {
-                'res_partner_id': partner.id,
-                'notification_type': 'inbox'}))
-        self.message_post(body=body, message_type='notification',
-                          subtype_id=self.env.ref('mail.mt_comment').id, author_id=2, notification_ids=notification_ids)
+            notification_ids.append(partner.id)
+        self.message_post(
+            body=body,
+            message_type='notification',
+            #subtype_id=self.env.ref('mail.mt_comment').id, 
+            subtype_xmlid='mail.mt_comment',
+            partner_ids=notification_ids
+        )
                         # to Odoo 15's compatibility, change subtype='mail.mt_comment' --> subtype_id=self.env.ref('mail.mt_comment').id
     def notify_users_by_activity(self, user, body):
         self.env.cr.execute("""SELECT id FROM ir_model 

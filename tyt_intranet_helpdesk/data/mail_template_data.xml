@@ -49,7 +49,7 @@
                                                     Información
                                                 </strong>
                                                 <br/><br/>
-                                                <strong>Sitio: </strong><t t-out="object.site_id.x_name or ''"/>
+                                                <strong>Sitio: </strong><t t-out="object.site_id.name or ''"/>
                                                 <br/>
                                                 <strong>Área de servicio: </strong><t t-out="object.service_area_id.name or ''"/>
                                                 <br/>

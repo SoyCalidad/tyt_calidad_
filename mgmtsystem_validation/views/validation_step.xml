@@ -26,7 +26,7 @@
                 <field name="check" 
                     readonly="current_user_can_validate == False"/>
                 <field name="date" />
-                <field name="current_user_can_validate" invisible="1" />
+                <field name="current_user_can_validate" column_invisible="1" invisible="1" />
             </list>
         </field>
     </record>

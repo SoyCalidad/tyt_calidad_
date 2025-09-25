@@ -77,7 +77,7 @@
             </group>
 
             <group string="Respuestas">
-              <field name="survey_answer_ids" mode="tree,form" string="Respuestas" readonly="1">
+              <field name="survey_answer_ids" mode="list,form" string="Respuestas" readonly="1">
                 <list editable="bottom">
                   <field name="id" />
                   <field name="question_id" />
@@ -133,7 +133,7 @@
             
             <notebook>
               <page string="Formación académica">
-                <field name="academics_ids" mode="tree,kanban,form" readonly="1" >
+                <field name="academics_ids" mode="list,kanban,form" readonly="1" >
                   <list readonly="1">
                     <field name="degree" width="200px" />
                     <field name="institution" width="200px" />
@@ -142,7 +142,7 @@
                 </field>
               </page>
               <page string="Hijos">
-                <field name="children_ids" mode="tree,kanban,form" readonly="1" >
+                <field name="children_ids" mode="list,kanban,form" readonly="1" >
                   <list readonly="1">
                     <field name="name" width="200px" />
                     <field name="age" width="200px" />
@@ -150,7 +150,7 @@
                 </field>
               </page>
               <page string="Historial Laboral">
-                <field name="job_history_ids" mode="tree,kanban,form" >
+                <field name="job_history_ids" mode="list,kanban,form" >
                   <list >
                     <field name="company_name" />
                     <field name="start_date" width="200px" />
@@ -161,7 +161,7 @@
                 </field>
               </page>
               <page string="Referencias">
-                <field name="reference_ids" mode="tree,kanban,form" readonly="1" >
+                <field name="reference_ids" mode="list,kanban,form" readonly="1" >
                   <list readonly="1">
                     <field name="name" />
                     <field name="type" width="200px" />

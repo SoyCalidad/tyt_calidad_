@@ -337,7 +337,7 @@ class ProcessEdition(models.Model):
 
         message = self.check_changes(values, "")
         if message != "":
-            self.message_post(body=message)
+            self.message_post(body=message, body_is_html=True)
 
         return result
 

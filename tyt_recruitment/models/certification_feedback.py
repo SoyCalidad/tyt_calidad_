@@ -92,3 +92,4 @@ class CertificationFeeback(models.Model):
         
         if template and email_to:
             template.with_context(email_to=email_to).send_mail(self.id, force_send=True)
+    

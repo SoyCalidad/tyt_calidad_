@@ -226,7 +226,7 @@ class PlanInfrastructure(models.Model):
         result = super(PlanInfrastructure, self).write(values)
 
         if message != "":
-            self.message_post(body=message)
+            self.message_post(body=message, body_is_html=True)
 
         return result
 

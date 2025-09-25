@@ -42,7 +42,7 @@
                                 </a>
                             </td>
                             <td><span t-field="record.create_date"/></td>
-                            <td><span t-field="record.site_id.x_name"/></td>
+                            <td><span t-field="record.site_id.name"/></td>
                             <td><span t-field="record.service_area_id.name"/></td>
                             <td><span t-field="record.message_type_id.name"/></td>
                         </tr>
@@ -135,7 +135,7 @@
                                     </div>
                                     <div>
                                         <strong class="col-lg-2">Site: </strong>
-                                        <span class="col-lg-10" t-field="entry.site_id.x_name"/>
+                                        <span class="col-lg-10" t-field="entry.site_id.name"/>
                                     </div>
                                     <div>
                                         <strong class="col-lg-2">Service Area: </strong>

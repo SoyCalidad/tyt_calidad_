@@ -27,7 +27,6 @@
                             class="oe_highlight"
                             invisible="state != 'validate_ok'"/>
 
-                    <!--invisible="(active == False or state != 'validate_ok')"-->    
                 </xpath>            
                 <xpath expr="//sheet/div[3]" position="replace">
                     <div>
@@ -51,30 +50,16 @@
                 </xpath>
                 <xpath expr="//sheet/notebook/page[1]" position="replace">
                     <page string="Cronograma" >
-                        <!--<field name="schedule_ids" domain="[('sites_id', '=', sites_id)]">-->
-                        <field name="filtered_schedule_ids" mode="tree,form" context="{'form_view_ref':'tyt_audit.view_audit_plan_schedule_form'}">
-                        <!--<field name="schedule_ids" domain="[('sites_id', '=', sites_id)]" context="{'default_audit_plan_id': active_id, 'default_sites_id': sites_id}" mode="tree,form">-->
+                        <field name="filtered_schedule_ids" mode="list,form" context="{'form_view_ref':'tyt_audit.view_audit_plan_schedule_form'}">
+                        
                             <list>
-                                <!--<field name="name" readonly="1"/>-->
                                 <field name="description_id" readonly="1"/>
                                 <field name="activity_id" readonly="1"/>
                                 <field name="sites_id" readonly="1"/>
                                 <field name="responsible_auditors_id" widget="many2many_tags"/>
                                 <field name="total_weeks" readonly="1"/>
                                 <button name="%(action_audit_plan_schedule_line_ids)d" type="action" string="Ver Fechas" class="btn-primary"/>
-                            </list>
-                            <!--
-                            <form string="Cronograma de Auditoría">
-                                <sheet>
-                                    <group>
-                                        <field name="description_id"/>
-                                        <field name="activity_id"/>
-                                        <field name="sites_id" />
-                                        <field name="responsible_auditors_id"/>
-                                    </group>
-                                </sheet>
-                            </form>
-                            -->                          
+                            </list>                      
                         </field>
                     </page>                 
                 </xpath>                                
@@ -97,7 +82,7 @@
             </field>
         </record>
         <!-- Window Actions-->
-
+ 
         <record id="mgmtsystem_audit.audit_plan_action" model="ir.actions.act_window">
             <field name="name">Cronograma de Auditorías - General</field>
             <field name="type">ir.actions.act_window</field>

@@ -8,4 +8,5 @@ access_tyt_studio_survey_area,access.tyt.studio.survey.area,model_tyt_studio_sur
 access_tyt_studio_ano,access.tyt.studio..ano,model_tyt_studio_ano,base.group_user,1,1,1,1
 access_tyt_studio_period_type,access.tyt.studio.period_type,model_tyt_studio_period_type,base.group_user,1,1,1,1
 access_tyt_studio_period,access.tyt.studio.period,model_tyt_studio_period,base.group_user,1,1,1,1
-
+tyt_studio.access_tyt_studio_gnnnn,access_tyt_studio_gnnnn,tyt_studio.model_tyt_studio_gnnnn,base.group_user,1,1,1,1
+tyt_studio.access_tyt_studio_mes,access_tyt_studio_mes,tyt_studio.model_tyt_studio_mes,base.group_user,1,1,1,1

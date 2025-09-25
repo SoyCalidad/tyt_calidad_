@@ -8,6 +8,9 @@ from odoo import api, fields, models
 from odoo.exceptions import UserError, ValidationError
 from PIL import Image
 from PIL import Image, UnidentifiedImageError
+import logging 
+
+_logger = logging.getLogger(__name__)
 
 
 class IndividualReport(models.AbstractModel):
@@ -73,7 +76,7 @@ class IndividualReport(models.AbstractModel):
 
                 sheet.merge_range('G5:H5', f'FECHA DE AUDITORIA: ({audit_date_str})', title_format2)
 
-                sheet.merge_range('I5:J5', 'SITIO: ( '+ (matrix.tyt_sites_related_id.x_name or '') +')', title_format2)
+                sheet.merge_range('I5:J5', 'SITIO: ( '+ (matrix.tyt_sites_related_id.name or '') +')', title_format2)
 
                 sheet.merge_range(
                     'I2:J4', '', logo_box_format )
@@ -199,5 +202,5 @@ class IndividualReport(models.AbstractModel):
 
 
         except Exception as e:
-            print(e)
-            raise UserError("Hubo un error al generar el reporte")
+            _logger.info(f"{e}")
+            raise UserError(f"Hubo un error al generar el reporte {e}")

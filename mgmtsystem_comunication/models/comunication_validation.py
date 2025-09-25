@@ -125,11 +125,13 @@ class ComunicationPlanLine(models.Model):
                 date = each.date_release.strftime('%d/%m/%Y')
                 body = "Plan de comunicación pendiente: " + each.resume + ' el ' + date
                 for partner in each.partner_ids:
-                    notification_ids.append((0, 0, {
-                        'res_partner_id': partner.id,
-                        'notification_type': 'inbox'}))
-                self.message_post(body=body, message_type='notification',
-                                  subtype='mail.mt_comment', author_id=2, notification_ids=notification_ids)
+                    notification_ids.append(partner.id)
+                self.message_post(
+                    body=body, 
+                    message_type='notification',
+                    subtype='mail.mt_comment', 
+                    partner_ids=notification_ids,
+                )
             except:
                 pass
 

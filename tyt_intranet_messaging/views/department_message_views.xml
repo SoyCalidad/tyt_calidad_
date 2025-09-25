@@ -56,7 +56,7 @@
                                 <group>
                                     <field name="job_id"/>
                                     <field name="department_id"/>
-                                    <field name="gps" widget="boolean_toggle"/>
+                                    <field name="gps" />
                                     <field name="group_ids" widget="many2many_tags"/>
                                 </group>
                             </group>

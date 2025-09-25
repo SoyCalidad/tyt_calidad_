@@ -155,7 +155,7 @@
         <form string="">
           <sheet>
             <group>
-              <field name="maintenance_plan_id"/>
+              <field name="maintenance_plan_id" required="1"/>
             </group>
           </sheet>
           <footer>

@@ -7,7 +7,7 @@
       <field name="arch" type="xml">
         <form>
           <group>
-            <field name="record_meeting_id" string="Minuta de Reunión"/>
+            <field name="record_meeting_id" string="Minuta de Reunión" required="1"/>
           </group>
           <p>
                         Escoja una Minuta de reunión para imprimir
