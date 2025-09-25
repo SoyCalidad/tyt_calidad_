@@ -705,7 +705,9 @@ class HrEmployee(models.Model):
                     continue
 
                 if employee:
-                    _logger.info(f"Sincronizando empleado: {data['first_name']} {data['last_name']}")
+                    _logger.info(
+                        f"Sincronizando empleado: {data['first_name']} {data['last_name']}"
+                    )
                     employee.write(
                         {
                             "id_crehana": data["id"],
