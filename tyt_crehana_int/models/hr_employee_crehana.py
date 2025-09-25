@@ -237,7 +237,6 @@ class HrEmployee(models.Model):
             _logger.info(
                 f"Datos de empleados obtenidos de Crehana: {len(crehana_response_data)}"
             )
-            _logger.info(f"Datos de empleados obtenidos de Crehana: {crehana_response_data}")
 
             crehana_user_data = next(
                 (
@@ -667,3 +666,65 @@ class HrEmployee(models.Model):
 
         _logger.info(f"Sincronización masiva completada: {results}")
         return results
+
+    @api.model
+    def tyt_sync_from_crehana(self):
+        """Obtiene todos los empleados de Crehana y los sincroniza con Odoo"""
+        settings = self.env["tyt_crehana.crehana_settings"].get_first_settings()
+        if not settings:
+            _logger.error("No se encontraron credenciales de Crehana")
+            return False
+        url = f"https://www.crehana.com/api/v5/rest/org/{settings.organization_slug}/users/"
+        headers = {
+            "api-key": settings.api_key,
+            "secret-access": settings.secret_access,
+            "Content-Type": "application/json",
+        }
+        params = {"limit": 10000}
+
+        try:
+            response = requests.get(url, headers=headers, params=params, timeout=60)
+            response.raise_for_status()
+            employees_data = response.json()
+            crehana_response_data = employees_data["data"]
+            mapping = self._get_custom_fields_mapping()
+
+            for data in crehana_response_data:
+
+                # Buscar por id
+                employee = self.search([("id_crehana", "=", data["id"])])
+                # En caso no encontrar, buscamos por apellidos + nombres
+                if not employee:
+                    employee = self.search(
+                        [("name", "=", f"{data['last_name']} {data['first_name']}")]
+                    )
+                if not employee:
+                    _logger.info(
+                        f"Empleado no encontrado: {data['first_name']} {data['last_name']}"
+                    )
+                    continue
+
+                if employee:
+                    employee.write(
+                        {
+                            "id_crehana": data["id"],
+                            "crehana_email": data["email"],
+                            "is_registered_in_crehana": True,
+                        }
+                    )
+                    for key, meta in mapping.items():
+                        cf = next(
+                            (
+                                x
+                                for x in data.get("custom_fields", [])
+                                if isinstance(x, dict) and x.get("id") == key
+                            ),
+                            None,
+                        )
+                        if cf:
+                            setattr(employee, meta["field"], cf.get("value"))
+        except Exception as e:
+            _logger.error(f"Error al obtener empleados de Crehana: {str(e)}")
+            return False
+
+        return True

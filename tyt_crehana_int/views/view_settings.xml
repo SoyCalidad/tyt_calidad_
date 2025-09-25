@@ -18,6 +18,7 @@
                     type="object" 
                     class="oe_highlight" />
                 <button string="Ver reporte general" name="action_show_general_report" type="object" class="oe_highlight"/>
+                <button string="Sincronizar empleados de Crehana" name="tyt_sync_from_crehana" type="object" class="oe_highlight"/>
             </tree>
         </field>
     </record>
