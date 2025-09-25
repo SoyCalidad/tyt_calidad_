@@ -705,6 +705,7 @@ class HrEmployee(models.Model):
                     continue
 
                 if employee:
+                    _logger.info(f"Sincronizando empleado: {data['first_name']} {data['last_name']}")
                     employee.write(
                         {
                             "id_crehana": data["id"],
@@ -722,6 +723,7 @@ class HrEmployee(models.Model):
                             None,
                         )
                         if cf:
+                            _logger.info(f"Actualizando campo {meta['field']}")
                             setattr(employee, meta["field"], cf.get("value"))
         except Exception as e:
             _logger.error(f"Error al obtener empleados de Crehana: {str(e)}")
