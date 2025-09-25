@@ -681,15 +681,15 @@ class HrEmployee(models.Model):
             "Content-Type": "application/json",
         }
         params = {"limit": 10000}
+        response = requests.get(url, headers=headers, params=params, timeout=60)
+        response.raise_for_status()
+        employees_data = response.json()
+        crehana_response_data = employees_data["data"]
+        mapping = self._get_custom_fields_mapping()
 
-        try:
-            response = requests.get(url, headers=headers, params=params, timeout=60)
-            response.raise_for_status()
-            employees_data = response.json()
-            crehana_response_data = employees_data["data"]
-            mapping = self._get_custom_fields_mapping()
+        for data in crehana_response_data:
 
-            for data in crehana_response_data:
+            try:
 
                 # Buscar por id
                 employee = self.search([("id_crehana", "=", data["id"])])
@@ -725,8 +725,11 @@ class HrEmployee(models.Model):
                         if cf:
                             _logger.info(f"Actualizando campo {meta['field']}")
                             setattr(employee, meta["field"], cf.get("value"))
-        except Exception as e:
-            _logger.error(f"Error al obtener empleados de Crehana: {str(e)}")
-            return False
+
+            except Exception as e:
+                _logger.error(
+                    f"Error al sincronizar empleado: {data['first_name']} {data['last_name']}: {e}"
+                )
+                continue
 
         return True
