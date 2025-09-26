@@ -205,11 +205,12 @@ class AttendanceState(models.Model):
     tag = fields.Char(required=True, string="Etiqueta", tracking=True)
     name = fields.Char(required=True, string="Nombre", tracking=True)
 
-class TagNameController(http.Controller):
-    @http.route('/tag_name_list', auth='public', website=True)
-    def tag_name_list(self):
-        records = request.env['tyt_recruitment.tag_attendance'].search([])
-        return request.render('tyt_recruitment.tag_name_list', {'records': records})
+# no existe el render
+# class TagNameController(http.Controller):
+#     @http.route('/tag_name_list', auth='public', website=True)
+#     def tag_name_list(self):
+#         records = request.env['tyt_recruitment.tag_attendance'].search([])
+#         return request.render('tyt_recruitment.tag_name_list', {'records': records})
     
 class DaysOfWeek(models.Model):
     _name = 'tyt_recruitment.attendance_days_of_week'

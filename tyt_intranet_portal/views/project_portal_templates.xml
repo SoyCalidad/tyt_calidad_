@@ -10,12 +10,14 @@
                 <t t-set="title">Proyectos</t>
                 <t t-set="url" t-value="'/my/projects'"/>
                 <t t-set="text">Siga la evolución de sus proyectos</t>
+                <t t-set="config_card" t-value="False"/>
             </t>
             <t t-call="portal.portal_docs_entry">
                 <t t-set="icon" t-value="'/tyt_intranet_portal/static/src/img/tasks.svg'"/>
                 <t t-set="title">Tareas</t>
                 <t t-set="url" t-value="'/my/tasks'"/>
                 <t t-set="text">Siga y comente las tareas de sus proyectos</t>
+                <t t-set="config_card" t-value="False"/>
             </t>
         </div>
     </template>

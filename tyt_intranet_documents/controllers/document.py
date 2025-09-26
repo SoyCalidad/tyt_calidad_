@@ -39,7 +39,7 @@ class DocumentController(http.Controller):
     @http.route('/documents/folder/share', type='http', auth='user', website=True)
     def documents_folder_share(self):
         values = request.params.copy()
-        folders = request.env['documents.folder'].sudo().search([('is_intranet_folder', '=', True)])
+        folders = request.env['documents.document'].sudo().search([('type', '=', 'folder'),('is_intranet_folder', '=', True)])
         accessible_folders = folders.filtered(lambda folder: self._check_folder_access(folder))
         values.update({
             'page_name': 'documents_folder',
@@ -51,10 +51,10 @@ class DocumentController(http.Controller):
     @http.route('/my/documents/share/<int:folder_id>', type='http', auth='user', website=True)
     def my_documents_share(self, folder_id):
         values = request.params.copy()
-        folder = request.env['documents.folder'].sudo().browse(folder_id)
+        folder = request.env['documents.document'].sudo().browse(folder_id)
         if not folder.exists() or not self._check_folder_access(folder):
             return request.redirect('/my')
-        documents = folder.document_ids.filtered(lambda d: d.mimetype == 'application/pdf')
+        documents = folder.children_ids.filtered(lambda d: d.mimetype == 'application/pdf')
         document_count = len(documents)
         values.update({
             'page_name': 'documents_folder',

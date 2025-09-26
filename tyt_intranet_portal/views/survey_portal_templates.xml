@@ -13,6 +13,7 @@
                 <t t-set="url" t-value="'/my/surveys'"/>
                 <t t-set="placeholder_count" t-value="'survey_count'"/>
                 <t t-set="show_count" t-value="True"/>
+                <t t-set="config_card" t-value="True"/>
             </t>
         </div>
     </template>

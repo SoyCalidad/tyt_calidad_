@@ -12,6 +12,7 @@
                 <t t-set="url" t-value="'/my/department_messages'"/>
                 <t t-set="placeholder_count" t-value="'department_message_count'"/>
                 <t t-set="show_count" t-value="True"/>
+                <t t-set="config_card" t-value="True"/>
             </t>
         </div>
     </template>

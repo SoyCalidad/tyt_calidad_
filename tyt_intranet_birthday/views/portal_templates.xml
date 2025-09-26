@@ -17,7 +17,7 @@
         <div class="modal fade" id="modal_birthday_card" data-bs-backdrop="static"
              data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
             <div class="modal-dialog">
-                <t t-set="employee" t-value="request.env.user.sudo().x_studio_empleado"/>
+                <t t-set="employee" t-value="request.env.user.sudo().empleado"/>
                 <div class="modal-content">
                     <div class="modal-header">
                         <div class="o_wevent_registration_title modal-title fs-5" id="staticBackdropLabel">
