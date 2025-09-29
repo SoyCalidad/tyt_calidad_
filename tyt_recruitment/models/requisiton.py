@@ -87,23 +87,24 @@ class Requisition(models.Model):
         return ','.join(emails)
 
     @api.onchange('request_date')
-    def onchange_request_date(self):
+    def _onchange_request_date(self):
         
         selected_date = self.request_date
 
-        current_period = request.env['tyt_studio.period'].sudo().search([
-            ('f1', '<=', selected_date),
-            ('f2', '>=', selected_date),
-            ('tipo_periodo', '>=', 'Semana')
-        ], limit=1)
+        if self.request_date:
+            current_period = request.env['tyt_studio.period'].sudo().search([
+                ('f1', '<=', selected_date),
+                ('f2', '>=', selected_date),
+                ('tipo_periodo', '>=', 'Semana')
+            ], limit=1)
 
-        if current_period:
-            self['periodo_id'] = current_period.id
-            self['request_date'] = current_period.f1
-            self['closing_date'] = current_period.f2
-            
-        else:
-            raise ValidationError("No hay registros del periodo. Seleccione otra fecha")
+            if current_period:
+                self['periodo_id'] = current_period.id
+                self['request_date'] = current_period.f1
+                self['closing_date'] = current_period.f2
+                
+            else:
+                raise ValidationError("No hay registros del periodo. Seleccione otra fecha")
 
     def get_share_url(self):
         self.ensure_one()

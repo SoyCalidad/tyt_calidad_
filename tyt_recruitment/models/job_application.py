@@ -16,7 +16,7 @@ class JobApplication(models.Model):
     requisition = fields.Char(string='Requisición', tracking=True)
     site = fields.Char(string='Sitio', tracking=True)
 
-    signature_image = fields.Binary(string="Firma del solicitante", tracking=True)
+    signature_image = fields.Binary(string="Firma del solicitante")
 
     # Campos relacionados para acceder al nombre y apellidos del aplicante
     applicant_name = fields.Char(related="applicant_id.name", string="Nombre", store=True, tracking=True)
@@ -50,62 +50,62 @@ class JobApplication(models.Model):
     complete_survey_id = fields.One2many("tyt_recruitment.complete_survey", 'job_application_id', string="Encuesta de salud", tracking=True)
     has_complete_survey = fields.Boolean(string='Tiene Encuesta Completada', compute='compute_has_complete_survey', tracking=True)
 
-    birth_certificate = fields.Binary(string="Acta de nacimiento", tracking=True)
+    birth_certificate = fields.Binary(string="Acta de nacimiento",)
     birth_certificate_filename = fields.Char(string="Nombre del Archivo - ", tracking=True)
     birth_certificate_state = fields.Boolean(string="Estado - Acta de nacimiento", default=False, tracking=True)
     birth_certificate_approved = fields.Boolean(string="Estado de aprobación - Acta de nacimiento", default=False, tracking=True)
 
-    rfc = fields.Binary(string="RFC", tracking=True)
+    rfc = fields.Binary(string="RFC")
     rfc_filename = fields.Char(string="Nombre del Archivo - RFC", tracking=True)
     rfc_state = fields.Boolean(string="Estado - RFC", default=False, tracking=True)
     rfc_approved = fields.Boolean(string="Estado de aprobación - RFC", default=False, tracking=True)
 
-    curp = fields.Binary(string="CURP", tracking=True)
+    curp = fields.Binary(string="CURP")
     curp_filename = fields.Char(string="Nombre del Archivo - CURP", tracking=True)
     curp_state = fields.Boolean(string="Estado - CURP", default=False, tracking=True)
     curp_approved = fields.Boolean(string="Estado de aprobación - CURP", default=False, tracking=True)
 
-    study_certificate = fields.Binary(string="Comprobante de estudio", tracking=True)
+    study_certificate = fields.Binary(string="Comprobante de estudio")
     study_certificate_filename = fields.Char(string="Nombre del Archivo - Comprobante de estudio", tracking=True)
     study_certificate_state = fields.Boolean(string="Estado - Comprobante de estudio", default=False, tracking=True)
     study_certificate_approved = fields.Boolean(string="Estado de aprobación - Comprobante de estudio", default=False, tracking=True)
 
-    proposed_letter = fields.Binary(string="Carta propuesta", tracking=True)
+    proposed_letter = fields.Binary(string="Carta propuesta")
     proposed_letter_filename = fields.Char(string="Nombre del Archivo - Carta propuesta", tracking=True)
     proposed_letter_state = fields.Boolean(string="Estado - Carta propuesta", default=False, tracking=True)
     proposed_letter_approved = fields.Boolean(string="Estado de aprobación - Carta propuesta", default=False, tracking=True)
 
-    ine = fields.Binary(string="INE", tracking=True)
+    ine = fields.Binary(string="INE")
     ine_filename = fields.Char(string="Nombre del Archivo - INE", tracking=True)
     ine_state = fields.Boolean(string="Estado - INE", default=False, tracking=True)
     ine_approved = fields.Boolean(string="Estado de aprobación - INE", default=False, tracking=True)
 
-    reference_validation = fields.Binary(string="Validación de referencias", tracking=True)
+    reference_validation = fields.Binary(string="Validación de referencias")
     reference_validation_filename = fields.Char(string="Nombre del Archivo - Validación de referencias", tracking=True)
     reference_validation_state = fields.Boolean(string="Estado - Validación de referencias", default=False, tracking=True)
     reference_validation_approved = fields.Boolean(string="Estado de aprobación - Validación de referencias", default=False, tracking=True)
     
-    utility_bill = fields.Binary(string="Comprobante de domicilio", tracking=True)
+    utility_bill = fields.Binary(string="Comprobante de domicilio")
     utility_bill_filename = fields.Char(string="Nombre del Archivo - Comprobante de domicilio", tracking=True)
     utility_bill_state = fields.Boolean(string="Estado - Comprobante de domicilio", default=False, tracking=True)
     utility_bill_approved = fields.Boolean(string="Estado de aprobación - Comprobante de domicilio", default=False, tracking=True)
 
-    psychometric = fields.Binary(string="Psicométrico", tracking=True)
+    psychometric = fields.Binary(string="Psicométrico")
     psychometric_filename = fields.Char(string="Nombre del Archivo - Psicométrico", tracking=True)
     psychometric_state = fields.Boolean(string="Estado - Psicométrico", default=False, tracking=True)
     psychometric_approved = fields.Boolean(string="Estado de aprobación - Psicométrico", default=False, tracking=True)
 
-    snn = fields.Binary(string="SNN", tracking=True)
+    snn = fields.Binary(string="SNN")
     snn_filename = fields.Char(string="Nombre del Archivo - SNN", tracking=True)
     snn_state = fields.Boolean(string="Estado - SNN", default=False, tracking=True)
     snn_approved = fields.Boolean(string="Estado de aprobación - SNN", default=False, tracking=True)
 
-    interbank_key = fields.Binary(string="Clabe interbancaria", tracking=True)
+    interbank_key = fields.Binary(string="Clabe interbancaria")
     interbank_key_filename = fields.Char(string="Nombre del Archivo - Clabe interbancaria", tracking=True)
     interbank_key_state = fields.Boolean(string="Estado - Clabe interbancaria", default=False, tracking=True)
     interbank_key_approved = fields.Boolean(string="Estado de aprobación - Clabe interbancaria", default=False, tracking=True)
 
-    value_proposition = fields.Binary(string="Propuesta de valor", tracking=True)
+    value_proposition = fields.Binary(string="Propuesta de valor")
     value_proposition_filename = fields.Char(string="Nombre del Archivo - Propuesta de valor", tracking=True)
     value_proposition_state = fields.Boolean(string="Estado - Propuesta de valor", default=False, tracking=True)
     value_proposition_approved = fields.Boolean(string="Estado de aprobación - Propuesta de valor", default=False, tracking=True)

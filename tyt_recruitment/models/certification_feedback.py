@@ -28,9 +28,9 @@ class CertificationFeeback(models.Model):
     campaign = fields.Char(string="Campaña", tracking=True)
     trainner = fields.Char(string="Entrenador", tracking=True)
 
-    applicant_signature = fields.Binary(string="Firma del aplicante", tracking=True)
-    quality_signature = fields.Binary(string="Firma del Técnico de calidad", tracking=True)
-    manager_signature = fields.Binary(string="Firma del responsable de capacitación y calidad", tracking=True)
+    applicant_signature = fields.Binary(string="Firma del aplicante",)
+    quality_signature = fields.Binary(string="Firma del Técnico de calidad")
+    manager_signature = fields.Binary(string="Firma del responsable de capacitación y calidad")
 
     strengths = fields.Text(string="Fortalezas", tracking=True)
     opportunity_areas = fields.Text(string="Areas de Oportunidad", tracking=True)

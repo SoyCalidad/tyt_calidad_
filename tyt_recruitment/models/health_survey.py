@@ -36,7 +36,7 @@ class CompleteSurvey(models.Model):
 
     state = fields.Selection([('draft', "PorEnviar"),('sent', "Enviado"),], string="Estado", default='draft', tracking=True)
     recruiter_comments = fields.Char(string="Comentarios del reclutador", tracking=True)
-    signature_image = fields.Binary(string="Firma del solicitante", tracking=True)
+    signature_image = fields.Binary(string="Firma del solicitante")
     job_application_id = fields.Many2one("tyt_recruitment.job_application", string="Aplicaicón de trabajo", tracking=True)
     survey_answer_ids = fields.One2many('tyt_recruitment.survey_answer', 'complete_survey_id', string="Respuestas", tracking=True)
 

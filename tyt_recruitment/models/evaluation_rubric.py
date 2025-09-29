@@ -142,7 +142,7 @@ class EvaluationSignatureWizard(models.TransientModel):
     _inherit = ['mail.thread']
 
     evaluation_rubric_id = fields.Many2one('tyt_recruitment.evaluation_rubric', string="Evaluación", required=True, tracking=True)
-    signature = fields.Binary(string="Firma", tracking=True)
+    signature = fields.Binary(string="Firma")
 
     def action_save_signature(self):
         if self.signature:

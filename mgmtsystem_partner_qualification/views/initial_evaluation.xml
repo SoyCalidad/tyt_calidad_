@@ -35,7 +35,7 @@
             <field name="arch" type="xml">
                 <form string="Evaluación">
                     <header>
-                        <field name="state" widget="statusbar" statusbar_visible="elaborate,review,validate,validate_ok,on_track,closed" />
+                        <field name="state" widget="statusbar" statusbar_visible="elaborate,review,validate,validate_ok,cancel" />
                         <button string="Enviar a Elaborar"
                                 name="send_elaborate"
                                 type="object"
