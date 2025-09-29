@@ -4,10 +4,10 @@
 #
 msgid ""
 msgstr ""
-"Project-Id-Version: Odoo Server 16.0-20240819\n"
+"Project-Id-Version: Odoo Server 18.0+e-20250918\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2024-10-09 16:49+0000\n"
-"PO-Revision-Date: 2024-10-09 16:49+0000\n"
+"POT-Creation-Date: 2025-09-29 14:56+0000\n"
+"PO-Revision-Date: 2025-09-29 14:56+0000\n"
 "Last-Translator: \n"
 "Language-Team: \n"
 "MIME-Version: 1.0\n"
@@ -77,14 +77,7 @@ msgstr "Editar"
 #: model:ir.model.fields,field_description:tyt_remediation_log.field_maintenance_remediationlog_line__id
 #: model:ir.model.fields,field_description:tyt_remediation_log.field_maintenance_remediationlog_stage__id
 msgid "ID"
-msgstr "ID"
-
-#. module: tyt_remediation_log
-#: model:ir.model.fields,field_description:tyt_remediation_log.field_maintenance_remediationlog____last_update
-#: model:ir.model.fields,field_description:tyt_remediation_log.field_maintenance_remediationlog_line____last_update
-#: model:ir.model.fields,field_description:tyt_remediation_log.field_maintenance_remediationlog_stage____last_update
-msgid "Last Modified on"
-msgstr "Última Modificación el"
+msgstr ""
 
 #. module: tyt_remediation_log
 #: model:ir.model.fields,field_description:tyt_remediation_log.field_maintenance_remediationlog__write_uid
@@ -109,6 +102,11 @@ msgstr "Ubicación"
 #: model:ir.model,name:tyt_remediation_log.model_maintenance_remediationlog
 msgid "Maintenance Remediation Log"
 msgstr "Bitácora de Remediación de Mantenimiento"
+
+#. module: tyt_remediation_log
+#: model:ir.model.fields,field_description:tyt_remediation_log.field_maintenance_remediationlog_stage__manager_id
+msgid "Manager"
+msgstr "Encargado"
 
 #. module: tyt_remediation_log
 #: model:ir.model.fields,field_description:tyt_remediation_log.field_maintenance_remediationlog__name
@@ -142,8 +140,8 @@ msgstr "Líneas de Remediación"
 
 #. module: tyt_remediation_log
 #: model:ir.model.fields,field_description:tyt_remediation_log.field_maintenance_remediationlog_line__remediation_log_id
-#: model_terms:ir.ui.view,arch_db:tyt_remediation_log.view_maintenance_remediationlog_form
 #: model:ir.model.fields,field_description:tyt_remediation_log.field_maintenance_remediationlog_stage__remediation_log_id
+#: model_terms:ir.ui.view,arch_db:tyt_remediation_log.view_maintenance_remediationlog_form
 msgid "Remediation Log"
 msgstr "Bitácora de Remediación"
 
@@ -158,6 +156,11 @@ msgid "Remediation Log Report (Excel)"
 msgstr "Informe de Bitácora de Remediación (Excel)"
 
 #. module: tyt_remediation_log
+#: model:ir.model,name:tyt_remediation_log.model_maintenance_remediationlog_stage
+msgid "Remediation Log Stage"
+msgstr "Etapa del registro de remediación"
+
+#. module: tyt_remediation_log
 #: model:ir.actions.act_window,name:tyt_remediation_log.action_maintenance_remediationlog
 #: model:ir.ui.menu,name:tyt_remediation_log.menu_maintenance_remediationlog
 #: model_terms:ir.ui.view,arch_db:tyt_remediation_log.view_maintenance_remediationlog_tree
@@ -168,6 +171,16 @@ msgstr "Bitácoras de Remediación"
 #: model_terms:ir.ui.view,arch_db:tyt_remediation_log.view_maintenance_remediationlog_form
 msgid "Save"
 msgstr "Guardar"
+
+#. module: tyt_remediation_log
+#: model:ir.model.fields,field_description:tyt_remediation_log.field_maintenance_remediationlog_stage__stage
+msgid "Stage"
+msgstr "Etapa"
+
+#. module: tyt_remediation_log
+#: model:ir.model.fields,field_description:tyt_remediation_log.field_maintenance_remediationlog__remediation_log_stages_ids
+msgid "Stage Manager"
+msgstr "Encargado de Etapa"
 
 #. module: tyt_remediation_log
 #: model:ir.model.fields,field_description:tyt_remediation_log.field_maintenance_remediationlog__state
@@ -183,24 +196,3 @@ msgstr "Validación y versión"
 #: model:ir.model.fields,field_description:tyt_remediation_log.field_maintenance_remediationlog_line__remediation
 msgid "What was done?"
 msgstr "¿Qué se hizo?"
-
-
-#. module: tyt_remediation_log
-#: model:ir.model,name:tyt_remediation_log.model_maintenance_remediationlog_stage
-msgid "Remediation Log Stage"
-msgstr ""
-
-#. module: tyt_remediation_log
-#: model:ir.model.fields,field_description:tyt_remediation_log.field_maintenance_remediationlog_stage__stage
-msgid "Stage"
-msgstr "Etapa"
-
-#. module: tyt_remediation_log
-#: model:ir.model.fields,field_description:tyt_remediation_log.field_maintenance_remediationlog_stage__manager_id
-msgid "Manager"
-msgstr "Encargado"
-
-#. module: tyt_remediation_log
-#: model:ir.model.fields,field_description:tyt_remediation_log.field_maintenance_remediationlog__remediation_log_stages_ids
-msgid "Stage Manager"
-msgstr "Encargado de Etapa"

@@ -4,10 +4,10 @@
 #
 msgid ""
 msgstr ""
-"Project-Id-Version: Odoo Server 16.0+e-20240912\n"
+"Project-Id-Version: Odoo Server 18.0+e-20250918\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2024-11-12 05:03+0000\n"
-"PO-Revision-Date: 2024-11-12 05:03+0000\n"
+"POT-Creation-Date: 2025-09-27 15:30+0000\n"
+"PO-Revision-Date: 2025-09-27 15:30+0000\n"
 "Last-Translator: \n"
 "Language-Team: \n"
 "MIME-Version: 1.0\n"
@@ -17,6 +17,10 @@ msgstr ""
 
 #. module: tyt_customer_satisfaction_history
 #: model:ir.actions.report,print_report_name:tyt_customer_satisfaction_history.action_report_tyt_sscx
+msgid "'ACC-53_Informe de satisfacción del cliente'"
+msgstr ""
+
+#. module: tyt_customer_satisfaction_history
 #: model:ir.actions.report,print_report_name:tyt_customer_satisfaction_history.action_report_tyt_ssh
 msgid "'ACC-54_Histórico de satisfacción del cliente'"
 msgstr ""
@@ -29,12 +33,12 @@ msgstr "Cancelar"
 #. module: tyt_customer_satisfaction_history
 #: model:ir.model.fields,field_description:tyt_customer_satisfaction_history.field_tyt_satisfaction_survey_history__create_uid
 msgid "Created by"
-msgstr ""
+msgstr "Creado por"
 
 #. module: tyt_customer_satisfaction_history
 #: model:ir.model.fields,field_description:tyt_customer_satisfaction_history.field_tyt_satisfaction_survey_history__create_date
 msgid "Created on"
-msgstr ""
+msgstr "Creado el"
 
 #. module: tyt_customer_satisfaction_history
 #: model:ir.model,name:tyt_customer_satisfaction_history.model_report_tyt_customer_satisfaction_history_report_tyt_sscx
@@ -45,7 +49,7 @@ msgstr "Histórico de la encuesta de satisfacción TYT"
 #. module: tyt_customer_satisfaction_history
 #: model:ir.model.fields,field_description:tyt_customer_satisfaction_history.field_tyt_satisfaction_survey_history__display_name
 msgid "Display Name"
-msgstr ""
+msgstr "Nombre para mostrar"
 
 #. module: tyt_customer_satisfaction_history
 #: model:ir.model.fields,field_description:tyt_customer_satisfaction_history.field_tyt_satisfaction_survey_history__from_date
@@ -58,19 +62,14 @@ msgid "ID"
 msgstr ""
 
 #. module: tyt_customer_satisfaction_history
-#: model:ir.model.fields,field_description:tyt_customer_satisfaction_history.field_tyt_satisfaction_survey_history____last_update
-msgid "Last Modified on"
-msgstr ""
-
-#. module: tyt_customer_satisfaction_history
 #: model:ir.model.fields,field_description:tyt_customer_satisfaction_history.field_tyt_satisfaction_survey_history__write_uid
 msgid "Last Updated by"
-msgstr ""
+msgstr "Última actualización por"
 
 #. module: tyt_customer_satisfaction_history
 #: model:ir.model.fields,field_description:tyt_customer_satisfaction_history.field_tyt_satisfaction_survey_history__write_date
 msgid "Last Updated on"
-msgstr ""
+msgstr "Última actualización el"
 
 #. module: tyt_customer_satisfaction_history
 #: model_terms:ir.ui.view,arch_db:tyt_customer_satisfaction_history.tyt_satisfaction_survey_history_view_form
@@ -91,6 +90,10 @@ msgstr "Histórico de la encuesta de satisfacción"
 
 #. module: tyt_customer_satisfaction_history
 #: model:ir.actions.report,name:tyt_customer_satisfaction_history.action_report_tyt_sscx
+msgid "TYT Satisfaction Survey CX"
+msgstr "Histórico de la encuesta de satisfacción TYT"
+
+#. module: tyt_customer_satisfaction_history
 #: model:ir.actions.report,name:tyt_customer_satisfaction_history.action_report_tyt_ssh
 msgid "TYT Satisfaction Survey History"
 msgstr "Histórico de la encuesta de satisfacción TYT"
@@ -103,7 +106,6 @@ msgstr "Histórico de la encuesta de satisfacción TYT"
 #. module: tyt_customer_satisfaction_history
 #. odoo-python
 #: code:addons/tyt_customer_satisfaction_history/wizards/satisfaction_survey_history.py:0
-#, python-format
 msgid "The 'From Date' must be earlier than 'To Date'."
 msgstr "La fecha de inicio no puede ser mayor a la fecha de fin"
 

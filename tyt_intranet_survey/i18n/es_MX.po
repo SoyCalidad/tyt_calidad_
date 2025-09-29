@@ -4,10 +4,10 @@
 #
 msgid ""
 msgstr ""
-"Project-Id-Version: Odoo Server 16.0+e-20240730\n"
+"Project-Id-Version: Odoo Server 18.0+e-20250918\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2024-12-18 17:49+0000\n"
-"PO-Revision-Date: 2024-12-18 17:49+0000\n"
+"POT-Creation-Date: 2025-09-29 14:45+0000\n"
+"PO-Revision-Date: 2025-09-29 14:45+0000\n"
 "Last-Translator: \n"
 "Language-Team: \n"
 "MIME-Version: 1.0\n"
@@ -18,20 +18,13 @@ msgstr ""
 #. module: tyt_intranet_survey
 #: model_terms:ir.ui.view,arch_db:tyt_intranet_survey.portal_my_surveys
 msgid "<i class=\"fa fa-fw fa-clock-o\" title=\"Published Date\" alt=\"Published Date\"/>"
-msgstr ""
-
-#. module: tyt_intranet_survey
-#: model_terms:ir.ui.view,arch_db:tyt_intranet_survey.survey_fill_form_done
-msgid ""
-"<i class=\"fa fa-fw fa-home\" role=\"img\" aria-label=\"Volver a Mi perfil\" title=\"Volver a Mi perfil\"/>\n"
-"                        Volver a Mi perfil"
-msgstr ""
+msgstr "<i class=\"fa fa-fw fa-clock-o\" title=\"Fecha de publicación\" alt=\"Fecha de publicación\"/>"
 
 #. module: tyt_intranet_survey
 #: model_terms:ir.ui.view,arch_db:tyt_intranet_survey.survey_publish_view_form
 msgid ""
 "<i class=\"fa fa-long-arrow-right mx-2 oe_edit_only\" aria-label=\"Arrow icon\" title=\"Arrow\"/>\n"
-"                            <i class=\"fa fa-long-arrow-right mx-2 oe_read_only\" aria-label=\"Arrow icon\" title=\"Arrow\" attrs=\"{'invisible': [('start_date', '=', False), ('end_date', '=', False)]}\"/>"
+"                            <i class=\"fa fa-long-arrow-right mx-2 oe_read_only\" aria-label=\"Arrow icon\" title=\"Arrow\" invisible=\"(start_date == False and end_date == False)\"/>"
 msgstr ""
 
 #. module: tyt_intranet_survey
@@ -47,14 +40,12 @@ msgstr ""
 #. module: tyt_intranet_survey
 #. odoo-python
 #: code:addons/tyt_intranet_survey/wizard/survey_publish.py:0
-#, python-format
 msgid "All surveys must be published before unpublishing."
 msgstr "Todas las encuestas deben estar publicadas antes de despublicar."
 
 #. module: tyt_intranet_survey
 #. odoo-python
 #: code:addons/tyt_intranet_survey/wizard/survey_publish.py:0
-#, python-format
 msgid "All surveys must be unpublished before publishing."
 msgstr "Todos las encuestas deben estar sin publicar antes de publicar."
 
@@ -66,13 +57,7 @@ msgstr "¿Está seguro de que desea restablecer a borrador?"
 #. module: tyt_intranet_survey
 #: model:ir.model.fields,field_description:tyt_intranet_survey.field_survey_question__area_encuesta_id
 msgid "Area encuesta"
-msgstr "Área"
-
-#. module: tyt_intranet_survey
-#: model:ir.actions.act_window,name:tyt_intranet_survey.tyt_x_area_encuesta_action
-#: model:ir.ui.menu,name:tyt_intranet_survey.tyt_x_area_encuesta_menu_action
-msgid "Areas - Typification"
-msgstr "Áreas"
+msgstr "Área encuesta"
 
 #. module: tyt_intranet_survey
 #: model_terms:ir.ui.view,arch_db:tyt_intranet_survey.survey_fill_form_start
@@ -88,13 +73,13 @@ msgstr "Cancelar"
 #: model:ir.model.fields,field_description:tyt_intranet_survey.field_survey_publish__create_uid
 #: model:ir.model.fields,field_description:tyt_intranet_survey.field_tyt_survey_question_answer__create_uid
 msgid "Created by"
-msgstr ""
+msgstr "Creado por"
 
 #. module: tyt_intranet_survey
 #: model:ir.model.fields,field_description:tyt_intranet_survey.field_survey_publish__create_date
 #: model:ir.model.fields,field_description:tyt_intranet_survey.field_tyt_survey_question_answer__create_date
 msgid "Created on"
-msgstr ""
+msgstr "Creado el"
 
 #. module: tyt_intranet_survey
 #: model:ir.model.fields,field_description:tyt_intranet_survey.field_survey_publish__deadline
@@ -160,12 +145,6 @@ msgstr ""
 #: model_terms:ir.ui.view,arch_db:tyt_intranet_survey.survey_survey_view_search
 msgid "Job Position"
 msgstr "Puesto de trabajo"
-
-#. module: tyt_intranet_survey
-#: model:ir.model.fields,field_description:tyt_intranet_survey.field_survey_publish____last_update
-#: model:ir.model.fields,field_description:tyt_intranet_survey.field_tyt_survey_question_answer____last_update
-msgid "Last Modified on"
-msgstr ""
 
 #. module: tyt_intranet_survey
 #: model:ir.model.fields,field_description:tyt_intranet_survey.field_survey_publish__write_uid
@@ -266,7 +245,6 @@ msgstr "Fecha de inicio"
 #. module: tyt_intranet_survey
 #. odoo-python
 #: code:addons/tyt_intranet_survey/wizard/survey_publish.py:0
-#, python-format
 msgid "Start Date and End Date are required."
 msgstr "La fecha de inicio y fecha de finalización son requeridas."
 
@@ -336,7 +314,7 @@ msgstr "Encuestas"
 #. module: tyt_intranet_survey
 #: model:ir.model,name:tyt_intranet_survey.model_tyt_survey_question_answer
 msgid "TYT Survey Question Answer"
-msgstr ""
+msgstr "Pregunta y respuesta de la encuesta TYT"
 
 #. module: tyt_intranet_survey
 #: model_terms:ir.ui.view,arch_db:tyt_intranet_survey.portal_my_surveys
@@ -347,13 +325,7 @@ msgstr "Actualmente no existen encuestas para su cuenta."
 #: model:ir.model.fields,field_description:tyt_intranet_survey.field_survey_question__tipo_encuesta_id
 #: model:ir.model.fields,field_description:tyt_intranet_survey.field_survey_user_input_line__tipo_encuesta_id
 msgid "Tipo encuesta"
-msgstr "Tipo"
-
-#. module: tyt_intranet_survey
-#: model:ir.actions.act_window,name:tyt_intranet_survey.tyt_x_tipo_encuesta_action
-#: model:ir.ui.menu,name:tyt_intranet_survey.tyt_x_tipo_encuesta_menu_action
-msgid "Tipos - Typification"
-msgstr "Tipos"
+msgstr "Tipo encuesta"
 
 #. module: tyt_intranet_survey
 #: model_terms:ir.ui.view,arch_db:tyt_intranet_survey.survey_question_form

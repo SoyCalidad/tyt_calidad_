@@ -4,10 +4,10 @@
 #
 msgid ""
 msgstr ""
-"Project-Id-Version: Odoo Server 16.0+e-20240730\n"
+"Project-Id-Version: Odoo Server 18.0+e-20250918\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2024-11-11 16:25+0000\n"
-"PO-Revision-Date: 2024-11-11 16:25+0000\n"
+"POT-Creation-Date: 2025-09-29 14:28+0000\n"
+"PO-Revision-Date: 2025-09-29 14:28+0000\n"
 "Last-Translator: \n"
 "Language-Team: \n"
 "MIME-Version: 1.0\n"
@@ -26,17 +26,18 @@ msgid "Documentos"
 msgstr ""
 
 #. module: tyt_intranet_documents
-#: model:ir.model,name:tyt_intranet_documents.model_documents_folder
-msgid "Documents Workspace"
-msgstr "Espacio de trabajo de documentos"
-
-#. module: tyt_intranet_documents
 #: model_terms:ir.ui.view,arch_db:tyt_intranet_documents.portal_documents_folder_share
+#: model_terms:ir.ui.view,arch_db:tyt_intranet_documents.portal_my_home_menu_folder
 msgid "Espacios de trabajo"
 msgstr ""
 
 #. module: tyt_intranet_documents
-#: model:ir.model.fields,field_description:tyt_intranet_documents.field_documents_folder__is_intranet_folder
+#: model_terms:ir.ui.view,arch_db:tyt_intranet_documents.folder_view_form
+msgid "Intranet"
+msgstr ""
+
+#. module: tyt_intranet_documents
+#: model:ir.model.fields,field_description:tyt_intranet_documents.field_documents_document__is_intranet_folder
 msgid "Is Intranet Folder"
 msgstr "Intranet"
 

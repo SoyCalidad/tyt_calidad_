@@ -4,10 +4,10 @@
 #
 msgid ""
 msgstr ""
-"Project-Id-Version: Odoo Server 16.0+e-20240730\n"
+"Project-Id-Version: Odoo Server 18.0+e-20250918\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2024-12-03 07:21+0000\n"
-"PO-Revision-Date: 2024-12-03 07:21+0000\n"
+"POT-Creation-Date: 2025-09-29 14:24+0000\n"
+"PO-Revision-Date: 2025-09-29 14:24+0000\n"
 "Last-Translator: \n"
 "Language-Team: \n"
 "MIME-Version: 1.0\n"
@@ -89,6 +89,11 @@ msgstr ""
 #: model_terms:ir.ui.view,arch_db:tyt_intranet_birthday.tyt_intranet_birthday_publication_view_form
 msgid "Birthday Employees"
 msgstr "Cumpleaños del día"
+
+#. module: tyt_intranet_birthday
+#: model:ir.model.fields,field_description:tyt_intranet_birthday.field_hr_employee__birthday_month
+msgid "Birthday Month"
+msgstr "Mes de cumpleaños"
 
 #. module: tyt_intranet_birthday
 #: model:ir.actions.act_window,name:tyt_intranet_birthday.tyt_intranet_birthday_publication_action
@@ -218,7 +223,6 @@ msgstr "Incluir en la publicación de cumpleaños"
 
 #. module: tyt_intranet_birthday
 #: model:ir.actions.server,name:tyt_intranet_birthday.ir_cron_update_birthday_publication_ir_actions_server
-#: model:ir.cron,cron_name:tyt_intranet_birthday.ir_cron_update_birthday_publication
 msgid "Intranet: update birthday publication"
 msgstr "Intranet: actualizar publicación de cumpleaños"
 
@@ -248,11 +252,6 @@ msgid "Job Position"
 msgstr "Puesto de trabajo"
 
 #. module: tyt_intranet_birthday
-#: model:ir.model.fields,field_description:tyt_intranet_birthday.field_tyt_intranet_birthday_publication____last_update
-msgid "Last Modified on"
-msgstr "Ultima modificación"
-
-#. module: tyt_intranet_birthday
 #: model:ir.model.fields,field_description:tyt_intranet_birthday.field_tyt_intranet_birthday_publication__write_uid
 msgid "Last Updated by"
 msgstr "Ultima modificación por"
@@ -261,11 +260,6 @@ msgstr "Ultima modificación por"
 #: model:ir.model.fields,field_description:tyt_intranet_birthday.field_tyt_intranet_birthday_publication__write_date
 msgid "Last Updated on"
 msgstr "Ultima modificación"
-
-#. module: tyt_intranet_birthday
-#: model:ir.model.fields,field_description:tyt_intranet_birthday.field_tyt_intranet_birthday_publication__message_main_attachment_id
-msgid "Main Attachment"
-msgstr ""
 
 #. module: tyt_intranet_birthday
 #: model:ir.model.fields,field_description:tyt_intranet_birthday.field_tyt_intranet_birthday_publication__message_has_error
@@ -336,7 +330,12 @@ msgstr ""
 #: model_terms:ir.ui.view,arch_db:tyt_intranet_birthday.portal_birthday_publication
 #: model_terms:ir.ui.view,arch_db:tyt_intranet_birthday.portal_my_home_menu_birthday_publication
 msgid "Publicación de cumpleaños"
-msgstr "Publicación de cumpleaños"
+msgstr ""
+
+#. module: tyt_intranet_birthday
+#: model:ir.model.fields,field_description:tyt_intranet_birthday.field_tyt_intranet_birthday_publication__rating_ids
+msgid "Ratings"
+msgstr "Calificaciones"
 
 #. module: tyt_intranet_birthday
 #: model:ir.model.fields,field_description:tyt_intranet_birthday.field_tyt_intranet_birthday_publication__responsible_id
@@ -380,14 +379,12 @@ msgstr "No hay publicaciones de cumpleaños para este período."
 #. module: tyt_intranet_birthday
 #. odoo-python
 #: code:addons/tyt_intranet_birthday/controllers/birthday_publication.py:0
-#, python-format
 msgid "This Month"
 msgstr "Este mes"
 
 #. module: tyt_intranet_birthday
 #. odoo-python
 #: code:addons/tyt_intranet_birthday/controllers/birthday_publication.py:0
-#, python-format
 msgid "This Week"
 msgstr "Esta semana"
 
@@ -399,7 +396,6 @@ msgstr "Título"
 #. module: tyt_intranet_birthday
 #. odoo-python
 #: code:addons/tyt_intranet_birthday/controllers/birthday_publication.py:0
-#, python-format
 msgid "Today"
 msgstr "Hoy"
 

@@ -4,10 +4,10 @@
 #
 msgid ""
 msgstr ""
-"Project-Id-Version: Odoo Server 16.0+e-20240730\n"
+"Project-Id-Version: Odoo Server 18.0+e-20250918\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2024-10-09 18:02+0000\n"
-"PO-Revision-Date: 2024-10-09 18:02+0000\n"
+"POT-Creation-Date: 2025-09-27 15:34+0000\n"
+"PO-Revision-Date: 2025-09-27 15:34+0000\n"
 "Last-Translator: \n"
 "Language-Team: \n"
 "MIME-Version: 1.0\n"
@@ -18,7 +18,6 @@ msgstr ""
 #. module: tyt_intranet_base
 #. odoo-python
 #: code:addons/tyt_intranet_base/models/intranet_groups.py:0
-#, python-format
 msgid "%s (copy)"
 msgstr "%s (copia)"
 
@@ -40,7 +39,7 @@ msgstr ""
 #. module: tyt_intranet_base
 #: model:ir.model.fields,field_description:tyt_intranet_base.field_intranet_groups__activity_ids
 msgid "Activities"
-msgstr ""
+msgstr "Actividades"
 
 #. module: tyt_intranet_base
 #: model:ir.model.fields,field_description:tyt_intranet_base.field_intranet_groups__activity_exception_decoration
@@ -50,7 +49,7 @@ msgstr ""
 #. module: tyt_intranet_base
 #: model:ir.model.fields,field_description:tyt_intranet_base.field_intranet_groups__activity_state
 msgid "Activity State"
-msgstr ""
+msgstr "Estado de la actividad"
 
 #. module: tyt_intranet_base
 #: model:ir.model.fields,field_description:tyt_intranet_base.field_intranet_groups__activity_type_icon
@@ -70,7 +69,7 @@ msgstr "¿Está seguro de que desea filtrar a los empleados?"
 #. module: tyt_intranet_base
 #: model:ir.model.fields,field_description:tyt_intranet_base.field_intranet_groups__message_attachment_count
 msgid "Attachment Count"
-msgstr ""
+msgstr "Cantidad de archivos"
 
 #. module: tyt_intranet_base
 #: model:ir.model.fields,field_description:tyt_intranet_base.field_intranet_groups__company_id
@@ -85,12 +84,12 @@ msgstr "Configuración"
 #. module: tyt_intranet_base
 #: model:ir.model.fields,field_description:tyt_intranet_base.field_intranet_groups__create_uid
 msgid "Created by"
-msgstr ""
+msgstr "Creado por"
 
 #. module: tyt_intranet_base
 #: model:ir.model.fields,field_description:tyt_intranet_base.field_intranet_groups__create_date
 msgid "Created on"
-msgstr ""
+msgstr "Creado el"
 
 #. module: tyt_intranet_base
 #: model:ir.model.fields,field_description:tyt_intranet_base.field_intranet_groups__department_id
@@ -100,24 +99,23 @@ msgstr "Departamento"
 #. module: tyt_intranet_base
 #: model:ir.model.fields,field_description:tyt_intranet_base.field_intranet_groups__display_name
 msgid "Display Name"
-msgstr ""
+msgstr "Nombre para mostrar"
 
 #. module: tyt_intranet_base
 #: model:ir.model,name:tyt_intranet_base.model_hr_employee
-#: model:ir.model.fields,field_description:tyt_intranet_base.field_intranet_groups__employee_ids
 msgid "Employee"
 msgstr "Empleado"
 
 #. module: tyt_intranet_base
 #: model:ir.model.fields,field_description:tyt_intranet_base.field_intranet_groups__employee_count
 msgid "Employee Count"
-msgstr ""
+msgstr "Cantidad de empleados"
 
 #. module: tyt_intranet_base
 #. odoo-python
 #: code:addons/tyt_intranet_base/models/intranet_groups.py:0
+#: model:ir.model.fields,field_description:tyt_intranet_base.field_intranet_groups__employee_ids
 #: model_terms:ir.ui.view,arch_db:tyt_intranet_base.intranet_groups_view_form
-#, python-format
 msgid "Employees"
 msgstr "Empleados"
 
@@ -145,7 +143,7 @@ msgstr "Filtrar empleados"
 #. module: tyt_intranet_base
 #: model:ir.model.fields,field_description:tyt_intranet_base.field_intranet_groups__message_follower_ids
 msgid "Followers"
-msgstr ""
+msgstr "Seguidores"
 
 #. module: tyt_intranet_base
 #: model:ir.model.fields,field_description:tyt_intranet_base.field_intranet_groups__message_partner_ids
@@ -160,7 +158,7 @@ msgstr ""
 #. module: tyt_intranet_base
 #: model:ir.model.fields,field_description:tyt_intranet_base.field_intranet_groups__has_message
 msgid "Has Message"
-msgstr ""
+msgstr "Tiene mensaje"
 
 #. module: tyt_intranet_base
 #: model:ir.model.fields,field_description:tyt_intranet_base.field_intranet_groups__id
@@ -205,11 +203,6 @@ msgid "Intranet"
 msgstr ""
 
 #. module: tyt_intranet_base
-#: model:ir.ui.menu,name:tyt_intranet_base.intranet_groups_menu_action
-msgid "Intranet Access Group"
-msgstr "Grupos de acceso"
-
-#. module: tyt_intranet_base
 #: model:ir.actions.act_window,name:tyt_intranet_base.intranet_groups_action
 #: model:ir.model,name:tyt_intranet_base.model_intranet_groups
 msgid "Intranet Access Groups"
@@ -222,24 +215,18 @@ msgstr "Usuario Intranet"
 
 #. module: tyt_intranet_base
 #: model:ir.model.fields,field_description:tyt_intranet_base.field_hr_employee__intranet_user_ids
-#: model_terms:ir.ui.view,arch_db:tyt_intranet_base.view_employee_form
 msgid "Intranet Users"
 msgstr "Usuarios Intranet"
 
 #. module: tyt_intranet_base
 #: model:ir.model.fields,field_description:tyt_intranet_base.field_intranet_groups__message_is_follower
 msgid "Is Follower"
-msgstr ""
+msgstr "Es seguidor"
 
 #. module: tyt_intranet_base
 #: model:ir.model.fields,field_description:tyt_intranet_base.field_intranet_groups__job_id
 msgid "Job Position"
 msgstr "Puesto de trabajo"
-
-#. module: tyt_intranet_base
-#: model:ir.model.fields,field_description:tyt_intranet_base.field_intranet_groups____last_update
-msgid "Last Modified on"
-msgstr ""
 
 #. module: tyt_intranet_base
 #: model:ir.model.fields,field_description:tyt_intranet_base.field_intranet_groups__write_uid
@@ -252,11 +239,6 @@ msgid "Last Updated on"
 msgstr ""
 
 #. module: tyt_intranet_base
-#: model:ir.model.fields,field_description:tyt_intranet_base.field_intranet_groups__message_main_attachment_id
-msgid "Main Attachment"
-msgstr ""
-
-#. module: tyt_intranet_base
 #: model:ir.model.fields,field_description:tyt_intranet_base.field_intranet_groups__message_has_error
 msgid "Message Delivery error"
 msgstr ""
@@ -264,7 +246,7 @@ msgstr ""
 #. module: tyt_intranet_base
 #: model:ir.model.fields,field_description:tyt_intranet_base.field_intranet_groups__message_ids
 msgid "Messages"
-msgstr ""
+msgstr "Mensajes"
 
 #. module: tyt_intranet_base
 #: model:ir.model.fields,field_description:tyt_intranet_base.field_intranet_groups__my_activity_date_deadline
@@ -299,12 +281,12 @@ msgstr ""
 #. module: tyt_intranet_base
 #: model:ir.model.fields,field_description:tyt_intranet_base.field_intranet_groups__message_needaction_counter
 msgid "Number of Actions"
-msgstr ""
+msgstr "Número de acciones"
 
 #. module: tyt_intranet_base
 #: model:ir.model.fields,field_description:tyt_intranet_base.field_intranet_groups__message_has_error_counter
 msgid "Number of errors"
-msgstr ""
+msgstr "Número de errores"
 
 #. module: tyt_intranet_base
 #: model:ir.model.fields,help:tyt_intranet_base.field_intranet_groups__message_needaction_counter
@@ -314,6 +296,16 @@ msgstr ""
 #. module: tyt_intranet_base
 #: model:ir.model.fields,help:tyt_intranet_base.field_intranet_groups__message_has_error_counter
 msgid "Number of messages with delivery error"
+msgstr "Número de mensajes con error de entrega"
+
+#. module: tyt_intranet_base
+#: model:ir.model.fields,field_description:tyt_intranet_base.field_intranet_groups__rating_ids
+msgid "Ratings"
+msgstr "Calificaciones"
+
+#. module: tyt_intranet_base
+#: model:ir.ui.menu,name:tyt_intranet_base.intranet_menu_report
+msgid "Reportes"
 msgstr ""
 
 #. module: tyt_intranet_base
@@ -364,7 +356,6 @@ msgstr ""
 #. odoo-python
 #: code:addons/tyt_intranet_base/models/intranet_groups.py:0
 #: model:ir.model.fields,field_description:tyt_intranet_base.field_intranet_groups__user_ids
-#, python-format
 msgid "Users"
 msgstr "Usuarios"
 

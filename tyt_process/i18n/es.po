@@ -4,16 +4,28 @@
 #
 msgid ""
 msgstr ""
-"Project-Id-Version: Odoo Server 16.0-20240711\n"
+"Project-Id-Version: Odoo Server 18.0+e-20250918\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2024-09-02 13:17+0000\n"
-"PO-Revision-Date: 2024-09-02 13:17+0000\n"
+"POT-Creation-Date: 2025-09-29 14:50+0000\n"
+"PO-Revision-Date: 2025-09-29 14:50+0000\n"
 "Last-Translator: \n"
 "Language-Team: \n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: \n"
 "Plural-Forms: \n"
+
+#. module: tyt_process
+#. odoo-python
+#: code:addons/tyt_process/models/process.py:0
+msgid "%s-%s"
+msgstr ""
+
+#. module: tyt_process
+#. odoo-python
+#: code:addons/tyt_process/models/process.py:0
+msgid "%s-%s-%s"
+msgstr ""
 
 #. module: tyt_process
 #: model:ir.actions.report,print_report_name:tyt_process.action_report_procedure_edition_tyt
@@ -66,6 +78,11 @@ msgid "4. Management of Records Kept Based on This Document"
 msgstr "4. Gestión de registros guardados con base en este documento"
 
 #. module: tyt_process
+#: model_terms:ir.ui.view,arch_db:tyt_process.view_mgmtsystem_qualitymanual_form_tyt_inherited
+msgid "4.4.2. Áreas"
+msgstr ""
+
+#. module: tyt_process
 #: model_terms:ir.ui.view,arch_db:tyt_process.system_process_edition_form_view_inherit_inherit
 msgid "5. Appendices"
 msgstr ""
@@ -76,14 +93,71 @@ msgid "5. Apéndices"
 msgstr ""
 
 #. module: tyt_process
+#. odoo-python
+#: code:addons/tyt_process/models/process.py:0
+msgid ""
+"<a data-oe-id=%s data-oe-model='process.edition' "
+"href=#id=%s&model=process.edition>%s</a>"
+msgstr ""
+
+#. module: tyt_process
+#: model:mail.template,body_html:tyt_process.tyt_mgmt_categ_communicate_mail_template
+msgid ""
+"<div style=\"margin: 0px; padding: 0px;\">\n"
+"                    <p style=\"margin: 0px; padding: 0px; font-size: 13px;\">\n"
+"                        Estimado/a\n"
+"                        <br/>\n"
+"                        <br/>\n"
+"                        Estimados se hace envío del presente mapa de procesos para su conocimiento y uso respectivo.\n"
+"                        <br/>\n"
+"                        <br/>\n"
+"                        Saludos cordiales\n"
+"                    </p>\n"
+"                </div>\n"
+"            "
+msgstr ""
+
+#. module: tyt_process
 #: model_terms:ir.ui.view,arch_db:tyt_process.external_layout_tyt_document
 msgid "<span>Page <span class=\"page\"/></span> of <span class=\"topage\"/>"
 msgstr "<span>Página <span class=\"page\"/></span> de <span class=\"topage\"/>"
 
 #. module: tyt_process
+#: model:ir.model.fields,field_description:tyt_process.field_documentary_control_tyt_docs__abbreviation
+msgid "Abreviatura"
+msgstr ""
+
+#. module: tyt_process
+#: model_terms:ir.ui.view,arch_db:tyt_process.tyt_mgmt_categ_communicate_view_form
+msgid "Actualizado última vez por"
+msgstr ""
+
+#. module: tyt_process
+#: model_terms:ir.ui.view,arch_db:tyt_process.tyt_mgmt_categ_communicate_view_form
+msgid "Adjuntar un archivo"
+msgstr ""
+
+#. module: tyt_process
+#: model:ir.model.fields,field_description:tyt_process.field_tyt_mgmt_categ_communicate__attachment_ids
+msgid "Adjuntos"
+msgstr ""
+
+#. module: tyt_process
 #: model:ir.model.fields,field_description:tyt_process.field_process_edition__tyt_appendices
 msgid "Appendices"
 msgstr "Apéndices"
+
+#. module: tyt_process
+#: model_terms:ir.ui.view,arch_db:tyt_process.mgmt_categ_form_inherit_create_date
+msgid "Archivos"
+msgstr ""
+
+#. module: tyt_process
+#: model_terms:ir.ui.view,arch_db:tyt_process.tyt_mgmt_categ_communicate_view_form
+#: model_terms:ir.ui.view,arch_db:tyt_process.view_external_inventory_report_wizard
+#: model_terms:ir.ui.view,arch_db:tyt_process.view_internal_inventory_report_wizard
+msgid "Cancelar"
+msgstr ""
 
 #. module: tyt_process
 #: model_terms:ir.ui.view,arch_db:tyt_process.report_procedure_edition_tyt_cover
@@ -96,8 +170,23 @@ msgid "Change History"
 msgstr "Historial de cambios"
 
 #. module: tyt_process
+#: model:ir.model.fields,field_description:tyt_process.field_documentary_control__code_number_str
+msgid "Code Number"
+msgstr ""
+
+#. module: tyt_process
 #: model_terms:ir.ui.view,arch_db:tyt_process.report_procedure_edition_tyt_cover
 msgid "Codigo"
+msgstr ""
+
+#. module: tyt_process
+#: model:ir.model.fields,field_description:tyt_process.field_tyt_mgmt_categ_communicate__company_id
+msgid "Compañía"
+msgstr ""
+
+#. module: tyt_process
+#: model_terms:ir.ui.view,arch_db:tyt_process.tyt_mgmt_categ_communicate_view_form
+msgid "Comunicar"
 msgstr ""
 
 #. module: tyt_process
@@ -111,16 +200,29 @@ msgid "Copia N°"
 msgstr ""
 
 #. module: tyt_process
+#: model:ir.model.fields,field_description:tyt_process.field_documentary_control_tyt_docs__create_uid
+#: model:ir.model.fields,field_description:tyt_process.field_mgmt_categ_docs__create_uid
 #: model:ir.model.fields,field_description:tyt_process.field_tyt_distribution_list__create_uid
 #: model:ir.model.fields,field_description:tyt_process.field_tyt_document_record__create_uid
+#: model:ir.model.fields,field_description:tyt_process.field_tyt_mgmt_categ_communicate__create_uid
+#: model:ir.model.fields,field_description:tyt_process.field_wizard_inventory_report__create_uid
 msgid "Created by"
 msgstr "Creado por"
 
 #. module: tyt_process
+#: model:ir.model.fields,field_description:tyt_process.field_documentary_control_tyt_docs__create_date
+#: model:ir.model.fields,field_description:tyt_process.field_mgmt_categ_docs__create_date
 #: model:ir.model.fields,field_description:tyt_process.field_tyt_distribution_list__create_date
 #: model:ir.model.fields,field_description:tyt_process.field_tyt_document_record__create_date
+#: model:ir.model.fields,field_description:tyt_process.field_tyt_mgmt_categ_communicate__create_date
+#: model:ir.model.fields,field_description:tyt_process.field_wizard_inventory_report__create_date
 msgid "Created on"
 msgstr "Creado el"
+
+#. module: tyt_process
+#: model:ir.model.fields,field_description:tyt_process.field_documentary_control__int_code
+msgid "Código"
+msgstr ""
 
 #. module: tyt_process
 #: model_terms:ir.ui.view,arch_db:tyt_process.report_procedure_edition_tyt_meta
@@ -128,8 +230,12 @@ msgid "Descripción de la modificación"
 msgstr ""
 
 #. module: tyt_process
+#: model:ir.model.fields,field_description:tyt_process.field_documentary_control_tyt_docs__display_name
+#: model:ir.model.fields,field_description:tyt_process.field_mgmt_categ_docs__display_name
 #: model:ir.model.fields,field_description:tyt_process.field_tyt_distribution_list__display_name
 #: model:ir.model.fields,field_description:tyt_process.field_tyt_document_record__display_name
+#: model:ir.model.fields,field_description:tyt_process.field_tyt_mgmt_categ_communicate__display_name
+#: model:ir.model.fields,field_description:tyt_process.field_wizard_inventory_report__display_name
 msgid "Display Name"
 msgstr "Nombre a mostrar"
 
@@ -172,6 +278,16 @@ msgid "Document Record"
 msgstr "Registro de documento"
 
 #. module: tyt_process
+#: model:ir.model.fields,field_description:tyt_process.field_documentary_control__tyt_document_id
+msgid "Documento"
+msgstr ""
+
+#. module: tyt_process
+#: model:ir.model.fields,field_description:tyt_process.field_mgmt_categ__tyt_documents
+msgid "Documentos"
+msgstr ""
+
+#. module: tyt_process
 #: model:ir.model,name:tyt_process.model_process_edition
 msgid "Edición de procedimiento"
 msgstr ""
@@ -188,14 +304,89 @@ msgid "Elaborado por"
 msgstr ""
 
 #. module: tyt_process
+#: model_terms:ir.ui.view,arch_db:tyt_process.view_external_inventory_report_wizard
+msgid "Exportar Inventario Externo"
+msgstr ""
+
+#. module: tyt_process
+#: model_terms:ir.ui.view,arch_db:tyt_process.view_internal_inventory_report_wizard
+msgid "Exportar Inventario Interno"
+msgstr ""
+
+#. module: tyt_process
 #: model_terms:ir.ui.view,arch_db:tyt_process.report_procedure_edition_tyt_meta
 msgid "Fecha"
 msgstr ""
 
 #. module: tyt_process
+#: model:ir.model.fields,field_description:tyt_process.field_wizard_inventory_report__date_fin
+msgid "Fecha de Fin"
+msgstr ""
+
+#. module: tyt_process
+#: model:ir.model.fields,field_description:tyt_process.field_wizard_inventory_report__date_init
+msgid "Fecha de Inicio"
+msgstr ""
+
+#. module: tyt_process
+#: model:ir.model.fields,field_description:tyt_process.field_documentary_control__reception_date
+msgid "Fecha de Recepción"
+msgstr ""
+
+#. module: tyt_process
+#: model_terms:ir.ui.view,arch_db:tyt_process.mgmt_categ_form_inherit_create_date
+msgid "Fecha de creación"
+msgstr ""
+
+#. module: tyt_process
+#: model_terms:ir.ui.view,arch_db:tyt_process.tyt_mgmt_categ_communicate_view_form
+msgid "Guardar"
+msgstr ""
+
+#. module: tyt_process
+#: model:ir.model.fields,field_description:tyt_process.field_documentary_control_tyt_docs__id
+#: model:ir.model.fields,field_description:tyt_process.field_mgmt_categ_docs__id
 #: model:ir.model.fields,field_description:tyt_process.field_tyt_distribution_list__id
 #: model:ir.model.fields,field_description:tyt_process.field_tyt_document_record__id
+#: model:ir.model.fields,field_description:tyt_process.field_tyt_mgmt_categ_communicate__id
+#: model:ir.model.fields,field_description:tyt_process.field_wizard_inventory_report__id
 msgid "ID"
+msgstr ""
+
+#. module: tyt_process
+#: model:ir.ui.menu,name:tyt_process.menu_external_inventory_report
+msgid "Inventario Externo"
+msgstr ""
+
+#. module: tyt_process
+#: model:ir.actions.report,name:tyt_process.action_external_inventory_report
+msgid "Inventario Externo (XLSX)"
+msgstr ""
+
+#. module: tyt_process
+#: model:ir.actions.report,name:tyt_process.action_internal_inventory_report
+msgid "Inventario Interno (XLSX)"
+msgstr ""
+
+#. module: tyt_process
+#: model:ir.model.fields,field_description:tyt_process.field_mgmt_process__documentarycontrol_ids
+#: model_terms:ir.ui.view,arch_db:tyt_process.inherit_mgmt_process_form
+msgid "Inventario de Registro"
+msgstr ""
+
+#. module: tyt_process
+#: model:ir.actions.report,name:tyt_process.action_inventory_report
+msgid "Inventario de Registros (XLSX)"
+msgstr ""
+
+#. module: tyt_process
+#: model:ir.actions.report,name:tyt_process.action_report_partner_xlsx
+msgid "Inventario de Registros Internos"
+msgstr ""
+
+#. module: tyt_process
+#: model:res.groups,name:tyt_process.group_invisible_1_menu
+msgid "Invisible Menu Group"
 msgstr ""
 
 #. module: tyt_process
@@ -204,20 +395,22 @@ msgid "Job"
 msgstr "Puesto"
 
 #. module: tyt_process
-#: model:ir.model.fields,field_description:tyt_process.field_tyt_distribution_list____last_update
-#: model:ir.model.fields,field_description:tyt_process.field_tyt_document_record____last_update
-msgid "Last Modified on"
-msgstr "Última modificación el"
-
-#. module: tyt_process
+#: model:ir.model.fields,field_description:tyt_process.field_documentary_control_tyt_docs__write_uid
+#: model:ir.model.fields,field_description:tyt_process.field_mgmt_categ_docs__write_uid
 #: model:ir.model.fields,field_description:tyt_process.field_tyt_distribution_list__write_uid
 #: model:ir.model.fields,field_description:tyt_process.field_tyt_document_record__write_uid
+#: model:ir.model.fields,field_description:tyt_process.field_tyt_mgmt_categ_communicate__write_uid
+#: model:ir.model.fields,field_description:tyt_process.field_wizard_inventory_report__write_uid
 msgid "Last Updated by"
 msgstr "Última actualización por"
 
 #. module: tyt_process
+#: model:ir.model.fields,field_description:tyt_process.field_documentary_control_tyt_docs__write_date
+#: model:ir.model.fields,field_description:tyt_process.field_mgmt_categ_docs__write_date
 #: model:ir.model.fields,field_description:tyt_process.field_tyt_distribution_list__write_date
 #: model:ir.model.fields,field_description:tyt_process.field_tyt_document_record__write_date
+#: model:ir.model.fields,field_description:tyt_process.field_tyt_mgmt_categ_communicate__write_date
+#: model:ir.model.fields,field_description:tyt_process.field_wizard_inventory_report__write_date
 msgid "Last Updated on"
 msgstr "Última actualización el"
 
@@ -242,11 +435,46 @@ msgid "Management of Records Kept Based on This Document"
 msgstr "Gestión de registros guardados con base en este documento"
 
 #. module: tyt_process
+#: model:ir.model,name:tyt_process.model_mgmt_categ_docs
+msgid "Mapa de Procesos - Documentos"
+msgstr ""
+
+#. module: tyt_process
+#: model:ir.actions.act_window,name:tyt_process.tyt_mgmt_categ_communicate_action
+#: model:ir.ui.menu,name:tyt_process.tyt_mgmt_categ_communicate_menu_action
+#: model:mail.template,subject:tyt_process.tyt_mgmt_categ_communicate_mail_template
+msgid "Mapa de procesos - TYT"
+msgstr ""
+
+#. module: tyt_process
+#: model:mail.template,name:tyt_process.tyt_mgmt_categ_communicate_mail_template
+msgid "Mapa de procesos - TYT: Enviar por correo electrónico"
+msgstr ""
+
+#. module: tyt_process
+#: model:ir.model,name:tyt_process.model_mgmt_categ
+msgid "Mgmt Categ"
+msgstr ""
+
+#. module: tyt_process
+#: model:ir.model,name:tyt_process.model_tyt_mgmt_categ_communicate
+msgid "Mgmt Categ Communicate"
+msgstr ""
+
+#. module: tyt_process
+#: model:ir.model.fields,field_description:tyt_process.field_documentary_control_tyt_docs__name
 #: model:ir.model.fields,field_description:tyt_process.field_tyt_document_record__name
 msgid "Name"
 msgstr "Nombre"
 
 #. module: tyt_process
+#: model:ir.model.fields,field_description:tyt_process.field_documentary_control__next_number_str
+msgid "Next Number"
+msgstr "Siguiente número"
+
+#. module: tyt_process
+#: model:ir.model.fields,field_description:tyt_process.field_mgmt_categ_docs__name
+#: model:ir.model.fields,field_description:tyt_process.field_tyt_mgmt_categ_communicate__name
 #: model_terms:ir.ui.view,arch_db:tyt_process.report_procedure_edition_tyt_body
 #: model_terms:ir.ui.view,arch_db:tyt_process.report_procedure_edition_tyt_cover
 msgid "Nombre"
@@ -261,6 +489,11 @@ msgstr ""
 #: model:ir.model.fields,field_description:tyt_process.field_process_edition__tyt_objective_scope_users
 msgid "Objective, Scope and Users"
 msgstr "Objetivo, alcance y usuarios"
+
+#. module: tyt_process
+#: model:ir.model.fields,field_description:tyt_process.field_documentary_control__received_by_id
+msgid "Persona que lo Recibió"
+msgstr ""
 
 #. module: tyt_process
 #: model:ir.model.fields,field_description:tyt_process.field_tyt_distribution_list__place
@@ -281,6 +514,11 @@ msgstr ""
 #: model:ir.model.fields,field_description:tyt_process.field_tyt_document_record__prefix
 msgid "Prefix"
 msgstr "Prefijo"
+
+#. module: tyt_process
+#: model:ir.model,name:tyt_process.model_mgmt_process
+msgid "Procedimiento"
+msgstr ""
 
 #. module: tyt_process
 #: model:ir.model.fields,field_description:tyt_process.field_process_edition__tyt_procedure_description
@@ -328,8 +566,14 @@ msgid "Reference Documents"
 msgstr "Documentos de referencia"
 
 #. module: tyt_process
-#: model_terms:ir.ui.view,arch_db:tyt_process.inherit_mgmt_process_form
-msgid "Registro de inventario"
+#: model:ir.model.fields,field_description:tyt_process.field_mgmt_categ__referencess
+#: model_terms:ir.ui.view,arch_db:tyt_process.mgmt_categ_form_inherit_create_date
+msgid "Referencias"
+msgstr ""
+
+#. module: tyt_process
+#: model:ir.model.fields,field_description:tyt_process.field_documentary_control__sender_id
+msgid "Remitente"
 msgstr ""
 
 #. module: tyt_process
@@ -338,6 +582,17 @@ msgid "Report Action"
 msgstr "Acción de informe"
 
 #. module: tyt_process
+#: model:ir.actions.act_window,name:tyt_process.action_external_inventory_wizard
+msgid "Reporte de Inventario Externo"
+msgstr ""
+
+#. module: tyt_process
+#: model:ir.actions.act_window,name:tyt_process.action_internal_inventory_wizard
+msgid "Reporte de Inventario Interno"
+msgstr ""
+
+#. module: tyt_process
+#: model:ir.model.fields,field_description:tyt_process.field_documentary_control__job_id
 #: model_terms:ir.ui.view,arch_db:tyt_process.report_procedure_edition_tyt_body
 msgid "Responsable"
 msgstr ""
@@ -346,6 +601,21 @@ msgstr ""
 #: model:ir.model.fields,field_description:tyt_process.field_tyt_document_record__responsible
 msgid "Responsible"
 msgstr "Responsable"
+
+#. module: tyt_process
+#: model_terms:ir.ui.view,arch_db:tyt_process.view_external_inventory_report_wizard
+msgid "Seleccionar fechas para el reporte de Inventario Externo"
+msgstr ""
+
+#. module: tyt_process
+#: model_terms:ir.ui.view,arch_db:tyt_process.view_internal_inventory_report_wizard
+msgid "Seleccionar fechas para el reporte de Inventario Interno"
+msgstr ""
+
+#. module: tyt_process
+#: model:ir.model.fields,field_description:tyt_process.field_documentary_control__tyt_sites_id
+msgid "Sitio"
+msgstr ""
 
 #. module: tyt_process
 #: model:ir.model,name:tyt_process.model_tyt_distribution_list
@@ -363,8 +633,19 @@ msgid "TYT Procedure Edition Report"
 msgstr "Report de edición de procedimiento TYT"
 
 #. module: tyt_process
+#: model:ir.model.fields,field_description:tyt_process.field_mgmt_categ__tyt_sites_id
 #: model_terms:ir.ui.view,arch_db:tyt_process.report_procedure_edition_tyt_body
 msgid "Ubicación"
+msgstr ""
+
+#. module: tyt_process
+#: model_terms:ir.ui.view,arch_db:tyt_process.tyt_mgmt_categ_communicate_view_form
+msgid "Ultima Actualización"
+msgstr ""
+
+#. module: tyt_process
+#: model_terms:ir.ui.view,arch_db:tyt_process.system_process_edition_form_view_tyt_inherit_inherit
+msgid "Validación y edición"
 msgstr ""
 
 #. module: tyt_process
@@ -373,7 +654,85 @@ msgid "Ver."
 msgstr ""
 
 #. module: tyt_process
+#: model_terms:ir.ui.view,arch_db:tyt_process.mgmt_process_form_tyt_inherit
+msgid "Versiones"
+msgstr ""
+
+#. module: tyt_process
+#: model:ir.model.fields,field_description:tyt_process.field_documentary_control__process_last_edition
 #: model_terms:ir.ui.view,arch_db:tyt_process.report_procedure_edition_tyt_cover
 #: model_terms:ir.ui.view,arch_db:tyt_process.report_procedure_edition_tyt_meta
 msgid "Versión"
+msgstr ""
+
+#. module: tyt_process
+#: model:ir.model.fields,field_description:tyt_process.field_mgmt_process_edition_report_wizard__process_edition_id
+msgid "Versión de proceso"
+msgstr ""
+
+#. module: tyt_process
+#: model:ir.model.fields,field_description:tyt_process.field_mgmt_process__last_edition
+msgid "Versión vigente"
+msgstr ""
+
+#. module: tyt_process
+#: model:ir.model,name:tyt_process.model_wizard_inventory_report
+msgid "Wizard para Reporte de Inventario"
+msgstr ""
+
+#. module: tyt_process
+#: model:ir.model,name:tyt_process.model_documentary_control
+msgid "documentary.control"
+msgstr ""
+
+#. module: tyt_process
+#: model:ir.model,name:tyt_process.model_documentary_control_tyt_docs
+msgid "documentary.control.tyt_docs"
+msgstr ""
+
+#. module: tyt_process
+#: model:ir.model,name:tyt_process.model_mgmt_process_edition_report_wizard
+msgid "mgmt.process_edition.report.wizard"
+msgstr ""
+
+#. module: tyt_process
+#: model:ir.actions.report,print_report_name:tyt_process.action_report_partner_xlsx
+msgid "object.name"
+msgstr ""
+
+#. module: tyt_process
+#: model:ir.model,name:tyt_process.model_report_tyt_process_general_inventory
+msgid "report.tyt_process.general_inventory"
+msgstr ""
+
+#. module: tyt_process
+#: model:ir.model,name:tyt_process.model_report_tyt_process_inventory_report_mixin
+msgid "report.tyt_process.inventory_report_mixin"
+msgstr ""
+
+#. module: tyt_process
+#: model:ir.model,name:tyt_process.model_report_tyt_process_record_inventory_report
+msgid "report.tyt_process.record_inventory_report"
+msgstr ""
+
+#. module: tyt_process
+#: model:ir.model,name:tyt_process.model_report_tyt_process_wizard_external_inventory
+msgid "report.tyt_process.wizard_external_inventory"
+msgstr ""
+
+#. module: tyt_process
+#: model:ir.model,name:tyt_process.model_report_tyt_process_wizard_internal_inventory
+msgid "report.tyt_process.wizard_internal_inventory"
+msgstr ""
+
+#. module: tyt_process
+#: model:ir.model.fields,field_description:tyt_process.field_mgmt_categ__type
+#: model:ir.model.fields,field_description:tyt_process.field_mgmt_process__type
+#: model:ir.model.fields,field_description:tyt_process.field_process_edition__type_id
+msgid "Área"
+msgstr ""
+
+#. module: tyt_process
+#: model:ir.model.fields,field_description:tyt_process.field_documentary_control__area_id
+msgid "Área Responsable"
 msgstr ""

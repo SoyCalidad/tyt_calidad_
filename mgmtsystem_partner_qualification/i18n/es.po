@@ -4,13 +4,12 @@
 #
 msgid ""
 msgstr ""
-"Project-Id-Version: Odoo Server 13.0-20201123\n"
+"Project-Id-Version: Odoo Server 18.0+e-20250918\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2022-05-09 14:50+0000\n"
-"PO-Revision-Date: 2022-05-09 14:50+0000\n"
+"POT-Creation-Date: 2025-09-26 16:08+0000\n"
+"PO-Revision-Date: 2025-09-26 16:08+0000\n"
 "Last-Translator: \n"
 "Language-Team: \n"
-"Language: es\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: \n"
@@ -114,7 +113,14 @@ msgstr ""
 #: model:ir.model.fields,field_description:mgmtsystem_partner_qualification.field_res_partner_evaluation__activity_state
 #: model:ir.model.fields,field_description:mgmtsystem_partner_qualification.field_res_partner_evaluation_history__activity_state
 msgid "Activity State"
-msgstr ""
+msgstr "Estado de actividad"
+
+#. module: mgmtsystem_partner_qualification
+#: model:ir.model.fields,field_description:mgmtsystem_partner_qualification.field_evaluation_initial_evaluation__activity_type_icon
+#: model:ir.model.fields,field_description:mgmtsystem_partner_qualification.field_res_partner_evaluation__activity_type_icon
+#: model:ir.model.fields,field_description:mgmtsystem_partner_qualification.field_res_partner_evaluation_history__activity_type_icon
+msgid "Activity Type Icon"
+msgstr "Icono de Tipo de Actividad"
 
 #. module: mgmtsystem_partner_qualification
 #: model:ir.model.fields.selection,name:mgmtsystem_partner_qualification.selection__res_partner__frequency__yearly
@@ -142,7 +148,7 @@ msgstr ""
 #. module: mgmtsystem_partner_qualification
 #: model_terms:ir.ui.view,arch_db:mgmtsystem_partner_qualification.res_partner_evaluation_form
 msgid "Archived"
-msgstr ""
+msgstr "Archivado"
 
 #. module: mgmtsystem_partner_qualification
 #: model:ir.model.fields,field_description:mgmtsystem_partner_qualification.field_res_partner_evaluation_history_item__item_id
@@ -205,6 +211,8 @@ msgid "Cliente crítico"
 msgstr ""
 
 #. module: mgmtsystem_partner_qualification
+#: model:ir.model.fields,field_description:mgmtsystem_partner_qualification.field_evaluation_initial_evaluation__company_id
+#: model:ir.model.fields,field_description:mgmtsystem_partner_qualification.field_res_partner_evaluation__company_id
 #: model:ir.model.fields,field_description:mgmtsystem_partner_qualification.field_res_partner_evaluation_history__company_id
 msgid "Compañia"
 msgstr ""
@@ -212,7 +220,7 @@ msgstr ""
 #. module: mgmtsystem_partner_qualification
 #: model:ir.model,name:mgmtsystem_partner_qualification.model_res_partner
 msgid "Contact"
-msgstr ""
+msgstr "Contacto"
 
 #. module: mgmtsystem_partner_qualification
 #: model:ir.model.fields,field_description:mgmtsystem_partner_qualification.field_evaluation_initial_evaluation__create_uid
@@ -343,8 +351,6 @@ msgstr ""
 #: model:ir.model.fields,field_description:mgmtsystem_partner_qualification.field_evaluation_initial_evaluation__display_name
 #: model:ir.model.fields,field_description:mgmtsystem_partner_qualification.field_evaluation_initial_evaluation_item__display_name
 #: model:ir.model.fields,field_description:mgmtsystem_partner_qualification.field_partner_qualification_wizard__display_name
-#: model:ir.model.fields,field_description:mgmtsystem_partner_qualification.field_report_mgmtsystem_partner_qualification_partner_evaluation__display_name
-#: model:ir.model.fields,field_description:mgmtsystem_partner_qualification.field_report_mgmtsystem_partner_qualification_r_initial_evaluation__display_name
 #: model:ir.model.fields,field_description:mgmtsystem_partner_qualification.field_res_partner_evaluation__display_name
 #: model:ir.model.fields,field_description:mgmtsystem_partner_qualification.field_res_partner_evaluation_history__display_name
 #: model:ir.model.fields,field_description:mgmtsystem_partner_qualification.field_res_partner_evaluation_history_item__display_name
@@ -480,8 +486,8 @@ msgid "Evaluación de seguimiento"
 msgstr ""
 
 #. module: mgmtsystem_partner_qualification
-#: model:mail.template,report_name:mgmtsystem_partner_qualification.email_template_partner_evaluation_history
-msgid "Evaluación de seguimiento_${(object.name or '').replace('/','_')}"
+#: model:mail.template,name:mgmtsystem_partner_qualification.email_template_partner_evaluation_history
+msgid "Evaluación de seguimiento: Enviar por correo electrónico"
 msgstr ""
 
 #. module: mgmtsystem_partner_qualification
@@ -522,6 +528,21 @@ msgstr ""
 #: model:ir.model.fields,field_description:mgmtsystem_partner_qualification.field_res_partner_initial_evaluation__employee_id
 msgid "Evaluador"
 msgstr ""
+
+#. module: mgmtsystem_partner_qualification
+#: model:ir.model.fields,field_description:mgmtsystem_partner_qualification.field_mgmtsystem_validation_step__evaluation_elaboration_id
+msgid "Evaluation Elaboration"
+msgstr "Elaboración de la evaluación"
+
+#. module: mgmtsystem_partner_qualification
+#: model:ir.model.fields,field_description:mgmtsystem_partner_qualification.field_mgmtsystem_validation_step__evaluation_review_id
+msgid "Evaluation Review"
+msgstr "Revisión de evaluación"
+
+#. module: mgmtsystem_partner_qualification
+#: model:ir.model.fields,field_description:mgmtsystem_partner_qualification.field_mgmtsystem_validation_step__evaluation_validation_id
+msgid "Evaluation Validation"
+msgstr "Validación de la evaluación"
 
 #. module: mgmtsystem_partner_qualification
 #: model:ir.model.fields.selection,name:mgmtsystem_partner_qualification.selection__partner_qualification_wizard__filter_by__date
@@ -579,18 +600,19 @@ msgstr ""
 #: model:ir.model.fields,field_description:mgmtsystem_partner_qualification.field_evaluation_initial_evaluation__message_follower_ids
 #: model:ir.model.fields,field_description:mgmtsystem_partner_qualification.field_res_partner_evaluation__message_follower_ids
 msgid "Followers"
-msgstr ""
-
-#. module: mgmtsystem_partner_qualification
-#: model:ir.model.fields,field_description:mgmtsystem_partner_qualification.field_evaluation_initial_evaluation__message_channel_ids
-#: model:ir.model.fields,field_description:mgmtsystem_partner_qualification.field_res_partner_evaluation__message_channel_ids
-msgid "Followers (Channels)"
-msgstr ""
+msgstr "Seguidores"
 
 #. module: mgmtsystem_partner_qualification
 #: model:ir.model.fields,field_description:mgmtsystem_partner_qualification.field_evaluation_initial_evaluation__message_partner_ids
 #: model:ir.model.fields,field_description:mgmtsystem_partner_qualification.field_res_partner_evaluation__message_partner_ids
 msgid "Followers (Partners)"
+msgstr "Seguidores (Contactos)"
+
+#. module: mgmtsystem_partner_qualification
+#: model:ir.model.fields,help:mgmtsystem_partner_qualification.field_evaluation_initial_evaluation__activity_type_icon
+#: model:ir.model.fields,help:mgmtsystem_partner_qualification.field_res_partner_evaluation__activity_type_icon
+#: model:ir.model.fields,help:mgmtsystem_partner_qualification.field_res_partner_evaluation_history__activity_type_icon
+msgid "Font awesome icon e.g. fa-tasks"
 msgstr ""
 
 #. module: mgmtsystem_partner_qualification
@@ -604,6 +626,12 @@ msgstr ""
 #: model:ir.model.fields,field_description:mgmtsystem_partner_qualification.field_res_users__frequency
 msgid "Frecuencia de evaluación"
 msgstr ""
+
+#. module: mgmtsystem_partner_qualification
+#: model:ir.model.fields,field_description:mgmtsystem_partner_qualification.field_evaluation_initial_evaluation__has_message
+#: model:ir.model.fields,field_description:mgmtsystem_partner_qualification.field_res_partner_evaluation__has_message
+msgid "Has Message"
+msgstr "Tiene mensaje"
 
 #. module: mgmtsystem_partner_qualification
 #: model:ir.model.fields,field_description:mgmtsystem_partner_qualification.field_partner_qualification_wizard__end_date
@@ -637,8 +665,6 @@ msgstr ""
 #: model:ir.model.fields,field_description:mgmtsystem_partner_qualification.field_evaluation_initial_evaluation__id
 #: model:ir.model.fields,field_description:mgmtsystem_partner_qualification.field_evaluation_initial_evaluation_item__id
 #: model:ir.model.fields,field_description:mgmtsystem_partner_qualification.field_partner_qualification_wizard__id
-#: model:ir.model.fields,field_description:mgmtsystem_partner_qualification.field_report_mgmtsystem_partner_qualification_partner_evaluation__id
-#: model:ir.model.fields,field_description:mgmtsystem_partner_qualification.field_report_mgmtsystem_partner_qualification_r_initial_evaluation__id
 #: model:ir.model.fields,field_description:mgmtsystem_partner_qualification.field_res_partner_evaluation__id
 #: model:ir.model.fields,field_description:mgmtsystem_partner_qualification.field_res_partner_evaluation_history__id
 #: model:ir.model.fields,field_description:mgmtsystem_partner_qualification.field_res_partner_evaluation_history_item__id
@@ -662,15 +688,13 @@ msgstr ""
 #: model:ir.model.fields,help:mgmtsystem_partner_qualification.field_res_partner_evaluation__activity_exception_icon
 #: model:ir.model.fields,help:mgmtsystem_partner_qualification.field_res_partner_evaluation_history__activity_exception_icon
 msgid "Icon to indicate an exception activity."
-msgstr ""
+msgstr "Icono para indicar una actividad de excepción."
 
 #. module: mgmtsystem_partner_qualification
 #: model:ir.model.fields,help:mgmtsystem_partner_qualification.field_evaluation_initial_evaluation__message_needaction
-#: model:ir.model.fields,help:mgmtsystem_partner_qualification.field_evaluation_initial_evaluation__message_unread
 #: model:ir.model.fields,help:mgmtsystem_partner_qualification.field_res_partner_evaluation__message_needaction
-#: model:ir.model.fields,help:mgmtsystem_partner_qualification.field_res_partner_evaluation__message_unread
 msgid "If checked, new messages require your attention."
-msgstr ""
+msgstr "Si está marcada, los mensajes nuevos requieren su atención."
 
 #. module: mgmtsystem_partner_qualification
 #: model:ir.model.fields,help:mgmtsystem_partner_qualification.field_evaluation_initial_evaluation__message_has_error
@@ -678,7 +702,7 @@ msgstr ""
 #: model:ir.model.fields,help:mgmtsystem_partner_qualification.field_res_partner_evaluation__message_has_error
 #: model:ir.model.fields,help:mgmtsystem_partner_qualification.field_res_partner_evaluation__message_has_sms_error
 msgid "If checked, some messages have a delivery error."
-msgstr ""
+msgstr "Si está marcada, algunos mensajes tendrán un error de entrega."
 
 #. module: mgmtsystem_partner_qualification
 #: model:ir.model.fields,field_description:mgmtsystem_partner_qualification.field_res_partner_evaluation_history__qualification
@@ -689,24 +713,7 @@ msgstr ""
 #: model:ir.model.fields,field_description:mgmtsystem_partner_qualification.field_evaluation_initial_evaluation__message_is_follower
 #: model:ir.model.fields,field_description:mgmtsystem_partner_qualification.field_res_partner_evaluation__message_is_follower
 msgid "Is Follower"
-msgstr ""
-
-#. module: mgmtsystem_partner_qualification
-#: model:ir.model.fields,field_description:mgmtsystem_partner_qualification.field_evaluation_initial_evaluation____last_update
-#: model:ir.model.fields,field_description:mgmtsystem_partner_qualification.field_evaluation_initial_evaluation_item____last_update
-#: model:ir.model.fields,field_description:mgmtsystem_partner_qualification.field_partner_qualification_wizard____last_update
-#: model:ir.model.fields,field_description:mgmtsystem_partner_qualification.field_report_mgmtsystem_partner_qualification_partner_evaluation____last_update
-#: model:ir.model.fields,field_description:mgmtsystem_partner_qualification.field_report_mgmtsystem_partner_qualification_r_initial_evaluation____last_update
-#: model:ir.model.fields,field_description:mgmtsystem_partner_qualification.field_res_partner_evaluation____last_update
-#: model:ir.model.fields,field_description:mgmtsystem_partner_qualification.field_res_partner_evaluation_history____last_update
-#: model:ir.model.fields,field_description:mgmtsystem_partner_qualification.field_res_partner_evaluation_history_item____last_update
-#: model:ir.model.fields,field_description:mgmtsystem_partner_qualification.field_res_partner_evaluation_history_item_line____last_update
-#: model:ir.model.fields,field_description:mgmtsystem_partner_qualification.field_res_partner_evaluation_item____last_update
-#: model:ir.model.fields,field_description:mgmtsystem_partner_qualification.field_res_partner_evaluation_item_line____last_update
-#: model:ir.model.fields,field_description:mgmtsystem_partner_qualification.field_res_partner_initial_evaluation____last_update
-#: model:ir.model.fields,field_description:mgmtsystem_partner_qualification.field_res_partner_initial_evaluation_item____last_update
-msgid "Last Modified on"
-msgstr ""
+msgstr "Es seguidor"
 
 #. module: mgmtsystem_partner_qualification
 #: model:ir.model.fields,field_description:mgmtsystem_partner_qualification.field_evaluation_initial_evaluation__write_uid
@@ -721,7 +728,7 @@ msgstr ""
 #: model:ir.model.fields,field_description:mgmtsystem_partner_qualification.field_res_partner_initial_evaluation__write_uid
 #: model:ir.model.fields,field_description:mgmtsystem_partner_qualification.field_res_partner_initial_evaluation_item__write_uid
 msgid "Last Updated by"
-msgstr ""
+msgstr "Última actualización por"
 
 #. module: mgmtsystem_partner_qualification
 #: model:ir.model.fields,field_description:mgmtsystem_partner_qualification.field_evaluation_initial_evaluation__write_date
@@ -736,7 +743,7 @@ msgstr ""
 #: model:ir.model.fields,field_description:mgmtsystem_partner_qualification.field_res_partner_initial_evaluation__write_date
 #: model:ir.model.fields,field_description:mgmtsystem_partner_qualification.field_res_partner_initial_evaluation_item__write_date
 msgid "Last Updated on"
-msgstr ""
+msgstr "Última actualización el"
 
 #. module: mgmtsystem_partner_qualification
 #: model:ir.model,name:mgmtsystem_partner_qualification.model_res_partner_evaluation_item
@@ -756,12 +763,6 @@ msgid "Listado de evaluaciones iniciales"
 msgstr ""
 
 #. module: mgmtsystem_partner_qualification
-#: model:ir.model.fields,field_description:mgmtsystem_partner_qualification.field_evaluation_initial_evaluation__message_main_attachment_id
-#: model:ir.model.fields,field_description:mgmtsystem_partner_qualification.field_res_partner_evaluation__message_main_attachment_id
-msgid "Main Attachment"
-msgstr ""
-
-#. module: mgmtsystem_partner_qualification
 #: model:ir.model.fields.selection,name:mgmtsystem_partner_qualification.selection__res_partner__frequency__monthly
 msgid "Mensual"
 msgstr ""
@@ -770,39 +771,58 @@ msgstr ""
 #: model:ir.model.fields,field_description:mgmtsystem_partner_qualification.field_evaluation_initial_evaluation__message_has_error
 #: model:ir.model.fields,field_description:mgmtsystem_partner_qualification.field_res_partner_evaluation__message_has_error
 msgid "Message Delivery error"
-msgstr ""
+msgstr "Error de entrega del mensaje"
 
 #. module: mgmtsystem_partner_qualification
 #: model:ir.model.fields,field_description:mgmtsystem_partner_qualification.field_evaluation_initial_evaluation__message_ids
 #: model:ir.model.fields,field_description:mgmtsystem_partner_qualification.field_res_partner_evaluation__message_ids
 msgid "Messages"
-msgstr ""
+msgstr "Mensajes"
+
+#. module: mgmtsystem_partner_qualification
+#: model:ir.model.fields,field_description:mgmtsystem_partner_qualification.field_evaluation_initial_evaluation__my_activity_date_deadline
+#: model:ir.model.fields,field_description:mgmtsystem_partner_qualification.field_res_partner_evaluation__my_activity_date_deadline
+#: model:ir.model.fields,field_description:mgmtsystem_partner_qualification.field_res_partner_evaluation_history__my_activity_date_deadline
+msgid "My Activity Deadline"
+msgstr "Fecha límite de mi actividad"
+
+#. module: mgmtsystem_partner_qualification
+#: model:ir.model.fields,field_description:mgmtsystem_partner_qualification.field_evaluation_initial_evaluation__activity_calendar_event_id
+#: model:ir.model.fields,field_description:mgmtsystem_partner_qualification.field_res_partner_evaluation__activity_calendar_event_id
+#: model:ir.model.fields,field_description:mgmtsystem_partner_qualification.field_res_partner_evaluation_history__activity_calendar_event_id
+msgid "Next Activity Calendar Event"
+msgstr "Próximo evento del calendario de actividades"
 
 #. module: mgmtsystem_partner_qualification
 #: model:ir.model.fields,field_description:mgmtsystem_partner_qualification.field_evaluation_initial_evaluation__activity_date_deadline
 #: model:ir.model.fields,field_description:mgmtsystem_partner_qualification.field_res_partner_evaluation__activity_date_deadline
 #: model:ir.model.fields,field_description:mgmtsystem_partner_qualification.field_res_partner_evaluation_history__activity_date_deadline
 msgid "Next Activity Deadline"
-msgstr ""
+msgstr "Fecha límite para la próxima actividad"
 
 #. module: mgmtsystem_partner_qualification
 #: model:ir.model.fields,field_description:mgmtsystem_partner_qualification.field_evaluation_initial_evaluation__activity_summary
 #: model:ir.model.fields,field_description:mgmtsystem_partner_qualification.field_res_partner_evaluation__activity_summary
 #: model:ir.model.fields,field_description:mgmtsystem_partner_qualification.field_res_partner_evaluation_history__activity_summary
 msgid "Next Activity Summary"
-msgstr ""
+msgstr "Resumen de la próxima actividad"
 
 #. module: mgmtsystem_partner_qualification
 #: model:ir.model.fields,field_description:mgmtsystem_partner_qualification.field_evaluation_initial_evaluation__activity_type_id
 #: model:ir.model.fields,field_description:mgmtsystem_partner_qualification.field_res_partner_evaluation__activity_type_id
 #: model:ir.model.fields,field_description:mgmtsystem_partner_qualification.field_res_partner_evaluation_history__activity_type_id
 msgid "Next Activity Type"
-msgstr ""
+msgstr "Siguiente tipo de actividad"
 
 #. module: mgmtsystem_partner_qualification
 #: model:ir.model.fields,field_description:mgmtsystem_partner_qualification.field_res_partner_initial_evaluation__select_no
 #: model:ir.model.fields,field_description:mgmtsystem_partner_qualification.field_res_partner_initial_evaluation_item__no
 msgid "No"
+msgstr ""
+
+#. module: mgmtsystem_partner_qualification
+#: model:ir.model.fields,field_description:mgmtsystem_partner_qualification.field_res_partner_initial_evaluation_item__no_apply
+msgid "No Aplica"
 msgstr ""
 
 #. module: mgmtsystem_partner_qualification
@@ -834,31 +854,25 @@ msgstr ""
 #: model:ir.model.fields,field_description:mgmtsystem_partner_qualification.field_evaluation_initial_evaluation__message_needaction_counter
 #: model:ir.model.fields,field_description:mgmtsystem_partner_qualification.field_res_partner_evaluation__message_needaction_counter
 msgid "Number of Actions"
-msgstr ""
+msgstr "Número de acciones"
 
 #. module: mgmtsystem_partner_qualification
 #: model:ir.model.fields,field_description:mgmtsystem_partner_qualification.field_evaluation_initial_evaluation__message_has_error_counter
 #: model:ir.model.fields,field_description:mgmtsystem_partner_qualification.field_res_partner_evaluation__message_has_error_counter
 msgid "Number of errors"
-msgstr ""
+msgstr "Número de errores"
 
 #. module: mgmtsystem_partner_qualification
 #: model:ir.model.fields,help:mgmtsystem_partner_qualification.field_evaluation_initial_evaluation__message_needaction_counter
 #: model:ir.model.fields,help:mgmtsystem_partner_qualification.field_res_partner_evaluation__message_needaction_counter
-msgid "Number of messages which requires an action"
-msgstr ""
+msgid "Number of messages requiring action"
+msgstr "Número de mensajes que requieren acción"
 
 #. module: mgmtsystem_partner_qualification
 #: model:ir.model.fields,help:mgmtsystem_partner_qualification.field_evaluation_initial_evaluation__message_has_error_counter
 #: model:ir.model.fields,help:mgmtsystem_partner_qualification.field_res_partner_evaluation__message_has_error_counter
 msgid "Number of messages with delivery error"
-msgstr ""
-
-#. module: mgmtsystem_partner_qualification
-#: model:ir.model.fields,help:mgmtsystem_partner_qualification.field_evaluation_initial_evaluation__message_unread_counter
-#: model:ir.model.fields,help:mgmtsystem_partner_qualification.field_res_partner_evaluation__message_unread_counter
-msgid "Number of unread messages"
-msgstr ""
+msgstr "Número de mensajes con error de entrega"
 
 #. module: mgmtsystem_partner_qualification
 #: model:ir.model.fields,field_description:mgmtsystem_partner_qualification.field_evaluation_initial_evaluation__version
@@ -878,12 +892,9 @@ msgstr ""
 
 #. module: mgmtsystem_partner_qualification
 #: model:ir.model.fields,field_description:mgmtsystem_partner_qualification.field_evaluation_initial_evaluation__parent_edition
-#: model:ir.model.fields,field_description:mgmtsystem_partner_qualification.field_mgmtsystem_validation_step__evaluation_elaboration_id
-#: model:ir.model.fields,field_description:mgmtsystem_partner_qualification.field_mgmtsystem_validation_step__evaluation_review_id
-#: model:ir.model.fields,field_description:mgmtsystem_partner_qualification.field_mgmtsystem_validation_step__evaluation_validation_id
 #: model:ir.model.fields,field_description:mgmtsystem_partner_qualification.field_res_partner_evaluation__parent_edition
-msgid "Padre"
-msgstr ""
+msgid "Parent Edition"
+msgstr "Padre"
 
 #. module: mgmtsystem_partner_qualification
 #: model:ir.model.fields,field_description:mgmtsystem_partner_qualification.field_res_partner_evaluation__process_id
@@ -948,8 +959,6 @@ msgstr ""
 
 #. module: mgmtsystem_partner_qualification
 #: model:ir.actions.server,name:mgmtsystem_partner_qualification.res_partner_cron_ir_actions_server
-#: model:ir.cron,cron_name:mgmtsystem_partner_qualification.res_partner_cron
-#: model:ir.cron,name:mgmtsystem_partner_qualification.res_partner_cron
 msgid "Reevaluación de proveedor"
 msgstr ""
 
@@ -979,7 +988,7 @@ msgstr ""
 #: model:ir.model.fields,field_description:mgmtsystem_partner_qualification.field_res_partner_evaluation__activity_user_id
 #: model:ir.model.fields,field_description:mgmtsystem_partner_qualification.field_res_partner_evaluation_history__activity_user_id
 msgid "Responsible User"
-msgstr ""
+msgstr "Usuario responsable"
 
 #. module: mgmtsystem_partner_qualification
 #: model:ir.model.fields,field_description:mgmtsystem_partner_qualification.field_evaluation_initial_evaluation__review_step
@@ -993,7 +1002,7 @@ msgstr ""
 #: model:ir.model.fields,field_description:mgmtsystem_partner_qualification.field_evaluation_initial_evaluation__message_has_sms_error
 #: model:ir.model.fields,field_description:mgmtsystem_partner_qualification.field_res_partner_evaluation__message_has_sms_error
 msgid "SMS Delivery error"
-msgstr ""
+msgstr "Error de entrega de SMS"
 
 #. module: mgmtsystem_partner_qualification
 #: model:ir.model.fields.selection,name:mgmtsystem_partner_qualification.selection__res_partner__frequency__weekly
@@ -1033,19 +1042,7 @@ msgstr ""
 #: model:ir.model.fields,help:mgmtsystem_partner_qualification.field_res_partner_evaluation__activity_exception_decoration
 #: model:ir.model.fields,help:mgmtsystem_partner_qualification.field_res_partner_evaluation_history__activity_exception_decoration
 msgid "Type of the exception activity on record."
-msgstr ""
-
-#. module: mgmtsystem_partner_qualification
-#: model:ir.model.fields,field_description:mgmtsystem_partner_qualification.field_evaluation_initial_evaluation__message_unread
-#: model:ir.model.fields,field_description:mgmtsystem_partner_qualification.field_res_partner_evaluation__message_unread
-msgid "Unread Messages"
-msgstr ""
-
-#. module: mgmtsystem_partner_qualification
-#: model:ir.model.fields,field_description:mgmtsystem_partner_qualification.field_evaluation_initial_evaluation__message_unread_counter
-#: model:ir.model.fields,field_description:mgmtsystem_partner_qualification.field_res_partner_evaluation__message_unread_counter
-msgid "Unread Messages Counter"
-msgstr ""
+msgstr "Tipo de actividad de excepción registrada."
 
 #. module: mgmtsystem_partner_qualification
 #: model:res.groups,name:mgmtsystem_partner_qualification.group_partner_evaluation_onlyread_printreport
@@ -1110,13 +1107,13 @@ msgstr ""
 #: model:ir.model.fields,field_description:mgmtsystem_partner_qualification.field_evaluation_initial_evaluation__website_message_ids
 #: model:ir.model.fields,field_description:mgmtsystem_partner_qualification.field_res_partner_evaluation__website_message_ids
 msgid "Website Messages"
-msgstr ""
+msgstr "Mensajes del sitio web"
 
 #. module: mgmtsystem_partner_qualification
 #: model:ir.model.fields,help:mgmtsystem_partner_qualification.field_evaluation_initial_evaluation__website_message_ids
 #: model:ir.model.fields,help:mgmtsystem_partner_qualification.field_res_partner_evaluation__website_message_ids
 msgid "Website communication history"
-msgstr ""
+msgstr "Historial de comunicaciones del sitio web"
 
 #. module: mgmtsystem_partner_qualification
 #: model:ir.model,name:mgmtsystem_partner_qualification.model_partner_qualification_wizard

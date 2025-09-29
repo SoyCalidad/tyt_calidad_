@@ -4,10 +4,10 @@
 #
 msgid ""
 msgstr ""
-"Project-Id-Version: Odoo Server 16.0+e-20240730\n"
+"Project-Id-Version: Odoo Server 18.0+e-20250918\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2024-11-20 20:51+0000\n"
-"PO-Revision-Date: 2024-11-20 20:51+0000\n"
+"POT-Creation-Date: 2025-09-29 14:41+0000\n"
+"PO-Revision-Date: 2025-09-29 14:41+0000\n"
 "Last-Translator: \n"
 "Language-Team: \n"
 "MIME-Version: 1.0\n"
@@ -257,13 +257,6 @@ msgid "Job Position"
 msgstr "Puesto de trabajo"
 
 #. module: tyt_intranet_messaging
-#: model:ir.model.fields,field_description:tyt_intranet_messaging.field_tyt_intranet_department_message____last_update
-#: model:ir.model.fields,field_description:tyt_intranet_messaging.field_tyt_intranet_department_message_read_status____last_update
-#: model:ir.model.fields,field_description:tyt_intranet_messaging.field_tyt_intranet_department_message_tag____last_update
-msgid "Last Modified on"
-msgstr ""
-
-#. module: tyt_intranet_messaging
 #: model:ir.model.fields,field_description:tyt_intranet_messaging.field_tyt_intranet_department_message__write_uid
 #: model:ir.model.fields,field_description:tyt_intranet_messaging.field_tyt_intranet_department_message_read_status__write_uid
 #: model:ir.model.fields,field_description:tyt_intranet_messaging.field_tyt_intranet_department_message_tag__write_uid
@@ -278,9 +271,9 @@ msgid "Last Updated on"
 msgstr ""
 
 #. module: tyt_intranet_messaging
-#: model:ir.model.fields,field_description:tyt_intranet_messaging.field_tyt_intranet_department_message__message_main_attachment_id
-msgid "Main Attachment"
-msgstr "Adjuntos"
+#: model_terms:ir.ui.view,arch_db:tyt_intranet_messaging.portal_my_department_messages
+msgid "Leído"
+msgstr ""
 
 #. module: tyt_intranet_messaging
 #: model_terms:ir.ui.view,arch_db:tyt_intranet_messaging.portal_my_department_messages
@@ -301,7 +294,7 @@ msgstr ""
 #. module: tyt_intranet_messaging
 #: model:ir.model.fields,field_description:tyt_intranet_messaging.field_tyt_intranet_department_message__message_ids
 msgid "Messages"
-msgstr ""
+msgstr "Mensajes"
 
 #. module: tyt_intranet_messaging
 #: model:ir.model.fields,field_description:tyt_intranet_messaging.field_tyt_intranet_department_message__my_activity_date_deadline
@@ -316,7 +309,6 @@ msgstr "Nombre"
 #. module: tyt_intranet_messaging
 #. odoo-python
 #: code:addons/tyt_intranet_messaging/controllers/department_message.py:0
-#, python-format
 msgid "Newest"
 msgstr "Más reciente"
 
@@ -341,9 +333,13 @@ msgid "Next Activity Type"
 msgstr ""
 
 #. module: tyt_intranet_messaging
+#: model_terms:ir.ui.view,arch_db:tyt_intranet_messaging.portal_my_department_messages
+msgid "No Leído"
+msgstr ""
+
+#. module: tyt_intranet_messaging
 #. odoo-python
 #: code:addons/tyt_intranet_messaging/controllers/department_message.py:0
-#, python-format
 msgid "None"
 msgstr "Ninguno"
 
@@ -393,6 +389,13 @@ msgid "Published Date"
 msgstr "Fecha de publicación"
 
 #. module: tyt_intranet_messaging
+#: model:ir.model.fields,field_description:tyt_intranet_messaging.field_tyt_intranet_department_message__rating_ids
+msgid "Ratings"
+msgstr "Calificaciones"
+
+#. module: tyt_intranet_messaging
+#. odoo-python
+#: code:addons/tyt_intranet_messaging/controllers/department_message.py:0
 #: model:ir.model.fields,field_description:tyt_intranet_messaging.field_tyt_intranet_department_message__read_status_ids
 #: model_terms:ir.ui.view,arch_db:tyt_intranet_messaging.tyt_intranet_department_message_view_form
 msgid "Read Status"
@@ -421,29 +424,25 @@ msgstr ""
 #. module: tyt_intranet_messaging
 #. odoo-python
 #: code:addons/tyt_intranet_messaging/controllers/department_message.py:0
-#, python-format
 msgid "Search in Sender"
 msgstr "Buscar en Remitente"
 
 #. module: tyt_intranet_messaging
 #. odoo-python
 #: code:addons/tyt_intranet_messaging/controllers/department_message.py:0
-#, python-format
 msgid "Search in Subject"
 msgstr "Buscar en Asunto"
 
 #. module: tyt_intranet_messaging
 #: model:ir.model.fields,field_description:tyt_intranet_messaging.field_tyt_intranet_department_message__access_token
 msgid "Security Token"
-msgstr ""
+msgstr "Token de seguridad"
 
 #. module: tyt_intranet_messaging
 #. odoo-python
 #: code:addons/tyt_intranet_messaging/controllers/department_message.py:0
-#: code:addons/tyt_intranet_messaging/controllers/department_message.py:0
 #: model:ir.model.fields,field_description:tyt_intranet_messaging.field_tyt_intranet_department_message__sender_char
 #: model_terms:ir.ui.view,arch_db:tyt_intranet_messaging.portal_my_department_messages
-#, python-format
 msgid "Sender"
 msgstr "Remitente"
 
@@ -474,9 +473,13 @@ msgstr ""
 #: model:ir.model.fields,field_description:tyt_intranet_messaging.field_tyt_intranet_department_message__subject
 #: model_terms:ir.ui.view,arch_db:tyt_intranet_messaging.portal_my_department_messages
 #: model_terms:ir.ui.view,arch_db:tyt_intranet_messaging.tyt_intranet_department_message_view_form
-#, python-format
 msgid "Subject"
 msgstr "Asunto"
+
+#. module: tyt_intranet_messaging
+#: model_terms:ir.ui.view,arch_db:tyt_intranet_messaging.tyt_snippets
+msgid "TYT Message Popup"
+msgstr "TYT Mensaje"
 
 #. module: tyt_intranet_messaging
 #: model:ir.model.constraint,message:tyt_intranet_messaging.constraint_tyt_intranet_department_message_tag_name_uniq
@@ -533,10 +536,3 @@ msgstr ""
 #: model:ir.model.fields,field_description:tyt_intranet_messaging.field_tyt_intranet_department_message__gps
 msgid "gps"
 msgstr "Actualizar"
-
-#. module: tyt_intranet_messaging
-#. odoo-python
-#: code:addons/tyt_intranet_messaging/controllers/department_message.py:0
-#, python-format
-msgid "Read Status"
-msgstr "Estado de lectura"

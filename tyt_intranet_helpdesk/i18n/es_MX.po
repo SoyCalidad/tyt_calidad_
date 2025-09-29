@@ -4,21 +4,16 @@
 #
 msgid ""
 msgstr ""
-"Project-Id-Version: Odoo Server 16.0+e-20240730\n"
+"Project-Id-Version: Odoo Server 18.0+e-20250918\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2024-10-23 18:39+0000\n"
-"PO-Revision-Date: 2024-10-23 18:39+0000\n"
+"POT-Creation-Date: 2025-09-29 14:36+0000\n"
+"PO-Revision-Date: 2025-09-29 14:36+0000\n"
 "Last-Translator: \n"
 "Language-Team: \n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: \n"
 "Plural-Forms: \n"
-
-#. module: tyt_intranet_helpdesk
-#: model_terms:ir.ui.view,arch_db:tyt_intranet_helpdesk.tyt_intranet_mailbox_view_form
-msgid "&gt;"
-msgstr ""
 
 #. module: tyt_intranet_helpdesk
 #: model_terms:ir.ui.view,arch_db:tyt_intranet_helpdesk.mailbox_form_send
@@ -82,9 +77,9 @@ msgid ""
 "                                            <td class=\"header\" style=\"border-style:solid;box-sizing:border-box;border-left-width:0px;border-bottom-width:0px;border-right-width:0px;border-top-width:0px;border-left-color:inherit;border-bottom-color:inherit;border-right-color:inherit;border-top-color:inherit;background-color: #1b7486; padding: 40px; text-align: start; color: white; font-size: 24px; vertical-align: middle;\">\n"
 "                                                <a style=\"text-decoration:none;box-sizing:border-box;padding: 0px; position: relative;color: white;\">\n"
 "                                                    <strong style=\"box-sizing:border-box;font-weight:bolder;\">Estimado/a, usted tiene un nuevo seguimiento:\n"
-"                                                        <br>\n"
-"                                                        <t t-out=\"object.message_type_id.name or ''\"></t>\n"
-"                                                        (ID: #<t t-out=\"object.id or ''\"></t>)\n"
+"                                                        <br/>\n"
+"                                                        <t t-out=\"object.message_type_id.name or ''\"/>\n"
+"                                                        (ID: #<t t-out=\"object.id or ''\"/>)\n"
 "                                                    </strong>\n"
 "                                                </a>\n"
 "                                            </td>\n"
@@ -94,36 +89,36 @@ msgid ""
 "                                                <strong style=\"box-sizing:border-box;font-weight:bolder;\">\n"
 "                                                    Datos del remitente\n"
 "                                                </strong>\n"
-"                                                <br><br>\n"
-"                                                <strong>Nombre completo: </strong><t t-out=\"object.user_id.name or ''\"></t>\n"
-"                                                <br>\n"
-"                                                <strong>Correo electrónico: </strong><t t-out=\"object.partner_email or ''\"></t>\n"
-"                                                <br>\n"
-"                                                <strong>Número de empleado: </strong><t t-out=\"object.employee_number or ''\"></t>\n"
-"                                                <br>\n"
-"                                                <br>\n"
-"                                                <br>\n"
+"                                                <br/><br/>\n"
+"                                                <strong>Nombre completo: </strong><t t-out=\"object.user_id.name or ''\"/>\n"
+"                                                <br/>\n"
+"                                                <strong>Correo electrónico: </strong><t t-out=\"object.partner_email or ''\"/>\n"
+"                                                <br/>\n"
+"                                                <strong>Número de empleado: </strong><t t-out=\"object.employee_number or ''\"/>\n"
+"                                                <br/>\n"
+"                                                <br/>\n"
+"                                                <br/>\n"
 "\n"
 "                                                <strong style=\"box-sizing:border-box;font-weight:bolder;\">\n"
 "                                                    Información\n"
 "                                                </strong>\n"
-"                                                <br><br>\n"
-"                                                <strong>Sitio: </strong><t t-out=\"object.site_id.x_name or ''\"></t>\n"
-"                                                <br>\n"
-"                                                <strong>Área de servicio: </strong><t t-out=\"object.service_area_id.name or ''\"></t>\n"
-"                                                <br>\n"
-"                                                <strong>Asunto: </strong><t t-out=\"object.message_type_id.name or ''\"></t>\n"
-"                                                <br>\n"
+"                                                <br/><br/>\n"
+"                                                <strong>Sitio: </strong><t t-out=\"object.site_id.name or ''\"/>\n"
+"                                                <br/>\n"
+"                                                <strong>Área de servicio: </strong><t t-out=\"object.service_area_id.name or ''\"/>\n"
+"                                                <br/>\n"
+"                                                <strong>Asunto: </strong><t t-out=\"object.message_type_id.name or ''\"/>\n"
+"                                                <br/>\n"
 "                                                <strong>Descripción de la situación: </strong>\n"
 "                                                <p>\n"
-"                                                    <t t-out=\"object.comment or ''\"></t>\n"
+"                                                    <t t-out=\"object.comment or ''\"/>\n"
 "                                                </p>\n"
-"                                                <br>\n"
+"                                                <br/>\n"
 "                                            </td>\n"
 "                                        </tr>\n"
 "                                        <tr style=\"border-style:solid;box-sizing:border-box;border-left-width:0px;border-bottom-width:0px;border-right-width:0px;border-top-width:0px;border-left-color:inherit;border-bottom-color:inherit;border-right-color:inherit;border-top-color:inherit;\">\n"
 "                                            <td class=\"footer\" style=\"border-style:solid;box-sizing:border-box;border-left-width:0px;border-bottom-width:0px;border-right-width:0px;border-top-width:0px;border-left-color:inherit;border-bottom-color:inherit;border-right-color:inherit;border-top-color:inherit;background-color: #114651; padding: 40px; text-align: center; color: white; font-size: 14px;\">\n"
-"                                                <t t-out=\"object.company_id.name or ''\"></t>\n"
+"                                                <t t-out=\"object.company_id.name or ''\"/>\n"
 "                                            </td>\n"
 "                                        </tr>\n"
 "                                    </tbody>\n"
@@ -191,8 +186,8 @@ msgstr ""
 #: model:website.menu,name:tyt_intranet_helpdesk.menu_mailbox
 #: model_terms:ir.ui.view,arch_db:tyt_intranet_helpdesk.mailbox_followup
 #: model_terms:ir.ui.view,arch_db:tyt_intranet_helpdesk.portal_my_mailbox
-msgid "Buzón"
-msgstr "Buzón de sugerencias"
+msgid "Buzón de sugerencias"
+msgstr ""
 
 #. module: tyt_intranet_helpdesk
 #: model:ir.model.fields,field_description:tyt_intranet_helpdesk.field_tyt_intranet_mailbox__close_date
@@ -228,7 +223,7 @@ msgstr ""
 #: model:ir.model.fields,field_description:tyt_intranet_helpdesk.field_tyt_intranet_notification_matrix_line_message_type__create_uid
 #: model:ir.model.fields,field_description:tyt_intranet_helpdesk.field_tyt_intranet_service_area__create_uid
 msgid "Created by"
-msgstr ""
+msgstr "Creado por"
 
 #. module: tyt_intranet_helpdesk
 #: model:ir.model.fields,field_description:tyt_intranet_helpdesk.field_tyt_intranet_mailbox__create_date
@@ -381,16 +376,6 @@ msgid "Is Follower"
 msgstr ""
 
 #. module: tyt_intranet_helpdesk
-#: model:ir.model.fields,field_description:tyt_intranet_helpdesk.field_tyt_intranet_mailbox____last_update
-#: model:ir.model.fields,field_description:tyt_intranet_helpdesk.field_tyt_intranet_message_type____last_update
-#: model:ir.model.fields,field_description:tyt_intranet_helpdesk.field_tyt_intranet_notification_matrix____last_update
-#: model:ir.model.fields,field_description:tyt_intranet_helpdesk.field_tyt_intranet_notification_matrix_line____last_update
-#: model:ir.model.fields,field_description:tyt_intranet_helpdesk.field_tyt_intranet_notification_matrix_line_message_type____last_update
-#: model:ir.model.fields,field_description:tyt_intranet_helpdesk.field_tyt_intranet_service_area____last_update
-msgid "Last Modified on"
-msgstr ""
-
-#. module: tyt_intranet_helpdesk
 #: model:ir.model.fields,field_description:tyt_intranet_helpdesk.field_tyt_intranet_mailbox__write_uid
 #: model:ir.model.fields,field_description:tyt_intranet_helpdesk.field_tyt_intranet_message_type__write_uid
 #: model:ir.model.fields,field_description:tyt_intranet_helpdesk.field_tyt_intranet_notification_matrix__write_uid
@@ -421,7 +406,6 @@ msgstr "Baja"
 #: model:ir.ui.menu,name:tyt_intranet_helpdesk.tyt_intranet_mailbox_configuration_menu
 #: model:ir.ui.menu,name:tyt_intranet_helpdesk.tyt_intranet_mailbox_menu_action
 #: model_terms:ir.ui.view,arch_db:tyt_intranet_helpdesk.mailbox_followup
-#: model_terms:ir.ui.view,arch_db:tyt_intranet_helpdesk.portal_my_home_mailbox
 #: model_terms:ir.ui.view,arch_db:tyt_intranet_helpdesk.portal_my_home_menu_mailbox
 msgid "Mailbox"
 msgstr "Buzón de sugerencias"
@@ -450,12 +434,6 @@ msgstr "Sitio"
 #: model:mail.template,name:tyt_intranet_helpdesk.mail_template_tyt_intranet_mailbox
 msgid "Mailbox: Notification"
 msgstr "Notificación de buzón de sugerencias"
-
-#. module: tyt_intranet_helpdesk
-#: model:ir.model.fields,field_description:tyt_intranet_helpdesk.field_tyt_intranet_mailbox__message_main_attachment_id
-#: model:ir.model.fields,field_description:tyt_intranet_helpdesk.field_tyt_intranet_notification_matrix__message_main_attachment_id
-msgid "Main Attachment"
-msgstr ""
 
 #. module: tyt_intranet_helpdesk
 #: model:ir.model.fields,field_description:tyt_intranet_helpdesk.field_tyt_intranet_mailbox__matrix_id
@@ -572,6 +550,11 @@ msgid "Notification Matrix Lines"
 msgstr "Líneas de matriz"
 
 #. module: tyt_intranet_helpdesk
+#: model_terms:ir.ui.view,arch_db:tyt_intranet_helpdesk.tyt_intranet_mailbox_view_form
+msgid "Notify Responsible"
+msgstr "Notificar responsable"
+
+#. module: tyt_intranet_helpdesk
 #: model:ir.model.fields,field_description:tyt_intranet_helpdesk.field_tyt_intranet_mailbox__message_needaction_counter
 #: model:ir.model.fields,field_description:tyt_intranet_helpdesk.field_tyt_intranet_notification_matrix__message_needaction_counter
 msgid "Number of Actions"
@@ -629,6 +612,12 @@ msgstr "Nivel de prioridad"
 #: model_terms:ir.ui.view,arch_db:tyt_intranet_helpdesk.mailbox_form
 msgid "Quejas / Sugerencias / Felicitaciones"
 msgstr ""
+
+#. module: tyt_intranet_helpdesk
+#: model:ir.model.fields,field_description:tyt_intranet_helpdesk.field_tyt_intranet_mailbox__rating_ids
+#: model:ir.model.fields,field_description:tyt_intranet_helpdesk.field_tyt_intranet_notification_matrix__rating_ids
+msgid "Ratings"
+msgstr "Calificaciones"
 
 #. module: tyt_intranet_helpdesk
 #: model:ir.model.fields,field_description:tyt_intranet_helpdesk.field_tyt_intranet_mailbox__receive_response
@@ -692,14 +681,9 @@ msgid "Security Token"
 msgstr ""
 
 #. module: tyt_intranet_helpdesk
-#: model_terms:ir.ui.view,arch_db:tyt_intranet_helpdesk.tyt_intranet_mailbox_view_form
-msgid "Send Email"
-msgstr "Envíar correo electrónico"
-
-#. module: tyt_intranet_helpdesk
-#: model_terms:ir.ui.view,arch_db:tyt_intranet_helpdesk.tyt_intranet_mailbox_view_form
-msgid "Notify Responsible"
-msgstr "Notificar responsable"
+#: model_terms:ir.ui.view,arch_db:tyt_intranet_helpdesk.mailbox_form
+msgid "Seleccione una opción"
+msgstr ""
 
 #. module: tyt_intranet_helpdesk
 #: model:ir.model,name:tyt_intranet_helpdesk.model_tyt_intranet_service_area
@@ -796,7 +780,6 @@ msgstr ""
 #. module: tyt_intranet_helpdesk
 #. odoo-python
 #: code:addons/tyt_intranet_helpdesk/models/mailbox.py:0
-#, python-format
 msgid "You must select a responsible"
 msgstr "Debe seleccionar un responsable"
 
