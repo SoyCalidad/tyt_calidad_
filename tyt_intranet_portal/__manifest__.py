@@ -13,6 +13,7 @@
         'hr_timesheet',
         'purchase',
         'sign',
+        'documents',
     ],
     'data': [
         'views/portal_templates.xml',

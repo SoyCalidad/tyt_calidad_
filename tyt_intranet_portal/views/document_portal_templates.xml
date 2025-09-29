@@ -15,4 +15,9 @@
             </t>
         </div>
     </template>
+
+    <template id="portal_document_inherit" inherit_id="portal.portal_my_home"
+     priority="210">
+            <xpath expr="(//t[@t-call='portal.portal_docs_entry'])[last()]" position="replace"/>
+    </template>
 </odoo>
