@@ -84,6 +84,15 @@ class HrEmployee(models.Model):
             return response.get("results", [])
         except Exception as e:
             _logger.error(f"Error al obtener empleados de Crehana: {str(e)}")
+            # Crear un mensaje de error chatter
+            message = self.env["mail.message"].create(
+                {
+                    "subject": "Error al obtener empleados de Crehana",
+                    "body": f"Error al obtener empleados de Crehana: {str(e)}",
+                    "model": "hr.employee",
+                    "res_id": self.id,
+                }
+            )
             return []
 
     def tyt_get_crehana_employee_by_id(self, user_id):
@@ -202,14 +211,14 @@ class HrEmployee(models.Model):
                     f"Empleado {self.name} no tiene número de usuario de Crehana configurado"
                 )
 
-            crehana_user = self.retrieve_user_by_email()
-            if crehana_user and not self.id_crehana:
-                self.id_crehana = crehana_user[0]["id"]
+            # crehana_user = self.retrieve_user_by_email()
+            # if crehana_user and not self.id_crehana:
+            #     self.id_crehana = crehana_user[0]["id"]
 
-            else:
-                _logger.warning(
-                    f"No se encontró usuario en Crehana para empleado {self.name}"
-                )
+            # else:
+            #     _logger.warning(
+            #         f"No se encontró usuario en Crehana para empleado {self.name}"
+            #     )
 
             settings = self.env["tyt_crehana.crehana_settings"].get_first_settings()
             if not settings:
@@ -233,6 +242,9 @@ class HrEmployee(models.Model):
             response = response.json()
 
             crehana_response_data = response["data"]
+
+            if not crehana_response_data:
+                crehana_response_data = []
 
             _logger.info(
                 f"Datos de empleados obtenidos de Crehana: {len(crehana_response_data)}"
@@ -280,6 +292,15 @@ class HrEmployee(models.Model):
             _logger.error(
                 f"Error al sincronizar empleado {self.name} con Crehana: {str(e)}"
             )
+            # Crear un mensaje de error chatter
+            message = self.env["mail.message"].create(
+                {
+                    "subject": "Error al sincronizar empleado con Crehana",
+                    "body": f"Error al sincronizar empleado {self.name} con Crehana: {str(e)}",
+                    "res_id": self.id,
+                    "res_model": "hr.employee",
+                }
+            )
             return False
 
     def action_register_in_crehana(self):
@@ -291,8 +312,8 @@ class HrEmployee(models.Model):
 
         try:
             # Validar email
-            if not self.private_email and not self.work_email:
-                message = "No se encontró email del empleado"
+            if not self.crehana_email:
+                message = "No se encontró email crehana del empleado"
                 raise ValueError(message)
 
             # Procesar nombres del empleado
@@ -331,7 +352,7 @@ class HrEmployee(models.Model):
             payload = {
                 "first_name": empleado_nombre,
                 "last_name": f"{empleado_paterno} {empleado_materno}",
-                "email": self.private_email or self.work_email,
+                "email": self.crehana_email or self.private_email or self.work_email,
                 "area_level_1_id": "122564672",
                 "position_id": "43849",
                 "position_category_id": "55184",
@@ -487,6 +508,15 @@ class HrEmployee(models.Model):
             return False
 
         except requests.exceptions.HTTPError as e:
+            # mensaje de error chatter
+            message = self.env["mail.message"].create(
+                {
+                    "subject": "Error al enviar campos personalizados a Crehana",
+                    "body": f"Error al enviar campos personalizados a Crehana: {str(e)}",
+                    "model": "hr.employee",
+                    "res_id": self.id,
+                }
+            )
             _logger.error(
                 f"Error HTTP al enviar campos personalizados para {self.name}: {e}"
             )
@@ -702,6 +732,15 @@ class HrEmployee(models.Model):
                     _logger.info(
                         f"Empleado no encontrado: {data['first_name']} {data['last_name']}"
                     )
+                    # Create message in chatter
+                    message = self.env["mail.message"].create(
+                        {
+                            "subject": f"Empleado no encontrado: {data['first_name']} {data['last_name']}",
+                            "body": f"Empleado no encontrado: {data['first_name']} {data['last_name']}",
+                            "model": "hr.employee",
+                            "res_id": self.id,
+                        }
+                    )
                     continue
 
                 if employee:
@@ -731,6 +770,15 @@ class HrEmployee(models.Model):
             except Exception as e:
                 _logger.error(
                     f"Error al sincronizar empleado: {data['first_name']} {data['last_name']}: {e}"
+                )
+                # Mensaje en el chatter
+                message = self.env["mail.message"].create(
+                    {
+                        "subject": f"Error al sincronizar empleado: {data['first_name']} {data['last_name']}",
+                        "body": f"Error al sincronizar empleado: {data['first_name']} {data['last_name']}: {e}",
+                        "model": "hr.employee",
+                        "res_id": self.id,
+                    }
                 )
                 continue
 

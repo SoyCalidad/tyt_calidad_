@@ -439,21 +439,41 @@ class EmployeeExtension(models.Model):
                 }
 
                 # Obtener ruta para su posición
-                position = (
-                    self.env["tyt_crehana.job_positions"]
-                    .sudo()
-                    .search([("job_id", "=", self.job_id.id)])
-                )
+                # Mapeo de niveles a campos
+                # Mapeo de niveles a dominios de búsqueda y campos de path
+                level_mapping = {
+                    "A": (
+                        [("job_id", "=", self.job_id.id), ("level_a", "=", True)],
+                        "path_to_position_a",
+                    ),
+                    "B": (
+                        [("job_id", "=", self.job_id.id), ("level_b", "=", True)],
+                        "path_to_position_b",
+                    ),
+                    "C": (
+                        [("job_id", "=", self.job_id.id), ("level_c", "=", True)],
+                        "path_to_position_c",
+                    ),
+                    "D": (
+                        [("job_id", "=", self.job_id.id), ("level_d", "=", True)],
+                        "path_to_position_d",
+                    ),
+                }
 
                 path_selected = None
-                if position.level_a and self.level == "A":
-                    path_selected = position.path_to_position_a
-                elif position.level_b and self.level == "B":
-                    path_selected = position.path_to_position_b
-                elif position.level_c and self.level == "C":
-                    path_selected = position.path_to_position_c
-                elif position.level_d and self.level == "D":
-                    path_selected = position.path_to_position_d
+                level_config = level_mapping.get(self.level)
+
+                if level_config:
+                    domain, path_field = level_config
+
+                    position = (
+                        self.env["tyt_crehana.job_positions"]
+                        .sudo()
+                        .search(domain, limit=1)
+                    )
+
+                    if position:
+                        path_selected = getattr(position, path_field, None)
 
                 if path_selected and path_selected.id_path:
 
@@ -675,14 +695,15 @@ class EmployeeExtension(models.Model):
         else:
             _logger.error(f"Error de credenciales de acceso")
             raise models.ValidationError(
-                "Error al obtener credenciales de acceso para API's")
+                "Error al obtener credenciales de acceso para API's"
+            )
 
     def retrieve_user_id(self):
         data = self.retrieve_user_by_email()
         if data and isinstance(data, list) and len(data) > 0:
             return data[0].get("id")
         return
-        
+
     def update_employee_level(self):
 
         if not self.level:

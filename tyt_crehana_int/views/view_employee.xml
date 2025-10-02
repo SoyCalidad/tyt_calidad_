@@ -94,7 +94,7 @@
                         <field name="generacion" />
                     </group>
                     
-                    <group groups="base.group_no_one">
+                    <group>
                         <button string="Registrar en Crehana" name="action_register_in_crehana" type="object" class="oe_highlight" attrs="{'invisible': [('is_registered_in_crehana', '=', True)]}"/>
                         <button string="Sincronizar con Crehana" name="tyt_sync_with_crehana" type="object" class="oe_highlight" attrs="{'invisible': [('is_registered_in_crehana', '=', False)]}"/>
                         <button string="Enviar campos personalizados" name="action_sync_custom_fields_crehana" type="object"/>
