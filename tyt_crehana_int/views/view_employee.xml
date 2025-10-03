@@ -58,17 +58,8 @@
                         <field name="is_registered_in_crehana" />
                         <field name="is_registered_on_a_learning_path" />
                     </group>
-                    <div>
-                        <label for="level" />
-                        <field name="level" class="oe_inline" />
-                        <button string="Obtener nivel desde Crehana"
-                            name="tyt_crehana_get_employee_level" type="object" class="oe_inline" />
-                        <button string="Establecer nivel en Crehana" name="update_employee_level"
-                            type="object" class="oe_inline" />
-                    </div>
                     <group string="Información General">
                         <field name="cliente" />
-                        <field name="no_empleado" />
                         <field name="sexo" />
                         <field name="fecha_nacimiento" />
                         <field name="fecha_ingreso" />
@@ -93,7 +84,6 @@
                         <field name="especialidades" />
                         <field name="generacion" />
                     </group>
-                    
                     <group>
                         <button string="Registrar en Crehana" name="action_register_in_crehana" type="object" class="oe_highlight" attrs="{'invisible': [('is_registered_in_crehana', '=', True)]}"/>
                         <button string="Sincronizar con Crehana" name="tyt_sync_with_crehana" type="object" class="oe_highlight" attrs="{'invisible': [('is_registered_in_crehana', '=', False)]}"/>
@@ -162,9 +152,6 @@
 
     <menuitem id="menu_employees" name="Empleados"
         parent="menu_crehana_root" sequence="30" />
-
-    <menuitem id="menu_registred_employees" name="Empleados"
-        parent="menu_employees" action="action_employees" sequence="10" />
 
     <menuitem id="menu_all_employees" name="Todos los Empleados"
         parent="menu_employees" action="action_all_employees" sequence="20" />
