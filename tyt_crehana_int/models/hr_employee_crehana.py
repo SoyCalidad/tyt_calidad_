@@ -285,6 +285,15 @@ class HrEmployee(models.Model):
 
                 _logger.info(f"Datos sincronizados para empleado {self.name}")
             else:
+                # Mensaje de error en chatter
+                message = self.env["mail.message"].create(
+                    {
+                        "subject": "Error al sincronizar empleado con Crehana",
+                        "body": f"No se encontró usuario en Crehana para empleado {self.name}",
+                        "res_id": self.id,
+                        "res_model": "hr.employee",
+                    }
+                )
                 _logger.warning(
                     f"No se encontró usuario en Crehana para empleado {self.name}"
                 )
