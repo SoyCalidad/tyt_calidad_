@@ -461,7 +461,7 @@ class EmployeeExtension(models.Model):
                 }
 
                 path_selected = None
-                level_config = level_mapping.get(self.level)
+                level_config = level_mapping.get(self.nivel_pdp)
 
                 if level_config:
                     domain, path_field = level_config
@@ -571,7 +571,7 @@ class EmployeeExtension(models.Model):
                         new_data["id_course"] = course_id
                         new_data["name"] = course_title
                         new_data["employee_id"] = self.id
-                        new_data["level_of_employee"] = self.level
+                        new_data["level_of_employee"] = self.nivel_pdp
                         new_data["job_of_employee"] = self.job_id.name
 
                         self.env["tyt_crehana.learning_course"].create(new_data)
@@ -706,7 +706,7 @@ class EmployeeExtension(models.Model):
 
     def update_employee_level(self):
 
-        if not self.level:
+        if not self.nivel_pdp:
             _logger.error("El nivel del empleado no está definido.")
             raise models.ValidationError("El nivel del empleado no está definido.")
 
@@ -723,7 +723,7 @@ class EmployeeExtension(models.Model):
 
             payload = {
                 "custom_fields": [
-                    {"id": 1944, "value": self.level or "", "type": "TEXT"}
+                    {"id": 1944, "value": self.nivel_pdp or "", "type": "TEXT"}
                 ]
             }
 
@@ -761,9 +761,9 @@ class EmployeeExtension(models.Model):
                     custom_fields = data[0].get("custom_fields", [])
                     for field in custom_fields:
                         if field.get("id") == 1944:
-                            self.level = field.get("value")
+                            self.nivel_pdp = field.get("value")
                             _logger.info(
-                                f"Nivel del empleado actualizado a: {self.level}"
+                                f"Nivel del empleado actualizado a: {self.nivel_pdp}"
                             )
                             break
                 else:
