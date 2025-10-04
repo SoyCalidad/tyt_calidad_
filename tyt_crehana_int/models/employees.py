@@ -461,7 +461,10 @@ class EmployeeExtension(models.Model):
                 }
 
                 path_selected = None
-                level_config = level_mapping.get(self.nivel_pdp)
+                if self.nivel_pdp and self.nivel_pdp.upper() in level_mapping:
+                    level_config = level_mapping.get(self.nivel_pdp.upper())
+                else:
+                    level_config = ""
 
                 if level_config:
                     domain, path_field = level_config
@@ -571,7 +574,7 @@ class EmployeeExtension(models.Model):
                         new_data["id_course"] = course_id
                         new_data["name"] = course_title
                         new_data["employee_id"] = self.id
-                        new_data["level_of_employee"] = self.nivel_pdp
+                        new_data["level_of_employee"] = self.nivel_pdp.upper() if self.nivel_pdp else None
                         new_data["job_of_employee"] = self.job_id.name
 
                         self.env["tyt_crehana.learning_course"].create(new_data)
@@ -723,7 +726,7 @@ class EmployeeExtension(models.Model):
 
             payload = {
                 "custom_fields": [
-                    {"id": 1944, "value": self.nivel_pdp or "", "type": "TEXT"}
+                    {"id": 1944, "value": self.nivel_pdp.upper() if self.nivel_pdp else "", "type": "TEXT"}
                 ]
             }
 
