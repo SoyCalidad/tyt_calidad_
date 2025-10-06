@@ -11,7 +11,7 @@
                 <field name="job_id" />
                 <field name="id_crehana" />
                 <field name="user_crehana" />
-                <field name="level" />
+                <field name="nivel_pdp" />
                 <field name="is_registered_in_crehana" />
                 <field name="is_registered_on_a_learning_path" />
                 <button
@@ -113,7 +113,7 @@
                         <field name="job_id" />
                         <field name="id_crehana" />
                         <field name="user_crehana" />
-                        <field name="level" />
+                        <field name="nivel_pdp" />
                     </group>
                     <group>
                         <field name="course_ids">
