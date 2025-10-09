@@ -36,16 +36,16 @@
                                     </h6>
                                 </header>
                                 <div class="o_card_body">
-                                    <t t-foreach="folder.facet_ids" t-as="facet">
+                                    <t t-foreach="folder.tag_ids" t-as="tag">
                                         <span class="badge bg-primary">
-                                            <t t-esc="facet.name"/>
+                                            <t t-esc="tag.name"/>
                                         </span>
                                     </t>
                                 </div>
                                 <div class="o_card_footer d-flex justify-content-between align-items-center">
                                     <time><b t-field="folder.create_date" t-options="{'format':'d MMM yyyy'}"/></time>
                                     <span class="badge text-bg-secondary rounded-pill d-flex align-items-center justify-content-center"
-                                          t-esc="len(folder.document_ids.filtered(lambda d: d.mimetype == 'application/pdf'))"/>
+                                          t-esc="len(folder.children_ids.filtered(lambda d: d.mimetype == 'application/pdf'))"/>
                                 </div>
                             </div>
                         </div>

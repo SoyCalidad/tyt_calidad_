@@ -1,5 +1,6 @@
 # -*- coding: utf-8 -*-
 
+from . import code 
 from . import diagnostic
 from . import version
 from . import onboarding

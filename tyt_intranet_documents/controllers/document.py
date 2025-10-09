@@ -28,7 +28,23 @@ class DocumentController(http.Controller):
 
     @api.model
     def _check_folder_access(self, folder):
-        return folder.is_intranet_folder and folder.read_group_ids & request.env.user.groups_id
+        now = fields.Datetime.now()
+        Access = request.env['documents.access'].sudo()
+        accesses = Access.search([
+            ('document_id', '=', folder.id),
+            ('partner_id', '=', request.env.user.partner_id.id),
+            ('role', 'in', ['view', 'edit']),
+            '|',
+                ('expiration_date', '=', False),
+                ('expiration_date', '>', now),
+        ], limit=1)
+        
+
+        # Si no hay acceso explícito, denegar
+        if not accesses:
+            return False
+        
+        return folder.is_intranet_folder and bool(accesses)
 
     @api.model
     def _check_document_access(self, document):

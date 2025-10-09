@@ -37,17 +37,17 @@ class JobApplication(models.Model):
     applicant_id = fields.Many2one('tyt_recruitment.applicant', tracking=True)
     applicant_status = fields.Boolean( related="applicant_id.status", string="Aprobado", required=True, tracking=True)
 
-    academics_ids = fields.One2many('tyt_recruitment.data_academic', 'job_application_id', string="Formación académica", tracking=True)
-    children_ids = fields.One2many('tyt_recruitment.child', 'job_application_id', string="Hijos", tracking=True)
-    answer_ids = fields.One2many('tyt_recruitment.answer', 'job_application_id', string="Respuestas", tracking=True)
-    job_history_ids = fields.One2many('tyt_recruitment.job_history', 'job_application_id', string="Historial laboral", tracking=True)
-    reference_ids = fields.One2many('tyt_recruitment.reference', 'job_application_id', string="Referencia laboral", tracking=True)
+    academics_ids = fields.One2many('tyt_recruitment.data_academic', 'job_application_id', string="Formación académica")
+    children_ids = fields.One2many('tyt_recruitment.child', 'job_application_id', string="Hijos")
+    answer_ids = fields.One2many('tyt_recruitment.answer', 'job_application_id', string="Respuestas")
+    job_history_ids = fields.One2many('tyt_recruitment.job_history', 'job_application_id', string="Historial laboral")
+    reference_ids = fields.One2many('tyt_recruitment.reference', 'job_application_id', string="Referencia laboral")
 
     father_data_id = fields.Many2one('tyt_recruitment.family_data_detail', string="Datos del padre", tracking=True)
     mother_data_id = fields.Many2one('tyt_recruitment.family_data_detail', string="Datos de la madre", tracking=True)
     spouse_data_id = fields.Many2one('tyt_recruitment.family_data_detail', string="Datos del cónyuge", tracking=True)
 
-    complete_survey_id = fields.One2many("tyt_recruitment.complete_survey", 'job_application_id', string="Encuesta de salud", tracking=True)
+    complete_survey_id = fields.One2many("tyt_recruitment.complete_survey", 'job_application_id', string="Encuesta de salud")
     has_complete_survey = fields.Boolean(string='Tiene Encuesta Completada', compute='compute_has_complete_survey', tracking=True)
 
     birth_certificate = fields.Binary(string="Acta de nacimiento",)

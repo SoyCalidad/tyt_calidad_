@@ -40,10 +40,11 @@ class Applicant(models.Model):
     approved_by = fields.Many2one('res.users', string='Aprobado por')
     responsable_id = fields.Many2one('res.users', string='Responsable del seguimiento')
 
-    @api.onchange('job_id')
-    def _onchange_job_id(self):
-        if self.job_id:
-            self.name = 'Solicitud: '+self.job_id.name
+    # @api.onchange('job_id')
+    # def _onchange_job_id(self):
+    #     if self.job_id:
+    #         self.partner_name = 'Solicitud: '+self.job_id.name
+
 
 
 class ApplicantTurn(models.Model):

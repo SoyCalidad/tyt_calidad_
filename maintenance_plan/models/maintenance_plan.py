@@ -118,21 +118,22 @@ class MaintenancePlan(models.Model):
             "time": safe_eval.time,
         }
 
-    def name_get(self):
-        result = []
-        for plan in self:
-            result.append(
-                (
-                    plan.id,
-                    plan.name
-                    or self.env._(
-                        "Unnamed %(kind)s plan (%(eqpmt)s)",
-                        kind=plan.maintenance_kind_id.name or "",
-                        eqpmt=plan.equipment_id.name,
-                    ),
-                )
-            )
-        return result
+    # @api.depends('maintenance_kind_id', 'equipment_id')
+    # def _compute_display_name(self):
+    #     result = []
+    #     for plan in self:
+    #         result.append(
+    #             (
+    #                 plan.id,
+    #                 plan.name
+    #                 or self.env._(
+    #                     "Unnamed %(kind)s plan (%(eqpmt)s)",
+    #                     kind=plan.maintenance_kind_id.name or "",
+    #                     eqpmt=plan.equipment_id.name,
+    #                 ),
+    #             )
+    #         )
+    #     return result
 
     @api.depends("maintenance_ids.stage_id.done")
     def _compute_maintenance_count(self):

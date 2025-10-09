@@ -26,9 +26,13 @@ class MaintenanceEquipment(models.Model):
     )
     calibration_needed = fields.Boolean(string='Requiere calibración')
 
-    def name_get(self):
-        return [(template.id, '%s%s' % (template.default_code and '[%s] ' % template.default_code or '', template.name))
-                for template in self]
+    @api.depends('default_code')
+    def _compute_display_name(self):
+        for rec in self:
+            rec.display_name = '%s%s' % (
+                '[%s] ' % rec.default_code if rec.default_code else '',
+                rec.name or ''
+            )
 
     state = fields.Selection(
         string='Estado',

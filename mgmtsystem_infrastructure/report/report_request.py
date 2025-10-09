@@ -71,7 +71,7 @@ class ReportRequestReport(models.AbstractModel):
                 maintenance_plan_id = self.env['maintenance.request'].browse(
                     data['id'])
 
-            sheet.merge_range(0, 0, 1, 0, '', format_1)
+
             company_id = self.env.user.company_id
 
             buf_image = io.BytesIO(base64.b64decode(company_id.logo))
