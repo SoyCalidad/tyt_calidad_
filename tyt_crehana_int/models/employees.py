@@ -395,7 +395,7 @@ class EmployeeExtension(models.Model):
 
             # Obtener los datos del usuario y el id centralizado
 
-            email = self.private_email or self.work_email
+            email = self.crehana_email or self.work_email or self.private_email
 
             user_url = f"https://www.crehana.com/api/rest/org/{settings.organization_slug}/users/?email={email}"
             headers = {
@@ -574,7 +574,9 @@ class EmployeeExtension(models.Model):
                         new_data["id_course"] = course_id
                         new_data["name"] = course_title
                         new_data["employee_id"] = self.id
-                        new_data["level_of_employee"] = self.nivel_pdp.upper() if self.nivel_pdp else None
+                        new_data["level_of_employee"] = (
+                            self.nivel_pdp.upper() if self.nivel_pdp else None
+                        )
                         new_data["job_of_employee"] = self.job_id.name
 
                         self.env["tyt_crehana.learning_course"].create(new_data)
@@ -602,46 +604,154 @@ class EmployeeExtension(models.Model):
             )
 
     def action_show_user_report(self):
-
         settings = self.env["tyt_crehana.crehana_settings"].get_first_settings()
 
-        if settings:
+        email = self.crehana_email or self.work_email
+        url = f"https://www.crehana.com/api/v5/rest/org/{settings.organization_slug}/reports/learning/general/?user_email={email}"
+        headers = {
+            "api-key": settings.api_key,
+            "secret-access": settings.secret_access,
+            "Content-Type": "application/json",
+        }
 
-            headers = {
-                "api-key": settings.api_key,
-                "secret-access": settings.secret_access,
-                "Content-Type": "application/json",
-            }
+        try:
+            response = requests.get(url, headers=headers, timeout=10)
+            response.raise_for_status()
+            data = response.json()
 
-            url = f"https://www.crehana.com/api/v5/rest/org/{settings.organization_slug}/reports/learning/general/?user_email={self.private_email or self.work_email}"
-
-            try:
-                response = requests.get(url, headers=headers, timeout=10)
-                response.raise_for_status()
-
-                data = response.json()
-
-                _logger.info(f"Datos obtenidos para el reporte del empleado: {data}")
-
-                email = self.private_email or self.work_email
-
-                return {
-                    "type": "ir.actions.act_window",
-                    "name": "Reporte del Empleado",
-                    "res_model": "tyt.crehana.general.report",
-                    "view_mode": "tree",
-                    "res_id": False,
-                    "domain": [("crehana_user_email", "=", email)],
-                    "target": "current",
-                }
-            except requests.exceptions.RequestException as e:
-                _logger.error(f"Error al obtener datos: {e}")
-                raise models.ValidationError(f"Error al obtener datos: {e}")
-        else:
-            _logger.error(f"Error de credenciales de acceso")
-            raise models.ValidationError(
-                "Error al obtener credenciales de acceso para API's"
+            _logger.info(
+                f"Datos obtenidos para el usuario {email}: {len(data.get('results', []))} registros"
             )
+
+            # Obtener registros existentes para este usuario
+            existing_records = self.env["tyt.crehana.general.report"].search(
+                [("crehana_user_email", "=", email)]
+            )
+            existing_dict = {}
+            for record in existing_records:
+                key = f"{record.crehana_user_id}_{record.creahana_course_id}"
+                existing_dict[key] = record
+
+            records_to_create = []
+            records_to_update = []
+
+            for result in data.get("results", []):
+                key = f"{result.get('user_id')}_{result.get('course_id')}"
+                custom_fields_str = (
+                    str(result.get("user_custom_fields", []))
+                    if result.get("user_custom_fields")
+                    else ""
+                )
+
+                record_data = {
+                    "crehana_user_id": result.get("user_id"),
+                    "crehana_user_name": result.get("user_name"),
+                    "crehana_user_email": result.get("user_email"),
+                    "crehana_user_status": result.get("user_status"),
+                    "crehana_user_info_extra": result.get("user_info_extra"),
+                    "crehana_is_enroll_active": result.get("is_enroll_active", False),
+                    "creahana_course_id": result.get("course_id"),
+                    "creahana_course_name": result.get("course_name"),
+                    "creahana_course_category": result.get("course_category"),
+                    "creahana_course_subcategory": result.get("course_subcategory"),
+                    "creahana_is_admin_assigned": result.get(
+                        "is_admin_assigned", False
+                    ),
+                    "creahana_assigned_by_name": result.get("assigned_by_name"),
+                    "creahana_course_type": result.get("course_type"),
+                    "creahana_course_is_reward": result.get("course_is_reward"),
+                    "creahana_course_duration_hours": result.get(
+                        "course_duration_hours", 0.0
+                    ),
+                    "creahana_course_progress": result.get("course_progress", 0.0),
+                    "creahana_course_progress_hours": result.get(
+                        "course_progress_hours", 0.0
+                    ),
+                    "creahana_course_is_completed": result.get(
+                        "course_is_completed", False
+                    ),
+                    "creahana_project_status": result.get("project_status"),
+                    "creahana_project_date": self._parse_date(
+                        result.get("project_date")
+                    ),
+                    "creahana_quiz_status": result.get("quiz_status"),
+                    "creahana_quiz_attempts": result.get("quiz_attemps"),
+                    "creahana_quiz_best_correct_answers": result.get(
+                        "quiz_best_correct_answers"
+                    ),
+                    "creahana_quiz_best_wrong_answers": result.get(
+                        "quiz_best_wrong_answers"
+                    ),
+                    "creahana_quiz_total_questions": result.get("quiz_total_questions"),
+                    "creahana_quiz_best_result": result.get("quiz_best_result"),
+                    "creahana_course_is_certified": result.get(
+                        "course_is_certified", False
+                    ),
+                    "creahana_course_has_participation_certificate": result.get(
+                        "course_has_participation_certificate", False
+                    ),
+                    "creahana_course_enroll_date": self._parse_date(
+                        result.get("course_enroll_date")
+                    ),
+                    "creahana_course_start_date": self._parse_date(
+                        result.get("course_start_date")
+                    ),
+                    "creahana_course_complete_date": self._parse_date(
+                        result.get("course_complete_date")
+                    ),
+                    "creahana_project_url": result.get("project_url"),
+                    "creahana_course_certificated_url": result.get(
+                        "course_certificated_url"
+                    ),
+                    "creahana_course_participation_certificate_url": result.get(
+                        "course_participation_certificate_url"
+                    ),
+                    "creahana_course_certificated_date": self._parse_date(
+                        result.get("course_certificated_date")
+                    ),
+                    "creahana_course_last_action_date": self._parse_date(
+                        result.get("course_last_action_date")
+                    ),
+                    "creahana_user_division": result.get("user_division"),
+                    "creahana_user_subsidiary": result.get("user_subsidiary"),
+                    "creahana_user_job": result.get("user_job"),
+                    "creahana_user_level": result.get("user_level"),
+                    "creahana_user_role": result.get("user_role"),
+                    "creahana_track_id": result.get("track_id"),
+                    "creahana_track_name": result.get("track_name"),
+                    "creahana_track_is_hidden": result.get("track_is_hidden", False),
+                    "creahana_user_custom_fields": custom_fields_str,
+                }
+
+                if key in existing_dict:
+                    records_to_update.append((existing_dict[key], record_data))
+                else:
+                    records_to_create.append(record_data)
+
+            if records_to_create:
+                self.env["tyt.crehana.general.report"].create(records_to_create)
+                _logger.info(
+                    f"Se crearon {len(records_to_create)} nuevos registros para {email}"
+                )
+
+            if records_to_update:
+                for record, data in records_to_update:
+                    record.write(data)
+                _logger.info(
+                    f"Se actualizaron {len(records_to_update)} registros para {email}"
+                )
+
+            return {
+                "type": "ir.actions.act_window",
+                "name": "Reporte del Empleado",
+                "res_model": "tyt.crehana.general.report",
+                "view_mode": "tree",
+                "domain": [("crehana_user_email", "=", email)],
+                "target": "current",
+            }
+        except requests.exceptions.RequestException as e:
+            _logger.error(f"Error al obtener datos para {email}: {e}")
+            raise models.ValidationError(f"Error al obtener datos: {e}")
 
     def retrieve_crehana_users(self):
         url = f"https://www.crehana.com/api/v5/rest/org/{self.organization_slug}/users/"
@@ -726,7 +836,11 @@ class EmployeeExtension(models.Model):
 
             payload = {
                 "custom_fields": [
-                    {"id": 1944, "value": self.nivel_pdp.upper() if self.nivel_pdp else "", "type": "TEXT"}
+                    {
+                        "id": 1944,
+                        "value": self.nivel_pdp.upper() if self.nivel_pdp else "",
+                        "type": "TEXT",
+                    }
                 ]
             }
 
@@ -785,3 +899,11 @@ class EmployeeExtension(models.Model):
         employees = self.search([("is_registered_in_crehana", "=", False)])
         for employee in employees:
             employee.action_register_in_crehana()
+
+    def _parse_date(self, date_str):
+        if not date_str or date_str == "None":
+            return None
+        try:
+            return fields.Date.from_string(date_str)
+        except:
+            return None
