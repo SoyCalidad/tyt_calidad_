@@ -7,11 +7,11 @@
         <field name="arch" type="xml">
             <tree>
                 <field name="organization_slug"/>
-                <button 
+                <!-- <button 
                     name="action_view_general_progress_report" 
                     string="Ver reporte de avances" 
                     type="object" 
-                    class="oe_highlight" />
+                    class="oe_highlight" /> -->
                 <button 
                     name="action_fetch_paths_from_api" 
                     string="Actualizar rutas de aprendizaje" 
