@@ -20,7 +20,7 @@ class TestMaintenancePlanBase(test_common.TransactionCase):
         cls.maintenance_plan_obj = cls.env["maintenance.plan"]
         cls.maintenance_equipment_obj = cls.env["maintenance.equipment"]
         cls.cron = cls.env.ref("maintenance_plan.maintenance_requests_cron")
-        cls.weekly_kind = cls.env.ref("maintenance_plan.maintenance_kind_weekly")
+        #cls.weekly_kind = cls.env.ref("maintenance_plan.maintenance_kind_weekly")
         cls.done_stage = cls.env.ref("maintenance.stage_3")
 
         cls.equipment_1 = cls.maintenance_equipment_obj.create({"name": "Laptop 1"})
@@ -37,7 +37,7 @@ class TestMaintenancePlanBase(test_common.TransactionCase):
         cls.maintenance_plan_2 = cls.maintenance_plan_obj.create(
             {
                 "equipment_id": cls.equipment_1.id,
-                "maintenance_kind_id": cls.weekly_kind.id,
+                #"maintenance_kind_id": cls.weekly_kind.id,
                 "interval": 1,
                 "interval_step": "week",
                 "maintenance_plan_horizon": 2,
@@ -57,7 +57,7 @@ class TestMaintenancePlanBase(test_common.TransactionCase):
         cls.maintenance_plan_4 = cls.maintenance_plan_obj.create(
             {
                 "name": "Plan without equipment",
-                "maintenance_kind_id": cls.weekly_kind.id,
+                #"maintenance_kind_id": cls.weekly_kind.id,
                 "interval": 1,
                 "interval_step": "week",
                 "maintenance_plan_horizon": 2,

@@ -1,7 +1,10 @@
 from odoo import models, api, fields, _
 from odoo.exceptions import RedirectWarning, UserError, ValidationError
 
+import logging 
 
+
+_logger = logging.getLogger(__name__)
 class NcReport(models.TransientModel):
     _name = "wizard.nc.report"
     _inherit = 'mgmtsystem.code'
@@ -41,6 +44,8 @@ class NcReport(models.TransientModel):
         for field in datas['form'].keys():
             if isinstance(datas['form'][field], tuple):
                 datas['form'][field] = datas['form'][field][0]
+        datas['form']['validation_date'] = datas['form']['validation_date'].strftime(
+            '%d/%m/%Y') if datas['form']['validation_date'] else datas['form']['validation_date']
         return self.env.ref('mgmtsystem_nonconformity.report_nc_ac_xlsx').report_action(self, data=datas)
 
 

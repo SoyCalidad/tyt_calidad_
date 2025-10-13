@@ -9,6 +9,10 @@ import pytz
 import time
 from datetime import datetime, timedelta
 from bs4 import BeautifulSoup
+import logging 
+
+
+_logger = logging.getLogger(__name__)
 
 
 class Report_excel_nc(models.AbstractModel):
@@ -182,8 +186,14 @@ class Report_excel_nc_ac(models.AbstractModel):
             'D2:L5', 'REGISTRO DE NO CONFORMIDADES Y ACCIONES', format26_c_bold)
         sheet.merge_range('M2:N3', 'Código: ' + code, format21_c_bold)
         sheet.merge_range('M4:N4', 'Versión: 1', format21_c_bold)
-        validation_date = data['form']['validation_date'].strftime(
-            '%d/%m/%Y') if data['form']['validation_date'] else ''
+        if data['form']['validation_date']:
+            if type(data['form']['validation_date']) == str:
+                validation_date = data['form']['validation_date']
+            else:        
+                validation_date = data['form']['validation_date'].strftime(
+            '%d/%m/%Y')
+        else:
+            validation_date = ''
         sheet.merge_range('M5:N5', 'Fecha de validación: ' +
                           validation_date, format21_c_bold)
         sheet.merge_range('B6:E6', 'IDENTIFICACION', format21_c_bold)

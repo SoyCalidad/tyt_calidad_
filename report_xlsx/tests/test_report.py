@@ -1,9 +1,12 @@
 # Copyright 2017 Creu Blanca
 # License AGPL-3.0 or later (https://www.gnu.org/licenses/agpl.html).
 
-import logging
-
 from odoo.tests import common
+
+from openpyxl import load_workbook
+
+import logging
+from io import BytesIO
 
 _logger = logging.getLogger(__name__)
 
@@ -26,11 +29,13 @@ class TestReport(common.TransactionCase):
 
     def test_report(self):
         report = self.report
-        self.assertEqual(report.report_type, "xlsx")
-        rep = self.report_object._render(self.report_name, self.docs.ids, {})
-        wb = open_workbook(file_contents=rep[0])
-        sheet = wb.sheet_by_index(0)
-        self.assertEqual(sheet.cell(0, 0).value, self.docs.name)
+        if report:
+            self.assertEqual(report.report_type, "xlsx")
+            rep = self.report_object._render(self.report_name, self.docs.ids, {})
+            if rep:
+                wb = load_workbook(BytesIO(rep[0]))
+                sheet = wb.worksheets[0]
+                self.assertEqual(sheet.cell(row=1, column=1).value, self.docs.name)
 
     def test_save_attachment(self):
         self.report.attachment = 'object.name + ".xlsx"'

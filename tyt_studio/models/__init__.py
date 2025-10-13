@@ -9,3 +9,4 @@ from . import sites
 from . import res_users
 from . import period
 from . import hr_job
+from . import hr_employee_public
