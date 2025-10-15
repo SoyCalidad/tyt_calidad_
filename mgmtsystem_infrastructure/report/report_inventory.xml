@@ -239,7 +239,7 @@
     <template id="report_calibration_plan">
       <t t-foreach="docs" t-as="doc">
         <t t-if="doc and 'company_id' in doc">
-          <t t-set="company" t-value="o.company_id"/>
+          <t t-set="company" t-value="doc.company_id"/>
         </t>
         <t t-if="not doc or not 'company_id' in doc">
           <t t-set="company" t-value="res_company"/>

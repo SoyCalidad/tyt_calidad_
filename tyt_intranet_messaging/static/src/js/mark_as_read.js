@@ -1,7 +1,7 @@
 /** @odoo-module **/
 
 import { registry } from "@web/core/registry";
-import { jsonrpc } from "@web/core/network/rpc_service";
+import { jsonRpc } from "@web/core/network/rpc";
 
 function setupMarkAsRead() {
     document.body.addEventListener("click", async (ev) => {
@@ -9,11 +9,17 @@ function setupMarkAsRead() {
         if (!target) {
             return;
         }
+
         const messageId = target.dataset.id;
-        if (messageId) {
-            const result = await jsonrpc("/mark_as_read", {
+        if (!messageId) {
+            return;
+        }
+
+        try {
+            const result = await jsonRpc("/mark_as_read", {
                 message_id: messageId,
             });
+
             if (result && result.success) {
                 document.querySelectorAll(`[data-id="${messageId}"] span`).forEach(el => {
                     el.classList.remove("fw-bold");
@@ -22,11 +28,13 @@ function setupMarkAsRead() {
                     el.classList.remove("fw-bold");
                 });
             }
+        } catch (error) {
+            console.error("Error en mark_as_read:", error);
         }
     });
 }
 
-// Registrar como "startup" para que se ejecute al cargar la web
+// Registrar el código para que se ejecute al iniciar el cliente web
 registry.category("web_tour.startup").add("tyt_intranet_messaging.mark_as_read", {
     start() {
         setupMarkAsRead();

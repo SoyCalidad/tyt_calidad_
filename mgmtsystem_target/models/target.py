@@ -319,7 +319,7 @@ class Indicator(models.Model):
     goal_value = fields.Float(
         compute='_compute_current_goal_progress', string='Valor de la meta', store=True , compute_sudo=True)
     c_goal_progress = fields.Float(
-        compute='_compute_c_goal_progress', string='Progreso actual')
+        compute='_compute_c_goal_progress', string='Progreso actual', store=True)
     
     max_goal_progress = fields.Float(string="Max Progress", default=100)
 
