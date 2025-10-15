@@ -10,7 +10,6 @@
                 <field name="name" />
                 <field name="job_id" />
                 <field name="id_crehana" />
-                <field name="user_crehana" />
                 <field name="nivel_pdp" />
                 <field name="is_registered_in_crehana" />
                 <field name="is_registered_on_a_learning_path" />
@@ -26,12 +25,12 @@
                     string="Registrar en una ruta de aprendizaje"
                     class="oe_highlight"
                     attrs="{'invisible': ['|', ('is_registered_on_a_learning_path', '=', True), ('is_registered_in_crehana', '=', False)]}" />
-                <button
+                <!-- <button
                     name="action_show_learning_progress"
                     type="object"
                     string="Ver avance"
                     class="oe_highlight"
-                    attrs="{'invisible': [('is_registered_on_a_learning_path', '=', False)]}" />
+                    attrs="{'invisible': [('is_registered_on_a_learning_path', '=', False)]}" /> -->
                 <button
                     name="action_show_user_report"
                     type="object"
@@ -54,7 +53,6 @@
                         <field name="company_id" invisible="1" />
                         <field name="job_id" />
                         <field name="id_crehana" />
-                        <field name="user_crehana" />
                         <field name="is_registered_in_crehana" />
                         <field name="is_registered_on_a_learning_path" />
                     </group>
@@ -112,7 +110,6 @@
                         <field name="company_id" invisible="1" />
                         <field name="job_id" />
                         <field name="id_crehana" />
-                        <field name="user_crehana" />
                         <field name="nivel_pdp" />
                     </group>
                     <group>

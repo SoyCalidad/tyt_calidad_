@@ -615,7 +615,7 @@ class EmployeeExtension(models.Model):
         }
 
         try:
-            response = requests.get(url, headers=headers, timeout=10)
+            response = requests.get(url, headers=headers, timeout=30)
             response.raise_for_status()
             data = response.json()
 
