@@ -3,6 +3,8 @@ import requests
 import logging
 from datetime import datetime
 import json
+from dateutil import parser
+from dateutil.parser import ParserError
 
 _logger = logging.getLogger(__name__)
 
@@ -281,7 +283,18 @@ class HrEmployee(models.Model):
                         None,
                     )
                     if cf:
-                        setattr(self, meta["field"], cf.get("value"))
+                        value = cf.get("value")
+
+                        if isinstance(value, str) and value.strip():
+                            try:
+                                parsed_value = parser.parse(
+                                    value.strip(), dayfirst=True
+                                )
+                                setattr(self, meta["field"], parsed_value)
+                            except (ValueError, ParserError, OverflowError):
+                                setattr(self, meta["field"], value)
+                        else:
+                            setattr(self, meta["field"], value)
 
                 _logger.info(f"Datos sincronizados para empleado {self.name}")
             else:
