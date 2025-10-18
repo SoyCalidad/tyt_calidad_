@@ -285,18 +285,27 @@ class HrEmployee(models.Model):
                     if cf:
                         value = cf.get("value")
 
-                        if isinstance(value, str) and value.strip():
+                        if (
+                            meta.get("type") == "DATE"
+                            and isinstance(value, str)
+                            and value.strip()
+                        ):
                             try:
-                                parsed_value = parser.parse(
-                                    value.strip(), dayfirst=True
+                                parsed_date = parser.parse(value.strip(), dayfirst=True)
+                                setattr(
+                                    self,
+                                    meta["field"],
+                                    parsed_date.strftime("%Y-%m-%d"),
                                 )
-                                setattr(self, meta["field"], parsed_value)
                             except (ValueError, ParserError, OverflowError):
+                                _logger.warning(
+                                    f"No se pudo parsear fecha '{value}' para campo {meta['field']}"
+                                )
                                 setattr(self, meta["field"], value)
                         else:
                             setattr(self, meta["field"], value)
 
-                _logger.info(f"Datos sincronizados para empleado {self.name}")
+                    _logger.info(f"Datos sincronizados para empleado {self.name}")
             else:
                 # Mensaje de error en chatter
                 message = self.env["mail.message"].create(
@@ -776,6 +785,7 @@ class HrEmployee(models.Model):
                             "is_registered_in_crehana": True,
                         }
                     )
+
                     for key, meta in mapping.items():
                         cf = next(
                             (
@@ -786,8 +796,30 @@ class HrEmployee(models.Model):
                             None,
                         )
                         if cf:
-                            _logger.info(f"Actualizando campo {meta['field']}")
-                            setattr(employee, meta["field"], cf.get("value"))
+                            value = cf.get("value")
+
+                            # Solo convertir si es un campo de tipo DATE
+                            if (
+                                meta.get("type") == "DATE"
+                                and isinstance(value, str)
+                                and value.strip()
+                            ):
+                                try:
+                                    parsed_date = parser.parse(
+                                        value.strip(), dayfirst=True
+                                    )
+                                    setattr(
+                                        employee,
+                                        meta["field"],
+                                        parsed_date.strftime("%Y-%m-%d"),
+                                    )
+                                except (ValueError, ParserError, OverflowError):
+                                    _logger.warning(
+                                        f"No se pudo parsear fecha '{value}' para campo {meta['field']}"
+                                    )
+                                    setattr(employee, meta["field"], value)
+                            else:
+                                setattr(employee, meta["field"], value)
 
             except Exception as e:
                 _logger.error(
