@@ -42,7 +42,7 @@ class Requisition(models.Model):
             vals['site_id'] = current_user.sitio.id
         
         current_date = datetime.now().date()
-        current_period = request.env['tyt_studio.period'].sudo().search([
+        current_period = self.env['tyt_studio.period'].sudo().search([
             ('f1', '<=', current_date),
             ('f2', '>=', current_date),
             ('tipo_periodo', '>=', 'Semana')
@@ -92,7 +92,7 @@ class Requisition(models.Model):
         selected_date = self.request_date
 
         if self.request_date:
-            current_period = request.env['tyt_studio.period'].sudo().search([
+            current_period = self.env['tyt_studio.period'].sudo().search([
                 ('f1', '<=', selected_date),
                 ('f2', '>=', selected_date),
                 ('tipo_periodo', '>=', 'Semana')
@@ -259,7 +259,7 @@ class Campaign(models.Model):
     def action_open_applicant_list(self):
 
         tag_id = self.env.context.get('tag_id')
-        applicants = request.env['tyt_recruitment.applicant'].sudo().search([('campaign_id', '=', int(tag_id))])
+        applicants = self.env['tyt_recruitment.applicant'].sudo().search([('campaign_id', '=', int(tag_id))])
 
         return {
             'name': 'Lista de aplicantes',

@@ -186,7 +186,7 @@ class Attendance(models.Model):
             new_rubric = self.env['tyt_recruitment.evaluation_rubric'].sudo().create(rubric_data)
 
             # Creating new input evaluations
-            details = request.env['tyt_recruitment.detail_evaluation_rubric'].search([])
+            details = self.env['tyt_recruitment.detail_evaluation_rubric'].search([])
             for detail in details:
                 new_input_evaluation_data = {
                     'evaluation_rubric_id': new_rubric.id,
