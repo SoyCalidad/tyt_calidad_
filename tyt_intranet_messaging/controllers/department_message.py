@@ -114,6 +114,6 @@ class DepartmentMessagePortal(portal.CustomerPortal):
     @http.route('/mark_as_read', type='json', auth='user')
     def mark_as_read(self, message_id):
         department_message = request.env['tyt.intranet.department_message'].sudo().browse(message_id)
-        if department_message.exists() and not department_message.is_read_by_current_user():
+        if department_message and not department_message.is_read_by_current_user():
             department_message.mark_as_read_by_current_user()
         return {'success': True}

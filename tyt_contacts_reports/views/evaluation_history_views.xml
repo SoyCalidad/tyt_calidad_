@@ -12,7 +12,7 @@
             <xpath expr="//field[@name='history_item_ids']" position="replace">
                 <field name="history_item_ids"
                        context="{
-                            'tree_view_ref': 'tyt_contacts_reports.res_partner_evaluation_history_item_tree2',
+                            'list_view_ref': 'tyt_contacts_reports.res_partner_evaluation_history_item_tree2',
                             'form_view_ref': 'tyt_contacts_reports.res_partner_evaluation_history_item_form2'}"/>
             </xpath>
             <xpath expr="//field[@name='history_item_ids']" position="after">
@@ -84,7 +84,7 @@
                 <field name="item_ids" readonly="is_tyt_evaluation == True"
                        context="{
                            'default_evaluation_id':id,
-                           'tree_view_ref': 'tyt_contacts_reports.res_partner_evaluation_item_tree2',
+                           'list_view_ref': 'tyt_contacts_reports.res_partner_evaluation_item_tree2',
                            'form_view_ref': 'tyt_contacts_reports.res_partner_evaluation_item_form2',
                            'is_tyt_evaluation': is_tyt_evaluation}"/>
             </xpath>

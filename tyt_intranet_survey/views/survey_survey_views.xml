@@ -90,7 +90,7 @@
         <field name="res_model">survey.survey</field>
         <field name="view_mode">list</field>
         <field name="search_view_id" ref="survey_survey_view_search"/>
-        <field name="context">{'tree_view_ref': 'tyt_intranet_survey.survey_survey_view_tree_management'}</field>
+        <field name="context">{'list_view_ref': 'tyt_intranet_survey.survey_survey_view_tree_management'}</field>
         <field name="domain">[('access_mode', '=', 'intranet')]</field>
     </record>
 

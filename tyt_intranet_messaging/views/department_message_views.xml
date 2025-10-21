@@ -64,7 +64,7 @@
                         <page string="Read Status" name="read_status">
                             <field name="read_status_ids">
                                 <list create="false" delete="false" edit="false" no_open="1">
-                                    <field name="department_message_id" invisible="1"/>
+                                    <field name="department_message_id" invisible="1" column_invisible="1" />
                                     <field name="user_id"/>
                                     <field name="is_read"/>
                                 </list>

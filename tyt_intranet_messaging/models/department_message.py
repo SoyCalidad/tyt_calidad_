@@ -68,24 +68,39 @@ class DepartmentMessage(models.Model):
     def _onchange_gps(self):
         if self.gps and self.job_id:
             groups = self.env['res.groups'].search([('job_id', '=', self.job_id.id)])
-            self.group_ids = [(6, 0, [groups.ids])] if groups else []
+            self.group_ids = [(6, 0, groups.ids)] if groups else []
             existing_user_ids = self.read_status_ids.mapped('user_id.id')
             new_user_ids = groups.mapped('users.id')
             unique_user_ids = set(new_user_ids) - set(existing_user_ids)
             read_status_vals = [{'user_id': user_id, 'department_message_id': self.id} for user_id in unique_user_ids]
             self.read_status_ids = [(0, 0, vals) for vals in read_status_vals]
             self.gps = False
+            
+    def _get_ids_read_status(self, user_id):
+        """
+        Return ids of tyt_intranet_department_message_read_status
+        of current instance
+        """
+        self.env.cr.execute("""
+            SELECT id
+            FROM tyt_intranet_department_message_read_status
+            WHERE department_message_id = %s
+            AND user_id = %s
+        """, [self.id, user_id])
+        return [r[0] for r in self.env.cr.fetchall()]        
 
     def is_read_by_current_user(self):
         self.ensure_one()
         current_user = self.env.user
-        read_record = self.read_status_ids.filtered(lambda r: r.user_id == current_user)
+        status_ids = self._get_ids_read_status(current_user.id)
+        read_record = self.env['tyt.intranet.department_message.read_status'].browse(status_ids)
         return read_record.is_read if read_record else False
 
     def mark_as_read_by_current_user(self):
         self.ensure_one()
         current_user = self.env.user
-        read_record = self.read_status_ids.filtered(lambda r: r.user_id == current_user)
+        status_ids = self._get_ids_read_status(current_user.id)
+        read_record = self.env['tyt.intranet.department_message.read_status'].browse(status_ids)
         if read_record:
             read_record.is_read = True
 
