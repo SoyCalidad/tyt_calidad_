@@ -20,7 +20,7 @@ class PlanCateg(models.Model):
 
     @api.onchange('name')
     def _onchange_name(self):
-        self.sequence_id.name = 'Secuencia de '+self.name
+        self.sequence_id.name = f'Secuencia de {self.name}'
 
     # @api.model
     # def create(self, values):
