@@ -6,6 +6,7 @@ class AreaEncuesta(models.Model):
     _description = "Area encuesta"
     _order = "sequence asc, id asc"
     
+    active = fields.Boolean(string="Activo", default=True)
     name = fields.Char(string="Descripción", required=True,translate=True)
     code = fields.Char(string="code")
     sequence = fields.Integer(string="Secuencia")
@@ -16,6 +17,7 @@ class TipoEncuesta(models.Model):
     _description = "Tipo encuesta"
     _order = "sequence asc, id asc"
     
+    active = fields.Boolean(string="Activo", default=True)
     name = fields.Char(string="Descripción", translate=True, required=True)
     code = fields.Char(string="code")
     sequence = fields.Integer(string="Secuencia")    

@@ -1,6 +1,6 @@
 {
     'name': 'TYT Studio - Soy Calidad',
-    'version': '1.0',
+    'version': '18.0.1.0.0',
     'description': 'Añade modelos y campos que se crearon mediante odoo studio',
     'summary': 'Añade modelos y campos que se crearon mediante odoo studio',
     'author': 'Soy Calidad',
@@ -22,5 +22,6 @@
     'auto_install': False,
     'installable': True,
     'application': False,
+    'post_init_hook': '_post_migrate_hook'
     
 }
