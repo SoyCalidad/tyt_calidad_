@@ -6,38 +6,37 @@
         <field name="model">hr.employee</field>
         <field name="arch" type="xml">
             <list>
-                <field name="id"/>
-                <field name="name"/>
-                <field name="job_id"/>
-                <field name="id_crehana"/>
-                <field name="user_crehana"/>
-                <field name="level"/>
-                <field name="is_registered_in_crehana"/>
-                <field name="is_registered_on_a_learning_path"/>
-                <button 
-                    name="action_register_in_crehana" 
-                    type="object" 
-                    string="Registrar en Crehana" 
+                <field name="id" />
+                <field name="name" />
+                <field name="job_id" />
+                <field name="id_crehana" />
+                <field name="nivel_pdp" />
+                <field name="is_registered_in_crehana" />
+                <field name="is_registered_on_a_learning_path" />
+                <button
+                    name="action_register_in_crehana"
+                    type="object"
+                    string="Registrar en Crehana"
                     class="oe_highlight"
-                    invisible="is_registered_in_crehana == True"/>
-                <button 
-                    name="action_register_on_a_learning_path" 
-                    type="object" 
-                    string="Registrar en una ruta de aprendizaje" 
+                    invisible="is_registered_in_crehana == True" />
+                <button
+                    name="action_register_on_a_learning_path"
+                    type="object"
+                    string="Registrar en una ruta de aprendizaje"
                     class="oe_highlight"
-                    invisible="(is_registered_on_a_learning_path == True or is_registered_in_crehana == False)"/>
-                <button 
-                    name="action_show_learning_progress"  
-                    type="object" 
-                    string="Ver avance"  
+                    invisible="is_registered_on_a_learning_path == True or is_registered_in_crehana == False" />
+                <!-- <button
+                    name="action_show_learning_progress"
+                    type="object"
+                    string="Ver avance"
                     class="oe_highlight"
-                    invisible="is_registered_on_a_learning_path == False"/>
-                <button 
-                    name="action_show_user_report"  
-                    type="object" 
-                    string="Reporte de usuario"  
+                    attrs="{'invisible': [('is_registered_on_a_learning_path', '=', False)]}" /> -->
+                <button
+                    name="action_show_user_report"
+                    type="object"
+                    string="Reporte de usuario"
                     class="oe_highlight"
-                    invisible="is_registered_on_a_learning_path == False"/>
+                    invisible="is_registered_on_a_learning_path == False" />
             </list>
         </field>
     </record>
@@ -49,23 +48,52 @@
             <form>
                 <sheet>
                     <group>
-                        <field name="id" readonly="1"/>
-                        <field name="name"/>
-                        <field name="company_id" invisible="1"/>
-                        <field name="job_id"/>
-                        <field name="id_crehana"/>
-                        <field name="user_crehana"/>
-                        <field name="is_registered_in_crehana"/>
-                        <field name="is_registered_on_a_learning_path"/>
+                        <field name="id" readonly="1" />
+                        <field name="name" />
+                        <field name="company_id" invisible="1" />
+                        <field name="job_id" />
+                        <field name="id_crehana" />
+                        <field name="is_registered_in_crehana" />
+                        <field name="is_registered_on_a_learning_path" />
                     </group>
-                    <div>
-                        <label for="level" />
-                        <field name="level" class="oe_inline" />
-                        <button string="Obtener nivel desde Crehana" name="tyt_crehana_get_employee_level" type="object" class="oe_inline"/>
-                        <button string="Establecer nivel en Crehana" name="update_employee_level" type="object" class="oe_inline"/>
-                    </div>
+                    <group string="Información General">
+                        <field name="cliente" />
+                        <field name="sexo" />
+                        <field name="fecha_nacimiento" />
+                        <field name="fecha_ingreso" />
+                    </group>
+
+                    <group string="Información Laboral">
+                        <field name="puesto" />
+                        <field name="area" />
+                        <field name="turnos" />
+                        <field name="perfil" />
+                        <field name="nivel_pdp" />
+                    </group>
+
+                    <group string="Proyectos y Asignaciones">
+                        <field name="proyecto_asignado_1" />
+                        <field name="proyecto_asignado_2" />
+                        <field name="campanas" />
+                    </group>
+
+                    <group string="Ubicación y Especialidades">
+                        <field name="centros" />
+                        <field name="especialidades" />
+                        <field name="generacion" />
+                    </group>
+                    <group>
+                        <button string="Registrar en Crehana" name="action_register_in_crehana" type="object" class="oe_highlight" 
+                        invisible="is_registered_in_crehana == True"/>
+                        <button string="Sincronizar con Crehana" name="tyt_sync_with_crehana" type="object" class="oe_highlight" 
+                        invisible="is_registered_in_crehana == False"/>
+                        <button string="Enviar campos personalizados" name="action_sync_custom_fields_crehana" type="object"/>
+                        <!-- <button string="Consultar Progreso" name="tyt_get_crehana_employee_progress" type="object"/> -->
+                    </group>
                 </sheet>
-                <chatter />            </form>
+
+                <chatter />
+            </form>
         </field>
     </record>
 
@@ -76,23 +104,22 @@
             <form edit="false">
                 <sheet>
                     <group>
-                        <field name="id"/>
-                        <field name="name"/>
-                        <field name="company_id" invisible="1"/>
-                        <field name="job_id"/>
-                        <field name="id_crehana"/>
-                        <field name="user_crehana"/>
-                        <field name="level" />
+                        <field name="id" />
+                        <field name="name" />
+                        <field name="company_id" invisible="1" />
+                        <field name="job_id" />
+                        <field name="id_crehana" />
+                        <field name="nivel_pdp" />
                     </group>
                     <group>
                         <field name="course_ids">
-                           <list create="false" edit="false">
-                                <field name="id_course"/>
-                                <field name="name"/>
-                                <field name="hours"/>
-                                <field name="progress"/>
-                                <field name="level_of_employee"/>
-                                <field name="job_of_employee"/>
+                            <list edit="false">
+                                <field name="id_course" />
+                                <field name="name" />
+                                <field name="hours" />
+                                <field name="progress" />
+                                <field name="level_of_employee" />
+                                <field name="job_of_employee" />
                             </list>
                         </field>
                     </group>
@@ -106,10 +133,23 @@
         <field name="res_model">hr.employee</field>
         <field name="view_mode">list</field>
         <!-- <field name="view_id" ref="view_crehana_employee_tree"/> -->
-        <field name="view_ids" eval="[(5, 0, 0), (0, 0, {'view_mode': 'list', 'view_id': ref('view_crehana_employee_tree')}), (0, 0, {'view_mode': 'form', 'view_id': ref('view_crehana_employee_form')})]"/> 
+        <field name="view_ids"
+            eval="[(5, 0, 0), (0, 0, {'view_mode': 'list', 'view_id': ref('view_crehana_employee_tree')}), (0, 0, {'view_mode': 'form', 'view_id': ref('view_crehana_employee_form')})]" />
         <field name="context">{'default_dynamic_domain': True}</field>
     </record>
 
+    <record id="action_all_employees" model="ir.actions.act_window">
+        <field name="name">Todos los Empleados</field>
+        <field name="res_model">hr.employee</field>
+        <field name="view_mode">list</field>
+        <field name="view_ids"
+            eval="[(5, 0, 0), (0, 0, {'view_mode': 'list', 'view_id': ref('view_crehana_employee_tree')}), (0, 0, {'view_mode': 'form', 'view_id': ref('view_crehana_employee_form')})]" />
+    </record>
+
     <menuitem id="menu_employees" name="Empleados"
-        parent="menu_crehana_root" action="action_employees" sequence="30"/>
+        parent="menu_crehana_root" sequence="30" />
+
+    <menuitem id="menu_all_employees" name="Todos los Empleados"
+        parent="menu_employees" action="action_all_employees" sequence="20" />
+
 </odoo>

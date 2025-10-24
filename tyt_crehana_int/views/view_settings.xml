@@ -7,17 +7,18 @@
         <field name="arch" type="xml">
             <list>
                 <field name="organization_slug"/>
-                <button 
+                <!-- <button 
                     name="action_view_general_progress_report" 
                     string="Ver reporte de avances" 
                     type="object" 
-                    class="oe_highlight" />
+                    class="oe_highlight" /> -->
                 <button 
                     name="action_fetch_paths_from_api" 
                     string="Actualizar rutas de aprendizaje" 
                     type="object" 
                     class="oe_highlight" />
                 <button string="Ver reporte general" name="action_show_general_report" type="object" class="oe_highlight"/>
+                <button string="Sincronizar empleados de Crehana" name="tyt_sync_from_crehana" type="object" class="oe_highlight"/>
             </list>
         </field>
     </record>
@@ -34,7 +35,8 @@
                         <field name="organization_slug" />
                     </group>
                 </sheet>
-                <chatter />            </form>
+                <chatter/>
+            </form>
         </field>
     </record>
 
