@@ -12,7 +12,7 @@
         'mgmtsystem_process',
         'mgmtsystem_process_integration',
         'mgmtsystem_qualitymanual',
-        'tyt_studio',
+        #'tyt_studio',
     ],
     'data': [
         'security/ir.model.access.csv',

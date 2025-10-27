@@ -23,9 +23,8 @@ class Requisition(models.Model):
     request_date = fields.Date(required=True, string="Fecha de solicitud", tracking=True)
     closing_date = fields.Date(required=True, string="Fecha de cierre", readonly=True, tracking=True)
     state = fields.Selection([('draft', "En creación"),('sent', "Enviado"),], string="Estado", required=True, tracking=True, default='draft')
- 
-    site_id = fields.Many2one("tyt_studio.site", string='Sitio', tracking=True, store=True)
-    periodo_id = fields.Many2one("tyt_studio.period", string='Semana', tracking=True)
+    site_id = fields.Many2one("x_sitio", string='Sitio', tracking=True, store=True)
+    periodo_id = fields.Many2one("x_periodo", string='Semana', tracking=True)
     campaign_ids = fields.One2many("tyt_recruitment.campaign", "requisition_id", string="Campaña", tracking=True)
     employee_ids = fields.Many2many('hr.employee', string="Empleados relacionados")
     attendance_ids = fields.One2many("tyt_recruitment.attendance", "requisition_id", string="Listas de asistencia", tracking=True)
@@ -38,20 +37,20 @@ class Requisition(models.Model):
         
         current_user = self.env.user
 
-        if current_user.sitio:
-            vals['site_id'] = current_user.sitio.id
+        if current_user.x_studio_sitio:
+            vals['site_id'] = current_user.x_studio_sitio.id
         
         current_date = datetime.now().date()
-        current_period = self.env['tyt_studio.period'].sudo().search([
-            ('f1', '<=', current_date),
-            ('f2', '>=', current_date),
-            ('tipo_periodo', '>=', 'Semana')
+        current_period = self.env['x_periodo'].sudo().search([
+            ('x_studio_f1', '<=', current_date),
+            ('x_studio_f2', '>=', current_date),
+            ('x_studio_tipo_periodo', '>=', 'Semana')
         ], limit=1)
 
         if current_period:
             vals['periodo_id'] = current_period.id
-            vals['request_date'] = current_period.f1
-            vals['closing_date'] = current_period.f2
+            vals['request_date'] = current_period.x_studio_f1
+            vals['closing_date'] = current_period.x_studio_f2
 
         return vals
 
@@ -60,21 +59,21 @@ class Requisition(models.Model):
         for vals in vals_list:
             current_user = self.env.user
 
-            if current_user.sitio:
-                vals['site_id'] = current_user.sitio.id
+            if current_user.x_studio_sitio:
+                vals['site_id'] = current_user.x_studio_sitio.id
 
             current_date = vals.get('request_date', fields.Date.today())
 
-            current_period = self.env['tyt_studio.period'].sudo().search([
-                ('f1', '<=', current_date),
-                ('f2', '>=', current_date),
-                ('tipo_periodo', '=', 'Semana')
+            current_period = self.env['x_periodo'].sudo().search([
+                ('x_studio_f1', '<=', current_date),
+                ('x_studio_f2', '>=', current_date),
+                ('x_studio_tipo_periodo', '=', 'Semana')
             ], limit=1)
 
             if current_period:
                 vals['periodo_id'] = current_period.id
-                vals['request_date'] = current_period.f1
-                vals['closing_date'] = current_period.f2
+                vals['request_date'] = current_period.x_studio_f1
+                vals['closing_date'] = current_period.x_studio_f2
 
         return super(Requisition, self).create(vals_list)
 
@@ -92,16 +91,16 @@ class Requisition(models.Model):
         selected_date = self.request_date
 
         if self.request_date:
-            current_period = self.env['tyt_studio.period'].sudo().search([
-                ('f1', '<=', selected_date),
-                ('f2', '>=', selected_date),
-                ('tipo_periodo', '>=', 'Semana')
+            current_period = self.env['x_periodo'].sudo().search([
+                ('x_studio_f1', '<=', selected_date),
+                ('x_studio_f2', '>=', selected_date),
+                ('x_studio_tipo_periodo', '>=', 'Semana')
             ], limit=1)
 
             if current_period:
                 self['periodo_id'] = current_period.id
-                self['request_date'] = current_period.f1
-                self['closing_date'] = current_period.f2
+                self['request_date'] = current_period.x_studio_f1
+                self['closing_date'] = current_period.x_studio_f2
                 
             else:
                 raise ValidationError("No hay registros del periodo. Seleccione otra fecha")
@@ -242,7 +241,7 @@ class Campaign(models.Model):
 
     def action_open_job_application(self):
         requisition_id = self.requisition_id.id
-        site_name = self.requisition_id.site_id.name
+        site_name = self.requisition_id.site_id.x_name
         tag_name = self.tag_id.display_name
         
         url = f"/job_application/{requisition_id}/?site_name={site_name}&tag_name={tag_name}&campaign_id={self.id}"

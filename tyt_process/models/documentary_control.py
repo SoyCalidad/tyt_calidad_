@@ -45,7 +45,7 @@ class DocumentaryControl(models.Model):
     job_id = fields.Many2one('hr.job', string='Responsable')
 
     tyt_sites_id = fields.Many2one(
-        'tyt_studio.sites', string='Sitio'
+        'x_sitios', string='Sitio'
     )
 
     next_number_str = fields.Char(

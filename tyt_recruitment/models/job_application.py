@@ -288,7 +288,7 @@ class Applicant(models.Model):
     recruiter_id = fields.Many2one('hr.employee', string="Reclutador", tracking=True)
 
     employee_id = fields.Many2one('hr.employee', string="Empleado relacionado", tracking=True)
-    employee_number = fields.Char(related="employee_id.numero", string="Número de empleado", tracking=True)
+    employee_number = fields.Char(related="employee_id.x_studio_numero", string="Número de empleado", tracking=True)
 
     expedient_status = fields.Boolean(string="Estado de carga", default=False, tracking=True)
     has_complete_survey = fields.Boolean(string='Tiene Encuesta Completada', tracking=True)

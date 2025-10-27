@@ -55,7 +55,7 @@ class Plan(models.Model):
             ]
 
             # Obtener todos los sitios
-            sites = self.env['tyt_studio.sites'].search([('id', 'in', site_ids)])
+            sites = self.env['x_sitios'].sudo().search([('id', 'in', site_ids)])
 
             # Obtener todas las descripciones
             descriptions = self.env['audit.plan.schedule.descriptions'].search([])
@@ -82,7 +82,7 @@ class Plan(models.Model):
             # Borrar todos los cronogramas generados nos permitirá sobrescribir los datos generados por el metodo, en caso realicemos modificaciones en "Cronograma de auditoría - Auditores"
             
             for data in schedule_data:
-                site = self.env['tyt_studio.sites'].browse(data['sites_id'])
+                site = self.env['x_sitios'].browse(data['sites_id'])
                 # _logger.info(f"Procesando sitio: {site.x_name} (ID: {site.id})")
                 # print(f"Procesando sitio: {site.x_name} (ID: {site.id})")
 
@@ -132,7 +132,7 @@ class Plan(models.Model):
                     'sites_id': data['sites_id'],
                     'responsible_auditors_id': [(6, 0, auditors.ids)],
                     'total_weeks': total_weeks,
-                    'name': f"{plan.name} - Sitio: {site.name}",
+                    'name': f"{plan.name} - Sitio: {site.x_name}",
                 })
 
                 # _logger.info(f"Nuevo schedule creado: ID {new_schedule.id} para el sitio {site.x_name}")

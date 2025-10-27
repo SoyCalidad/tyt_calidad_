@@ -13,7 +13,14 @@
     'category': 'Uncategorized',
     'version': '0.1',
 
-    'depends': ['base','hr','mgmtsystem_nonconformity','marketing_automation','report_xlsx', 'tyt_studio'],
+    'depends': [
+        'base',
+        'hr',
+        'mgmtsystem_nonconformity',
+        'marketing_automation',
+        'report_xlsx', 
+        #'tyt_studio'
+    ],
 
     'data': [
         'security/ir.model.access.csv',

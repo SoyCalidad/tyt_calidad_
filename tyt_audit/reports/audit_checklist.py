@@ -9,6 +9,7 @@ from odoo.exceptions import UserError, ValidationError
 from PIL import Image
 from PIL import Image, UnidentifiedImageError
 import logging 
+import binascii
 
 _logger = logging.getLogger(__name__)
 
@@ -98,7 +99,7 @@ class IndividualReport(models.AbstractModel):
                         y_scale = cell_height / image_height
                         sheet.insert_image('I2', "logo.png", {
                             'image_data': buf_image, 'x_scale': x_scale, 'y_scale': y_scale, 'x_offset': x_offset, 'y_offset': y_offset})
-                    except (base64.binascii.Error, UnidentifiedImageError, OSError):
+                    except (binascii.Error, UnidentifiedImageError, OSError):
                         pass
 
                 # Cabecera de la tabla

@@ -19,7 +19,7 @@ class MgmtCateg(models.Model):
         'mgmt.categ.docs', string='Documentos')
 
     tyt_sites_id = fields.Many2one(
-        'tyt_studio.sites', string='Ubicación')
+        'x_sitios', string='Ubicación')
     
     referencess = fields.Text(string='Referencias')
 

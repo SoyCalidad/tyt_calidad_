@@ -216,7 +216,7 @@ class Audit(models.Model):
     )
 
     tyt_sites_related_id = fields.Many2one(
-        'tyt_studio.sites',
+        'x_sitios',
         string='Sitio',
         related='plan_id.sites_id',
         store=True,

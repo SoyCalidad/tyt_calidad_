@@ -12,7 +12,7 @@ class NonConformingProductsLog(models.Model):
     _name = 'non.conforming.products.log'
     _description = 'Non-Conforming Products Log'
     
-    site = fields.Many2one('tyt_studio.sites', string='Site', required=True)
+    site = fields.Many2one('x_sitios', string='Site', required=True)
     report_id = fields.Char(string='Report ID', required=True)
     campaign = fields.Many2one('marketing.campaign', string='Campaign', required=True)
     report_date = fields.Date(string='Report Date', required=True, default=fields.Date.today)

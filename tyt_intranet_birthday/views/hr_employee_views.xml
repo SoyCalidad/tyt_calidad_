@@ -52,7 +52,7 @@
                         <group>
                             <field name="department_id"/>
                             <field name="job_id"/>
-                            <field name="sitios0"/>
+                            <field name="x_studio_sitios0"/>
                         </group>
                     </group>
                     <group string="Birthday Card">
@@ -71,7 +71,7 @@
         <field name="arch" type="xml">
             <list>
                 <field name="name"/>
-                <field name="sitios0"/>
+                <field name="x_studio_sitios0"/>
                 <field name="birthday"/>
                 <field name="is_birthday" invisible="1"/>
                 <field name="include_in_birthday_publication"/>

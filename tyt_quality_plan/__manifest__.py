@@ -14,8 +14,13 @@
     'license': 'Other proprietary',
     'version': '0.1',
 
-    'depends': ['base','maintenance','report_xlsx', 'tyt_studio'],
-
+    'depends': [
+        'base',
+        'maintenance',
+        'report_xlsx', 
+        #'tyt_studio',
+        
+    ],
     'data': [
         'security/ir.model.access.csv',
         'views/maintenance_quality_plan_views.xml',

@@ -13,7 +13,7 @@
         'report_xlsx',
         'website',
         'survey',
-        'tyt_studio',
+        #'tyt_studio',
     ],
     'data': [
         'security/ir.model.access.csv',

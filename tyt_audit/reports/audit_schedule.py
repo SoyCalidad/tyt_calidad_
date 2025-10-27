@@ -8,6 +8,7 @@ from odoo import api, fields, models
 from odoo.exceptions import UserError, ValidationError
 from PIL import Image
 from PIL import Image, UnidentifiedImageError
+import binascii
 #from odoo.addons.report_xlsx.report.report_xlsx import ReportXlsx
 
 class IndividualReport(models.AbstractModel):
@@ -86,7 +87,7 @@ class IndividualReport(models.AbstractModel):
                         y_scale = cell_height/image_height
                         sheet1.insert_image('C5', "logo.png", {
                             'image_data': buf_image, 'x_scale': x_scale, 'y_scale': y_scale, 'x_offset': x_offset})
-                    except (base64.binascii.Error, UnidentifiedImageError, OSError):
+                    except (binascii.Error, UnidentifiedImageError, OSError):
                         pass
 
                 # HEADER

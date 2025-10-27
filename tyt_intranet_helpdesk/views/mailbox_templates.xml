@@ -30,7 +30,7 @@
                                             <t t-foreach="site_ids" t-as="rec">
                                                 <option t-att-value="rec.id"
                                                         t-att-selected="rec.id == user_site_id and 'selected' or None">
-                                                    <t t-esc="rec.name"/>
+                                                    <t t-esc="rec.x_name"/>
                                                 </option>
                                             </t>
                                         </select>

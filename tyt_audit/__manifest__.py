@@ -12,7 +12,7 @@
         'mgmtsystem_nonconformity',
         'mgmtsystem_audit',
         'website',
-        'tyt_studio',
+        #'tyt_studio',
     ],
     'data': [
         'security/ir.model.access.csv',

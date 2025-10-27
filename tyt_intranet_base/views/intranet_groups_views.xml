@@ -51,12 +51,12 @@
                         <page string="Employees" name="employees">
                             <field name="employee_ids">
                                 <list>
-                                    <field name="numero"/>
+                                    <field name="x_studio_numero"/>
                                     <field name="name"/>
                                     <field name="intranet_user_id"/>
                                     <field name="department_id"/>
                                     <field name="job_id"/>
-                                    <field name="sitio"/>
+                                    <field name="x_studio_sitio"/>
                                 </list>
                             </field>
                         </page>

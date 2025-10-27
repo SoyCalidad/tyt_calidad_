@@ -18,7 +18,7 @@ class AuditReport(models.Model):
 
 
     site_id = fields.Many2one(
-        'tyt_studio.sites',
+        comodel_name='x_sitios', #'tyt_studio.sites',
         string='Sitios'
     )
 

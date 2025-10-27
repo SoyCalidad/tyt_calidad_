@@ -8,7 +8,7 @@ class Groups(models.Model):
 
     name = fields.Char(string='Name')
     department_id = fields.Many2one('hr.department', string='Department')
-    sitio_id = fields.Many2one(related='department_id.sitio', string='Site', store=True)
+    sitio_id = fields.Many2one(related='department_id.x_studio_sitio', string='Site', store=True)
     job_id = fields.Many2one('hr.job', string='Job Position')
     employee_ids = fields.Many2many(
         comodel_name='hr.employee',

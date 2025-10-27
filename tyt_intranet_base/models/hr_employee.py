@@ -4,7 +4,7 @@ from odoo import api, fields, models, _
 class HrEmployee(models.Model):
     _inherit = 'hr.employee'
 
-    intranet_user_ids = fields.One2many('res.users', 'empleado', string='Intranet Users')
+    intranet_user_ids = fields.One2many('res.users', 'x_studio_empleado', string='Intranet Users')
     intranet_user_id = fields.Many2one(
         comodel_name='res.users',
         string='Intranet User',
@@ -16,8 +16,8 @@ class HrEmployee(models.Model):
     @api.depends('intranet_user_ids')
     def _compute_intranet_user_id(self):
         user_per_employee = {
-            user.empleado: user
-            for user in self.env['res.users'].search([('empleado', 'in', self.ids)])
+            user.x_studio_empleado: user
+            for user in self.env['res.users'].search([('x_studio_empleado', 'in', self.ids)])
         }
         for employee in self:
             employee.intranet_user_id = user_per_employee.get(employee)

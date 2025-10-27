@@ -12,7 +12,7 @@ class AuditPlanTytAuditorSchedule(models.Model):
     )    
 
     tyt_sites_id = fields.Many2one(
-        'tyt_studio.sites',
+        comodel_name='x_sitios',#'tyt_studio.sites',
         string='Sitios'
     )    
     responsible_auditors_id = fields.Many2many('res.partner', string='Auditores Responsables')
@@ -131,8 +131,7 @@ class AuditPlanTytAuditor(models.Model):
         records = super(AuditPlanTytAuditor, self).create(vals_list)
 
         # Lista de IDs de sitios
-        #site_ids = [1, 2, 10, 9, 8, 7, 5, 3]
-        site_ids = []
+        site_ids = [1, 2, 10, 9, 8, 7, 5, 3]
 
         # Preparar los valores para los registros de audit.plan.tyt.auditor.schedule
         schedule_vals = []
