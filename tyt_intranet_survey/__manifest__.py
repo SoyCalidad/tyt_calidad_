@@ -10,6 +10,7 @@
     'depends': [
         'tyt_intranet_base',
         'survey',
+        #'tyt_studio',
         
     ],
     'data': [

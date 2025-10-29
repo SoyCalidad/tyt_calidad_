@@ -4,8 +4,8 @@
         <xpath expr="//div[@t-field='survey.description']" position="before">
             <div class="welcome-message">
                 <h2>Bienvenido/a,
-                    <t t-if="request.env.user.empleado">
-                        <t t-esc="request.env.user.empleado.name"/>
+                    <t t-if="request.env.user.x_studio_empleado">
+                        <t t-esc="request.env.user.x_studio_empleado.name"/>
                     </t>
                     <t t-else="">
                         <t t-esc="request.env.user.name"/>

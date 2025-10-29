@@ -14,8 +14,8 @@ class TYTSurveyQuestionAnswer(models.Model):
 class SurveyQuestion(models.Model):
     _inherit = 'survey.question'
 
-    area_encuesta_id = fields.Many2one('tyt_studio.survey_area', string='Area encuesta')
-    tipo_encuesta_id = fields.Many2one('tyt_studio.survey_type', string='Tipo encuesta')
+    area_encuesta_id = fields.Many2one('x_area_encuesta', string='Area encuesta')
+    tipo_encuesta_id = fields.Many2one('x_tipo_encuesta', string='Tipo encuesta')
     survey_publish_state = fields.Selection(related='survey_id.publish_state', string='Survey Publish State', store=True)
 
     @api.onchange('tipo_encuesta_id')

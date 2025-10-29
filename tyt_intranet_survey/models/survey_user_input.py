@@ -11,10 +11,10 @@ class SurveyUserInput(models.Model):
     @api.depends('partner_id')
     def _compute_employee_number(self):
         for record in self:
-            if record.partner_id.empleado:
-                record.employee_number = record.partner_id.empleado.numero
-            elif record.partner_id.usuario:
-                record.employee_number = record.partner_id.usuario.numero
+            if record.partner_id.x_studio_empleado:
+                record.employee_number = record.partner_id.x_studio_empleado.x_studio_numero
+            elif record.partner_id.x_studio_usuario:
+                record.employee_number = record.partner_id.x_studio_usuario.x_studio_numero
             else:
                 record.employee_number = ''
 
@@ -22,7 +22,7 @@ class SurveyUserInput(models.Model):
 class SurveyUserInputLine(models.Model):
     _inherit = 'survey.user_input.line'
 
-    tipo_encuesta_id = fields.Many2one('tyt_studio.survey_type', string='Tipo encuesta', related='question_id.tipo_encuesta_id', store=True)
+    tipo_encuesta_id = fields.Many2one('x_tipo_encuesta', string='Tipo encuesta', related='question_id.tipo_encuesta_id', store=True)
     partner_id = fields.Many2one('res.partner', string='Partner', related='user_input_id.partner_id', store=True)
     employee_number = fields.Char('Número de empleado', related='user_input_id.employee_number', store=True)
     suggested_answer_value = fields.Char('Suggested Answer Value', related='suggested_answer_id.value', store=True, translate=True)

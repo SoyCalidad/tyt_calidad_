@@ -34,17 +34,17 @@
                   parent="tyt_intranet_base.intranet_configuration_menu"
                   sequence="20"/>
 
-        <!-- <menuitem id="tyt_x_area_encuesta_menu_action"
+        <menuitem id="tyt_x_area_encuesta_menu_action"
                   name="Areas - Typification"
                   parent="tyt_survey_configuration_menu"
-                  action="tyt_studio.area_encuesta_action"
+                  action="tyt_x_area_encuesta_action"
                   sequence="10"/>
 
         <menuitem id="tyt_x_tipo_encuesta_menu_action"
                   name="Tipos - Typification"
                   parent="tyt_survey_configuration_menu"
-                  action="tyt_studio.survey_type_action"
-                  sequence="20"/> -->
+                  action="tyt_x_tipo_encuesta_action"
+                  sequence="20"/>
 
 <!--        <menuitem id="tyt_survey_question_answer_menu_action"-->
 <!--                  name="Suggested Answers"-->
