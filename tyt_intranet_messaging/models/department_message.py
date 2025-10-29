@@ -67,7 +67,7 @@ class DepartmentMessage(models.Model):
     @api.onchange('gps')
     def _onchange_gps(self):
         if self.gps and self.job_id:
-            groups = self.env['res.groups'].search([('job_id', '=', self.job_id.id)])
+            groups = self.env['res.groups'].search([('x_studio_job', '=', self.job_id.id)])
             self.group_ids = [(6, 0, groups.ids)] if groups else []
             existing_user_ids = self.read_status_ids.mapped('user_id.id')
             new_user_ids = groups.mapped('users.id')
