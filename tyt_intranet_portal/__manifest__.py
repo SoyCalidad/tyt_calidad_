@@ -14,6 +14,7 @@
         'purchase',
         'sign',
         'documents',
+        #'tyt_studio',
     ],
     'data': [
         'views/portal_templates.xml',
