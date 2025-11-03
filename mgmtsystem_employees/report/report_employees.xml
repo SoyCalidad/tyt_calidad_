@@ -126,13 +126,13 @@
                                         </td>
                                         <td class="tg-standar" width="70%" colspan="3" valign="middle">
 
-                                            <span t-field="o.address_home_id.street" />
+                                            <span t-field="o.private_street" />
                                             , 
-                                            <span t-field="o.address_home_id.city" />
+                                            <span t-field="o.private_city" />
                                             , 
-                                            <span t-field="o.address_home_id.state_id" />
+                                            <span t-field="o.private_state_id" />
                                             , 
-                                            <span t-field="o.address_home_id.country_id" />
+                                            <span t-field="o.private_country_id" />
 
                                         </td>
                                     </tr>
@@ -170,7 +170,7 @@
                                         </td>
                                         <td class="tg-standar" width="70%" colspan="3" valign="middle">
 
-                                            <span t-field="o.address_home_id.phone" />
+                                            <span t-field="o.private_phone" />
 
                                         </td>
                                     </tr>
@@ -271,7 +271,7 @@
                                         </td>
                                         <td class="tg-standar" width="20%" colspan="3" valign="middle">
 
-                                            <span t-field="o.work_location" />
+                                            <span t-field="o.work_location_name" />
 
                                         </td>
                                     </tr>
