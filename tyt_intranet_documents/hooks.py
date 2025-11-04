@@ -5,7 +5,7 @@ _logger = logging.getLogger(__name__)
 
 def post_init_hook(env):
     
-    folders = env['documents.document'].search([
+    folders = env['documents.document'].sudo().search([
         ('type', '=', 'folder'),
         ('name', 'in', [
             'Documentos Intranet',
