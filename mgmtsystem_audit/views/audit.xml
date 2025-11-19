@@ -155,7 +155,6 @@
                         </h1>
                         <div class="oe_title">
                             <label for="name" />
-                            <label for="name" />
                             <h2>
                                 <field name="name" readonly="state not in ['draft']" />
                             </h2>

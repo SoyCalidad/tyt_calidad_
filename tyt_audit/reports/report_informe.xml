@@ -95,7 +95,7 @@
                                         </td>
                                         <!-- Segunda columna (60% de ancho) -->
                                         <td style="width: 60%; background-color: #D0E8F2; padding: 10px;text-align: left;">
-                                            <strong class="bold-text">SITIO: </strong><span style="font-size: 30px;" t-field="o.site_id.name"/><br/>
+                                            <strong class="bold-text">SITIO: </strong><span style="font-size: 30px;" t-field="o.site_id.x_name"/><br/>
                                             <strong class="bold-text">NORMAS APLICABLES:</strong><br/>
                                             <span style="font-size: 30px;">SISTEMA DE GESTIÓN INTEGRAL NORMAS. -</span><br/>
                                             <span style="font-size: 30px;">ISO 9001:2015</span><br/>

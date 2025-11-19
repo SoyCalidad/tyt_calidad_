@@ -77,7 +77,7 @@ class IndividualReport(models.AbstractModel):
 
                 sheet.merge_range('G5:H5', f'FECHA DE AUDITORIA: ({audit_date_str})', title_format2)
 
-                sheet.merge_range('I5:J5', 'SITIO: ( '+ (matrix.tyt_sites_related_id.name or '') +')', title_format2)
+                sheet.merge_range('I5:J5', 'SITIO: ( '+ (matrix.tyt_sites_related_id.x_name or '') +')', title_format2)
 
                 sheet.merge_range(
                     'I2:J4', '', logo_box_format )

@@ -14,6 +14,7 @@
         'purchase',
         'sign',
         'documents',
+        'helpdesk',
         #'tyt_studio',
     ],
     'data': [
