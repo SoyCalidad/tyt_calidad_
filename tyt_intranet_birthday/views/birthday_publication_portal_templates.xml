@@ -34,9 +34,9 @@
                                 <img class="rounded-circle o_portal_contact_img" t-att-src="image_data_uri(employee.avatar_128)" alt="Employee"/>
                                 <span class="ml8"><t t-esc="employee.name"/></span>
                             </td>
-                            <td><span t-esc="employee.job_id.nesp or employee.job_id.name"/></td>
+                            <td><span t-esc="employee.job_id.x_studio_nesp or employee.job_id.name or ''"/></td>
                             <td><span t-field="employee.department_id.display_name"/></td>
-                            <td><span t-field="employee.sitios0"/></td>
+                            <td><span t-field="employee.x_studio_sitios0"/></td>
                             <td class="text-end"><span t-field="employee.birthday"/></td>
                         </tr>
                     </t>
