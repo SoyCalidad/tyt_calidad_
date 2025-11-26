@@ -375,6 +375,7 @@ class MgmtsystemAction(models.Model):
         template.send_mail(action.id, force_send=force_send)
         return True
 
+    """
     def get_action_url(self):
         #Return action url to be used in email templates.
         base_url = self.env['ir.config_parameter'].get_param(
@@ -388,7 +389,6 @@ class MgmtsystemAction(models.Model):
             self._name
         )
         return url
-    """
 
     def case_open(self):
         """ Opens case """

@@ -8,19 +8,17 @@
         <record id="email_template_mgmtsystem_target_indicator_measurement_reminder" model="mail.template">
             <field name="name">Indicadores: Enviar por correo electrónico</field>
             <field name="model_id" ref="mgmtsystem_target.model_mgmtsystem_target" />
-            <field name="email_from">"${object.company_id.name | safe}" &lt;${(object.company_id.email or user.email) | safe}&gt;</field>
-            <field name="email_to">${object.user_id.login}</field>
-            <field name="subject">${object.company_id.name} Medición de indicador (Ref ${object.name or 'n/a'})</field>
+            <field name="email_from">{{(object.company_id.email_formatted or user.email_formatted) }}</field>
+            <field name="email_to">{{object.user_id.email_formatted}}</field>
+            <field name="subject">{{object.company_id.name}} Medición de indicador (Ref {{object.name or 'n/a'}})</field>
             <field name="body_html" type="html">
                 <div style="margin: 0px; padding: 0px;">
                     <p style="margin: 0px; padding: 0px; font-size: 13px;">
                         Estimado/a
-                        % if object.user_id:
-                            ${object.user_id.name}
-                        % endif
+                        <t t-if="object.user_id" t-out="object.user_id.name" />
                         <br />
                         <br />
-                        Medición del indicador para el objetivo ${object.name}:
+                        Medición del indicador para el objetivo <t t-out="object.name" />:
                         <br />
                         <br />
                     </p>

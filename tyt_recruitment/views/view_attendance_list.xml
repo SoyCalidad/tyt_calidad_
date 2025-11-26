@@ -65,40 +65,40 @@
             <page string="Lista de asistencia">
               <field name="attendance_days_of_week_ids" nolabel="1" options="{'no_create': True}">
                 <list editable="bottom">
-                  <field name="login" width="30px" string="Número de empleado"/>
-                  <field name="full_name" width="30px" />
-                  <field name="day1" width="30px" column_invisible="parent.days &lt; 1"/>
-                  <field name="day2" width="30px" column_invisible="parent.days &lt; 2"/>
-                  <field name="day3" width="30px" column_invisible="parent.days &lt; 3"/>
-                  <field name="day4" width="30px" column_invisible="parent.days &lt; 4"/>
-                  <field name="day5" width="30px" column_invisible="parent.days &lt; 5"/>
-                  <field name="day6" width="30px" column_invisible="parent.days &lt; 6"/>
-                  <field name="day7" width="30px" column_invisible="parent.days &lt; 7"/>
-                  <field name="day8" width="30px" column_invisible="parent.days &lt; 8" />
-                  <field name="day9" width="30px" column_invisible="parent.days &lt; 9" />
-                  <field name="day10" width="30px" column_invisible="parent.days &lt; 10" />
-                  <field name="day11" width="30px" column_invisible="parent.days &lt; 11" />
-                  <field name="day12" width="30px" column_invisible="parent.days &lt; 12" />
-                  <field name="day13" width="30px" column_invisible="parent.days &lt; 13" />
-                  <field name="day14" width="30px" column_invisible="parent.days &lt; 14" />
-                  <field name="day15" width="30px" column_invisible="parent.days &lt; 15" />
-                  <field name="day16" width="30px" column_invisible="parent.days &lt; 16" />
-                  <field name="day17" width="30px" column_invisible="parent.days &lt; 17" />
-                  <field name="day18" width="30px" column_invisible="parent.days &lt; 18" />
-                  <field name="day19" width="30px" column_invisible="parent.days &lt; 19" />
-                  <field name="day20" width="30px" column_invisible="parent.days &lt; 20" />
+                  <field name="login" width="50px" string="Número de empleado"/>
+                  <field name="full_name" width="50px" />
+                  <field name="day1" width="50px" column_invisible="parent.days &lt; 1"/>
+                  <field name="day2" width="50px" column_invisible="parent.days &lt; 2"/>
+                  <field name="day3" width="50px" column_invisible="parent.days &lt; 3"/>
+                  <field name="day4" width="50px" column_invisible="parent.days &lt; 4"/>
+                  <field name="day5" width="50px" column_invisible="parent.days &lt; 5"/>
+                  <field name="day6" width="50px" column_invisible="parent.days &lt; 6"/>
+                  <field name="day7" width="50px" column_invisible="parent.days &lt; 7"/>
+                  <field name="day8" width="50px" column_invisible="parent.days &lt; 8" />
+                  <field name="day9" width="50px" column_invisible="parent.days &lt; 9" />
+                  <field name="day10" width="50px" column_invisible="parent.days &lt; 10" />
+                  <field name="day11" width="50px" column_invisible="parent.days &lt; 11" />
+                  <field name="day12" width="50px" column_invisible="parent.days &lt; 12" />
+                  <field name="day13" width="50px" column_invisible="parent.days &lt; 13" />
+                  <field name="day14" width="50px" column_invisible="parent.days &lt; 14" />
+                  <field name="day15" width="50px" column_invisible="parent.days &lt; 15" />
+                  <field name="day16" width="50px" column_invisible="parent.days &lt; 16" />
+                  <field name="day17" width="50px" column_invisible="parent.days &lt; 17" />
+                  <field name="day18" width="50px" column_invisible="parent.days &lt; 18" />
+                  <field name="day19" width="50px" column_invisible="parent.days &lt; 19" />
+                  <field name="day20" width="50px" column_invisible="parent.days &lt; 20" />
 
-                  <field name="opday1" width="30px" />
-                  <field name="opday2" width="30px" />
+                  <field name="opday1" width="50px" />
+                  <field name="opday2" width="50px" />
 
                   <field name="campaign_id" />
 
-                  <field name="recruiter" width="30px" />
-                  <field name="prospect_turn" width="30px" />
-                  <field name="right_turn" width="30px" />
-                  <field name="observations" width="30px" />
-                  <field name="experience" width="30px" />
-                  <field name="reason_for_withdrawal" width="30px" />
+                  <field name="recruiter" width="70px" />
+                  <field name="prospect_turn" width="70px" />
+                  <field name="right_turn" width="70px" />
+                  <field name="observations" width="70px" />
+                  <field name="experience" width="70px" />
+                  <field name="reason_for_withdrawal" width="70px" />
                   <button 
                     name="show_applicant_details" 
                     string="Ver" 
@@ -148,40 +148,40 @@
             <page string="Kardex - Certificación" groups="tyt_recruitment.group_quality_user" invisible="view_kardex_certificate == False">
               <field name="kardex_by_applicant_two_ids" nolabel="1" options="{'no_create': True}">
                 <list editable="bottom">
-                  <field name="applicant_name" width="30px" readonly="1"/>
-                  <field name="experience" width="30px" readonly="1"/>
-                  <field name="time" width="30px" readonly="1"/>
-                  <field name="marital_status" width="30px" readonly="1"/>
+                  <field name="applicant_name" width="50px" readonly="1"/>
+                  <field name="experience" width="50px" readonly="1"/>
+                  <field name="time" width="50px" readonly="1"/>
+                  <field name="marital_status" width="50px" readonly="1"/>
 
-                  <field name="exam1" width="30px" readonly="1" column_invisible="parent.survey_counter &lt; 1"/>
-                  <field name="exam2" width="30px" readonly="1" column_invisible="parent.survey_counter &lt; 2"/>
-                  <field name="exam3" width="30px" readonly="1" column_invisible="parent.survey_counter &lt; 3"/>
-                  <field name="exam4" width="30px" readonly="1" column_invisible="parent.survey_counter &lt; 4"/>
-                  <field name="exam5" width="30px" readonly="1" column_invisible="parent.survey_counter &lt; 5"/>
-                  <field name="exam6" width="30px" readonly="1" column_invisible="parent.survey_counter &lt; 6"/>
-                  <field name="exam7" width="30px" readonly="1" column_invisible="parent.survey_counter &lt; 7"/>
-                  <field name="exam8" width="30px" readonly="1" column_invisible="parent.survey_counter &lt; 8"/>
-                  <field name="exam9" width="30px" readonly="1" column_invisible="parent.survey_counter &lt; 9"/>
-                  <field name="exam10" width="30px" readonly="1" column_invisible="parent.survey_counter &lt; 10"/>
-                  <field name="exam11" width="30px" readonly="1" column_invisible="parent.survey_counter &lt; 11"/>
-                  <field name="exam12" width="30px" readonly="1" column_invisible="parent.survey_counter &lt; 12"/>
-                  <field name="exam13" width="30px" readonly="1" column_invisible="parent.survey_counter &lt; 13"/>
-                  <field name="exam14" width="30px" readonly="1" column_invisible="parent.survey_counter &lt; 14"/>
-                  <field name="exam15" width="30px" readonly="1" column_invisible="parent.survey_counter &lt; 15"/>
+                  <field name="exam1" width="40px" readonly="1" column_invisible="parent.survey_counter &lt; 1"/>
+                  <field name="exam2" width="40px" readonly="1" column_invisible="parent.survey_counter &lt; 2"/>
+                  <field name="exam3" width="40px" readonly="1" column_invisible="parent.survey_counter &lt; 3"/>
+                  <field name="exam4" width="40px" readonly="1" column_invisible="parent.survey_counter &lt; 4"/>
+                  <field name="exam5" width="40px" readonly="1" column_invisible="parent.survey_counter &lt; 5"/>
+                  <field name="exam6" width="40px" readonly="1" column_invisible="parent.survey_counter &lt; 6"/>
+                  <field name="exam7" width="35px" readonly="1" column_invisible="parent.survey_counter &lt; 7"/>
+                  <field name="exam8" width="35px" readonly="1" column_invisible="parent.survey_counter &lt; 8"/>
+                  <field name="exam9" width="35px" readonly="1" column_invisible="parent.survey_counter &lt; 9"/>
+                  <field name="exam10" width="35px" readonly="1" column_invisible="parent.survey_counter &lt; 10"/>
+                  <field name="exam11" width="35px" readonly="1" column_invisible="parent.survey_counter &lt; 11"/>
+                  <field name="exam12" width="35px" readonly="1" column_invisible="parent.survey_counter &lt; 12"/>
+                  <field name="exam13" width="35px" readonly="1" column_invisible="parent.survey_counter &lt; 13"/>
+                  <field name="exam14" width="35px" readonly="1" column_invisible="parent.survey_counter &lt; 14"/>
+                  <field name="exam15" width="35px" readonly="1" column_invisible="parent.survey_counter &lt; 15"/>
 
-                  <field name="average" width="30px" readonly="1"/>
-                  <field name="comments" width="30px" readonly="1"/>
+                  <field name="average" width="40px" readonly="1"/>
+                  <field name="comments" width="40px" readonly="1"/>
 
-                  <field name="certification1" width="30px" />
-                  <field name="certification2" width="30px" />
-                  <field name="certification3" width="30px" />
-                  <field name="highest_score" width="30px" />
-                  <field name="comments_quality" width="30px" />
+                  <field name="certification1" width="50px" />
+                  <field name="certification2" width="50px" />
+                  <field name="certification3" width="50px" />
+                  <field name="highest_score" width="50px" />
+                  <field name="comments_quality" width="50px" />
                   
-                  <field name="accreditation_status" width="30px" />
-                  <field name="concession" width="30px" />
-                  <field name="observation" width="30px" />
-                  <field name="has_certification_feedback" invisible="1" />
+                  <field name="accreditation_status" width="40px" />
+                  <field name="concession" width="40px" />
+                  <field name="observation" width="40px" />
+                  <field name="has_certification_feedback" column_invisible="1" />
                   <button 
                     name="action_message_certification_feedback" 
                     title=" "

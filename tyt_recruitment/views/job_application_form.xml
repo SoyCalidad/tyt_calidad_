@@ -536,7 +536,7 @@
                             </button>
                         </div>
                         <div class="col text-end">
-                            <button type="submit" class="btn btn-primary btn-lg">
+                            <button type="submit" form="job-application-form" class="btn btn-primary btn-lg">
                                 Enviar
                             </button>
                         </div>
@@ -622,16 +622,23 @@
             document.getElementById('clear-signature').addEventListener('click', function () {
                 signaturePad.clear();
             });
-
+            const form = document.getElementById("job-application-form");
             // Guardar la firma como una imagen base64 en el campo oculto
-            document.querySelector('form').addEventListener('submit', function (event) {
+            form.addEventListener('submit', function (event) {
                 if (!signaturePad.isEmpty()) {
                     var signatureData = signaturePad.toDataURL('image/png');
                     document.getElementById('signature').value = signatureData;
+                    const btn = form.querySelector("button[type='submit']");
+                    if (btn) {
+                        btn.disabled = true;
+                        btn.classList.add("disabled");
+                        btn.innerText = "Enviando...";
+                    }
                 } else {
                     alert("Por favor, firme antes de enviar.");
                     event.preventDefault();  // Evita el envío si no hay firma
                 }
+
             });
 
             //  AGREGAR O BORRAR HISTORIAL LABORAL

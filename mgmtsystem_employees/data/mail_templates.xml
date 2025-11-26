@@ -5,18 +5,16 @@
         <record id="email_template_mgmtsystem_plan_training" model="mail.template">
             <field name="name">Plan de capacitación: Enviar por email</field>
             <field name="model_id" ref="mgmtsystem_employees.model_mgmtsystem_plan_training" />
-            <field name="email_from">${(user.email_formatted) |safe}</field>
-            <field name="email_to">${object.get_employees_work_emails()}</field>
-            <field name="subject">Plan de capacitación (${object.name or 'n/a'}) (Fecha:
-                ${object.date_training or 'n/a' })</field>
+            <field name="email_from">{{(user.email_formatted)}}</field>
+            <field name="email_to">{{object.get_employees_work_emails()}}</field>
+            <field name="subject">Plan de capacitación ({{object.name or 'n/a'}}) (Fecha: {{object.date_training or 'n/a' }})</field>
             <field name="body_html" type="html">
                 <div style="margin: 0px; padding: 0px;">
-                    <p style="margin: 0px; padding: 0px; font-size: 13px;"> Se ha creado una nueva
-                        política ${object.name} con fecha ${object.date} <p>Estimado/a, se envía la
+                    <p style="margin: 0px; padding: 0px; font-size: 13px;"> Se ha creado una nueva  política <t t-out="object.name" /> con fecha <t t-out="object.create_date" /> <p>Estimado/a, se envía la
                         información pertinente para nuestra próxima capacitación.</p>
                         <p>Tema:
-                        ${object.name} </p>
-                        <p>Fecha y hora: ${object.date_training}</p>
+                        <t t-out="object.name" /> </p>
+                        <p>Fecha y hora: <t t-out="object.date_training" /></p>
                         <p>Agradecemos
                         su participación.</p>
                     </p>
@@ -26,7 +24,7 @@
                 ref('mgmtsystem_employees.report_announcement'),
             ])]"/>
 
-            <field name="lang">${user.lang}</field>
+            <field name="lang">{{user.lang}}</field>
             <!--<field
             name="user_signature" eval="False" />-->
             <field name="auto_delete" eval="True" />

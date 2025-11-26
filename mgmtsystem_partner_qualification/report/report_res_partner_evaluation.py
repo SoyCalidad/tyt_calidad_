@@ -158,7 +158,7 @@ class PartnerEvaluationReport(models.AbstractModel):
                 else:
                     sheet.merge_range(
                         row-1, col, row-len_line, col, item.qualification_item, format21_center)
-            sheet.merge_range(row, col-2, row, col-1, "Total", format21_c_bold)
+            #sheet.merge_range(row, col-1, row, col-0, "Total", format21_c_bold)
             sheet.write(row, col, evaluation.qualification, format21_c_bold)
             row += 2
 
