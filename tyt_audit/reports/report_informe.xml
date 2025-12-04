@@ -29,7 +29,7 @@
                                 <div class="title-container">
                                     <h1 >SISTEMA DE GESTIÓN DE CALIDAD</h1>
                                     <t t-if="o.name">
-                                        <h2 t-esc="o.name"/>
+                                        <h2 t-esc="o.name" class="me-5" />
                                     </t>
                                     <t t-else="">
                                         <h2>Informe de Auditoria</h2>
@@ -133,7 +133,7 @@
                                 <td style="padding: 10px; width: 40%;">
                                     <span t-field="o.next_audit" 
                                         t-options='{"widget": "date", 
-                                            "timezone": context.get("tz") or "UTC",
+                                            "timezone": env.context.get("tz") or "UTC",
                                             "format": "dd/MM/yyyy"}'/> 
                                 </td>
                             </tr>
@@ -183,7 +183,7 @@
                                         <!-- Columnas 1-4: Datos de user_ids -->
                                         <td style="padding: 10px;">
                                             <t t-if="i &lt; len(o.team_id.user_ids)">
-                                                <t t-esc="o.team_id.user_ids[i].puesto.name"/>
+                                                <t t-esc="o.team_id.user_ids[i].x_studio_puesto.name"/>
                                             </t>
                                         </td>
                                         <td style="padding: 10px;">
@@ -193,7 +193,7 @@
                                         </td>
                                         <td style="padding: 10px;">
                                             <t t-if="i &lt; len(o.team_id.user_ids)">
-                                                <t t-esc="o.team_id.user_ids[i].puesto.name"/>
+                                                <t t-esc="o.team_id.user_ids[i].x_studio_puesto.name"/>
                                             </t>
                                         </td>
                                         <td style="padding: 10px;">
