@@ -1,0 +1,50 @@
+<odoo>
+    <menuitem id="menu_business_process_root" name="Gestión de riesgos" sequence="10">
+
+        <menuitem id="my_activities_menu" sequence="0" name="Mis actividades " 
+        action="action_risk_my_activity"
+        />
+        <menuitem id="admin_menu" name="Administración" sequence="10">
+
+            <menuitem id="menu_user" name="Usuarios" action="base.action_res_users" sequence="30" groups="group_ver_usuarios,base.group_system,base.group_erp_manager" />
+            <menuitem id="menu_role" name="Roles" action="base.action_res_groups" sequence="30" groups="base.group_system,base.group_erp_manager,base.group_no_one" />
+            <menuitem id="menu_business_process" name="Procesos" action="action_admin_process" sequence="40"/>
+            <menuitem id="menu_business_process_hierarchy" name="Jerarquia de procesos" action="action_business_process_hierarchy" sequence="50"/>
+            <menuitem id="menu_catalog_frequency" name="Catalogos" 
+            action="action_catalog_frequency" sequence="60" />
+        </menuitem>
+        <menuitem id="menu_risk_config" name="Configuración"  sequence="100">
+            
+            <menuitem id="menu_risk_stage" name="Etapas de Riesgo"  
+                action="action_risk_stage" />
+        </menuitem>
+        <menuitem id="menu_risk_root" name="Identificación"  sequence="20">
+            
+            
+            <menuitem id="menu_risk_management" name="Riesgos"  
+            action="action_risk_management" sequence="10"
+            groups="group_ver_risk"
+            />
+            <menuitem id="scheduled_risk_menu" 
+            action="action_risk_scheduled" 
+            sequence="20" name="Programación de revisiónes" 
+            groups="group_schedule_review" /> 
+            <menuitem id="quantification_risk_menu" 
+            action="action_risk_quantification" 
+            sequence="20" name="Cuantificación" 
+            groups="group_quantification" /> 
+            <!-- 
+            Cuantificación
+            REvisiones especiales 
+            programación (especiales)
+            -->
+        </menuitem>
+        <!-- 
+        Gestion de riesgos 
+        - Mitigación
+        - Monitoreo
+        -Planes de accion 
+        -->
+    </menuitem>
+              
+</odoo>

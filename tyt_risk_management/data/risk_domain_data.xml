@@ -1,0 +1,6 @@
+<odoo>
+    <record id="civil_protection" model="tyt.risk.domain">
+        <field name="name">Protección civil</field>
+        <field name="sequence">1</field>
+    </record>
+</odoo>

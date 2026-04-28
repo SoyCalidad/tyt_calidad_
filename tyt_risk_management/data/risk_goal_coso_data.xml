@@ -1,0 +1,18 @@
+<odoo>
+    <record id="coso_reporteo" model="tyt.risk.goal.coso">
+        <field name="name">Reporteo</field>
+        <field name="sequence">1</field>
+    </record>
+    <record id="coso_operativo" model="tyt.risk.goal.coso">
+        <field name="name">Operativo</field>
+        <field name="sequence">2</field>
+    </record>
+    <record id="coso_estrategico" model="tyt.risk.goal.coso">
+        <field name="name">Estrategico</field>
+        <field name="sequence">3</field>
+    </record>
+    <record id="coso_cumplimiento" model="tyt.risk.goal.coso">
+        <field name="name">Cumplimiento</field>
+        <field name="sequence">4</field>
+    </record>
+</odoo>

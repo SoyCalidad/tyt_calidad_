@@ -1,0 +1,178 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <record id="view_business_process_list" model="ir.ui.view">
+        <field name="name">business.process.list</field>
+        <field name="model">tyt.business.process</field>
+        <field name="arch" type="xml">
+            <list expand="1" multi_edit="1">
+                <field name="department_id"  />
+
+                <field name="company_id" groups="base.group_multi_company" />
+                <field name="name" />
+                <field name="short_name" />
+                <field name="owner_id" />
+                <field name="write_date" string="Actualizado el " />
+                <field name="write_uid" string="Actualizado por " />
+                <field name="active" string="Estatus" widget="boolean_toggle" />
+                <!-- <button class="btn btn-sm btn-info" type="object" name="action_view_subprocess">
+                    <i class="fa-eye" />
+                    Subprocesos
+                </button> -->
+                <button name="action_view_subprocess" 
+                    type="object" 
+                    icon="fa-eye" 
+                    string="Subprocesos" 
+                    class="btn btn-sm btn-info"
+                    title="Ver Subprocesos"/>
+            </list>
+        </field>
+    </record>
+
+    <record id="view_business_subprocess_list" model="ir.ui.view">
+        <field name="name">business.subprocess.list</field>
+        <field name="model">tyt.business.process</field>
+        <field name="arch" type="xml">
+            <list expand="1" multi_edit="1">
+                <field name="id" />
+                <field name="company_id" groups="base.group_multi_company" />
+                <field name="department_id" />
+                <field name="parent_id" />
+                <field name="name" string="Sub Proceso"/>
+                <field name="owner_id" />
+                <field name="write_date" />
+                <field name="write_uid" />
+                <field name="active" string="Estatus" widget="boolean_toggle" />
+                <button name="action_view_subprocess" 
+                    type="object" 
+                    icon="fa-eye" 
+                    string="Subprocesos" 
+                    title="Ver Subprocesos"/>
+                <!-- <button class="btn btn-sm btn-info" type="object" name="action_view_subprocess">
+                    <i class="fa-eye" />
+                    Subprocesos
+                </button> -->
+            </list>
+        </field>
+    </record>
+
+    <record id="view_business_process_form" model="ir.ui.view">
+        <field name="name">business.process.form</field>
+        <field name="model">tyt.business.process</field>
+
+        <field name="arch" type="xml">
+            <form>
+                <sheet>
+                    <div class="oe_button_box" name="button_box" groups="tyt_risk_management.group_ver_risk">
+                        <button name="action_view_risks" 
+                                type="object" 
+                                class="oe_stat_button" 
+                                icon="fa-exclamation-triangle"
+                                invisible="risk_count == 0">
+                            <field string="Riesgos" name="risk_count" widget="statinfo"/>
+                        </button>
+                    </div>
+                    <widget name="web_ribbon" title="Archivado" bg_color="text-bg-danger"
+                        invisible="active" />
+                
+                    
+                    <group>
+                        <group>
+                            <field name="company_id" groups="base.group_multi_company"/>
+                            <field name="department_id" />
+                        </group>
+                    </group>
+                    <group>
+                        <group invisible="not parent_id">
+                            <field name="parent_id" domain="[('level', '&lt;', 3)]"
+                                readonly="1" />
+                        </group>
+                        <group>
+                            <field name="level" readonly="1" />
+                            <field name="active" widget="boolean_toggle" invisible="1" />
+                        </group>
+                    </group>
+                    <notebook>
+                        <page string="Proceso " name="process">
+                            <group>
+                                <group>
+                                    <field name="name"  />
+                                </group>
+                                <group>
+                                    <field name="short_name" />
+                                </group>
+                            </group>
+                            <group>
+                                <group>
+                                    <field name="owner_id" />
+                                </group>
+                            </group>
+                        </page>
+                        <page string="Control de documentos" name="document_control">
+                            <field name="control_document_ids" />
+                        </page>
+                        <page string="Enlaces relacionados" name="link_related">
+                            <field name="link_related_ids" />
+                        </page>
+                        <page string="Carga inicial de archivos" name="files_init_load">
+                            <field name="load_initial_user" />
+                        </page>
+                    </notebook>
+                </sheet>
+                <chatter/>
+            </form>
+        </field>
+    </record>
+
+    <record id="view_business_process_hierarchy" model="ir.ui.view">
+        <field name="name">business.process.hierarchy</field>
+        <field name="model">tyt.business.process</field>
+        <field name="arch" type="xml">
+            <hierarchy child_field="child_ids" draggable="false">
+                <field name="name" />
+                <field name="risk_ids" groups="tyt_risk_management.group_ver_risk"  />
+                <field name="risk_count" groups="tyt_risk_management.group_ver_risk" />
+                <field name="owner_id" />
+                <templates>
+                    <t t-name="hierarchy-box" >
+                        <div
+                            class="o_hierarchy_node_header d-flex justify-content-between align-items-center"
+                            t-att-title="record.name.value">
+                            <h4 class="fw-bolder">
+                                <span class="text-truncate" t-out="record.name.value" />
+                            </h4>
+                        </div>
+                        <div class="o_hierarchy_node_body" 
+                        groups="tyt_risk_management.group_ver_risk" >
+                            <div t-if="record.risk_count.raw_value &gt; 0" class="mt-2">
+                                <span class="badge rounded-pill text-bg-danger">
+                                    <t t-out="record.risk_count.value" /> Riesgos </span>
+                            </div>
+                            
+                            
+                        </div>
+                        <div class="my-2" t-if="record.owner_id">
+                            <field class="text-primary fw-bolder" name="owner_id" />
+                        </div>
+                    </t>
+                </templates>
+            </hierarchy>
+        </field>
+    </record>
+
+    <record id="action_admin_process" model="ir.actions.act_window">
+        <field name="name">Procesos</field>
+        <field name="res_model">tyt.business.process</field>
+        <field name="view_mode">list,form</field>
+    </record>
+
+    
+
+    <record id="action_business_process_hierarchy" model="ir.actions.act_window">
+        <field name="name">Jerarquía de Procesos</field>
+        <field name="res_model">tyt.business.process</field>
+        <field name="view_mode">hierarchy,list,form</field> 
+
+    </record> 
+
+    
+</odoo>

@@ -1,0 +1,184 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+
+    <!-- Categoría Principal del Módulo -->
+    <record id="module_category_mi_modulo" model="ir.module.category">
+        <field name="name">Gestión de riesgos</field>
+        <field name="sequence">100</field>
+    </record>
+
+    <!-- Subcategoría para los Roles Principales (Aparecerá como una columna) -->
+    <record id="module_category_roles" model="ir.module.category">
+        <field name="name">Roles Principales</field>
+        <field name="parent_id" ref="module_category_mi_modulo"/>
+        <field name="sequence">200</field>
+    </record>
+
+    <!-- Subcategoría para los Permisos Específicos (Aparecerá como otra columna) -->
+    <record id="module_category_permisos" model="ir.module.category">
+        <field name="name">Permisos Específicos</field>
+        <field name="parent_id" ref="module_category_mi_modulo"/>
+        <field name="sequence">200</field>
+    </record>
+
+    <record id="module_category_permisos_admin" model="ir.module.category">
+        <field name="name">Administración </field>
+        <field name="parent_id" ref="module_category_permisos"/>
+        <field name="sequence">300</field>
+
+    </record>
+    <record id="module_category_permisos_risk" model="ir.module.category">
+        <field name="name">Gestión de riesgos </field>
+        <field name="parent_id" ref="module_category_permisos"/>
+        <field name="sequence">310</field>
+    </record>
+    <record id="module_category_identification" model="ir.module.category">
+        <field name="name">Identificación</field>
+        <field name="parent_id" ref="module_category_permisos"/>
+        <field name="sequence">320</field>
+    </record>
+    <record id="module_category_subscription" model="ir.module.category">
+        <field name="name">Suscripciones</field>
+        <field name="parent_id" ref="module_category_permisos"/>
+        <field name="sequence">330</field>
+    </record>
+
+
+    <!-- ========================================== -->
+    <!--       PERMISOS ESPECÍFICOS (Los Checkboxes individuales)    -->
+    <!-- ========================================== -->
+    
+    <record id="group_ver_usuarios" model="res.groups">
+        <field name="name">Usuarios</field>
+        <field name="category_id" ref="module_category_permisos_admin"/>
+        <field name="implied_ids" eval="[(4, ref('base.group_user'))]"/>
+    </record>
+
+    <record id="group_ver_catalogos" model="res.groups">
+        <field name="name">Catálogos</field>
+        <field name="category_id" ref="module_category_permisos_admin"/>
+    </record>
+
+    <record id="group_roles" model="res.groups">
+        <field name="name">Roles</field>
+        <field name="category_id" ref="module_category_permisos_admin"/>
+    </record>
+
+    <record id="group_ver_procesos" model="res.groups">
+        <field name="name">Procesos</field>
+        <field name="category_id" ref="module_category_permisos_admin"/>
+    </record>
+     <record id="group_log_record" model="res.groups">
+        <field name="name">Registro de logs</field>
+        <field name="category_id" ref="module_category_permisos_admin"/>
+    </record>
+
+
+    
+    <record id="group_ver_mitigation" model="res.groups">
+       <field name="name">Mitigación</field>
+        <field name="category_id" ref="module_category_permisos_risk"/>
+    </record> 
+    <record id="group_ver_monitoring" model="res.groups">
+       <field name="name">Monitoreo</field>
+        <field name="category_id" ref="module_category_permisos_risk"/>
+    </record>
+    <record id="group_action_plan" model="res.groups">
+       <field name="name">Plan de acción</field>
+        <field name="category_id" ref="module_category_permisos_risk"/>
+    </record>
+    <record id="group_initial_load" model="res.groups">
+       <field name="name">Carga inicial</field>
+        <field name="category_id" ref="module_category_permisos_risk"/>
+    </record>
+    <record id="group_block_mitigation" model="res.groups">
+       <field name="name">Mitigaciones bloqueadas</field>
+        <field name="category_id" ref="module_category_permisos_risk"/>
+    </record>
+    <record id="group_drop_mitigation" model="res.groups">
+       <field name="name">Eliminar mitigaciones</field>
+        <field name="category_id" ref="module_category_permisos_risk"/>
+    </record>
+
+    <!--identification-->
+    <record id="group_ver_risk" model="res.groups">
+       <field name="name">Riesgos</field><!--ask-->
+        <field name="category_id" ref="module_category_permisos_risk"/>
+        <field name="implied_ids" eval="[(4, ref('base.group_user'))]"/>
+    </record>
+    <record id="group_special_review" model="res.groups">
+       <field name="name">Revisiones Especiales</field>
+        <field name="category_id" ref="module_category_identification"/>
+    </record>
+    <record id="group_schedule_review" model="res.groups">
+       <field name="name">Programación de revisiones</field>
+        <field name="category_id" ref="module_category_identification"/>
+    </record>
+    <record id="group_special_schedule" model="res.groups">
+       <field name="name">Programación (especiales)</field>
+        <field name="category_id" ref="module_category_identification"/>
+    </record>
+    <record id="group_quantification" model="res.groups">
+       <field name="name">Cuantificación</field>
+        <field name="category_id" ref="module_category_identification"/>
+    </record>
+
+    <!--suscription-->
+    <record id="group_matrix_risk" model="res.groups">
+       <field name="name">Matriz de riesgos y controles </field>
+        <field name="category_id" ref="module_category_subscription"/>
+    </record>
+    <record id="group_4level" model="res.groups">
+       <field name="name">Nivel 4 - Personalizado</field>
+        <field name="category_id" ref="module_category_subscription"/>
+    </record>
+    <record id="group_risk_map" model="res.groups">
+       <field name="name">Mapa de riesgos  </field>
+        <field name="category_id" ref="module_category_subscription"/>
+    </record>
+    <record id="group_certification" model="res.groups">
+       <field name="name">Certificaciones  </field>
+        <field name="category_id" ref="module_category_subscription"/>
+    </record>
+    <record id="group_2level" model="res.groups">
+       <field name="name">Nivel 2 - Estatus </field>
+        <field name="category_id" ref="module_category_subscription"/>
+    </record>
+    <record id="group_nom035" model="res.groups">
+       <field name="name">NOM035 </field>
+        <field name="category_id" ref="module_category_subscription"/>
+    </record>
+
+
+    <!-- ========================================== -->
+    <!--       ROLES PRINCIPALES (Los que heredan)          -->
+    <!-- ========================================== -->
+
+    <!-- ROL ADMIN: Al marcarlo, activa los 3 permisos específicos -->
+    <record id="group_admin" model="res.groups">
+        <field name="name">Admin</field>
+        <field name="category_id" ref="module_category_roles"/>
+        <field name="implied_ids" eval="[(4, ref('base.group_user')), 
+                                         (4, ref('group_ver_usuarios')), 
+                                         (4, ref('group_ver_catalogos')), 
+                                         (4, ref('group_ver_procesos'))]"/>
+    </record>
+
+    <!-- ROL USUARIO: Al marcarlo, activa "Ver Usuarios" -->
+    <record id="group_usuario" model="res.groups">
+        <field name="name">Usuario</field>
+        <field name="category_id" ref="module_category_roles"/>
+        <field name="implied_ids" eval="[(4, ref('base.group_user')), 
+                                         (4, ref('group_ver_usuarios'))]"/>
+    </record>
+
+    <!-- ROL CONSULTA: Al marcarlo, activa "Ver Catálogos" y "Ver Procesos" -->
+    <record id="group_consulta" model="res.groups">
+        <field name="name">Consulta</field>
+        <field name="category_id" ref="module_category_roles"/>
+        <field name="implied_ids" eval="[(4, ref('base.group_user')), 
+                                         (4, ref('group_ver_catalogos')), 
+                                         (4, ref('group_ver_procesos'))]"/>
+    </record>
+
+</odoo>

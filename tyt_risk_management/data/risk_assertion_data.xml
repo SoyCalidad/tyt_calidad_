@@ -1,0 +1,34 @@
+<odoo>
+    <record id="assertion_exactitud" model="tyt.risk.assertion">
+        <field name="name">Exactitud</field>
+        <field name="sequence">1</field>
+    </record>
+    <record id="assertion_existencia" model="tyt.risk.assertion">
+        <field name="name">Existencia</field>
+        <field name="sequence">2</field>
+    </record>
+    <record id="assertion_derechos" model="tyt.risk.assertion">
+        <field name="name">Derechos y Obligaciones</field>
+        <field name="sequence">3</field>
+    </record>
+    <record id="assertion_totalidad" model="tyt.risk.assertion">
+        <field name="name">Totalidad</field>
+        <field name="sequence">4</field>
+    </record>
+    <record id="assertion_valuacion" model="tyt.risk.assertion">
+        <field name="name">Valuación</field>
+        <field name="sequence">5</field>
+    </record>
+    <record id="assertion_periodo_contable" model="tyt.risk.assertion">
+        <field name="name">Periodo contable</field>
+        <field name="sequence">6</field>
+    </record>
+    <record id="assertion_acceso_restringido" model="tyt.risk.assertion">
+        <field name="name">Acceso restringido</field>
+        <field name="sequence">7</field>
+    </record>
+    <record id="assertion_presentacion" model="tyt.risk.assertion">
+        <field name="name">Presentacion y revelación</field>
+        <field name="sequence">8</field>
+    </record>
+</odoo>

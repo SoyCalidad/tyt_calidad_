@@ -1,0 +1,26 @@
+<odoo>
+    <record id="frequency_bi" model="tyt.catalog.frequency">
+        <field name="name">Bimestral</field>
+    </record>
+    <record id="frequency_se" model="tyt.catalog.frequency">
+        <field name="name">Semestral</field>
+    </record>
+    <record id="frequency_tri" model="tyt.catalog.frequency">
+        <field name="name">Trimestral</field>
+    </record>
+    <record id="frequency_cuatri" model="tyt.catalog.frequency">
+        <field name="name">Cuatrimestral</field>
+    </record>
+    <record id="frequency_quincenal" model="tyt.catalog.frequency">
+        <field name="name">Quincenal</field>
+    </record>
+    <record id="frequency_mensual" model="tyt.catalog.frequency">
+        <field name="name">Mensual</field>
+    </record>
+    <record id="frequency_diario" model="tyt.catalog.frequency">
+        <field name="name">Diario</field>
+    </record>
+    <record id="frequency_semanal" model="tyt.catalog.frequency">
+        <field name="name">Semanal</field>
+    </record> 
+</odoo>

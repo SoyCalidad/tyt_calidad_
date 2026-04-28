@@ -1,0 +1,81 @@
+<templates>
+    <t t-name="tyt_risk_management.ReviewerGuide">
+        <div class="container">
+            <div class="card">
+                <div class="card-body table-responsive">
+                    <table class="table table-hover table-sm table-bordered table-condensed">
+                        <thead>
+                            <tr class="bg-secondary text-white" style="--background-color: #666;">
+                                <th>Nivel de madurez</th>
+                                <th>Porcentaje de madurez</th>
+                                <th width="500">Descripción</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td>
+                                    <label class="badge bg-danger">No existe</label>
+                                </td>
+                                <td>0 %</td>
+                                <td width="500"><b>Control diseñado pero no operando. </b> No existe
+                                    documentación soporte que permita mitigar el riesgo inherente.</td>
+                            </tr>
+                            <tr>
+                                <td>
+                                    <label class="badge bg-warning">Inicial</label>
+                                </td>
+                                <td>25 %</td>
+                                <td width="500"><b>Control operando en su etapa inicial. </b> Existe
+                                    evidencia de esfuerzos iniciados para obtener o integrar la
+                                    documentación soporte que mitigará el riesgo inherente. Por
+                                    ejemplo, el diseño de un plan, un memo o minuta que resuma
+                                    acciones a seguir o un correo electrónico que indique próximos
+                                    pasos o una lista de documentos que se requieren o cualquier
+                                    combinación de estos u otros medios que permitan mitigar el
+                                    riesgo inherente.</td>
+                            </tr>
+                            <tr>
+                                <td>
+                                    <label class="badge bg-warning">Limitado</label>
+                                </td>
+                                <td>50 %</td>
+                                <td width="500"><b>Control operando limitadamente. </b> Existe
+                                    documentación soporte pero está incompleta. Se requiere
+                                    documentación adicional que de certidumbre para mitigar el
+                                    riesgo inherente.</td>
+                            </tr>
+                            <tr>
+                                <td>
+                                    <label class="badge bg-warning">Definido</label>
+                                </td>
+                                <td>75 %</td>
+                                <td width="500"><b>Control operando con áreas de mejora.</b> Existe
+                                    documentación soporte pero carece de validez, pertinencia o
+                                    actualización o el soporte documental no procede de una fuente
+                                    externa al sistema o existen partidas antiguas mayores a 90 días
+                                    sin planes de acción o cualquier combinación de estas u otras
+                                    situaciones que no permiten mitigar completamente el riesgo
+                                    inherente.</td>
+                            </tr>
+                            <tr>
+                                <td>
+                                    <label class="badge bg-success">Optimizado</label>
+                                </td>
+                                <td>100 %</td>
+                                <td width="500"><b>Control operando efectivamente. </b> La
+                                    documentación soporte permite mitigar satisfactoriamente el
+                                    riesgo inherente. Por ejemplo, la documentación soporte es
+                                    válida, pertinente y está actualizada o existe soporte
+                                    documental independiente (al sistema) o el importe del módulo
+                                    cuadra contra el importe en contabilidad o las partidas mayores
+                                    a 90 días cuentan con planes de acción o cualquier combinación
+                                    de estas u otras situaciones que sí permitan mitigar
+                                    completamente el riesgo inherente.</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </t>
+</templates>
