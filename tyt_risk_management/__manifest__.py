@@ -1,0 +1,43 @@
+{
+    'name': 'TyT - Gestión de Riesgos',
+    'version': '18.0.1.0.0',
+    'summary': 'Estructurar la organización bajo un modelo basado en procesos',
+    'category': 'Management',
+    'author': 'David/SoyCalidad',
+    'depends': [
+        'base', 
+        'web_hierarchy', 
+        'mail',
+        'documents',
+        'hr',
+    ],
+    'data': [
+        'security/group.xml',
+        'security/ir.model.access.csv',
+
+        'views/business_process_views.xml',
+        'views/risk_management_views.xml',
+        'views/catalog_views.xml',
+        'views/res_users_views.xml',
+        'views/menus.xml',
+
+        'wizard/risk.xml',
+
+        'data/risk_domain_data.xml',
+        'data/catalog_data.xml',
+        'data/risk_goal_coso_data.xml',
+        'data/risk_assertion_data.xml',
+        'data/risk_financial_statement_category_data.xml',
+        
+        
+    ],
+    'assets':{ 
+        'web.assets_backend': [
+            'tyt_risk_management/static/src/**/*',
+        ],
+
+    },
+    'installable': True,
+    'application': True,
+    'license': 'LGPL-3',
+}

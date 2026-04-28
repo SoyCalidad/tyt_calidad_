@@ -1,0 +1,18 @@
+<odoo>
+    <record id="fsc_nivel_entidad" model="tyt.risk.financial.statement.category">
+        <field name="name">Nivel entidad</field>
+        <field name="sequence">1</field>
+    </record>
+    <record id="fsc_bger" model="tyt.risk.financial.statement.category">
+        <field name="name">Balance General y Estado de Resultados</field>
+        <field name="sequence">2</field>
+    </record>
+    <record id="fsc_general" model="tyt.risk.financial.statement.category">
+        <field name="name">General</field>
+        <field name="sequence">3</field>
+    </record>
+    <record id="fsc_ingresos" model="tyt.risk.financial.statement.category">
+        <field name="name">Ingresos</field>
+        <field name="sequence">4</field>
+    </record>
+</odoo>

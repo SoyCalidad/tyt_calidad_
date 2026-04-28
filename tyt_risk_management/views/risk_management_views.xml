@@ -1,0 +1,844 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+
+    <record id="view_risk_mo_link_form" model="ir.ui.view">
+        <field name="name">tyt.risk.mo.link.form</field>
+        <field name="model">tyt.risk.mo_link</field>
+        <field name="arch" type="xml">
+            <form>
+                <sheet>
+                    <group>
+                        <group>
+                            <field name="name" widget="url"/>
+                            <field name="description" />
+                            <field name="risk_id" readonly="1" />
+                        </group>
+                    </group>
+                </sheet>
+            </form>
+        </field>
+    </record>
+    <record id="view_risk_management_list" model="ir.ui.view">
+        <field name="name">risk.management.list</field>
+        <field name="model">tyt.risk.management</field>
+        <field name="arch" type="xml">
+            <list>
+                <field name="department_id" />
+                <field name="id" />
+                <field name="domain_id" />
+                <field name="process_id" />
+                <field name="subprocess_id" />
+                <field name="owner_id" />
+                <field name="reviewer_id" />
+                <field name="auditor_id" />
+                <field name="frequency_id" />
+                <field name="quantification" />
+                <field name="active" widget="boolean_toggle" />
+            </list>
+        </field>
+    </record>
+
+    <record id="view_risk_action_plan_form" model="ir.ui.view">
+        <field name="name">tyt.risk.action.plan.form</field>
+        <field name="model">tyt.risk.action.plan</field>
+        <field name="arch" type="xml">
+            <form string="Plan de acción">
+                <sheet>
+                    <group>
+                        <field name="name" />
+                        <field name="user_id" />
+                        <field name="remediation_date" required="True" />
+                    </group>
+                </sheet>
+            </form>
+        </field>
+    </record>
+
+    <record id="view_risk_action_plan_attendance_form" model="ir.ui.view">
+        <field name="name">tyt.risk.action.plan.attendance.form</field>
+        <field name="model">tyt.risk.action.plan</field>
+        <field name="arch" type="xml">
+            <form string="Plan de acción">
+                <sheet>
+                    <group>
+                        <field name="name" readonly="1" />
+                    </group>
+                    <group>
+                        <group>
+                            <field name="user_id" readonly="1" />
+                        </group>
+                        <group>
+                            <field name="remediation_date" readonly="True" />
+                        </group>
+                    </group>
+                    <group colspan="4">
+                        <label for="document_ids" />
+                        <field name="document_ids" nolabel="1" context="{'default_plan_id': id, 'default_origin': 'action_plan'}">
+                            <list >
+                                <field name="name" />
+                                <field name="description" />
+                                <field name="create_date" string="Fecha de carga" />
+                                <field name="create_uid" string="Cargado por" />
+                            </list>
+                        </field>
+                        <label for="link_ids" />
+                        <field name="link_ids" nolabel="1" context="{'default_plan_id': id, 'default_origin': 'action_plan'}">
+                            <list >
+                                <field name="name" />
+                                <field name="description" />
+                                <field name="create_date" string="Fecha de carga" />
+                                <field name="create_uid" string="Cargado por" />
+
+                            </list>
+                        </field>
+                    </group>
+                    <field name="status" invisible="1" />
+                    <footer>
+                        <button string="En revisión" class="btn btn-primary"
+                        name="action_send_review" 
+                        invisible="not status=='pending'"
+                        type="object"
+                        />
+                        <group invisible="not context.get('show_buttons', False)">
+                            <button name="action_send_complete"
+                                string="Completar"
+                                class="btn btn-success"
+                                type="object"
+                                invisible="not status=='under_review' and not context.get('is_for_complete', False)"
+                            />
+                            <button name="action_send_reject"
+                                string="Rechazar"
+                                class="btn btn-danger"
+                                type="object"
+                                invisible="not status=='under_review' or context.get('is_for_complete', False)"
+                            />
+
+                        </group>
+                    </footer>
+                </sheet>
+                <chatter />
+            </form>
+        </field>
+    </record>
+
+    <record id="view_risk_management_form" model="ir.ui.view">
+        <field name="name">risk.management.form</field>
+        <field name="model">tyt.risk.management</field>
+        <field name="arch" type="xml">
+            <form >
+                <header>
+                    <field name="stage_id" widget="statusbar" options="{'clickable': '1'}" />
+                </header>
+                <sheet>
+                    <widget name="web_ribbon" title="Archivado" bg_color="text-bg-danger"
+                        invisible="active" />
+                    
+                    <group >
+                        <group>
+                            <field name="id" />
+                            <field name="active"  />
+                            <field name="domain_id"  />
+                        </group>
+                        
+                        <group>
+                            <field name="process_id"   />
+                            <field name="subprocess_id"  />
+                            <field name="status" readonly="1" />
+                        </group>
+                    </group>
+
+                    <group>
+                        <group>
+                            <field name="name"   />
+                            <field name="control_objective"   />
+                            <field name="control_activity"  />
+                        </group>
+                        <group>
+                            <field name="owner_id"   />
+                            <field name="reviewer_id"   />
+                            <field name="auditor_id"  />
+                        </group>
+
+                    </group>
+                    <group>
+                        <group>
+                            <field name="goal_coso_ids" widget="many2many_tags"  />
+                            <field name="assertion_ids" widget="many2many_tags"  />
+                            <field name="frequency_id" />
+                            <field name="type_ma" placeholder="Seleccione"  />
+                            <field name="system_control"   />
+
+                        </group>
+                        <group>
+                            <field name="fsc_id"  />
+                            <field name="quantification"  />
+                            <field name="required_load_initial_files"   />
+                            <field name="required_mitigation_files"   />
+
+                        </group>
+                    </group>
+                    <group>
+                        <field name="type_pd" placeholder="Seleccione" readonly="is_scheduled"/>
+                        <field name="type_cf" placeholder="Seleccione" readonly="is_scheduled" />
+                        <field name="write_date" string="Actualizado el" />
+                        <field name="write_uid" string="Actualizado por" />
+                        <field name="department_id" readonly="is_scheduled" />
+                    </group>
+                    <group  >
+                        <group>
+                            <field name="impact"
+                            
+                            decoration-success="impact == 'low'"
+                            decoration-warning="impact == 'medium'"
+                            decoration-danger="impact == 'high'"/>
+                            <field name="occurrence"
+                             
+                            decoration-success="occurrence == 'low'"
+                            decoration-warning="occurrence == 'medium'"
+                            decoration-danger="occurrence == 'high'"/>
+                        </group>
+                    </group>
+                    <group name="risk_analisis" string="Análisis de riesgos"  >
+                        <group>
+                            <field name="low_scenery" />
+                        </group>
+                        <group>
+                            <field name="middle_scenery" />
+                        </group>
+                        <group>
+                            <field name="high_scenery" />
+                        </group>
+                    </group>
+                    <field name="is_scheduled" invisible="1" />
+                    
+                    
+                </sheet>
+                <chatter />
+            </form>
+        </field>
+    </record>
+
+    <record id="action_risk_management" model="ir.actions.act_window">
+        <field name="name">Lista de riesgos</field>
+        <field name="res_model">tyt.risk.management</field>
+        <field name="view_mode">list,form</field>
+
+    </record>
+
+    <record id="view_risk_scheduled_list" model="ir.ui.view">
+        <field name="name">risk.scheduled.list</field>
+        <field name="model">tyt.risk.management</field>
+        <field name="arch" type="xml">
+            <list>
+                <field name="id" />
+                <field name="domain_id" />
+                <field name="process_id" />
+                <field name="subprocess_id" />
+                <field name="owner_id" />
+                <field name="reviewer_id" />
+                <field name="auditor_id" />
+                <field name="cr_peoriod" />
+                <field name="cr_year" />
+                <field name="cr_month" />
+                <field name="is_scheduled" />
+                <field name="active" />
+            </list>
+        </field>
+    </record>
+
+    <record id="view_risk_scheduled_form" model="ir.ui.view">
+        <field name="name">tyt.risk.scheduled.form</field>
+        <field name="model">tyt.risk.management</field>
+        <field name="arch" type="xml">
+            <form >
+                <group>
+                    <group>
+                        <field name="process_id" readonly="1" />
+                        <field name="id" />
+                    </group>
+                    <group>
+                        <field name="subprocess_id" readonly="1"  />
+                        <field name="domain_id" readonly="1"  />
+                    </group>
+                </group>
+                <group>
+                    <group>
+                        <field name="owner_id" readonly="1"  />
+                    </group>
+                    <group>
+                        <field name="reviewer_id" readonly="1"  />
+                    </group>
+                    <group>
+                        <field name="auditor_id" readonly="1"  />
+                    </group>
+                </group>
+                <group string="Configuración revisión ">
+                    <group colspan="4">
+                        <group>
+                            <field name="cr_peoriod" />
+                        </group>
+                        <group>
+                            <field name="cr_month" />
+                        </group>
+                        <group>
+                            <field name="cr_year" />
+                        </group>
+
+                    </group>
+                    <group colspan="4">
+                        <field  name="cr_month_result" readonly="1" widget="badge" nolabel="1" />
+                    </group> 
+                </group>
+                <div  class="row"  >
+                    <button string="Guardar programación" class="btn btn-primary col-auto ms-3" type="object" name="action_scheduled" />
+                </div>
+            </form>
+        </field>
+    </record>
+    
+
+
+    <record id="action_risk_scheduled" model="ir.actions.act_window">
+        <field name="name">Programación de revisiones</field>
+        <field name="res_model">tyt.risk.management</field>
+        <field name="view_mode">list,form</field>
+        <field name="views"  ref="view_risk_scheduled_list" />
+        <field name="domain">[]</field>
+        <field name="view_ids" 
+         eval="[(5, 0, 0),
+                (0, 0, {'view_mode': 'list', 'view_id': ref('view_risk_scheduled_list')}),
+                (0, 0, {'view_mode': 'form', 'view_id': ref('view_risk_scheduled_form')})]"
+         />
+    </record>
+
+    <record id="view_risk_quantification_list" model="ir.ui.view">
+        <field name="name">risk.quantification.list</field>
+        <field name="model">tyt.risk.management</field>
+        <field name="arch" type="xml">
+            <list edit="0">
+                <field name="id" />
+                <field name="process_id" />
+                <field name="subprocess_id" />
+                <field name="owner_id" />
+                <field name="reviewer_id" />
+                <field name="auditor_id" />
+                <field name="cr_peoriod" />
+                <field name="quantification" />
+                <field name="type_risk" />
+                <field name="value_risk" />
+                <field name="impact" 
+                decoration-danger="impact == 'high'"
+                decoration-warning="impact == 'medium'"
+                decoration-success="impact == 'low'"
+                />
+                <field name="occurrence" 
+                decoration-danger="occurrence == 'high'"
+                decoration-warning="occurrence == 'medium'"
+                decoration-success="occurrence == 'low'"
+                />
+            </list>
+        </field>
+    </record>
+
+    <record id="action_risk_quantification" model="ir.actions.act_window">
+        <field name="name">Cuantificación</field>
+        <field name="res_model">tyt.risk.management</field>
+        <field name="view_mode">list</field>
+        <field name="domain">[]</field>
+        <field name="limit">10</field>
+        <field name="view_ids" 
+         eval="[(5, 0, 0),
+                (0, 0, {'view_mode': 'list', 'view_id': ref('view_risk_quantification_list')}),]"
+         />
+    </record>
+
+    <!-- <record id="reviewer_guide_action" model="ir.actions.client">
+        <field name="name">Ver la guía del revisor</field>
+        <field name="tag">tyt_risk_management.reviewer_guide</field>
+    </record> -->
+
+    <record id="view_risk_my_activity_form" model="ir.ui.view">
+        <field name="name">risk.my.activity.form</field>
+        <field name="model">tyt.risk.management</field>
+        <field name="arch" type="xml">
+            <form js_class="risk_form" >
+                <header>
+                    <button 
+                    string="Guía del revisor" 
+                    class="btn btn-secondary"
+                     
+                    type="object"
+                    name="open_reviewer_guide"
+                    />
+                    <button string="Control de documentos" class="btn btn-secondary" />
+                </header>
+                <sheet>
+                    <widget name="web_ribbon" title="Archivado" bg_color="text-bg-danger"
+                        invisible="active" />
+                    
+                    <field name="active" invisible="1" readonly="1" />
+                    <group >
+                        <group>
+                            <field name="id" readonly="1" />
+                            <field name="domain_id" readonly="1" />
+                        </group>
+                        
+                        <group>
+                            <field name="process_id" readonly="is_scheduled" />
+                            <field name="subprocess_id" readonly="is_scheduled" />
+                        </group>
+                    </group>
+
+                    <group>
+                        <group>
+                            <field name="name" readonly="is_scheduled" />
+                            <field name="control_objective" readonly="is_scheduled" />
+                            <field name="control_activity" readonly="is_scheduled" />
+                        </group>
+                        <group>
+                            <field name="owner_id" readonly="is_scheduled" />
+                            <field name="reviewer_id" readonly="is_scheduled" />
+                            <field name="auditor_id" readonly="is_scheduled" />
+                        </group>
+
+                    </group>
+                    <group>
+                        <group>
+                            <field name="goal_coso_ids" widget="many2many_tags" readonly="is_scheduled" />
+                            <field name="assertion_ids" widget="many2many_tags" readonly="is_scheduled"/>
+                            <field name="frequency_id" readonly="is_scheduled" />
+                            <field name="type_ma" placeholder="Seleccione" readonly="is_scheduled" />
+                            <field name="system_control" readonly="is_scheduled" />
+
+                        </group>
+                        <group>
+                            <field name="fsc_id" readonly="is_scheduled"/>
+                            <field name="quantification" readonly="is_scheduled"/>
+                            <field name="required_load_initial_files" readonly="is_scheduled" />
+                            <field name="required_mitigation_files" readonly="is_scheduled" />
+
+                        </group>
+                    </group>
+                    <group>
+                        <field name="type_pd" placeholder="Seleccione" readonly="is_scheduled"/>
+                        <field name="type_cf" placeholder="Seleccione" readonly="is_scheduled" />
+                        <field name="department_id" readonly="is_scheduled" />
+                    </group>
+                    <group invisible="not is_scheduled">
+                        <group>
+                            <field name="status" 
+                            widget="badge"
+                            readonly="1"
+                            decoration-muted="status == 'unmitigated'"
+                            decoration-warning="status == 'review'"
+                            decoration-success="status == 'filled' or status == 'mitigated'"
+
+                            />
+                            <field name="impact"
+                            widget="badge"
+                            readonly="1"
+                            decoration-success="impact == 'low'"
+                            decoration-warning="impact == 'medium'"
+                            decoration-danger="impact == 'high'"/>
+                            <field name="occurrence"
+                            widget="badge"
+                            readonly="1"
+                            decoration-success="occurrence == 'low'"
+                            decoration-warning="occurrence == 'medium'"
+                            decoration-danger="occurrence == 'high'"/>
+                        </group>
+                    </group>
+                     
+                    <field name="is_scheduled" invisible="1" />
+                    <field name="status" invisible="1" />
+                    <group string="Mitigación dueño" name="mo" invisible="not is_scheduled">
+                        <group colspan="4">
+                            <div class="row justify-content-end">
+                                <div class="col-auto">
+                                    <label for="mo_period_str" string="Periodo" />
+                                    <field name="mo_period_str" nolabel="1" />
+                                </div>
+                            </div>
+                        </group>
+                        <label for="mo_document_ids" />
+                        <field name="mo_document_ids" nolabel="1" context="{'default_risk_id': id, 'default_origin': 'risk'}">
+                            <list >
+                                <field name="name" />
+                                <field name="description" />
+                                <field name="create_date" string="Fecha de carga" />
+                                <field name="create_uid" string="Cargado por" />
+                            </list>
+                        </field>
+
+                        <label for="mo_link_ids" />
+                        <field name="mo_link_ids" nolabel="1" context="{'default_risk_id': id, 'default_origin': 'risk'}">
+                            <list >
+                                <field name="name" />
+                                <field name="description" />
+                                <field name="create_date" string="Fecha de carga" />
+                                <field name="create_uid" string="Cargado por" />
+
+                            </list>
+                        </field>
+                        <div invisible="status=='review'" colspan="4">
+                            <div >
+                                <p class="text-primary fw-bold">
+                                    Si completó la carga de archivos, haga click en el botón azul *"NOTIFICAR"*, para enviar su control a revisión
+                                </p>
+                                
+                            </div>
+                            <div class="row justify-content-end">
+                                <div class="col-auto me-2">
+                                    <button class="btn btn-primary" name="action_notify_revision" type="object">
+                                    Notificar
+                                </button>
+                                </div>
+                            </div>
+                        </div>
+                        <field name="mo_comment_ids_count" invisible="1" />
+                        <label for="mo_comment_ids" invisible="mo_comment_ids_count==0"/>
+                        <field name="mo_comment_ids" options="{'no_create': True}" nolabel="1" invisible="mo_comment_ids_count==0">
+                            <list>
+                                <field name="name" />
+                                <field name="create_uid" string="Creado por"/>
+                                <field name="create_date" string="Creado el" />
+                            </list>
+                        </field>
+                        <div invisible="not status=='review'" colspan="4">
+                            <field name="status" 
+                            widget="badge"
+                            nolabel="1"
+                            readonly="1"
+                            decoration-muted="status == 'unmitigated' or status == 'mitigated'"
+                            decoration-warning="status == 'review'"
+                            />
+                        </div>
+                    </group>
+                    <group string="Mitigación revisor" name="reviewer_mitigation"
+                    invisible="not is_scheduled or not reviewer_id"
+                    >
+                            <separator string="Proceso de mitigación"></separator>
+                            <div class="row justify-content-end" colspan="4">
+                                <div class="col-auto">
+                                    <label for="mr_period_str" string="Periodo" />
+                                    <field name="mr_period_str" nolabel="1" />
+                                </div>
+                            </div>
+                            <group>
+                                <field name="mr_status_mitigation" />
+                                <field name="quantification" readonly="1" 
+                                string="Riesgo inherente" />
+                            </group>
+                            <group>
+                                <field name="mr_degree_mitigation" />
+                                <field name="mr_residual_risk" readonly="1" />
+                            </group>
+                            <group>
+                                <field name="maturity_level" />
+                                <field name="mr_mitigation_date" readonly="1" />
+                            </group>
+                            <group>
+                                <field name="cr_month" readonly="1" />
+                                <field name="mr_level_compliance" readonly="1" />
+                            </group>
+                            <group>
+                                <field name="cr_year" readonly="1" />
+                            </group>
+                            <separator string="Calificación del riesgo"> </separator>
+                            <div class="row ms-1 gx-3" colspan="4">
+                                <div class="col-3 me-2">
+                                    <span class="fw-bold">Antes de controles</span>
+                                </div>
+                                <div class="col-3 me-2">
+                                    <span class="fw-bold">Despúes de controles</span>
+                                </div>
+                            </div>
+                            <div class="row gx-3 " colspan="4">
+                                <div class="col-3 me-2 bg-success">
+                                    <span class="fw-bold font-white">Insignificante</span>
+                                </div>
+                                <div class="col-3 me-2 bg-success">
+                                    <span class="fw-bold font-white">Insignificante</span>
+                                </div>
+                            </div>
+                            
+                            <separator string="Planes de acción"></separator>
+
+                            <div class="row justify-content-end mt-2" colspan="4">
+                                <div class="col-auto">
+                                    <button string="Agregar plan de acción" 
+                                    name="action_create_action_plan"
+                                    class="btn btn-primary"
+                                    type="object"
+                                    />
+                                </div>
+                            </div>
+                            <field name="mr_all_action_plans_complete" invisible="1" />
+                            <div invisible="not mr_all_action_plans_complete" class="row mt-2" colspan="4">
+                                <div class="text-primary">
+                                    Todos los planes de acción estan completados ya es posible asignar el status de mitigado.
+                                </div>
+                            </div>
+                            <group colspan="4">
+                                <label for="mr_action_plan_ids" />
+                                <field name="mr_action_plan_ids"
+                                nolabel="1"
+                                colspan="4"
+                                options="{'no_quick_create': True, 'no_create': True}"
+                                groups="tyt_risk_management.group_action_plan" >
+                                    <list  edit="status=='pending'" create="0">
+                                        <button 
+                                        type="object"
+                                        name="action_attendance_action_plan"
+                                            string="Atender"
+                                            class="btn btn-warning"
+                                            invisible="status=='under_review'"
+                                        />
+                                        <button 
+                                        type="object"
+                                        name="action_attendance_action_plan"
+                                            string="Completar"
+                                            class="btn btn-success"
+                                            context="{'is_for_complete': True, 'show_buttons': True}"
+                                            invisible="not status=='under_review'"
+                                        />
+                                        <button name="action_attendance_action_plan"
+                                            string="Rechazar"
+                                            type="object"
+                                            class="btn btn-danger"
+                                            context="{'is_for_complete': False, 'show_buttons': True}"
+                                            invisible="not status=='under_review'"
+                                        />
+                                        <field name="sequence" widget="handle" />
+                                        <field name="name" />
+                                        <field name="user_id" />
+                                        <field name="remediation_date" />
+                                        <field name="status" 
+                                        decoration-warning="status=='under_review'"
+                                        decoration-muted="status=='pending'"
+                                        />
+                                    </list>
+                                </field>
+                            </group>
+                    </group>
+
+                    <group string="Mitigación del auditor" name="audit_mitigation"
+                    invisible="not is_scheduled or not auditor_id"
+                    >
+                            <separator string="Proceso de mitigación"></separator>
+                            <div class="row justify-content-end" colspan="4">
+                                <div class="col-auto">
+                                    <label for="ma_period_str" string="Periodo" />
+                                    <field name="ma_period_str" nolabel="1" />
+                                </div>
+                            </div>
+                            <group>
+                                <field name="ma_status_mitigation" />
+                                <field name="quantification" readonly="1" 
+                                string="Riesgo inherente" />
+                            </group>
+                            <group>
+                                <field name="ma_degree_mitigation" />
+                                <field name="ma_residual_risk" readonly="1" />
+                            </group>
+                            <group>
+                                <field name="ma_maturity_level" />
+                                <field name="ma_mitigation_date" readonly="1" />
+                            </group>
+                            <group>
+                                <field name="cr_month" readonly="1" />
+                                <field name="ma_level_compliance" readonly="1" />
+                            </group>
+                            <group>
+                                <field name="cr_year" readonly="1" />
+                            </group>
+                            <separator string="Calificación del riesgo"> </separator>
+                            <div class="row ms-1 gx-3" colspan="4">
+                                <div class="col-3 me-2">
+                                    <span class="fw-bold">Antes de controles</span>
+                                </div>
+                                <div class="col-3 me-2">
+                                    <span class="fw-bold">Despúes de controles</span>
+                                </div>
+                            </div>
+                            <div class="row gx-3 " colspan="4">
+                                <div class="col-3 me-2 bg-success">
+                                    <span class="fw-bold font-white">Insignificante</span>
+                                </div>
+                                <div class="col-3 me-2 bg-success">
+                                    <span class="fw-bold font-white">Insignificante</span>
+                                </div>
+                            </div>
+                            
+                            <separator string="Planes de acción"></separator>
+
+                            <div class="row justify-content-end mt-2" colspan="4">
+                                <div class="col-auto">
+                                    <button string="Agregar plan de acción" 
+                                    name="action_create_action_plan_audit"
+                                    class="btn btn-primary"
+                                    type="object"
+                                    />
+                                </div>
+                            </div>
+                            <field name="ma_all_action_plans_complete" invisible="1" />
+                            <div invisible="not ma_all_action_plans_complete" class="row mt-2" colspan="4">
+                                <div class="text-primary">
+                                    Todos los planes de acción estan completados ya es posible asignar el status de mitigado.
+                                </div>
+                            </div>
+                            <group colspan="4">
+                                <label for="ma_action_plan_ids" />
+                                <field name="ma_action_plan_ids"
+                                nolabel="1"
+                                colspan="4"
+                                
+                                options="{'no_quick_create': True, 'no_create': True}"
+                                groups="tyt_risk_management.group_action_plan" >
+                                    <list  edit="status=='pending'" create="0">
+                                        <button 
+                                        type="object"
+                                        name="action_attendance_action_plan"
+                                            string="Atender"
+                                            class="btn btn-warning"
+                                            invisible="status=='under_review'"
+                                        />
+                                        <button 
+                                        type="object"
+                                        name="action_attendance_action_plan"
+                                            string="Completar"
+                                            class="btn btn-success"
+                                            context="{'is_for_complete': True, 'show_buttons': True}"
+                                            invisible="not status=='under_review'"
+                                        />
+                                        <button name="action_attendance_action_plan"
+                                            string="Rechazar"
+                                            type="object"
+                                            class="btn btn-danger"
+                                            context="{'is_for_complete': False, 'show_buttons': True}"
+                                            invisible="not status=='under_review'"
+                                        />
+                                        <field name="sequence" widget="handle"/>
+                                        <field name="name" />
+                                        <field name="user_id" />
+                                        <field name="remediation_date" />
+                                        <field name="status" 
+                                        decoration-warning="status=='under_review'"
+                                        decoration-muted="status=='pending'"
+                                        />
+                                    </list>
+                                </field>
+                            </group>
+                    </group>
+
+                </sheet>
+                <chatter />
+            </form>
+        </field>
+    </record>
+
+    <record id="view_risk_my_activity_list" model="ir.ui.view">
+        <field name="name">risk.my_activity.list</field>
+        <field name="model">tyt.risk.management</field>
+        <field name="arch" type="xml">
+            <list>
+                <field name="department_id" />
+                <field name="id" />
+                <field name="activity_state" 
+                decoration-warning="activity_state == 'action_plan'"
+                decoration-muted="activity_state == 'mitigation'" 
+                />
+                <field name="domain_id" />
+                <field name="process_id" />
+                <field name="subprocess_id" />
+                <field name="mo_period_str" />
+                <field name="owner_id" />
+                <field name="reviewer_id" />
+                <field name="auditor_id" />
+                <field name="assigned_to" />
+                <field name="status" 
+                decoration-muted="status == 'unmitigated'"
+                decoration-warning="status == 'review'"
+                decoration-success="status == 'filled' or status == 'mitigated'"
+                />
+            </list>
+        </field>
+    </record>
+
+    <record id="action_risk_my_activity" model="ir.actions.act_window">
+        <field name="name">Mis actividades</field>
+        <field name="res_model">tyt.risk.management</field>
+        <field name="view_mode">list,form</field>
+        <field name="domain">[('is_scheduled', '=', True), ('assigned_to', '=', uid)]</field>
+        <field name="view_ids" 
+         eval="[(5, 0, 0),
+                (0, 0, {'view_mode': 'list', 'view_id': ref('view_risk_my_activity_list')}),
+                (0, 0, {'view_mode': 'form', 'view_id': ref('view_risk_my_activity_form')})]"
+         />
+        <field name="context">{
+            'search_default_owner_id': uid,
+        }</field>
+    </record>
+
+    <record id="view_risk_management_search" model="ir.ui.view">
+        <field name="name">tyt.risk.management.search</field>
+        <field name="model">tyt.risk.management</field>
+        <field name="arch" type="xml">
+            <search>
+                
+                <!-- Filtro simple -->
+                <filter name="inactivos"
+                        string="Inactivos"
+                        domain="[('active','=',False)]"/>
+                <filter name="mis_tareas"
+                string="Mis actividades"
+                domain="[('owner_id', '=', uid)]"/>
+                
+                <!-- Filtro por campo -->
+                <field name="owner_id"/>
+                <field name="domain_id"/>
+                <field name="process_id"/>
+                <field name="subprocess_id"/>
+                <field name="frequency_id"/>
+                <field name="is_scheduled"/>
+                <field name="name"/>
+
+                <field name="reviewer_id"/>
+                <field name="auditor_id"/>
+                <field name="status" />
+
+                <!-- Grupo de filtros -->
+                <group expand="0" string="Agrupar por">
+                    <filter name="group_owner"
+                            string="Dueño"
+                            context="{'group_by':'owner_id'}"/>
+                </group>
+
+            </search>
+        </field>
+    </record>
+
+    <record id="view_risk_stage_tree" model="ir.ui.view">
+        <field name="name">risk.stage.list</field>
+        <field name="model">tyt.risk.stage</field>
+        <field name="arch" type="xml">
+            <list editable="bottom">
+                <field name="sequence" widget="handle" />
+                <field name="name" />
+                <field name="description" />
+            </list>
+        </field>
+    </record>
+
+    <record id="action_risk_stage" model="ir.actions.act_window">
+        <field name="name">Configurar Etapas de Riesgo</field>
+        <field name="res_model">tyt.risk.stage</field>
+        <field name="view_mode">list,form</field>
+    </record>
+
+
+
+
+
+
+</odoo>

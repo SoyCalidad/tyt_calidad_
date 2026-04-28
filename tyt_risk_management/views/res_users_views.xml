@@ -1,0 +1,21 @@
+<odoo>
+    <record id="view_users_form" model="ir.ui.view">
+        <field name="name">res.users.form</field>
+        <field name="model">res.users</field>
+        <field name="inherit_id" ref="base.view_users_form" />
+        <field name="arch" type="xml">
+            <notebook position="inside">
+                <page name="process_ids" string="Procesos">
+                    <field name="process_ids" domain="[('level', '=', 1),]"
+                    context="{'group_by': 'department_id',}"
+                    >
+                        <list >
+                            <field name="name" />
+                            <field name="owner_id" />
+                        </list>
+                    </field>
+                </page>
+            </notebook>
+        </field>
+    </record>
+</odoo>

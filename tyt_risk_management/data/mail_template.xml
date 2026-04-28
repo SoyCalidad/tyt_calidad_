@@ -1,0 +1,72 @@
+<odoo>
+    <record id="email_template_action_plan" model="mail.template">
+        <field name="name">Actividad_asignada</field>
+        <field name="model_id" ref="model_tyt_risk_management" />
+        <field name="subject">{{ object.name }}</field>
+        <field name="email_from">{{ user.email }}</field>
+        <field name="email_to">{{ object.responsible_id.email }}</field>
+        <field name="body_html" type="html">
+            <div class="container bg-second">
+                <div class="text-center">
+                    <h3 class="fw-bolder">Actividad asignada</h3>
+                </div>
+
+                <div class="row justify-content-center">
+                    <div class="col-9">
+                        <div class="table-responsive">
+                            <table class="table">
+                                <tbody class="text-muted">
+                                    <tr>
+                                        <th class="fw-semibold" scope="row">
+                                            Actividad
+                                        </th>
+                                        <td>
+                                            <t t-out="object.activity_state" />
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <th class="fw-semibold" scope="row">
+                                            Descripción
+                                        </th>
+                                        <td>
+                                            Monitoreo R<t t-out="object.id" />
+                                            - 
+                                            <t t-out="object.domain_id.name" />
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <th class="fw-semibold" scope="row">
+                                            Estatus
+                                        </th>
+                                        <td>
+                                            <t t-out="object.status" />
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <th class="fw-semibold" scope="row">
+                                            De
+                                        </th>
+                                        <td>
+                                            <t t-out="user.email" />
+                                            ->
+                                            <t t-out="user.display_name" />
+
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <th class="fw-semibold" scope="row">
+                                            Comentarios
+                                        </th>
+                                        <td>
+                                        </td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+        </field>
+    </record>
+</odoo>

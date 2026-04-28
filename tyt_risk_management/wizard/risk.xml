@@ -1,0 +1,15 @@
+<odoo>
+    <record id="view_tyt_risk_notification_revision_form" model="ir.ui.view">
+        <field name="name">tyt.risk.notification.revision.form</field>
+        <field name="model">tyt.risk.notification.revision</field>
+        <field name="arch" type="xml">
+            <form string="Notificar">
+                <field name="name" />
+                <footer invisible="not name">
+                    <button class="btn btn-info" string="Notificar" type="object" name="action_notify" />
+                    <button string="Cancelar" special="cancel" class="btn-secondary"/>
+                </footer>
+            </form>
+        </field>
+    </record>
+</odoo>
