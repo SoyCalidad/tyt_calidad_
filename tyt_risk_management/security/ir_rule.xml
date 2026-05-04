@@ -1,0 +1,40 @@
+<odoo>
+    <record id="business_process_admin_rule" model="ir.rule">
+        <field name="name">Admin full access</field>
+        <field name="model_id" ref="model_tyt_business_process" />
+        <field name="domain_force">[(1, '=', 1)]</field>
+        <field name="groups" eval="[(4, ref('tyt_risk_management.group_admin'))]" />
+    </record>
+    <record id="business_process_user_rule" model="ir.rule">
+        <field name="name">User can only see assigned processes</field>
+        <field name="model_id" ref="model_tyt_business_process" />
+        <field name="domain_force">
+            [
+                '|',
+                ('id', 'in', user.process_ids.ids),
+                ('parent_id.id', 'in', user.process_ids.ids),
+                
+            ]
+        </field>
+        <field name="groups" eval="[(4, ref('tyt_risk_management.group_usuario')), (4, ref('tyt_risk_management.group_consulta'))]"/>
+    </record>
+
+    <record id="risk_user_rule" model="ir.rule">
+        <field name="name">User can only see assigned risk</field>
+        <field name="model_id" ref="model_tyt_risk_management" />
+        <field name="domain_force">
+            [
+                '|',
+                ('process_id.id', 'in', user.process_ids.ids),
+                ('process_id.parent_id.id', 'in', user.process_ids.ids),
+                
+            ]
+        </field>
+    </record>
+    <record id="risk_admin_rule" model="ir.rule">
+        <field name="name">Admin full access</field>
+        <field name="model_id" ref="model_tyt_risk_management" />
+        <field name="domain_force">[(1, '=', 1)]</field>
+        <field name="groups" eval="[(4, ref('tyt_risk_management.group_admin'))]" />
+    </record>
+</odoo>

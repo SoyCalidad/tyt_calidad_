@@ -1,16 +1,28 @@
 from odoo import models, fields, api
 from odoo.exceptions import UserError
 
-class RiskStage(models.Model):
-    _name = 'tyt.risk.stage'
-    _description = 'Etapa de Riesgo'
-    _order = 'sequence'
+from datetime import datetime, date
+from dateutil.relativedelta import relativedelta
 
-    name = fields.Char(string='Nombre de la Etapa', required=True, translate=True)
+
+class RiskDegreeMitigation(models.Model):
+    _name = "tyt.risk.degree.mitigation"
+    _description = "Grado de mitigación"
+
+    name = fields.Char(string='Nombre', required=True,  )
     sequence = fields.Integer(default=1, help="Orden en el que se mostrará la etapa", string="Order")
     description = fields.Text(string='Descripción')
     active = fields.Boolean(default=True)
-    
+    status = fields.Selection(
+        selection=[
+            ('unmitigated', 'No Mitigado'),
+            ('partialmitigated', 'Parcialmente Mitigado'),
+            ('mitigated', 'Mitigado'),
+        ],
+        string="Estatus de mitigación",
+    )
+    value = fields.Integer(default=0)
+
 
 class RiskDomain(models.Model):
     _name = 'tyt.risk.domain'
@@ -56,6 +68,11 @@ class RiskMOComment(models.Model):
         comodel_name='tyt.risk.management',
         string="Riesgo",
     )
+    mitigation_id = fields.Many2one(
+        comodel_name='tyt.risk.mitigation',
+        string="Mitigación",
+    )
+    
 
 
 class RiskMOFiles(models.Model):
@@ -73,6 +90,11 @@ class RiskMOFiles(models.Model):
         comodel_name='tyt.risk.management',
         string="Riesgo",
     )
+    mitigation_id = fields.Many2one(
+        comodel_name='tyt.risk.mitigation',
+        string="Mitigación",
+    )
+    
     plan_id = fields.Many2one(
         comodel_name='tyt.risk.action.plan',
         string="Plan",
@@ -80,7 +102,8 @@ class RiskMOFiles(models.Model):
     origin = fields.Selection(
         selection=[
             ('risk', 'Riesgo'),
-            ('action_plan', 'Plan de acción')
+            ('action_plan', 'Plan de acción'),
+            ('mitigation_owner', 'Mitigación Dueño')
         ],
         string="Origen"
     )
@@ -100,20 +123,38 @@ class RiskMOLink(models.Model):
         comodel_name='tyt.risk.action.plan',
         string="Riesgo",
     )
+    mitigation_id = fields.Many2one(
+        'tyt.risk.mitigation', 
+        string='Mitigación de Riesgo',
+        ondelete='cascade', 
+    )
+    #origen is not necesary
     origin = fields.Selection(
         selection=[
             ('risk', 'Riesgo'),
-            ('action_plan', 'Plan de acción')
+            ('action_plan', 'Plan de acción'),
+            ('mitigation_owner', 'Mitigación Dueño'),
+
         ],
         string="Origen"
     )
 
+MAPA_SALTOS = {
+    'fortnightly': 1,
+    'month': 2,
+    'bi': 4,
+    'tri': 6,
+    'cua': 8,
+    'se': 12,
+    'anual': 24,
+}
 class PlanAction(models.Model):
     _name = "tyt.risk.action.plan"
-    _inherit = ['mail.thread']
+    _inherit = ['mail.thread', 'mail.activity.mixin']
     _description = "Plan de acción "
     _order = "id,sequence"
 
+    active = fields.Boolean(string="Activo", default=True)
     name = fields.Text(string="Plan de acción")
     user_id = fields.Many2one(
         comodel_name='res.users',
@@ -127,12 +168,55 @@ class PlanAction(models.Model):
             ('complete', 'Completado'),
         ],
         string="Estatus",
-        default="pending"
+        default="pending",
+        tracking=True,
     )
     sequence = fields.Integer(default=1)
     risk_id = fields.Many2one(
         comodel_name='tyt.risk.management',
         string="Riesgo",
+    )
+    risk_id_id = fields.Integer(
+        related="risk_id.id",
+        store=True,
+        string="ID Riesgo"
+    ) 
+    mitigation_id = fields.Many2one(
+        comodel_name='tyt.risk.mitigation', 
+        string='Mitigación', 
+        ondelete='cascade')
+    mitigation_id_period_str = fields.Char(
+        related='mitigation_id.period_str'
+    )
+    mitigation_id_year = fields.Integer(
+        related='mitigation_id.year'
+    )
+    mitigation_id_month = fields.Selection(
+        related='mitigation_id.month'
+    )
+    #data related to risk
+    risk_id_subprocess_id = fields.Many2one(
+        related="risk_id.subprocess_id",
+        store=True
+    )
+
+    risk_id_process_id = fields.Many2one(
+        related="risk_id.process_id",
+        string="Proceso",
+        store=True,
+
+    )
+    risk_id_name = fields.Text(
+        related="risk_id.name",
+        store=True,
+    )
+    risk_id_department_id = fields.Many2one(
+        related="risk_id.department_id",
+        store=True,
+    )
+    risk_id_domain_id = fields.Many2one(
+        related="risk_id.domain_id",
+        store=True,
     )
     link_ids = fields.One2many(
         comodel_name='tyt.risk.mo_link',
@@ -154,6 +238,91 @@ class PlanAction(models.Model):
             ('audit', 'Auditoria'),
         ],
     )
+
+
+    def _send_notification_email(self, mitigation, email_to, plan_action_name):
+        # Datos para el correo
+        current_user = self.env.user.display_name
+        reviewer_email = mitigation.risk_id_reviewer_id.email 
+        status_label = dict(mitigation._fields['status'].selection).get(mitigation.status, mitigation.status)
+        
+        if not email_to:
+            return # O lanza un ValidationError si es obligatorio
+
+        base_url = self.env['ir.config_parameter'].sudo().get_param('web.base.url')
+        # Formateo del cuerpo en HTML (Tabla invertida)
+        body_html = f"""
+            <h3>Actividad asignada</h3>
+            <table border="1" class="table" style="border-collapse: collapse; width: 100%; font-family: sans-serif;">
+                <tr>
+                    <th style="padding: 8px; background-color: #f2f2f2; text-align: left;">Actividad</th>
+                    <td style="padding: 8px;">Plan de acción</td>
+                </tr>
+                <tr>
+                    <th style="padding: 8px; background-color: #f2f2f2; text-align: left;">Riesgo</th>
+                    <td style="padding: 8px;">R-{mitigation.risk_id_id} - {mitigation.risk_id_domain_id.display_name or ''}</td>
+                </tr>
+                <tr>
+                    <th style="padding: 8px; background-color: #f2f2f2; text-align: left;">Plan de acción</th>
+                    <td style="padding: 8px;">{plan_action_name}</td>
+                </tr>
+                <tr>
+                    <th style="padding: 8px; background-color: #f2f2f2; text-align: left;">Estatus</th>
+                    <td style="padding: 8px;">Pendiente</td>
+                </tr>
+                <tr>
+                    <th style="padding: 8px; background-color: #f2f2f2; text-align: left; width: 30%;">De</th>
+                    <td style="padding: 8px;">{current_user}</td>
+                </tr>
+                <tr>
+                    <th style="padding: 8px; background-color: #f2f2f2; text-align: left;">Comentario</th>
+                    <td style="padding: 8px;"></td>
+                </tr>
+            </table>
+            <p>Estimado usuario, por favor revise sus actividades pendientes en la plataforma.</p>
+            <div class="row justify-content-center">
+            <a href="{base_url}" target="_blank" rel="noopener noreferrer" data-auth="NotApplicable" style="text-decoration: none; display: inline-block; color: rgb(255, 255, 255) !important; background-color: rgb(93, 71, 161) !important; border-radius: 4px; width: auto; border-width: 1px; border-style: solid; border-color: rgb(15, 11, 91); padding-top: 0px; padding-bottom: 5px; font-family: Arial, &quot;Helvetica Neue&quot;, Helvetica, sans-serif; text-align: center; word-break: keep-all;" data-linkindex="0" title="{base_url}" data-ogsb="rgb(15, 11, 91)"><span style="padding-left:20px; padding-right:20px; font-size:24px; display:inline-block; letter-spacing:normal"><span style="font-size:16px; margin:0px; line-height:2; word-break:break-word"><strong><span style="font-size:24px; line-height:48px">ODOO TYT</span></strong></span></span></a> 
+            
+            </div>
+        """
+
+        # Crear y enviar el correo
+        mail_values = {
+            'subject': f'Plan de acción R-{mitigation.risk_id_id}',
+            'body_html': body_html,
+            'email_to': email_to,
+            'email_from': self.env.user.email_formatted or self.env.company.email_formatted,
+        }
+        
+        # Creamos el registro de correo y lo enviamos inmediatamente
+        self.env['mail.mail'].sudo().create(mail_values).send()
+
+
+    @api.model_create_multi
+    def create(self, vals_list):
+        records = super().create(vals_list)
+        for rec in records:
+            if rec.mitigation_id:
+                email_to = rec.user_id.email_formatted 
+                plan_action_name = rec.display_name
+                self._send_notification_email(rec.mitigation_id, email_to, plan_action_name)
+
+        return records
+
+    def action_view_mitigation(self):
+        self.ensure_one() 
+        view_id = self.env.ref('tyt_risk_management.view_risk_mitigation_my_activity_form').id
+
+        return {
+            'name': 'Plan de acción',
+            'type': 'ir.actions.act_window',
+            'res_model': 'tyt.risk.mitigation',
+            'view_mode': 'form',
+            'res_id': self.mitigation_id.id, 
+            'target': 'current', 
+            'views': [(view_id, 'form')], 
+
+        }
 
     def action_send_reject(self,):
         self.ensure_one()
@@ -290,7 +459,8 @@ class RiskManagement(models.Model):
             ('medium', 'Medio'),
             ('high', 'Alto')
         ],
-        string="Impacto"
+        string="Impacto",
+        tracking=True,
     )
     occurrence = fields.Selection(
         selection=[
@@ -299,7 +469,8 @@ class RiskManagement(models.Model):
             ('high', 'Alto')
             
         ],
-        string="Ocurrencia"
+        string="Ocurrencia",
+        tracking=True,
     )
     is_scheduled = fields.Boolean(string="Programada", default=False)
     status = fields.Selection(
@@ -350,6 +521,74 @@ class RiskManagement(models.Model):
             'assigned_to': self.reviewer_id,
             'activity_state': 'mitigation',    
         })
+        freq_map = {
+            'fortnightly': (0, 24), # 2 registros por mes
+            'month': (1, 12),
+            'bi': (2, 6),
+            'tri': (3, 4),
+            'cua': (4, 3),
+            'se': (6, 2),
+            'anual': (12, 1),
+
+        }
+        months_to_skip, total_records = freq_map.get(self.cr_peoriod, (1, 12))
+
+        start_date = date(self.cr_year, int(self.cr_month), 1)
+
+        for i in range(total_records):
+            # --- CASO ESPECIAL: QUINCENAL ---
+            if self.cr_peoriod == 'fortnightly':
+                # Determinamos si es la primera quincena (0, 2, 4...) o la segunda (1, 3, 5...)
+                month_offset = i // 2
+                is_second_half = i % 2 != 0
+                
+                target_month_date = start_date + relativedelta(months=month_offset)
+                
+                if not is_second_half:
+                    # Primera Quincena: Día 15
+                    limit_date = target_month_date.replace(day=15)
+                else:
+                    # Segunda Quincena: Fin de Mes
+                    # relativedelta(day=31) siempre salta al último día válido (28, 29, 30 o 31)
+                    limit_date = target_month_date + relativedelta(day=31)
+
+            else:
+                target_month_date = start_date + relativedelta(months=i * months_to_skip)
+                # En todos estos casos, el límite es el fin del mes de destino
+                limit_date = target_month_date + relativedelta(day=31)
+
+            mitigation = self.env['tyt.risk.mitigation'].search([
+                ('risk_id', '=', self.id),
+                ('active','=', True),
+                ('year', '=', self.cr_year),
+                ('month', '=', str(limit_date.month)),
+                ('initial_date', '=', target_month_date),
+            ], limit=1)
+            if mitigation.exists():
+                mitigation.write({
+                    'assigned_to': self.reviewer_id.id,
+                })
+                continue
+            self.env['tyt.risk.mitigation'].create({
+                'risk_id': self.id,
+                'initial_date': target_month_date,
+                'mitigation_date': datetime(limit_date.year, limit_date.month, limit_date.day,0,0,0),
+                'year': self.cr_year,
+                'month': str(int(limit_date.month)),
+                'assigned_to': self.reviewer_id.id,
+            })
+
+    def _get_end_month(self, month, cr_period):
+        if month==2:
+            if cr_period=='fortnightly':#quincenal
+                return 15 
+            else:
+                return 28
+        else:
+            if cr_period == 'fortnightly':
+                return 15
+            else:
+                return 30
 
     #confi revision
     cr_peoriod = fields.Selection(
@@ -405,345 +644,4 @@ class RiskManagement(models.Model):
 
             record.cr_month_result = " - ".join(meses)
 
-    #mitigation owner
-    mo_document_ids = fields.One2many(
-        comodel_name='tyt.risk.mo_file',
-        inverse_name='risk_id',
-        string="Documentación soporte",
-        domain=[('origin', '=', 'risk')],
-    )
-    mo_link_ids = fields.One2many(
-        comodel_name='tyt.risk.mo_link',
-        inverse_name='risk_id',
-        string="Enlaces relacionados",
-        domain=[('origin', '=', 'risk')]
-    )
-    mo_comment_ids = fields.One2many(
-        comodel_name='tyt.risk.mo_comment',
-        inverse_name='risk_id',
-        string="Comentarios"
-    )
-
-    mo_comment_ids_count = fields.Integer(string="N° comentarios", compute="_compute_mo_comment_ids_count")
-    mo_period_str = fields.Char(string="Periodo calc", compute="_compute_mo_period_str")
-
-
-    @api.depends('cr_month', 'cr_year')
-    def _compute_mo_period_str(self):
-        for record in self:
-            if record.is_scheduled and record.cr_month and record.cr_year:
-                mes = record.cr_month.zfill(2)
-                anio = str(record.cr_year)
-
-                if record.cr_peoriod == 'fortnightly':
-                    record.mo_period_str = f"01-{mes}-{anio} al 09-{mes}-{anio}"
-                else:
-                    record.mo_period_str = f"01-{mes}-{anio} al 11-{mes}-{anio}"
-            else:
-                record.mo_period_str = False
-
-
-
-    @api.depends('mo_comment_ids')
-    def _compute_mo_comment_ids_count(self):
-        for record in self:
-            record.mo_comment_ids_count = len(record.mo_comment_ids)
-
-
-    #mitigation reviewer
-    mr_period_str = fields.Char(string="Periodo revision", compute="_compute_mr_period_str")
-    @api.depends('cr_month', 'cr_year')
-    def _compute_mr_period_str(self):
-        for record in self:
-            if record.is_scheduled and record.cr_month and record.cr_year:
-                mes = record.cr_month.zfill(2)
-                anio = str(record.cr_year)
-                if record.cr_peoriod == 'fortnightly':
-                    record.mr_period_str = f"09-{mes}-{anio} al 14-{mes}-{anio}"
-                else:
-                    record.mr_period_str = f"11-{mes}-{anio} al 20-{mes}-{anio}"
-            else:
-                record.mr_period_str = False
-    mr_status_mitigation = fields.Selection(
-        selection=[
-            ('unmitigated', 'No Mitigado'),
-            ('partialmitigated', 'Parcialmente Mitigado'),
-            ('mitigated', 'Mitigado'),
-        ],
-        string="Estatus de mitigación",
-    )
-    mr_degree_mitigation = fields.Selection(
-        selection=[
-            ('0', '0%'),
-            ('25', '25%'),
-            ('50', '50%'),
-            ('75', '75%'),
-            ('100', '100%'),
-        ],
-        string="Grado de mitigación"
-    )
-    mr_residual_risk = fields.Float(string="Riesgo residual", compute="_compute_mr_residual_risk")
-
-    @api.depends('quantification', 'mr_degree_mitigation')
-    def _compute_mr_residual_risk(self):
-        for record in self:
-            if record.quantification and record.mr_degree_mitigation:
-                record.mr_residual_risk = ((100 - int(record.mr_degree_mitigation)) * record.quantification) / 100
-            else:
-                record.mr_residual_risk = 0
-
-
-
-    @api.onchange('mr_status_mitigation')
-    def _onchange_mr_status_mitigation(self):
-        if self.mr_status_mitigation:
-            if self.mr_status_mitigation == 'unmitigated':
-                self.mr_degree_mitigation = '0'
-            if self.mr_status_mitigation == 'partialmitigated':
-                self.mr_degree_mitigation = '25'
-            if self.mr_status_mitigation == 'mitigated':
-                self.mr_degree_mitigation = '100'
-        else:
-            self.mr_degree_mitigation = False
-
-    maturity_level  = fields.Selection(
-        selection=[
-            ('limited', 'Limitado'),#amarillo 50%
-            ('defined', 'Definido'),#amarillo 75%
-            ('initial', 'Inicial'),#amarillo 25%
-            ('none', 'No existe'),#rojo 0%
-            ('optimize', 'Optimizado'),#verde 100   %
-
-        ],
-        string="Nivel de madurez"
-    )
-
-    mr_mitigation_date = fields.Date(string="Fecha de mitigación")
-    mr_level_compliance = fields.Char(string="Grado de cumplimiento", default="Programado")
-    mr_action_plan_ids = fields.One2many(
-        comodel_name='tyt.risk.action.plan',
-        inverse_name='risk_id',
-        string="Plan de acción",
-        domain=[('origin', '=', 'review')]
-
-    )
-    mr_all_action_plans_complete = fields.Boolean(
-        string="MR planes completos?",
-        compute='_compute_mr_all_action_plans_complete',
-
-    )
-
-    @api.depends('mr_action_plan_ids', 'mr_action_plan_ids.status')
-    def _compute_mr_all_action_plans_complete(self):
-        for record in self:
-            if len(record.mr_action_plan_ids)>0:
-                record.mr_all_action_plans_complete = all(p.status=='complete' for p in record.mr_action_plan_ids)
-            else:
-                record.mr_all_action_plans_complete = False
-
-    @api.onchange('mr_degree_mitigation')
-    def _onchange_mr_degree_mitigation(self):
-        if self.mr_degree_mitigation == '0':
-            self.maturity_level = 'none'
-        if self.mr_degree_mitigation == '25':
-            self.maturity_level = 'initial'
-        if self.mr_degree_mitigation == '50':
-            self.maturity_level = 'limited'
-        if self.mr_degree_mitigation == '75':
-            self.maturity_level = 'defined'
-        if self.mr_degree_mitigation == '100':
-            self.maturity_level = 'optimize'
-
     
-    #mitigation audit
-    ma_period_str = fields.Char(string="Periodo revision", compute="_compute_ma_period_str")
-    @api.depends('cr_month', 'cr_year')
-    def _compute_ma_period_str(self):
-        for record in self:
-            if record.is_scheduled and record.cr_month and record.cr_year:
-                mes = record.cr_month.zfill(2)
-                anio = str(record.cr_year)
-                if record.cr_peoriod == 'fortnightly':
-                    record.ma_period_str = f"14-{mes}-{anio} al 15-{mes}-{anio}"
-                else:
-                    record.ma_period_str = f"20-{mes}-{anio} al 30-{mes}-{anio}"
-            else:
-                record.ma_period_str = False
-    ma_status_mitigation = fields.Selection(
-        selection=[
-            ('unmitigated', 'No Mitigado'),
-            ('partialmitigated', 'Parcialmente Mitigado'),
-            ('mitigated', 'Mitigado'),
-        ],
-        string="Estatus de mitigación",
-    )
-    ma_degree_mitigation = fields.Selection(
-        selection=[
-            ('0', '0%'),
-            ('25', '25%'),
-            ('50', '50%'),
-            ('75', '75%'),
-            ('100', '100%'),
-        ],
-        string="Grado de mitigación"
-    )
-    ma_residual_risk = fields.Float(string="Riesgo residual", compute="_compute_ma_residual_risk")
-
-    @api.depends('quantification', 'ma_degree_mitigation')
-    def _compute_ma_residual_risk(self):
-        for record in self:
-            if record.quantification and record.ma_degree_mitigation:
-                record.ma_residual_risk = ((100 - int(record.ma_degree_mitigation)) * record.quantification) / 100
-            else:
-                record.ma_residual_risk = 0
-
-
-
-    @api.onchange('ma_status_mitigation')
-    def _onchange_ma_status_mitigation(self):
-        if self.ma_status_mitigation:
-            if self.ma_status_mitigation == 'unmitigated':
-                self.ma_degree_mitigation = '0'
-            if self.ma_status_mitigation == 'partialmitigated':
-                self.ma_degree_mitigation = '25'
-            if self.ma_status_mitigation == 'mitigated':
-                self.ma_degree_mitigation = '100'
-        else:
-            self.ma_degree_mitigation = False
-
-    ma_maturity_level  = fields.Selection(
-        selection=[
-            ('limited', 'Limitado'),#amarillo 50%
-            ('defined', 'Definido'),#amarillo 75%
-            ('initial', 'Inicial'),#amarillo 25%
-            ('none', 'No existe'),#rojo 0%
-            ('optimize', 'Optimizado'),#verde 100   %
-
-        ],
-        string="Nivel de madurez"
-    )
-
-    ma_mitigation_date = fields.Date(string="Fecha de mitigación")
-    ma_level_compliance = fields.Char(string="Grado de cumplimiento", default="Programado")
-    ma_action_plan_ids = fields.One2many(
-        comodel_name='tyt.risk.action.plan',
-        inverse_name='risk_id',
-        string="Plan de acción",
-        domain=[('origin', '=', 'audit')]
-    )
-    ma_all_action_plans_complete = fields.Boolean(
-        string="MA planes completos?",
-        compute='_compute_ma_all_action_plans_complete',
-
-    )
-
-    @api.depends('ma_action_plan_ids', 'ma_action_plan_ids.status')
-    def _compute_ma_all_action_plans_complete(self):
-        for record in self:
-            if len(record.ma_action_plan_ids)>0:
-                record.ma_all_action_plans_complete = all(p.status=='complete' for p in record.ma_action_plan_ids)
-            else:
-                record.ma_all_action_plans_complete = False
-
-    @api.onchange('ma_degree_mitigation')
-    def _onchange_ma_degree_mitigation(self):
-        if self.ma_degree_mitigation == '0':
-            self.ma_maturity_level = 'none'
-        if self.ma_degree_mitigation == '25':
-            self.ma_maturity_level = 'initial'
-        if self.ma_degree_mitigation == '50':
-            self.ma_maturity_level = 'limited'
-        if self.ma_degree_mitigation == '75':
-            self.ma_maturity_level = 'defined'
-        if self.ma_degree_mitigation == '100':
-            self.ma_maturity_level = 'optimize'
-
-    
-
-
-    stage_id = fields.Many2one(
-        'tyt.risk.stage', 
-        string='Etapa', 
-        group_expand='_read_group_stage_ids', # Para que salgan todas las columnas en Kanban
-        tracking=True,
-        index=True,
-        default=lambda self: self.env['tyt.risk.stage'].search([], limit=1)
-    )
-    
-    @api.model
-    def _read_group_stage_ids(self, stages, domain, order):
-        # Esta función hace que en la vista Kanban aparezcan todas las etapas 
-        return self.env['tyt.risk.stage'].search([('active', '=', True)])
-    
-
-    def action_create_action_plan(self,):
-        self.ensure_one()
-        self.write({
-            'activity_state': 'action_plan',
-        })
-        view_id = self.env.ref('tyt_risk_management.view_risk_action_plan_form').id
-
-        return {
-            'type': 'ir.actions.act_window',
-            'name': 'Plan de acción',
-            'res_model': 'tyt.risk.action.plan',
-            'view_mode': 'form',
-            'views': [(view_id, 'form')], 
-            'target': 'new',
-            'context': {
-                'default_risk_id': self.id,
-                'default_user_id': self.owner_id.id,
-                'default_origin': 'review',
-            }
-        }
-
-    def action_create_action_plan_audit(self,):
-        self.ensure_one()
-        self.write({
-            'activity_state': 'action_plan',
-        })
-        view_id = self.env.ref('tyt_risk_management.view_risk_action_plan_form').id
-
-        return {
-            'type': 'ir.actions.act_window',
-            'name': 'Plan de acción',
-            'res_model': 'tyt.risk.action.plan',
-            'view_mode': 'form',
-            'views': [(view_id, 'form')], 
-            'target': 'new',
-            'context': {
-                'default_risk_id': self.id,
-                'default_user_id': self.owner_id.id,
-                'default_origin': 'audit',
-            }
-        }
-
-
-
-
-    def action_notify_revision(self,):
-        #open wizard to write coment and send email
-        msg = "Enviado a {0} para su revisión".format(self.assigned_to.display_name if self.assigned_to else '')
-
-        return {
-            'type': 'ir.actions.act_window',
-            'name': 'Notificar',
-            'res_model': 'tyt.risk.notification.revision',
-            'view_mode': 'form',
-            'target': 'new',
-            'context': {
-                'default_risk_id': self.id,
-            }
-        }
-    #     return {
-    #     'type': 'ir.actions.client',
-    #     'tag': 'display_notification',
-    #     'params': {
-    #         'title': 'Éxito',
-    #         'message': 'El proceso se ejecutó correctamente',
-    #         'type': 'success',  # success, warning, danger
-    #         'sticky': False,
-    #     }
-    # }
-
-
