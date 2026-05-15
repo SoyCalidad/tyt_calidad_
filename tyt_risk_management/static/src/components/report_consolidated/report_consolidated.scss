@@ -1,0 +1,38 @@
+.level3-filter-card {
+
+    .card-header {
+        background-color: #fff;
+        border-bottom: 1px solid #dee2e6;
+    }
+
+    .card-title {
+        font-size: 1rem;
+        font-weight: 600;
+    }
+
+    .filter-item {
+
+        .form-label {
+            font-size: 0.875rem;
+            font-weight: 500;
+            margin-bottom: 0.35rem;
+        }
+
+        .form-select {
+            min-width: 100%;
+        }
+    }
+}
+
+.risk-stat-icon {
+    border-radius: .25rem;
+  -ms-flex-align: center;
+  align-items: center;
+  display: -ms-flexbox;
+  display: flex;
+  font-size: 1.875rem;
+  -ms-flex-pack: center;
+  justify-content: center;
+  text-align: center;
+  width: 70px;
+}

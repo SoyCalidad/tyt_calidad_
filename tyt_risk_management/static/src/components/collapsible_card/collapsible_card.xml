@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<templates xml:space="preserve">
+
+    <t t-name="tyt_risk_management.CollapsibleCard" owl="1">
+
+        <div class="card shadow-sm mb-3">
+
+            <!-- HEADER -->
+            <div  t-att-class="'card-header ' + (props.headerClass || '')">
+
+                <button
+                    class="btn btn-link w-100 d-flex justify-content-between align-items-center text-decoration-none text-reset p-0"
+                    t-on-click="toggle"
+                    type="button">
+
+                    <span class="fw-semibold">
+                        <t t-esc="props.title"/>
+                    </span>
+
+                    <i
+                        class="fa"
+                        t-att-class="state.collapsed ? 'fa-chevron-down' : 'fa-chevron-up'"
+                    />
+
+                </button>
+
+            </div>
+
+            <!-- BODY -->
+            <div
+                class="card-body"
+                t-if="!state.collapsed">
+
+                <t t-slot="default"/>
+
+            </div>
+
+        </div>
+
+    </t>
+
+</templates>

@@ -56,7 +56,7 @@
                     <group >
                         <group>
                             <field name="id" readonly="1" />
-                            <field name="risk_id_domain_id" readonly="1" />
+                            <field name="risk_id_pdomain_id" readonly="1" />
                         </group>
                         
                         <group>
@@ -315,7 +315,7 @@
         <field name="name">Mitigación</field>
         <field name="res_model">tyt.risk.mitigation</field>
         <field name="view_mode">list,form</field>
-        <field name="domain"> [('mitigation_date', '&lt;=', (context_today() + relativedelta(months=1, day=1)))]</field>
+        <field name="domain"> [('mitigation_date', '&lt;=', (context_today() + relativedelta(months=1, day=1))), ]</field>
         <field name="view_ids" 
          eval="[(5, 0, 0),
                 (0, 0, {'view_mode': 'list', 'view_id': ref('view_risk_mitigation_mitigation_list')}),
@@ -325,4 +325,58 @@
             'search_default_owner_id': uid,
         }</field>
     </record>
+
+    <record id="view_risk_mitigation_monitoring_list" model="ir.ui.view">
+        <field name="name">risk.mitigation.monitoring.list</field>
+        <field name="model">tyt.risk.mitigation</field>
+        <field name="arch" type="xml">
+            <list>
+                <field name="risk_id_id" />
+                <field name="period_str" />
+                <field name="risk_id_process_id" />
+                <field name="risk_id_subprocess_id" />
+                 
+                <field name="risk_id_owner_id" />
+                <field name="risk_id_reviewer_id" />
+                <field name="risk_id_auditor_id" />
+                <field name="ma_degree_mitigation" widget="badge" />
+                <field name="risk_id_impact"
+                    widget="badge"
+                    decoration-success="risk_id_impact == 'low'"
+                    decoration-warning="risk_id_impact == 'medium'"
+                    decoration-danger="risk_id_impact == 'high'"/>
+                <field name="risk_id_occurrence"
+                            widget="badge"
+                            decoration-success="risk_id_occurrence == 'low'"
+                            decoration-warning="risk_id_occurrence == 'medium'"
+                            decoration-danger="risk_id_occurrence == 'high'"/>
+                <field name="mr_status_mitigation" 
+                widget="badge"
+                decoration-success="mr_status_mitigation=='mitigated'"
+                />
+                <field name="status" 
+                widget="badge"
+                decoration-muted="status == 'unmitigated'"
+                decoration-warning="status == 'under_review'"
+                decoration-success="status == 'filled' or status == 'mitigated'"
+                />
+            </list>
+        </field>
+    </record>
+
+    <record id="action_risk_monitoring" model="ir.actions.act_window">
+        <field name="name">Monitoreo</field>
+        <field name="res_model">tyt.risk.mitigation</field>
+        <field name="view_mode">list,form</field>
+        <field name="domain"> [('mitigation_date', '&lt;=', (context_today() + relativedelta(months=1, day=1))), ('risk_activity_state', '=' , 'monitoring' )]</field>
+        <field name="view_ids" 
+         eval="[(5, 0, 0),
+                (0, 0, {'view_mode': 'list', 'view_id': ref('view_risk_mitigation_monitoring_list')}),
+                (0, 0, {'view_mode': 'form', 'view_id': ref('view_risk_mitigation_my_activity_form')})]"
+         />
+        <field name="context">{
+            'search_default_owner_id': uid,
+        }</field>
+    </record>
+    
 </odoo>

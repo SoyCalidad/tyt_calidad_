@@ -83,6 +83,7 @@ class RiskMOFiles(models.Model):
     file_id = fields.Many2one(
         comodel_name='documents.document',
         domain=[('type', '=', 'binary')],
+        string="Archivo",
     )
     
     description = fields.Char(string="Descripción")
@@ -107,6 +108,31 @@ class RiskMOFiles(models.Model):
         ],
         string="Origen"
     )
+
+    def _default_folder(self):
+        folder = self.env.ref(
+            'tyt_risk_management.folder_risk_management',
+            raise_if_not_found=False
+        )
+        return folder or False
+    
+    default_folder = fields.Many2one(
+        comodel_name='documents.document',
+        default=_default_folder,
+    )
+
+
+    def action_open_file(self):
+        self.ensure_one()
+        if not self.file_id or not self.file_id.access_url:
+            return
+
+        return {
+            'type': 'ir.actions.act_url',
+            'url': self.file_id.access_url,
+            'target': 'new',
+        }
+
 
 class RiskMOLink(models.Model):
     _name = "tyt.risk.mo_link"
@@ -386,19 +412,26 @@ class RiskManagement(models.Model):
     )
     domain_id = fields.Many2one(
         comodel_name='tyt.risk.domain',
-        string="Dominio"
+        string="Dominio (obsoleto)"
+    )
+    pdomain_id = fields.Many2one(
+        comodel_name='tyt.business.process',
+        string="Dominio",
+        tracking=True,
     )
     process_id = fields.Many2one(
         'tyt.business.process', 
         string='Proceso', 
         required=True,
-        domain="[('active', '=', True)]" # Solo procesos activos
+        domain="[('active', '=', True)]",
+        tracking=True,
     )
     subprocess_id = fields.Many2one(
         'tyt.business.process', 
         string='Sub Proceso', 
         required=True,
-        domain="[('active', '=', True), ('level', '=',2)]"
+        tracking=True,
+        domain="[('active', '=', True), ('level', '=',3)]"
     )
     control_objective = fields.Text(string="Objetivo de control")
     control_activity = fields.Text(string="Actividad de control")
@@ -490,16 +523,7 @@ class RiskManagement(models.Model):
         string="Asignado a"
     )
     period_str = fields.Char(string="Periodo")
-    activity_state = fields.Selection(
-        selection=[
-            ('mitigation', 'Mitigación'),
-            ('action_plan', 'Plan de acción'),
-            ('unmitigated', 'No mitigado'), 
-        ],
-        default='unmitigated',
-        string="Actividad",
-        tracking=True,
-    )
+     
     type_risk = fields.Char(default="Ventas", string="Tipo")
     value_risk = fields.Float(default=500000, string="Valor")
 
@@ -519,7 +543,6 @@ class RiskManagement(models.Model):
         self.write({
             'is_scheduled': True, 
             'assigned_to': self.reviewer_id,
-            'activity_state': 'mitigation',    
         })
         freq_map = {
             'fortnightly': (0, 24), # 2 registros por mes
@@ -534,6 +557,7 @@ class RiskManagement(models.Model):
         months_to_skip, total_records = freq_map.get(self.cr_peoriod, (1, 12))
 
         start_date = date(self.cr_year, int(self.cr_month), 1)
+        today = fields.Datetiem.now()
 
         for i in range(total_records):
             # --- CASO ESPECIAL: QUINCENAL ---
@@ -569,7 +593,7 @@ class RiskManagement(models.Model):
                     'assigned_to': self.reviewer_id.id,
                 })
                 continue
-            self.env['tyt.risk.mitigation'].create({
+            mitigation = self.env['tyt.risk.mitigation'].create({
                 'risk_id': self.id,
                 'initial_date': target_month_date,
                 'mitigation_date': datetime(limit_date.year, limit_date.month, limit_date.day,0,0,0),
@@ -577,6 +601,16 @@ class RiskManagement(models.Model):
                 'month': str(int(limit_date.month)),
                 'assigned_to': self.reviewer_id.id,
             })
+            if today.month == int(limit_date.month):
+                activity_type = self.env.ref("mail.mail_activity_data_todo")
+
+                mitigation.activity_schedule(
+                    activity_type_id=activity_type.id,
+                    summary="Revisar riesgo",
+                    note="Debe cargar la información de la mitigación del dueño.",
+                    user_id=self.risk_id_owner_id.id,
+                    date_deadline=target_month_date + timedelta(days=3),
+                )
 
     def _get_end_month(self, month, cr_period):
         if month==2:

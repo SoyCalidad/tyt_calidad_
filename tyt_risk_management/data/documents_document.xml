@@ -1,0 +1,6 @@
+<odoo>
+    <record id="folder_risk_management" model="documents.document">
+        <field name="name">Gestión de riesgos</field>
+        <field name="type">folder</field>
+    </record>
+</odoo>

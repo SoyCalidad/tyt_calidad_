@@ -1,0 +1,568 @@
+<templates xml:space="preserve">
+    <t t-name="tyt_risk_management.report_nivel2_status" owl="1">
+        <Layout display="display" className="'o_dashboard h-100 overflow-y-auto'">
+            <div class="o_report_status_level2  p-4 bg-light">
+                <!-- Sección de Filtros -->
+                <div class="row bg-white p-3 mb-4 shadow-sm rounded align-items-end">
+                    <div class="col-md-2">
+                        <label>Sitio</label>
+                        <select class="form-select" t-model="state.filters.domain_id">
+                            <option value="0">Todas</option>
+                            <t t-foreach="state.departments" t-as="el" t-key="'department'+el.id">
+                                <option t-att-value="el.id">
+                                    <t t-esc="el.name"/>
+                                </option>
+                            </t>
+                        </select>
+                    </div>
+                    <div class="col-md-2">
+                        <label>Dominio</label>
+                        <select class="form-select" t-model="state.filters.domain_id">
+                            <option value="0">Todas</option>
+                            <t t-foreach="state.domains" t-as="el" t-key="'domain'+el.id">
+                                <option t-att-value="el.id">
+                                    <t t-esc="el.name"/>
+                                </option>
+                            </t>
+                        </select>
+                    </div>
+                    <div class="col-md-2">
+                        <label>Proceso</label>
+                        <select class="form-select" t-model="state.filters.process_id">
+                            <option value="false">Todos los procesos</option>
+                            <t t-foreach="state.processes" t-as="proceso" t-key="'process'+proceso.id">
+                                <option t-att-value="proceso.id">
+                                    <t t-esc="proceso.name"/>
+                                </option>
+                            </t>
+                        </select>
+                    </div>
+                    <div class="col-md-2">
+                        <label>Año</label>
+                        <select class="form-select" t-model="state.filters.year">
+                            <option value="0">Todos los años</option>
+                            <t t-foreach="state.years" t-as="y" t-key="y">
+                                <option t-att-value="y"><t t-esc="y"/></option>
+                            </t>
+                        </select>
+                    </div>
+                    <div class="col-md-2">
+                        <label>Mes</label>
+                        <select class="form-select" t-model="state.filters.month">
+                            <option value="">Todos los meses</option>
+                            <t t-foreach="state.months" t-as="m" t-key="'month'+m.id">
+                                <option t-att-value="m.id"><t t-esc="m.name"/></option>
+                            </t>
+                        </select>
+                    </div>
+                    <div class="col-md-1">
+                        <button class="btn btn-primary w-100" t-on-click="onSearch">
+                             Buscar
+                        </button>
+                    </div>
+                </div>
+    
+                <!--vista
+                general-->
+                <div class="accordion accordion-flush mb-3" id="accordionFlushExample">
+                    <div class="accordion-item">
+                        <h2 class="accordion-header border-bottom ">
+                        <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#flush-collapseOne" aria-expanded="false" aria-controls="flush-collapseOne">
+                             
+                        </button>
+                        </h2>
+                        <div id="flush-collapseOne" class="accordion-collapse collapse show" data-bs-parent="#accordionFlushExample">
+                            <div class="accordion-body">
+                                <!-- Dashboard de 3 Columnas -->
+                                <div class="row">
+                                    <!-- Columna 1: Completados -->
+                                    <div class="col-md-4 col-sm-6">
+                                        <div class="card shadow-sm mb-3">
+                                            <div class="card-header  text-white d-flex justify-content-between align-items-center bg-primary" 
+                                                style="cursor: pointer;">
+                                                <strong>% COMPLETADOS</strong>
+                                            </div>
+                                            <div class="card-body p-0"  >
+                                                <div class="row my-1">
+                                                    <t  t-foreach="state.processedData" t-as="item" t-key="'C'+item.process_id" >
+                                                        <div class="col-lg-3 col-sm-6">
+                                                            <div class="d-flex flex-column text-center">
+                                                                <h5 t-out="item.process_short_name" class="fw-semibold" />
+                                                                <span  >
+                                                                    <t t-out="item.is_completed_percentage" /> %
+                                                                </span>
+                                                            </div>
+                                                        </div>
+    
+                                                    </t>
+                                                </div> 
+                                            </div>
+                                        </div>
+                                    </div>
+    
+                                    <!-- Columna 2: Controles Claves -->
+                                    <div class="col-md-4 col-sm-6">
+                                        <div class="card shadow-sm mb-3">
+                                            <div class="card-header text-white d-flex justify-content-between align-items-center bg-secondary" >
+                                                <strong>CONTROLES CLAVES</strong>
+                                            </div>
+                                            <div class="card-body p-0"  >
+                                                 
+                                                <div class="row my-1">
+                                                    <t  t-foreach="state.processedData" t-as="item"  t-key="'CC'+item.process_id">
+                                                        <div class="col-lg-3 col-sm-6">
+                                                            <div class="d-flex flex-column text-center">
+                                                                <h5 t-out="item.process_short_name" class="fw-semibold" />
+                                                                <span t-out="item.total" />
+                                                            </div>
+                                                        </div>
+    
+                                                    </t>
+                                                </div> 
+                                            </div>
+                                        </div>
+                                    </div>
+    
+                                    <div class="col-md-4">
+                                        <div class="card shadow-sm mb-3">
+                                            <div class="card-header bg-danger text-white d-flex justify-content-between align-items-center "
+                                                 >
+                                                <strong>NO MITIGADOS</strong>
+                                            </div>
+                                            <div class="card-body p-0"  >
+                                                <div class="row my-1">
+                                                    <t  t-foreach="state.processedData" t-as="item"  t-key="'NM'+item.process_id" >
+                                                        <div class="col-lg-3 col-sm-6">
+                                                            <div class="d-flex flex-column text-center">
+                                                                <h5 t-out="item.process_short_name" class="fw-semibold" />
+                                                                <span t-out="item.no_completed" />
+                                                            </div>
+                                                        </div>
+    
+                                                    </t>
+                                                </div> 
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    
+                     
+                </div>
+    
+                <!--vista
+                por proceso-->
+                <t t-foreach="state.processedData" t-as="process" t-key="'process'+process.process_id">
+                    <div class="accordion accordion-flush my-3" id="accordionFlushProcess">
+                        
+                        <div class="accordion-item">
+                            <h2 class="accordion-header">
+                            <button class="accordion-button btn-primary collapsed" type="button" 
+                            data-bs-toggle="collapse" t-att-data-bs-target="'#flushcollapse'+process.process_id" 
+                            aria-expanded="false" 
+                            t-att-aria-controls="'flushcollapse'+process.process_id">
+                                Resultado por proceso <t t-out="process.process_name" />
+                            </button>
+                            </h2>
+                            <div t-att-id="'flushcollapse'+process.process_id" class="accordion-collapse collapse show" data-bs-parent="#accordionFlushProcess">
+                                <div class="accordion-body">
+                                    <div class="row my-1">
+                                        <div class="col-md-6 col-sm-12">
+                                            <CollapsibleCard title="process.process_name + ' (' + process.process_short_name + ')'" headerClass="'bg-primary'" >
+                                                <div class="row my-1" >
+                                                        <div class="col-md-8 col-sm-6">
+                                                            <PieChart 
+                                                            data="{}" 
+                                                            dataValues="[
+                                                                process.is_not_scope,
+                                                                process.is_open,
+                                                                process.is_review,
+                                                                process.is_remediation,
+                                                                process.is_audit,
+                                                                process.is_completed,
+                                                            ]"
+                                                            dataLabels="['Fuera','Abierto','En revisión','En remediación', 'En auditoria', 'Completado']"
+                                                            dataColors="['#5d6d7e','#f4d03f','#2E86C1','#BA4A00', '#7d3c98', '#196f3d']"
+                                                            label="process.process_name"
+                                                            />
+                                                        </div>
+                                                        <div class="col-md-4 col-sm-6">
+                                                            <div class="table-responsive">
+                                                                <table class="table table-hover table-sm table-bordered table-condensed">
+                                                                    <tbody>
+                                                                        <tr style="cursor: pointer;"
+                                                                        t-on-click="() => this.openMitigation(process.registros_is_not_scope)"
+                                                                        >
+                                                                            <td>Fuera de alcance</td> 
+                                                                            <td>
+                                                                                <t t-out="process.is_not_scope" />
+                                                                            </td> 
+                                                                            <td style="background-color: rgb(93, 109, 126); color: transparent;">
+                                                                                41
+                                                                            </td>
+                                                                        </tr> 
+                                                                        <tr style="cursor: pointer;"
+                                                                        t-on-click="() => this.openMitigation(process.registros_is_open)"
+                                                                        >
+                                                                            <td>Abierto</td> 
+                                                                            <td>
+                                                                                <t t-out="process.is_open" />
+    
+                                                                            </td> 
+                                                                            <td style="background-color: rgb(244, 208, 63); color: transparent;">
+                                                                    41
+                                                                            </td>
+                                                                        </tr> 
+                                                                        <tr style="cursor: pointer;"
+                                                                        t-on-click="() => this.openMitigation(process.registros_is_review)"
+                                                                        >
+                                                                            <td>En revisión</td> 
+                                                                            <td>
+                                                                                <t t-out="process.is_review" />
+    
+                                                                            </td> 
+                                                                            <td style="background-color: rgb(46, 134, 193); color: transparent;">
+                                                                    41
+                                                                            </td>
+                                                                        </tr> 
+                                                                        <tr style="cursor: pointer;"
+                                                                        t-on-click="() => this.openMitigation(process.registros_is_remediation)"
+                                                                        >
+                                                                            <td>En remediación</td> 
+                                                                            <td>
+                                                                                <t t-out="process.is_remediation" />
+    
+                                                                            </td> 
+                                                                            <td style="background-color: rgb(186, 74, 0); color: transparent;">
+                                                                    41
+                                                                            </td>
+                                                                        </tr> 
+                                                                        <tr style="cursor: pointer;"
+                                                                        t-on-click="() => this.openMitigation(process.registros_is_audit)"
+                                                                        >
+                                                                            <td>En auditoria</td> 
+                                                                            <td>
+                                                                                <t t-out="process.is_audit" />
+    
+                                                                            </td> 
+                                                                            <td style="background-color: rgb(125, 60, 152); color: transparent;">
+                                                                    41
+                                                                            </td>
+                                                                        </tr> 
+                                                                        <tr style="cursor: pointer;"
+                                                                        t-on-click="() => this.openMitigation(process.registros_is_completed)"
+                                                                        >
+                                                                            <td>Completado</td> 
+                                                                            <td>
+                                                                                <t t-out="process.is_completed" />
+    
+                                                                            </td> 
+                                                                            <td style="background-color: rgb(25, 111, 61); color: transparent;">
+                                                                    41
+                                                                            </td>
+                                                                        </tr>
+                                                                    </tbody>
+                                                                </table>
+                                                            </div>
+                                                        </div> 
+                                                </div>
+                                            </CollapsibleCard>
+                                        </div>
+                                        <t t-foreach="process.subProcesos" t-as="subp" t-key="'sp'+subp.process_id" >
+                                            <div class="col-md-6 col-sm-12">
+                                                
+                                                <CollapsibleCard  title="subp.sub_process_name or ''">
+                                                    <div class="row my-1" >
+                                                        <div class="col-md-8 col-sm-6">
+                                                            <PieChart 
+                                                            data="{}" 
+                                                            dataValues="[
+                                                                subp.is_not_scope,
+                                                                subp.is_open,
+                                                                subp.is_review,
+                                                                subp.is_remediation,
+                                                                subp.is_audit,
+                                                                subp.is_completed,
+                                                            ]"
+                                                            dataLabels="['Fuera','Abierto','En revisión','En remediación', 'En auditoria', 'Completado']"
+                                                            dataColors="['#5d6d7e','#f4d03f','#2E86C1','#BA4A00', '#7d3c98', '#196f3d']"
+                                                            label="subp.sub_process_name"
+                                                            />
+                                                        </div>
+                                                        <div class="col-md-4 col-sm-6">
+                                                            <div class="table-responsive">
+                                                                <table class="table table-hover table-sm table-bordered table-condensed">
+                                                                    <tbody>
+                                                                        <tr style="cursor: pointer;"
+                                                                        t-on-click="() => this.openMitigation(process.registros_is_not_scope)"
+                                                                        >
+                                                                            <td>Fuera de alcance</td> 
+                                                                            <td>
+                                                                                <t t-out="subp.is_not_scope" />
+                                                                            </td> 
+                                                                            <td style="background-color: rgb(93, 109, 126); color: transparent;">
+                                                                                41
+                                                                            </td>
+                                                                        </tr> 
+                                                                        <tr style="cursor: pointer;"
+                                                                         t-on-click="() => this.openMitigation(process.registros_is_open)"
+                                                                        >
+                                                                            <td>Abierto</td> 
+                                                                            <td>
+                                                                                <t t-out="subp.is_open" />
+    
+                                                                            </td> 
+                                                                            <td style="background-color: rgb(244, 208, 63); color: transparent;">
+                                                                    41
+                                                                            </td>
+                                                                        </tr> 
+                                                                        <tr style="cursor: pointer;"
+                                                                         t-on-click="() => this.openMitigation(process.registros_is_review)"
+                                                                        >
+                                                                            <td>En revisión</td> 
+                                                                            <td>
+                                                                                <t t-out="subp.is_review" />
+    
+                                                                            </td> 
+                                                                            <td style="background-color: rgb(46, 134, 193); color: transparent;">
+                                                                    41
+                                                                            </td>
+                                                                        </tr> 
+                                                                        <tr style="cursor: pointer;"
+                                                                        t-on-click="() => this.openMitigation(process.registros_is_remediation)"
+                                                                        >
+                                                                            <td>En remediación</td> 
+                                                                            <td>
+                                                                                <t t-out="subp.is_remediation" />
+    
+                                                                            </td> 
+                                                                            <td style="background-color: rgb(186, 74, 0); color: transparent;">
+                                                                    41
+                                                                            </td>
+                                                                        </tr> 
+                                                                        <tr style="cursor: pointer;"
+                                                                        t-on-click="() => this.openMitigation(process.registros_is_audit)"
+                                                                        >
+                                                                            <td>En auditoria</td> 
+                                                                            <td>
+                                                                                <t t-out="subp.is_audit" />
+    
+                                                                            </td> 
+                                                                            <td style="background-color: rgb(125, 60, 152); color: transparent;">
+                                                                    41
+                                                                            </td>
+                                                                        </tr> 
+                                                                        <tr style="cursor: pointer;"
+                                                                        t-on-click="() => this.openMitigation(process.registros_is_completed)"
+                                                                        >
+                                                                            <td>Completado</td> 
+                                                                            <td>
+                                                                                <t t-out="process.is_completed" />
+    
+                                                                            </td> 
+                                                                            <td style="background-color: rgb(25, 111, 61); color: transparent;">
+                                                                    41
+                                                                            </td>
+                                                                        </tr>
+                                                                    </tbody>
+                                                                </table>
+                                                            </div>
+                                                        </div> 
+                                                </div>
+                                                </CollapsibleCard>
+    
+                                            </div>
+                                        </t>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                         
+                    </div>
+                </t>
+    
+                <div class="accordion accordion-flush my-3" id="accordionFlushStatus">
+                     
+                    <div class="accordion-item">
+                        <h2 class="accordion-header">
+                        <button class="accordion-button btn-primary collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#flush-collapseTwo" aria-expanded="false" aria-controls="flush-collapseTwo">
+                             Nivel 2 - Estatus 
+                        </button>
+                        </h2>
+                        <div id="flush-collapseTwo" class="accordion-collapse collapse" data-bs-parent="#accordionFlushStatus">
+                        <div class="accordion-body">
+                            <div class="row">
+                                <div class="col-lg-12">
+                                    <div class="table-responsive">
+                                        <table class="table table-hover table-sm table-bordered table-condensed">
+                                            <thead>
+                                                <tr class="table_header_style">
+                                                    <th>Proceso</th> 
+                                                    <th>Total</th> 
+                                                    <th>Fuera de alcance</th> 
+                                                    <th>Abierto</th> 
+                                                    <th>En revisión</th> 
+                                                    <th>En remediación</th> 
+                                                    <th>En auditoria</th> 
+                                                    <th>Completado</th>
+                                                </tr>
+                                            </thead> 
+                                            <tbody>
+                                                <t t-foreach="state.processedData" t-as="process" t-key="'n2p'+process.process_id">
+                                                    <tr style="cursor: pointer;" 
+                                                    t-on-click="() => this.openMitigation(process.registros_total)"
+                                                    >
+                                                        <td>
+                                                            <t t-out="process.process_name" />
+                                                        </td> 
+                                                        <td>
+                                                            <t t-out="process.total" />
+                                                        </td> 
+                                                        <td>
+                                                            <t t-out="process.is_not_scope" />
+                                                        </td> 
+                                                        <td>
+                                                            <t t-out="process.is_open" />
+                                                        </td> 
+                                                        <td>
+                                                            <t t-out="process.is_review" />
+                                                        </td> 
+                                                        <td>
+                                                            <t t-out="process.is_remediation" />
+                                                        </td> 
+                                                        <td>
+                                                            <t t-out="process.is_audit" />
+                                                        </td> 
+                                                        <td>
+                                                            <t t-out="process.is_completed" />
+                                                        </td>
+                                                    </tr>
+    
+                                                </t>
+                                            </tbody>
+                                        </table>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        </div>
+                    </div>
+                     
+                </div>
+                <t t-foreach="state.processedData" t-as="process"  t-key="'n2sp'+process.process_id">
+                    <CollapsibleCard title="'Nivel 2 - Estatus ' + process.process_name + ' (' + process.process_short_name + ')'" headerClass="' my-3 bg-primary'">
+                        <div class="row mb-3">
+                            <div class="col-lg-12">
+                                <div class="table-responsive">
+                                    <table class="table table-hover table-sm table-bordered table-condensed">
+                                        <thead>
+                                            <tr class="bg-secondary text-white ">
+                                                <th class="fw-bolder">Proceso</th> 
+                                                <th class="fw-bolder">Total</th> 
+                                                <th class="fw-bolder">Fuera de alcance</th> 
+                                                <th class="fw-bolder">Abierto</th> 
+                                                <th class="fw-bolder">En revisión</th> 
+                                                <th class="fw-bolder">En remediación</th> 
+                                                <th class="fw-bolder">En auditoria</th> 
+                                                <th class="fw-bolder">Completado</th>
+                                            </tr>
+                                        </thead> 
+                                        <tbody>
+                                             
+                                            <tr style="cursor: pointer;" 
+                                            t-on-click="() => this.openMitigation(process.registros_total)"
+                                            >
+                                                <td>
+                                                    <t t-out="process.process_name" />
+                                                </td> 
+                                                <td>
+                                                    <t t-out="process.total" />
+                                                </td> 
+                                                <td>
+                                                    <t t-out="process.is_not_scope" />
+                                                </td> 
+                                                <td>
+                                                    <t t-out="process.is_open" />
+                                                </td> 
+                                                <td>
+                                                    <t t-out="process.is_review" />
+                                                </td> 
+                                                <td>
+                                                    <t t-out="process.is_remediation" />
+                                                </td> 
+                                                <td>
+                                                    <t t-out="process.is_audit" />
+                                                </td> 
+                                                <td>
+                                                    <t t-out="process.is_completed" />
+                                                </td>
+                                            </tr>
+    
+                                        </tbody>
+                                    </table>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row mb-1">
+                            <div class="col-lg-12">
+                                <div class="table-responsive">
+                                    <table class="table table-hover table-sm table-bordered table-condensed">
+                                        <thead>
+                                            <tr class="table_header_style">
+                                                <th>Sub Proceso</th>
+                                                <th>Total</th> 
+                                                <th>Fuera de alcance</th> 
+                                                <th>Abierto</th> 
+                                                <th>En revisión</th> 
+                                                <th>En remediación</th> 
+                                                <th>En auditoria</th> 
+                                                <th>Completado</th>
+                                            </tr>
+                                        </thead> 
+                                        <tbody>
+                                            <t t-foreach="process.subProcesos" t-as="subp" t-key="'n2ss'+subp.sub_process_id">
+                                                <tr style="cursor: pointer;"
+                                                t-on-click="() => this.openMitigation(subp.registros_total)"
+                                                >
+                                                    <td>
+                                                        <t t-out="subp.sub_process_name" />
+                                                    </td> 
+                                                    <td>
+                                                        <t t-out="subp.total" />
+                                                    </td> 
+                                                    <td>
+                                                        <t t-out="subp.is_not_scope" />
+                                                    </td> 
+                                                    <td>
+                                                        <t t-out="subp.is_open" />
+                                                    </td> 
+                                                    <td>
+                                                        <t t-out="subp.is_review" />
+                                                    </td> 
+                                                    <td>
+                                                        <t t-out="subp.is_remediation" />
+                                                    </td> 
+                                                    <td>
+                                                        <t t-out="subp.is_audit" />
+                                                    </td> 
+                                                    <td>
+                                                        <t t-out="subp.is_completed" />
+    
+                                                    </td>
+                                                </tr>
+    
+                                            </t>
+                                        </tbody>
+                                    </table>
+                                </div>
+                            </div>
+                        </div>
+                    </CollapsibleCard>
+                </t>
+                
+            </div>
+        </Layout>
+    </t>
+</templates>

@@ -1,0 +1,123 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<templates xml:space="preserve">
+
+    <t t-name="tyt_risk_management.RiskMap" owl="1">
+
+        <div class="row">
+            <div class="col-12">
+
+                <div class="card shadow-sm">
+
+                    <div class="card-header d-flex justify-content-between align-items-center">
+                        <h3 class="card-title mb-0">
+                            <t t-out="props.title" />
+                        </h3>
+
+                        <button
+                            type="button"
+                            class="btn btn-sm btn-outline-secondary"
+                        >
+                            <i class="fa fa-plus"/>
+                        </button>
+                    </div>
+
+                    <div class="card-body">
+
+                        <div class="text-center mb-4">
+                            <h4 class="text-uppercase fw-bold">
+                                Mapa de riesgos
+                            </h4>
+                        </div>
+
+                        <div class="table-responsive d-flex justify-content-center">
+
+                            <table class="risk-map-table">
+
+                                <tbody>
+
+                                    <!-- FILAS DE IMPACTO -->
+                                    <t t-foreach="rows" t-as="row" t-key="row.impact">
+
+                                        <tr>
+
+                                            <t t-if="row_index === 0">
+                                                <td rowspan="4"
+                                                    class="risk-axis bg-secondary text-white">
+                                                    Impacto
+                                                </td>
+                                            </t>
+
+                                            <td t-att-class="'risk-impact-label ' + row.impactClass">
+
+                                                <span class="fw-bold text-uppercase">
+                                                    <t t-esc="row.impact"/>
+                                                </span>
+
+                                            </td>
+
+                                            <t t-foreach="row.quadrants"
+                                            t-as="quadrant"
+                                            t-key="quadrant.id">
+
+                                                <td class="p-1 border-0" t-attf-style="min-width: {{matrixSize * 50}} px">
+                                                    <RiskQuadrant
+                                                        risks="quadrant.risks"
+                                                        size="this.matrixSize"
+                                                        className="quadrant.className"
+                                                    />
+                                                </td>
+
+                                            </t>
+
+                                        </tr>
+
+                                    </t>
+
+                                    <!-- OCURRENCIA -->
+                                    <tr>
+
+                                        <td class="bg-secondary border-0"/>
+
+                                        <t t-foreach="occurrenceLevels"
+                                           t-as="level"
+                                           t-key="level.label">
+
+                                            <td 
+                                                t-att-class="'text-center fw-bold text-uppercase occurrence-label ' + level.class"
+                                            >
+                                                <t t-esc="level.label"/>
+                                            </td>
+
+                                        </t>
+
+                                    </tr>
+
+                                    <!-- EJE X -->
+                                    <tr>
+
+                                        <td
+                                            colspan="16"
+                                            class="bg-secondary text-white text-center text-uppercase fw-bold"
+                                        >
+                                            Ocurrencia
+                                        </td>
+
+                                    </tr>
+
+                                </tbody>
+
+                            </table>
+
+                        </div>
+
+                    </div>
+
+                </div>
+
+            </div>
+        </div>
+
+    </t>
+
+</templates>

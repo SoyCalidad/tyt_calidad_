@@ -9,13 +9,26 @@
                 <sheet>
                     <group>
                         <group>
+                            <field name="default_folder" invisible="1"  />
                             <field name="name" widget="url"/>
-                            <field name="file_id" />
+                            <field name="file_id" 
+                             context="{'default_folder_id': default_folder,
+                            'default_type': 'binary'}"
+                             />
                             <field name="description" />
                             <field name="risk_id" readonly="1" />
                             <field name="mitigation_id" readonly="1" />
                             <field name="plan_id" readonly="1" />
                             <field name="origin" invisible="1" force_save="1" />
+                        </group>
+                    </group>
+                    <group>
+                        <group invisible="not file_id">
+                            <button name="action_open_file"
+                                type="object"
+                                string="Ver archivo"
+                                class="btn btn-primary"/>
+                            
                         </group>
                     </group>
                 </sheet>
@@ -47,7 +60,7 @@
             <list>
                 <field name="department_id" />
                 <field name="id" />
-                <field name="domain_id" />
+                <field name="pdomain_id" />
                 <field name="process_id" />
                 <field name="subprocess_id" />
                 <field name="owner_id" />
@@ -126,13 +139,13 @@
                                 string="Completar"
                                 class="btn btn-success"
                                 type="object"
-                                invisible="not status=='under_review' and not context.get('is_for_complete', False)"
+                                invisible="not(status=='under_review' and context.get('is_for_complete', False))"
                             />
                             <button name="action_send_reject"
                                 string="Rechazar"
                                 class="btn btn-danger"
                                 type="object"
-                                invisible="not status=='under_review' or context.get('is_for_complete', False)"
+                                invisible="not (status=='under_review' and not context.get('is_for_complete', False))"
                             />
 
                         </group>
@@ -158,12 +171,12 @@
                         <group>
                             <field name="id" />
                             <field name="active"  />
-                            <field name="domain_id"  />
+                            <field name="pdomain_id" domain="[('level', '=', 1)]" />
                         </group>
                         
                         <group>
-                            <field name="process_id"   />
-                            <field name="subprocess_id"  />
+                            <field name="process_id" domain="[('level', '=', 2)]"   />
+                            <field name="subprocess_id" domain="[('level', '=', 3)]"  />
                         </group>
                     </group>
 
@@ -202,7 +215,8 @@
                         <field name="type_cf" placeholder="Seleccione" readonly="is_scheduled" />
                         <field name="write_date" string="Actualizado el" />
                         <field name="write_uid" string="Actualizado por" />
-                        <field name="department_id" readonly="is_scheduled" />
+                        <!-- <field name="department_id"  /> -->
+                        <field name="department_id" domain="[('x_studio_npp', '=', 1)]" />
                     </group>
                     <group  >
                         <group>
@@ -278,7 +292,7 @@
                     </group>
                     <group>
                         <field name="subprocess_id" readonly="1"  />
-                        <field name="domain_id" readonly="1"  />
+                        <field name="pdomain_id" readonly="1"  />
                     </group>
                 </group>
                 <group>
@@ -400,7 +414,7 @@
                     <group >
                         <group>
                             <field name="risk_id_id" readonly="1" />
-                            <field name="risk_id_domain_id" readonly="1" />
+                            <field name="risk_id_pdomain_id" readonly="1" />
                         </group>
                         
                         <group>
@@ -546,9 +560,9 @@
                     <field name="is_reviewer" invisible="1" />
                     <field name="can_create_documents" invisible="1" />
                     <group string="Mitigación revisor" name="reviewer_mitigation"
-                    invisible="not is_reviewer or status=='unmitigated'"
+                    invisible="not is_reviewer or status=='unmitigated' or mr_status_mitigation=='mitigated'"
                     >
-                            <separator string="Proceso de mitigación"></separator>
+                            <separator string="Proceso de mitigación "></separator>
                             <div class="row justify-content-end" colspan="4">
                                 <div class="col-auto">
                                     <label for="mr_period_str" string="Periodo" />
@@ -573,7 +587,11 @@
                                 />
                             </group>
                             <group>
-                                <field name="mr_maturity_level" readonly="1" force_save="1" />
+                                <field name="mr_maturity_level" readonly="1" 
+                                widget="badge"
+                                decoration-danger="mr_maturity_level"
+                                
+                                force_save="1" />
                                 <field name="mr_mitigation_date" readonly="1" />
                             </group>
                             <group>
@@ -645,13 +663,7 @@
                                 options="{'no_quick_create': True, 'no_create': True}"
                                 groups="tyt_risk_management.group_action_plan" >
                                     <list  edit="status=='pending'" create="0">
-                                        <button 
-                                        type="object"
-                                        name="action_attendance_action_plan"
-                                            string="Atender"
-                                            class="btn btn-warning"
-                                            invisible="status=='under_review'"
-                                        />
+                                         
                                         <button 
                                         type="object"
                                         name="action_attendance_action_plan"
@@ -680,8 +692,9 @@
                             </group>
                     </group>
                     <!--readonly review-->
+                    <field name="risk_activity_state" invisible="1" />
                     <group string="Mitigación revisor" name="reviewer_mitigation_only_read"
-                    invisible="not risk_id_reviewer_id or not (status == 'unmitigated' or status == 'pending' or status == 'under_review') or (is_reviewer or status!='under_review')"
+                    invisible="not risk_id_reviewer_id or not (status == 'unmitigated' or (status == 'pending' or not can_create_documents) or status == 'under_review') or (is_reviewer or status!='under_review')"
                     >
                             <separator string="Proceso de mitigación"></separator>
                             <div class="row justify-content-end" colspan="4">
@@ -694,7 +707,9 @@
                                 <field name="status" readonly="1" 
                                 widget="badge"
                                 decoration-warning="status=='under_review'"
+                                invisible="mr_status_mitigation =='mitigated'"
                                 />
+                                <field name="mr_status_mitigation" invisible="not (risk_activity_state=='monitoring')" />
                                 <field name="risk_id_quantification" readonly="1" 
                                 string="Riesgo inherente" />
                             </group>
@@ -706,6 +721,7 @@
                                 <field name="mr_maturity_level" readonly="1" 
                                 widget="badge"
                                 decoration-danger="mr_maturity_level=='none'"
+
                                 />
                                 <field name="mr_mitigation_date" readonly="1" />
                             </group>
@@ -762,7 +778,7 @@
                                         name="action_attendance_action_plan"
                                             string="Atender"
                                             class="btn btn-warning"
-                                            invisible="status=='under_review'"
+                                            invisible="not (status=='pending')"
                                         />
                                         <button 
                                         type="object"
@@ -779,6 +795,206 @@
                                             context="{'is_for_complete': False, 'show_buttons': True}"
                                             invisible="not status=='under_review'"
                                         />
+                                        <field name="sequence" widget="handle" />
+                                        <field name="name" />
+                                        <field name="user_id" />
+                                        <field name="remediation_date" />
+                                        <field name="status" 
+                                        decoration-warning="status=='under_review'"
+                                        decoration-muted="status=='pending'"
+                                        />
+                                    </list>
+                                </field>
+                            </group>
+                    </group>
+                    <!--readnoly for owner-->
+                    <group string="Mitigación revisor" name="reviewer_mitigation_only_read"
+                    invisible="not(status == 'pending' and can_create_documents )"
+                    >
+                            <separator string="Proceso de mitigación"></separator>
+                            <div class="row justify-content-end" colspan="4">
+                                <div class="col-auto">
+                                    <label for="mr_period_str" string="Periodo" />
+                                    <field name="mr_period_str" nolabel="1" />
+                                </div>
+                            </div>
+                            <group>
+                                <field name="status" readonly="1" 
+                                widget="badge"
+                                decoration-warning="status=='under_review'"
+                                />
+                                <field name="risk_id_quantification" readonly="1" 
+                                string="Riesgo inherente" />
+                            </group>
+                            <group>
+                                <field name="mr_degree_mitigation" readonly="1" />
+                                <field name="mr_residual_risk" readonly="1" />
+                            </group>
+                            <group>
+                                <field name="mr_maturity_level" readonly="1" 
+                                widget="badge"
+                                decoration-danger="mr_maturity_level=='none'"
+
+                                />
+                                <field name="mr_mitigation_date" readonly="1" />
+                            </group>
+                            <group>
+                                <field name="month" readonly="1" />
+                                <field name="mr_level_compliance" readonly="1"
+                                 />
+                            </group>
+                            <group>
+                                <field name="year" widget="integer" readonly="1" />
+                            </group>
+                            <separator string="Calificación del riesgo"> </separator>
+                            <div class="row ms-1 gx-3" colspan="4">
+                                <div class="col-3 me-2">
+                                    <span class="fw-bold">Antes de controles</span>
+                                </div>
+                                <div class="col-3 me-2">
+                                    <span class="fw-bold">Despúes de controles</span>
+                                </div>
+                            </div>
+                            <div class="row gx-3 ms-1" colspan="4">
+                                <div class="col-3 me-2">
+                                    <field name="before_control" widget="badge" readonly="1" 
+                                    decoration-success="before_control=='minor'"
+                                    decoration-warning="before_control=='significant'"
+                                    decoration-danger="before_control=='higher'"
+                                    
+                                    />
+                                </div>
+                                <div class="col-3 me-2">
+                                    <field name="after_control" widget="badge" readonly="1"
+                                    decoration-success="after_control=='minor'"
+                                    decoration-warning="after_control=='significant'"
+                                    decoration-danger="after_control=='higher'"
+                                    
+                                    />
+
+                                </div>
+                                
+                            </div>
+                            <field name="mr_action_plan_ids_count" invisible="1" groups="tyt_risk_management.group_action_plan" />
+                            <separator groups="tyt_risk_management.group_action_plan" invisible="mr_action_plan_ids_count==0" string="Planes de acción"></separator>
+                             
+                            <group colspan="4" invisible="mr_action_plan_ids_count==0" groups="tyt_risk_management.group_action_plan">
+                                <label for="mr_action_plan_ids" />
+                                <field name="mr_action_plan_ids"
+                                nolabel="1"
+                                colspan="4"
+                                options="{'no_quick_create': True, 'no_create': True}"
+                                groups="tyt_risk_management.group_action_plan" >
+                                    <list  edit="status=='pending'" create="0">
+                                        <button 
+                                        type="object"
+                                        name="action_attendance_action_plan"
+                                            string="Atender"
+                                            class="btn btn-warning"
+                                            invisible="not (status=='pending')"
+                                        />
+                                         
+                                        <field name="sequence" widget="handle" />
+                                        <field name="name" />
+                                        <field name="user_id" />
+                                        <field name="remediation_date" />
+                                        <field name="status" 
+                                        decoration-warning="status=='under_review'"
+                                        decoration-muted="status=='pending'"
+                                        />
+                                    </list>
+                                </field>
+                            </group>
+                    </group>
+                    <!--readnoly for monitoring-->
+                    <group string="Mitigación revisor" name="reviewer_mitigation_only_read"
+                    invisible="not(risk_activity_state == 'monitoring' )"
+                    >
+                            <separator string="Proceso de mitigación"></separator>
+                            <div class="row justify-content-end" colspan="4">
+                                <div class="col-auto">
+                                    <label for="mr_period_str" string="Periodo" />
+                                    <field name="mr_period_str" nolabel="1" />
+                                </div>
+                            </div>
+                            <group>
+                                <field name="mr_status_mitigation" readonly="1" 
+                                widget="badge"
+                                decoration-warning="mr_status_mitigation=='partialmitigated'"
+                                decoration-muted="mr_status_mitigation=='unmitigated'"
+                                decoration-success="mr_status_mitigation == 'mitigated'"
+                                />
+                                <field name="risk_id_quantification" readonly="1" 
+                                string="Riesgo inherente" />
+                            </group>
+                            <group>
+                                <field name="mr_degree_mitigation" readonly="1" />
+                                <field name="mr_residual_risk" readonly="1" />
+                            </group>
+                            <group>
+                                <field name="mr_maturity_level" readonly="1" 
+                                widget="badge"
+                                decoration-danger="mr_maturity_level=='none'"
+
+                                />
+                                <field name="mr_mitigation_date" readonly="1" />
+                            </group>
+                            <group>
+                                <field name="month" readonly="1" />
+                                <field name="mr_level_compliance" readonly="1"
+                                 />
+                            </group>
+                            <group>
+                                <field name="year" widget="integer" readonly="1" />
+                            </group>
+                            <separator string="Calificación del riesgo"> </separator>
+                            <div class="row ms-1 gx-3" colspan="4">
+                                <div class="col-3 me-2">
+                                    <span class="fw-bold">Antes de controles</span>
+                                </div>
+                                <div class="col-3 me-2">
+                                    <span class="fw-bold">Despúes de controles</span>
+                                </div>
+                            </div>
+                            <div class="row gx-3 ms-1" colspan="4">
+                                <div class="col-3 me-2">
+                                    <field name="before_control" widget="badge" readonly="1" 
+                                    decoration-success="before_control=='minor'"
+                                    decoration-warning="before_control=='significant'"
+                                    decoration-danger="before_control=='higher'"
+                                    
+                                    />
+                                </div>
+                                <div class="col-3 me-2">
+                                    <field name="after_control" widget="badge" readonly="1"
+                                    decoration-success="after_control=='minor'"
+                                    decoration-warning="after_control=='significant'"
+                                    decoration-danger="after_control=='higher'"
+                                    
+                                    />
+
+                                </div>
+                                
+                            </div>
+                            <field name="mr_action_plan_ids_count" invisible="1" groups="tyt_risk_management.group_action_plan" />
+                            <separator groups="tyt_risk_management.group_action_plan" invisible="mr_action_plan_ids_count==0" string="Planes de acción"></separator>
+                             
+                            <group colspan="4" invisible="mr_action_plan_ids_count==0" groups="tyt_risk_management.group_action_plan">
+                                <label for="mr_action_plan_ids" />
+                                <field name="mr_action_plan_ids"
+                                nolabel="1"
+                                colspan="4"
+                                options="{'no_quick_create': True, 'no_create': True}"
+                                groups="tyt_risk_management.group_action_plan" >
+                                    <list  edit="status=='pending'" create="0">
+                                        <button 
+                                        type="object"
+                                        name="action_attendance_action_plan"
+                                            string="Atender"
+                                            class="btn btn-warning"
+                                            invisible="not (status=='pending')"
+                                        />
+                                         
                                         <field name="sequence" widget="handle" />
                                         <field name="name" />
                                         <field name="user_id" />
@@ -872,7 +1088,7 @@
                                         name="action_attendance_action_plan"
                                             string="Atender"
                                             class="btn btn-warning"
-                                            invisible="status=='under_review'"
+                                            invisible="not (status=='pending')"
                                         />
                                         <button 
                                         type="object"
@@ -902,18 +1118,140 @@
                             </group>
                     </group>
 
-                    <group string="Proceso de auditoria" invisible="status!='mitigated' or is_auditor">
+                    <!--only read-->
+                    <group string="Proceso de auditoria" invisible="not ((status=='under_review' or status=='mitigated') and mr_status_mitigation == 'mitigated'  )">
+                        <div class="row justify-content-end" colspan="4">
+                                <div class="col-auto">
+                                    <label for="ma_period_str" string="Periodo" />
+                                    <field name="ma_period_str" nolabel="1" />
+                                </div>
+                            </div>
                         <group>
-                            <field name="status_audit" readonly="1"  />
-                            <field name="ma_degree_mitigation" string="Avance de auditoria " />
+                            <field name="ma_status_mitigation" readonly="1"  />
+                            <field name="ma_degree_mitigation" string="Avance de auditoria " readonly="1" />
                             <field name="risk_id_quantification" />
                         </group>
                         <group>
                             <field name="ma_residual_risk" />
-                            <field name="ma_mitigation_date" />
-                            <field name="ma_level_compliance" />
+                            <field name="ma_mitigation_date" invisible="not ma_mitigation_date" />
+                            <field name="ma_level_compliance" invisible="not ma_level_compliance" readonly="1" />
 
                         </group>
+                        <separator string="Planes de acción"></separator>
+
+                             
+                            <field name="ma_all_action_plans_complete" invisible="1" />
+                             
+                            <group colspan="4">
+                                <label for="ma_action_plan_ids" />
+                                <field name="ma_action_plan_ids"
+                                nolabel="1"
+                                colspan="4"
+                                readonly="not (is_reviewer and status!='mitigated')"
+                                options="{'no_quick_create': True, 'no_create': True}"
+                                groups="tyt_risk_management.group_action_plan" >
+                                    <list  edit="status=='pending'" create="0">
+                                        <button 
+                                        type="object"
+                                        name="action_attendance_action_plan"
+                                            string="Atender"
+                                            class="btn btn-warning"
+                                            invisible="not (status=='pending')"
+                                        /> 
+                                        <field name="sequence" widget="handle"/>
+                                        <field name="name" />
+                                        <field name="user_id" />
+                                        <field name="remediation_date" />
+                                        <field name="status" 
+                                        decoration-warning="status=='under_review'"
+                                        decoration-muted="status=='pending'"
+                                        decoration-success="status=='complete'"
+
+                                        />
+                                    </list>
+                                </field>
+                            </group>
+                    </group>
+                    <!--auditor-->
+                    <group string="Proceso de auditoria" invisible="not (status=='under_review' and mr_status_mitigation == 'mitigated' and is_auditor  )">
+                        <div class="row justify-content-end" colspan="4">
+                                <div class="col-auto">
+                                    <label for="ma_period_str" string="Periodo" />
+                                    <field name="ma_period_str" nolabel="1" />
+                                </div>
+                            </div>
+                        <group>
+                            <field name="ma_status_mitigation"  />
+                            <field name="ma_degree_mitigation" 
+                            domain="[('status', '=', mr_status_mitigation)]" string="Avance de auditoria "  />
+                            <field name="risk_id_quantification" />
+                            
+                        </group>
+                        <group>
+                            <field name="ma_residual_risk" />
+                            <field name="ma_mitigation_date" readonly="1" invisible="not ma_mitigation_date" />
+                            <field name="ma_level_compliance" invisible="not ma_level_compliance" readonly="1" />
+
+                        </group>
+                        <group>
+                            <field name="ma_recommendation" colspan="2"/>
+                            
+                        </group>
+                        <separator string="Planes de acción"></separator>
+
+                            <div class="row justify-content-end mt-2" colspan="4">
+                                <div class="col-auto">
+                                    <button string="Agregar plan de acción" 
+                                    name="action_create_action_plan_audit"
+                                    class="btn btn-primary"
+                                    type="object"
+                                    />
+                                </div>
+                            </div>
+                            <field name="ma_all_action_plans_complete" invisible="1" />
+                            <div invisible="not ma_all_action_plans_complete" class="row mt-2" colspan="4">
+                                <div class="text-primary">
+                                    Todos los planes de acción estan completados ya es posible asignar el status de mitigado.
+                                </div>
+                            </div>
+                            <group colspan="4">
+                                <label for="ma_action_plan_ids" />
+                                <field name="ma_action_plan_ids"
+                                nolabel="1"
+                                colspan="4"
+                                readonly="status=='mitigated'"
+                                options="{'no_quick_create': True, 'no_create': True}"
+                                groups="tyt_risk_management.group_action_plan" >
+                                    <list  edit="status=='pending'" create="0">
+                                         
+                                        <button 
+                                        type="object"
+                                        name="action_attendance_action_plan"
+                                            string="Completar"
+                                            class="btn btn-success"
+                                            context="{'is_for_complete': True, 'show_buttons': True}"
+                                            invisible="not status=='under_review'"
+                                        />
+                                        <button name="action_attendance_action_plan"
+                                            string="Rechazar"
+                                            type="object"
+                                            class="btn btn-danger"
+                                            context="{'is_for_complete': False, 'show_buttons': True}"
+                                            invisible="not status=='under_review'"
+                                        />
+                                        <field name="sequence" widget="handle"/>
+                                        <field name="name" />
+                                        <field name="user_id" />
+                                        <field name="remediation_date" />
+                                        <field name="status" 
+                                        widget="badge"
+                                        decoration-warning="status=='under_review'"
+                                        decoration-muted="status=='pending'"
+                                        decoration-success="status=='complete'"
+                                        />
+                                    </list>
+                                </field>
+                            </group>
                     </group>
 
                 </sheet>
@@ -934,7 +1272,7 @@
                 decoration-warning="risk_activity_state == 'action_plan'"
                 decoration-muted="risk_activity_state == 'mitigation'" 
                 />
-                <field name="risk_id_domain_id" />
+                <field name="risk_id_pdomain_id" />
                 <field name="risk_id_process_id" />
                 <field name="risk_id_subprocess_id" />
                 <field name="period_str" />
@@ -969,21 +1307,6 @@
 
     
 
-    <record id="action_risk_monitoring" model="ir.actions.act_window">
-        <field name="name">Monitoreo</field>
-        <field name="res_model">tyt.risk.mitigation</field>
-        <field name="view_mode">list,form</field>
-        <field name="domain"> [('mitigation_date', '&lt;=', (context_today() + relativedelta(months=1, day=1)))]</field>
-        <field name="view_ids" 
-         eval="[(5, 0, 0),
-                (0, 0, {'view_mode': 'list', 'view_id': ref('view_risk_mitigation_my_activity_list')}),
-                (0, 0, {'view_mode': 'form', 'view_id': ref('view_risk_mitigation_my_activity_form')})]"
-         />
-        <field name="context">{
-            'search_default_owner_id': uid,
-        }</field>
-    </record>
-
     <record id="view_risk_management_search" model="ir.ui.view">
         <field name="name">tyt.risk.management.search</field>
         <field name="model">tyt.risk.management</field>
@@ -1000,7 +1323,7 @@
                 
                 <!-- Filtro por campo -->
                 <field name="owner_id"/>
-                <field name="domain_id"/>
+                <field name="pdomain_id"/>
                 <field name="process_id"/>
                 <field name="subprocess_id"/>
                 <field name="frequency_id"/>
@@ -1038,7 +1361,7 @@
                 
                 <!-- Filtro por campo -->
                 <field name="risk_id_owner_id"/>
-                <field name="risk_id_domain_id"/>
+                <field name="risk_id_pdomain_id"/>
                 <field name="risk_id_process_id"/>
                 <field name="risk_id_subprocess_id"/>
                 <field name="risk_id_frequency_id"/>

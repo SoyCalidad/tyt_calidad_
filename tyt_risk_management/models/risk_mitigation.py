@@ -60,6 +60,9 @@ class RiskMitigation(models.Model):
     risk_id_domain_id = fields.Many2one(
         related="risk_id.domain_id"
     )
+    risk_id_pdomain_id = fields.Many2one(
+        related="risk_id.pdomain_id"
+    )
     risk_id_subprocess_id = fields.Many2one(
         related="risk_id.subprocess_id",
         store=True
@@ -92,7 +95,7 @@ class RiskMitigation(models.Model):
             ('partially_mitigated', 'Parcialmente Mitigado'),
             ('under_review', 'En revisión'), #amarillo
 
-            ('pending', 'Pendiente'), # when existe some plan action pendient
+            ('pending', 'Pendiente'), # when existe some plan action pendient 
             ('complete', 'Completado'),
         ],
         string="Estatus",
@@ -105,10 +108,6 @@ class RiskMitigation(models.Model):
             ('unmitigated', 'No Mitigado'), # create a mitigation
             ('mitigated', 'Mitigado'), # owner notify reviewer
             ('partially_mitigated', 'Parcialmente Mitigado'),
-            ('under_review', 'En revisión'), #amarillo
-
-            ('pending', 'Pendiente'), # when existe some plan action pendient
-            ('complete', 'Completado'),
         ],
         string="Estatus de auditoria",
         default="unmitigated",
@@ -295,9 +294,12 @@ class RiskMitigation(models.Model):
     #     string="Grado de mitigación",
     #     default="0",
     # )
+    def _default_mr_degree_mitigation(self):
+        return self.env.ref('tyt_risk_management.unmitigated_0').id 
     mr_degree_mitigation = fields.Many2one(
         comodel_name='tyt.risk.degree.mitigation',
         string="Grado de mitigación",
+        default="_default_mr_degree_mitigation"
     )
     mr_residual_risk = fields.Float(string="Riesgo residual", compute="_compute_mr_residual_risk")
 
@@ -340,7 +342,7 @@ class RiskMitigation(models.Model):
         selection=[
             ('programmed', 'Programado'),
             ('unaccepted', 'No Atendido'),
-            ('ontime', 'A Tiempo') # TODO: Check one use
+            ('ontime', 'A Tiempo') # TODO: Check one use, is compute with mitigation date
         ],
         string="Grado de cumplimiento", default="programmed")
     mr_action_plan_ids = fields.One2many(
@@ -404,13 +406,15 @@ class RiskMitigation(models.Model):
             ('partialmitigated', 'Parcialmente Mitigado'),
             ('mitigated', 'Mitigado'),
         ],
-        string="Estatus de mitigación",
+        string="Estatus de auditoria",
     )
     ma_degree_mitigation = fields.Many2one(
         comodel_name='tyt.risk.degree.mitigation',
-        string="Grado de mitigación"
+        string="Grado de mitigación",
+        default="_default_mr_degree_mitigation"
     )
     ma_residual_risk = fields.Float(string="Riesgo residual", compute="_compute_ma_residual_risk")
+    ma_recommendation = fields.Text(string="Recomendación del auditor")
 
     @api.depends('risk_id_quantification', 'ma_degree_mitigation')
     def _compute_ma_residual_risk(self):
@@ -440,7 +444,7 @@ class RiskMitigation(models.Model):
     ma_level_compliance = fields.Char(string="Grado de cumplimiento", default="Programado")
     ma_action_plan_ids = fields.One2many(
         comodel_name='tyt.risk.action.plan',
-        inverse_name='risk_id',
+        inverse_name='mitigation_id',
         string="Plan de acción",
         domain=[('origin', '=', 'audit')]
     )
@@ -524,7 +528,7 @@ class RiskMitigation(models.Model):
             'context': {
                 'default_risk_id': self.risk_id.id,
                 'default_mitigation_id': self.id,
-                'default_user_id': self.risk_id_owner_id.id,
+                'default_user_id': self.risk_id_reviewer_id.id,
                 'default_origin': 'audit',
             }
         }
@@ -622,7 +626,6 @@ class RiskMitigation(models.Model):
         current_year = today.year
         current_month = today.month # Entero 1-12
 
-        # Buscamos solo los que no están mitigados aún para ahorrar recursos
         mitigations = self.search([])
 
         for rec in mitigations:
@@ -660,6 +663,37 @@ class RiskMitigation(models.Model):
 
 
     def write(self, vals):
-        if 'status' in vals and vals['status'] == 'mitigated':
+        if 'mr_status_mitigation' in vals and vals['mr_status_mitigation'] == 'mitigated':
             vals['mr_mitigation_date'] = fields.Datetime.now().date()
+            vals['mr_level_compliance'] = 'ontime'
+            vals['status'] = 'under_review' # en revision por el auditor 
+            vals['risk_activity_state'] = 'monitoring'
+
+        if 'ma_status_mitigation' in vals and vals['ma_status_mitigation'] == 'mitigated':
+            vals['ma_mitigation_date'] = fields.Datetime.now().date()
+            vals['ma_level_compliance'] = 'A tiempo' # tambien hay fuera de periodo
+            vals['status'] = 'mitigated' 
         return super().write(vals)
+
+    @api.model
+    def get_available_years(self):
+        # Usamos f-string para inyectar dinámicamente el nombre de la tabla
+        # Odoo guarda el nombre real de la tabla en el atributo privado _table
+        query = f"""
+            SELECT DISTINCT year 
+            FROM {self._table} 
+            WHERE year IS NOT NULL 
+            ORDER BY year DESC
+        """
+        
+        self.env.cr.execute(query)
+        
+        # Obtenemos solo el primer elemento de cada tupla en el resultado
+        return [r[0] for r in self.env.cr.fetchall()]
+        
+
+    def get_form_action_id(self):
+        action = self.env.ref("tyt_risk_management.action_risk_my_activity")
+        return action.id
+
+    

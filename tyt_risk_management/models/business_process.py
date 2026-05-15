@@ -159,7 +159,11 @@ class BusinessProcess(models.Model):
             'res_model': self._name,
             'view_mode': 'list',
             'domain': [('id', 'in', self.child_ids.ids)],
-            'context': {'default_parent_id': self.id},
+            'context': {
+                'default_parent_id': self.id,
+                'default_owner_id': self.owner_id.id,
+                'default_department_id': self.department_id.id,    
+            },
             'target': 'current',
             'views': [(vista_lista_id, 'list'), (False, 'form')], 
 

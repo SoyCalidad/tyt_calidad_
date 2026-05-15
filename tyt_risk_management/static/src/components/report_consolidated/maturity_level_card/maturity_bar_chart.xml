@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<templates xml:space="preserve">
+
+    <t t-name="tyt_risk_management.MaturityBarChart">
+
+        <div class="card shadow-sm h-100">
+
+            <div class="card-header">
+                <h3 class="card-title mb-0">
+                    <t t-esc="props.title"/>
+                </h3>
+            </div>
+
+            <div class="card-body">
+
+                <div class="maturity-chart-container">
+                    <canvas t-ref="chart"/>
+                </div>
+
+            </div>
+
+        </div>
+
+    </t>
+
+</templates>

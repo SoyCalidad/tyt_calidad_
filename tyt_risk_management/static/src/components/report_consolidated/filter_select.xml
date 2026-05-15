@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<templates xml:space="preserve">
+
+    <t t-name="my_module.FilterSelect">
+        <div class="" t-att-class="'filter-item col-lg ' + (props.mainClass || '')">
+            <label class="form-label">
+                <t t-esc="props.label"/>
+            </label>
+
+            <select
+                class="form-select"
+                t-att-name="props.name"
+                t-on-change="onChange"
+            >
+                <option value="">
+                    <t t-esc="props.placeholder || 'Todo'"/>
+                </option>
+
+                <t t-foreach="props.options"
+                   t-as="option"
+                   t-key="props.name + '-' +option.value">
+
+                    <option
+                        t-att-value="option.value"
+                        t-att-selected="props.value === option.value ? true : undefined"
+                    >
+                        <t t-esc="option.label"/>
+                    </option>
+
+                </t>
+            </select>
+        </div>
+    </t>
+
+</templates>

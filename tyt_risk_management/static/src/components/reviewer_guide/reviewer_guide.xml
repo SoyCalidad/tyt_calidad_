@@ -14,7 +14,7 @@
                         <tbody>
                             <tr>
                                 <td>
-                                    <label class="badge bg-danger">No existe</label>
+                                    <label class="badge rounded bg-danger">No existe</label>
                                 </td>
                                 <td>0 %</td>
                                 <td width="500"><b>Control diseñado pero no operando. </b> No existe
@@ -22,7 +22,7 @@
                             </tr>
                             <tr>
                                 <td>
-                                    <label class="badge bg-warning">Inicial</label>
+                                    <label class="badge bg-warning rounded">Inicial</label>
                                 </td>
                                 <td>25 %</td>
                                 <td width="500"><b>Control operando en su etapa inicial. </b> Existe
@@ -36,7 +36,7 @@
                             </tr>
                             <tr>
                                 <td>
-                                    <label class="badge bg-warning">Limitado</label>
+                                    <label class="badge bg-warning rounded">Limitado</label>
                                 </td>
                                 <td>50 %</td>
                                 <td width="500"><b>Control operando limitadamente. </b> Existe
@@ -46,7 +46,7 @@
                             </tr>
                             <tr>
                                 <td>
-                                    <label class="badge bg-warning">Definido</label>
+                                    <label class="badge bg-warning rounded">Definido</label>
                                 </td>
                                 <td>75 %</td>
                                 <td width="500"><b>Control operando con áreas de mejora.</b> Existe
@@ -59,7 +59,7 @@
                             </tr>
                             <tr>
                                 <td>
-                                    <label class="badge bg-success">Optimizado</label>
+                                    <label class="badge bg-success rounded">Optimizado</label>
                                 </td>
                                 <td>100 %</td>
                                 <td width="500"><b>Control operando efectivamente. </b> La

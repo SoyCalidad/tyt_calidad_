@@ -1,0 +1,110 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<templates xml:space="preserve">
+
+    <t t-name="tyt_risk_management.ReportConsolidated">
+        <Layout display="display" className="'o_dashboard h-100 mt-2 overflow-y-auto'">
+            <div class="row m-2">
+                <div class="col-12">
+                    <div class="card shadow-sm level3-filter-card">
+                        <div class="card-header">
+                            <h3 class="card-title mb-0">
+                                Nivel 3 - Consolidado
+                            </h3>
+                        </div>
+            
+                        <div class="card-body">
+            
+                            <div class="row g-3 align-items-end">
+            
+                                <FilterSelect
+                                    label="'Departamento'"
+                                    name="'department_id'"
+                                    value="state.filters.deparment_id"
+                                    options="state.deparments"
+                                    onChange.bind="updateFilter"
+                                    mainClass="'col-md-3'"
+                                />
+            
+                                <FilterSelect
+                                    label="'Dominio'"
+                                    name="'dominio'"
+                                    value="state.filters.dominio"
+                                    options="state.domains"
+                                    onChange.bind="updateFilter"
+                                    mainClass="'col-md-3'"
+                                />
+            
+                                <FilterSelect
+                                    label="'Proceso'"
+                                    name="'proceso'"
+                                    value="state.filters.proceso"
+                                    options="state.processes"
+                                    onChange.bind="updateFilter"
+                                    mainClass="'col-md-3'"
+                                />
+            
+                                <FilterSelect
+                                    label="'Año'"
+                                    name="'year'"
+                                    value="state.filters.year"
+                                    options="state.years"
+                                    onChange.bind="updateFilter"
+                                    mainClass="'col-md-2'"
+                                />
+            
+                                <FilterSelect
+                                    label="'Mes'"
+                                    name="'month'"
+                                    value="state.filters.month"
+                                    options="monthOptions"
+                                    onChange.bind="updateFilter"
+                                    mainClass="'col-md-2'"
+                                />
+            
+                                <div class="col-12 col-lg-auto">
+            
+                                    <button
+                                        class="btn btn-primary w-100"
+                                        t-on-click="onSearch"
+                                    >
+                                        Buscar
+                                    </button>
+            
+                                </div>
+            
+                            </div>
+            
+                        </div>
+            
+                    </div>
+                </div>
+            </div>
+            <div class="row m-2">
+                <div class="col-12">
+                    <RiskSectionCard title="'Mitigación'"
+                    data_status_risk="[144,2,2]"
+                    />
+                </div>
+            </div>
+            <div class="row m-2">
+                <div class="col-12">
+                    <RiskSectionCard title="'Monitoreo'" data_status_risk="[122, 0,0]" />
+                </div>
+            </div>
+            <div class="row m-2">
+                <div class="col-12">
+                    <MaturityLevelCard  />
+                </div>
+            </div>
+            <div class="row m-2">
+                <div class="col-12">
+                    <RiskMap title="'Mapa de riesgos (Mitigación)'" />
+                </div>
+            </div>
+
+
+        </Layout>
+
+    </t>
+
+</templates>

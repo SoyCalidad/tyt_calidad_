@@ -12,9 +12,12 @@
         'hr',
     ],
     'data': [
+        'data/documents_document.xml',
+        
         'security/group.xml',
         'security/ir.model.access.csv',
         'security/ir_rule.xml',
+
 
         'views/business_process_views.xml',
         'views/risk_management_views.xml',
@@ -22,6 +25,7 @@
         'views/res_users_views.xml',
         'views/action_plan_views.xml',
         'views/risk_mitigation_views.xml',
+        'views/reports_templates.xml',
         'views/menus.xml',
 
         'wizard/risk.xml',

@@ -30,6 +30,8 @@
                 
             ]
         </field>
+        <field name="groups" eval="[(4, ref('tyt_risk_management.group_usuario')), (4, ref('tyt_risk_management.group_consulta'))]"/>
+
     </record>
     <record id="risk_admin_rule" model="ir.rule">
         <field name="name">Admin full access</field>

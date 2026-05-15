@@ -1,0 +1,159 @@
+.risk-map-table {
+    border-collapse: separate;
+    border-spacing: 4px;
+
+    td {
+        min-width: 48px;
+        height: 80px;
+        border-radius: 0.5rem;
+    }
+}
+
+/* Eje vertical */
+.impact-axis {
+    writing-mode: vertical-rl;
+    transform: rotate(180deg);
+    text-align: center;
+    vertical-align: middle;
+    padding: 0.5rem;
+    font-weight: 600;
+    text-transform: uppercase;
+}
+
+/* Labels laterales */
+.impact-label {
+    writing-mode: vertical-rl;
+    transform: rotate(180deg);
+    text-align: center;
+    vertical-align: middle;
+    padding: 0.5rem;
+    min-width: 40px;
+}
+
+/* Labels inferiores */
+.occurrence-label {
+    height: 40px !important;
+    vertical-align: middle;
+}
+
+/* Cuadrantes */
+
+.risk-cell {
+    transition: all 0.2s ease;
+    cursor: pointer;
+
+    &:hover {
+        transform: scale(1.02);
+        box-shadow: 0 0 8px rgba(0, 0, 0, 0.15);
+    }
+}
+
+/* Colores */
+
+.risk-green {
+    background-color: #b6d7a8;
+}
+
+.risk-yellow-1 {
+    background-color: #ffe599;
+}
+
+.risk-yellow-2 {
+    background-color: #f1c232;
+}
+
+.risk-red {
+    background-color: #e06666;
+}
+
+/* Bootstrap fallback */
+
+.bg-warning-light {
+    background-color: #ffe599;
+}
+
+.risk-map-table {
+    border-collapse: separate;
+    border-spacing: 6px;
+}
+
+.risk-axis {
+    writing-mode: vertical-rl;
+    transform: rotate(180deg);
+    vertical-align: middle;
+    text-align: center;
+    min-width: 40px;
+    font-weight: 600;
+}
+
+.risk-impact-label {
+    writing-mode: vertical-rl;
+    transform: rotate(180deg);
+    text-align: center;
+    width: 40px;
+    min-width: 40px;
+}
+
+.risk-impact-high {
+    background: #e06666;
+}
+
+.risk-impact-medium {
+    background: #f1c232;
+}
+
+.risk-impact-low {
+    background: #ffe599;
+}
+
+.risk-occurrence-label {
+    text-align: center;
+    background: #f8f9fa;
+    padding: 0.5rem;
+}
+
+/* QUADRANTS */
+
+.risk-quadrant {
+    display: grid;
+    grid-template-columns: repeat(5, 42px);
+    grid-template-rows: repeat(5, 42px);
+    gap: 4px;
+    padding: 6px;
+    border-radius: 0.75rem;
+}
+
+/* COLORS */
+
+.risk-green {
+    background: #b6d7a8;
+}
+
+.risk-yellow-1 {
+    background: #ffe599;
+}
+
+.risk-yellow-2 {
+    background: #f1c232;
+}
+
+.risk-red {
+    background: #e06666;
+}
+
+/* CELLS */
+
+.risk-cell {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.risk-badge {
+    width: 34px;
+    height: 34px;
+    border-radius: 50%;
+    padding: 0;
+    font-size: 0.75rem;
+    font-weight: 600;
+}

@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<templates xml:space="preserve">
+
+    <t t-name="tyt_risk_management.StatInfoCard">
+
+        <div class="risk-stat-card border p-1 rounded d-flex w-100">
+
+            <div
+                class="risk-stat-icon"
+                  t-att-style="'background-color: ' + props.color"
+            >
+                <i t-att-class="props.icon"/>
+            </div>
+
+            <div class="risk-stat-content px-2">
+                <div class="risk-stat-title d-block overflow-hidden">
+                    <t t-esc="props.title"/>
+                </div>
+
+                <div class="risk-stat-value mt-1 d-block fw-bold">
+                    <t t-esc="props.value"/>
+                </div>
+            </div>
+
+        </div>
+
+    </t>
+
+</templates>

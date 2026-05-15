@@ -1,0 +1,35 @@
+<templates xml:space="preserve">
+    <t t-name="tyt_risk_management.report_dashboard">
+        <Layout>
+            <div class="container">
+    
+                <div class="row gx-1 mt-3">
+                    <t t-foreach="reports" t-as="r" t-key="r.name">
+                        
+                        <div class="col-md-3 col-sm-4 ">
+                            <div class="card py-1 shadow-sm " style="cursor: pointer;"
+                                 t-on-click="() => this.openReport(r.action)">
+                                <div class="card-body text-center">
+                                    <i t-att-class="'fa ' + r.icon"
+                                    style="font-size: 2.5rem;
+                                    margin-bottom: 10px;
+                                    color: #007bff;"
+                                    />
+                                    <h5 class="card-title fw-bold fs-4">
+                                        <t t-esc="r.name"/>
+                                    </h5>
+                                </div>
+                                
+        
+                            </div>
+
+                        </div>
+    
+                    </t>
+                </div>
+    
+            </div>
+
+        </Layout>
+    </t>
+</templates>

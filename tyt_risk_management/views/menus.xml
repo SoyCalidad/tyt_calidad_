@@ -1,60 +1,81 @@
 <odoo>
     <menuitem id="menu_business_process_root" name="Gestión de riesgos" sequence="10">
 
-        <menuitem id="my_activities_menu" sequence="0" name="Mis actividades " 
-        action="action_risk_my_activity"
+        <menuitem id="my_activities_menu" sequence="0" name="Mis actividades "
+            action="action_risk_my_activity"
         />
         <menuitem id="admin_menu" name="Administración" sequence="10">
 
-            <menuitem id="menu_user" name="Usuarios" action="base.action_res_users" sequence="30" groups="group_ver_usuarios,base.group_system,base.group_erp_manager" />
-            <menuitem id="menu_role" name="Roles" action="base.action_res_groups" sequence="30" groups="base.group_system,base.group_erp_manager,base.group_no_one,group_roles" />
-            <menuitem id="menu_business_process" name="Procesos" action="action_admin_process" sequence="40"
-            groups="group_ver_procesos"
+            <menuitem id="menu_user" name="Usuarios" action="base.action_res_users" sequence="30"
+                groups="group_ver_usuarios,base.group_system,base.group_erp_manager" />
+            <menuitem id="menu_role" name="Roles" action="base.action_res_groups" sequence="30"
+                groups="base.group_system,base.group_erp_manager,base.group_no_one,group_roles" />
+            <menuitem id="menu_business_process" name="Procesos" action="action_admin_process"
+                sequence="40"
+                groups="group_ver_procesos"
             />
-            <menuitem id="menu_business_process_hierarchy" name="Jerarquia de procesos" action="action_business_process_hierarchy" sequence="50"
-            groups="group_ver_procesos"
+            <menuitem id="menu_business_process_hierarchy" name="Jerarquia de procesos"
+                action="action_business_process_hierarchy" sequence="50"
+                groups="group_ver_procesos"
             />
-            <menuitem id="menu_catalog_frequency" name="Catalogos" 
-            action="action_catalog_frequency" sequence="60" 
-            groups="group_ver_catalogos"
+            <menuitem id="menu_catalog_frequency" name="Catalogos"
+                action="action_catalog_frequency" sequence="60"
+                groups="group_ver_catalogos"
             />
-        </menuitem> 
-        <menuitem id="menu_risk_root" name="Identificación"  sequence="20">
-            
-            
-            <menuitem id="menu_risk_management" name="Riesgos"  
-            action="action_risk_management" sequence="10"
-            groups="group_ver_risk"
+        </menuitem>
+        <menuitem id="menu_risk_root" name="Identificación" sequence="20">
+
+
+            <menuitem id="menu_risk_management" name="Riesgos"
+                action="action_risk_management" sequence="10"
+                groups="group_ver_risk"
             />
-            <menuitem id="scheduled_risk_menu" 
-            action="action_risk_scheduled" 
-            sequence="20" name="Programación de revisiónes" 
-            groups="group_schedule_review" /> 
-            <menuitem id="quantification_risk_menu" 
-            action="action_risk_quantification" 
-            sequence="20" name="Cuantificación" 
-            groups="group_quantification" /> 
-             
+            <menuitem id="scheduled_risk_menu"
+                action="action_risk_scheduled"
+                sequence="20" name="Programación de revisiónes"
+                groups="group_schedule_review" />
+            <menuitem id="quantification_risk_menu"
+                action="action_risk_quantification"
+                sequence="20" name="Cuantificación"
+                groups="group_quantification" />
+
         </menuitem>
         <menuitem id="management_risk_menu"
-        name="Gestión de riesgos"
-        sequence="30"
+            name="Gestión de riesgos"
+            sequence="30"
         >
             <menuitem id="mitigation_risk_menu"
-            name="Mitigación"
-            action="action_risk_mitigation"
-            sequence="10" />
+                name="Mitigación"
+                action="action_risk_mitigation"
+                sequence="10" />
             <menuitem id="monitoreo_risk_menu"
-            name="Monitoreo"
-            action="action_risk_monitoring"
-            sequence="10" />
+                name="Monitoreo"
+                action="action_risk_monitoring"
+                sequence="10" />
             <menuitem id="action_plan_risk_menu"
-            name="Planes de accion"
-            action="action_risk_action_plan"
-            groups="group_action_plan"
-            sequence="10" />
+                name="Planes de accion"
+                action="action_risk_action_plan"
+                groups="group_action_plan"
+                sequence="10" />
         </menuitem>
-         
+        <menuitem id="reports_menu"
+            name="Reportes"
+            sequence="40"
+        >
+            <menuitem id="my_activities_report_menu" sequence="10" name="Nivel 1 - Actividades "
+                action="action_risk_my_activity"
+            />
+            <menuitem id="report_status_menu" sequence="20"
+                name="Nivel 2 - Estatus"
+                action="action_report_status_dashboard"
+            />
+            <menuitem id="report_consolidated_menu"
+                sequence="30"
+                name="Nivel 3 - Consolidado"
+                action="action_report_consolidated_dashboard"
+            />  
+        </menuitem>
+
     </menuitem>
-              
+
 </odoo>

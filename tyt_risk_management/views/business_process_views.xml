@@ -39,13 +39,17 @@
                 <field name="parent_id" />
                 <field name="name" string="Sub Proceso"/>
                 <field name="owner_id" />
-                <field name="write_date" />
-                <field name="write_uid" />
+                <field name="write_date" string="Actualizado el"/>
+                <field name="write_uid" string="Actualizado por " />
                 <field name="active" string="Estatus" widget="boolean_toggle" />
+                <field name="level" column_invisible="1" invisible="1" />
                 <button name="action_view_subprocess" 
                     type="object" 
                     icon="fa-eye" 
+                    class="btn btn-sm btn-info"
                     string="Subprocesos" 
+
+                    invisible="level >= 3"
                     title="Ver Subprocesos"/>
                 <!-- <button class="btn btn-sm btn-info" type="object" name="action_view_subprocess">
                     <i class="fa-eye" />
@@ -70,6 +74,14 @@
                                 invisible="risk_count == 0">
                             <field string="Riesgos" name="risk_count" widget="statinfo"/>
                         </button>
+                        <button name="action_view_subprocess" 
+                            type="object" 
+                            icon="fa-eye" 
+                            class="oe_stat_button"
+                            string="Subprocesos" 
+
+                            invisible="level >= 3"
+                            title="Ver Subprocesos"/>
                     </div>
                     <widget name="web_ribbon" title="Archivado" bg_color="text-bg-danger"
                         invisible="active" />
@@ -78,7 +90,8 @@
                     <group>
                         <group>
                             <field name="company_id" groups="base.group_multi_company"/>
-                            <field name="department_id" />
+                            <!-- <field name="department_id"  /> -->
+                            <field name="department_id" domain="[('x_studio_npp', '=', 1)]" />
                         </group>
                     </group>
                     <group>
@@ -163,7 +176,7 @@
         <field name="name">Procesos</field>
         <field name="res_model">tyt.business.process</field>
         <field name="view_mode">list,form</field>
-        <field name="domain">[('level', '&lt;', 3)]</field>
+        <field name="domain">[('level', '=', 1)]</field>
     </record>
 
     

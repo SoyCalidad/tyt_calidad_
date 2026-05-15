@@ -106,18 +106,12 @@
         <field name="category_id" ref="module_category_permisos_risk"/>
         <field name="implied_ids" eval="[(4, ref('base.group_user'))]"/>
     </record>
-    <record id="group_special_review" model="res.groups">
-       <field name="name">Revisiones Especiales</field>
-        <field name="category_id" ref="module_category_identification"/>
-    </record>
+     
     <record id="group_schedule_review" model="res.groups">
        <field name="name">Programación de revisiones</field>
         <field name="category_id" ref="module_category_identification"/>
     </record>
-    <record id="group_special_schedule" model="res.groups">
-       <field name="name">Programación (especiales)</field>
-        <field name="category_id" ref="module_category_identification"/>
-    </record>
+    
     <record id="group_quantification" model="res.groups">
        <field name="name">Cuantificación</field>
         <field name="category_id" ref="module_category_identification"/>
