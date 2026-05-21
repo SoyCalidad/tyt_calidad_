@@ -25,6 +25,9 @@
                             >
                                 <t t-esc="cell.id"/>
                             </button>
+                            <t t-else="">
+                                <div class="p-3" />
+                            </t>
 
                         </td>
 

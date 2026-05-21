@@ -3,9 +3,10 @@
     border-spacing: 4px;
 
     td {
-        min-width: 48px;
-        height: 80px;
+        // min-width: 48px;
+        // height: 80px;
         border-radius: 0.5rem;
+        padding: 0.25rem;
     }
 }
 
@@ -144,9 +145,9 @@
 /* CELLS */
 
 .risk-cell {
-    display: flex;
-    align-items: center;
-    justify-content: center;
+    // display: flex;
+    // align-items: center;
+    // justify-content: center;
 }
 
 .risk-badge {

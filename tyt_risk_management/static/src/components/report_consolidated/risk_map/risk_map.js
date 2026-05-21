@@ -1,6 +1,6 @@
 /** @odoo-module **/
 
-import { Component } from "@odoo/owl";
+import { Component, useState } from "@odoo/owl";
 import { RiskQuadrant } from "./risk_quadrant";
 export class RiskMap extends Component {
     static template = "tyt_risk_management.RiskMap";
@@ -10,9 +10,14 @@ export class RiskMap extends Component {
             type: String,
             optional: true,
         },//"Mapa de riesgos (Mitigación)",
+        mitigations: {
+            type: Array,
+            optional: true,
+        }
     }
     static defaultProps = {
         title: "Mapa de riesgos",
+        mitigations: [],
     };
 
     static components = {
@@ -38,9 +43,7 @@ export class RiskMap extends Component {
                     {
                         id: 9,
                         className: "risk-red",
-                        risks: [
-                            { id: 34 },
-                            { id: 29 },
+                        risks: [ 
                         ],
                     },
                 ],
@@ -63,9 +66,6 @@ export class RiskMap extends Component {
                         id: 8,
                         className: "risk-yellow-2",
                         risks: [
-                            { id: 33 },
-                            { id: 27 },
-                            { id: 1 },
                         ],
                     },
                 ],
@@ -88,18 +88,25 @@ export class RiskMap extends Component {
                         id: 6,
                         className: "risk-yellow-1",
                         risks: [
-                            { id: 36 },
-                            { id: 35 },
-                            { id: 31 },
-                            { id: 30 },
-                            { id: 28 },
-                            { id: 26 },
-                            { id: 25 },
                         ],
                     },
                 ],
             },
         ];
+
+        this.props.mitigations.forEach(mitigation => {
+            if (mitigation.risk_id_quadrant > 0 && mitigation.risk_id_quadrant < 10) {
+                this.rows.forEach(row  => {
+                    row.quadrants.forEach(quadrant => {
+                        if (quadrant.id == mitigation.risk_id_quadrant) {
+                            quadrant.risks.push({
+                                id: mitigation.risk_id_id
+                            })
+                        }
+                    })
+                });
+            }
+        });
 
         this.occurrenceLevels = [
             {
@@ -115,6 +122,14 @@ export class RiskMap extends Component {
                 class: "bg-danger-subtle",
             },
         ];
+
+        this.state = useState({
+            collapsed: false,
+        });
+    }
+
+    toggleCollapse() {
+        this.state.collapsed = !this.state.collapsed;
     }
 
     get maxRiskCount() {

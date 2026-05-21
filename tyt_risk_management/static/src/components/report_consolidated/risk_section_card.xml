@@ -2,16 +2,12 @@
 
 <templates xml:space="preserve">
     <t t-name="tyt_risk_management.RiskSectionCard">
-
         <div class="card shadow-sm risk-section-card">
-
             <div class="card-header d-flex justify-content-between align-items-center"
-              
             >
                 <h3 class="card-title mb-0">
                     <t t-esc="props.title"/>
                 </h3>
-
                 <button
                     class="btn btn-sm btn-outline-secondary"
                     t-on-click="toggleCollapse" 
@@ -22,13 +18,11 @@
                     />
                 </button>
             </div>
-
             <div
                 class="card-body"
                 t-att-class="state.collapsed ? 'd-none' : ''"
             >
                 <div class="row g-4">
-
                     <!-- BAR CHART -->
                     <div class="col-12 col-xl-6">
                         <div class="chart-container">
@@ -49,7 +43,7 @@
                                 label="'data piechart'"
                                 showLegend="true"
                                 data="{}"
-                                dataValues="[32324242,32]"
+                                dataValues="[this.props.residual_risk,this.props.insured_risk]"
                                 dataLabels="['Riesgo residual','Riesgos asegurados']"
                                 dataColors="['#DC3545','#16AAFF']" />
 
@@ -60,13 +54,13 @@
                                 <div class="d-flex flex-column gap-3">
                                     <StatInfoCard
                                         title="'Riesgos Asegurados'"
-                                        value="'6,778,003'"
+                                        value="props.insured_risk"
                                         color="'#16AAFF'"
                                         icon="'fa fa-money'"
                                     />
                                     <StatInfoCard
                                         title="'Riesgo Residual'"
-                                        value="'404,547,363'"
+                                        value="props.residual_risk"
                                         color="'#DC3545'"
                                         icon="'fa fa-money'"
                                     />

@@ -12,7 +12,7 @@
                 t-att-name="props.name"
                 t-on-change="onChange"
             >
-                <option value="">
+                <option value="0">
                     <t t-esc="props.placeholder || 'Todo'"/>
                 </option>
 
@@ -22,7 +22,7 @@
 
                     <option
                         t-att-value="option.value"
-                        t-att-selected="props.value === option.value ? true : undefined"
+                        
                     >
                         <t t-esc="option.label"/>
                     </option>

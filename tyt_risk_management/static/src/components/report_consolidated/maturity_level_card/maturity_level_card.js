@@ -8,6 +8,11 @@ export class MaturityLevelCard extends Component {
 
     static template = "tyt_risk_management.MaturityLevelCard";
 
+    static props = {
+        dataMitigated: Array ,
+        dataMonitoring: Array, // 5 element
+    }
+
     static components = {
         MaturityBarChart,
     };
@@ -27,7 +32,7 @@ export class MaturityLevelCard extends Component {
                 "Optimizado",
             ],
 
-            data: [12, 28, 40, 18, 8],
+            data: this.props.dataMitigated,
 
             colors: [
                 "#C10808",
@@ -47,7 +52,7 @@ export class MaturityLevelCard extends Component {
                 "Optimizado",
             ],
 
-            data: [8, 14, 35, 27, 12],
+            data: this.props.dataMonitoring,
 
             colors: [
                 "#ef4444",

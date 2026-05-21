@@ -29,17 +29,36 @@ export class ReportConsolidated extends Component {
 
         this.state = useState({
             filters: {
-                deparment_id: "",
-                dominio: "",
-                proceso: "",
-                year: "",
-                month: "",
+                department_id: "0",
+                pdomain_id: "0",
+                process_id: "0",
+                year: "0",
+                month: "0",
             },
 
+            //data filters
             deparments: [],
             domains : [],
             processes: [],
-            years: []
+            years: [],
+
+            //dataprocessed
+            dataProcessed: {
+                barchart_mitigated: [0,0,0],
+                mitigated_riesgo_asegurado: 0,
+                monitoring_riesgo_asegurado: 0,
+                mitigated_riesgo_residual: 0,
+                monitoring_riesgo_residual: 0,
+                barchart_monitoring: [0,0,0],
+                maturity_mitigated: [0,0,0,0,0],
+                maturity_monitoring: [0,0,0,0,0],
+                resumenProcesos: {
+                    mitigado: [],
+                    monitoring: [],
+                }
+            },
+
+
         });
 
         this.monthOptions = [
@@ -61,7 +80,7 @@ export class ReportConsolidated extends Component {
         onWillStart(async () => {
             await this.loadInitialData();
             await loadBundle("web.chartjs_lib");
-
+            await this.onSearch()
         });
     }
 
@@ -88,16 +107,7 @@ export class ReportConsolidated extends Component {
             label: c.name,
         }));
 
-        const processes = await this.orm.searchRead(
-            "tyt.business.process",
-            [["level", "=", 2]],
-            ["id", "name"],
-        );
-
-        this.state.processes = processes.map(c => ({
-            value: c.id,
-            label: c.name,
-        }));
+        await this._loadProcess()
 
         
 
@@ -115,14 +125,58 @@ export class ReportConsolidated extends Component {
 
     updateFilter(name, value) {
         this.state.filters[name] = value;
+        console.log("update filter", name, value);
+        console.log("state filter", this.state.filters)
+        if (name=='pdomain_id') {
+            this._loadProcess();
+        }
+    }
+
+ 
+
+    async _loadProcess() {
+        const domain = [["level", "=", 2]];
+        if (this.state.filters.pdomain_id) {
+            domain.push(["parent_id", "=", Number(this.state.filters.pdomain_id)])
+        }
+        const processes = await this.orm.searchRead(
+            "tyt.business.process",
+            domain,
+            ["id", "name"],
+        );
+
+        this.state.processes = processes.map(c => ({
+            value: c.id,
+            label: c.name,
+        }));
     }
 
     async onSearch() {
 
         console.log("Filtros", this.state.filters);
+        console.log("Esp", this.state.filters.department_id,
+                    this.state.filters.pdomain_id,
+                    this.state.filters.process_id,
+                    this.state.filters.year,
+                    this.state.filters.month,)
 
-        if (this.props.onSearch) {
-            await this.props.onSearch(this.state.filters);
+        try {
+            const data = await this.orm.call(
+                "tyt.risk.mitigation",     
+                "report_consolidated", 
+                [
+                    this.state.filters.department_id,
+                    this.state.filters.pdomain_id,
+                    this.state.filters.process_id,
+                    this.state.filters.year,
+                    this.state.filters.month,
+                ]
+            );
+            //this.state.processedData = data;
+            this.state.dataProcessed = data;
+
+        } catch (error) {
+            console.error("Error cargando procesos:", error);
         }
     }
 }

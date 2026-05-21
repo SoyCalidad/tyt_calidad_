@@ -7,7 +7,7 @@
                 <div class="col-12">
                     <div class="card shadow-sm level3-filter-card">
                         <div class="card-header">
-                            <h3 class="card-title mb-0">
+                            <h3 class="fw-semibold text-white mb-0">
                                 Nivel 3 - Consolidado
                             </h3>
                         </div>
@@ -20,15 +20,15 @@
                                     label="'Departamento'"
                                     name="'department_id'"
                                     value="state.filters.deparment_id"
-                                    options="state.deparments"
+                                    options="state.deparments" 
                                     onChange.bind="updateFilter"
                                     mainClass="'col-md-3'"
                                 />
             
                                 <FilterSelect
                                     label="'Dominio'"
-                                    name="'dominio'"
-                                    value="state.filters.dominio"
+                                    name="'pdomain_id'"
+                                    value="state.filters.pdomain_id"
                                     options="state.domains"
                                     onChange.bind="updateFilter"
                                     mainClass="'col-md-3'"
@@ -37,8 +37,8 @@
                                 <FilterSelect
                                     label="'Proceso'"
                                     name="'proceso'"
-                                    value="state.filters.proceso"
-                                    options="state.processes"
+                                    value="state.filters.process_id"
+                                    options="state.processes" 
                                     onChange.bind="updateFilter"
                                     mainClass="'col-md-3'"
                                 />
@@ -82,23 +82,43 @@
             <div class="row m-2">
                 <div class="col-12">
                     <RiskSectionCard title="'Mitigación'"
-                    data_status_risk="[144,2,2]"
+                    data_status_risk="state.dataProcessed.barchart_mitigated"
+                    residual_risk="state.dataProcessed.mitigated_riesgo_residual"
+                    insured_risk="state.dataProcessed.mitigated_riesgo_asegurado"
                     />
                 </div>
             </div>
             <div class="row m-2">
                 <div class="col-12">
-                    <RiskSectionCard title="'Monitoreo'" data_status_risk="[122, 0,0]" />
+                    <RiskSectionCard title="'Monitoreo'" 
+                    data_status_risk="state.dataProcessed.barchart_monitoring"
+                    residual_risk="state.dataProcessed.monitoring_riesgo_residual"
+                    insured_risk="state.dataProcessed.monitoring_riesgo_asegurado"
+                    />
                 </div>
             </div>
             <div class="row m-2">
                 <div class="col-12">
-                    <MaturityLevelCard  />
+                    <MaturityLevelCard  
+                    dataMonitoring="state.dataProcessed.maturity_monitoring"
+                    dataMitigated="state.dataProcessed.maturity_mitigated"
+                    />
                 </div>
             </div>
             <div class="row m-2">
                 <div class="col-12">
-                    <RiskMap title="'Mapa de riesgos (Mitigación)'" />
+                    <RiskMap 
+                    title="'Mapa de riesgos (Mitigación)'" 
+                    mitigations="state.dataProcessed.resumenProcesos.mitigado"
+                    />
+                </div>
+            </div>
+            <div class="row m-2">
+                <div class="col-12">
+                    <RiskMap 
+                    title="'Mapa de riesgos (Monitoreo)'" 
+                    mitigations="state.dataProcessed.resumenProcesos.monitoring"
+                    />
                 </div>
             </div>
 

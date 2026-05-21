@@ -19,12 +19,12 @@ export class Nivel2StatusReport extends Component {
         this.orm = useService("orm");
         this.state = useState({
             filters: {
-                domain_id: false,
-                process_id: false,
-                year: 'all',
-                month: 'all',
+                department_id: "0",
+                domain_id: "0",
+                process_id: "0",
+                year: '0',
+                month: '0',
             },
-            data: [],
             processedData: [
                 {
                     "process_id": "46e7694e-a647-462d-9421-9955f529998c",
@@ -112,21 +112,23 @@ export class Nivel2StatusReport extends Component {
             await this.loadFilters();
             await this.fetchInitialData();
 
-            this.processDataForCards();
-
+            await this.onSearch()
         });
     }
 
+    onChangeDomain() {
+        console.log("onchangedomain", this.state.filters.domain_id);
+    }
+
     async loadFilters() {
-        await this.cargarProcesos();
         await this.loadDomains();
+        await this.cargarProcesos();
         await this.loadDepartments();
         const availableYears = await this.orm.call(
             "tyt.risk.mitigation",     
             "get_available_years", 
             []
         );
-
         this.state.years = availableYears;
 
         
@@ -144,7 +146,7 @@ export class Nivel2StatusReport extends Component {
         try {
             const data =  await this.orm.searchRead(
                 "tyt.business.process", 
-                [["nivel", "=", 1]],
+                [["level", "=", 1]],
                 ["id", "name", "short_name"],
             );
             
@@ -156,9 +158,14 @@ export class Nivel2StatusReport extends Component {
 
     async cargarProcesos() {
         try {
+            const domain = [["level", "=", "2"]];
+            const domainValue = this.state.filters.domain_id;
+            if (domainValue) {
+                domain.push(["parent_id", "=", domainValue])
+            }
             const data = await this.orm.searchRead(
                 "tyt.business.process", 
-                [["nivel", "=", 2]],
+                domain,
                 ["id", "name", "short_name"]);
             this.state.processes = data;
         } catch (error) {
@@ -169,7 +176,7 @@ export class Nivel2StatusReport extends Component {
     async fetchInitialData() {
         // Simulación de carga de datos basada en tu JSON
         // En producción: this.state.data = await this.orm.call(...)
-        this.state.data = [/* Tu JSON aquí */];
+        this.state.processedData = [/* Tu JSON aquí */];
 
         const actionId = await this.orm.call(
             "tyt.risk.mitigation",
@@ -179,54 +186,6 @@ export class Nivel2StatusReport extends Component {
         this.idActionActivity = actionId; //actionId
     }
 
-    processDataForCards() {
-        const result = {
-            completed: [],
-            keyControls: [],
-            unmitigated: []
-        };
-
-        this.state.data.forEach(proc => {
-            const records = proc.registros_total || [];
-
-            // FILTRADO LÓGICO (Si no es 'all', filtrar)
-            const filteredRecords = records.filter(r => {
-                const matchYear = this.state.filters.year === 'all' || r.year === this.state.filters.year;
-                const matchMonth = this.state.filters.month === 'all' || r.month_name === this.state.filters.month;
-                return matchYear && matchMonth;
-            });
-
-            if (filteredRecords.length === 0 && this.state.filters.year !== 'all') return;
-
-            // 1. Cálculo de Completados (Porcentaje)
-            // Asumimos completado si status no es 'sys_unmitigated'
-            const completedCount = filteredRecords.filter(r => r.status !== 'sys_unmitigated').length;
-            const percentage = filteredRecords.length > 0
-                ? Math.round((completedCount / filteredRecords.length) * 100)
-                : 0;
-
-            result.completed.push({
-                name: proc.process_short_name,
-                value: `${percentage}%`
-            });
-
-            // 2. Controles Claves (isaudit == true)
-            const keyCount = filteredRecords.filter(r => r.isaudit === true).length;
-            result.keyControls.push({
-                name: proc.process_short_name,
-                value: keyCount
-            });
-
-            // 3. No Mitigados (status == 'sys_unmitigated')
-            const unmitigatedCount = filteredRecords.filter(r => r.status === 'sys_unmitigated').length;
-            result.unmitigated.push({
-                name: proc.process_short_name,
-                value: unmitigatedCount
-            });
-        });
-
-        //this.state.processedData = result;
-    }
 
     async openMitigation(mIds = []) {
         console.log("mids", mIds);
@@ -237,8 +196,24 @@ export class Nivel2StatusReport extends Component {
         });
     }
 
-    onSearch() {
-        this.processDataForCards();
+    async onSearch() {
+        try {
+            const data = await this.orm.call(
+                "tyt.business.process",     
+                "data_status_report", 
+                [
+                    this.state.filters.department_id,
+                    this.state.filters.domain_id,
+                    this.state.filters.process_id,
+                    this.state.filters.year,
+                    this.state.filters.month,
+                ]
+            );
+            this.state.processedData = data;
+
+        } catch (error) {
+            console.error("Error cargando procesos:", error);
+        }
     }
 }
 

@@ -21,10 +21,15 @@ export class FilterSelect extends Component {
             type: String,
             optional: true,
         },
-        onChange: Function,
+        onChange: {
+            type: Function,
+            optional: true,
+        },
     };
 
     onChange(ev) {
-        this.props.onChange(this.props.name, ev.target.value);
+        if (this.props.onChange) {
+            this.props.onChange(this.props.name, ev.target.value);
+        }
     }
 }

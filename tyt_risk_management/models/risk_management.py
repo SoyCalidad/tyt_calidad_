@@ -1,9 +1,8 @@
 from odoo import models, fields, api
 from odoo.exceptions import UserError
 
-from datetime import datetime, date
+from datetime import datetime, date, timedelta
 from dateutil.relativedelta import relativedelta
-
 
 class RiskDegreeMitigation(models.Model):
     _name = "tyt.risk.degree.mitigation"
@@ -557,7 +556,7 @@ class RiskManagement(models.Model):
         months_to_skip, total_records = freq_map.get(self.cr_peoriod, (1, 12))
 
         start_date = date(self.cr_year, int(self.cr_month), 1)
-        today = fields.Datetiem.now()
+        today = fields.Datetime.now()
 
         for i in range(total_records):
             # --- CASO ESPECIAL: QUINCENAL ---
@@ -608,7 +607,7 @@ class RiskManagement(models.Model):
                     activity_type_id=activity_type.id,
                     summary="Revisar riesgo",
                     note="Debe cargar la información de la mitigación del dueño.",
-                    user_id=self.risk_id_owner_id.id,
+                    user_id=self.owner_id.id,
                     date_deadline=target_month_date + timedelta(days=3),
                 )
 
@@ -678,4 +677,30 @@ class RiskManagement(models.Model):
 
             record.cr_month_result = " - ".join(meses)
 
-    
+    quadrant = fields.Integer(
+        string="Cuadrante",
+        compute="_compute_quadrant",
+        store=True 
+    )
+
+    @api.depends('impact', 'occurrence')
+    def _compute_quadrant(self):
+        for rec in self:
+            if rec.impact == 'high' and rec.occurrence== 'high':
+                rec.quadrant = 9
+            elif rec.impact == 'medium' and rec.occurrence== 'high':
+                rec.quadrant = 8
+            elif rec.impact == 'high' and rec.occurrence== 'medium':
+                rec.quadrant = 7
+            elif rec.impact == 'low' and rec.occurrence== 'high':
+                rec.quadrant = 6
+            elif rec.impact == 'medium' and rec.occurrence== 'medium':
+                rec.quadrant = 5
+            elif rec.impact == 'high' and rec.occurrence== 'low':
+                rec.quadrant = 4
+            elif rec.impact == 'low' and rec.occurrence== 'medium':
+                rec.quadrant = 3
+            elif rec.impact == 'medium' and rec.occurrence== 'low':
+                rec.quadrant = 2
+            else:
+                rec.quadrant = 1

@@ -7,7 +7,7 @@ export class StatInfoCard extends Component {
 
     static props = {
         title: String,
-        value: String,
+        value: Number,
         color: String,
         icon: String,
     };

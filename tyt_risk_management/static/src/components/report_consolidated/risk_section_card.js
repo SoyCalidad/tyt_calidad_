@@ -22,6 +22,8 @@ export class RiskSectionCard extends Component {
     static props = {
         title: String,
         data_status_risk: Array,
+        residual_risk: Number,
+        insured_risk: Number,
     };
 
     setup() {

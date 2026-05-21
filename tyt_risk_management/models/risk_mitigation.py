@@ -1,6 +1,7 @@
 from odoo import models, fields, api
 from odoo.exceptions import UserError
 
+from dateutil.relativedelta import relativedelta
 
 class RiskMitigation(models.Model):
     _name = "tyt.risk.mitigation"
@@ -42,6 +43,9 @@ class RiskMitigation(models.Model):
     risk_id_fsc_id = fields.Many2one(
         related='risk_id.fsc_id',
         string="Categoría del estado financiero",
+    )
+    risk_id_quadrant = fields.Integer(
+        related='risk_id.quadrant',
     )
     risk_id_quantification = fields.Float(string="Cuantificación", related="risk_id.quantification")
     risk_id_type_ma = fields.Selection(related="risk_id.type_ma", string="Manual o Automático")
@@ -663,6 +667,9 @@ class RiskMitigation(models.Model):
 
 
     def write(self, vals):
+        if 'mr_status_mitigation' in vals and vals['mr_status_mitigation'] == 'partialmitigated':
+            vals['status'] = 'partially_mitigated'
+        
         if 'mr_status_mitigation' in vals and vals['mr_status_mitigation'] == 'mitigated':
             vals['mr_mitigation_date'] = fields.Datetime.now().date()
             vals['mr_level_compliance'] = 'ontime'
@@ -672,7 +679,7 @@ class RiskMitigation(models.Model):
         if 'ma_status_mitigation' in vals and vals['ma_status_mitigation'] == 'mitigated':
             vals['ma_mitigation_date'] = fields.Datetime.now().date()
             vals['ma_level_compliance'] = 'A tiempo' # tambien hay fuera de periodo
-            vals['status'] = 'mitigated' 
+            vals['status'] = 'complete' 
         return super().write(vals)
 
     @api.model
@@ -694,6 +701,78 @@ class RiskMitigation(models.Model):
 
     def get_form_action_id(self):
         action = self.env.ref("tyt_risk_management.action_risk_my_activity")
-        return action.id
+        return action.id 
+
+    def _data_mitigation_for_consolidated(self, mitigation):
+        return {
+            'id': mitigation.id,
+            'risk_activity_state': mitigation.risk_activity_state,
+            'risk_id_quadrant': mitigation.risk_id_quadrant,
+            'risk_id_id': mitigation.risk_id_id,
+        }
+
+    @api.model 
+    def report_consolidated(self, department_id, pdomain_id, process_id, anio, month):
+        domain_mitigation = [
+            ('risk_activity_state', 'in', [ 'mitigation', 'monitoring' ]),
+            ('mitigation_date', '<=', (fields.Datetime.today() + relativedelta(months=1, day=1)))
+        ] 
+        if department_id and int(department_id):
+            domain_mitigation.append(('risk_id_department_id', '=', department_id))
+        if pdomain_id and int(pdomain_id):
+            domain_mitigation.append(('risk_id_pdomain_id', '=', pdomain_id))
+        if process_id and int(process_id):
+            domain_mitigation.append(('risk_id_process_id', '=', process_id))
+        if anio and int(anio):
+            domain_mitigation.append(('year', '=', int(anio)))
+        if month and int(month):
+            domain_mitigation.append(('month', '=', str(int(month))))
+
+        mitigations = self.env['tyt.risk.mitigation'].search(
+            domain_mitigation,  
+        )
+        m_mitigation = mitigations.filtered(lambda m: m.risk_activity_state=='mitigation')
+        m_monitoring = mitigations.filtered(lambda m: m.risk_activity_state=='monitoring')
+
+        return {
+            "lista": [self._data_mitigation_for_consolidated(m) for m in mitigations],
+            "listaResumen": [],
+            "resumenProcesos": {
+                "mitigado": [self._data_mitigation_for_consolidated(m) for m in m_mitigation],
+                "monitoring": [self._data_mitigation_for_consolidated(m) for m in m_monitoring],
+            },
+            "mitigated_riesgo_asegurado": sum(m_mitigation.mapped('risk_id_quantification')),
+            "mitigated_riesgo_residual": sum(m_mitigation.mapped('residual_risk')),
+            "monitoring_riesgo_asegurado": sum(m_monitoring.mapped('risk_id_quantification')),
+            "monitoring_riesgo_residual": sum(m_monitoring.mapped('residual_risk')),
+            "barchart_mitigated":  [
+                len(m_mitigation.filtered(lambda m: m.mr_status_mitigation=='unmitigated')),
+                len(m_mitigation.filtered(lambda m: m.mr_status_mitigation=='partialmitigated')),
+                len(m_mitigation.filtered(lambda m: m.mr_status_mitigation=='mitigated')),
+            ],
+            "barchart_monitoring":  [
+                len(m_monitoring.filtered(lambda m: m.ma_status_mitigation=='unmitigated')),
+                len(m_monitoring.filtered(lambda m: m.ma_status_mitigation=='partialmitigated')),
+                len(m_monitoring.filtered(lambda m: m.ma_status_mitigation=='mitigated')),
+            ],
+            "maturity_mitigated": [
+                len(m_mitigation.filtered(lambda m: m.mr_maturity_level=='none')),
+                len(m_mitigation.filtered(lambda m: m.mr_maturity_level=='initial')),
+                len(m_mitigation.filtered(lambda m: m.mr_maturity_level=='limited')),
+                len(m_mitigation.filtered(lambda m: m.mr_maturity_level=='defined')),
+                len(m_mitigation.filtered(lambda m: m.mr_maturity_level=='optimize')),
+            ],
+            "maturity_monitoring": [
+                len(m_mitigation.filtered(lambda m: m.ma_maturity_level=='none')),
+                len(m_mitigation.filtered(lambda m: m.ma_maturity_level=='initial')),
+                len(m_mitigation.filtered(lambda m: m.ma_maturity_level=='limited')),
+                len(m_mitigation.filtered(lambda m: m.ma_maturity_level=='defined')),
+                len(m_mitigation.filtered(lambda m: m.ma_maturity_level=='optimize')),
+            ],
+            
+        }
+        
+
+
 
     

@@ -12,6 +12,7 @@
                             <field name="default_folder" invisible="1"  />
                             <field name="name" widget="url"/>
                             <field name="file_id" 
+                            options="{'no_open': True}"
                              context="{'default_folder_id': default_folder,
                             'default_type': 'binary'}"
                              />

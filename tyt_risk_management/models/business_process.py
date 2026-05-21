@@ -1,6 +1,11 @@
 from odoo import models, fields, api, _
 from odoo.exceptions import ValidationError
 
+from dateutil.relativedelta import relativedelta
+import logging 
+
+_logger = logging.getLogger(__name__)
+
 class BusinessProcessFiles(models.Model):
     _name = "tyt.business.process.file"
     _description = "Control de documentos"
@@ -108,7 +113,7 @@ class BusinessProcess(models.Model):
     _sql_constraints = [
         ('name_unique', 'unique(name, parent_id)', '¡El nombre ya existe en este nivel jerárquico!')
     ]
-    level = fields.Integer(string="Nivel", compute='_compute_level', store=True)
+    level = fields.Integer(string="Nivel", compute='_compute_level', store=True, recursive=True)
     
 
     @api.depends('parent_id', 'parent_id.level')
@@ -168,4 +173,96 @@ class BusinessProcess(models.Model):
             'views': [(vista_lista_id, 'list'), (False, 'form')], 
 
         }
-                
+
+    @api.model
+    def data_status_report(self, department_id=0, domain_id=0, process_id=0, anio=0, month=0 ):
+        domain_mitigation = [
+            ('mitigation_date', '<=', (fields.Datetime.today() + relativedelta(months=1, day=1)))
+        ]
+        if department_id and int(department_id):
+            domain_mitigation.append(('risk_id_department_id', '=', department_id))
+        if domain_id and int(domain_id):
+            domain_mitigation.append(('risk_id_pdomain_id', '=', domain_id))
+        if process_id and int(process_id):
+            domain_mitigation.append(('risk_id_process_id', '=', process_id))
+        if anio and int(anio):
+            domain_mitigation.append(('year', '=', int(anio)))
+        if month and int(month):
+            domain_mitigation.append(('month', '=', str(int(month))))
+
+        mitigations = self.env['tyt.risk.mitigation'].read_group(
+            domain_mitigation, 
+            ['risk_id_process_id'],
+            ['risk_id_process_id']
+        )
+        process_ids = [
+            m['risk_id_process_id'][0]
+            for m in mitigations
+            if m['risk_id_process_id']
+        ]
+        processes = self.env['tyt.business.process'].browse(process_ids)
+        data = []
+        for process in processes:
+            mitigation_process = self.env['tyt.risk.mitigation'].search(domain_mitigation + [('risk_id_process_id', '=', process.id)])
+            data_process = {
+                "process_id": process.id,
+                "process_short_name": process.short_name,
+                "process_name": process.display_name,
+                "total": len(mitigation_process),
+                "registros_total": mitigation_process.ids,
+                "is_not_scope": 0,
+                "registros_is_not_scope": [],
+                "is_open": len(mitigation_process.filtered(lambda m: m.status == 'unmitigated')),
+                "registros_is_open": mitigation_process.filtered(lambda m: m.status == 'unmitigated').ids,
+                "is_review": len( mitigation_process.filtered(lambda m: m.status == 'under_review' and m.mr_status_mitigation != 'mitigated')),
+                "registros_is_review": mitigation_process.filtered(lambda m: m.status == 'under_review' and m.mr_status_mitigation != 'mitigated').ids,
+                "is_remediation": len( mitigation_process.filtered(lambda m: m.status == 'partially_mitigated')),
+                "registros_is_remediation":mitigation_process.filtered(lambda m: m.status == 'partially_mitigated').ids,
+                "is_audit": len(mitigation_process.filtered(lambda m: m.status == 'under_review' and m.mr_status_mitigation == 'mitigated')),
+                "registros_is_audit": mitigation_process.filtered(lambda m: m.status == 'under_review' and m.mr_status_mitigation == 'mitigated').ids,
+                "is_completed": len(mitigation_process.filtered(lambda m: m.status == 'complete' or (m.mr_status_mitigation=='mitigated') and not m.risk_id_auditor_id)),
+                "registros_is_completed": mitigation_process.filtered(lambda m: m.status == 'complete' or (m.mr_status_mitigation=='mitigated') and not m.risk_id_auditor_id).ids,
+                "is_completed_percentage": 0,
+                "no_completed": len(mitigation_process.filtered(lambda m: not(m.status == 'complete' or (m.mr_status_mitigation=='mitigated') and not m.risk_id_auditor_id))),
+                "subProcesos": []
+                   
+            }
+            if data_process["total"]:
+                data_process["is_completed_percentage"] = int((data_process["is_completed"] / data_process["total"]) * 100)
+
+            subprocesses = self.env['tyt.business.process']
+            for m in mitigation_process:
+                subprocesses |= m.risk_id_subprocess_id
+            data_subprocesses = []
+            for subprocess in subprocesses:
+                mitigation_subprocess = mitigation_process.filtered(lambda m: m.risk_id_subprocess_id.id==subprocess.id)
+                data_subprocess = {
+                    "sub_process_id": subprocess.id,
+                    "process_short_name": process.short_name,
+                    "sub_process_name": process.display_name,
+                    "total": len(mitigation_subprocess),
+                    "registros_total": mitigation_subprocess.ids,
+                    "is_not_scope": 0,
+                    "registros_is_not_scope": [],
+                    "is_open": len(mitigation_subprocess.filtered(lambda m: m.status == 'unmitigated')),
+                    "registros_is_open": mitigation_subprocess.filtered(lambda m: m.status == 'unmitigated').ids,
+                    "is_review": len(mitigation_subprocess.filtered(lambda m: m.status == 'under_review' and m.mr_status_mitigation != 'mitigated')),
+                    "registros_is_review": mitigation_subprocess.filtered(lambda m: m.status == 'under_review' and m.mr_status_mitigation != 'mitigated').ids,
+                    "is_remediation": len( mitigation_subprocess.filtered(lambda m: m.status == 'partially_mitigated')),
+                    "registros_is_remediation": mitigation_subprocess.filtered(lambda m: m.status == 'partially_mitigated').ids,
+
+                    "is_audit": len(mitigation_subprocess.filtered(lambda m: m.status == 'under_review' and m.mr_status_mitigation == 'mitigated')),
+                    "registros_is_audit": mitigation_subprocess.filtered(lambda m: m.status == 'under_review' and m.mr_status_mitigation == 'mitigated').ids,
+                    "is_completed": len(mitigation_subprocess.filtered(lambda m: m.status == 'complete' or (m.mr_status_mitigation=='mitigated') and not m.risk_id_auditor_id)),
+                    "registros_is_completed": mitigation_subprocess.filtered(lambda m: m.status == 'complete' or (m.mr_status_mitigation=='mitigated') and not m.risk_id_auditor_id).ids,
+                    "is_completed_percentage": 0,
+                }
+                if data_subprocess["total"]:
+                    data_subprocess["is_completed_percentage"] = int((data_subprocess["is_completed"] / data_subprocess["total"]) * 100)
+
+                data_subprocesses.append(data_subprocess)
+
+            data_process["subProcesos"] = data_subprocesses
+
+            data.append(data_process)
+        return data

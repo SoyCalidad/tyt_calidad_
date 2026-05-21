@@ -17,12 +17,17 @@
                         <button
                             type="button"
                             class="btn btn-sm btn-outline-secondary"
+                            t-on-click="toggleCollapse" 
                         >
-                            <i class="fa fa-plus"/>
+                            <i class="fa "
+                            t-att-class="state.collapsed ? 'fa-plus' : 'fa-minus'"
+                            />
                         </button>
                     </div>
 
-                    <div class="card-body">
+                    <div class="card-body "
+                    t-att-class="state.collapsed ? 'd-none' : ''"
+                    >
 
                         <div class="text-center mb-4">
                             <h4 class="text-uppercase fw-bold">
@@ -60,11 +65,12 @@
                                             t-as="quadrant"
                                             t-key="quadrant.id">
 
-                                                <td class="p-1 border-0" t-attf-style="min-width: {{matrixSize * 50}} px">
+                                                <td 
+                                                t-att-class="'p-2 border-0 ' + quadrant.className" t-attf-style="min-width: {{matrixSize * 50}}px">
                                                     <RiskQuadrant
                                                         risks="quadrant.risks"
                                                         size="this.matrixSize"
-                                                        className="quadrant.className"
+                                                        className="''"
                                                     />
                                                 </td>
 
