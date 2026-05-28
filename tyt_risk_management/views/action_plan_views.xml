@@ -27,7 +27,7 @@
                 <field name="risk_id_domain_id" />
                 <field name="risk_id_process_id" />
                 <field name="risk_id_subprocess_id" />
-                <field name="sequence" />
+                <field name="sequence" widget="handle" />
                 <field name="name" />
                 <field name="create_uid" string="Creado por" />
                 <field name="user_id" />
@@ -88,6 +88,22 @@
         <field name="help" type="html">
             <p class="o_view_nocontent_smiling_face">
                 Crea el primer plan de acción para mitigar riesgos.
+            </p>
+        </field>
+    </record>
+
+    <record id="action_report_risk_action_plan" model="ir.actions.act_window">
+        <field name="name">Planes de Acción</field>
+        <field name="res_model">tyt.risk.action.plan</field>
+        <field name="view_mode">list,kanban</field>
+        <field name="search_view_id" ref="view_risk_action_plan_search" />
+        <field name="context">{
+            'search_default_user_id': uid,
+        }</field>
+
+        <field name="help" type="html">
+            <p class="o_view_nocontent_smiling_face">
+                Repore de planes de acción para mitigar riesgos.
             </p>
         </field>
     </record>

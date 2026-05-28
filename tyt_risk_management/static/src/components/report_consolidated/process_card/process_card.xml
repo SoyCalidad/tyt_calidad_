@@ -1,0 +1,81 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<templates xml:space="preserve">
+
+    <t t-name="tyt_risk_management.ProcessCard">
+        <div class="row g-4 my-2">
+            <div class="col-12">
+                <t t-set="process" t-value="props.process" />
+                <div class="card ">
+                    <div class="card-header bg-primary">
+                        <h3 class="card-title float-start text-white fw-bold">
+                            <t t-out="process.name" />
+                            ( <t t-out="process.short_name" /> )
+                        </h3>
+                        <div class="float-end me-3">
+                                
+                            <button
+                                type="button"
+                                class="btn btn-sm btn-outline-secondary"
+                                t-on-click="toggleCollapse"
+                            >
+                                <i
+                                    class="fa"
+                                    t-att-class="state.collapsed ? 'fa-plus' : 'fa-minus'"
+                                />
+                            </button>
+                        </div>
+                    </div>
+                    <div class="card-body" 
+                     t-att-class="state.collapsed ? 'd-none' : ''"
+                    >
+                        <div class="row">
+                            <div class="col-lg-6">
+                                <div class="chart-container">
+                                    <canvas t-ref="barChart"/>
+                                </div>
+                            </div>
+                            <div class="col-lg-6">
+                                <div class="row">
+                                    <div class="col-lg-8 p-0" style="">
+                                        <PieChart 
+                                        label="'data piechart'"
+                                        showLegend="true"
+                                        data="{}"
+                                        dataValues="[this.props.residual_risk,this.props.insured_risk]"
+                                        dataLabels="['Riesgo residual','Riesgos asegurados']"
+                                        dataColors="['#DC3545','#16AAFF']" />
+                                    </div>
+                                    <div class="col-lg-4 p-0"  >
+                                        <div class="d-flex flex-column gap-3">
+                                            <StatInfoCard
+                                                title="'Riesgos Asegurados'"
+                                                value="process.quantification - process.residual"
+                                                color="'#16AAFF'"
+                                                icon="'fa fa-money'"
+                                            />
+                                            <StatInfoCard
+                                                title="'Riesgo Residual'"
+                                                value="process.residual"
+                                                color="'#DC3545'"
+                                                icon="'fa fa-money'"
+                                            />
+
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <t t-foreach="process.subprocesses or []" t-as="subp" t-key="'subp'+subp.id">
+                                <div class="col-lg-6">
+                                    <Subprocess process="subp" />
+                                </div>
+                            </t>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+    </t>
+
+</templates>

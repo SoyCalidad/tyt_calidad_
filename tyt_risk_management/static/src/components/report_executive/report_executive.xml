@@ -1,0 +1,269 @@
+<templates xml:space="preserve">
+    <t t-name="tyt_risk_management.executive_report" owl="1">
+        <Layout display="display" className="'o_dashboard h-100 overflow-y-auto'">
+            <div class="o_report_status_level2  p-4 bg-light">
+                <!-- Sección de Filtros -->
+                <div class="row bg-white p-3 mb-4 shadow-sm rounded align-items-end">
+                    <div class="col-12 ">
+                        <h3 class="fw-semibold text-black ">
+                            Nivel 3 - Ejecutivo 
+                        </h3>
+                    </div>
+                    <div class="col-md-2">
+                        <label>Sitio</label>
+                        <select class="form-select" t-model="state.filters.department_id">
+                            <option value="0">Todo</option>
+                            <t t-foreach="state.departments" t-as="el" t-key="'department'+el.id">
+                                <option t-att-value="el.id">
+                                    <t t-esc="el.name"/>
+                                </option>
+                            </t>
+                        </select>
+                    </div>
+                    <div class="col-md-2">
+                        <label>Dominio</label>
+                        <select class="form-select" t-model="state.filters.domain_id"
+                        t-on-change="onChangeDomain"
+                        >
+                            <option value="0">Todo</option>
+                            <t t-foreach="state.domains" t-as="el" t-key="'domain'+el.id">
+                                <option t-att-value="el.id">
+                                    <t t-esc="el.name"/>
+                                </option>
+                            </t>
+                        </select>
+                    </div>
+                    <div class="col-md-2">
+                        <label>Proceso</label>
+                        <select class="form-select" t-model="state.filters.process_id">
+                            <option value="0">Todo</option>
+                            <t t-foreach="state.processes" t-as="proceso" t-key="'process'+proceso.id">
+                                <option t-att-value="proceso.id">
+                                    <t t-esc="proceso.name"/>
+                                </option>
+                            </t>
+                        </select>
+                    </div>
+                    <div class="col-md-2">
+                        <label>Año</label>
+                        <select class="form-select" t-model="state.filters.year">
+                            <option value="0">Todo</option>
+                            <t t-foreach="state.years" t-as="y" t-key="y">
+                                <option t-att-value="y"><t t-esc="y"/></option>
+                            </t>
+                        </select>
+                    </div>
+                    <div class="col-md-2">
+                        <label>Mes</label>
+                        <select class="form-select" t-model="state.filters.month">
+                            <option value="0">Todo</option>
+                            <t t-foreach="state.months" t-as="m" t-key="'month'+m.id">
+                                <option t-att-value="m.id"><t t-esc="m.name"/></option>
+                            </t>
+                        </select>
+                    </div>
+                    <div class="col-md-1">
+                        <button class="btn btn-secondary w-100" t-on-click="onSearch">
+                             Buscar
+                        </button>
+                    </div>
+                </div>
+    
+                <div class="row my-1 gx-1 ">
+                    <div class="col-lg-3 col-md-6 col-sm-12">
+                        <div class="card rounded h-100">
+                            <div class="card-body" style="min-height: 70px;">
+                                <div class="row">
+                                    <h4 class="card-title fw-medium">Total de Riesgos</h4>
+                                </div>
+                            </div>
+                            <div class="card-header bg-primary text-white rounded-top">
+                                <h4 class="card-title" t-if="reportData and reportData.report">
+                                    <t t-out="reportData.report.num_mitigation_total" />
+                                </h4>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-lg-3 col-md-6 col-sm-12">
+                        <div class="card rounded h-100">
+                            <div class="card-body" style="min-height: 70px;">
+                                <div class="row">
+                                    <h4 class="card-title fw-medium">Riesgos Asegurados</h4>
+                                </div>
+                            </div>
+                            <div class="card-header bg-success text-white rounded-top">
+                                <h4 class="card-title" t-if="reportData and reportData.report">
+                                    <t t-out="reportData.report.per_mitigation_safe" />
+                                    %</h4>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-lg-3 col-md-6 col-sm-12">
+                        <div class="card rounded h-100 ">
+                            <div class="card-body" style="min-height: 70px;">
+                                <div class="row">
+                                    <h3 class="card-title fw-medium">Riesgos No Asegurados Impacto Residual</h3>
+                                </div>
+                            </div>
+                            <div class="card-header bg-danger text-white rounded-top">
+                                <h3 class="card-title" t-if="reportData and reportData.report">
+                                    <t t-out="reportData.report.riesgos_no_asegurados_impacto" />
+                                </h3>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-lg-3 col-md-6 col-sm-12">
+                        <div class="card rounded h-100">
+                            <div class="card-body" style="min-height: 70px;">
+                                <div class="row">
+                                    <h3 class="card-title fw-medium">Nivel de Madurez del Control Interno</h3>
+                                </div>
+                            </div>
+                            <div class="card-header bg-danger text-white rounded-top ">
+                                <h3 class="card-title " t-if="reportData and reportData.report">
+                                    <t t-out="reportData.report.nivel_de_madurez" />
+                                </h3>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="row mt-3 mb-1">
+                    <div class="col-lg-6 col-md-12 col-sm-12 ">
+                        <div class="card rounded h-100">
+                            <div class="card-header">
+                                <h4 class="card-title"  t-if="reportData and reportData.report">
+                                    <t t-out="100 - reportData.report.per_mitigation_safe" /> % Riesgos no Asegurados
+                                </h4>
+                            </div>
+                            <div class="card-body">
+                                <div class="row">
+                                    <div class="col-lg-12"> 
+                                        <div t-ref="uninsured-risks-chart" style="height: 350px;
+                                        user-select: none;
+                                        position: relative;" />
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-lg-6 col-md-12 col-sm-12">
+                        <div class="card rounded h-100">
+                            <div class="card-header">
+                                <h4 class="card-title">
+                                    Riesgos Asegurados vs Riesgos no Asegurados
+                                </h4>
+                            </div>
+                            <div class="card-body">
+                                <div class="row">
+                                    <t t-if="state.loading">
+                                        <div class="text-center p-4">
+                                            <i class="fa fa-spinner fa-spin"/> Cargando...
+                                        </div>
+                                    </t>
+                                    <t t-else="">
+                                        <div class="col-lg-12">
+                                            <BarChart
+                                                series="cosoChartSeries"
+                                                categories="cosoCategories"
+                                                height="350"
+                                                showLegend="true"
+                                            /> 
+                                        </div>
+                                    </t>
+                                    
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
+                <div class="row mt-3 mb-1">
+                    <div class="col-lg-3 col-md-6 col-sm-12">
+                        <div class="card rounded h-100">
+                            <div class="card-header">
+                                <h4 class="card-title">
+                                    Grado de cumplimiento
+                                </h4>
+                            </div>
+                            <div class="card-body">
+                                <div class="row">
+                                    <div class="col-lg-12">
+                                        <div t-ref="chart-degree-compliance" style="height: 350px; user-select: none;"
+                                             >
+                                            
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-lg-4 col-md-12 col-sm-12">
+                        <div class="card rounded h-100">
+                            <div class="card-header">
+                                <h4 class="card-title">
+                                    Grado de cumplimiento X Empresa
+                                </h4>
+                            </div>
+                            <div class="card-body">
+                                <div class="row">
+                                    <div class="col-lg-12">
+                                        <div t-ref="chart-grado-empresa" style="height: 350px; user-select: none; position: relative;"
+                                             >
+                                             
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-lg-5">
+                        <div class="card rounded h-100">
+                            <div class="card-header">
+                                <h4 class="card-title">
+                                    Riesgos No Asegurados Impacto Residual X Empresa
+                                </h4>
+                            </div>
+                            <div class="card-body">
+                                <div class="row">
+                                    <div class="col-lg-12">
+                                        <div t-ref="chart-impact-company" style="height: 350px; user-select: none; position: relative;" >
+                                             
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="row mt-3 mb-1">
+                    <div class="col-lg-5 col-md-9 col-sm-12">
+                        <div class="card h-100 rounded">
+                            <div class="card-header">
+                                <h4 class="card-title">
+                                    Nivel de madurez
+                                </h4>
+                            </div>
+                            <div class="card-body">
+                                <div class="row">
+                                    <div class="col-lg-12">
+                                        <div t-ref="maturity-level-chart" style="height: 350px; user-select: none; position: relative;"
+                                             >
+                                            
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-lg-7 col-md-12 col-sm-12"
+                    t-if="reportData and reportData.report">
+                        <RiskMap 
+                        title="'Mapa de riesgos (Mitigación)'" 
+                        mitigations="reportData.report.lista"
+                        />
+                    </div>
+                </div>
+            </div>
+        </Layout>
+    </t>
+</templates>

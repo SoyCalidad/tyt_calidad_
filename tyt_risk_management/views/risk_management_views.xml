@@ -217,7 +217,8 @@
                         <field name="write_date" string="Actualizado el" />
                         <field name="write_uid" string="Actualizado por" />
                         <!-- <field name="department_id"  /> -->
-                        <field name="department_id" domain="[('x_studio_npp', '=', 1)]" />
+                        <field name="department_id" 
+                        domain="[('x_studio_npp', '=', 1)]" />
                     </group>
                     <group  >
                         <group>

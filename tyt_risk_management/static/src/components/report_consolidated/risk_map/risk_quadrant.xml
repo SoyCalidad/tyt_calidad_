@@ -15,21 +15,23 @@
                     <t t-foreach="row"
                        t-as="cell"
                        t-key="cell_index">
-
-                        <td class="risk-cell">
-
-                            <button
-                                t-if="cell"
-                                class="btn btn-dark btn-sm risk-badge"
-                                t-on-click="() => this.onRiskClick(cell)"
-                            >
-                                <t t-esc="cell.id"/>
-                            </button>
-                            <t t-else="">
+                        <t t-if="cell">
+                            <td class="risk-cell" t-attf-class="{{ cell.status == 'under_review' ? 'bg-warning' : '' }} {{ cell.mr_status_mitigation == 'mitigated' ? 'bg-success' : 'bg-dark' }}">
+    
+                                <button
+                                    class="btn btn-dark btn-sm risk-badge"
+                                    t-on-click="() => this.onRiskClick(cell)"
+                                >
+                                    <t t-esc="cell.id"/>
+                                </button>
+    
+                            </td>
+                        </t>
+                        <t t-else="">
+                            <td class="risk-cell" >
                                 <div class="p-3" />
-                            </t>
-
-                        </td>
+                            </td>
+                        </t>
 
                     </t>
 

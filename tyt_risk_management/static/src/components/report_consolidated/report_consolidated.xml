@@ -7,7 +7,7 @@
                 <div class="col-12">
                     <div class="card shadow-sm level3-filter-card">
                         <div class="card-header">
-                            <h3 class="fw-semibold text-white mb-0">
+                            <h3 class="fw-semibold text-black mb-0">
                                 Nivel 3 - Consolidado
                             </h3>
                         </div>
@@ -17,7 +17,7 @@
                             <div class="row g-3 align-items-end">
             
                                 <FilterSelect
-                                    label="'Departamento'"
+                                    label="'Sitio'"
                                     name="'department_id'"
                                     value="state.filters.deparment_id"
                                     options="state.deparments" 
@@ -119,6 +119,42 @@
                     title="'Mapa de riesgos (Monitoreo)'" 
                     mitigations="state.dataProcessed.resumenProcesos.monitoring"
                     />
+                </div>
+            </div>
+
+            <div class="row m-2">
+                <div class="col-12">
+                    <div class="card  shadow-sm ">
+                        <div class="card-header d-flex justify-content-between align-items-center bg-secondary ">
+
+                            <h3 class="card-title mb-0">
+                                Resultados por procesos ( Mitigación ) 
+                            </h3>
+                            <button
+                                class="btn btn-sm btn-outline-secondary"
+                                t-on-click="toggleCollapseMitigation"
+                            >
+                                <i
+                                    class="fa"
+                                      t-att-class="state.collapsedMitigation ? 'fa-plus' : 'fa-minus'"
+                                />
+                            </button>
+
+                        </div>
+                        <div
+                            class="card-body"
+                            t-att-class="state.collapsedMitigation ? 'd-none' : ''" 
+                        >
+                            <t t-foreach="state.dataProcessed.processes_mitigated" t-as="process" t-key="'resultbyprocess'+process.id">
+                                <ProcessCard 
+                                process="process"
+
+                                />
+                            </t>
+
+                        </div>
+
+                    </div>
                 </div>
             </div>
 

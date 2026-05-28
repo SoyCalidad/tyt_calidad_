@@ -709,7 +709,68 @@ class RiskMitigation(models.Model):
             'risk_activity_state': mitigation.risk_activity_state,
             'risk_id_quadrant': mitigation.risk_id_quadrant,
             'risk_id_id': mitigation.risk_id_id,
+            'status': mitigation.status,
+            'mr_status_mitigation': mitigation.mr_status_mitigation,
         }
+
+    def _load_data_processes(self, mitigations):
+        process_dict = dict()
+        for m in mitigations:
+            if not m.risk_id_process_id:
+                continue
+            n_unmitigation = 0
+            n_partialmitigated = 0
+            n_mitigation = 0
+            if m.mr_status_mitigation == 'unmitigated':
+                n_unmitigation += 1
+            elif m.mr_status_mitigation=='partialmitigated':
+                n_partialmitigated += 1
+            else:
+                n_mitigation += 1
+            if m.risk_id_process_id.id not in process_dict:
+                process_dict[m.risk_id_process_id.id] = {
+                    'id': m.risk_id_process_id.id,
+                    'name': m.risk_id_process_id.name,
+                    'short_name': m.risk_id_process_id.short_name,
+                    'quantification': m.risk_id_quantification,
+                    'residual': m.mr_residual_risk,
+                    'n_unmitigation': n_unmitigation,
+                    'n_partialmitigated': n_partialmitigated,
+                    'n_mitigation': 0,
+
+                    'subprocesses': [{
+                        'id': m.risk_id_subprocess_id.id,
+                        'name': m.risk_id_subprocess_id.name,
+                        'short_name': m.risk_id_subprocess_id.short_name,
+                        'quantification': m.risk_id_quantification,
+                        'residual': m.mr_residual_risk,
+                        'n_unmitigation': n_unmitigation,
+                        'n_partialmitigated': n_partialmitigated,
+                        'n_mitigation': n_mitigation,
+                    }]
+                } 
+            else:
+                process_dict["quantification"] += m.risk_id_quantification
+                process_dict["residual"] += m.mr_residual_risk
+                process_dict["n_unmitigation"] += n_unmitigation
+                process_dict["n_partialmitigated"] += n_partialmitigated
+                process_dict["n_mitigation"] += n_mitigation
+                exist_subprocess = False 
+                for index, subp in enumerate(process_dict["subprocesses"]):
+                    if subp["id"] == m.risk_id_subprocess_id.id:
+                        exist_subprocess = index 
+                        break 
+
+                if exist_subprocess:
+                    process_dict["subprocesses"][exist_subprocess]["quantification"] += m.risk_id_quantification
+                    process_dict["subprocesses"][exist_subprocess]["residual"] += m.mr_residual_risk
+                    process_dict["subprocesses"][exist_subprocess]["n_unmitigation"] += n_unmitigation
+                    process_dict["subprocesses"][exist_subprocess]["n_partialmitigated"] += n_partialmitigated
+                    process_dict["subprocesses"][exist_subprocess]["n_mitigation"] += n_mitigation
+
+        return list(process_dict.values())
+
+
 
     @api.model 
     def report_consolidated(self, department_id, pdomain_id, process_id, anio, month):
@@ -741,6 +802,8 @@ class RiskMitigation(models.Model):
                 "mitigado": [self._data_mitigation_for_consolidated(m) for m in m_mitigation],
                 "monitoring": [self._data_mitigation_for_consolidated(m) for m in m_monitoring],
             },
+            "processes_mitigated": self._load_data_processes(m_mitigation),
+            "processes_monitoring": self._load_data_processes(m_monitoring),
             "mitigated_riesgo_asegurado": sum(m_mitigation.mapped('risk_id_quantification')),
             "mitigated_riesgo_residual": sum(m_mitigation.mapped('residual_risk')),
             "monitoring_riesgo_asegurado": sum(m_monitoring.mapped('risk_id_quantification')),
@@ -773,6 +836,124 @@ class RiskMitigation(models.Model):
         }
         
 
+    @api.model
+    def report_executive(self, department_id, pdomain_id, process_id, anio, month):
+        domain_mitigation = [
+            ('mitigation_date', '<=', (fields.Datetime.today() + relativedelta(months=1, day=1)))
+        ] 
+        if department_id and int(department_id):
+            domain_mitigation.append(('risk_id_department_id', '=', department_id))
+        if pdomain_id and int(pdomain_id):
+            domain_mitigation.append(('risk_id_pdomain_id', '=', pdomain_id))
+        if process_id and int(process_id):
+            domain_mitigation.append(('risk_id_process_id', '=', process_id))
+        if anio and int(anio):
+            domain_mitigation.append(('year', '=', int(anio)))
+        if month and int(month):
+            domain_mitigation.append(('month', '=', str(int(month))))
 
+        mitigations = self.env['tyt.risk.mitigation'].search(
+            domain_mitigation,  
+        )
+
+        maturity_level = "No existe" #TODO: this is a compute 
+        target_dic = dict() #key is target a values [asegurado, no_asegurado]
+        degree_of_compliance_company_dict = dict() #key departmentname , value is [n_asegurado, total, residual]
+        degree_of_compliance_company = []
+        targets = []
+        nivel_madurez=[]
+        for m in mitigations:
+            target_name = ",".join([g.display_name for g in m.risk_id.goal_coso_ids])
+            asegurado = 0
+            no_asegurado = 0
+            if m.mr_status_mitigation=='mitigated':
+                asegurado = 1
+            else:
+                no_asegurado = 1
+            if target_name in target_dic:
+                target_dic[target_name][0] = asegurado
+                target_dic[target_name][1] = no_asegurado
+            else:
+                target_dic[target_name] = [asegurado, no_asegurado]
+
+        
+            if m.risk_id_department_id.name in degree_of_compliance_company_dict:
+                degree_of_compliance_company_dict[m.risk_id_department_id.name][0] += asegurado
+                degree_of_compliance_company_dict[m.risk_id_department_id.name][1] += 1
+                degree_of_compliance_company_dict[m.risk_id_department_id.name][2] += m.mr_residual_risk 
+            else:
+                degree_of_compliance_company_dict[m.risk_id_department_id.name] = [
+                    asegurado,
+                    1,
+                    m.mr_residual_risk,
+                ]
+
+            find_level=False 
+            for index, item in enumerate(nivel_madurez):
+                if item["nivel"] == m.mr_maturity_level:
+                    find_level = index 
+
+            if find_level:
+                nivel_madurez[find_level]["count"] += 1
+            else:
+                nivel_madurez.append({
+                    "nivel": m.mr_maturity_level,
+                    "count": 1,
+                    "name": dict(self._fields['mr_maturity_level'].selection).get(m.mr_maturity_level),
+                })
+
+
+        for name, values in target_dic.items():
+            targets.append({
+                "objetivo": name,
+                "asegurados": values[0],
+                "no_asegurados": values[1]
+            })
+        for name, values in degree_of_compliance_company_dict.items():
+            degree_of_compliance_company.append({
+                "department_name": name,
+                "grado_cumplimiento": round((values[0] / values[1])*100),
+                "grado_cumplimiento_residual": values[2],
+            })
+
+        len_mitigations = len(mitigations)
+        
+        return {
+            "lista": [],
+            "report": {
+                "lista": [ self._data_mitigation_for_consolidated(m) for m in mitigations],
+                "num_mitigation_total": len_mitigations,
+                "per_mitigation_safe": (round((len(mitigations.filtered(lambda m: m.mr_status_mitigation=='mitigated')) / len_mitigations) * 100)) if len_mitigations>0 else 0,
+                "riesgos_no_asegurados_impacto": sum(mitigations.filtered(lambda m: m.mr_status_mitigation!='mitigated').mapped('risk_id_quantification')),
+                "nivel_de_madurez": maturity_level,
+
+                "objetivos": targets,
+                "degree_of_compliance_company": degree_of_compliance_company,
+                "nivel_madurez":  nivel_madurez,
+
+            },
+        }
+
+    @api.model
+    def mitigation_detail(self, mitigation_id=None):
+        if not mitigation_id:
+            return {}
+        m = self.browse(mitigation_id)
+
+        return {
+            "id": m.id, 
+            "risk_name": m.risk_id_name,
+            "risk_process": m.risk_id_process_id.display_name,
+            "risk_subprocess": m.risk_id_subprocess_id.display_name,
+            "anio": m.year,
+            "month": m.month,
+            "risk_id": m.risk_id_id,
+            "risk_pdomain": m.risk_id_pdomain_id.display_name,
+            "risk_low_scenery": m.risk_id.low_scenery, 
+            "risk_middle_scenery": m.risk_id.middle_scenery, 
+            "risk_high_scenery": m.risk_id.high_scenery, 
+            "risk_impact": m.risk_id_impact,
+            "risk_occurrence": m.risk_id_occurrence,
+        }
 
     

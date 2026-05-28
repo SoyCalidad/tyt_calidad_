@@ -1,0 +1,79 @@
+<templates xml:space="preserve">
+    <t t-name="tyt_risk_management.CustomizedReport" owl="1">
+        <Layout display="display" className="'o_dashboard h-100 overflow-y-auto'">
+            <div class="o_report_status_level2  p-4 bg-light">
+                <!-- Sección de Filtros -->
+                <div class="row bg-white p-3 mb-4 shadow-sm rounded align-items-end">
+                    <div class="col-12 ">
+                        <h3 class="fw-semibold text-black ">
+                             Nivel 4 - Personalizado 
+                        </h3>
+                    </div>
+                    <div class="col-md-2">
+                        <label>Sitio</label>
+                        <select class="form-select" t-model="state.filters.department_id">
+                            <option value="0">Todo</option>
+                            <t t-foreach="state.departments" t-as="el" t-key="'department'+el.id">
+                                <option t-att-value="el.id">
+                                    <t t-esc="el.name"/>
+                                </option>
+                            </t>
+                        </select>
+                    </div>
+                    <div class="col-md-2">
+                        <label>Dominio</label>
+                        <select class="form-select" t-model="state.filters.domain_id"
+                        t-on-change="onChangeDomain"
+                        >
+                            <option value="0">Todo</option>
+                            <t t-foreach="state.domains" t-as="el" t-key="'domain'+el.id">
+                                <option t-att-value="el.id">
+                                    <t t-esc="el.name"/>
+                                </option>
+                            </t>
+                        </select>
+                    </div>
+                    <div class="col-md-2">
+                        <label>Proceso</label>
+                        <select class="form-select" t-model="state.filters.process_id">
+                            <option value="0">Todo</option>
+                            <t t-foreach="state.processes" t-as="proceso" t-key="'process'+proceso.id">
+                                <option t-att-value="proceso.id">
+                                    <t t-esc="proceso.name"/>
+                                </option>
+                            </t>
+                        </select>
+                    </div>
+                    <div class="col-md-2">
+                        <label>Año</label>
+                        
+                        <SelectMenu
+                        choices="state.years"
+                        multiSelect="true"
+                        searchable="true"
+                        value="state.filters.selectedYears"
+                        onSelect.bind="onYearSelect"
+                        placeholder="'Todos'"/>
+                    </div>
+                    <div class="col-md-2">
+                        <label >Mes</label>
+                        <SelectMenu
+                        choices="state.months"
+                        multiSelect="true"
+                        searchable="true"
+                        value="state.filters.selectedMonths"
+                        onSelect.bind="onMonthSelect"
+                        placeholder="'Todos'"/>
+                    </div>
+                    <div class="col-md-1">
+                        <button class="btn btn-secondary w-100" t-on-click="onSearch">
+                             Buscar
+                        </button>
+                    </div>
+                </div>
+    
+
+            </div>
+        </Layout>
+    </t>
+</templates>

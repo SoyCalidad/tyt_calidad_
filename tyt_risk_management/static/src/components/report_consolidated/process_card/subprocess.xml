@@ -1,0 +1,60 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<templates xml:space="preserve">
+
+    <t t-name="tyt_risk_management.RCSubprocess">
+        <t t-set="process" t-value="props.process" />
+        <div class="card ">
+                    <div class="card-header">
+                        <h4 class="card-title">
+                            <t t-out="process.name" />
+                        </h4>
+                         
+                    </div>
+                    <div class="card-body" >
+                        <div class="row">
+                            <div class="col-lg-6">
+                                <div class="chart-container">
+                                    <canvas t-ref="barChart"/>
+                                </div>
+                            </div>
+                            <div class="col-lg-6">
+                                <div class="row">
+                                    <div class="col-lg-8 p-0" style="">
+                                        <PieChart 
+                                        label="'data piechart'"
+                                        showLegend="true"
+                                        data="{}"
+                                        dataValues="[this.props.residual_risk,this.props.insured_risk]"
+                                        dataLabels="['Riesgo residual','Riesgos asegurados']"
+                                        dataColors="['#DC3545','#16AAFF']" />
+                                    </div>
+                                    <div class="col-lg-4 "  >
+                                        <div class="mt-3" >
+                                            <div class="d-flex flex-column ps-0 mb-0 border">
+                                                <div class="py-1 px-2" >Riesgos Asegurados</div>
+                                                <div class=" py-1 px-2 fw-bolder">
+                                                    <t t-out="process.quantification - process.residual" />
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="mt-3">
+                                            <div class=" d-flex flex-column ps-0 mb-0 "> 
+                                                <div class="py-1 px-2 border rounded-top" >Riesgo residual</div> 
+                                                <div class=" py-1 px-2 fw-bolder border rounded-bottom"  >
+                                                    <t t-out="process.residual" />
+                                                </div>
+                                            </div>
+                                        </div>
+                                        
+                                    </div>
+                                </div>
+                            </div>
+                             
+                        </div>
+                    </div>
+                </div>
+
+    </t>
+
+</templates>

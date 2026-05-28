@@ -116,8 +116,9 @@ export class Nivel2StatusReport extends Component {
         });
     }
 
-    onChangeDomain() {
+    async onChangeDomain() {
         console.log("onchangedomain", this.state.filters.domain_id);
+        await this.cargarProcesos();
     }
 
     async loadFilters() {
@@ -135,7 +136,11 @@ export class Nivel2StatusReport extends Component {
     }
     async loadDepartments() {
         try {
-            const data = await this.orm.searchRead("hr.department", [], ["id", "name",]);
+            const data = await this.orm.searchRead(
+                "hr.department", 
+                [['x_studio_npp', '=', 1]], 
+                ["id", "name",]
+            );
             this.state.departments = data;
         } catch (error) {
             console.error("Error cargando domains:", error);
@@ -160,9 +165,11 @@ export class Nivel2StatusReport extends Component {
         try {
             const domain = [["level", "=", "2"]];
             const domainValue = this.state.filters.domain_id;
-            if (domainValue) {
-                domain.push(["parent_id", "=", domainValue])
+            console.log("domainValue", domainValue)
+            if (domainValue && domainValue!="0") {
+                domain.push(["parent_id", "=", Number(domainValue)])
             }
+            console.log("domain process ", domain)
             const data = await this.orm.searchRead(
                 "tyt.business.process", 
                 domain,

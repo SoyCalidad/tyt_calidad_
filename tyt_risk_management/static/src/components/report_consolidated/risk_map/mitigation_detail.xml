@@ -1,0 +1,256 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<templates xml:space="preserve">
+
+    <t t-name="tyt_risk_management.RMMitigationDetail"  >
+        <Dialog size="'lg'" title="props.title" modalRef="modalRef">
+        <t t-set-slot="default">
+            <t t-if="state.loading">
+                <div class="text-center p-4">
+                    <i class="fa fa-spinner fa-spin me-2"/>
+                    Cargando...
+                </div>
+            </t>
+                
+            <t t-else="">
+                <div class="form-group">
+                    <div class="row">
+                        <div class="col-lg-12">
+                            <h3>Identificación</h3>
+                        </div>
+                        <div class="col-lg-4">
+                            <label for="text-input" class="form-label fw-bolder">Proceso</label> 
+                            <input type="text"
+                                disabled="disabled" class="form-control" t-att-value="risk?.risk_process || ''" />
+                        </div>
+                        <div class="col-lg-4">
+                            <label for="text-input" class="form-label fw-bolder">Sub Proceso</label> 
+                            <input type="text"
+                                disabled="disabled" class="form-control"
+                                t-att-value="risk?.risk_subprocess || ''"  
+                                />
+                        </div>
+                        <div class="col-lg-2">
+                            <label for="text-input" class="form-label fw-bolder">Año</label> <input type="text"
+                            t-att-value="risk?.year || ''" 
+                            disabled="" class="form-control" style="text-align: right;" />
+                        </div>
+                        <div class="col-lg-2">
+                            <label for="text-input" class="form-label fw-bolder">Mes</label> <input type="text"
+                            t-att-value="risk?.month || ''" 
+                                disabled="1" class="form-control" style="text-align: right;0"/>
+                        </div> 
+                    </div>
+                </div>
+                <div class="form-group">
+                    <div class="row">
+                        <div class="col-lg-4">
+                            <label for="text-input" class="form-label fw-bolder">ID Riesgo</label> 
+                            <input type="text"
+                                disabled="disabled" class="form-control" 
+                                t-att-value="risk?.risk_id || ''" 
+                                />
+                            </div>
+                        <div class="col-lg-4">
+                            <label for="text-input" class="form-label fw-bolder">Dominio</label> 
+                            <input type="text"
+                                disabled="disabled" class="form-control" 
+                                t-att-value="risk?.risk_pdomain || ''" 
+                                />
+                            </div>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <div class="row">
+                        <div class="col-lg-4">
+                            <label for="text-input" class="form-label fw-bolder">Riesgo asociado</label> 
+                            <textarea
+                                disabled="disabled" name="text-input" rows="5" class="form-control"
+                                t-att-value="risk?.risk_name || ''" 
+                                >
+                            </textarea>
+                            </div>
+                        <div class="col-lg-4"><label for="text-input" class="form-label fw-bolder">Objetivo de Control</label> <textarea
+                                disabled="disabled" name="text-input" rows="5" class="form-control"></textarea></div>
+                        <div class="col-lg-4"><label for="text-input" class="form-label fw-bolder">Objetivo COSO</label> <textarea
+                                disabled="disabled" name="text-input" rows="5" class="form-control"></textarea></div>
+                    </div>
+                </div>
+                <hr />
+                <div class="form-group">
+                    <div class="row">
+                        <div class="col-lg-12">
+                            <h3>Análisis de riesgos</h3>
+                        </div>
+                        <div class="col-lg-4">
+                            <label for="text-input" class="form-label fw-bolder">Escenario bajo</label> 
+                            <textarea
+                                disabled="disabled" name="text-input" rows="5" class="form-control"
+                                t-att-value="risk?.risk_low_scenery || ''" 
+                                ></textarea></div>
+                        <div class="col-lg-4">
+                            <label for="text-input" class="form-label fw-bolder">Escenario medio</label> 
+                            <textarea
+                            t-att-value="risk?.risk_middle_scenery || ''" 
+                                disabled="disabled" name="text-input" rows="5" class="form-control"></textarea></div>
+                        <div class="col-lg-4">
+                            <label for="text-input" class="form-label fw-bolder">Escenario alto</label> 
+                            <textarea
+                            t-att-value="risk?.risk_high_scenery || ''" 
+                                disabled="disabled" name="text-input" rows="5" class="form-control"></textarea></div>
+                    </div>
+                </div>
+                <hr />
+                <div class="form-group">
+                    <div class="row">
+                        <div class="col-lg-12">
+                            <h3>Evaluación</h3>
+                        </div>
+                        <div class="col-lg-3">
+                            <label for="text-input" class="form-label fw-bolder">Impacto</label>  
+                            <label
+                                class="form-control badge bg-danger rounded px-3 py-2 my-2 fw-bolder">
+                                <t t-out="risk?.risk_impact || ''" />
+                            </label>
+                        </div>
+                        <div class="col-lg-3">
+                            <label for="text-input" class="form-label fw-bolder">Ocurrencia</label>
+                            <label class="form-control badge bg-danger rounded px-3 py-2 my-2 fw-bolder">
+                                <t t-out="risk?.risk_occurrence || ''" />
+                            </label></div>
+                    </div>
+                </div>
+                <hr />
+                <div class="form-group">
+                    <div class="row">
+                        <div class="col-lg-12">
+                            <h3>RESPUESTA AL RIESGO</h3>
+                        </div>
+                        <div class="col-lg-6"><label for="text-input" class="form-label fw-bolder">Actividad de Control</label> <textarea
+                                maxlength="1000" disabled="disabled" name="text-input" rows="4" class="form-control"></textarea></div>
+                        <div class="col-lg-6"><label for="text-input" class="form-label fw-bolder">Aseveraciones</label> <textarea
+                                maxlength="1000" disabled="disabled" name="text-input" rows="4" class="form-control"></textarea></div>
+                    </div>
+                    <div class="row">
+                        <div class="col-lg-3">
+                            <label for="text-input" class="form-label fw-bolder">Manual o Automático</label> 
+                            <input
+                                type="text" maxlength="50" disabled="disabled" name="text-input" class="form-control"/>
+                        </div>
+                        <div class="col-lg-3">
+                            <label for="text-input" class="form-label fw-bolder">Sistema de control</label> 
+                            <input
+                                type="text" maxlength="50" disabled="disabled" name="text-input" class="form-control" />
+                        </div>
+                        <div class="col-lg-3">
+                            <label for="text-input" class="form-label fw-bolder">Frecuencia</label> 
+                            <input type="text"
+                                maxlength="50" disabled="disabled" name="text-input" class="form-control" />
+                        </div>
+                        <div class="col-lg-3">
+                            <label for="text-input" class="form-label fw-bolder">Preventivo o Detectivo</label> 
+                            <input
+                                type="text" maxlength="50" disabled="disabled" name="text-input" class="form-control" />
+                        </div>
+                        <div class="col-lg-3">
+                            <label for="text-input" class="form-label fw-bolder">Control de fraude</label> 
+                            <input
+                                type="text" maxlength="50" disabled="disabled" name="text-input" class="form-control" />
+                        </div>
+                    </div>
+                </div>
+                <hr />
+                <div class="form-group">
+                    <div class="row">
+                        <div class="col-lg-12">
+                            <h3>INFORMACIÓN Y COMUNICACIÓN</h3>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-lg-4">
+                            <label for="text-input" class="form-label fw-bolder">
+                                Grado de mitigación
+                            </label> 
+                            <label class="form-control badge bg-secondary rounded px-3 py-2 my-2 fw-bolder">No Mitigado</label> 
+                        </div>
+                        <div class="col-lg-4">
+                            <label for="text-input" class="form-label fw-bolder">Nivel de madurez</label> 
+                            <label class="form-control badge bg-danger rounded px-3 py-2 my-2 fw-bolder">No existe</label></div>
+                        <div class="col-lg-4">
+                            <label for="text-input" class="form-label fw-bolder">Grado de cumplimiento</label>  
+                            <label class="form-control badge bg-danger rounded px-3 py-2 my-2 fw-bolder">No atendido</label> <!---->
+                        </div>
+                        <div class="col-lg-2">
+                            <label for="text-input" class="form-label fw-bolder">Estatus %</label> <input type="text"
+                                maxlength="50" disabled="disabled" name="text-input" class="form-control" />
+                        </div>
+                        <div class="col-lg-2">
+                            <label for="text-input" class="form-label fw-bolder">Riesgo inherente</label> 
+                            <input
+                                type="text" disabled="1" class="form-control" style="text-align: right;" />
+                        </div>
+                        <div class="col-lg-2">
+                            <label for="text-input" class="form-label fw-bolder">Riesgo residual</label> 
+                            <input
+                                type="text" disabled="1" class="form-control" style="text-align: right;" />
+                        </div>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <div class="row">
+                        <div class="col-lg-12">
+                            <h3>Calificación del riesgo</h3>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-lg-4">
+                            <label for="text-input" class="form-label fw-bolder">
+                                Antes de controles
+                            </label> 
+                            <label class="form-control badge bg-danger rounded px-3 py-2 my-2 fw-bolder"
+                                style="background-color: darkred !important;">Severo</label> 
+                        </div>
+                        <div class="col-lg-4">
+                            <label for="text-input" class="form-label fw-bolder">Después de controles</label>
+                            <label class="form-control badge bg-danger rounded px-3 py-2 my-2 fw-bolder"
+                                style="background-color: darkred !important;">Severo</label>
+                        </div>
+                    </div>
+                </div>
+                <hr />
+                <div class="form-group">
+                    <div class="row">
+                        <div class="col-lg-12">
+                            <h3>REVISIÓN Y MONITOREO</h3>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-lg-12">
+                            <h3>Mitigación</h3>
+                        </div>
+                        <div class="col-lg-4">
+                            <label for="text-input" class="form-label fw-bolder">Dueño del proceso </label> 
+                            <input
+                                type="text"  disabled="disabled" name="text-input" class="form-control" />
+                        </div>
+                        <div class="col-lg-4">
+                            <label for="text-input" class="form-label fw-bolder">Dueño del control </label> 
+                            <input
+                                type="text" disabled="disabled" name="text-input" class="form-control" />
+                        </div>
+                        <div class="col-lg-4">
+                            <label for="text-input" class="form-label fw-bolder">Revisor </label> <input type="text"
+                                 disabled="disabled" name="text-input" class="form-control" />
+                        </div>
+                    </div> 
+                </div>
+                
+
+            </t>
+        </t>
+        <t t-set-slot="footer">
+            <button t-if="props.cancel" class="btn btn-secondary" t-on-click="_cancel" t-esc="props.cancelLabel"/>
+        </t>
+        </Dialog>
+    </t>
+
+</templates>

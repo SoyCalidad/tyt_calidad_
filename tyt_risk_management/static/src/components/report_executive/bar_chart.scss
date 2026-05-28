@@ -1,0 +1,14 @@
+.o_bar_chart {
+    width: 100%;
+
+    &_title {
+        font-size: 14px;
+        font-weight: 500;
+        color: var(--color-text-secondary, #666);
+        margin-bottom: 8px;
+    }
+
+    &_canvas {
+        width: 100%;
+    }
+}

@@ -10,6 +10,7 @@ import { FilterSelect } from "./filter_select";
 import { RiskSectionCard } from "./risk_section_card";
 import { MaturityLevelCard } from "./maturity_level_card/maturity_level_card";
 import { RiskMap } from "./risk_map/risk_map"
+import { ProcessCard } from "./process_card/process_card";
 
 export class ReportConsolidated extends Component {
 
@@ -21,6 +22,7 @@ export class ReportConsolidated extends Component {
         RiskSectionCard,
         MaturityLevelCard,
         RiskMap ,
+        ProcessCard,
     };
 
     setup() {
@@ -42,6 +44,9 @@ export class ReportConsolidated extends Component {
             processes: [],
             years: [],
 
+            collapsedMitigation: false,
+            collapsedMonitoring: false,
+
             //dataprocessed
             dataProcessed: {
                 barchart_mitigated: [0,0,0],
@@ -55,7 +60,9 @@ export class ReportConsolidated extends Component {
                 resumenProcesos: {
                     mitigado: [],
                     monitoring: [],
-                }
+                },
+                processes_mitigated: [],
+                processes_monitoring:[],
             },
 
 
@@ -88,7 +95,7 @@ export class ReportConsolidated extends Component {
 
         const deparments = await this.orm.searchRead(
             "hr.department",
-            [],
+            [['x_studio_npp', '=', 1]],
             ["id", "name"]
         );
         this.state.deparments = deparments.map(c => ({
@@ -178,6 +185,10 @@ export class ReportConsolidated extends Component {
         } catch (error) {
             console.error("Error cargando procesos:", error);
         }
+    }
+
+    toggleCollapseMitigation() {
+        this.state.collapsedMitigation = !this.state.collapsedMitigation;
     }
 }
 

@@ -11,7 +11,10 @@ export class PieChart extends Component {
         data: Object,
         dataValues: Array,
         dataLabels: Array,
-        dataColors: Array,
+        dataColors: {
+            type: Array, 
+            optional: true,
+        },
         showLegend: {
             type: Boolean,
             optional: true,
@@ -19,8 +22,8 @@ export class PieChart extends Component {
     };
 
     static defaultProps = {
-    showLegend: false,
-  };
+        showLegend: false,
+    };
 
     setup() {
         this.canvasRef = useRef("canvas");
@@ -37,17 +40,18 @@ export class PieChart extends Component {
         const labels = this.props.dataLabels;
         const data = this.props.dataValues;
         const color = this.props.dataColors;
+        const dataset = [
+            {
+                label: this.props.label,
+                data: data,
+                backgroundColor: color ? color : null,
+            },
+        ];
         this.chart = new Chart(this.canvasRef.el, {
             type: "pie",
             data: {
                 labels: labels,
-                datasets: [
-                    {
-                        label: this.props.label,
-                        data: data,
-                        backgroundColor: color,
-                    },
-                ],
+                datasets: dataset,
             },
             options: {
                 plugins: {

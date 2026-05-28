@@ -1,7 +1,9 @@
 /** @odoo-module **/
 
 import { Component, useState } from "@odoo/owl";
+import { useService } from "@web/core/utils/hooks";
 import { RiskQuadrant } from "./risk_quadrant";
+import { MitigationDetail } from "./mitigation_detail";
 export class RiskMap extends Component {
     static template = "tyt_risk_management.RiskMap";
 
@@ -22,6 +24,7 @@ export class RiskMap extends Component {
 
     static components = {
         RiskQuadrant,
+        
     }
 
     setup() {
@@ -143,4 +146,6 @@ export class RiskMap extends Component {
     get matrixSize() {
         return Math.ceil(Math.sqrt(this.maxRiskCount || 1));
     }
+
+
 }

@@ -43,6 +43,7 @@
     'assets':{ 
         'web.assets_backend': [
             'tyt_risk_management/static/src/**/*',
+            'tyt_risk_management/static/lib/echarts/**/*',
         ],
 
     },

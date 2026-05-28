@@ -74,6 +74,22 @@
                 name="Nivel 3 - Consolidado"
                 action="action_report_consolidated_dashboard"
             />  
+            <menuitem id="report_customized_menu"
+                sequence="40"
+                name="Nivel 4 - Personalizado "
+                action="action_report_customized_dashboard"
+            />  
+            <menuitem id="report_executive_menu"
+                sequence="30"
+                name="Nivel 5 - Ejecutivo"
+                action="action_report_executive_dashboard"
+            />  
+
+            <menuitem id="report_action_plan_menu"
+                sequence="60"
+                name="Nivel 6 - Planes de acción"
+                action="action_report_risk_action_plan"
+            />  
         </menuitem>
 
     </menuitem>

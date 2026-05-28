@@ -14,7 +14,7 @@
             </div>
 
             <div class="risk-stat-content px-2">
-                <div class="risk-stat-title d-block overflow-hidden">
+                <div class="risk-stat-title d-block overflow-hidden text-truncate ">
                     <t t-esc="props.title"/>
                 </div>
 
