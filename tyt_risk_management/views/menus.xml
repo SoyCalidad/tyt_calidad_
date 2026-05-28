@@ -80,7 +80,7 @@
                 action="action_report_customized_dashboard"
             />  
             <menuitem id="report_executive_menu"
-                sequence="30"
+                sequence="50"
                 name="Nivel 5 - Ejecutivo"
                 action="action_report_executive_dashboard"
             />  

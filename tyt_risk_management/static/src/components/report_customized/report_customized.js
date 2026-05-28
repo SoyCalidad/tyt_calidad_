@@ -21,9 +21,9 @@ export class CustomizedReport extends Component {
         this.orm = useService("orm");
         this.state = useState({
             filters: {
-                department_id: "0",
-                domain_id: "0",
-                process_id: "0",
+                departmentIds: "0",
+                domainIds: "0",
+                processIds: "0",
                 selectedYears: [],
                 selectedMonths: [],
             },
@@ -58,6 +58,18 @@ export class CustomizedReport extends Component {
         this.state.filters.selectedYears = item
     }
 
+    onProcessSelect(item) {
+        this.state.filters.processIds = item
+    }
+
+    onDomainSelect(item) {
+        this.state.filters.domainIds = item
+    }
+
+    onDepartmentSelect(item) {
+        this.state.filters.departmentIds = item
+    }
+
 
     onChangeDomain() {
         this.cargarProcesos()
@@ -87,7 +99,7 @@ export class CustomizedReport extends Component {
                 [['x_studio_npp', '=', 1]],
                 ["id", "name",]
             );
-            this.state.departments = data;
+            this.state.departments = data.map(d => ({label: d.name, value: d.id}));
         } catch (error) {
             console.error("Error cargando domains:", error);
         }
@@ -101,7 +113,7 @@ export class CustomizedReport extends Component {
                 ["id", "name", "short_name"],
             );
 
-            this.state.domains = data;
+            this.state.domains = data.map(d => ({label: d.name, value: d.id}));
         } catch (error) {
             console.error("Error cargando domains:", error);
         }
@@ -118,7 +130,7 @@ export class CustomizedReport extends Component {
                 "tyt.business.process",
                 domain,
                 ["id", "name", "short_name"]);
-            this.state.processes = data;
+            this.state.processes = data.map(process => ({label: process.name, value: process.id}));
         } catch (error) {
             console.error("Error cargando procesos:", error);
         }

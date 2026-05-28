@@ -34,7 +34,7 @@ export class MitigationDetail extends Component {
         this.risk = useState({})
 
         onWillStart(async () => {
-            await this.loadMitigations();
+            this.loadMitigations();
         });
     }
 
