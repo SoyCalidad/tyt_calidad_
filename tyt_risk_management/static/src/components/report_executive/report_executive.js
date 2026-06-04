@@ -385,6 +385,7 @@ export class ExecutiveReport extends Component {
             title: "Lista de riesgos",
             mIds,
             actionId: this.idActionActivity,
+            showAction: true,
         });
     }
 

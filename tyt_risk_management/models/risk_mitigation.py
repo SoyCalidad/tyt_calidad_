@@ -2,6 +2,9 @@ from odoo import models, fields, api
 from odoo.exceptions import UserError
 
 from dateutil.relativedelta import relativedelta
+import logging 
+
+_logger = logging.getLogger(__name__)
 
 class RiskMitigation(models.Model):
     _name = "tyt.risk.mitigation"
@@ -750,23 +753,23 @@ class RiskMitigation(models.Model):
                     }]
                 } 
             else:
-                process_dict["quantification"] += m.risk_id_quantification
-                process_dict["residual"] += m.mr_residual_risk
-                process_dict["n_unmitigation"] += n_unmitigation
-                process_dict["n_partialmitigated"] += n_partialmitigated
-                process_dict["n_mitigation"] += n_mitigation
+                process_dict[m.risk_id_process_id.id]["quantification"] += m.risk_id_quantification
+                process_dict[m.risk_id_process_id.id]["residual"] += m.mr_residual_risk
+                process_dict[m.risk_id_process_id.id]["n_unmitigation"] += n_unmitigation
+                process_dict[m.risk_id_process_id.id]["n_partialmitigated"] += n_partialmitigated
+                process_dict[m.risk_id_process_id.id]["n_mitigation"] += n_mitigation
                 exist_subprocess = False 
-                for index, subp in enumerate(process_dict["subprocesses"]):
+                for index, subp in enumerate(process_dict[m.risk_id_process_id.id]["subprocesses"]):
                     if subp["id"] == m.risk_id_subprocess_id.id:
                         exist_subprocess = index 
                         break 
 
                 if exist_subprocess:
-                    process_dict["subprocesses"][exist_subprocess]["quantification"] += m.risk_id_quantification
-                    process_dict["subprocesses"][exist_subprocess]["residual"] += m.mr_residual_risk
-                    process_dict["subprocesses"][exist_subprocess]["n_unmitigation"] += n_unmitigation
-                    process_dict["subprocesses"][exist_subprocess]["n_partialmitigated"] += n_partialmitigated
-                    process_dict["subprocesses"][exist_subprocess]["n_mitigation"] += n_mitigation
+                    process_dict[m.risk_id_process_id.id]["subprocesses"][exist_subprocess]["quantification"] += m.risk_id_quantification
+                    process_dict[m.risk_id_process_id.id]["subprocesses"][exist_subprocess]["residual"] += m.mr_residual_risk
+                    process_dict[m.risk_id_process_id.id]["subprocesses"][exist_subprocess]["n_unmitigation"] += n_unmitigation
+                    process_dict[m.risk_id_process_id.id]["subprocesses"][exist_subprocess]["n_partialmitigated"] += n_partialmitigated
+                    process_dict[m.risk_id_process_id.id]["subprocesses"][exist_subprocess]["n_mitigation"] += n_mitigation
 
         return list(process_dict.values())
 
@@ -946,7 +949,7 @@ class RiskMitigation(models.Model):
             "risk_process": m.risk_id_process_id.display_name,
             "risk_subprocess": m.risk_id_subprocess_id.display_name,
             "anio": m.year,
-            "month": m.month,
+            "month": dict(self._fields['month'].selection).get(m.month),
             "risk_id": m.risk_id_id,
             "risk_pdomain": m.risk_id_pdomain_id.display_name,
             "risk_low_scenery": m.risk_id.low_scenery, 
@@ -954,6 +957,109 @@ class RiskMitigation(models.Model):
             "risk_high_scenery": m.risk_id.high_scenery, 
             "risk_impact": m.risk_id_impact,
             "risk_occurrence": m.risk_id_occurrence,
+            "risk_control_objective": m.risk_id.control_objective,
+            "risk_goal_coso_names": "\n".join([g.name for g in m.risk_id.goal_coso_ids]),
+            "risk_control_activity": m.risk_id.control_activity,
+            "risk_assertion_names": ",".join([a.name for a in m.risk_id.assertion_ids]),
+            "risk_type_ma": dict(self.env['tyt.risk.management']._fields['type_ma'].selection).get(m.risk_id.type_ma),
+            'risk_system_control': m.risk_id.system_control,
+            'risk_frequency_name': m.risk_id.frequency_id.name,
+            "risk_type_pd": dict(self.env['tyt.risk.management']._fields['type_pd'].selection).get(m.risk_id.type_pd),
+            "risk_type_cf": dict(self.env['tyt.risk.management']._fields['type_cf'].selection).get(m.risk_id.type_cf),
         }
 
+    @api.model
+    def calc_num_periods(self, years, months):
+        return 0
+
+    @api.model
+    def customized_report(self, department_ids, pdomain_ids, process_ids, years, months):
+        num_period = 0
+        data_list = []
+        label_time = []
+        if department_ids or pdomain_ids or process_ids or years or months:
+            domain_m = []
+            domain_domain = [('level', '=', 1)]
+            domain_process = [('level', '=', 2)]
+            domain_depts = [('x_studio_npp', '=', 1)]
+            if department_ids and isinstance(department_ids, list):
+                domain_m.append(('risk_id.department_id', 'in', department_ids))
+                domain_depts.append(('id', 'in', department_ids))
+            if pdomain_ids and isinstance(pdomain_ids, list):
+                domain_m.append(('risk_id.pdomain_id', 'in', pdomain_ids))
+                domain_domain.append(('id', 'in', pdomain_ids))
+            if process_ids and isinstance(process_ids, list):
+                domain_process.append(('id', 'in', process_ids))
+                domain_m.append(('risk_id.process_id', 'in', process_ids))
+            if years and isinstance(years, list):
+                domain_m.append(('year', 'in', years))
+            if months and isinstance(months, list):
+                domain_m.append(('month', 'in', months))
+
+            available_years = self.get_available_years()
+            iterable_years = sorted(years or available_years)
+            _logger.info(f"mes array, {months}")
+            iterable_months = months or [1,2,3,4,5,6,7,8,9,10,11,12]
+            _logger.info(f"mes array iterable, {iterable_months}")
+            num_period = len(iterable_years) * len(iterable_months)
+
+            departments = self.env['hr.department'].search(domain_depts)
+            domains = self.env['tyt.business.process'].search(domain_domain)
+            process = self.env['tyt.business.process'].search(domain_process)
+            sub_process = self.env['tyt.business.process'].search([('parent_id', 'in', process.ids)])
+            
+            for d in departments:
+                for do in domains:
+                    for p in process.filtered(lambda pro: pro.parent_id.id==do.id):
+                        for sp in sub_process.filtered(lambda subp: subp.parent_id.id==p.id):
+                            month_table = []
+                            for y_index, y in enumerate(iterable_years):
+                                for m_index, m in enumerate(iterable_months):
+                                    month_label = dict(self._fields['month'].selection).get(f"{m}")
+                                    if f"{month_label} {y}" not in label_time:
+                                        label_time.append(f"{month_label} {y}")
+                                    mitigations = self.env['tyt.risk.mitigation'].search([
+                                        ('risk_id.department_id', '=', d.id),
+                                        ('risk_id.process_id', '=', p.id),
+                                        ('risk_id.subprocess_id', '=', sp.id),
+                                        ('risk_id.pdomain_id', '=', do.id),
+                                        ('year', '=', int(y)),
+                                        ('month', '<=', str(m)),
+                                    ])
+                                    mi_month = mitigations.filtered(lambda mi: mi.month == m)
+                                    compliances = []
+                                    num_100 = 0
+                                    for mi in mi_month:
+                                        if mi.mr_degree_mitigation.value ==100:
+                                            num_100 += 1
+                                        compliances.append(mi.mr_degree_mitigation.value)
+                                    month_table.append(
+                                        {
+                                            "month": m,
+                                            "month_name": "sys_month_5",
+                                            "month_text": month_label,
+                                            "year": y,
+                                            "cantidad": len(mi_month),
+                                            "compliance": round(sum(compliances) / len (compliances) if len(compliances)> 0 else 0),
+                                            "complianceAcomulado": round(num_100 / len(compliances) if len(compliances)>0 else 0),
+                                            "cantidadAcomulada": len(compliances),
+                                            "risks": list(mi_month.mapped('id')),
+                                            "risksAcomulado": list(mitigations.mapped('id')),
+                                        })
+
+                            data_list.append({
+                                "id": f"{d.id}-{p.id}-{sp.id}-{do.id}",
+                                "department_name": d.display_name,
+                                "process_name": p.display_name,
+                                "sub_process_name": sp.display_name,
+                                "pdomain_name": do.display_name,
+                                "month_table": month_table,
+                            })
+
+
+        return {
+            "label_header": ["Riesgos", "Cumplimiento", "Cumplimiento acumulado"] * num_period,
+            "label_time": label_time,
+            "list": data_list,
+        }
     

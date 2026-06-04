@@ -89,6 +89,16 @@
                 sequence="60"
                 name="Nivel 6 - Planes de acción"
                 action="action_report_risk_action_plan"
+            /> 
+            <menuitem id="report_carried_out_menu"
+                sequence="70"
+                name="7.1 Desempeño de Evaluaciones Efectuadas"
+                action="action_report_carried_out_dashboard"
+            />  
+            <menuitem id="report_7_2_consolidated_menu"
+                sequence="80"
+                name="7.2  Desempeño de Evaluaciones Efectuadas, Consolidado"
+                action="action_report_7_2_consolidate_dashboard"
             />  
         </menuitem>
 

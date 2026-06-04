@@ -1,0 +1,20 @@
+<odoo>
+    <record id="customized_report_action_report" model="ir.actions.report">
+        <field name="name">Mitigación riesgo - reporte personalizado </field>
+        <field name="model">tyt.customized.report.wizard</field>
+        <field name="report_type">xlsx</field>
+        <field name="report_name">tyt_risk_management.customized_report_wizard_template</field>
+        <field name="report_file">CompliaceStatus--</field>
+        <field name="binding_type">report</field>
+        <field name="print_report_name">'CompliaceStatus--'</field>
+    </record>
+    <record id="accumulated_customized_report_action_report" model="ir.actions.report">
+        <field name="name">Mitigación riesgo - reporte personalizado - acumulado</field>
+        <field name="model">tyt.customized.report.wizard</field>
+        <field name="report_type">xlsx</field>
+        <field name="report_name">tyt_risk_management.accumulated_customized_template</field>
+        <field name="report_file">ReportDet</field>
+        <field name="binding_type">report</field>
+        <field name="print_report_name">'ReportDet'</field>
+    </record>
+</odoo>

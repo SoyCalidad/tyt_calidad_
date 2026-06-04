@@ -200,6 +200,7 @@ export class Nivel2StatusReport extends Component {
             title: "Lista de riesgos",
             mIds,
             actionId: this.idActionActivity,
+            showAction: true,
         });
     }
 

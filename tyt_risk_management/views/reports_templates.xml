@@ -20,4 +20,12 @@
         <field name="name">Nivel 5 - Ejecutivo</field>
         <field name="tag">tyt_risk_management.report_executive</field>
     </record>
+    <record id="action_report_carried_out_dashboard" model="ir.actions.client">
+        <field name="name">7.1 Desempeño de Evaluaciones Efectuadas</field>
+        <field name="tag">tyt_risk_management.carried_out_report</field>
+    </record>
+    <record id="action_report_7_2_consolidate_dashboard" model="ir.actions.client">
+        <field name="name">7.2  Desempeño de Evaluaciones Efectuadas, Consolidado </field>
+        <field name="tag">tyt_risk_management.rpe_consolidated_report</field>
+    </record>
 </odoo>

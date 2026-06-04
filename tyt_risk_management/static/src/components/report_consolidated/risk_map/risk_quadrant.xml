@@ -16,11 +16,12 @@
                        t-as="cell"
                        t-key="cell_index">
                         <t t-if="cell">
-                            <td class="risk-cell" t-attf-class="{{ cell.status == 'under_review' ? 'bg-warning' : '' }} {{ cell.mr_status_mitigation == 'mitigated' ? 'bg-success' : 'bg-dark' }}">
+                            <td class="risk-cell px-1">
     
                                 <button
                                     class="btn btn-dark btn-sm risk-badge"
                                     t-on-click="() => this.onRiskClick(cell)"
+                                    t-attf-class="{{ cell.status == 'under_review' ? 'bg-warning' : '' }} {{ cell.mr_status_mitigation == 'mitigated' ? 'bg-success' : '' }}"
                                 >
                                     <t t-esc="cell.id"/>
                                 </button>

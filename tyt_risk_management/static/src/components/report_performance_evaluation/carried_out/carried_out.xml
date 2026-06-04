@@ -1,0 +1,395 @@
+<templates xml:space="preserve">
+    <t t-name="tyt_risk_management.RPECarriedOut" owl="1">
+        <Layout display="display" className="'o_dashboard h-100 overflow-y-auto'">
+            <div class="  p-4 bg-light">
+                <!-- Sección de Filtros -->
+                <div class="row">
+                    <div class="col-md-12">
+                        <div class="card rounded">
+                            <div class="card-header bg-white ">
+                                <h3 class="card-title">
+                                    Desempeño de Evaluaciones Efectuadas
+                                </h3>
+                            </div>
+                            <div class="card-body">
+                                <div class="row pb-3" >
+                                     
+                                    <div class="col-lg-2 col-md-3 col-sm-4">
+                                        <label for="company_id" class="form-label fw-semibold">
+                                            Sitio
+                                        </label> 
+                                        <select name="company_id" class="form-control"
+                                        t-model="state.filters.department_id">
+                                            <option value="0">Todo</option>
+                                            <t t-foreach="state.departments" t-as="dep" t-key="'dep'+dep.id">
+                                                <option t-att-value="dep.id" t-out="dep.name"></option>
+
+                                            </t> 
+                                        </select>
+                                    </div>
+                                    <div class="col-lg-1 col-sm-3">
+                                        <label for="select-anio" class="form-label fw-semibold">Año</label> 
+                                        <select name="select-anio" class="form-select" t-model="state.filters.year">
+                                            <option value="0">Todo</option>
+                                            <t t-foreach="state.years" t-as="y" t-key="y">
+                                                <option t-att-value="y"><t t-esc="y"/></option>
+                                            </t>
+                                        </select>
+                                    </div>
+                                    <div class="col-lg-2">
+                                        <label for="period" class="form-label fw-semibold">Periodo</label> 
+                                        <select
+                                            name="period" class="form-control">
+                                            <option value="month">Mensual</option>
+                                            <option value="bi">Bimestral</option>
+                                            <option value="tri">Trimestral</option>
+                                            <option value="cua">Cuatrimestral</option>
+                                            <option value="se">Semestral</option>
+                                            <option value="anual">Anual</option>
+                                        </select>
+                                    </div>
+                                    <div class="col-lg-2">
+                                        <label for="type_revision" class="form-label fw-semibold">
+                                            Tipo de revisión
+                                        </label> 
+                                        <select name="type_revision" class="form-control">
+                                            <option value="">Todo</option>
+                                            <option value="sys_only_normal">Solo normales</option>
+                                            <option value="sys_only_special">Solo especiales</option>
+                                        </select></div>
+                                    <div class="col-lg-1" style="align-self: self-end;">
+                                        <button
+                                            class="btn btn-secondary">Buscar</button>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="row my-2">
+                    <div class="col-lg-12">
+                        <div class="card rounded ">
+                            <div class="card-body">
+                                <div class="table-responsive pt-4" style="  border-collapse: separate;">
+                                    <t t-foreach="reportData.report" t-as="report" t-key="'table'+report_index">
+                                        <table class="table table-hover table-sm table-bordered table-condensed">
+                                            <thead>
+                                                <tr class="bg-info text-white fw-bold fs-5">
+                                                    <th width="300" class="tabla_titulo">Subsidiaria 1</th>
+                                                    <th class="tabla_titulo titulo-celda">P1</th>
+                                                    <th class="tabla_titulo titulo-celda">P2</th>
+                                                    <th class="tabla_titulo titulo-celda">P3</th>
+                                                    <th class="tabla_titulo titulo-celda">P4</th>
+                                                    <th class="tabla_titulo titulo-celda">Total</th>
+                                                    <th class="tabla_titulo titulo-celda">%</th>
+                                                </tr>
+                                            </thead>
+                                            <tbody>
+                                                <tr>
+                                                    <td width="300"
+                                                        style="background-color: red; color: white; font-weight: bold; font-size: 16px;">
+                                                        Evaluaciones Reprobadas 0%
+                                                    </td>
+                                                    <td align="center" class="titulo-celda"
+                                                        style="background-color: red; color: white; font-weight: bold; font-size: 16px;">87
+                                                    </td>
+                                                    <td align="center" class="titulo-celda"
+                                                        style="background-color: red; color: white; font-weight: bold; font-size: 16px;">57
+                                                    </td>
+                                                    <td align="center" class="titulo-celda"
+                                                        style="background-color: red; color: white; font-weight: bold; font-size: 16px;">0
+                                                    </td>
+                                                    <td align="center" class="titulo-celda"
+                                                        style="background-color: red; color: white; font-weight: bold; font-size: 16px;">0
+                                                    </td>
+                                                    <td align="center" class="titulo-celda"
+                                                        style="background-color: red; color: white; font-weight: bold; font-size: 16px;">144
+                                                    </td>
+                                                    <td align="center" class="titulo-celda"
+                                                        style="background-color: red; color: white; font-weight: bold; font-size: 16px;">
+                                                        97.3 %</td>
+                                                </tr>
+                                                <tr>
+                                                    <td width="300"
+                                                        style="background-color: rgb(217, 123, 0); color: white; font-weight: bold; font-size: 16px;">
+                                                        Evaluaciones Estado Inicial 25%
+                                                    </td>
+                                                    <td align="center" class="titulo-celda"
+                                                        style="background-color: rgb(217, 123, 0); color: white; font-weight: bold; font-size: 16px;">
+                                                        1</td>
+                                                    <td align="center" class="titulo-celda"
+                                                        style="background-color: rgb(217, 123, 0); color: white; font-weight: bold; font-size: 16px;">
+                                                        0</td>
+                                                    <td align="center" class="titulo-celda"
+                                                        style="background-color: rgb(217, 123, 0); color: white; font-weight: bold; font-size: 16px;">
+                                                        0</td>
+                                                    <td align="center" class="titulo-celda"
+                                                        style="background-color: rgb(217, 123, 0); color: white; font-weight: bold; font-size: 16px;">
+                                                        0</td>
+                                                    <td align="center" class="titulo-celda"
+                                                        style="background-color: rgb(217, 123, 0); color: white; font-weight: bold; font-size: 16px;">
+                                                        1</td>
+                                                    <td align="center" class="titulo-celda"
+                                                        style="background-color: rgb(217, 123, 0); color: white; font-weight: bold; font-size: 16px;">
+                                                        0.68 %</td>
+                                                </tr>
+                                                <tr>
+                                                    <td width="300"
+                                                        style="background-color: rgb(255, 215, 0); font-weight: bold; font-size: 16px;">
+                                                        Evaluaciones Estado Limitado 50%
+                                                    </td>
+                                                    <td align="center" class="titulo-celda"
+                                                        style="background-color: rgb(255, 215, 0); font-weight: bold; font-size: 16px;">0
+                                                    </td>
+                                                    <td align="center" class="titulo-celda"
+                                                        style="background-color: rgb(255, 215, 0); font-weight: bold; font-size: 16px;">0
+                                                    </td>
+                                                    <td align="center" class="titulo-celda"
+                                                        style="background-color: rgb(255, 215, 0); font-weight: bold; font-size: 16px;">0
+                                                    </td>
+                                                    <td align="center" class="titulo-celda"
+                                                        style="background-color: rgb(255, 215, 0); font-weight: bold; font-size: 16px;">0
+                                                    </td>
+                                                    <td align="center" class="titulo-celda"
+                                                        style="background-color: rgb(255, 215, 0); font-weight: bold; font-size: 16px;">0
+                                                    </td>
+                                                    <td align="center" class="titulo-celda"
+                                                        style="background-color: rgb(255, 215, 0); font-weight: bold; font-size: 16px;">0 %
+                                                    </td>
+                                                </tr>
+                                                <tr>
+                                                    <td width="300"
+                                                        style="background-color: rgb(0, 191, 255); font-weight: bold; font-size: 16px;">
+                                                        Evaluaciones Estado Definido 75%
+                                                    </td>
+                                                    <td align="center" class="titulo-celda"
+                                                        style="background-color: rgb(0, 191, 255); font-weight: bold; font-size: 16px;">1
+                                                    </td>
+                                                    <td align="center" class="titulo-celda"
+                                                        style="background-color: rgb(0, 191, 255); font-weight: bold; font-size: 16px;">0
+                                                    </td>
+                                                    <td align="center" class="titulo-celda"
+                                                        style="background-color: rgb(0, 191, 255); font-weight: bold; font-size: 16px;">0
+                                                    </td>
+                                                    <td align="center" class="titulo-celda"
+                                                        style="background-color: rgb(0, 191, 255); font-weight: bold; font-size: 16px;">0
+                                                    </td>
+                                                    <td align="center" class="titulo-celda"
+                                                        style="background-color: rgb(0, 191, 255); font-weight: bold; font-size: 16px;">1
+                                                    </td>
+                                                    <td align="center" class="titulo-celda"
+                                                        style="background-color: rgb(0, 191, 255); font-weight: bold; font-size: 16px;">0.68
+                                                        %</td>
+                                                </tr>
+                                                <tr>
+                                                    <td width="300"
+                                                        style="background-color: rgb(154, 205, 50); font-weight: bold; font-size: 16px;">
+                                                        Evaluaciones Estado Optimizado 100%
+                                                    </td>
+                                                    <td align="center" class="titulo-celda"
+                                                        style="background-color: rgb(154, 205, 50); font-weight: bold; font-size: 16px;">1
+                                                    </td>
+                                                    <td align="center" class="titulo-celda"
+                                                        style="background-color: rgb(154, 205, 50); font-weight: bold; font-size: 16px;">1
+                                                    </td>
+                                                    <td align="center" class="titulo-celda"
+                                                        style="background-color: rgb(154, 205, 50); font-weight: bold; font-size: 16px;">0
+                                                    </td>
+                                                    <td align="center" class="titulo-celda"
+                                                        style="background-color: rgb(154, 205, 50); font-weight: bold; font-size: 16px;">0
+                                                    </td>
+                                                    <td align="center" class="titulo-celda"
+                                                        style="background-color: rgb(154, 205, 50); font-weight: bold; font-size: 16px;">2
+                                                    </td>
+                                                    <td align="center" class="titulo-celda"
+                                                        style="background-color: rgb(154, 205, 50); font-weight: bold; font-size: 16px;">
+                                                        1.35 %</td>
+                                                </tr>
+                                            </tbody>
+                                            <tfoot>
+                                                <tr class="bg-primary text-white fw-bold ">
+                                                    <td width="300" class="tabla_titulo">Total de Evaluaciones Efectuadas</td>
+                                                    <td class="tabla_titulo titulo-celda">90</td>
+                                                    <td class="tabla_titulo titulo-celda">58</td>
+                                                    <td class="tabla_titulo titulo-celda">0</td>
+                                                    <td class="tabla_titulo titulo-celda">0</td>
+                                                    <td class="tabla_titulo titulo-celda">148</td>
+                                                    <td class="tabla_titulo titulo-celda">100 %</td>
+                                                </tr>
+                                            </tfoot>
+                                        </table>
+                                    </t>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+    
+                <div class="row my-2">
+                    <div class="col-lg-12">
+                        <div class="card rounded">
+                            <div class="card-body">
+                                <div class="table-responsive" style="padding-top: 10px;">
+                                    <table class="table table-hover table-sm table-bordered table-condensed">
+                                        <thead>
+                                            <tr class="bg-primary text-white fw-bold ">
+                                                <th width="300" class="tabla_titulo">Desempeño de Evaluaciones Efectuadas</th>
+                                                <th class="tabla_titulo titulo-celda">P1</th>
+                                                <th class="tabla_titulo titulo-celda">P2</th>
+                                                <th class="tabla_titulo titulo-celda">P3</th>
+                                                <th class="tabla_titulo titulo-celda">P4</th>
+                                                <th class="tabla_titulo titulo-celda">Total</th>
+                                                <th class="tabla_titulo titulo-celda">%</th>
+                                                <th style="border: 0px;"></th>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                            <tr>
+                                                <td width="300"
+                                                    style="background-color: red; color: white; font-weight: bold; font-size: 16px;">
+                                                    Evaluaciones Reprobadas 0%
+                                                </td>
+                                                <td align="center" class="titulo-celda"
+                                                    style="background-color: red; color: white; font-weight: bold; font-size: 16px;">87
+                                                </td>
+                                                <td align="center" class="titulo-celda"
+                                                    style="background-color: red; color: white; font-weight: bold; font-size: 16px;">86
+                                                </td>
+                                                <td align="center" class="titulo-celda"
+                                                    style="background-color: red; color: white; font-weight: bold; font-size: 16px;">0
+                                                </td>
+                                                <td align="center" class="titulo-celda"
+                                                    style="background-color: red; color: white; font-weight: bold; font-size: 16px;">0
+                                                </td>
+                                                <td align="center" class="titulo-celda"
+                                                    style="background-color: red; color: white; font-weight: bold; font-size: 16px;">173
+                                                </td>
+                                                <td align="center" class="titulo-celda"
+                                                    style="background-color: red; color: white; font-weight: bold; font-size: 16px;">
+                                                    97.74 %</td>
+                                                <td style="border: 0px;"></td>
+                                            </tr>
+                                            <tr>
+                                                <td width="300"
+                                                    style="background-color: rgb(217, 123, 0); color: white; font-weight: bold; font-size: 16px;">
+                                                    Evaluaciones Estado Inicial 25%
+                                                </td>
+                                                <td align="center" class="titulo-celda"
+                                                    style="background-color: rgb(217, 123, 0); color: white; font-weight: bold; font-size: 16px;">
+                                                    1</td>
+                                                <td align="center" class="titulo-celda"
+                                                    style="background-color: rgb(217, 123, 0); color: white; font-weight: bold; font-size: 16px;">
+                                                    0</td>
+                                                <td align="center" class="titulo-celda"
+                                                    style="background-color: rgb(217, 123, 0); color: white; font-weight: bold; font-size: 16px;">
+                                                    0</td>
+                                                <td align="center" class="titulo-celda"
+                                                    style="background-color: rgb(217, 123, 0); color: white; font-weight: bold; font-size: 16px;">
+                                                    0</td>
+                                                <td align="center" class="titulo-celda"
+                                                    style="background-color: rgb(217, 123, 0); color: white; font-weight: bold; font-size: 16px;">
+                                                    1</td>
+                                                <td align="center" class="titulo-celda"
+                                                    style="background-color: rgb(217, 123, 0); color: white; font-weight: bold; font-size: 16px;">
+                                                    0.56 %</td>
+                                                <td style="border: 0px;"></td>
+                                            </tr>
+                                            <tr>
+                                                <td width="300"
+                                                    style="background-color: rgb(255, 215, 0); font-weight: bold; font-size: 16px;">
+                                                    Evaluaciones Estado Limitado 50%
+                                                </td>
+                                                <td align="center" class="titulo-celda"
+                                                    style="background-color: rgb(255, 215, 0); font-weight: bold; font-size: 16px;">0
+                                                </td>
+                                                <td align="center" class="titulo-celda"
+                                                    style="background-color: rgb(255, 215, 0); font-weight: bold; font-size: 16px;">0
+                                                </td>
+                                                <td align="center" class="titulo-celda"
+                                                    style="background-color: rgb(255, 215, 0); font-weight: bold; font-size: 16px;">0
+                                                </td>
+                                                <td align="center" class="titulo-celda"
+                                                    style="background-color: rgb(255, 215, 0); font-weight: bold; font-size: 16px;">0
+                                                </td>
+                                                <td align="center" class="titulo-celda"
+                                                    style="background-color: rgb(255, 215, 0); font-weight: bold; font-size: 16px;">0
+                                                </td>
+                                                <td align="center" class="titulo-celda"
+                                                    style="background-color: rgb(255, 215, 0); font-weight: bold; font-size: 16px;">0 %
+                                                </td>
+                                                <td style="border: 0px;"></td>
+                                            </tr>
+                                            <tr>
+                                                <td width="300"
+                                                    style="background-color: rgb(0, 191, 255); font-weight: bold; font-size: 16px;">
+                                                    Evaluaciones Estado Definido 75%
+                                                </td>
+                                                <td align="center" class="titulo-celda"
+                                                    style="background-color: rgb(0, 191, 255); font-weight: bold; font-size: 16px;">1
+                                                </td>
+                                                <td align="center" class="titulo-celda"
+                                                    style="background-color: rgb(0, 191, 255); font-weight: bold; font-size: 16px;">0
+                                                </td>
+                                                <td align="center" class="titulo-celda"
+                                                    style="background-color: rgb(0, 191, 255); font-weight: bold; font-size: 16px;">0
+                                                </td>
+                                                <td align="center" class="titulo-celda"
+                                                    style="background-color: rgb(0, 191, 255); font-weight: bold; font-size: 16px;">0
+                                                </td>
+                                                <td align="center" class="titulo-celda"
+                                                    style="background-color: rgb(0, 191, 255); font-weight: bold; font-size: 16px;">1
+                                                </td>
+                                                <td align="center" class="titulo-celda"
+                                                    style="background-color: rgb(0, 191, 255); font-weight: bold; font-size: 16px;">0.56
+                                                    %</td>
+                                                <td style="border: 0px;"></td>
+                                            </tr>
+                                            <tr>
+                                                <td width="300"
+                                                    style="background-color: rgb(154, 205, 50); font-weight: bold; font-size: 16px;">
+                                                    Evaluaciones Estado Optimizado 100%
+                                                </td>
+                                                <td align="center" class="titulo-celda"
+                                                    style="background-color: rgb(154, 205, 50); font-weight: bold; font-size: 16px;">1
+                                                </td>
+                                                <td align="center" class="titulo-celda"
+                                                    style="background-color: rgb(154, 205, 50); font-weight: bold; font-size: 16px;">1
+                                                </td>
+                                                <td align="center" class="titulo-celda"
+                                                    style="background-color: rgb(154, 205, 50); font-weight: bold; font-size: 16px;">0
+                                                </td>
+                                                <td align="center" class="titulo-celda"
+                                                    style="background-color: rgb(154, 205, 50); font-weight: bold; font-size: 16px;">0
+                                                </td>
+                                                <td align="center" class="titulo-celda"
+                                                    style="background-color: rgb(154, 205, 50); font-weight: bold; font-size: 16px;">2
+                                                </td>
+                                                <td align="center" class="titulo-celda"
+                                                    style="background-color: rgb(154, 205, 50); font-weight: bold; font-size: 16px;">
+                                                    1.13 %</td>
+                                                <td style="border: 0px;"></td>
+                                            </tr>
+                                        </tbody>
+                                        <tfoot>
+                                            <tr class="bg-primary text-white fw-bold ">
+                                                <td width="300" class="tabla_titulo">Total de Evaluaciones Efectuadas</td>
+                                                <td class="tabla_titulo titulo-celda">90</td>
+                                                <td class="tabla_titulo titulo-celda">87</td>
+                                                <td class="tabla_titulo titulo-celda">0</td>
+                                                <td class="tabla_titulo titulo-celda">0</td>
+                                                <td class="tabla_titulo titulo-celda">177</td>
+                                                <td class="tabla_titulo titulo-celda">100 %</td>
+                                                <td style="border: 0px;"></td>
+                                            </tr>
+                                        </tfoot>
+                                    </table>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </Layout>
+    </t>
+</templates>

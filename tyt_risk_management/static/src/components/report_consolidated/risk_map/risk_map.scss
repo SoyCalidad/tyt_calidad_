@@ -41,7 +41,7 @@
 
 .risk-cell {
     transition: all 0.2s ease;
-    cursor: pointer;
+    //cursor: pointer;
 
     &:hover {
         transform: scale(1.02);
@@ -151,8 +151,8 @@
 }
 
 .risk-badge {
-    width: 34px;
-    height: 34px;
+    width: 25px;
+    height: 25px;
     border-radius: 50%;
     padding: 0;
     font-size: 0.75rem;

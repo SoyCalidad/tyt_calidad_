@@ -69,7 +69,6 @@ export class ReportConsolidated extends Component {
         });
 
         this.monthOptions = [
-            { value: "0", label: "Todo" },
             { value: "1", label: "Enero" },
             { value: "2", label: "Febrero" },
             { value: "3", label: "Marzo" },

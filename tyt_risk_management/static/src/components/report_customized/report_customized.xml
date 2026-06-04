@@ -5,11 +5,30 @@
                 <!-- Sección de Filtros -->
                 <div class="card shadow-sm rounded">
                     <div class="card-title">
-                        <div class="row">
+                        <div class="row justify-content-between align-items-center">
                             <div class="col-auto ">
                                 <h3 class=" pt-4 ps-4 fw-semibold text-black ">
                                      Nivel 4 - Personalizado 
                                 </h3>
+                            </div>
+                            <div class="col-auto me-3">
+                                <div class="">
+                                    <div class="spinner-border" role="status" t-if="state.loading">
+                                        <span class="visually-hidden">Loading...</span>
+                                        </div> 
+                                    <t t-else="">
+                                        <button type="button" class="btn btn-success me-1" 
+                                        t-on-click="() => this.download()" >
+                                            Descargar
+                                        </button> 
+                                        <button type="button" class="btn btn-success me-1"  
+                                        t-on-click="() => this.downloadAccumulated()"
+                                        >
+                                            Descargar acumulado
+                                        </button>
+
+                                    </t>
+                                </div>
                             </div>
                         </div>
                     </div>
@@ -65,16 +84,87 @@
                                 <SelectMenu
                                 choices="state.months"
                                 multiSelect="true"
-                                searchable="true"
+                                 
                                 value="state.filters.selectedMonths"
                                 onSelect.bind="onMonthSelect"
                                 placeholder="'Todos'"/>
                             </div>
                             <div class="col-md-1">
-                                <button class="btn btn-secondary w-100" t-on-click="onSearch">
+                                <button class="btn btn-secondary w-100" t-on-click="() => this.onSearch()">
                                      Buscar
                                 </button>
                             </div>
+                        </div>
+
+                        <div class="table-responsive">
+                            <table class="table table-hover table-sm table-bordered table-condensed">
+                                <thead>
+                                    <tr class="text-white bg-secondary" style="--background-color: #666666">
+                                        <th colspan="4" style="background-color: white;"></th> 
+                                        <t t-if="reportData and reportData.label_time">
+                                            <t t-foreach="reportData.label_time" t-as="label" t-key="'Time'+label+label_index">
+                                                <th colspan="3" class=" fw-bolder" >
+                                                    <t t-out="label" />
+                                                </th>
+
+                                            </t>
+                                        </t> 
+                                    </tr> 
+                                    <tr class="text-white bg-secondary fw-bolder" style="--background-color: #666666">
+                                        <th class="fw-bolder">
+                                            Sitio
+                                        </th> 
+                                        <th class="fw-bolder">
+                                            Proceso
+                                        </th> 
+                                        <th class="fw-bolder">
+                                            Sub Proceso
+                                        </th> 
+                                        <th class="fw-bolder">
+                                            Dominio
+                                        </th> 
+                                        <t t-if="reportData and reportData.label_header">
+                                            <t t-foreach="reportData.label_header" t-as="label" t-key="label_index">
+                                                <th class="fw-bolder" t-out="label">
+                                                </th>
+                                            </t>
+                                        </t>
+                                    </tr>
+                                </thead> 
+                                <tbody t-if="reportData and reportData.list">
+                                    <t t-foreach="reportData.list" t-as="mitigation" t-key="mitigation_index">
+                                        <tr>
+                                            <td t-out="mitigation.department_name"></td>
+                                            <td t-out="mitigation.process_name"></td>
+                                            <td t-out="mitigation.sub_process_name">Ambiental_Social_Gobernanza</td>
+                                            <td t-out="mitigation.pdomain_name">Ambiental</td>
+
+                                            <t t-if="mitigation.month_table">
+                                                <t t-foreach="mitigation.month_table" t-as="mT" t-key="mitigation_index + '-' +mT_index">
+    
+                                                    <td  t-out="mT.cantidad"></td>
+                                                    <td style="cursor: pointer;" t-attf-style="cursor: #{mT.risks.length >0 ? 'pointer' : 'auto'};" 
+                                                    t-on-click="() => this.openMitigation(mT.risks)"
+                                                    > 
+                                                        <t t-out="mT.compliance" /> %
+                                                    
+                                                    </td>
+                                                    <td t-attf-style="cursor: #{mT.risksAcomulado.lenght > 0 ? 'pointer' : 'auto'};"
+                                                    t-on-click="() => this.openMitigation(mT.risksAcomulado)"
+                                                    >
+                                                        <t t-out="mT.complianceAcomulado" /> %</td>
+                                                    
+                                                </t> 
+                                            </t>
+                                            <t t-else="">
+                                                <td></td>
+                                            </t>
+                                        </tr>
+
+                                    </t>
+      
+                                </tbody>
+                            </table>
                         </div>
 
                     </div>

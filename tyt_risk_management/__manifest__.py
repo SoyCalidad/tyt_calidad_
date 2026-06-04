@@ -10,6 +10,7 @@
         'mail',
         'documents',
         'hr',
+        'report_xlsx',
     ],
     'data': [
         'data/documents_document.xml',
@@ -29,6 +30,7 @@
         'views/menus.xml',
 
         'wizard/risk.xml',
+        'wizard/report_wizard_reports.xml',
 
         'data/risk_domain_data.xml',
         'data/catalog_data.xml',

@@ -20,3 +20,6 @@ access_risk_risk.mitigation_admin,tyt.risk.risk.mitigation.admin,model_tyt_risk_
 
 
 access_tyt_catalog_frequency,tyt.catalog.frequency,model_tyt_catalog_frequency,tyt_risk_management.group_ver_catalogos,1,1,1,1
+
+access_tyt_customized_report_wizard,tyt.customzed.report.wizar,model_tyt_customized_report_wizard,base.group_user,1,1,1,1
+
