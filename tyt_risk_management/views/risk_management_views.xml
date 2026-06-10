@@ -811,7 +811,7 @@
                     </group>
                     <!--readnoly for owner-->
                     <group string="Mitigación revisor" name="reviewer_mitigation_only_read"
-                    invisible="not(status == 'pending' and can_create_documents )"
+                    invisible="not((status == 'pending' or status == 'partially_mitigated') and can_create_documents )"
                     >
                             <separator string="Proceso de mitigación"></separator>
                             <div class="row justify-content-end" colspan="4">
@@ -908,11 +908,11 @@
                                 </field>
                             </group>
                     </group>
-                    <!--readnoly for monitoring-->
+                    <!--readnoly read-->
                     <group string="Mitigación revisor" name="reviewer_mitigation_only_read"
-                    invisible="not(risk_activity_state == 'monitoring' )"
+                    invisible="not(risk_activity_state == 'monitoring' or (not can_create_documents and not is_reviewer) )"
                     >
-                            <separator string="Proceso de mitigación"></separator>
+                            <separator string="Proceso de mitigación "></separator>
                             <div class="row justify-content-end" colspan="4">
                                 <div class="col-auto">
                                     <label for="mr_period_str" string="Periodo" />
@@ -989,13 +989,13 @@
                                 options="{'no_quick_create': True, 'no_create': True}"
                                 groups="tyt_risk_management.group_action_plan" >
                                     <list  edit="status=='pending'" create="0">
-                                        <button 
+                                        <!-- <button 
                                         type="object"
                                         name="action_attendance_action_plan"
                                             string="Atender"
                                             class="btn btn-warning"
-                                            invisible="not (status=='pending')"
-                                        />
+                                            invisible="not (status=='pending' and user_id == uid)"
+                                        /> -->
                                          
                                         <field name="sequence" widget="handle" />
                                         <field name="name" />
@@ -1296,7 +1296,7 @@
         <field name="name">Mis actividades</field>
         <field name="res_model">tyt.risk.mitigation</field>
         <field name="view_mode">list,form</field>
-        <field name="domain"> [('mitigation_date', '&lt;=', (context_today() + relativedelta(months=1, day=1)))]</field>
+        <field name="domain"> [('mitigation_date', '&lt;=', (context_today() + relativedelta(months=1, day=1))), ('assigned_to', '=', uid)]</field>
         <field name="view_ids" 
          eval="[(5, 0, 0),
                 (0, 0, {'view_mode': 'list', 'view_id': ref('view_risk_mitigation_my_activity_list')}),

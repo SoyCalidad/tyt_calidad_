@@ -93,8 +93,28 @@ class RiskMitigation(models.Model):
     )
     assigned_to = fields.Many2one(
         comodel_name='res.users',
-        string="Asignado a"
+        string="Asignado a",
+        compute="_compute_assigned_to",
+        store=True,
     )
+
+    @api.depends('status', 'mr_status_mitigation', 'mr_action_plan_ids')
+    def _compute_assigned_to(self):
+        for rec in self:
+            if rec.status == 'unmitigated' and not rec.mr_status_mitigation == 'mitigated':
+                rec.assigned_to = rec.risk_id_owner_id
+            elif rec.mr_status_mitigation == 'mitigated':
+                rec.assigned_to = rec.risk_id_auditor_id
+            elif len(rec.mr_action_plan_ids)>0:
+                if len(rec.mr_action_plan_ids.filtered(lambda plan: plan.status == 'pending'))>0:
+                    rec.assigned_to = rec.risk_id_owner_id
+                else: 
+                    rec.assigned_to = rec.risk_id_reviewer_id
+            else:
+                rec.assigned_to = rec.risk_id_reviewer_id 
+
+
+
     status = fields.Selection(
         selection=[
             ('unmitigated', 'No Mitigado'), # create a mitigation
@@ -244,7 +264,7 @@ class RiskMitigation(models.Model):
 
     def action_notify_revision(self,):
         #open wizard to write coment and send email
-        msg = "Enviado a {0} para su revisión".format(self.assigned_to.display_name if self.assigned_to else '')
+        self.write({})
         if not self.mo_document_ids and not self.mo_link_ids:
             raise UserError(
                 "Debe cargar al menos algun documento o enlace",
@@ -676,7 +696,7 @@ class RiskMitigation(models.Model):
         if 'mr_status_mitigation' in vals and vals['mr_status_mitigation'] == 'mitigated':
             vals['mr_mitigation_date'] = fields.Datetime.now().date()
             vals['mr_level_compliance'] = 'ontime'
-            vals['status'] = 'under_review' # en revision por el auditor 
+            vals['status'] = 'mitigated' # en revision por el auditor 
             vals['risk_activity_state'] = 'monitoring'
 
         if 'ma_status_mitigation' in vals and vals['ma_status_mitigation'] == 'mitigated':
@@ -1062,4 +1082,390 @@ class RiskMitigation(models.Model):
             "label_time": label_time,
             "list": data_list,
         }
+
+    @api.model 
+    def rpe_carried_out_report(self, department_id, year, cr_peoriod, revision_type):
+        domain_mitigation = []
+        if department_id and int(department_id):
+            domain_mitigation.append(('risk_id.department_id', '=', int(department_id)))
+        if year and int(year):
+            domain_mitigation.append(('year', '=', int(year)))
+        num_period = 1
+        if cr_peoriod:
+            if revision_type == 'sys_only_normal' :
+                domain_mitigation.append(('risk_id.cr_peoriod', '!=', 'fortnightly'))
+            if revision_type == 'sys_only_special':
+                domain_mitigation.append(('risk_id.cr_peoriod', 'in', [ 'fortnightly']))
+
+            if cr_peoriod == 'month':
+                num_period = 12
+            if cr_peoriod == 'bi':
+                num_period = 6
+            if cr_peoriod == 'tri':
+                num_period = 4
+            if cr_peoriod == 'cua':
+                num_period = 3
+            if cr_peoriod == 'se':
+                num_period = 2
+            if cr_peoriod == 'anual':
+                num_period = 1
+
+        _logger.info(f"domain_mitigation {domain_mitigation}")
+        mitigations = self.env['tyt.risk.mitigation'].search(domain_mitigation)
+
+        department_dict = dict()
+        level_dict = dict() #key is (dep_id, level) and value is num 
+        for mitigation in mitigations:
+            key = (mitigation.risk_id_department_id.id, mitigation.mr_degree_mitigation.value, mitigation.risk_id_department_id.display_name, mitigation.month)
+            if key in department_dict:
+                department_dict[(key)] += 1
+            else:
+                department_dict[(key)] = 1
+
+        def _get_index_period(period, month):
+            if period == 12:
+                return month
+            if period == 6:
+                if month <7:
+                    return 1 
+                else :
+                    return 2
+            if period == 4:
+                if month <=3:
+                    return 1 
+                elif month <=6:
+                    return 2
+                elif month <= 9:
+                    return 3
+                else:
+                    return 4 
+            if period == 3:
+                if month <= 4:
+                    return 1 
+                elif month <= 8:
+                    return 2 
+                else:
+                    return 3
+            if period == 2:
+                if month <= 6:
+                    return 1 
+                else:
+                    return 2
+            if period == 1:
+                return 1
+                
+        data_report = []
+        total_obj =  {
+            "department_name": "sys_report_sox_1",
+            "department_id": "sys_report_sox_1",
+            "items": [
+                {
+                    "titulo": "sys_sox1_nivel_0",
+                    "nivel": 0,
+                    "periodos": [{"periodo": str(_l), "valor": 0} for _l in range(1, num_period +1)],
+                    "total": 0,
+                    "porcentaje": 0
+                },
+                {
+                    "titulo": "sys_sox1_nivel_25",
+                    "nivel": 25,
+                    "periodos": [{"periodo": str(_l), "valor": 0} for _l in range(1, num_period +1)],
+                    "total": 0,
+                    "porcentaje": 0
+                },
+                {
+                    "titulo": "sys_sox1_nivel_50",
+                    "nivel": 50,
+                    "periodos": [{"periodo": str(_l), "valor": 0} for _l in range(1, num_period +1)],
+                    "total": 0,
+                    "porcentaje": 0
+                },
+                {
+                    "titulo": "sys_sox1_nivel_75",
+                    "nivel": 75,
+                    "periodos": [{"periodo": str(_l), "valor": 0} for _l in range(1, num_period +1)],
+                    "total": 0,
+                    "porcentaje": 0
+                },
+                {
+                    "titulo": "sys_sox1_nivel_100",
+                    "nivel": 100,
+                    "periodos": [{"periodo": str(_l), "valor": 0} for _l in range(1, num_period +1)],
+                    "total": 0,
+                    "porcentaje": 0
+                }
+            ],
+            "totales": {
+                "titulo": "sys_sox1_nivel_total",
+                "nivel": 0,
+                "periodos":  [{"periodo": str(_l), "valor": 0} for _l in range(1, num_period +1)],
+                "total": 0,
+                "porcentaje": 100
+            }
+        }
+        for dep_id, level, dep_name, month in department_dict.keys():
+            index_data = None
+            for i, da in enumerate(data_report):
+                if dep_name == da["department_name"]:
+                    index_data = i
+                    break 
+            index_pe = _get_index_period(num_period, int(month)) -1
+            if index_data is not None:
+                if level == 0:
+                    data_report[index_data]["items"][0]["periodos"][index_pe]["valor"] +=1
+                    data_report[index_data]["items"][0]["total"] +=1
+                elif level == 25:
+                    data_report[index_data]["items"][1]["total"] +=1
+                    data_report[index_data]["items"][1]["periodos"][index_pe]["valor"] +=1
+                elif level == 50:
+                    data_report[index_data]["items"][2]["total"] +=1
+                    data_report[index_data]["items"][2]["periodos"][index_pe]["valor"] +=1
+                elif level == 25:
+                    data_report[index_data]["items"][3]["total"] +=1
+                    data_report[index_data]["items"][3]["periodos"][index_pe]["valor"] +=1
+                else:
+                    data_report[index_data]["items"][4]["total"] +=1
+                    data_report[index_data]["items"][4]["periodos"][index_pe]["valor"] +=1
+                data_report[index_data]["totales"]["total"] += 1
+                data_report[index_data]["totales"]["periodos"][index_pe]["valor"] += 1
+            else:
+                data_report.append({
+                    "department_name": dep_name,
+                    "department_id": dep_id,
+                    "items": [
+                        {
+                            "titulo": "sys_sox1_nivel_0",
+                            "nivel": 0,
+                            "periodos": [{"periodo": str(_l), "valor": 1 if index_pe == _l and level == 0 else 0} for _l in range(1, num_period +1)],
+                            
+                            "total":  1 if  level == 0 else 0,
+                            "porcentaje": 0
+                        },
+                        {
+                            "titulo": "sys_sox1_nivel_25",
+                            "nivel": 25,
+                            "periodos": [{"periodo": str(_l), "valor": 1 if index_pe == _l and level == 25 else 0} for _l in range(1, num_period +1)],
+                            "total": 1 if level== 25 else 0,
+                            "porcentaje": 0
+                        },
+                        {
+                            "titulo": "sys_sox1_nivel_50",
+                            "nivel": 50,
+                            "periodos": [{"periodo": str(_l), "valor": 1 if index_pe == _l and level == 50 else 0} for _l in range(1, num_period +1)],
+
+                            "total": 1 if level== 50 else 0,
+                            "porcentaje": 0
+                        },
+                        {
+                            "titulo": "sys_sox1_nivel_75",
+                            "nivel": 75,
+                            "periodos": [{"periodo": str(_l), "valor": 1 if index_pe == _l and level == 75 else 0} for _l in range(1, num_period +1)],
+                            "total": 1 if level== 75 else 0,
+                            "porcentaje": 0
+                        },
+                        {
+                            "titulo": "sys_sox1_nivel_100",
+                            "nivel": 100,
+                            "periodos": [{"periodo": str(_l), "valor": 1 if index_pe == _l and level == 100 else 0} for _l in range(1, num_period +1)],
+                            "total": 1 if level== 100 else 0,
+                            "porcentaje": 0
+                        }
+                    ],
+                    "totales": {
+                        "titulo": "sys_sox1_nivel_total",
+                        "nivel": 0,
+                        "periodos": [{
+                            "periodo": str(_l), 
+                            "valor": 1 if _l==index_pe else 0} for _l in range(1, num_period +1)],
+                        "total": 1,
+                        "porcentaje": 100
+                    }
+                })
+
+            if level== 0:
+                total_obj['items'][0]["periodos"][index_pe]["valor"] += 1
+                total_obj['items'][0]["total"] += 1
+                total_obj['totales']["periodos"][index_pe]["valor"] += 1
+                total_obj['totales']["total"] += 1
+            if level== 25:
+                total_obj['items'][1]["periodos"][index_pe]["valor"] += 1
+                total_obj['items'][1]["total"] += 1
+                total_obj['totales']["periodos"][index_pe]["valor"] += 1
+                total_obj['totales']["total"] += 1
+            if level== 50:
+                total_obj['items'][2]["periodos"][index_pe]["valor"] += 1
+                total_obj['items'][2]["total"] += 1
+                total_obj['totales']["periodos"][index_pe]["valor"] += 1
+                total_obj['totales']["total"] += 1
+            if level== 75:
+                total_obj['items'][3]["periodos"][index_pe]["valor"] += 1
+                total_obj['items'][3]["total"] += 1
+                total_obj['totales']["periodos"][index_pe]["valor"] += 1
+                total_obj['totales']["total"] += 1
+            if level== 100:
+                total_obj['items'][4]["periodos"][index_pe]["valor"] += 1
+                total_obj['items'][4]["total"] += 1
+                total_obj['totales']["periodos"][index_pe]["valor"] += 1
+                total_obj['totales']["total"] += 1
+        #calculate totals
+        for d in data_report:
+            #total by periodo
+            total_m = d["totales"]["total"] 
+            if total_m == 0:
+                continue
+            for item in d["items"]:
+                item["porcentaje"] = round((item["total"] / total_m) * 100, 2)
+
+        if total_obj['totales']["total"]> 0:
+            for t_item in total_obj["items"]:
+                t_item["porcentaje"] = round((t_item["total"] / total_obj['totales']["total"]) * 100, 2)
+
+        return {
+            "periods": list(range(1,num_period+1)),
+            "report": data_report,
+            "totals": total_obj,
+        }
+
+    @api.model 
+    def rpe_consolidated_report(self, department_id, year, cr_peoriod, revision_type):
+        domain_mitigation = []
+        if department_id and int(department_id):
+            domain_mitigation.append(('risk_id.department_id', '=', int(department_id)))
+        if year and int(year):
+            domain_mitigation.append(('year', '=', int(year)))
+        num_period = 1
+        if cr_peoriod:
+            if revision_type == 'sys_only_normal' or revision_type == "0":
+                domain_mitigation.append(('risk_id.cr_peoriod', '=', cr_peoriod))
+            if revision_type == 'sys_only_special':
+                domain_mitigation.append(('risk_id.cr_peoriod', 'in', [cr_peoriod, 'fortnightly']))
+
+            if cr_peoriod == 'month':
+                num_period = 12
+            if cr_peoriod == 'bi':
+                num_period = 6
+            if cr_peoriod == 'tri':
+                num_period = 4
+            if cr_peoriod == 'cua':
+                num_period = 3
+            if cr_peoriod == 'se':
+                num_period = 2
+            if cr_peoriod == 'anual':
+                num_period = 1
+
+        mitigations = self.env['tyt.risk.mitigation'].search(domain_mitigation)
+
+        department_dict = dict()
+        level_dict = dict() #key is (dep_id, level) and value is num 
+        for mitigation in mitigations:
+            key = (mitigation.risk_id_department_id.id, mitigation.mr_status_mitigation, mitigation.risk_id_department_id.display_name, mitigation.month)
+            if key in department_dict:
+                department_dict[(key)] += 1
+            else:
+                department_dict[(key)] = 1
+
+        def _get_index_period(period, month):
+            if period == 12:
+                return month
+            if period == 6:
+                if month <7:
+                    return 1 
+                else :
+                    return 2
+            if period == 4:
+                if month <=3:
+                    return 1 
+                elif month <=6:
+                    return 2
+                elif month <= 9:
+                    return 3
+                else:
+                    return 4 
+            if period == 3:
+                if month <= 4:
+                    return 1 
+                elif month <= 8:
+                    return 2 
+                else:
+                    return 3
+            if period == 2:
+                if month <= 6:
+                    return 1 
+                else:
+                    return 2
+            if period == 1:
+                return 1
+            return 0
+                
+        data_report = []
+        total_obj =  {
+            "titulo": "sys_sox1_nivel_total",
+            "total": 177,
+            "porcentaje": 100,
+            "periodos":  [{"periodo": str(_l), "mitigado": 0, "parcial": 0, "no": 0, "total": 0} for _l in range(1, num_period +1)],
+        }
+        for dep_id, status_mitigation, dep_name, month in department_dict:
+            index_data = None
+            for i, da in enumerate(data_report):
+                if dep_name == da["department_name"]:
+                    index_data = i
+                    break 
+            index_pe = _get_index_period(num_period, int(month)) - 1
+            if index_data is not None:
+                data_report[index_data]["total"] += 1
+                if status_mitigation == 'mitigated':
+                    data_report[index_data]["periodos"][index_pe]["mitigado"] +=1
+                    data_report[index_data]["periodos"][index_pe]["total"] +=1
+                elif status_mitigation == 'partialmitigated':
+                    data_report[index_data]["periodos"][index_pe]["parcial"] +=1
+                    data_report[index_data]["periodos"][index_pe]["total"] +=1
+                else:
+                    data_report[index_data]["periodos"][index_pe]["no"] +=1
+                    data_report[index_data]["periodos"][index_pe]["total"] +=1
+
+            else: 
+                data_report.append({
+                    "department_name": dep_name,
+                    "department_id": dep_id,
+                    "total": 1,
+                    "porcentaje": 0,
+                    
+                    "periodos": [{
+                        "periodo": str(_l), 
+                        "mitigado": 1 if status_mitigation == 'mitigated' and _l -1 == index_pe else 0,
+                        "parcial":  1 if status_mitigation == 'partialmitigated' and _l -1 == index_pe else 0, 
+                        "no":   1 if status_mitigation == 'unmitigated' and _l -1 == index_pe else 0, 
+                        "total": 1 if  _l -1 == index_pe else 0} for _l in range(1, num_period +1)],
+                    
+                })
+
+            total_obj["total"] += 1
+            if status_mitigation == 'unmitigated':
+                total_obj["periodos"][index_pe]["no"] += 1
+            if status_mitigation == 'partialmitigated':
+                total_obj["periodos"][index_pe]["parcial"] += 1
+            if status_mitigation == 'mitigated':
+                total_obj["periodos"][index_pe]["mitigado"] += 1
+
+            
+        #calculate totals
+        for d in data_report:
+            #total by periodo
+            total_m = total_obj["total"]
+            if total_m == 0:
+                continue
+            for item in d["items"]:
+                item["porcentaje"] = round(item["total"] / total_m, 2)
+
+        if total_obj['total'] >  0:
+            for item in data_report:
+                item["porcentaje"] = round(item["total"] / total_obj['total']["total"], 2)
+
+        return {
+            "report": data_report,
+            "totales": total_obj,
+        }
+
+
     
+

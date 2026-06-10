@@ -588,9 +588,9 @@ class RiskManagement(models.Model):
                 ('initial_date', '=', target_month_date),
             ], limit=1)
             if mitigation.exists():
-                mitigation.write({
-                    'assigned_to': self.reviewer_id.id,
-                })
+                # mitigation.write({
+                #     'assigned_to': self.reviewer_id.id,
+                # })
                 continue
             mitigation = self.env['tyt.risk.mitigation'].create({
                 'risk_id': self.id,
@@ -598,7 +598,7 @@ class RiskManagement(models.Model):
                 'mitigation_date': datetime(limit_date.year, limit_date.month, limit_date.day,0,0,0),
                 'year': self.cr_year,
                 'month': str(int(limit_date.month)),
-                'assigned_to': self.reviewer_id.id,
+                'assigned_to': self.owner_id.id,
             })
             if today.month == int(limit_date.month):
                 activity_type = self.env.ref("mail.mail_activity_data_todo")
