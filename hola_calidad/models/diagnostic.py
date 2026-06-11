@@ -293,8 +293,12 @@ class Diagnostic(models.Model):
         default=lambda self: self.env.user and self.env.user.id or False,
     )
 
-    company_id = fields.Many2one(string=u'Compañia', comodel_name='res.company', required=True,
-                                 domain=lambda self: [('id', 'in', self.env.user.company_ids.ids)], default=lambda self: self.env.user.company_id.id)
+    company_id = fields.Many2one(
+        string=u'Compañia', 
+        comodel_name='res.company', 
+        required=True,
+        domain=lambda self: [('id', 'in', self.env.user.company_ids.ids)], default=lambda self: self.env.company,
+    )
     date_diagnostic = fields.Datetime(
         string=u'Fecha creación', default=fields.Datetime.now, required=True)
     date_validate = fields.Datetime(
@@ -549,19 +553,19 @@ class Diagnostic(models.Model):
         string=u'Total Mejora 0%', compute='_get_diagnostic', compute_sudo=True)
 
     diagnostic4_ids_total = fields.Integer(
-        string=u'Total Punto 4', compute='_get_diagnostic', compute_sudo=True, store=True)
+        string=u'Total Punto 4', compute='_get_diagnostic', compute_sudo=True)
     diagnostic5_ids_total = fields.Integer(
-        string=u'Total Punto 5', compute='_get_diagnostic', compute_sudo=True, store=True)
+        string=u'Total Punto 5', compute='_get_diagnostic', compute_sudo=True)
     diagnostic6_ids_total = fields.Integer(
-        string=u'Total Punto 6', compute='_get_diagnostic', compute_sudo=True, store=True)
+        string=u'Total Punto 6', compute='_get_diagnostic', compute_sudo=True)
     diagnostic7_ids_total = fields.Integer(
-        string=u'Total Punto 7', compute='_get_diagnostic', compute_sudo=True, store=True)
+        string=u'Total Punto 7', compute='_get_diagnostic', compute_sudo=True)
     diagnostic8_ids_total = fields.Integer(
-        string=u'Total Punto 8', compute='_get_diagnostic', compute_sudo=True, store=True)
+        string=u'Total Punto 8', compute='_get_diagnostic', compute_sudo=True)
     diagnostic9_ids_total = fields.Integer(
-        string=u'Total Punto 9', compute='_get_diagnostic', compute_sudo=True, store=True)
+        string=u'Total Punto 9', compute='_get_diagnostic', compute_sudo=True)
     diagnostic10_ids_total = fields.Integer(
-        string=u'Total Punto 10', compute='_get_diagnostic', compute_sudo=True, store=True)
+        string=u'Total Punto 10', compute='_get_diagnostic', compute_sudo=True)
 
     def get_diagnostic_values(self, diagnostic_list):
         total_100 = total_75 = total_50 = total_25 = total_0 = total_na = 0

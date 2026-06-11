@@ -21,7 +21,7 @@ class SurveyCustomDescriptionLine(models.Model):
     supervisor = fields.Many2one('hr.employee', string='Supervisor', required=True)
     campaign = fields.Many2one('marketing.campaign', string='Campaign', required=True)
     turn = fields.Selection(
-        selection=[(' AM', _('AM')), (' PM', _('PM'))],
-        string=_('Turn'),
+        selection=[(' AM', 'AM'), (' PM', 'PM')],
+        string='Turno',
         required=True
     )

@@ -37,15 +37,15 @@ class MyModuleSettings(models.Model):
                 )
         return super(MyModuleSettings, self).write(vals)
 
-    @api.model
-    def create(self, values):
+    @api.model_create_multi
+    def create(self, vals_list):
         _logger.info("call create crehana_settings")
         # Verificar si ya existe un registro
         if self.search([]):
             raise UserError(
                 "Ya existe un registro de configuración. No puedes crear otro."
             )
-        return super(MyModuleSettings, self).create(values)
+        return super(MyModuleSettings, self).create(vals_list)
 
     def action_view_general_progress_report(self):
         _logger.info("call action_view_general_progress_report")
