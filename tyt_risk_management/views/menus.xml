@@ -100,6 +100,11 @@
                 name="7.2  Desempeño de Evaluaciones Efectuadas, Consolidado"
                 action="action_report_7_2_consolidate_dashboard"
             />  
+            <menuitem id="report_7_3_remediation_menu"
+                sequence="90"
+                name="7.3 Desempeño de Acciones de Remediación"
+                action="action_report_remediation_action_dashboard"
+            />  
         </menuitem>
 
     </menuitem>

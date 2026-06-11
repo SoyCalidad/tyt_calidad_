@@ -98,7 +98,7 @@ class RiskMitigation(models.Model):
         store=True,
     )
 
-    @api.depends('status', 'mr_status_mitigation', 'mr_action_plan_ids')
+    @api.depends('status', 'mr_status_mitigation', 'mr_action_plan_ids', 'mr_action_plan_ids.status')
     def _compute_assigned_to(self):
         for rec in self:
             if rec.status == 'unmitigated' and not rec.mr_status_mitigation == 'mitigated':
@@ -1085,17 +1085,20 @@ class RiskMitigation(models.Model):
 
     @api.model 
     def rpe_carried_out_report(self, department_id, year, cr_peoriod, revision_type):
-        domain_mitigation = []
+        domain_mitigation = [
+            ('mitigation_date', '<=', (fields.Datetime.today() + relativedelta(months=1, day=1)))
+
+        ]
         if department_id and int(department_id):
             domain_mitigation.append(('risk_id.department_id', '=', int(department_id)))
         if year and int(year):
             domain_mitigation.append(('year', '=', int(year)))
         num_period = 1
         if cr_peoriod:
-            if revision_type == 'sys_only_normal' :
+            if revision_type == 'sys_only_normal':
                 domain_mitigation.append(('risk_id.cr_peoriod', '!=', 'fortnightly'))
             if revision_type == 'sys_only_special':
-                domain_mitigation.append(('risk_id.cr_peoriod', 'in', [ 'fortnightly']))
+                domain_mitigation.append(('risk_id.cr_peoriod', '=',  'fortnightly'))
 
             if cr_peoriod == 'month':
                 num_period = 12
@@ -1328,17 +1331,19 @@ class RiskMitigation(models.Model):
 
     @api.model 
     def rpe_consolidated_report(self, department_id, year, cr_peoriod, revision_type):
-        domain_mitigation = []
+        domain_mitigation = [
+            ('mitigation_date', '<=', (fields.Datetime.today() + relativedelta(months=1, day=1)))
+        ]
         if department_id and int(department_id):
             domain_mitigation.append(('risk_id.department_id', '=', int(department_id)))
         if year and int(year):
             domain_mitigation.append(('year', '=', int(year)))
         num_period = 1
         if cr_peoriod:
-            if revision_type == 'sys_only_normal' or revision_type == "0":
-                domain_mitigation.append(('risk_id.cr_peoriod', '=', cr_peoriod))
+            if revision_type == 'sys_only_normal':
+                domain_mitigation.append(('risk_id.cr_peoriod', '!=', 'fortnightly'))
             if revision_type == 'sys_only_special':
-                domain_mitigation.append(('risk_id.cr_peoriod', 'in', [cr_peoriod, 'fortnightly']))
+                domain_mitigation.append(('risk_id.cr_peoriod', '=',  'fortnightly'))
 
             if cr_peoriod == 'month':
                 num_period = 12
@@ -1400,11 +1405,12 @@ class RiskMitigation(models.Model):
         data_report = []
         total_obj =  {
             "titulo": "sys_sox1_nivel_total",
-            "total": 177,
+            "total": 0  ,
             "porcentaje": 100,
             "periodos":  [{"periodo": str(_l), "mitigado": 0, "parcial": 0, "no": 0, "total": 0} for _l in range(1, num_period +1)],
         }
-        for dep_id, status_mitigation, dep_name, month in department_dict:
+        for dep_id, status_mitigation, dep_name, month in department_dict.keys():
+            _logger.info(f"status_mitigation, {status_mitigation}")
             index_data = None
             for i, da in enumerate(data_report):
                 if dep_name == da["department_name"]:
@@ -1434,38 +1440,239 @@ class RiskMitigation(models.Model):
                         "periodo": str(_l), 
                         "mitigado": 1 if status_mitigation == 'mitigated' and _l -1 == index_pe else 0,
                         "parcial":  1 if status_mitigation == 'partialmitigated' and _l -1 == index_pe else 0, 
-                        "no":   1 if status_mitigation == 'unmitigated' and _l -1 == index_pe else 0, 
+                        "no":   1 if (status_mitigation == 'unmitigated' or status_mitigation == False) and _l -1 == index_pe else 0, 
                         "total": 1 if  _l -1 == index_pe else 0} for _l in range(1, num_period +1)],
                     
                 })
 
             total_obj["total"] += 1
-            if status_mitigation == 'unmitigated':
+            if status_mitigation == 'unmitigated' or status_mitigation == False:
                 total_obj["periodos"][index_pe]["no"] += 1
             if status_mitigation == 'partialmitigated':
                 total_obj["periodos"][index_pe]["parcial"] += 1
             if status_mitigation == 'mitigated':
                 total_obj["periodos"][index_pe]["mitigado"] += 1
+            total_obj["periodos"][index_pe]["total"] += 1
+            _logger.info(f"total_obj periodos, {total_obj['periodos'][index_pe]}")
 
             
-        #calculate totals
-        for d in data_report:
-            #total by periodo
-            total_m = total_obj["total"]
-            if total_m == 0:
-                continue
-            for item in d["items"]:
-                item["porcentaje"] = round(item["total"] / total_m, 2)
+
+            
+
 
         if total_obj['total'] >  0:
             for item in data_report:
-                item["porcentaje"] = round(item["total"] / total_obj['total']["total"], 2)
+                item["porcentaje"] = round((item["total"] / total_obj['total'])*100, 2)
 
         return {
             "report": data_report,
             "totales": total_obj,
         }
 
+    @api.model 
+    def rpe_remedition_action(self, department_id, year, cr_peoriod, revision_type):
+        domain_mitigation = [
+            ('mitigation_date', '<=', (fields.Datetime.today() + relativedelta(months=1, day=1)))
+
+        ]
+        if department_id and int(department_id):
+            domain_mitigation.append(('risk_id.department_id', '=', int(department_id)))
+        if year and int(year):
+            domain_mitigation.append(('year', '=', int(year)))
+        num_period = 1
+        if cr_peoriod:
+            if revision_type == 'sys_only_normal':
+                domain_mitigation.append(('risk_id.cr_peoriod', '!=', 'fortnightly'))
+            if revision_type == 'sys_only_special':
+                domain_mitigation.append(('risk_id.cr_peoriod', '=',  'fortnightly'))
+
+            if cr_peoriod == 'month':
+                num_period = 12
+            if cr_peoriod == 'bi':
+                num_period = 6
+            if cr_peoriod == 'tri':
+                num_period = 4
+            if cr_peoriod == 'cua':
+                num_period = 3
+            if cr_peoriod == 'se':
+                num_period = 2
+            if cr_peoriod == 'anual':
+                num_period = 1
+
+        mitigations = self.env['tyt.risk.mitigation'].search(domain_mitigation)
+        plans = self.env['tyt.risk.action.plan'].search([
+            ('mitigation_id', 'in', mitigations.ids)
+        ])
+        department_dict = dict()
+        for plan in plans:
+            key = (plan.status, plan.mitigation_id.risk_id_department_id.display_name, plan.mitigation_id.risk_id_department_id.id, plan.mitigation_id_month)
+            if key in department_dict:
+                department_dict[(key)] += 1
+            else:
+                department_dict[(key)] = 1
+
+        def _get_index_period(period, month):
+            if period == 12:
+                return month
+            if period == 6:
+                if month <7:
+                    return 1 
+                else :
+                    return 2
+            if period == 4:
+                if month <=3:
+                    return 1 
+                elif month <=6:
+                    return 2
+                elif month <= 9:
+                    return 3
+                else:
+                    return 4 
+            if period == 3:
+                if month <= 4:
+                    return 1 
+                elif month <= 8:
+                    return 2 
+                else:
+                    return 3
+            if period == 2:
+                if month <= 6:
+                    return 1 
+                else:
+                    return 2
+            if period == 1:
+                return 1
+                
+        data_report = []
+        total_obj =  {
+            "department_name": "sys_report_sox_3",
+            "department_id": "sys_report_sox_3",
+            "items": [
+                {
+                    "titulo": "sys_sox_reme_open",
+                    "periodos": [{"periodo": str(_l), "valor": 0} for _l in range(1, num_period +1)],
+                    "total": 0,
+                    "porcentaje": 0
+                },
+                {
+                    "titulo": "sys_sox_reme_process",
+                    "nivel": 25,
+                    "periodos": [{"periodo": str(_l), "valor": 0} for _l in range(1, num_period +1)],
+                    "total": 0,
+                    "porcentaje": 0
+                },
+                {
+                    "titulo": "sys_sox_reme_complete",
+                    "nivel": 50,
+                    "periodos": [{"periodo": str(_l), "valor": 0} for _l in range(1, num_period +1)],
+                    "total": 0,
+                    "porcentaje": 0
+                },
+            ],
+            "totales": {
+                "titulo": "sys_sox3_nivel_total",
+                "nivel": 0,
+                "periodos":  [{"periodo": str(_l), "valor": 0} for _l in range(1, num_period +1)],
+                "total": 0,
+                "porcentaje": 100
+            }
+        }
+        for status, dep_name, dep_id, month in department_dict.keys():
+            index_data = None
+            for i, da in enumerate(data_report):
+                if dep_name == da["department_name"]:
+                    index_data = i
+                    break 
+            index_pe = _get_index_period(num_period, int(month)) -1
+            if index_data is not None:
+                if status == 'pending':
+                    data_report[index_data]["items"][0]["periodos"][index_pe]["valor"] +=1
+                    data_report[index_data]["items"][0]["total"] +=1
+                elif status=='under_review':
+                    data_report[index_data]["items"][1]["total"] +=1
+                    data_report[index_data]["items"][1]["periodos"][index_pe]["valor"] +=1
+                else:
+                    data_report[index_data]["items"][2]["total"] +=1
+                    data_report[index_data]["items"][2]["periodos"][index_pe]["valor"] +=1
+                data_report[index_data]["totales"]["total"] += 1
+                data_report[index_data]["totales"]["periodos"][index_pe]["valor"] += 1
+            else:
+                data_report.append({
+                    "department_name": dep_name,
+                    "department_id": dep_id,
+                    "items": [
+                        {
+                            "titulo": "sys_sox_reme_open",
+                            "nivel": 0,
+                            "periodos": [{
+                                "periodo": str(_l), 
+                                "valor": 1 if index_pe == _l and status == 'pending' else 0} for _l in range(1, num_period +1)],
+                            
+                            "total":  1 if  status == 'pending' else 0,
+                            "porcentaje": 0
+                        },
+                        {
+                            "titulo": "sys_sox_reme_process",
+                            "periodos": [{
+                                "periodo": str(_l), 
+                                "valor": 1 if index_pe == _l and status == 'under_review' else 0} for _l in range(1, num_period +1)],
+                            "total": 1 if status== 'under_review' else 0,
+                            "porcentaje": 0
+                        },
+                        {
+                            "titulo": "sys_sox_reme_complete",
+                            "nivel": 50,
+                            "periodos": [{"periodo": str(_l), "valor": 1 if index_pe == _l and status == 'complete' else 0} for _l in range(1, num_period +1)],
+
+                            "total": 1 if status== 'complete' else 0,
+                            "porcentaje": 0
+                        },
+                    ],
+                    "totales": {
+                        "titulo": "sys_sox1_nivel_total",
+                        "nivel": 0,
+                        "periodos": [{
+                            "periodo": str(_l), 
+                            "valor": 1 if _l==index_pe else 0} for _l in range(1, num_period +1)],
+                        "total": 1,
+                        "porcentaje": 100
+                    }
+                })
+
+            if status== 'pending':
+                total_obj['items'][0]["periodos"][index_pe]["valor"] += 1
+                total_obj['items'][0]["total"] += 1
+                total_obj['totales']["periodos"][index_pe]["valor"] += 1
+                total_obj['totales']["total"] += 1
+            if status== 'under_review':
+                total_obj['items'][1]["periodos"][index_pe]["valor"] += 1
+                total_obj['items'][1]["total"] += 1
+                total_obj['totales']["periodos"][index_pe]["valor"] += 1
+                total_obj['totales']["total"] += 1
+            if status== 'complete':
+                total_obj['items'][2]["periodos"][index_pe]["valor"] += 1
+                total_obj['items'][2]["total"] += 1
+                total_obj['totales']["periodos"][index_pe]["valor"] += 1
+                total_obj['totales']["total"] += 1
+            
+        #calculate totals
+        for d in data_report:
+            #total by periodo
+            total_m = d["totales"]["total"] 
+            if total_m == 0:
+                continue
+            for item in d["items"]:
+                item["porcentaje"] = round((item["total"] / total_m) * 100, 2)
+
+        if total_obj['totales']["total"]> 0:
+            for t_item in total_obj["items"]:
+                t_item["porcentaje"] = round((t_item["total"] / total_obj['totales']["total"]) * 100, 2)
+
+        return {
+            "periods": list(range(1,num_period+1)),
+            "report": data_report,
+            "totals": total_obj,
+        }
 
     
 

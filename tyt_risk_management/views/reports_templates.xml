@@ -28,4 +28,8 @@
         <field name="name">7.2  Desempeño de Evaluaciones Efectuadas, Consolidado </field>
         <field name="tag">tyt_risk_management.rpe_consolidated_report</field>
     </record>
+    <record id="action_report_remediation_action_dashboard" model="ir.actions.client">
+        <field name="name">7.3 Desempeño de Acciones de Remediación</field>
+        <field name="tag">tyt_risk_management.rpe_remediation_action_report</field>
+    </record>
 </odoo>

@@ -18,7 +18,7 @@
                                         <label for="company_id" class="form-label fw-semibold">
                                             Sitio
                                         </label> 
-                                        <select name="company_id" class="form-control"
+                                        <select name="company_id" class="form-select"
                                         t-model="state.filters.department_id">
                                             <option value="0">Todo</option>
                                             <t t-foreach="state.departments" t-as="dep" t-key="'dep'+dep.id">
@@ -30,7 +30,7 @@
                                     <div class="col-lg-1 col-sm-3">
                                         <label for="select-anio" class="form-label fw-semibold">Año</label> 
                                         <select name="select-anio" class="form-select" t-model="state.filters.year">
-                                            <option value="0">Todo</option>
+                                            <option value="0" disabled="1">Todo</option>
                                             <t t-foreach="state.years" t-as="y" t-key="y">
                                                 <option t-att-value="y"><t t-esc="y"/></option>
                                             </t>
@@ -40,7 +40,9 @@
                                         <label for="period" class="form-label fw-semibold">Periodo</label> 
                                         
                                         <select
-                                            name="period" class="form-control">
+                                            name="period" class="form-select"
+                                            t-model="state.filters.cr_period"
+                                            >
                                             <option value="month">Mensual</option>
                                             <option value="bi">Bimestral</option>
                                             <option value="tri">Trimestral</option>
@@ -53,13 +55,17 @@
                                         <label for="type_revision" class="form-label fw-semibold">
                                             Tipo de revisión
                                         </label> 
-                                        <select name="type_revision" class="form-control">
-                                            <option value="">Todo</option>
+                                        <select name="type_revision" class="form-select" 
+                                        t-model="state.filters.revision_type"
+                                        >
+                                            <option value="0">Todo</option>
                                             <option value="sys_only_normal">Solo normales</option>
                                             <option value="sys_only_special">Solo especiales</option>
                                         </select></div>
                                     <div class="col-lg-1" style="align-self: self-end;">
                                         <button
+                                        t-on-click="() => this.onSearch()"
+
                                             class="btn btn-secondary">Buscar</button>
                                     </div>
                                 </div>
@@ -70,13 +76,18 @@
 
                 <div class="row">
                     <div class="col-lg-12">
-                        <div class="card" t-if="reportData">
+                        <div t-if="state.loading">
+                            <div class="spinner-border" role="status">
+                                <span class="visually-hidden">Loading...</span>
+                            </div>
+                        </div>
+                        <div class="card" t-if="reportData and !state.loading">
                             <div class="card-header"></div>
-                            <div class="card-body">
+                            <div class="card-body" t-if="reportData.totales and reportData.report">
                                 <div class="table-responsive" style="padding-top: 10px;">
-                                    <table class="table table-hover table-sm table-bordered table-condensed">
+                                    <table class="table table-bcs-10px table-hover table-sm table-bordered table-condensed">
                                         <thead>
-                                            <tr class="bg-primary text-white fw-bold ">
+                                            <tr class="sc-fs-14px bg-primary text-white sc-fw-bold ">
                                                 <th rowspan="2" class="text-primary text-center align-middle text-white">Evaluaciones Efectuadas</th>
                                                 <t t-foreach="reportData.totales.periodos" t-key="'PeriodX'+label_period_index" t-as="label_period">
 
@@ -85,7 +96,7 @@
                                                 <th rowspan="2" class="  text-center align-middle">Total</th>
                                                 <th rowspan="2" class="  text-center align-middle">%</th>
                                             </tr>
-                                            <tr class="bg-primary text-white fw-bold ">
+                                            <tr class="sc-fs-14px bg-primary text-white sc-fw-bold ">
                                                 <t t-foreach="reportData.totales.periodos" t-as="_p" t-key="'statusmitigation'+ _p_index">
                                                     <th class="bg-primary text-center align-middle">Mitigado</th>
                                                     <th class="bg-primary text-center align-middle">Parcialmente Mitigado</th>
@@ -94,12 +105,17 @@
                                                 </t>
                                             </tr>
                                         </thead>
-                                        <tbody t-if="reportData and reportData.reporte">
-                                            <t t-foreach="reportData.reporte" t-as="data" t-key="data_index">
-                                                <tr>
-                                                    <td class=" bg-primary text-center align-center text-white fw-bold ">
-                                                        <t t-out="data.company_name">
-                                                            Subsidiaria 1
+                                        <tbody >
+                                            <t t-foreach="reportData.report" t-as="data" t-key="data_index">
+                                                <tr class="sc-fs-14px">
+                                                    <td class=" bg-primary text-center align-center text-white sc-fw-bold ">
+                                                        <t t-if="data.department_name">
+                                                            <t t-out="data.department_name">
+                                                                Subsidiaria 1
+                                                            </t>
+                                                        </t>
+                                                        <t t-else="">
+                                                            Sin sitio
                                                         </t>
                                                             
                                                     </td>
@@ -125,17 +141,17 @@
                                                         </td>
                                                     </t>
                                                      
-                                                    <td align="center" class="bg-primary text-white fw-bold  text-center align-middle">
+                                                    <td align="center" class="bg-primary text-white sc-fw-bold  text-center align-middle">
                                                         <t t-out="data.total">177</t>
                                                     </td>
-                                                    <td align="center" class=" text-white fw-bold  bg-primary text-center align-middle text-white fw-bold ">
+                                                    <td align="center" class=" text-white sc-fw-bold  bg-primary text-center align-middle text-white sc-fw-bold ">
                                                         <t t-out="data.porcentaje" />
                                                         %</td>
                                                 </tr>
                                             </t>
                                         </tbody>
                                         <tfoot>
-                                            <tr class="bg-primary text-white fw-bold ">
+                                            <tr class="bg-primary text-white sc-fw-bold sc-fs-14px">
                                                 <td class="bg-primary text-center align-middle">Total de Evaluaciones Efectuadas</td>
                                                 <t t-foreach="reportData.totales.periodos" t-as="total" t-key="'Totales'+total_index">
                                                     <td class="bg-primary text-center align-middle">
@@ -148,10 +164,10 @@
                                                         <t t-out="total.no" />
                                                     </td>
                                                 </t>
-                                                <td class="text-primary text-center align-middle">
+                                                <td class="bg-primary text-center align-middle">
                                                     <t t-out="reportData.totales.total" />
                                                 </td>
-                                                <td class="text-primary text-center align-middle">
+                                                <td class="bg-primary text-center align-middle">
                                                     <t t-out="reportData.totales.porcentaje" /> %</td>
                                             </tr>
                                         </tfoot>

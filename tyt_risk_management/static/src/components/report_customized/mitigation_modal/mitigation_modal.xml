@@ -1,0 +1,100 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<templates xml:space="preserve">
+
+    <t t-name="tyt_risk_management.RCMitigationModal"  >
+
+        
+    <Dialog size="'md'" title="props.title" modalRef="modalRef">
+      <t t-set-slot="default">
+        <t t-if="state.loading">
+            
+                        <div class="text-center p-4">
+            
+                            <i class="fa fa-spinner fa-spin me-2"/>
+                            Cargando...
+            
+                        </div>
+            
+                    </t>
+            
+                    <t t-else="">
+            
+                        <div class="table-responsive">
+            
+                            <table class="table table-hover table-bordered">
+            
+                                <thead class="table-light">
+            
+                                    <tr>
+                                        <th width="80">
+                                            Acciones
+                                        </th>
+                                        <th>Periodo </th>
+                                        <th>ID Riesgo</th>
+                                        <th>Dominio</th>
+                                        <th>Dueño</th>
+                                        <th>Revisor</th>
+                                        <th>Auditor</th>
+                                    </tr>
+            
+                                </thead>
+            
+                                <tbody>
+            
+                                    <tr
+                                    style="cursor: pointer;"
+                                        t-foreach="state.mitigations"
+                                        t-as="mitigation"
+                                        t-key="mitigation.id">
+            
+                                        <td>
+            
+                                            <button
+                                                class="btn btn-sm btn-primary"
+                                                t-on-click="() => this.openDepartment(mitigation.id)">
+            
+                                                Abrir
+            
+                                            </button>
+            
+                                        </td>
+                                        <td>
+                                            <t t-esc="mitigation.period_str"/>
+                                        </td>
+                                        <td>
+                                            <t t-esc="mitigation.risk_id_id" />
+                                        </td>
+            
+                                        <td>
+                                            <t t-esc="mitigation.risk_id_pdomain_id?.[1] || '-'"/>
+                                        </td>
+            
+                                        <td>
+                                            <t t-esc="mitigation.risk_id_owner_id?.[1] || '-'"/>
+                                        </td>
+                                        <td>
+                                            <t t-esc="mitigation.risk_id_reviewer_id?.[1] || '-'"/>
+                                        </td>
+                                        <td>
+                                            <t t-esc="mitigation.risk_id_auditor_id?.[1] || '-'"/>
+                                        </td>
+            
+            
+                                    </tr>
+            
+                                </tbody>
+            
+                            </table>
+            
+                        </div>
+            
+                    </t>
+      </t>
+      <t t-set-slot="footer">
+        <button t-if="props.cancel" class="btn btn-secondary" t-on-click="_cancel" t-esc="props.cancelLabel"/>
+      </t>
+    </Dialog>
+  
+    </t>
+
+</templates>

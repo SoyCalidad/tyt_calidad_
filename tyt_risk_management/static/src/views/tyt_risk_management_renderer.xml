@@ -1,0 +1,24 @@
+<templates>
+
+    <t t-name="tyt_risk_management.RiskQuantificationListRenderer" t-inherit="web.ListRenderer" t-inherit-mode="primary">
+        <table position="after">
+            <div class="container">
+                <!-- <div class="row justify-content-center">
+                    <div class="col-auto">
+                        <h4 class="fw-bolder fs-3">Mapa de riesgos</h4>
+                    </div>
+
+                </div>
+                <div class="d-flex">
+                    <t t-foreach="props.list.records" t-as="li" t-key="'tableMP'+li_index">
+                        <div class="">
+                            <t t-out="li_index" />-
+                        </div>
+                    </t>
+                </div> -->
+
+            </div>
+        </table>
+    </t>
+
+</templates>

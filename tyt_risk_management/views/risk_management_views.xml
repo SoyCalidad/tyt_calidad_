@@ -562,7 +562,7 @@
                     <field name="is_reviewer" invisible="1" />
                     <field name="can_create_documents" invisible="1" />
                     <group string="Mitigación revisor" name="reviewer_mitigation"
-                    invisible="not is_reviewer or status=='unmitigated' or mr_status_mitigation=='mitigated'"
+                    invisible="not (is_reviewer and status!='unmitigated' and mr_status_mitigation!='mitigated')"
                     >
                             <separator string="Proceso de mitigación "></separator>
                             <div class="row justify-content-end" colspan="4">
@@ -780,7 +780,7 @@
                                         name="action_attendance_action_plan"
                                             string="Atender"
                                             class="btn btn-warning"
-                                            invisible="not (status=='pending')"
+                                            invisible="not (status=='pending' and current_user == user_id)"
                                         />
                                         <button 
                                         type="object"
@@ -788,15 +788,16 @@
                                             string="Completar"
                                             class="btn btn-success"
                                             context="{'is_for_complete': True, 'show_buttons': True}"
-                                            invisible="not status=='under_review'"
+                                            invisible="not (status=='under_review' and current_user != user_id)"
                                         />
                                         <button name="action_attendance_action_plan"
                                             string="Rechazar"
                                             type="object"
                                             class="btn btn-danger"
                                             context="{'is_for_complete': False, 'show_buttons': True}"
-                                            invisible="not status=='under_review'"
+                                            invisible="not (status=='under_review' and current_user != user_id)"
                                         />
+                                        <field name="current_user" column_invisible="1" invisible="1" />
                                         <field name="sequence" widget="handle" />
                                         <field name="name" />
                                         <field name="user_id" />
@@ -893,9 +894,9 @@
                                         name="action_attendance_action_plan"
                                             string="Atender"
                                             class="btn btn-warning"
-                                            invisible="not (status=='pending')"
+                                            invisible="not (status=='pending' and current_user == user_id)"
                                         />
-                                         
+                                        <field name="current_user" column_invisible="1" />
                                         <field name="sequence" widget="handle" />
                                         <field name="name" />
                                         <field name="user_id" />
@@ -910,7 +911,7 @@
                     </group>
                     <!--readnoly read-->
                     <group string="Mitigación revisor" name="reviewer_mitigation_only_read"
-                    invisible="not(risk_activity_state == 'monitoring' or (not can_create_documents and not is_reviewer) )"
+                    invisible="not(risk_activity_state == 'monitoring' or (not can_create_documents and not is_reviewer and not is_auditor) )"
                     >
                             <separator string="Proceso de mitigación "></separator>
                             <div class="row justify-content-end" colspan="4">
@@ -1090,7 +1091,7 @@
                                         name="action_attendance_action_plan"
                                             string="Atender"
                                             class="btn btn-warning"
-                                            invisible="not (status=='pending')"
+                                            invisible="not (status=='pending' and current_user == user_id)"
                                         />
                                         <button 
                                         type="object"
@@ -1098,15 +1099,16 @@
                                             string="Completar"
                                             class="btn btn-success"
                                             context="{'is_for_complete': True, 'show_buttons': True}"
-                                            invisible="not status=='under_review'"
+                                            invisible="not (status=='under_review' and current_user != user_id)"
                                         />
                                         <button name="action_attendance_action_plan"
                                             string="Rechazar"
                                             type="object"
                                             class="btn btn-danger"
                                             context="{'is_for_complete': False, 'show_buttons': True}"
-                                            invisible="not status=='under_review'"
+                                            invisible="not (status=='under_review' and current_user != user_id)"
                                         />
+                                        <field name="current_user" column_invisible="1" />
                                         <field name="sequence" widget="handle"/>
                                         <field name="name" />
                                         <field name="user_id" />
@@ -1121,7 +1123,7 @@
                     </group>
 
                     <!--only read-->
-                    <group string="Proceso de auditoria" invisible="not ((status=='under_review' or status=='mitigated') and mr_status_mitigation == 'mitigated'  )">
+                    <group string="Proceso de auditoria" invisible="not (mr_status_mitigation == 'mitigated' and (not is_auditor))">
                         <div class="row justify-content-end" colspan="4">
                                 <div class="col-auto">
                                     <label for="ma_period_str" string="Periodo" />

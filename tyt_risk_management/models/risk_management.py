@@ -185,6 +185,15 @@ class PlanAction(models.Model):
         comodel_name='res.users',
         string="Usuario responsable"
     )
+    current_user = fields.Many2one(
+        comodel_name='res.users',
+        compute='_compute_current_user',
+    )
+
+    def _compute_current_user(self):
+        for rec in self:
+            rec.current_user = self.env.user
+    
     remediation_date = fields.Date(string="Fecha de remediación")
     status = fields.Selection(
         selection=[
@@ -363,6 +372,13 @@ class PlanAction(models.Model):
 
     def action_send_review(self,):
         self.ensure_one()
+        if self.mitigation_id:
+            others_plan = self.env['tyt.risk.action.plan'].search_count([
+                ('mitigation_id', '=', self.mitigation_id.id),
+                ('id', '!=', self.id),
+            ])
+            if others_plan == 0:
+                self.mitigation_id.status = 'under_review'
         self.write({
             'status': 'under_review',
         })

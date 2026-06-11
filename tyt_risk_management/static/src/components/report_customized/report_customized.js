@@ -6,7 +6,7 @@ import { Layout } from "@web/search/layout";
 import { registry } from "@web/core/registry";
 import { SelectMenu } from "@web/core/select_menu/select_menu";
 
-import { MitigationModal } from "./../report_status/mitigation_modal/mitigation_modal";
+import { RCMitigationModal } from "./mitigation_modal/mitigation_modal";
 
 import { MONTHS } from "../utils";
 
@@ -146,12 +146,12 @@ export class CustomizedReport extends Component {
         if (!mIds) {
             return;
         }
-        await this.dialog.add(MitigationModal, {
+        await this.dialog.add(RCMitigationModal, {
             title: "Lista de riesgos",
             mIds,
             actionId: this.idActionActivity,
             // showAction: false,
-            // keysMitigation: ["id","risk_id_auditor_id", "risk_id_reviewer_id", "risk_id_owner_id",  "risk_id_id", "risk_id_pdomain_id", "period_str", "year", "month", "risk_id_subprocess_id", "risk_id_process_id", "mr_degree_mitigation", "ma_degree_mitigation", ],
+            // keysMitigation: ,
             // labelTable: [
             //     {label: "ID Riesgo", key: "risk_id_id", is_m2o: false},
             //     {label: "Dominio", key: "risk_id_pdomain_id", is_m2o: true},

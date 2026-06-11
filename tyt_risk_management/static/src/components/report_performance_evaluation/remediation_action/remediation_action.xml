@@ -1,5 +1,5 @@
 <templates xml:space="preserve">
-    <t t-name="tyt_risk_management.RPECarriedOut" owl="1">
+    <t t-name="tyt_risk_management.RPERemediationAction" owl="1">
         <Layout display="display" className="'o_dashboard h-100 overflow-y-auto'">
             <div class="  p-4 bg-light">
                 <!-- Sección de Filtros -->
@@ -8,7 +8,7 @@
                         <div class="card rounded">
                             <div class="card-header bg-white ">
                                 <h3 class="card-title">
-                                    Desempeño de Evaluaciones Efectuadas
+                                    Desempeño de Acciones de Remediación
                                 </h3>
                             </div>
                             <div class="card-body">
@@ -30,7 +30,7 @@
                                     <div class="col-lg-1 col-sm-3">
                                         <label for="select-anio" class="form-label fw-semibold">Año</label> 
                                         <select name="select-anio" class="form-select" t-model="state.filters.year">
-                                            <option value="0">Todo</option>
+                                            <option value="0" disabled="1">Todo</option>
                                             <t t-foreach="state.years" t-as="y" t-key="y">
                                                 <option t-att-value="y"><t t-esc="y"/></option>
                                             </t>
@@ -38,9 +38,11 @@
                                     </div>
                                     <div class="col-lg-2">
                                         <label for="period" class="form-label fw-semibold">Periodo</label> 
+                                        
                                         <select
-                                         t-model="state.filters.cr_period"
-                                            name="period" class="form-select">
+                                            name="period" class="form-select"
+                                            t-model="state.filters.cr_period"
+                                            >
                                             <option value="month">Mensual</option>
                                             <option value="bi">Bimestral</option>
                                             <option value="tri">Trimestral</option>
@@ -53,7 +55,9 @@
                                         <label for="type_revision" class="form-label fw-semibold">
                                             Tipo de revisión
                                         </label> 
-                                        <select name="type_revision" class="form-select" t-model="state.filters.revision_type">
+                                        <select name="type_revision" class="form-select" 
+                                        t-model="state.filters.revision_type"
+                                        >
                                             <option value="0">Todo</option>
                                             <option value="sys_only_normal">Solo normales</option>
                                             <option value="sys_only_special">Solo especiales</option>
@@ -61,6 +65,7 @@
                                     <div class="col-lg-1" style="align-self: self-end;">
                                         <button
                                         t-on-click="() => this.onSearch()"
+
                                             class="btn btn-secondary">Buscar</button>
                                     </div>
                                 </div>
@@ -71,14 +76,19 @@
 
                 <div class="row my-2">
                     <div class="col-lg-12">
-                        <div class="card rounded " t-if="reportData and reportData.report">
+                        <div t-if="state.loading">
+                            <div class="spinner-border" role="status">
+                                <span class="visually-hidden">Loading...</span>
+                            </div>
+                        </div>
+                        <div class="card rounded " t-if="reportData and reportData.report and reportData.report and reportData.periods">
                             <div class="card-body">
                                 <div class="table-responsive pt-4" style="  border-collapse: separate;">
                                     <t t-foreach="reportData.report" t-as="report" t-key="'table'+report_index">
                                         <table class="table table-bcs-10px table-hover table-sm table-bordered " >
                                             <thead>
-                                                <tr class="bg-info text-white fw-bold fs-5">
-                                                    <th width="300" class="bg-primary text-center align-middle">
+                                                <tr class="bg-info text-white  fs-5">
+                                                    <th  class="bg-primary text-center align-middle sc-fw-bold sc-w-350px">
                                                         <t t-if="report.department_name">
                                                             <t t-out="report.department_name">
                                                                 Subsidiaria 1
@@ -90,52 +100,47 @@
                                                     </th>
                                                     <t t-foreach="reportData.periods" t-as="period" t-key="'Period'+report_index+period_index">
 
-                                                        <th class="bg-primary text-center align-middle titulo-celda">
+                                                        <th class="bg-primary text-center align-middle titulo-celda sc-fw-bold">
                                                             P<t t-out="period">1</t>
                                                         </th>
                                                     </t>
-                                                    <th class="bg-primary text-center align-middle titulo-celda">Total</th>
-                                                    <th class="bg-primary text-center align-middle titulo-celda">%</th>
+                                                    <th class="bg-primary text-center align-middle titulo-celda sc-fw-bold">Total</th>
+                                                    <th class="bg-primary text-center align-middle titulo-celda sc-fw-bold">%</th>
                                                 </tr>
                                             </thead>
                                             <tbody>
                                                 <t t-foreach="report.items" t-as="item" t-key="'item'+report_index + item_index">
                                                     <tr>
-                                                        <td width="300"
+                                                        <td 
+                                                        class="sc-w-350px"
                                                             style=" font-weight: bold; font-size: 16px;"
-                                                            t-att-style="nivelStyle(item.nivel)"
+                                                            t-att-style="nivelStyle(item.titulo)"
                                                             >
-                                                            <t t-if="item.nivel==0">
-                                                                Evaluaciones Reprobadas 0%
+                                                            <t t-if="item.titulo=='sys_sox_reme_open'">
+                                                                 Remediaciones abiertas 
                                                             </t>
-                                                            <t t-if="item.nivel==25">
-                                                                Evaluaciones Estado Inicial 25%
+                                                            <t t-if="item.titulo=='sys_sox_reme_process'">
+                                                                 Remediaciones en proceso 
                                                             </t>
-                                                            <t t-if="item.nivel==50">
-                                                                Evaluaciones Estado Limitado 50%
-                                                            </t>
-                                                            <t t-if="item.nivel==75">
-                                                                Evaluaciones Estado Definido 75%
-                                                            </t>
-                                                            <t t-if="item.nivel==100">
-                                                                Evaluaciones Estado Optimizado 100%
-                                                            </t>
+                                                            <t t-if="item.titulo=='sys_sox_reme_complete'">
+                                                                 Remediaciones completadas 
+                                                            </t> 
                                                         </td>
                                                         <t t-foreach="item.periodos" t-as="period" t-key="'itemperiod'+report_index + item_index+period_index">
                                                             <td align="center" class="titulo-celda"
-                                                            t-att-style="nivelStyle(item.nivel)"
+                                                            t-att-style="nivelStyle(item.titulo)"
                                                             >
                                                                 <t t-out="period.valor">87</t>
                                                             </td>
                                                         </t>
                                                         
                                                         <td align="center" class="titulo-celda"
-                                                        t-att-style="nivelStyle(item.nivel)"    
+                                                        t-att-style="nivelStyle(item.titulo)"    
                                                         >
                                                             <t t-out="item.total">144</t>
                                                         </td>
                                                         <td align="center" class="titulo-celda"
-                                                        t-att-style="nivelStyle(item.nivel)"
+                                                        t-att-style="nivelStyle(item.titulo)"
                                                         >
                                                             <t t-out="item.porcentaje" >97.3</t> %
                                                         </td>
@@ -143,21 +148,23 @@
                                                 </t>
                                             </tbody>
                                             <tfoot>
-                                                <tr class="bg-primary text-white fw-bold ">
-                                                    <td width="300" class="bg-primary text-center align-middle">Total de Evaluaciones Efectuadas</td>
+                                                <tr class="bg-primary text-white  sc-fs-18px">
+                                                    <td   class="bg-primary text-center align-middle sc-w-350px sc-fw-bold">
+Total de Acciones de Remediación
+                                                    </td>
                                                     <t t-foreach="report.totales.periodos" t-as="period" t-key="'Totalitem'+report_index+period_index">
-                                                        <td class="bg-primary text-center align-middle titulo-celda">
+                                                        <td class="bg-primary text-center align-middle titulo-celda sc-fw-bold">
                                                             <t t-out="period.valor">
                                                                 90
                                                             </t>
                                                         </td>
                                                     </t>
-                                                    <td class="bg-primary text-center align-middle titulo-celda">
+                                                    <td class="bg-primary text-center align-middle titulo-celda sc-fw-bold">
                                                         <t t-out="report.totales.total">
                                                             148
                                                         </t>
                                                     </td>
-                                                    <td class="bg-primary text-center align-middle titulo-celda">
+                                                    <td class="bg-primary text-center align-middle titulo-celda sc-fw-bold">
                                                         <t t-out="report.totales.porcentaje">
                                                             100
                                                         </t> %
@@ -179,75 +186,75 @@
                                 <div class="table-responsive" style="padding-top: 10px;">
                                     <table class="table table-bcs-10px table-hover table-sm table-bordered ">
                                         <thead>
-                                            <tr class="bg-primary text-white fw-bold ">
-                                                <th width="300" class="bg-primary text-center align-middle">Desempeño de Evaluaciones Efectuadas</th>
+                                            <tr class="bg-primary text-white  ">
+                                                <th   class="bg-primary text-center align-middle sc-w-350px sc-fw-bold sc-fs-18px">
+                                                    Desempeño de Acciones de Remediación
+                                                </th>
                                                 <t t-foreach="reportData.periods" t-as="period" t-key="'Period'+report_index+period_index">
 
-                                                    <th class="bg-primary text-center align-middle titulo-celda">
+                                                    <th class="bg-primary text-center align-middle titulo-celda sc-fw-bold sc-fs-18px">
                                                         P<t t-out="period">1</t>
                                                     </th>
                                                 </t>
-                                                <th class="bg-primary text-center align-middle titulo-celda">Total</th>
-                                                <th class="bg-primary text-center align-middle titulo-celda">%</th>
+                                                <th class="bg-primary text-center align-middle titulo-celda sc-fw-bold sc-fs-18px">Total</th>
+                                                <th class="bg-primary text-center align-middle titulo-celda sc-fw-bold sc-fs-18px">%</th>
                                             </tr>
                                         </thead>
                                         <tbody t-if="reportData.totals.items">
                                             <t t-foreach="reportData.totals.items" t-as="item" t-key="'Totalitem'+report_index + item_index">
                                                 <tr>
-                                                    <td width="300"
+                                                    <td class="sc-w-350px"
                                                         style=" font-weight: bold; font-size: 16px;"
-                                                        t-att-style="nivelStyle(item.nivel)"
+                                                        t-att-style="nivelStyle(item.titulo)"
                                                         >
-                                                        <t t-if="item.nivel==0">
-                                                            Evaluaciones Reprobadas 0%
+                                                        <t t-if="item.titulo=='sys_sox_reme_open'">
+                                                             Remediaciones abiertas 
                                                         </t>
-                                                        <t t-if="item.nivel==25">
+                                                        <t t-if="item.titulo=='sys_sox_reme_process'">
                                                             Evaluaciones Estado Inicial 25%
                                                         </t>
-                                                        <t t-if="item.nivel==50">
+                                                        <t t-if="item.titulo=='sys_sox_reme_complete'">
                                                             Evaluaciones Estado Limitado 50%
-                                                        </t>
-                                                        <t t-if="item.nivel==75">
-                                                            Evaluaciones Estado Definido 75%
-                                                        </t>
-                                                        <t t-if="item.nivel==100">
-                                                            Evaluaciones Estado Optimizado 100%
-                                                        </t>
+                                                        </t> 
                                                     </td>
                                                     <t t-foreach="item.periodos" t-as="period" t-key="'itemperiod'+report_index + item_index+period_index">
-                                                        <td align="center" class="titulo-celda"
-                                                            t-att-style="nivelStyle(item.nivel)">
+                                                        <td align="center" class="titulo-celda sc-fs-16px"
+                                                            t-att-style="nivelStyle(item.titulo)">
                                                             <t t-out="period.valor">87</t>
                                                         </td>
                                                     </t>
                                                     
-                                                    <td align="center" class="titulo-celda"
-                                                        t-att-style="nivelStyle(item.nivel)">
+                                                    <td align="center" class="titulo-celda sc-fs-16px"
+                                                        t-att-style="nivelStyle(item.titulo)">
                                                         <t t-out="item.total">144</t>
                                                     </td>
-                                                    <td align="center" class="titulo-celda"
-                                                        t-att-style="nivelStyle(item.nivel)">
+                                                    <td align="center" class="titulo-celda sc-fs-16px"
+                                                        t-att-style="nivelStyle(item.titulo)">
                                                         <t t-out="item.porcentaje" >97.3</t> %
                                                     </td>
                                                 </tr>
                                             </t>
                                         </tbody>
                                         <tfoot>
-                                            <tr class="bg-primary text-white fw-bold ">
-                                                <td width="300" class="bg-primary text-center align-middle">Total de Evaluaciones Efectuadas</td>
+                                            <tr
+                                            t-if="reportData.totals.totales"
+                                            class="bg-primary text-white  ">
+                                                <td   class="bg-primary text-center align-middle sc-w-350px sc-fw-bold sc-fs-18px">
+                                                    Total de Acciones de Remediación
+                                                </td>
                                                 <t t-foreach="reportData.totals.totales.periodos" t-as="period" t-key="'TotalTotalitem'+report_index+period_index">
-                                                        <td class="bg-primary text-center align-middle titulo-celda">
+                                                        <td class="bg-primary text-center align-middle titulo-celda sc-fw-bold sc-fs-18px">
                                                             <t t-out="period.valor">
                                                                 90
                                                             </t>
                                                         </td>
                                                     </t> 
-                                                <td class="bg-primary text-center align-middle titulo-celda">
+                                                <td class="bg-primary text-center align-middle titulo-celda sc-fw-bold sc-fs-18px">
                                                     <t t-out="reportData.totals.totales.total">
                                                         148
                                                     </t>
                                                 </td>
-                                                <td class="bg-primary text-center align-middle titulo-celda">
+                                                <td class="bg-primary text-center align-middle titulo-celda sc-fw-bold sc-fs-18px">
                                                     <t t-out="reportData.totals.totales.porcentaje">
                                                             100
                                                         </t> %</td>
@@ -259,6 +266,8 @@
                         </div>
                     </div>
                 </div>
+    
+
             </div>
         </Layout>
     </t>

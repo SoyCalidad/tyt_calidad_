@@ -7,8 +7,8 @@ import { registry } from "@web/core/registry";
 
 import { MONTHS } from "../../utils";
 
-class RPEConsolidatedReport extends Component {
-    static template = 'tyt_risk_management.RPEConsolidated';
+class RPERemediationActionReport extends Component {
+    static template = 'tyt_risk_management.RPERemediationAction';
 
     static components = {
         Layout,
@@ -34,10 +34,9 @@ class RPEConsolidatedReport extends Component {
         });
 
         this.reportData = useState({
+            "totals": {},
             "report": [],
-            "totales": {
-                "periodos": [],
-            }
+            "periods": [],
         });
 
         this.dialog = useService("dialog");
@@ -103,7 +102,7 @@ class RPEConsolidatedReport extends Component {
             this.state.loading = true;
             const data = await this.orm.call(
                 "tyt.risk.mitigation",     
-                "rpe_consolidated_report", 
+                "rpe_remedition_action", 
                 [ 
                     this.state.filters.department_id, 
                     this.state.filters.year,
@@ -111,9 +110,9 @@ class RPEConsolidatedReport extends Component {
                     this.state.filters.revision_type,
                 ]
             );
-            this.reportData.report = data.report;
-            this.reportData.totales = data.totales;
-            console.log("reportdata", this.reportData)
+            this.reportData.periods = data.periods || [];
+            this.reportData.report = data.report || [];
+            this.reportData.totals = data.totals || {};
 
         } catch (error) {
             console.error("Error carga de report:", error);
@@ -125,6 +124,15 @@ class RPEConsolidatedReport extends Component {
             this.state.loading = false;
         }
     }
+
+    nivelStyle(nivel) {
+        const MAP = {
+            'sys_sox_reme_open':   "background-color: #e53935; color: #fff; font-weight: bold; font-size: 16px;",
+            'sys_sox_reme_process':  " background-color: rgb(255,215,0); color: #222; font-weight: bold; font-size: 16px;",
+            'sys_sox_reme_complete':  "background-color: rgb(154,205,50); color: #222; font-weight: bold; font-size: 16px;",
+        };
+        return MAP[nivel] ?? '';
+    }
 }
 
-registry.category("actions").add("tyt_risk_management.rpe_consolidated_report", RPEConsolidatedReport);
+registry.category("actions").add("tyt_risk_management.rpe_remediation_action_report", RPERemediationActionReport);

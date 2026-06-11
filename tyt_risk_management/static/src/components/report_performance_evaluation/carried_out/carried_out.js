@@ -14,14 +14,28 @@ export class CarriedOutReport extends Component {
         Layout,
     };
 
+    nivelStyle(nivel) {
+        const MAP = {
+            0:   "background-color: #e53935; color: #fff; font-weight: bold; font-size: 14px;",
+            25:  " background-color: rgb(217,123,0); color: #fff; font-weight: bold; font-size: 14px;",
+            50:  "background-color: rgb(255,215,0); color: #222; font-weight: bold; font-size: 14px;",
+            75: "background-color: rgb(0,191,255); color: #222; font-weight: bold; font-size: 14px;",
+            100: "background-color: rgb(154,205,50); color: #222; font-weight: bold; font-size: 14px;",
+        };
+        return MAP[nivel] ?? '';
+    }
+
     setup() {
+
+        const today = new Date()
 
         this.orm = useService("orm");
         this.state = useState({
             filters: {
-                departmentIds: "0",
-                selectedYear: "0",
-                selectedPeriod: "0",
+                department_id: "0",
+                year: "0",
+                cr_period: "month",
+                revision_type: "0",
             },
 
             //data filters 
@@ -31,315 +45,16 @@ export class CarriedOutReport extends Component {
         });
 
         this.reportData = useState({
-            "report": [
-                {
-                    "company_name": "Subsidiaria 1",
-                    "company_id": "92e5d90a-d25d-4a39-84ca-9f37dd8265e3",
-                    "items": [
-                        {
-                            "titulo": "sys_sox1_nivel_0",
-                            "nivel": 0,
-                            "periodos": [
-                                {
-                                    "periodo": "1",
-                                    "valor": 87
-                                },
-                                {
-                                    "periodo": "2",
-                                    "valor": 86
-                                },
-                                {
-                                    "periodo": "3",
-                                    "valor": 0
-                                },
-                                {
-                                    "periodo": "4",
-                                    "valor": 0
-                                }
-                            ],
-                            "total": 173,
-                            "porcentaje": 97.74
-                        },
-                        {
-                            "titulo": "sys_sox1_nivel_25",
-                            "nivel": 25,
-                            "periodos": [
-                                {
-                                    "periodo": "1",
-                                    "valor": 1
-                                },
-                                {
-                                    "periodo": "2",
-                                    "valor": 0
-                                },
-                                {
-                                    "periodo": "3",
-                                    "valor": 0
-                                },
-                                {
-                                    "periodo": "4",
-                                    "valor": 0
-                                }
-                            ],
-                            "total": 1,
-                            "porcentaje": 0.56
-                        },
-                        {
-                            "titulo": "sys_sox1_nivel_50",
-                            "nivel": 50,
-                            "periodos": [
-                                {
-                                    "periodo": "1",
-                                    "valor": 0
-                                },
-                                {
-                                    "periodo": "2",
-                                    "valor": 0
-                                },
-                                {
-                                    "periodo": "3",
-                                    "valor": 0
-                                },
-                                {
-                                    "periodo": "4",
-                                    "valor": 0
-                                }
-                            ],
-                            "total": 0,
-                            "porcentaje": 0
-                        },
-                        {
-                            "titulo": "sys_sox1_nivel_75",
-                            "nivel": 75,
-                            "periodos": [
-                                {
-                                    "periodo": "1",
-                                    "valor": 1
-                                },
-                                {
-                                    "periodo": "2",
-                                    "valor": 0
-                                },
-                                {
-                                    "periodo": "3",
-                                    "valor": 0
-                                },
-                                {
-                                    "periodo": "4",
-                                    "valor": 0
-                                }
-                            ],
-                            "total": 1,
-                            "porcentaje": 0.56
-                        },
-                        {
-                            "titulo": "sys_sox1_nivel_100",
-                            "nivel": 100,
-                            "periodos": [
-                                {
-                                    "periodo": "1",
-                                    "valor": 1
-                                },
-                                {
-                                    "periodo": "2",
-                                    "valor": 1
-                                },
-                                {
-                                    "periodo": "3",
-                                    "valor": 0
-                                },
-                                {
-                                    "periodo": "4",
-                                    "valor": 0
-                                }
-                            ],
-                            "total": 2,
-                            "porcentaje": 1.13
-                        }
-                    ],
-                    "totales": {
-                        "titulo": "sys_sox1_nivel_total",
-                        "nivel": 0,
-                        "periodos": [
-                            {
-                                "periodo": "1",
-                                "valor": 90
-                            },
-                            {
-                                "periodo": "2",
-                                "valor": 87
-                            },
-                            {
-                                "periodo": "3",
-                                "valor": 0
-                            },
-                            {
-                                "periodo": "4",
-                                "valor": 0
-                            }
-                        ],
-                        "total": 177,
-                        "porcentaje": 100
-                    }
-                },
-            ],
-    "totals": {
-            "company_name": "sys_report_sox_1",
-            "company_id": "sys_report_sox_1",
-            "items": [
-                {
-                    "titulo": "sys_sox1_nivel_0",
-                    "nivel": 0,
-                    "periodos": [
-                        {
-                            "periodo": "1",
-                            "valor": 87
-                        },
-                        {
-                            "periodo": "2",
-                            "valor": 86
-                        },
-                        {
-                            "periodo": "3",
-                            "valor": 0
-                        },
-                        {
-                            "periodo": "4",
-                            "valor": 0
-                        }
-                    ],
-                    "total": 173,
-                    "porcentaje": 97.74
-                },
-                {
-                    "titulo": "sys_sox1_nivel_25",
-                    "nivel": 25,
-                    "periodos": [
-                        {
-                            "periodo": "1",
-                            "valor": 1
-                        },
-                        {
-                            "periodo": "2",
-                            "valor": 0
-                        },
-                        {
-                            "periodo": "3",
-                            "valor": 0
-                        },
-                        {
-                            "periodo": "4",
-                            "valor": 0
-                        }
-                    ],
-                    "total": 1,
-                    "porcentaje": 0.56
-                },
-                {
-                    "titulo": "sys_sox1_nivel_50",
-                    "nivel": 50,
-                    "periodos": [
-                        {
-                            "periodo": "1",
-                            "valor": 0
-                        },
-                        {
-                            "periodo": "2",
-                            "valor": 0
-                        },
-                        {
-                            "periodo": "3",
-                            "valor": 0
-                        },
-                        {
-                            "periodo": "4",
-                            "valor": 0
-                        }
-                    ],
-                    "total": 0,
-                    "porcentaje": 0
-                },
-                {
-                    "titulo": "sys_sox1_nivel_75",
-                    "nivel": 75,
-                    "periodos": [
-                        {
-                            "periodo": "1",
-                            "valor": 1
-                        },
-                        {
-                            "periodo": "2",
-                            "valor": 0
-                        },
-                        {
-                            "periodo": "3",
-                            "valor": 0
-                        },
-                        {
-                            "periodo": "4",
-                            "valor": 0
-                        }
-                    ],
-                    "total": 1,
-                    "porcentaje": 0.56
-                },
-                {
-                    "titulo": "sys_sox1_nivel_100",
-                    "nivel": 100,
-                    "periodos": [
-                        {
-                            "periodo": "1",
-                            "valor": 1
-                        },
-                        {
-                            "periodo": "2",
-                            "valor": 1
-                        },
-                        {
-                            "periodo": "3",
-                            "valor": 0
-                        },
-                        {
-                            "periodo": "4",
-                            "valor": 0
-                        }
-                    ],
-                    "total": 2,
-                    "porcentaje": 1.13
-                }
-            ],
-            "totales": {
-                "titulo": "sys_sox1_nivel_total",
-                "nivel": 0,
-                "periodos": [
-                    {
-                        "periodo": "1",
-                        "valor": 90
-                    },
-                    {
-                        "periodo": "2",
-                        "valor": 87
-                    },
-                    {
-                        "periodo": "3",
-                        "valor": 0
-                    },
-                    {
-                        "periodo": "4",
-                        "valor": 0
-                    }
-                ],
-                "total": 177,
-                "porcentaje": 100
-            }
-        }
-});
+            "totals": {},
+            "report": [],
+            "periods": [],
+        });
 
         this.dialog = useService("dialog");
         onWillStart(async () => {
             await this.loadFilters();
 
-            await this.onSearch()
+            this.onSearch()
         });
 
 
@@ -356,6 +71,9 @@ export class CarriedOutReport extends Component {
                 []
             );
             this.state.years = availableYears;
+            if (availableYears) {
+                this.state.filters.year = availableYears[0];
+            }
         } catch (error) {
             console.error("Error cargando domains:", error);
         }
@@ -388,26 +106,26 @@ export class CarriedOutReport extends Component {
 
     async onSearch() {
         this.state.loading = true;
-        // try {
-        //     const data = await this.orm.call(
-        //         "tyt.business.process",     
-        //         "data_status_report", 
-        //         [
-        //             this.state.filters.department_id,
-        //             this.state.filters.domain_id,
-        //             this.state.filters.process_id,
-        //             this.state.filters.year,
-        //             this.state.filters.month,
-        //         ]
-        //     );
-        //     this.state.reportData = data;
+        try {
+            const data = await this.orm.call(
+                "tyt.risk.mitigation",     
+                "rpe_carried_out_report", 
+                [
+                    this.state.filters.department_id, 
+                    this.state.filters.year,
+                    this.state.filters.cr_period,
+                    this.state.filters.revision_type,
+                ]
+            );
+            this.reportData.periods = data.periods || [];
+            this.reportData.report = data.report || [];
+            this.reportData.totals = data.totals || {};
 
-        // } catch (error) {
-        //     console.error("Error cargando procesos:", error);
-        // }
-        setTimeout(() => {
-            this.state.loading = false;
-        }, 500);
+        } catch (error) {
+            console.error("Error cargando procesos:", error);
+        }
+        this.state.loading = false;
+        
     }
 }
 
