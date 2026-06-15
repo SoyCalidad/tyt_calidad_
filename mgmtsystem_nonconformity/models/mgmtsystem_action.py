@@ -47,7 +47,8 @@ class ReportLine(models.Model):
     )
 
     nc_id = fields.Many2one('mgmtsystem.nonconformity.type',
-                            string='Tipo de hallazgo')
+                            string='Tipo de hallazgo',
+                            ondelete='set null')
 
 
 class AuditReport(models.Model):

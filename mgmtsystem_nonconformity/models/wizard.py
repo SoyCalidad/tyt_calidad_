@@ -90,7 +90,7 @@ class NC(models.TransientModel):
                     'nc_id': self.id,
                     'auditor_id': auditor_id,
                     'team_id': team_id,
-                    'type_id': line.nc_id.id,
+                    'type_id': line.nc_id.id if line.nc_id.exists() else False,
                     'standard': self.report_id.standard,
                     'date_found': line.datetime,
                 }
