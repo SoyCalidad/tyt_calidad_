@@ -27,12 +27,12 @@ class TYTNC(models.TransientModel):
         line_vals = []
         for line in lines:
             line_vals.append((0, 0, {
-                'name': line.comment or '-',  # Usar el valor de `comment` en lugar de otros valores
-                'type_id': line.clause_id.id if line.clause_id else False,
-                'auditor_id': line.employee_id.id if line.employee_id else False,
-                'team_id': False,  # Si no tienes un campo relacionado, deja esto en `False`
-                'date_found': fields.Date.today(),  # Puedes usar `line.date_found` si está definido
-                'details': line.comment or '',  # Descripción del hallazgo
+                'name': line.comment or '-',
+                'type_id': False,  # clause_id es audit.audit.planning.clause, no mgmtsystem.nonconformity.type
+                'auditor_id': 'hr.employee,%d' % line.employee_id.id if line.employee_id else False,
+                'team_id': False,
+                'date_found': fields.Date.today(),
+                'details': line.comment or '',
             }))
 
         # Reemplazar directamente las líneas existentes con las nuevas
