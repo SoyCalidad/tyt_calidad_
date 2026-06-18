@@ -115,6 +115,12 @@
                                 <field name="description" />
                                 <field name="create_date" string="Fecha de carga" />
                                 <field name="create_uid" string="Cargado por" />
+                                <field name="file_id" column_invisible="1" />
+                                <button name="action_open_file" 
+                                type="object"
+                                icon="fa-eye"
+                                class="oe_stat_button"
+                                invisible="not file_id"/>
                             </list>
                         </field>
                         <label for="link_ids" />

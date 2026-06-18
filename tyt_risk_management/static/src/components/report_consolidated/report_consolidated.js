@@ -11,7 +11,7 @@ import { RiskSectionCard } from "./risk_section_card";
 import { MaturityLevelCard } from "./maturity_level_card/maturity_level_card";
 import { RiskMap } from "./risk_map/risk_map"
 import { ProcessCard } from "./process_card/process_card";
-
+import { MONTHS } from "./../utils";
 export class ReportConsolidated extends Component {
 
     static template = "tyt_risk_management.ReportConsolidated";
@@ -68,25 +68,12 @@ export class ReportConsolidated extends Component {
 
         });
 
-        this.monthOptions = [
-            { value: "1", label: "Enero" },
-            { value: "2", label: "Febrero" },
-            { value: "3", label: "Marzo" },
-            { value: "4", label: "Abril" },
-            { value: "5", label: "Mayo" },
-            { value: "6", label: "Junio" },
-            { value: "7", label: "Julio" },
-            { value: "8", label: "Agosto" },
-            { value: "9", label: "Septiembre" },
-            { value: "10", label: "Octubre" },
-            { value: "11", label: "Noviembre" },
-            { value: "12", label: "Diciembre" },
-        ];
+        this.monthOptions = MONTHS.map(m => ({value: m.id, label: m.name, ...m}));
 
         onWillStart(async () => {
             await this.loadInitialData();
             await loadBundle("web.chartjs_lib");
-            await this.onSearch()
+            this.onSearch()
         });
     }
 
@@ -127,6 +114,9 @@ export class ReportConsolidated extends Component {
             value: c,
             label: c,
         }));;
+        if (availableYears) {
+            this.state.filters.year = availableYears[0];
+        }
     }
 
     updateFilter(name, value) {

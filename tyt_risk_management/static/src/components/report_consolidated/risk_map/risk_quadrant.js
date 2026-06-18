@@ -34,7 +34,7 @@ export class RiskQuadrant extends Component {
         console.log("Risk selected:", risk);
         await this.dialog.add(MitigationDetail, {
             title: "DETALLE",
-            idMitigation: risk?.id || 0,
+            idMitigation: risk?.idMitigation || 0,
         });
     }
 }

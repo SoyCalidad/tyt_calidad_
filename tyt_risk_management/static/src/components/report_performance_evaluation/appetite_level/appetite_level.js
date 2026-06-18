@@ -7,31 +7,21 @@ import { registry } from "@web/core/registry";
 
 import { MONTHS } from "../../utils";
 
-export class CarriedOutReport extends Component {
-    static template = 'tyt_risk_management.RPECarriedOut';
+
+class RPEAppetiteLevelReport extends Component {
+    static template = 'tyt_risk_management.RPEAppetiteLevel';
 
     static components = {
         Layout,
     };
 
-    nivelStyle(nivel) {
-        const MAP = {
-            0:   "background-color: #e53935; color: #fff; font-weight: bold; font-size: 14px;",
-            25:  " background-color: rgb(217,123,0); color: #fff; font-weight: bold; font-size: 14px;",
-            50:  "background-color: rgb(255,215,0); color: #222; font-weight: bold; font-size: 14px;",
-            75: "background-color: rgb(0,191,255); color: #222; font-weight: bold; font-size: 14px;",
-            100: "background-color: rgb(154,205,50); color: #222; font-weight: bold; font-size: 14px;",
-        };
-        return MAP[nivel] ?? '';
-    }
-
     setup() {
 
-        const today = new Date()
-
+        this.notification = useService("notification");
         this.orm = useService("orm");
         this.state = useState({
             filters: {
+
                 department_id: "0",
                 year: "0",
                 cr_period: "tri",
@@ -45,9 +35,10 @@ export class CarriedOutReport extends Component {
         });
 
         this.reportData = useState({
-            "totals": {},
             "report": [],
-            "periods": [],
+            "totales": {
+                "periodos": [],
+            }
         });
 
         this.dialog = useService("dialog");
@@ -60,6 +51,17 @@ export class CarriedOutReport extends Component {
 
 
     }
+
+    getColorApetite(apetite) {
+    if (apetite == 'Alto') {
+        return '#c22f1b'
+    }
+    else if(apetite == 'Moderado') {
+        return '#FFD700'
+    } else {
+        return '#9ACD32'
+    }
+}
 
 
     async loadFilters() {
@@ -75,7 +77,11 @@ export class CarriedOutReport extends Component {
                 this.state.filters.year = availableYears[0];
             }
         } catch (error) {
-            console.error("Error cargando domains:", error);
+            this.notification.add(
+                "Errror al cargar los años",
+                {type: "danger"},
+            )
+            console.error("Error cargando anos:", error);
         }
 
 
@@ -105,28 +111,32 @@ export class CarriedOutReport extends Component {
     }
 
     async onSearch() {
-        this.state.loading = true;
         try {
+            this.state.loading = true;
             const data = await this.orm.call(
                 "tyt.risk.mitigation",     
-                "rpe_carried_out_report", 
-                [
+                "rpe_appetite_level_report", 
+                [ 
                     this.state.filters.department_id, 
                     this.state.filters.year,
                     this.state.filters.cr_period,
                     this.state.filters.revision_type,
                 ]
             );
-            this.reportData.periods = data.periods || [];
-            this.reportData.report = data.report || [];
-            this.reportData.totals = data.totals || {};
+            this.reportData.report = data.report;
+            this.reportData.totales = data.totales;
+            console.log("reportdata", this.reportData)
 
         } catch (error) {
-            console.error("Error cargando procesos:", error);
+            console.error("Error carga de report:", error);
+            this.notification.add(
+                "Errror al cargar el reporte",
+                {type: "danger"},
+            )
+        } finally {
+            this.state.loading = false;
         }
-        this.state.loading = false;
-        
     }
 }
 
-registry.category("actions").add("tyt_risk_management.carried_out_report", CarriedOutReport);
+registry.category("actions").add("tyt_risk_management.rpe_appetite_level_report", RPEAppetiteLevelReport);

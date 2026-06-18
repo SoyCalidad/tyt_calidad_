@@ -63,13 +63,13 @@ export class ExecutiveReport extends Component {
             const today = new Date();
             const anio = today.getFullYear() 
             const month = today.getMonth()
-            if (this.state.years.includes(anio)) {
-                this.state.filters.anio = anio;
-            }
+            // if (this.state.years.includes(anio)) {
+            //     this.state.filters.anio = anio;
+            // }
             if (month) {
-                this.state.filters.month = month.toString();
+                this.state.filters.month = month;
             }
-            await this.onSearch()
+            this.onSearch()
         });
     }
 
@@ -321,6 +321,7 @@ export class ExecutiveReport extends Component {
     }
 
     async loadFilters() {
+        this.state.loading = true;
         await this.loadDomains();
         await this.cargarProcesos();
         await this.loadDepartments();
@@ -330,6 +331,10 @@ export class ExecutiveReport extends Component {
             []
         );
         this.state.years = availableYears;
+        if (availableYears) {
+            this.state.filters.year = availableYears[0];
+        }
+        this.state.loading = false;
 
 
     }
@@ -415,7 +420,7 @@ export class ExecutiveReport extends Component {
             this.loadImpactCompanyChart();
             this.loadMadurityLevelChart();
             this.loadUninsuredRisksChart();
-        }, 500);
+        }, 50);
     }
 }
 

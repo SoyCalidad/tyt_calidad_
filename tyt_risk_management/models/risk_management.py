@@ -125,13 +125,19 @@ class RiskMOFiles(models.Model):
         self.ensure_one()
         if not self.file_id or not self.file_id.access_url:
             return
+        if self.file_id.mimetype in (
+                'application/vnd.openxmlformats-officedocument.wordprocessingml.document',
+                'application/msword',                                                      # doc
+                'application/vnd.openxmlformats-officedocument.spreadsheetml.sheet',
+                'application/vnd.ms-excel',                                                # xls
+            ):
+            return self.file_id.action_open_document_in_office()
 
         return {
             'type': 'ir.actions.act_url',
             'url': self.file_id.access_url,
             'target': 'new',
         }
-
 
 class RiskMOLink(models.Model):
     _name = "tyt.risk.mo_link"

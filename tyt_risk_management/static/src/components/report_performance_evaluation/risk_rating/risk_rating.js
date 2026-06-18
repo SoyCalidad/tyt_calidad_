@@ -7,31 +7,33 @@ import { registry } from "@web/core/registry";
 
 import { MONTHS } from "../../utils";
 
-export class CarriedOutReport extends Component {
-    static template = 'tyt_risk_management.RPECarriedOut';
+const MAP = {
+        'severe': "background-color: #8B0000; color: #fff; font-weight: bold; font-size: 14px;",
+        'higher':" background-color: #DC3545; color: #fff; font-weight: bold; font-size: 14px;",
+        'significant':  "background-color: #FFC107; color: #222; font-weight: bold; font-size: 14px;",
+        'minor':  "background-color: #008000; color: #fff; font-weight: bold; font-size: 14px;",
+        'insignificant':  "background-color: #28A745; color: #fff; font-weight: bold; font-size: 14px;",
+    };
+
+class RPERiskRatingReport extends Component {
+    static template = 'tyt_risk_management.RPERiskRating';
 
     static components = {
         Layout,
     };
 
     nivelStyle(nivel) {
-        const MAP = {
-            0:   "background-color: #e53935; color: #fff; font-weight: bold; font-size: 14px;",
-            25:  " background-color: rgb(217,123,0); color: #fff; font-weight: bold; font-size: 14px;",
-            50:  "background-color: rgb(255,215,0); color: #222; font-weight: bold; font-size: 14px;",
-            75: "background-color: rgb(0,191,255); color: #222; font-weight: bold; font-size: 14px;",
-            100: "background-color: rgb(154,205,50); color: #222; font-weight: bold; font-size: 14px;",
-        };
+        
         return MAP[nivel] ?? '';
     }
 
     setup() {
 
-        const today = new Date()
-
+        this.notification = useService("notification");
         this.orm = useService("orm");
         this.state = useState({
             filters: {
+
                 department_id: "0",
                 year: "0",
                 cr_period: "tri",
@@ -45,8 +47,10 @@ export class CarriedOutReport extends Component {
         });
 
         this.reportData = useState({
-            "totals": {},
             "report": [],
+            "totals": {
+                "periodos": [],
+            },
             "periods": [],
         });
 
@@ -75,7 +79,11 @@ export class CarriedOutReport extends Component {
                 this.state.filters.year = availableYears[0];
             }
         } catch (error) {
-            console.error("Error cargando domains:", error);
+            this.notification.add(
+                "Errror al cargar los años",
+                {type: "danger"},
+            )
+            console.error("Error cargando anos:", error);
         }
 
 
@@ -105,28 +113,33 @@ export class CarriedOutReport extends Component {
     }
 
     async onSearch() {
-        this.state.loading = true;
         try {
+            this.state.loading = true;
             const data = await this.orm.call(
                 "tyt.risk.mitigation",     
-                "rpe_carried_out_report", 
-                [
+                "rpe_risk_rating", 
+                [ 
                     this.state.filters.department_id, 
                     this.state.filters.year,
                     this.state.filters.cr_period,
                     this.state.filters.revision_type,
                 ]
             );
-            this.reportData.periods = data.periods || [];
-            this.reportData.report = data.report || [];
-            this.reportData.totals = data.totals || {};
+            this.reportData.report = data.report;
+            this.reportData.totals = data.totals;
+            this.reportData.periods = data.periods;
+            console.log("reportdata", this.reportData);
 
         } catch (error) {
-            console.error("Error cargando procesos:", error);
+            console.error("Error carga de report:", error);
+            this.notification.add(
+                "Errror al cargar el reporte",
+                {type: "danger"},
+            )
+        } finally {
+            this.state.loading = false;
         }
-        this.state.loading = false;
-        
     }
 }
 
-registry.category("actions").add("tyt_risk_management.carried_out_report", CarriedOutReport);
+registry.category("actions").add("tyt_risk_management.rpe_risk_rating_report", RPERiskRatingReport);

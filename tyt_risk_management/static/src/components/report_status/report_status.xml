@@ -279,7 +279,7 @@
                                                 </div>
                                             </CollapsibleCard>
                                         </div>
-                                        <t t-foreach="process.subProcesos" t-as="subp" t-key="'sp'+subp.process_id" >
+                                        <t t-foreach="process.subProcesos" t-as="subp" t-key="'sp'+subp.sub_process_id" >
                                             <div class="col-md-6 col-sm-12">
                                                 
                                                 <CollapsibleCard  title="subp.sub_process_name or ''">

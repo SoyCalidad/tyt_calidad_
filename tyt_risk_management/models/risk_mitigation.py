@@ -6,6 +6,37 @@ import logging
 
 _logger = logging.getLogger(__name__)
 
+
+def _get_index_period(period, month):
+    if period == 12:
+        return month
+    if period == 6:
+        return int((month // (12/period)) + (month % (12/period)))
+    if period == 4:
+        if month <=3:
+            return 1 
+        elif month <=6:
+            return 2
+        elif month <= 9:
+            return 3
+        else:
+            return 4 
+    if period == 3:
+        if month <= 4:
+            return 1 
+        elif month <= 8:
+            return 2 
+        else:
+            return 3
+    if period == 2:
+        if month <= 6:
+            return 1 
+        else:
+            return 2
+    if period == 1:
+        return 1
+    return 0
+
 class RiskMitigation(models.Model):
     _name = "tyt.risk.mitigation"
     _description = "Mitigación del riesgo"
@@ -572,6 +603,7 @@ class RiskMitigation(models.Model):
     #controls
     before_control = fields.Selection(
         selection=[
+            ('insignificant', 'Insignificate'),
             ('minor', 'Menor'),
             ('higher', 'Mayor'),
             ('significant', 'Significativo'),
@@ -975,8 +1007,8 @@ class RiskMitigation(models.Model):
             "risk_low_scenery": m.risk_id.low_scenery, 
             "risk_middle_scenery": m.risk_id.middle_scenery, 
             "risk_high_scenery": m.risk_id.high_scenery, 
-            "risk_impact": m.risk_id_impact,
-            "risk_occurrence": m.risk_id_occurrence,
+            "risk_impact": dict(self.env['tyt.risk.management']._fields['impact'].selection).get(m.risk_id_impact),
+            "risk_occurrence": dict(self.env['tyt.risk.management']._fields['occurrence'].selection).get(m.risk_id_occurrence),
             "risk_control_objective": m.risk_id.control_objective,
             "risk_goal_coso_names": "\n".join([g.name for g in m.risk_id.goal_coso_ids]),
             "risk_control_activity": m.risk_id.control_activity,
@@ -986,6 +1018,15 @@ class RiskMitigation(models.Model):
             'risk_frequency_name': m.risk_id.frequency_id.name,
             "risk_type_pd": dict(self.env['tyt.risk.management']._fields['type_pd'].selection).get(m.risk_id.type_pd),
             "risk_type_cf": dict(self.env['tyt.risk.management']._fields['type_cf'].selection).get(m.risk_id.type_cf),
+
+            "residual_risk": m.residual_risk,
+            "risk_quantification": m.risk_id_quantification,
+            "before_control": dict(self._fields['before_control'].selection).get(m.before_control),
+            "after_control": dict(self._fields['after_control'].selection).get(m.after_control),
+            "mr_degree_mitigation": m.mr_degree_mitigation.name ,
+            "mr_level_compliance": dict(self._fields['mr_level_compliance'].selection).get(m.mr_level_compliance),
+            "mr_maturity_level": dict(self._fields['mr_maturity_level'].selection).get(m.mr_maturity_level),
+            "mr_status_mitigation": dict(self._fields['mr_status_mitigation'].selection).get(m.mr_status_mitigation)
         }
 
     @api.model
@@ -1125,38 +1166,7 @@ class RiskMitigation(models.Model):
             else:
                 department_dict[(key)] = 1
 
-        def _get_index_period(period, month):
-            if period == 12:
-                return month
-            if period == 6:
-                if month <7:
-                    return 1 
-                else :
-                    return 2
-            if period == 4:
-                if month <=3:
-                    return 1 
-                elif month <=6:
-                    return 2
-                elif month <= 9:
-                    return 3
-                else:
-                    return 4 
-            if period == 3:
-                if month <= 4:
-                    return 1 
-                elif month <= 8:
-                    return 2 
-                else:
-                    return 3
-            if period == 2:
-                if month <= 6:
-                    return 1 
-                else:
-                    return 2
-            if period == 1:
-                return 1
-                
+
         data_report = []
         total_obj =  {
             "department_name": "sys_report_sox_1",
@@ -1369,39 +1379,7 @@ class RiskMitigation(models.Model):
             else:
                 department_dict[(key)] = 1
 
-        def _get_index_period(period, month):
-            if period == 12:
-                return month
-            if period == 6:
-                if month <7:
-                    return 1 
-                else :
-                    return 2
-            if period == 4:
-                if month <=3:
-                    return 1 
-                elif month <=6:
-                    return 2
-                elif month <= 9:
-                    return 3
-                else:
-                    return 4 
-            if period == 3:
-                if month <= 4:
-                    return 1 
-                elif month <= 8:
-                    return 2 
-                else:
-                    return 3
-            if period == 2:
-                if month <= 6:
-                    return 1 
-                else:
-                    return 2
-            if period == 1:
-                return 1
-            return 0
-                
+       
         data_report = []
         total_obj =  {
             "titulo": "sys_sox1_nivel_total",
@@ -1511,37 +1489,6 @@ class RiskMitigation(models.Model):
             else:
                 department_dict[(key)] = 1
 
-        def _get_index_period(period, month):
-            if period == 12:
-                return month
-            if period == 6:
-                if month <7:
-                    return 1 
-                else :
-                    return 2
-            if period == 4:
-                if month <=3:
-                    return 1 
-                elif month <=6:
-                    return 2
-                elif month <= 9:
-                    return 3
-                else:
-                    return 4 
-            if period == 3:
-                if month <= 4:
-                    return 1 
-                elif month <= 8:
-                    return 2 
-                else:
-                    return 3
-            if period == 2:
-                if month <= 6:
-                    return 1 
-                else:
-                    return 2
-            if period == 1:
-                return 1
                 
         data_report = []
         total_obj =  {
@@ -1674,5 +1621,292 @@ class RiskMitigation(models.Model):
             "totals": total_obj,
         }
 
-    
+    @api.model 
+    def rpe_appetite_level_report(self, department_id, year, cr_peoriod, revision_type):
+        domain_mitigation = [
+            ('mitigation_date', '<=', (fields.Datetime.today() + relativedelta(months=1, day=1)))
+        ]
+        if department_id and int(department_id):
+            domain_mitigation.append(('risk_id.department_id', '=', int(department_id)))
+        if year and int(year):
+            domain_mitigation.append(('year', '=', int(year)))
+        num_period = 1
+        if cr_peoriod:
+            if revision_type == 'sys_only_normal':
+                domain_mitigation.append(('risk_id.cr_peoriod', '!=', 'fortnightly'))
+            if revision_type == 'sys_only_special':
+                domain_mitigation.append(('risk_id.cr_peoriod', '=',  'fortnightly'))
+
+            if cr_peoriod == 'month':
+                num_period = 12
+            if cr_peoriod == 'bi':
+                num_period = 6
+            if cr_peoriod == 'tri':
+                num_period = 4
+            if cr_peoriod == 'cua':
+                num_period = 3
+            if cr_peoriod == 'se':
+                num_period = 2
+            if cr_peoriod == 'anual':
+                num_period = 1
+
+        mitigations = self.env['tyt.risk.mitigation'].search(domain_mitigation)
+
+        department_dict = dict()
+        for mitigation in mitigations:
+            key = (mitigation.risk_id_department_id.id, mitigation.mr_residual_risk, mitigation.risk_id_quantification, mitigation.risk_id_department_id.display_name, mitigation.month, mitigation.mr_degree_mitigation.value)
+            if key in department_dict:
+                department_dict[(key)] += 1
+            else:
+                department_dict[(key)] = 1
+
+                
+        data_report = []
+        total_obj =  {
+            "titulo": "sys_sta_total",
+            "periodos":  [{
+                "periodo": str(_l), 
+                "residual": 0, 
+                "asegurado": 0, 
+                "apetitos": [],
+                "apetito_label": "",
+            } for _l in range(1, num_period +1)],
+        }
+        #apetito
+        # bajo: mayoria en 100
+        # moderado: queda en 50 
+        # alto que en 0
+        def _get_apetito_label(apetitos):
+            len_100_75 = len([_ for _ in apetitos if _ == 100 or _ == 75])
+            len_50 = len([_ for _ in apetitos if _ == 50])
+            len_apetitos = len(apetitos)
+            if len_apetitos == 0:
+                return "Bajo"
+            
+            if len_apetitos > 0 and len_100_75 / len_apetitos >= 0.5:
+                return "Bajo"
+            elif len_apetitos > 0 and len_50 / len_apetitos >= 0.5:
+                return "Moderado"
+            else:
+                return "Alto"
+        
+        for dep_id, residual, quantification, dep_name, month, degree_value in department_dict.keys():
+            index_data = None
+            insured = quantification - residual 
+            for i, da in enumerate(data_report):
+                if dep_name == da["department_name"]:
+                    index_data = i
+                    break 
+            index_pe = _get_index_period(num_period, int(month)) - 1
+            if index_data is not None:
+                data_report[index_data]["periodos"][index_pe]["residual"] += residual
+                data_report[index_data]["periodos"][index_pe]["asegurado"] += insured
+                data_report[index_data]["periodos"][index_pe]["apetitos"].append(degree_value)
+
+            else: 
+                data_report.append({
+                    "department_name": dep_name,
+                    "department_id": dep_id, 
+                    
+                    "periodos": [{
+                        "periodo": str(_l), 
+                        "residual": residual if _l -1 == index_pe else 0,
+                        "asegurado": insured if _l -1 == index_pe else 0, 
+                        "apetitos": [degree_value],
+                        "apetito_label": "", 
+                    } for _l in range(1, num_period +1)],
+                    
+                })
+
+            total_obj["periodos"][index_pe]["residual"] += residual
+            total_obj["periodos"][index_pe]["asegurado"] += insured
+            total_obj["periodos"][index_pe]["apetitos"].append(degree_value)
+
+            
+
+        for item in data_report:
+            for periodo in item["periodos"]:
+                periodo["apetito_label"] = _get_apetito_label(periodo["apetitos"])
+
+        for period in total_obj["periodos"]:
+            period["apetito_label"] = _get_apetito_label(period["apetitos"])
+
+        return {
+            "report": data_report,
+            "totales": total_obj,
+        }
+ 
+
+    @api.model 
+    def rpe_risk_rating(self, department_id, year, cr_peoriod, revision_type):
+        domain_mitigation = [
+            ('mitigation_date', '<=', (fields.Datetime.today() + relativedelta(months=1, day=1)))
+
+        ]
+        if department_id and int(department_id):
+            domain_mitigation.append(('risk_id.department_id', '=', int(department_id)))
+        if year and int(year):
+            domain_mitigation.append(('year', '=', int(year)))
+        num_period = 1
+        if cr_peoriod:
+            if revision_type == 'sys_only_normal':
+                domain_mitigation.append(('risk_id.cr_peoriod', '!=', 'fortnightly'))
+            if revision_type == 'sys_only_special':
+                domain_mitigation.append(('risk_id.cr_peoriod', '=',  'fortnightly'))
+
+            if cr_peoriod == 'month':
+                num_period = 12
+            if cr_peoriod == 'bi':
+                num_period = 6
+            if cr_peoriod == 'tri':
+                num_period = 4
+            if cr_peoriod == 'cua':
+                num_period = 3
+            if cr_peoriod == 'se':
+                num_period = 2
+            if cr_peoriod == 'anual':
+                num_period = 1
+
+        mitigations = self.env['tyt.risk.mitigation'].search(domain_mitigation)
+         
+        department_dict = dict()
+        for mitigation in mitigations:
+            key = (mitigation.risk_id_department_id.display_name, mitigation.risk_id_department_id.id, mitigation.month, mitigation.before_control, mitigation.after_control)
+            if key in department_dict:
+                department_dict[(key)] += 1
+            else:
+                department_dict[(key)] = 1
+
+                
+        data_report = []
+        INDEX_CONTROL = {
+            'severe': 0,
+            'higher': 1,
+            'significant': 2,
+            'minor': 3,
+            'insignificant': 4,
+        }
+        total_obj =  {
+            "items": [
+                {
+                    "titulo": "severe",
+                    "title": "Severo",
+                    "periodos": [{"periodo": str(_l), "before": 0, "after": 0, "performance": 0} for _l in range(1, num_period +1)],
+                },
+                {
+                    "titulo": "higher",
+                    "title": "Mayor",
+                    "periodos": [{"periodo": str(_l), "before": 0, "after": 0, "performance": 0} for _l in range(1, num_period +1)],
+                },
+                {
+                    "titulo": "significant",
+                    "title": "Significativo",
+                    "nivel": 50,
+                    "periodos": [{"periodo": str(_l), "before": 0, "after": 0, "performance": 0} for _l in range(1, num_period +1)],
+                },
+                {
+                    "titulo": "minor",
+                    "title": "Menor",
+                    "periodos": [{"periodo": str(_l), "before": 0, "after": 0, "performance": 0} for _l in range(1, num_period +1)],
+                },
+                {
+                    "titulo": "insignificant",
+                    "title": "Insignificate",
+                    "periodos": [{"periodo": str(_l), "before": 0, "after": 0, "performance": 0} for _l in range(1, num_period +1)],
+                },
+            ],
+            "totals": [ 0 for _l in range(1, num_period +1)],
+        }
+        for dep_name, dep_id, month, before_control, after_control in department_dict.keys():
+            index_data = None
+            _logger.info(f"month {month}")
+            for i, da in enumerate(data_report):
+                if dep_name == da["department_name"]:
+                    index_data = i
+                    break 
+            index_pe = _get_index_period(num_period, int(month)) -1
+            if index_data is not None:
+            
+                data_report[index_data]["rows"][INDEX_CONTROL.get(before_control)]["periodos"][index_pe]["before"] += 1
+                data_report[index_data]["rows"][INDEX_CONTROL.get(after_control)]["periodos"][index_pe]["after"] += 1
+                data_report[index_data]["totals"][index_pe] += 1
+            else:
+                data_report.append({
+                    "department_name": dep_name,
+                    "department_id": dep_id,
+                    "rows": [
+                        {
+                            "titulo": "severe",
+                            "title": "Severo",
+                            "periodos": [{
+                                "periodo": str(_l), 
+                                "before": 1 if before_control== 'severe' and _l-1 == index_pe else 0, 
+                                "after": 1 if after_control== 'severe' and _l-1 == index_pe else 0, 
+                                "performance": 0} for _l in range(1, num_period +1)],
+                        },
+                        {
+                            "titulo": "higher",
+                            "title": "Mayor",
+                            "periodos": [{
+                                "periodo": str(_l), 
+                                "before": 1 if before_control== 'higher' and _l-1 == index_pe else 0, 
+                                "after": 1 if after_control== 'higher' and _l-1 == index_pe else 0, 
+                                "performance": 0} for _l in range(1, num_period +1)],
+                        },
+                        {
+                            "titulo": "significant",
+                            "title": "Significativo",
+                            "periodos": [{
+                                "periodo": str(_l), 
+                                "before": 1 if before_control== 'significant' and _l-1 == index_pe else 0, 
+                                "after": 1 if after_control== 'significant' and _l-1 == index_pe else 0,  
+                                "performance": 0} for _l in range(1, num_period +1)],
+
+                        },
+                        {
+                            "titulo": "minor",
+                            "title": "Menor",
+                            "periodos": [{
+                                "periodo": str(_l), 
+                                "before": 1 if before_control== 'minor' and _l-1 == index_pe else 0, 
+                                "after": 1 if after_control== 'minor' and _l-1 == index_pe else 0, 
+                                "performance": 0} for _l in range(1, num_period +1)],
+                        },
+                        {
+                            "titulo": "insignificant",
+                            "title": "Insignificate",
+                            "periodos": [{
+                                "periodo": str(_l), 
+                                "before": 1 if before_control== 'insignificant' and _l-1 == index_pe else 0, 
+                                "after": 1 if after_control== 'insignificant' and _l-1 == index_pe else 0, 
+                                "performance": 0} for _l in range(1, num_period +1)],
+                        },
+                    ], 
+                    "totals": [1 if index_pe == _l -1 else 0 for _l in range(1, num_period +1)],
+                })
+
+            total_obj['items'][INDEX_CONTROL.get(before_control)]["periodos"][index_pe]["before"] += 1
+            total_obj['items'][INDEX_CONTROL.get(after_control)]["periodos"][index_pe]["after"] += 1
+            total_obj['totals'][index_pe] += 1
+            
+        #calculate totals
+        for d in data_report:
+            #total by periodo
+            for item in d["rows"]:
+                for i_p, period in enumerate(item["periodos"]):
+                    if d["totals"][i_p] == 0:
+                        continue
+                    period["performance"] = round((period["after"] / d["totals"][i_p]) * 100, 2)
+
+        for t_item in total_obj["items"]:
+            for t_i_p, period in enumerate(t_item["periodos"]):
+                if total_obj["totals"][t_i_p]==0:
+                    continue
+                period["performance"] = round((period["after"] / total_obj["totals"][t_i_p]) * 100, 2)
+
+        return {
+            "periods": list(range(1,num_period+1)),
+            "report": data_report,
+            "totals": total_obj,
+        }
 

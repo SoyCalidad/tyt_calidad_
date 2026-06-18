@@ -43,14 +43,41 @@
                                     mainClass="'col-md-3'"
                                 />
             
-                                <FilterSelect
+                                <!-- <FilterSelect
                                     label="'Año'"
                                     name="'year'"
                                     value="state.filters.year"
-                                    options="state.years"
+                                    options=""
                                     onChange.bind="updateFilter"
-                                    mainClass="'col-md-2'"
-                                />
+                                /> -->
+                                <div class="col-md-2" t-att-class="'filter-item col-lg '">
+                                    <label class="form-label" for="year">
+                                        <t t-esc="'Año'"/>
+                                    </label>
+
+                                    <select
+                                        class="form-select"
+                                        t-att-name="'year'"
+                                        t-model="state.filters.year"
+                                    >
+                                        <option value="0">
+                                            <t t-esc="'Todo'"/>
+                                        </option>
+
+                                        <t t-foreach="state.years"
+                                        t-as="option"
+                                        t-key="'Year-' +option.value">
+
+                                            <option
+                                                t-att-value="option.value"
+                                                
+                                            >
+                                                <t t-esc="option.label"/>
+                                            </option>
+
+                                        </t>
+                                    </select>
+                                </div>
             
                                 <FilterSelect
                                     label="'Mes'"

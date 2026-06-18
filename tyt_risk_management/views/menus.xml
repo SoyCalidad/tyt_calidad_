@@ -105,6 +105,16 @@
                 name="7.3 Desempeño de Acciones de Remediación"
                 action="action_report_remediation_action_dashboard"
             />  
+            <menuitem id="report_7_4_appetite_level_menu"
+                sequence="100"
+                name="7.4 Nivel de Apetito de Riesgo"
+                action="action_report_risk_appetite_level_dashboard"
+            />
+            <menuitem id="report_7_5_rating_performance_menu"
+                sequence="110"
+                name="7.5 Calificación y Desempeño del Riesgo"
+                action="action_report_risk_rating_performance_dashboard"
+            />  
         </menuitem>
 
     </menuitem>

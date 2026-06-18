@@ -103,7 +103,8 @@ export class RiskMap extends Component {
                     row.quadrants.forEach(quadrant => {
                         if (quadrant.id == mitigation.risk_id_quadrant) {
                             quadrant.risks.push({
-                                id: mitigation.risk_id_id
+                                id: mitigation.risk_id_id,
+                                idMitigation: mitigation.id,
                             })
                         }
                     })
