@@ -266,7 +266,7 @@
                                 nolabel="1"
                                 colspan="4"
                                 options="{'no_quick_create': True, 'no_create': True}"
-                                groups="tyt_risk_management.group_action_plan" >
+                                groups="tyt_risk_management.group_risk_action_plan" >
                                     <list  edit="status=='pending'" create="0">
                                         <button 
                                         type="object"

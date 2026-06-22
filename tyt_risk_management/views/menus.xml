@@ -1,10 +1,14 @@
 <odoo>
-    <menuitem id="menu_business_process_root" name="Gestión de riesgos" sequence="10">
+    <menuitem id="menu_business_process_root" name="Gestión de riesgos" sequence="10"
+    groups="tyt_risk_management.group_admin,tyt_risk_management.group_usuario,tyt_risk_management.group_consulta"
+    >
 
         <menuitem id="my_activities_menu" sequence="0" name="Mis actividades "
             action="action_risk_my_activity"
         />
-        <menuitem id="admin_menu" name="Administración" sequence="10">
+        <menuitem id="admin_menu" name="Administración" sequence="10"
+        groups="tyt_risk_management.group_admin"
+        >
 
             <menuitem id="menu_user" name="Usuarios" action="base.action_res_users" sequence="30"
                 groups="group_ver_usuarios,base.group_system,base.group_erp_manager" />
@@ -23,7 +27,9 @@
                 groups="group_ver_catalogos"
             />
         </menuitem>
-        <menuitem id="menu_risk_root" name="Identificación" sequence="20">
+        <menuitem id="menu_risk_root" name="Identificación" sequence="20"
+        groups="tyt_risk_management.group_admin"
+        >
 
 
             <menuitem id="menu_risk_management" name="Riesgos"
@@ -43,6 +49,7 @@
         <menuitem id="management_risk_menu"
             name="Gestión de riesgos"
             sequence="30"
+            groups="tyt_risk_management.group_usuario,tyt_risk_management.group_consulta,tyt_risk_management.group_admin"
         >
             <menuitem id="mitigation_risk_menu"
                 name="Mitigación"
@@ -51,69 +58,82 @@
             <menuitem id="monitoreo_risk_menu"
                 name="Monitoreo"
                 action="action_risk_monitoring"
+                groups="group_ver_monitoring"
                 sequence="10" />
             <menuitem id="action_plan_risk_menu"
                 name="Planes de accion"
                 action="action_risk_action_plan"
-                groups="group_action_plan"
+                groups="group_risk_action_plan"
                 sequence="10" />
         </menuitem>
         <menuitem id="reports_menu"
             name="Reportes"
             sequence="40"
+            groups="tyt_risk_management.group_admin,tyt_risk_management.group_consulta"
         >
             <menuitem id="my_activities_report_menu" sequence="10" name="Nivel 1 - Actividades "
                 action="action_risk_my_activity"
+                groups="group_level1_activities"
             />
             <menuitem id="report_status_menu" sequence="20"
                 name="Nivel 2 - Estatus"
                 action="action_report_status_dashboard"
+                groups="group_2level"
             />
             <menuitem id="report_consolidated_menu"
                 sequence="30"
                 name="Nivel 3 - Consolidado"
                 action="action_report_consolidated_dashboard"
+                groups="group_level3_consolidated"
             />  
             <menuitem id="report_customized_menu"
                 sequence="40"
                 name="Nivel 4 - Personalizado "
                 action="action_report_customized_dashboard"
+                groups="group_4level"
             />  
             <menuitem id="report_executive_menu"
                 sequence="50"
                 name="Nivel 5 - Ejecutivo"
                 action="action_report_executive_dashboard"
+                groups="group_level5_executive"
             />  
 
             <menuitem id="report_action_plan_menu"
                 sequence="60"
                 name="Nivel 6 - Planes de acción"
                 action="action_report_risk_action_plan"
+                groups="group_level6_action_plan"
             /> 
             <menuitem id="report_carried_out_menu"
                 sequence="70"
                 name="7.1 Desempeño de Evaluaciones Efectuadas"
                 action="action_report_carried_out_dashboard"
+                groups="group_performance_evaluations_carried_out"
             />  
             <menuitem id="report_7_2_consolidated_menu"
                 sequence="80"
                 name="7.2  Desempeño de Evaluaciones Efectuadas, Consolidado"
                 action="action_report_7_2_consolidate_dashboard"
+                groups="group_peco_consolidated"
             />  
             <menuitem id="report_7_3_remediation_menu"
                 sequence="90"
                 name="7.3 Desempeño de Acciones de Remediación"
                 action="action_report_remediation_action_dashboard"
+                groups="group_performance_remediation_actions"
             />  
             <menuitem id="report_7_4_appetite_level_menu"
                 sequence="100"
                 name="7.4 Nivel de Apetito de Riesgo"
                 action="action_report_risk_appetite_level_dashboard"
+                groups="group_risk_appetite_level"
             />
             <menuitem id="report_7_5_rating_performance_menu"
                 sequence="110"
                 name="7.5 Calificación y Desempeño del Riesgo"
                 action="action_report_risk_rating_performance_dashboard"
+                groups="group_risk_rating_performance"
             />  
         </menuitem>
 

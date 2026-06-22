@@ -119,6 +119,7 @@
                                 <button name="action_open_file" 
                                 type="object"
                                 icon="fa-eye"
+                                title="Ver"
                                 class="oe_stat_button"
                                 invisible="not file_id"/>
                             </list>
@@ -643,7 +644,7 @@
                             <separator string="Planes de acción"></separator>
 
                             <div class="row justify-content-end mt-2" colspan="4" invisible="not is_reviewer"
-                            groups="tyt_risk_management.group_action_plan"
+                            groups="tyt_risk_management.group_risk_action_plan"
                             >
                                 <div class="col-auto">
                                     <button string="Agregar plan de acción" 
@@ -654,22 +655,22 @@
                                 </div>
                             </div>
                             <field name="mr_all_action_plans_complete" invisible="1"
-                            groups="tyt_risk_management.group_action_plan"
+                            groups="tyt_risk_management.group_risk_action_plan"
                             />
-                            <div groups="tyt_risk_management.group_action_plan" invisible="not mr_all_action_plans_complete" class="row mt-2" colspan="4">
+                            <div groups="tyt_risk_management.group_risk_action_plan" invisible="not mr_all_action_plans_complete" class="row mt-2" colspan="4">
                                 <div class="text-primary">
                                     Todos los planes de acción estan completados ya es posible asignar el status de mitigado.
                                 </div>
                             </div>
                             <group colspan="4" 
-                            groups="tyt_risk_management.group_action_plan"
+                            groups="tyt_risk_management.group_risk_action_plan"
                             invisible="status_mitigation=='mitigated'" >
                                 <label for="mr_action_plan_ids" />
                                 <field name="mr_action_plan_ids"
                                 nolabel="1"
                                 colspan="4"
                                 options="{'no_quick_create': True, 'no_create': True}"
-                                groups="tyt_risk_management.group_action_plan" >
+                                groups="tyt_risk_management.group_risk_action_plan" >
                                     <list  edit="status=='pending'" create="0">
                                          
                                         <button 
@@ -770,16 +771,16 @@
                                 </div>
                                 
                             </div>
-                            <field name="mr_action_plan_ids_count" invisible="1" groups="tyt_risk_management.group_action_plan" />
-                            <separator groups="tyt_risk_management.group_action_plan" invisible="mr_action_plan_ids_count==0" string="Planes de acción"></separator>
+                            <field name="mr_action_plan_ids_count" invisible="1" groups="tyt_risk_management.group_risk_action_plan" />
+                            <separator groups="tyt_risk_management.group_risk_action_plan" invisible="mr_action_plan_ids_count==0" string="Planes de acción"></separator>
                              
-                            <group colspan="4" invisible="mr_action_plan_ids_count==0" groups="tyt_risk_management.group_action_plan">
+                            <group colspan="4" invisible="mr_action_plan_ids_count==0" groups="tyt_risk_management.group_risk_action_plan">
                                 <label for="mr_action_plan_ids" />
                                 <field name="mr_action_plan_ids"
                                 nolabel="1"
                                 colspan="4"
                                 options="{'no_quick_create': True, 'no_create': True}"
-                                groups="tyt_risk_management.group_action_plan" >
+                                groups="tyt_risk_management.group_risk_action_plan" >
                                     <list  edit="status=='pending'" create="0">
                                         <button 
                                         type="object"
@@ -884,16 +885,16 @@
                                 </div>
                                 
                             </div>
-                            <field name="mr_action_plan_ids_count" invisible="1" groups="tyt_risk_management.group_action_plan" />
-                            <separator groups="tyt_risk_management.group_action_plan" invisible="mr_action_plan_ids_count==0" string="Planes de acción"></separator>
+                            <field name="mr_action_plan_ids_count" invisible="1" groups="tyt_risk_management.group_risk_action_plan" />
+                            <separator groups="tyt_risk_management.group_risk_action_plan" invisible="mr_action_plan_ids_count==0" string="Planes de acción"></separator>
                              
-                            <group colspan="4" invisible="mr_action_plan_ids_count==0" groups="tyt_risk_management.group_action_plan">
+                            <group colspan="4" invisible="mr_action_plan_ids_count==0" groups="tyt_risk_management.group_risk_action_plan">
                                 <label for="mr_action_plan_ids" />
                                 <field name="mr_action_plan_ids"
                                 nolabel="1"
                                 colspan="4"
                                 options="{'no_quick_create': True, 'no_create': True}"
-                                groups="tyt_risk_management.group_action_plan" >
+                                groups="tyt_risk_management.group_risk_action_plan" >
                                     <list  edit="status=='pending'" create="0">
                                         <button 
                                         type="object"
@@ -985,16 +986,16 @@
                                 </div>
                                 
                             </div>
-                            <field name="mr_action_plan_ids_count" invisible="1" groups="tyt_risk_management.group_action_plan" />
-                            <separator groups="tyt_risk_management.group_action_plan" invisible="mr_action_plan_ids_count==0" string="Planes de acción"></separator>
+                            <field name="mr_action_plan_ids_count" invisible="1" groups="tyt_risk_management.group_risk_action_plan" />
+                            <separator groups="tyt_risk_management.group_risk_action_plan" invisible="mr_action_plan_ids_count==0" string="Planes de acción"></separator>
                              
-                            <group colspan="4" invisible="mr_action_plan_ids_count==0" groups="tyt_risk_management.group_action_plan">
+                            <group colspan="4" invisible="mr_action_plan_ids_count==0" groups="tyt_risk_management.group_risk_action_plan">
                                 <label for="mr_action_plan_ids" />
                                 <field name="mr_action_plan_ids"
                                 nolabel="1"
                                 colspan="4"
                                 options="{'no_quick_create': True, 'no_create': True}"
-                                groups="tyt_risk_management.group_action_plan" >
+                                groups="tyt_risk_management.group_risk_action_plan" >
                                     <list  edit="status=='pending'" create="0">
                                         <!-- <button 
                                         type="object"
@@ -1090,7 +1091,7 @@
                                 colspan="4"
                                 
                                 options="{'no_quick_create': True, 'no_create': True}"
-                                groups="tyt_risk_management.group_action_plan" >
+                                groups="tyt_risk_management.group_risk_action_plan" >
                                     <list  edit="status=='pending'" create="0">
                                         <button 
                                         type="object"
@@ -1159,7 +1160,7 @@
                                 colspan="4"
                                 readonly="not (is_reviewer and status!='mitigated')"
                                 options="{'no_quick_create': True, 'no_create': True}"
-                                groups="tyt_risk_management.group_action_plan" >
+                                groups="tyt_risk_management.group_risk_action_plan" >
                                     <list  edit="status=='pending'" create="0">
                                         <button 
                                         type="object"
@@ -1231,7 +1232,7 @@
                                 colspan="4"
                                 readonly="status=='mitigated'"
                                 options="{'no_quick_create': True, 'no_create': True}"
-                                groups="tyt_risk_management.group_action_plan" >
+                                groups="tyt_risk_management.group_risk_action_plan" >
                                     <list  edit="status=='pending'" create="0">
                                          
                                         <button 

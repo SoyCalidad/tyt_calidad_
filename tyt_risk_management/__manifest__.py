@@ -11,6 +11,7 @@
         'documents',
         'hr',
         'report_xlsx',
+        'preview_officeapps_attachments',
     ],
     'data': [
         'data/documents_document.xml',
