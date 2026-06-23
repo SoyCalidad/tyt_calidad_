@@ -620,13 +620,12 @@
                                 </div>
                             </div>
                              
-                             <div class="row gx-3 ms-1" colspan="4">
+                            <div class="row gx-3 ms-1" colspan="4">
                                 <div class="col-3 me-2">
                                     <field name="before_control" widget="badge" readonly="1" 
                                     decoration-success="before_control=='minor'"
                                     decoration-warning="before_control=='significant'"
                                     decoration-danger="before_control=='higher'"
-                                    
                                     />
                                 </div>
                                 <div class="col-3 me-2">
@@ -636,9 +635,7 @@
                                     decoration-danger="after_control=='higher'"
                                     
                                     />
-
                                 </div>
-                                
                             </div>
                             
                             <separator string="Planes de acción"></separator>
@@ -1019,8 +1016,11 @@
                     </group>
 
                     <field name="is_auditor" invisible="1" />
-                    <group string="Mitigación del auditor" name="audit_mitigation"
-                    invisible="not risk_id_auditor_id or not is_auditor or status not in ['mitigated', 'partially_mitigated']"
+                    <field name="assigned_to" invisible="1" />
+                    <field name="ma_all_action_plans_complete" invisible="1" />
+                    <!--view for reviews in need plan action-->
+                    <!-- <group string="Mitigación del auditor" name="audit_mitigation"
+                    invisible="not (risk_id_reviewer_id and is_reviewer and status in ['mitigated', ] and ma_all_action_plans_complete == 0 and assigned_to==risk_id_reviewer_id)"
                     >
                             <separator string="Proceso de mitigación"></separator>
                             <div class="row justify-content-end" colspan="4">
@@ -1058,32 +1058,30 @@
                                     <span class="fw-bold">Despúes de controles</span>
                                 </div>
                             </div>
-                            <div class="row gx-3 " colspan="4">
-                                <div class="col-3 me-2 bg-success">
-                                    <span class="fw-bold font-white">Insignificante</span>
+                             
+                            <div class="row gx-3 ms-1" colspan="4">
+                                <div class="col-3 me-2">
+                                    <field name="before_control" widget="badge" readonly="1" 
+                                    decoration-success="before_control=='minor'"
+                                    decoration-warning="before_control=='significant'"
+                                    decoration-danger="before_control=='higher'"
+                                    />
                                 </div>
-                                <div class="col-3 me-2 bg-success">
-                                    <span class="fw-bold font-white">Insignificante</span>
+                                <div class="col-3 me-2">
+                                    <field name="after_control" widget="badge" readonly="1"
+                                    decoration-success="after_control=='minor'"
+                                    decoration-warning="after_control=='significant'"
+                                    decoration-danger="after_control=='higher'"
+                                    
+                                    />
                                 </div>
                             </div>
                             
                             <separator string="Planes de acción"></separator>
 
-                            <div class="row justify-content-end mt-2" colspan="4">
-                                <div class="col-auto">
-                                    <button string="Agregar plan de acción" 
-                                    name="action_create_action_plan_audit"
-                                    class="btn btn-primary"
-                                    type="object"
-                                    />
-                                </div>
-                            </div>
+                             
                             <field name="ma_all_action_plans_complete" invisible="1" />
-                            <div invisible="not ma_all_action_plans_complete" class="row mt-2" colspan="4">
-                                <div class="text-primary">
-                                    Todos los planes de acción estan completados ya es posible asignar el status de mitigado.
-                                </div>
-                            </div>
+                             
                             <group colspan="4">
                                 <label for="ma_action_plan_ids" />
                                 <field name="ma_action_plan_ids"
@@ -1100,21 +1098,6 @@
                                             class="btn btn-warning"
                                             invisible="not (status=='pending' and current_user == user_id)"
                                         />
-                                        <button 
-                                        type="object"
-                                        name="action_attendance_action_plan"
-                                            string="Completar"
-                                            class="btn btn-success"
-                                            context="{'is_for_complete': True, 'show_buttons': True}"
-                                            invisible="not (status=='under_review' and current_user != user_id)"
-                                        />
-                                        <button name="action_attendance_action_plan"
-                                            string="Rechazar"
-                                            type="object"
-                                            class="btn btn-danger"
-                                            context="{'is_for_complete': False, 'show_buttons': True}"
-                                            invisible="not (status=='under_review' and current_user != user_id)"
-                                        />
                                         <field name="current_user" column_invisible="1" />
                                         <field name="sequence" widget="handle"/>
                                         <field name="name" />
@@ -1127,10 +1110,10 @@
                                     </list>
                                 </field>
                             </group>
-                    </group>
+                    </group> -->
 
                     <!--only read-->
-                    <group string="Proceso de auditoria" invisible="not (mr_status_mitigation == 'mitigated' and (not is_auditor))">
+                    <group string="Proceso de auditoria" invisible="not (mr_status_mitigation == 'mitigated' and (not is_auditor)) ">
                         <div class="row justify-content-end" colspan="4">
                                 <div class="col-auto">
                                     <label for="ma_period_str" string="Periodo" />
@@ -1184,7 +1167,7 @@
                             </group>
                     </group>
                     <!--auditor-->
-                    <group string="Proceso de auditoria" invisible="not (status=='under_review' and mr_status_mitigation == 'mitigated' and is_auditor  )">
+                    <group string="Proceso de auditoria" invisible="not (status=='mitigated' and mr_status_mitigation == 'mitigated' and is_auditor  )">
                         <div class="row justify-content-end" colspan="4">
                                 <div class="col-auto">
                                     <label for="ma_period_str" string="Periodo" />
@@ -1313,6 +1296,21 @@
          />
         <field name="context">{
             'search_default_owner_id': uid,
+        }</field>
+    </record>
+
+     <record id="action_report_risk_my_activity" model="ir.actions.act_window">
+        <field name="name">Mis actividades</field>
+        <field name="res_model">tyt.risk.mitigation</field>
+        <field name="view_mode">list,form</field>
+        <field name="domain"> [('mitigation_date', '&lt;=', (context_today() + relativedelta(months=1, day=1))),]</field>
+        <field name="view_ids" 
+         eval="[(5, 0, 0),
+                (0, 0, {'view_mode': 'list', 'view_id': ref('view_risk_mitigation_my_activity_list')}),
+                (0, 0, {'view_mode': 'form', 'view_id': ref('view_risk_mitigation_my_activity_form')})]"
+         />
+        <field name="context">{
+            'search_default_risk_id_owner_id': uid,
         }</field>
     </record>
 

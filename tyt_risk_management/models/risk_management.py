@@ -384,7 +384,10 @@ class PlanAction(models.Model):
                 ('id', '!=', self.id),
             ])
             if others_plan == 0:
-                self.mitigation_id.status = 'under_review'
+                if self.mitigation_id.status == 'mitigated': 
+                    pass 
+                else:
+                    self.mitigation_id.status = 'under_review'
         self.write({
             'status': 'under_review',
         })
