@@ -10,7 +10,7 @@
                     <div class="card-header bg-primary">
                         <h3 class="card-title float-start text-white fw-bold">
                             <t t-out="process.name" />
-                            ( <t t-out="process.short_name" /> )
+                            (<t t-out="process.short_name or 'S/N'" />)
                         </h3>
                         <div class="float-end me-3">
                                 

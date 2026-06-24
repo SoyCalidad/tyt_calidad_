@@ -143,7 +143,7 @@ class RiskMitigation(models.Model):
                     rec.assigned_to = rec.risk_id_reviewer_id
             elif rec.status == 'mitigated' and len(rec.ma_action_plan_ids)>0:
                 if len(rec.ma_action_plan_ids.filtered(lambda plan: plan.status == 'pending'))>0:
-                    rec.assigned_to = rec.risk_id_reviewer_id
+                    rec.assigned_to = rec.risk_id_owner_id
                 else: 
                     rec.assigned_to = rec.risk_id_auditor_id
             else:
@@ -300,6 +300,7 @@ class RiskMitigation(models.Model):
 
     def action_notify_revision(self,):
         #open wizard to write coment and send email
+        self.ensure_one()
         self.write({})
         if not self.mo_document_ids and not self.mo_link_ids:
             raise UserError(
@@ -591,7 +592,7 @@ class RiskMitigation(models.Model):
             'context': {
                 'default_risk_id': self.risk_id.id,
                 'default_mitigation_id': self.id,
-                'default_user_id': self.risk_id_reviewer_id.id,
+                'default_user_id': self.risk_id_owner_id.id,
                 'default_origin': 'audit',
             }
         }
@@ -841,11 +842,11 @@ class RiskMitigation(models.Model):
             ('mitigation_date', '<=', (fields.Datetime.today() + relativedelta(months=1, day=1)))
         ] 
         if department_id and int(department_id):
-            domain_mitigation.append(('risk_id_department_id', '=', department_id))
+            domain_mitigation.append(('risk_id_department_id', '=', int(department_id)))
         if pdomain_id and int(pdomain_id):
-            domain_mitigation.append(('risk_id_pdomain_id', '=', pdomain_id))
+            domain_mitigation.append(('risk_id_pdomain_id', '=', int(pdomain_id)))
         if process_id and int(process_id):
-            domain_mitigation.append(('risk_id_process_id', '=', process_id))
+            domain_mitigation.append(('risk_id_process_id', '=', int(process_id)))
         if anio and int(anio):
             domain_mitigation.append(('year', '=', int(anio)))
         if month and int(month):
@@ -904,11 +905,11 @@ class RiskMitigation(models.Model):
             ('mitigation_date', '<=', (fields.Datetime.today() + relativedelta(months=1, day=1)))
         ] 
         if department_id and int(department_id):
-            domain_mitigation.append(('risk_id_department_id', '=', department_id))
+            domain_mitigation.append(('risk_id_department_id', '=', int(department_id)))
         if pdomain_id and int(pdomain_id):
-            domain_mitigation.append(('risk_id_pdomain_id', '=', pdomain_id))
+            domain_mitigation.append(('risk_id_pdomain_id', '=', int(pdomain_id)))
         if process_id and int(process_id):
-            domain_mitigation.append(('risk_id_process_id', '=', process_id))
+            domain_mitigation.append(('risk_id_process_id', '=', int(process_id)))
         if anio and int(anio):
             domain_mitigation.append(('year', '=', int(anio)))
         if month and int(month):
@@ -1033,7 +1034,11 @@ class RiskMitigation(models.Model):
             "mr_degree_mitigation": m.mr_degree_mitigation.name ,
             "mr_level_compliance": dict(self._fields['mr_level_compliance'].selection).get(m.mr_level_compliance),
             "mr_maturity_level": dict(self._fields['mr_maturity_level'].selection).get(m.mr_maturity_level),
-            "mr_status_mitigation": dict(self._fields['mr_status_mitigation'].selection).get(m.mr_status_mitigation)
+            "mr_status_mitigation": dict(self._fields['mr_status_mitigation'].selection).get(m.mr_status_mitigation),
+
+            "risk_owner_name": m.risk_id_owner_id.display_name,
+            "risk_review_name": m.risk_id_reviewer_id.display_name,
+            "risk_auditor_name": m.risk_id_auditor_id.display_name,
         }
 
     @api.model

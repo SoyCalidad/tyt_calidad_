@@ -13,7 +13,7 @@ access_risk_fsc_admin,tyt.risk.fsc.admin,model_tyt_risk_financial_statement_cate
 access_risk_mo_link,tyt.risk.mo_link.admin,model_tyt_risk_mo_link,base.group_user,1,1,1,1
 access_risk_mo_file,tyt.risk.mo_file.admin,model_tyt_risk_mo_file,base.group_user,1,1,1,1
 access_risk_mo_comment,tyt.risk.mo_comment.admin,model_tyt_risk_mo_comment,base.group_user,1,1,1,1
-access_risk_notification.revision,tyt.risk.notification.revision.admin,model_tyt_risk_notification_revision,tyt_risk_management.group_ver_risk,1,1,1,1
+access_risk_notification.revision,tyt.risk.notification.revision.admin,model_tyt_risk_notification_revision,base.group_user,1,1,1,1
 access_risk_risk.action.plan_admin,tyt.risk.risk.action.plan.admin,model_tyt_risk_action_plan,base.group_user,1,1,1,1
 access_risk_risk.action.plan_ro,tyt.risk.risk.action.plan.readonly,model_tyt_risk_action_plan,base.group_user,1,1,0,0
 access_risk_risk.mitigation_admin,tyt.risk.risk.mitigation.admin,model_tyt_risk_mitigation,base.group_user,1,1,1,1

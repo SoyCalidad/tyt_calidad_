@@ -7,6 +7,12 @@ import { useService } from "@web/core/utils/hooks";
 export class RiskQuadrant extends Component {
     static template = "tyt_risk_management.RiskQuadrant";
 
+    static props = {
+        risks: Array,
+        size: Number,
+        className: String,
+    }
+
     setup() {
         this.dialog = useService("dialog");
     }

@@ -106,84 +106,91 @@
                     </div>
                 </div>
             </div>
-            <div class="row m-2">
-                <div class="col-12">
-                    <RiskSectionCard title="'Mitigación'"
-                    data_status_risk="state.dataProcessed.barchart_mitigated"
-                    residual_risk="state.dataProcessed.mitigated_riesgo_residual"
-                    insured_risk="state.dataProcessed.mitigated_riesgo_asegurado"
-                    />
+            <t t-if="state.loading">
+                <div class="spinner-border" role="status">
+                    <span class="visually-hidden">Loading...</span>
                 </div>
-            </div>
-            <div class="row m-2">
-                <div class="col-12">
-                    <RiskSectionCard title="'Monitoreo'" 
-                    data_status_risk="state.dataProcessed.barchart_monitoring"
-                    residual_risk="state.dataProcessed.monitoring_riesgo_residual"
-                    insured_risk="state.dataProcessed.monitoring_riesgo_asegurado"
-                    />
-                </div>
-            </div>
-            <div class="row m-2">
-                <div class="col-12">
-                    <MaturityLevelCard  
-                    dataMonitoring="state.dataProcessed.maturity_monitoring"
-                    dataMitigated="state.dataProcessed.maturity_mitigated"
-                    />
-                </div>
-            </div>
-            <div class="row m-2">
-                <div class="col-12">
-                    <RiskMap 
-                    title="'Mapa de riesgos (Mitigación)'" 
-                    mitigations="state.dataProcessed.resumenProcesos.mitigado"
-                    />
-                </div>
-            </div>
-            <div class="row m-2">
-                <div class="col-12">
-                    <RiskMap 
-                    title="'Mapa de riesgos (Monitoreo)'" 
-                    mitigations="state.dataProcessed.resumenProcesos.monitoring"
-                    />
-                </div>
-            </div>
-
-            <div class="row m-2">
-                <div class="col-12">
-                    <div class="card  shadow-sm ">
-                        <div class="card-header d-flex justify-content-between align-items-center bg-secondary ">
-
-                            <h3 class="card-title mb-0">
-                                Resultados por procesos ( Mitigación ) 
-                            </h3>
-                            <button
-                                class="btn btn-sm btn-outline-secondary"
-                                t-on-click="toggleCollapseMitigation"
-                            >
-                                <i
-                                    class="fa"
-                                      t-att-class="state.collapsedMitigation ? 'fa-plus' : 'fa-minus'"
-                                />
-                            </button>
-
-                        </div>
-                        <div
-                            class="card-body"
-                            t-att-class="state.collapsedMitigation ? 'd-none' : ''" 
-                        >
-                            <t t-foreach="state.dataProcessed.processes_mitigated" t-as="process" t-key="'resultbyprocess'+process.id">
-                                <ProcessCard 
-                                process="process"
-
-                                />
-                            </t>
-
-                        </div>
-
+            </t>
+            <t t-else="">
+                <div class="row m-2">
+                    <div class="col-12">
+                        <RiskSectionCard title="'Mitigación'"
+                        data_status_risk="state.dataProcessed.barchart_mitigated"
+                        residual_risk="state.dataProcessed.mitigated_riesgo_residual"
+                        insured_risk="state.dataProcessed.mitigated_riesgo_asegurado"
+                        />
                     </div>
                 </div>
-            </div>
+                <div class="row m-2">
+                    <div class="col-12">
+                        <RiskSectionCard title="'Monitoreo'" 
+                        data_status_risk="state.dataProcessed.barchart_monitoring"
+                        residual_risk="state.dataProcessed.monitoring_riesgo_residual"
+                        insured_risk="state.dataProcessed.monitoring_riesgo_asegurado"
+                        />
+                    </div>
+                </div>
+                <div class="row m-2">
+                    <div class="col-12">
+                        <MaturityLevelCard  
+                        dataMonitoring="state.dataProcessed.maturity_monitoring"
+                        dataMitigated="state.dataProcessed.maturity_mitigated"
+                        />
+                    </div>
+                </div>
+                <div class="row m-2">
+                    <div class="col-12">
+                        <RiskMap 
+                        title="'Mapa de riesgos (Mitigación)'" 
+                        mitigations="state.dataProcessed.resumenProcesos.mitigado"
+                        />
+                    </div>
+                </div>
+                <div class="row m-2">
+                    <div class="col-12">
+                        <RiskMap 
+                        title="'Mapa de riesgos (Monitoreo)'" 
+                        mitigations="state.dataProcessed.resumenProcesos.monitoring"
+                        />
+                    </div>
+                </div>
+    
+                <div class="row m-2">
+                    <div class="col-12">
+                        <div class="card  shadow-sm ">
+                            <div class="card-header d-flex justify-content-between align-items-center bg-secondary ">
+    
+                                <h3 class="card-title mb-0">
+                                    Resultados por procesos ( Mitigación ) 
+                                </h3>
+                                <button
+                                    class="btn btn-sm btn-outline-secondary"
+                                    t-on-click="toggleCollapseMitigation"
+                                >
+                                    <i
+                                        class="fa"
+                                          t-att-class="state.collapsedMitigation ? 'fa-plus' : 'fa-minus'"
+                                    />
+                                </button>
+    
+                            </div>
+                            <div
+                                class="card-body"
+                                t-att-class="state.collapsedMitigation ? 'd-none' : ''" 
+                            >
+                                <t t-foreach="state.dataProcessed.processes_mitigated" t-as="process" t-key="'resultbyprocess'+process.id">
+                                    <ProcessCard 
+                                    process="process"
+    
+                                    />
+                                </t>
+    
+                            </div>
+    
+                        </div>
+                    </div>
+                </div>
+            </t>
 
 
         </Layout>

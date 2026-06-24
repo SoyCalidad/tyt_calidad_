@@ -47,6 +47,8 @@ export class ReportConsolidated extends Component {
             collapsedMitigation: false,
             collapsedMonitoring: false,
 
+            loading: false,
+
             //dataprocessed
             dataProcessed: {
                 barchart_mitigated: [0,0,0],
@@ -132,7 +134,7 @@ export class ReportConsolidated extends Component {
 
     async _loadProcess() {
         const domain = [["level", "=", 2]];
-        if (this.state.filters.pdomain_id) {
+        if (this.state.filters.pdomain_id && this.state.filters.pdomain_id!='0') {
             domain.push(["parent_id", "=", Number(this.state.filters.pdomain_id)])
         }
         const processes = await this.orm.searchRead(
@@ -149,14 +151,8 @@ export class ReportConsolidated extends Component {
 
     async onSearch() {
 
-        console.log("Filtros", this.state.filters);
-        console.log("Esp", this.state.filters.department_id,
-                    this.state.filters.pdomain_id,
-                    this.state.filters.process_id,
-                    this.state.filters.year,
-                    this.state.filters.month,)
-
         try {
+            this.state.loading = true;
             const data = await this.orm.call(
                 "tyt.risk.mitigation",     
                 "report_consolidated", 
@@ -169,10 +165,30 @@ export class ReportConsolidated extends Component {
                 ]
             );
             //this.state.processedData = data;
-            this.state.dataProcessed = data;
+            setTimeout(() => {
+                this.state.dataProcessed.barchart_mitigated = data.barchart_mitigated;
+                this.state.dataProcessed.mitigated_riesgo_asegurado = data.mitigated_riesgo_asegurado;
+                this.state.dataProcessed.monitoring_riesgo_asegurado = data.monitoring_riesgo_asegurado;
+                this.state.dataProcessed.mitigated_riesgo_residual = data.mitigated_riesgo_residual;
+                this.state.dataProcessed.monitoring_riesgo_residual = data.monitoring_riesgo_residual;
+                this.state.dataProcessed.barchart_monitoring = data.barchart_monitoring;
+                this.state.dataProcessed.maturity_mitigated = data.maturity_mitigated;
+                this.state.dataProcessed.maturity_monitoring = data.maturity_monitoring;
+                this.state.dataProcessed.resumenProcesos = data.resumenProcesos;
+                this.state.dataProcessed.processes_mitigated = data.processes_mitigated;
+                this.state.dataProcessed.processes_monitoring = data.processes_monitoring;
+                console.log("state.dataProcessed", this.state.dataProcessed);
+                console.log("state.dataProcessed.resumenProcesos", this.state.dataProcessed.resumenProcesos);
+            this.state.loading = false;
+                
+            }, 50);
 
         } catch (error) {
             console.error("Error cargando procesos:", error);
+            this.state.loading = false;
+
+        } finally{
+            // this.state.loading = false;
         }
     }
 

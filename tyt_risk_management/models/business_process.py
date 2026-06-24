@@ -180,11 +180,11 @@ class BusinessProcess(models.Model):
             ('mitigation_date', '<=', (fields.Datetime.today() + relativedelta(months=1, day=1)))
         ]
         if department_id and int(department_id):
-            domain_mitigation.append(('risk_id_department_id', '=', department_id))
+            domain_mitigation.append(('risk_id_department_id', '=', int(department_id)))
         if domain_id and int(domain_id):
-            domain_mitigation.append(('risk_id_pdomain_id', '=', domain_id))
+            domain_mitigation.append(('risk_id_pdomain_id', '=', int(domain_id)))
         if process_id and int(process_id):
-            domain_mitigation.append(('risk_id_process_id', '=', process_id))
+            domain_mitigation.append(('risk_id_process_id', '=', int(process_id)))
         if anio and int(anio):
             domain_mitigation.append(('year', '=', int(anio)))
         if month and int(month):
@@ -239,7 +239,7 @@ class BusinessProcess(models.Model):
                 data_subprocess = {
                     "sub_process_id": subprocess.id,
                     "process_short_name": process.short_name,
-                    "sub_process_name": process.display_name,
+                    "sub_process_name": subprocess.display_name,
                     "total": len(mitigation_subprocess),
                     "registros_total": mitigation_subprocess.ids,
                     "is_not_scope": 0,
@@ -251,8 +251,8 @@ class BusinessProcess(models.Model):
                     "is_remediation": len( mitigation_subprocess.filtered(lambda m: m.status == 'partially_mitigated')),
                     "registros_is_remediation": mitigation_subprocess.filtered(lambda m: m.status == 'partially_mitigated').ids,
 
-                    "is_audit": len(mitigation_subprocess.filtered(lambda m: m.status == 'under_review' and m.mr_status_mitigation == 'mitigated')),
-                    "registros_is_audit": mitigation_subprocess.filtered(lambda m: m.status == 'under_review' and m.mr_status_mitigation == 'mitigated').ids,
+                    "is_audit": len(mitigation_subprocess.filtered(lambda m: m.status == 'mitigated' and m.mr_status_mitigation == 'mitigated')),
+                    "registros_is_audit": mitigation_subprocess.filtered(lambda m: m.status == 'mitigated' and m.mr_status_mitigation == 'mitigated').ids,
                     "is_completed": len(mitigation_subprocess.filtered(lambda m: m.status == 'complete' or (m.mr_status_mitigation=='mitigated') and not m.risk_id_auditor_id)),
                     "registros_is_completed": mitigation_subprocess.filtered(lambda m: m.status == 'complete' or (m.mr_status_mitigation=='mitigated') and not m.risk_id_auditor_id).ids,
                     "is_completed_percentage": 0,

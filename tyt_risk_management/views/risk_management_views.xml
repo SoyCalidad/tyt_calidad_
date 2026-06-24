@@ -219,8 +219,8 @@
                         </group>
                     </group>
                     <group>
-                        <field name="type_pd" placeholder="Seleccione" readonly="is_scheduled"/>
-                        <field name="type_cf" placeholder="Seleccione" readonly="is_scheduled" />
+                        <field name="type_pd" placeholder="Seleccione" />
+                        <field name="type_cf" placeholder="Seleccione"  />
                         <field name="write_date" string="Actualizado el" />
                         <field name="write_uid" string="Actualizado por" />
                         <!-- <field name="department_id"  /> -->
@@ -533,7 +533,7 @@
                         <div invisible="status=='review' or not can_create_documents" colspan="4">
                             <div >
                                 <p class="text-primary fw-bold">
-                                    Si completó la carga de archivos, haga click en el botón azul *"NOTIFICAR"*, para enviar su control a revisión
+                                    Si completó la carga de archivos, haga click en el botón *"NOTIFICAR"*, para enviar su control a revisión
                                 </p>
                                 
                             </div>
@@ -1113,7 +1113,7 @@
                     </group> -->
 
                     <!--only read-->
-                    <group string="Proceso de auditoria" invisible="not (mr_status_mitigation == 'mitigated' and (not is_auditor)) ">
+                    <group string="Proceso de auditoria" invisible="not ((mr_status_mitigation == 'mitigated' and (not is_auditor)) or status=='complete') ">
                         <div class="row justify-content-end" colspan="4">
                                 <div class="col-auto">
                                     <label for="ma_period_str" string="Periodo" />
@@ -1177,7 +1177,7 @@
                         <group>
                             <field name="ma_status_mitigation"  />
                             <field name="ma_degree_mitigation" 
-                            domain="[('status', '=', mr_status_mitigation)]" string="Avance de auditoria "  />
+                            domain="[('status', '=', ma_status_mitigation)]" string="Avance de auditoria "  />
                             <field name="risk_id_quantification" />
                             
                         </group>

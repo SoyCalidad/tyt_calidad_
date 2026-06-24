@@ -94,7 +94,17 @@
                                                     <t  t-foreach="state.processedData" t-as="item" t-key="'C'+item.process_id" >
                                                         <div class="col-lg-3 col-sm-6">
                                                             <div class="d-flex flex-column text-center">
-                                                                <h5 t-out="item.process_short_name" class="fw-semibold" />
+                                                                <h5 class="fw-semibold text-truncate" t-att-title="item.process_short_name or item.process_name or 'Sin titulo' + item.process_id" >
+                                                                    <t t-if="item.process_short_name" >
+                                                                        <t t-out="item.process_short_name"  />
+                                                                    </t>
+                                                                    <t t-else="">
+                                                                        <t t-out="item.process _name"  />
+
+                                                                    </t>
+
+                                                                </h5>
+
                                                                 <span  >
                                                                     <t t-out="item.is_completed_percentage" /> %
                                                                 </span>
@@ -119,7 +129,17 @@
                                                     <t  t-foreach="state.processedData" t-as="item"  t-key="'CC'+item.process_id">
                                                         <div class="col-lg-3 col-sm-6">
                                                             <div class="d-flex flex-column text-center">
-                                                                <h5 t-out="item.process_short_name" class="fw-semibold" />
+                                                                <h5 class="fw-semibold text-truncate" t-att-title="item.process_short_name or item.process_name or 'Sin titulo' + item.process_id" >
+                                                                    <t t-if="item.process_short_name" >
+                                                                        <t t-out="item.process_short_name"  />
+                                                                    </t>
+                                                                    <t t-else="">
+                                                                        <t t-out="item.process _name"  />
+
+                                                                    </t>
+
+                                                                </h5>
+
                                                                 <span t-out="item.total" />
                                                             </div>
                                                         </div>
@@ -141,7 +161,16 @@
                                                     <t  t-foreach="state.processedData" t-as="item"  t-key="'NM'+item.process_id" >
                                                         <div class="col-lg-3 col-sm-6">
                                                             <div class="d-flex flex-column text-center">
-                                                                <h5 t-out="item.process_short_name" class="fw-semibold" />
+                                                                <h5 class="fw-semibold text-truncate" t-att-title="item.process_short_name or item.process_name or 'Sin titulo' + item.process_id" >
+                                                                    <t t-if="item.process_short_name" >
+                                                                        <t t-out="item.process_short_name"  />
+                                                                    </t>
+                                                                    <t t-else="">
+                                                                        <t t-out="item.process _name"  />
+
+                                                                    </t>
+
+                                                                </h5>
                                                                 <span t-out="item.no_completed" />
                                                             </div>
                                                         </div>
@@ -172,7 +201,7 @@
                             t-att-aria-controls="'flushcollapse'+process.process_id">
                                 Resultado por proceso 
                                 <t t-out="process.process_name" />
-                                ( <t t-out="process.process_short_name" /> ) 
+                                ( <t t-out="process.process_short_name or ''" /> ) 
                             </button>
                             </h2>
                             <div t-att-id="'flushcollapse'+process.process_id" class="accordion-collapse collapse show" data-bs-parent="#accordionFlushProcess">
@@ -539,7 +568,7 @@
                                                 t-on-click="() => this.openMitigation(subp.registros_total)"
                                                 >
                                                     <td>
-                                                        <t t-out="subp.sub_process_name" />
+                                                        <t t-out="subp.sub_process_name or 'Nombre subp'" />
                                                     </td> 
                                                     <td>
                                                         <t t-out="subp.total" />

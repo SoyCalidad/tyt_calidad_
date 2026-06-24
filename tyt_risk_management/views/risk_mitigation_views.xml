@@ -360,6 +360,7 @@
                 decoration-warning="status == 'under_review'"
                 decoration-success="status == 'filled' or status == 'mitigated'"
                 />
+                <field name="assigned_to" optional="hide" />
             </list>
         </field>
     </record>
