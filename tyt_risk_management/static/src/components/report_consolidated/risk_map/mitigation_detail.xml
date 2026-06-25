@@ -118,13 +118,13 @@
                         <div class="col-lg-3">
                             <label for="text-input" class="form-label fw-bolder">Impacto</label>  
                             <label
-                                class="form-control badge bg-danger rounded px-3 py-2 my-2 fw-bolder">
+                                class="form-control badge bg-danger rounded px-3 py-2 my-2 fw-bolder text-white ">
                                 <t t-out="risk?.risk_impact or ''" />
                             </label>
                         </div>
                         <div class="col-lg-3">
-                            <label for="text-input" class="form-label fw-bolder">Ocurrencia</label>
-                            <label class="form-control badge bg-danger rounded px-3 py-2 my-2 fw-bolder">
+                            <label for="text-input" class="form-label fw-bolder ">Ocurrencia</label>
+                            <label class="form-control badge bg-danger rounded px-3 py-2 my-2 fw-bolder text-white ">
                                 <t t-out="risk?.risk_occurrence or ''" />
                             </label></div>
                     </div>

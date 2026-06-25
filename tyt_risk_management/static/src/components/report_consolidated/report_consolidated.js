@@ -195,6 +195,9 @@ export class ReportConsolidated extends Component {
     toggleCollapseMitigation() {
         this.state.collapsedMitigation = !this.state.collapsedMitigation;
     }
+    toggleCollapseMonitoring() {
+        this.state.collapsedMonitoring = !this.state.collapsedMonitoring;
+    }
 }
 
 registry.category("actions").add("tyt_risk_management.report_consolidated", ReportConsolidated);

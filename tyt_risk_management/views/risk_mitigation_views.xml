@@ -29,6 +29,9 @@
                 decoration-warning="status == 'review'"
                 decoration-success="status == 'filled' or status == 'mitigated'"
                 />
+                <field name="risk_id_process_id" optional="hide" />
+                <field name="risk_id_subprocess_id" optional="hide" />
+                <field name="risk_id_pdomain_id" optional="hide" />
             </list>
         </field>
     </record>

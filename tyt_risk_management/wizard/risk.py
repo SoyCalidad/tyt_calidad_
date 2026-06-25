@@ -57,16 +57,16 @@ class RiskNotificationRevision(models.TransientModel):
             </div>
         """
 
-        # Crear y enviar el correo
-        mail_values = {
-            'subject': f'Mitigación R-{mitigation.risk_id_id}',
-            'body_html': body_html,
-            'email_to': reviewer_email,
-            'email_from': self.env.user.email_formatted or self.env.company.email_formatted,
-        }
-        
-        # Creamos el registro de correo y lo enviamos inmediatamente
-        self.env['mail.mail'].sudo().create(mail_values).send()
+        email_from = self.env.user.email_formatted or self.env.company.email_formatted
+        if email_from:
+            mail_values = {
+                'subject': f'Mitigación R-{mitigation.risk_id_id}',
+                'body_html': body_html,
+                'email_to': reviewer_email,
+                'email_from': email_from,
+            }
+            
+            self.env['mail.mail'].sudo().create(mail_values).send()
 
     def action_notify(self):
         self.ensure_one()

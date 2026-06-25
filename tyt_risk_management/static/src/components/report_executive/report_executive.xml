@@ -257,10 +257,18 @@
                     </div>
                     <div class="col-lg-7 col-md-12 col-sm-12"
                     t-if="reportData and reportData.report">
-                        <RiskMap 
-                        title="'Mapa de riesgos (Mitigación)'" 
-                        mitigations="reportData.report.lista"
-                        />
+                        <t t-if="state.loading">
+                            <div class="text-center p-4">
+                                <i class="fa fa-spinner fa-spin"/> Cargando...
+                            </div>
+                        </t>
+                        <t t-else="">
+                            <RiskMap 
+                            title="'Mapa de riesgos (Mitigación)'" 
+                            mitigations="reportData.report.lista"
+                            />
+
+                        </t>
                     </div>
                 </div>
             </div>

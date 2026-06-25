@@ -99,7 +99,7 @@
                                                                         <t t-out="item.process_short_name"  />
                                                                     </t>
                                                                     <t t-else="">
-                                                                        <t t-out="item.process _name"  />
+                                                                        <t t-out="item.process_name"  />
 
                                                                     </t>
 
@@ -134,7 +134,7 @@
                                                                         <t t-out="item.process_short_name"  />
                                                                     </t>
                                                                     <t t-else="">
-                                                                        <t t-out="item.process _name"  />
+                                                                        <t t-out="item.process_name"  />
 
                                                                     </t>
 
@@ -166,7 +166,7 @@
                                                                         <t t-out="item.process_short_name"  />
                                                                     </t>
                                                                     <t t-else="">
-                                                                        <t t-out="item.process _name"  />
+                                                                        <t t-out="item.process_name"  />
 
                                                                     </t>
 

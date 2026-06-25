@@ -729,3 +729,4 @@ class RiskManagement(models.Model):
                 rec.quadrant = 2
             else:
                 rec.quadrant = 1
+                

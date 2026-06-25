@@ -178,7 +178,43 @@
                                 class="card-body"
                                 t-att-class="state.collapsedMitigation ? 'd-none' : ''" 
                             >
-                                <t t-foreach="state.dataProcessed.processes_mitigated" t-as="process" t-key="'resultbyprocess'+process.id">
+                                <t t-foreach="state.dataProcessed.processes_mitigated" t-as="process" t-key="'resultbyprocessMitigation'+process.id">
+                                    <ProcessCard 
+                                    process="process"
+    
+                                    />
+                                </t>
+    
+                            </div>
+    
+                        </div>
+                    </div>
+                </div>
+
+                <div class="row m-2">
+                    <div class="col-12">
+                        <div class="card  shadow-sm ">
+                            <div class="card-header d-flex justify-content-between align-items-center bg-secondary ">
+    
+                                <h3 class="card-title mb-0">
+                                    Resultados por procesos (Monitoreo) 
+                                </h3>
+                                <button
+                                    class="btn btn-sm btn-outline-secondary"
+                                    t-on-click="toggleCollapseMonitoring"
+                                >
+                                    <i
+                                        class="fa"
+                                          t-att-class="state.collapsedMonitoring ? 'fa-plus' : 'fa-minus'"
+                                    />
+                                </button>
+    
+                            </div>
+                            <div
+                                class="card-body"
+                                t-att-class="state.collapsedMonitoring ? 'd-none' : ''" 
+                            >
+                                <t t-foreach="state.dataProcessed.processes_monitoring  " t-as="process" t-key="'resultbyprocessMonitoring'+process.id">
                                     <ProcessCard 
                                     process="process"
     

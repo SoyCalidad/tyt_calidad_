@@ -61,11 +61,8 @@ export class ExecutiveReport extends Component {
             
             //defaul year and month 
             const today = new Date();
-            const anio = today.getFullYear() 
-            const month = today.getMonth()
-            // if (this.state.years.includes(anio)) {
-            //     this.state.filters.anio = anio;
-            // }
+            const month = today.getMonth() +1 ;
+            
             if (month) {
                 this.state.filters.month = month;
             }
@@ -107,7 +104,6 @@ export class ExecutiveReport extends Component {
         const chartDom = this.maturityLevelChart.el;
         if (chartDom) {
             var myChart = echarts.init(chartDom);
-            const nivel_madurez = this.reportData?.report?.nivel_madurez || []
             const option = {
                 tooltip: {
                     trigger: 'item'
@@ -117,8 +113,8 @@ export class ExecutiveReport extends Component {
                     name: '',
                     type: 'pie',
                     radius: '50%',
-                    data: nivel_madurez.map(item => ({
-                        value: item.cantidad,
+                    data: (this.reportData?.report?.nivel_madurez || []).map(item => ({
+                        value: item.count,
                         name: item.nivel,
                     })) || [],
                     //data:  [],
@@ -214,7 +210,7 @@ export class ExecutiveReport extends Component {
                         offsetCenter: [0, '-40%'],
                         valueAnimation: true,
                         formatter: function (value) {
-                        return Math.round(value * 100) + ' %';
+                        return Math.round(value*1) + ' %';
                         },
                         color: 'inherit'
                     },
@@ -241,6 +237,12 @@ export class ExecutiveReport extends Component {
             var option;
     
             option = {
+                tooltip: {
+                    trigger: 'axis',
+                    axisPointer: {
+                    type: 'shadow'
+                    }
+                },
                 yAxis: {
                     type: 'category',
                     data: this.reportData?.report?.degree_of_compliance_company.map(degree => degree.department_name || "") || [],

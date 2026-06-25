@@ -774,6 +774,7 @@ class RiskMitigation(models.Model):
             'risk_id_id': mitigation.risk_id_id,
             'status': mitigation.status,
             'mr_status_mitigation': mitigation.mr_status_mitigation,
+            'risk_process_id': mitigation.risk_id_process_id.id,
         }
 
     def _load_data_processes(self, mitigations):
@@ -784,7 +785,7 @@ class RiskMitigation(models.Model):
             n_unmitigation = 0
             n_partialmitigated = 0
             n_mitigation = 0
-            if m.mr_status_mitigation == 'unmitigated':
+            if m.mr_status_mitigation == 'unmitigated' or m.mr_status_mitigation==False:
                 n_unmitigation += 1
             elif m.mr_status_mitigation=='partialmitigated':
                 n_partialmitigated += 1
@@ -799,7 +800,7 @@ class RiskMitigation(models.Model):
                     'residual': m.mr_residual_risk,
                     'n_unmitigation': n_unmitigation,
                     'n_partialmitigated': n_partialmitigated,
-                    'n_mitigation': 0,
+                    'n_mitigation': n_mitigation,
 
                     'subprocesses': [{
                         'id': m.risk_id_subprocess_id.id,
@@ -838,7 +839,8 @@ class RiskMitigation(models.Model):
     @api.model 
     def report_consolidated(self, department_id, pdomain_id, process_id, anio, month):
         domain_mitigation = [
-            ('risk_activity_state', 'in', [ 'mitigation', 'monitoring' ]),
+            # ('risk_activity_state', 'in', [ 'mitigation', 'monitoring' ]),
+            ('status', '!=', 'unmitigated'),
             ('mitigation_date', '<=', (fields.Datetime.today() + relativedelta(months=1, day=1)))
         ] 
         if department_id and int(department_id):
@@ -855,12 +857,14 @@ class RiskMitigation(models.Model):
         mitigations = self.env['tyt.risk.mitigation'].search(
             domain_mitigation,  
         )
-        m_mitigation = mitigations.filtered(lambda m: m.risk_activity_state=='mitigation')
+        m_mitigation = mitigations 
         m_monitoring = mitigations.filtered(lambda m: m.risk_activity_state=='monitoring')
 
         return {
             "lista": [self._data_mitigation_for_consolidated(m) for m in mitigations],
             "listaResumen": [],
+            "m_monitoring": m_monitoring.ids,
+            "m_mitigation": m_mitigation.ids,
             "resumenProcesos": {
                 "mitigado": [self._data_mitigation_for_consolidated(m) for m in m_mitigation],
                 "monitoring": [self._data_mitigation_for_consolidated(m) for m in m_monitoring],
@@ -872,12 +876,12 @@ class RiskMitigation(models.Model):
             "monitoring_riesgo_asegurado": sum(m_monitoring.mapped('risk_id_quantification')),
             "monitoring_riesgo_residual": sum(m_monitoring.mapped('residual_risk')),
             "barchart_mitigated":  [
-                len(m_mitigation.filtered(lambda m: m.mr_status_mitigation=='unmitigated')),
+                len(m_mitigation.filtered(lambda m: m.mr_status_mitigation=='unmitigated' or m.mr_status_mitigation ==False)),
                 len(m_mitigation.filtered(lambda m: m.mr_status_mitigation=='partialmitigated')),
                 len(m_mitigation.filtered(lambda m: m.mr_status_mitigation=='mitigated')),
             ],
             "barchart_monitoring":  [
-                len(m_monitoring.filtered(lambda m: m.ma_status_mitigation=='unmitigated')),
+                len(m_monitoring.filtered(lambda m: m.ma_status_mitigation=='unmitigated' or m.mr_status_mitigation ==False)),
                 len(m_monitoring.filtered(lambda m: m.ma_status_mitigation=='partialmitigated')),
                 len(m_monitoring.filtered(lambda m: m.ma_status_mitigation=='mitigated')),
             ],
@@ -889,11 +893,11 @@ class RiskMitigation(models.Model):
                 len(m_mitigation.filtered(lambda m: m.mr_maturity_level=='optimize')),
             ],
             "maturity_monitoring": [
-                len(m_mitigation.filtered(lambda m: m.ma_maturity_level=='none')),
-                len(m_mitigation.filtered(lambda m: m.ma_maturity_level=='initial')),
-                len(m_mitigation.filtered(lambda m: m.ma_maturity_level=='limited')),
-                len(m_mitigation.filtered(lambda m: m.ma_maturity_level=='defined')),
-                len(m_mitigation.filtered(lambda m: m.ma_maturity_level=='optimize')),
+                len(m_monitoring.filtered(lambda m: m.ma_maturity_level=='none')),
+                len(m_monitoring.filtered(lambda m: m.ma_maturity_level=='initial')),
+                len(m_monitoring.filtered(lambda m: m.ma_maturity_level=='limited')),
+                len(m_monitoring.filtered(lambda m: m.ma_maturity_level=='defined')),
+                len(m_monitoring.filtered(lambda m: m.ma_maturity_level=='optimize')),
             ],
             
         }
@@ -934,8 +938,8 @@ class RiskMitigation(models.Model):
             else:
                 no_asegurado = 1
             if target_name in target_dic:
-                target_dic[target_name][0] = asegurado
-                target_dic[target_name][1] = no_asegurado
+                target_dic[target_name][0] += asegurado
+                target_dic[target_name][1] += no_asegurado
             else:
                 target_dic[target_name] = [asegurado, no_asegurado]
 
@@ -951,12 +955,13 @@ class RiskMitigation(models.Model):
                     m.mr_residual_risk,
                 ]
 
-            find_level=False 
+            find_level=None 
             for index, item in enumerate(nivel_madurez):
                 if item["nivel"] == m.mr_maturity_level:
                     find_level = index 
+                    break
 
-            if find_level:
+            if find_level is not None:
                 nivel_madurez[find_level]["count"] += 1
             else:
                 nivel_madurez.append({
@@ -980,13 +985,22 @@ class RiskMitigation(models.Model):
             })
 
         len_mitigations = len(mitigations)
+        per_mitigation_safe = (round((len(mitigations.filtered(lambda m: m.mr_status_mitigation=='mitigated')) / len_mitigations) * 100)) if len_mitigations>0 else 0
+        if per_mitigation_safe == 100 :
+            maturity_level = 'Optimizado'
+        elif per_mitigation_safe >=75:
+            maturity_level = 'Definido'
+        elif per_mitigation_safe >=50:
+            maturity_level = 'Limitado'
+        elif per_mitigation_safe >= 25:
+            maturity_level = 'Inicial'
         
         return {
             "lista": [],
             "report": {
                 "lista": [ self._data_mitigation_for_consolidated(m) for m in mitigations],
                 "num_mitigation_total": len_mitigations,
-                "per_mitigation_safe": (round((len(mitigations.filtered(lambda m: m.mr_status_mitigation=='mitigated')) / len_mitigations) * 100)) if len_mitigations>0 else 0,
+                "per_mitigation_safe": per_mitigation_safe,
                 "riesgos_no_asegurados_impacto": sum(mitigations.filtered(lambda m: m.mr_status_mitigation!='mitigated').mapped('risk_id_quantification')),
                 "nivel_de_madurez": maturity_level,
 
@@ -1065,8 +1079,10 @@ class RiskMitigation(models.Model):
                 domain_process.append(('id', 'in', process_ids))
                 domain_m.append(('risk_id.process_id', 'in', process_ids))
             if years and isinstance(years, list):
+                years = [int(year) for year in years]
                 domain_m.append(('year', 'in', years))
             if months and isinstance(months, list):
+                months = [str(int(m)) for m in months]
                 domain_m.append(('month', 'in', months))
 
             available_years = self.get_available_years()

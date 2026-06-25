@@ -16,7 +16,56 @@
     </record>
 
    
+    <record id="vrisk_action_plan_kanban" model="ir.ui.view">
+        <field name="name">tyt.risk.action.plan.kanban</field>
+        <field name="model">tyt.risk.action.plan</field>
+        <field name="arch" type="xml">
+        <kanban default_group_by="status" class="o_kanban_small_column">
 
+            <!-- Campos que se cargarán -->
+            <field name="name"/>
+            <field name="user_id"/>
+            <field name="status"/>
+
+
+            <templates>
+            <t t-name="card">
+                <div class="oe_kanban_card oe_kanban_global_click">
+
+                    <div class="oe_kanban_content">
+                        <div class="o_kanban_record_title">
+                            <strong>
+                                <field name="name"/>
+                            </strong>
+                        </div>
+                        <div>
+                            <span>
+                            </span>
+                        </div>
+                    </div>
+
+                    <div class="oe_kanban_footer mt-2 d-flex align-items-center justify-content-between">
+
+                        <div class="d-flex align-items-center gap-1">
+                        <field name="user_id" widget="many2one_avatar_user"/>
+                        </div>
+
+                        <div>
+                            <field name="status"
+                                widget="badge"
+                                decoration-secondary="status == 'pending'"
+                                decoration-warning="status == 'under_review'"
+                                decoration-success="status == 'complete'"
+                                />
+                        </div>
+
+                    </div>
+                </div>
+            </t>
+            </templates>
+        </kanban>
+        </field>
+    </record>
     <record id="view_risk_action_plan_list" model="ir.ui.view">
         <field name="name">tyt.risk.action.plan.list</field>
         <field name="model">tyt.risk.action.plan</field>
@@ -33,12 +82,13 @@
                 <field name="user_id" />
                 <field name="remediation_date" />
                 <field name="status"
+                    widget="badge"
                     decoration-warning="status=='under_review'"
                     decoration-muted="status=='pending'"
                     decoration-success="status=='complete'"
                 />
                 <button name="action_view_mitigation" 
-                    string="Ver Mitigación" 
+                    string="Ver" 
                     type="object" 
                     icon="fa-external-link" 
                     class="btn btn-primary"/>
