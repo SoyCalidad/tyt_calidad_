@@ -56,6 +56,7 @@
                                 decoration-secondary="status == 'pending'"
                                 decoration-warning="status == 'under_review'"
                                 decoration-success="status == 'complete'"
+                                decoration-danger="status == 'rejected'"
                                 />
                         </div>
 

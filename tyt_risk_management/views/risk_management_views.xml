@@ -139,7 +139,7 @@
                     <footer>
                         <button string="En revisión" class="btn btn-primary"
                         name="action_send_review" 
-                        invisible="not status=='pending'"
+                        invisible="not (status=='pending' or status=='rejected')"
                         type="object"
                         />
                         <group invisible="not context.get('show_buttons', False)">
@@ -358,8 +358,10 @@
         <field name="name">risk.quantification.list</field>
         <field name="model">tyt.risk.management</field>
         <field name="arch" type="xml">
-            <list edit="0">
+            <list edit="0" js_class="risk_quantification_list">
                 <field name="id" />
+                <field name="name" optional="hide" />
+                <field name="quadrant" optional="hide" />
                 <field name="process_id" />
                 <field name="subprocess_id" />
                 <field name="owner_id" />
@@ -668,7 +670,7 @@
                                 colspan="4"
                                 options="{'no_quick_create': True, 'no_create': True}"
                                 groups="tyt_risk_management.group_risk_action_plan" >
-                                    <list  edit="status=='pending'" create="0">
+                                    <list  edit="status=='pending' or status == 'rejected'" create="0">
                                          
                                         <button 
                                         type="object"
@@ -690,8 +692,11 @@
                                         <field name="user_id" />
                                         <field name="remediation_date" />
                                         <field name="status" 
+                                        widget="badge"
                                         decoration-warning="status=='under_review'"
                                         decoration-muted="status=='pending'"
+                                        decoration-success="status == 'complete'"
+                                        decoration-danger="status == 'rejected'"
                                         />
                                     </list>
                                 </field>
@@ -784,7 +789,7 @@
                                         name="action_attendance_action_plan"
                                             string="Atender"
                                             class="btn btn-warning"
-                                            invisible="not (status=='pending' and current_user == user_id)"
+                                            invisible="not ((status=='pending' or status=='rejected') and current_user == user_id)"
                                         />
                                         <button 
                                         type="object"
@@ -807,8 +812,11 @@
                                         <field name="user_id" />
                                         <field name="remediation_date" />
                                         <field name="status" 
+                                        widget="badge"
                                         decoration-warning="status=='under_review'"
                                         decoration-muted="status=='pending'"
+                                        decoration-success="status=='complete'"
+                                        decoration-danger="status=='rejected'"
                                         />
                                     </list>
                                 </field>
@@ -892,13 +900,13 @@
                                 colspan="4"
                                 options="{'no_quick_create': True, 'no_create': True}"
                                 groups="tyt_risk_management.group_risk_action_plan" >
-                                    <list  edit="status=='pending'" create="0">
+                                    <list  edit="status=='pending' or status=='rejected'" create="0">
                                         <button 
                                         type="object"
                                         name="action_attendance_action_plan"
                                             string="Atender"
                                             class="btn btn-warning"
-                                            invisible="not (status=='pending' and current_user == user_id)"
+                                            invisible="not ((status=='pending' or status=='rejected') and current_user == user_id)"
                                         />
                                         <field name="current_user" column_invisible="1" />
                                         <field name="sequence" widget="handle" />
@@ -906,8 +914,11 @@
                                         <field name="user_id" />
                                         <field name="remediation_date" />
                                         <field name="status" 
+                                    widget="badge"
                                         decoration-warning="status=='under_review'"
                                         decoration-muted="status=='pending'"
+                                        decoration-success="status == 'complete'"
+                                        decoration-danger="status == 'rejected'"
                                         />
                                     </list>
                                 </field>
@@ -1007,8 +1018,11 @@
                                         <field name="user_id" />
                                         <field name="remediation_date" />
                                         <field name="status" 
+                                        widget="badge"
                                         decoration-warning="status=='under_review'"
                                         decoration-muted="status=='pending'"
+                                        decoration-success="status == 'complete'"
+                                        decoration-danger="status == 'rejected'"
                                         />
                                     </list>
                                 </field>
@@ -1141,16 +1155,16 @@
                                 <field name="ma_action_plan_ids"
                                 nolabel="1"
                                 colspan="4"
-                                readonly="not (is_reviewer and status!='mitigated')"
+                                readonly="not (can_create_documents and status!='mitigated')"
                                 options="{'no_quick_create': True, 'no_create': True}"
                                 groups="tyt_risk_management.group_risk_action_plan" >
-                                    <list  edit="status=='pending'" create="0">
+                                    <list  edit="status=='pending' or status=='rejected'" create="0">
                                         <button 
                                         type="object"
                                         name="action_attendance_action_plan"
                                             string="Atender"
                                             class="btn btn-warning"
-                                            invisible="not (status=='pending')"
+                                            invisible="not (status in ['pending', 'rejected'])"
                                         /> 
                                         <field name="sequence" widget="handle"/>
                                         <field name="name" />
@@ -1160,6 +1174,7 @@
                                         decoration-warning="status=='under_review'"
                                         decoration-muted="status=='pending'"
                                         decoration-success="status=='complete'"
+                                        decoration-danger="status=='rejected'"
 
                                         />
                                     </list>
@@ -1216,7 +1231,7 @@
                                 readonly="status=='mitigated'"
                                 options="{'no_quick_create': True, 'no_create': True}"
                                 groups="tyt_risk_management.group_risk_action_plan" >
-                                    <list  edit="status=='pending'" create="0">
+                                    <list  edit="status=='pending' or status=='rejected'" create="0">
                                          
                                         <button 
                                         type="object"
@@ -1242,6 +1257,7 @@
                                         decoration-warning="status=='under_review'"
                                         decoration-muted="status=='pending'"
                                         decoration-success="status=='complete'"
+                                        decoration-danger="status=='rejected'"
                                         />
                                     </list>
                                 </field>

@@ -133,16 +133,14 @@ class RiskMitigation(models.Model):
     def _compute_assigned_to(self):
         for rec in self:
             if rec.status == 'unmitigated' and not rec.mr_status_mitigation == 'mitigated':
-                rec.assigned_to = rec.risk_id_owner_id
-            elif rec.mr_status_mitigation == 'mitigated' and len(rec.ma_action_plan_ids)==0:
-                rec.assigned_to = rec.risk_id_auditor_id
+                rec.assigned_to = rec.risk_id_owner_id 
             elif len(rec.mr_action_plan_ids)>0:
-                if len(rec.mr_action_plan_ids.filtered(lambda plan: plan.status == 'pending'))>0:
+                if len(rec.mr_action_plan_ids.filtered(lambda plan: plan.status == 'pending' or plan.status == 'rejected'))>0:
                     rec.assigned_to = rec.risk_id_owner_id
                 else: 
                     rec.assigned_to = rec.risk_id_reviewer_id
             elif rec.status == 'mitigated' and len(rec.ma_action_plan_ids)>0:
-                if len(rec.ma_action_plan_ids.filtered(lambda plan: plan.status == 'pending'))>0:
+                if len(rec.ma_action_plan_ids.filtered(lambda plan: plan.status == 'pending' or plan.status == 'rejected'))>0:
                     rec.assigned_to = rec.risk_id_owner_id
                 else: 
                     rec.assigned_to = rec.risk_id_auditor_id

@@ -206,6 +206,7 @@ class PlanAction(models.Model):
             ('pending', 'Pendiente'),
             ('under_review', 'En revisión'), #amarillo
             ('complete', 'Completado'),
+            ('rejected', 'Rechazado'), 
         ],
         string="Estatus",
         default="pending",
@@ -367,7 +368,7 @@ class PlanAction(models.Model):
     def action_send_reject(self,):
         self.ensure_one()
         self.write({
-            'status': 'pending',
+            'status': 'rejected',
         })
 
     def action_send_complete(self,):
