@@ -129,7 +129,7 @@ class RiskMitigation(models.Model):
         store=True,
     )
 
-    @api.depends('status', 'mr_status_mitigation', 'mr_action_plan_ids', 'mr_action_plan_ids.status', 'ma_action_plan_ids', 'ma_action_plan_ids.status')
+    @api.depends('status', 'mr_status_mitigation', 'mr_action_plan_ids', 'mr_action_plan_ids.status', 'ma_action_plan_ids', 'ma_action_plan_ids.status', 'risk_id_owner_id', 'risk_id_reviewer_id', 'risk_id_auditor_id')
     def _compute_assigned_to(self):
         for rec in self:
             if rec.status == 'unmitigated' and not rec.mr_status_mitigation == 'mitigated':

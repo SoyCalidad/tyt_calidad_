@@ -562,13 +562,6 @@ class RiskManagement(models.Model):
         }
 
     def action_scheduled(self):
-        self.ensure_one()
-        if not self.cr_month or not self.cr_year:
-            raise UserError("Debe ingresar el mes y el año")
-        self.write({
-            'is_scheduled': True, 
-            'assigned_to': self.reviewer_id,
-        })
         freq_map = {
             'fortnightly': (0, 24), # 2 registros por mes
             'month': (1, 12),
@@ -579,63 +572,69 @@ class RiskManagement(models.Model):
             'anual': (12, 1),
 
         }
-        months_to_skip, total_records = freq_map.get(self.cr_peoriod, (1, 12))
-
-        start_date = date(self.cr_year, int(self.cr_month), 1)
         today = fields.Datetime.now()
+        for rec in self:
+            if not rec.cr_month or not rec.cr_year:
+                raise UserError("Debe ingresar el mes y el año")
+            rec.write({
+                'is_scheduled': True, 
+            })
+            months_to_skip, total_records = freq_map.get(rec.cr_peoriod, (1, 12))
 
-        for i in range(total_records):
-            # --- CASO ESPECIAL: QUINCENAL ---
-            if self.cr_peoriod == 'fortnightly':
-                # Determinamos si es la primera quincena (0, 2, 4...) o la segunda (1, 3, 5...)
-                month_offset = i // 2
-                is_second_half = i % 2 != 0
-                
-                target_month_date = start_date + relativedelta(months=month_offset)
-                
-                if not is_second_half:
-                    # Primera Quincena: Día 15
-                    limit_date = target_month_date.replace(day=15)
+            start_date = date(rec.cr_year, int(rec.cr_month), 1)
+
+            for i in range(total_records):
+                # --- CASO ESPECIAL: QUINCENAL ---
+                if rec.cr_peoriod == 'fortnightly':
+                    # Determinamos si es la primera quincena (0, 2, 4...) o la segunda (1, 3, 5...)
+                    month_offset = i // 2
+                    is_second_half = i % 2 != 0
+                    
+                    target_month_date = start_date + relativedelta(months=month_offset)
+                    
+                    if not is_second_half:
+                        # Primera Quincena: Día 15
+                        limit_date = target_month_date.replace(day=15)
+                    else:
+                        # Segunda Quincena: Fin de Mes
+                        # relativedelta(day=31) siempre salta al último día válido (28, 29, 30 o 31)
+                        limit_date = target_month_date + relativedelta(day=31)
+
                 else:
-                    # Segunda Quincena: Fin de Mes
-                    # relativedelta(day=31) siempre salta al último día válido (28, 29, 30 o 31)
+                    target_month_date = start_date + relativedelta(months=i * months_to_skip)
+                    # En todos estos casos, el límite es el fin del mes de destino
                     limit_date = target_month_date + relativedelta(day=31)
 
-            else:
-                target_month_date = start_date + relativedelta(months=i * months_to_skip)
-                # En todos estos casos, el límite es el fin del mes de destino
-                limit_date = target_month_date + relativedelta(day=31)
+                mitigation = self.env['tyt.risk.mitigation'].search([
+                    ('risk_id', '=', rec.id),
+                    ('active','=', True),
+                    ('year', '=', rec.cr_year),
+                    ('month', '=', str(limit_date.month)),
+                    ('initial_date', '=', target_month_date),
+                ], limit=1)
+                if mitigation.exists():
+                    # mitigation.write({
+                    #     'assigned_to': self.reviewer_id.id,
+                    # })
+                    continue
+                mitigation = self.env['tyt.risk.mitigation'].create({
+                    'risk_id': rec.id,
+                    'initial_date': target_month_date,
+                    'mitigation_date': datetime(limit_date.year, limit_date.month, limit_date.day,0,0,0),
+                    'year': rec.cr_year,
+                    'month': str(int(limit_date.month)),
+                    'assigned_to': rec.owner_id.id,
+                })
+                if today.month == int(limit_date.month):
+                    activity_type = self.env.ref("mail.mail_activity_data_todo")
 
-            mitigation = self.env['tyt.risk.mitigation'].search([
-                ('risk_id', '=', self.id),
-                ('active','=', True),
-                ('year', '=', self.cr_year),
-                ('month', '=', str(limit_date.month)),
-                ('initial_date', '=', target_month_date),
-            ], limit=1)
-            if mitigation.exists():
-                # mitigation.write({
-                #     'assigned_to': self.reviewer_id.id,
-                # })
-                continue
-            mitigation = self.env['tyt.risk.mitigation'].create({
-                'risk_id': self.id,
-                'initial_date': target_month_date,
-                'mitigation_date': datetime(limit_date.year, limit_date.month, limit_date.day,0,0,0),
-                'year': self.cr_year,
-                'month': str(int(limit_date.month)),
-                'assigned_to': self.owner_id.id,
-            })
-            if today.month == int(limit_date.month):
-                activity_type = self.env.ref("mail.mail_activity_data_todo")
-
-                mitigation.activity_schedule(
-                    activity_type_id=activity_type.id,
-                    summary="Revisar riesgo",
-                    note="Debe cargar la información de la mitigación del dueño.",
-                    user_id=self.owner_id.id,
-                    date_deadline=target_month_date + timedelta(days=3),
-                )
+                    mitigation.activity_schedule(
+                        activity_type_id=activity_type.id,
+                        summary="Revisar riesgo",
+                        note="Debe cargar la información de la mitigación del dueño.",
+                        user_id=self.owner_id.id,
+                        date_deadline=target_month_date + timedelta(days=3),
+                    )
 
     def _get_end_month(self, month, cr_period):
         if month==2:

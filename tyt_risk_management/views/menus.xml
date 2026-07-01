@@ -38,7 +38,7 @@
             />
             <menuitem id="scheduled_risk_menu"
                 action="action_risk_scheduled"
-                sequence="20" name="Programación de revisiónes"
+                sequence="20" name="Programación de revisiones"
                 groups="group_schedule_review" />
             <menuitem id="quantification_risk_menu"
                 action="action_risk_quantification"

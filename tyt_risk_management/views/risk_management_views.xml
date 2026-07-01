@@ -43,12 +43,11 @@
             <form>
                 <sheet>
                     <group>
-                        <group>
-                            <field name="name" widget="url"/>
-                            <field name="description" />
-                            <field name="risk_id" readonly="1" />
-                            <field name="mitigation_id" readonly="1" />
-                        </group>
+                        <field name="name" widget="url"/>
+                        <field name="description" />
+                        <field name="risk_id" readonly="1" />
+                        <field name="mitigation_id" readonly="1" />
+                        <field name="origin" invisible="1" />
                     </group>
                 </sheet>
             </form>
@@ -273,8 +272,11 @@
         <field name="model">tyt.risk.management</field>
         <field name="arch" type="xml">
             <list>
+                <header>
+                    <button name="action_scheduled" type="object" string="Generar programación "/>
+                </header>
                 <field name="id" />
-                <field name="domain_id" />
+                <field name="pdomain_id" />
                 <field name="process_id" />
                 <field name="subprocess_id" />
                 <field name="owner_id" />
@@ -381,6 +383,8 @@
                 decoration-warning="occurrence == 'medium'"
                 decoration-success="occurrence == 'low'"
                 />
+
+                <field name="status" column_invisible="1" />
             </list>
         </field>
     </record>
