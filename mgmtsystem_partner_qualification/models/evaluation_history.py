@@ -302,19 +302,20 @@ class History(models.Model):
     @api.onchange('evaluation_id')
     def _onchange_evaluation_id(self):
         if not self.evaluation_id:
+            self.history_item_ids = [(5, 0, 0)]
             return
         lines = []
-        self.history_item_ids = None
         for item in self.evaluation_id.item_ids:
-            lines.append((0, 0, {'name': item.name,
-                                 'item_id': item.id, }))
-            history_item = self.env['res.partner.evaluation.history.item'].create({
+            history_lines = [(0, 0, {
+                'name': line.name,
+                'line_id': line.id,
+            }) for line in item.line_ids]
+            lines.append((0, 0, {
                 'name': item.name,
                 'item_id': item.id,
-                'history_id': self.id,
-            })
-            history_item._onchange_item_id()
-            lines.append(history_item.id)
+                'history_line_ids': history_lines,
+            }))
+        self.history_item_ids = [(5, 0, 0)] + lines
 
     @api.depends('history_item_ids')
     def _compute_qualification(self):
@@ -413,16 +414,13 @@ class HistoryItem(models.Model):
     @api.onchange('item_id')
     def _onchange_item_id(self):
         if not self.item_id:
+            self.history_line_ids = [(5, 0, 0)]
             return
-        lines = []
-        for item in self.item_id.line_ids:
-            history_line = self.env['res.partner.evaluation.history.item.line'].create({
-                'name': item.name,
-                'line_id': item.id,
-                'history_item_id': self.id,
-            })
-            lines.append(history_line.id)
-        self.history_line_ids = lines
+        lines = [(0, 0, {
+            'name': line.name,
+            'line_id': line.id,
+        }) for line in self.item_id.line_ids]
+        self.history_line_ids = [(5, 0, 0)] + lines
 
 
 class HistoryItemLine(models.Model):
