@@ -3,6 +3,9 @@ from odoo.exceptions import UserError
 
 from datetime import datetime, date, timedelta
 from dateutil.relativedelta import relativedelta
+import logging
+
+_logger = logging.getLogger(__name__)
 
 class RiskDegreeMitigation(models.Model):
     _name = "tyt.risk.degree.mitigation"
@@ -561,80 +564,111 @@ class RiskManagement(models.Model):
             "target": "new",  
         }
 
-    def action_scheduled(self):
-        freq_map = {
-            'fortnightly': (0, 24), # 2 registros por mes
-            'month': (1, 12),
-            'bi': (2, 6),
-            'tri': (3, 4),
-            'cua': (4, 3),
-            'se': (6, 2),
-            'anual': (12, 1),
+    def _get_mitigation_dates(self):
+        self.ensure_one()
 
+        start_date = date(self.cr_year, int(self.cr_month), 1)
+        today = fields.Date.today()
+
+        frequencies = {
+            'month': 1,
+            'bi': 2,
+            'tri': 3,
+            'cua': 4,
+            'se': 6,
+            'anual': 12,
         }
-        today = fields.Datetime.now()
-        for rec in self:
-            if not rec.cr_month or not rec.cr_year:
-                raise UserError("Debe ingresar el mes y el año")
-            rec.write({
-                'is_scheduled': True, 
-            })
-            months_to_skip, total_records = freq_map.get(rec.cr_peoriod, (1, 12))
 
-            start_date = date(rec.cr_year, int(rec.cr_month), 1)
+        dates = []
 
-            for i in range(total_records):
-                # --- CASO ESPECIAL: QUINCENAL ---
-                if rec.cr_peoriod == 'fortnightly':
-                    # Determinamos si es la primera quincena (0, 2, 4...) o la segunda (1, 3, 5...)
-                    month_offset = i // 2
-                    is_second_half = i % 2 != 0
-                    
-                    target_month_date = start_date + relativedelta(months=month_offset)
-                    
-                    if not is_second_half:
-                        # Primera Quincena: Día 15
-                        limit_date = target_month_date.replace(day=15)
-                    else:
-                        # Segunda Quincena: Fin de Mes
-                        # relativedelta(day=31) siempre salta al último día válido (28, 29, 30 o 31)
-                        limit_date = target_month_date + relativedelta(day=31)
+        if self.cr_peoriod == 'fortnightly':
+            current = start_date
 
-                else:
-                    target_month_date = start_date + relativedelta(months=i * months_to_skip)
-                    # En todos estos casos, el límite es el fin del mes de destino
-                    limit_date = target_month_date + relativedelta(day=31)
+            while current <= today:
+                first_half = current.replace(day=15)
 
-                mitigation = self.env['tyt.risk.mitigation'].search([
-                    ('risk_id', '=', rec.id),
-                    ('active','=', True),
-                    ('year', '=', rec.cr_year),
-                    ('month', '=', str(limit_date.month)),
-                    ('initial_date', '=', target_month_date),
+                if first_half <= today:
+                    dates.append((current, first_half))
+
+                second_half = current + relativedelta(day=31)
+
+                if second_half <= today:
+                    dates.append((current, second_half))
+
+                current += relativedelta(months=1)
+
+        else:
+            step = frequencies[self.cr_peoriod]
+
+            current = start_date
+
+            while current <= today:
+                limit_date = current + relativedelta(day=31)
+
+                dates.append((current, limit_date))
+
+                current += relativedelta(months=step)
+
+        return dates
+
+    def _generate_missing_mitigations(self):
+        activity_type = self.env.ref("mail.mail_activity_data_todo")
+
+        today = fields.Date.today()
+
+        for risk in self:
+
+            for initial_date, limit_date in risk._get_mitigation_dates():
+
+                mitigation = self.env["tyt.risk.mitigation"].search([
+                    ("risk_id", "=", risk.id),
+                    ("active", "=", True),
+                    ("initial_date", "=", initial_date),
                 ], limit=1)
-                if mitigation.exists():
-                    # mitigation.write({
-                    #     'assigned_to': self.reviewer_id.id,
-                    # })
-                    continue
-                mitigation = self.env['tyt.risk.mitigation'].create({
-                    'risk_id': rec.id,
-                    'initial_date': target_month_date,
-                    'mitigation_date': datetime(limit_date.year, limit_date.month, limit_date.day,0,0,0),
-                    'year': rec.cr_year,
-                    'month': str(int(limit_date.month)),
-                    'assigned_to': rec.owner_id.id,
-                })
-                if today.month == int(limit_date.month):
-                    activity_type = self.env.ref("mail.mail_activity_data_todo")
 
+                if mitigation:
+                    _logger.info(f"exist mitigation {initial_date}")
+                    continue
+
+                mitigation = self.env["tyt.risk.mitigation"].create({
+                    "risk_id": risk.id,
+                    "initial_date": initial_date,
+                    "mitigation_date": datetime.combine(limit_date, datetime.min.time()),
+                    "year": initial_date.year,
+                    "month": str(initial_date.month),
+                    "assigned_to": risk.owner_id.id,
+                })
+
+                if (
+                    limit_date.year == today.year
+                    and limit_date.month == today.month
+                ):
                     mitigation.activity_schedule(
                         activity_type_id=activity_type.id,
                         summary="Revisar riesgo",
                         note="Debe cargar la información de la mitigación del dueño.",
-                        user_id=self.owner_id.id,
-                        date_deadline=target_month_date + timedelta(days=3),
+                        user_id=risk.owner_id.id,
+                        date_deadline=initial_date + timedelta(days=3),
                     )
+
+    def action_scheduled(self):
+        for risk in self:
+            if not risk.cr_month or not risk.cr_year:
+                raise UserError(_("Debe ingresar el mes y el año."))
+
+            risk.is_scheduled = True
+
+            # Crear las mitigaciones que correspondan hasta hoy
+            risk._generate_missing_mitigations()
+
+    @api.model
+    def cron_generate_mitigations(self):
+        risks = self.search([
+            ("is_scheduled", "=", True),
+            ("active", "=", True),
+        ])
+
+        risks._generate_missing_mitigations()
 
     def _get_end_month(self, month, cr_period):
         if month==2:

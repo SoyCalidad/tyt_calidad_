@@ -13,7 +13,7 @@
                 <field name="risk_id_auditor_id" />
                 <field name="degree_mitigation" />
                 <field name="risk_id_quantification" />
-                <field name="residual_risk" />
+                <field name="mr_residual_risk" />
                 <field name="risk_id_impact" 
                 decoration-success="risk_id_impact == 'low'"
                             decoration-warning="risk_id_impact == 'medium'"

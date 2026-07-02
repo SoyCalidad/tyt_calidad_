@@ -118,13 +118,13 @@
                         <div class="col-lg-3">
                             <label for="text-input" class="form-label fw-bolder">Impacto</label>  
                             <label
-                                class="form-control badge bg-danger rounded px-3 py-2 my-2 fw-bolder text-white ">
+                                t-attf-class="form-control badge rounded px-3 py-2 my-2 fw-bolder text-white {{impactBadgeClass}}">
                                 <t t-out="risk?.risk_impact or ''" />
                             </label>
                         </div>
                         <div class="col-lg-3">
                             <label for="text-input" class="form-label fw-bolder ">Ocurrencia</label>
-                            <label class="form-control badge bg-danger rounded px-3 py-2 my-2 fw-bolder text-white ">
+                            <label t-attf-class="form-control badge  rounded px-3 py-2 my-2 fw-bolder text-white {{occurenceBadgeClass}}">
                                 <t t-out="risk?.risk_occurrence or ''" />
                             </label></div>
                     </div>
@@ -138,18 +138,18 @@
                         <div class="col-lg-6">
                             <label for="text-input" class="form-label fw-bolder">Actividad de Control</label> 
                             <textarea
-                                maxlength="1000" disabled="disabled" name="text-input" rows="4" class="form-control"
+                                 disabled="disabled" name="text-input" rows="5" class="form-control"
                                 t-att-value="risk?.risk_control_activity or ''"></textarea>
                         </div>
                         <div class="col-lg-6">
                             <label for="text-input" class="form-label fw-bolder">Aseveraciones</label> 
                             <textarea
-                                maxlength="1000" disabled="disabled" name="text-input" rows="4" class="form-control"
+                                 disabled="disabled" name="text-input" rows="5" class="form-control"
                                 t-att-value="risk?.risk_assertion_names or ''"
                                 ></textarea>
                         </div>
                     </div>
-                    <div class="row">
+                    <div class="row my-2">
                         <div class="col-lg-3">
                             <label for="text-input" class="form-label fw-bolder">Manual o Automático</label> 
                             <input
@@ -240,7 +240,7 @@
                             <label for="text-input" class="form-label fw-bolder">Riesgo residual</label> 
                             <input
                                 type="text" disabled="1" class="form-control" style="text-align: right;"
-                                t-att-value="risk?.residual_risk or ''"
+                                t-att-value="risk?.mr_residual_risk or ''"
                                 />
                         </div>
                     </div>

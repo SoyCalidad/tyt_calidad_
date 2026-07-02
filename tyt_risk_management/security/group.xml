@@ -4,21 +4,21 @@
     <!-- Categoría Principal del Módulo -->
     <record id="module_category_mi_modulo" model="ir.module.category">
         <field name="name">Gestión de riesgos</field>
-        <field name="sequence">100</field>
+        <field name="sequence">300</field>
     </record>
 
     <!-- Subcategoría para los Roles Principales (Aparecerá como una columna) -->
     <record id="module_category_roles" model="ir.module.category">
         <field name="name">Roles Principales</field>
         <field name="parent_id" ref="module_category_mi_modulo"/>
-        <field name="sequence">200</field>
+        <field name="sequence">300</field>
     </record>
 
     <!-- Subcategoría para los Permisos Específicos (Aparecerá como otra columna) -->
     <record id="module_category_permisos" model="ir.module.category">
         <field name="name">Permisos Específicos</field>
         <field name="parent_id" ref="module_category_mi_modulo"/>
-        <field name="sequence">210</field>
+        <field name="sequence">300</field>
     </record>
 
     <record id="module_category_permisos_admin" model="ir.module.category">
@@ -194,46 +194,6 @@
     <!--       ROLES PRINCIPALES (Los que heredan)          -->
     <!-- ========================================== -->
 
-    <!-- ROL ADMIN: Al marcarlo, activa los 3 permisos específicos -->
-    <record id="group_admin" model="res.groups">
-        <field name="name">Admin</field>
-        <field name="category_id" ref="module_category_roles"/>
-        <field name="implied_ids" eval="[
-            (4, ref('base.group_user')), 
-            (4, ref('group_roles')),
-            (4, ref('group_ver_usuarios')), 
-            (4, ref('group_ver_catalogos')), 
-            (4, ref('group_ver_procesos')),
-
-            (4, ref('group_ver_mitigation')),
-            (4, ref('group_risk_initial_load')),
-            (4, ref('group_ver_monitoring')),
-            (4, ref('group_risk_action_plan')),
-
-            (4, ref('group_ver_risk')), 
-            (4, ref('group_schedule_review')), 
-            (4, ref('group_quantification')), 
-
-            (4, ref('group_4level')),
-            (4, ref('group_2level')),
-
-            (4, ref('group_performance_evaluations_carried_out')), 
-            (4, ref('group_risk_appetite_level')), 
-            (4, ref('group_peco_consolidated')), 
-            (4, ref('group_risk_rating_performance')), 
-            (4, ref('group_performance_remediation_actions')), 
-
-            (4, ref('group_level0_load_initial')), 
-            (4, ref('group_level5_executive')), 
-            (4, ref('group_level1_activities')), 
-            (4, ref('group_level6_action_plan')), 
-            (4, ref('group_level3_consolidated')), 
-            
-        ]"
-            
-            />
-    </record>
-
     <record id="group_usuario" model="res.groups">
         <field name="name">Usuario</field>
         <field name="category_id" ref="module_category_roles"/>
@@ -253,10 +213,7 @@
         <field name="category_id" ref="module_category_roles"/>
         <field name="implied_ids" eval="[
             (6, 0, [
-                ref('group_ver_mitigation'),
-                ref('group_risk_initial_load'),
-                ref('group_ver_monitoring'),
-                ref('group_risk_action_plan'),
+                ref('group_usuario'),
                 ref('group_4level'),
                 ref('group_2level'),
                 ref('group_performance_evaluations_carried_out'),
@@ -273,5 +230,45 @@
             
         ]"/>
     </record>
+
+
+    <!-- ROL ADMIN: Al marcarlo, activa los 3 permisos específicos -->
+    <record id="group_admin" model="res.groups">
+        <field name="name">Admin</field>
+        <field name="category_id" ref="module_category_roles"/>
+        <field name="implied_ids" eval="[(6, 0, [
+            ref('group_consulta'),
+            ref('base.group_user'),
+            ref('group_roles'),
+            ref('group_ver_usuarios'),
+            ref('group_ver_catalogos'),
+            ref('group_ver_procesos'),
+
+            ref('group_ver_mitigation'),
+            ref('group_risk_initial_load'),
+            ref('group_ver_monitoring'),
+            ref('group_risk_action_plan'),
+
+            ref('group_ver_risk'),
+            ref('group_schedule_review'),
+            ref('group_quantification'),
+
+            ref('group_4level'),
+            ref('group_2level'),
+
+            ref('group_performance_evaluations_carried_out'),
+            ref('group_risk_appetite_level'),
+            ref('group_peco_consolidated'),
+            ref('group_risk_rating_performance'),
+            ref('group_performance_remediation_actions'),
+
+            ref('group_level0_load_initial'),
+            ref('group_level5_executive'),
+            ref('group_level1_activities'),
+            ref('group_level6_action_plan'),
+            ref('group_level3_consolidated'),
+        ])]"/>
+    </record>
+
 
 </odoo>

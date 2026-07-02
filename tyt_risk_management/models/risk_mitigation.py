@@ -152,7 +152,7 @@ class RiskMitigation(models.Model):
     status = fields.Selection(
         selection=[
             ('unmitigated', 'No Mitigado'), # create a mitigation
-            ('mitigated', 'Mitigado'), # owner notify reviewer
+            ('mitigated', 'Mitigado'), # owner notify reviewer, or reviewer is complete
             ('partially_mitigated', 'Parcialmente Mitigado'),
             ('under_review', 'En revisión'), #amarillo
 
@@ -215,8 +215,8 @@ class RiskMitigation(models.Model):
         string="Nivel de madurez",
         default="none",
     )
-    residual_risk = fields.Float(string="Riesgo residual", compute="_compute_residual_risk")
-    residual_risk_audit = fields.Float(string="Riesgo residual", compute="_compute_residual_risk")
+
+
     degree_mitigation = fields.Selection(
         selection=[
             ('0', '0%'),
@@ -232,13 +232,6 @@ class RiskMitigation(models.Model):
         related="risk_id.quantification",
     )
 
-    @api.depends('risk_id.quantification', 'degree_mitigation')
-    def _compute_residual_risk(self):
-        for record in self:
-            if record.risk_id and record.risk_id.quantification and record.degree_mitigation:
-                record.residual_risk = ((100 - int(record.degree_mitigation)) * record.risk_id.quantification) / 100
-            else:
-                record.residual_risk = 0
 
     status_mitigation = fields.Selection(
         selection=[
@@ -361,7 +354,7 @@ class RiskMitigation(models.Model):
     mr_degree_mitigation = fields.Many2one(
         comodel_name='tyt.risk.degree.mitigation',
         string="Grado de mitigación",
-        default="_default_mr_degree_mitigation"
+        default=_default_mr_degree_mitigation
     )
     mr_residual_risk = fields.Float(string="Riesgo residual", compute="_compute_mr_residual_risk")
 
@@ -655,7 +648,7 @@ class RiskMitigation(models.Model):
     def _compute_after_control(self):
         for rec in self:
             if rec.mr_status_mitigation == 'mitigated':
-                if rec.risk_id_impact == 'high' and rec.risk_id_impact == 'medium':
+                if rec.risk_id_impact == 'high' or rec.risk_id_impact == 'medium':
                     rec.after_control = 'minor'
                 else:
                     rec.after_control = 'insignificant'  
@@ -833,6 +826,14 @@ class RiskMitigation(models.Model):
         return list(process_dict.values())
 
 
+    @api.model 
+    def load_mitigation_from_risks(self, risk_ids):
+
+        mitigations = self.search([
+            ('mitigation_date', '<=', (fields.Datetime.today() + relativedelta(months=1, day=1))),
+            ('risk_id', 'in', risk_ids),
+        ])
+        return [self._data_mitigation_for_consolidated(m) for m in mitigations]
 
     @api.model 
     def report_consolidated(self, department_id, pdomain_id, process_id, anio, month):
@@ -870,9 +871,9 @@ class RiskMitigation(models.Model):
             "processes_mitigated": self._load_data_processes(m_mitigation),
             "processes_monitoring": self._load_data_processes(m_monitoring),
             "mitigated_riesgo_asegurado": sum(m_mitigation.mapped('risk_id_quantification')),
-            "mitigated_riesgo_residual": sum(m_mitigation.mapped('residual_risk')),
+            "mitigated_riesgo_residual": sum(m_mitigation.mapped('mr_residual_risk')),
             "monitoring_riesgo_asegurado": sum(m_monitoring.mapped('risk_id_quantification')),
-            "monitoring_riesgo_residual": sum(m_monitoring.mapped('residual_risk')),
+            "monitoring_riesgo_residual": sum(m_monitoring.mapped('ma_residual_risk')),
             "barchart_mitigated":  [
                 len(m_mitigation.filtered(lambda m: m.mr_status_mitigation=='unmitigated' or m.mr_status_mitigation ==False)),
                 len(m_mitigation.filtered(lambda m: m.mr_status_mitigation=='partialmitigated')),
@@ -921,7 +922,7 @@ class RiskMitigation(models.Model):
             domain_mitigation,  
         )
 
-        maturity_level = "No existe" #TODO: this is a compute 
+        maturity_level = "No existe"  
         target_dic = dict() #key is target a values [asegurado, no_asegurado]
         degree_of_compliance_company_dict = dict() #key departmentname , value is [n_asegurado, total, residual]
         degree_of_compliance_company = []
@@ -1039,7 +1040,7 @@ class RiskMitigation(models.Model):
             "risk_type_pd": dict(self.env['tyt.risk.management']._fields['type_pd'].selection).get(m.risk_id.type_pd),
             "risk_type_cf": dict(self.env['tyt.risk.management']._fields['type_cf'].selection).get(m.risk_id.type_cf),
 
-            "residual_risk": m.residual_risk,
+            "mr_residual_risk": m.mr_residual_risk,
             "risk_quantification": m.risk_id_quantification,
             "before_control": dict(self._fields['before_control'].selection).get(m.before_control),
             "after_control": dict(self._fields['after_control'].selection).get(m.after_control),
@@ -1113,7 +1114,7 @@ class RiskMitigation(models.Model):
                                         ('year', '=', int(y)),
                                         ('month', '<=', str(m)),
                                     ])
-                                    mi_month = mitigations.filtered(lambda mi: mi.month == m)
+                                    mi_month = mitigations.filtered(lambda mi: mi.month == str(m))
                                     compliances = []
                                     num_100 = 0
                                     for mi in mi_month:
@@ -1259,7 +1260,7 @@ class RiskMitigation(models.Model):
                 elif level == 50:
                     data_report[index_data]["items"][2]["total"] +=1
                     data_report[index_data]["items"][2]["periodos"][index_pe]["valor"] +=1
-                elif level == 25:
+                elif level == 75:
                     data_report[index_data]["items"][3]["total"] +=1
                     data_report[index_data]["items"][3]["periodos"][index_pe]["valor"] +=1
                 else:

@@ -1,25 +1,25 @@
 id,name,model_id:id,group_id:id,perm_read,perm_write,perm_create,perm_unlink
-access_business_process_admin,tyt.business.process.admin,model_tyt_business_process,base.group_user,1,1,1,1
-access_business_process_user_admin,tyt.business.process.user.admin,model_tyt_business_process_user,base.group_user,1,1,1,1
-access_business_process_file_admin,tyt.business.process.file.admin,model_tyt_business_process_file,base.group_user,1,1,1,1
-access_business_process_link_admin,tyt.business.process.link.admin,model_tyt_business_process_link,base.group_user,1,1,1,1
+access_business_process_admin,tyt.business.process.admin,model_tyt_business_process,group_usuario,1,1,1,1
+access_business_process_user_admin,tyt.business.process.user.admin,model_tyt_business_process_user,group_usuario,1,1,1,1
+access_business_process_file_admin,tyt.business.process.file.admin,model_tyt_business_process_file,group_usuario,1,1,1,1
+access_business_process_link_admin,tyt.business.process.link.admin,model_tyt_business_process_link,group_usuario,1,1,1,1
 
-access_risk_management_admin,tyt.risk.management.admin,model_tyt_risk_management,base.group_user,1,1,1,1
-access_risk_domain_admin,tyt.risk.domain.admin,model_tyt_risk_domain,base.group_user,1,1,1,1
-access_risk_degree_mitigation_admin,tyt.risk.degree.admin,model_tyt_risk_degree_mitigation,base.group_user,1,1,1,1
-access_risk_coso_admin,tyt.risk.coso.admin,model_tyt_risk_goal_coso,base.group_user,1,1,1,1
-access_risk_assertion_admin,tyt.risk.assertion.admin,model_tyt_risk_assertion,base.group_user,1,1,1,1
-access_risk_fsc_admin,tyt.risk.fsc.admin,model_tyt_risk_financial_statement_category,base.group_user,1,1,1,1
-access_risk_mo_link,tyt.risk.mo_link.admin,model_tyt_risk_mo_link,base.group_user,1,1,1,1
-access_risk_mo_file,tyt.risk.mo_file.admin,model_tyt_risk_mo_file,base.group_user,1,1,1,1
-access_risk_mo_comment,tyt.risk.mo_comment.admin,model_tyt_risk_mo_comment,base.group_user,1,1,1,1
-access_risk_notification.revision,tyt.risk.notification.revision.admin,model_tyt_risk_notification_revision,base.group_user,1,1,1,1
-access_risk_risk.action.plan_admin,tyt.risk.risk.action.plan.admin,model_tyt_risk_action_plan,base.group_user,1,1,1,1
-access_risk_risk.action.plan_ro,tyt.risk.risk.action.plan.readonly,model_tyt_risk_action_plan,base.group_user,1,1,0,0
-access_risk_risk.mitigation_admin,tyt.risk.risk.mitigation.admin,model_tyt_risk_mitigation,base.group_user,1,1,1,1
+access_risk_management_admin,tyt.risk.management.admin,model_tyt_risk_management,group_usuario,1,1,1,1
+access_risk_domain_admin,tyt.risk.domain.admin,model_tyt_risk_domain,group_usuario,1,1,1,1
+access_risk_degree_mitigation_admin,tyt.risk.degree.admin,model_tyt_risk_degree_mitigation,group_usuario,1,1,1,1
+access_risk_coso_admin,tyt.risk.coso.admin,model_tyt_risk_goal_coso,group_usuario,1,1,1,1
+access_risk_assertion_admin,tyt.risk.assertion.admin,model_tyt_risk_assertion,group_usuario,1,1,1,1
+access_risk_fsc_admin,tyt.risk.fsc.admin,model_tyt_risk_financial_statement_category,group_usuario,1,1,1,1
+access_risk_mo_link,tyt.risk.mo_link.admin,model_tyt_risk_mo_link,group_usuario,1,1,1,1
+access_risk_mo_file,tyt.risk.mo_file.admin,model_tyt_risk_mo_file,group_usuario,1,1,1,1
+access_risk_mo_comment,tyt.risk.mo_comment.admin,model_tyt_risk_mo_comment,group_usuario,1,1,1,1
+access_risk_notification.revision,tyt.risk.notification.revision.admin,model_tyt_risk_notification_revision,group_usuario,1,1,1,1
+access_risk_risk.action.plan_admin,tyt.risk.risk.action.plan.admin,model_tyt_risk_action_plan,group_usuario,1,1,1,1
+access_risk_risk.action.plan_ro,tyt.risk.risk.action.plan.readonly,model_tyt_risk_action_plan,group_usuario,1,1,0,0
+access_risk_risk.mitigation_admin,tyt.risk.risk.mitigation.admin,model_tyt_risk_mitigation,group_usuario,1,1,1,1
 
 
-access_tyt_catalog_frequency,tyt.catalog.frequency,model_tyt_catalog_frequency,base.group_user,1,1,1,1
+access_tyt_catalog_frequency,tyt.catalog.frequency,model_tyt_catalog_frequency,group_usuario,1,1,1,1
 
-access_tyt_customized_report_wizard,tyt.customzed.report.wizar,model_tyt_customized_report_wizard,base.group_user,1,1,1,1
+access_tyt_customized_report_wizard,tyt.customzed.report.wizar,model_tyt_customized_report_wizard,group_usuario,1,1,1,1
 

@@ -73,5 +73,25 @@ export class MitigationDetail extends Component {
         this.state.loading = false;
     }
 
+    get impactBadgeClass() {
+        const impact = this.risk && this.risk.risk_impact;
+        const colors = {
+            Bajo: "bg-success",
+            Medio: "bg-warning",
+            Alto: "bg-danger",
+        };
+        return colors[impact] || "bg-secondary";
+    }
+
+    get occurenceBadgeClass() {
+        const impact = this.risk && this.risk.risk_occurrence;
+        const colors = {
+            Bajo: "bg-success",
+            Medio: "bg-warning",
+            Alto: "bg-danger",
+        };
+        return colors[impact] || "bg-secondary";
+    }
+
 
 }
