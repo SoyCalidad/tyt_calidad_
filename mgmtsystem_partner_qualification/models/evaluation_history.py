@@ -299,13 +299,10 @@ class History(models.Model):
     )
     history_items_total = fields.Float()
 
-    @api.onchange('evaluation_id')
-    def _onchange_evaluation_id(self):
-        if not self.evaluation_id:
-            self.history_item_ids = [(5, 0, 0)]
-            return
+    @api.model
+    def _build_history_item_commands(self, evaluation):
         lines = []
-        for item in self.evaluation_id.item_ids:
+        for item in evaluation.item_ids:
             history_lines = [(0, 0, {
                 'name': line.name,
                 'line_id': line.id,
@@ -315,7 +312,26 @@ class History(models.Model):
                 'item_id': item.id,
                 'history_line_ids': history_lines,
             }))
-        self.history_item_ids = [(5, 0, 0)] + lines
+        return lines
+
+    @api.onchange('evaluation_id')
+    def _onchange_evaluation_id(self):
+        if not self.evaluation_id:
+            self.history_item_ids = [(5, 0, 0)]
+            return
+        self.history_item_ids = [
+            (5, 0, 0)] + self._build_history_item_commands(self.evaluation_id)
+
+    @api.model_create_multi
+    def create(self, vals_list):
+        for vals in vals_list:
+            evaluation_id = vals.get('evaluation_id')
+            if evaluation_id:
+                evaluation = self.env['res.partner.evaluation'].browse(
+                    evaluation_id)
+                vals['history_item_ids'] = self._build_history_item_commands(
+                    evaluation)
+        return super().create(vals_list)
 
     @api.depends('history_item_ids')
     def _compute_qualification(self):
