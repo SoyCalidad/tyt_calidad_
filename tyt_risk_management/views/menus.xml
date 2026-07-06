@@ -10,7 +10,7 @@
         groups="tyt_risk_management.group_admin"
         >
 
-            <menuitem id="menu_user" name="Usuarios" action="base.action_res_users" sequence="30"
+            <menuitem id="menu_user" name="Usuarios" action="base.action_res_users" sequence="20"
                 groups="group_ver_usuarios,base.group_system,base.group_erp_manager" />
             <menuitem id="menu_role" name="Roles" action="base.action_res_groups" sequence="30"
                 groups="base.group_system,base.group_erp_manager,base.group_no_one,group_roles" />

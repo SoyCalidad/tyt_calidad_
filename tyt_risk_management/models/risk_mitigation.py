@@ -137,6 +137,8 @@ class RiskMitigation(models.Model):
             elif len(rec.mr_action_plan_ids)>0:
                 if len(rec.mr_action_plan_ids.filtered(lambda plan: plan.status == 'pending' or plan.status == 'rejected'))>0:
                     rec.assigned_to = rec.risk_id_owner_id
+                elif len(rec.mr_action_plan_ids) == len(rec.mr_action_plan_ids.filtered(lambda plan: plan.status == 'complete')):
+                    rec.assigned_to = rec.risk_id_auditor_id
                 else: 
                     rec.assigned_to = rec.risk_id_reviewer_id
             elif rec.status == 'mitigated' and len(rec.ma_action_plan_ids)>0:
@@ -144,6 +146,8 @@ class RiskMitigation(models.Model):
                     rec.assigned_to = rec.risk_id_owner_id
                 else: 
                     rec.assigned_to = rec.risk_id_auditor_id
+            elif rec.risk_activity_state == 'monitoring':
+                rec.assigned_to = rec.risk_id_auditor_id
             else:
                 rec.assigned_to = rec.risk_id_reviewer_id 
 
@@ -729,6 +733,7 @@ class RiskMitigation(models.Model):
             vals['mr_level_compliance'] = 'ontime'
             vals['status'] = 'mitigated' # en revision por el auditor 
             vals['risk_activity_state'] = 'monitoring'
+            vals['mr_degree_mitigation'] = self.env.ref('tyt_risk_management.mitigated_100').id 
 
         if 'ma_status_mitigation' in vals and vals['ma_status_mitigation'] == 'mitigated':
             vals['ma_mitigation_date'] = fields.Datetime.now().date()

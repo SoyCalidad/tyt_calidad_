@@ -134,7 +134,7 @@ class RiskMOFiles(models.Model):
                 'application/vnd.openxmlformats-officedocument.spreadsheetml.sheet',
                 'application/vnd.ms-excel',                                                # xls
             ):
-            return self.file_id.action_open_document_in_office()
+            return self.file_id.sudo().action_open_document_in_office()
 
         return {
             'type': 'ir.actions.act_url',
@@ -581,19 +581,24 @@ class RiskManagement(models.Model):
 
         dates = []
 
-        if self.cr_peoriod == 'fortnightly':
+        if self.cr_peoriod == "fortnightly":
             current = start_date
 
             while current <= today:
-                first_half = current.replace(day=15)
 
-                if first_half <= today:
-                    dates.append((current, first_half))
+                # Primera quincena: 01 -> 15
+                first_initial = current.replace(day=1)
+                first_limit = current.replace(day=15)
 
-                second_half = current + relativedelta(day=31)
+                if first_limit <= today:
+                    dates.append((first_initial, first_limit))
 
-                if second_half <= today:
-                    dates.append((current, second_half))
+                # Segunda quincena: 15 -> último día
+                second_initial = current.replace(day=16)
+                second_limit = current + relativedelta(day=31)
+
+                if second_limit <= today:
+                    dates.append((second_initial, second_limit))
 
                 current += relativedelta(months=1)
 
@@ -654,7 +659,7 @@ class RiskManagement(models.Model):
     def action_scheduled(self):
         for risk in self:
             if not risk.cr_month or not risk.cr_year:
-                raise UserError(_("Debe ingresar el mes y el año."))
+                raise UserError("Debe ingresar el mes y el año.")
 
             risk.is_scheduled = True
 

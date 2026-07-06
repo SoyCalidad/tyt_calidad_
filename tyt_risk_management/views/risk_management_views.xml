@@ -575,7 +575,7 @@
                     <field name="is_reviewer" invisible="1" />
                     <field name="can_create_documents" invisible="1" />
                     <group string="Mitigación revisor" name="reviewer_mitigation"
-                    invisible="not (is_reviewer and status!='unmitigated' and mr_status_mitigation!='mitigated')"
+                    invisible="not (is_reviewer and status!='unmitigated' and risk_activity_state!='monitoring')"
                     >
                             <separator string="Proceso de mitigación "></separator>
                             <div class="row justify-content-end" colspan="4">
@@ -592,6 +592,7 @@
                             <group>
                                 <field name="mr_degree_mitigation" 
                                 domain="[('status', '=', mr_status_mitigation)]"
+                                options="{'no_create': True, 'no_quick_create': True, 'no_create_edit': True}"
                                 />
                                 <field name="mr_residual_risk" readonly="1"
                                 options="{
@@ -1196,7 +1197,9 @@
                         <group>
                             <field name="ma_status_mitigation"  />
                             <field name="ma_degree_mitigation" 
-                            domain="[('status', '=', ma_status_mitigation)]" string="Avance de auditoria "  />
+                            domain="[('status', '=', ma_status_mitigation)]" 
+                            options="{'no_create': True, 'no_quick_create': True, 'no_create_edit': True}"
+                            string="Avance de auditoria "  />
                             <field name="risk_id_quantification" />
                             
                         </group>
