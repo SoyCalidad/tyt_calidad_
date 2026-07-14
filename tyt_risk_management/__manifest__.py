@@ -1,7 +1,12 @@
 {
     'name': 'TyT - Gestión de Riesgos',
     'version': '18.0.1.0.0',
-    'summary': 'Estructurar la organización bajo un modelo basado en procesos',
+    'description': 'Módulo de la gestión de riesgos',
+    'summary': '''Módulo de la gestión de riesgos:
+    Programación de riesgos de acuerdo al periodo registrado.
+    Control de los riesgos: dueño, revisor y auditor
+    Reportes de los riesgos 
+    ''',
     'category': 'Management',
     'author': 'David/SoyCalidad',
     'depends': [
@@ -52,5 +57,5 @@
     },
     'installable': True,
     'application': True,
-    'license': 'LGPL-3',
+    'license': 'Other proprietary',
 }
