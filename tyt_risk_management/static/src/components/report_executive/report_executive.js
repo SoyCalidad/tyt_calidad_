@@ -210,13 +210,13 @@ export class ExecutiveReport extends Component {
                         offsetCenter: [0, '-40%'],
                         valueAnimation: true,
                         formatter: function (value) {
-                        return Math.round(value*1) + ' %';
+                        return Math.round(value*100) + ' %';
                         },
                         color: 'inherit'
                     },
                     data: [
                         {
-                        value: this.reportData?.report?.per_mitigation_safe || 0,
+                        value: this.reportData?.report?.per_mitigation_safe || 0 / 100,
                         name: ''
                         }
                     ]

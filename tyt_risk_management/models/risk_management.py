@@ -550,7 +550,7 @@ class RiskManagement(models.Model):
         comodel_name='res.users',
         string="Asignado a"
     )
-    period_str = fields.Char(string="Periodo")
+    # period_str = fields.Char(string="Periodo")
      
     type_risk = fields.Char(default="Ventas", string="Tipo")
     value_risk = fields.Float(default=500000, string="Valor")
@@ -658,12 +658,11 @@ class RiskManagement(models.Model):
 
     def action_scheduled(self):
         for risk in self:
-            if not risk.cr_month or not risk.cr_year:
+            if not risk.cr_month or not risk.cr_year or not risk.cr_peoriod:
                 raise UserError("Debe ingresar el mes y el año.")
 
             risk.is_scheduled = True
 
-            # Crear las mitigaciones que correspondan hasta hoy
             risk._generate_missing_mitigations()
 
     @api.model
@@ -674,6 +673,39 @@ class RiskManagement(models.Model):
         ])
 
         risks._generate_missing_mitigations()
+
+    @api.model 
+    def update_access_folder(self):
+        partners = {}
+        for rec in self.search([]):
+            if rec.owner_id.partner_id and not rec.owner_id.partner_id in partners:
+                partners[rec.owner_id.partner_id] = ("edit", False)
+            if rec.reviewer_id.partner_id and not rec.reviewer_id.partner_id in partners:
+                partners[rec.reviewer_id.partner_id] = ("edit", False)
+            if rec.auditor_id.partner_id and not rec.auditor_id.partner_id in partners:
+                partners[rec.auditor_id.partner_id] = ("edit", False)
+
+        folder = self.env.ref('tyt_risk_management.folder_risk_management')
+        if folder:
+            folder.action_update_access_rights(partners=partners)
+
+    @api.model_create_multi
+    def create(self, vals_list):
+        records = super().create(vals_list)
+
+        self.update_access_folder()
+
+        return records
+
+    def write(self, vals):
+
+        res = super().write(vals)
+
+        if 'owner_id' in vals or 'reviewer_id' in vals or 'auditor_id' in vals:
+            self.update_access_folder()
+
+        return res
+
 
     def _get_end_month(self, month, cr_period):
         if month==2:
