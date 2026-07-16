@@ -134,7 +134,7 @@ class RiskMitigation(models.Model):
         for rec in self:
             if rec.status == 'unmitigated' and not rec.mr_status_mitigation == 'mitigated':
                 rec.assigned_to = rec.risk_id_owner_id 
-            elif len(rec.mr_action_plan_ids)>0:
+            elif len(rec.mr_action_plan_ids)>0 and len(rec.ma_action_plan_ids)==0:
                 if len(rec.mr_action_plan_ids.filtered(lambda plan: plan.status == 'pending' or plan.status == 'rejected'))>0:
                     rec.assigned_to = rec.risk_id_owner_id
                 elif len(rec.mr_action_plan_ids) == len(rec.mr_action_plan_ids.filtered(lambda plan: plan.status == 'complete')):
