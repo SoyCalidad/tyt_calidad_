@@ -74,6 +74,11 @@ class RiskMOComment(models.Model):
         comodel_name='tyt.risk.mitigation',
         string="Mitigación",
     )
+    action_plan_id = fields.Many2one(
+        comodel_name='tyt.risk.action.plan',
+        string="Plan de acción ",
+        ondelete="cascade",
+    )
     
 
 
@@ -283,6 +288,12 @@ class PlanAction(models.Model):
         ],
     )
 
+    comment_ids = fields.One2many(
+        comodel_name='tyt.risk.mo_comment',
+        inverse_name='action_plan_id',
+        string="Comentarios"
+    )
+
 
     def _send_notification_email(self, mitigation, email_to, plan_action_name):
         # Datos para el correo
@@ -331,15 +342,17 @@ class PlanAction(models.Model):
         """
 
         # Crear y enviar el correo
-        mail_values = {
-            'subject': f'Plan de acción R-{mitigation.risk_id_id}',
-            'body_html': body_html,
-            'email_to': email_to,
-            'email_from': self.env.user.email_formatted or self.env.company.email_formatted,
-        }
-        
-        # Creamos el registro de correo y lo enviamos inmediatamente
-        self.env['mail.mail'].sudo().create(mail_values).send()
+        email_from = self.env.user.email_formatted or self.env.company.email_formatted
+        if email_from:
+            mail_values = {
+                'subject': f'Plan de acción R-{mitigation.risk_id_id}',
+                'body_html': body_html,
+                'email_to': email_to,
+                'email_from': email_from,
+            }
+            
+            # Creamos el registro de correo y lo enviamos inmediatamente
+            self.env['mail.mail'].sudo().create(mail_values).send()
 
 
     @api.model_create_multi

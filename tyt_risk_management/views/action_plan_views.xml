@@ -10,6 +10,17 @@
                         <field name="user_id" />
                         <field name="remediation_date" required="True" />
                     </group>
+
+                    <group cols="1">
+                        <label for="comment_ids" />
+                        <field name="comment_ids" nolabel="1">
+                            <list editable="bottom" delete="false">
+                                <field name="name" />
+                                <field name="create_uid" string="Creado por"/>
+                                <field name="create_date" string="Creado el" />
+                            </list>
+                        </field>
+                    </group>
                 </sheet>
             </form>
         </field>

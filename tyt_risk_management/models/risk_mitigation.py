@@ -427,7 +427,7 @@ class RiskMitigation(models.Model):
     def _compute_mr_all_action_plans_complete(self):
         for record in self:
             if len(record.mr_action_plan_ids)>0:
-                record.mr_all_action_plans_complete = all(p.status=='complete' for p in record.mr_action_plan_ids)
+                record.mr_all_action_plans_complete = all(p.status in ['complete', 'rejected'] for p in record.mr_action_plan_ids)
             else:
                 record.mr_all_action_plans_complete = False
 
@@ -729,6 +729,8 @@ class RiskMitigation(models.Model):
             vals['status'] = 'partially_mitigated'
         
         if 'mr_status_mitigation' in vals and vals['mr_status_mitigation'] == 'mitigated':
+            if not self.mr_all_action_plans_complete:
+                raise UserError("Debe completar todos los planes de acción")
             vals['mr_mitigation_date'] = fields.Datetime.now().date()
             vals['mr_level_compliance'] = 'ontime'
             vals['status'] = 'mitigated' # en revision por el auditor 
@@ -736,6 +738,8 @@ class RiskMitigation(models.Model):
             vals['mr_degree_mitigation'] = self.env.ref('tyt_risk_management.mitigated_100').id 
 
         if 'ma_status_mitigation' in vals and vals['ma_status_mitigation'] == 'mitigated':
+            if not self.ma_all_action_plans_complete:
+                raise UserError("Debe completar todos los planes de acción")
             vals['ma_mitigation_date'] = fields.Datetime.now().date()
             vals['ma_level_compliance'] = 'A tiempo' # tambien hay fuera de periodo
             vals['status'] = 'complete' 

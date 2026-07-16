@@ -73,7 +73,7 @@
         </field>
     </record>
 
-    <record id="view_risk_action_plan_form" model="ir.ui.view">
+    <!-- <record id="view_risk_action_plan_form" model="ir.ui.view">
         <field name="name">tyt.risk.action.plan.form</field>
         <field name="model">tyt.risk.action.plan</field>
         <field name="arch" type="xml">
@@ -84,10 +84,20 @@
                         <field name="user_id" />
                         <field name="remediation_date" required="True" />
                     </group>
+                    <group cols="1">
+                        <label for="comment_ids" />
+                        <field name="comment_ids" nolabel="1">
+                            <list >
+                                <field name="name" />
+                                <field name="create_uid" string="Creado por"/>
+                                <field name="create_date" string="Creado el" />
+                            </list>
+                        </field>
+                    </group>
                 </sheet>
             </form>
         </field>
-    </record>
+    </record> -->
 
     <record id="view_risk_action_plan_attendance_form" model="ir.ui.view">
         <field name="name">tyt.risk.action.plan.attendance.form</field>
@@ -108,7 +118,7 @@
                     </group>
                     <group colspan="4">
                         <label for="document_ids" />
-                        <field name="document_ids" nolabel="1" context="{'default_plan_id': id, 'default_origin': 'action_plan'}">
+                        <field name="document_ids" nolabel="1" context="{'default_plan_id': id, 'default_origin': 'action_plan'}" readonly="status=='complete'">
                             <list >
                                 <field name="name" />
                                 <field name="description" />
@@ -124,7 +134,7 @@
                             </list>
                         </field>
                         <label for="link_ids" />
-                        <field name="link_ids" nolabel="1" context="{'default_plan_id': id, 'default_origin': 'action_plan'}">
+                        <field name="link_ids" nolabel="1" context="{'default_plan_id': id, 'default_origin': 'action_plan'}" readonly="status=='complete'" >
                             <list >
                                 <field name="name" />
                                 <field name="description" />
@@ -135,6 +145,16 @@
                         </field>
                     </group>
                     <field name="status" invisible="1" />
+                    <group cols="1">
+                        <label for="comment_ids" />
+                        <field name="comment_ids" nolabel="1" readonly="status=='complete'" >
+                            <list editable="bottom" delete="false">
+                                <field name="name" />
+                                <field name="create_uid" string="Creado por"/>
+                                <field name="create_date" string="Creado el" />
+                            </list>
+                        </field>
+                    </group>
                     <footer>
                         <button string="En revisión" class="btn btn-primary"
                         name="action_send_review" 
@@ -353,7 +373,7 @@
          eval="[(5, 0, 0),
                 (0, 0, {'view_mode': 'list', 'view_id': ref('view_risk_scheduled_list')}),
                 (0, 0, {'view_mode': 'form', 'view_id': ref('view_risk_scheduled_form')})]"
-         />
+         /> 
     </record>
 
     <record id="view_risk_quantification_list" model="ir.ui.view">
@@ -1169,11 +1189,12 @@
                                         name="action_attendance_action_plan"
                                             string="Atender"
                                             class="btn btn-warning"
-                                            invisible="not (status in ['pending', 'rejected'])"
+                                            invisible="not (status in ['pending', 'rejected'] and current_user == user_id)"
                                         /> 
                                         <field name="sequence" widget="handle"/>
                                         <field name="name" />
                                         <field name="user_id" />
+                                        <field name="current_user" invisible="1" column_invisible="1" />
                                         <field name="remediation_date" />
                                         <field name="status" 
                                         decoration-warning="status=='under_review'"
@@ -1319,6 +1340,7 @@
          />
         <field name="context">{
             'search_default_owner_id': uid,
+            'create': False,
         }</field>
     </record>
 
