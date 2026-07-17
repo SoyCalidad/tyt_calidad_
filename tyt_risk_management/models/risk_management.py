@@ -383,6 +383,17 @@ class PlanAction(models.Model):
 
     def action_send_reject(self,):
         self.ensure_one()
+        if self.mitigation_id:
+            others_plan = self.env['tyt.risk.action.plan'].search_count([
+                ('mitigation_id', '=', self.mitigation_id.id),
+                ('status', '=', 'under_review'),
+                ('id', '!=', self.id),
+            ])
+            if others_plan == 0:
+                if self.mitigation_id.status == 'mitigated': 
+                    pass 
+                else:
+                    self.mitigation_id.status = 'rejected'
         self.write({
             'status': 'rejected',
         })

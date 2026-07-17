@@ -160,6 +160,7 @@ class RiskMitigation(models.Model):
             ('partially_mitigated', 'Parcialmente Mitigado'),
             ('under_review', 'En revisión'), #amarillo
 
+            ('rejected', 'Rechazado'), #danger 
             ('pending', 'Pendiente'), # when existe some plan action pendient 
             ('complete', 'Completado'),
         ],

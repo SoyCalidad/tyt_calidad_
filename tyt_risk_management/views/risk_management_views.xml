@@ -730,7 +730,7 @@
                     <!--readonly review-->
                     <field name="risk_activity_state" invisible="1" />
                     <group string="Mitigación revisor" name="reviewer_mitigation_only_read"
-                    invisible="not risk_id_reviewer_id or not (status == 'unmitigated' or (status == 'pending' or not can_create_documents) or status == 'under_review') or (is_reviewer or status!='under_review')"
+                    invisible="not risk_id_reviewer_id or not (status == 'unmitigated' or (status in ['pending', 'rejected'] or not can_create_documents) or status == 'under_review') or (is_reviewer or status!='under_review')"
                     >
                             <separator string="Proceso de mitigación"></separator>
                             <div class="row justify-content-end" colspan="4">
@@ -849,7 +849,7 @@
                     </group>
                     <!--readnoly for owner-->
                     <group string="Mitigación revisor" name="reviewer_mitigation_only_read"
-                    invisible="not((status == 'pending' or status == 'partially_mitigated') and can_create_documents )"
+                    invisible="not((status == 'pending' or status=='rejected' or status == 'partially_mitigated') and can_create_documents )"
                     >
                             <separator string="Proceso de mitigación"></separator>
                             <div class="row justify-content-end" colspan="4">
@@ -1323,6 +1323,7 @@
                 decoration-muted="status == 'unmitigated'"
                 decoration-warning="status == 'under_review'"
                 decoration-success="status == 'filled' or status == 'mitigated'"
+                decoration-danger="status == 'rejected'"
                 />
             </list>
         </field>
