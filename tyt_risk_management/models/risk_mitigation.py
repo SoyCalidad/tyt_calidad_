@@ -730,7 +730,7 @@ class RiskMitigation(models.Model):
             vals['status'] = 'partially_mitigated'
         
         if 'mr_status_mitigation' in vals and vals['mr_status_mitigation'] == 'mitigated':
-            if not self.mr_all_action_plans_complete:
+            if not self.mr_all_action_plans_complete and len(self.mr_action_plan_ids)>0:
                 _logger.info(f"Writing {self}")
                 _logger.info(f"vals {vals}")
                 raise UserError("Revisor: Debe completar todos los planes de acción")
@@ -741,7 +741,7 @@ class RiskMitigation(models.Model):
             vals['mr_degree_mitigation'] = self.env.ref('tyt_risk_management.mitigated_100').id 
 
         if 'ma_status_mitigation' in vals and vals['ma_status_mitigation'] == 'mitigated':
-            if not self.ma_all_action_plans_complete:
+            if not self.ma_all_action_plans_complete and len(self.ma_action_plan_ids)>0:
                 _logger.info(f"Writing {self}")
                 _logger.info(f"vals {vals}")
                 raise UserError("Auditor: Debe completar todos los planes de acción")

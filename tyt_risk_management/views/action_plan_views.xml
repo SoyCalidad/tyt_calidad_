@@ -85,7 +85,7 @@
             <list string="Plan de acción" create="0">
                 <field name="risk_id_id"  />
                 <field name="mitigation_id_period_str" />
-                <field name="risk_id_domain_id" />
+                <field name="risk_id_pdomain_id" />
                 <field name="risk_id_process_id" />
                 <field name="risk_id_subprocess_id" />
                 <field name="sequence" widget="handle" />
@@ -161,6 +161,7 @@
         <field name="search_view_id" ref="view_risk_action_plan_search" />
         <field name="context">{
             'search_default_user_id': uid,
+            'create': False,
         }</field>
 
         <field name="help" type="html">

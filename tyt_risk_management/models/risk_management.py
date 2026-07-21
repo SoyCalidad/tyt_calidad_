@@ -267,6 +267,10 @@ class PlanAction(models.Model):
         related="risk_id.domain_id",
         store=True,
     )
+    risk_id_pdomain_id = fields.Many2one(
+        related="risk_id.pdomain_id",
+        store=True,
+    )
     link_ids = fields.One2many(
         comodel_name='tyt.risk.mo_link',
         inverse_name='plan_id',

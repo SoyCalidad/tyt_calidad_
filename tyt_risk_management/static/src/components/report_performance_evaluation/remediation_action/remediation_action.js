@@ -23,7 +23,7 @@ class RPERemediationActionReport extends Component {
 
                 department_id: "0",
                 year: "0",
-                cr_period: "month",
+                cr_period: "tri",
                 revision_type: "0",
             },
 

@@ -419,6 +419,7 @@
          eval="[(5, 0, 0),
                 (0, 0, {'view_mode': 'list', 'view_id': ref('view_risk_quantification_list')}),]"
          />
+        <field name="context">{'create': False}</field>
     </record>
 
     <!-- <record id="reviewer_guide_action" model="ir.actions.client">
@@ -1346,7 +1347,7 @@
     </record>
 
      <record id="action_report_risk_my_activity" model="ir.actions.act_window">
-        <field name="name">Mis actividades</field>
+        <field name="name">Nivel 1 - Actividades</field>
         <field name="res_model">tyt.risk.mitigation</field>
         <field name="view_mode">list,form</field>
         <field name="domain"> [('mitigation_date', '&lt;=', (context_today() + relativedelta(months=1, day=1))),]</field>
