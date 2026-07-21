@@ -723,6 +723,16 @@ class RiskManagement(models.Model):
 
         self.update_access_folder()
 
+        for rec in records:
+            if rec.pdomain_id and rec.pdomain_id.level!=1:
+                rec.pdomain_id.parent_id = False 
+
+            if rec.process_id and rec.process_id.level!=2 and rec.pdomain_id:
+                rec.process_id.parent_id = rec.pdomain_id 
+
+            if rec.subprocess_id and rec.subprocess_id.level!=3 and rec.process_id:
+                rec.subprocess_id.parent_id = rec.process_id 
+
         return records
 
     def write(self, vals):
@@ -731,6 +741,7 @@ class RiskManagement(models.Model):
 
         if 'owner_id' in vals or 'reviewer_id' in vals or 'auditor_id' in vals:
             self.update_access_folder()
+
 
         return res
 

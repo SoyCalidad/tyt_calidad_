@@ -77,7 +77,8 @@ class BusinessProcess(models.Model):
         'tyt.business.process', 
         string='Proceso Padre', 
         ondelete='cascade',
-        index=True
+        index=True,
+        tracking=True,
     )
     child_ids = fields.One2many(
         'tyt.business.process', 
@@ -218,8 +219,8 @@ class BusinessProcess(models.Model):
                 "registros_is_review": mitigation_process.filtered(lambda m: m.status == 'under_review' and m.mr_status_mitigation != 'mitigated').ids,
                 "is_remediation": len( mitigation_process.filtered(lambda m: m.status == 'partially_mitigated')),
                 "registros_is_remediation":mitigation_process.filtered(lambda m: m.status == 'partially_mitigated').ids,
-                "is_audit": len(mitigation_process.filtered(lambda m:  m.mr_status_mitigation == 'mitigated' and m.risk_id_auditor_id)),
-                "registros_is_audit": mitigation_process.filtered(lambda m: m.mr_status_mitigation == 'mitigated' and m.risk_id_auditor_id).ids,
+                "is_audit": len(mitigation_process.filtered(lambda m:  m.mr_status_mitigation == 'mitigated' and m.status != 'complete' and m.risk_id_auditor_id)),
+                "registros_is_audit": mitigation_process.filtered(lambda m: m.mr_status_mitigation == 'mitigated' and m.status != 'complete' and m.risk_id_auditor_id).ids,
                 "is_completed": len(mitigation_process.filtered(lambda m: m.status == 'complete' or (m.mr_status_mitigation=='mitigated' and not m.risk_id_auditor_id))),
                 "registros_is_completed": mitigation_process.filtered(lambda m: m.status == 'complete' or (m.mr_status_mitigation=='mitigated' and not m.risk_id_auditor_id)).ids,
                 "is_completed_percentage": 0,
@@ -251,10 +252,10 @@ class BusinessProcess(models.Model):
                     "is_remediation": len( mitigation_subprocess.filtered(lambda m: m.status == 'partially_mitigated')),
                     "registros_is_remediation": mitigation_subprocess.filtered(lambda m: m.status == 'partially_mitigated').ids,
 
-                    "is_audit": len(mitigation_subprocess.filtered(lambda m: m.mr_status_mitigation == 'mitigated')),
-                    "registros_is_audit": mitigation_subprocess.filtered(lambda m: m.mr_status_mitigation == 'mitigated').ids,
-                    "is_completed": len(mitigation_subprocess.filtered(lambda m: m.status == 'complete' or (m.mr_status_mitigation=='mitigated') and not m.risk_id_auditor_id)),
-                    "registros_is_completed": mitigation_subprocess.filtered(lambda m: m.status == 'complete' or (m.mr_status_mitigation=='mitigated') and not m.risk_id_auditor_id).ids,
+                    "is_audit": len(mitigation_subprocess.filtered(lambda m:  m.mr_status_mitigation == 'mitigated' and m.status != 'complete' and m.risk_id_auditor_id)),
+                    "registros_is_audit": mitigation_subprocess.filtered(lambda m: m.mr_status_mitigation == 'mitigated' and m.status != 'complete' and m.risk_id_auditor_id).ids,
+                    "is_completed": len(mitigation_subprocess.filtered(lambda m: m.status == 'complete' or (m.mr_status_mitigation=='mitigated' and not m.risk_id_auditor_id))),
+                    "registros_is_completed": mitigation_subprocess.filtered(lambda m: m.status == 'complete' or (m.mr_status_mitigation=='mitigated' and not m.risk_id_auditor_id)).ids,
                     "is_completed_percentage": 0,
                 }
                 if data_subprocess["total"]:
