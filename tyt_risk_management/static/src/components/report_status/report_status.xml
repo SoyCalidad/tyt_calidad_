@@ -393,11 +393,11 @@
                                                                             </td>
                                                                         </tr> 
                                                                         <tr style="cursor: pointer;"
-                                                                        t-on-click="() => this.openMitigation(process.registros_is_completed)"
+                                                                        t-on-click="() => this.openMitigation(subp.registros_is_completed)"
                                                                         >
                                                                             <td>Completado</td> 
                                                                             <td>
-                                                                                <t t-out="process.is_completed" />
+                                                                                <t t-out="subp.is_completed" />
     
                                                                             </td> 
                                                                             <td style="background-color: rgb(25, 111, 61); color: transparent;">

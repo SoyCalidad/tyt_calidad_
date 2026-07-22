@@ -894,19 +894,19 @@ class RiskMitigation(models.Model):
                 len(m_mitigation.filtered(lambda m: m.mr_status_mitigation=='mitigated')),
             ],
             "barchart_monitoring":  [
-                len(m_monitoring.filtered(lambda m: m.ma_status_mitigation=='unmitigated' or m.mr_status_mitigation ==False)),
+                len(m_monitoring.filtered(lambda m: m.ma_status_mitigation=='unmitigated' or m.ma_status_mitigation ==False)),
                 len(m_monitoring.filtered(lambda m: m.ma_status_mitigation=='partialmitigated')),
                 len(m_monitoring.filtered(lambda m: m.ma_status_mitigation=='mitigated')),
             ],
             "maturity_mitigated": [
-                len(m_mitigation.filtered(lambda m: m.mr_maturity_level=='none')),
+                len(m_mitigation.filtered(lambda m: m.mr_maturity_level=='none' or m.mr_maturity_level==False)),
                 len(m_mitigation.filtered(lambda m: m.mr_maturity_level=='initial')),
                 len(m_mitigation.filtered(lambda m: m.mr_maturity_level=='limited')),
                 len(m_mitigation.filtered(lambda m: m.mr_maturity_level=='defined')),
                 len(m_mitigation.filtered(lambda m: m.mr_maturity_level=='optimize')),
             ],
             "maturity_monitoring": [
-                len(m_monitoring.filtered(lambda m: m.ma_maturity_level=='none')),
+                len(m_monitoring.filtered(lambda m: m.ma_maturity_level=='none' or m.ma_maturity_level==False)),
                 len(m_monitoring.filtered(lambda m: m.ma_maturity_level=='initial')),
                 len(m_monitoring.filtered(lambda m: m.ma_maturity_level=='limited')),
                 len(m_monitoring.filtered(lambda m: m.ma_maturity_level=='defined')),

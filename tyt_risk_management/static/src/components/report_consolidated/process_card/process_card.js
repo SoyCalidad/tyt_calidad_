@@ -19,6 +19,10 @@ export class ProcessCard extends Component {
 
     static props = {
         process: Object, 
+        data_status_risk: Array,
+        residual_risk: Number,
+        insured_risk: Number,
+        
         //title: String,
     }
 

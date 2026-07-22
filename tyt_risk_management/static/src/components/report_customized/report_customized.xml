@@ -90,7 +90,9 @@
                                 placeholder="'Todos'"/>
                             </div>
                             <div class="col-md-1">
-                                <button class="btn btn-secondary w-100" t-on-click="() => this.onSearch()">
+                                <button class="btn btn-secondary w-100"
+                                t-att-disabled="state.loading"
+                                t-on-click="() => this.onSearch()">
                                      Buscar
                                 </button>
                             </div>
@@ -100,7 +102,7 @@
                             <table class="table table-hover table-sm table-bordered table-condensed">
                                 <thead>
                                     <tr class="text-white bg-secondary" style="--background-color: #666666">
-                                        <th colspan="4" style="background-color: white;"></th> 
+                                        <th colspan="4"></th> 
                                         <t t-if="reportData and reportData.label_time">
                                             <t t-foreach="reportData.label_time" t-as="label" t-key="'Time'+label+label_index">
                                                 <th colspan="3" class=" fw-bolder" >

@@ -67,7 +67,12 @@
                             </div>
                             <t t-foreach="process.subprocesses or []" t-as="subp" t-key="'subp'+subp.id">
                                 <div class="col-lg-6">
-                                    <Subprocess process="subp" />
+                                    <Subprocess 
+                                    process="subp"
+                                    data_status_risk="[subp.n_unmitigation, subp.n_partialmitigated, subp.n_mitigation]"
+                                    residual_risk="subp.residual"
+                                    insured_risk="subp.quantification"
+                                    />
                                 </div>
                             </t>
                         </div>

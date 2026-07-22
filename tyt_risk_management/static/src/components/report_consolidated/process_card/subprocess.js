@@ -18,6 +18,24 @@ export class Subprocess extends Component {
 
     static props = {
         process: Object,
+        data_status_risk: {
+            type: Array,
+            optional: true,
+        },
+        residual_risk: {
+            type: Number,
+            optional: true,
+        },
+        insured_risk: {
+            type: Number,
+            optional: true,
+        },
+    };
+
+    static defaultProps = {  
+        data_status_risk: [0,0,0],
+        residual_risk: 0,
+        insured_risk: 0,
     };
 
     static components = {

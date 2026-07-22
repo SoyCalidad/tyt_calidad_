@@ -181,7 +181,9 @@
                                 <t t-foreach="state.dataProcessed.processes_mitigated" t-as="process" t-key="'resultbyprocessMitigation'+process.id">
                                     <ProcessCard 
                                     process="process"
-    
+                                    data_status_risk="[process.n_unmitigation, process.n_partialmitigated, process.n_mitigation]"
+                                    residual_risk="process.residual"
+                                    insured_risk="process.quantification"
                                     />
                                 </t>
     
@@ -217,7 +219,9 @@
                                 <t t-foreach="state.dataProcessed.processes_monitoring  " t-as="process" t-key="'resultbyprocessMonitoring'+process.id">
                                     <ProcessCard 
                                     process="process"
-    
+                                    data_status_risk="[process.n_unmitigation, process.n_partialmitigated, process.n_mitigation]"
+                                    residual_risk="process.residual"
+                                    insured_risk="process.quantification"
                                     />
                                 </t>
     
