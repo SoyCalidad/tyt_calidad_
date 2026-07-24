@@ -63,7 +63,9 @@
                         </select>
                     </div>
                     <div class="col-md-1">
-                        <button class="btn btn-primary w-100" t-on-click="onSearch">
+                        <button class="btn btn-primary w-100"
+                        t-att-disabled="state.loading"
+                        t-on-click="onSearch">
                              Buscar
                         </button>
                     </div>

@@ -219,7 +219,25 @@ class RiskMitigation(models.Model):
         ],
         string="Nivel de madurez",
         default="none",
+        compute="_compute_mr_maturity_level",
+        store=True
     )
+
+    @api.depends('mr_degree_mitigation')
+    def _compute_mr_maturity_level(self):
+        for rec in self:
+            if not rec.mr_degree_mitigation  or rec.mr_degree_mitigation.id == self.env.ref('tyt_risk_management.unmitigated_0').id:
+                rec.mr_maturity_level = 'none'
+            elif rec.mr_degree_mitigation.id == self.env.ref('tyt_risk_management.pmitigated_25').id:
+                rec.mr_maturity_level = 'initial'
+            elif rec.mr_degree_mitigation.id == self.env.ref('tyt_risk_management.pmitigated_50').id:
+                rec.mr_maturity_level = 'limited'
+            elif rec.mr_degree_mitigation.id == self.env.ref('tyt_risk_management.pmitigated_75').id:
+                rec.mr_maturity_level = 'defined'
+            elif rec.mr_degree_mitigation.id == self.env.ref('tyt_risk_management.mitigated_100').id:
+                rec.mr_maturity_level = 'optimize'
+            else:
+                rec.mr_maturity_level = False
 
 
     degree_mitigation = fields.Selection(
@@ -343,6 +361,10 @@ class RiskMitigation(models.Model):
         ],
         string="Estatus de mitigación",
     )
+
+    @api.onchange('mr_status_mitigation')
+    def _onchange_mr_status_mitigation(self):
+        self.mr_degree_mitigation = False
     # mr_degree_mitigation = fields.Selection(
     #     selection=[
     #         ('0', '0%'),
@@ -468,6 +490,10 @@ class RiskMitigation(models.Model):
         ],
         string="Estatus de auditoria",
     )
+    @api.onchange('ma_status_mitigation')
+    def _onchange_ma_status_mitigation(self):
+        self.ma_degree_mitigation = False
+
     ma_degree_mitigation = fields.Many2one(
         comodel_name='tyt.risk.degree.mitigation',
         string="Grado de mitigación",
@@ -497,8 +523,26 @@ class RiskMitigation(models.Model):
             ('optimize', 'Optimizado'),#verde 100   %
 
         ],
-        string="Nivel de madurez"
+        string="Nivel de madurez auditoria",
+        compute="_compute_mr_maturity_level",
+        store=True
     )
+
+    @api.depends('ma_degree_mitigation')
+    def _compute_ma_maturity_level(self):
+        for rec in self:
+            if not rec.ma_degree_mitigation  or rec.ma_degree_mitigation.id == self.env.ref('tyt_risk_management.unmitigated_0').id:
+                rec.ma_maturity_level = 'none'
+            elif rec.ma_degree_mitigation.id == self.env.ref('tyt_risk_management.pmitigated_25').id:
+                rec.ma_maturity_level = 'initial'
+            elif rec.ma_degree_mitigation.id == self.env.ref('tyt_risk_management.pmitigated_50').id:
+                rec.ma_maturity_level = 'limited'
+            elif rec.ma_degree_mitigation.id == self.env.ref('tyt_risk_management.pmitigated_75').id:
+                rec.ma_maturity_level = 'defined'
+            elif rec.ma_degree_mitigation.id == self.env.ref('tyt_risk_management.mitigated_100').id:
+                rec.ma_maturity_level = 'optimize'
+            else:
+                rec.ma_maturity_level = False
 
     ma_mitigation_date = fields.Date(string="Fecha de mitigación")
     ma_level_compliance = fields.Char(string="Grado de cumplimiento", default="Programado")
@@ -824,18 +868,31 @@ class RiskMitigation(models.Model):
                 process_dict[m.risk_id_process_id.id]["n_unmitigation"] += n_unmitigation
                 process_dict[m.risk_id_process_id.id]["n_partialmitigated"] += n_partialmitigated
                 process_dict[m.risk_id_process_id.id]["n_mitigation"] += n_mitigation
-                exist_subprocess = False 
+                exist_subprocess = None 
                 for index, subp in enumerate(process_dict[m.risk_id_process_id.id]["subprocesses"]):
                     if subp["id"] == m.risk_id_subprocess_id.id:
                         exist_subprocess = index 
                         break 
 
-                if exist_subprocess:
+                if exist_subprocess is not None:
                     process_dict[m.risk_id_process_id.id]["subprocesses"][exist_subprocess]["quantification"] += m.risk_id_quantification
                     process_dict[m.risk_id_process_id.id]["subprocesses"][exist_subprocess]["residual"] += m.mr_residual_risk
                     process_dict[m.risk_id_process_id.id]["subprocesses"][exist_subprocess]["n_unmitigation"] += n_unmitigation
                     process_dict[m.risk_id_process_id.id]["subprocesses"][exist_subprocess]["n_partialmitigated"] += n_partialmitigated
                     process_dict[m.risk_id_process_id.id]["subprocesses"][exist_subprocess]["n_mitigation"] += n_mitigation
+                else:
+                    process_dict[m.risk_id_process_id.id]["subprocesses"].append({
+                        'id': m.risk_id_subprocess_id.id,
+                        'name': m.risk_id_subprocess_id.name,
+                        'short_name': m.risk_id_subprocess_id.short_name,
+                        'quantification': m.risk_id_quantification,
+                        'residual': m.mr_residual_risk,
+                        'n_unmitigation': n_unmitigation,
+                        'n_partialmitigated': n_partialmitigated,
+                        'n_mitigation': n_mitigation,
+                    })
+
+
 
         return list(process_dict.values())
 
@@ -1063,9 +1120,17 @@ class RiskMitigation(models.Model):
             "mr_maturity_level": dict(self._fields['mr_maturity_level'].selection).get(m.mr_maturity_level),
             "mr_status_mitigation": dict(self._fields['mr_status_mitigation'].selection).get(m.mr_status_mitigation),
 
+            "risk_owner_process_name": m.risk_id.process_id.owner_id.display_name,
             "risk_owner_name": m.risk_id_owner_id.display_name,
             "risk_review_name": m.risk_id_reviewer_id.display_name,
             "risk_auditor_name": m.risk_id_auditor_id.display_name,
+
+            "ma_status_mitigation": dict(self._fields['ma_status_mitigation'].selection).get(m.ma_status_mitigation),
+            "ma_level_compliance": m.ma_level_compliance,
+            'review_period': dict(self.env['tyt.risk.management']._fields['cr_peoriod'].selection).get(m.risk_id.cr_peoriod),
+            "ma_degree_mitigation": m.ma_degree_mitigation.name ,
+            "ma_residual_risk": m.ma_residual_risk,
+
         }
 
     @api.model

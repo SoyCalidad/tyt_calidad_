@@ -5,6 +5,7 @@ import { useService } from "@web/core/utils/hooks";
 import { registry } from "@web/core/registry";
 import { loadBundle } from "@web/core/assets";
 import { Layout } from "@web/search/layout";
+import { loadJS } from "@web/core/assets";
 
 import { FilterSelect } from "./filter_select";
 import { RiskSectionCard } from "./risk_section_card";
@@ -12,6 +13,7 @@ import { MaturityLevelCard } from "./maturity_level_card/maturity_level_card";
 import { RiskMap } from "./risk_map/risk_map"
 import { ProcessCard } from "./process_card/process_card";
 import { MONTHS } from "./../utils";
+
 export class ReportConsolidated extends Component {
 
     static template = "tyt_risk_management.ReportConsolidated";
@@ -74,7 +76,9 @@ export class ReportConsolidated extends Component {
 
         onWillStart(async () => {
             await this.loadInitialData();
+            await loadJS("/tyt_risk_management/static/lib/echarts/echarts.min.js");
             await loadBundle("web.chartjs_lib");
+
             this.onSearch()
         });
     }

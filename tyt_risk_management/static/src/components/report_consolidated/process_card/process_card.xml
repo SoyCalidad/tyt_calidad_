@@ -38,13 +38,20 @@
                             <div class="col-lg-6">
                                 <div class="row">
                                     <div class="col-lg-8 p-0" style="">
-                                        <PieChart 
+                                        <!-- <PieChart 
                                         label="'data piechart'"
                                         showLegend="true"
                                         data="{}"
                                         dataValues="[this.props.residual_risk,this.props.insured_risk]"
                                         dataLabels="['Riesgo residual','Riesgos asegurados']"
-                                        dataColors="['#DC3545','#16AAFF']" />
+                                        dataColors="['#DC3545','#16AAFF']" /> -->
+                                        <div 
+                                        style="height: 350px; user-select: none; position: relative;"
+                                        t-ref="div_process_grafica_pastel" 
+                                             >
+                                            
+                                        </div>
+
                                     </div>
                                     <div class="col-lg-4 p-0"  >
                                         <div class="d-flex flex-column gap-3">

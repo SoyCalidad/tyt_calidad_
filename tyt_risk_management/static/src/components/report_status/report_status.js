@@ -103,9 +103,12 @@ export class Nivel2StatusReport extends Component {
             ],
             years: [],
             departments: [],
+
+            loading: false,
         });
 
         this.dialog = useService("dialog");
+        this.notification = useService("notification");
 
         onWillStart(async () => {
             await loadBundle("web.chartjs_lib")
@@ -206,6 +209,7 @@ export class Nivel2StatusReport extends Component {
 
     async onSearch() {
         try {
+            this.state.loading = true;
             const data = await this.orm.call(
                 "tyt.business.process",     
                 "data_status_report", 
@@ -220,7 +224,16 @@ export class Nivel2StatusReport extends Component {
             this.state.processedData = data;
 
         } catch (error) {
-            console.error("Error cargando procesos:", error);
+            this.notification.add(
+                error.message || "No se pudo generar el reporte.",
+                {
+                    title: "Error",
+                    type: "danger",
+                }
+            );
+            console.error("Error onSearch Nivel2:", error);
+        } finally {
+            this.state.loading = false;
         }
     }
 }

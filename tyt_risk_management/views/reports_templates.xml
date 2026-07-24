@@ -11,6 +11,7 @@
     <record id="action_report_consolidated_dashboard" model="ir.actions.client">
         <field name="name">Nivel 3 - Consolidado</field>
         <field name="tag">tyt_risk_management.report_consolidated</field>
+        <field name="path">report-nivel-3</field>
     </record>
     <record id="action_report_customized_dashboard" model="ir.actions.client">
         <field name="name">Nivel 4 - Personalizado </field>

@@ -33,10 +33,61 @@ export class ProcessCard extends Component {
             collapsed: false,
         });
         this.barChartRef = useRef("barChart");
+        this.pieChart = useRef("div_process_grafica_pastel");
         onMounted(() => {
            this.renderBarChart();
+           this.renderPieChart();
         });
 
+    }
+
+    renderPieChart() {
+        const chartDom = this.pieChart.el;
+        if (chartDom) {
+            var myChart = echarts.init(chartDom);
+            let risk_ensured = 0 
+            if (this.props.process.quantification && this.props.process.residual) {
+                risk_ensured = this.props.process.quantification - this.props.process.residual;
+            }
+            const option =  {
+            tooltip: {
+                trigger: 'item'
+            },
+            legend: {
+                top: '5%',
+                left: 'center'
+            },
+            series: [
+                {
+                //name: 'Access From',
+                type: 'pie',
+                color: ['#DC3545', '#16AAFF'],
+                avoidLabelOverlap: false,
+                label: {
+                    show: false,
+                    position: 'center'
+                },
+                emphasis: {
+                    label: {
+                    show: false,
+                    fontSize: 40,
+                    fontWeight: 'bold'
+                    }
+                },
+                labelLine: {
+                    show: false
+                },
+                data: [
+                    { value: this.props.residual_risk || 0, name: 'Riesgo residual' },
+                    { value:  risk_ensured, name: 'Riesgos asegurados' },
+                ]
+                }
+            ]
+            };
+    
+            option && myChart.setOption(option);
+
+        }
     }
 
     renderBarChart() {

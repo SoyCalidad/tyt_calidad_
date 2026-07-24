@@ -199,7 +199,7 @@
                             <label for="text-input" class="form-label fw-bolder">
                                 Grado de mitigación
                             </label> 
-                            <label class="form-control badge bg-secondary rounded px-3 py-2 my-2 fw-bolder">
+                            <label t-attf-class="form-control badge  rounded px-3 py-2 my-2 fw-bolder {{mrStatusMitigationClass}}">
                                 <t t-out="risk?.mr_status_mitigation or 'No Mitigado'">
                                     No Mitigado
                                 </t>
@@ -216,7 +216,7 @@
                         </div>
                         <div class="col-lg-4">
                             <label for="text-input" class="form-label fw-bolder">Grado de cumplimiento</label>  
-                            <label class="form-control badge bg-danger rounded px-3 py-2 my-2 fw-bolder text-white">
+                            <label t-attf-class="form-control badge  rounded px-3 py-2 my-2 fw-bolder text-white {{mrLevelComplianceClass}}">
                                 <t t-out="risk?.mr_level_compliance or ''">
                                     No atendido
                                 </t>
@@ -226,7 +226,7 @@
                             <label for="text-input" class="form-label fw-bolder">Estatus %</label> 
                             <input type="text"
                                 disabled="disabled" name="text-input" class="form-control" 
-                                t-att-value="risk?.mr_degree_mitigation or ''" 
+                                t-att-value="risk?.mr_degree_mitigation or '0'" 
                                 />
                         </div>
                         <div class="col-lg-2">
@@ -240,7 +240,7 @@
                             <label for="text-input" class="form-label fw-bolder">Riesgo residual</label> 
                             <input
                                 type="text" disabled="1" class="form-control" style="text-align: right;"
-                                t-att-value="risk?.mr_residual_risk or ''"
+                                t-att-value="risk?.mr_residual_risk or '0'"
                                 />
                         </div>
                     </div>
@@ -256,13 +256,17 @@
                             <label for="text-input" class="form-label fw-bolder">
                                 Antes de controles
                             </label> 
-                            <label class="form-control badge bg-danger rounded px-3 py-2 my-2 fw-bolder text-white"
-                                style="background-color: darkred !important;">Severo</label> 
+                            <label t-attf-class="form-control badge bg-danger rounded px-3 py-2 my-2 fw-bolder text-white {{beforeControlClass}}"
+                                style="background-color: darkred !important;">
+                                <t t-out="risk?.before_control or ''" />
+                            </label> 
                         </div>
                         <div class="col-lg-4">
                             <label for="text-input" class="form-label fw-bolder">Después de controles</label>
-                            <label class="form-control badge bg-danger rounded px-3 py-2 my-2 fw-bolder text-white"
-                                style="background-color: darkred !important;">Severo</label>
+                            <label t-attf-class="form-control badge bg-danger rounded px-3 py-2 my-2 fw-bolder text-white {{afterControlClass}}"
+                                 >
+                                <t t-out="risk?.after_control or ''" />
+                            </label>
                         </div>
                     </div>
                 </div>
@@ -281,7 +285,7 @@
                             <label for="text-input" class="form-label fw-bolder">Dueño del proceso </label> 
                             <input
                                 type="text"  disabled="disabled" name="text-input" class="form-control"
-                                t-att-value="risk?.risk_owner_name or ''"
+                                t-att-value="risk?.risk_owner_process_name or ''"
                                 />
                         </div>
                         <div class="col-lg-4">
@@ -300,7 +304,7 @@
                                  />
                         </div>
                     </div> 
-                    <t >
+                    <t t-if="risk.risk_auditor_name">
                         <hr />
                         <div class="row">
                             <div class="col-lg-12">
@@ -309,17 +313,27 @@
                             <div class="col-lg-4">
                                 <label for="text-input" class="form-label fw-bolder">
                                     Grado de mitigación
+                                </label>  
+                                <label t-attf-class="form-control badge  rounded px-3 py-2 my-2 fw-bolder {{maStatusMitigationClass}}">
+                                    <t t-out="risk?.ma_status_mitigation or 'No Mitigado'">
+                                        No Mitigado
+                                    </t>
                                 </label> 
-                                <label class=" form-control badge bg-secondary rounded px-3 py-2 my-2 fw-bolder">No Mitigado</label>
                             </div>
                             <div class="col-lg-4">
                                 <label for="text-input" class="form-label fw-bolder">Grado de cumplimiento</label> 
-                                <label class="form-control badge bg-secondary rounded px-3 py-2 my-2 fw-bolder">Programado</label>
+                                <label t-attf-class="form-control badge bg-secondary rounded px-3 py-2 my-2 fw-bolder {{maLevelComplianceClass}}">
+                                    <t t-out="risk?.ma_level_compliance or ''" >
+                                        Programado
+                                    </t>
+                                </label>
                             </div>
                             <div class="col-lg-4">
                                 <label for="text-input" class="form-label fw-bolder">Periodo de revisión </label> 
                                 <input
-                                    type="text"   disabled="disabled" name="text-input" class="form-control" />
+                                    type="text"   disabled="disabled" name="text-input" class="form-control" 
+                                    t-att-value="risk?.review_period or ''"
+                                    />
                             </div>
                             <div class="col-lg-4">
                                 <label for="text-input" class="form-label fw-bolder">Auditor </label> 
@@ -332,17 +346,23 @@
                             <div class="col-lg-2">
                                 <label for="text-input" class="form-label fw-bolder">Estatus %</label> 
                                 <input type="text"
-                                    maxlength="50" disabled="disabled" name="text-input" class="form-control" />
+                                    maxlength="50" disabled="disabled" name="text-input" class="form-control" 
+                                    t-att-value="risk?.ma_degree_mitigation or '0'"
+                                    />
                             </div>
                             <div class="col-lg-2">
                                 <label for="text-input" class="form-label fw-bolder">Riesgo inherente</label> 
                                 <input type="text"
-                                    disabled="disabled" class="form-control text-end"   />
+                                    disabled="disabled" class="form-control text-end" 
+                                    t-att-value="risk?.risk_quantification or '0'"
+                                    />
                             </div>
                             <div class="col-lg-2">
                                 <label for="text-input" class="form-label fw-bolder">Riesgo residual</label> 
                                 <input type="text"
-                                    disabled="disabled" class="form-control text-end"  />
+                                    disabled="disabled" class="form-control text-end" 
+                                    t-att-value="risk?.ma_residual_risk or '0'"
+                                    />
                             </div>
                         </div>
                     </t>

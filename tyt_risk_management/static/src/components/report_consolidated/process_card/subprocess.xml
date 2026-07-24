@@ -25,9 +25,9 @@
                                         label="'data piechart'"
                                         showLegend="true"
                                         data="{}"
-                                        dataValues="[this.props.residual_risk,this.props.insured_risk]"
+                                        dataValues="[this.props.residual_risk, process.quantification - process.residual]"
                                         dataLabels="['Riesgo residual','Riesgos asegurados']"
-                                        dataColors="['#DC3545','#16AAFF']" />
+                                        dataColors="['#DC3545','#16AAFF']" />                                 
                                     </div>
                                     <div class="col-lg-4 "  >
                                         <div class="mt-3" >

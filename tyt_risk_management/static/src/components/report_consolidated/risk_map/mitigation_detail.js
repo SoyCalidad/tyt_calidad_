@@ -94,4 +94,55 @@ export class MitigationDetail extends Component {
     }
 
 
+    COLORS_CONTROLS = {
+            'Insignificate': 'bg-secondary',
+            'Menor': 'bg-success',
+            'Mayor': 'bg-danger',
+            'Significativo': 'bg-warning',
+            'Severo': 'tyt-bg-darkred',
+        }
+    get beforeControlClass() {
+        const beforeControl = this.risk && this.risk.before_control;
+
+        return this.COLORS_CONTROLS[beforeControl] || "";
+    }
+
+    get afterControlClass() {
+        const control = this.risk && this.risk.after_control;
+        return this.COLORS_CONTROLS[control] || "";
+    }
+
+    COLORS_STATUS_MITIGATION = {
+            'No Mitigado': 'bg-secondary',
+            'Parcialmente Mitigado': 'bg-warning',
+            'Mitigado': 'bg-success',
+        }
+    get mrStatusMitigationClass() {
+        const mrStatusMitigation = this.risk && this.risk.mr_status_mitigation;
+        return this.COLORS_STATUS_MITIGATION[mrStatusMitigation] || 'bg-secondary';
+    }
+
+    get maStatusMitigationClass() {
+        const mrStatusMitigation = this.risk && this.risk.ma_status_mitigation;
+        return this.COLORS_STATUS_MITIGATION[mrStatusMitigation] || 'bg-secondary';
+    }
+
+    COLORS_LEVEL_COMPLIANCE = {
+        'No atendido': 'bg-danger',
+        'Programado': 'bg-secondary',
+    }
+
+    get mrLevelComplianceClass() {
+        const level = this.risk && this.risk.mr_level_compliance ;
+        return this.COLORS_LEVEL_COMPLIANCE[level] || 'bg-secondary';
+
+    }
+
+    get maLevelComplianceClass() {
+        const level = this.risk && this.risk.ma_level_compliance ;
+        return this.COLORS_LEVEL_COMPLIANCE[level] || 'bg-secondary';
+
+    }
+
+
 }
