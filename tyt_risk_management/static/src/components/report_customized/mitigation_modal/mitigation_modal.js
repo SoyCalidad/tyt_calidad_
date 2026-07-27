@@ -5,7 +5,7 @@ import { useService } from "@web/core/utils/hooks";
 import { Dialog } from "@web/core/dialog/dialog";
 
 export class RCMitigationModal extends Component {
-    static template = "tyt_risk_management.RCMitigationModalks";
+    static template = "tyt_risk_management.RCMitigationModal";
 
     static components = {Dialog};
 

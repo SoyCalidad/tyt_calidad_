@@ -128,7 +128,7 @@ class AccumulatedCustomizedReportWizard(models.AbstractModel):
 
             		
 
-            sheet.set_column(0, len(headers), 25)
+            sheet.set_column(0, len(headers), 28)
             dict_months = dict(self.env['tyt.risk.mitigation']._fields['month'].selection)
             dict_cr_period = dict(self.env['tyt.risk.management']._fields['cr_peoriod'].selection)
 
@@ -140,7 +140,7 @@ class AccumulatedCustomizedReportWizard(models.AbstractModel):
                 sheet.write(row, 3, dict_months.get(mitigation.month), text_format)
                 sheet.write(row, 4, "", text_format)
                 sheet.write(row, 5, mitigation.risk_id_department_id.name or '', text_format)
-                sheet.write(row, 6,  '', text_format)
+                sheet.write(row, 6,  mitigation.risk_id_fsc_id.display_name or '', text_format)
                 sheet.write(row, 7, ",".join([g.name for g in mitigation.risk_id.goal_coso_ids]),  text_format)
                 sheet.write(row, 8, mitigation.risk_id_process_id.name or '', text_format)
                 sheet.write(row, 9, mitigation.risk_id_subprocess_id.name or '', text_format)
