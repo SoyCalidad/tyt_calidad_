@@ -27,7 +27,7 @@ class RiskNotificationRevision(models.TransientModel):
         base_url = self.env['ir.config_parameter'].sudo().get_param('web.base.url')
         # Formateo del cuerpo en HTML (Tabla invertida)
         body_html = f"""
-            <h3>Actividad asignada</h3>
+            <h3 class="text-center" >Actividad asignada</h3>
             <table border="1" class="table" style="border-collapse: collapse; width: 100%; font-family: sans-serif;">
                 <tr>
                     <th style="padding: 8px; background-color: #f2f2f2; text-align: left;">Actividad</th>
@@ -35,7 +35,7 @@ class RiskNotificationRevision(models.TransientModel):
                 </tr>
                 <tr>
                     <th style="padding: 8px; background-color: #f2f2f2; text-align: left;">Descripción</th>
-                    <td style="padding: 8px;">Monitoreo R{mitigation.risk_id_id} - {mitigation.risk_id_domain_id.display_name or ''}</td>
+                    <td style="padding: 8px;">Monitoreo R{mitigation.risk_id_id} - {mitigation.sudo().risk_id_pdomain_id.display_name or ''}</td>
                 </tr>
                 <tr>
                     <th style="padding: 8px; background-color: #f2f2f2; text-align: left;">Estatus</th>
@@ -64,6 +64,7 @@ class RiskNotificationRevision(models.TransientModel):
                 'body_html': body_html,
                 'email_to': reviewer_email,
                 'email_from': email_from,
+                'auto_delete': True,
             }
             
             self.env['mail.mail'].sudo().create(mail_values).send()

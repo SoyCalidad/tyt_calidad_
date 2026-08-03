@@ -3,6 +3,7 @@ from odoo.exceptions import UserError
 
 from dateutil.relativedelta import relativedelta
 import logging 
+from markupsafe import escape
 
 _logger = logging.getLogger(__name__)
 
@@ -148,6 +149,8 @@ class RiskMitigation(models.Model):
                     rec.assigned_to = rec.risk_id_auditor_id
             elif rec.risk_activity_state == 'monitoring':
                 rec.assigned_to = rec.risk_id_auditor_id
+            elif rec.status == 'complete':
+                rec.assigned_to = False
             else:
                 rec.assigned_to = rec.risk_id_reviewer_id 
 
@@ -792,7 +795,16 @@ class RiskMitigation(models.Model):
             vals['ma_mitigation_date'] = fields.Datetime.now().date()
             vals['ma_level_compliance'] = 'A tiempo' # tambien hay fuera de periodo
             vals['status'] = 'complete' 
-        return super().write(vals)
+        res = super().write(vals)
+
+        #mail
+        if 'status' in vals and vals['status'] == 'mitigated':
+            self._send_activity_assigned_monitoring_email()
+            self._send_activity_mitigation_completed_email()
+        if 'status' in vals and vals['status'] == 'complete':
+            self._send_mail_activity_complete()
+
+        return res
 
     @api.model
     def get_available_years(self):
@@ -2016,3 +2028,571 @@ class RiskMitigation(models.Model):
             "totals": total_obj,
         }
 
+
+    def _send_mail_activity_complete(self): 
+        """Envía correo al usuario asignado cuando cambia el estado.""" 
+        self.ensure_one()
+        user = self.risk_id_auditor_id
+        if not user or not user.partner_id or not user.partner_id.email: 
+            return 
+        state_label = "Mitigado"
+        activity = escape("Monitoreo") 
+        description = escape(f"Monitoreo R{self.risk_id_id} - {self.sudo().risk_id_pdomain_id.display_name or ''}") 
+        comments = escape(self.ma_recommendation or '') 
+        sender_email = ( self.env.company.email_formatted or (self.env.user.email_formatted if self.env.user else False ) ) # De 
+        if sender_email: 
+            sender_display = f"{escape(sender_email)} -&gt; {escape(user.name)}" 
+        else: 
+            sender_display = escape(user.name) 
+        body_html = f""" <table width="100%" border="0" cellspacing="0" cellpadding="0" bgcolor="#2e2e2e" style="width:100%; background-color:#f4f4f4 !important;" > <tbody> <tr> <td style=" color:#ffffff !important; font-family:Lato, Arial, sans-serif; font-size:24px; line-height:32px; font-weight:bold; text-align:center; padding-bottom:15px; padding-top:25px; " > <span > Actividad Completada </span> </td> </tr> <tr> <td style=" color:#777777 !important; font-family:Lato, Arial, sans-serif; font-size:17px; line-height:30px; text-align:center; padding-bottom:15px; " > <center> <table class="table table-bordered" border="1"> <tbody> <tr> <td style="padding:0 10px;"> <b>Actividad</b> </td> <td style="padding:0 10px;"> {activity} </td> </tr> <tr> <td style="padding:0 10px;"> <b>Descripción</b> </td> <td style="padding:0 10px;"> {description} </td> </tr> <tr> <td style="padding:0 10px;"> <b>Estatus</b> </td> <td style="padding:0 10px;"> {escape(state_label)} </td> </tr> <tr> <td style="padding:0 10px;"> <b>De</b> </td> <td style="padding:0 10px;"> {sender_display} </td> </tr> <tr> <td style="padding:0 10px;"> <b>Comentarios</b> </td> <td style="padding:0 10px;"> {comments} </td> </tr> </tbody> </table> </center> </td> </tr> </tbody> </table> """ 
+        if sender_email:
+            mail_values = { 
+                "subject": f"Monitoreo R{self.risk_id_id}", 
+                "body_html": body_html, 
+                "email_to": user.partner_id.email, 
+                "email_from": sender_email, 
+                "auto_delete": True, 
+                "model": self._name, "res_id": self.id, 
+            } 
+            mail = self.env["mail.mail"].sudo().create(mail_values) 
+            mail.send()
+
+    def _send_activity_assigned_monitoring_email(self): 
+        """ Envía un correo al usuario asignado indicando que tiene una actividad pendiente. """ 
+        base_url = self.env['ir.config_parameter'].sudo().get_param('web.base.url')
+        for record in self: 
+            user = record.risk_id_auditor_id 
+            if not user or not user.partner_id or not user.partner_id.email: 
+                continue # Obtener etiqueta visible del estado 
+            state_label = "No mitigado" 
+            activity = escape("Monitoreo") 
+            description = escape(f"Monitoreo R{record.risk_id_id} - {record.sudo().risk_id_pdomain_id.display_name or ''}") 
+            comments = escape("Realizar revisiones anuales al proceso, revisar su vigencia e implementación") 
+            sender = self.env.user 
+            sender_email = sender.email or self.env.company.email or "" 
+            sender_name = sender.name or "" # Texto mostrado como: # correo@dominio.com -> Nombre 
+            sender_display = ( f'<a href="mailto:{escape(sender_email)}">' f'{escape(sender_email)}' f'</a> -&gt; {escape(user.name)}' if sender_email else escape(sender_name) )
+            body_html = f""" <table width="100%" border="0" cellspacing="0" cellpadding="0" class="w-100" style="width:100%; background-color:#f4f4f4;" > <tbody> <!-- TÍTULO --> <tr> <td class="text-center pt-4 pb-3" style=" color:#000000; font-family:Lato,Arial,sans-serif; font-size:24px; line-height:32px; font-weight:bold; text-align:center; padding-top:25px; padding-bottom:15px; " > <span> Actividad asignada </span> </td> </tr> <!-- INFORMACIÓN --> <tr> <td class="text-center pb-3" style=" color:#777777; font-family:Lato,Arial,sans-serif; font-size:17px; line-height:30px; text-align:center; padding-bottom:15px; " > <center> <table border="1" class="table table-bordered" cellpadding="0" cellspacing="0" style=" border-collapse:collapse; margin:0 auto; " > <tbody> <!-- ACTIVIDAD --> <tr> <td class="px-2 py-1"> <b class="fw-bold"> Actividad </b> </td> <td class="px-2 py-1"> {activity} </td> </tr> <!-- DESCRIPCIÓN --> <tr> <td class="px-2 py-1"> <b class="fw-bold"> Descripción </b> </td> <td class="px-2 py-1"> {description} </td> </tr> <!-- ESTADO --> <tr> <td class="px-2 py-1"> <b class="fw-bold"> Estatus </b> </td> <td class="px-2 py-1"> {escape(state_label)} </td> </tr> <!-- REMITENTE --> <tr> <td class="px-2 py-1"> <b class="fw-bold"> De </b> </td> <td class="px-2 py-1"> {sender_display} </td> </tr> <!-- COMENTARIOS --> <tr> <td class="px-2 py-1"> <b class="fw-bold"> Comentarios </b> </td> <td class="px-2 py-1"> {comments} </td> </tr> </tbody> </table> </center> </td> </tr> <!-- MENSAJE --> <tr> <td class="text-center pb-3" style=" color:#777777; font-family:Lato,Arial,sans-serif; font-size:17px; line-height:30px; text-align:center; padding-bottom:15px; " > <p class="mb-0"> Estimado usuario, por favor revise sus actividades pendientes en la plataforma. </p> </td> </tr> <!-- BOTÓN --> <tr> <td class="text-center pb-5" style=" text-align:center; padding-bottom:35px; " > <center> <a href="{base_url}/odoo" target="_blank" class="btn btn-primary fw-bold" style=" display:inline-block; text-decoration:none; color:#ffffff; background-color:#0f0b5b; border:1px solid #0f0b5b; border-radius:4px; padding:10px 20px; font-family:Arial, 'Helvetica Neue', Helvetica, sans-serif; font-size:24px; line-height:48px; font-weight:bold; text-align:center; " > Inicia sesión </a> </center> </td> </tr> </tbody> </table> """ 
+            mail_values = { 
+                "subject": f"Monitoreo R{record.risk_id_id}", 
+                "body_html": body_html, 
+                "email_to": user.partner_id.email, 
+                "email_from": sender_email or False, 
+                "auto_delete": True, 
+                "model": record._name, "res_id": record.id, } 
+            mail = self.env["mail.mail"].sudo().create(mail_values) 
+            mail.send()
+
+    def _send_weekly_pending_activities_emails(self):
+        """
+        Envía semanalmente un resumen de actividades pendientes
+        agrupado por usuario asignado.
+        """
+
+        # Estados que serán considerados pendientes.
+        pending_states = {
+            "mitigation": "Mitigación",
+            "action_plan": "Plan de acción",
+            "unmitigated": "No mitigado",
+            "monitoring": "Monitoreo",
+        }
+
+        # URL base configurada en Odoo.
+        base_url = (
+            self.env["ir.config_parameter"]
+            .sudo()
+            .get_param("web.base.url", "")
+        )
+
+        # Dejamos el acceso al backend de Odoo.
+        login_url = f"{str(base_url).rstrip('/')}/odoo"
+
+        # Buscar todas las mitigaciones asignadas.
+        mitigations = self.search([
+            ("assigned_to", "!=", False),
+            ("risk_activity_state", "!=", False),
+        ])
+
+        if not mitigations:
+            return
+
+        from collections import defaultdict
+
+        # Agrupar por usuario.
+        mitigations_by_user = defaultdict(lambda: self.env[self._name])
+
+        for mitigation in mitigations:
+            mitigations_by_user[mitigation.assigned_to] |= mitigation
+
+        Mail = self.env["mail.mail"]
+
+        for user, user_mitigations in mitigations_by_user.items():
+
+            # El usuario no tiene correo.
+            if not user.partner_id.email:
+                continue
+
+            # Contadores por estado.
+            counters = {
+                state: 0
+                for state in pending_states
+            }
+
+            for mitigation in user_mitigations:
+                state = mitigation.risk_activity_state
+
+                if state in counters:
+                    counters[state] += 1
+
+            # Solo mostrar estados que realmente tienen pendientes.
+            pending_rows = []
+
+            for state, label in pending_states.items():
+
+                count = counters[state]
+
+                if count:
+                    pending_rows.append(
+                        f"""
+                        <tr>
+                            <td
+                                class="px-2 py-1"
+                                style="padding-left:10px;padding-right:10px;"
+                            >
+                                {escape(label)}
+                            </td>
+
+                            <td
+                                class="px-2 py-1"
+                                style="
+                                    padding-left:10px;
+                                    padding-right:10px;
+                                    text-align:center;
+                                "
+                            >
+                                <strong>
+                                    {count}
+                                </strong>
+                            </td>
+                        </tr>
+                        """
+                    )
+
+            # Si por alguna razón no existen pendientes, no enviar.
+            if not pending_rows:
+                continue
+
+            body_html = f"""
+                <table
+                    width="100%"
+                    border="0"
+                    cellspacing="0"
+                    cellpadding="0"
+                    class="w-100"
+                    style="
+                        width:100%;
+                        background-color:#f4f4f4;
+                        border-collapse:collapse;
+                    "
+                >
+                    <tbody>
+
+                        <!-- TÍTULO -->
+                        <tr>
+                            <td
+                                class="text-center pt-4 pb-3"
+                                style="
+                                    color:#000000;
+                                    font-family:Lato,Arial,sans-serif;
+                                    font-size:24px;
+                                    line-height:32px;
+                                    font-weight:bold;
+                                    text-align:center;
+                                    padding-top:25px;
+                                    padding-bottom:15px;
+                                "
+                            >
+                                <span>
+                                    Actividades pendientes
+                                </span>
+                            </td>
+                        </tr>
+
+                        <!-- MENSAJE -->
+                        <tr>
+                            <td
+                                class="text-center pb-3"
+                                style="
+                                    color:#777777;
+                                    font-family:Lato,Arial,sans-serif;
+                                    font-size:17px;
+                                    line-height:30px;
+                                    text-align:center;
+                                    padding-bottom:15px;
+                                "
+                            >
+                                <p class="mb-0">
+                                    Estimado {escape(user.name)},
+                                    por favor revise sus actividades
+                                    pendientes en la plataforma.
+                                </p>
+                            </td>
+                        </tr>
+
+                        <!-- TABLA -->
+                        <tr>
+                            <td
+                                class="text-center pb-3"
+                                style="
+                                    color:#777777;
+                                    font-family:Lato,Arial,sans-serif;
+                                    font-size:17px;
+                                    line-height:30px;
+                                    text-align:center;
+                                    padding-bottom:15px;
+                                "
+                            >
+                                <center>
+
+                                    <table
+                                        border="1"
+                                        class="table table-bordered w-auto"
+                                        cellspacing="0"
+                                        cellpadding="0"
+                                        style="
+                                            border-collapse:collapse;
+                                        "
+                                    >
+                                        <tbody>
+
+                                            <!-- CABECERA -->
+                                            <tr>
+                                                <td
+                                                    class="px-2 py-1"
+                                                    style="
+                                                        padding-left:10px;
+                                                        padding-right:10px;
+                                                    "
+                                                >
+                                                    <strong>
+                                                        Actividad
+                                                    </strong>
+                                                </td>
+
+                                                <td
+                                                    class="px-2 py-1"
+                                                    style="
+                                                        padding-left:10px;
+                                                        padding-right:10px;
+                                                    "
+                                                >
+                                                    <strong>
+                                                        Pendientes
+                                                    </strong>
+                                                </td>
+                                            </tr>
+
+                                            {''.join(pending_rows)}
+                                        </tbody>
+                                    </table>
+                                </center>
+                            </td>
+                        </tr>
+
+                        <!-- BOTÓN -->
+                        <tr>
+                            <td
+                                class="text-center pb-5"
+                                style="
+                                    text-align:center;
+                                    padding-bottom:35px;
+                                "
+                            >
+                                <center>
+
+                                    <a
+                                        href="{escape(login_url)}"
+                                        target="_blank"
+                                        class="btn btn-primary fw-bold"
+                                        style="
+                                            display:inline-block;
+                                            text-decoration:none;
+                                            color:#ffffff;
+                                            background-color:#0f0b5b;
+                                            border:1px solid #0f0b5b;
+                                            border-radius:4px;
+                                            padding:10px 20px;
+                                            font-family:Arial,
+                                                'Helvetica Neue',
+                                                Helvetica,
+                                                sans-serif;
+                                            font-size:24px;
+                                            line-height:48px;
+                                            font-weight:bold;
+                                            text-align:center;
+                                        "
+                                    >
+                                        Inicia sesión
+                                    </a>
+
+                                </center>
+                            </td>
+                        </tr>
+
+                    </tbody>
+                </table>
+            """
+
+            sender_email = (
+                self.env.company.email_formatted
+                or self.env.user.email_formatted
+                or False
+            )
+
+            mail_values = {
+                "subject": "Actividades pendientes",
+                "body_html": body_html,
+                "email_to": user.partner_id.email,
+                "email_from": sender_email,
+                "auto_delete": True,
+                "model": self._name,
+                "res_id": user_mitigations[0].id,
+            }
+
+            Mail.sudo().create(mail_values).send()
+
+    def _send_activity_mitigation_completed_email(self):
+        """
+        Envía un correo notificando que una actividad fue completada.
+        El correo se envía al usuario asignado (assigned_to).
+        """ 
+        user = self.risk_id_reviewer_id
+
+        # No enviar si no existe usuario o correo
+        if not user or not user.partner_id or not user.partner_id.email:
+            return
+
+        # Obtener etiqueta visible del estado
+        state_label = "Mitigado"
+
+        activity = "Mitigación"
+        description = f"Mitigación Rf{self.risk_id_id} - {self.sudo().risk_id_pdomain_id.display_name or ''}"
+        comments = escape("")
+
+        sender = self.env.user
+        sender_email = sender.email_formatted or self.env.company.email_formatted or ""
+
+        if sender_email:
+            sender_display = (
+                f'<a href="mailto:{escape(sender_email)}">'
+                f'{escape(sender_email)}'
+                f'</a> -&gt; {escape(user.name)}'
+            )
+        else:
+            sender_display = escape(sender.name or "")
+
+        body_html = f"""
+            <table
+                width="100%"
+                border="0"
+                cellspacing="0"
+                cellpadding="0"
+                class="w-100"
+                style="
+                    width:100%;
+                    background-color:#f4f4f4;
+                    border-collapse:collapse;
+                "
+            >
+                <tbody>
+                    <!-- TÍTULO -->
+                    <tr>
+                        <td
+                            class="text-center pt-4 pb-3"
+                            style="
+                                color:#000000;
+                                font-family:Lato,Arial,sans-serif;
+                                font-size:24px;
+                                line-height:32px;
+                                font-weight:bold;
+                                text-align:center;
+                                padding-top:25px;
+                                padding-bottom:15px;
+                            "
+                        >
+                            <span>
+                                Actividad Completada
+                            </span>
+                        </td>
+                    </tr>
+
+                    <!-- INFORMACIÓN -->
+                    <tr>
+                        <td
+                            class="text-center pb-3"
+                            style="
+                                color:#777777;
+                                font-family:Lato,Arial,sans-serif;
+                                font-size:17px;
+                                line-height:30px;
+                                text-align:center;
+                                padding-bottom:15px;
+                            "
+                        >
+                            <center>
+                                <!-- TABLA INTERIOR -->
+                                <table
+                                    border="1"
+                                    cellspacing="0"
+                                    cellpadding="0"
+                                    class="table table-bordered w-auto"
+                                    style=" 
+                                        max-width:100%;
+                                        border-collapse:collapse;
+                                        margin:0 auto;
+                                    "
+                                >
+                                    <tbody>
+                                        <tr>
+                                            <td
+                                                class="px-2 py-1"
+                                                style="
+                                                    padding-left:10px;
+                                                    padding-right:10px;
+                                                "
+                                            >
+                                                <strong>
+                                                    Actividad
+                                                </strong>
+                                            </td>
+
+                                            <td
+                                                class="px-2 py-1"
+                                                style="
+                                                    padding-left:10px;
+                                                    padding-right:10px;
+                                                "
+                                            >
+                                                {activity}
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td
+                                                class="px-2 py-1"
+                                                style="
+                                                    padding-left:10px;
+                                                    padding-right:10px;
+                                                "
+                                            >
+                                                <strong>
+                                                    Descripción
+                                                </strong>
+                                            </td>
+
+                                            <td
+                                                class="px-2 py-1"
+                                                style="
+                                                    padding-left:10px;
+                                                    padding-right:10px;
+                                                "
+                                            >
+                                                {description}
+                                            </td>
+                                        </tr>
+
+                                        <tr>
+                                            <td
+                                                class="px-2 py-1"
+                                                style="
+                                                    padding-left:10px;
+                                                    padding-right:10px;
+                                                "
+                                            >
+                                                <strong>
+                                                    Estatus
+                                                </strong>
+                                            </td>
+
+                                            <td
+                                                class="px-2 py-1"
+                                                style="
+                                                    padding-left:10px;
+                                                    padding-right:10px;
+                                                "
+                                            >
+                                                {escape(state_label)}
+                                            </td>
+                                        </tr>
+
+                                        <tr>
+                                            <td
+                                                class="px-2 py-1"
+                                                style="
+                                                    padding-left:10px;
+                                                    padding-right:10px;
+                                                "
+                                            >
+                                                <strong>
+                                                    De
+                                                </strong>
+                                            </td>
+                                            <td
+                                                class="px-2 py-1"
+                                                style="
+                                                    padding-left:10px;
+                                                    padding-right:10px;
+                                                "
+                                            >
+                                                {sender_display}
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td
+                                                class="px-2 py-1"
+                                                style="
+                                                    padding-left:10px;
+                                                    padding-right:10px;
+                                                "
+                                            >
+                                                <strong>
+                                                    Comentarios
+                                                </strong>
+                                            </td>
+
+                                            <td
+                                                class="px-2 py-1"
+                                                style="
+                                                    padding-left:10px;
+                                                    padding-right:10px;
+                                                "
+                                            >
+                                                {comments}
+                                            </td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </center>
+                        </td>
+                    </tr>
+
+                </tbody>
+            </table>
+        """
+
+        sender_email = (
+            self.env.company.email_formatted
+            or self.env.user.email_formatted
+            or False
+        )
+
+        mail_values = {
+            "subject": f"Actividad completada - {activity}",
+            "body_html": body_html,
+            "email_to": user.partner_id.email,
+            "email_from": sender_email,
+            "auto_delete": True,
+            "model": self._name,
+            "res_id": self.id,
+        }
+
+        self.env["mail.mail"].sudo().create(mail_values).send()

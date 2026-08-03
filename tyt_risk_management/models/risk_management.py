@@ -299,7 +299,7 @@ class PlanAction(models.Model):
     )
 
 
-    def _send_notification_email(self, mitigation, email_to, plan_action_name):
+    def _send_notification_email(self, mitigation, email_to, plan_action_name, comments=""):
         # Datos para el correo
         current_user = self.env.user.display_name
         reviewer_email = mitigation.risk_id_reviewer_id.email 
@@ -311,7 +311,7 @@ class PlanAction(models.Model):
         base_url = self.env['ir.config_parameter'].sudo().get_param('web.base.url')
         # Formateo del cuerpo en HTML (Tabla invertida)
         body_html = f"""
-            <h3>Actividad asignada</h3>
+            <h3 class="text-center">Actividad asignada</h3>
             <table border="1" class="table" style="border-collapse: collapse; width: 100%; font-family: sans-serif;">
                 <tr>
                     <th style="padding: 8px; background-color: #f2f2f2; text-align: left;">Actividad</th>
@@ -335,7 +335,7 @@ class PlanAction(models.Model):
                 </tr>
                 <tr>
                     <th style="padding: 8px; background-color: #f2f2f2; text-align: left;">Comentario</th>
-                    <td style="padding: 8px;"></td>
+                    <td style="padding: 8px;">{comments}</td>
                 </tr>
             </table>
             <p>Estimado usuario, por favor revise sus actividades pendientes en la plataforma.</p>
@@ -366,7 +366,8 @@ class PlanAction(models.Model):
             if rec.mitigation_id:
                 email_to = rec.user_id.email_formatted 
                 plan_action_name = rec.display_name
-                self._send_notification_email(rec.mitigation_id, email_to, plan_action_name)
+                comments = "\n".join([c.display_name for c in rec.comment_ids])
+                self._send_notification_email(rec.mitigation_id, email_to, plan_action_name, comments)
 
         return records
 
