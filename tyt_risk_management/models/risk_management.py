@@ -364,6 +364,8 @@ class PlanAction(models.Model):
         records = super().create(vals_list)
         for rec in records:
             if rec.mitigation_id:
+                rec.mitigation_id.risk_activity_state =  'action_plan'
+                
                 email_to = rec.user_id.email_formatted 
                 plan_action_name = rec.display_name
                 comments = "\n".join([c.display_name for c in rec.comment_ids])

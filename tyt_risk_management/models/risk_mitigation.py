@@ -135,19 +135,19 @@ class RiskMitigation(models.Model):
         for rec in self:
             if rec.status == 'unmitigated' and not rec.mr_status_mitigation == 'mitigated':
                 rec.assigned_to = rec.risk_id_owner_id 
-            elif len(rec.mr_action_plan_ids)>0 and len(rec.ma_action_plan_ids)==0:
+            elif len(rec.mr_action_plan_ids)>0 and len(rec.ma_action_plan_ids)==0 and rec.status !='complete':
                 if len(rec.mr_action_plan_ids.filtered(lambda plan: plan.status == 'pending' or plan.status == 'rejected'))>0:
                     rec.assigned_to = rec.risk_id_owner_id
                 elif len(rec.mr_action_plan_ids) == len(rec.mr_action_plan_ids.filtered(lambda plan: plan.status == 'complete')):
                     rec.assigned_to = rec.risk_id_auditor_id
                 else: 
                     rec.assigned_to = rec.risk_id_reviewer_id
-            elif rec.status == 'mitigated' and len(rec.ma_action_plan_ids)>0:
+            elif (rec.mr_status_mitigation=='mitigated') and len(rec.ma_action_plan_ids)>0:
                 if len(rec.ma_action_plan_ids.filtered(lambda plan: plan.status == 'pending' or plan.status == 'rejected'))>0:
                     rec.assigned_to = rec.risk_id_owner_id
                 else: 
                     rec.assigned_to = rec.risk_id_auditor_id
-            elif rec.risk_activity_state == 'monitoring':
+            elif rec.risk_activity_state == 'monitoring' and rec.status !='complete':
                 rec.assigned_to = rec.risk_id_auditor_id
             elif rec.status == 'complete':
                 rec.assigned_to = False
@@ -585,9 +585,7 @@ class RiskMitigation(models.Model):
 
     def action_create_action_plan(self,):
         self.ensure_one()
-        self.write({
-            'risk_activity_state': 'action_plan',
-        })
+
         view_id = self.env.ref('tyt_risk_management.view_risk_action_plan_form').id
 
         return {
@@ -620,9 +618,7 @@ class RiskMitigation(models.Model):
 
     def action_create_action_plan_audit(self,):
         self.ensure_one()
-        self.write({
-            'risk_activity_state': 'action_plan',
-        })
+        
         view_id = self.env.ref('tyt_risk_management.view_risk_action_plan_form').id
 
         return {
@@ -774,6 +770,8 @@ class RiskMitigation(models.Model):
 
     def write(self, vals):
         if 'mr_status_mitigation' in vals and vals['mr_status_mitigation'] == 'partialmitigated':
+            vals['status'] = 'partially_mitigated'
+        if 'ma_status_mitigation' in vals and vals['ma_status_mitigation'] == 'partialmitigated':
             vals['status'] = 'partially_mitigated'
         
         if 'mr_status_mitigation' in vals and vals['mr_status_mitigation'] == 'mitigated':
@@ -940,7 +938,7 @@ class RiskMitigation(models.Model):
             domain_mitigation,  
         )
         m_mitigation = mitigations 
-        m_monitoring = mitigations.filtered(lambda m: m.risk_activity_state=='monitoring')
+        m_monitoring = mitigations.filtered(lambda m: m.mr_status_mitigation=='mitigated')
 
         return {
             "lista": [self._data_mitigation_for_consolidated(m) for m in mitigations],
