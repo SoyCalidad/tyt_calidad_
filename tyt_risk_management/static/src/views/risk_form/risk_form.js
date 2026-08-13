@@ -7,7 +7,7 @@ import { formView } from "@web/views/form/form_view";
 import { FormController } from '@web/views/form/form_controller';
 import { useService } from "@web/core/utils/hooks";
 import {_t} from "@web/core/l10n/translation";
-import { ReviewerGuide } from "./../reviewer_guide/reviewer_guide" 
+import { ReviewerGuide } from "../../components/reviewer_guide/reviewer_guide" 
 
 import { ConfirmationDialog } from "@web/core/confirmation_dialog/confirmation_dialog";
 
