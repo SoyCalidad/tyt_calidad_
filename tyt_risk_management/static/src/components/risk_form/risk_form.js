@@ -9,6 +9,7 @@ import { useService } from "@web/core/utils/hooks";
 import {_t} from "@web/core/l10n/translation";
 import { ReviewerGuide } from "./../reviewer_guide/reviewer_guide" 
 
+import { ConfirmationDialog } from "@web/core/confirmation_dialog/confirmation_dialog";
 
 export class RiskFormController extends FormController {
     setup() {
@@ -24,6 +25,95 @@ export class RiskFormController extends FormController {
         this.dialog.add(ReviewerGuide, {
             info: "data",
         });
+    }
+
+    async beforeLeave() {
+        const record = this.model.root;
+
+        console.log("record", record)
+        if (
+            record.data.mr_all_action_plans_complete &&
+            record.data.mr_mitigation_status  !== "mitigated" &&
+            record.data.is_reviewer
+        ) {
+            this.dialogService.add(ConfirmationDialog, {
+                title: _t("Actualización requerida - Revisor"),
+                body: _t(
+                    "Todos los planes de acción han sido completados. " +
+                    "Debe cambiar el estado del control a " +
+                    "\"Mitigado\" antes de continuar."
+                ),
+                confirmLabel: _t("Aceptar"),
+                confirm: () => {},
+            });
+
+            return false;
+        }
+
+        if (
+            record.data.ma_all_action_plans_complete &&
+            record.data.ma_mitigation_status  !== "mitigated" && 
+            record.data.is_auditor
+        ) {
+            this.dialogService.add(ConfirmationDialog, {
+                title: _t("Actualización requerida - Auditor"),
+                body: _t(
+                    "Todos los planes de acción han sido completados. " +
+                    "Debe cambiar el estado del control a " +
+                    "\"Mitigado\" antes de continuar."
+                ),
+                confirmLabel: _t("Aceptar"),
+                confirm: () => {},
+            });
+
+            return false;
+        }
+
+        return super.beforeLeave(...arguments);
+    }
+
+    async onPagerUpdate({ offset, resIds }) {
+        const record = this.model.root;
+
+        if (
+            record.data.mr_all_action_plans_complete &&
+            record.data.mr_mitigation_status  !== "mitigated" &&
+            record.data.is_reviewer
+        ) {
+            this.dialogService.add(ConfirmationDialog, {
+                title: _t("Actualización requerida"),
+                body: _t(
+                    "Todos los planes de acción han sido completados. " +
+                    "Debe cambiar el estado del control a \"Mitigado\" " +
+                    "antes de cambiar de registro."
+                ),
+                confirmLabel: _t("Aceptar"),
+                confirm: () => {},
+            });
+
+            return;
+        }
+
+        if (
+            record.data.ma_all_action_plans_complete &&
+            record.data.ma_mitigation_status  !== "mitigated" && 
+            record.data.is_auditor
+        ) {
+            this.dialogService.add(ConfirmationDialog, {
+                title: _t("Actualización requerida - Auditor"),
+                body: _t(
+                    "Todos los planes de acción han sido completados. " +
+                    "Debe cambiar el estado del control a " +
+                    "\"Mitigado\" antes de continuar."
+                ),
+                confirmLabel: _t("Aceptar"),
+                confirm: () => {},
+            });
+
+            return false;
+        }
+
+        return super.onPagerUpdate({ offset, resIds });
     }
 
     
