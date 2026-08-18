@@ -781,7 +781,8 @@ class RiskMitigation(models.Model):
                 raise UserError("Revisor: Debe completar todos los planes de acción")
             vals['mr_mitigation_date'] = fields.Datetime.now().date()
             vals['mr_level_compliance'] = 'ontime'
-            vals['status'] = 'mitigated' # en revision por el auditor 
+            #vals['status'] = 'mitigated' # en revision por el auditor 
+            vals['status'] = 'under_review' # en revision por el auditor 
             vals['risk_activity_state'] = 'monitoring'
             vals['mr_degree_mitigation'] = self.env.ref('tyt_risk_management.mitigated_100').id 
 

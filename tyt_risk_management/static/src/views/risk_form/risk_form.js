@@ -27,13 +27,35 @@ export class RiskFormController extends FormController {
         });
     }
 
+    async _saveBeforeNavigation() {
+        const record = this.model.root;
+
+        const dirty = await record.isDirty();
+
+        if (!dirty) {
+            return true;
+        }
+
+        const saved = await this.save({
+            reload: false,
+            onError: this.onSaveError.bind(this),
+        });
+
+        return saved !== false;
+    }
+
     async beforeLeave() {
         const record = this.model.root;
 
+        const saved = await this._saveBeforeNavigation();
+
+        if (!saved) {
+            return false;
+        }
         console.log("record", record)
         if (
             record.data.mr_all_action_plans_complete &&
-            record.data.mr_mitigation_status  !== "mitigated" &&
+            record.data.mr_status_mitigation  !== "mitigated" &&
             record.data.is_reviewer
         ) {
             this.dialogService.add(ConfirmationDialog, {
@@ -52,8 +74,9 @@ export class RiskFormController extends FormController {
 
         if (
             record.data.ma_all_action_plans_complete &&
-            record.data.ma_mitigation_status  !== "mitigated" && 
-            record.data.is_auditor
+            record.data.ma_status_mitigation  !== "mitigated" && 
+            record.data.is_auditor && 
+            record.data.mr_mitigation_status == 'mitigated'
         ) {
             this.dialogService.add(ConfirmationDialog, {
                 title: _t("Actualización requerida - Auditor"),
@@ -73,15 +96,20 @@ export class RiskFormController extends FormController {
     }
 
     async onPagerUpdate({ offset, resIds }) {
+        const saved = await this._saveBeforeNavigation();
+
+        if (!saved) {
+            return false;
+        }
         const record = this.model.root;
 
         if (
             record.data.mr_all_action_plans_complete &&
-            record.data.mr_mitigation_status  !== "mitigated" &&
-            record.data.is_reviewer
+            record.data.mr_status_mitigation  !== "mitigated" &&
+            record.data.is_reviewer 
         ) {
             this.dialogService.add(ConfirmationDialog, {
-                title: _t("Actualización requerida"),
+                title: _t("Actualización requerida - Revisor"),
                 body: _t(
                     "Todos los planes de acción han sido completados. " +
                     "Debe cambiar el estado del control a \"Mitigado\" " +
@@ -96,8 +124,9 @@ export class RiskFormController extends FormController {
 
         if (
             record.data.ma_all_action_plans_complete &&
-            record.data.ma_mitigation_status  !== "mitigated" && 
-            record.data.is_auditor
+            record.data.ma_status_mitigation  !== "mitigated" && 
+            record.data.is_auditor && 
+            record.data.mr_status_mitigation == 'mitigated'
         ) {
             this.dialogService.add(ConfirmationDialog, {
                 title: _t("Actualización requerida - Auditor"),
