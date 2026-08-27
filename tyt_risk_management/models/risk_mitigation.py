@@ -453,7 +453,7 @@ class RiskMitigation(models.Model):
     def _compute_mr_all_action_plans_complete(self):
         for record in self:
             if len(record.mr_action_plan_ids)>0:
-                record.mr_all_action_plans_complete = all(p.status in ['complete', 'rejected'] for p in record.mr_action_plan_ids)
+                record.mr_all_action_plans_complete = all(p.status in ['complete',] for p in record.mr_action_plan_ids)
             else:
                 record.mr_all_action_plans_complete = False
 
@@ -565,7 +565,7 @@ class RiskMitigation(models.Model):
     def _compute_ma_all_action_plans_complete(self):
         for record in self:
             if len(record.ma_action_plan_ids)>0:
-                record.ma_all_action_plans_complete = all(p.status in ['complete', 'rejected'] for p in record.ma_action_plan_ids)
+                record.ma_all_action_plans_complete = all(p.status in ['complete', ] for p in record.ma_action_plan_ids)
             else:
                 record.ma_all_action_plans_complete = False
 
