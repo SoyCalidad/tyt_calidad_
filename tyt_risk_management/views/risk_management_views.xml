@@ -1070,7 +1070,7 @@
                     </group> -->
 
                     <!--only read-->
-                    <group string="Proceso de auditoria" invisible="not ((mr_status_mitigation == 'mitigated' and (not is_auditor)) or status=='complete') ">
+                    <group string="Proceso de auditoria" invisible="not ((mr_status_mitigation == 'mitigated' and (not is_auditor))) ">
                         <div class="row justify-content-end" colspan="4">
                                 <div class="col-auto">
                                     <label for="ma_period_str" string="Periodo" />
@@ -1126,7 +1126,7 @@
                             </group>
                     </group>
                     <!--auditor-->
-                    <group string="Proceso de auditoria" invisible="not (status=='mitigated' and mr_status_mitigation == 'mitigated' and is_auditor  )">
+                    <group string="Proceso de auditoria" invisible="not (mr_status_mitigation == 'mitigated' and is_auditor  )">
                         <div class="row justify-content-end" colspan="4">
                                 <div class="col-auto">
                                     <label for="ma_period_str" string="Periodo" />
