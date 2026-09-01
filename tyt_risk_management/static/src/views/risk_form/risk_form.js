@@ -19,9 +19,6 @@ export class RiskFormController extends FormController {
 
     onClickInfo() {
         const record = this.model.root.data;
-
-        
-
         this.dialog.add(ReviewerGuide, {
             info: "data",
         });
@@ -76,7 +73,7 @@ export class RiskFormController extends FormController {
             record.data.ma_all_action_plans_complete &&
             record.data.ma_status_mitigation  !== "mitigated" && 
             record.data.is_auditor && 
-            record.data.mr_mitigation_status == 'mitigated'
+            record.data.mr_status_mitigation == 'mitigated'
         ) {
             this.dialogService.add(ConfirmationDialog, {
                 title: _t("Actualización requerida - Auditor"),
