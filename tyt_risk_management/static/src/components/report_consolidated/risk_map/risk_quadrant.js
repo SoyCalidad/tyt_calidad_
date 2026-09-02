@@ -32,7 +32,7 @@ export class RiskQuadrant extends Component {
         for (let i = 0; i < totalCells; i += size) {
             rows.push(cells.slice(i, i + size));
         }
-        console.log(rows)
+        console.log("matriz," , rows)
         return rows;
     }
 

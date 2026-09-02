@@ -157,7 +157,7 @@ export class ExecutiveReport extends Component {
                             width: 6,
                             color: [
                                 [0.5, '#FF6E76'],
-                                [0.75, '#FDDD60'],
+                                [0.85, '#FDDD60'],
                                 [1, '#7CFFB2']
                             ]
                         }
@@ -210,13 +210,13 @@ export class ExecutiveReport extends Component {
                         offsetCenter: [0, '-40%'],
                         valueAnimation: true,
                         formatter: function (value) {
-                        return Math.round(value) + ' %';
+                        return Math.round(value*100) + ' %';
                         },
                         color: 'inherit'
                     },
                     data: [
                         {
-                        value: this.reportData?.report?.per_mitigation_safe || 0 / 100,
+                        value: (this.reportData?.report?.per_mitigation_safe || 0) / 100,
                         name: ''
                         }
                     ]

@@ -1339,10 +1339,15 @@
                 <field name="risk_id_subprocess_id"/>
                 <field name="risk_id_frequency_id"/>
                 <field name="risk_id_name"/>
+                <field name="risk_id_department_id" string="Sitio"/>
 
                 <field name="risk_id_reviewer_id"/>
                 <field name="risk_id_auditor_id"/>
                 <field name="status" />
+                <field name="risk_activity_state" string="Actividad" />
+                <field name="year" />
+                <field name="month" />
+                <field name="assigned_to"  />
 
                 <!-- Grupo de filtros -->
                 <group expand="0" string="Agrupar por">

@@ -57,6 +57,11 @@ class RiskMitigation(models.Model):
     risk_id_name = fields.Text(
         related="risk_id.name",
     )
+    risk_id_department_id = fields.Many2one(
+        related='risk_id.department_id',
+        string='Sitio',
+        store=True,
+    )
     risk_id_control_objective = fields.Text(string="Objetivo de control", related="risk_id.control_objective", store=True)
     risk_id_control_activity = fields.Text(string="Actividad de control", related='risk_id.control_activity', store=True)
     risk_id_department_id = fields.Many2one(
@@ -921,7 +926,7 @@ class RiskMitigation(models.Model):
     def report_consolidated(self, department_id, pdomain_id, process_id, anio, month):
         domain_mitigation = [
             # ('risk_activity_state', 'in', [ 'mitigation', 'monitoring' ]),
-            ('status', '!=', 'unmitigated'),
+            # ('status', '!=', 'unmitigated'),
             ('mitigation_date', '<=', (fields.Datetime.today() + relativedelta(months=1, day=1)))
         ] 
         if department_id and int(department_id):
@@ -1219,7 +1224,7 @@ class RiskMitigation(models.Model):
                                             "year": y,
                                             "cantidad": len(mi_month),
                                             "compliance": round(sum(compliances) / len (compliances) if len(compliances)> 0 else 0),
-                                            "complianceAcomulado": round(num_100 / len(compliances) if len(compliances)>0 else 0),
+                                            "complianceAcomulado": round((num_100 / len(compliances)*100) if len(compliances)>0 else 0),
                                             "cantidadAcomulada": len(compliances),
                                             "risks": list(mi_month.mapped('id')),
                                             "risksAcomulado": list(mitigations.mapped('id')),

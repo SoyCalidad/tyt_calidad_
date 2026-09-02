@@ -105,6 +105,8 @@ export class RiskMap extends Component {
                             quadrant.risks.push({
                                 id: mitigation.risk_id_id,
                                 idMitigation: mitigation.id,
+                                mr_status_mitigation: mitigation.mr_status_mitigation,
+                                status: mitigation.status,
                             })
                         }
                     })
