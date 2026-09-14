@@ -431,15 +431,13 @@ class PlanAction(models.Model):
         self.ensure_one()
         view_id = self.env.ref('tyt_risk_management.view_risk_action_plan_attendance_form').id
         return {
-            'type': 'ir.actions.act_window',
+            'type': 'ir.actions.client',
+            'tag': 'tyt_risk_management.action_plan_attendance_dialog',
             'name': 'Plan de acción',
             'res_model': 'tyt.risk.action.plan',
-            'view_mode': 'form',
-            'target': 'new',
             'res_id': self.id,
-            'views': [(view_id, 'form')], 
-            'context': {
-            }
+            'views': [(view_id, 'form')],
+            'context': dict(self.env.context),
         }
 
 MESES = [
