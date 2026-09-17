@@ -426,6 +426,14 @@ class PlanAction(models.Model):
         self.write({
             'status': 'under_review',
         })
+        
+        return {
+            'type': 'ir.actions.client',
+            'tag': 'tyt_risk_management.action_plan_reviewed',
+            'params': {
+                'message': 'El plan de acción fue enviado a revisión.',
+            },
+        }
 
     def action_attendance_action_plan(self,):
         self.ensure_one()

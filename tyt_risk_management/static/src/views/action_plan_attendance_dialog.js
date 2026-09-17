@@ -22,3 +22,17 @@ registry.category("actions").add(
         });
     }
 );
+
+registry.category("actions").add(
+    "tyt_risk_management.action_plan_reviewed",
+    async (env, action) => {
+        env.services.notification.add(
+            action.params?.message || "El plan de acción fue enviado a revisión.",
+            {
+                type: "success",
+            }
+        );
+
+        await env.services.action.doAction("soft_reload");
+    }
+);
