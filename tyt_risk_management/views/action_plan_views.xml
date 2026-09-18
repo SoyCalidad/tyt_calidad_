@@ -188,6 +188,7 @@
                             <field name="remediation_date" readonly="True" />
                         </group>
                     </group>
+                    <field name="current_user" invisible="1" />
                     <group colspan="4">
                         <label for="document_ids" />
                         <field name="document_ids" nolabel="1" context="{'default_plan_id': id, 'default_origin': 'action_plan'}" readonly="status=='complete'">
@@ -230,7 +231,7 @@
                     <footer>
                         <button string="En revisión" class="btn btn-primary"
                         name="action_send_review" 
-                        invisible="not (status=='pending' or status=='rejected')"
+                        invisible="not ((status=='pending' or status=='rejected') and current_user==user_id)"
                         type="object"
                         />
                         <group invisible="not context.get('show_buttons', False)">

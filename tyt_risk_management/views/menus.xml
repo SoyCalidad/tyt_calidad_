@@ -1,6 +1,7 @@
 <odoo>
     <menuitem id="menu_business_process_root" name="Gestión de riesgos" sequence="10"
     groups="tyt_risk_management.group_admin,tyt_risk_management.group_usuario,tyt_risk_management.group_consulta"
+    web_icon="tyt_risk_management,static/description/icon.png"
     >
 
         <menuitem id="my_activities_menu" sequence="0" name="Mis actividades "

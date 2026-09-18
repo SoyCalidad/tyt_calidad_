@@ -404,12 +404,27 @@ class PlanAction(models.Model):
         self.write({
             'status': 'rejected',
         })
+        return {
+            'type': 'ir.actions.client',
+            'tag': 'tyt_risk_management.action_plan_reviewed',
+            'params': {
+                'message': f'El plan de acción fue rechazado.',
+            },
+        }
 
     def action_send_complete(self,):
         self.ensure_one()
         self.write({
             'status': 'complete',
         })
+        
+        return {
+            'type': 'ir.actions.client',
+            'tag': 'tyt_risk_management.action_plan_reviewed',
+            'params': {
+                'message': f'El plan de acción fue completado.',
+            },
+        }
 
     def action_send_review(self,):
         self.ensure_one()
