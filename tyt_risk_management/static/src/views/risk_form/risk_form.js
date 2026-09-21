@@ -89,6 +89,44 @@ export class RiskFormController extends FormController {
             return false;
         }
 
+        /**
+         * Validation when status is partial
+         */
+        if (
+            record.data.mr_action_plan_ids_count == 0 &&
+            record.data.mr_status_mitigation == "partialmitigated" && 
+            record.data.is_reviewer
+        ) {
+            this.dialogService.add(ConfirmationDialog, {
+                title: _t("Actualización requerida - Revisor"),
+                body: _t(
+                    "Cuando el estatus es \"Parcialmente mitigado\", " +
+                    "debe crear un plan de acción."
+                ),
+                confirmLabel: _t("Aceptar"),
+                confirm: () => {},
+            });
+
+            return false;
+        }
+        if (
+            record.data.ma_action_plan_ids_count == 0 &&
+            record.data.ma_status_mitigation == "partialmitigated" && 
+            record.data.is_auditor
+        ) {
+            this.dialogService.add(ConfirmationDialog, {
+                title: _t("Actualización requerida - Auditor"),
+                body: _t(
+                    "Cuando el estatus es \"Parcialmente mitigado\" " +
+                    "debe crear un plan de acción."
+                ),
+                confirmLabel: _t("Aceptar"),
+                confirm: () => {},
+            });
+
+            return false;
+        }
+
         return super.beforeLeave(...arguments);
     }
 
@@ -131,6 +169,44 @@ export class RiskFormController extends FormController {
                     "Todos los planes de acción han sido completados. " +
                     "Debe cambiar el estado del control a " +
                     "\"Mitigado\" antes de continuar."
+                ),
+                confirmLabel: _t("Aceptar"),
+                confirm: () => {},
+            });
+
+            return false;
+        }
+
+        /**
+         * Validation when status is partial
+         */
+        if (
+            record.data.mr_action_plan_ids_count == 0 &&
+            record.data.mr_status_mitigation == "partialmitigated" && 
+            record.data.is_reviewer
+        ) {
+            this.dialogService.add(ConfirmationDialog, {
+                title: _t("Actualización requerida - Revisor"),
+                body: _t(
+                    "Cuando el estatus es \"Parcialmente mitigado\" " +
+                    "debe crear un plan de acción."
+                ),
+                confirmLabel: _t("Aceptar"),
+                confirm: () => {},
+            });
+
+            return false;
+        }
+        if (
+            record.data.ma_action_plan_ids_count == 0 &&
+            record.data.ma_status_mitigation == "partialmitigated" && 
+            record.data.is_auditor
+        ) {
+            this.dialogService.add(ConfirmationDialog, {
+                title: _t("Actualización requerida - Auditor"),
+                body: _t(
+                    "Cuando el estatus es \"Parcialmente mitigado\" " +
+                    "debe crear un plan de acción."
                 ),
                 confirmLabel: _t("Aceptar"),
                 confirm: () => {},

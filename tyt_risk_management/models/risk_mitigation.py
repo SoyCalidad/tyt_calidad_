@@ -560,6 +560,13 @@ class RiskMitigation(models.Model):
         string="Plan de acción",
         domain=[('origin', '=', 'audit')]
     )
+    ma_action_plan_ids_count = fields.Integer(string="N° plan de acción del auditor", compute="_compute_ma_action_plan_ids_count")
+    
+    @api.depends('ma_action_plan_ids')
+    def _compute_ma_action_plan_ids_count(self):
+        for rec in self:
+            rec.ma_action_plan_ids_count = len(rec.ma_action_plan_ids)
+    
     ma_all_action_plans_complete = fields.Boolean(
         string="MA planes completos?",
         compute='_compute_ma_all_action_plans_complete',

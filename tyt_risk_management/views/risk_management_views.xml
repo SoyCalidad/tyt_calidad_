@@ -717,6 +717,7 @@
                                 
                             </div>
                             <field name="mr_action_plan_ids_count" invisible="1" groups="tyt_risk_management.group_risk_action_plan" />
+                            <field name="ma_action_plan_ids_count" invisible="1" groups="tyt_risk_management.group_risk_action_plan" />
                             <separator groups="tyt_risk_management.group_risk_action_plan" invisible="mr_action_plan_ids_count==0" string="Planes de acción"></separator>
                              
                             <group colspan="4" invisible="mr_action_plan_ids_count==0" groups="tyt_risk_management.group_risk_action_plan">
