@@ -61,7 +61,7 @@
     <record id="group_ver_usuarios" model="res.groups">
         <field name="name">Usuarios</field>
         <field name="category_id" ref="module_category_permisos_admin"/>
-        <field name="implied_ids" eval="[(4, ref('base.group_user'))]"/>
+        
     </record>
 
     <record id="group_ver_catalogos" model="res.groups">
@@ -88,7 +88,7 @@
     <record id="group_ver_mitigation" model="res.groups">
        <field name="name">Mitigación</field>
         <field name="category_id" ref="module_category_permisos_risk"/>
-    </record> 
+    </record>
     <record id="group_ver_monitoring" model="res.groups">
        <field name="name">Monitoreo</field>
         <field name="category_id" ref="module_category_permisos_risk"/>
@@ -101,7 +101,6 @@
        <field name="name">Carga inicial.</field>
         <field name="category_id" ref="module_category_permisos_risk"/>
     </record>
- 
 
 
     <!--identification-->
@@ -199,6 +198,7 @@
         <field name="category_id" ref="module_category_roles"/>
         <field name="implied_ids" eval="[
             (6,0, [
+                ref('base.group_user'),
                 ref('group_ver_mitigation'),
                 ref('group_risk_initial_load'),
                 ref('group_ver_monitoring'),
@@ -227,7 +227,7 @@
                 ref('group_level6_action_plan'),
                 ref('group_level3_consolidated'),
             ]),
-            
+
         ]"/>
     </record>
 
@@ -238,35 +238,15 @@
         <field name="category_id" ref="module_category_roles"/>
         <field name="implied_ids" eval="[(6, 0, [
             ref('group_consulta'),
-            ref('base.group_user'),
+
             ref('group_roles'),
             ref('group_ver_usuarios'),
             ref('group_ver_catalogos'),
             ref('group_ver_procesos'),
 
-            ref('group_ver_mitigation'),
-            ref('group_risk_initial_load'),
-            ref('group_ver_monitoring'),
-            ref('group_risk_action_plan'),
-
             ref('group_ver_risk'),
             ref('group_schedule_review'),
             ref('group_quantification'),
-
-            ref('group_4level'),
-            ref('group_2level'),
-
-            ref('group_performance_evaluations_carried_out'),
-            ref('group_risk_appetite_level'),
-            ref('group_peco_consolidated'),
-            ref('group_risk_rating_performance'),
-            ref('group_performance_remediation_actions'),
-
-            ref('group_level0_load_initial'),
-            ref('group_level5_executive'),
-            ref('group_level1_activities'),
-            ref('group_level6_action_plan'),
-            ref('group_level3_consolidated'),
         ])]"/>
     </record>
 
