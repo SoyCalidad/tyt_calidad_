@@ -23,3 +23,8 @@ access_tyt_catalog_frequency,tyt.catalog.frequency,model_tyt_catalog_frequency,g
 
 access_tyt_customized_report_wizard,tyt.customzed.report.wizar,model_tyt_customized_report_wizard,group_usuario,1,1,1,1
 
+access_risk_user_permission_wizard,risk_management.user_permission_wizard,model_risk_management_user_permission_wizard,group_ver_usuarios,1,1,1,1
+access_res_users_risk_readonly,res.users.risk.readonly,base.model_res_users,group_ver_usuarios,1,0,0,0
+
+access_res_groups_risk_roles,tyt_rm.res.groups.risk.roles,base.model_res_groups,group_roles,1,0,0,0
+

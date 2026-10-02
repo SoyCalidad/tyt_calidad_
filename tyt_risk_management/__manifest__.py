@@ -32,6 +32,10 @@
         'views/action_plan_views.xml',
         'views/risk_mitigation_views.xml',
         'views/reports_templates.xml',
+        'views/res_group_views.xml',
+        
+        'wizard/user_wizard.xml',
+        
         'views/menus.xml',
 
         'wizard/risk.xml',

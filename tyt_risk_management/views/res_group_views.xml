@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+
+    <!-- Acción acotada: narrows la UI a los grupos de Gestión de Riesgos -->
+    <record id="action_risk_groups" model="ir.actions.act_window">
+        <field name="name">Roles</field>
+        <field name="res_model">res.groups</field>
+        <field name="view_mode">list,form</field>
+        <field name="domain" eval="[('category_id', 'child_of',
+            ref('tyt_risk_management.module_category_mi_modulo'))]"/>
+    </record>
+
+
+</odoo>

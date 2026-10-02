@@ -1,0 +1,92 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+
+    <!-- Formulario del wizard -->
+    <record id="view_risk_user_permission_wizard_form" model="ir.ui.view">
+        <field name="name">risk_management.user_permission_wizard.form</field>
+        <field name="model">risk_management.user_permission_wizard</field>
+        <field name="arch" type="xml">
+            <form string="Editar permisos de Gestión de Riesgos">
+                <group>
+                    <field name="user_id"/>
+                </group>
+                <group string="Rol">
+                    <field name="role"  nolabel="1"/>
+                </group>
+                <group string="Permisos específicos">
+                    <field name="permission_ids" widget="many2many_checkboxes"
+                           nolabel="1"/>
+                </group>
+                <group string="Acceso a Procesos">
+                    <group colspan="2">
+                        <div class="alert alert-warning ">
+                            <span class="d-block">
+                                Para asignar procesos al usuario primero debe seleccionar un rol (Usuario, Consulta o Admin) 
+                            </span>
+                            <span>
+                                El rol Admin puede acceder a todos los procesos asi no es necesario asignarlos.
+                            </span>
+                        </div>
+
+                    </group>
+                    <group colspan="2">
+                        <field name="process_ids"
+                        domain="[('level', '=', 1),]"
+                               nolabel="1">
+                            <list >
+                                <field name="name" />
+                                <field name="owner_id" />
+                                <field name="department_id" />
+                            </list>
+                        </field>
+
+                    </group>
+                </group>
+
+                <footer>
+                    <button name="action_apply" type="object"
+                            string="Aplicar" class="btn-primary"/>
+                    <button string="Cancelar" class="btn-secondary" special="cancel"/>
+                </footer>
+            </form>
+        </field>
+    </record>
+
+    <record id="action_risk_user_permission_wizard" model="ir.actions.act_window">
+        <field name="name">Editar permisos de Gestión de Riesgos</field>
+        <field name="res_model">risk_management.user_permission_wizard</field>
+        <field name="view_mode">form</field>
+        <field name="target">new</field>
+    </record>
+
+    <!-- Lista de usuarios de solo lectura (no expone res.users completo,
+         solo lo mínimo para ubicar al usuario y lanzar el wizard) -->
+    <record id="view_risk_users_readonly_list" model="ir.ui.view">
+        <field name="name">risk_management.res.users.readonly.list</field>
+        <field name="model">res.users</field>
+        <field name="arch" type="xml">
+            <list string="Usuarios" create="false" edit="false" delete="false">
+                <field name="name"/>
+                <field name="login"/>
+                <field name="tyt_rm_user_type" />
+                <button name="%(action_risk_user_permission_wizard)d"
+                        type="action"
+                        string="Editar permisos de Riesgos"
+                        context="{'default_user_id': id}"
+                        icon="fa-key"/>
+            </list>
+        </field>
+    </record>
+
+    <record id="action_risk_users_readonly" model="ir.actions.act_window">
+        <field name="name">Usuarios</field>
+        <field name="res_model">res.users</field>
+        <field name="view_mode">list</field>
+        <field name="view_ids" eval="[(5, 0, 0),
+            (0, 0, {'view_mode': 'list', 'view_id': ref('view_risk_users_readonly_list')})]"/>
+        
+    </record>
+
+
+
+</odoo>

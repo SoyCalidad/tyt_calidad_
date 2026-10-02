@@ -11,10 +11,10 @@
         groups="tyt_risk_management.group_admin"
         >
 
-            <menuitem id="menu_user" name="Usuarios" action="base.action_res_users" sequence="20"
+            <menuitem id="menu_user" name="Usuarios" action="action_risk_users_readonly" sequence="20"
                 groups="group_ver_usuarios,base.group_system,base.group_erp_manager" />
-            <menuitem id="menu_role" name="Roles" action="base.action_res_groups" sequence="30"
-                groups="base.group_system,base.group_erp_manager,base.group_no_one,group_roles" />
+            <menuitem id="menu_role" name="Roles" action="action_risk_groups" sequence="30"
+                groups="group_roles" />
             <menuitem id="menu_business_process" name="Procesos" action="action_admin_process"
                 sequence="40"
                 groups="group_ver_procesos"
