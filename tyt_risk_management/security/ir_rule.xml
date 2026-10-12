@@ -41,6 +41,51 @@
     </record>
 
 
+    <!-- ========================================================== -->
+    <!--  Rol Usuario: solo ve sus controles (dueño/revisor/auditor) -->
+    <!--  Consulta y Admin conservan la vista completa (reportes)    -->
+    <!-- ========================================================== -->
+
+    <!-- Mitigation / monitoring -->
+    <record id="risk_mitigation_user_rule" model="ir.rule">
+        <field name="name">User can only see own mitigations</field>
+        <field name="model_id" ref="model_tyt_risk_mitigation" />
+        <field name="domain_force">
+            [
+                '|', '|',
+                ('risk_id_owner_id', '=', user.id),
+                ('risk_id_reviewer_id', '=', user.id),
+                ('risk_id_auditor_id', '=', user.id),
+            ]
+        </field>
+        <field name="groups" eval="[(4, ref('tyt_risk_management.group_usuario'))]" />
+    </record>
+    <record id="risk_mitigation_full_rule" model="ir.rule">
+        <field name="name">Consulta and Admin full access to mitigations</field>
+        <field name="model_id" ref="model_tyt_risk_mitigation" />
+        <field name="domain_force">[(1, '=', 1)]</field>
+        <field name="groups" eval="[(4, ref('tyt_risk_management.group_consulta')), (4, ref('tyt_risk_management.group_admin'))]" />
+    </record>
+
+    <!-- Action plans -->
+    <record id="risk_action_plan_user_rule" model="ir.rule">
+        <field name="name">User can only see own action plans</field>
+        <field name="model_id" ref="model_tyt_risk_action_plan" />
+        <field name="domain_force">
+            [
+                ('user_id', '=', user.id),
+            ]
+        </field>
+        <field name="groups" eval="[(4, ref('tyt_risk_management.group_usuario'))]" />
+    </record>
+    <record id="risk_action_plan_full_rule" model="ir.rule">
+        <field name="name">Consulta and Admin full access to action plans</field>
+        <field name="model_id" ref="model_tyt_risk_action_plan" />
+        <field name="domain_force">[(1, '=', 1)]</field>
+        <field name="groups" eval="[(4, ref('tyt_risk_management.group_consulta')), (4, ref('tyt_risk_management.group_admin'))]" />
+    </record>
+
+
     <record id="rule_res_groups_risk_scope" model="ir.rule">
         <field name="name">Gestión de Riesgos: solo grupos del módulo</field>
         <field name="model_id" ref="base.model_res_groups"/>

@@ -655,7 +655,7 @@ class RiskMitigation(models.Model):
             
             risk_id = record.risk_id_id 
             
-            record.display_name = f"{self.period_str} - R{risk_id or ''}"
+            record.display_name = f"{record.period_str} - R{risk_id or ''}"
 
     #controls
     before_control = fields.Selection(

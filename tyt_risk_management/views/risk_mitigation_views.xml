@@ -3,7 +3,7 @@
         <field name="name">risk.mitigation.mitigation.list</field>
         <field name="model">tyt.risk.mitigation</field>
         <field name="arch" type="xml">
-            <list>
+            <list create="0">
                 <field name="risk_id_id" />
                 <field name="period_str" />
                 <field name="risk_id_process_id" />
@@ -326,6 +326,7 @@
          />
         <field name="context">{
             'search_default_owner_id': uid,
+            'create': False,
         }</field>
     </record>
 
@@ -333,7 +334,7 @@
         <field name="name">risk.mitigation.monitoring.list</field>
         <field name="model">tyt.risk.mitigation</field>
         <field name="arch" type="xml">
-            <list>
+            <list create="0">
                 <field name="risk_id_id" />
                 <field name="period_str" />
                 <field name="risk_id_process_id" />
@@ -380,6 +381,7 @@
          />
         <field name="context">{
             'search_default_owner_id': uid,
+            'create': False,
         }</field>
     </record>
     
