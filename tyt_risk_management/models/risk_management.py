@@ -1,5 +1,5 @@
 from odoo import models, fields, api
-from odoo.exceptions import UserError
+from odoo.exceptions import UserError, AccessError
 
 from datetime import datetime, date, timedelta
 from dateutil.relativedelta import relativedelta
@@ -129,10 +129,28 @@ class RiskMOFiles(models.Model):
     )
 
 
+    def _check_open_file_access(self):
+        """Rol Usuario: solo puede previsualizar archivos que ya puede ver.
+
+        La previsualización de Office se abre con sudo, por lo que sin esta
+        validación se saltaría los permisos de Documentos y las reglas de
+        este módulo. Consulta y Admin conservan el comportamiento anterior.
+        """
+        self.ensure_one()
+        user = self.env.user
+        if user.has_group('tyt_risk_management.group_consulta') or user.has_group('tyt_risk_management.group_admin'):
+            return
+        if not self.file_id.has_access('read'):
+            raise AccessError("No tiene permiso para ver este archivo.")
+
     def action_open_file(self):
         self.ensure_one()
-        if not self.file_id or not self.file_id.access_url:
+        if not self.file_id:
             return
+        self._check_open_file_access()
+        if not self.file_id.access_url:
+            return
+
         if self.file_id.mimetype in (
                 'application/vnd.openxmlformats-officedocument.wordprocessingml.document',
                 'application/msword',                                                      # doc
@@ -729,7 +747,7 @@ class RiskManagement(models.Model):
     @api.model 
     def update_access_folder(self):
         partners = {}
-        for rec in self.search([]):
+        for rec in self.sudo().search([]):
             if rec.owner_id.partner_id and not rec.owner_id.partner_id in partners:
                 partners[rec.owner_id.partner_id] = ("edit", False)
             if rec.reviewer_id.partner_id and not rec.reviewer_id.partner_id in partners:
@@ -739,6 +757,20 @@ class RiskManagement(models.Model):
 
         folder = self.env.ref('tyt_risk_management.folder_risk_management')
         if folder:
+            folder = folder.sudo()
+            # Quitar el acceso a quien ya no es dueño, revisor ni auditor de
+            # ningún riesgo. Solo se revisan los usuarios con el rol Usuario:
+            # Consulta, Admin y los accesos que se hayan dado a mano no se tocan.
+            group_usuario = self.env.ref('tyt_risk_management.group_usuario')
+            group_others = self.env.ref('tyt_risk_management.group_consulta') | self.env.ref('tyt_risk_management.group_admin')
+            only_users = self.env['res.users'].sudo().search([
+                ('groups_id', 'in', group_usuario.ids),
+                ('groups_id', 'not in', group_others.ids),
+            ])
+            members = folder.access_ids.filtered('role').partner_id
+            for partner in (only_users.partner_id & members):
+                if partner not in partners:
+                    partners[partner] = (False, False)
             folder.action_update_access_rights(partners=partners)
 
     @api.model_create_multi
@@ -763,7 +795,7 @@ class RiskManagement(models.Model):
 
         res = super().write(vals)
 
-        if 'owner_id' in vals or 'reviewer_id' in vals or 'auditor_id' in vals:
+        if 'owner_id' in vals or 'reviewer_id' in vals or 'auditor_id' in vals or 'active' in vals:
             self.update_access_folder()
 
 

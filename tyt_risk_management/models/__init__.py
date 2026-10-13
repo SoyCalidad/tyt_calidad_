@@ -3,3 +3,4 @@ from . import risk_management
 from . import res_users
 from . import catalog
 from . import risk_mitigation
+from . import documents_document
