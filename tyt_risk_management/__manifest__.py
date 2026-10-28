@@ -1,6 +1,6 @@
 {
     'name': 'TyT - Gestión de Riesgos',
-    'version': '18.0.1.0.0',
+    'version': '18.0.1.0.1',
     'description': '''Módulo de la gestión de riesgos:
     Programación de riesgos de acuerdo al periodo registrado.
     Control de los riesgos: dueño, revisor y auditor

@@ -138,8 +138,11 @@ class RiskMitigation(models.Model):
     @api.depends('status', 'mr_status_mitigation', 'mr_action_plan_ids', 'mr_action_plan_ids.status', 'ma_action_plan_ids', 'ma_action_plan_ids.status', 'risk_id_owner_id', 'risk_id_reviewer_id', 'risk_id_auditor_id')
     def _compute_assigned_to(self):
         for rec in self:
-            if rec.status == 'unmitigated' and not rec.mr_status_mitigation == 'mitigated':
-                rec.assigned_to = rec.risk_id_owner_id 
+            if rec.mr_status_mitigation == 'mitigated' and not rec.risk_id_auditor_id and not rec.ma_action_plan_ids:
+                # Sin auditor el ciclo concluye con el revisor: nadie tiene pendiente
+                rec.assigned_to = False
+            elif rec.status == 'unmitigated' and not rec.mr_status_mitigation == 'mitigated':
+                rec.assigned_to = rec.risk_id_owner_id
             elif len(rec.mr_action_plan_ids)>0 and len(rec.ma_action_plan_ids)==0 and rec.status !='complete':
                 if len(rec.mr_action_plan_ids.filtered(lambda plan: plan.status == 'pending' or plan.status == 'rejected'))>0:
                     rec.assigned_to = rec.risk_id_owner_id
@@ -152,7 +155,8 @@ class RiskMitigation(models.Model):
                     rec.assigned_to = rec.risk_id_owner_id
                 else: 
                     rec.assigned_to = rec.risk_id_auditor_id
-            elif rec.risk_activity_state == 'monitoring' and rec.status !='complete':
+            elif rec.mr_status_mitigation == 'mitigated' and rec.status !='complete':
+                # Concluyó el revisor: sigue la revisión del auditor
                 rec.assigned_to = rec.risk_id_auditor_id
             elif rec.status == 'complete':
                 rec.assigned_to = False
@@ -793,10 +797,14 @@ class RiskMitigation(models.Model):
                 raise UserError("Revisor: Debe completar todos los planes de acción")
             vals['mr_mitigation_date'] = fields.Datetime.now().date()
             vals['mr_level_compliance'] = 'ontime'
-            #vals['status'] = 'mitigated' # en revision por el auditor 
-            vals['status'] = 'under_review' # en revision por el auditor 
-            vals['risk_activity_state'] = 'monitoring'
-            vals['mr_degree_mitigation'] = self.env.ref('tyt_risk_management.mitigated_100').id 
+            # Con auditor pasa a su revisión (monitoreo); sin auditor el ciclo termina en el
+            # revisor y conserva su actividad anterior, ya que no hay fase de auditoría
+            if len(self) == 1 and not self.risk_id_auditor_id:
+                vals['status'] = 'mitigated'
+            else:
+                vals['status'] = 'under_review' # en revision por el auditor
+                vals['risk_activity_state'] = 'monitoring'
+            vals['mr_degree_mitigation'] = self.env.ref('tyt_risk_management.mitigated_100').id
 
         if 'ma_status_mitigation' in vals and vals['ma_status_mitigation'] == 'mitigated':
             if not self.ma_all_action_plans_complete and len(self.ma_action_plan_ids)>0:
@@ -951,7 +959,8 @@ class RiskMitigation(models.Model):
             domain_mitigation,  
         )
         m_mitigation = mitigations 
-        m_monitoring = mitigations.filtered(lambda m: m.mr_status_mitigation=='mitigated')
+        # El monitoreo es la fase del auditor: sin auditor no hay monitoreo
+        m_monitoring = mitigations.filtered(lambda m: m.mr_status_mitigation=='mitigated' and m.risk_id_auditor_id)
 
         return {
             "lista": [self._data_mitigation_for_consolidated(m) for m in mitigations],
